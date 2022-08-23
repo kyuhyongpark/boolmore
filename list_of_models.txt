@@ -1,0 +1,29 @@
+# MODEL = '../PyStableMotifs/models/ABA_full.txt'
+# model with added inhibitory edge from PA to ABI2
+# MODEL = '../PyStableMotifs/models/ABA_full_with_edge.txt'
+# model with the calcium oscillation node
+# MODEL = '../PyStableMotifs/models/ABA_calosc.txt'
+# model with the rule for KEV fixed and self loop in vacuolar acidification deleted
+# MODEL = '../PyStableMotifs/models/ABA_full_fix.txt'
+# model with the rule for Ca2osc and CIS changed
+# MODEL = '../PyStableMotifs/models/ABA_calosc_cis.txt'
+
+# model with an extra edge
+# MODEL = '../networkmutation/20220531/edge_7961_gen49.txt'
+# model with no extra edges
+# MODEL = '../networkmutation/20220518/7885_gen48.txt'
+# model from GA with calcium oscillation node
+# MODEL = '../networkmutation/20220601/best/osc_7546_gen49.txt'
+# model from GA with calcium oscillation node and CIS modified
+# MODEL = '../networkmutation/20220603/best/osc_cis_8072_gen47.txt'
+
+GA with no extra edge
+20220518/7885_gen48.txt			325.95/417
+20220525/best/no_edge_7889_gen47.txt		322.83/417
+
+GA model with extra edge from PA to ABI2
+20220531/edge_7961_gen49.txt
+
+GA model with calcium oscillation - no rule change for Ca2osc
+20220601/best/*
+20220601/best/osc_7546_gen49 - shortest rules
