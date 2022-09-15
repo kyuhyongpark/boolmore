@@ -1,5 +1,43 @@
 import mutation as m
 
+def check_node(regulators, rr, constraints, node):
+    """
+    Checks if the model follows regulate, necessary, possible_source constraints.
+    Checking fixed and group constraints are not implemented yet.
+    """
+
+    check = True
+    # constant nodes are not mutated
+    if len(regulators) == 0:
+        return check
+    # source nodes are not mutated
+    if len(regulators) == 1 and regulators[0] == node:
+        return check
+
+    if node in constraints['necessary']:
+        for necc in constraints['necessary'][node]:
+            check = check_necessary(regulators, rr, necc)
+            if check == False:
+                print(necc, "should be necessary for", node)
+                return check
+
+    if node in constraints['regulate']:
+        # check if the constrained nodes are regulating the target
+        for reg in constraints['regulate'][node]:
+            check = check_regulation(regulators, rr, reg)
+            if check == False:
+                print(reg, "should regulate", node)
+                return check
+    elif node not in constraints['possible_source']:
+
+        # need to check if a node became a source node and mutate more if it did
+        # nodes that have a regulating node cannot be a source, and hence elif.
+        check = not check_source(rr)
+        if check == False:
+            print(node, "should not be a source")
+
+    return check
+
 def check_regulation(regulators, rr, node, is_min = False):
     """
     Check if a node does appear in the rule
@@ -106,7 +144,6 @@ def check_necessary(regulators, rr, node):
 
     # n = nth regulator
     n = regulators.index(node)
-    print(n)
 
     if check_regulation(regulators, rr, node) == False:
         return False
@@ -114,11 +151,8 @@ def check_necessary(regulators, rr, node):
     add = 0
     for i in range(2**N):
         if i % 2**(N-n) > 2**(N-1-n)-1:
-            print('i:', i)
-            print('bi[i]:', rr[i])
             add += int(rr[i])
 
-    print(add)
     if add == 0:
         check = True
     return check

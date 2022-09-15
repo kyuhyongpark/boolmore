@@ -99,14 +99,16 @@ exps, pert = import_exps_new(DATA)
 n0.get_predictions(pert)
 # n0.get_predictions(exps)
 n0.get_network_score(exps)
-# n0.info()
+n0.info()
+# print('following contraints', n0.check_constraint(CONSTRAINT))
 
-# # make one mutated network
+# make one mutated network
 # new_network = n0.mutate(CONSTRAINT, EDGEPOOL, PROB, EDGE_PROB)
 # new_network.get_predictions(pert)
 # new_network.get_network_score(exps)
 # new_network.info()
-# # new_network.export(NAME)
+# print('following contraints', new_network.check_constraint(CONSTRAINT))
+# new_network.export(NAME)
 
 
 print("- - - - - generation ", 0, " - - - - -")
@@ -124,6 +126,7 @@ generation = sorted(generation, key=lambda x: x.score, reverse=True)
 
 for network in generation:
     network.info()
+    assert network.check_constraint(CONSTRAINT) == True
 
 average = 0
 for i in range(EXPORT_TOP):
@@ -148,7 +151,7 @@ for i in range(GENERATIONS):
 
     for j in range(PER_GENERATION-KEEP):
         mix = random.choices(to_be_mixed, k=2)
-        print("mixing", mix[0].id, "and", mix[1].id)
+        # print("mixing", mix[0].id, "and", mix[1].id)
         mixed_model = mix_models(mix[0], mix[1], CONSTRAINT, PROB)
         mixed_model.get_predictions(pert)
         mixed_model.get_network_score(exps)
@@ -158,6 +161,7 @@ for i in range(GENERATIONS):
 
     for network in new_generation:
         network.info()
+        assert network.check_constraint(CONSTRAINT) == True
 
     average = 0
     for i in range(EXPORT_TOP):

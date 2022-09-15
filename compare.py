@@ -1,8 +1,8 @@
-# compare two models and find the nodes whose rules are different
+# import two models, and reduce the source nodes
+# And then find the nodes whose rules are different
 
 import pystablemotifs as sm
 import pyboolnet.trap_spaces
-import mutation as m
 from pprint import pprint
 
 
@@ -19,17 +19,20 @@ MODEL1 = '../PyStableMotifs/models/ABA_full.txt'
 # model with an extra edge
 # MODEL2 = '../networkmutation/20220531/edge_7961_gen49.txt'
 # model with no extra edges
-MODEL2 = '../networkmutation/20220518/7885_gen48.txt'
+# MODEL2 = '../networkmutation/20220518/7885_gen48.txt'
 # model from GA with calcium oscillation node
 # MODEL1 = '../networkmutation/20220601/best/osc_7546_gen49.txt'
 # model from GA with calcium oscillation node and CIS modified
 # MODEL2 = '../networkmutation/20220603/best/osc_cis_8072_gen47.txt'
+# model from GA using pair-significance
+MODEL2 = '../networkmutation/_7621_gen48.txt'
+
 
 # MODEL = '../networkmutation/random1.txt'
 # MODEL = '../networkmutation/osc_test1.txt'
 
-DATA1 = 'data.txt'
-DATA2 = 'data_osc.txt'
+# DATA1 = 'data.txt'
+# DATA2 = 'data_osc.txt'
 
 primes1 = sm.format.import_primes(MODEL1)
 primes2 = sm.format.import_primes(MODEL2)

@@ -354,8 +354,9 @@ def mutate_rr(rr, probability):
 
 def mutate_rr_bias(rr, probability, bias = 0.5):
     """
-    Returns the mutated representation of that rule with certain acitivity bias
-    when given any representation of a rule.
+    When given any representation of a rule,
+    returns the mutated representation of that rule
+    with a certain inacitivity bias.
 
     Parameters
     ----------
@@ -383,8 +384,10 @@ def mutate_rr_bias(rr, probability, bias = 0.5):
 
 def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 0.5):
     """
-    Returns the mutated representation of that rule with certain acitivity bias
-    that follows all the constraints when given any representation of a rule.
+    When given any representation of a rule,
+    returns the mutated representation of that rule
+    with a certain inacitivity bias
+    that follows all the constraints.
 
     Parameters
     ----------
@@ -393,11 +396,12 @@ def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 
     rr : length 2^N binary str
         representation of the rules
     constraints : dictionary of dictionary of tuples
-        represents 4 types of constraints
+        represents 5 types of constraints
         fixed
         regulate
         necessary
         group
+        possible source
     node : string
         the target node
     probability : float between 0 and 1
@@ -412,78 +416,46 @@ def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 
     modified : Boole
         True if modified
     """
-    # no need to mutate fixed nodes
+    # no need to mutate constant nodes
     if len(regulators) == 0:
         return rr, False
     # no need to mutate source nodes
     if len(regulators) == 1 and regulators[0] == node:
         return rr, False
-    # impose constraints
-    # no need to mutate nodes whose rules are fixed
-    if node in constraints['fixed']:
-        return rr, False
     # no need to mutate nodes with one regulator and cannot be a source node
     if len(regulators) == 1 and node not in constraints['possible_source']:
         return rr, False
+    # impose constraints - fixed nodes
+    if node in constraints['fixed']:
+        return rr, False
 
-    # mutation
-    # impose group nodes
-    if node in constraints['group']:
-        groups = constraints['group'][node]
-        group_rr, group_regulators = rr2group_rr(regulators, rr, groups)
-        mutated_group_rr = mutate_rr_bias(group_rr, probability, bias = 0.5)
-        mutated_rr = group_rr2rr(regulators, mutated_group_rr, groups, group_regulators)
-    else: # no group constraints
-        mutated_rr = mutate_rr_bias(rr, probability, bias = 0.5)
+    redo = True
+    while redo == True:
+        ### mutation module
+        if node in constraints['group']: # impose group constraint
+            groups = constraints['group'][node]
+            group_rr, group_regulators = rr2group_rr(regulators, rr, groups)
+            mutated_group_rr = mutate_rr_bias(group_rr, probability, bias)
+            mutated_rr = group_rr2rr(regulators, mutated_group_rr, groups, group_regulators)
+        else: # no group constraints
+            mutated_rr = mutate_rr_bias(rr, probability, bias)
 
-    # impose constraints
-    # impose necessary nodes
-    if node in constraints['necessary']:
-        for necc in constraints['necessary'][node]:
-            mutated_rr = impose_necessary(regulators, mutated_rr, necc)
+        if node in constraints['necessary']: # impose necessary constraint
+            for necc in constraints['necessary'][node]:
+                mutated_rr = impose_necessary(regulators, mutated_rr, necc)
+        ### end of mutation
 
-    # impose regulating nodes
-    if node in constraints['regulate']:
-        # check if the constrained nodes are regulating the target
-        check = True
-        for reg in constraints['regulate'][node]:
-            check = check and check_regulation(regulators, mutated_rr, reg)
-            if check == False:
-                break
-        while check == False:
-            if node in constraints['group']:
-                groups = constraints['group'][node]
-                group_rr, group_regulators = rr2group_rr(regulators, rr, groups)
-                mutated_group_rr = mutate_rr_bias(group_rr, probability, bias = 0.5)
-                mutated_rr = group_rr2rr(regulators, mutated_group_rr, groups, group_regulators)
-            else: # no group constraints
-                mutated_rr = mutate_rr_bias(rr, probability, bias = 0.5)
-            check = True
+        redo = False
+        if node in constraints['regulate']:
+            # check if the constrained nodes are regulating the target
             for reg in constraints['regulate'][node]:
-                check = check and check_regulation(regulators, mutated_rr, reg)
-                if check == False:
+                redo = not check_regulation(regulators, mutated_rr, reg)
+                if redo == True:
                     break
-
-    # need to check if a node became a source node and mutate more if it did
-    # nodes that have a regulating node or a necessary node cannot be a source
-    if node not in constraints['regulate']:
-        # check if the constrained nodes are regulating the target
-        check = check_source(mutated_rr)
-        while check == True:
-            if node in constraints['group']:
-                groups = constraints['group'][node]
-                group_rr, group_regulators = rr2group_rr(regulators, rr, groups)
-                mutated_group_rr = mutate_rr_bias(group_rr, probability, bias = 0.5)
-                mutated_rr = group_rr2rr(regulators, mutated_group_rr, groups, group_regulators)
-            else: # no group constraints
-                mutated_rr = mutate_rr_bias(rr, probability, bias = 0.5)
-
-            # impose necessary nodes again
-            if node in constraints['necessary']:
-                for necc in constraints['necessary'][node]:
-                    mutated_rr = impose_necessary(regulators, mutated_rr, necc)
-
-            check = check_source(mutated_rr)
+        elif node not in constraints['possible_source']:
+            # need to check if a node became a source node and mutate more if it did
+            # nodes that have a regulating node cannot be a source, and hence elif.
+            redo = check_source(mutated_rr)
 
     max_original = get_uni_rr(rr)
     max_mutated = get_uni_rr(mutated_rr)
@@ -693,7 +665,7 @@ class Network:
             regulators = self.regulators[node]
             rr = self.rrs[node]
             signs = self.signs[node]
-            mutated_rr, modified = mutate_rr_constraint(regulators, rr, constraints, node, probability)
+            mutated_rr, modified = mutate_rr_constraint_new(regulators, rr, constraints, node, probability)
             mutated_network.rrs[node] = mutated_rr
 
             # get primes from the mutated_rr
@@ -745,6 +717,13 @@ class Network:
             prime1 = rr2prime(modified_regulators, modified_rr, modified_signs, inverted = False)
             mutated_network.primes[node] = prime1
         return mutated_network
+
+    def check_constraint(self, constraints):
+        for node in self.primes:
+            check = check_node(self.regulators[node], self.rrs[node], constraints, node)
+            if check == False:
+                return check
+        return check
 
     def get_predictions(self, exps):
         '''
@@ -853,7 +832,6 @@ class Network:
                 s = k + "* = 1"
             fp.write(s + '\n')
         fp.close()
-
 
     def info(self):
         print('id: ', self.id)

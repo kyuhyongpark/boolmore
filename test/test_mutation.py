@@ -21,13 +21,6 @@ import pystablemotifs as sm
 # min_rr = get_uni_rr(rr, max = False)
 # print('max_rr : ', max_rr)
 # print('min_rr : ', min_rr)
-# max_rr2 = get_uni_rr2(rr, max = True)
-# min_rr2 = get_uni_rr2(rr, max = False)
-# print('max_rr2: ', max_rr2)
-# print('min_rr2: ', min_rr2)
-#
-# print(max_rr == max_rr2)
-# print(min_rr == min_rr2)
 
 # # check rr2prime
 # rr = '1111'
@@ -77,53 +70,6 @@ import pystablemotifs as sm
 # print(prime1 == prime2)
 
 
-# # constraint check
-MODEL = '../PyStableMotifs/models/ABA_full.txt'
-CONSTRAINT = {
-'fixed': {'Ca2_ATPase', 'Ca2c', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'ROS', 'cADPR', 'cGMP'},
-'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'K_efflux':('KEV', 'KOUT'), 'PP2CA':('RCARs',)},
-'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1','K_efflux'), 'Malate':('PEPC', 'AnionEM')},
-'group': {'PA':(('PC', 'PLDalpha'),('PC', 'PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2', 'Sph'),)},
-'possible_source': {'AquaporinPIP2_1',}
-}
-#
-print("Loading network . . .")
-primes = sm.format.import_primes(MODEL)
-# #
-# print("Network loaded.")
-# print()
-#
-# nodes = []
-# for condition in CONSTRAINT:
-#     for node in CONSTRAINT[condition]:
-#         assert node in primes, "The node does not exist"
-#         nodes.append(node)
-#
-# for node in nodes:
-#     print(node)
-#
-#     prime = primes[node]
-#     regulators, rr, signs = prime2rr(prime)
-#     constraints = CONSTRAINT
-#     mutated_rr, modified = mutate_rr_constraint(regulators, rr, constraints, node, 0.5)
-#
-#     # print(mutated_rr)
-#     # print(modified)
-#
-#     if not modified:
-#         mutated_prime = prime
-#     else:
-#         mutated_prime = rr2prime(regulators, mutated_rr, signs, inverted = False)
-#         print(prime)
-#         print(mutated_prime)
-
-for node in primes:
-    if node in CONSTRAINT['fixed']:
-        continue
-    prime = primes[node]
-    regulators, rr, signs = prime2rr(prime)
-    print(node, len(regulators))
-
 # # test add_regulator
 # regulators = ('A','B','C')
 # rr = '11001100'
@@ -144,6 +90,11 @@ for node in primes:
 # deleted_regulators, deleted_rr, deleted_signs = delete_regulator(regulators, rr, signs, target_regulator)
 #
 # print(deleted_regulators, deleted_rr, deleted_signs)
+
+# test mix_rr
+rr1 = '0101'
+rr2 = '1111'
+print(mix_rr(rr1, rr2))
 
 # # Stop the profiling.
 # pr.disable()

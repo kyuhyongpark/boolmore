@@ -2,6 +2,7 @@ import sys
 sys.path.insert(0, 'C:/Users/danie/OneDrive/Documents/Codes/networkmutation/networkmutation')
 
 from experiment import *
+from score import *
 
 location = '../networkmutation/data_0822.txt'
 

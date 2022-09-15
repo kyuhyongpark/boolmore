@@ -2,6 +2,7 @@ import sys
 sys.path.insert(0, 'C:/Users/danie/OneDrive/Documents/Codes/networkmutation/networkmutation')
 
 from constraint import *
+from mutation import *
 import pystablemotifs as sm
 
 # import cProfile, pstats
@@ -12,23 +13,9 @@ import pystablemotifs as sm
 # # Start the code profiler.
 # pr.enable()
 
+# # test constraint on real model
 # MODEL = '../PyStableMotifs/models/ABA_full.txt'
-# model with an extra edge and rule for closure is not modified
-MODEL2 = '../networkmutation/20220519/best/7993_gen50.txt'
-
-primes = sm.format.import_primes(MODEL)
-
-n0 = m.Network.import_network(primes, id = 1, generation = 0)
-
-for node in n1.regulators.keys():
-    if n1.regulators[node] != n2.regulators[node]:
-        print(node)
-        print(n1.regulators[node])
-        print(n2.regulators[node])
-
-
-
-
+#
 # CONSTRAINT = {
 # 'fixed': {},
 # 'regulate': {'ABI1':('RCARs')},
@@ -49,12 +36,13 @@ for node in n1.regulators.keys():
 # print(groups)
 # # prime = [[{'pHc': 0}, {'ROS': 1}, {'RCARs': 1}, {'PA': 1}], [{'PA': 0, 'RCARs': 0, 'ROS': 0, 'pHc': 1}]]
 # prime = primes[node]
-# regulators, rr, signs = prime2rr(prime)
+# regulators, rr, signs = m.prime2rr(prime)
 # constraints = CONSTRAINT
 #
 # print(prime)
 # print(regulators, rr, signs)
 
+# # test constraint on toy example
 # node = 'X'
 # signs = '1111'
 # rrs = {'X':'1100001111000011'}
