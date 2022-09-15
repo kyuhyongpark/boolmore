@@ -1,8 +1,4 @@
 import csv
-from mutation import *
-from score import *
-from constraint import *
-import config
 
 def import_exps_new(location):
     """

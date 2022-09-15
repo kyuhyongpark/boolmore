@@ -494,6 +494,55 @@ def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 
 
     return mutated_rr, modified
 
+def mix_rr(rr1, rr2):
+    rr1_lst = list(rr1)
+    rr2_lst = list(rr2)
+    mixed_rr = ''
+    for i in range(len(rr1_lst)):
+        rnd = random.random()
+        if rnd < 0.5:
+            mixed_rr += rr1_lst[i]
+        else:
+            mixed_rr += rr2_lst[i]
+    return mixed_rr
+
+def mix_models(model1, model2, constraints, probability, bias = 0.5):
+    config.id += 1
+    mixed_network = Network()
+    mixed_network.id = config.id
+    mixed_network.generation = max(model1.generation,model2.generation) + 1
+    mixed_network.regulators = model1.regulators.copy()
+    mixed_network.signs = model1.signs.copy()
+    mixed_network.rrs = {}
+    # extra edge is not treated right now
+    mixed_network.extra_edges = []
+    mixed_network.primes = {}
+
+    for node in model1.rrs:
+        # get mutated_rr from rr
+        regulators = model1.regulators[node]
+        signs = model1.signs[node]
+        rr1 = model1.rrs[node]
+        rr2 = model2.rrs[node]
+        rnd = random.random()
+        if rnd < bias:
+            irr1 = get_max_irr(rr1)
+            irr2 = get_max_irr(rr2)
+
+            mixed_irr = mix_rr(irr1, irr2)
+            mixed_rr = get_max_irr(mixed_irr)
+        else:
+            mixed_rr = mix_rr(rr1, rr2)
+        mixed_rr, modified = mutate_rr_constraint(regulators, mixed_rr, constraints, node, probability)
+        mixed_network.rrs[node] = mixed_rr
+
+        # get primes from the mutated_rr
+        # if the representations are equivalent, take the old prime
+        prime1 = rr2prime(regulators, mixed_rr, signs, inverted = False)
+        mixed_network.primes[node] = prime1
+
+    return mixed_network
+
 def add_regulator(regulators, rr, signs, new_regulator, new_sign, bias=0.5):
     """
     Returns a new representation of a rule with an extra regulator.
@@ -607,7 +656,7 @@ class Network:
         self.score = None
 
     @classmethod
-    def import_network(cls, primes, id = 0, generation = 0, extra_edges = 0, given_regulators = None, given_signs = None):
+    def import_network(cls, primes, id = 0, generation = 0, extra_edges = [], given_regulators = None, given_signs = None):
         x = cls()
         x.id = id
         x.generation = generation
@@ -665,43 +714,36 @@ class Network:
             #     prime = list(bnet_text2primes(rule).values())[0]
             #     mutated_network.primes[node] = prime
 
-        add_edge = False
+        modify_edge = False
         rnd = random.random()
         if rnd < edge_prob:
             new_edge = random.choice(edge_pool)
             node = new_edge[1]
             regulators = mutated_network.regulators[node]
             new_regulator = new_edge[0]
-            add_edge = True
+            modify_edge = True
 
-        if add_edge and new_regulator in regulators:
-            add_edge = False
+        if modify_edge and new_regulator in regulators:
             rr = mutated_network.rrs[node]
             signs = mutated_network.signs[node]
 
-            mutated_network.extra_edges -= 1
-            deleted_regulators, deleted_rr, deleted_signs = delete_regulator(regulators, rr, signs, new_regulator)
+            mutated_network.extra_edges.remove(new_edge)
+            modified_regulators, modified_rr, modified_signs = delete_regulator(regulators, rr, signs, new_regulator)
 
-            mutated_network.regulators[node] = deleted_regulators
-            mutated_network.rrs[node] = deleted_rr
-            mutated_network.signs[node] = deleted_signs
-            prime1 = rr2prime(deleted_regulators, deleted_rr, deleted_signs, inverted = False)
-            mutated_network.primes[node] = prime1
-
-        if add_edge and new_regulator not in regulators:
+        elif modify_edge and new_regulator not in regulators:
             rr = mutated_network.rrs[node]
             signs = mutated_network.signs[node]
             new_sign = new_edge[2]
 
-            mutated_network.extra_edges += 1
-            added_regulators, added_rr, added_signs = add_regulator(regulators, rr, signs, new_regulator, new_sign)
+            mutated_network.extra_edges.append(new_edge)
+            modified_regulators, modified_rr, modified_signs = add_regulator(regulators, rr, signs, new_regulator, new_sign)
 
-            mutated_network.regulators[node] = added_regulators
-            mutated_network.rrs[node] = added_rr
-            mutated_network.signs[node] = added_signs
-            prime1 = rr2prime(added_regulators, added_rr, added_signs, inverted = False)
+        if modify_edge:
+            mutated_network.regulators[node] = modified_regulators
+            mutated_network.rrs[node] = modified_rr
+            mutated_network.signs[node] = modified_signs
+            prime1 = rr2prime(modified_regulators, modified_rr, modified_signs, inverted = False)
             mutated_network.primes[node] = prime1
-
         return mutated_network
 
     def get_predictions(self, exps):
@@ -730,7 +772,7 @@ class Network:
 
             new_primes = self.primes.copy()
             for node in perturbation.keys():
-                assert node in new_primes.keys(), "perturbed node should be in the network"
+                assert node in new_primes.keys(), f"{node} is not in the network"
                 if int(perturbation[node]) == 0:
                     new_primes[node] = [[{}],[]]
                 else:
@@ -763,7 +805,8 @@ class Network:
         '''
         To be modified to meet the criteria
         '''
-        self.score = get_score(exps, self.predictions, self.extra_edges)
+        self.score = get_score_new(exps, self.predictions, self.extra_edges)
+        # self.score = get_score(exps, self.predictions, self.extra_edges)
 
     def export(self, name, threshold = 0.0):
         '''

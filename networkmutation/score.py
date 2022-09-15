@@ -24,7 +24,7 @@ def get_score(exps, predictions, extra_edges):
     To be modified to meet the criteria
     '''
     score = 0.0
-    cost = extra_edges * 0.5
+    cost = len(extra_edges) * 0.5
     score -= cost
 
     counts = [0]*14
@@ -107,11 +107,13 @@ def get_score_new(exps, predictions, extra_edges):
     To be modified to meet the criteria
     '''
     total = 0.0
-    cost = extra_edges * 0.5
+    max_score = 0.0
+    cost = len(extra_edges) * 0.5
     total -= cost
 
     for expset in exps:
         score = float(expset[0])
+        max_score += score
         exp = expset[1]
         for fix in exp:
             result = exp[fix]
@@ -136,12 +138,12 @@ def get_score_new(exps, predictions, extra_edges):
                 raise Exception("Unexpected experiment input")
             score *= mult
 
-            print("- - - - - - - - - -")
-            print("Perturbation: ", fix)
-            print("Experiment: ", result)
-            print("Prediction: ", predict_value)
-            print("multiplying ", mult)
-            print("Current score ", score)
+            # print("Perturbation: ", fix)
+            # print("Experiment: ", result)
+            # print("Prediction: ", predict_value)
+            # print("multiplying ", mult)
+        # print("Adding ", score)
+        # print("- - - - - - - - - -")
         total += score
-
+    # print("Total ", total, "/", max_score)
     return total
