@@ -1,6 +1,6 @@
 import csv
 
-def import_exps_new(location):
+def import_exps(location):
     """
     Returns exps
 
@@ -70,3 +70,50 @@ def check_score(row):
         return True
     except ValueError:
         return False
+
+# def import_exps(location):
+#     """
+#     Returns exps
+#
+#     Parameters
+#     ----------
+#     location : data location
+#
+#     Returns
+#     -------
+#     exps : dictionary of list of tuples
+#         key represents the perturbation
+#         value is a list where outcomes are stored
+#         each outcome is a tuple (measured_node, 1, 0, 0)
+#         1,0,0 denotes constitutive activation
+#     """
+#
+#     file = open(location, "r")
+#     data = csv.reader(file, delimiter='\t')
+#
+#     lst = []
+#     for row in data:
+#         exp = []
+#         # get the fix
+#         fix = []
+#         row_iter = iter(row)
+#         for sth in row_iter:
+#             fix1 = tuple([sth, next(row_iter)])
+#             fix.append(fix1)
+#         fix = tuple(sorted(fix, key= lambda x:x[0]))
+#         # get the result
+#         result = tuple(next(data))
+#
+#         exp.append(fix)
+#         exp.append(result)
+#         lst.append(exp)
+#
+#     lst = sorted(lst, key = lambda x: x[0])
+#
+#     exps = {}
+#     for exp in lst:
+#         if exp[0] not in exps:
+#             exps[exp[0]] = []
+#         exps[exp[0]].append(exp[1])
+#
+#     return exps

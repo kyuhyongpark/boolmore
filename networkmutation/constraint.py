@@ -94,7 +94,7 @@ def rr2group_rr(regulators, rr, groups):
 
     for group in groups:
         for node in group:
-            assert node in regulators, "The node should be one of the regulators"
+            assert node in regulators, f"{node} is not one of the regulators {regulators}"
 
     group_regulators = set(regulators)
     for i, group in enumerate(groups):

@@ -1,0 +1,230 @@
+import random
+import pyboolnet.trap_spaces
+import mutation as m
+import constraint as cons
+import score
+import config
+
+class Model():
+    def __init__(self):
+        self.id = None
+        self.generation = None
+        self.rules = None
+        self.primes = None
+        self.regulators = None
+        self.rrs = None
+        self.signs = None
+        self.extra_edges = None
+        self.predictions = None
+        self.score = None
+
+    @classmethod
+    def import_model(cls, primes, id = 0, generation = 0, extra_edges = [], given_regulators = None, given_signs = None):
+        x = cls()
+        x.id = id
+        x.generation = generation
+        x.primes = primes
+        x.regulators = {}
+        x.rrs = {}
+        x.signs = {}
+        x.extra_edges = extra_edges
+
+        for node in primes:
+            if given_regulators == None:
+                regulators, rr, signs = m.prime2rr(primes[node], regulators = None, signs = None)
+            else:
+                regulators, rr, signs = m.prime2rr(primes[node], regulators = given_regulators[node], signs = given_signs[node])
+            x.regulators[node] = regulators
+            x.rrs[node] = rr
+            x.signs[node] = signs
+
+        return x
+
+    def mutate(self, constraints, edge_pool, probability, edge_prob, bias = 0.5):
+        config.id += 1
+        mutated_model = Model()
+        mutated_model.id = config.id
+        mutated_model.generation = self.generation + 1
+        mutated_model.regulators = self.regulators.copy()
+        mutated_model.signs = self.signs.copy()
+        mutated_model.rrs = {}
+        mutated_model.extra_edges = self.extra_edges.copy()
+        mutated_model.primes = {}
+
+        for node in self.rrs:
+            # get mutated_rr from rr
+            regulators = self.regulators[node]
+            rr = self.rrs[node]
+            signs = self.signs[node]
+            mutated_rr, modified = m.mutate_rr_constraint(regulators, rr, constraints, node, probability)
+            mutated_model.rrs[node] = mutated_rr
+
+            # get primes from the mutated_rr
+            # if the representations are equivalent, take the old prime
+            if not modified:
+                # print(node, 'is not modified')
+                mutated_model.primes[node] = self.primes[node]
+            else:
+                prime1 = m.rr2prime(regulators, mutated_rr, signs, inverted = False)
+                mutated_model.primes[node] = prime1
+                # irr = get_max_irr(rr)
+                # prime2 = rr2prime(regulators, irr, signs, inverted = True)
+                # assert prime1 == prime2, "rr and irr lead to different result!"
+
+        modify_edge = False
+        rnd = random.random()
+        if rnd < edge_prob:
+            new_edge = random.choice(edge_pool)
+            node = new_edge[1]
+            regulators = mutated_model.regulators[node]
+            new_regulator = new_edge[0]
+            modify_edge = True
+
+        if modify_edge and new_regulator in regulators:
+            rr = mutated_model.rrs[node]
+            signs = mutated_model.signs[node]
+
+            mutated_model.extra_edges.remove(new_edge)
+            modified_regulators, modified_rr, modified_signs = m.delete_regulator(regulators, rr, signs, new_regulator)
+
+        elif modify_edge and new_regulator not in regulators:
+            rr = mutated_model.rrs[node]
+            signs = mutated_model.signs[node]
+            new_sign = new_edge[2]
+
+            mutated_model.extra_edges.append(new_edge)
+            modified_regulators, modified_rr, modified_signs = m.add_regulator(regulators, rr, signs, new_regulator, new_sign)
+
+        if modify_edge:
+            mutated_model.regulators[node] = modified_regulators
+            mutated_model.rrs[node] = modified_rr
+            mutated_model.signs[node] = modified_signs
+            prime1 = m.rr2prime(modified_regulators, modified_rr, modified_signs, inverted = False)
+            mutated_model.primes[node] = prime1
+        return mutated_model
+
+    def check_constraint(self, constraints):
+        for node in self.primes:
+            check = cons.check_node(self.regulators[node], self.rrs[node], constraints, node)
+            if check == False:
+                return check
+        return check
+
+    def get_predictions(self, exps):
+        '''
+        Returns predictions when given interventions
+
+        Parameters
+        ----------
+        exps : dict or list
+            interventions in the form [((nodeA, value1),(nodeB, value2), ...), ...]
+
+        Returns
+        -------
+        self.predictions : dict
+            keys : interventions
+            values : dict
+                average value of every node in the attractors
+        '''
+        predictions = {}
+        for exp in exps:
+            perturbation = {}
+            for fix in exp:
+                perturbation[fix[0]] = fix[1]
+            # print("- - - - - - - - - -")
+            # print("fixed: ", perturbation)
+
+            new_primes = self.primes.copy()
+            for node in perturbation.keys():
+                assert node in new_primes.keys(), f"{node} is not in the model"
+                if int(perturbation[node]) == 0:
+                    new_primes[node] = [[{}],[]]
+                else:
+                    new_primes[node] = [[],[{}]]
+
+            tr = pyboolnet.trap_spaces.compute_trap_spaces(new_primes, "min")
+
+            for i in tr:
+                for node in self.primes.keys():
+                    if node not in i.keys():
+                        i[node] = '?'
+                    else:
+                        i[node] = str(i[node])
+
+            result = {}
+            for i in tr:
+                for node in self.primes.keys():
+                    if node not in result.keys():
+                        result[node] = 0.0
+                    if i[node] == '1':
+                        result[node] += (1.0/len(tr))
+                    elif i[node] == '?':
+                        result[node] += (0.5/len(tr))
+
+            predictions[exp] = result
+
+        self.predictions = predictions
+
+    def get_model_score(self, exps):
+        '''
+        To be modified to meet the criteria
+        '''
+        self.score = score.get_score(exps, self.predictions, self.extra_edges)
+        # self.score = get_score(exps, self.predictions, self.extra_edges)
+
+    def export(self, name, threshold = 0.0):
+        '''
+        Exports the model rules with scores above a certain threshold.
+
+        Parameters
+        ----------
+        threshold : float
+            the threshold score
+
+        Returns
+        -------
+        None
+
+        Exports
+        -------
+        id :
+
+        '''
+        if threshold != 0.0 and self.score < threshold:
+            return
+        fp = open(name + "_" + str(self.id) + "_gen" + str(self.generation) + ".txt", "w")
+        fp.write("# id: " + str(self.id) + '\n')
+        fp.write('# generation: ' + str(self.generation) + '\n')
+        fp.write('# extra edges: ' + str(self.extra_edges) + '\n')
+        fp.write('# score: ' + str(self.score) + '\n')
+        primes = {k:self.primes[k] for k in sorted(self.primes)}
+        for k,v in primes.items():
+            s = k + "* = "
+            sl = []
+            for c in v[1]:
+                sll = []
+                for kk,vv in c.items():
+                    if vv: sli = kk
+                    else: sli = '!'+kk
+                    sll.append(sli)
+                if len(sll) > 0:
+                    sl.append(' & '.join(sll))
+            if len(sl) > 0:
+                s += ' | '.join(sl)
+            if v[1]==[]:
+                s = k + "* = 0"
+            if v[1]==[{}]:
+                s = k + "* = 1"
+            fp.write(s + '\n')
+        fp.close()
+
+    def info(self):
+        print('id: ', self.id)
+        print('generation: ', self.generation)
+        # print(self.rules)
+        # print(self.primes)
+        # print(self.regulators)
+        # print(self.rrs)
+        # print(self.signs)
+        print('extra edges: ', self.extra_edges)
+        print('score: ', self.score)

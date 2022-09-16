@@ -3,6 +3,7 @@ sys.path.insert(0, 'C:/Users/danie/OneDrive/Documents/Codes/networkmutation/netw
 
 from mutation import *
 import pystablemotifs as sm
+from pyboolnet.external.bnet2primes import bnet_text2primes
 
 # import cProfile, pstats
 #
@@ -12,7 +13,7 @@ import pystablemotifs as sm
 # # Start the code profiler.
 # pr.enable()
 
-# # check manipulation of rr
+# ### check manipulation of rr
 # rr = '01100100011001000110010001100100011001000110010001100100011001000110010001100100011001000110010001100100011001000110010001100100'
 # print('ori_rr : ', rr)
 # rr = mutate_rr(rr, 0.05)
@@ -34,7 +35,7 @@ import pystablemotifs as sm
 # print(prime1)
 # print(prime2)
 
-# # basic functions check
+# ### basic functions check
 # import time
 #
 # prime = [[{'pHc': 0}, {'ROS': 1}, {'RCARs': 1}, {'PA': 1}], [{'PA': 0, 'RCARs': 0, 'ROS': 0, 'pHc': 1}]]
@@ -70,7 +71,7 @@ import pystablemotifs as sm
 # print(prime1 == prime2)
 
 
-# # test add_regulator
+# ### test add_regulator
 # regulators = ('A','B','C')
 # rr = '11001100'
 # signs = '111'
@@ -91,10 +92,35 @@ import pystablemotifs as sm
 #
 # print(deleted_regulators, deleted_rr, deleted_signs)
 
-# test mix_rr
-rr1 = '0101'
-rr2 = '1111'
-print(mix_rr(rr1, rr2))
+### test mix_models
+rule1 = '''
+A, B | C
+B, B & A
+C, C
+'''
+rule2 = '''
+A, B & C
+B, B
+C, C | !A
+'''
+primes1 = bnet_text2primes(rule1)
+primes2 = bnet_text2primes(rule2)
+
+print(sm.format.primes2bnet(primes1))
+print(sm.format.primes2bnet(primes2))
+
+EDGEPOOL = (('A', 'B', '1'), ('A', 'C', '0'))
+model1 = Network.import_network(primes1, extra_edges = [('A', 'B', '1')], id = 1, generation = 1)
+model2 = Network.import_network(primes2, extra_edges = [('A', 'C', '0')], id = 2, generation = 1)
+
+# model1.info()
+# model2.info()
+
+mix_model = mix_models(model1, model2)
+
+mix_model.info()
+print(sm.format.primes2bnet(mix_model.primes))
+
 
 # # Stop the profiling.
 # pr.disable()
