@@ -421,9 +421,11 @@ def mix_models(model1, model2):
     mixed_model.generation = max(model1.generation,model2.generation) + 1
     mixed_model.regulators = {}
     mixed_model.signs = {}
+    mixed_model.constraints = model1.constraints
+    mixed_model.edge_pool = model1.edge_pool
+    mixed_model.primes = {}
     mixed_model.rrs = {}
     mixed_model.extra_edges = []
-    mixed_model.primes = {}
 
     for node in model1.rrs:
         # get mutated_rr from rr

@@ -1,0 +1,20 @@
+old
+original	106.5/228
+0531	124.4/228
+0518	126.0/228
+osc models
+
+pair-signal
+original	106.5/228
+0531	124.4/228
+0518	126.0/228
+
+pair-significance
+original	94.8/231
+0531	122.4/231
+0518	127.2/231
+
+hierarchy
+original	94.8/231
+0531	122.9/231
+0518	127.2/231

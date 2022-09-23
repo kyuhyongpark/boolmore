@@ -9,54 +9,80 @@ class Model():
     def __init__(self):
         self.id = None
         self.generation = None
-        self.rules = None
-        self.primes = None
         self.regulators = None
-        self.rrs = None
         self.signs = None
+        self.constraints = None
+        self.edge_pool = None
+        self.primes = None
+        self.rrs = None
         self.extra_edges = None
         self.predictions = None
         self.score = None
 
     @classmethod
-    def import_model(cls, primes, id = 0, generation = 0, extra_edges = [], given_regulators = None, given_signs = None):
+    def import_model(cls, primes, constraints, edge_pool, id = 0, generation = 0, base = None):
         x = cls()
         x.id = id
         x.generation = generation
-        x.primes = primes
         x.regulators = {}
-        x.rrs = {}
         x.signs = {}
-        x.extra_edges = extra_edges
+        x.constraints = constraints
+        x.edge_pool = edge_pool
+        x.primes = primes
+        x.rrs = {}
+        x.extra_edges = []
 
         for node in primes:
-            if given_regulators == None:
-                regulators, rr, signs = m.prime2rr(primes[node], regulators = None, signs = None)
+            # find current regulators and signs
+            regulators, rr, signs = m.prime2rr(primes[node], regulators = None, signs = None)
+
+            # check the extra edges (signs are not checked yet)
+            for edge in edge_pool:
+                if edge[1] == node and edge[0] in regulators:
+                    x.extra_edges.append(edge)
+
+            if base == None:
+                x.regulators[node] = regulators
+                x.rrs[node] = rr
+                x.signs[node] = signs
+
             else:
-                regulators, rr, signs = m.prime2rr(primes[node], regulators = given_regulators[node], signs = given_signs[node])
-            x.regulators[node] = regulators
-            x.rrs[node] = rr
-            x.signs[node] = signs
+                regulators = list(base.regulators[node])
+                signs = base.signs[node]
+
+                for edge in x.extra_edges:
+                    if edge[1] == node:
+                        regulators.append(edge[0])
+                        signs += edge[2]
+
+                regulators = tuple(regulators)
+
+                regulators, rr, signs = m.prime2rr(primes[node], regulators=regulators, signs=signs)
+                x.regulators[node] = regulators
+                x.rrs[node] = rr
+                x.signs[node] = signs
 
         return x
 
-    def mutate(self, constraints, edge_pool, probability, edge_prob, bias = 0.5):
+    def mutate(self, probability, edge_prob, bias = 0.5):
         config.id += 1
         mutated_model = Model()
         mutated_model.id = config.id
         mutated_model.generation = self.generation + 1
         mutated_model.regulators = self.regulators.copy()
         mutated_model.signs = self.signs.copy()
+        mutated_model.constraints = self.constraints
+        mutated_model.edge_pool = self.edge_pool
+        mutated_model.primes = {}
         mutated_model.rrs = {}
         mutated_model.extra_edges = self.extra_edges.copy()
-        mutated_model.primes = {}
 
         for node in self.rrs:
             # get mutated_rr from rr
             regulators = self.regulators[node]
             rr = self.rrs[node]
             signs = self.signs[node]
-            mutated_rr, modified = m.mutate_rr_constraint(regulators, rr, constraints, node, probability)
+            mutated_rr, modified = m.mutate_rr_constraint(regulators, rr, self.constraints, node, probability)
             mutated_model.rrs[node] = mutated_rr
 
             # get primes from the mutated_rr
@@ -74,7 +100,7 @@ class Model():
         modify_edge = False
         rnd = random.random()
         if rnd < edge_prob:
-            new_edge = random.choice(edge_pool)
+            new_edge = random.choice(self.edge_pool)
             node = new_edge[1]
             regulators = mutated_model.regulators[node]
             new_regulator = new_edge[0]
@@ -103,9 +129,9 @@ class Model():
             mutated_model.primes[node] = prime1
         return mutated_model
 
-    def check_constraint(self, constraints):
+    def check_constraint(self):
         for node in self.primes:
-            check = cons.check_node(self.regulators[node], self.rrs[node], constraints, node)
+            check = cons.check_node(self.regulators[node], self.rrs[node], self.constraints, node)
             if check == False:
                 return check
         return check
@@ -197,6 +223,7 @@ class Model():
         fp.write('# generation: ' + str(self.generation) + '\n')
         fp.write('# extra edges: ' + str(self.extra_edges) + '\n')
         fp.write('# score: ' + str(self.score) + '\n')
+        fp.write('# following constraints: ' + str(self.check_constraint()) + '\n')
         primes = {k:self.primes[k] for k in sorted(self.primes)}
         for k,v in primes.items():
             s = k + "* = "
@@ -221,10 +248,6 @@ class Model():
     def info(self):
         print('id: ', self.id)
         print('generation: ', self.generation)
-        # print(self.rules)
-        # print(self.primes)
-        # print(self.regulators)
-        # print(self.rrs)
-        # print(self.signs)
         print('extra edges: ', self.extra_edges)
         print('score: ', self.score)
+        print('following constraints:', self.check_constraint())

@@ -61,7 +61,7 @@ def get_score(exps, predictions, extra_edges):
         # print("Adding ", score)
         # print("- - - - - - - - - -")
         total += score
-    # print("Total ", total, "/", max_score)
+    print("Total ", total, "/", max_score)
 
     return total
 
