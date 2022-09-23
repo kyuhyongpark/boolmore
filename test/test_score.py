@@ -4,18 +4,21 @@ sys.path.insert(0, 'C:/Users/danie/OneDrive/Documents/Codes/networkmutation/netw
 from experiment import *
 from score import *
 
-location = '../networkmutation/data_0822.txt'
+location = '../networkmutation/data_0923.txt'
 
-data, pert = import_exps_new(location)
-for sth in data:
-    print(sth)
+data, pert = import_exps(location)
+# for sth in data:
+#     print(sth)
+#
+# print(pert)
 
-print(pert)
+predictions = {(('ABA', '0'),):{'Closure':0},
+(('ABA', '1'),):{'Closure':1},
+(('ABA', '0'), ('SCAB1', '0')): {'Closure':0, 'Actin_Reorganization':0},
+(('ABA', '1'), ('SCAB1', '0')): {'Closure':1, 'Actin_Reorganization':1},
+(('ABA', '0'), ('SCAB1', '1')): {'Closure':0, 'Actin_Reorganization':0},
+(('ABA', '1'), ('SCAB1', '1')): {'Closure':1, 'Actin_Reorganization':0.2},
+(('ABA', '1'), ('GEF1_4_10','1')): {'Closure':1},
+(('ABA', '0'), ('PA','1')): {'Closure':0.2}}
 
-predictions = {(('ABA', '0'),):{'Closure':0, 'ROS':0},
-(('ABA', '1'),):{'Closure':1, 'ROS':1},
-(('ABA', '0'),):{'Closure':0, 'ROS':0},
-(('ABA', '0'), ('CPK3_21', '0')): {'Closure':0},
-(('ABA', '1'), ('CPK3_21', '0')): {'Closure':1}}
-
-print(get_score_new(data, predictions, 0))
+print(get_score(data, predictions, []))

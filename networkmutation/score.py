@@ -1,27 +1,39 @@
-def line(input, start, end, type):
+def line(input, start, end):
     '''
     Returns a straight line from the start to the end
     any value outside the region returns 0
     '''
-    if not start <= input <= end:
+    if not start[0] <= input <= end[0]:
         return 0
 
-    if type == 'inc':
-        slope = 1/(end-start)
-        output = slope * (input - start)
-        return (output + abs(output))/2
-    elif type == 'dec':
-        slope = -1/(end-start)
-        output =  slope * (input - start) + 1
-        return (output + abs(output))/2
-    elif type == 'flat':
-        return 1
-    else:
-        raise Exception("Unexpected line type")
+    slope = (end[1]-start[1])/(end[0]-start[0])
+    output = start[1] + slope * (input - start[0])
+    return output
 
+# 20220923 grouping experiment, lenient criteria
 def get_score(exps, predictions, extra_edges):
     '''
-    To be modified to meet the criteria
+    experimental data input
+
+    score: The model will get this score if it agrees with all the results below
+    e.g. [1.0]
+
+    Interventions: The nodes, and the values (0 or 1) separated by tab
+    e.g. [ABA	0	CPK3_21	0]
+
+    Outcome: A single node, and the expected value separated by tab
+    The outcome value can be 0 or 0.5 or 1, and multiple values can be listed
+    If multiple values for outcome are listed,
+    the model will be checked whether it matches with one of them.
+    e.g. [Closure	0	0.5]
+    the model is considered to agree with this result if it gets 0 or 0.5
+    Optional arguments: lenient scoring
+    'lenient 1' or 'lenient 0' can be added when a single outcome value is listed.
+    Scoring method will give half score in that direction
+    e.g. [Closure	0	lenient 1] will give 1 score if 0, and 0.5 score if 0.5
+
+    If multiple intervention/outcome pairs are listed,
+    the model should agree with all to get the score.
     '''
     total = 0.0
     max_score = 0.0
@@ -36,34 +48,94 @@ def get_score(exps, predictions, extra_edges):
             node = result[0]
             predict_value = predictions[fix][node]
             # experiment showed (ON)
-            if '1' in result and '0.5' not in result:
-                mult = line(predict_value,0.5,1,'inc')
+            if result[1:] == ('1',):
+                mult = line(predict_value,(0.7,0),(1,1))
+            # experiment showed (ON lenient 0)
+            elif result[1:] == ('1', 'lenient 0'):
+                mult = line(predict_value,(0,0),(1,1))
             # experiment showed (ON/some ON)
             elif '1' in result and '0.5' in result:
-                mult = max(line(predict_value,0.3,0.5,'inc'),line(predict_value,0.5,1,'flat'))
+                mult = max(line(predict_value,(0,0),(0.3,1)),line(predict_value,(0.3,1),(1,1)))
+            # experiment showed (some ON lenient 1)
+            elif result[1:] == ('0.5', 'lenient 1'):
+                mult = max(line(predict_value,(0,0),(0.3,1)),line(predict_value,(0.3,1),(0.7,1)),line(predict_value,(0.7,1),(1,0.5)))
             # experiment showed (some ON)
-            elif '0.5' in result and '0' not in result:
-                mult = max(line(predict_value,0.3,0.5,'inc'),line(predict_value,0.5,0.7,'dec'))
+            elif result[1:] == ('0.5',):
+                mult = max(line(predict_value,(0,0),(0.3,1)),line(predict_value,(0.3,1),(0.7,1)),line(predict_value,(0.7,1),(1,0)))
+            # experiment showed (some ON lenient 1)
+            elif result[1:] == ('0.5', 'lenient 0'):
+                mult = max(line(predict_value,(0,0.5),(0.3,1)),line(predict_value,(0.3,1),(0.7,1)),line(predict_value,(0.7,1),(1,0)))
             # experiment showed (some ON/OFF)
             elif '0.5' in result and '0' in result:
-                mult = max(line(predict_value,0,0.5,'flat'),line(predict_value,0.5,0.7,'dec'))
+                mult = max(line(predict_value,(0,1),(0.7,1)),line(predict_value,(0.7,1),(1,0)))
+            # experiment showed (OFF lenient 1)
+            elif result[1:] == ('0', 'lenient 1'):
+                mult = line(predict_value,(0,1),(1,0))
             # experiment showed (OFF)
-            elif '0.5' not in result and '0' in result:
-                mult = line(predict_value,0,0.5,'dec')
+            elif result[1:] == ('0',):
+                mult = line(predict_value,(0,1),(0.3,0))
             else:
+                print("Unexpected input", result)
                 raise Exception("Unexpected experiment input")
             score *= mult
 
-            # print("Perturbation: ", fix)
-            # print("Experiment: ", result)
-            # print("Prediction: ", predict_value)
-            # print("multiplying ", mult)
+        #     print("Perturbation: ", fix)
+        #     print("Experiment: ", result)
+        #     print("Prediction: ", predict_value)
+        #     print("multiplying ", mult)
         # print("Adding ", score)
         # print("- - - - - - - - - -")
         total += score
-    print("Total ", total, "/", max_score)
+    # print("Total ", total, "/", max_score)
 
     return total
+
+# grouping experiment implemented, but no lenient criteria
+# def get_score(exps, predictions, extra_edges):
+#     '''
+#     To be modified to meet the criteria
+#     '''
+#     total = 0.0
+#     max_score = 0.0
+#     cost = len(extra_edges) * 0.5
+#     total -= cost
+#     for expset in exps:
+#         score = float(expset[0])
+#         max_score += score
+#         exp = expset[1]
+#         for fix in exp:
+#             result = exp[fix]
+#             node = result[0]
+#             predict_value = predictions[fix][node]
+#             # experiment showed (ON)
+#             if '1' in result and '0.5' not in result:
+#                 mult = line(predict_value,0.5,1,'inc')
+#             # experiment showed (ON/some ON)
+#             elif '1' in result and '0.5' in result:
+#                 mult = max(line(predict_value,0.3,0.5,'inc'),line(predict_value,0.5,1,'flat'))
+#             # experiment showed (some ON)
+#             elif '0.5' in result and '0' not in result:
+#                 mult = max(line(predict_value,0.3,0.5,'inc'),line(predict_value,0.5,0.7,'dec'))
+#             # experiment showed (some ON/OFF)
+#             elif '0.5' in result and '0' in result:
+#                 mult = max(line(predict_value,0,0.5,'flat'),line(predict_value,0.5,0.7,'dec'))
+#             # experiment showed (OFF)
+#             elif '0.5' not in result and '0' in result:
+#                 mult = line(predict_value,0,0.5,'dec')
+#             else:
+#                 raise Exception("Unexpected experiment input")
+#             score *= mult
+#
+#             # print("Perturbation: ", fix)
+#             # print("Experiment: ", result)
+#             # print("Prediction: ", predict_value)
+#             # print("multiplying ", mult)
+#         # print("Adding ", score)
+#         # print("- - - - - - - - - -")
+#         total += score
+#     print("Total ", total, "/", max_score)
+#
+#     return total
 
 # def get_score(exps, predictions, extra_edges):
 #     '''

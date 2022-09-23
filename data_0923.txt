@@ -1,0 +1,60 @@
+# experimental data input
+#
+# score: The model will get this score if it agrees with all the results below
+# e.g. [1.0]
+#
+# Interventions: The nodes, and the values (0 or 1) separated by tab
+# e.g. [ABA	0	CPK3_21	0]
+#
+# Outcome: A single node, and the expected value separated by tab
+# The outcome value can be 0 or 0.5 or 1, and multiple values can be listed
+# If multiple values for outcome are listed,
+# the model will be checked whether it matches with one of them.
+# e.g. [Closure	0	0.5]
+# the model is considered to agree with this result if it gets 0 or 0.5
+# Optional arguments: lenient scoring
+# 'lenient 1' or 'lenient 0' can be added when a single outcome value is listed.
+# Scoring method will give half score in that direction
+# e.g. [Closure	0	lenient 1] will give 1 score if 0, and 0.5 score if 0.5
+# 
+# If multiple intervention/outcome pairs are listed,
+# the model should agree with all to get the score.
+
+#
+1.0
+ABA	0
+Closure	0
+ABA	1
+Closure	1
+#
+1.0
+ABA	0	SCAB1	0
+Closure	0
+ABA	1	SCAB1	0
+Closure	1
+#
+1.0
+ABA	0	SCAB1	1
+Closure	0
+ABA	1	SCAB1	1
+Closure	1	lenient 0
+#
+1.0
+ABA	0	SCAB1	0
+Actin_Reorganization	0
+ABA	1	SCAB1	0
+Actin_Reorganization	1	lenient 0
+#
+1.0
+ABA	0	SCAB1	1
+Actin_Reorganization	0
+ABA	1	SCAB1	1
+Actin_Reorganization	1	lenient 0
+#
+1.0
+ABA	1	GEF1_4_10	1
+Closure	0.5	lenient 1
+#
+1.0
+ABA	0	PA	1
+Closure	1	0.5
