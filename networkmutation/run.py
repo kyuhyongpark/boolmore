@@ -11,24 +11,55 @@ import config
 # # Start the code profiler.
 # pr.enable()
 
-# DATA = 'data.txt'
-# DATA = 'data_osc.txt'
-# DATA = 'data_pair_signal.txt'
-DATA = 'data_pair_significance.txt'
+# DATA = 'data_1014.txt'
+DATA = 'data_osc_1018.txt'
 
+# CONSTRAINTS = {
+# 'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+# 'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'K_efflux':('KEV','KOUT'), 'PP2CA':('RCARs',)},
+# 'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1','K_efflux'), 'Malate':('PEPC', 'AnionEM')},
+# 'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
+# 'possible_source': {'AquaporinPIP2_1',}
+# }
+### constraints for the ca osc model
 CONSTRAINTS = {
-'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'ROS', 'cADPR', 'cGMP'},
+'fixed': {'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
 'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'K_efflux':('KEV','KOUT'), 'PP2CA':('RCARs',), 'Ca2osc':('CaIM','CIS')},
+'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1','K_efflux'), 'Malate':('PEPC', 'AnionEM')},
+'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
+'possible_source': {'AquaporinPIP2_1',}
+}
+### constraints for the ca osc cis model
+CONSTRAINTS = {
+'fixed': {'Ca2osc', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'K_efflux':('KEV','KOUT'), 'PP2CA':('RCARs',)},
 'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1','K_efflux'), 'Malate':('PEPC', 'AnionEM')},
 'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
 'possible_source': {'AquaporinPIP2_1',}
 }
 
 ### Same edge with different sign is not yet allowed
-EDGE_POOL = (('Ca2c', 'ABI2', '0'),('Ca2c', 'HAB1', '0'),('Ca2c', 'PP2CA', '0'),('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'))
-# EDGE_POOL = (('Ca2osc', 'ABI2', '0'),('Ca2osc', 'HAB1', '0'),('Ca2osc', 'PP2CA', '0'),('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'))
+# EDGE_POOL = (('Ca2c', 'ABI2', '0'),('Ca2c', 'HAB1', '0'),('Ca2c', 'PP2CA', '0'),
+# ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
+# ('AquaporinPIP2_1', 'ROS', '1'), ('Actin_Reorganization', 'ROS', '1'),
+# ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
+# ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
+# ('GPA1', 'ABI1', '0'), ('GPA1', 'ABI2', '0'), ('GPA1', 'HAB1', '0'),
+# ('GHR1', 'CPK3_21', '1'), ('PA', 'Microtubule_Depolymerization', '1'),
+# ('Microtubule_Depolymerization', 'ROS', '1'))
+EDGE_POOL = (('Ca2osc', 'ABI2', '0'),('Ca2osc', 'HAB1', '0'),('Ca2osc', 'PP2CA', '0'),
+('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
+('AquaporinPIP2_1', 'ROS', '1'), ('Actin_Reorganization', 'ROS', '1'),
+('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
+('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
+('GPA1', 'ABI1', '0'), ('GPA1', 'ABI2', '0'), ('GPA1', 'HAB1', '0'),
+('GHR1', 'CPK3_21', '1'), ('PA', 'Microtubule_Depolymerization', '1'),
+('Microtubule_Depolymerization', 'ROS', '1'))
 
-BASE = '../PyStableMotifs/models/ABA_full.txt'
+# BASE = '../PyStableMotifs/models/ABA_full.txt'
+# BASE = '../PyStableMotifs/models/ABA_calosc.txt'
+BASE = '../PyStableMotifs/models/ABA_calosc_cis.txt'
+
 
 # MODEL = '../PyStableMotifs/models/ABA_full.txt'
 # model with added inhibitory edge from PA to ABI2
@@ -41,32 +72,32 @@ BASE = '../PyStableMotifs/models/ABA_full.txt'
 # MODEL = '../PyStableMotifs/models/ABA_calosc_cis.txt'
 
 # GA model with an extra edge
-MODEL = '../../Work/Network Inference/ABA/20220531/edge_7961_gen49.txt'
+# MODEL = '../../Work/Network Inference/ABA/20220531/edge_7961_gen49.txt'
 # GA model with no extra edges
 # MODEL = '../../Work/Network Inference/ABA/20220518/7885_gen48.txt'
 # GA model with calcium oscillation node
-# MODEL = '../networkmutation/20220601/best/osc_7546_gen49.txt'
+# MODEL = '../../Work/Network Inference/ABA/20220601/best/osc_7546_gen49.txt'
 # GA model with calcium oscillation node and CIS modified
-# MODEL = '../networkmutation/20220603/best/osc_cis_8072_gen47.txt'
+MODEL = '../../Work/Network Inference/ABA/20220603/best/osc_cis_8072_gen47.txt'
 # GA model with the pair-significance scoring method
-# MODEL = '../networkmutation/_7621_gen48_mod.txt'
+# MODEL = '../../Work/Network Inference/ABA/20220904/_7621_gen48.txt'
 
-# MODEL = '../networkmutation/random1.txt'
-# MODEL = '../networkmutation/random4.txt'
-# MODEL = '../networkmutation/osc_test1.txt'
+# MODEL = '../networkmutation/models/random1.txt'
+# MODEL = '../networkmutation/models/random2.txt'
+# MODEL = '../networkmutation/models/random3.txt'
 
-NAME = 'from0531'
+NAME = 'osc_cis_20221018'
 
 STARTING_ID = 1
-STARTING_GEN = 49
+STARTING_GEN = 1
 
-ITERATIONS = 50
+ITERATIONS = 100
 PER_ITERATION = 100
 KEEP = 20
 EXPORT_TOP = 1
-EXPORT_THRESHOLD = 123
+EXPORT_THRESHOLD = 302
 PROB = 0.01
-EDGE_PROB = 0.1
+EDGE_PROB = 0.5
 
 config.id = STARTING_ID
 
@@ -98,11 +129,11 @@ print()
 # new_model.get_model_score(exps)
 # new_model.info()
 # new_model.export(NAME)
-#
+
 # from pyboolnet.prime_implicants import primes_are_equal
 # print(primes_are_equal(n1.primes,new_model.primes))
 
-## Genetic Algorithm
+### Genetic Algorithm
 print("- - - - - iteration ", 0, " - - - - -")
 
 iteration = []
@@ -135,11 +166,9 @@ for i in range(ITERATIONS):
     weights.reverse()
     for j in range(KEEP):
         mix = random.choices(to_be_mixed, weights=weights, k=2)
-        print("mixing", mix[0].score, "and", mix[1].score)
         mixed_model = mix_models(mix[0], mix[1])
         mixed_model.get_predictions(pert)
         mixed_model.get_model_score(exps)
-        print("which became", mixed_model.score)
         new_iteration.append(mixed_model)
 
     # mutate the best ones

@@ -136,13 +136,13 @@ class Model():
                 return check
         return check
 
-    def get_predictions(self, exps):
+    def get_predictions(self, interventions):
         '''
         Returns predictions when given interventions
 
         Parameters
         ----------
-        exps : dict or list
+        interventions : list of tuples
             interventions in the form [((nodeA, value1),(nodeB, value2), ...), ...]
 
         Returns
@@ -153,9 +153,9 @@ class Model():
                 average value of every node in the attractors
         '''
         predictions = {}
-        for exp in exps:
+        for fixes in interventions:
             perturbation = {}
-            for fix in exp:
+            for fix in fixes:
                 perturbation[fix[0]] = fix[1]
             # print("- - - - - - - - - -")
             # print("fixed: ", perturbation)
@@ -187,7 +187,7 @@ class Model():
                     elif i[node] == '?':
                         result[node] += (0.5/len(tr))
 
-            predictions[exp] = result
+            predictions[fixes] = result
 
         self.predictions = predictions
 
@@ -195,8 +195,9 @@ class Model():
         '''
         To be modified to meet the criteria
         '''
-        self.score = score.get_score(exps, self.predictions, self.extra_edges)
-        # self.score = get_score(exps, self.predictions, self.extra_edges)
+        # self.score = score.get_score(exps, self.predictions, self.extra_edges)
+        agreements = score.get_agreement(exps, self.predictions)
+        self.score = score.get_hierarchy_score(exps, agreements, self.extra_edges)
 
     def export(self, name, threshold = 0.0):
         '''

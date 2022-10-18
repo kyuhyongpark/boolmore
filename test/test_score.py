@@ -3,8 +3,9 @@ sys.path.insert(0, 'C:/Users/danie/OneDrive/Documents/Codes/networkmutation/netw
 
 from experiment import *
 from score import *
+from pprint import pprint
 
-location = '../networkmutation/data_0923.txt'
+location = '../networkmutation/data_1006.txt'
 
 data, pert = import_exps(location)
 # for sth in data:
@@ -12,7 +13,7 @@ data, pert = import_exps(location)
 #
 # print(pert)
 
-predictions = {(('ABA', '0'),):{'Closure':0},
+predictions = {(('ABA', '0'),):{'Closure':1},
 (('ABA', '1'),):{'Closure':1},
 (('ABA', '0'), ('SCAB1', '0')): {'Closure':0, 'Actin_Reorganization':0},
 (('ABA', '1'), ('SCAB1', '0')): {'Closure':1, 'Actin_Reorganization':1},
@@ -21,4 +22,7 @@ predictions = {(('ABA', '0'),):{'Closure':0},
 (('ABA', '1'), ('GEF1_4_10','1')): {'Closure':1},
 (('ABA', '0'), ('PA','1')): {'Closure':0.2}}
 
-print(get_score(data, predictions, []))
+
+agreements = get_agreement(data, predictions)
+# pprint(agreements)
+print(get_hierarchy_score(data, agreements, []))

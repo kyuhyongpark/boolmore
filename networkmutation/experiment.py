@@ -3,7 +3,7 @@ import csv
 # 20220923 grouping expriments, lenient criteria
 def import_exps(location):
     """
-    Returns exps
+    Returns experiments and interventions
 
     Parameters
     ----------
@@ -11,14 +11,14 @@ def import_exps(location):
 
     Returns
     -------
-    experiments : list of tuple
+    experiments : list of expset (tuple)
         expset[0] : score (float) representing the score for the experiment set
         expset[1] : exp (dict) representing each perturbation/result pair
-            key : fixes (tuple) ((node A, value1), (node B, value2), ...)
-            value : result (tuple) (measured_node, values)
+            exp key : fixes (tuple) ((node A, value1), (node B, value2), ...)
+            exp value : result (tuple) (measured_node, values)
 
     interventions : list of tuples
-        each element represents a set of intervention
+        each element represents fixes (tuple)
     """
 
     file = open(location, "r")
