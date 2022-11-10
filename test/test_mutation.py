@@ -70,6 +70,24 @@ from pyboolnet.external.bnet2primes import bnet_text2primes
 #
 # print(prime1 == prime2)
 
+### test mutate_rr_constraint
+
+CONSTRAINTS = {
+'fixed': {'Ca2osc', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'K_efflux':('KEV','KOUT'), 'PP2CA':('RCARs',)},
+'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1','K_efflux'), 'Malate':('PEPC', 'AnionEM')},
+'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
+'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}
+}
+
+regulators = ('ROS', 'RCARs')
+rr = '0000'
+constraints = CONSTRAINTS
+node = 'HAB1'
+probability = 0.01
+
+new_rr, modified = mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 0.5)
+print(new_rr)
 
 # ### test add_regulator
 # regulators = ('A','B','C')
@@ -92,34 +110,34 @@ from pyboolnet.external.bnet2primes import bnet_text2primes
 #
 # print(deleted_regulators, deleted_rr, deleted_signs)
 
-### test mix_models
-rule1 = '''
-A, B | C
-B, B & A
-C, C
-'''
-rule2 = '''
-A, B & C
-B, B
-C, C | !A
-'''
-primes1 = bnet_text2primes(rule1)
-primes2 = bnet_text2primes(rule2)
-
-print(sm.format.primes2bnet(primes1))
-print(sm.format.primes2bnet(primes2))
-
-EDGEPOOL = (('A', 'B', '1'), ('A', 'C', '0'))
-model1 = Network.import_network(primes1, extra_edges = [('A', 'B', '1')], id = 1, generation = 1)
-model2 = Network.import_network(primes2, extra_edges = [('A', 'C', '0')], id = 2, generation = 1)
-
-# model1.info()
-# model2.info()
-
-mix_model = mix_models(model1, model2)
-
-mix_model.info()
-print(sm.format.primes2bnet(mix_model.primes))
+# ### test mix_models
+# rule1 = '''
+# A, B | C
+# B, B & A
+# C, C
+# '''
+# rule2 = '''
+# A, B & C
+# B, B
+# C, C | !A
+# '''
+# primes1 = bnet_text2primes(rule1)
+# primes2 = bnet_text2primes(rule2)
+#
+# print(sm.format.primes2bnet(primes1))
+# print(sm.format.primes2bnet(primes2))
+#
+# EDGEPOOL = (('A', 'B', '1'), ('A', 'C', '0'))
+# model1 = Network.import_network(primes1, extra_edges = [('A', 'B', '1')], id = 1, generation = 1)
+# model2 = Network.import_network(primes2, extra_edges = [('A', 'C', '0')], id = 2, generation = 1)
+#
+# # model1.info()
+# # model2.info()
+#
+# mix_model = mix_models(model1, model2)
+#
+# mix_model.info()
+# print(sm.format.primes2bnet(mix_model.primes))
 
 
 # # Stop the profiling.

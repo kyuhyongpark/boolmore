@@ -16,7 +16,7 @@
 # 'lenient 1' or 'lenient 0' can be added when a single outcome value is listed.
 # Scoring method will give half score in that direction
 # e.g. [Closure	0	lenient 1] will give 1 score if 0, and 0.5 score if 0.5
-# 
+#
 # If multiple intervention/outcome pairs are listed,
 # the model should agree with all to get the score.
 

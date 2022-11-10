@@ -25,8 +25,8 @@ MODEL1 = '../PyStableMotifs/models/ABA_full.txt'
 # model from GA with calcium oscillation node and CIS modified
 # MODEL2 = '../networkmutation/20220603/best/osc_cis_8072_gen47.txt'
 # model from GA using pair-significance
-MODEL2 = '../networkmutation/_7621_gen48.txt'
-
+# MODEL2 = '../networkmutation/_7621_gen48.txt'
+MODEL2 = './osc_cis_20221019_3625_gen21.txt'
 
 # MODEL = '../networkmutation/random1.txt'
 # MODEL = '../networkmutation/osc_test1.txt'
@@ -102,7 +102,47 @@ for node in different_nodes:
     print('new:',s)
 
 print('only in pprimes 1', only_in_pprimes1)
+for node in only_in_pprimes1:
+        k = node
+        v = pprimes1[node]
+        s = k + "* = "
+        sl = []
+        for c in v[1]:
+            sll = []
+            for kk,vv in c.items():
+                if vv: sli = kk
+                else: sli = '!'+kk
+                sll.append(sli)
+            if len(sll) > 0:
+                sl.append(' & '.join(sll))
+        if len(sl) > 0:
+            s += ' | '.join(sl)
+        if v[1]==[]:
+            s = k + "* = 0"
+        if v[1]==[{}]:
+            s = k + "* = 1"
+        print('old  :',s)
 print('only in pprimes 2', only_in_pprimes2)
+for node in only_in_pprimes2:
+        k = node
+        v = pprimes2[node]
+        s = k + "* = "
+        sl = []
+        for c in v[1]:
+            sll = []
+            for kk,vv in c.items():
+                if vv: sli = kk
+                else: sli = '!'+kk
+                sll.append(sli)
+            if len(sll) > 0:
+                sl.append(' & '.join(sll))
+        if len(sl) > 0:
+            s += ' | '.join(sl)
+        if v[1]==[]:
+            s = k + "* = 0"
+        if v[1]==[{}]:
+            s = k + "* = 1"
+        print('new  :',s)
 
 # n1 = m.Network.import_network(primes1, id = 1, generation = 0)
 # n2 = m.Network.import_network(primes2, id = 1, generation = 0)

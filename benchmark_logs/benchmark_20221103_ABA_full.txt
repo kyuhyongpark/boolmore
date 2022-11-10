@@ -1,0 +1,224 @@
+[Command: python -u C:\Users\danie\OneDrive\Documents\Codes\networkmutation\test\test_benchmarks.py]
+Loading primes . . .
+Primes loaded.
+
+Generating artificial experimental data . . .
+Experimental data generated.
+
+Loading base model . . .
+Base model loaded.
+id:  0
+generation:  0
+extra edges:  []
+score:  380.3745740536853
+following constraints: True
+
+id:  2
+generation:  1
+extra edges:  []
+score:  288.0
+following constraints: True
+
+- - - - - iteration  0  - - - - -
+average score for top  1  :  294.0
+- - - - - iteration  1  - - - - -
+average score for top  1  :  297.1666666666667
+- - - - - iteration  2  - - - - -
+average score for top  1  :  301.0
+- - - - - iteration  3  - - - - -
+average score for top  1  :  310.0
+- - - - - iteration  4  - - - - -
+average score for top  1  :  316.0
+- - - - - iteration  5  - - - - -
+average score for top  1  :  320.33333333333337
+- - - - - iteration  6  - - - - -
+average score for top  1  :  332.0
+- - - - - iteration  7  - - - - -
+average score for top  1  :  335.3333333333333
+- - - - - iteration  8  - - - - -
+average score for top  1  :  337.6666666666667
+- - - - - iteration  9  - - - - -
+average score for top  1  :  343.0
+- - - - - iteration  10  - - - - -
+average score for top  1  :  343.0
+- - - - - iteration  11  - - - - -
+average score for top  1  :  343.0
+- - - - - iteration  12  - - - - -
+average score for top  1  :  343.0
+- - - - - iteration  13  - - - - -
+average score for top  1  :  343.0
+- - - - - iteration  14  - - - - -
+average score for top  1  :  345.0
+- - - - - iteration  15  - - - - -
+average score for top  1  :  346.0
+- - - - - iteration  16  - - - - -
+average score for top  1  :  347.0
+- - - - - iteration  17  - - - - -
+average score for top  1  :  348.0
+- - - - - iteration  18  - - - - -
+average score for top  1  :  352.6296296296296
+- - - - - iteration  19  - - - - -
+average score for top  1  :  354.6296296296296
+- - - - - iteration  20  - - - - -
+average score for top  1  :  356.0
+- - - - - iteration  21  - - - - -
+average score for top  1  :  358.33333333333337
+- - - - - iteration  22  - - - - -
+average score for top  1  :  360.33333333333337
+- - - - - iteration  23  - - - - -
+average score for top  1  :  362.0
+- - - - - iteration  24  - - - - -
+average score for top  1  :  362.0
+- - - - - iteration  25  - - - - -
+average score for top  1  :  362.0
+- - - - - iteration  26  - - - - -
+average score for top  1  :  362.0
+- - - - - iteration  27  - - - - -
+average score for top  1  :  362.24
+- - - - - iteration  28  - - - - -
+average score for top  1  :  365.24
+- - - - - iteration  29  - - - - -
+average score for top  1  :  365.24
+- - - - - iteration  30  - - - - -
+average score for top  1  :  367.24
+- - - - - iteration  31  - - - - -
+average score for top  1  :  368.05481481481485
+- - - - - iteration  32  - - - - -
+average score for top  1  :  369.05481481481485
+- - - - - iteration  33  - - - - -
+average score for top  1  :  369.05481481481485
+- - - - - iteration  34  - - - - -
+average score for top  1  :  369.05481481481485
+- - - - - iteration  35  - - - - -
+average score for top  1  :  371.05481481481485
+- - - - - iteration  36  - - - - -
+average score for top  1  :  371.05481481481485
+- - - - - iteration  37  - - - - -
+average score for top  1  :  372.05481481481485
+- - - - - iteration  38  - - - - -
+average score for top  1  :  372.05481481481485
+- - - - - iteration  39  - - - - -
+average score for top  1  :  372.05481481481485
+- - - - - iteration  40  - - - - -
+average score for top  1  :  372.05481481481485
+- - - - - iteration  41  - - - - -
+average score for top  1  :  372.05481481481485
+- - - - - iteration  42  - - - - -
+average score for top  1  :  372.05481481481485
+- - - - - iteration  43  - - - - -
+average score for top  1  :  372.05481481481485
+- - - - - iteration  44  - - - - -
+average score for top  1  :  372.46986201888166
+- - - - - iteration  45  - - - - -
+average score for top  1  :  372.46986201888166
+- - - - - iteration  46  - - - - -
+average score for top  1  :  374.46986201888166
+- - - - - iteration  47  - - - - -
+average score for top  1  :  376.46986201888166
+- - - - - iteration  48  - - - - -
+average score for top  1  :  376.46986201888166
+- - - - - iteration  49  - - - - -
+average score for top  1  :  376.46986201888166
+- - - - - iteration  50  - - - - -
+average score for top  1  :  377.67012687427916
+- - - - - iteration  51  - - - - -
+average score for top  1  :  377.67012687427916
+- - - - - iteration  52  - - - - -
+average score for top  1  :  378.67012687427916
+- - - - - iteration  53  - - - - -
+average score for top  1  :  378.67012687427916
+- - - - - iteration  54  - - - - -
+average score for top  1  :  378.67012687427916
+- - - - - iteration  55  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  56  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  57  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  58  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  59  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  60  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  61  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  62  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  63  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  64  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  65  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  66  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  67  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  68  - - - - -
+average score for top  1  :  379.67012687427916
+- - - - - iteration  69  - - - - -
+average score for top  1  :  379.7816669367472
+- - - - - iteration  70  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  71  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  72  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  73  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  74  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  75  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  76  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  77  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  78  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  79  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  80  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  81  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  82  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  83  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  84  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  85  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  86  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  87  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  88  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  89  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  90  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  91  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  92  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  93  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  94  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  95  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  96  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  97  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  98  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  99  - - - - -
+average score for top  1  :  382.7816669367472
+- - - - - iteration  100  - - - - -
+average score for top  1  :  382.7816669367472
+[Finished in 63463.625s]

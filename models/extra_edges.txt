@@ -1,0 +1,9 @@
+20221030 GA1
+('PA', 'ABI2', '0'), ('ROS', 'Actin_Reorganization', '1'), ('GHR1', 'CPK3_21', '1'), ('PA', 'Microtubule_Depolymerization', '1'), ('Actin_Reorganization', 'ROS', '1'), ('AquaporinPIP2_1', 'ROS', '1'), ('pHc', 'Vacuolar_Acidification', '1')
+
+20221102 GA2
+('Ca2osc', 'ABI2', '0'), ('PA', 'ABI2', '0'), ('ROS', 'Actin_Reorganization', '1'), ('PA', 'Microtubule_Depolymerization', '1'), ('Actin_Reorganization', 'ROS', '1'), ('AquaporinPIP2_1', 'ROS', '1'), ('pHc', 'Vacuolar_Acidification', '1')
+
+20221019 GA3
+('PA', 'ABI2', '0'), ('Ca2osc', 'HAB1', '0'), ('PA', 'Microtubule_Depolymerization', '1'), ('AquaporinPIP2_1', 'ROS', '1')
+

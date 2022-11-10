@@ -58,11 +58,11 @@ ABA	0	CaIM	1
 Closure	1
 #
 1.0
-ABA	0	Ca2osc	0
+ABA	0	Ca2c	0
 Closure	0
 #
 1.0
-ABA	1	Ca2osc	0
+ABA	1	Ca2c	0
 Closure	0.5	lenient 0
 #
 1.0
@@ -190,6 +190,10 @@ ABA	1	RCARs	0
 Closure	0.5
 #
 1.0
+ABA	0	CaIM	1	RCARs	0
+Closure	1	lenient 0
+#
+1.0
 ABA	0	GCR1	0
 Closure	0
 #
@@ -294,6 +298,26 @@ ABA	0	DAG	1
 Closure	0
 #
 1.0
+ABA	0	ABI1	0	PA	1
+Closure	0.5	1
+#
+1.0
+ABA	0	ABI1	1	PA	1
+Closure	0
+#
+1.0
+ABA	0	PA	1	PLDalpha	0
+Closure	0.5	lenient 1
+#
+1.0
+ABA	0	GPA1	0	PA	1
+Closure	1	0.5
+#
+1.0
+ABA	0	GPA1	0	PA	1	PLDalpha	0
+Closure	1	0.5
+#
+1.0
 ABA	0	ABI1	0	PLDalpha	0
 Closure	0
 #
@@ -318,26 +342,6 @@ ABA	1	GPA1	0	PLDalpha	0
 Closure	0
 #
 1.0
-ABA	0	ABI1	0	PA	1
-Closure	0.5	1
-#
-1.0
-ABA	0	ABI1	1	PA	1
-Closure	0
-#
-1.0
-ABA	0	PA	1	PLDalpha	0
-Closure	0.5	lenient 1
-#
-1.0
-ABA	0	GPA1	0	PA	1
-Closure	1	0.5
-#
-1.0
-ABA	0	GPA1	0	PA	1	PLDalpha	0
-Closure	1	0.5
-#
-1.0
 ABA	0	PP2CA	0
 Closure	0
 #
@@ -346,19 +350,19 @@ ABA	0	PA	1	PP2CA	0
 Closure	0.5	lenient	1
 #
 1.0
-ABA	0	Ca2osc	0	PLDalpha	0
+ABA	0	Ca2c	0	PLDalpha	0
 Closure	0.5	lenient 0
 #
 1.0
-ABA	1	Ca2osc	0	PLDalpha	0
+ABA	1	Ca2c	0	PLDalpha	0
 Closure	0.5	lenient 0
 #
 1.0
-ABA	0	PA	1	Ca2osc	0
+ABA	0	PA	1	Ca2c	0
 Closure	0.5	lenient 1
 #
 1.0
-ABA	0	PA	1	Ca2osc	0	PLDalpha	0
+ABA	0	PA	1	Ca2c	0	PLDalpha	0
 Closure	0.5	lenient 1
 #
 1.0
@@ -514,6 +518,10 @@ ABA	1	PtdInsP3	0
 Closure	0.5	lenient 0
 #
 1.0
+ABA	1	PtdInsP3	0	PtdInsP4	0
+Closure	0.5	lenient 0
+#
+1.0
 ABA	0	ROP11	1
 Closure	0
 #
@@ -602,6 +610,10 @@ ABA	1	QUAC1	0
 Closure	0.5	0
 #
 1.0
+ABA	0	CaIM	1	QUAC1	0
+Closure	0
+#
+1.0
 ABA	0	GAPC1_2	0
 Closure	0
 #
@@ -676,6 +688,18 @@ Closure	0
 1.0
 ABA	1	GHR1	0
 Closure	0
+#
+1.0
+ABA	0	GHR1	0	ROS	1
+Closure	0
+#
+1.0
+ABA	0	OST1	0	ROS	1
+Closure	1
+#
+1.0
+ABA	0	CaIM	1	GHR1	0
+Closure	1
 #
 1.0
 ABA	0	RCN1	0
@@ -802,10 +826,6 @@ ABA	1	NtSyp121	0
 Closure	0
 #
 1.0
-ABA	0	CaIM	1	RCARs	0
-Closure	1	lenient 0
-#
-1.0
 ABA	0	S1P_PhytoS1P	1
 Closure	1	lenient 0
 #
@@ -836,14 +856,6 @@ Closure	1	lenient 0
 1.0
 ABA	0	NO	1	NOGC1	0	cGMP	1
 Closure	1	lenient 0
-#
-1.0
-ABA	0	GHR1	0	ROS	1
-Closure	0
-#
-1.0
-ABA	0	OST1	0	ROS	1
-Closure	1
 #
 1.0
 ABA	0	GPA1	0	ROS	1
@@ -879,7 +891,7 @@ Closure	0.5	lenient 1
 #
 1.0
 ABA	0	InsP3	1
-Ca2osc	1
+Ca2c	0.5
 #
 1.0
 ABA	0	CaIM	0
@@ -887,7 +899,7 @@ Closure	0
 #
 1.0
 ABA	0	CaIM	0
-Ca2osc	0
+Ca2c	0
 #
 1.0
 ABA	0	CaIM	0	InsP3	1
@@ -895,11 +907,7 @@ Closure	0.5	lenient 1
 #
 1.0
 ABA	0	CaIM	0	InsP3	1
-Ca2osc	1
-#
-1.0
-ABA	0	CaIM	1	QUAC1	0
-Closure	0
+Ca2c	0.5
 #
 1.0
 ABA	0	NO	1	NtSyp121	0
@@ -926,15 +934,11 @@ ABA	0	8-nitro-cGMP	1	cADPR	0
 Closure	0
 #
 1.0
-ABA	0	8-nitro-cGMP	1	Ca2osc	0
+ABA	0	8-nitro-cGMP	1	Ca2c	0
 Closure	0.5	lenient 0
 #
 1.0
 ABA	0	GCR1	0	S1P_PhytoS1P	1
-Closure	1
-#
-1.0
-ABA	0	CaIM	1	GHR1	0
 Closure	1
 #
 1.0
@@ -1034,11 +1038,11 @@ ABA	1	NO	0
 pHc	0.5
 #
 1.0
-ABA	0	Ca2osc	0
+ABA	0	Ca2c	0
 pHc	0
 #
 1.0
-ABA	1	Ca2osc	0
+ABA	1	Ca2c	0
 pHc	0
 #
 1.0
@@ -1058,11 +1062,11 @@ ABA	1	pHc	1
 NO	1
 #
 1.0
-ABA	0	Ca2osc	0
+ABA	0	Ca2c	0
 NO	0
 #
 1.0
-ABA	1	Ca2osc	0
+ABA	1	Ca2c	0
 NO	0
 #
 1.0
@@ -1195,23 +1199,23 @@ pHc	1
 #
 1.0
 ABA	0
-Ca2osc	0
+Ca2c	0
 #
 1.0
 ABA	1
-Ca2osc	1
+Ca2c	0.5
 #
 1.0
 ABA	1	pHc	0
-Ca2osc	0	0.5
+Ca2c	0	0.5
 #
 1.0
 ABA	0	OST1	0
-Ca2osc	0
+Ca2c	0
 #
 1.0
 ABA	1	OST1	0
-Ca2osc	0
+Ca2c	0
 #
 1.0
 ABA	0
@@ -1243,6 +1247,10 @@ Actin_Reorganization	0
 #
 1.0
 ABA	1	PtdInsP4	0
+Actin_Reorganization	0.5	lenient 0
+#
+1.0
+ABA	1	PtdInsP3	0	PtdInsP4	0
 Actin_Reorganization	0.5	lenient 0
 #
 1.0
@@ -1322,7 +1330,7 @@ ABA	1
 KEV	1
 #
 1.0
-ABA	0	Ca2osc	1
+ABA	0	CaIM	1
 KEV	1	lenient 0
 #
 1.0
@@ -1358,27 +1366,27 @@ ABA	0	PA	1	PP2CA	0
 Microtubule_Depolymerization	0.5	lenient 1
 #
 1.0
-ABA	0	Ca2osc	0
+ABA	0	Ca2c	0
 Microtubule_Depolymerization	0
 #
 1.0
-ABA	1	Ca2osc	0
+ABA	1	Ca2c	0
 Microtubule_Depolymerization	0	lenient 1
 #
 1.0
-ABA	0	Ca2osc	0	PA	1
+ABA	0	Ca2c	0	PA	1
 Microtubule_Depolymerization	1
 #
 1.0
-ABA	0	Ca2osc	0	PLDalpha	0
+ABA	0	Ca2c	0	PLDalpha	0
 Microtubule_Depolymerization	0	lenient 1
 #
 1.0
-ABA	1	Ca2osc	0	PLDalpha	0
+ABA	1	Ca2c	0	PLDalpha	0
 Microtubule_Depolymerization	0	lenient 1
 #
 1.0
-ABA	0	Ca2osc	0	PA	1	PLDalpha	0
+ABA	0	Ca2c	0	PA	1	PLDalpha	0
 Microtubule_Depolymerization	1
 #
 1.0
@@ -1491,7 +1499,7 @@ ROS	0
 #
 1.0
 ABA	1	PtdInsP3	0
-ROS	0
+ROS	0.5	lenient 0
 #
 1.0
 ABA	0	PtdInsP4	0
@@ -1499,6 +1507,10 @@ ROS	0
 #
 1.0
 ABA	1	PtdInsP4	0
+ROS	1
+#
+1.0
+ABA	1	PtdInsP3	0	PtdInsP4	0
 ROS	0
 #
 1.0
@@ -1590,19 +1602,19 @@ ABA	1	ERA1	0
 SLAC1	1
 #
 1.0
-ABA	0	Ca2osc	1
+ABA	0	Ca2c	1
 QUAC1	0
 #
 1.0
-ABA	1	Ca2osc	1
+ABA	1	Ca2c	1
 QUAC1	1
 #
 1.0
-ABA	1	ABI1	1	Ca2osc	1
+ABA	1	ABI1	1	Ca2c	1
 QUAC1	0
 #
 1.0
-ABA	1	Ca2osc	1	OST1	0
+ABA	1	Ca2c	1	OST1	0
 QUAC1	0
 #
 1.0
@@ -1643,11 +1655,11 @@ CaIM	1	0.5
 #
 1.0
 ABA	0	S1P_PhytoS1P	1
-Ca2osc	1
+Ca2c	0.5
 #
 1.0
 ABA	0	CaIM	1
-Ca2osc	1
+Ca2c	0.5
 #
 1.0
 ABA	0	AtRAC1	0
@@ -1687,7 +1699,7 @@ SLAC1	0
 #
 1.0
 ABA	0	PA	1
-Ca2osc	0
+Ca2c	0
 #
 1.0
 ABA	0	GHR1	0

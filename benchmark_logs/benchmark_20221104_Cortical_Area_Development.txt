@@ -1,0 +1,38 @@
+[Command: python -u C:\Users\danie\OneDrive\Documents\Codes\networkmutation\test\test_benchmarks.py]
+Loading primes . . .
+Primes loaded.
+
+Generating artificial experimental data . . .
+Experimental data generated.
+
+Loading base model . . .
+Base model loaded.
+id:  0
+generation:  0
+extra edges:  []
+score:  20.0
+following constraints: True
+
+id:  2
+generation:  1
+extra edges:  []
+score:  14.0
+following constraints: True
+../cubewalkers/models/Cortical Area Development.txt
+number of experiments: 20
+- - - - - iteration  0  - - - - -
+average score for top  1  :  14.0
+- - - - - iteration  1  - - - - -
+average score for top  1  :  18.0
+- - - - - iteration  2  - - - - -
+average score for top  1  :  19.0
+- - - - - iteration  3  - - - - -
+average score for top  1  :  19.0
+- - - - - iteration  4  - - - - -
+average score for top  1  :  19.0
+- - - - - iteration  5  - - - - -
+average score for top  1  :  19.0
+- - - - - iteration  6  - - - - -
+average score for top  1  :  19.0
+- - - - - iteration  7  - - - - -
+average score for top  1  :  20.0

@@ -11,8 +11,9 @@ class Model():
         self.generation = None
         self.regulators = None
         self.signs = None
-        self.constraints = None
-        self.edge_pool = None
+        self.constraints = {'fixed': set(), 'regulate': {}, 'necessary' : {},
+        'group': {}, 'possible_source': set()}
+        self.edge_pool = []
         self.primes = None
         self.rrs = None
         self.extra_edges = None
@@ -20,14 +21,14 @@ class Model():
         self.score = None
 
     @classmethod
-    def import_model(cls, primes, constraints, edge_pool, id = 0, generation = 0, base = None):
+    def import_model(cls, primes, constraints={}, edge_pool=[], id = 0, generation = 0, base = None):
         x = cls()
         x.id = id
         x.generation = generation
         x.regulators = {}
         x.signs = {}
-        x.constraints = constraints
-        x.edge_pool = edge_pool
+        x.constraints.update(constraints)
+        x.edge_pool.extend(edge_pool)
         x.primes = primes
         x.rrs = {}
         x.extra_edges = []
@@ -73,60 +74,59 @@ class Model():
         mutated_model.signs = self.signs.copy()
         mutated_model.constraints = self.constraints
         mutated_model.edge_pool = self.edge_pool
-        mutated_model.primes = {}
-        mutated_model.rrs = {}
+        mutated_model.primes = self.primes.copy()
+        mutated_model.rrs = self.rrs.copy()
         mutated_model.extra_edges = self.extra_edges.copy()
 
-        for node in self.rrs:
+        modify_edge = False
+        new_edge_node = None
+        rnd = random.random()
+        if rnd < edge_prob:
+            new_edge = random.choice(self.edge_pool)
+            new_edge_node = new_edge[1]
+            regulators = mutated_model.regulators[new_edge_node]
+            new_regulator = new_edge[0]
+            modify_edge = True
+
+        if modify_edge and new_regulator not in regulators:
+            rr = mutated_model.rrs[new_edge_node]
+            signs = mutated_model.signs[new_edge_node]
+            new_sign = new_edge[2]
+
+            mutated_model.extra_edges.append(new_edge)
+            modified_regulators, modified_rr, modified_signs = m.add_regulator(regulators, rr, signs, new_regulator, new_sign)
+
+        elif modify_edge and new_regulator in regulators:
+            rr = mutated_model.rrs[new_edge_node]
+            signs = mutated_model.signs[new_edge_node]
+
+            mutated_model.extra_edges.remove(new_edge)
+            modified_regulators, modified_rr, modified_signs = m.delete_regulator(regulators, rr, signs, new_regulator)
+
+        if modify_edge:
+            mutated_model.regulators[new_edge_node] = modified_regulators
+            mutated_model.rrs[new_edge_node] = modified_rr
+            mutated_model.signs[new_edge_node] = modified_signs
+            prime1 = m.rr2prime(modified_regulators, modified_rr, modified_signs, inverted = False)
+            mutated_model.primes[new_edge_node] = prime1
+
+        for node in mutated_model.rrs:
             # get mutated_rr from rr
-            regulators = self.regulators[node]
-            rr = self.rrs[node]
-            signs = self.signs[node]
-            mutated_rr, modified = m.mutate_rr_constraint(regulators, rr, self.constraints, node, probability)
+            regulators = mutated_model.regulators[node]
+            rr = mutated_model.rrs[node]
+            signs = mutated_model.signs[node]
+            mutated_rr, modified = m.mutate_rr_constraint(regulators, rr, mutated_model.constraints, node, probability)
             mutated_model.rrs[node] = mutated_rr
 
             # get primes from the mutated_rr
             # if the representations are equivalent, take the old prime
-            if not modified:
-                # print(node, 'is not modified')
-                mutated_model.primes[node] = self.primes[node]
-            else:
+            if modified or node == new_edge_node:
                 prime1 = m.rr2prime(regulators, mutated_rr, signs, inverted = False)
                 mutated_model.primes[node] = prime1
                 # irr = get_max_irr(rr)
                 # prime2 = rr2prime(regulators, irr, signs, inverted = True)
                 # assert prime1 == prime2, "rr and irr lead to different result!"
 
-        modify_edge = False
-        rnd = random.random()
-        if rnd < edge_prob:
-            new_edge = random.choice(self.edge_pool)
-            node = new_edge[1]
-            regulators = mutated_model.regulators[node]
-            new_regulator = new_edge[0]
-            modify_edge = True
-
-        if modify_edge and new_regulator in regulators:
-            rr = mutated_model.rrs[node]
-            signs = mutated_model.signs[node]
-
-            mutated_model.extra_edges.remove(new_edge)
-            modified_regulators, modified_rr, modified_signs = m.delete_regulator(regulators, rr, signs, new_regulator)
-
-        elif modify_edge and new_regulator not in regulators:
-            rr = mutated_model.rrs[node]
-            signs = mutated_model.signs[node]
-            new_sign = new_edge[2]
-
-            mutated_model.extra_edges.append(new_edge)
-            modified_regulators, modified_rr, modified_signs = m.add_regulator(regulators, rr, signs, new_regulator, new_sign)
-
-        if modify_edge:
-            mutated_model.regulators[node] = modified_regulators
-            mutated_model.rrs[node] = modified_rr
-            mutated_model.signs[node] = modified_signs
-            prime1 = m.rr2prime(modified_regulators, modified_rr, modified_signs, inverted = False)
-            mutated_model.primes[node] = prime1
         return mutated_model
 
     def check_constraint(self):

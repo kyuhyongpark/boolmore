@@ -411,7 +411,7 @@ def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 
         modified = False
     else:
         modified = True
-
+        
     return mutated_rr, modified
 
 def mix_models(model1, model2):
