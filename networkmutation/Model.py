@@ -4,6 +4,7 @@ import mutation as m
 import constraint as cons
 import score
 import config
+import multiprocessing
 
 class Model():
     def __init__(self):
@@ -191,13 +192,13 @@ class Model():
 
         self.predictions = predictions
 
-    def get_model_score(self, exps):
+    def get_model_score(self, exps, penalty = 0.1, report = False, file = None):
         '''
         To be modified to meet the criteria
         '''
         # self.score = score.get_score(exps, self.predictions, self.extra_edges)
         agreements = score.get_agreement(exps, self.predictions)
-        self.score = score.get_hierarchy_score(exps, agreements, self.extra_edges)
+        self.score = score.get_hierarchy_score(exps, agreements, self.extra_edges, penalty=penalty, report=report, file=file)
 
     def export(self, name, threshold = 0.0):
         '''

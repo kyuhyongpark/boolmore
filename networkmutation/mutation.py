@@ -370,15 +370,15 @@ def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 
     # no need to mutate source nodes
     if len(regulators) == 1 and regulators[0] == node:
         return rr, False
-    # no need to mutate nodes with one regulator and cannot be a source node
-    if len(regulators) == 1 and node not in constraints['possible_source']:
-        return rr, False
     # impose constraints - fixed nodes
     if node in constraints['fixed']:
         return rr, False
 
     redo = True
+    trial = 0
     while redo == True:
+        if trial > 1000:
+            raise Exception("too many trials. check mutation parameter")
         ### mutation module
         if node in constraints['group']: # impose group constraint
             groups = constraints['group'][node]
@@ -399,11 +399,13 @@ def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 
             for reg in constraints['regulate'][node]:
                 redo = not cons.check_regulation(regulators, mutated_rr, reg)
                 if redo == True:
+                    trial += 1
                     break
         elif node not in constraints['possible_source']:
             # need to check if a node became a source node and mutate more if it did
             # nodes that have a regulating node cannot be a source, and hence elif.
             redo = cons.check_source(mutated_rr)
+            trial += 1
 
     max_original = get_uni_rr(rr)
     max_mutated = get_uni_rr(mutated_rr)
@@ -411,7 +413,7 @@ def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 
         modified = False
     else:
         modified = True
-        
+
     return mutated_rr, modified
 
 def mix_models(model1, model2):

@@ -20,55 +20,18 @@
 # If multiple intervention/outcome pairs are listed,
 # the model should agree with all to get the score.
 
-#
-1.0
-ABA	0
-Closure	0
-#
-1.0
-ABA	1
-Closure	1
-#
-1.0
-ABA	0	SCAB1	0
-Closure	0
-#
-1.0
-ABA	1	SCAB1	0
-Closure	1
-#
-1.0
-ABA	0	SCAB1	1
-Closure	0
-#
-1.0
-ABA	1	SCAB1	1
-Closure	1	lenient 0
+ID	Intervention	Observed	Node	Value	Score
+1	ABA=0	Closure	OFF	1.0
+2	ABA=1	Closure	ON	1.0
+3	ABA=0,SCAB1=0	Closure	OFF	1.0
+4	ABA=1,SCAB1=0	Closure	ON	1.0
+5	ABA=0,SCAB1=1	Closure	OFF	1.0
+6	ABA=1,SCAB1=1	Closure	Some/ON	1.0
 # duplicate with different data
-1.0
-ABA	1	SCAB1	1
-Closure	1
-#
-1.0
-ABA	0	SCAB1	0
-Actin_Reorganization	0
-#
-1.0
-ABA	1	SCAB1	0
-Actin_Reorganization	1	lenient 0
-#
-1.0
-ABA	0	SCAB1	1
-Actin_Reorganization	0
-#
-1.0
-ABA	1	SCAB1	1
-Actin_Reorganization	1	lenient 0
-#
-1.0
-ABA	1	GEF1_4_10	1
-Closure	0.5	lenient 1
-#
-1.0
-ABA	0	PA	1
-Closure	1	0.5
+#7	ABA=1,SCAB1=1	Closure	ON	1.0
+8	ABA=0,SCAB1=0	Actin_Reorganization	OFF	1.0
+9	ABA=1,SCAB1=0	Actin_Reorganization	ON	1.0
+10	ABA=0,SCAB1=1	Actin_Reorganization	OFF	1.0
+11	ABA=1,SCAB1=1	Actin_Reorganization	Some/ON	1.0
+12	ABA=1,GEF1_4_10=1	Closure	Some/ON	1.0
+13	ABA=0,PA=1	Closure	Some/ON	1.0

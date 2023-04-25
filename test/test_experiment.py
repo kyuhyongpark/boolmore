@@ -3,7 +3,7 @@ sys.path.insert(0, 'C:/Users/danie/OneDrive/Documents/Codes/networkmutation/netw
 
 from experiment import *
 
-location = '../networkmutation/data_0923.txt'
+location = 'networkmutation/test/data_test_20230424.txt'
 
 data, pert = import_exps(location)
 for sth in data:
