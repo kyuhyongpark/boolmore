@@ -1,8 +1,8 @@
-# Categorized as GA2, starting from ca_osc_cis
+# Started from from ABA_calosc_cis
 # id: 3625
 # generation: 21
 # extra edges: [('PA', 'ABI2', '0'), ('Ca2osc', 'HAB1', '0'), ('PA', 'Microtubule_Depolymerization', '1'), ('AquaporinPIP2_1', 'ROS', '1')]
-# score: 310.25
+# score: 298.0
 # following constraints: False
 # ABI1 should regulate OST1
 8-nitro-cGMP* = ROS & cGMP | NO & cGMP

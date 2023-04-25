@@ -1,8 +1,9 @@
-# Categorized as GA2, starting from ca_osc
+# Started from ABA_calosc
+# Modified the rule for CPK3_21, which did not follow the constraints due to an error
 # id: 5946
 # generation: 86
 # extra edges: [('Ca2osc', 'ABI2', '0'), ('PA', 'ABI2', '0'), ('ROS', 'Actin_Reorganization', '1'), ('PA', 'Microtubule_Depolymerization', '1'), ('Actin_Reorganization', 'ROS', '1'), ('AquaporinPIP2_1', 'ROS', '1'), ('pHc', 'Vacuolar_Acidification', '1')]
-# score: 309.5
+# score: 300.0
 # following constraints: True
 8-nitro-cGMP* = NO & cGMP
 ABA* = ABA

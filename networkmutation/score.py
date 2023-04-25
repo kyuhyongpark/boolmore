@@ -22,7 +22,7 @@ def powerset(iterable):
     s = list(iterable)
     return it.chain.from_iterable(it.combinations(s, r) for r in range(len(s)+1))
 
-# 20221110 attractor agreement update
+# 20230425 agreement function update
 def get_agreement(experiments, predictions):
     """
     Returns attractor agreements
@@ -82,32 +82,20 @@ def get_agreement(experiments, predictions):
                 agreements[node] = {}
             predict_value = predictions[fix][node]
             # experiment showed (ON)
-            if outcome[1:] == ('1',):
-                agreement = line(predict_value,(0.8,0),(1,1))
-            # experiment showed (ON lenient 0)
-            elif outcome[1:] == ('1', 'lenient 0'):
+            if outcome[2:] == ('ON',):
+                agreement = max(line(predict_value,(0.8,0),(1,1)),line(predict_value,(1,1),(1.0001,1)))
+            # experiment showed (Some/ON)
+            elif outcome[2:] == ('Some/ON',):
                 agreement = max(line(predict_value,(0.6,0),(0.8,1)),line(predict_value,(0.8,1),(1,1)))
-            # experiment showed (ON/some ON)
-            elif '1' in outcome and '0.5' in outcome:
-                agreement = max(line(predict_value,(0.1,0),(0.3,1)),line(predict_value,(0.3,1),(1,1)))
-            # experiment showed (some ON lenient 1)
-            elif outcome[1:] == ('0.5', 'lenient 1'):
-                agreement = max(line(predict_value,(0.2,0),(0.4,1)),line(predict_value,(0.4,1),(0.8,1)),line(predict_value,(0.8,1),(1,0)))
-            # experiment showed (some ON)
-            elif outcome[1:] == ('0.5',):
+            # experiment showed (Some)
+            elif outcome[1:] == ('Some',):
                 agreement = max(line(predict_value,(0.1,0),(0.3,1)),line(predict_value,(0.3,1),(0.7,1)),line(predict_value,(0.7,1),(0.9,0)))
-            # experiment showed (some ON lenient 1)
-            elif outcome[1:] == ('0.5', 'lenient 0'):
-                agreement = max(line(predict_value,(0,0),(0.2,1)),line(predict_value,(0.2,1),(0.6,1)),line(predict_value,(0.6,1),(0.8,0)))
-            # experiment showed (some ON/OFF)
-            elif '0.5' in outcome and '0' in outcome:
-                agreement = max(line(predict_value,(0,1),(0.7,1)),line(predict_value,(0.7,1),(0.9,0)))
-            # experiment showed (OFF lenient 1)
-            elif outcome[1:] == ('0', 'lenient 1'):
+            # experiment showed (OFF/Some)
+            elif outcome[1:] == ('OFF/Some',):
                 agreement = max(line(predict_value,(0,1),(0.2,1)),line(predict_value,(0.2,1),(0.4,0)))
             # experiment showed (OFF)
-            elif outcome[1:] == ('0',):
-                agreement = line(predict_value,(0,1),(0.2,0))
+            elif outcome[1:] == ('OFF',):
+                agreement = max(line(predict_value,(-0.0001,1),(0,1)),line(predict_value,(0,1),(0.2,0)))
             else:
                 print("Unexpected input", outcome)
                 raise Exception("Unexpected experiment input")
@@ -127,6 +115,112 @@ def get_agreement(experiments, predictions):
         #     print("agreement: ", agreement)
         # print("- - - - - - - - - -")
     return agreements
+
+# # 20221110 attractor agreement update
+# def get_agreement(experiments, predictions):
+#     """
+#     Returns attractor agreements
+#     when given experimental results and model predictions
+
+#     Parameters
+#     ----------
+#     experiments : list of expset (tuple)
+#         expset[0] : score (float) representing the score for the experiment set
+#         expset[1] : exp (dict) representing each perturbation/result pair
+#             exp key : fixes (tuple) ((node A, value1), (node B, value2), ...)
+#             exp value : outcome (tuple) (measured_node, values)
+
+#     predictions : dict
+#         keys : fixes (tuple) ((node A, value1), (node B, value2), ...)
+#         values : dict
+#             average value of every node in the attractors
+
+#     Returns
+#     -------
+#     agreements : dict
+#         keys : Outcome node
+#         values : dict
+#             keys : fixes (tuple)
+#             values : [agreement(float), outcome(tuple), predict value(float)]
+
+#     Notes
+#     -----
+#     experimental data input
+
+#     score: The maximum score the model can get from the experiment
+#     e.g. [1.0]
+
+#     Interventions: The nodes, and the values (0 or 1) separated by tab
+#     e.g. [ABA	0	CPK3_21	0]
+
+#     Outcome: A single node, and the expected value separated by tab.
+#     The outcome value can be 0 or 0.5 or 1, and multiple values can be listed.
+#     If multiple values for outcome are listed,
+#     the model will be checked whether it matches with one of them.
+#     e.g. [Closure	0	0.5]
+#     The model is considered to agree with this result if it gets 0 or 0.5.
+#     Optional arguments: lenient scoring
+#     'lenient 1' or 'lenient 0' can be added when a single outcome value is listed.
+#     Scoring curve will move in that direction.
+
+#     If multiple intervention/outcome pairs are listed,
+#     the model should agree with all to get the score.
+#     """
+#     agreements = {}
+#     for expset in experiments:
+#         exp = expset[1]
+#         for fix in exp:
+#             outcome = exp[fix]
+#             node = outcome[0]
+#             if node not in agreements:
+#                 agreements[node] = {}
+#             predict_value = predictions[fix][node]
+#             # experiment showed (ON)
+#             if outcome[1:] == ('1',):
+#                 agreement = max(line(predict_value,(0.8,0),(1,1)),line(predict_value,(1,1),(1.0001,1)))
+#             # experiment showed (ON lenient 0)
+#             elif outcome[1:] == ('1', 'lenient 0'):
+#                 agreement = max(line(predict_value,(0.6,0),(0.8,1)),line(predict_value,(0.8,1),(1,1)))
+#             # experiment showed (ON/some ON)
+#             elif '1' in outcome and '0.5' in outcome:
+#                 agreement = max(line(predict_value,(0.1,0),(0.3,1)),line(predict_value,(0.3,1),(1,1)))
+#             # experiment showed (some ON lenient 1)
+#             elif outcome[1:] == ('0.5', 'lenient 1'):
+#                 agreement = max(line(predict_value,(0.2,0),(0.4,1)),line(predict_value,(0.4,1),(0.8,1)),line(predict_value,(0.8,1),(1,0)))
+#             # experiment showed (some ON)
+#             elif outcome[1:] == ('0.5',):
+#                 agreement = max(line(predict_value,(0.1,0),(0.3,1)),line(predict_value,(0.3,1),(0.7,1)),line(predict_value,(0.7,1),(0.9,0)))
+#             # experiment showed (some ON lenient 1)
+#             elif outcome[1:] == ('0.5', 'lenient 0'):
+#                 agreement = max(line(predict_value,(0,0),(0.2,1)),line(predict_value,(0.2,1),(0.6,1)),line(predict_value,(0.6,1),(0.8,0)))
+#             # experiment showed (some ON/OFF)
+#             elif '0.5' in outcome and '0' in outcome:
+#                 agreement = max(line(predict_value,(0,1),(0.7,1)),line(predict_value,(0.7,1),(0.9,0)))
+#             # experiment showed (OFF lenient 1)
+#             elif outcome[1:] == ('0', 'lenient 1'):
+#                 agreement = max(line(predict_value,(0,1),(0.2,1)),line(predict_value,(0.2,1),(0.4,0)))
+#             # experiment showed (OFF)
+#             elif outcome[1:] == ('0',):
+#                 agreement = max(line(predict_value,(-0.0001,1),(0,1)),line(predict_value,(0,1),(0.2,0)))
+#             else:
+#                 print("Unexpected input", outcome)
+#                 raise Exception("Unexpected experiment input")
+
+#             if fix in agreements[node]:
+#                 print("These fixes are already included", fix)
+#                 raise Exception("Duplicate experimental entry")
+#             else:
+#                 agreements[node][fix] = []
+
+#             agreements[node][fix].append(agreement)
+#             agreements[node][fix].append(outcome)
+#             agreements[node][fix].append(predict_value)
+#         #     print("Perturbation: ", fix)
+#         #     print("Experiment: ", outcome)
+#         #     print("Prediction: ", predict_value)
+#         #     print("agreement: ", agreement)
+#         # print("- - - - - - - - - -")
+#     return agreements
 
 # # 20221004 hierarchy scoring
 # def get_agreement(experiments, predictions):
@@ -236,7 +330,7 @@ def get_agreement(experiments, predictions):
 #     return agreements
 
 # 20221006 hierarchy scoring
-def get_hierarchy_score(experiments, agreements, extra_edges):
+def get_hierarchy_score(experiments, agreements, extra_edges, penalty = 0.1, report = False, file = None):
     """
     Returns model score
     when given experimental results and model attractor agreements
@@ -257,14 +351,24 @@ def get_hierarchy_score(experiments, agreements, extra_edges):
 
     extra_edges : list of extra_edge (tuple)
         extra_edge : tuple representing (starting node, )
+
+    penalty : penalty for an extra edge (float)
+    
+    report : if True, make a csv file with detailed report
+
+    file : the location and name of the detailed report file
+
     Returns
     -------
     total : The model's total score
 
     """
+    if report:
+        fp = open(file, 'w')
+
     total = 0.0
     max_score = 0.0
-    cost = len(extra_edges) * 0.1
+    cost = len(extra_edges) * penalty
     total -= cost
     for expset in experiments:
         score = float(expset[0])
@@ -273,6 +377,11 @@ def get_hierarchy_score(experiments, agreements, extra_edges):
         for fix in exp:
             outcome = exp[fix]
             node = outcome[0]
+            if report:
+                fp.write(str(fix) + '\t')
+                fp.write(str(outcome) + '\t')
+                fp.write(str(agreements[node][fix][2]) + '\t')
+                fp.write(str(agreements[node][fix][0]) + '\t')
             # print("Perturbation: ", fix)
             # print("Experiment: ", outcome)
             # print("Prediction: ", agreements[node][fix][2])
@@ -287,11 +396,16 @@ def get_hierarchy_score(experiments, agreements, extra_edges):
                     # print("Prediction: ", agreements[node][subset][2])
                     # print('agreement: ',agreements[node][subset][0])
                     # print('current score: ',score)
+        if report:
+            fp.write(str(score) + '\n')
 
         # print("Adding ", score)
         # print("- - - - - - - - - -")
         total += score
     # print("Total ", total, "/", max_score)
+    if report:
+        fp.write('total\t\t\t\t' + str(total) + '\n')
+        fp.write('out of\t\t\t\t' + str(max_score) + '\n')
 
     return total
 

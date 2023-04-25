@@ -1,0 +1,100 @@
+# Started from ABA_full_fix
+# ERROR: added self loop on KEV instead of K_efflux to the pool of edges
+# Modified a model from the genetic algorithm
+# deleted self loop of KEV
+# modified the rule for K_efflux to KEV & KOUT | KOUT & K_efflux
+# id: 6349
+# generation: 78
+# extra edges: [('ROS', 'Actin_Reorganization', '1'), ('K_efflux', 'K_efflux', '1'), ('PA', 'Microtubule_Depolymerization', '1'), ('PA', 'PP2CA', '0')]
+# score: 297.0
+# following constraints: True
+# Stable motifs:
+# ?
+# Conditionally stable motifs:
+# ABA=0 - ?
+# ABA=1 - ?
+
+# Percolated rules
+# ?
+
+8-nitro-cGMP* = NO & cGMP
+ABA* = ABA
+ABH1* = 1
+ABI1* = !PA & !RCARs | !PA & !ROS & pHc
+ABI2* = !RCARs | ROP11 & !ROS
+ADPRc* = 8-nitro-cGMP
+ARP_Complex* = 1
+Actin_Reorganization* = !AtRAC1 & PtdInsP3 & PtdInsP4 & SCAB1 | !AtRAC1 & PtdInsP4 & ROS
+AnionEM* = QUAC1 & SLAC1
+AquaporinPIP2_1* = OST1
+AtRAC1* = ABI1 | !ABA
+CIS* = InsP3 | cADPR
+CPK23* = 1
+CPK3_21* = Ca2c
+CPK6* = 1
+Ca2_ATPase* = Ca2c
+Ca2c* = !Ca2_ATPase & CaIM | CIS & !Ca2_ATPase
+CaIM* = !ABH1 & Actin_Reorganization & !ERA1 & GHR1 | !ABH1 & Actin_Reorganization & !ERA1 & MRP5 | !ABH1 & Actin_Reorganization & GHR1 & MRP5 | !ABH1 & !ERA1 & GHR1 & MRP5 | !ABH1 & !ERA1 & MRP5 & NtSyp121 | !ABH1 & GHR1 & NtSyp121 | Actin_Reorganization & GHR1 & NtSyp121 | GHR1 & MRP5 & NtSyp121
+Closure* = H2O_Efflux & Microtubule_Depolymerization
+DAG* = PLC & PtdIns4_5P2
+DAGK* = 1
+Depolarization* = AnionEM | Ca2c & !H_ATPase | Ca2c & !K_efflux | !H_ATPase & KEV & !K_efflux
+ERA1* = 1
+GAPC1_2* = 1
+GCR1* = 1
+GEF1_4_10* = 0
+GHR1* = ROS
+GPA1* = S1P_PhytoS1P | !GCR1
+GTP* = 1
+H2O_Efflux* = AnionEM & AquaporinPIP2_1 & K_efflux
+HAB1* = !RCARs & !ROS
+H_ATPase* = !pHc
+InsP3* = PLC & PtdIns4_5P2
+InsP6* = InsP3
+KEV* = Ca2c
+KOUT* = Depolarization
+K_efflux* = KEV & KOUT | KOUT & K_efflux
+MPK9_12* = Ca2c
+MRP5* = 1
+Malate* = !AnionEM & PEPC
+Microtubule_Depolymerization* = PA
+NAD* = 1
+NADPH* = 1
+NIA1_2* = ROS
+NO* = NADPH & NIA1_2 & Nitrite
+NOGC1* = NO
+Nitrite* = 1
+NtSyp121* = 1
+OST1* = !ABI1 & !ABI2 | !ABI1 & !HAB1 | !ABI1 & !PP2CA
+PA* = DAG & DAGK | PC & PLDalpha & PLDdelta
+PC* = 1
+PEPC* = !ABA
+PI3P5K* = ABA
+PLC* = Ca2c
+PLDalpha* = GPA1
+PLDdelta* = GAPC1_2 & NO | GAPC1_2 & ROS
+PP2CA* = !RCARs & !ROS & !PA
+PtdIns3_5P2* = PI3P5K
+PtdIns4_5P2* = PtdInsP4
+PtdInsP3* = 1
+PtdInsP4* = 1
+QUAC1* = OST1
+RBOH* = !ABI1 & GPA1 & pHc | !ABI1 & PA & pHc | GPA1 & RCN1 & pHc | PA & RCN1 & pHc | PtdInsP3 & RCN1 & pHc
+RCARs* = ABA
+RCN1* = 1
+ROP11* = GEF1_4_10
+ROS* = NADPH & RBOH
+S1P_PhytoS1P* = SPHK1_2 & !SPP1 & Sph
+SCAB1* = 1
+SLAC1* = !ABI1 & !ABI2 & CPK23 & CPK3_21 & CPK6 & GHR1 & OST1 | !ABI1 & !ABI2 & CPK23 & CPK3_21 & CPK6 & MPK9_12 | !ABI1 & !ABI2 & CPK23 & CPK3_21 & MPK9_12 & pHc | !ABI1 & !ABI2 & CPK23 & CPK6 & MPK9_12 & OST1 | !ABI1 & !ABI2 & CPK23 & MPK9_12 & OST1 & pHc | !ABI1 & !ABI2 & CPK3_21 & CPK6 & MPK9_12 & OST1 | !ABI1 & !ABI2 & CPK3_21 & MPK9_12 & OST1 & pHc | !ABI1 & !ABI2 & CPK3_21 & !PP2CA & pHc | !ABI1 & !ABI2 & CPK6 & GHR1 & !PP2CA & pHc | !ABI1 & !ABI2 & CPK6 & MPK9_12 & OST1 & pHc | !ABI1 & !ABI2 & OST1 & !PP2CA & pHc | !ABI1 & CPK23 & CPK6 & GHR1 & !PP2CA & pHc | !ABI1 & CPK3_21 & CPK6 & GHR1 & !PP2CA | !ABI1 & CPK3_21 & GHR1 & MPK9_12 & pHc | !ABI1 & CPK3_21 & MPK9_12 & !PP2CA & pHc | !ABI1 & CPK6 & GHR1 & MPK9_12 & OST1 | !ABI1 & CPK6 & GHR1 & OST1 & !PP2CA | !ABI1 & CPK6 & MPK9_12 & !PP2CA | !ABI1 & GHR1 & MPK9_12 & OST1 & pHc | !ABI1 & MPK9_12 & OST1 & !PP2CA & pHc | !ABI2 & CPK23 & CPK3_21 & GHR1 & pHc | !ABI2 & CPK23 & CPK3_21 & MPK9_12 & !PP2CA | !ABI2 & CPK23 & CPK6 & GHR1 & !PP2CA & pHc | !ABI2 & CPK23 & CPK6 & MPK9_12 & !PP2CA & pHc | !ABI2 & CPK3_21 & CPK6 & !PP2CA | !ABI2 & CPK3_21 & GHR1 & MPK9_12 & OST1 & pHc | !ABI2 & CPK3_21 & GHR1 & MPK9_12 & !PP2CA & pHc | !ABI2 & CPK3_21 & OST1 & !PP2CA & pHc | !ABI2 & CPK6 & GHR1 & MPK9_12 & OST1 & pHc | !ABI2 & CPK6 & GHR1 & MPK9_12 & !PP2CA & pHc | !ABI2 & CPK6 & OST1 & !PP2CA | CPK23 & CPK3_21 & CPK6 & !PP2CA | CPK23 & CPK3_21 & GHR1 & MPK9_12 & pHc | CPK23 & CPK3_21 & GHR1 & OST1 & pHc | CPK23 & CPK3_21 & !PP2CA & pHc | CPK23 & CPK6 & GHR1 & MPK9_12 & OST1 | CPK23 & CPK6 & GHR1 & MPK9_12 & !PP2CA & pHc | CPK23 & OST1 & !PP2CA | CPK3_21 & CPK6 & GHR1 & MPK9_12
+SLAH3* = CPK23 | CPK6
+SPHK1_2* = PA
+SPP1* = 0
+Sph* = 1
+TCTP* = Ca2c
+V-ATPase* = Ca2c
+V-PPase* = PtdIns3_5P2
+Vacuolar_Acidification* = V-PPase
+cADPR* = ADPRc & NAD
+cGMP* = GTP & NOGC1
+pHc* = !ABI1 & !ABI2 & OST1 & Vacuolar_Acidification | Ca2c & Vacuolar_Acidification

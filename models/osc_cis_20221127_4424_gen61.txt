@@ -1,0 +1,151 @@
+# Started from ABA_calosc_cis
+# id: 4424
+# generation: 61
+# extra edges: [('PA', 'ABI2', '0'), ('PA', 'Microtubule_Depolymerization', '1'), ('Actin_Reorganization', 'ROS', '1'), ('AquaporinPIP2_1', 'ROS', '1')]
+# score: 300.5
+# following constraints: True
+# Stable motifs:
+# None
+# Conditionally stable motifs:
+# ABA=0 - None
+# ABA=1 - {'ABI1': 0, 'Actin_Reorganization': 1, 'AtRAC1': 0, 'CIS': 1, 'Ca2osc': 1, 'CaIM': 1, 'DAG': 1, 'PA': 1, 'PLC': 1, 'PLDdelta': 1, 'RBOH': 1, 'ROS': 1, 'pHc': 1}
+# {'ABI1': 0, 'Actin_Reorganization': 1, 'AtRAC1': 0, 'CIS': 1, 'Ca2osc': 1, 'CaIM': 1, 'DAG': 1, 'PA': 1, 'PLC': 1, 'PLDalpha': 1, 'RBOH': 1, 'ROS': 1, 'pHc': 1}
+# {'8-nitro-cGMP': 1, 'ABI1': 0, 'ADPRc': 1, 'Actin_Reorganization': 1, 'AtRAC1': 0, 'CIS': 1, 'Ca2osc': 1, 'DAG': 1, 'NIA1_2': 1, 'NO': 1, 'NOGC1': 1, 'PA': 1, 'PLC': 1, 'PLDdelta': 1, 'RBOH': 1, 'ROS': 1, 'cADPR': 1, 'cGMP': 1, 'pHc': 1}
+# {'8-nitro-cGMP': 1, 'ABI1': 0, 'ADPRc': 1, 'Actin_Reorganization': 1, 'AtRAC1': 0, 'CIS': 1, 'Ca2osc': 1, 'DAG': 1, 'NIA1_2': 1, 'NO': 1, 'NOGC1': 1, 'PA': 1, 'PLC': 1, 'PLDalpha': 1, 'RBOH': 1, 'ROS': 1, 'cADPR': 1, 'cGMP': 1, 'pHc': 1}
+
+# Percolated rules
+# 8-nitro-cGMP* = NO & cGMP
+# ABA* = ABA
+# ABI1* = !ROS & pHc | !RCARs & pHc
+# ABI2* = !PA & !RCARs & !ROS
+# ADPRc* = 8-nitro-cGMP
+# Actin_Reorganization* = !AtRAC1
+# AnionEM* = SLAC1
+# AtRAC1* = ABI1 | !ABA
+# CIS* = cADPR | CaIM
+# CPK3_21* = Ca2osc
+# Ca2osc* = CIS
+# CaIM* = GHR1 | Actin_Reorganization
+# Closure* = H2O_Efflux & Microtubule_Depolymerization
+# DAG* = PLC
+# Depolarization* = Ca2osc & !K_efflux | Ca2osc & !H_ATPase | AnionEM & !K_efflux | AnionEM & !H_ATPaseGHR1* = !ABI2 & ROS
+# GPA1* = S1P_PhytoS1P
+# H2O_Efflux* = AnionEM & K_efflux & !Malate
+# HAB1* = !RCARs & !ROS
+# H_ATPase* = !ROS & !pHc | !Ca2osc & !ROS
+# InsP3* = PLC
+# InsP6* = InsP3
+# KEV* = Ca2osc
+# KOUT* = Depolarization & pHc | Depolarization & !ROS | Depolarization & !NO
+# K_efflux* = KEV & KOUT
+# MPK9_12* = Ca2osc
+# Malate* = !ABA & !AnionEM & PEPC
+# Microtubule_Depolymerization* = TCTP | PA
+# NIA1_2* = ROS
+# NO* = NIA1_2
+# NOGC1* = NO
+# OST1* = !HAB1 & !PP2CA | !ABI2 & !PP2CA | !ABI1 & !PP2CA
+# PA* = DAG & PLDdelta | DAG & PLDalpha
+# PEPC* = !ABA
+# PI3P5K* = ABA
+# PLC* = Ca2osc
+# PLDalpha* = Ca2osc
+# PLDdelta* = ROS | NO
+# PP2CA* = !RCARs & !ROS
+# PtdIns3_5P2* = PI3P5K
+# QUAC1* = Ca2osc & OST1
+# RBOH* = GPA1 & OST1 & PA & pHc
+# RCARs* = ABA
+# ROS* = Actin_Reorganization & RBOH
+# S1P_PhytoS1P* = SPHK1_2
+# SLAC1* = CPK3_21 & GHR1 & MPK9_12 & !PP2CA & pHc | !ABI1 & GHR1 & MPK9_12 & OST1 & !PP2CA | !ABI1 & CPK3_21 & GHR1 & MPK9_12 & !PP2CA | !ABI1 & !ABI2 & CPK3_21 & MPK9_12 & !PP2CA | !ABI2 & CPK3_21 & MPK9_12 & pHc | !ABI1 & !ABI2 & MPK9_12 & OST1
+# SLAH3* = CPK3_21 | !ABI1
+# SPHK1_2* = PA | ABA
+# TCTP* = Ca2osc
+# V-ATPase* = Ca2osc
+# V-PPase* = PtdIns3_5P2
+# Vacuolar_Acidification* = V-PPase | V-ATPase
+# cADPR* = ADPRc
+# cGMP* = NOGC1
+# pHc* = Ca2osc & Vacuolar_Acidification
+
+8-nitro-cGMP* = NO & cGMP
+ABA* = ABA
+ABH1* = 1
+ABI1* = !PA & ROP11 | !RCARs & ROP11 | !RCARs & pHc | !ROS & pHc
+ABI2* = !RCARs & ROP11 & !PA | !RCARs & !ROS & !PA | ROP11 & !ROS & !PA
+ADPRc* = 8-nitro-cGMP
+ARP_Complex* = 1
+Actin_Reorganization* = !AtRAC1
+AnionEM* = SLAC1
+AquaporinPIP2_1* = 1
+AtRAC1* = ABI1 | !ABA
+CIS* = CaIM | cADPR
+CPK23* = 1
+CPK3_21* = Ca2osc
+CPK6* = 1
+Ca2osc* = CIS
+CaIM* = !ABH1 & Actin_Reorganization & GHR1 | !ABH1 & Actin_Reorganization & NtSyp121 | !ABH1 & GHR1 & NtSyp121 | Actin_Reorganization & GHR1 & NtSyp121 | Actin_Reorganization & MRP5 | !ERA1 & GHR1 & NtSyp121 | GHR1 & MRP5 & NtSyp121
+Closure* = H2O_Efflux & Microtubule_Depolymerization
+DAG* = PLC & PtdIns4_5P2
+DAGK* = 1
+Depolarization* = AnionEM & !H_ATPase | AnionEM & !K_efflux | Ca2osc & !H_ATPase | Ca2osc & !K_efflux
+ERA1* = 1
+GAPC1_2* = 1
+GCR1* = 1
+GEF1_4_10* = 0
+GHR1* = !ABI2 & ROS
+GPA1* = S1P_PhytoS1P
+GTP* = 1
+H2O_Efflux* = AnionEM & AquaporinPIP2_1 & K_efflux & !Malate
+HAB1* = !RCARs & !ROS
+H_ATPase* = !Ca2osc & !ROS | !ROS & !pHc
+InsP3* = PLC & PtdIns4_5P2
+InsP6* = InsP3
+KEV* = Ca2osc
+KOUT* = Depolarization & pHc | Depolarization & !ROS | Depolarization & !NO
+K_efflux* = KEV & KOUT
+MPK9_12* = Ca2osc
+MRP5* = 1
+Malate* = !ABA & !AnionEM & PEPC
+Microtubule_Depolymerization* = TCTP | PA
+NAD* = 1
+NADPH* = 1
+NIA1_2* = ROS
+NO* = NADPH & NIA1_2 & Nitrite
+NOGC1* = NO
+Nitrite* = 1
+NtSyp121* = 1
+OST1* = !ABI1 & !PP2CA | !ABI2 & !PP2CA | !HAB1 & !PP2CA
+PA* = DAG & DAGK & PC & PLDalpha | DAG & DAGK & PC & PLDdelta
+PC* = 1
+PEPC* = !ABA
+PI3P5K* = ABA
+PLC* = Ca2osc
+PLDalpha* = Ca2osc
+PLDdelta* = GAPC1_2 & ROS | NO
+PP2CA* = !RCARs & !ROS
+PtdIns3_5P2* = PI3P5K
+PtdIns4_5P2* = PtdInsP4
+PtdInsP3* = 1
+PtdInsP4* = 1
+QUAC1* = Ca2osc & OST1
+RBOH* = GPA1 & OST1 & PA & PtdInsP3 & RCN1 & pHc
+RCARs* = ABA
+RCN1* = 1
+ROP11* = GEF1_4_10
+ROS* = RBOH & Actin_Reorganization & AquaporinPIP2_1
+S1P_PhytoS1P* = SPHK1_2 & !SPP1 & Sph
+SCAB1* = 1
+SLAC1* = !ABI1 & !ABI2 & CPK23 & CPK3_21 & MPK9_12 & pHc | !ABI1 & !ABI2 & CPK3_21 & CPK6 & MPK9_12 & !PP2CA | !ABI1 & !ABI2 & CPK3_21 & CPK6 & MPK9_12 & pHc | !ABI1 & !ABI2 & CPK3_21 & MPK9_12 & OST1 & pHc | !ABI1 & !ABI2 & CPK6 & MPK9_12 & OST1 | !ABI1 & !ABI2 & GHR1 & MPK9_12 & OST1 | !ABI1 & CPK3_21 & GHR1 & MPK9_12 & !PP2CA | !ABI1 & GHR1 & MPK9_12 & OST1 & !PP2CA | !ABI2 & CPK23 & CPK3_21 & CPK6 & MPK9_12 & pHc | !ABI2 & CPK23 & CPK3_21 & MPK9_12 & OST1 & pHc | !ABI2 & CPK3_21 & CPK6 & MPK9_12 & OST1 & pHc | !ABI2 & CPK3_21 & GHR1 & MPK9_12 & pHc | !ABI2 & CPK3_21 & MPK9_12 & !PP2CA & pHc | CPK3_21 & GHR1 & MPK9_12 & !PP2CA & pHc
+SLAH3* = !ABI1 & CPK6 | CPK23 & CPK3_21 | CPK3_21 & CPK6
+SPHK1_2* = PA | ABA
+SPP1* = 0
+Sph* = 1
+TCTP* = Ca2osc
+V-ATPase* = Ca2osc
+V-PPase* = PtdIns3_5P2
+Vacuolar_Acidification* = V-PPase | V-ATPase
+cADPR* = ADPRc & NAD
+cGMP* = GTP & NOGC1
+pHc* = Ca2osc & Vacuolar_Acidification

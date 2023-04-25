@@ -1,8 +1,9 @@
-# Categorized as GA1, starting from ABA 2017 model
+# Started from ABA_full
+# has an error where KEV is regulated by Vacuolar_Acidification
 # id: 7590
 # generation: 81
 # extra edges: [('PA', 'ABI2', '0'), ('ROS', 'Actin_Reorganization', '1'), ('GHR1', 'CPK3_21', '1'), ('PA', 'Microtubule_Depolymerization', '1'), ('Actin_Reorganization', 'ROS', '1'), ('AquaporinPIP2_1', 'ROS', '1'), ('pHc', 'Vacuolar_Acidification', '1')]
-# score: 304.0
+# score: 298.0
 # following constraints: True
 8-nitro-cGMP* = NO & cGMP
 ABA* = ABA
