@@ -106,10 +106,6 @@ ABA	1	GEF1_4_10	0
 Closure	1
 #
 1.0
-ABA	1	GEF1_4_10	1
-Closure	0.5	lenient 1
-#
-1.0
 ABA	0	SPHK1_2	0
 Closure	0
 #

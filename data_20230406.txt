@@ -12,78 +12,74 @@
 # the model will be checked whether it matches with one of them.
 # e.g. [Closure	0	0.5]
 # the model is considered to agree with this result if it gets 0 or 0.5
-# Optional arguments: lenient scoring
-# 'lenient 1' or 'lenient 0' can be added when a single outcome value is listed.
-# Scoring method will give half score in that direction
-# e.g. [Closure	0	lenient 1] will give 1 score if 0, and 0.5 score if 0.5
 #
 # If multiple intervention/outcome pairs are listed,
 # the model should agree with all to get the score.
 
-#
+#1
 1.0
 ABA	0
 Closure	0
-#
+#2
 1.0
 ABA	1
 Closure	1
-#
+#3
 1.0
 ABA	0	ROS	1
 Closure	1
-#
+#4
 1.0
 ABA	0	RBOH	0
 Closure	0
-#
+#5
 1.0
 ABA	0	RBOH	0	ROS	1
 Closure	1
-#
+#6
 1.0
 ABA	0	ROS	0
 Closure	0
-#
+#7
 1.0
 ABA	1	ROS	0
-Closure	0.5	lenient 0
-#
+Closure	0	0.5
+#8
 1.0
 ABA	1	RBOH	0
-Closure	0.5
-#
+Closure	0	0.5
+#9
 1.0
 ABA	0	CaIM	1
 Closure	1
-#
+#10
 1.0
 ABA	0	Ca2c	0
 Closure	0
-#
+#11
 1.0
 ABA	1	Ca2c	0
-Closure	0.5	lenient 0
-#
+Closure	0	0.5
+#12
 1.0
 ABA	0	SCAB1	1
 Closure	0
-#
+#13
 1.0
 ABA	1	SCAB1	1
-Closure	1	lenient 0
-#
+Closure	0.5	1
+#14
 1.0
 ABA	1	SCAB1	1
-Actin_Reorganization	1	lenient 0
-#
+Actin_Reorganization	0.5	1
+#15
 1.0
 ABA	0	SCAB1	0
 Closure	0
-#
+#16
 1.0
 ABA	1	SCAB1	0
-Closure	1
+Closure	0.5	1
 #
 1.0
 ABA	1	SCAB1	0
@@ -104,10 +100,6 @@ Closure	0
 1.0
 ABA	1	GEF1_4_10	0
 Closure	1
-#
-1.0
-ABA	1	GEF1_4_10	1
-Closure	0.5	lenient 1
 #
 1.0
 ABA	0	SPHK1_2	0
