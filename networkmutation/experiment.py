@@ -3,11 +3,17 @@ import csv
 def comment_removal(line):
     return not line.startswith("#") and not line.isspace()
 
-# 20230424 import from tsv files
-# TODO: check if there is duplicate. Point it out if it is even different
+# 20230425 import from tsv files
 def import_exps(location):
     """
-    Returns experiments and interventions
+    Reads a tsv file and returns experiments and interventions
+
+    The tsv file should have 5 columns
+    ID - e.g. 1
+    SCORE - e.g. 1.0
+    INTERVENTION - e.g. A=1,B=0,C=0
+    NODE - the observed node
+    VALUE - one of OFF, OFF/Some, Some, Some/ON, ON
 
     Parameters
     ----------
@@ -15,63 +21,57 @@ def import_exps(location):
 
     Returns
     -------
-    experiments : list of expset (tuple)
-        expset[0] : id (int) of the experiment
-        expset[1] : score (float) representing the score for the experiment set
-        expset[2] : exp (dict) representing each perturbation/result pair
-            exp key : fixes (tuple) ((node A, value1), (node B, value2), ...)
-            exp value : result (tuple) (measured_node, values)
+    experiments : list of exp - list(tuple)
+        exp[0] : id of the experiment - int
+        exp[1] : score for the experiment set - float
+        exp[2] : fixes - tuple(tuple(str, int))
+                 ((node A, value1), (node B, value2), ...)
+        exp[3] : result - tuple(str, str)
+                 (measured_node, values)
 
-    interventions : list of tuples
-        each element represents fixes (tuple)
+    interventions : list of fixes - list(tuple)
+        each element represents fixes - tuple(tuple(str, int))
     """
-    ID_COLUMN = 0
-    INTERVENTION_COLUMN = 1
-    NODE_COLUMN = 2
-    VALUE_COLUMN = 3
-    SCORE_COLUMN = 4
-
+    ID = 0
+    SCORE = 1
+    INTERVENTION = 2
+    NODE = 3
+    VALUE = 4
+    
     file = open(location, "r")
     lines = filter(comment_removal, file)
     data = csv.reader(lines, delimiter='\t')
+
     # skip the first row
     next(data)
 
     experiments = []
     interventions = []
-    expset = None
     for row in data:
-        print(row)
-        # start the new entry
-        expset = []
-        expset.append(int(row[ID_COLUMN]))
-        expset.append(float(row[SCORE_COLUMN]))
+        exp = [int(row[ID]), float(row[SCORE])]
 
-        exp = {}
         fixes = []
-        intervention_string = row[INTERVENTION_COLUMN].split(',')
+        intervention_string = row[INTERVENTION].split(',')
         for sth in intervention_string:
             node_value = sth.split('=')
             fix = tuple([node_value[0], int(node_value[1])])
             fixes.append(fix)
         # fixes should be sorted so that they do not depend on the order of user input
         fixes = tuple(sorted(fixes, key= lambda x:x[0]))
-        result = tuple([row[NODE_COLUMN], row[VALUE_COLUMN]])
-        exp[fixes] = result
+        exp.append(fixes)
 
-        expset.append(exp)
+        result = tuple([row[NODE], row[VALUE]])
+        exp.append(result)
+
         if fixes not in interventions:
             interventions.append(fixes)
         else:
-            print('there is chance for a duplicate')
             for experiment in experiments:
-                if fixes in list(experiment[2].keys()):
-                    print("hey i am here")
-                    print(experiment[2][fixes])
-                    assert result[0] != experiment[2][fixes][0], f'{experiment[0]} and {expset[0]} are duplicates' 
+                if fixes in experiment:
+                    assert result[0] != experiment[3][0], f'{experiment[0]} and {exp[0]} are duplicates' 
 
         # add the entry
-        experiments.append(tuple(expset))
+        experiments.append(tuple(exp))
 
     return experiments, interventions
 

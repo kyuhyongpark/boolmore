@@ -1,3 +1,5 @@
+# test data for hierarchy scoring, lenient criteria, grouping allowed
+
 # experimental data input
 #
 # score: The model will get this score if it agrees with all the results below
