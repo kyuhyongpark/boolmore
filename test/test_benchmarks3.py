@@ -5,15 +5,12 @@ from benchmarks import *
 from mutation import *
 from Model import *
 import config
-import pystablemotifs as sm
-import cana
 from cana.datasets.bio import load_all_cell_collective_models
+import cubewalkers as cw
 import pystablemotifs as sm
-import pyboolnet.trap_spaces
 from pyboolnet.external.bnet2primes import bnet_text2primes
-from cana.datasets.bio import THALIANA
 
-N_threshold = 30
+N_threshold = 20
 repeats = 3
 ITERATIONS = 100
 PER_ITERATION = 100
@@ -21,107 +18,11 @@ KEEP = 20
 EXPORT_TOP = 1
 PROB = 0.01
 EDGE_PROB = 0
-FILE = 'benchmark_20221129_cell_coll.txt'
+FILE = 'benchmark_20221123_cell_coll.txt'
 
 nets = []
 nets = load_all_cell_collective_models()
 fp = open(FILE, "w")
-
-def node_rule_from_cana(node: cana.boolean_node.BooleanNode,
-                        int2name: dict[int, str] | None = None) -> str:
-    """Transforms the prime implicants LUT of a Boolean Node from CANA to algebraic format.
-
-    Parameters
-    ----------
-    node : BooleanNode
-        CANA Boolean node. See: https://github.com/rionbr/CANA
-    int2name : dict[int, str], optional
-        Dictionary with the node ids as keys and node name as values, by default None
-
-    Returns
-    -------
-    str
-        Node rule in algebraic format.
-        Ex.: A* = A|B&C
-    """
-    if int2name == None:
-        int2name = {i: "x{}".format(i) for i in node.inputs}
-
-    if node.constant:
-        return "{name}* = {state}".format(name=int2name[node.id], state=node.state)
-
-    node._check_compute_canalization_variables(prime_implicants=True)
-
-    if node.bias() < 0.5:
-        alg_rule = "{name}* = ".format(name=int2name[node.id])
-        prime_rules = node._prime_implicants['1']
-    else:
-        alg_rule = "{name}* = !(".format(name=int2name[node.id])
-        prime_rules = node._prime_implicants['0']
-
-    for rule in prime_rules:
-        for k, out in enumerate(rule):
-            if out == '1':
-                alg_rule += "{name}&".format(name=int2name[node.inputs[k]])
-            elif out == '0':
-                alg_rule += "!{name}&".format(name=int2name[node.inputs[k]])
-        alg_rule = alg_rule[:-1]+"|"
-
-    if node.bias() < 0.5:
-        alg_rule = alg_rule[:-1]
-    else:
-        alg_rule = alg_rule[:-1]+")"
-
-    return alg_rule
-
-def name_adjustment(name: str) -> str:
-    """Adjust the node name to fit proper formatting.
-
-    Parameters
-    ----------
-    name : str
-        Original name of the node.
-
-    Returns
-    -------
-    str
-        Adjusted name of the node.
-    """
-
-    not_allowed = ["-", ")", "(", "/"]
-
-    for expression in not_allowed:
-        name = name.replace(expression, "_")
-
-    name = name.replace("\\", "")
-    name = name.replace("+", "_plus_")
-
-    if name[0].isdigit():
-        name = 'number_' + name
-
-    return name
-
-def network_rules_from_cana(BN: cana.boolean_network.BooleanNetwork) -> str:
-    """Transforms the prime implicants LUT of a Boolean Network from CANA to algebraic format.
-
-    ----------
-    BN : BooleanNetwork
-        CANA Boolean network. See: https://github.com/rionbr/CANA
-
-    Returns
-    -------
-    str
-        Network rules in algebraic format.
-        Ex.: A* = A|B&C\nB* = C\nC* = A|B
-    """
-
-    alg_rule = ""
-    int2name = {v: name_adjustment(k) for k, v in BN.name2int.items()}
-    for node in BN.nodes:
-        alg_rule += node_rule_from_cana(node=node, int2name=int2name)
-        alg_rule += "\n"
-
-    return alg_rule[:-1]
 
 for net in nets:
     N = net.Nnodes
@@ -129,12 +30,10 @@ for net in nets:
     # skip models with more than N_threshold
     if N > N_threshold:
         continue
-    if N <= 20:
-        continue
 
     print("- - - - - - - - - -")
     fp.write("- - - - - - - - - -")
-    bnet = sm.format.booleannet2bnet(network_rules_from_cana(net))
+    bnet = sm.format.booleannet2bnet(cw.conversions.network_rules_from_cana(net))
     primes = bnet_text2primes(bnet)
     if primes == None:
         print(net.name, 'failed\n')
