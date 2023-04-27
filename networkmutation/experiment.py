@@ -21,15 +21,15 @@ def import_exps(location):
 
     Returns
     -------
-    experiments : list of exp - list(tuple)
+    experiments : list of exp - list[tuple]
         exp[0] : id of the experiment - int
-        exp[1] : score for the experiment set - float
+        exp[1] : max_score for the experiment - float
         exp[2] : fixes - tuple(tuple(str, int))
                  ((node A, value1), (node B, value2), ...)
-        exp[3] : result - tuple(str, str)
-                 (measured_node, values)
+        exp[3] : observed_node - str
+        exp[4] : outcome_value - str
 
-    interventions : list of fixes - list(tuple)
+    interventions : list of fixes - list[tuple]
         each element represents fixes - tuple(tuple(str, int))
     """
     ID = 0
@@ -60,15 +60,15 @@ def import_exps(location):
         fixes = tuple(sorted(fixes, key= lambda x:x[0]))
         exp.append(fixes)
 
-        result = tuple([row[NODE], row[VALUE]])
-        exp.append(result)
+        exp.append(row[NODE])
+        exp.append(row[VALUE])
 
         if fixes not in interventions:
             interventions.append(fixes)
         else:
             for experiment in experiments:
                 if fixes in experiment:
-                    assert result[0] != experiment[3][0], f'{experiment[0]} and {exp[0]} are duplicates' 
+                    assert exp[NODE] != experiment[NODE], f'{experiment[ID]} and {exp[ID]} are duplicates' 
 
         # add the entry
         experiments.append(tuple(exp))

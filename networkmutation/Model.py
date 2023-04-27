@@ -198,7 +198,7 @@ class Model():
         '''
         # self.score = score.get_score(exps, self.predictions, self.extra_edges)
         agreements = score.get_agreement(exps, self.predictions)
-        self.score = score.get_hierarchy_score(exps, agreements, self.extra_edges, penalty=penalty, report=report, file=file)
+        self.score = score.get_hierarchy_score(agreements, self.extra_edges, penalty=penalty, report=report, file=file)
 
     def export(self, name, threshold = 0.0):
         '''

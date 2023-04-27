@@ -1,4 +1,4 @@
-# GA2-1
+# GA2
 # Started from ABA_calosc
 # id: 8100
 # generation: 79

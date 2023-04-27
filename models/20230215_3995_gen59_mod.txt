@@ -1,167 +1,23 @@
 # Started from ABA_full_fix (the original model with the rule for KEV fixed)
 # added a self loop for K_efflux in the pool of edges
 # Manually removed self loop of K_efflux and added self_loop for H2O_Efflux
+# 20230426 Added SACC, and replaced Actin_Reorganization with SACC in the rule for CaIM
 
 # id: 3995
 # generation: 59
-# extra edges: [(PA, ABI2, 0), (ROS, Actin_Reorganization, 1), (GHR1, CPK3_21, 1), (K_efflux, K_efflux, 1), (PA, Microtubule_Depolymerization, 1), (pHc, Vacuolar_Acidification, 1)]
-# score: 301.75
+# extra edges: [('PA', 'ABI2', '0'), ('ROS', 'Actin_Reorganization', '1'), ('GHR1', 'CPK3_21', '1'), ('H2O_Efflux', 'H2O_Efflux', '1'), ('PA', 'Microtubule_Depolymerization', '1'), ('pHc', 'Vacuolar_Acidification', '1')]
+# score: 396.36111111111103
 # following constraints: True
 
 ### Stable Motifs:
-# {CPK3_21: 0}
-# {MPK9_12: 1}
 
 ### Conditionally Stable Motifs and attractors:
 # fix: {ABA: 0}
-# {ABI1: 1, RBOH: 0, ROS: 0, Vacuolar_Acidification: 0, pHc: 0}
-# {8-nitro-cGMP: 0, ABI1: 1, ADPRc: 0, Actin_Reorganization: 0, CIS: 0, Ca2c: 0, CaIM: 0, GHR1: 0, InsP3: 0, InsP6: 0, NIA1_2: 0, NO: 0, PLC: 0, RBOH: 0, ROS: 0, cADPR: 0, pHc: 0}
-# {8-nitro-cGMP: 0, ADPRc: 0, Actin_Reorganization: 0, CIS: 0, Ca2c: 0, CaIM: 0, GHR1: 0, InsP3: 0, InsP6: 0, NIA1_2: 0, NO: 0, PLC: 0, RBOH: 0, ROS: 0, Vacuolar_Acidification: 0, cADPR: 0, pHc: 0}
-# {8-nitro-cGMP: 0, ABI2: 1, ADPRc: 0, Actin_Reorganization: 0, CIS: 0, Ca2c: 0, CaIM: 0, DAG: 0, GHR1: 0, InsP3: 0, InsP6: 0, NIA1_2: 0, NO: 0, PA: 0, PLC: 0, PLDalpha: 0, PLDdelta: 0, RBOH: 0, ROS: 0, cADPR: 0, pHc: 0}
-# There are 2 attractors.
-# {8-nitro-cGMP: 0, ABI1: 1, ABI2: 1, ADPRc: 0, Actin_Reorganization: 0, AnionEM: 0, AquaporinPIP2_1: 0, CIS: 0, CPK3_21: 0, Ca2_ATPase: 0, Ca2c: 0, CaIM: 0, Closure: 0, DAG: 0, Depolarization: 0, GHR1: 0, H2O_Efflux: 0, H_ATPase: 1, InsP3: 0, InsP6: 0, KEV: 0, KOUT: 0, K_efflux: 0, MPK9_12: 1, Malate: 1, Microtubule_Depolymerization: 0, NIA1_2: 0, NO: 0, NOGC1: 0, OST1: 0, PA: 0, PLC: 0, PLDalpha: 0, PLDdelta: 0, PP2CA: 1, QUAC1: 0, RBOH: 0, ROS: 0, SLAC1: 0, SLAH3: 0, SPHK1_2: 0, TCTP: 0, V-ATPase: 0, Vacuolar_Acidification: 0, cADPR: 0, cGMP: 0, pHc: 0}
-# {8-nitro-cGMP: 0, ABI1: 1, ABI2: 1, ADPRc: 0, Actin_Reorganization: 0, AnionEM: 0, AquaporinPIP2_1: 0, CIS: 0, CPK3_21: 0, Ca2_ATPase: 0, Ca2c: 0, CaIM: 0, Closure: 0, DAG: 0, Depolarization: 0, GHR1: 0, H2O_Efflux: 0, H_ATPase: 1, InsP3: 0, InsP6: 0, KEV: 0, KOUT: 0, K_efflux: 0, MPK9_12: 0, Malate: 1, Microtubule_Depolymerization: 0, NIA1_2: 0, NO: 0, NOGC1: 0, OST1: 0, PA: 0, PLC: 0, PLDalpha: 0, PLDdelta: 0, PP2CA: 1, QUAC1: 0, RBOH: 0, ROS: 0, SLAC1: 0, SLAH3: 0, SPHK1_2: 0, TCTP: 0, V-ATPase: 0, Vacuolar_Acidification: 0, cADPR: 0, cGMP: 0, pHc: 0}
 # fix: {ABA: 1}
-# {H2O_Efflux: 1}
-# {ABI1: 0, RBOH: 1, ROS: 1, Vacuolar_Acidification: 1, pHc: 1}
-# There are 2 attractors.
-# {8-nitro-cGMP: 1, ABI1: 0, ADPRc: 1, Actin_Reorganization: 1, AtRAC1: 0, CIS: 1, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, CaIM: 1, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, H_ATPase: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, Microtubule_Depolymerization: 1, NIA1_2: 1, NO: 1, NOGC1: 1, PA: 1, PLC: X, PLDalpha: X, PLDdelta: 1, QUAC1: X, RBOH: 1, ROS: 1, SLAH3: 0, TCTP: X, V-ATPase: X, Vacuolar_Acidification: 1, cADPR: 1, cGMP: 1, pHc: 1}
-# {8-nitro-cGMP: 1, ABI1: 0, ADPRc: 1, Actin_Reorganization: 1, AtRAC1: 0, CIS: 1, CPK3_21: 1, Ca2_ATPase: X, Ca2c: X, CaIM: 1, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, H_ATPase: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, Microtubule_Depolymerization: 1, NIA1_2: 1, NO: 1, NOGC1: 1, PA: 1, PLC: X, PLDalpha: X, PLDdelta: 1, QUAC1: X, RBOH: 1, ROS: 1, SLAH3: 1, TCTP: X, V-ATPase: X, Vacuolar_Acidification: 1, cADPR: 1, cGMP: 1, pHc: 1}
 
 ### LDOIs, DOIs and attractors
-# - - - - - - - - - -
-# fixed:  {ROS: 1}
-# LDOI:  {8-nitro-cGMP: 1, ABI2: 0, ADPRc: 1, Actin_Reorganization: 1, AnionEM: 1, AquaporinPIP2_1: 1, CIS: 1, CaIM: 1, Depolarization: 1, GHR1: 1, H_ATPase: 0, Malate: 0, Microtubule_Depolymerization: 1, NIA1_2: 1, NO: 1, NOGC1: 1, OST1: 1, PA: 1, PLDdelta: 1, PP2CA: 0, SLAC1: 1, SPHK1_2: 1, cADPR: 1, cGMP: 1}
-# only in MPBN_DOI:  {Closure: 1, H2O_Efflux: 1, MPK9_12: 1}
-# There are 4 attractors.
-# {ABA: 1, ABI1: 0, AtRAC1: 0, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, Closure: 1, DAG: X, H2O_Efflux: 1, HAB1: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAH3: 0, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, pHc: 1}
-# {ABA: 1, ABI1: 0, AtRAC1: 0, CPK3_21: 1, Ca2_ATPase: X, Ca2c: X, Closure: 1, DAG: X, H2O_Efflux: 1, HAB1: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAH3: 1, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, pHc: 1}
-# {ABA: 0, ABI1: X, AtRAC1: 1, CPK3_21: 1, Ca2_ATPase: X, Ca2c: X, Closure: 1, DAG: X, H2O_Efflux: 1, HAB1: 1, InsP3: X, InsP6: X, KEV: X, KOUT: X, K_efflux: X, MPK9_12: 1, PEPC: 1, PI3P5K: 0, PLC: X, PLDalpha: X, PtdIns3_5P2: 0, QUAC1: X, RBOH: X, RCARs: 0, ROS: X, SLAH3: X, TCTP: X, V-ATPase: X, V-PPase: 0, Vacuolar_Acidification: X, pHc: X}
-# {ABA: 0, ABI1: X, AtRAC1: 1, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, Closure: 1, DAG: X, H2O_Efflux: 1, HAB1: 1, InsP3: X, InsP6: X, KEV: X, KOUT: X, K_efflux: X, MPK9_12: 1, PEPC: 1, PI3P5K: 0, PLC: X, PLDalpha: X, PtdIns3_5P2: 0, QUAC1: X, RBOH: X, RCARs: 0, ROS: X, SLAH3: 0, TCTP: X, V-ATPase: X, V-PPase: 0, Vacuolar_Acidification: X, pHc: X}
-# - - - - - - - - - -
-# fixed:  {NO: 1}
-# LDOI:  {8-nitro-cGMP: 1, ABI2: 0, ADPRc: 1, AnionEM: 1, AquaporinPIP2_1: 1, CIS: 1, Malate: 0, Microtubule_Depolymerization: 1, NOGC1: 1, OST1: 1, PA: 1, PLDdelta: 1, SLAC1: 1, SPHK1_2: 1, cADPR: 1, cGMP: 1}
-# only in MPBN_DOI:  {Closure: 1, H2O_Efflux: 1, MPK9_12: 1}
-# Attractors for MPBN
-# There are 3 attractors.
-# {ABA: 0, ABI1: 1, Actin_Reorganization: 0, AtRAC1: 1, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, CaIM: 0, Closure: 1, DAG: X, Depolarization: X, GHR1: 0, H2O_Efflux: 1, HAB1: 1, H_ATPase: X, InsP3: X, InsP6: X, KEV: X, KOUT: X, K_efflux: X, MPK9_12: 1, NIA1_2: 0, NO: 0, PEPC: 1, PI3P5K: 0, PLC: X, PLDalpha: X, PP2CA: 1, PtdIns3_5P2: 0, QUAC1: X, RBOH: 0, RCARs: 0, ROS: 0, SLAH3: 0, TCTP: X, V-ATPase: X, V-PPase: 0, Vacuolar_Acidification: 0, pHc: 0}
-# {ABA: 1, ABI1: 0, Actin_Reorganization: 1, AtRAC1: 0, CPK3_21: 1, Ca2_ATPase: X, Ca2c: X, CaIM: 1, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, HAB1: 0, H_ATPase: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, NIA1_2: 1, NO: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PP2CA: 0, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAH3: 1, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, pHc: 1}
-# {ABA: 1, ABI1: 0, Actin_Reorganization: 1, AtRAC1: 0, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, CaIM: 1, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, HAB1: 0, H_ATPase: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, NIA1_2: 1, NO: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PP2CA: 0, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAH3: 0, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, pHc: 1}
-# - - - - - - - - - -
-# fixed:  {PA: 1}
-# LDOI:  {ABI2: 0, AnionEM: 1, AquaporinPIP2_1: 1, Malate: 0, Microtubule_Depolymerization: 1, OST1: 1, SLAC1: 1, SPHK1_2: 1}
-# only in MPBN_DOI:  {}
-# Attractors for MPBN
-# There are 6 attractors.
-# {8-nitro-cGMP: 1, ABA: 1, ABI1: 0, ADPRc: 1, Actin_Reorganization: 1, AtRAC1: 0, CIS: 1, CPK3_21: 1, Ca2_ATPase: X, Ca2c: X, CaIM: 1, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, HAB1: 0, H_ATPase: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, NIA1_2: 1, NO: 1, NOGC1: 1, PA: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PLDdelta: 1, PP2CA: 0, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAH3: 1, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, cADPR: 1, cGMP: 1, pHc: 1}
-# {8-nitro-cGMP: 1, ABA: 1, ABI1: 0, ADPRc: 1, Actin_Reorganization: 1, AtRAC1: 0, CIS: 1, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, CaIM: 1, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, HAB1: 0, H_ATPase: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, NIA1_2: 1, NO: 1, NOGC1: 1, PA: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PLDdelta: 1, PP2CA: 0, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAH3: 0, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, cADPR: 1, cGMP: 1, pHc: 1}
-# {8-nitro-cGMP: 0, ABA: 0, ABI1: 1, ADPRc: 0, Actin_Reorganization: 0, AtRAC1: 1, CIS: 0, CPK3_21: 0, Ca2_ATPase: 0, Ca2c: 0, CaIM: 0, Closure: 0, DAG: 0, Depolarization: 0, GHR1: 0, H2O_Efflux: 0, HAB1: 1, H_ATPase: 1, InsP3: 0, InsP6: 0, KEV: 0, KOUT: 0, K_efflux: 0, MPK9_12: 0, NIA1_2: 0, NO: 0, NOGC1: 0, PA: 0, PEPC: 1, PI3P5K: 0, PLC: 0, PLDalpha: 0, PLDdelta: 0, PP2CA: 1, PtdIns3_5P2: 0, QUAC1: 0, RBOH: 0, RCARs: 0, ROS: 0, SLAH3: 0, TCTP: 0, V-ATPase: 0, V-PPase: 0, Vacuolar_Acidification: 0, cADPR: 0, cGMP: 0, pHc: 0}
-# {8-nitro-cGMP: 0, ABA: 0, ABI1: 1, ADPRc: 0, Actin_Reorganization: 0, AtRAC1: 1, CIS: 0, CPK3_21: 0, Ca2_ATPase: 0, Ca2c: 0, CaIM: 0, Closure: 0, DAG: 0, Depolarization: 0, GHR1: 0, H2O_Efflux: 0, HAB1: 1, H_ATPase: 1, InsP3: 0, InsP6: 0, KEV: 0, KOUT: 0, K_efflux: 0, MPK9_12: 1, NIA1_2: 0, NO: 0, NOGC1: 0, PA: 0, PEPC: 1, PI3P5K: 0, PLC: 0, PLDalpha: 0, PLDdelta: 0, PP2CA: 1, PtdIns3_5P2: 0, QUAC1: 0, RBOH: 0, RCARs: 0, ROS: 0, SLAH3: 0, TCTP: 0, V-ATPase: 0, V-PPase: 0, Vacuolar_Acidification: 0, cADPR: 0, cGMP: 0, pHc: 0}
-# {8-nitro-cGMP: 0, ABA: 0, ABI1: 1, ADPRc: 0, Actin_Reorganization: 0, AtRAC1: 1, CIS: 0, CPK3_21: 0, Ca2_ATPase: 0, Ca2c: 0, CaIM: 0, Closure: 1, DAG: 0, Depolarization: 0, GHR1: 0, H2O_Efflux: 1, HAB1: 1, H_ATPase: 1, InsP3: 0, InsP6: 0, KEV: 0, KOUT: 0, K_efflux: 0, MPK9_12: 0, NIA1_2: 0, NO: 0, NOGC1: 0, PA: 0, PEPC: 1, PI3P5K: 0, PLC: 0, PLDalpha: 0, PLDdelta: 0, PP2CA: 1, PtdIns3_5P2: 0, QUAC1: 0, RBOH: 0, RCARs: 0, ROS: 0, SLAH3: 0, TCTP: 0, V-ATPase: 0, V-PPase: 0, Vacuolar_Acidification: 0, cADPR: 0, cGMP: 0, pHc: 0}
-# {8-nitro-cGMP: 0, ABA: 0, ABI1: 1, ADPRc: 0, Actin_Reorganization: 0, AtRAC1: 1, CIS: 0, CPK3_21: 0, Ca2_ATPase: 0, Ca2c: 0, CaIM: 0, Closure: 1, DAG: 0, Depolarization: 0, GHR1: 0, H2O_Efflux: 1, HAB1: 1, H_ATPase: 1, InsP3: 0, InsP6: 0, KEV: 0, KOUT: 0, K_efflux: 0, MPK9_12: 1, NIA1_2: 0, NO: 0, NOGC1: 0, PA: 0, PEPC: 1, PI3P5K: 0, PLC: 0, PLDalpha: 0, PLDdelta: 0, PP2CA: 1, PtdIns3_5P2: 0, QUAC1: 0, RBOH: 0, RCARs: 0, ROS: 0, SLAH3: 0, TCTP: 0, V-ATPase: 0, V-PPase: 0, Vacuolar_Acidification: 0, cADPR: 0, cGMP: 0, pHc: 0}
-# - - - - - - - - - -
-# fixed:  {CaIM: 1}
-# LDOI:  {}
-# only in MPBN_DOI:  {MPK9_12: 1}
-# Attractors for MPBN
-# There are 3 attractors.
-# {8-nitro-cGMP: 1, ABA: 1, ABI1: 0, ABI2: 0, ADPRc: 1, Actin_Reorganization: 1, AnionEM: 1, AquaporinPIP2_1: 1, AtRAC1: 0, CIS: 1, CPK3_21: 1, Ca2_ATPase: X, Ca2c: X, CaIM: 1, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, HAB1: 0, H_ATPase: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, Malate: 0, Microtubule_Depolymerization: 1, NIA1_2: 1, NO: 1, NOGC1: 1, OST1: 1, PA: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PLDdelta: 1, PP2CA: 0, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAC1: 1, SLAH3: 1, SPHK1_2: 1, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, cADPR: 1, cGMP: 1, pHc: 1}
-# {8-nitro-cGMP: 0, ABA: 0, ABI1: 1, ABI2: X, ADPRc: 0, Actin_Reorganization: 0, AnionEM: X, AquaporinPIP2_1: X, AtRAC1: 1, CIS: X, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, CaIM: 0, Closure: X, DAG: X, Depolarization: X, GHR1: 0, H2O_Efflux: X, HAB1: 1, H_ATPase: X, InsP3: X, InsP6: X, KEV: X, KOUT: X, K_efflux: X, MPK9_12: 1, Malate: X, Microtubule_Depolymerization: X, NIA1_2: 0, NO: 0, NOGC1: 0, OST1: X, PA: X, PEPC: 1, PI3P5K: 0, PLC: X, PLDalpha: X, PLDdelta: 0, PP2CA: 1, PtdIns3_5P2: 0, QUAC1: X, RBOH: 0, RCARs: 0, ROS: 0, SLAC1: X, SLAH3: 0, SPHK1_2: X, TCTP: X, V-ATPase: X, V-PPase: 0, Vacuolar_Acidification: 0, cADPR: 0, cGMP: 0, pHc: 0}
-# {8-nitro-cGMP: 1, ABA: 1, ABI1: 0, ABI2: 0, ADPRc: 1, Actin_Reorganization: 1, AnionEM: 1, AquaporinPIP2_1: 1, AtRAC1: 0, CIS: 1, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, CaIM: 1, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, HAB1: 0, H_ATPase: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, Malate: 0, Microtubule_Depolymerization: 1, NIA1_2: 1, NO: 1, NOGC1: 1, OST1: 1, PA: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PLDdelta: 1, PP2CA: 0, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAC1: 1, SLAH3: 0, SPHK1_2: 1, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, cADPR: 1, cGMP: 1, pHc: 1}
-# - - - - - - - - - -
-# fixed:  {pHc: 1}
-# LDOI:  {8-nitro-cGMP: 1, ABI2: 0, ADPRc: 1, Actin_Reorganization: 1, AnionEM: 1, AquaporinPIP2_1: 1, CIS: 1, CaIM: 1, Depolarization: 1, GHR1: 1, H_ATPase: 0, KOUT: 1, Malate: 0, Microtubule_Depolymerization: 1, NIA1_2: 1, NO: 1, NOGC1: 1, OST1: 1, PA: 1, PLDdelta: 1, PP2CA: 0, RBOH: 1, ROS: 1, SLAC1: 1, SPHK1_2: 1, cADPR: 1, cGMP: 1}
-# only in MPBN_DOI:  {Closure: 1, H2O_Efflux: 1, MPK9_12: 1}
-# Attractors for MPBN
-# There are 4 attractors.
-# {ABA: 0, ABI1: 1, AtRAC1: 1, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, Closure: 1, DAG: X, H2O_Efflux: 1, HAB1: 1, InsP3: X, InsP6: X, KEV: X, K_efflux: X, MPK9_12: 1, PEPC: 1, PI3P5K: 0, PLC: X, PLDalpha: X, PtdIns3_5P2: 0, QUAC1: X, RCARs: 0, SLAH3: 0, TCTP: X, V-ATPase: X, V-PPase: 0, Vacuolar_Acidification: X, pHc: X}
-# {ABA: 0, ABI1: 1, AtRAC1: 1, CPK3_21: 1, Ca2_ATPase: X, Ca2c: X, Closure: 1, DAG: X, H2O_Efflux: 1, HAB1: 1, InsP3: X, InsP6: X, KEV: X, K_efflux: X, MPK9_12: 1, PEPC: 1, PI3P5K: 0, PLC: X, PLDalpha: X, PtdIns3_5P2: 0, QUAC1: X, RCARs: 0, SLAH3: 0, TCTP: X, V-ATPase: X, V-PPase: 0, Vacuolar_Acidification: X, pHc: X}
-# {ABA: 1, ABI1: 0, AtRAC1: 0, CPK3_21: 1, Ca2_ATPase: X, Ca2c: X, Closure: 1, DAG: X, H2O_Efflux: 1, HAB1: 0, InsP3: X, InsP6: X, KEV: X, K_efflux: X, MPK9_12: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PtdIns3_5P2: 1, QUAC1: X, RCARs: 1, SLAH3: 1, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, pHc: 1}
-# {ABA: 1, ABI1: 0, AtRAC1: 0, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, Closure: 1, DAG: X, H2O_Efflux: 1, HAB1: 0, InsP3: X, InsP6: X, KEV: X, K_efflux: X, MPK9_12: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PtdIns3_5P2: 1, QUAC1: X, RCARs: 1, SLAH3: 0, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, pHc: 1}
-# - - - - - - - - - -
-# fixed:  {cADPR: 1}
-# LDOI:  {CIS: 1}
-# only in MPBN_DOI:  {MPK9_12: 1}
-# Attractors for MPBN
-# There are 3 attractors.
-# {8-nitro-cGMP: 1, ABA: 1, ABI1: 0, ABI2: 0, ADPRc: 1, Actin_Reorganization: 1, AnionEM: 1, AquaporinPIP2_1: 1, AtRAC1: 0, CPK3_21: 1, Ca2_ATPase: X, Ca2c: X, CaIM: 1, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, HAB1: 0, H_ATPase: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, Malate: 0, Microtubule_Depolymerization: 1, NIA1_2: 1, NO: 1, NOGC1: 1, OST1: 1, PA: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PLDdelta: 1, PP2CA: 0, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAC1: 1, SLAH3: 1, SPHK1_2: 1, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, cADPR: 1, cGMP: 1, pHc: 1}
-# {8-nitro-cGMP: 0, ABA: 0, ABI1: 1, ABI2: X, ADPRc: 0, Actin_Reorganization: 0, AnionEM: X, AquaporinPIP2_1: X, AtRAC1: 1, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, CaIM: 0, Closure: X, DAG: X, Depolarization: X, GHR1: 0, H2O_Efflux: X, HAB1: 1, H_ATPase: X, InsP3: X, InsP6: X, KEV: X, KOUT: X, K_efflux: X, MPK9_12: 1, Malate: X, Microtubule_Depolymerization: X, NIA1_2: 0, NO: 0, NOGC1: 0, OST1: X, PA: X, PEPC: 1, PI3P5K: 0, PLC: X, PLDalpha: X, PLDdelta: 0, PP2CA: 1, PtdIns3_5P2: 0, QUAC1: X, RBOH: 0, RCARs: 0, ROS: 0, SLAC1: X, SLAH3: 0, SPHK1_2: X, TCTP: X, V-ATPase: X, V-PPase: 0, Vacuolar_Acidification: 0, cADPR: 0, cGMP: 0, pHc: 0}
-# {8-nitro-cGMP: 1, ABA: 1, ABI1: 0, ABI2: 0, ADPRc: 1, Actin_Reorganization: 1, AnionEM: 1, AquaporinPIP2_1: 1, AtRAC1: 0, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, CaIM: 1, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, HAB1: 0, H_ATPase: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, Malate: 0, Microtubule_Depolymerization: 1, NIA1_2: 1, NO: 1, NOGC1: 1, OST1: 1, PA: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PLDdelta: 1, PP2CA: 0, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAC1: 1, SLAH3: 0, SPHK1_2: 1, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, cADPR: 1, cGMP: 1, pHc: 1}
-# - - - - - - - - - -
-# fixed:  {InsP3: 1}
-# LDOI:  {CIS: 1, InsP6: 1}
-# only in MPBN_DOI:  {MPK9_12: 1}
-# Attractors for MPBN
-# There are 3 attractors.
-# {8-nitro-cGMP: 1, ABA: 1, ABI1: 0, ABI2: 0, ADPRc: 1, Actin_Reorganization: 1, AnionEM: 1, AquaporinPIP2_1: 1, AtRAC1: 0, CPK3_21: 1, Ca2_ATPase: X, Ca2c: X, CaIM: 1, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, HAB1: 0, H_ATPase: 0, InsP3: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, Malate: 0, Microtubule_Depolymerization: 1, NIA1_2: 1, NO: 1, NOGC1: 1, OST1: 1, PA: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PLDdelta: 1, PP2CA: 0, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAC1: 1, SLAH3: 1, SPHK1_2: 1, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, cADPR: 1, cGMP: 1, pHc: 1}
-# {8-nitro-cGMP: 0, ABA: 0, ABI1: 1, ABI2: X, ADPRc: 0, Actin_Reorganization: 0, AnionEM: X, AquaporinPIP2_1: X, AtRAC1: 1, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, CaIM: 0, Closure: X, DAG: X, Depolarization: X, GHR1: 0, H2O_Efflux: X, HAB1: 1, H_ATPase: X, InsP3: X, KEV: X, KOUT: X, K_efflux: X, MPK9_12: 1, Malate: X, Microtubule_Depolymerization: X, NIA1_2: 0, NO: 0, NOGC1: 0, OST1: X, PA: X, PEPC: 1, PI3P5K: 0, PLC: X, PLDalpha: X, PLDdelta: 0, PP2CA: 1, PtdIns3_5P2: 0, QUAC1: X, RBOH: 0, RCARs: 0, ROS: 0, SLAC1: X, SLAH3: 0, SPHK1_2: X, TCTP: X, V-ATPase: X, V-PPase: 0, Vacuolar_Acidification: 0, cADPR: 0, cGMP: 0, pHc: 0}
-# {8-nitro-cGMP: 1, ABA: 1, ABI1: 0, ABI2: 0, ADPRc: 1, Actin_Reorganization: 1, AnionEM: 1, AquaporinPIP2_1: 1, AtRAC1: 0, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, CaIM: 1, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, HAB1: 0, H_ATPase: 0, InsP3: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, Malate: 0, Microtubule_Depolymerization: 1, NIA1_2: 1, NO: 1, NOGC1: 1, OST1: 1, PA: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PLDdelta: 1, PP2CA: 0, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAC1: 1, SLAH3: 0, SPHK1_2: 1, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, cADPR: 1, cGMP: 1, pHc: 1}
-# - - - - - - - - - -
-# fixed:  {AtRAC1: 0}
-# LDOI:  {Actin_Reorganization: 1, CaIM: 1}
-# only in MPBN_DOI:  {MPK9_12: 1}
-# Attractors for MPBN
-# There are 3 attractors.
-# {8-nitro-cGMP: 1, ABA: 1, ABI1: 0, ABI2: 0, ADPRc: 1, AnionEM: 1, AquaporinPIP2_1: 1, AtRAC1: 0, CIS: 1, CPK3_21: 1, Ca2_ATPase: X, Ca2c: X, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, HAB1: 0, H_ATPase: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, Malate: 0, Microtubule_Depolymerization: 1, NIA1_2: 1, NO: 1, NOGC1: 1, OST1: 1, PA: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PLDdelta: 1, PP2CA: 0, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAC1: 1, SLAH3: 1, SPHK1_2: 1, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, cADPR: 1, cGMP: 1, pHc: 1}
-# {8-nitro-cGMP: 0, ABA: 0, ABI1: 1, ABI2: X, ADPRc: 0, AnionEM: X, AquaporinPIP2_1: X, AtRAC1: 1, CIS: X, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, Closure: X, DAG: X, Depolarization: X, GHR1: 0, H2O_Efflux: X, HAB1: 1, H_ATPase: X, InsP3: X, InsP6: X, KEV: X, KOUT: X, K_efflux: X, MPK9_12: 1, Malate: X, Microtubule_Depolymerization: X, NIA1_2: 0, NO: 0, NOGC1: 0, OST1: X, PA: X, PEPC: 1, PI3P5K: 0, PLC: X, PLDalpha: X, PLDdelta: 0, PP2CA: 1, PtdIns3_5P2: 0, QUAC1: X, RBOH: 0, RCARs: 0, ROS: 0, SLAC1: X, SLAH3: 0, SPHK1_2: X, TCTP: X, V-ATPase: X, V-PPase: 0, Vacuolar_Acidification: 0, cADPR: 0, cGMP: 0, pHc: 0}
-# {8-nitro-cGMP: 1, ABA: 1, ABI1: 0, ABI2: 0, ADPRc: 1, AnionEM: 1, AquaporinPIP2_1: 1, AtRAC1: 0, CIS: 1, CPK3_21: 0, Ca2_ATPase: X, Ca2c: X, Closure: 1, DAG: X, Depolarization: 1, GHR1: 1, H2O_Efflux: 1, HAB1: 0, H_ATPase: 0, InsP3: X, InsP6: X, KEV: X, KOUT: 1, K_efflux: X, MPK9_12: 1, Malate: 0, Microtubule_Depolymerization: 1, NIA1_2: 1, NO: 1, NOGC1: 1, OST1: 1, PA: 1, PEPC: 0, PI3P5K: 1, PLC: X, PLDalpha: X, PLDdelta: 1, PP2CA: 0, PtdIns3_5P2: 1, QUAC1: X, RBOH: 1, RCARs: 1, ROS: 1, SLAC1: 1, SLAH3: 0, SPHK1_2: 1, TCTP: X, V-ATPase: X, V-PPase: 1, Vacuolar_Acidification: 1, cADPR: 1, cGMP: 1, pHc: 1}
 
 ### Percolated rules
-# 8-nitro-cGMP* = ROS & cGMP | NO & cGMP
-# ABA* = ABA
-# ABI1* = !PA & !ROS & pHc | !RCARs & pHc | !RCARs & !ROS
-# ABI2* = !PA & !RCARs & !ROS
-# ADPRc* = 8-nitro-cGMP
-# Actin_Reorganization* = ROS | !AtRAC1
-# AnionEM* = SLAC1
-# AquaporinPIP2_1* = OST1
-# AtRAC1* = ABI1 | !ABA
-# CIS* = cADPR | InsP6 | InsP3
-# CPK3_21* = CPK3_21 & GHR1
-# Ca2_ATPase* = Ca2c
-# Ca2c* = !Ca2_ATPase & CaIM | CIS & !Ca2_ATPase
-# CaIM* = GHR1 | Actin_Reorganization
-# Closure* = H2O_Efflux & Microtubule_Depolymerization
-# DAG* = PLC
-# Depolarization* = !H_ATPase & KEV | Ca2c & !H_ATPase | AnionEM & !H_ATPase
-# GHR1* = !ABI2 & ROS
-# H2O_Efflux* = AnionEM & AquaporinPIP2_1 & K_efflux & !Malate | AnionEM & AquaporinPIP2_1 & H2O_Efflux & !Malate
-# HAB1* = !RCARs
-# H_ATPase* = !Ca2c & !ROS & !pHc
-# InsP3* = PLC
-# InsP6* = InsP3
-# KEV* = Ca2c
-# KOUT* = Depolarization & pHc | Depolarization & !ROS
-# K_efflux* = KEV & KOUT
-# MPK9_12* = MPK9_12 | Ca2c
-# Malate* = !ABA & !AnionEM & PEPC
-# Microtubule_Depolymerization* = TCTP | PA
-# NIA1_2* = ROS
-# NO* = NIA1_2
-# NOGC1* = NO
-# OST1* = !ABI2 | !ABI1
-# PA* = PLDdelta | PLDalpha | DAG
-# PEPC* = !ABA
-# PI3P5K* = ABA
-# PLC* = Ca2c
-# PLDalpha* = Ca2c
-# PLDdelta* = ROS | NO
-# PP2CA* = !RCARs & !ROS
-# PtdIns3_5P2* = PI3P5K
-# QUAC1* = Ca2c & OST1
-# RBOH* = pHc
-# RCARs* = ABA
-# ROS* = RBOH
-# SLAC1* = CPK3_21 & GHR1 & !PP2CA & pHc | CPK3_21 & GHR1 & MPK9_12 & !PP2CA | !ABI2 & CPK3_21 & !PP2CA & pHc | !ABI2 & CPK3_21 & MPK9_12 & pHc | !ABI2 & CPK3_21 & MPK9_12 & !PP2CA | !ABI2 & CPK3_21 & GHR1 & pHc | !ABI2 & CPK3_21 & GHR1 & !PP2CA | !ABI2 & CPK3_21 & GHR1 & MPK9_12 | !ABI1 & CPK3_21 & !PP2CA & pHc | !ABI1 & CPK3_21 & MPK9_12 & pHc | !ABI1 & CPK3_21 & MPK9_12 & !PP2CA | !ABI1 & CPK3_21 & MPK9_12 & OST1 | !ABI1 & CPK3_21 & GHR1 & pHc | !ABI1 & CPK3_21 & GHR1 & !PP2CA | !ABI1 & CPK3_21 & GHR1 & MPK9_12 | !ABI1 & !ABI2 & CPK3_21 & !PP2CA | CPK3_21 & OST1 & pHc | CPK3_21 & GHR1 & OST1 | !ABI2 & OST1
-# SLAH3* = !ABI1 & CPK3_21
-# SPHK1_2* = PA | ABA
-# TCTP* = Ca2c
-# V-ATPase* = Ca2c
-# V-PPase* = PtdIns3_5P2
-# Vacuolar_Acidification* = V-ATPase & V-PPase & Vacuolar_Acidification | V-PPase & pHc | V-ATPase & pHc
-# cADPR* = ADPRc
-# cGMP* = NOGC1
-# pHc* = !ABI1 & !ABI2 & OST1 & Vacuolar_Acidification | !ABI1 & !ABI2 & Ca2c & OST1 | !ABI2 & Ca2c & Vacuolar_Acidification
 
 8-nitro-cGMP* = NO & cGMP | ROS & cGMP
 ABA* = ABA
@@ -180,7 +36,8 @@ CPK3_21* = CPK3_21 & GHR1
 CPK6* = 1
 Ca2_ATPase* = Ca2c
 Ca2c* = !Ca2_ATPase & CaIM | CIS & !Ca2_ATPase
-CaIM* = !ABH1 & Actin_Reorganization | !ABH1 & !ERA1 | !ABH1 & GHR1 | Actin_Reorganization & !ERA1 & MRP5 | Actin_Reorganization & GHR1 | Actin_Reorganization & MRP5 & NtSyp121 | !ERA1 & GHR1 | GHR1 & MRP5 & NtSyp121
+SACC* = Actin_Reorganization
+CaIM* = !ABH1 & SACC | !ABH1 & !ERA1 | !ABH1 & GHR1 | SACC & !ERA1 & MRP5 | SACC & GHR1 | SACC & MRP5 & NtSyp121 | !ERA1 & GHR1 | GHR1 & MRP5 & NtSyp121
 Closure* = H2O_Efflux & Microtubule_Depolymerization
 DAG* = PLC & PtdIns4_5P2
 DAGK* = 1
