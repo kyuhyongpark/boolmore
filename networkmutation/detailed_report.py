@@ -3,6 +3,8 @@ from Model import *
 from experiment import *
 from mutation import *
 import config
+import pyboolnet.trap_spaces
+import pyboolnet.prime_implicants
 
 run_type = 'normal'
 
@@ -127,7 +129,6 @@ BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
 ### GA0
 # MODEL = 'networkmutation/models/no_edge_20230303_3807_gen54_mod.txt'
 ### GA1
-# MODEL = 'networkmutation/models/20230215_3995_gen59_mod.txt'
 MODEL = 'networkmutation/models/20230502_5424_gen75.txt'
 ### GA2
 # MODEL = 'networkmutation/models/osc_20221126_8100_gen79_mod.txt'
@@ -157,3 +158,90 @@ if __name__ == '__main__':
     n1.info()
     print()
 
+    ### percolate the constants and reduce the model
+    pprimes1 = pyboolnet.prime_implicants.percolate(primes, remove_constants = True, copy=True)
+    print('percolated rules: ')
+    sm.format.pretty_print_prime_rules({k:pprimes1[k] for k in sorted(pprimes1)})
+    print()
+
+    ### find nodes that have different functions
+    pprimes0 = pyboolnet.prime_implicants.percolate(base_primes, remove_constants = True, copy=True)
+    different_nodes = []
+    for node in pprimes0:
+        if node not in pprimes1:
+            different_nodes.append(node)
+            continue
+        if pprimes0[node] == pprimes1[node]:
+            pass
+        else:
+            different_nodes.append(node)
+    for node in pprimes1:
+        if node not in pprimes0:
+            different_nodes.append(node)
+    print('Nodes with changed percolated functions: ', sorted(different_nodes))
+    print()
+
+    ### find stable motifs
+    ### TODO: not include the source nodes.
+    stable_motifs = pyboolnet.trap_spaces.compute_trap_spaces(pprimes1, "max")
+    print("Stable Motifs:")
+    for stable_motif in stable_motifs:
+        print(stable_motif)
+    print()
+
+    ### fix extra nodes to find conditionally stable motifs
+    ### WARNING: fixing constant nodes do not work, as they are already percolated
+    print("Conditionally Stable Motifs:")
+    fixes = [{'ABA': 0}, {'ABA': 1}]
+    for fix in fixes:
+        print('fix - ', fix)
+        pprimes2 = pyboolnet.prime_implicants.percolate(pprimes1, add_constants = fix, remove_constants = True, copy=True)
+        # sm.format.pretty_print_prime_rules({k:primes2[k] for k in sorted(primes2)})
+        conditinally_stable_motifs = pyboolnet.trap_spaces.compute_trap_spaces(pprimes2, "max")
+        for conditinally_stable_motif in conditinally_stable_motifs:
+            if conditinally_stable_motif not in stable_motifs:
+                print(conditinally_stable_motif)
+    print()
+
+    ### fix nodes to find minimal trapspaces and LDOIs
+    print("LDOI, DOI and minimal trapspaces:")
+    fixes = [{'ABA':0},
+             {'ABA':1},
+             {'ROS':1},
+             {'NO':1},
+             {'CaIM':1},
+             {'cADPR':1},
+             {'PA':1},
+             {'pHc':1},
+             {'S1P_PhytoS1P':1},
+             {'AtRAC1':0},
+             {'InsP3':1}]
+    for fix in fixes:
+        print("- - - - - - - - - -")
+        print("fix -", fix)
+        LDOI, LDOI_contra = sm.drivers.logical_domain_of_influence(fix,pprimes1)
+        MPBN_DOI, MPBN_DOI_contra, MPBN_unknown, MPBN_unknown_contra, MPBN_ar = sm.drivers.domain_of_influence(fix,pprimes1,MPBN_update=True)
+
+        print('LDOI: ',{k:LDOI[k] for k in sorted(LDOI)})
+        print('only in MPBN_DOI: ',{k:MPBN_DOI[k] for k in MPBN_DOI if k not in LDOI})
+        print()
+
+        if 'ABA' not in fix:
+            fix.update({'ABA':0})
+            pprimes2 = pyboolnet.prime_implicants.percolate(pprimes1, add_constants = fix, remove_constants = False, copy=True)
+            trs = pyboolnet.trap_spaces.compute_trap_spaces(pprimes2, "min")
+
+            for tr in trs:
+                for node in pprimes1.keys():
+                    if node not in tr.keys():
+                        tr[node] = 'X'
+        else:
+            trs = MPBN_ar
+        
+        if len(trs) == 1:
+            print("There is 1 minimal trapspace for ", dict(sorted(fix.items())))
+        else:
+            print("There are " + str(len(trs)) + " minimal trapspaces for", dict(sorted(fix.items())))
+        for tr in trs:
+            print(dict(sorted(tr.items())))
+        print()

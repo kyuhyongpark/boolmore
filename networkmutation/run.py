@@ -6,19 +6,17 @@ import config
 
 run_type = 'normal'
 RUN_GA = True
-NAME = '20230502'
+NAME = '20230503'
 
 if run_type != 'osc' and run_type != 'two':
     DATA = 'networkmutation/data_20230426.tsv'
     DEFAULT_SOURCES = {'ABA':0}
     ### constraints for the typical run
-    CONSTRAINTS = {
-        'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-        'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',)},
-        'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-        'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-        'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}
-        }
+    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',)},
+                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+                   'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
+                   'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
     ### constraints for the 'more edges' version
     ### allow change of Ca2c
     # CONSTRAINTS = {
@@ -59,13 +57,11 @@ elif run_type == 'osc':
     DATA = 'networkmutation/data_osc_20230426.tsv'
     DEFAULT_SOURCES = {'ABA':0}
     ### constraints for the typical run for ca_osc model
-    CONSTRAINTS = {
-        'fixed': {'Ca2osc', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-        'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',)},
-        'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-        'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-        'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}
-        }
+    CONSTRAINTS = {'fixed': {'Ca2osc', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',)},
+                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+                   'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
+                   'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
     ### constraints for the 'more edges' version
     ### Allow modification of Ca2osc
     # CONSTRAINTS = {'fixed': {'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
@@ -118,18 +114,18 @@ elif run_type == 'two':
 
 # BASE = 'networkmutation/baseline/ABA_full_20230407.txt'
 # BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
-# BASE = 'networkmutation/baseline/ABA_calosc_20230407.txt'
-BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
+# BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
+BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
 
 # MODEL = 'networkmutation/baseline/ABA_full_20230407.txt'
 # MODEL = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
-# MODEL = 'networkmutation/baseline/ABA_calosc_20230407.txt'
-MODEL = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
+# MODEL = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
+MODEL = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
 
 ### GA0
 # MODEL = 'networkmutation/models/no_edge_20230303_3807_gen54_mod.txt'
 ### GA1
-# MODEL = 'networkmutation/models/20230215_3995_gen59_mod.txt'
+# MODEL = 'networkmutation/models/20230502_5424_gen75.txt'
 ### GA2
 # MODEL = 'networkmutation/models/osc_20221126_8100_gen79_mod.txt'
 
@@ -185,6 +181,26 @@ if __name__ == '__main__':
 
     if RUN_GA == True:
         fp = open(FILE, "w")
+
+        fp.write(f'# {DATA=}\n')
+        fp.write(f'# {DEFAULT_SOURCES=}\n')
+        fp.write(f'# {CONSTRAINTS=}\n')
+        fp.write(f'# {EDGE_POOL=}\n')
+        fp.write(f'\n# {BASE=}\n')
+        fp.write(f'# extra edges: {base.extra_edges}\n')
+        fp.write(f'# score: {base.score}\n')
+        with open(BASE, 'r') as base_text:
+            for line in base_text:
+                if not line.startswith('#') and not line.isspace():
+                    fp.write('# ' + line)
+        fp.write(f'\n# {MODEL=}\n')
+        if BASE != MODEL:
+            fp.write(f'# score: {n1.score}\n')
+            fp.write(f'# extra edges: {n1.extra_edges}\n')
+            with open(MODEL, 'r') as model_text:
+                for line in model_text:
+                    if not line.startswith('#') and not line.isspace():
+                        fp.write('# ' + line)
 
         ### Genetic Algorithm
         print("- - - - - iteration ", 0, " - - - - -")
