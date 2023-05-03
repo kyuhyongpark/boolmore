@@ -15,6 +15,7 @@ class Model():
         self.constraints = {'fixed': set(), 'regulate': {}, 'necessary' : {},
         'group': {}, 'possible_source': set()}
         self.edge_pool = []
+        self.default_sources = {}
         self.primes = None
         self.rrs = None
         self.extra_edges = None
@@ -22,7 +23,7 @@ class Model():
         self.score = None
 
     @classmethod
-    def import_model(cls, primes, constraints={}, edge_pool=[], id = 0, generation = 0, base = None):
+    def import_model(cls, primes, constraints={}, edge_pool=[], default_sources={}, id = 0, generation = 0, base = None):
         x = cls()
         x.id = id
         x.generation = generation
@@ -30,6 +31,7 @@ class Model():
         x.signs = {}
         x.constraints.update(constraints)
         x.edge_pool.extend(edge_pool)
+        x.default_sources.update(default_sources)
         x.primes = primes
         x.rrs = {}
         x.extra_edges = []
@@ -75,6 +77,7 @@ class Model():
         mutated_model.signs = self.signs.copy()
         mutated_model.constraints = self.constraints
         mutated_model.edge_pool = self.edge_pool
+        mutated_model.default_sources = self.default_sources
         mutated_model.primes = self.primes.copy()
         mutated_model.rrs = self.rrs.copy()
         mutated_model.extra_edges = self.extra_edges.copy()
@@ -198,7 +201,7 @@ class Model():
         '''
         # self.score = score.get_score(exps, self.predictions, self.extra_edges)
         agreements = score.get_agreement(exps, self.predictions)
-        self.score = score.get_hierarchy_score(agreements, self.extra_edges, penalty=penalty, report=report, file=file)
+        self.score = score.get_hierarchy_score(agreements, self.extra_edges, default_sources=self.default_sources, penalty=penalty, report=report, file=file)
 
     def export(self, name, threshold = 0.0):
         '''

@@ -4,12 +4,13 @@ from experiment import *
 from mutation import *
 import config
 
-run_type = 'osc'
-RUN_GA = False
-NAME = '20230323'
+run_type = 'normal'
+RUN_GA = True
+NAME = '20230502'
 
 if run_type != 'osc' and run_type != 'two':
     DATA = 'networkmutation/data_20230426.tsv'
+    DEFAULT_SOURCES = {'ABA':0}
     ### constraints for the typical run
     CONSTRAINTS = {
         'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
@@ -27,21 +28,21 @@ if run_type != 'osc' and run_type != 'two':
     #     'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
     #     'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}
     #     }
-    ### typical run
+
+    ### edge pool for the typical run
     EDGE_POOL = (('Ca2c', 'ABI2', '0'),('Ca2c', 'HAB1', '0'),('Ca2c', 'PP2CA', '0'),
                  ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
-                 ('AquaporinPIP2_1', 'ROS', '1'), ('Actin_Reorganization', 'ROS', '1'),
+                 ('AquaporinPIP2_1', 'ROS', '1'),
                  ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
                  ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
                  ('GPA1', 'OST1', '1'), ('GHR1', 'CPK3_21', '1'),
-                 ('PA', 'Microtubule_Depolymerization', '1'),
-                 ('H2O_Efflux', 'H2O_Efflux', '1'))
+                 ('PA', 'Microtubule_Depolymerization', '1'))
     ### No edge version
-    # EDGE_POOL = (('H2O_Efflux', 'H2O_Efflux', '1'),)
+    # EDGE_POOL = tuple()
     ### more edges version 20230315 - 17 edges
     # EDGE_POOL = (('PA', 'ABI2', '0'),
     #              ('AquaporinPIP2_1', 'ROS', '1'),
-    #              ('Actin_Reorganization', 'ROS', '1'), ('Actin_Reorganization', 'RBOH', '1'),
+    #              ('Actin_Reorganization', 'RBOH', '1'),
     #              ('ROS', 'Actin_Reorganization', '1'),
     #              ('pHc', 'Vacuolar_Acidification', '1'),
     #              ('ABI1', 'GEF1_4_10', '1'),
@@ -56,6 +57,7 @@ if run_type != 'osc' and run_type != 'two':
     #              ('GPA1', 'Ca2c', '1'), ('PA', 'Ca2c', '1'))
 elif run_type == 'osc':
     DATA = 'networkmutation/data_osc_20230426.tsv'
+    DEFAULT_SOURCES = {'ABA':0}
     ### constraints for the typical run for ca_osc model
     CONSTRAINTS = {
         'fixed': {'Ca2osc', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
@@ -71,10 +73,11 @@ elif run_type == 'osc':
     #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
     #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
     #                'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
-    ### typical run for the ca_osc model - 16 edges
+
+    ### edge pool for the typical run for the ca_osc model - 16 edges
     EDGE_POOL = (('Ca2osc', 'ABI2', '0'),('Ca2osc', 'HAB1', '0'),('Ca2osc', 'PP2CA', '0'),
                  ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
-                 ('AquaporinPIP2_1', 'ROS', '1'), ('Actin_Reorganization', 'ROS', '1'),
+                 ('AquaporinPIP2_1', 'ROS', '1'),
                  ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
                  ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
                  ('GPA1', 'OST1', '1'), ('GHR1', 'CPK3_21', '1'),
@@ -82,7 +85,7 @@ elif run_type == 'osc':
     ### more edges version 20230315 - 16 edges
     # EDGE_POOL = (('PA', 'ABI2', '0'),
     #              ('AquaporinPIP2_1', 'ROS', '1'),
-    #              ('Actin_Reorganization', 'ROS', '1'), ('Actin_Reorganization', 'RBOH', '1'),
+    #              ('Actin_Reorganization', 'RBOH', '1'),
     #              ('ROS', 'Actin_Reorganization', '1'),
     #              ('pHc', 'Vacuolar_Acidification', '1'),
     #              ('ABI1', 'GEF1_4_10', '1'),
@@ -96,35 +99,39 @@ elif run_type == 'osc':
     #              ('GPA1', 'Ca2osc', '1'), ('PA', 'Ca2osc', '1'))
 elif run_type == 'two':
     DATA = 'networkmutation/data_two_20230317.txt'
+    DEFAULT_SOURCES = {'ABA':0}
     ### constraints for the typical run for ca_two model
     CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2c_l', 'Ca2c_h', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
                    'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',), 'Ca2c':('CaIM','CIS','Ca2_ATPase')},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
                    'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
+    
     ### typical run for the ca_two model
     EDGE_POOL = (('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
-                 ('AquaporinPIP2_1', 'ROS', '1'), ('Actin_Reorganization', 'ROS', '1'),
+                 ('AquaporinPIP2_1', 'ROS', '1'),
                  ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
                  ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
                  ('GPA1', 'OST1', '1'), ('GHR1', 'CPK3_21', '1'),
                  ('PA', 'Microtubule_Depolymerization', '1'),
                  ('Microtubule_Depolymerization', 'ROS', '1'), ('H2O_Efflux', 'H2O_Efflux', '1'))
 
-# BASE = 'PyStableMotifs/models/ABA_full_20230407.txt'
-# BASE = 'PyStableMotifs/models/ABA_full_fix_20230407.txt'
-BASE = 'PyStableMotifs/models/ABA_calosc_20230407.txt'
+# BASE = 'networkmutation/baseline/ABA_full_20230407.txt'
+# BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
+# BASE = 'networkmutation/baseline/ABA_calosc_20230407.txt'
+BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
 
-# MODEL = 'PyStableMotifs/models/ABA_full_20230407.txt'
-# BASE = 'PyStableMotifs/models/ABA_full_fix_20230407.txt'
-# BASE = 'PyStableMotifs/models/ABA_calosc_20230407.txt'
+# MODEL = 'networkmutation/baseline/ABA_full_20230407.txt'
+# MODEL = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
+# MODEL = 'networkmutation/baseline/ABA_calosc_20230407.txt'
+MODEL = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
 
 ### GA0
 # MODEL = 'networkmutation/models/no_edge_20230303_3807_gen54_mod.txt'
 ### GA1
 # MODEL = 'networkmutation/models/20230215_3995_gen59_mod.txt'
 ### GA2
-MODEL = 'networkmutation/models/osc_20221126_8100_gen79_mod.txt'
+# MODEL = 'networkmutation/models/osc_20221126_8100_gen79_mod.txt'
 
 FILE = NAME + '_log.txt'
 STARTING_ID = 1
@@ -133,7 +140,7 @@ ITERATIONS = 100
 PER_ITERATION = 100
 KEEP = 20
 EXPORT_TOP = 1
-EXPORT_THRESHOLD = 350
+EXPORT_THRESHOLD = 400
 PROB = 0.01
 EDGE_PROB = 0.5
 PENALTY = 0.1
@@ -150,7 +157,7 @@ if __name__ == '__main__':
 
     print("Loading base model . . .")
     base_primes = sm.format.import_primes(BASE)
-    base = Model.Model.import_model(base_primes, CONSTRAINTS, EDGE_POOL)
+    base = Model.Model.import_model(base_primes, CONSTRAINTS, EDGE_POOL, DEFAULT_SOURCES)
     print("Base model loaded.")
     base.get_predictions(pert)
     base.get_model_score(exps, PENALTY)
@@ -159,7 +166,7 @@ if __name__ == '__main__':
 
     print("Loading starting model . . .")
     primes = sm.format.import_primes(MODEL)
-    n1 = Model.Model.import_model(primes, CONSTRAINTS, EDGE_POOL, id=config.id, generation=STARTING_GEN, base=base)
+    n1 = Model.Model.import_model(primes, CONSTRAINTS, EDGE_POOL, DEFAULT_SOURCES, id=config.id, generation=STARTING_GEN, base=base)
     print("Starting model loaded.")
     n1.get_predictions(pert)
     n1.get_model_score(exps, PENALTY)

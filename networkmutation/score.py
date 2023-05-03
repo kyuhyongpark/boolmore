@@ -1,4 +1,5 @@
 import itertools as it
+import math
 
 def line(input, start, end):
     '''
@@ -113,7 +114,7 @@ def get_agreement(experiments, predictions):
     return agreements
 
 # 20230425 tsv input update
-def get_hierarchy_score(agreements, extra_edges, penalty = 0.1, report = False, file = None):
+def get_hierarchy_score(agreements, extra_edges, default_sources={'ABA':0}, penalty = 0.1, report = False, file = None):
     """
     Returns model score
     when given attractor agreements
@@ -128,8 +129,12 @@ def get_hierarchy_score(agreements, extra_edges, penalty = 0.1, report = False, 
             values : list[int, float, str, float, float]
                      [id, max_score, outcome_value, predict_value, agreement]
 
+    default_sources : dict{str: int}
+                      Shows what are the default settings for the source nodes.
+                      This setting is considered the top of the hierarchy.
+
     extra_edges : list of extra_edge (tuple)
-        extra_edge : tuple representing (starting node, )
+        extra_edge : tuple representing (regulator, target, sign)
 
     penalty : penalty for an extra edge (float)
     
@@ -166,16 +171,28 @@ def get_hierarchy_score(agreements, extra_edges, penalty = 0.1, report = False, 
             model_max_score += lst[MAX_SCORE]
 
             subsets = powerset(fixes)
+            subset_fixes = set()
+
             for subset in subsets:
-                if subset in agreements[observed_node]:
-                    current_score *= agreements[observed_node][subset][AGREEMENT]
+                for source in default_sources:
+                    if tuple([source, 0]) not in subset and tuple([source, 1]) not in subset:
+                        subset_fix = list(subset)
+                        subset_fix.append(tuple([source,default_sources[source]]))
+                        subset_fix = tuple(sorted(subset_fix, key= lambda x:x[0]))
+                    else:
+                        subset_fix = subset
+
+                subset_fixes.add(subset_fix)
+
+            for subset_fix in subset_fixes:
+                if subset_fix in agreements[observed_node]:
+                    current_score *= agreements[observed_node][subset_fix][AGREEMENT]
 
             total_score += current_score
                 
             if report:
                 fp.write(str(agreements[observed_node][fixes][ID]) + '\t')
-                # TODO: writhe fixes in the same format
-                fp.write(str(len(fixes)) + '\t')
+                fp.write(str(int(math.log2(len(subset_fixes)))) + '\t')
                 for fix in fixes:
                     fp.write(str(fix[0]) + '=' + str(fix[1]) + ',')
                 fp.write('\t')
