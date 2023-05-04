@@ -6,19 +6,17 @@ import config
 import pyboolnet.trap_spaces
 import pyboolnet.prime_implicants
 
-run_type = 'normal'
+run_type = 'osc'
 
 if run_type != 'osc' and run_type != 'two':
     DATA = 'networkmutation/data_20230426.tsv'
     DEFAULT_SOURCES = {'ABA':0}
     ### constraints for the typical run
-    CONSTRAINTS = {
-        'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-        'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',)},
-        'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-        'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-        'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}
-        }
+    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',)},
+                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+                   'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
+                   'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
     ### constraints for the 'more edges' version
     ### allow change of Ca2c
     # CONSTRAINTS = {
@@ -59,13 +57,11 @@ elif run_type == 'osc':
     DATA = 'networkmutation/data_osc_20230426.tsv'
     DEFAULT_SOURCES = {'ABA':0}
     ### constraints for the typical run for ca_osc model
-    CONSTRAINTS = {
-        'fixed': {'Ca2osc', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-        'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',)},
-        'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-        'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-        'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}
-        }
+    CONSTRAINTS = {'fixed': {'Ca2osc', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',)},
+                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+                   'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
+                   'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
     ### constraints for the 'more edges' version
     ### Allow modification of Ca2osc
     # CONSTRAINTS = {'fixed': {'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
@@ -118,20 +114,20 @@ elif run_type == 'two':
 
 # BASE = 'networkmutation/baseline/ABA_full_20230407.txt'
 # BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
-# BASE = 'networkmutation/baseline/ABA_calosc_20230407.txt'
-BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
+# BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
+BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
 
 # MODEL = 'networkmutation/baseline/ABA_full_20230407.txt'
 # MODEL = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
-# MODEL = 'networkmutation/baseline/ABA_calosc_20230407.txt'
 # MODEL = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
+# MODEL = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
 
 ### GA0
 # MODEL = 'networkmutation/models/no_edge_20230303_3807_gen54_mod.txt'
 ### GA1
-MODEL = 'networkmutation/models/20230502_5424_gen75.txt'
+# MODEL = 'networkmutation/models/20230502_5424_gen75.txt'
 ### GA2
-# MODEL = 'networkmutation/models/osc_20221126_8100_gen79_mod.txt'
+MODEL = 'networkmutation/models/osc_20230503_7492_gen66.txt'
 
 FILE_NAME = MODEL.split("/")[-1][:-4]+'_score.csv'
 
@@ -228,15 +224,13 @@ if __name__ == '__main__':
 
         if 'ABA' not in fix:
             fix.update({'ABA':0})
-            pprimes2 = pyboolnet.prime_implicants.percolate(pprimes1, add_constants = fix, remove_constants = False, copy=True)
-            trs = pyboolnet.trap_spaces.compute_trap_spaces(pprimes2, "min")
-
-            for tr in trs:
-                for node in pprimes1.keys():
-                    if node not in tr.keys():
-                        tr[node] = 'X'
-        else:
-            trs = MPBN_ar
+        
+        pprimes2 = pyboolnet.prime_implicants.percolate(pprimes1, add_constants = fix, remove_constants = False, copy=True)
+        trs = pyboolnet.trap_spaces.compute_trap_spaces(pprimes2, "min")
+        for tr in trs:
+            for node in pprimes1.keys():
+                if node not in tr.keys():
+                    tr[node] = 'X'
         
         if len(trs) == 1:
             print("There is 1 minimal trapspace for ", dict(sorted(fix.items())))
