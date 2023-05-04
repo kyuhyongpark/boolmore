@@ -425,6 +425,7 @@ def mix_models(model1, model2):
     mixed_model.signs = {}
     mixed_model.constraints = model1.constraints
     mixed_model.edge_pool = model1.edge_pool
+    mixed_model.default_sources = model1.default_sources
     mixed_model.primes = {}
     mixed_model.rrs = {}
     mixed_model.extra_edges = []
