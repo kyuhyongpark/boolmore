@@ -4,25 +4,26 @@ from experiment import *
 from mutation import *
 import config
 
-run_type = 'normal'
+
 RUN_GA = True
-NAME = '20230503'
+NAME = 'try_20230505'
+run_type = 'normal'
 
 if run_type != 'osc' and run_type != 'two':
     DATA = 'networkmutation/data_20230426.tsv'
     DEFAULT_SOURCES = {'ABA':0}
     ### constraints for the typical run
-    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',)},
-                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
+                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
                    'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
     ### constraints for the 'more edges' version
     ### allow change of Ca2c
     # CONSTRAINTS = {
-    #     'fixed': {'Ca2_ATPase', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-    #     'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',), 'Ca2c':('CaIM','CIS','Ca2_ATPase')},
-    #     'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+    #     'fixed': {'Ca2_ATPase', 'Closure', 'DAG', 'InsP3', 'H2O_Efflux', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+    #     'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2c':('CaIM','CIS','Ca2_ATPase')},
+    #     'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
     #     'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
     #     'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}
     #     }
@@ -46,7 +47,6 @@ if run_type != 'osc' and run_type != 'two':
     #              ('ABI1', 'GEF1_4_10', '1'),
     #              ('GHR1', 'CPK3_21', '1'),
     #              ('PA', 'Microtubule_Depolymerization', '1'),
-    #              ('H2O_Efflux', 'H2O_Efflux', '1'),
     #              ('OST1', 'CaIM', '1'), 
     #              ('GHR1', 'KOUT', '1'),
     #              ('NO', 'KEV', '1'),
@@ -57,16 +57,16 @@ elif run_type == 'osc':
     DATA = 'networkmutation/data_osc_20230426.tsv'
     DEFAULT_SOURCES = {'ABA':0}
     ### constraints for the typical run for ca_osc model
-    CONSTRAINTS = {'fixed': {'Ca2osc', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',)},
-                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+    CONSTRAINTS = {'fixed': {'Ca2osc', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
+                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
                    'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
     ### constraints for the 'more edges' version
     ### Allow modification of Ca2osc
-    # CONSTRAINTS = {'fixed': {'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',), 'Ca2osc':('CaIM','CIS')},
-    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+    # CONSTRAINTS = {'fixed': {'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2osc':('CaIM','CIS')},
+    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
     #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
     #                'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
 
@@ -97,9 +97,9 @@ elif run_type == 'two':
     DATA = 'networkmutation/data_two_20230317.txt'
     DEFAULT_SOURCES = {'ABA':0}
     ### constraints for the typical run for ca_two model
-    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2c_l', 'Ca2c_h', 'Closure', 'DAG', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'H2O_Efflux':('K_efflux',), 'Depolarization':('AnionEM',), 'Ca2c':('CaIM','CIS','Ca2_ATPase')},
-                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'H2O_Efflux':('AnionEM','AquaporinPIP2_1'), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2c_l', 'Ca2c_h', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2c':('CaIM','CIS','Ca2_ATPase')},
+                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
                    'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
     
@@ -113,21 +113,21 @@ elif run_type == 'two':
                  ('Microtubule_Depolymerization', 'ROS', '1'), ('H2O_Efflux', 'H2O_Efflux', '1'))
 
 # BASE = 'networkmutation/baseline/ABA_full_20230407.txt'
-# BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
+BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
 # BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
-BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
+# BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
 
 # MODEL = 'networkmutation/baseline/ABA_full_20230407.txt'
-# MODEL = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
+MODEL = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
 # MODEL = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
-MODEL = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
+# MODEL = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
 
 ### GA0
 # MODEL = 'networkmutation/models/no_edge_20230303_3807_gen54_mod.txt'
 ### GA1
 # MODEL = 'networkmutation/models/20230502_5424_gen75.txt'
 ### GA2
-# MODEL = 'networkmutation/models/osc_20221126_8100_gen79_mod.txt'
+# MODEL = 'networkmutation/models/osc_20230503_7492_gen66.txt'
 
 FILE = NAME + '_log.txt'
 STARTING_ID = 1
@@ -136,7 +136,7 @@ ITERATIONS = 100
 PER_ITERATION = 100
 KEEP = 20
 EXPORT_TOP = 1
-EXPORT_THRESHOLD = 400
+EXPORT_THRESHOLD = 410
 PROB = 0.01
 EDGE_PROB = 0.5
 PENALTY = 0.1
