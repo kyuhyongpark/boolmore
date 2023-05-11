@@ -16,7 +16,7 @@ if run_type != 'osc' and run_type != 'two':
                    'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-                   'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
+                   'possible_source': {'GEF1_4_10',}}
     ### constraints for the 'more edges' version
     ### allow change of Ca2c
     # CONSTRAINTS = {
@@ -24,7 +24,7 @@ if run_type != 'osc' and run_type != 'two':
     #     'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2c':('CaIM','CIS','Ca2_ATPase')},
     #     'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
     #     'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #     'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}
+    #     'possible_source': {'GEF1_4_10',}
     #     }
 
     ### edge pool for the typical run
@@ -60,14 +60,14 @@ elif run_type == 'osc':
                    'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-                   'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
+                   'possible_source': {'GEF1_4_10',}}
     ### constraints for the 'more edges' version
     ### Allow modification of Ca2osc
     # CONSTRAINTS = {'fixed': {'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
     #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2osc':('CaIM','CIS')},
     #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
     #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #                'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
+    #                'possible_source': {'GEF1_4_10',}}
 
     ### edge pool for the typical run for the ca_osc model - 16 edges
     EDGE_POOL = (('Ca2osc', 'ABI2', '0'),('Ca2osc', 'HAB1', '0'),('Ca2osc', 'PP2CA', '0'),
@@ -100,7 +100,7 @@ elif run_type == 'two':
                    'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2c':('CaIM','CIS','Ca2_ATPase')},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-                   'possible_source': {'AquaporinPIP2_1','GEF1_4_10'}}
+                   'possible_source': {'GEF1_4_10',}}
     
     ### typical run for the ca_two model
     EDGE_POOL = (('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
@@ -174,6 +174,26 @@ if __name__ == '__main__':
         if node not in pprimes0:
             different_nodes.append(node)
     print('Nodes with changed percolated functions: ', sorted(different_nodes))
+    print()
+
+    ### find the edges that are deleted
+    deleted_regulators = {}
+    deleted_regulators_perc = {}
+    for node in base_primes:
+        base_regulators = pyboolnet.prime_implicants.find_predecessors(base_primes, [node])
+        regulators = pyboolnet.prime_implicants.find_predecessors(primes, [node])
+        deleted_regulator_list = [x for x in base_regulators if x not in regulators]
+        if len(deleted_regulator_list) != 0:
+            deleted_regulators[node] = deleted_regulator_list
+        ### find extra edges that are deleted in the percolated rules
+        if node in pprimes0 and node in pprimes1:
+            base_regulators_perc = pyboolnet.prime_implicants.find_predecessors(pprimes0, [node])
+            regulators_perc = pyboolnet.prime_implicants.find_predecessors(pprimes1, [node])
+            deleted_regulator_list_perc = [x for x in base_regulators_perc if x not in regulators_perc and x not in deleted_regulator_list]
+            if len(deleted_regulator_list_perc) != 0:
+                deleted_regulators_perc[node] = deleted_regulator_list_perc
+    print('deleted regulators: ',deleted_regulators)
+    print('extra deleted regulators in the percolated rules: ',deleted_regulators_perc)
     print()
 
     ### find stable motifs

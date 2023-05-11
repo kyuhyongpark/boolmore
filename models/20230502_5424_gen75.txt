@@ -69,6 +69,9 @@
 
 # Nodes with changed percolated functions:  ['8-nitro-cGMP', 'ABI1', 'ABI2', 'AnionEM', 'CPK3_21', 'Depolarization', 'GHR1', 'H_ATPase', 'KOUT', 'MPK9_12', 'Microtubule_Depolymerization', 'OST1', 'PLDdelta', 'PP2CA', 'QUAC1', 'ROS', 'SLAC1', 'SLAH3', 'SPHK1_2', 'Vacuolar_Acidification', 'pHc']
 
+# deleted regulators:  {'8-nitro-cGMP': ['ROS'], 'Actin_Reorganization': ['PtdInsP3', 'SCAB1'], 'CPK3_21': ['CPK3_21'], 'GHR1': ['ABI2'], 'GPA1': ['GCR1'], 'H_ATPase': ['Ca2c', 'ROS'], 'KOUT': ['ROS'], 'MPK9_12': ['MPK9_12'], 'PLDdelta': ['ROS'], 'QUAC1': ['Ca2c'], 'pHc': ['OST1']}
+# extra deleted regulators in the percolated rules:  {}
+
 # Stable Motifs:
 # {'ABA': 1}
 # {'ABA': 0}
