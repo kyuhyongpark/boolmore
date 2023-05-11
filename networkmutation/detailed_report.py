@@ -112,19 +112,19 @@ elif run_type == 'two':
                  ('Microtubule_Depolymerization', 'ROS', '1'), ('H2O_Efflux', 'H2O_Efflux', '1'))
 
 # BASE = 'networkmutation/baseline/ABA_full_20230407.txt'
-BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
-# BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
+# BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
+BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
 # BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
 
 # MODEL = 'networkmutation/baseline/ABA_full_20230407.txt'
-MODEL = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
+# MODEL = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
 # MODEL = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
 # MODEL = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
 
 ### GA0
 # MODEL = 'networkmutation/models/no_edge_20230303_3807_gen54_mod.txt'
 ### GA1
-# MODEL = 'networkmutation/models/20230502_5424_gen75.txt'
+MODEL = 'networkmutation/models/20230502_5424_gen75.txt'
 ### GA2
 # MODEL = 'networkmutation/models/osc_20230503_7492_gen66.txt'
 
@@ -140,7 +140,7 @@ if __name__ == '__main__':
     base = Model.Model.import_model(base_primes, CONSTRAINTS, EDGE_POOL, DEFAULT_SOURCES)
     print("Base model loaded.")
     base.get_predictions(pert)
-    base.get_model_score(exps, 0)
+    base.get_model_score(exps)
     base.info()
     print()
 
@@ -149,7 +149,7 @@ if __name__ == '__main__':
     n1 = Model.Model.import_model(primes, CONSTRAINTS, EDGE_POOL, DEFAULT_SOURCES, id=config.id, generation=0, base=base)
     print("Starting model loaded.")
     n1.get_predictions(pert)
-    n1.get_model_score(exps, 0, report=True, file=FILE_NAME)
+    n1.get_model_score(exps, report=True, file=FILE_NAME)
     n1.info()
     print()
 

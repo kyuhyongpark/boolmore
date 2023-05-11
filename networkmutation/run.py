@@ -6,7 +6,7 @@ import config
 
 
 RUN_GA = True
-NAME = 'try_20230505'
+NAME = 'try_20230511'
 run_type = 'normal'
 
 if run_type != 'osc' and run_type != 'two':
@@ -139,10 +139,6 @@ EXPORT_TOP = 1
 EXPORT_THRESHOLD = 410
 PROB = 0.01
 EDGE_PROB = 0.5
-PENALTY = 0.1
-
-if RUN_GA == False:
-    PENALTY = 0
 
 config.id = STARTING_ID
 
@@ -156,7 +152,7 @@ if __name__ == '__main__':
     base = Model.Model.import_model(base_primes, CONSTRAINTS, EDGE_POOL, DEFAULT_SOURCES)
     print("Base model loaded.")
     base.get_predictions(pert)
-    base.get_model_score(exps, PENALTY)
+    base.get_model_score(exps)
     base.info()
     print()
 
@@ -165,7 +161,7 @@ if __name__ == '__main__':
     n1 = Model.Model.import_model(primes, CONSTRAINTS, EDGE_POOL, DEFAULT_SOURCES, id=config.id, generation=STARTING_GEN, base=base)
     print("Starting model loaded.")
     n1.get_predictions(pert)
-    n1.get_model_score(exps, PENALTY)
+    n1.get_model_score(exps)
     n1.info()
     print()
 
@@ -209,18 +205,22 @@ if __name__ == '__main__':
         for i in range(PER_ITERATION-1):
             new_model = n1.mutate(PROB, EDGE_PROB)
             new_model.get_predictions(pert)
-            new_model.get_model_score(exps, PENALTY)
+            new_model.get_model_score(exps)
             iteration.append(new_model)
         
+        iteration = sorted(iteration, key=lambda x: (len(x.extra_edges), x.complexity))
         iteration = sorted(iteration, key=lambda x: x.score, reverse=True)
         
-        average = 0
         for i in range(EXPORT_TOP):
             iteration[i].export(NAME, EXPORT_THRESHOLD)
-            average += iteration[i].score
-        average /= EXPORT_TOP
-        print("average score for top ", EXPORT_TOP, " : ", average)
-        fp.write('0, '+ str(average)+'\n')
+
+        print("top score :", iteration[0].score)
+        print("extra edges :", len(iteration[0].extra_edges))
+        print("complexity of the top model :", iteration[0].complexity)
+        fp.write('iteration\ttop score\textra edges\tcomplexity\n')
+        fp.write('0\t'+ str(iteration[0].score) +'\t')
+        fp.write(str(len(iteration[0].extra_edges)) +'\t')
+        fp.write(str(iteration[0].complexity) +'\n')
         
         for i in range(ITERATIONS):
             print("- - - - - iteration ", i+1, " - - - - -")
@@ -230,40 +230,44 @@ if __name__ == '__main__':
                 new_iteration.append(iteration[j])
         
             # mix the best ones
-            to_be_mixed = sorted(new_iteration, key=lambda x: x.score, reverse=True)
+            to_be_mixed = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
+            to_be_mixed = sorted(to_be_mixed, key=lambda x: x.score, reverse=True)
             weights = list(range(1, KEEP+1))
             weights.reverse()
             for j in range(KEEP):
                 mix = random.choices(to_be_mixed, weights=weights, k=2)
                 mixed_model = mix_models(mix[0], mix[1])
                 mixed_model.get_predictions(pert)
-                mixed_model.get_model_score(exps, PENALTY)
+                mixed_model.get_model_score(exps)
                 new_iteration.append(mixed_model)
         
             # mutate the best ones
             weights = list(range(1, 2*KEEP+1))
             weights.reverse()
+            new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
             new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
             targets = random.choices(new_iteration, weights=weights, k=PER_ITERATION-2*KEEP)
             for target in targets:
                 new_model = target.mutate(PROB, EDGE_PROB)
                 new_model.get_predictions(pert)
-                new_model.get_model_score(exps, PENALTY)
+                new_model.get_model_score(exps)
                 new_iteration.append(new_model)
-        
+            
+            new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
             new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
         
-            average = 0
             for j in range(EXPORT_TOP):
                 new_iteration[j].export(NAME, EXPORT_THRESHOLD)
-                average += new_iteration[j].score
 
             # Always export the final best model
             if i+1 == ITERATIONS:
                 new_iteration[0].export(NAME, 0)
 
-            average /= EXPORT_TOP
-            print("average score for top ", EXPORT_TOP, " : ", average)
-            fp.write(str(i+1) +', '+ str(average)+'\n')
+            print("average score for top : ", new_iteration[0].score)
+            print("extra edges :", len(new_iteration[0].extra_edges))
+            print("complexity of the top model :", new_iteration[0].complexity)
+            fp.write(str(i+1) +'\t'+ str(new_iteration[0].score) +'\t')
+            fp.write(str(len(new_iteration[0].extra_edges)) +'\t')
+            fp.write(str(new_iteration[0].complexity) +'\n')
         
             iteration = new_iteration

@@ -429,6 +429,7 @@ def mix_models(model1, model2):
     mixed_model.primes = {}
     mixed_model.rrs = {}
     mixed_model.extra_edges = []
+    mixed_model.complexity = 0
 
     for node in model1.rrs:
         # get mutated_rr from rr
@@ -444,6 +445,11 @@ def mix_models(model1, model2):
         for edge in get.extra_edges:
             if edge[1] == node:
                 mixed_model.extra_edges.append(edge)
+
+        # get complexity
+        for prime_implicant in mixed_model.primes[node][1]:
+            mixed_model.complexity += len(prime_implicant)
+
     return mixed_model
 
 def add_regulator(regulators, rr, signs, new_regulator, new_sign, bias=0.5):
