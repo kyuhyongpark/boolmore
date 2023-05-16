@@ -1,0 +1,195 @@
+# DATA='networkmutation/data_ca_ext_20230511.tsv'
+# DEFAULT_SOURCES={'ABA': 0}
+# CONSTRAINTS={'fixed': {'Closure', 'Ca2_ATPase', 'NO', 'DAG', 'Ca2c', 'PtdIns4_5P2', 'PtdIns3_5P2', 'H2O_Efflux', 'InsP3', 'RCARs', 'InsP6', 'cGMP', 'cADPR'}, 'regulate': {'ABI1': ('RCARs',), 'ABI2': ('RCARs',), 'HAB1': ('RCARs',), 'PP2CA': ('RCARs',), 'K_efflux': ('KEV', 'KOUT'), 'OST1': ('ABI1', 'ABI2'), 'Depolarization': ('AnionEM',)}, 'necessary': {'8-nitro-cGMP': ('cGMP',), 'KOUT': ('Depolarization',), 'Malate': ('PEPC', 'AnionEM'), 'ROS': ('NADPH', 'RBOH')}, 'group': {'PA': (('PC', 'PLDalpha'), ('PC', 'PLDdelta'), ('DAG', 'DAGK')), 'S1P_PhytoS1P': (('SPHK1_2', 'Sph'),)}, 'possible_source': {'GEF1_4_10'}}
+# EDGE_POOL=(('Ca2c', 'ABI2', '0'), ('Ca2c', 'HAB1', '0'), ('Ca2c', 'PP2CA', '0'), ('PA', 'ABI2', '0'), ('PA', 'HAB1', '0'), ('PA', 'PP2CA', '0'), ('AquaporinPIP2_1', 'ROS', '1'), ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'), ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'), ('GPA1', 'OST1', '1'), ('GHR1', 'CPK3_21', '1'), ('PA', 'Microtubule_Depolymerization', '1'))
+
+# BASE='networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
+# extra edges: []
+# score: 311.71313474579495
+# ABA* = ABA
+# ABH1* = 1
+# ARP_Complex* = 1
+# CPK6* = 1
+# CPK23* = 1
+# DAGK* = 1
+# ERA1* = 1
+# GAPC1_2* = 1
+# GCR1* = 1
+# GTP* = 1
+# MRP5* = 1
+# NAD* = 1
+# NADPH* = 1
+# Nitrite* = 1
+# NtSyp121* = 1
+# PC* = 1
+# PtdInsP3* = 1
+# PtdInsP4* = 1
+# RCN1* = 1
+# SCAB1* = 1
+# Sph* = 1
+# GEF1_4_10* = 0
+# SPP1* = 0
+# Ca_ext* = 0
+# RCARs* = ABA
+# PEPC* = not ABA
+# PI3P5K* = ABA
+# ROP11* = GEF1_4_10
+# ABI1* = not PA and (not RCARs or ROP11) and not ROS and pHc
+# ABI2* = (not RCARs or ROP11) and not ROS
+# HAB1* = not RCARs and not ROS
+# PP2CA* = not RCARs and not ROS
+# OST1* = (not ABI1 and not HAB1) or (not PP2CA and not ABI2) or (not ABI1 and not ABI2) or (not HAB1 and not PP2CA) or (not HAB1 and not ABI2) or (not ABI1 and not PP2CA)
+# RBOH* = pHc and not ABI1 and PtdInsP3 and OST1 and GPA1 and PA and RCN1
+# ROS* = NADPH and RBOH
+# GHR1* = not ABI2 and ROS
+# NO* = Nitrite and NIA1_2 and NADPH
+# NIA1_2* = ROS
+# NOGC1* = NO
+# cGMP* = NOGC1 and GTP
+# 8-nitro-cGMP* = cGMP and ROS and NO
+# ADPRc* = 8-nitro-cGMP
+# cADPR* = NAD and ADPRc
+# CIS* = InsP3 or InsP6 or cADPR or CaIM
+# SACC* = Actin_Reorganization
+# CaIM* = SACC or (NtSyp121 and GHR1 and MRP5) or not ABH1 or not ERA1
+# Ca2c* = (CIS or Ca_ext) and not Ca2_ATPase
+# Ca2_ATPase* = Ca2c
+# CPK3_21* = Ca2c or CPK3_21
+# MPK9_12* = Ca2c or MPK9_12
+# PtdIns4_5P2* = PtdInsP4
+# PLC* = Ca2c
+# DAG* = PtdIns4_5P2 and PLC
+# InsP3* = PLC and PtdIns4_5P2
+# InsP6* = InsP3
+# PLDalpha* = GPA1 and Ca2c
+# PLDdelta* = NO or ROS and GAPC1_2
+# PA* = PC and (PLDdelta or PLDalpha) or DAG and DAGK
+# SPHK1_2* = PA or ABA
+# S1P_PhytoS1P* = SPHK1_2 and Sph and not SPP1
+# GPA1* = S1P_PhytoS1P or not GCR1
+# PtdIns3_5P2* = PI3P5K
+# V-PPase* = PtdIns3_5P2
+# V-ATPase* = Ca2c
+# Vacuolar_Acidification* = V-PPase or V-ATPase or Vacuolar_Acidification
+# TCTP* = Ca2c
+# Microtubule_Depolymerization* = TCTP or Microtubule_Depolymerization
+# pHc* = (OST1 and not ABI2 and not ABI1 or Ca2c) and Vacuolar_Acidification
+# H_ATPase* = not pHc and not Ca2c and not ROS
+# AtRAC1* = not ABA or ABI1
+# Actin_Reorganization* = (PtdInsP4 or PtdInsP3) and not AtRAC1 and ARP_Complex and SCAB1
+# SLAC1* = (CPK6 or CPK23 or CPK3_21) and MPK9_12 and OST1 and GHR1 and pHc and not ABI1 and not PP2CA and not ABI2
+# QUAC1* = OST1 and Ca2c
+# SLAH3* = (CPK6 or CPK23) and CPK3_21 and not ABI1
+# AnionEM* = SLAC1 or QUAC1 and SLAH3
+# Malate* = PEPC and not ABA and not AnionEM
+# KEV* = Ca2c
+# Depolarization* = (AnionEM or Ca2c or KEV) and (not H_ATPase or not K_efflux)
+# KOUT* = (not NO or not ROS or pHc) and Depolarization
+# K_efflux* = KEV and KOUT
+# AquaporinPIP2_1* = OST1
+# H2O_Efflux* = AnionEM and AquaporinPIP2_1 and (K_efflux or H2O_Efflux) and not Malate
+# Closure* = Microtubule_Depolymerization and H2O_Efflux
+
+# MODEL='networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
+iteration	top score	extra edges	complexity
+0	325.30034722222223	1	205
+1	333.525	2	192
+2	341.025	3	198
+3	346.0972222222222	4	223
+4	356.275	3	197
+5	357.0	4	318
+6	364.2416666666666	5	231
+7	365.9722222222222	4	216
+8	367.25	4	225
+9	372.0	4	220
+10	372.0	4	194
+11	372.95000000000005	4	301
+12	375.25	4	328
+13	381.0	5	228
+14	381.5	5	326
+15	382.0	4	297
+16	385.0	5	316
+17	385.8	6	320
+18	389.0	5	317
+19	389.0	5	317
+20	390.50000000000006	5	317
+21	391.4166666666667	5	369
+22	391.4166666666667	5	369
+23	391.6666666666667	5	312
+24	392.25	5	337
+25	393.75	5	349
+26	394.0	4	344
+27	404.2211111111111	6	321
+28	404.3877777777777	6	278
+29	404.8877777777777	6	326
+30	406.41	6	347
+31	406.41	6	347
+32	406.41	6	347
+33	406.66	6	308
+34	406.66	6	308
+35	406.66	6	308
+36	406.66	6	308
+37	406.66	6	294
+38	407.7777777777778	6	232
+39	409.16	6	310
+40	410.5277777777778	6	357
+41	413.7777777777778	7	392
+42	413.7777777777778	7	392
+43	413.7777777777778	7	392
+44	413.7777777777778	7	392
+45	413.7777777777778	7	386
+46	413.7777777777778	7	386
+47	415.0277777777778	9	271
+48	415.7777777777778	8	392
+49	416.0277777777778	8	392
+50	416.6277777777778	9	417
+51	417.2777777777778	9	431
+52	417.8777777777778	9	419
+53	418.1277777777778	8	424
+54	418.1277777777778	8	424
+55	418.9444444444445	8	330
+56	418.9444444444445	8	330
+57	418.9444444444445	8	330
+58	418.9444444444445	8	330
+59	418.9444444444445	8	329
+60	419.27777777777777	7	317
+61	419.27777777777777	7	315
+62	419.27777777777777	7	300
+63	419.27777777777777	7	300
+64	419.27777777777777	7	299
+65	420.52777777777777	7	298
+66	420.52777777777777	7	298
+67	420.52777777777777	7	298
+68	421.02777777777777	7	294
+69	421.02777777777777	7	293
+70	421.02777777777777	7	293
+71	421.02777777777777	7	293
+72	421.02777777777777	7	292
+73	421.02777777777777	7	289
+74	421.02777777777777	7	288
+75	421.02777777777777	7	288
+76	421.02777777777777	7	288
+77	421.02777777777777	7	288
+78	421.02777777777777	7	288
+79	421.02777777777777	7	283
+80	421.02777777777777	7	283
+81	421.02777777777777	7	283
+82	421.02777777777777	7	277
+83	421.02777777777777	7	277
+84	421.02777777777777	7	277
+85	421.02777777777777	6	274
+86	421.02777777777777	6	274
+87	421.52777777777777	7	271
+88	422.02777777777777	7	270
+89	422.02777777777777	7	268
+90	422.02777777777777	6	272
+91	422.02777777777777	6	272
+92	422.02777777777777	6	271
+93	422.02777777777777	6	268
+94	422.02777777777777	6	254
+95	422.02777777777777	6	254
+96	422.2291666666668	6	258
+97	422.2291666666668	6	258
+98	422.2291666666668	6	254
+99	422.5277777777777	7	258
+100	422.92916666666673	7	255

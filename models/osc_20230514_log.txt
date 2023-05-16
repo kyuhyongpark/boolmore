@@ -1,0 +1,193 @@
+# DATA='networkmutation/data_osc_20230426.tsv'
+# DEFAULT_SOURCES={'ABA': 0}
+# CONSTRAINTS={'fixed': {'cGMP', 'Ca2osc', 'NO', 'H2O_Efflux', 'InsP3', 'cADPR', 'InsP6', 'PtdIns3_5P2', 'DAG', 'Closure', 'RCARs', 'PtdIns4_5P2'}, 'regulate': {'ABI1': ('RCARs',), 'ABI2': ('RCARs',), 'HAB1': ('RCARs',), 'PP2CA': ('RCARs',), 'K_efflux': ('KEV', 'KOUT'), 'OST1': ('ABI1', 'ABI2'), 'Depolarization': ('AnionEM',)}, 'necessary': {'8-nitro-cGMP': ('cGMP',), 'KOUT': ('Depolarization',), 'Malate': ('PEPC', 'AnionEM'), 'ROS': ('NADPH', 'RBOH')}, 'group': {'PA': (('PC', 'PLDalpha'), ('PC', 'PLDdelta'), ('DAG', 'DAGK')), 'S1P_PhytoS1P': (('SPHK1_2', 'Sph'),)}, 'possible_source': {'GEF1_4_10'}}
+# EDGE_POOL=(('Ca2osc', 'ABI2', '0'), ('Ca2osc', 'HAB1', '0'), ('Ca2osc', 'PP2CA', '0'), ('PA', 'ABI2', '0'), ('PA', 'HAB1', '0'), ('PA', 'PP2CA', '0'), ('AquaporinPIP2_1', 'ROS', '1'), ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'), ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'), ('GPA1', 'OST1', '1'), ('GHR1', 'CPK3_21', '1'), ('PA', 'Microtubule_Depolymerization', '1'))
+
+# BASE='networkmutation/baseline/ABA_GA_base_B_20230407.txt'
+# extra edges: []
+# score: 184.19875019051986
+# ABA* = ABA
+# ABH1* = 1
+# ARP_Complex* = 1
+# CPK6* = 1
+# CPK23* = 1
+# DAGK* = 1
+# ERA1* = 1
+# GAPC1_2* = 1
+# GCR1* = 1
+# GTP* = 1
+# MRP5* = 1
+# NAD* = 1
+# NADPH* = 1
+# Nitrite* = 1
+# NtSyp121* = 1
+# PC* = 1
+# PtdInsP3* = 1
+# PtdInsP4* = 1
+# RCN1* = 1
+# SCAB1* = 1
+# Sph* = 1
+# GEF1_4_10* = 0
+# SPP1* = 0
+# RCARs* = ABA
+# PEPC* = not ABA
+# PI3P5K* = ABA
+# ROP11* = GEF1_4_10
+# ABI1* = not PA and (not RCARs or ROP11) and not ROS and pHc
+# ABI2* = (not RCARs or ROP11) and not ROS
+# HAB1* = not RCARs and not ROS
+# PP2CA* = not RCARs and not ROS
+# OST1* = (not ABI1 and not HAB1) or (not PP2CA and not ABI2) or (not ABI1 and not ABI2) or (not HAB1 and not PP2CA) or (not HAB1 and not ABI2) or (not ABI1 and not PP2CA)
+# RBOH* = pHc and not ABI1 and PtdInsP3 and OST1 and GPA1 and PA and RCN1
+# ROS* = NADPH and RBOH
+# GHR1* = not ABI2 and ROS
+# NO* = Nitrite and NIA1_2 and NADPH
+# NIA1_2* = ROS
+# NOGC1* = NO
+# cGMP* = NOGC1 and GTP
+# 8-nitro-cGMP* = cGMP and ROS and NO
+# ADPRc* = 8-nitro-cGMP
+# cADPR* = NAD and ADPRc
+# CIS* = InsP3 or InsP6 or cADPR
+# SACC* = Actin_Reorganization
+# CaIM* = SACC or (NtSyp121 and GHR1 and MRP5) or not ABH1 or not ERA1
+# Ca2osc* = CIS or CaIM
+# CPK3_21* = Ca2osc
+# MPK9_12* = Ca2osc
+# PtdIns4_5P2* = PtdInsP4
+# PLC* = Ca2osc
+# DAG* = PtdIns4_5P2 and PLC
+# InsP3* = PLC and PtdIns4_5P2
+# InsP6* = InsP3
+# PLDalpha* = GPA1 and Ca2osc
+# PLDdelta* = NO or ROS and GAPC1_2
+# PA* = PC and (PLDdelta or PLDalpha) or DAG and DAGK
+# SPHK1_2* = PA or ABA
+# S1P_PhytoS1P* = SPHK1_2 and Sph and not SPP1
+# GPA1* = S1P_PhytoS1P or not GCR1
+# PtdIns3_5P2* = PI3P5K
+# V-PPase* = PtdIns3_5P2
+# V-ATPase* = Ca2osc
+# Vacuolar_Acidification* = V-PPase or V-ATPase
+# TCTP* = Ca2osc
+# Microtubule_Depolymerization* = TCTP
+# pHc* = (OST1 and not ABI2 and not ABI1 or Ca2osc) and Vacuolar_Acidification
+# H_ATPase* = not pHc and not Ca2osc and not ROS
+# AtRAC1* = not ABA or ABI1
+# Actin_Reorganization* = (PtdInsP4 or PtdInsP3) and not AtRAC1 and ARP_Complex and SCAB1
+# SLAC1* = (CPK6 or CPK23 or CPK3_21) and MPK9_12 and OST1 and GHR1 and pHc and not ABI1 and not PP2CA and not ABI2
+# QUAC1* = OST1 and Ca2osc
+# SLAH3* = (CPK6 or CPK23) and CPK3_21 and not ABI1
+# AnionEM* = SLAC1 or QUAC1 and SLAH3
+# Malate* = PEPC and not ABA and not AnionEM
+# KEV* = Ca2osc
+# Depolarization* = (AnionEM or Ca2osc or KEV) and (not H_ATPase or not K_efflux)
+# KOUT* = (not NO or not ROS or pHc) and Depolarization
+# K_efflux* = KEV and KOUT
+# AquaporinPIP2_1* = OST1
+# H2O_Efflux* = (AnionEM and AquaporinPIP2_1 and K_efflux) and not Malate
+# Closure* = Microtubule_Depolymerization and H2O_Efflux
+
+# MODEL='networkmutation/baseline/ABA_GA_base_B_20230407.txt'
+iteration	top score	extra edges	complexity
+0	192.55677488187806	0	175
+1	214.7880979938272	1	192
+2	297.375	0	172
+3	299.875	2	172
+4	303.61111111111126	0	164
+5	306.4444444444446	1	179
+6	309.6111111111113	1	171
+7	309.6111111111113	1	171
+8	310.814814814815	1	180
+9	318.7314814814816	2	181
+10	318.7314814814816	2	181
+11	318.7314814814816	2	181
+12	331.1666666666667	2	164
+13	339.6666666666667	1	180
+14	339.6666666666667	1	180
+15	348.4166666666667	2	162
+16	349.4166666666667	3	181
+17	354.1666666666667	3	176
+18	357.75	3	158
+19	358.75	2	170
+20	362.25	3	187
+21	365.75	5	200
+22	372.25	6	168
+23	372.75	4	171
+24	372.75	4	171
+25	374.75	3	162
+26	376.5	5	262
+27	376.5	5	262
+28	378.0216049382716	6	179
+29	380.5	7	185
+30	381.50308641975306	7	316
+31	383.00308641975306	7	317
+32	383.00308641975306	7	317
+33	383.00308641975306	7	317
+34	386.00308641975306	8	187
+35	388.5	7	352
+36	389.5	8	309
+37	391.5	7	318
+38	391.5	7	318
+39	391.5	7	315
+40	392.5	8	326
+41	393.5	7	299
+42	393.5	7	299
+43	394.75	8	308
+44	395.9166666666667	9	318
+45	395.9166666666667	8	329
+46	398.58333333333337	9	331
+47	398.58333333333337	9	307
+48	398.58333333333337	8	305
+49	399.08333333333337	10	289
+50	399.08333333333337	10	289
+51	399.08333333333337	9	279
+52	399.08333333333337	9	262
+53	399.58333333333337	9	294
+54	399.58333333333337	9	286
+55	399.58333333333337	9	268
+56	399.58333333333337	9	267
+57	399.58333333333337	9	266
+58	399.58333333333337	9	266
+59	399.9166666666667	9	276
+60	399.9166666666667	9	265
+61	399.9166666666667	9	259
+62	401.9166666666667	9	274
+63	401.9166666666667	9	263
+64	401.9166666666667	9	254
+65	401.9166666666667	9	254
+66	401.9166666666667	9	254
+67	401.9166666666667	9	254
+68	401.9166666666667	9	254
+69	403.4166666666667	10	254
+70	403.4166666666667	10	252
+71	403.4166666666667	10	240
+72	403.4166666666667	10	240
+73	403.4166666666667	10	240
+74	403.4166666666667	10	229
+75	403.4166666666667	10	229
+76	403.4166666666667	10	229
+77	403.4166666666667	10	229
+78	404.4166666666667	10	240
+79	404.4166666666667	10	231
+80	404.9166666666667	10	229
+81	404.9166666666667	10	229
+82	404.9166666666667	10	226
+83	405.9166666666667	10	239
+84	406.9166666666667	10	241
+85	407.9166666666667	10	227
+86	407.9166666666667	10	227
+87	407.9166666666667	10	224
+88	407.9166666666667	9	228
+89	407.9166666666667	9	223
+90	407.9166666666667	9	219
+91	407.9166666666667	8	233
+92	407.9166666666667	8	217
+93	407.9166666666667	8	214
+94	407.9166666666667	8	208
+95	407.9166666666667	7	208
+96	407.9166666666667	7	199
+97	407.9166666666667	7	198
+98	407.9166666666667	7	198
+99	407.9166666666667	7	198
+100	407.9166666666667	7	184

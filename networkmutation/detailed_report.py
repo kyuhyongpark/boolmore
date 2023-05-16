@@ -6,7 +6,7 @@ import config
 import pyboolnet.trap_spaces
 import pyboolnet.prime_implicants
 
-run_type = 'ca_ext'
+run_type = 'normal'
 
 if run_type == 'normal':
     DATA = 'networkmutation/data_20230426.tsv'
@@ -131,9 +131,9 @@ elif run_type == 'ca_ext':
 
 # BASE = 'networkmutation/baseline/ABA_full_20230407.txt'
 # BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
-# BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
+BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
 # BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
-BASE = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
+# BASE = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
 
 # MODEL = 'networkmutation/baseline/ABA_full_20230407.txt'
 # MODEL = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
@@ -145,10 +145,9 @@ BASE = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
 # MODEL = 'networkmutation/models/no_edge_20230303_3807_gen54_mod.txt'
 ### GA1
 # MODEL = 'networkmutation/models/20230502_5424_gen75.txt'
+MODEL = 'networkmutation/models/20230512_7790_gen125.txt'
 ### GA2
 # MODEL = 'networkmutation/models/osc_20230503_7492_gen66.txt'
-### GA3
-MODEL = 'networkmutation/models/ca_ext_cis_20230511_7622_gen111.txt'
 
 FILE_NAME = MODEL.split("/")[-1][:-4]+'_score.csv'
 
@@ -247,6 +246,7 @@ if __name__ == '__main__':
              {'ABA':1},
              {'ROS':1},
              {'NO':1},
+             {'CaIM':1},
              {'cADPR':1},
              {'PA':1},
              {'pHc':1},

@@ -1,0 +1,193 @@
+# DATA='networkmutation/data_osc_20230426.tsv'
+# DEFAULT_SOURCES={'ABA': 0}
+# CONSTRAINTS={'fixed': {'RCARs', 'InsP3', 'NO', 'InsP6', 'cADPR', 'Closure', 'DAG', 'Ca2osc', 'PtdIns3_5P2', 'H2O_Efflux', 'cGMP', 'PtdIns4_5P2'}, 'regulate': {'ABI1': ('RCARs',), 'ABI2': ('RCARs',), 'HAB1': ('RCARs',), 'PP2CA': ('RCARs',), 'K_efflux': ('KEV', 'KOUT'), 'OST1': ('ABI1', 'ABI2'), 'Depolarization': ('AnionEM',)}, 'necessary': {'8-nitro-cGMP': ('cGMP',), 'KOUT': ('Depolarization',), 'Malate': ('PEPC', 'AnionEM'), 'ROS': ('NADPH', 'RBOH')}, 'group': {'PA': (('PC', 'PLDalpha'), ('PC', 'PLDdelta'), ('DAG', 'DAGK')), 'S1P_PhytoS1P': (('SPHK1_2', 'Sph'),)}, 'possible_source': {'GEF1_4_10'}}
+# EDGE_POOL=(('Ca2osc', 'ABI2', '0'), ('Ca2osc', 'HAB1', '0'), ('Ca2osc', 'PP2CA', '0'), ('PA', 'ABI2', '0'), ('PA', 'HAB1', '0'), ('PA', 'PP2CA', '0'), ('AquaporinPIP2_1', 'ROS', '1'), ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'), ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'), ('GPA1', 'OST1', '1'), ('GHR1', 'CPK3_21', '1'), ('PA', 'Microtubule_Depolymerization', '1'))
+
+# BASE='networkmutation/baseline/ABA_GA_base_B_20230407.txt'
+# extra edges: []
+# score: 184.19875019051986
+# ABA* = ABA
+# ABH1* = 1
+# ARP_Complex* = 1
+# CPK6* = 1
+# CPK23* = 1
+# DAGK* = 1
+# ERA1* = 1
+# GAPC1_2* = 1
+# GCR1* = 1
+# GTP* = 1
+# MRP5* = 1
+# NAD* = 1
+# NADPH* = 1
+# Nitrite* = 1
+# NtSyp121* = 1
+# PC* = 1
+# PtdInsP3* = 1
+# PtdInsP4* = 1
+# RCN1* = 1
+# SCAB1* = 1
+# Sph* = 1
+# GEF1_4_10* = 0
+# SPP1* = 0
+# RCARs* = ABA
+# PEPC* = not ABA
+# PI3P5K* = ABA
+# ROP11* = GEF1_4_10
+# ABI1* = not PA and (not RCARs or ROP11) and not ROS and pHc
+# ABI2* = (not RCARs or ROP11) and not ROS
+# HAB1* = not RCARs and not ROS
+# PP2CA* = not RCARs and not ROS
+# OST1* = (not ABI1 and not HAB1) or (not PP2CA and not ABI2) or (not ABI1 and not ABI2) or (not HAB1 and not PP2CA) or (not HAB1 and not ABI2) or (not ABI1 and not PP2CA)
+# RBOH* = pHc and not ABI1 and PtdInsP3 and OST1 and GPA1 and PA and RCN1
+# ROS* = NADPH and RBOH
+# GHR1* = not ABI2 and ROS
+# NO* = Nitrite and NIA1_2 and NADPH
+# NIA1_2* = ROS
+# NOGC1* = NO
+# cGMP* = NOGC1 and GTP
+# 8-nitro-cGMP* = cGMP and ROS and NO
+# ADPRc* = 8-nitro-cGMP
+# cADPR* = NAD and ADPRc
+# CIS* = InsP3 or InsP6 or cADPR
+# SACC* = Actin_Reorganization
+# CaIM* = SACC or (NtSyp121 and GHR1 and MRP5) or not ABH1 or not ERA1
+# Ca2osc* = CIS or CaIM
+# CPK3_21* = Ca2osc
+# MPK9_12* = Ca2osc
+# PtdIns4_5P2* = PtdInsP4
+# PLC* = Ca2osc
+# DAG* = PtdIns4_5P2 and PLC
+# InsP3* = PLC and PtdIns4_5P2
+# InsP6* = InsP3
+# PLDalpha* = GPA1 and Ca2osc
+# PLDdelta* = NO or ROS and GAPC1_2
+# PA* = PC and (PLDdelta or PLDalpha) or DAG and DAGK
+# SPHK1_2* = PA or ABA
+# S1P_PhytoS1P* = SPHK1_2 and Sph and not SPP1
+# GPA1* = S1P_PhytoS1P or not GCR1
+# PtdIns3_5P2* = PI3P5K
+# V-PPase* = PtdIns3_5P2
+# V-ATPase* = Ca2osc
+# Vacuolar_Acidification* = V-PPase or V-ATPase
+# TCTP* = Ca2osc
+# Microtubule_Depolymerization* = TCTP
+# pHc* = (OST1 and not ABI2 and not ABI1 or Ca2osc) and Vacuolar_Acidification
+# H_ATPase* = not pHc and not Ca2osc and not ROS
+# AtRAC1* = not ABA or ABI1
+# Actin_Reorganization* = (PtdInsP4 or PtdInsP3) and not AtRAC1 and ARP_Complex and SCAB1
+# SLAC1* = (CPK6 or CPK23 or CPK3_21) and MPK9_12 and OST1 and GHR1 and pHc and not ABI1 and not PP2CA and not ABI2
+# QUAC1* = OST1 and Ca2osc
+# SLAH3* = (CPK6 or CPK23) and CPK3_21 and not ABI1
+# AnionEM* = SLAC1 or QUAC1 and SLAH3
+# Malate* = PEPC and not ABA and not AnionEM
+# KEV* = Ca2osc
+# Depolarization* = (AnionEM or Ca2osc or KEV) and (not H_ATPase or not K_efflux)
+# KOUT* = (not NO or not ROS or pHc) and Depolarization
+# K_efflux* = KEV and KOUT
+# AquaporinPIP2_1* = OST1
+# H2O_Efflux* = (AnionEM and AquaporinPIP2_1 and K_efflux) and not Malate
+# Closure* = Microtubule_Depolymerization and H2O_Efflux
+
+# MODEL='networkmutation/baseline/ABA_GA_base_B_20230407.txt'
+iteration	top score	extra edges	complexity
+0	280.2314814814815	0	191
+1	291.7314814814815	0	224
+2	291.7314814814815	0	224
+3	296.2314814814815	0	271
+4	299.25	1	249
+5	320.25	1	245
+6	321.25	2	253
+7	327.375	2	244
+8	328.875	2	290
+9	333.2083333333333	2	262
+10	338.625	1	244
+11	340.25	2	252
+12	342.25	3	271
+13	345.75	3	250
+14	346.25	3	243
+15	349.0	3	258
+16	351.25	3	256
+17	353.75	2	243
+18	355.25	4	251
+19	357.75	3	262
+20	359.75	4	254
+21	359.75	4	250
+22	360.25	6	266
+23	363.75	4	230
+24	368.75	3	253
+25	369.25	4	268
+26	369.75	3	239
+27	370.75	3	238
+28	371.25	3	244
+29	371.75	4	257
+30	371.75	4	242
+31	372.25	4	259
+32	372.75	3	229
+33	373.75	4	244
+34	374.75	4	229
+35	374.75	3	224
+36	376.25	4	229
+37	376.5	4	222
+38	377.75	4	221
+39	378.75	5	229
+40	378.75	5	229
+41	378.75	5	222
+42	378.75	5	221
+43	378.75	5	208
+44	378.75	5	208
+45	378.75	5	202
+46	378.75	4	204
+47	378.75	4	201
+48	378.75	4	198
+49	378.75	4	197
+50	378.75	4	196
+51	378.75	4	196
+52	378.75	4	195
+53	378.75	4	195
+54	380.25	5	212
+55	380.25	5	212
+56	380.5	5	207
+57	383.5	5	185
+58	383.5	5	185
+59	384.25	5	186
+60	388.5	6	199
+61	388.5	6	199
+62	390.0	6	199
+63	390.0	5	193
+64	390.0	5	192
+65	390.25	5	190
+66	390.25	5	190
+67	390.25	5	190
+68	391.25	7	195
+69	391.5	7	184
+70	391.5	6	181
+71	391.5	5	193
+72	391.5	5	190
+73	392.25	7	191
+74	392.25	7	191
+75	392.25	5	184
+76	392.25	5	184
+77	392.25	5	182
+78	392.25	5	182
+79	392.5	6	186
+80	392.5	5	186
+81	392.5	5	172
+82	392.5	5	165
+83	392.5	5	164
+84	392.5	5	161
+85	392.5	5	159
+86	392.5	5	158
+87	392.5	5	158
+88	392.5	5	158
+89	392.5	5	158
+90	392.5	5	157
+91	392.5	5	157
+92	392.5	5	157
+93	392.5	5	156
+94	392.5	5	156
+95	392.5	5	156
+96	392.5	5	156
+97	392.5	5	156
+98	392.5	5	156
+99	392.5	5	156
+100	392.5	5	156

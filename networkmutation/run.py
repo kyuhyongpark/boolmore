@@ -6,7 +6,7 @@ import config
 
 
 RUN_GA = True
-NAME = 'ca_ext_cis_20230511'
+NAME = 'ca_ext_20230516'
 run_type = 'ca_ext'
 
 if run_type == 'normal':
@@ -156,7 +156,7 @@ ITERATIONS = 100
 PER_ITERATION = 100
 KEEP = 20
 EXPORT_TOP = 1
-EXPORT_THRESHOLD = 410
+EXPORT_THRESHOLD = 427
 PROB = 0.01
 EDGE_PROB = 0.5
 
@@ -283,7 +283,7 @@ if __name__ == '__main__':
             if i+1 == ITERATIONS:
                 new_iteration[0].export(NAME, 0)
 
-            print("average score for top : ", new_iteration[0].score)
+            print("top score : ", new_iteration[0].score)
             print("extra edges :", len(new_iteration[0].extra_edges))
             print("complexity of the top model :", new_iteration[0].complexity)
             fp.write(str(i+1) +'\t'+ str(new_iteration[0].score) +'\t')
