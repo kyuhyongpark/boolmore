@@ -74,6 +74,55 @@ import pystablemotifs as sm
 # print(rr2prime(regulators, mutated_rr, signs))
 
 
+# test check_source
+
+def test_check_source():
+    regulators = ('A', 'B', 'C')
+    node = 'A'
+
+    assert check_source(regulators, '00010000', 'A') == True
+    assert check_source(regulators, '00010000', 'B') == False
+    assert check_source(regulators, '00010000', 'C') == False
+
+    assert check_source(regulators, '11110000', 'A') == True
+    assert check_source(regulators, '11110000', 'B') == False
+    assert check_source(regulators, '11110000', 'C') == False
+
+    assert check_source(regulators, '10010000', 'A') == True
+    assert check_source(regulators, '10010000', 'B') == False
+    assert check_source(regulators, '10010000', 'C') == False
+
+    assert check_source(regulators, '00000100', 'A') == False
+    assert check_source(regulators, '00000100', 'B') == True
+    assert check_source(regulators, '00000100', 'C') == False
+
+    assert check_source(regulators, '11001100', 'A') == False
+    assert check_source(regulators, '11001100', 'B') == True
+    assert check_source(regulators, '11001100', 'C') == False
+
+    assert check_source(regulators, '00001100', 'A') == False
+    assert check_source(regulators, '00001100', 'B') == True
+    assert check_source(regulators, '00001100', 'C') == False
+
+    assert check_source(regulators, '00000010', 'A') == False
+    assert check_source(regulators, '00000010', 'B') == False
+    assert check_source(regulators, '00000010', 'C') == True
+
+    assert check_source(regulators, '00000001', 'A') == False
+    assert check_source(regulators, '00000001', 'B') == False
+    assert check_source(regulators, '00000001', 'C') == False
+
+    assert check_source(regulators, '11111000', 'A') == False
+    assert check_source(regulators, '11111000', 'B') == False
+    assert check_source(regulators, '11111000', 'C') == False
+
+    assert check_source(regulators, '11101000', 'A') == False
+    assert check_source(regulators, '11101000', 'B') == False
+    assert check_source(regulators, '11101000', 'C') == False
+
+    return
+
+test_check_source()
 # # Stop the profiling.
 # pr.disable()
 #

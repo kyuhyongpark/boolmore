@@ -401,10 +401,14 @@ def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 
                 if redo == True:
                     trial += 1
                     break
-        elif node not in constraints['possible_source']:
-            # need to check if a node became a source node and mutate more if it did
+        elif node in regulators:
+            # check if the node became a source node if it has a self loop.
             # nodes that have a regulating node cannot be a source, and hence elif.
-            redo = cons.check_source(mutated_rr)
+            redo = cons.check_source(regulators, mutated_rr, node)
+        elif node not in constraints['possible_constant']:
+            # need to check if a node became a constant node and mutate more if it did
+            # nodes that have a regulating node cannot be a constant, and hence elif.
+            redo = cons.check_constant(mutated_rr)
             trial += 1
 
     max_original = get_uni_rr(rr)

@@ -6,8 +6,8 @@ import config
 
 
 RUN_GA = True
-NAME = 'ca_ext_20230516'
-run_type = 'ca_ext'
+NAME = 'osc_ca_ext_20230517'
+run_type = 'osc_ca_ext'
 
 if run_type == 'normal':
     DATA = 'networkmutation/data_20230426.tsv'
@@ -17,7 +17,7 @@ if run_type == 'normal':
                    'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-                   'possible_source': {'GEF1_4_10',}}
+                   'possible_constant': {'GEF1_4_10',}}
     ### constraints for the 'more edges' version
     ### allow change of Ca2c
     # CONSTRAINTS = {
@@ -25,7 +25,7 @@ if run_type == 'normal':
     #     'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2c':('CaIM','CIS','Ca2_ATPase')},
     #     'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
     #     'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #     'possible_source': {'GEF1_4_10',}
+    #     'possible_constant': {'GEF1_4_10',}
     #     }
 
     ### edge pool for the typical run
@@ -61,14 +61,14 @@ elif run_type == 'osc':
                    'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-                   'possible_source': {'GEF1_4_10',}}
+                   'possible_constant': {'GEF1_4_10',}}
     ### constraints for the 'more edges' version
     ### Allow modification of Ca2osc
     # CONSTRAINTS = {'fixed': {'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
     #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2osc':('CaIM','CIS')},
     #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
     #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #                'possible_source': {'GEF1_4_10',}}
+    #                'possible_constant': {'GEF1_4_10',}}
 
     ### edge pool for the typical run for the ca_osc model - 16 edges
     EDGE_POOL = (('Ca2osc', 'ABI2', '0'),('Ca2osc', 'HAB1', '0'),('Ca2osc', 'PP2CA', '0'),
@@ -101,7 +101,7 @@ elif run_type == 'two':
                    'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2c':('CaIM','CIS','Ca2_ATPase')},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-                   'possible_source': {'GEF1_4_10',}}
+                   'possible_constant': {'GEF1_4_10',}}
     
     ### typical run for the ca_two model
     EDGE_POOL = (('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
@@ -119,10 +119,28 @@ elif run_type == 'ca_ext':
                    'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-                   'possible_source': {'GEF1_4_10',}}
+                   'possible_constant': {'GEF1_4_10',}}
 
     ### edge pool for the typical run
     EDGE_POOL = (('Ca2c', 'ABI2', '0'),('Ca2c', 'HAB1', '0'),('Ca2c', 'PP2CA', '0'),
+                 ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
+                 ('AquaporinPIP2_1', 'ROS', '1'),
+                 ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
+                 ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
+                 ('GPA1', 'OST1', '1'), ('GHR1', 'CPK3_21', '1'),
+                 ('PA', 'Microtubule_Depolymerization', '1'))
+elif run_type == 'osc_ca_ext':
+    DATA = 'networkmutation/data_osc_ca_ext_20230511.tsv'
+    DEFAULT_SOURCES = {'ABA':0}
+    ### constraints for the typical run
+    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2osc', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
+                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+                   'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
+                   'possible_constant': {'GEF1_4_10',}}
+
+    ### edge pool for the typical run
+    EDGE_POOL = (('Ca2osc', 'ABI2', '0'),('Ca2osc', 'HAB1', '0'),('Ca2osc', 'PP2CA', '0'),
                  ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
                  ('AquaporinPIP2_1', 'ROS', '1'),
                  ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
@@ -134,20 +152,22 @@ elif run_type == 'ca_ext':
 # BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
 # BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
 # BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
-BASE = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
+# BASE = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
+BASE = 'networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext_cis.txt'
 
 # MODEL = 'networkmutation/baseline/ABA_full_20230407.txt'
 # MODEL = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
 # MODEL = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
 # MODEL = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
-MODEL = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
+# MODEL = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
+MODEL = 'networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext_cis.txt'
 
 ### GA0
 # MODEL = 'networkmutation/models/no_edge_20230303_3807_gen54_mod.txt'
 ### GA1
-# MODEL = 'networkmutation/models/20230502_5424_gen75.txt'
+# MODEL = 'networkmutation/models/20230512_7790_gen125_mod.txt'
 ### GA2
-# MODEL = 'networkmutation/models/osc_20230503_7492_gen66.txt'
+# MODEL = 'networkmutation/models/osc_20230514_8025_gen128.txt'
 
 FILE = NAME + '_log.txt'
 STARTING_ID = 1

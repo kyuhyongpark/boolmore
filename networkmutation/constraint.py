@@ -2,7 +2,7 @@ import mutation as m
 
 def check_node(regulators, rr, constraints, node):
     """
-    Checks if the model follows regulate, necessary, possible_source constraints.
+    Checks if the model follows regulate, necessary, possible_constant constraints.
     Checking fixed and group constraints are not implemented yet.
     """
 
@@ -28,13 +28,18 @@ def check_node(regulators, rr, constraints, node):
             if check == False:
                 print(reg, "should regulate", node)
                 return check
-    elif node not in constraints['possible_source']:
-
-        # need to check if a node became a source node and mutate more if it did
+    elif node in regulators:
+        # check if the node became a source node if it has a self loop.
         # nodes that have a regulating node cannot be a source, and hence elif.
-        check = not check_source(rr)
+        check = not check_source(regulators, rr, node)
         if check == False:
             print(node, "should not be a source")
+    elif node not in constraints['possible_constant']:
+        # need to check if a node became a constant node and mutate more if it did
+        # nodes that have a regulating node cannot be a constant, and hence elif.
+        check = not check_constant(rr)
+        if check == False:
+            print(node, "should not be a constant")
 
     return check
 
@@ -177,7 +182,7 @@ def impose_necessary(regulators, rr, node):
 
     return necessary_rr
 
-def check_source(rr):
+def check_constant(rr):
     """
     Check if the rule is fixed to 0 or 1
     """
@@ -186,3 +191,22 @@ def check_source(rr):
         return False
     else:
         return True
+
+def check_source(regulators, rr, node):
+    """
+    Check if the rule became a source
+    """
+    # N = number of regulators
+    N = len(regulators)
+    # n = nth regulator
+    n = regulators.index(node)
+
+    min_rr = m.get_uni_rr(rr, max = False)
+    add = 0
+    for i in range(2**N):
+        add += int(min_rr[i])
+
+    if add == 1 and min_rr[2**N-2**(N-n-1)-1] == '1':
+        return True
+    else:
+        return False
