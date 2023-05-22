@@ -4,6 +4,172 @@
 # score: 407.9166666666667
 # following constraints: True
 # complexity: 184
+
+# percolated rules: 
+# 8-nitro-cGMP* = NO & cGMP
+# ABA* = ABA
+# ABI1* = !PA & !ROS
+# ABI2* = !Ca2osc & !PA & !RCARs | !Ca2osc & !ROS
+# ADPRc* = 8-nitro-cGMP
+# Actin_Reorganization* = !AtRAC1 & ROS
+# AnionEM* = QUAC1 & SLAC1
+# AquaporinPIP2_1* = OST1
+# AtRAC1* = ABI1 | !ABA
+# CIS* = InsP6 & cADPR
+# CPK3_21* = Ca2osc
+# Ca2osc* = CaIM | CIS
+# CaIM* = GHR1
+# Closure* = H2O_Efflux & Microtubule_Depolymerization
+# DAG* = PLC
+# Depolarization* = AnionEM & !K_efflux | AnionEM & !H_ATPase
+# GHR1* = !ABI2 & ROS
+# GPA1* = S1P_PhytoS1P
+# H2O_Efflux* = AnionEM & AquaporinPIP2_1 & K_efflux & !Malate
+# HAB1* = !ROS | !RCARs
+# H_ATPase* = !Ca2osc
+# InsP3* = PLC
+# InsP6* = InsP3
+# KEV* = Ca2osc
+# KOUT* = Depolarization & pHc | Depolarization & !ROS
+# K_efflux* = KEV & KOUT
+# MPK9_12* = Ca2osc
+# Malate* = !ABA & !AnionEM & PEPC
+# Microtubule_Depolymerization* = TCTP | PA
+# NIA1_2* = ROS
+# NO* = NIA1_2
+# NOGC1* = NO
+# OST1* = !ABI1 & !PP2CA | !ABI1 & !ABI2 | !HAB1
+# PA* = PLDdelta | PLDalpha | DAG
+# PEPC* = !ABA
+# PI3P5K* = ABA
+# PLC* = Ca2osc
+# PLDalpha* = GPA1
+# PLDdelta* = NO & ROS
+# PP2CA* = !RCARs
+# PtdIns3_5P2* = PI3P5K
+# QUAC1* = OST1
+# RBOH* = !ABI1 & GPA1 & OST1 & pHc | Actin_Reorganization & GPA1 & OST1 | !ABI1 & Actin_Reorganization & OST1 | Actin_Reorganization & pHc | Actin_Reorganization & PA
+# RCARs* = ABA
+# ROS* = AquaporinPIP2_1 & RBOH
+# S1P_PhytoS1P* = SPHK1_2
+# SACC* = Actin_Reorganization
+# SLAC1* = !ABI2 & CPK3_21 & MPK9_12 & OST1 & pHc | !ABI1 & !ABI2 & MPK9_12 & pHc
+# SLAH3* = !ABI1 & CPK3_21
+# SPHK1_2* = ABA
+# TCTP* = Ca2osc
+# V-ATPase* = Ca2osc
+# V-PPase* = PtdIns3_5P2
+# Vacuolar_Acidification* = pHc | V-PPase | V-ATPase
+# cADPR* = ADPRc
+# cGMP* = NOGC1
+# pHc* = !ABI1 & OST1 & Vacuolar_Acidification | Ca2osc & Vacuolar_Acidification | Ca2osc & OST1
+
+# Nodes with changed percolated functions:  ['8-nitro-cGMP', 'ABI1', 'ABI2', 'Actin_Reorganization', 'AnionEM', 'CIS', 'CaIM', 'Depolarization', 'HAB1', 'H_ATPase', 'KOUT', 'Microtubule_Depolymerization', 'OST1', 'PLDalpha', 'PLDdelta', 'PP2CA', 'QUAC1', 'RBOH', 'ROS', 'SLAC1', 'SPHK1_2', 'Vacuolar_Acidification', 'pHc']
+
+# deleted regulators:  {'8-nitro-cGMP': ['ROS'], 'Actin_Reorganization': ['SCAB1'], 'AnionEM': ['SLAH3'], 'CIS': ['InsP3'], 'Depolarization': ['Ca2osc', 'KEV'], 'GPA1': ['GCR1'], 'H_ATPase': ['ROS', 'pHc'], 'KOUT': ['NO'], 'PLDalpha': ['Ca2osc'], 'PP2CA': ['ROS'], 'QUAC1': ['Ca2osc'], 'S1P_PhytoS1P': ['SPP1'], 'SLAH3': ['CPK6'], 'SPHK1_2': ['PA'], 'pHc': ['ABI2']}
+# extra deleted regulators in the percolated rules:  {'ABI1': ['RCARs', 'pHc'], 'CaIM': ['SACC'], 'SLAC1': ['GHR1', 'PP2CA']}
+
+# Stable Motifs:
+# {'ABA': 1}
+# {'ABA': 0}
+
+# Conditionally Stable Motifs:
+# fix -  {'ABA': 0}
+# fix -  {'ABA': 1}
+
+# LDOI, DOI and minimal trapspaces:
+# - - - - - - - - - -
+# fix - {'ABA': 0}
+# LDOI:  {'8-nitro-cGMP': 0, 'ABA': 0, 'ABI1': 1, 'ABI2': 1, 'ADPRc': 0, 'Actin_Reorganization': 0, 'AnionEM': 0, 'AquaporinPIP2_1': 0, 'AtRAC1': 1, 'CIS': 0, 'CPK3_21': 0, 'Ca2osc': 0, 'CaIM': 0, 'Closure': 0, 'DAG': 0, 'Depolarization': 0, 'GHR1': 0, 'GPA1': 0, 'H2O_Efflux': 0, 'HAB1': 1, 'H_ATPase': 1, 'InsP3': 0, 'InsP6': 0, 'KEV': 0, 'KOUT': 0, 'K_efflux': 0, 'MPK9_12': 0, 'Malate': 1, 'Microtubule_Depolymerization': 0, 'NIA1_2': 0, 'NO': 0, 'NOGC1': 0, 'OST1': 0, 'PA': 0, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 0, 'PLDalpha': 0, 'PLDdelta': 0, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 0, 'RBOH': 0, 'RCARs': 0, 'ROS': 0, 'S1P_PhytoS1P': 0, 'SACC': 0, 'SLAC1': 0, 'SLAH3': 0, 'SPHK1_2': 0, 'TCTP': 0, 'V-ATPase': 0, 'V-PPase': 0, 'Vacuolar_Acidification': 0, 'cADPR': 0, 'cGMP': 0, 'pHc': 0}
+# only in MPBN_DOI:  {}
+
+# There is 1 minimal trapspace for  {'ABA': 0}
+# {'8-nitro-cGMP': 0, 'ABA': 0, 'ABI1': 1, 'ABI2': 1, 'ADPRc': 0, 'Actin_Reorganization': 0, 'AnionEM': 0, 'AquaporinPIP2_1': 0, 'AtRAC1': 1, 'CIS': 0, 'CPK3_21': 0, 'Ca2osc': 0, 'CaIM': 0, 'Closure': 0, 'DAG': 0, 'Depolarization': 0, 'GHR1': 0, 'GPA1': 0, 'H2O_Efflux': 0, 'HAB1': 1, 'H_ATPase': 1, 'InsP3': 0, 'InsP6': 0, 'KEV': 0, 'KOUT': 0, 'K_efflux': 0, 'MPK9_12': 0, 'Malate': 1, 'Microtubule_Depolymerization': 0, 'NIA1_2': 0, 'NO': 0, 'NOGC1': 0, 'OST1': 0, 'PA': 0, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 0, 'PLDalpha': 0, 'PLDdelta': 0, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 0, 'RBOH': 0, 'RCARs': 0, 'ROS': 0, 'S1P_PhytoS1P': 0, 'SACC': 0, 'SLAC1': 0, 'SLAH3': 0, 'SPHK1_2': 0, 'TCTP': 0, 'V-ATPase': 0, 'V-PPase': 0, 'Vacuolar_Acidification': 0, 'cADPR': 0, 'cGMP': 0, 'pHc': 0}
+
+# - - - - - - - - - -
+# fix - {'ABA': 1}
+# LDOI:  {'8-nitro-cGMP': 1, 'ABA': 1, 'ABI1': 0, 'ABI2': 0, 'ADPRc': 1, 'Actin_Reorganization': 1, 'AnionEM': 1, 'AquaporinPIP2_1': 1, 'AtRAC1': 0, 'CIS': 1, 'CPK3_21': 1, 'Ca2osc': 1, 'CaIM': 1, 'Closure': 1, 'DAG': 1, 'Depolarization': 1, 'GHR1': 1, 'GPA1': 1, 'H2O_Efflux': 1, 'HAB1': 0, 'H_ATPase': 0, 'InsP3': 1, 'InsP6': 1, 'KEV': 1, 'KOUT': 1, 'K_efflux': 1, 'MPK9_12': 1, 'Malate': 0, 'Microtubule_Depolymerization': 1, 'NIA1_2': 1, 'NO': 1, 'NOGC1': 1, 'OST1': 1, 'PA': 1, 'PEPC': 0, 'PI3P5K': 1, 'PLC': 1, 'PLDalpha': 1, 'PLDdelta': 1, 'PP2CA': 0, 'PtdIns3_5P2': 1, 'QUAC1': 1, 'RBOH': 1, 'RCARs': 1, 'ROS': 1, 'S1P_PhytoS1P': 1, 'SACC': 1, 'SLAC1': 1, 'SLAH3': 1, 'SPHK1_2': 1, 'TCTP': 1, 'V-ATPase': 1, 'V-PPase': 1, 'Vacuolar_Acidification': 1, 'cADPR': 1, 'cGMP': 1, 'pHc': 1}
+# only in MPBN_DOI:  {}
+
+# There is 1 minimal trapspace for  {'ABA': 1}
+# {'8-nitro-cGMP': 1, 'ABA': 1, 'ABI1': 0, 'ABI2': 0, 'ADPRc': 1, 'Actin_Reorganization': 1, 'AnionEM': 1, 'AquaporinPIP2_1': 1, 'AtRAC1': 0, 'CIS': 1, 'CPK3_21': 1, 'Ca2osc': 1, 'CaIM': 1, 'Closure': 1, 'DAG': 1, 'Depolarization': 1, 'GHR1': 1, 'GPA1': 1, 'H2O_Efflux': 1, 'HAB1': 0, 'H_ATPase': 0, 'InsP3': 1, 'InsP6': 1, 'KEV': 1, 'KOUT': 1, 'K_efflux': 1, 'MPK9_12': 1, 'Malate': 0, 'Microtubule_Depolymerization': 1, 'NIA1_2': 1, 'NO': 1, 'NOGC1': 1, 'OST1': 1, 'PA': 1, 'PEPC': 0, 'PI3P5K': 1, 'PLC': 1, 'PLDalpha': 1, 'PLDdelta': 1, 'PP2CA': 0, 'PtdIns3_5P2': 1, 'QUAC1': 1, 'RBOH': 1, 'RCARs': 1, 'ROS': 1, 'S1P_PhytoS1P': 1, 'SACC': 1, 'SLAC1': 1, 'SLAH3': 1, 'SPHK1_2': 1, 'TCTP': 1, 'V-ATPase': 1, 'V-PPase': 1, 'Vacuolar_Acidification': 1, 'cADPR': 1, 'cGMP': 1, 'pHc': 1}
+
+# - - - - - - - - - -
+# fix - {'ROS': 1}
+# LDOI:  {'8-nitro-cGMP': 1, 'ABI1': 0, 'ABI2': 0, 'ADPRc': 1, 'AnionEM': 1, 'AquaporinPIP2_1': 1, 'CIS': 1, 'CPK3_21': 1, 'Ca2osc': 1, 'CaIM': 1, 'Closure': 1, 'DAG': 1, 'Depolarization': 1, 'GHR1': 1, 'H2O_Efflux': 1, 'H_ATPase': 0, 'InsP3': 1, 'InsP6': 1, 'KEV': 1, 'KOUT': 1, 'K_efflux': 1, 'MPK9_12': 1, 'Malate': 0, 'Microtubule_Depolymerization': 1, 'NIA1_2': 1, 'NO': 1, 'NOGC1': 1, 'OST1': 1, 'PA': 1, 'PLC': 1, 'PLDdelta': 1, 'QUAC1': 1, 'SLAC1': 1, 'SLAH3': 1, 'TCTP': 1, 'V-ATPase': 1, 'Vacuolar_Acidification': 1, 'cADPR': 1, 'cGMP': 1, 'pHc': 1}
+# only in MPBN_DOI:  {}
+
+# There is 1 minimal trapspace for  {'ABA': 0, 'ROS': 1}
+# {'8-nitro-cGMP': 1, 'ABA': 0, 'ABI1': 0, 'ABI2': 0, 'ADPRc': 1, 'Actin_Reorganization': 0, 'AnionEM': 1, 'AquaporinPIP2_1': 1, 'AtRAC1': 1, 'CIS': 1, 'CPK3_21': 1, 'Ca2osc': 1, 'CaIM': 1, 'Closure': 1, 'DAG': 1, 'Depolarization': 1, 'GHR1': 1, 'GPA1': 0, 'H2O_Efflux': 1, 'HAB1': 1, 'H_ATPase': 0, 'InsP3': 1, 'InsP6': 1, 'KEV': 1, 'KOUT': 1, 'K_efflux': 1, 'MPK9_12': 1, 'Malate': 0, 'Microtubule_Depolymerization': 1, 'NIA1_2': 1, 'NO': 1, 'NOGC1': 1, 'OST1': 1, 'PA': 1, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 1, 'PLDalpha': 0, 'PLDdelta': 1, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 1, 'RBOH': 0, 'RCARs': 0, 'ROS': 1, 'S1P_PhytoS1P': 0, 'SACC': 0, 'SLAC1': 1, 'SLAH3': 1, 'SPHK1_2': 0, 'TCTP': 1, 'V-ATPase': 1, 'V-PPase': 0, 'Vacuolar_Acidification': 1, 'cADPR': 1, 'cGMP': 1, 'pHc': 1}
+
+# - - - - - - - - - -
+# fix - {'NO': 1}
+# LDOI:  {'8-nitro-cGMP': 1, 'ADPRc': 1, 'NOGC1': 1, 'cADPR': 1, 'cGMP': 1}
+# only in MPBN_DOI:  {}
+
+# There are 2 minimal trapspaces for {'ABA': 0, 'NO': 1}
+# {'8-nitro-cGMP': 1, 'ABA': 0, 'ABI1': 0, 'ABI2': 0, 'ADPRc': 1, 'Actin_Reorganization': 0, 'AnionEM': 1, 'AquaporinPIP2_1': 1, 'AtRAC1': 1, 'CIS': 1, 'CPK3_21': 1, 'Ca2osc': 1, 'CaIM': 0, 'Closure': 1, 'DAG': 1, 'Depolarization': 1, 'GHR1': 0, 'GPA1': 0, 'H2O_Efflux': 1, 'HAB1': 1, 'H_ATPase': 0, 'InsP3': 1, 'InsP6': 1, 'KEV': 1, 'KOUT': 1, 'K_efflux': 1, 'MPK9_12': 1, 'Malate': 0, 'Microtubule_Depolymerization': 1, 'NIA1_2': 0, 'NO': 1, 'NOGC1': 1, 'OST1': 1, 'PA': 1, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 1, 'PLDalpha': 0, 'PLDdelta': 0, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 1, 'RBOH': 0, 'RCARs': 0, 'ROS': 0, 'S1P_PhytoS1P': 0, 'SACC': 0, 'SLAC1': 1, 'SLAH3': 1, 'SPHK1_2': 0, 'TCTP': 1, 'V-ATPase': 1, 'V-PPase': 0, 'Vacuolar_Acidification': 1, 'cADPR': 1, 'cGMP': 1, 'pHc': 1}
+# {'8-nitro-cGMP': 1, 'ABA': 0, 'ABI1': 1, 'ABI2': 1, 'ADPRc': 1, 'Actin_Reorganization': 0, 'AnionEM': 0, 'AquaporinPIP2_1': 0, 'AtRAC1': 1, 'CIS': 0, 'CPK3_21': 0, 'Ca2osc': 0, 'CaIM': 0, 'Closure': 0, 'DAG': 0, 'Depolarization': 0, 'GHR1': 0, 'GPA1': 0, 'H2O_Efflux': 0, 'HAB1': 1, 'H_ATPase': 1, 'InsP3': 0, 'InsP6': 0, 'KEV': 0, 'KOUT': 0, 'K_efflux': 0, 'MPK9_12': 0, 'Malate': 1, 'Microtubule_Depolymerization': 0, 'NIA1_2': 0, 'NO': 1, 'NOGC1': 1, 'OST1': 0, 'PA': 0, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 0, 'PLDalpha': 0, 'PLDdelta': 0, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 0, 'RBOH': 0, 'RCARs': 0, 'ROS': 0, 'S1P_PhytoS1P': 0, 'SACC': 0, 'SLAC1': 0, 'SLAH3': 0, 'SPHK1_2': 0, 'TCTP': 0, 'V-ATPase': 0, 'V-PPase': 0, 'Vacuolar_Acidification': 0, 'cADPR': 1, 'cGMP': 1, 'pHc': 0}
+
+# - - - - - - - - - -
+# fix - {'CaIM': 1}
+# LDOI:  {'ABI1': 0, 'ABI2': 0, 'AnionEM': 1, 'AquaporinPIP2_1': 1, 'CPK3_21': 1, 'Ca2osc': 1, 'Closure': 1, 'DAG': 1, 'Depolarization': 1, 'H2O_Efflux': 1, 'H_ATPase': 0, 'InsP3': 1, 'InsP6': 1, 'KEV': 1, 'KOUT': 1, 'K_efflux': 1, 'MPK9_12': 1, 'Malate': 0, 'Microtubule_Depolymerization': 1, 'OST1': 1, 'PA': 1, 'PLC': 1, 'QUAC1': 1, 'SLAC1': 1, 'SLAH3': 1, 'TCTP': 1, 'V-ATPase': 1, 'Vacuolar_Acidification': 1, 'pHc': 1}
+# only in MPBN_DOI:  {}
+
+# There is 1 minimal trapspace for  {'ABA': 0, 'CaIM': 1}
+# {'8-nitro-cGMP': 0, 'ABA': 0, 'ABI1': 0, 'ABI2': 0, 'ADPRc': 0, 'Actin_Reorganization': 0, 'AnionEM': 1, 'AquaporinPIP2_1': 1, 'AtRAC1': 1, 'CIS': 0, 'CPK3_21': 1, 'Ca2osc': 1, 'CaIM': 1, 'Closure': 1, 'DAG': 1, 'Depolarization': 1, 'GHR1': 0, 'GPA1': 0, 'H2O_Efflux': 1, 'HAB1': 1, 'H_ATPase': 0, 'InsP3': 1, 'InsP6': 1, 'KEV': 1, 'KOUT': 1, 'K_efflux': 1, 'MPK9_12': 1, 'Malate': 0, 'Microtubule_Depolymerization': 1, 'NIA1_2': 0, 'NO': 0, 'NOGC1': 0, 'OST1': 1, 'PA': 1, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 1, 'PLDalpha': 0, 'PLDdelta': 0, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 1, 'RBOH': 0, 'RCARs': 0, 'ROS': 0, 'S1P_PhytoS1P': 0, 'SACC': 0, 'SLAC1': 1, 'SLAH3': 1, 'SPHK1_2': 0, 'TCTP': 1, 'V-ATPase': 1, 'V-PPase': 0, 'Vacuolar_Acidification': 1, 'cADPR': 0, 'cGMP': 0, 'pHc': 1}
+
+# - - - - - - - - - -
+# fix - {'cADPR': 1}
+# LDOI:  {}
+# only in MPBN_DOI:  {}
+
+# There are 2 minimal trapspaces for {'ABA': 0, 'cADPR': 1}
+# {'8-nitro-cGMP': 0, 'ABA': 0, 'ABI1': 0, 'ABI2': 0, 'ADPRc': 0, 'Actin_Reorganization': 0, 'AnionEM': 1, 'AquaporinPIP2_1': 1, 'AtRAC1': 1, 'CIS': 1, 'CPK3_21': 1, 'Ca2osc': 1, 'CaIM': 0, 'Closure': 1, 'DAG': 1, 'Depolarization': 1, 'GHR1': 0, 'GPA1': 0, 'H2O_Efflux': 1, 'HAB1': 1, 'H_ATPase': 0, 'InsP3': 1, 'InsP6': 1, 'KEV': 1, 'KOUT': 1, 'K_efflux': 1, 'MPK9_12': 1, 'Malate': 0, 'Microtubule_Depolymerization': 1, 'NIA1_2': 0, 'NO': 0, 'NOGC1': 0, 'OST1': 1, 'PA': 1, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 1, 'PLDalpha': 0, 'PLDdelta': 0, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 1, 'RBOH': 0, 'RCARs': 0, 'ROS': 0, 'S1P_PhytoS1P': 0, 'SACC': 0, 'SLAC1': 1, 'SLAH3': 1, 'SPHK1_2': 0, 'TCTP': 1, 'V-ATPase': 1, 'V-PPase': 0, 'Vacuolar_Acidification': 1, 'cADPR': 1, 'cGMP': 0, 'pHc': 1}
+# {'8-nitro-cGMP': 0, 'ABA': 0, 'ABI1': 1, 'ABI2': 1, 'ADPRc': 0, 'Actin_Reorganization': 0, 'AnionEM': 0, 'AquaporinPIP2_1': 0, 'AtRAC1': 1, 'CIS': 0, 'CPK3_21': 0, 'Ca2osc': 0, 'CaIM': 0, 'Closure': 0, 'DAG': 0, 'Depolarization': 0, 'GHR1': 0, 'GPA1': 0, 'H2O_Efflux': 0, 'HAB1': 1, 'H_ATPase': 1, 'InsP3': 0, 'InsP6': 0, 'KEV': 0, 'KOUT': 0, 'K_efflux': 0, 'MPK9_12': 0, 'Malate': 1, 'Microtubule_Depolymerization': 0, 'NIA1_2': 0, 'NO': 0, 'NOGC1': 0, 'OST1': 0, 'PA': 0, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 0, 'PLDalpha': 0, 'PLDdelta': 0, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 0, 'RBOH': 0, 'RCARs': 0, 'ROS': 0, 'S1P_PhytoS1P': 0, 'SACC': 0, 'SLAC1': 0, 'SLAH3': 0, 'SPHK1_2': 0, 'TCTP': 0, 'V-ATPase': 0, 'V-PPase': 0, 'Vacuolar_Acidification': 0, 'cADPR': 1, 'cGMP': 0, 'pHc': 0}
+
+# - - - - - - - - - -
+# fix - {'PA': 1}
+# LDOI:  {'ABI1': 0, 'Microtubule_Depolymerization': 1}
+# only in MPBN_DOI:  {}
+
+# There is 1 minimal trapspace for  {'ABA': 0, 'PA': 1}
+# {'8-nitro-cGMP': 0, 'ABA': 0, 'ABI1': 0, 'ABI2': 1, 'ADPRc': 0, 'Actin_Reorganization': 0, 'AnionEM': 0, 'AquaporinPIP2_1': 0, 'AtRAC1': 1, 'CIS': 0, 'CPK3_21': 0, 'Ca2osc': 0, 'CaIM': 0, 'Closure': 0, 'DAG': 0, 'Depolarization': 0, 'GHR1': 0, 'GPA1': 0, 'H2O_Efflux': 0, 'HAB1': 1, 'H_ATPase': 1, 'InsP3': 0, 'InsP6': 0, 'KEV': 0, 'KOUT': 0, 'K_efflux': 0, 'MPK9_12': 0, 'Malate': 1, 'Microtubule_Depolymerization': 1, 'NIA1_2': 0, 'NO': 0, 'NOGC1': 0, 'OST1': 0, 'PA': 1, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 0, 'PLDalpha': 0, 'PLDdelta': 0, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 0, 'RBOH': 0, 'RCARs': 0, 'ROS': 0, 'S1P_PhytoS1P': 0, 'SACC': 0, 'SLAC1': 0, 'SLAH3': 0, 'SPHK1_2': 0, 'TCTP': 0, 'V-ATPase': 0, 'V-PPase': 0, 'Vacuolar_Acidification': 0, 'cADPR': 0, 'cGMP': 0, 'pHc': 0}
+
+# - - - - - - - - - -
+# fix - {'pHc': 1}
+# LDOI:  {'Vacuolar_Acidification': 1}
+# only in MPBN_DOI:  {}
+
+# There is 1 minimal trapspace for  {'ABA': 0, 'pHc': 1}
+# {'8-nitro-cGMP': 0, 'ABA': 0, 'ABI1': 1, 'ABI2': 1, 'ADPRc': 0, 'Actin_Reorganization': 0, 'AnionEM': 0, 'AquaporinPIP2_1': 0, 'AtRAC1': 1, 'CIS': 0, 'CPK3_21': 0, 'Ca2osc': 0, 'CaIM': 0, 'Closure': 0, 'DAG': 0, 'Depolarization': 0, 'GHR1': 0, 'GPA1': 0, 'H2O_Efflux': 0, 'HAB1': 1, 'H_ATPase': 1, 'InsP3': 0, 'InsP6': 0, 'KEV': 0, 'KOUT': 0, 'K_efflux': 0, 'MPK9_12': 0, 'Malate': 1, 'Microtubule_Depolymerization': 0, 'NIA1_2': 0, 'NO': 0, 'NOGC1': 0, 'OST1': 0, 'PA': 0, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 0, 'PLDalpha': 0, 'PLDdelta': 0, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 0, 'RBOH': 0, 'RCARs': 0, 'ROS': 0, 'S1P_PhytoS1P': 0, 'SACC': 0, 'SLAC1': 0, 'SLAH3': 0, 'SPHK1_2': 0, 'TCTP': 0, 'V-ATPase': 0, 'V-PPase': 0, 'Vacuolar_Acidification': 1, 'cADPR': 0, 'cGMP': 0, 'pHc': 1}
+
+# - - - - - - - - - -
+# fix - {'S1P_PhytoS1P': 1}
+# LDOI:  {'ABI1': 0, 'GPA1': 1, 'Microtubule_Depolymerization': 1, 'PA': 1, 'PLDalpha': 1}
+# only in MPBN_DOI:  {}
+
+# There are 2 minimal trapspaces for {'ABA': 0, 'S1P_PhytoS1P': 1}
+# {'8-nitro-cGMP': 0, 'ABA': 0, 'ABI1': 0, 'ABI2': 1, 'ADPRc': 0, 'Actin_Reorganization': 0, 'AnionEM': 0, 'AquaporinPIP2_1': 0, 'AtRAC1': 1, 'CIS': 0, 'CPK3_21': 0, 'Ca2osc': 0, 'CaIM': 0, 'Closure': 0, 'DAG': 0, 'Depolarization': 0, 'GHR1': 0, 'GPA1': 1, 'H2O_Efflux': 0, 'HAB1': 1, 'H_ATPase': 1, 'InsP3': 0, 'InsP6': 0, 'KEV': 0, 'KOUT': 0, 'K_efflux': 0, 'MPK9_12': 0, 'Malate': 1, 'Microtubule_Depolymerization': 1, 'NIA1_2': 0, 'NO': 0, 'NOGC1': 0, 'OST1': 0, 'PA': 1, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 0, 'PLDalpha': 1, 'PLDdelta': 0, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 0, 'RBOH': 0, 'RCARs': 0, 'ROS': 0, 'S1P_PhytoS1P': 1, 'SACC': 0, 'SLAC1': 0, 'SLAH3': 0, 'SPHK1_2': 0, 'TCTP': 0, 'V-ATPase': 0, 'V-PPase': 0, 'Vacuolar_Acidification': 0, 'cADPR': 0, 'cGMP': 0, 'pHc': 0}
+# {'8-nitro-cGMP': 1, 'ABA': 0, 'ABI1': 0, 'ABI2': 0, 'ADPRc': 1, 'Actin_Reorganization': 0, 'AnionEM': 1, 'AquaporinPIP2_1': 1, 'AtRAC1': 1, 'CIS': 1, 'CPK3_21': 1, 'Ca2osc': 1, 'CaIM': 1, 'Closure': 1, 'DAG': 1, 'Depolarization': 1, 'GHR1': 1, 'GPA1': 1, 'H2O_Efflux': 1, 'HAB1': 1, 'H_ATPase': 0, 'InsP3': 1, 'InsP6': 1, 'KEV': 1, 'KOUT': 1, 'K_efflux': 1, 'MPK9_12': 1, 'Malate': 0, 'Microtubule_Depolymerization': 1, 'NIA1_2': 1, 'NO': 1, 'NOGC1': 1, 'OST1': 1, 'PA': 1, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 1, 'PLDalpha': 1, 'PLDdelta': 1, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 1, 'RBOH': 1, 'RCARs': 0, 'ROS': 1, 'S1P_PhytoS1P': 1, 'SACC': 0, 'SLAC1': 1, 'SLAH3': 1, 'SPHK1_2': 0, 'TCTP': 1, 'V-ATPase': 1, 'V-PPase': 0, 'Vacuolar_Acidification': 1, 'cADPR': 1, 'cGMP': 1, 'pHc': 1}
+
+# - - - - - - - - - -
+# fix - {'AtRAC1': 0}
+# LDOI:  {}
+# only in MPBN_DOI:  {}
+
+# There are 2 minimal trapspaces for {'ABA': 0, 'AtRAC1': 0}
+# {'8-nitro-cGMP': 0, 'ABA': 0, 'ABI1': 1, 'ABI2': 1, 'ADPRc': 0, 'Actin_Reorganization': 0, 'AnionEM': 0, 'AquaporinPIP2_1': 0, 'AtRAC1': 0, 'CIS': 0, 'CPK3_21': 0, 'Ca2osc': 0, 'CaIM': 0, 'Closure': 0, 'DAG': 0, 'Depolarization': 0, 'GHR1': 0, 'GPA1': 0, 'H2O_Efflux': 0, 'HAB1': 1, 'H_ATPase': 1, 'InsP3': 0, 'InsP6': 0, 'KEV': 0, 'KOUT': 0, 'K_efflux': 0, 'MPK9_12': 0, 'Malate': 1, 'Microtubule_Depolymerization': 0, 'NIA1_2': 0, 'NO': 0, 'NOGC1': 0, 'OST1': 0, 'PA': 0, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 0, 'PLDalpha': 0, 'PLDdelta': 0, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 0, 'RBOH': 0, 'RCARs': 0, 'ROS': 0, 'S1P_PhytoS1P': 0, 'SACC': 0, 'SLAC1': 0, 'SLAH3': 0, 'SPHK1_2': 0, 'TCTP': 0, 'V-ATPase': 0, 'V-PPase': 0, 'Vacuolar_Acidification': 0, 'cADPR': 0, 'cGMP': 0, 'pHc': 0}
+# {'8-nitro-cGMP': 1, 'ABA': 0, 'ABI1': 0, 'ABI2': 0, 'ADPRc': 1, 'Actin_Reorganization': 1, 'AnionEM': 1, 'AquaporinPIP2_1': 1, 'AtRAC1': 0, 'CIS': 1, 'CPK3_21': 1, 'Ca2osc': 1, 'CaIM': 1, 'Closure': 1, 'DAG': 1, 'Depolarization': 1, 'GHR1': 1, 'GPA1': 0, 'H2O_Efflux': 1, 'HAB1': 1, 'H_ATPase': 0, 'InsP3': 1, 'InsP6': 1, 'KEV': 1, 'KOUT': 1, 'K_efflux': 1, 'MPK9_12': 1, 'Malate': 0, 'Microtubule_Depolymerization': 1, 'NIA1_2': 1, 'NO': 1, 'NOGC1': 1, 'OST1': 1, 'PA': 1, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 1, 'PLDalpha': 0, 'PLDdelta': 1, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 1, 'RBOH': 1, 'RCARs': 0, 'ROS': 1, 'S1P_PhytoS1P': 0, 'SACC': 1, 'SLAC1': 1, 'SLAH3': 1, 'SPHK1_2': 0, 'TCTP': 1, 'V-ATPase': 1, 'V-PPase': 0, 'Vacuolar_Acidification': 1, 'cADPR': 1, 'cGMP': 1, 'pHc': 1}
+
+# - - - - - - - - - -
+# fix - {'InsP3': 1}
+# LDOI:  {'InsP6': 1}
+# only in MPBN_DOI:  {}
+
+# There is 1 minimal trapspace for  {'ABA': 0, 'InsP3': 1}
+# {'8-nitro-cGMP': 0, 'ABA': 0, 'ABI1': 1, 'ABI2': 1, 'ADPRc': 0, 'Actin_Reorganization': 0, 'AnionEM': 0, 'AquaporinPIP2_1': 0, 'AtRAC1': 1, 'CIS': 0, 'CPK3_21': 0, 'Ca2osc': 0, 'CaIM': 0, 'Closure': 0, 'DAG': 0, 'Depolarization': 0, 'GHR1': 0, 'GPA1': 0, 'H2O_Efflux': 0, 'HAB1': 1, 'H_ATPase': 1, 'InsP3': 1, 'InsP6': 1, 'KEV': 0, 'KOUT': 0, 'K_efflux': 0, 'MPK9_12': 0, 'Malate': 1, 'Microtubule_Depolymerization': 0, 'NIA1_2': 0, 'NO': 0, 'NOGC1': 0, 'OST1': 0, 'PA': 0, 'PEPC': 1, 'PI3P5K': 0, 'PLC': 0, 'PLDalpha': 0, 'PLDdelta': 0, 'PP2CA': 1, 'PtdIns3_5P2': 0, 'QUAC1': 0, 'RBOH': 0, 'RCARs': 0, 'ROS': 0, 'S1P_PhytoS1P': 0, 'SACC': 0, 'SLAC1': 0, 'SLAH3': 0, 'SPHK1_2': 0, 'TCTP': 0, 'V-ATPase': 0, 'V-PPase': 0, 'Vacuolar_Acidification': 0, 'cADPR': 0, 'cGMP': 0, 'pHc': 0}
+
 8-nitro-cGMP* = NO & cGMP
 ABA* = ABA
 ABH1* = 1

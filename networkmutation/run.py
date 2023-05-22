@@ -6,8 +6,8 @@ import config
 
 
 RUN_GA = True
-NAME = 'osc_ca_ext_20230517'
-run_type = 'osc_ca_ext'
+NAME = 'osc_20230520'
+run_type = 'osc'
 
 if run_type == 'normal':
     DATA = 'networkmutation/data_20230426.tsv'
@@ -151,16 +151,16 @@ elif run_type == 'osc_ca_ext':
 # BASE = 'networkmutation/baseline/ABA_full_20230407.txt'
 # BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
 # BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
-# BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
+BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
 # BASE = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
-BASE = 'networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext_cis.txt'
+# BASE = 'networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext_cis.txt'
 
 # MODEL = 'networkmutation/baseline/ABA_full_20230407.txt'
 # MODEL = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
 # MODEL = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
-# MODEL = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
+MODEL = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
 # MODEL = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
-MODEL = 'networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext_cis.txt'
+# MODEL = 'networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext_cis.txt'
 
 ### GA0
 # MODEL = 'networkmutation/models/no_edge_20230303_3807_gen54_mod.txt'
