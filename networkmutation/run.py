@@ -5,9 +5,26 @@ from mutation import *
 import config
 
 
-RUN_GA = True
-NAME = 'osc_20230520'
+RUN_GA = False
+NAME = 'try_20230522'
 run_type = 'osc'
+
+# BASE = 'networkmutation/baseline/ABA_full_20230407.txt'
+# BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
+# BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
+BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
+# BASE = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
+# BASE = 'networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext_cis.txt'
+
+MODEL = BASE
+### GA_try
+# MODEL = 'networkmutation/models/try_20230522_7854_gen121.txt'
+### GA0
+# MODEL = 'networkmutation/models/no_edge_20230303_3807_gen54_mod.txt'
+### GA1
+# MODEL = 'networkmutation/models/20230512_7790_gen125_mod.txt'
+### GA2
+# MODEL = 'networkmutation/models/osc_20230514_8025_gen128.txt'
 
 if run_type == 'normal':
     DATA = 'networkmutation/data_20230426.tsv'
@@ -148,26 +165,7 @@ elif run_type == 'osc_ca_ext':
                  ('GPA1', 'OST1', '1'), ('GHR1', 'CPK3_21', '1'),
                  ('PA', 'Microtubule_Depolymerization', '1'))
 
-# BASE = 'networkmutation/baseline/ABA_full_20230407.txt'
-# BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
-# BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
-BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
-# BASE = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
-# BASE = 'networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext_cis.txt'
 
-# MODEL = 'networkmutation/baseline/ABA_full_20230407.txt'
-# MODEL = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
-# MODEL = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
-MODEL = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
-# MODEL = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext_cis.txt'
-# MODEL = 'networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext_cis.txt'
-
-### GA0
-# MODEL = 'networkmutation/models/no_edge_20230303_3807_gen54_mod.txt'
-### GA1
-# MODEL = 'networkmutation/models/20230512_7790_gen125_mod.txt'
-### GA2
-# MODEL = 'networkmutation/models/osc_20230514_8025_gen128.txt'
 
 FILE = NAME + '_log.txt'
 STARTING_ID = 1
