@@ -5,15 +5,15 @@ from mutation import *
 import config
 
 RUN_GA = True
-NAME = 'ca_ext_more_edges_20230529'
-run_type = 'ca_ext'
+NAME = 'osc_ca_ext_more_edges_20230602'
+run_type = 'osc_ca_ext'
 
 # BASE = 'networkmutation/baseline/ABA_full_20230407.txt'
 # BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
 # BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
 # BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
-BASE = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext.txt'
-# BASE = 'networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext.txt'
+# BASE = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext.txt'
+BASE = 'networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext.txt'
 
 MODEL = BASE
 ### GA_try
@@ -188,7 +188,7 @@ ITERATIONS = 100
 PER_ITERATION = 100
 KEEP = 20
 EXPORT_TOP = 1
-EXPORT_THRESHOLD = 427
+EXPORT_THRESHOLD = 430
 PROB = 0.01
 EDGE_PROB = 0.5
 

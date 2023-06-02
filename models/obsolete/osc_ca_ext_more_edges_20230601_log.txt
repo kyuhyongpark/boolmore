@@ -1,0 +1,194 @@
+# DATA='networkmutation/data_osc_ca_ext_20230511.tsv'
+# DEFAULT_SOURCES={'ABA': 0}
+# CONSTRAINTS={'fixed': {'NO', 'cGMP', 'cADPR', 'PtdIns4_5P2', 'DAG', 'Closure', 'PtdIns3_5P2', 'InsP6', 'H2O_Efflux', 'RCARs', 'InsP3'}, 'regulate': {'ABI1': ('RCARs',), 'ABI2': ('RCARs',), 'HAB1': ('RCARs',), 'PP2CA': ('RCARs',), 'K_efflux': ('KEV', 'KOUT'), 'OST1': ('ABI1', 'ABI2'), 'Depolarization': ('AnionEM',), 'Ca2osc': ('Ca_ext', 'CIS')}, 'necessary': {'8-nitro-cGMP': ('cGMP',), 'KOUT': ('Depolarization',), 'Malate': ('PEPC', 'AnionEM'), 'ROS': ('NADPH', 'RBOH')}, 'group': {'PA': (('PC', 'PLDalpha'), ('PC', 'PLDdelta'), ('DAG', 'DAGK')), 'S1P_PhytoS1P': (('SPHK1_2', 'Sph'),)}, 'possible_constant': {'GEF1_4_10'}}
+# EDGE_POOL=(('PA', 'ABI2', '0'), ('AquaporinPIP2_1', 'ROS', '1'), ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'), ('pHc', 'Vacuolar_Acidification', '1'), ('PA', 'Microtubule_Depolymerization', '1'), ('GHR1', 'KOUT', '1'), ('NO', 'KEV', '1'), ('CIS', 'AnionEM', '1'), ('GPA1', 'Ca2osc', '1'), ('PA', 'Ca2osc', '1'), ('pHc', 'SPHK1_2', '1'), ('InsP3', 'SPHK1_2', '1'))
+
+# BASE='networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext.txt'
+# extra edges: []
+# score: 184.19875019051986
+# ABA* = ABA
+# ABH1* = 1
+# ARP_Complex* = 1
+# CPK6* = 1
+# CPK23* = 1
+# DAGK* = 1
+# ERA1* = 1
+# GAPC1_2* = 1
+# GCR1* = 1
+# GTP* = 1
+# MRP5* = 1
+# NAD* = 1
+# NADPH* = 1
+# Nitrite* = 1
+# NtSyp121* = 1
+# PC* = 1
+# PtdInsP3* = 1
+# PtdInsP4* = 1
+# RCN1* = 1
+# SCAB1* = 1
+# Sph* = 1
+# GEF1_4_10* = 0
+# SPP1* = 0
+# Ca_ext* = 0
+# RCARs* = ABA
+# PEPC* = not ABA
+# PI3P5K* = ABA
+# ROP11* = GEF1_4_10
+# ABI1* = not PA and (not RCARs or ROP11) and not ROS and pHc
+# ABI2* = (not RCARs or ROP11) and not ROS
+# HAB1* = not RCARs and not ROS
+# PP2CA* = not RCARs and not ROS
+# OST1* = (not ABI1 and not HAB1) or (not PP2CA and not ABI2) or (not ABI1 and not ABI2) or (not HAB1 and not PP2CA) or (not HAB1 and not ABI2) or (not ABI1 and not PP2CA)
+# RBOH* = pHc and not ABI1 and PtdInsP3 and OST1 and GPA1 and PA and RCN1
+# ROS* = NADPH and RBOH
+# GHR1* = not ABI2 and ROS
+# NO* = Nitrite and NIA1_2 and NADPH
+# NIA1_2* = ROS
+# NOGC1* = NO
+# cGMP* = NOGC1 and GTP
+# 8-nitro-cGMP* = cGMP and ROS and NO
+# ADPRc* = 8-nitro-cGMP
+# cADPR* = NAD and ADPRc
+# CIS* = InsP3 or InsP6 or cADPR or CaIM
+# SACC* = Actin_Reorganization
+# CaIM* = SACC or (NtSyp121 and GHR1 and MRP5) or not ABH1 or not ERA1
+# Ca2osc* = CIS or Ca_ext
+# CPK3_21* = Ca2osc
+# MPK9_12* = Ca2osc
+# PtdIns4_5P2* = PtdInsP4
+# PLC* = Ca2osc
+# DAG* = PtdIns4_5P2 and PLC
+# InsP3* = PLC and PtdIns4_5P2
+# InsP6* = InsP3
+# PLDalpha* = GPA1 and Ca2osc
+# PLDdelta* = NO or ROS and GAPC1_2
+# PA* = PC and (PLDdelta or PLDalpha) or DAG and DAGK
+# SPHK1_2* = PA or ABA
+# S1P_PhytoS1P* = SPHK1_2 and Sph and not SPP1
+# GPA1* = S1P_PhytoS1P or not GCR1
+# PtdIns3_5P2* = PI3P5K
+# V-PPase* = PtdIns3_5P2
+# V-ATPase* = Ca2osc
+# Vacuolar_Acidification* = V-PPase or V-ATPase
+# TCTP* = Ca2osc
+# Microtubule_Depolymerization* = TCTP
+# pHc* = (OST1 and not ABI2 and not ABI1 or Ca2osc) and Vacuolar_Acidification
+# H_ATPase* = not pHc and not Ca2osc and not ROS
+# AtRAC1* = not ABA or ABI1
+# Actin_Reorganization* = (PtdInsP4 or PtdInsP3) and not AtRAC1 and ARP_Complex and SCAB1
+# SLAC1* = (CPK6 or CPK23 or CPK3_21) and MPK9_12 and OST1 and GHR1 and pHc and not ABI1 and not PP2CA and not ABI2
+# QUAC1* = OST1 and Ca2osc
+# SLAH3* = (CPK6 or CPK23) and CPK3_21 and not ABI1
+# AnionEM* = SLAC1 or QUAC1 and SLAH3
+# Malate* = PEPC and not ABA and not AnionEM
+# KEV* = Ca2osc
+# Depolarization* = (AnionEM or Ca2osc or KEV) and (not H_ATPase or not K_efflux)
+# KOUT* = (not NO or not ROS or pHc) and Depolarization
+# K_efflux* = KEV and KOUT
+# AquaporinPIP2_1* = OST1
+# H2O_Efflux* = (AnionEM and AquaporinPIP2_1 and K_efflux) and not Malate
+# Closure* = Microtubule_Depolymerization and H2O_Efflux
+
+# MODEL='networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext.txt'
+iteration	top score	extra edges	complexity
+0	282.16666666666663	1	198
+1	286.9444444444444	1	216
+2	289.0694444444444	1	254
+3	319.0	2	288
+4	319.0	1	270
+5	331.25	5	257
+6	341.0	5	264
+7	341.0	5	264
+8	347.75	6	332
+9	352.7777777777778	2	279
+10	353.25	6	270
+11	358.25	4	321
+12	358.75	5	310
+13	362.75	6	305
+14	362.84375	6	312
+15	363.75	5	316
+16	364.75	6	343
+17	366.75	7	347
+18	368.5	7	324
+19	372.75	8	334
+20	372.75	8	334
+21	372.75	7	334
+22	373.75	6	338
+23	373.75	6	323
+24	375.25	8	341
+25	376.59375	7	342
+26	378.8333333333333	7	335
+27	378.8333333333333	7	335
+28	380.0	7	356
+29	381.0	8	359
+30	382.3333333333333	7	360
+31	382.3333333333333	7	349
+32	383.3333333333333	7	353
+33	383.3333333333333	7	350
+34	383.3333333333333	7	348
+35	383.3333333333333	7	346
+36	384.0833333333333	6	339
+37	384.0833333333333	6	339
+38	384.0833333333333	6	334
+39	384.0833333333333	6	327
+40	384.0833333333333	6	324
+41	384.0833333333333	5	330
+42	384.0833333333333	5	307
+43	384.0833333333333	5	297
+44	384.0833333333333	4	331
+45	384.0833333333333	4	324
+46	384.0833333333333	4	301
+47	384.0833333333333	4	296
+48	384.0833333333333	4	295
+49	384.0833333333333	4	295
+50	384.5833333333333	4	289
+51	384.5833333333333	4	289
+52	384.75	5	309
+53	384.75	5	309
+54	385.25	5	279
+55	385.25	5	279
+56	385.25	5	279
+57	385.25	5	277
+58	386.75	5	293
+59	386.75	5	287
+60	386.75	5	285
+61	386.75	5	285
+62	386.75	4	288
+63	386.75	4	285
+64	386.75	4	285
+65	386.75	4	281
+66	389.75	4	288
+67	389.75	4	279
+68	389.75	4	279
+69	389.75	4	273
+70	389.75	4	272
+71	389.75	4	269
+72	389.75	4	269
+73	389.75	4	269
+74	389.75	4	265
+75	389.75	4	260
+76	389.75	4	260
+77	389.75	4	257
+78	389.75	4	256
+79	389.75	4	256
+80	389.75	4	256
+81	389.75	4	256
+82	389.75	4	256
+83	389.75	4	249
+84	389.75	4	249
+85	389.75	4	247
+86	389.75	4	246
+87	389.75	4	241
+88	389.75	4	241
+89	390.25	4	253
+90	390.25	4	244
+91	390.25	4	242
+92	390.25	4	242
+93	390.25	4	242
+94	390.25	4	242
+95	390.25	4	239
+96	390.25	4	239
+97	390.25	4	234
+98	390.25	4	232
+99	390.25	4	232
+100	390.25	4	224
