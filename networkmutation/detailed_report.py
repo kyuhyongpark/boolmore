@@ -6,14 +6,20 @@ import config
 import pyboolnet.trap_spaces
 import pyboolnet.prime_implicants
 
-run_type = 'ca_ext'
+run_type = 'special'
 
 # BASE = 'networkmutation/baseline/ABA_full_20230407.txt'
 # BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
 # BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
 # BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
-BASE = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext.txt'
+# BASE = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext.txt'
 # BASE = 'networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext.txt'
+
+# BASE = 'networkanalysis/models/ABA_2006_Li.txt'
+BASE = 'networkanalysis/models/ABA_2018_Waidyarathne.txt'
+
+# DATA = 'networkmutation/data/data_Li_20230811.tsv'
+DATA = 'networkmutation/data/data_Waidyarathne_20230811.tsv'
 
 MODEL = BASE
 ### GA_try
@@ -23,163 +29,168 @@ MODEL = BASE
 ### GA1
 # MODEL = 'networkmutation/models/20230512_7790_gen125_mod.txt'
 ### GA2
-# MODEL = 'networkmutation/models/osc_20230514_8025_gen128.txt'
+# MODEL = 'networkmutation/models/ca_ext_more_edges_20230529_7710_gen107.txt'
 
 DEFAULT_SOURCES = {'ABA':0}
 if run_type == 'normal':
     DATA = 'networkmutation/data_20230426.tsv'
 
-    # ### constraints for the typical run
-    # CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
-    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-    #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #                'possible_constant': {'GEF1_4_10',}}
-    ### constraints for the 'more edges' version 20230524 - allow change of Ca2c, move to regulate
-    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2c':('CaIM','CIS','Ca2_ATPase')},
+    ### constraints for the typical run
+    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
                    'possible_constant': {'GEF1_4_10',}}
+    # ### constraints for the 'more edges' version 20230524 - allow change of Ca2c, move to regulate
+    # CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2c':('CaIM','CIS','Ca2_ATPase')},
+    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+    #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
+    #                'possible_constant': {'GEF1_4_10',}}
 
-    # ### edge pool for the typical run
-    # EDGE_POOL = (('Ca2c', 'ABI2', '0'),('Ca2c', 'HAB1', '0'),('Ca2c', 'PP2CA', '0'),
-    #              ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
-    #              ('AquaporinPIP2_1', 'ROS', '1'),
-    #              ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
-    #              ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
-    #              ('GPA1', 'OST1', '1'), ('GHR1', 'CPK3_21', '1'),
-    #              ('PA', 'Microtubule_Depolymerization', '1'))
-    # ### No edge version
-    # EDGE_POOL = tuple()
-    ### more edges version 20230529 - 13 edges
-    EDGE_POOL = (('PA', 'ABI2', '0'),
+    ### edge pool for the typical run 20230801 - 13 edges
+    EDGE_POOL = (('Ca2c', 'ABI2', '0'),('Ca2c', 'HAB1', '0'),('Ca2c', 'PP2CA', '0'),
+                 ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
                  ('AquaporinPIP2_1', 'ROS', '1'),
-                 ('Actin_Reorganization', 'RBOH', '1'),
-                 ('ROS', 'Actin_Reorganization', '1'),
-                 ('pHc', 'Vacuolar_Acidification', '1'),
-                 ('PA', 'Microtubule_Depolymerization', '1'),
-                 ('GHR1', 'KOUT', '1'),
-                 ('NO', 'KEV', '1'),
-                 ('CIS', 'AnionEM', '1'),
-                 ('GPA1', 'Ca2c', '1'), ('PA', 'Ca2c', '1'),
-                 ('pHc', 'SPHK1_2', '1'),
-                 ('InsP3', 'SPHK1_2', '1'))
+                 ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
+                 ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
+                 ('GHR1', 'CPK3_21', '1'),
+                 ('PA', 'Microtubule_Depolymerization', '1'))
+    # ### more edges version 20230704 - 14 edges
+    # EDGE_POOL = (('PA', 'ABI2', '0'),
+    #              ('AquaporinPIP2_1', 'ROS', '1'),
+    #              ('Actin_Reorganization', 'RBOH', '1'),
+    #              ('ROS', 'Actin_Reorganization', '1'),
+    #              ('pHc', 'Vacuolar_Acidification', '1'),
+    #              ('PA', 'Microtubule_Depolymerization', '1'),
+    #              ('GHR1', 'KOUT', '1'),
+    #              ('NO', 'KEV', '1'),
+    #              ('CIS', 'AnionEM', '1'),
+    #              ('GPA1', 'Ca2c', '1'), ('PA', 'Ca2c', '1'),
+    #              ('pHc', 'SPHK1_2', '1'),
+    #              ('InsP3', 'SPHK1_2', '1'),
+    #              ('ABA', 'GEF1_4_10', '0'))
 
 elif run_type == 'osc':
     DATA = 'networkmutation/data_osc_20230426.tsv'
 
-    # ### constraints for the typical run for ca_osc model
-    # CONSTRAINTS = {'fixed': {'Ca2osc', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
-    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-    #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #                'possible_constant': {'GEF1_4_10',}}
-    ### constraints for the 'more edges' version - allow modification of Ca2osc, move to regulate
-    CONSTRAINTS = {'fixed': {'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2osc':('CaIM','CIS')},
+    ### constraints for the typical run for ca_osc model
+    CONSTRAINTS = {'fixed': {'Ca2osc', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
                    'possible_constant': {'GEF1_4_10',}}
+    # ### constraints for the 'more edges' version - allow modification of Ca2osc, move to regulate
+    # CONSTRAINTS = {'fixed': {'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2osc':('CaIM','CIS')},
+    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+    #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
+    #                'possible_constant': {'GEF1_4_10',}}
 
-    # ### edge pool for the typical run for the ca_osc model - 16 edges
-    # EDGE_POOL = (('Ca2osc', 'ABI2', '0'),('Ca2osc', 'HAB1', '0'),('Ca2osc', 'PP2CA', '0'),
-    #              ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
-    #              ('AquaporinPIP2_1', 'ROS', '1'),
-    #              ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
-    #              ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
-    #              ('GPA1', 'OST1', '1'), ('GHR1', 'CPK3_21', '1'),
-    #              ('PA', 'Microtubule_Depolymerization', '1'))
-    ### more edges version 20230529 - 13 edges
-    EDGE_POOL = (('PA', 'ABI2', '0'),
+    ### edge pool for the typical run for the ca_osc model 20230801 - 13 edges
+    EDGE_POOL = (('Ca2osc', 'ABI2', '0'),('Ca2osc', 'HAB1', '0'),('Ca2osc', 'PP2CA', '0'),
+                 ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
                  ('AquaporinPIP2_1', 'ROS', '1'),
-                 ('Actin_Reorganization', 'RBOH', '1'),
-                 ('ROS', 'Actin_Reorganization', '1'),
-                 ('pHc', 'Vacuolar_Acidification', '1'),
-                 ('PA', 'Microtubule_Depolymerization', '1'),
-                 ('GHR1', 'KOUT', '1'),
-                 ('NO', 'KEV', '1'),
-                 ('CIS', 'AnionEM', '1'),
-                 ('GPA1', 'Ca2osc', '1'), ('PA', 'Ca2osc', '1'),
-                 ('pHc', 'SPHK1_2', '1'),
-                 ('InsP3', 'SPHK1_2', '1'))
+                 ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
+                 ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
+                 ('GHR1', 'CPK3_21', '1'),
+                 ('PA', 'Microtubule_Depolymerization', '1'))
+    # ### more edges version 20230704 - 14 edges
+    # EDGE_POOL = (('PA', 'ABI2', '0'),
+    #              ('AquaporinPIP2_1', 'ROS', '1'),
+    #              ('Actin_Reorganization', 'RBOH', '1'),
+    #              ('ROS', 'Actin_Reorganization', '1'),
+    #              ('pHc', 'Vacuolar_Acidification', '1'),
+    #              ('PA', 'Microtubule_Depolymerization', '1'),
+    #              ('GHR1', 'KOUT', '1'),
+    #              ('NO', 'KEV', '1'),
+    #              ('CIS', 'AnionEM', '1'),
+    #              ('GPA1', 'Ca2osc', '1'), ('PA', 'Ca2osc', '1'),
+    #              ('pHc', 'SPHK1_2', '1'),
+    #              ('InsP3', 'SPHK1_2', '1'),
+    #              ('ABA', 'GEF1_4_10', '0'))
 
 elif run_type == 'ca_ext':
     DATA = 'networkmutation/data_ca_ext_20230511.tsv'
 
-    # ### constraints for the typical run
-    # CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
-    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-    #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #                'possible_constant': {'GEF1_4_10',}}
-    ### constraints for the 'more edges' version 20230524 - allow change of Ca2c, move to regulate
-    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2c':('Ca_ext','CIS','Ca2_ATPase')},
+    ### constraints for the typical run
+    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
                    'possible_constant': {'GEF1_4_10',}}
+    # ### constraints for the 'more edges' version 20230524 - allow change of Ca2c, move to regulate
+    # CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2c':('Ca_ext','CIS','Ca2_ATPase')},
+    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+    #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
+    #                'possible_constant': {'GEF1_4_10',}}
 
-    # ### edge pool for the typical run
-    # EDGE_POOL = (('Ca2c', 'ABI2', '0'),('Ca2c', 'HAB1', '0'),('Ca2c', 'PP2CA', '0'),
-    #              ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
-    #              ('AquaporinPIP2_1', 'ROS', '1'),
-    #              ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
-    #              ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
-    #              ('GPA1', 'OST1', '1'), ('GHR1', 'CPK3_21', '1'),
-    #              ('PA', 'Microtubule_Depolymerization', '1'))
-    ### more edges version 20230529 - 13 edges
-    EDGE_POOL = (('PA', 'ABI2', '0'),
+    ### edge pool for the typical run 20230801 - 13 edges
+    EDGE_POOL = (('Ca2c', 'ABI2', '0'),('Ca2c', 'HAB1', '0'),('Ca2c', 'PP2CA', '0'),
+                 ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
                  ('AquaporinPIP2_1', 'ROS', '1'),
-                 ('Actin_Reorganization', 'RBOH', '1'),
-                 ('ROS', 'Actin_Reorganization', '1'),
-                 ('pHc', 'Vacuolar_Acidification', '1'),
-                 ('PA', 'Microtubule_Depolymerization', '1'),
-                 ('GHR1', 'KOUT', '1'),
-                 ('NO', 'KEV', '1'),
-                 ('CIS', 'AnionEM', '1'),
-                 ('GPA1', 'Ca2c', '1'), ('PA', 'Ca2c', '1'),
-                 ('pHc', 'SPHK1_2', '1'),
-                 ('InsP3', 'SPHK1_2', '1'))
+                 ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
+                 ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
+                 ('GHR1', 'CPK3_21', '1'),
+                 ('PA', 'Microtubule_Depolymerization', '1'))
+    # ### more edges version 20230704 - 14 edges
+    # EDGE_POOL = (('PA', 'ABI2', '0'),
+    #              ('AquaporinPIP2_1', 'ROS', '1'),
+    #              ('Actin_Reorganization', 'RBOH', '1'),
+    #              ('ROS', 'Actin_Reorganization', '1'),
+    #              ('pHc', 'Vacuolar_Acidification', '1'),
+    #              ('PA', 'Microtubule_Depolymerization', '1'),
+    #              ('GHR1', 'KOUT', '1'),
+    #              ('NO', 'KEV', '1'),
+    #              ('CIS', 'AnionEM', '1'),
+    #              ('GPA1', 'Ca2c', '1'), ('PA', 'Ca2c', '1'),
+    #              ('pHc', 'SPHK1_2', '1'),
+    #              ('InsP3', 'SPHK1_2', '1'),
+    #              ('ABA', 'GEF1_4_10', '0'))
 
 elif run_type == 'osc_ca_ext':
     DATA = 'networkmutation/data_osc_ca_ext_20230511.tsv'
 
-    # ### constraints for the typical run
-    # CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2osc', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
-    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-    #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #                'possible_constant': {'GEF1_4_10',}}
-    ### constraints for the 'more edges' version - allow modification of Ca2osc, move to regulate
-    CONSTRAINTS = {'fixed': {'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2osc':('Ca_ext','CIS')},
+    ### constraints for the typical run
+    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2osc', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
                    'possible_constant': {'GEF1_4_10',}}
+    # ### constraints for the 'more edges' version - allow modification of Ca2osc, move to regulate
+    # CONSTRAINTS = {'fixed': {'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
+    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2osc':('Ca_ext','CIS')},
+    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
+    #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
+    #                'possible_constant': {'GEF1_4_10',}}
 
-    # ### edge pool for the typical run
-    # EDGE_POOL = (('Ca2osc', 'ABI2', '0'),('Ca2osc', 'HAB1', '0'),('Ca2osc', 'PP2CA', '0'),
-    #              ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
-    #              ('AquaporinPIP2_1', 'ROS', '1'),
-    #              ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
-    #              ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
-    #              ('GPA1', 'OST1', '1'), ('GHR1', 'CPK3_21', '1'),
-    #              ('PA', 'Microtubule_Depolymerization', '1'))
-    ### more edges version 20230529 - 13 edges
-    EDGE_POOL = (('PA', 'ABI2', '0'),
+    ### edge pool for the typical run 20230801 - 13 edges
+    EDGE_POOL = (('Ca2osc', 'ABI2', '0'),('Ca2osc', 'HAB1', '0'),('Ca2osc', 'PP2CA', '0'),
+                 ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
                  ('AquaporinPIP2_1', 'ROS', '1'),
-                 ('Actin_Reorganization', 'RBOH', '1'),
-                 ('ROS', 'Actin_Reorganization', '1'),
-                 ('pHc', 'Vacuolar_Acidification', '1'),
-                 ('PA', 'Microtubule_Depolymerization', '1'),
-                 ('GHR1', 'KOUT', '1'),
-                 ('NO', 'KEV', '1'),
-                 ('CIS', 'AnionEM', '1'),
-                 ('GPA1', 'Ca2osc', '1'), ('PA', 'Ca2osc', '1'),
-                 ('pHc', 'SPHK1_2', '1'),
-                 ('InsP3', 'SPHK1_2', '1'))
+                 ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
+                 ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
+                 ('GHR1', 'CPK3_21', '1'),
+                 ('PA', 'Microtubule_Depolymerization', '1'))
+    # ### more edges version 20230704 - 14 edges
+    # EDGE_POOL = (('PA', 'ABI2', '0'),
+    #              ('AquaporinPIP2_1', 'ROS', '1'),
+    #              ('Actin_Reorganization', 'RBOH', '1'),
+    #              ('ROS', 'Actin_Reorganization', '1'),
+    #              ('pHc', 'Vacuolar_Acidification', '1'),
+    #              ('PA', 'Microtubule_Depolymerization', '1'),
+    #              ('GHR1', 'KOUT', '1'),
+    #              ('NO', 'KEV', '1'),
+    #              ('CIS', 'AnionEM', '1'),
+    #              ('GPA1', 'Ca2osc', '1'), ('PA', 'Ca2osc', '1'),
+    #              ('pHc', 'SPHK1_2', '1'),
+    #              ('InsP3', 'SPHK1_2', '1'),
+    #              ('ABA', 'GEF1_4_10', '0'))
 
+elif run_type == 'special':
+    CONSTRAINTS = {'fixed':set(), 'regulate':{}, 'necessary':{},'group':{}, 'possible_constant':set()}
+    EDGE_POOL = set()
 
 FILE_NAME = MODEL.split("/")[-1][:-4]+'_score.csv'
 
@@ -271,44 +282,44 @@ if __name__ == '__main__':
                 print(conditinally_stable_motif)
     print()
 
-    ### fix nodes to find minimal trapspaces and LDOIs
-    ### fixing constant nodes are not allowed
-    print("LDOI, DOI and minimal trapspaces:")
-    fixes = [{'ABA':0},
-             {'ABA':1},
-             {'ROS':1},
-             {'NO':1},
-             {'CaIM':1},
-             {'cADPR':1},
-             {'PA':1},
-             {'pHc':1},
-             {'S1P_PhytoS1P':1},
-             {'AtRAC1':0},
-             {'InsP3':1}]
-    for fix in fixes:
-        print("- - - - - - - - - -")
-        print("fix -", fix)
-        LDOI, LDOI_contra = sm.drivers.logical_domain_of_influence(fix,pprimes1)
-        MPBN_DOI, MPBN_DOI_contra, MPBN_unknown, MPBN_unknown_contra, MPBN_ar = sm.drivers.domain_of_influence(fix,pprimes1,MPBN_update=True)
+    # ### fix nodes to find minimal trapspaces and LDOIs
+    # ### fixing constant nodes are not allowed
+    # print("LDOI, DOI and minimal trapspaces:")
+    # fixes = [{'ABA':0},
+    #          {'ABA':1},
+    #          {'ROS':1},
+    #          {'NO':1},
+    #          {'CaIM':1},
+    #          {'cADPR':1},
+    #          {'PA':1},
+    #          {'pHc':1},
+    #          {'S1P_PhytoS1P':1},
+    #          {'AtRAC1':0},
+    #          {'InsP3':1}]
+    # for fix in fixes:
+    #     print("- - - - - - - - - -")
+    #     print("fix -", fix)
+    #     LDOI, LDOI_contra = sm.drivers.logical_domain_of_influence(fix,pprimes1)
+    #     MPBN_DOI, MPBN_DOI_contra, MPBN_unknown, MPBN_unknown_contra, MPBN_ar = sm.drivers.domain_of_influence(fix,pprimes1,MPBN_update=True)
 
-        print('LDOI: ',{k:LDOI[k] for k in sorted(LDOI)})
-        print('only in MPBN_DOI: ',{k:MPBN_DOI[k] for k in MPBN_DOI if k not in LDOI})
-        print()
+    #     print('LDOI: ',{k:LDOI[k] for k in sorted(LDOI)})
+    #     print('only in MPBN_DOI: ',{k:MPBN_DOI[k] for k in MPBN_DOI if k not in LDOI})
+    #     print()
 
-        if 'ABA' not in fix:
-            fix.update({'ABA':0})
+    #     if 'ABA' not in fix:
+    #         fix.update({'ABA':0})
         
-        pprimes2 = pyboolnet.prime_implicants.percolate(pprimes1, add_constants = fix, remove_constants = False, copy=True)
-        trs = pyboolnet.trap_spaces.compute_trap_spaces(pprimes2, "min")
-        for tr in trs:
-            for node in pprimes1.keys():
-                if node not in tr.keys():
-                    tr[node] = 'X'
+    #     pprimes2 = pyboolnet.prime_implicants.percolate(pprimes1, add_constants = fix, remove_constants = False, copy=True)
+    #     trs = pyboolnet.trap_spaces.compute_trap_spaces(pprimes2, "min")
+    #     for tr in trs:
+    #         for node in pprimes1.keys():
+    #             if node not in tr.keys():
+    #                 tr[node] = 'X'
         
-        if len(trs) == 1:
-            print("There is 1 minimal trapspace for ", dict(sorted(fix.items())))
-        else:
-            print("There are " + str(len(trs)) + " minimal trapspaces for", dict(sorted(fix.items())))
-        for tr in trs:
-            print(dict(sorted(tr.items())))
-        print()
+    #     if len(trs) == 1:
+    #         print("There is 1 minimal trapspace for ", dict(sorted(fix.items())))
+    #     else:
+    #         print("There are " + str(len(trs)) + " minimal trapspaces for", dict(sorted(fix.items())))
+    #     for tr in trs:
+    #         print(dict(sorted(tr.items())))
+    #     print()
