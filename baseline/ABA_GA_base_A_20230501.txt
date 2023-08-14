@@ -12,6 +12,11 @@
 # , in node names were replaced by _
 # () in node names were deleted
 
+# extra edges:  []
+# score:  311.71313474579495  
+# following constraints: True 
+# complexity: 199
+
 ABA* = ABA
 ABH1* = 1
 ARP_Complex* = 1
