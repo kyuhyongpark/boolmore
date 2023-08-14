@@ -53,7 +53,7 @@ def import_exps(location):
         fixes = []
         intervention_string = row[INTERVENTION].split(',')
         for sth in intervention_string:
-            node_value = sth.split('=')
+            node_value = sth.strip().split('=')
             fix = tuple([node_value[0], int(node_value[1])])
             fixes.append(fix)
         # fixes should be sorted so that they do not depend on the order of user input
