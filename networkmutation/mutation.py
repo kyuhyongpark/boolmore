@@ -401,15 +401,17 @@ def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 
                 if redo == True:
                     trial += 1
                     break
-        elif node in regulators:
+        # nodes that do not have a guaranteed regulator may become a source or a constant,
+        # which may have to be prevented.
+        else:
             # check if the node became a source node if it has a self loop.
-            # nodes that have a regulating node cannot be a source, and hence elif.
-            redo = cons.check_source(regulators, mutated_rr, node)
-        elif node not in constraints['possible_constant']:
+            if node in regulators:
+                redo = cons.check_source(regulators, mutated_rr, node)
             # need to check if a node became a constant node and mutate more if it did
-            # nodes that have a regulating node cannot be a constant, and hence elif.
-            redo = cons.check_constant(mutated_rr)
-            trial += 1
+            if node not in constraints['possible_constant']:
+                redo = cons.check_constant(mutated_rr)
+            if redo == True:
+                trial += 1
 
     max_original = get_uni_rr(rr)
     max_mutated = get_uni_rr(mutated_rr)
@@ -425,14 +427,18 @@ def mix_models(model1, model2):
     mixed_model = Model.Model()
     mixed_model.id = config.id
     mixed_model.generation = max(model1.generation,model2.generation) + 1
-    mixed_model.regulators = {}
-    mixed_model.signs = {}
+
+    mixed_model.base = model1.base
     mixed_model.constraints = model1.constraints
     mixed_model.edge_pool = model1.edge_pool
     mixed_model.default_sources = model1.default_sources
+
     mixed_model.primes = {}
+    mixed_model.regulators = {}
+    mixed_model.signs = {}    
     mixed_model.rrs = {}
     mixed_model.extra_edges = []
+
     mixed_model.complexity = 0
 
     for node in model1.rrs:
@@ -442,10 +448,10 @@ def mix_models(model1, model2):
             get = model1
         else:
             get = model2
+        mixed_model.primes[node] = get.primes[node]
         mixed_model.regulators[node] = get.regulators[node]
         mixed_model.signs[node] = get.signs[node]
         mixed_model.rrs[node] = get.rrs[node]
-        mixed_model.primes[node] = get.primes[node]
         for edge in get.extra_edges:
             if edge[1] == node:
                 mixed_model.extra_edges.append(edge)

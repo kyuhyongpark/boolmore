@@ -5,14 +5,6 @@ from constraint import *
 from mutation import *
 import pystablemotifs as sm
 
-# import cProfile, pstats
-#
-# # Create the code profiler.
-# pr = cProfile.Profile()
-#
-# # Start the code profiler.
-# pr.enable()
-
 # # test constraint on real model
 # MODEL = '../PyStableMotifs/models/ABA_full.txt'
 #
@@ -74,8 +66,7 @@ import pystablemotifs as sm
 # print(rr2prime(regulators, mutated_rr, signs))
 
 
-# test check_source
-
+### test check_source ###
 def test_check_source():
     regulators = ('A', 'B', 'C')
     node = 'A'
@@ -120,9 +111,36 @@ def test_check_source():
     assert check_source(regulators, '11101000', 'B') == False
     assert check_source(regulators, '11101000', 'C') == False
 
-    return
+### test check_constant ###
+def test_check_constant():
+    assert check_constant('0') == True
+    assert check_constant('1') == True
+
+    assert check_constant('00') == True
+    assert check_constant('01') == True # max_rr == '11'
+    assert check_constant('10') == False
+    assert check_constant('11') == True
+
+    assert check_constant('0000') == True
+    assert check_constant('0001') == True # max_rr == '1111'
+    assert check_constant('0010') == False
+    assert check_constant('0011') == True # max_rr == '1111'
+    assert check_constant('0100') == False
+    assert check_constant('0101') == True # max_rr == '1111'
+    assert check_constant('0110') == False
+    assert check_constant('0111') == True # max_rr == '1111'
+    assert check_constant('1000') == False
+    assert check_constant('1001') == True # max_rr == '1111'
+    assert check_constant('1010') == False
+    assert check_constant('1011') == True # max_rr == '1111'
+    assert check_constant('1100') == False
+    assert check_constant('1101') == True # max_rr == '1111'
+    assert check_constant('1110') == False
+    assert check_constant('1111') == True
 
 test_check_source()
+test_check_constant()
+
 # # Stop the profiling.
 # pr.disable()
 #
