@@ -3,6 +3,7 @@ from __future__ import annotations
 import random
 import pyboolnet.trap_spaces
 import mutation as m
+import conversions as conv
 import constraint as cons
 import score
 import config
@@ -49,7 +50,7 @@ class Model():
 
         for node in primes:
             # find current regulators and signs
-            regulators, rr, signs = m.prime2rr(primes[node], regulators = None, signs = None)
+            regulators, rr, signs = conv.prime2rr(primes[node], regulators = None, signs = None)
 
             # check the extra edges (signs are not checked yet)
             for edge in edge_pool:
@@ -76,7 +77,7 @@ class Model():
 
                 regulators = tuple(regulators)
 
-                regulators, rr, signs = m.prime2rr(primes[node], regulators=regulators, signs=signs)
+                regulators, rr, signs = conv.prime2rr(primes[node], regulators=regulators, signs=signs)
                 x.regulators[node] = regulators
                 x.rrs[node] = rr
                 x.signs[node] = signs
@@ -124,7 +125,7 @@ class Model():
             mutated_model.regulators[new_edge_node] = modified_regulators
             mutated_model.rrs[new_edge_node] = modified_rr
             mutated_model.signs[new_edge_node] = modified_signs
-            prime1 = m.rr2prime(modified_regulators, modified_rr, modified_signs, inverted = False)
+            prime1 = conv.rr2prime(modified_regulators, modified_rr, modified_signs, inverted = False)
             mutated_model.primes[new_edge_node] = prime1
 
         for node in mutated_model.rrs:
@@ -139,7 +140,7 @@ class Model():
             # get primes from the mutated_rr
             # if the representations are equivalent, take the old prime
             if modified:
-                prime1 = m.rr2prime(mutated_model.regulators[node], mutated_rr, mutated_model.signs[node], inverted = False)
+                prime1 = conv.rr2prime(mutated_model.regulators[node], mutated_rr, mutated_model.signs[node], inverted = False)
                 mutated_model.primes[node] = prime1
                 # irr = get_max_irr(mutated_model.rrs[node])
                 # prime2 = rr2prime(mutated_model.regulators[node], irr, mutated_model.signs[node], inverted = True)
@@ -153,7 +154,7 @@ class Model():
 
     def check_constraint(self):
         for node in self.primes:
-            check = cons.check_node(self.regulators[node], self.rrs[node], self.constraints, node)
+            check = cons.check_node(self.regulators[node], self.rrs[node], self.base, self.constraints, node)
             if check == False:
                 return check
         return check

@@ -1,6 +1,9 @@
-import mutation as m
+# TODO: enable check_node function to check constant nodes, source nodes,
+# non-soure nodes, nodes with single regulators and fixed functions
 
-def check_node(regulators, rr, constraints, node):
+import conversions as conv
+
+def check_node(regulators, rr, base, constraints, node):
     """
     Checks if the model follows regulate, necessary, possible_constant constraints.
     Checking fixed and group constraints are not implemented yet.
@@ -58,7 +61,7 @@ def check_regulation(regulators, rr, node, is_min = False):
     if is_min:
         bi = rr
     else:
-        bi = m.get_uni_rr(rr, max = False)
+        bi = conv.get_uni_rr(rr, max = False)
 
     # n = nth regulator
     n = regulators.index(node)
@@ -186,7 +189,7 @@ def check_constant(rr):
     """
     Check if the rule is fixed to 0 or 1
     """
-    max_rr = m.get_uni_rr(rr, max = True)
+    max_rr = conv.get_uni_rr(rr, max = True)
     if '0' in max_rr and '1' in max_rr:
         return False
     else:
@@ -201,7 +204,7 @@ def check_source(regulators, rr, node):
     # n = nth regulator
     n = regulators.index(node)
 
-    min_rr = m.get_uni_rr(rr, max = False)
+    min_rr = conv.get_uni_rr(rr, max = False)
     add = 0
     for i in range(2**N):
         add += int(min_rr[i])
