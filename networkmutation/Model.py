@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import random
 import pyboolnet.trap_spaces
 import mutation as m
@@ -9,32 +11,40 @@ class Model():
     def __init__(self):
         self.id = None
         self.generation = None
-        self.regulators = None
-        self.signs = None
-        self.constraints = {'fixed': set(), 'regulate': {}, 'necessary' : {},
-        'group': {}, 'possible_source': set()}
+
+        self.base = None
+        self.constraints = {'fixed': set(), 'regulate': {}, 'necessary' : {}, 'group': {}, 'possible_constant': set()}
         self.edge_pool = []
         self.default_sources = {}
+        
         self.primes = None
+        self.regulators = None
+        self.signs = None
         self.rrs = None
         self.extra_edges = None
+
         self.complexity = None
         self.predictions = None
         self.score = None
 
     @classmethod
-    def import_model(cls, primes, constraints={}, edge_pool=[], default_sources={}, id = 0, generation = 0, base = None):
+    def import_model(cls, primes:PrimesType, id:int=0, generation:int=0,
+                     base:Model|None = None, constraints:dict={}, edge_pool:list[tuple[str]]=[], default_sources:dict[str,int]={}) -> Model:
         x = cls()
         x.id = id
         x.generation = generation
-        x.regulators = {}
-        x.signs = {}
+
+        x.base = base
         x.constraints.update(constraints)
         x.edge_pool.extend(edge_pool)
         x.default_sources.update(default_sources)
+
         x.primes = primes
+        x.regulators = {}
+        x.signs = {}
         x.rrs = {}
         x.extra_edges = []
+
         x.complexity = 0
 
         for node in primes:
@@ -78,14 +88,18 @@ class Model():
         mutated_model = Model()
         mutated_model.id = config.id
         mutated_model.generation = self.generation + 1
-        mutated_model.regulators = self.regulators.copy()
-        mutated_model.signs = self.signs.copy()
+
+        mutated_model.base = self.base
         mutated_model.constraints = self.constraints
         mutated_model.edge_pool = self.edge_pool
         mutated_model.default_sources = self.default_sources
+
         mutated_model.primes = self.primes.copy()
+        mutated_model.regulators = self.regulators.copy()
+        mutated_model.signs = self.signs.copy()        
         mutated_model.rrs = self.rrs.copy()
         mutated_model.extra_edges = self.extra_edges.copy()
+
         mutated_model.complexity = 0
 
         rnd = random.random()
@@ -117,8 +131,9 @@ class Model():
             # get mutated_rr from rr
             mutated_rr, modified = m.mutate_rr_constraint(mutated_model.regulators[node],
                                                           mutated_model.rrs[node],
+                                                          mutated_model.base.rrs[node],
                                                           mutated_model.constraints,
-                                                          node, probability)
+                                                          node, probability, bias)
             mutated_model.rrs[node] = mutated_rr
 
             # get primes from the mutated_rr
@@ -261,3 +276,44 @@ class Model():
         print('score: ', self.score)
         print('following constraints:', self.check_constraint())
         print('complexity:', self.complexity)
+
+
+def mix_models(model1:Model, model2:Model) -> Model:
+    config.id += 1
+    mixed_model = Model()
+    mixed_model.id = config.id
+    mixed_model.generation = max(model1.generation,model2.generation) + 1
+
+    mixed_model.base = model1.base
+    mixed_model.constraints = model1.constraints
+    mixed_model.edge_pool = model1.edge_pool
+    mixed_model.default_sources = model1.default_sources
+
+    mixed_model.primes = {}
+    mixed_model.regulators = {}
+    mixed_model.signs = {}    
+    mixed_model.rrs = {}
+    mixed_model.extra_edges = []
+
+    mixed_model.complexity = 0
+
+    for node in model1.rrs:
+        # get mutated_rr from rr
+        rnd = random.random()
+        if rnd < 0.5:
+            get = model1
+        else:
+            get = model2
+        mixed_model.primes[node] = get.primes[node]
+        mixed_model.regulators[node] = get.regulators[node]
+        mixed_model.signs[node] = get.signs[node]
+        mixed_model.rrs[node] = get.rrs[node]
+        for edge in get.extra_edges:
+            if edge[1] == node:
+                mixed_model.extra_edges.append(edge)
+
+        # get complexity
+        for prime_implicant in mixed_model.primes[node][1]:
+            mixed_model.complexity += len(prime_implicant)
+
+    return mixed_model

@@ -330,7 +330,8 @@ def mutate_rr_bias(rr, probability, bias = 0.5):
 
     return mutated_rr
 
-def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 0.5):
+
+def mutate_rr_constraint(regulators:tuple[str], rr:str, base_rr:str, constraints:dict, node:str, probability:float, bias:float=0.5):
     """
     When given any representation of a rule,
     returns the mutated representation of that rule
@@ -342,14 +343,16 @@ def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 
     regulators : tuple of strings
         the regulating nodes
     rr : length 2^N binary str
-        representation of the rules
+        representation of the rule
+    base_rr : length 2^N binary str
+        representation of the the baseline rule
     constraints : dictionary of dictionary of tuples
         represents 5 types of constraints
         fixed
         regulate
         necessary
         group
-        possible source
+        possible_constant
     node : string
         the target node
     probability : float between 0 and 1
@@ -364,15 +367,23 @@ def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 
     modified : Boole
         True if modified
     """
-    # no need to mutate constant nodes
-    if len(regulators) == 0:
-        return rr, False
     # no need to mutate source nodes
     if len(regulators) == 1 and regulators[0] == node:
         return rr, False
+
+    # in case of constant nodes, ensure that it has the correct value
+    if len(regulators) == 0:
+        if rr != base_rr:
+            return base_rr, True
+        else:
+            return rr, False
+
     # impose constraints - fixed nodes
     if node in constraints['fixed']:
-        return rr, False
+        if rr != base_rr:
+            return base_rr, True
+        else:
+            return rr, False
 
     redo = True
     trial = 0
@@ -422,47 +433,8 @@ def mutate_rr_constraint(regulators, rr, constraints, node, probability, bias = 
 
     return mutated_rr, modified
 
-def mix_models(model1, model2):
-    config.id += 1
-    mixed_model = Model.Model()
-    mixed_model.id = config.id
-    mixed_model.generation = max(model1.generation,model2.generation) + 1
 
-    mixed_model.base = model1.base
-    mixed_model.constraints = model1.constraints
-    mixed_model.edge_pool = model1.edge_pool
-    mixed_model.default_sources = model1.default_sources
-
-    mixed_model.primes = {}
-    mixed_model.regulators = {}
-    mixed_model.signs = {}    
-    mixed_model.rrs = {}
-    mixed_model.extra_edges = []
-
-    mixed_model.complexity = 0
-
-    for node in model1.rrs:
-        # get mutated_rr from rr
-        rnd = random.random()
-        if rnd < 0.5:
-            get = model1
-        else:
-            get = model2
-        mixed_model.primes[node] = get.primes[node]
-        mixed_model.regulators[node] = get.regulators[node]
-        mixed_model.signs[node] = get.signs[node]
-        mixed_model.rrs[node] = get.rrs[node]
-        for edge in get.extra_edges:
-            if edge[1] == node:
-                mixed_model.extra_edges.append(edge)
-
-        # get complexity
-        for prime_implicant in mixed_model.primes[node][1]:
-            mixed_model.complexity += len(prime_implicant)
-
-    return mixed_model
-
-def add_regulator(regulators, rr, signs, new_regulator, new_sign, bias=0.5):
+def add_regulator(regulators:tuple[str], rr:str, signs:str, new_regulator:str, new_sign:str, bias:float=0.5):
     """
     Returns a new representation of a rule with an extra regulator.
 
