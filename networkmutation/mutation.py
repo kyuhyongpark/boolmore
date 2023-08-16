@@ -64,7 +64,8 @@ def mutate_rr_bias(rr, probability, bias = 0.5):
     return mutated_rr
 
 
-def mutate_rr_constraint(regulators:tuple[str], rr:str, base_rr:str, constraints:dict, node:str, probability:float, bias:float=0.5):
+def mutate_rr_constraint(regulators:tuple[str], rr:str, base_rr:str, constraints:dict,
+                         node:str, probability:float, bias:float=0.5) -> tuple[str, bool]:
     """
     When given any representation of a rule,
     returns the mutated representation of that rule
@@ -73,89 +74,102 @@ def mutate_rr_constraint(regulators:tuple[str], rr:str, base_rr:str, constraints
 
     Parameters
     ----------
-    regulators : tuple of strings
-        the regulating nodes
-    rr : length 2^N binary str
-        representation of the rule
-    base_rr : length 2^N binary str
-        representation of the the baseline rule
-    constraints : dictionary of dictionary of tuples
-        represents 5 types of constraints
-        fixed
-        regulate
-        necessary
-        group
-        possible_constant
-    node : string
-        the target node
-    probability : float between 0 and 1
-        probability that each of the binary number in the representation is mutated.
-    bias : float between 0 and 1
-        bias to deactivate implicants
+    regulators  - the regulating nodes                      : tuple(str)
+    rr          - representation of the rule                : length 2^N binary str
+    base_rr     - representation of the the baseline rule   : length 2^N binary str
+    constraints - represents 5 types of constraints         : dict{str: set or dict}
+                  (fixed, regulate, necessary, group, possible_constant)
+    node        - the target node                           : str
+    probability - probability that each binary is mutated   : float between 0 and 1
+    bias        - bias to deactivate implicants             : float between 0 and 1
 
     Returns
     -------
-    mutated_rr : length 2^N binary str
-        representation of the rules
-    modified : Boole
-        True if modified
+    mutated_rr  - representation of the mutated rule        : length 2^N binary str
+    modified    - True if modified                          : bool
+
     """
-    # no need to mutate source nodes
-    if len(regulators) == 1 and regulators[0] == node:
-        return rr, False
 
-    # in case of constant nodes, ensure that it has the correct value
+    # constant nodes have no degree of freedom and should not be mutated
     if len(regulators) == 0:
-        if rr != base_rr:
-            return base_rr, True
-        else:
+        if rr == base_rr:
             return rr, False
+        else:
+            return base_rr, True
 
-    # impose constraints - fixed nodes
+    # nodes with single regulators (including source nodes)
+    # have no degree of freedom, and hence should not be mutated
+    # UNLESS it was originally a constant node but gained an extra edge,
+    # in which case it can become a constant node
+    if len(regulators) == 1 and len(base_rr) != 1:
+        if rr == base_rr:
+            return rr, False
+        else:
+            return base_rr, True
+
+    # impose constraints - fixed
     if node in constraints['fixed']:
-        if rr != base_rr:
-            return base_rr, True
-        else:
+        if rr == base_rr:
             return rr, False
+        else:
+            return base_rr, True
 
+    mutated_rr = ''
     redo = True
     trial = 0
     while redo == True:
         if trial > 1000:
             raise Exception("too many trials. check mutation parameter")
-        ### mutation module
-        if node in constraints['group']: # impose group constraint
+        
+        ### mutation module ###
+        # impose constraint - group
+        if node in constraints['group']:
             groups = constraints['group'][node]
             group_rr, group_regulators = cons.rr2group_rr(regulators, rr, groups)
             mutated_group_rr = mutate_rr_bias(group_rr, probability, bias)
             mutated_rr = cons.group_rr2rr(regulators, mutated_group_rr, groups, group_regulators)
-        else: # no group constraints
+        else:
             mutated_rr = mutate_rr_bias(rr, probability, bias)
 
-        if node in constraints['necessary']: # impose necessary constraint
+        # impose constraint - necessary
+        if node in constraints['necessary']: 
             for necc in constraints['necessary'][node]:
                 mutated_rr = cons.impose_necessary(regulators, mutated_rr, necc)
-        ### end of mutation
+        ### end of mutation ###
 
         redo = False
+        # check constraint - regulate
         if node in constraints['regulate']:
-            # check if the constrained nodes are regulating the target
             for reg in constraints['regulate'][node]:
-                redo = not cons.check_regulation(regulators, mutated_rr, reg)
+                redo = redo or not cons.check_regulation(regulators, mutated_rr, reg)
                 if redo == True:
-                    trial += 1
+                    # print('redo to ensure', reg, 'regulates', node)
                     break
-        # nodes that do not have a guaranteed regulator may become a source or a constant,
-        # which may have to be prevented.
-        else:
-            # check if the node became a source node if it has a self loop.
-            if node in regulators:
-                redo = cons.check_source(regulators, mutated_rr, node)
-            # need to check if a node became a constant node and mutate more if it did
-            if node not in constraints['possible_constant']:
-                redo = cons.check_constant(mutated_rr)
-            if redo == True:
-                trial += 1
+        
+        # node with a self loop should not become a source node
+        elif node in regulators:
+            redo = redo or cons.check_source(regulators, mutated_rr, node)
+            # if redo == True:
+                # print('redo to ensure', node, 'is not a source')
+        
+        # only nodes that were originally a constant node
+        # or nodes in possible_constant can become constants
+        if cons.check_constant(mutated_rr):
+            max_rr = conv.get_uni_rr(mutated_rr, max = True)
+            if node not in constraints['possible_constant'] and len(base_rr) != 1:
+                redo = True
+                # print('redo because', node, 'became a constant')
+            # a constant node should not have its value changed
+            elif base_rr == '1' and '0' in max_rr:
+                redo = True
+                # print('redo because', node, 'got opposite value')
+            elif base_rr == '0' and '1' in max_rr:
+                redo = True
+                # print('redo because', node, 'got opposite value')
+
+        if redo == True:
+            trial += 1
+            print(trial)
 
     max_original = conv.get_uni_rr(rr)
     max_mutated = conv.get_uni_rr(mutated_rr)
@@ -215,6 +229,7 @@ def add_regulator(regulators:tuple[str], rr:str, signs:str, new_regulator:str, n
         added_rr = conv.get_max_irr(added_rr)
 
     return added_regulators, added_rr, added_signs
+
 
 def delete_regulator(regulators, rr, signs, target_regulator, bias=0.5):
     """

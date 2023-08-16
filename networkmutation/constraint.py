@@ -3,48 +3,83 @@
 
 import conversions as conv
 
-def check_node(regulators, rr, base, constraints, node):
+def check_node(regulators, rr, base_rr, constraints, node):
     """
     Checks if the model follows regulate, necessary, possible_constant constraints.
     Checking fixed and group constraints are not implemented yet.
+
+    Parameters
+    ----------
+    regulators  - the regulating nodes                      : tuple(str)
+    rr          - representation of the rule                : length 2^N binary str
+    base_rr     - representation of the the baseline rule   : length 2^N binary str
+    constraints - represents 5 types of constraints         : dict{str: set or dict}
+                  (fixed, regulate, necessary, group, possible_constant)
+    node        - the target node                           : str
+
+    Returns
+    -------
+    check       - True if follows constraints               : bool
+    
     """
 
-    check = True
-    # constant nodes are not mutated
+    # a constant node should not be mutated
     if len(regulators) == 0:
-        return check
-    # source nodes are not mutated
+        if rr == base_rr:
+            return True
+        else:
+            print("Constant node", node, "was mutated")
+            return False
+
+    # a source node should not be mutated
     if len(regulators) == 1 and regulators[0] == node:
-        return check
+        if rr == base_rr:
+            return True
+        else:
+            print("Source node", node, "was mutated")
+            return False
+
+    # check constraint - fixed
+    if node in constraints['fixed']:
+        if rr == base_rr:
+            return True
+        else:    
+            print(node, "with fixed function was mutated")
+            return False
 
     if node in constraints['necessary']:
         for necc in constraints['necessary'][node]:
-            check = check_necessary(regulators, rr, necc)
-            if check == False:
+            if not check_necessary(regulators, rr, necc):
                 print(necc, "should be necessary for", node)
-                return check
+                return False
 
     if node in constraints['regulate']:
-        # check if the constrained nodes are regulating the target
         for reg in constraints['regulate'][node]:
-            check = check_regulation(regulators, rr, reg)
-            if check == False:
+            if not check_regulation(regulators, rr, reg):
                 print(reg, "should regulate", node)
-                return check
-    elif node in regulators:
-        # check if the node became a source node if it has a self loop.
-        # nodes that have a regulating node cannot be a source, and hence elif.
-        check = not check_source(regulators, rr, node)
-        if check == False:
-            print(node, "should not be a source")
-    elif node not in constraints['possible_constant']:
-        # need to check if a node became a constant node and mutate more if it did
-        # nodes that have a regulating node cannot be a constant, and hence elif.
-        check = not check_constant(rr)
-        if check == False:
-            print(node, "should not be a constant")
+                return False
 
-    return check
+    # node with a self loop should not become a source node
+    if node in regulators:
+        if check_source(regulators, rr, node):
+            print(node, "should not be a source")
+            return False
+
+    # only nodes that were originally a constant node
+    # or nodes in possible_constant can become constants
+    if check_constant(rr):
+        if node not in constraints['possible_constant'] and len(base_rr) != 1:
+            print(node, "should not be a constant")
+            return False
+        # a constant node should not have its value changed
+        elif base_rr == '1' and '0' in rr:
+            print(node, "has opposite constant value")
+            return False
+        elif base_rr == '0' and '1' in rr:
+            print(node, "has opposite constant value")
+            return False
+
+    return True
 
 def check_regulation(regulators, rr, node, is_min = False):
     """

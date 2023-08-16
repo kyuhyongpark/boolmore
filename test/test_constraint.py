@@ -1,3 +1,5 @@
+# TODO: add more test for check_node
+
 import sys
 sys.path.insert(0, 'C:/Users/danie/OneDrive/Documents/Codes/networkmutation/networkmutation')
 
@@ -138,8 +140,24 @@ def test_check_constant():
     assert check_constant('1110') == False
     assert check_constant('1111') == True
 
+def test_check_node():
+    # TODO: add more tests
+
+    # constant node test
+    CONSTRAINT = {'fixed': set(), 'regulate': {}, 'necessary' : {}, 'group': {}, 'possible_constant': set()}
+    assert check_node(tuple(),'0','0',CONSTRAINT,'A') == True
+    assert check_node(tuple(),'1','0',CONSTRAINT,'A') == False
+
+    assert check_node(('B'),'00','0',CONSTRAINT,'A') == True
+    assert check_node(('B'),'01','0',CONSTRAINT,'A') == False
+    assert check_node(('B'),'10','0',CONSTRAINT,'A') == True
+    assert check_node(('B'),'11','0',CONSTRAINT,'A') == False
+
+
+
 test_check_source()
 test_check_constant()
+test_check_node()
 
 # # Stop the profiling.
 # pr.disable()

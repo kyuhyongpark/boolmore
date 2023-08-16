@@ -35,13 +35,13 @@ if run_type == 'normal':
                    'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-                   'possible_constant': {'GEF1_4_10',}}
+                   'possible_constant': set()}
     # ### constraints for the 'more edges' version 20230524 - allow change of Ca2c, move to regulate
     # CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
     #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2c':('CaIM','CIS','Ca2_ATPase')},
     #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
     #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #                'possible_constant': {'GEF1_4_10',}}
+    #                'possible_constant': set()}
 
     ### edge pool for the typical run 20230801 - 13 edges
     EDGE_POOL = [('Ca2c', 'ABI2', '0'),('Ca2c', 'HAB1', '0'),('Ca2c', 'PP2CA', '0'),
@@ -74,93 +74,15 @@ elif run_type == 'osc':
                    'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
                    'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
                    'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-                   'possible_constant': {'GEF1_4_10',}}
+                   'possible_constant': set()}
     # ### constraints for the 'more edges' version - allow modification of Ca2osc, move to regulate
     # CONSTRAINTS = {'fixed': {'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
     #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2osc':('CaIM','CIS')},
     #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
     #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #                'possible_constant': {'GEF1_4_10',}}
+    #                'possible_constant': set()}
 
     ### edge pool for the typical run for the ca_osc model 20230801 - 13 edges
-    EDGE_POOL = [('Ca2osc', 'ABI2', '0'),('Ca2osc', 'HAB1', '0'),('Ca2osc', 'PP2CA', '0'),
-                 ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
-                 ('AquaporinPIP2_1', 'ROS', '1'),
-                 ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
-                 ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
-                 ('GHR1', 'CPK3_21', '1'),
-                 ('PA', 'Microtubule_Depolymerization', '1')]
-    # ### more edges version 20230704 - 14 edges
-    # EDGE_POOL = (('PA', 'ABI2', '0'),
-    #              ('AquaporinPIP2_1', 'ROS', '1'),
-    #              ('Actin_Reorganization', 'RBOH', '1'),
-    #              ('ROS', 'Actin_Reorganization', '1'),
-    #              ('pHc', 'Vacuolar_Acidification', '1'),
-    #              ('PA', 'Microtubule_Depolymerization', '1'),
-    #              ('GHR1', 'KOUT', '1'),
-    #              ('NO', 'KEV', '1'),
-    #              ('CIS', 'AnionEM', '1'),
-    #              ('GPA1', 'Ca2osc', '1'), ('PA', 'Ca2osc', '1'),
-    #              ('pHc', 'SPHK1_2', '1'),
-    #              ('InsP3', 'SPHK1_2', '1'),
-    #              ('ABA', 'GEF1_4_10', '0'))
-
-elif run_type == 'ca_ext':
-    DATA = 'networkmutation/data/data_ca_ext_20230511.tsv'
-
-    ### constraints for the typical run
-    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
-                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-                   'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-                   'possible_constant': {'GEF1_4_10',}}
-    # ### constraints for the 'more edges' version 20230524 - allow change of Ca2c, move to regulate
-    # CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2c':('Ca_ext','CIS','Ca2_ATPase')},
-    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-    #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #                'possible_constant': {'GEF1_4_10',}}
-
-    ### edge pool for the typical run 20230801 - 13 edges
-    EDGE_POOL = [('Ca2c', 'ABI2', '0'),('Ca2c', 'HAB1', '0'),('Ca2c', 'PP2CA', '0'),
-                 ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
-                 ('AquaporinPIP2_1', 'ROS', '1'),
-                 ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
-                 ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
-                 ('GHR1', 'CPK3_21', '1'),
-                 ('PA', 'Microtubule_Depolymerization', '1')]
-    # ### more edges version 20230704 - 14 edges
-    # EDGE_POOL = (('PA', 'ABI2', '0'),
-    #              ('AquaporinPIP2_1', 'ROS', '1'),
-    #              ('Actin_Reorganization', 'RBOH', '1'),
-    #              ('ROS', 'Actin_Reorganization', '1'),
-    #              ('pHc', 'Vacuolar_Acidification', '1'),
-    #              ('PA', 'Microtubule_Depolymerization', '1'),
-    #              ('GHR1', 'KOUT', '1'),
-    #              ('NO', 'KEV', '1'),
-    #              ('CIS', 'AnionEM', '1'),
-    #              ('GPA1', 'Ca2c', '1'), ('PA', 'Ca2c', '1'),
-    #              ('pHc', 'SPHK1_2', '1'),
-    #              ('InsP3', 'SPHK1_2', '1'),
-    #              ('ABA', 'GEF1_4_10', '0'))
-
-elif run_type == 'osc_ca_ext':
-    DATA = 'networkmutation/data/data_osc_ca_ext_20230511.tsv'
-
-    ### constraints for the typical run
-    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2osc', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
-                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-                   'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-                   'possible_constant': {'GEF1_4_10',}}
-    # ### constraints for the 'more edges' version - allow modification of Ca2osc, move to regulate
-    # CONSTRAINTS = {'fixed': {'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2osc':('Ca_ext','CIS')},
-    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-    #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #                'possible_constant': {'GEF1_4_10',}}
-
-    ### edge pool for the typical run 20230801 - 13 edges
     EDGE_POOL = [('Ca2osc', 'ABI2', '0'),('Ca2osc', 'HAB1', '0'),('Ca2osc', 'PP2CA', '0'),
                  ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
                  ('AquaporinPIP2_1', 'ROS', '1'),
@@ -272,6 +194,9 @@ if __name__ == '__main__':
         print("top score :", iteration[0].score)
         print("extra edges :", len(iteration[0].extra_edges))
         print("complexity of the top model :", iteration[0].complexity)
+        if not iteration[0].check_constraint():
+            print("ERROR: model does not follow constraints")
+
         fp.write('iteration\ttop score\textra edges\tcomplexity\n')
         fp.write('0\t'+ str(iteration[0].score) +'\t')
         fp.write(str(len(iteration[0].extra_edges)) +'\t')
@@ -321,6 +246,8 @@ if __name__ == '__main__':
             print("top score : ", new_iteration[0].score)
             print("extra edges :", len(new_iteration[0].extra_edges))
             print("complexity of the top model :", new_iteration[0].complexity)
+            if not new_iteration[0].check_constraint():
+                print("ERROR: model does not follow constraints")
             fp.write(str(i+1) +'\t'+ str(new_iteration[0].score) +'\t')
             fp.write(str(len(new_iteration[0].extra_edges)) +'\t')
             fp.write(str(new_iteration[0].complexity) +'\n')

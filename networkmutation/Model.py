@@ -82,6 +82,9 @@ class Model():
                 x.rrs[node] = rr
                 x.signs[node] = signs
 
+        if base == None:
+            x.base = x
+
         return x
 
     def mutate(self, probability, edge_prob, bias = 0.5):
@@ -152,26 +155,25 @@ class Model():
 
         return mutated_model
 
-    def check_constraint(self):
+    def check_constraint(self) -> bool:
+        check = True
         for node in self.primes:
-            check = cons.check_node(self.regulators[node], self.rrs[node], self.base, self.constraints, node)
-            if check == False:
-                return check
+            check = cons.check_node(self.regulators[node], self.rrs[node], self.base.rrs[node], self.constraints, node) and check
         return check
 
     def get_predictions(self, interventions):
         '''
-        Returns predictions when given interventions
+        Assigns self.predictions when given interventions
 
         Parameters
         ----------
-        interventions : list of tuples
-            interventions in the form [((nodeA, value1),(nodeB, value2), ...), ...]
-
-        Returns
+        interventions - list of fixes : list[FixesType]
+            fixes - ((nodeA, value1),(nodeB, value2), ...) : tuple(tuple(str, int))
+                    
+        Assigns
         -------
         self.predictions : dict
-            keys : interventions
+            keys : fixes
             values : dict
                 average value of every node in the attractors
         '''
@@ -223,6 +225,8 @@ class Model():
         self.score = score.get_hierarchy_score(agreements, self.default_sources, report=report, file=file)
 
     def export(self, name, threshold = 0.0):
+        # TODO: print out total score as well
+
         '''
         Exports the model rules with scores above a certain threshold.
 
@@ -271,6 +275,7 @@ class Model():
         fp.close()
 
     def info(self):
+        # TODO: print out total score as well
         print('id: ', self.id)
         print('generation: ', self.generation)
         print('extra edges: ', self.extra_edges)
