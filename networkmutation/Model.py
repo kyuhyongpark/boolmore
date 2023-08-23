@@ -33,6 +33,8 @@ class Model():
                           [(regulator, target, sign), ...]
         default_sources - Shows the default settings for the source nodes,          :dict[str, int]
                           which is considered the top of the hierarchy
+                          These source nodes must have a defined value in
+                          every experiments
 
         primes          - pyboolnet primes dictionary                               :length N dict[str, PrimeType]
                           {node: prime}                          
@@ -113,6 +115,7 @@ class Model():
 
         x.id = id
         x.generation = generation
+        x.primes = primes
 
         # get constraints, edge pool, and default sources
         if base == None:
@@ -130,23 +133,22 @@ class Model():
             x.default_sources.update(base.default_sources)
             generate_default_sources = False
 
-        x.primes = primes
         
-        for node in primes:
+        for node in x.primes:
             # generate default_sources if necessary
             if generate_default_sources:
-                if primes[node] == [[{node:0}],[{node:1}]]:
+                if x.primes[node] == [[{node:0}],[{node:1}]]:
                     x.default_sources[node] = 0
 
             # get complexity
-            for prime_implicant in primes[node][1]:
+            for prime_implicant in x.primes[node][1]:
                 x.complexity += len(prime_implicant)
 
             # find current regulators and signs
-            regulators, rr, signs = conv.prime2rr(primes[node], regulators = None, signs = None)
+            regulators, rr, signs = conv.prime2rr(x.primes[node])
 
             # check the extra edges (TODO: check signs)
-            for edge in edge_pool:
+            for edge in x.edge_pool:
                 if edge[1] == node and edge[0] in regulators: # type: ignore
                     x.extra_edges.append(edge)
 
@@ -166,7 +168,7 @@ class Model():
 
                 regulators = tuple(regulators)
 
-                regulators, rr, signs = conv.prime2rr(primes[node], regulators=regulators, signs=signs)
+                rr = conv.prime2rr(primes[node], regulators=regulators, signs=signs)[1]
                 x.regulators_dict[node] = regulators
                 x.rr_dict[node] = rr
                 x.signs_dict[node] = signs

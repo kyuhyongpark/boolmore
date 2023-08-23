@@ -166,6 +166,8 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
     
     default_sources - Shows the default settings for the source nodes,      :dict[str, int]
                       which is considered the top of the hierarchy
+                      These source nodes must have a defined value in
+                      every experiments
     report          - if True, make a csv file with detailed report         :bool
     file            - the location and name of the detailed report file     :str
 
@@ -182,12 +184,16 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
 
     if report:
         fp = open(file, 'w')
+        fp.write('id\thierarchy\tfixes\tobserved node\texperimental outcome\t')
+        fp.write('predict value\tattractor agreement\tscore\n')
 
     score = 0.0
     model_max_score = 0.0
     
     for observed_node in agreements:
         for fixes in agreements[observed_node]:
+            for source in default_sources:
+                assert tuple([source, 0]) in fixes or tuple([source, 1]) in fixes, "default sources must always be specified"
             lst = agreements[observed_node][fixes]
 
             current_score = 0.0
