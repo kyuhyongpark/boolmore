@@ -1,11 +1,14 @@
-# name of the generated models and the log
-NAME = 'ref_20230822'
-
-# location of the starting model
-STARTING_MODEL = None
+# location of the starting model or the model to make a detailed report
+MODEL = None
+# MODEL = 'networkmutation/generated_models/20230512_7790_gen125_mod.txt'
 
 # name of the key to use in the data bank
-RUN_TYPE = 'ABA_normal'     
+RUN_TYPE = 'ABA_normal'
+# RUN_TYPE = 'ABA_2006_Li'
+# RUN_TYPE = 'ABA_2018_Waidyarathne'
+
+# name of the algorithm generated models and the log
+NAME = 'ref_20230823'
 
 
 parameters = {
@@ -23,7 +26,7 @@ parameters = {
 data_bank = {
     'ABA_normal':{
         'data': 'networkmutation/data/data_20230426.tsv',
-        'base': 'networkmutation/baseline/ABA_GA_base_A_20230501.txt',
+        'base': 'networkmutation/baseline_models/ABA_GA_base_A_20230501.txt',
         'default_sources': {'ABA':0},
         ### constraints for the typical run 20230815
         'constraints': {'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
@@ -43,7 +46,7 @@ data_bank = {
 
     'ABA_normal_more_edges':{
         'data': 'networkmutation/data/data_20230426.tsv',
-        'base': 'networkmutation/baseline/ABA_GA_base_A_20230501.txt',
+        'base': 'networkmutation/baseline_models/ABA_GA_base_A_20230501.txt',
         'default_sources': {'ABA':0},
         ### constraints for the 'more edges' version 20230815 - allow change of Ca2c, move to regulate
         'constraints' : {'fixed': {'Ca2_ATPase', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
@@ -69,7 +72,7 @@ data_bank = {
 
     'ABA_osc':{
         'data': 'networkmutation/data/data_osc_20230426.tsv',
-        'base': 'networkmutation/baseline/ABA_GA_base_B_20230407.txt',
+        'base': 'networkmutation/baseline_models/ABA_GA_base_B_20230407.txt',
         'default_sources': {'ABA':0},
         ### constraints for the typical run of the ca_osc model 20230815
         'constraints': {'fixed': {'Ca2osc', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
@@ -89,7 +92,7 @@ data_bank = {
     
     'ABA_osc_more_edges':{
         'data': 'networkmutation/data/data_osc_20230426.tsv',
-        'base': 'networkmutation/baseline/ABA_GA_base_B_20230407.txt',
+        'base': 'networkmutation/baseline_models/ABA_GA_base_B_20230407.txt',
         'default_sources': {'ABA':0},
         ### constraints for the 'more edges' version of ca_osc model 20230815 - allow modification of Ca2osc, move to regulate
         'constraints': {'fixed': {'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
@@ -111,7 +114,23 @@ data_bank = {
                       ('pHc', 'SPHK1_2', '1'),
                       ('InsP3', 'SPHK1_2', '1'),
                       ('ABA', 'GEF1_4_10', '0')],
-        }
+        },
+
+    'ABA_2006_Li':{
+        'data': 'networkmutation/data/data_Li_20230811.tsv',
+        'base': 'networkmutation/baseline_models/ABA_2006_Li.txt',
+        'default_sources': {'ABA':0},
+        'constraints': {},
+        'edge_pool': [],
+        },
+    
+    'ABA_2018_Waidyarathne':{
+        'data': 'networkmutation/data/data_Waidyarathne_20230811.tsv',
+        'base': 'networkmutation/baseline_models/ABA_2018_Waidyarathne.txt',
+        'default_sources': {'ABA':0},
+        'constraints': {},
+        'edge_pool': [],
+        },
     }
 
 # STARTING_ID = 1

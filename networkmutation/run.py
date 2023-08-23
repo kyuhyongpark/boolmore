@@ -20,8 +20,8 @@ PROB = config.parameters['prob']
 EDGE_PROB = config.parameters['edge_prob']
 
 # if starting model is not given, take the base as the start
-if config.STARTING_MODEL != None:
-    STARTING_MODEL = config.STARTING_MODEL
+if config.MODEL != None:
+    STARTING_MODEL = config.MODEL
 else:
     STARTING_MODEL = config.data_bank[config.RUN_TYPE]['base']
 
@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
     print("Loading starting model . . .")
     primes = sm.format.import_primes(STARTING_MODEL)
-    n1 = Model.import_model(primes, config.id, STARTING_GEN, base, CONSTRAINTS, EDGE_POOL, DEFAULT_SOURCES)
+    n1 = Model.import_model(primes, config.id, STARTING_GEN, base)
     print("Starting model loaded.")
     n1.get_predictions(pert)
     n1.get_model_score(exps)
