@@ -1,0 +1,47 @@
+# Changed node names to correspond with 2017 ABA model
+# added rule for ABA explicitely
+# deleted Arg which was a source that does not regulate any other node
+# assigned constant values to nodes that were originally source nodes: ABH1, AGB1, ERA1
+
+ABH1 *= 1
+AGB1 *= 1
+ERA1 *= 1
+ABA *= ABA
+SPHK1_2 * = ABA  
+S1P_PhytoS1P * =  SPHK1_2 
+GPA1* = (S1P_PhytoS1P or not GCR1) and AGB1
+PLDalpha* = GPA1
+PA * = PLDalpha
+pHc * = ABA 
+OST1* = ABA 
+ROP2* = PA 
+RBOH* = pHc and OST1 and ROP2 and not ABI1 
+ROS* = RBOH 
+H_ATPase* = not ROS and not pHc and not Ca2c
+ABI1* = pHc and not PA and not ROS
+RCN1*= ABA 
+NIA1_2*= RCN1 
+NOS* = Ca2c 
+NO* = NIA1_2 and NOS 
+NOGC1* = NO
+ADPRc* =  NO
+cADPR* = ADPRc
+cGMP* = NOGC1
+PLC* = ABA and Ca2c
+InsP3* = PLC 
+InsPK* = ABA
+InsP6* = InsPK 
+CIS* = (cGMP and cADPR) or (InsP3 and InsP6)  
+Ca2_ATPase* = Ca2c 
+Ca2c * = (CaIM or CIS) and (not Ca2_ATPase)
+AnionEM* = ((Ca2c or pHc) and not ABI1 ) or (Ca2c and pHc)
+Depolarization* = KEV or AnionEM  or (not H_ATPase) or (not KOUT) or Ca2c 
+CaIM* = (ROS or not ERA1 or not ABH1) and (not Depolarization)
+KOUT* = (pHc or not ROS  or not NO) and Depolarization
+KAP*= (not pHc or not Ca2c) and Depolarization
+KEV* = Ca2c 
+PEPC* = not ABA
+Malate* = PEPC and not ABA and not AnionEM
+AtRAC1* = not ABA and not ABI1
+Actin_Reorganization* = Ca2c  or not AtRAC1 
+Closure* = (KOUT or KAP ) and AnionEM  and Actin_Reorganization and not Malate
