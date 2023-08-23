@@ -2,28 +2,29 @@ import math
 import itertools as it
 
 
-def prime2rr(prime:list[list[dict[str,int]]], regulators:tuple[str] | None = None, signs:str | None = None):
+PrimeType = list[list[dict[str, int]]]
+
+
+def prime2rr(prime:PrimeType,
+             regulators:tuple[str]|None=None, signs:str|None=None) -> tuple[tuple[str],str,str]:
     """
-    Returns the representation of the rule of a node
-    when given the prime implicants of that rule.
+    Returns a binary representation, regulators and signs of a rule
+    when given prime implicants of a rule.
 
     Parameters
     ----------
-    prime : list of list of dictionaries
-        prime implicants of the rule
-    regulators : tuple of strings
-        the regulating nodes
-    signs : length N binary str
-        represents signs of regulators. 0 means negation of the node
+    prime      - prime implicants of the rule           :PrimeType = list[list[dict[str,int]]]
+    regulators - the regulating nodes                   :length k tuple[str]
+    signs      - represents the signs of regulators     :length k binary str
+                 0 means negative regulation                                 
 
     Returns
     -------
-    regulators : tuple of strings
-        the regulating nodes
-    rr : length 2^N binary str
-        rule representation
-    signs : length N binary str
-        represents signs of regulators. 0 means negation of the node
+    regulators - the regulating nodes                   :length k tuple[str]
+    rr         - representation of the rule             :length 2^k binary str
+    signs      - represents the signs of regulators     :length k binary str
+                 0 means negative regulation
+    
     """
     # Get the tuple of the regulator nodes
     if regulators == None:
@@ -46,14 +47,14 @@ def prime2rr(prime:list[list[dict[str,int]]], regulators:tuple[str] | None = Non
     # Get the rr and signs of the regulators
     rr = ['0'] * (2**len(regulators))
     if signs == None:
-        signs = ['1'] * len(regulators)
+        signs_list = ['1'] * len(regulators)
         for implicant in prime[1]:
             # check whether certain node is inside
             for i, node in enumerate(regulators):
                 if node in implicant:
                     if implicant[node] == 0:
-                        signs[i] = '0'
-        signs = ''.join(signs)
+                        signs_list[i] = '0'
+        signs = ''.join(signs_list)
     # Get a binary number that gives us the position of the implicant on the rr
     # for every piece of rule that gives 1 to the regulated node,
     for implicant in prime[1]:
@@ -74,34 +75,31 @@ def prime2rr(prime:list[list[dict[str,int]]], regulators:tuple[str] | None = Non
     return regulators, rr, signs
 
 
-def rr2prime(regulators, rr, signs, inverted = False):
+def rr2prime(regulators:tuple[str], rr:str, signs:str, inverted:bool=False) -> PrimeType:
     """
-    Returns the prime implicants of the rule of a node
-    when given any representation of that rule.
+    Returns prime implicants of a rule
+    when given regulators, signs and a binary representation of a rule.
 
     Parameters
     ----------
-    regulators : tuple of strings
-        the regulating nodes
-    rr : length 2^N binary str
-        representation of the rules
-    signs : length N binary str
-        represents signs of regulators. 0 means negation of the node
-    inverted : Boolean
-        If True, get the prime assuming the input rr is inverted.
-        Default is False.
+    regulators - the regulating nodes                       :length k tuple[str]
+    rr         - representation of the rule                 :length 2^k binary str
+    signs      - represents the signs of regulators         :length k binary str
+                 0 means negative regulation
+    inverted   - if true, input rr is taken as inverted     :bool
+                 default is False
 
     Returns
     -------
-    prime : list of list of dictionaries
-        prime implicants of the rule
+    prime - prime implicants of the rule    :PrimeType = list[list[dict[str,int]]]
+        
 
     """
-    N = len(regulators)
-    assert 2**N == len(rr), "The length of rr should be equal to 2^(number of nodes)"
-    assert N == len(signs), "signs should be a list with the numbe of nodes as length"
+    k = len(regulators)
+    assert 2**k == len(rr), "The length of rr should be equal to 2^(number of nodes)"
+    assert k == len(signs), "signs should be a list with the numbe of nodes as length"
 
-    inverted = int(inverted)
+    inv = int(inverted)
     min_rr = get_uni_rr(rr, max = False)
     max_irr = get_max_irr(rr)
     min_irr = get_uni_rr(max_irr, max = False)
@@ -111,56 +109,53 @@ def rr2prime(regulators, rr, signs, inverted = False):
         # get the regulator values if there is '1'
         if min_rr[i] == '1':
             # bi represents the regulator values in binary string
-            bi = format(2**N - i - 1, '0' + str(N) + 'b')
+            bi = format(2**k - i - 1, '0' + str(k) + 'b')
         else:
             continue
         implicant = {}
         for i, num in enumerate(bi):
             if num == '1':
-                implicant[regulators[i]] = (int(signs[i]) - inverted)%2
-        prime[1-inverted].append(implicant)
+                implicant[regulators[i]] = (int(signs[i]) - inv)%2
+        prime[1-inv].append(implicant)
 
     for i in range(len(rr)):
         # get the regulator values if there is '1'
         if min_irr[i] == '1':
             # bi represents the regulator values in binary string
-            bi = format(2**N - i - 1, '0' + str(N) + 'b')
+            bi = format(2**k - i - 1, '0' + str(k) + 'b')
         else:
             continue
         implicant = {}
         for i, num in enumerate(bi):
             if num == '1':
-                implicant[regulators[i]] = (1-int(signs[i]) - inverted)%2
-        prime[0-inverted].append(implicant)
+                implicant[regulators[i]] = (1-int(signs[i]) - inv)%2
+        prime[0-inv].append(implicant)
 
     return prime
 
 
-def rr2bnet(regulators:tuple[str], rr, signs):
+def rr2bnet(regulators:tuple[str], rr:str, signs:str) -> str:
     """
-    Returns rules when given the regulating nodes, the rule representation
-    and the node signs.
+    Returns a bnet string
+    when given regulators, signs and a binary representation of a rule.
 
     Parameters
     ----------
-    regulators : tuple of strings
-        the regulating nodes
-    rr : length 2^N binary str
-        rule representation
-    signs : length N binary str
-        represents signs of regulators. 0 means negation of the node
+    regulators - the regulating nodes                       :length k tuple[str]
+    rr         - representation of the rule                 :length 2^k binary str
+    signs      - represents the signs of regulators         :length k binary str
+                 0 means negative regulation
 
     Returns
     -------
-    bnet : str
-        bnet formatted rules
-
+    bnet - bnet formatted rules     :str
+        
     """
     nodes = list(regulators)
-    N = len(nodes)
+    k = len(nodes)
 
-    assert 2**N == len(rr), "The length of rr should be equal to 2^(number of nodes)"
-    assert N == len(signs), "signs should be a list with the number of nodes as length"
+    assert 2**k == len(rr), "The length of rr should be equal to 2^(number of nodes)"
+    assert k == len(signs), "signs should be a list with the number of nodes as length"
 
     for i, num in enumerate(signs):
         if num == '0':
@@ -171,7 +166,7 @@ def rr2bnet(regulators:tuple[str], rr, signs):
     for i, num in enumerate(rr):
         bnet += str(num)
         # bin = 111, 110, 101, ...
-        bi = format(2**N-i-1, '0' + str(N) + 'b')
+        bi = format(2**k-i-1, '0' + str(k) + 'b')
         for j, node in enumerate(nodes):
             if bi[j] == '1':
                 bnet += ' & ' + node
@@ -181,33 +176,30 @@ def rr2bnet(regulators:tuple[str], rr, signs):
     return bnet
 
 
-def get_uni_rr(rr, max = True):
+def get_uni_rr(rr:str, max:bool=True) -> str:
     """
-    Returns the unique representation of the rule of a node(max or min)
-    when given any representation of that rule.
+    Returns the unique binary representation (max or min) of a rule
+    when given any binary representation of a rule.
 
     Parameters
     ----------
-    rr : length 2^N binary str
-        represents the rules
-    max : Boole
-        if True, get maximal representation
-        if False, get minimal representation
+    rr  - representation of the rule            :length 2^k binary str
+    max - if True, get maximal representation   :bool
+          if False, get minimal representation
 
     Returns
     -------
-    uni_rr : length 2^N binary str
-        unique representation of the rules
-        if maximal, it is equivalent to the truth table
-        if minimal, it is in a Blake canonical form
+    uni_rr - unique representation of the rules                 :length 2^k binary str
+             if maximal, it is equivalent to the truth table
+             if minimal, it is in a Blake canonical form
 
     """
-    # N = number of regulators
+    # k = number of regulators
     n = len(rr)
-    N = int(math.log2(n))
+    k = int(math.log2(n))
 
     # already minimal if the node is a fixed node
-    if N == 0:
+    if k == 0:
         return rr
 
     uni_rr = list(rr)
@@ -219,7 +211,7 @@ def get_uni_rr(rr, max = True):
         # get the regulator values if there is '1'
         if uni_rr[-i-1] == '1':
             # bi represents the regulator values in binary string
-            bi = format(i, '0' + str(N) + 'b')
+            bi = format(i, '0' + str(k) + 'b')
         else:
             continue
         # find all the positions that need to be changed to 0
@@ -246,21 +238,19 @@ def get_uni_rr(rr, max = True):
     return uni_rr
 
 
-def get_max_irr(rr):
+def get_max_irr(rr:str) -> str:
     """
-    Returns the inveted maximal representation of the rule of a node
-    when given any representation of that rule.
+    Returns the inverted maximal representation of the rule of a node
+    when given any representation of the rule.
 
     Parameters
     ----------
-    rr : length 2^N binary str
-        represents the rule
+    rr - represents the rule    :length 2^k binary str
 
     Returns
     -------
-    max_irr : length 2^N binary str
-        inverted maximal representation of the rule
-
+    max_irr - inverted maximal representation of the rule   :length 2^k binary str
+        
     """
     max_rr = get_uni_rr(rr, max = True)
     max_rr = max_rr.replace('0', 'X')

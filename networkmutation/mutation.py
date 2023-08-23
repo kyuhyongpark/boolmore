@@ -3,24 +3,25 @@ import conversions as conv
 import constraint as cons
 
 
-def mutate_rr(rr, probability):
-    '''
-    Returns the mutated representation of that rule when given any representation of a rule.
+def mutate_rr(rr:str, probability:float) -> str:
+    """
+    Returns the mutated representation of that rule
+    when given any representation of a rule.
+    
     This function is biased to activate all the implicants.
     Use mutate_rr_bias for non-biased or specific biased mutations.
 
     Parameters
     ----------
-    rr : length 2^N binary str
-        representation of the rules
-    probability : float between 0 and 1
-        probability that each of the binary number in the representation is mutated.
+    rr          - representation of the rule                    :length 2^k binary str
+    probability - probability that each of the binary number    :float between 0 and 1
+                  in the representation is mutated.
 
     Returns
     -------
-    mutated_rr : length 2^N binary str
-        representation of the rules
-    '''
+    mutated_rr - representation of the mutated rule     :length 2^k binary str
+    
+    """
     lst = []
     for num in rr:
         lst.append(int(num))
@@ -31,27 +32,27 @@ def mutate_rr(rr, probability):
     mutated_rr = ''
     for num in lst:
         mutated_rr += str(num % 2)
+    
     return mutated_rr
 
-def mutate_rr_bias(rr, probability, bias = 0.5):
+
+def mutate_rr_bias(rr:str, probability:float, bias:float=0.5) -> str:
     """
-    When given any representation of a rule,
-    returns the mutated representation of that rule
-    with a certain inacitivity bias.
+    Returns the mutated representation of a rule
+    when given any representation of a rule,
+    with a bias to invert representation in the process.
 
     Parameters
     ----------
-    rr : length 2^N binary str
-        representation of the rules
-    probability : float between 0 and 1
-        probability that each of the binary number in the representation is mutated.
-    bias : float between 0 and 1
-        bias to deactivate implicants
+    rr          - representation of the rule                    :length 2^k binary str
+    probability - probability that each of the binary number    :float between 0 and 1
+                  in the representation is mutated.
+    bias        - probability to invert rr when mutating        :float between 0 and 1
 
     Returns
     -------
-    mutated_rr : length 2^N binary str
-        representation of the rules
+    mutated_rr - representation of the mutated rule     :length 2^k binary str
+
     """
     rnd = random.random()
     if rnd < bias:
@@ -74,22 +75,21 @@ def mutate_rr_constraint(regulators:tuple[str], rr:str, base_rr:str, constraints
 
     Parameters
     ----------
-    regulators  - the regulating nodes                      : tuple(str)
-    rr          - representation of the rule                : length 2^N binary str
-    base_rr     - representation of the the baseline rule   : length 2^N binary str
-    constraints - represents 5 types of constraints         : dict{str: set or dict}
+    regulators  - the regulating nodes                      :tuple[str]
+    rr          - representation of the rule                :length 2^(k+a) binary str
+    base_rr     - representation of the the baseline rule   :length 2^k binary str
+    constraints - represents 5 types of constraints         :dict[str, set or dict]
                   (fixed, regulate, necessary, group, possible_constant)
-    node        - the target node                           : str
-    probability - probability that each binary is mutated   : float between 0 and 1
-    bias        - bias to deactivate implicants             : float between 0 and 1
+    node        - the target node                           :str
+    probability - probability that each binary is mutated   :float between 0 and 1
+    bias        - probability to invert rr when mutating    :float between 0 and 1
 
     Returns
     -------
-    mutated_rr  - representation of the mutated rule        : length 2^N binary str
-    modified    - True if modified                          : bool
+    mutated_rr  - representation of the mutated rule        :length 2^(k+a) binary str
+    modified    - True if modified                          :bool
 
     """
-
     # constant nodes have no degree of freedom and should not be mutated
     if len(regulators) == 0:
         if rr == base_rr:
@@ -127,7 +127,7 @@ def mutate_rr_constraint(regulators:tuple[str], rr:str, base_rr:str, constraints
             groups = constraints['group'][node]
             group_rr, group_regulators = cons.rr2group_rr(regulators, rr, groups)
             mutated_group_rr = mutate_rr_bias(group_rr, probability, bias)
-            mutated_rr = cons.group_rr2rr(regulators, mutated_group_rr, groups, group_regulators)
+            mutated_rr = cons.group_rr2rr(regulators, mutated_group_rr, group_regulators)
         else:
             mutated_rr = mutate_rr_bias(rr, probability, bias)
 
@@ -141,7 +141,7 @@ def mutate_rr_constraint(regulators:tuple[str], rr:str, base_rr:str, constraints
         # check constraint - regulate
         if node in constraints['regulate']:
             for reg in constraints['regulate'][node]:
-                redo = redo or not cons.check_regulation(regulators, mutated_rr, reg)
+                redo = redo or not cons.check_regulate(regulators, mutated_rr, reg)
                 if redo == True:
                     # print('redo to ensure', reg, 'regulates', node)
                     break
@@ -169,7 +169,6 @@ def mutate_rr_constraint(regulators:tuple[str], rr:str, base_rr:str, constraints
 
         if redo == True:
             trial += 1
-            print(trial)
 
     max_original = conv.get_uni_rr(rr)
     max_mutated = conv.get_uni_rr(mutated_rr)
@@ -181,31 +180,25 @@ def mutate_rr_constraint(regulators:tuple[str], rr:str, base_rr:str, constraints
     return mutated_rr, modified
 
 
-def add_regulator(regulators:tuple[str], rr:str, signs:str, new_regulator:str, new_sign:str, bias:float=0.5):
+def add_regulator(regulators:tuple[str], rr:str, signs:str, new_regulator:str, new_sign:str,
+                  bias:float=0.5) -> tuple[tuple[str], str, str]:
     """
     Returns a new representation of a rule with an extra regulator.
 
     Parameters
     ----------
-    regulators : tuple of strings
-        the regulating nodes
-    rr : length 2^N binary str
-        representation of the rules
-    signs : length N binary str
-        represents signs of regulators. 0 means negation of the node
-    new_regulator : str
-        the added regulating node
-    new_sign : length 1 binary str
-        represents sign of the new regulator. 0 means negation of the node
+    regulators    - the regulating nodes                    :length k tuple[str]
+    rr            - representation of the rule              :length 2^k binary str
+    signs         - represents the signs of regulators      :length k binary str
+                    0 means negative regulation
+    new_regulator - the added regulating node               :str
+    new_sign      - represents sign of the new regulator    :length 1 binary str
 
     Returns
     -------
-    added_regulators : tuple of strings
-        the regulating nodes
-    added_rr : length 2^(N+1) binary str
-        representation of the rules
-    added_signs : length N+1 binary str
-        represents signs of regulators. 0 means negation of the node
+    added_regulators - the regulating nodes             :length k+1 tuple[str]
+    added_rr         - representation of the rule       :length 2^(k+1) binary str
+    added_signs      - represents signs of regulators   :length k+1 binary str
 
     """
     nodes = list(regulators)
@@ -213,8 +206,6 @@ def add_regulator(regulators:tuple[str], rr:str, signs:str, new_regulator:str, n
     added_regulators = tuple(nodes)
 
     added_signs = signs + new_sign
-
-    N = len(regulators)
 
     rnd = random.random()
     if rnd < bias:
@@ -231,32 +222,27 @@ def add_regulator(regulators:tuple[str], rr:str, signs:str, new_regulator:str, n
     return added_regulators, added_rr, added_signs
 
 
-def delete_regulator(regulators, rr, signs, target_regulator, bias=0.5):
+def delete_regulator(regulators:tuple[str], rr:str, signs:str, target_regulator:str,
+                     bias:float=0.5) -> tuple[tuple[str], str, str]:
     """
     Returns a new representation of a rule with the target regulator deleted.
 
     Parameters
     ----------
-    regulators : tuple of strings
-        the regulating nodes
-    rr : length 2^N binary str
-        representation of the rules
-    signs : length N binary str
-        represents signs of regulators. 0 means negation of the node
-    target_regulator : str
-        the regulatort to be deleted
+    regulators       - the regulating nodes                 :length k tuple[str]
+    rr               - representation of the rule           :length 2^k binary str
+    signs            - represents the signs of regulators   :length k binary str
+                       0 means negative regulation
+    target_regulator - the regulator to be deleted          :str
 
     Returns
     -------
-    deleted_regulators : tuple of strings
-        the regulating nodes
-    deleted_rr : length 2^(N-1) binary str
-        representation of the rules
-    deleted_signs : length N-1 binary str
-        represents signs of regulators. 0 means negation of the node
+    deleted_regulators - the regulating nodes                   :length k-1 tuple[str]
+    deleted_rr         - representation of the rules            :length 2^(k-1) binary str
+    deleted_signs      - represents the signs of regulators     :length k-1 binary str
 
     """
-    N = len(regulators)
+    k = len(regulators)
     n = regulators.index(target_regulator)
 
     nodes = list(regulators)
@@ -272,8 +258,8 @@ def delete_regulator(regulators, rr, signs, target_regulator, bias=0.5):
         rr = conv.get_max_irr(rr)
 
     bi = list(rr)
-    for i in range(2**N):
-        if i % 2**(N-n) > 2**(N-1-n)-1:
+    for i in range(2**k):
+        if i % 2**(k-n) > 2**(k-1-n)-1:
             deleted_rr += bi[i]
 
     if rnd < bias:
