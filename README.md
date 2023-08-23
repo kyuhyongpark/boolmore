@@ -1,0 +1,2 @@
+# BoolMoRe
+Boolean Model Refiner
