@@ -5,117 +5,32 @@ from model import Model, mix_models
 from experiment import import_exps
 
 
-RUN_GA = True
-NAME = 'ref_20230815'
-run_type = 'normal'
-
-# BASE = 'networkmutation/baseline/ABA_full_20230407.txt'
-# BASE = 'networkmutation/baseline/ABA_full_fix_20230407.txt'
-BASE = 'networkmutation/baseline/ABA_GA_base_A_20230501.txt'
-# BASE = 'networkmutation/baseline/ABA_GA_base_B_20230407.txt'
-# BASE = 'networkmutation/baseline/ABA_GA_base_A_20230511_ca_ext.txt'
-# BASE = 'networkmutation/baseline/ABA_GA_base_B_20230511_ca_ext.txt'
-
-MODEL = BASE
-### GA_try
-# MODEL = 'networkmutation/models/try_20230522_7854_gen121.txt'
-### GA0
-# MODEL = 'networkmutation/models/no_edge_20230303_3807_gen54_mod.txt'
-### GA1
-# MODEL = 'networkmutation/models/20230512_7790_gen125_mod.txt'
-### GA2
-# MODEL = 'networkmutation/models/osc_20230514_8025_gen128.txt'
-
-DEFAULT_SOURCES = {'ABA':0}
-if run_type == 'normal':
-    DATA = 'networkmutation/data/data_20230426.tsv'
-
-    ### constraints for the typical run
-    CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
-                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-                   'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-                   'possible_constant': set()}
-    # ### constraints for the 'more edges' version 20230524 - allow change of Ca2c, move to regulate
-    # CONSTRAINTS = {'fixed': {'Ca2_ATPase', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2c':('CaIM','CIS','Ca2_ATPase')},
-    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-    #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #                'possible_constant': set()}
-
-    ### edge pool for the typical run 20230801 - 13 edges
-    EDGE_POOL = [('Ca2c', 'ABI2', '0'),('Ca2c', 'HAB1', '0'),('Ca2c', 'PP2CA', '0'),
-                 ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
-                 ('AquaporinPIP2_1', 'ROS', '1'),
-                 ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
-                 ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
-                 ('GHR1', 'CPK3_21', '1'),
-                 ('PA', 'Microtubule_Depolymerization', '1')]
-    # ### more edges version 20230704 - 14 edges
-    # EDGE_POOL = (('PA', 'ABI2', '0'),
-    #              ('AquaporinPIP2_1', 'ROS', '1'),
-    #              ('Actin_Reorganization', 'RBOH', '1'),
-    #              ('ROS', 'Actin_Reorganization', '1'),
-    #              ('pHc', 'Vacuolar_Acidification', '1'),
-    #              ('PA', 'Microtubule_Depolymerization', '1'),
-    #              ('GHR1', 'KOUT', '1'),
-    #              ('NO', 'KEV', '1'),
-    #              ('CIS', 'AnionEM', '1'),
-    #              ('GPA1', 'Ca2c', '1'), ('PA', 'Ca2c', '1'),
-    #              ('pHc', 'SPHK1_2', '1'),
-    #              ('InsP3', 'SPHK1_2', '1'),
-    #              ('ABA', 'GEF1_4_10', '0'))
-
-elif run_type == 'osc':
-    DATA = 'networkmutation/data/data_osc_20230426.tsv'
-
-    ### constraints for the typical run for ca_osc model
-    CONSTRAINTS = {'fixed': {'Ca2osc', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-                   'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',)},
-                   'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-                   'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-                   'possible_constant': set()}
-    # ### constraints for the 'more edges' version - allow modification of Ca2osc, move to regulate
-    # CONSTRAINTS = {'fixed': {'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'},
-    #                'regulate': {'ABI1':('RCARs',), 'ABI2':('RCARs',), 'HAB1':('RCARs',), 'PP2CA':('RCARs',), 'K_efflux':('KEV','KOUT'), 'OST1':('ABI1','ABI2'), 'Depolarization':('AnionEM',), 'Ca2osc':('CaIM','CIS')},
-    #                'necessary' : {'8-nitro-cGMP':('cGMP',), 'KOUT':('Depolarization',), 'Malate':('PEPC', 'AnionEM'), 'ROS':('NADPH', 'RBOH')},
-    #                'group': {'PA':(('PC','PLDalpha'),('PC','PLDdelta'),('DAG','DAGK')), 'S1P_PhytoS1P':(('SPHK1_2','Sph'),)},
-    #                'possible_constant': set()}
-
-    ### edge pool for the typical run for the ca_osc model 20230801 - 13 edges
-    EDGE_POOL = [('Ca2osc', 'ABI2', '0'),('Ca2osc', 'HAB1', '0'),('Ca2osc', 'PP2CA', '0'),
-                 ('PA', 'ABI2', '0'),('PA', 'HAB1', '0'),('PA', 'PP2CA', '0'),
-                 ('AquaporinPIP2_1', 'ROS', '1'),
-                 ('Actin_Reorganization', 'RBOH', '1'), ('ROS', 'Actin_Reorganization', '1'),
-                 ('pHc', 'Vacuolar_Acidification', '1'), ('ABI1', 'GEF1_4_10', '1'),
-                 ('GHR1', 'CPK3_21', '1'),
-                 ('PA', 'Microtubule_Depolymerization', '1')]
-    # ### more edges version 20230704 - 14 edges
-    # EDGE_POOL = (('PA', 'ABI2', '0'),
-    #              ('AquaporinPIP2_1', 'ROS', '1'),
-    #              ('Actin_Reorganization', 'RBOH', '1'),
-    #              ('ROS', 'Actin_Reorganization', '1'),
-    #              ('pHc', 'Vacuolar_Acidification', '1'),
-    #              ('PA', 'Microtubule_Depolymerization', '1'),
-    #              ('GHR1', 'KOUT', '1'),
-    #              ('NO', 'KEV', '1'),
-    #              ('CIS', 'AnionEM', '1'),
-    #              ('GPA1', 'Ca2osc', '1'), ('PA', 'Ca2osc', '1'),
-    #              ('pHc', 'SPHK1_2', '1'),
-    #              ('InsP3', 'SPHK1_2', '1'),
-    #              ('ABA', 'GEF1_4_10', '0'))
-
-
+NAME = config.NAME
 FILE = NAME + '_log.txt'
-STARTING_ID = 1
-STARTING_GEN = 1
-ITERATIONS = 100
-PER_ITERATION = 100
-KEEP = 20
-EXPORT_TOP = 1
-EXPORT_THRESHOLD = 430
-PROB = 0.01
-EDGE_PROB = 0.5
+
+# take parameters from the config file
+STARTING_ID = config.parameters['starting_id']
+STARTING_GEN = config.parameters['starting_gen']
+TOTAL_ITERATIONS = config.parameters['total_iterations']
+PER_ITERATION = config.parameters['per_iteration']
+KEEP = config.parameters['keep']
+EXPORT_TOP = config.parameters['export_top']
+EXPORT_THRESHOLD = config.parameters['export_threshold']
+PROB = config.parameters['prob']
+EDGE_PROB = config.parameters['edge_prob']
+
+# if starting model is not given, take the base as the start
+if config.STARTING_MODEL != None:
+    STARTING_MODEL = config.STARTING_MODEL
+else:
+    STARTING_MODEL = config.data_bank[config.RUN_TYPE]['base']
+
+DATA = config.data_bank[config.RUN_TYPE]['data']
+BASE = config.data_bank[config.RUN_TYPE]['base']
+DEFAULT_SOURCES = config.data_bank[config.RUN_TYPE]['default_sources']
+CONSTRAINTS = config.data_bank[config.RUN_TYPE]['constraints']
+EDGE_POOL = config.data_bank[config.RUN_TYPE]['edge_pool']
+
 
 config.id = STARTING_ID
 
@@ -134,7 +49,7 @@ if __name__ == '__main__':
     print()
 
     print("Loading starting model . . .")
-    primes = sm.format.import_primes(MODEL)
+    primes = sm.format.import_primes(STARTING_MODEL)
     n1 = Model.import_model(primes, config.id, STARTING_GEN, base, CONSTRAINTS, EDGE_POOL, DEFAULT_SOURCES)
     print("Starting model loaded.")
     n1.get_predictions(pert)
@@ -152,104 +67,103 @@ if __name__ == '__main__':
     # from pyboolnet.prime_implicants import primes_are_equal
     # print(primes_are_equal(n1.primes,new_model.primes))
 
-    if RUN_GA == True:
-        fp = open(FILE, "w")
+    fp = open(FILE, "w")
 
-        fp.write(f'# {DATA=}\n')
-        fp.write(f'# {DEFAULT_SOURCES=}\n')
-        fp.write(f'# {CONSTRAINTS=}\n')
-        fp.write(f'# {EDGE_POOL=}\n')
-        fp.write(f'\n# {BASE=}\n')
-        fp.write(f'# extra edges: {base.extra_edges}\n')
-        fp.write(f'# score: {base.score}\n')
-        with open(BASE, 'r') as base_text:
-            for line in base_text:
+    fp.write(f'# {DATA=}\n')
+    fp.write(f'# {DEFAULT_SOURCES=}\n')
+    fp.write(f'# {CONSTRAINTS=}\n')
+    fp.write(f'# {EDGE_POOL=}\n')
+    fp.write(f'\n# {BASE=}\n')
+    fp.write(f'# extra edges: {base.extra_edges}\n')
+    fp.write(f'# score: {base.score}\n')
+    with open(BASE, 'r') as base_text:
+        for line in base_text:
+            if not line.startswith('#') and not line.isspace():
+                fp.write('# ' + line)
+    fp.write(f'\n# {STARTING_MODEL=}\n')
+    if BASE != STARTING_MODEL:
+        fp.write(f'# score: {n1.score}\n')
+        fp.write(f'# extra edges: {n1.extra_edges}\n')
+        with open(STARTING_MODEL, 'r') as model_text:
+            for line in model_text:
                 if not line.startswith('#') and not line.isspace():
                     fp.write('# ' + line)
-        fp.write(f'\n# {MODEL=}\n')
-        if BASE != MODEL:
-            fp.write(f'# score: {n1.score}\n')
-            fp.write(f'# extra edges: {n1.extra_edges}\n')
-            with open(MODEL, 'r') as model_text:
-                for line in model_text:
-                    if not line.startswith('#') and not line.isspace():
-                        fp.write('# ' + line)
 
-        ### Genetic Algorithm
-        print("- - - - - iteration ", 0, " - - - - -")
-        iteration = []
-        iteration.append(n1)
-        for i in range(PER_ITERATION-1):
-            new_model = n1.mutate(PROB, EDGE_PROB)
+    ### Genetic Algorithm
+    print("- - - - - iteration ", 0, " - - - - -")
+    iteration = []
+    iteration.append(n1)
+    for i in range(PER_ITERATION-1):
+        new_model = n1.mutate(PROB, EDGE_PROB)
+        new_model.get_predictions(pert)
+        new_model.get_model_score(exps)
+        iteration.append(new_model)
+    
+    iteration = sorted(iteration, key=lambda x: (len(x.extra_edges), x.complexity))
+    iteration = sorted(iteration, key=lambda x: x.score, reverse=True)
+    
+    for i in range(EXPORT_TOP):
+        iteration[i].export(NAME, EXPORT_THRESHOLD)
+
+    print("top score :", iteration[0].score)
+    print("extra edges :", len(iteration[0].extra_edges))
+    print("complexity of the top model :", iteration[0].complexity)
+    if not iteration[0].check_constraint():
+        print("ERROR: model does not follow constraints")
+
+    fp.write('iteration\ttop score\textra edges\tcomplexity\n')
+    fp.write('0\t'+ str(iteration[0].score) +'\t')
+    fp.write(str(len(iteration[0].extra_edges)) +'\t')
+    fp.write(str(iteration[0].complexity) +'\n')
+    
+    for i in range(TOTAL_ITERATIONS):
+        print("- - - - - iteration ", i+1, " - - - - -")
+        new_iteration = []
+        # keep the best ones
+        for j in range(KEEP):
+            new_iteration.append(iteration[j])
+    
+        # mix the best ones
+        to_be_mixed = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
+        to_be_mixed = sorted(to_be_mixed, key=lambda x: x.score, reverse=True)
+        weights = list(range(1, KEEP+1))
+        weights.reverse()
+        for j in range(KEEP):
+            mix = random.choices(to_be_mixed, weights=weights, k=2)
+            mixed_model = mix_models(mix[0], mix[1])
+            mixed_model.get_predictions(pert)
+            mixed_model.get_model_score(exps)
+            new_iteration.append(mixed_model)
+    
+        # mutate the best ones
+        weights = list(range(1, 2*KEEP+1))
+        weights.reverse()
+        new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
+        new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
+        targets = random.choices(new_iteration, weights=weights, k=PER_ITERATION-2*KEEP)
+        for target in targets:
+            new_model = target.mutate(PROB, EDGE_PROB)
             new_model.get_predictions(pert)
             new_model.get_model_score(exps)
-            iteration.append(new_model)
+            new_iteration.append(new_model)
         
-        iteration = sorted(iteration, key=lambda x: (len(x.extra_edges), x.complexity))
-        iteration = sorted(iteration, key=lambda x: x.score, reverse=True)
-        
-        for i in range(EXPORT_TOP):
-            iteration[i].export(NAME, EXPORT_THRESHOLD)
+        new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
+        new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
+    
+        for j in range(EXPORT_TOP):
+            new_iteration[j].export(NAME, EXPORT_THRESHOLD)
 
-        print("top score :", iteration[0].score)
-        print("extra edges :", len(iteration[0].extra_edges))
-        print("complexity of the top model :", iteration[0].complexity)
-        if not iteration[0].check_constraint():
+        # Always export the final best model
+        if i+1 == TOTAL_ITERATIONS:
+            new_iteration[0].export(NAME, 0)
+
+        print("top score : ", new_iteration[0].score)
+        print("extra edges :", len(new_iteration[0].extra_edges))
+        print("complexity of the top model :", new_iteration[0].complexity)
+        if not new_iteration[0].check_constraint():
             print("ERROR: model does not follow constraints")
-
-        fp.write('iteration\ttop score\textra edges\tcomplexity\n')
-        fp.write('0\t'+ str(iteration[0].score) +'\t')
-        fp.write(str(len(iteration[0].extra_edges)) +'\t')
-        fp.write(str(iteration[0].complexity) +'\n')
-        
-        for i in range(ITERATIONS):
-            print("- - - - - iteration ", i+1, " - - - - -")
-            new_iteration = []
-            # keep the best ones
-            for j in range(KEEP):
-                new_iteration.append(iteration[j])
-        
-            # mix the best ones
-            to_be_mixed = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
-            to_be_mixed = sorted(to_be_mixed, key=lambda x: x.score, reverse=True)
-            weights = list(range(1, KEEP+1))
-            weights.reverse()
-            for j in range(KEEP):
-                mix = random.choices(to_be_mixed, weights=weights, k=2)
-                mixed_model = mix_models(mix[0], mix[1])
-                mixed_model.get_predictions(pert)
-                mixed_model.get_model_score(exps)
-                new_iteration.append(mixed_model)
-        
-            # mutate the best ones
-            weights = list(range(1, 2*KEEP+1))
-            weights.reverse()
-            new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
-            new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
-            targets = random.choices(new_iteration, weights=weights, k=PER_ITERATION-2*KEEP)
-            for target in targets:
-                new_model = target.mutate(PROB, EDGE_PROB)
-                new_model.get_predictions(pert)
-                new_model.get_model_score(exps)
-                new_iteration.append(new_model)
-            
-            new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
-            new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
-        
-            for j in range(EXPORT_TOP):
-                new_iteration[j].export(NAME, EXPORT_THRESHOLD)
-
-            # Always export the final best model
-            if i+1 == ITERATIONS:
-                new_iteration[0].export(NAME, 0)
-
-            print("top score : ", new_iteration[0].score)
-            print("extra edges :", len(new_iteration[0].extra_edges))
-            print("complexity of the top model :", new_iteration[0].complexity)
-            if not new_iteration[0].check_constraint():
-                print("ERROR: model does not follow constraints")
-            fp.write(str(i+1) +'\t'+ str(new_iteration[0].score) +'\t')
-            fp.write(str(len(new_iteration[0].extra_edges)) +'\t')
-            fp.write(str(new_iteration[0].complexity) +'\n')
-        
-            iteration = new_iteration
+        fp.write(str(i+1) +'\t'+ str(new_iteration[0].score) +'\t')
+        fp.write(str(len(new_iteration[0].extra_edges)) +'\t')
+        fp.write(str(new_iteration[0].complexity) +'\n')
+    
+        iteration = new_iteration
