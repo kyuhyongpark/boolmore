@@ -1,0 +1,69 @@
+# constant nodes from the original paper: AKAP12=PTEN=DUSP1=0, PAI-1=1
+EGR1,	Erk
+Elk1,	!(!JNK & !Erk)
+Mkk4,	!(!Mekk4 & !MLK3 & !Mekk1)
+HBEGF,	!(!p38 & !Erk)
+cMYC,	Erk
+RSK,	Erk
+IL8,	!(!p38 & !Erk)
+Ras,	SOS
+uPAR,	AP1
+AP1,	cFOS & cJUN
+p38,	!(!PAK1 & DUSP1 | !PAK1 & !Mkk6 | !Mkk3 & !PAK1)
+Cdc42_Rac1,	Ras & Akt & DOCK180
+SOS,	Grb2
+MET,	HGF
+ETS,	Erk
+JNK,	!(!PAK2 & !Mekk7 | !Mkk4 & !PAK2)
+CTGF,	!(!p38 & !Erk)
+EGFR,	!(!HBEGF & !EGF)
+PAK2,	Cdc42_Rac1
+Plasmin,	uPA & PAI_1
+PKC,	Ca & DAG & !AKAP12
+Shc,	!(!MET & !EGFR & !Fak)
+Mekk4,	Cdc42_Rac1
+Fak,	Integrins & Rap1 & !PTEN
+Proliferation,	CyclinD & CDK2
+CCL20,	Erk
+MLK3,	Cdc42_Rac1
+C3G,	CRKL
+CellMigration,	IL8 & CTGF & CCL20 & PTGS2
+STAT3,	Erk
+MMP1_10,	Plasmin
+cFOS,	Erk
+CyclinD,	!(!Elk1 & !ATF2)
+Erk,	Mek
+CDKN2A,	!(!Elk1 & !ETS)
+Mek,	!(!Mekk1 & !Raf)
+IP3,	PLC_g
+Integrins,	ECM
+PTGS2,	!(!ATF2 & !cJUN | !cFOS & !ATF2)
+CREB,	RSK
+Mekk7,	Mekk1
+Mkk3,	MLK3
+PAK1,	Cdc42_Rac1
+Mkk6,	MLK3
+CDK2,	CyclinD & !CDKN1A | CyclinD & !CDKN2A
+uPA,	uPAR
+Ca,	IP3
+CRKL,	Grb2
+PAK3,	Cdc42_Rac1
+Mekk1,	Cdc42_Rac1
+DAG,	PLC_g
+ATF2,	p38 & JNK
+cJUN,	p38 & JNK
+ECM,	MMP1_10
+PI3K,	!(!MET & !Fak | !MET & !EGFR)
+Raf,	Ras & PKC & PAK3
+Grb2,	Shc
+Akt,	PI3K & !PTEN
+Rap1,	C3G
+CDKN1A,	STAT3
+PLC_g,	!(!MET & !EGFR)
+DOCK180,	CRKL
+PTEN,	0
+DUSP1,	0
+AKAP12,	0
+PAI_1,	1
+HGF,	HGF
+EGF,	EGF

@@ -1,0 +1,81 @@
+Bcl2,	!(!STAT5 & !FR4)
+STAT1,	!(!IL27R & !JAK1 & !IFNbR)
+NFkB,	BCR
+IL10R,	IL10
+IL17,	RORgt
+Ebf1,	!Runx3 & Runx1
+STAT4,	!GATA3 & IL12R
+Flt3,	!Pax5 & Hoxa9 | !Pax5 & Flt3L
+STAT6,	IL4R
+TNFR2,	TNFa
+Tbet,	Tbet & !Foxp3 & !GATA3 & !RORgt | STAT1 & !Foxp3 & !GATA3 & !RORgt
+IFNgR,	IFNg
+IL2R,	IL2
+NFAT,	TCR
+STAT5,	JAK3 & !SOCS1 | IL2R & !SOCS1
+XBP1,	Blimp1
+Runx3,	STAT5 & CD8 | !ThPOK & !CD4 & CD8
+ThPOK,	!(!Tbet & !ThPOK & !Foxp3 & !GATA3 & !RORgt & CD8 & !TCR | Runx3 & !ThPOK & !Foxp3 & !CD4 & !GATA3 & !RORgt & !TCR | Runx3 & !ThPOK & !Foxp3 & !GATA3 & !RORgt & CD8 & !TCR | !Tbet & !ThPOK & !Foxp3 & !CD4 & !GATA3 & !RORgt & !TCR)
+TGFbR,	TGFb
+Foxp3,	!Tbet & Foxp3 & !GATA3 & !STAT3 & !RORgt | !Tbet & !GATA3 & SMAD3 & !STAT3 & !RORgt | !Tbet & SMAD2 & !GATA3 & !STAT3 & !RORgt
+IL23R,	IL23
+Gzmb,	EOMES
+EOMES,	Tbet & Runx3 | Runx3 & IL27R
+CD4,	!Ebf1 & !Runx3 & ThPOK | !Ebf1 & !Runx3 & Notch1 | !Ebf1 & !Runx3 & CD4
+Bcl6,	Ebf1 & IL21R & !Blimp1 & !Irf4
+IL27R,	IL27
+SMAD2,	TGFbR
+GATA3,	!Tbet & !Foxp3 & !Runx1 & !HEB & !RORgt & TCF1 | STAT6 & !Tbet & !Foxp3 & !Runx1 & !HEB & !RORgt | !Tbet & !Foxp3 & GATA3 & !Runx1 & !HEB & !RORgt
+Gfi1,	Ikaros
+Helios,	NFkB
+SMAD3,	TGFbR & !AKT
+FR4,	Foxp3 & B9
+IL7R,	IL7 & !TCR
+Pax5,	Ebf1 & !Flt3 & !ThPOK & !Blimp1 & !Irf4 | Ebf1 & STAT5 & !ThPOK & !Blimp1 & !Irf4
+Runx1,	!Runx3 & !ThPOK & Runx1 & !Notch1 & !TCR
+HEB,	Notch1
+IL21R,	IL21
+JAK3,	IL6R & !Notch1 | IL7R & !Notch1
+Bcl11b,	Notch1 & TCF1
+STAT3,	!(!IL10R & !IL23R & !IL21R & !JAK3)
+Bach2,	!(!Bcl6 & !Pax5)
+TGFb,	Foxp3
+IL6R,	IL6
+JAK1,	IFNgR
+AKT,	TNFR2
+IL6,	RORgt
+IL10,	GATA3
+IFNg,	STAT4 & !STAT3 | !STAT3 & IRAK | Tbet & !STAT3 | EOMES & !STAT3
+Notch1,	Dll1
+IL12R,	!STAT6 & IL12
+IL18R,	!STAT6 & IL18
+Blimp1,	!Bcl6 & !Pax5 & !Bach2 & Irf4
+CD19,	Pax5
+RORgt,	!Tbet & !Foxp3 & !GATA3 & RORgt | SMAD2 & STAT3
+SOCS1,	!(!STAT1 & !Tbet)
+Prf1,	EOMES
+Irf4,	NFkB & Ebf1 & !Flt3 | Ebf1 & !Flt3 & Blimp1
+TCF1,	Notch1
+TNFa,	RORgt
+ERK,	!(!Flt3 & !BCR)
+IL4R,	!SOCS1 & IL4
+CD8,	!Ebf1 & !ThPOK & CD8 & !TCR | !Ebf1 & !ThPOK & Notch1 & !TCR | !Ebf1 & Runx3 & !ThPOK & !TCR
+Ikaros,	PU1
+IFNbR,	IFNb
+IRAK,	IL18R
+IL4,	!STAT1 & GATA3
+PU1,	Irf4
+BCR,	BCR
+Dll1,	Dll1
+IL23,	IL23
+IFNb,	IFNb
+B9,	B9
+Hoxa9,	Hoxa9
+IL18,	IL18
+IL12,	IL12
+IL21,	IL21
+IL7,	IL7
+IL27,	IL27
+TCR,	TCR
+Flt3L,	Flt3L
+IL2,	IL2

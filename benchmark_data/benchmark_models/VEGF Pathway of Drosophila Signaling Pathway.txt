@@ -1,0 +1,18 @@
+Rl,	Dsor1 & msk
+Targets,	Pnt & !Aop
+Raf,	Ras & Src42 & CNK & Ksr
+Ras,	Sos & !Sty
+Pvr,	!(!Pvf1 & !Pvf2 & !Pvf3)
+Pnt,	Rl
+Drk,	Pvr
+Dsor1,	Raf
+Sos,	Drk
+Aop,	!Rl
+Src42,	Src42
+msk,	msk
+Pvf1,	Pvf1
+Pvf2,	Pvf2
+CNK,	CNK
+Sty,	Sty
+Pvf3,	Pvf3
+Ksr,	Ksr

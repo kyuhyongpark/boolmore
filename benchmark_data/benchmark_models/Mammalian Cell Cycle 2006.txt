@@ -1,0 +1,10 @@
+Rb,	!CycA & !CycD & !CycE & !CycB | p27 & !CycD & !CycB
+Cdc20,	CycB
+CycA,	!Rb & !Cdc20 & CycA & !UbcH10 | !Rb & !Cdc20 & !Cdh1 & E2F | !Rb & !Cdc20 & CycA & !Cdh1 | !Rb & !Cdc20 & !UbcH10 & E2F
+UbcH10,	!(!UbcH10 & Cdh1 | !Cdc20 & !CycA & Cdh1 & !CycB)
+p27,	!CycA & !CycD & !CycE & !CycB | !CycA & p27 & !CycD & !CycB | p27 & !CycD & !CycE & !CycB
+CycD,	CycD
+CycE,	!Rb & E2F
+Cdh1,	!(!Cdc20 & CycA & !p27 | !Cdc20 & CycB)
+CycB,	!Cdc20 & !Cdh1
+E2F,	!Rb & !CycA & !CycB | !Rb & p27 & !CycB

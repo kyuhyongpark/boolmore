@@ -1,0 +1,26 @@
+Pan,	!Nemo & Arm
+Axin,	!Dsh
+Dlp,	!Wf & Ttv
+Arr,	Wg
+Dsh,	Fz & !Nkd | Arr & !Nkd
+Nemo,	Pan
+Targets,	Pan & Hyx & !Gro & Nej & Lgs & Pygo
+Arm,	!APC & Hipk & CK1alpha | !Axin & Hipk & CK1alpha | !Sgg & Hipk & CK1alpha | Hipk & CK1alpha & !Slmb | !Proteasome & Hipk & CK1alpha
+Sgg,	!Dsh
+Fz,	Boca & Wg
+APC,	!Dsh
+Dally,	!Wf & Ttv
+Hyx,	Hyx
+Wf,	Wf
+Proteasome,	Proteasome
+Gro,	Gro
+Nkd,	Nkd
+Hipk,	Hipk
+Boca,	Boca
+Nej,	Nej
+Wg,	Wg
+CK1alpha,	CK1alpha
+Ttv,	Ttv
+Lgs,	Lgs
+Slmb,	Slmb
+Pygo,	Pygo

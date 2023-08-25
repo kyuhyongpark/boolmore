@@ -1,0 +1,53 @@
+PLCG,	!(!EGFR & !FGFR3)
+EGFR,	SPRY & !PKC & !GRB2 | !PKC & !GRB2 & EGFR_stimulus
+JUN,	JNK
+SMAD,	TGFBR
+CREB,	MSK
+AKT,	PDK1 & !PTEN
+MDM2,	AKT & !p14 | !p14 & p53
+FGFR3,	!PKC & !GRB2 & FGFR3_stimulus
+TAOK,	ATM
+TAK1,	TGFBR
+p14,	MYC
+RAS,	!(!PLCG & !SOS)
+ERK,	MEK1_2
+PDK1,	PI3K
+DUSP1,	CREB
+Growth_Arrest,	p21
+RSK,	ERK
+PTEN,	p53
+ELK1,	!(!ERK & !JNK & !p38)
+Apoptosis,	!ERK & p53 & FOXO3 & !BCL2
+p53,	!MDM2 & p38 | !MDM2 & ATM | p38 & ATM
+FRS2,	FGFR3 & !SPRY & !GRB2
+p21,	!AKT & p53
+GAB1,	!(!PI3K & !GRB2)
+MEK1_2,	!AP1 & MAP3K1_3 & !PPP2CA | RAF & !AP1 & !PPP2CA
+SPRY,	ERK
+PKC,	PLCG
+RAF,	!AKT & !ERK & PKC | !AKT & RAS & !ERK
+MYC,	AKT & MSK | MSK & MAX
+PI3K,	!(!GAB1 & !SOS | !RAS & !GAB1)
+AP1,	JUN & FOS | JUN & ATF2
+p70,	ERK & PDK1
+MSK,	!(!ERK & !p38)
+ATF2,	!(!JNK & !p38)
+FOXO3,	!AKT & JNK
+BCL2,	CREB & AKT
+Proliferation,	!p21 & MYC & p70
+SOS,	!RSK & GRB2
+MAP3K1_3,	RAS
+JNK,	!(!TAOK & !TAK1 & !MAP3K1_3 & !MTK1 | !TAOK & !TAK1 & DUSP1 & !MAP3K1_3 | !TAOK & DUSP1 & !MAP3K1_3 & !MTK1 | !TAOK & !TAK1 & DUSP1 & !MTK1 | !TAK1 & DUSP1 & !MAP3K1_3 & !MTK1)
+PPP2CA,	p38
+MAX,	p38
+FOS,	CREB & ERK & RSK | ERK & RSK & ELK1
+MTK1,	GADD45
+GADD45,	!(!SMAD & !p53)
+p38,	!(!TAOK & !TAK1 & !MAP3K1_3 & !MTK1 | !TAOK & !TAK1 & DUSP1 & !MAP3K1_3 | !TAOK & DUSP1 & !MAP3K1_3 & !MTK1 | !TAOK & !TAK1 & DUSP1 & !MTK1 | !TAK1 & DUSP1 & !MAP3K1_3 & !MTK1)
+ATM,	DNA_damage
+GRB2,	!(!EGFR & !FRS2 & !TGFBR)
+TGFBR,	TGFBR_stimulus
+TGFBR_stimulus,	TGFBR_stimulus
+DNA_damage,	DNA_damage
+FGFR3_stimulus,	FGFR3_stimulus
+EGFR_stimulus,	EGFR_stimulus

@@ -1,0 +1,26 @@
+IL5,	!(!Th2I & !EL2)
+IgE,	IL13 & BC | BC & IL4II
+Th2II,	DCII & !IL12II & T0
+DCI,	PIC
+DCII,	DCI
+IFNgI,	!(!DCI & !Th1I)
+Th1I,	Th1II
+IL12II,	DCII & !IL4II & T0
+EL,	!EL2 & IS
+IgG,	BC
+Th2I,	Th2II
+IL4I,	IL4II
+IL10I,	Th2I
+TEL,	!(!EL & !EL2)
+AD,	!(IgG & NE | !AD & !IS)
+IL13,	!(!EL & !Th2I & !EL2 | !Th2I & !EL2 & !IS)
+BC,	!(!BC & !T0)
+PIC,	!IL10I & EC & !IgA
+NE,	!IL4I & !IL10I & AD & PIC | IFNgI & !IL4I & !IL10I
+EL2,	IL5 & IL13 | IL5 & IgE
+IL4II,	!(!Th2II & !DCII & !EL2 | IL12II & !EL2 | !Th2II & !EL2 & !T0)
+Th1II,	DCII & IL12II & T0
+EC,	!(!AD & !IS)
+IgA,	BC & IS
+T0,	DCII
+IS,	IS

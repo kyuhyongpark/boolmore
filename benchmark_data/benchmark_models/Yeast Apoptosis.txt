@@ -1,0 +1,74 @@
+# constant node from the original paper: HK=1
+# removed the merged source node HK and made its regulators constant
+STE20_CYT,	MAPK
+RAS2,	!(!TOR1 & !RedActinDyn)
+Protosom,	CDC6
+HOS3,	H2O2
+DRE2_TAH18,	1
+CDC6,	Adozelesin
+AIF1_MT,	1
+MT_Frag,	!(!MT_ALT & !MDV1 & !H2O2 | DRE2_TAH18 & !MT_ALT & !MDV1 | !MT_ALT & FIS1 & !H2O2 | DRE2_TAH18 & !MT_ALT & FIS1)
+MCD1_NUC,	ESP1
+Apoptosis,	!(!ROS_CYT & BIR1 & FVY10 & POR1_2 & SNO1 & !DNA_Frag & !CU2 | !ROS_CYT & !YCA1 & FVY10 & SNO1 & !DNA_Frag & !CPR3 & !AceticAcid & !H2O2 | !ROS_CYT & BIR1 & FVY10 & POR1_2 & SNO1 & !DNA_Frag & !CPR3 | !ROS_CYT & BIR1 & FVY10 & SNO1 & !DNA_Frag & !CPR3 & !AceticAcid & !H2O2 | !ROS_CYT & !YCA1 & FVY10 & POR1_2 & SNO1 & !DNA_Frag & !CPR3 | !ROS_CYT & !YCA1 & FVY10 & SNO1 & !DNA_Frag & !CU2 & !AceticAcid & !H2O2 | !ROS_CYT & !YCA1 & FVY10 & POR1_2 & SNO1 & !DNA_Frag & !CU2 | !ROS_CYT & BIR1 & FVY10 & SNO1 & !DNA_Frag & !CU2 & !AceticAcid & !H2O2)
+SOD1,	Heat
+EMC4,	1
+NUC1_NUC,	KAP123
+NUC1_MT,	H2O2
+NDI1,	1
+ROS_CYT,	!(!RAS2 & !SOD1 & !NDI1 & !CDC48 & !ESP1 & SVF1 & !DesCyclinCCDK8 & !RedActinDyn & !Salt & !H2O2 | !RAS2 & !SOD1 & EMC4 & !NDI1 & !CDC48 & !ESP1 & SVF1 & !DesCyclinCCDK8 & !RedActinDyn & !Salt | !RAS2 & !SOD1 & !NDI1 & !CDC48 & !ESP1 & !DesCyclinCCDK8 & !RedActinDyn & !AceticAcid & !Salt & !H2O2)
+PTP2,	RLM1
+RLM1,	!(!HOG1 & !SLT2)
+MCD1_MT,	1
+AdenylateCyclase,	!(!RAS2 & !Stress)
+STM1_CYT,	1
+CytC_CYT,	!(!CDC48 & !CytC_MT)
+PTP3,	HOG1_Dep
+MT_ALT,	!(!RAS2 & !MT_Frag & !MMI1 & !PKA)
+CDC48,	1
+YCA1,	!(!MT_Frag & !ROS_CYT & !CytC_CYT & !MEC1 & !RedActinDyn & !Salt | !MT_Frag & !ROS_CYT & !CytC_CYT & !MEC1 & SRO7 & !RedActinDyn)
+BIR1,	!NMA111_NUC
+RPD3,	Stress
+CAMP,	!(!AdenylateCyclase & !TOR1)
+NMA111_NUC,	NMA111_CYT
+CytC_MT,	!(!MCD1_MT & !AceticAcid)
+ROS_MT,	NDI1 & !SOD2
+MMI1,	1
+ESP1,	H2O2
+MEC1,	AbnormalTelomer
+PKA,	!(!RAS2 & !Heat)
+FVY10,	1
+Tat_D,	MG2
+SDP1,	MSN2_4
+STM1_NUC,	!Protosom & STM1_CYT
+AIF1_NUC,	AIF1_MT
+MSN2_4,	PKA
+POR1_2,	1
+STE20_NUC,	STE20_CYT
+NMA111_CYT,	Heat
+SRO7,	1
+SOD2,	1
+MAPK,	Mating
+SNO1,	1
+KAP123,	NUC1_MT
+HOG1_Dep,	HOG1
+HOG1,	!(PTP2 & PTP3 & !Stress)
+DNA_Frag,	!(!Tat_D & STM1_NUC)
+SVF1,	1
+SLT2,	!(PTP2 & !RLM1 & SDP1 & Stress & !Heat)
+DesCyclinCCDK8,	!SLT2
+TOR1,	Stress
+MDV1,	1
+H2B,	!(!HOS3 & !NUC1_NUC & !RPD3 & !AIF1_NUC & !STE20_NUC)
+FIS1,	1
+CU2,	CU2
+CPR3,	CPR3
+RedActinDyn,	RedActinDyn
+MG2,	MG2
+Stress,	Stress
+Heat,	Heat
+Adozelesin,	Adozelesin
+Mating,	Mating
+AceticAcid,	AceticAcid
+Salt,	Salt
+AbnormalTelomer,	AbnormalTelomer
+H2O2,	H2O2

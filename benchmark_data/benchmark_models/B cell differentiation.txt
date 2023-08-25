@@ -1,0 +1,22 @@
+STAT6,	IL_4R
+IL_21R,	IL_21
+NF_kB,	CD40
+BCR,	Ag
+IL_2R,	IL_2
+Bach2,	Pax5 & !Blimp1
+STAT3,	IL_21R
+CD40,	CD40L
+Pax5,	!ERK & !Blimp1 & !Irf4 | Pax5 & !ERK & !Blimp1
+Bcl6,	!ERK & !Blimp1 & STAT5 & !Irf4 | Pax5 & Bcl6 & !ERK & !Blimp1 & !Irf4 | STAT6 & !ERK & !Blimp1 & !Irf4
+ERK,	BCR
+Blimp1,	!Bach2 & STAT3 & !Pax5 & !Bcl6 | !Bach2 & !Pax5 & !Bcl6 & Irf4 | !Bach2 & !Pax5 & !Bcl6 & ERK
+STAT5,	IL_2R
+IL_4R,	IL_4
+AID,	STAT6 & !Blimp1 | NF_kB & Pax5 & !Blimp1
+Irf4,	!(!NF_kB & Bcl6 | !NF_kB & !Blimp1 & !Irf4)
+XBP1,	!Pax5 & Blimp1
+CD40L,	CD40L
+IL_21,	IL_21
+IL_2,	IL_2
+Ag,	Ag
+IL_4,	IL_4

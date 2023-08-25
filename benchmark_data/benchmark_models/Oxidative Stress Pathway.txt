@@ -1,0 +1,19 @@
+PKC,	ROS & !ARE
+Mdm2,	p53 & !ATM | !ATM & Akt
+PIP3,	!PTEN & PIP2
+Bach1,	!ROS
+p53,	!Mdm2 & ATM
+Ras,	ROS
+ROS,	!ARE & Stress
+ARE,	!Bach1 & !ARE & !GSK3b & Nrf2
+ATM,	ROS
+Bad,	!Akt
+GSK3b,	!Akt
+PTEN,	!ROS
+Nrf2,	!(!PKC & Keap1 & !Akt)
+PIP2,	PI3K
+PI3K,	Ras
+Keap1,	!Bach1 & Nrf2 | !Bach1 & Keap1
+Bcl2,	!p53 & !Bad
+Akt,	PIP3
+Stress,	Stress

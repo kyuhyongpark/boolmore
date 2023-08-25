@@ -1,0 +1,24 @@
+# deleted isolated nodes: Nfkb, BAX
+CyclinB1,	CyclinB1 & !p53
+ERBB3,	ERBB3 & !pertuzumab & !erlotinib | !pertuzumab & !erlotinib & stimulus | RPS6 & !pertuzumab & !erlotinib
+CyclinD1,	!(!CyclinD1 & !p70S6K & !AKT & !cJUN & !ERK1_2)
+p38,	!(!p38 & !AKT)
+RPS6,	!(!RPS6 & !p70S6K)
+p70S6K,	p70S6K & !TSC2 & !PRAS | !TSC2 & !PRAS & ERK1_2
+TSC2,	RB & !AKT & !GSKa_b & !ERK1_2 | TSC2 & !AKT & !GSKa_b & !ERK1_2
+PTEN,	PTEN & !GSKa_b | !GSKa_b & cRAF
+PRAS,	PRAS & !AKT | !AKT & cJUN
+RB,	!CyclinB1 & RB | !CyclinB1 & p53
+AKT,	!PTEN & AKT | CyclinB1 & !PTEN | !PTEN & ERBB2 | !PTEN & ERBB1 | ERBB3 & !PTEN
+GSKa_b,	!(!GSKa_b & !p53)
+ERBB1,	ERBB3 & !pertuzumab & !erlotinib | !pertuzumab & !erlotinib & stimulus | cJUN & !pertuzumab & !erlotinib | ERBB1 & !pertuzumab & !erlotinib
+cRAF,	cRAF & !ERK1_2 | ERBB1 & !ERK1_2 | !ERK1_2 & ERBB2
+cJUN,	!GSKa_b & cJUN
+p53,	!(!CyclinB1 & !p38 & !RB & !p53)
+ERK1_2,	!(!ERBB1 & !cRAF & !ERK1_2)
+ERBB2,	!pertuzumab & !erlotinib & !trastuzumab & stimulus | ERBB2 & !pertuzumab & !erlotinib & !trastuzumab
+FOXO1_3a,	!AKT & FOXO1_3a
+pertuzumab,	pertuzumab
+erlotinib,	erlotinib
+trastuzumab,	trastuzumab
+stimulus,	stimulus

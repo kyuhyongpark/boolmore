@@ -1,0 +1,18 @@
+Ceramide,	!S1P & Fas & !Apoptosis
+GPCR,	S1P & !Apoptosis
+sFas,	S1P & !Apoptosis
+P2,	IFNG & !Apoptosis | P2 & !Apoptosis
+SMAD,	GPCR & !Apoptosis
+BID,	!MCL1 & !Apoptosis
+CTLA4,	TCR & !Apoptosis
+IFNG,	!P2 & !SMAD & !Apoptosis
+S1P,	!Ceramide & !Apoptosis
+MCL1,	!DISC & !Apoptosis
+Fas,	!sFas & !Apoptosis
+TCR,	!CTLA4 & !Apoptosis
+Caspase,	BID & !IAP & !Apoptosis | DISC & !Apoptosis
+IAP,	!BID & !Apoptosis
+FLIP,	!DISC & !Apoptosis
+DISC,	Ceramide & !Apoptosis | Fas & !FLIP & !Apoptosis
+CREB,	IFNG & !Apoptosis
+Apoptosis,	!(!Caspase & !Apoptosis)

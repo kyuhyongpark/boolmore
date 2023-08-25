@@ -1,0 +1,41 @@
+Cas3,	!IAP & Cas8 | !IAP & APC | !IAP & Cas6
+Cas12,	Cas7
+IAP,	!Mito & NFkB & !Cas6 | !Cas3 & !Mito & NFkB
+cFLIP,	TRAF
+TRADD,	TNFR1
+TNFR2,	TNF
+PTEN,	p53
+APC,	!IAP & Apaf1 & Mito & Cas9
+FADD,	TRADD
+Apaf1,	p53
+Mito,	BID & !BclX
+JNK,	JNKK
+Mdm2,	!(!p53 & !AKT)
+Cas8,	!cFLIP & FADD | !cFLIP & Cas6
+p53,	JNK & !Mdm2 | !Mdm2 & DNADamageEvent
+Apoptosis,	DNADamageEvent
+NFkB,	!IkB
+PIP3,	!PTEN & PI3K & PIP2
+Cas7,	!IAP & APC | !IAP & Cas8
+PI3K,	GFR
+JNKK,	MEKK1 & !AKT
+Cas6,	Cas3 & !IAP
+MEKK1,	RIP
+TNFR1,	TNF
+NIK,	TRAF2
+IKK,	AKT & !A20 | NIK & !A20
+IkB,	NFkB & !IKK
+TRAF2,	!(!TNFR2 & !RIP)
+TRAF,	TRADD
+AKT,	PIP3
+PIP2,	GFR
+GFR,	GF
+A20,	NFkB
+RIP,	TRADD
+BID,	JNK & p53 & !BclX | Cas8 & p53 & !BclX
+Cas9,	Cas3 & !IAP & !AKT | Cas12 & !IAP & !AKT
+BclX,	!p53 & NFkB & !BAD
+DNADamageEvent,	Cas3
+BAD,	p53 & !AKT
+TNF,	TNF
+GF,	GF
