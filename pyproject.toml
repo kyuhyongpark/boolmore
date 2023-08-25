@@ -11,12 +11,3 @@ license = { file = "LISENSE" }
 requires-python = ">=3.11"
 dependencies = ["pyboolnet @ git+https://github.com/hklarner/pyboolnet",
                 "pystablemotifs"]
-
-[project.optional-dependencies]
-bench = ["cana"]
-
-[tool.mypy]
-mypy_path = ["stubs"]
-
-[tool.setuptools.packages.find]
-where = ["baseline_models", "data"]
