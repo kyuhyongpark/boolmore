@@ -11,3 +11,6 @@ license = { file = "LISENSE" }
 requires-python = ">=3.11"
 dependencies = ["pyboolnet @ git+https://github.com/hklarner/pyboolnet",
                 "pystablemotifs"]
+
+[tool.setuptools]
+packages = ["boolmore"]
