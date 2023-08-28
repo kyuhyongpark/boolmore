@@ -27,10 +27,10 @@ class Model():
         base            - the base model (not the neccesarily the starting model)   :Model class
                           from which the regulators, fixed functions, constants,
                           extra edges, etc. are decided.
-        constraints     - represents 5 types of constraints                         :dict[str, set or dict]
+        constraints     - represents 5 types of constraints                         :dict[str, list or dict]
                           (fixed, regulate, necessary, group, possible_constant)
-        edge_pool       - the pool of edges. 0 is negative, 1 is positive           :list[tuple[str]]
-                          [(regulator, target, sign), ...]
+        edge_pool       - the pool of edges. 0 is negative, 1 is positive           :list[list[str]]
+                          [[regulator, target, sign], ...]
         default_sources - Shows the default settings for the source nodes,          :dict[str, int]
                           which is considered the top of the hierarchy
                           These source nodes must have a defined value in
@@ -59,8 +59,8 @@ class Model():
         self.generation = 0
 
         self.base = None
-        self.constraints = {'fixed': set(), 'regulate': {}, 'necessary' : {},
-                            'group': {}, 'possible_constant': set()}
+        self.constraints = {'fixed': [], 'regulate': {}, 'necessary' : {},
+                            'group': {}, 'possible_constant': []}
         self.edge_pool = []
         self.default_sources = {}
         
@@ -76,7 +76,7 @@ class Model():
 
     @classmethod
     def import_model(cls, primes:dict[str, PrimeType], id:int=0, generation:int=0,
-                     base:Model|None=None, constraints:dict={}, edge_pool:list[tuple[str]]=[],
+                     base:Model|None=None, constraints:dict={}, edge_pool:list[list[str]]=[],
                      default_sources:dict[str,int]={}) -> Model:
         """
         Import a model.
@@ -98,10 +98,10 @@ class Model():
                           if None, the output model is considered the base
 
         # if base is given, below parameters take the value of the base
-        constraints     - represents 5 types of constraints                         :dict[str, set or dict]
+        constraints     - represents 5 types of constraints                         :dict[str, list or dict]
                           (fixed, regulate, necessary, group, possible_constant)
-        edge_pool       - the pool of edges. 0 is negative, 1 is positive           :list[tuple[str]]
-                          [(regulator, target, sign), ...]
+        edge_pool       - the pool of edges. 0 is negative, 1 is positive           :list[list[str]]
+                          [[regulator, target, sign], ...]
         default_sources - Shows the default settings for the source nodes,          :dict[str, int]
                           which is considered the top of the hierarchy
                           if given an empty dict, all sources being 0 is taken

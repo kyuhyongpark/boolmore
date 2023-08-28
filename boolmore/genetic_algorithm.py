@@ -1,40 +1,69 @@
+import json
 import random
 import pystablemotifs as sm
 import config
 from model import Model, mix_models
 from experiment import import_exps
 
+SETTINGS = 'BoolMoRe/ABA_case_study/data/ABA_2017.json'
+START_MODEL = None
+NAME = None
 
-NAME = config.NAME
-FILE = NAME + '_log.txt'
+def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
+    """
+    Imports parameters, experiments, base model in the json file
+    Optionally imports starting model and the output file name.
+    Runs genetic algorithm and exports refined models.
 
-# take parameters from the config file
-STARTING_ID = config.parameters['starting_id']
-STARTING_GEN = config.parameters['starting_gen']
-TOTAL_ITERATIONS = config.parameters['total_iterations']
-PER_ITERATION = config.parameters['per_iteration']
-KEEP = config.parameters['keep']
-EXPORT_TOP = config.parameters['export_top']
-EXPORT_THRESHOLD = config.parameters['export_threshold']
-PROB = config.parameters['prob']
-EDGE_PROB = config.parameters['edge_prob']
+    Parameters
+    ----------
 
-# if starting model is not given, take the base as the start
-if config.MODEL != None:
-    STARTING_MODEL = config.MODEL
-else:
-    STARTING_MODEL = config.data_bank[config.RUN_TYPE]['base']
+    json_file   - location of the json file containing parameters   :str
 
-DATA = config.data_bank[config.RUN_TYPE]['data']
-BASE = config.data_bank[config.RUN_TYPE]['base']
-DEFAULT_SOURCES = config.data_bank[config.RUN_TYPE]['default_sources']
-CONSTRAINTS = config.data_bank[config.RUN_TYPE]['constraints']
-EDGE_POOL = config.data_bank[config.RUN_TYPE]['edge_pool']
+    name        - name of the generated models                      :str|None
+                  models are exported as name_id_gen.txt
+                  log is exported as name_log_txt
+                  if None, takes the start_model as the name
+    start_model - location of the txt file of the starting model    :str|None
+                  if None, base_model is the starting model
 
+    """
+    f = open(json_file)
+    json_dict = json.load(f)
 
-config.id = STARTING_ID
+    # take setting parameters from the json file
+    STARTING_ID = json_dict['parameters']['starting_id']
+    STARTING_GEN = json_dict['parameters']['starting_gen']
+    TOTAL_ITERATIONS = json_dict['parameters']['total_iterations']
+    PER_ITERATION = json_dict['parameters']['per_iteration']
+    KEEP = json_dict['parameters']['keep']
+    EXPORT_TOP = json_dict['parameters']['export_top']
+    EXPORT_THRESHOLD = json_dict['parameters']['export_threshold']
+    PROB = json_dict['parameters']['prob']
+    EDGE_PROB = json_dict['parameters']['edge_prob']
 
-if __name__ == '__main__':
+    # take model specific data from the json file
+    DEFAULT_SOURCES = json_dict['default_sources']
+    CONSTRAINTS = json_dict['constraints']
+    EDGE_POOL = config.data_bank[config.RUN_TYPE]['edge_pool']
+
+    DATA = json_dict['data']
+    BASE = json_dict['base']
+
+    if start_model != None:
+        START_MODEL = start_model
+    # if starting model is not given, take the base as the start
+    else:
+        START_MODEL = BASE
+
+    if name != None:
+        NAME = name
+    else:
+        NAME = START_MODEL.split("/")[-1][:-4]
+    FILE = NAME + '_log.txt'
+
+    config.id = STARTING_ID
+
     print("Loading experimental data . . .")
     exps, pert = import_exps(DATA)
     print("Experimental data loaded.\n")
@@ -49,7 +78,7 @@ if __name__ == '__main__':
     print()
 
     print("Loading starting model . . .")
-    primes = sm.format.import_primes(STARTING_MODEL)
+    primes = sm.format.import_primes(START_MODEL)
     n1 = Model.import_model(primes, config.id, STARTING_GEN, base)
     print("Starting model loaded.")
     n1.get_predictions(pert)
@@ -80,11 +109,11 @@ if __name__ == '__main__':
         for line in base_text:
             if not line.startswith('#') and not line.isspace():
                 fp.write('# ' + line)
-    fp.write(f'\n# {STARTING_MODEL=}\n')
-    if BASE != STARTING_MODEL:
+    fp.write(f'\n# {START_MODEL=}\n')
+    if BASE != START_MODEL:
         fp.write(f'# score: {n1.score}\n')
         fp.write(f'# extra edges: {n1.extra_edges}\n')
-        with open(STARTING_MODEL, 'r') as model_text:
+        with open(START_MODEL, 'r') as model_text:
             for line in model_text:
                 if not line.startswith('#') and not line.isspace():
                     fp.write('# ' + line)
@@ -167,3 +196,6 @@ if __name__ == '__main__':
         fp.write(str(new_iteration[0].complexity) +'\n')
     
         iteration = new_iteration
+
+if __name__=='__main__':
+    run_ga(SETTINGS, START_MODEL, NAME)

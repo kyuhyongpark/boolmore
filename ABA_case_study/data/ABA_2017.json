@@ -1,0 +1,49 @@
+{
+"parameters" : {
+    "starting_id": 1,           
+    "starting_gen": 1,
+    "total_iterations": 100,
+    "per_iteration": 100,
+    "keep": 20,
+    "export_top": 1,
+    "export_threshold": 430,
+    "prob": 0.01,
+    "edge_prob": 0.5
+    },
+
+"data": "BoolMoRe/ABA_case_study/data/data_20230426.tsv",
+
+"base": "BoolMoRe/ABA_case_study/baseline_models/ABA_GA_base_A_20230501.txt",
+
+"default_sources": {"ABA":0},
+
+"constraints": {"fixed": ["Ca2_ATPase", "Ca2c", "Closure", "DAG", "H2O_Efflux", "InsP3", "InsP6", "NO", "PtdIns3_5P2", "PtdIns4_5P2", "RCARs", "cADPR", "cGMP"],
+                "regulate": {"ABI1":["RCARs"],
+                             "ABI2":["RCARs"],
+                             "HAB1":["RCARs"],
+                             "PP2CA":["RCARs"],
+                             "K_efflux":["KEV","KOUT"],
+                             "OST1":["ABI1","ABI2"],
+                             "Depolarization":["AnionEM"]},
+                "necessary" : {"8-nitro-cGMP":["cGMP"],
+                               "KOUT":["Depolarization"],
+                               "Malate":["PEPC", "AnionEM"],
+                               "ROS":["NADPH", "RBOH"]},
+                "group": {"PA":[["PC","PLDalpha"],["PC","PLDdelta"],["DAG","DAGK"]],
+                          "S1P_PhytoS1P":[["SPHK1_2","Sph"]]},
+                "possible_constant": []},
+
+"edge_pool": [["Ca2c", "ABI2", "0"],
+              ["Ca2c", "HAB1", "0"],
+              ["Ca2c", "PP2CA", "0"],
+              ["PA", "ABI2", "0"],
+              ["PA", "HAB1", "0"],
+              ["PA", "PP2CA", "0"],
+              ["AquaporinPIP2_1", "ROS", "1"],
+              ["Actin_Reorganization", "RBOH", "1"],
+              ["ROS", "Actin_Reorganization", "1"],
+              ["pHc", "Vacuolar_Acidification", "1"],
+              ["ABI1", "GEF1_4_10", "1"],
+              ["GHR1", "CPK3_21", "1"],
+              ["PA", "Microtubule_Depolymerization", "1"]]
+}

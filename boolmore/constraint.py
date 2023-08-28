@@ -148,7 +148,7 @@ def check_node(regulators:tuple[str], rr:str, base_rr:str, constraints:dict, nod
                   Note that there can be added regulators
     rr          - representation of the rule                :length 2^(k+a) binary str
     base_rr     - representation of the the baseline rule   :length 2^k binary str
-    constraints - represents 5 types of constraints         :dict[str, set or dict]
+    constraints - represents 5 types of constraints         :dict[str, list or dict]
                   (fixed, regulate, necessary, group, possible_constant)
     node        - the target node                           :str
 
@@ -297,7 +297,7 @@ def group_bi2bi(group_bi:str, group_regulators:tuple[str, tuple[str]]) -> str:
     return bi
 
 
-def rr2group_rr(regulators:tuple[str], rr:str, groups:tuple[tuple[str]]) -> tuple[str, tuple[str, tuple[str]]]:
+def rr2group_rr(regulators:tuple[str], rr:str, groups:list[list[str]]) -> tuple[str, tuple[str, tuple[str]]]:
     """
     Convert the representation of a rule into a representation in which
     certain nodes are grouped together.
@@ -306,8 +306,8 @@ def rr2group_rr(regulators:tuple[str], rr:str, groups:tuple[tuple[str]]) -> tupl
     ----------
     regulators - the regulating nodes           :length k tuple[str]
     rr         - representation of the rule     :length 2^k binary str
-    groups     - groups of nodes                :tuple[tuple[str]]
-                 ((node A, node B), (node A, node C), ...)
+    groups     - groups of nodes                :list[list[str]]
+                 [[node A, node B], [node A, node C], ...]
     
     Returns
     -------
@@ -323,7 +323,7 @@ def rr2group_rr(regulators:tuple[str], rr:str, groups:tuple[tuple[str]]) -> tupl
 
     group_regulators = set(regulators)
     for i, group in enumerate(groups):
-        group_regulators.add(group) # type: ignore
+        group_regulators.add(tuple(group)) # type: ignore
         group_regulators -= set(group)
     group_regulators = tuple(group_regulators)
 

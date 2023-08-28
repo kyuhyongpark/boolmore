@@ -78,7 +78,7 @@ def mutate_rr_constraint(regulators:tuple[str], rr:str, base_rr:str, constraints
     regulators  - the regulating nodes                      :tuple[str]
     rr          - representation of the rule                :length 2^(k+a) binary str
     base_rr     - representation of the the baseline rule   :length 2^k binary str
-    constraints - represents 5 types of constraints         :dict[str, set or dict]
+    constraints - represents 5 types of constraints         :dict[str, list or dict]
                   (fixed, regulate, necessary, group, possible_constant)
     node        - the target node                           :str
     probability - probability that each binary is mutated   :float between 0 and 1
