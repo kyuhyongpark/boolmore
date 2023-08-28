@@ -1,28 +1,39 @@
+import json
+import boolmore.config as config
 import pystablemotifs as sm
-from model import Model
-from experiment import *
-from mutation import *
-import config
 import pyboolnet.trap_spaces as ts
 import pyboolnet.prime_implicants as pi
+from boolmore.model import Model
+from boolmore.experiment import import_exps
 
+SETTINGS = 'BoolMoRe/ABA_case_study/data/ABA_2017.json'
+MODEL = 'BoolMoRe/ABA_case_study/generated_models/20230512_7790_gen125_mod.txt'
+NAME = None
 
-# if starting model is not given, take the base as the start
-if config.MODEL != None:
-    MODEL = config.MODEL
-else:
-    MODEL = config.data_bank[config.RUN_TYPE]['base']
+def get_detailed_report(json_file:str, model:str|None=None, name:str|None=None):
 
-DATA = config.data_bank[config.RUN_TYPE]['data']
-BASE = config.data_bank[config.RUN_TYPE]['base']
-DEFAULT_SOURCES = config.data_bank[config.RUN_TYPE]['default_sources']
-CONSTRAINTS = config.data_bank[config.RUN_TYPE]['constraints']
-EDGE_POOL = config.data_bank[config.RUN_TYPE]['edge_pool']
+    f = open(json_file)
+    json_dict = json.load(f)
 
+    # take model specific data from the json file
+    DEFAULT_SOURCES = json_dict['default_sources']
+    CONSTRAINTS = json_dict['constraints']
+    EDGE_POOL = json_dict['edge_pool']
 
-FILE_NAME = MODEL.split("/")[-1][:-4]+'_score.tsv'
+    DATA = json_dict['data']
+    BASE = json_dict['base']
 
-if __name__ == '__main__':
+    if model != None:
+        MODEL = model
+    # if starting model is not given, take the base as the start
+    else:
+        MODEL = BASE
+
+    if name != None:
+        FILE = name
+    else:
+        FILE = MODEL.split("/")[-1][:-4]+'_score.tsv'
+
     print("Loading experimental data . . .")
     exps, pert = import_exps(DATA)
     print("Experimental data loaded.\n")
@@ -43,7 +54,7 @@ if __name__ == '__main__':
     n1 = Model.import_model(primes, config.id, 0, base)
     print("Starting model loaded.")
     n1.get_predictions(pert)
-    n1.get_model_score(exps, report=True, file=FILE_NAME)
+    n1.get_model_score(exps, report=True, file=FILE)
     n1.info()
     print('default_sources:', n1.default_sources)
     print()
@@ -154,3 +165,6 @@ if __name__ == '__main__':
         for tr in trs:
             print(dict(sorted(tr.items()))) # type: ignore
         print()
+
+if __name__ == '__main__':
+    get_detailed_report(SETTINGS, MODEL)

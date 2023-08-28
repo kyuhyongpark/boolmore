@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import random
 import pyboolnet.trap_spaces
-import mutation as m
-import conversions as conv
-import constraint as cons
-import score
-import config
+import boolmore.mutation as m
+import boolmore.conversions as conv
+import boolmore.constraint as cons
+import boolmore.score as score
+import boolmore.config as config
 
 
 PrimeType = list[list[dict[str, int]]]

@@ -1,7 +1,7 @@
 # TODO: enable check_node function to check group contraints
 
 
-import conversions as conv
+import boolmore.conversions as conv
 
 
 def check_constant(rr:str) -> bool:

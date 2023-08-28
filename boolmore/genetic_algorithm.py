@@ -1,9 +1,9 @@
 import json
 import random
 import pystablemotifs as sm
-import config
-from model import Model, mix_models
-from experiment import import_exps
+import boolmore.config
+from boolmore.model import Model, mix_models
+from boolmore.experiment import import_exps
 
 SETTINGS = 'BoolMoRe/ABA_case_study/data/ABA_2017.json'
 START_MODEL = None
@@ -45,7 +45,7 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
     # take model specific data from the json file
     DEFAULT_SOURCES = json_dict['default_sources']
     CONSTRAINTS = json_dict['constraints']
-    EDGE_POOL = config.data_bank[config.RUN_TYPE]['edge_pool']
+    EDGE_POOL = json_dict['edge_pool']
 
     DATA = json_dict['data']
     BASE = json_dict['base']
@@ -62,7 +62,7 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
         NAME = START_MODEL.split("/")[-1][:-4]
     FILE = NAME + '_log.txt'
 
-    config.id = STARTING_ID
+    boolmore.config.id = STARTING_ID
 
     print("Loading experimental data . . .")
     exps, pert = import_exps(DATA)
@@ -79,7 +79,7 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
 
     print("Loading starting model . . .")
     primes = sm.format.import_primes(START_MODEL)
-    n1 = Model.import_model(primes, config.id, STARTING_GEN, base)
+    n1 = Model.import_model(primes, boolmore.config.id, STARTING_GEN, base)
     print("Starting model loaded.")
     n1.get_predictions(pert)
     n1.get_model_score(exps)

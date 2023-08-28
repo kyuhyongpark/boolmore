@@ -1,7 +1,7 @@
 import random
 import os
 from pyboolnet.interaction_graphs import primes2igraph
-from model import Model
+from boolmore.model import Model
 
 
 PrimeType = list[list[dict[str, int]]]

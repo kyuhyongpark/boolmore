@@ -1,6 +1,6 @@
 import random
-import conversions as conv
-import constraint as cons
+import boolmore.conversions as conv
+import boolmore.constraint as cons
 
 
 def mutate_rr(rr:str, probability:float) -> str:
