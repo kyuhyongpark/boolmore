@@ -1,4 +1,5 @@
 import random
+import os
 from pyboolnet.interaction_graphs import primes2igraph
 from model import Model
 
@@ -8,8 +9,8 @@ FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
 
 
-# 20230821 output format fix
-def generate_experiments(primes:dict[str, PrimeType], n_exps:int) -> tuple[list[ExpType], list[FixesType]]:
+def generate_experiments(primes:dict[str, PrimeType], n_exps:int, export:bool=False,
+                         file:str='artificial_experiments.tsv') -> tuple[list[ExpType], list[FixesType]]:
     """
     Given the primes dictionary, generates and returns artificial experiments and interventions
 
@@ -19,6 +20,7 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int) -> tuple[list[
 
     Observed nodes have sink nodes as priority.
     Other nodes are included with a probability of 1/N_other in a single iteration.
+    Constant nodes are not observed.
     However, if the same fixes are generated multiple times, more nodes can be observed for that fixes.
     This is preferred as we usually have many observations for wildtypes or single perturbations.
     e.g. observed_nodes = {sink A, sink B, other C}
@@ -51,6 +53,12 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int) -> tuple[list[
         if primes[node] == [[{node:0}],[{node:1}]]:
             source_vars.append(node)
 
+    # find constant nodes
+    constants = []
+    for node in primes:
+        if primes[node] == [[{}],[]] or primes[node] == [[],[{}]]:
+            constants.append(node)
+
     # find sink nodes
     IG = primes2igraph(primes)
     sinks = [node for node, out_degree in IG.out_degree if out_degree == 0]
@@ -79,7 +87,7 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int) -> tuple[list[
         # observations should be all sink node + 1 or 2 or 3 or 4 ... other nodes
         observed_nodes = sinks.copy()
         for node in other_nodes:
-            if random.random() < 1/N_other and node not in fixed_nodes:
+            if random.random() < 1/N_other and node not in fixed_nodes and node not in constants:
                 observed_nodes.append(node)
 
         dct[fixes].update(observed_nodes)
@@ -95,6 +103,7 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int) -> tuple[list[
     exp_id = 0
     for fixes in interventions:
         for observed_node in dct[fixes]:
+            exp_id += 1
             exp = [exp_id, 1.0, fixes, observed_node]
 
             value = model.predictions[fixes][observed_node]
@@ -117,5 +126,18 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int) -> tuple[list[
             experiments.append(exp)
 
     experiments = experiments[0:n_exps]
+
+    if export == True:
+        fp = open(file, "w")
+        fp.write('ID\tSCORE\tFIXES\tNODE\tVALUE\n')
+        for exp in experiments:
+            fp.write(str(exp[0]) + '\t')
+            fp.write(str(exp[1]) + '\t')
+            lst = [fix[0] + '=' + str(fix[1]) for fix in exp[2]]
+            fp.write(','.join(lst) + '\t')
+            fp.write(exp[3] + '\t')
+            fp.write(exp[4] + '\n')
+
+        print('Exporting generated experiments to', os.path.abspath(file))
 
     return experiments, interventions

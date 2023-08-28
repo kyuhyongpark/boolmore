@@ -12,11 +12,11 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType]]:
     Reads a tsv file and returns experiments and interventions.
 
     The tsv file should have 5 columns
-    ID           - e.g. 1
-    SCORE        - e.g. 1.0
-    INTERVENTION - e.g. A=1,B=0,C=0
-    NODE         - the observed node
-    VALUE        - one of OFF, OFF/Some, Some, Some/ON, ON
+    ID    - e.g. 1
+    SCORE - e.g. 1.0
+    FIXES - e.g. A=1,B=0,C=0
+    NODE  - the observed node
+    VALUE - one of OFF, OFF/Some, Some, Some/ON, ON
 
     Parameters
     ----------
@@ -40,7 +40,7 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType]]:
     """
     ID = 0
     SCORE = 1
-    INTERVENTION = 2
+    FIXES = 2
     NODE = 3
     VALUE = 4
     
@@ -57,8 +57,8 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType]]:
         exp = [int(row[ID]), float(row[SCORE])]
 
         fixes = []
-        intervention_string = row[INTERVENTION].split(',')
-        for sth in intervention_string:
+        fixes_string = row[FIXES].split(',')
+        for sth in fixes_string:
             node_value = sth.strip().split('=')
             fix = tuple([node_value[0], int(node_value[1])])
             fixes.append(fix)
