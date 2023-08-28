@@ -200,23 +200,28 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
             current_score += lst[MAX_SCORE]
             model_max_score += lst[MAX_SCORE]
 
-            subsets = powerset(fixes)
-            subset_fixes = set()
+            subsets = list(powerset(fixes))
 
+            subset_fixes_set = set()
             for subset in subsets:
-                for source in default_sources:
-                    if tuple([source, 0]) not in subset and tuple([source, 1]) not in subset:
-                        subset_fix = list(subset)
-                        subset_fix.append(tuple([source,default_sources[source]]))
-                        subset_fix = tuple(sorted(subset_fix, key= lambda x:x[0]))
-                    else:
-                        subset_fix = subset
+                if len(default_sources) == 0:
+                    subset_fixes = subset
+                # if there are default values for sources, they should always be included
+                # in the fixes themselves and their subsets(subset_fixes)
+                else:
+                    for source in default_sources:
+                        if tuple([source, 0]) not in subset and tuple([source, 1]) not in subset:
+                            subset_fixes = list(subset)
+                            subset_fixes.append(tuple([source,default_sources[source]]))
+                            subset_fixes = tuple(sorted(subset_fixes, key= lambda x:x[0]))
+                        else:
+                            subset_fixes = subset
 
-                subset_fixes.add(subset_fix) # type: ignore
+                subset_fixes_set.add(subset_fixes) # type: ignore
 
-            for subset_fix in subset_fixes:
-                if subset_fix in agreements[observed_node]:
-                    current_score *= agreements[observed_node][subset_fix][AGREEMENT]
+            for subset_fixes in subset_fixes_set:
+                if subset_fixes in agreements[observed_node]:
+                    current_score *= agreements[observed_node][subset_fixes][AGREEMENT]
 
             score += current_score
                 
