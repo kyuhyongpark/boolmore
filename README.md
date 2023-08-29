@@ -10,13 +10,14 @@ pip install git+https://github.com/troonmel/BoolMoRe
 ## Quickstart with an example run
 
 1. install `boolmore`
-2. download 3 files from Examples and tutorials
+2. download 4 files from Examples and tutorials
 
    `Cortical_Area_Development.txt` : This is the baseline model  
+   `CAD_scrambled.txt` : This is the scrambled starting model  
    `CAD_data.tsv` : This is the generated artificial experiments as in benchmarks  
    `CAD_config.json` : This contains the path to above files and other constraints
        
-3. in `CAD_config.json`, modify paths for data and base
+4. in `CAD_config.json`, modify paths for data and base
 
    ```
    "data": "your_path/Cortical_Area_Development.txt"
@@ -24,16 +25,10 @@ pip install git+https://github.com/troonmel/BoolMoRe
    "base": "your_path/CAD_data.tsv"
    ```
 
-4. execute in cmd
-   
-   ```
-   python -m boolmore <your_path/CAD_config.json>
-   ```
-   
-   or run python script such as
+5. run python script such as
 
    ```
-   import boolmore
+   import boolmore.genetic_algorithm
 
-   boolmore.genetic_algorithm.run_ga('your_path/CAD_config.json')
+   boolmore.genetic_algorithm.run_ga('your_path/CAD_config.json', 'your_path/CAD_scrambled.txt')
    ```
