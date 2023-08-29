@@ -88,5 +88,3 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType], float]:
         experiments.append(tuple(exp))
 
     return experiments, interventions, max_score
-
-import_exps('BoolMoRe/Examples_and_tutorials/CAD_data.tsv')
