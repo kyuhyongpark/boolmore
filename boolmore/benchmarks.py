@@ -10,7 +10,7 @@ ExpType = tuple[int, float, FixesType, str, str]
 
 
 def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None, export:bool=False,
-                         file:str='artificial_experiments.tsv') -> tuple[list[ExpType], list[FixesType]]:
+                         file:str='artificial_experiments.tsv') -> tuple[list[ExpType], list[FixesType], float]:
     """
     Given the primes dictionary, generates and returns artificial experiments and interventions
 
@@ -46,6 +46,8 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None, expo
 
     interventions - summarized list of fixes for convenience    :list[FixesType]
         fixes     - ((node A, value1), (node B, value2), ...)   :FixesType = tuple[tuple[str, int]]
+    
+    max_score   - possible max score        :float
         
     """
     if n_exps == None:
@@ -144,4 +146,4 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None, expo
 
         print('Exported generated experiments to', os.path.abspath(file))
 
-    return experiments, interventions
+    return experiments, interventions, float(n_exps)
