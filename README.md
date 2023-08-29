@@ -24,16 +24,10 @@ pip install git+https://github.com/troonmel/BoolMoRe
    "base": "your_path/CAD_data.tsv"
    ```
 
-4. execute in cmd
-   
-   ```
-   python -m boolmore <your_path/CAD_config.json>
-   ```
-   
-   or run python script such as
+4. run python script such as
 
    ```
-   import boolmore
+   import boolmore.genetic_algorithm
 
-   boolmore.genetic_algorithm.run_ga('your_path/CAD_config.json')
+   boolmore.genetic_algorithm.run_ga('your_path/CAD_config.json', 'your_path/CAD_scrambled.txt')
    ```
