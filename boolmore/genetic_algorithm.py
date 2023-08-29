@@ -65,13 +65,14 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
     boolmore.config.id = STARTING_ID
 
     print("Loading experimental data . . .")
-    exps, pert = import_exps(DATA)
+    exps, pert, max_score = import_exps(DATA)
     print("Experimental data loaded.\n")
 
     print("Loading base model . . .")
     base_primes = sm.format.import_primes(BASE)
     base = Model.import_model(base_primes, constraints=CONSTRAINTS, edge_pool=EDGE_POOL, default_sources=DEFAULT_SOURCES)
     print("Base model loaded.")
+    base.max_score = max_score
     base.get_predictions(pert)
     base.get_model_score(exps)
     base.info()
@@ -179,13 +180,6 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
         new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
         new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
     
-        for j in range(EXPORT_TOP):
-            new_iteration[j].export(NAME, EXPORT_THRESHOLD)
-
-        # Always export the final best model
-        if i+1 == TOTAL_ITERATIONS:
-            new_iteration[0].export(NAME, 0)
-
         print("top score : ", new_iteration[0].score)
         print("extra edges :", len(new_iteration[0].extra_edges))
         print("complexity of the top model :", new_iteration[0].complexity)
@@ -194,7 +188,21 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
         fp.write(str(i+1) +'\t'+ str(new_iteration[0].score) +'\t')
         fp.write(str(len(new_iteration[0].extra_edges)) +'\t')
         fp.write(str(new_iteration[0].complexity) +'\n')
-    
+
+        # Export models that exceed the threshold score
+        for j in range(EXPORT_TOP):
+            new_iteration[j].export(NAME, EXPORT_THRESHOLD)
+
+        # Always export the final best model
+        if i+1 == TOTAL_ITERATIONS:
+            new_iteration[0].export(NAME, 0)
+
+        # Stop iteration if max score is reached
+        if new_iteration[0].score == base.max_score:
+            new_iteration[0].export(NAME, 0)
+            print("max score reached")
+            break
+
         iteration = new_iteration
 
 if __name__=='__main__':

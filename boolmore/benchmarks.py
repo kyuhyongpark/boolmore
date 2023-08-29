@@ -9,7 +9,7 @@ FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
 
 
-def generate_experiments(primes:dict[str, PrimeType], n_exps:int, export:bool=False,
+def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None, export:bool=False,
                          file:str='artificial_experiments.tsv') -> tuple[list[ExpType], list[FixesType]]:
     """
     Given the primes dictionary, generates and returns artificial experiments and interventions
@@ -29,7 +29,8 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int, export:bool=Fa
     ----------
     primes - pyboolnet primes dictionary        :length N dict[str, PrimeType]
              {node: prime}
-    n_exps - number of experiments to generate  :int
+    n_exps - number of experiments to generate  :int|None
+             when None, generates 10*N
 
     Returns
     -------
@@ -47,6 +48,9 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int, export:bool=Fa
         fixes     - ((node A, value1), (node B, value2), ...)   :FixesType = tuple[tuple[str, int]]
         
     """
+    if n_exps == None:
+        n_exps = 10*len(primes)
+
     # find source nodes
     source_vars = []
     for node in primes:
@@ -138,6 +142,6 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int, export:bool=Fa
             fp.write(exp[3] + '\t')
             fp.write(exp[4] + '\n')
 
-        print('Exporting generated experiments to', os.path.abspath(file))
+        print('Exported generated experiments to', os.path.abspath(file))
 
     return experiments, interventions

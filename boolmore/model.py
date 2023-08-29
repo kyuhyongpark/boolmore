@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import random
+import os
 import pyboolnet.trap_spaces
 import boolmore.mutation as m
 import boolmore.conversions as conv
@@ -53,6 +54,7 @@ class Model():
                           {observed_node: predict_value}
         score           - how well the model agrees with experimental results       :float
                           one point in score means agreement to one perturbation
+        max_score       - possible maximum score                                    :float
 
         """
         self.id = 0
@@ -73,6 +75,7 @@ class Model():
 
         self.predictions:PredictType = {}
         self.score = 0.0
+        self.max_score = 0.0
 
     @classmethod
     def import_model(cls, primes:dict[str, PrimeType], id:int=0, generation:int=0,
@@ -132,7 +135,7 @@ class Model():
             x.edge_pool.extend(base.edge_pool)
             x.default_sources.update(base.default_sources)
             generate_default_sources = False
-
+            x.max_score = base.max_score
         
         for node in x.primes:
             # generate default_sources if necessary
@@ -292,6 +295,7 @@ class Model():
         mutated_model.constraints = self.constraints
         mutated_model.edge_pool = self.edge_pool
         mutated_model.default_sources = self.default_sources
+        mutated_model.max_score = self.max_score
 
         mutated_model.primes = self.primes.copy()
         mutated_model.regulators_dict = self.regulators_dict.copy()
@@ -300,7 +304,7 @@ class Model():
         mutated_model.extra_edges = self.extra_edges.copy()
 
         rnd = random.random()
-        if rnd < edge_prob:
+        if rnd < edge_prob and len(mutated_model.edge_pool)>0:
             new_edge = random.choice(self.edge_pool)
 
             new_edge_node = new_edge[1]
@@ -374,11 +378,12 @@ class Model():
         """
         if threshold != 0.0 and self.score < threshold:
             return
-        fp = open(name + "_" + str(self.id) + "_gen" + str(self.generation) + ".txt", "w")
+        file = name + "_" + str(self.id) + "_gen" + str(self.generation) + ".txt"
+        fp = open(file, "w")
         fp.write("# id: " + str(self.id) + '\n')
         fp.write('# generation: ' + str(self.generation) + '\n')
         fp.write('# extra edges: ' + str(self.extra_edges) + '\n')
-        fp.write('# score: ' + str(self.score) + '\n')
+        fp.write('# score: ' + str(self.score) + '/' + str(self.max_score) + '\n')
         fp.write('# following constraints: ' + str(self.check_constraint()) + '\n')
         fp.write('# complexity: ' + str(self.complexity) + '\n')
         primes = {k:self.primes[k] for k in sorted(self.primes)}
@@ -401,6 +406,8 @@ class Model():
                 s = k + "* = 1"
             fp.write(s + '\n')
         fp.close()
+        
+        print('Exported generated experiments to', os.path.abspath(file))
 
 
 def mix_models(model1:Model, model2:Model) -> Model:
@@ -424,6 +431,7 @@ def mix_models(model1:Model, model2:Model) -> Model:
     mixed_model.constraints = model1.constraints
     mixed_model.edge_pool = model1.edge_pool
     mixed_model.default_sources = model1.default_sources
+    mixed_model.max_score = model1.max_score
 
     mixed_model.primes = {}
     mixed_model.regulators_dict = {}

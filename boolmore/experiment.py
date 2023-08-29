@@ -7,7 +7,7 @@ def comment_removal(line:str) -> bool:
     return not line.startswith("#") and not line.isspace()
 
 # 20230425 import from tsv files
-def import_exps(location:str) -> tuple[list[ExpType], list[FixesType]]:
+def import_exps(location:str) -> tuple[list[ExpType], list[FixesType], float]:
     """
     Reads a tsv file and returns experiments and interventions.
 
@@ -37,6 +37,8 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType]]:
     interventions - summarized list of fixes for convenience    :list[FixesType]
         fixes     - ((node A, value1), (node B, value2), ...)   :FixesType = tuple[tuple[str, int]]
 
+    max_score     - possible maximum score              :float
+
     """
     ID = 0
     SCORE = 1
@@ -53,18 +55,24 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType]]:
 
     experiments = []
     interventions = []
+    max_score = 0.0
     for row in data:
         exp = [int(row[ID]), float(row[SCORE])]
+        max_score += float(row[SCORE])
 
-        fixes = []
-        fixes_string = row[FIXES].split(',')
-        for sth in fixes_string:
-            node_value = sth.strip().split('=')
-            fix = tuple([node_value[0], int(node_value[1])])
-            fixes.append(fix)
-        # fixes should be sorted so that they do not depend on the order of user input
-        fixes = tuple(sorted(fixes, key= lambda x:x[0]))
-        exp.append(fixes)
+        if row[FIXES] == '':
+            fixes = tuple()
+            exp.append(fixes)
+        else:
+            fixes = []
+            fixes_string = row[FIXES].split(',')
+            for sth in fixes_string:
+                node_value = sth.strip().split('=')
+                fix = tuple([node_value[0], int(node_value[1])])
+                fixes.append(fix)
+            # fixes should be sorted so that they do not depend on the order of user input
+            fixes = tuple(sorted(fixes, key= lambda x:x[0]))
+            exp.append(fixes)
 
         exp.append(row[NODE])
         exp.append(row[VALUE])
@@ -79,4 +87,6 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType]]:
         # add the entry
         experiments.append(tuple(exp))
 
-    return experiments, interventions
+    return experiments, interventions, max_score
+
+import_exps('BoolMoRe/Examples_and_tutorials/CAD_data.tsv')

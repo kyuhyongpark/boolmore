@@ -244,5 +244,6 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
     if report:
         fp.write('total\t\t\t\t\t\t\t' + str(score) + '\n') # type: ignore
         fp.write('out of\t\t\t\t\t\t\t' + str(model_max_score) + '\n') # type: ignore
+        fp.write('out of\t\t\t\t\t\t\t' + str(score/model_max_score*100) + '%\n') # type: ignore
 
     return score
