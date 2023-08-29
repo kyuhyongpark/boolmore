@@ -18,9 +18,9 @@ def main():
     used. See ReadMe for instructions regarding typical use cases.
     """)
 
-    config_json = argv[0]
-    if len(argv) == 2:
-        model = argv[1]
+    config_json = argv[1]
+    if len(argv) == 3:
+        model = argv[2]
     else:
         model = None
 
