@@ -4,7 +4,7 @@ Boolean Model Refiner
 
 ## Install
 ```
-pip install git+https://github.com/troonmel/BoolMoRe
+pip install git+https://github.com/kyuhyongpark/BoolMoRe
 ```
 
 ## Quickstart with an example run
