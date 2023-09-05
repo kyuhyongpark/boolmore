@@ -1,0 +1,53 @@
+# added rule for ABA explicitely
+
+# score:  219.03 / 360 (60.8%)
+# complexity: 129
+# default_sources: {'ABA': 0}
+
+ABA *= ABA
+RCARs* = ABA
+PEPC* = not ABA
+V-PPase* = ABA
+ABI1* = not PA and not RCARs and not ROS and pHc
+ABI2* = not RCARs and not ROS
+HAB1* = not RCARs and not ROS
+PP2CA* = not RCARs and not ROS
+OST1* = (not ABI1 and not HAB1) or (not PP2CA and not ABI2) or (not ABI1 and not ABI2) or (not HAB1 and not PP2CA) or (not HAB1 and not ABI2) or (not ABI1 and not PP2CA)
+ROS* = pHc and not ABI1 and OST1 and S1P_PhytoS1P and PA
+GHR1* = not ABI2 and ROS
+NO* = NIA1_2
+NIA1_2* = ROS
+cGMP* = NO
+cADPR* = cGMP and ROS and NO
+CIS* = InsP3 or cADPR
+CaIM* =  Actin_Reorganization or GHR1  
+Ca2c* = (CIS or CaIM) and not Ca2_ATPase 
+Ca2_ATPase* = Ca2c
+CPK3_21* = Ca2c or CPK3_21
+MPK9_12* = Ca2c or MPK9_12
+PLC* = Ca2c
+DAG* = PLC
+InsP3* = PLC
+PLDalpha* = S1P_PhytoS1P and Ca2c
+PLDdelta* = NO or ROS
+PA* = PLDdelta or PLDalpha or DAG
+S1P_PhytoS1P* = PA or ABA
+V-ATPase* = Ca2c
+TCTP* = Ca2c
+Microtubule_Depolymerization* = TCTP or Microtubule_Depolymerization
+pHc* = ((OST1 and not ABI2 and not ABI1) or Ca2c) and Vacuolar_Acidification
+H_ATPase* = not pHc and not Ca2c and not ROS
+AtRAC1* = not ABA or ABI1
+Actin_Reorganization* = not AtRAC1
+SLAC1* = CPK3_21 and MPK9_12 and OST1 and GHR1 and not ABI1 and not PP2CA and not ABI2 and pHc 
+QUAC1* = OST1 and Ca2c
+SLAH3* = CPK3_21 and not ABI1
+AnionEM* = SLAC1 or QUAC1 and SLAH3
+Malate* = PEPC and not ABA and not AnionEM
+KEV* = Vacuolar_Acidification or Ca2c
+Depolarization* = (AnionEM or Ca2c or KEV) and (not H_ATPase or not K_efflux)  
+KOUT* = (not NO or not ROS or pHc) and Depolarization
+K_efflux* = KEV and KOUT 
+H2O_Efflux* = AnionEM and OST1 and K_efflux and not Malate
+Closure* = Microtubule_Depolymerization and H2O_Efflux
+Vacuolar_Acidification* = V-PPase or V-ATPase or Vacuolar_Acidification

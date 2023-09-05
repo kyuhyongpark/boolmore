@@ -360,7 +360,8 @@ class Model():
         print('id: ', self.id)
         print('generation: ', self.generation)
         print('extra edges: ', self.extra_edges)
-        print('score: ', self.score)
+        print('score: ', round(self.score,2), '/', self.max_score,
+              '(',round(self.score/self.max_score,2)*100,'%)')
         print('following constraints:', self.check_constraint())
         print('complexity:', self.complexity)
 

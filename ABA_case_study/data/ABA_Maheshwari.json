@@ -11,6 +11,10 @@
     "edge_prob": 0.5
     },
 
+"data": "BoolMoRe/ABA_case_study/data/data_Maheshwari_20230905.tsv",
+
+"base": "BoolMoRe/ABA_case_study/baseline_models/ABA_2019_Maheshwari.txt",
+
 "default_sources": {"ABA":0},
 
 "constraints": {"fixed": [],

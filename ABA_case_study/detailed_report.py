@@ -6,8 +6,8 @@ import pyboolnet.prime_implicants as pi
 from boolmore.model import Model
 from boolmore.experiment import import_exps
 
-SETTINGS = 'BoolMoRe/ABA_case_study/data/ABA_2017.json'
-MODEL = 'BoolMoRe/ABA_case_study/generated_models/20230512_7790_gen125_mod.txt'
+SETTINGS = 'BoolMoRe/ABA_case_study/data/ABA_Maheshwari.json'
+MODEL = None
 NAME = None
 
 def get_detailed_report(json_file:str, model:str|None=None, name:str|None=None):
@@ -35,7 +35,7 @@ def get_detailed_report(json_file:str, model:str|None=None, name:str|None=None):
         FILE = MODEL.split("/")[-1][:-4]+'_score.tsv'
 
     print("Loading experimental data . . .")
-    exps, pert = import_exps(DATA)
+    exps, pert, max_score = import_exps(DATA)
     print("Experimental data loaded.\n")
 
     print("Loading base model . . .")
@@ -44,6 +44,7 @@ def get_detailed_report(json_file:str, model:str|None=None, name:str|None=None):
                               constraints=CONSTRAINTS, edge_pool=EDGE_POOL,
                               default_sources=DEFAULT_SOURCES)
     print("Base model loaded.")
+    base.max_score = max_score
     base.get_predictions(pert)
     base.get_model_score(exps)
     base.info()

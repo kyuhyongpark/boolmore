@@ -1,6 +1,10 @@
 # Changed node names to correspond with 2017 ABA model
 # added rule for ABA explicitely
 
+# score:  175.79 / 296 (59.4%)
+# complexity: 178
+# default_sources: {'ABA': 0}
+
 ABA *= ABA
 SPHK1_2 *= ABA or PA
 S1P_PhytoS1P *= SPHK1_2

@@ -131,7 +131,8 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
     
     iteration = sorted(iteration, key=lambda x: (len(x.extra_edges), x.complexity))
     iteration = sorted(iteration, key=lambda x: x.score, reverse=True)
-    
+
+    final = iteration[0]    
     for i in range(EXPORT_TOP):
         iteration[i].export(NAME, EXPORT_THRESHOLD)
 
@@ -194,16 +195,18 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
             new_iteration[j].export(NAME, EXPORT_THRESHOLD)
 
         # Always export the final best model
-        if i+1 == TOTAL_ITERATIONS:
-            new_iteration[0].export(NAME, 0)
+        final = new_iteration[0]
 
         # Stop iteration if max score is reached
         if new_iteration[0].score == base.max_score:
-            new_iteration[0].export(NAME, 0)
+            final = new_iteration[0]
             print("max score reached")
             break
 
         iteration = new_iteration
+
+    final.export(NAME, 0)
+    final.info()
 
 if __name__=='__main__':
     run_ga(SETTINGS, START_MODEL, NAME)

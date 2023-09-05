@@ -3,6 +3,10 @@
 # deleted Arg which was a source that does not regulate any other node
 # assigned constant values to nodes that were originally source nodes: ABH1, AGB1, ERA1
 
+# score:  129.75 / 248 (52.3%)
+# complexity: 87
+# default_sources: {'ABA': 0}
+
 ABH1 *= 1
 AGB1 *= 1
 ERA1 *= 1

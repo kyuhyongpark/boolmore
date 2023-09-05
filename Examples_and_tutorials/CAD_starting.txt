@@ -1,9 +1,12 @@
+# scrambled model
+
 # id: 1
 # generation: 1
 # extra edges: []
 # score: 29.25
 # following constraints: True
 # complexity: 13
+
 Coup_fti* = !Fgf8 & !Sp8
 Emx2* = Coup_fti & !Pax6
 Fgf8* = !Emx2 & Fgf8 | Sp8
