@@ -1,9 +1,9 @@
 ID	Score	Intervention	Observed Node	Value
-1	1.0	ABA=0	Closure	OFF
-2	1.0	ABA=1	Closure	ON
-3	1.0	ABA=0,ROS=1	Closure	ON
-6	1.0	ABA=0,ROS=0	Closure	OFF
-7	1.0	ABA=1,ROS=0	Closure	OFF/Some
+1	4.0	ABA=0	Closure	OFF
+2	4.0	ABA=1	Closure	ON
+3	2.0	ABA=0,ROS=1	Closure	ON
+6	2.0	ABA=0,ROS=0	Closure	OFF
+7	2.0	ABA=1,ROS=0	Closure	OFF/Some
 9	1.0	ABA=1,PLDalpha=0,ROS=0	Closure	OFF
 10	1.0	ABA=0,CaIM=1	Closure	ON
 11	1.0	ABA=0,Ca2c=0	Closure	OFF
@@ -165,7 +165,7 @@ ID	Score	Intervention	Observed Node	Value
 242	1.0	ABA=0,CaIM=1,PLDalpha=0	Closure	OFF
 243	1.0	ABA=0,NO=0,ROS=1	Closure	OFF/Some
 244	1.0	ABA=0,NO=1,ROS=0	Closure	ON
-245	1.0	ABA=0	ROS	OFF
+245	3.0	ABA=0	ROS	OFF
 246	1.0	ABA=1	ROS	ON
 247	1.0	ABA=0	NO	OFF
 248	1.0	ABA=1	NO	ON
@@ -191,7 +191,7 @@ ID	Score	Intervention	Observed Node	Value
 268	1.0	ABA=1,pHc=1	NO	ON
 269	1.0	ABA=0,Ca2c=0	NO	OFF
 270	1.0	ABA=1,Ca2c=0	NO	OFF
-271	1.0	ABA=0,ROS=1	NO	ON
+271	2.0	ABA=0,ROS=1	NO	ON
 272	1.0	ABA=0,NIA1_2=0	NO	OFF/Some
 273	1.0	ABA=1,NIA1_2=0	NO	OFF
 274	1.0	ABA=0,NIA1_2=0,ROS=1	NO	OFF

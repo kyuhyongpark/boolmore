@@ -361,7 +361,7 @@ class Model():
         print('generation: ', self.generation)
         print('extra edges: ', self.extra_edges)
         print('score: ', round(self.score,2), '/', self.max_score,
-              '(',round(self.score/self.max_score,2)*100,'%)')
+              '(',round(self.score/self.max_score,3)*100,'%)')
         print('following constraints:', self.check_constraint())
         print('complexity:', self.complexity)
 
