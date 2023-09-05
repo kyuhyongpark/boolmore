@@ -1,10 +1,13 @@
 # BoolMoRe
 Boolean Model Refiner
 
+Takes an existing Boolean model and refines it to fit better with the given experimental results. Hundreds or thousands of Boolean models are explored in the process, each being consistent to the interaction graph of the starting model and any extra constraints given. The score (or fitness) of the models are determined by comparing the attractors with the experimental data for every perturbation (or fixes, such as gene KO).
+
+We showcase the strength of our algorithm by a case study on plant stomatal model. After several hours of automatic refinement, the fittest models recapture and surpass the accuracy gain achieved over 10 years of manual revision and provide new, testable predictions.
 
 ## Install
 ```
-pip install git+https://github.com/troonmel/BoolMoRe
+pip install git+https://github.com/kyuhyongpark/BoolMoRe
 ```
 
 ## Quickstart with an example run
