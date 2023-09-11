@@ -33,24 +33,24 @@ def prime2rr(prime:PrimeType,
             nodes = nodes.union(set(dct.keys()))
         nodes = list(nodes)
         nodes.sort()
-        regulators = tuple(nodes)
+        regulators = tuple(nodes) # type: ignore
 
     # check if the node is a fixed node
-    if len(regulators) == 0:
+    if len(regulators) == 0: # type: ignore
         signs = ''
         if bool(prime[1]): # 1 implicant is not empty
             rr = '1'
         else:
             rr = '0'
-        return regulators, rr, signs
+        return regulators, rr, signs # type: ignore
 
     # Get the rr and signs of the regulators
-    rr = ['0'] * (2**len(regulators))
+    rr = ['0'] * (2**len(regulators)) # type: ignore
     if signs == None:
-        signs_list = ['1'] * len(regulators)
+        signs_list = ['1'] * len(regulators) # type: ignore
         for implicant in prime[1]:
             # check whether certain node is inside
-            for i, node in enumerate(regulators):
+            for i, node in enumerate(regulators): # type: ignore
                 if node in implicant:
                     if implicant[node] == 0:
                         signs_list[i] = '0'
@@ -60,7 +60,7 @@ def prime2rr(prime:PrimeType,
     for implicant in prime[1]:
         bi = ''
         # check whether certain node is inside
-        for i, node in enumerate(regulators):
+        for i, node in enumerate(regulators): # type: ignore
             if node in implicant:
                 # if it exists, put 1
                 bi += '1'
@@ -72,7 +72,7 @@ def prime2rr(prime:PrimeType,
 
     rr = ''.join(rr)
 
-    return regulators, rr, signs
+    return regulators, rr, signs # type: ignore
 
 
 def rr2prime(regulators:tuple[str], rr:str, signs:str, inverted:bool=False) -> PrimeType:
@@ -175,6 +175,38 @@ def rr2bnet(regulators:tuple[str], rr:str, signs:str) -> str:
 
     return bnet
 
+def prime2bnet(node:str, prime:PrimeType) -> str:
+    """
+    Parameters
+    ----------
+    node  - the node for which the prime is given   :str
+    prime - prime implicants of the rule            :PrimeType = list[list[dict[str,int]]]
+
+    Returns
+    -------
+    bnet - bnet formatted rules     :str
+    """
+    k = node
+    v = prime
+    
+    s = k + "* = "
+    sl = []
+    for c in v[1]:
+        sll = []
+        for kk,vv in c.items():
+            if vv: sli = kk
+            else: sli = '!'+kk
+            sll.append(sli)
+        if len(sll) > 0:
+            sl.append(' & '.join(sll))
+    if len(sl) > 0:
+        s += ' | '.join(sl)
+    if v[1]==[]:
+        s = k + "* = 0"
+    if v[1]==[{}]:
+        s = k + "* = 1"
+    
+    return s
 
 def get_uni_rr(rr:str, max:bool=True) -> str:
     """

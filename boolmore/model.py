@@ -171,7 +171,7 @@ class Model():
 
                 regulators = tuple(regulators)
 
-                rr = conv.prime2rr(primes[node], regulators=regulators, signs=signs)[1]
+                rr = conv.prime2rr(primes[node], regulators=regulators, signs=signs)[1] # type: ignore
                 x.regulators_dict[node] = regulators
                 x.rr_dict[node] = rr
                 x.signs_dict[node] = signs
@@ -361,7 +361,7 @@ class Model():
         print('generation: ', self.generation)
         print('extra edges: ', self.extra_edges)
         print('score: ', round(self.score,2), '/', self.max_score,
-              '(',round(self.score/self.max_score,3)*100,'%)')
+              '(',round(self.score/self.max_score*100,1),'%)')
         print('following constraints:', self.check_constraint())
         print('complexity:', self.complexity)
 
@@ -388,27 +388,12 @@ class Model():
         fp.write('# following constraints: ' + str(self.check_constraint()) + '\n')
         fp.write('# complexity: ' + str(self.complexity) + '\n')
         primes = {k:self.primes[k] for k in sorted(self.primes)}
-        for k,v in primes.items():
-            s = k + "* = "
-            sl = []
-            for c in v[1]:
-                sll = []
-                for kk,vv in c.items():
-                    if vv: sli = kk
-                    else: sli = '!'+kk
-                    sll.append(sli)
-                if len(sll) > 0:
-                    sl.append(' & '.join(sll))
-            if len(sl) > 0:
-                s += ' | '.join(sl)
-            if v[1]==[]:
-                s = k + "* = 0"
-            if v[1]==[{}]:
-                s = k + "* = 1"
+        for k in primes:
+            s = conv.primes2bnet(k, primes[k])
             fp.write(s + '\n')
         fp.close()
         
-        print('Exported generated experiments to', os.path.abspath(file))
+        print('Exported generated model to', os.path.abspath(file))
 
 
 def mix_models(model1:Model, model2:Model) -> Model:

@@ -4,6 +4,7 @@ import pystablemotifs as sm
 import boolmore.config
 from boolmore.model import Model, mix_models
 from boolmore.experiment import import_exps
+from boolmore.conversions import prime2bnet
 
 SETTINGS = 'BoolMoRe/ABA_case_study/data/ABA_2017.json'
 START_MODEL = None
@@ -31,7 +32,7 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
     f = open(json_file)
     json_dict = json.load(f)
 
-    # take setting parameters from the json file
+    # take parameters from the json file
     STARTING_ID = json_dict['parameters']['starting_id']
     STARTING_GEN = json_dict['parameters']['starting_gen']
     TOTAL_ITERATIONS = json_dict['parameters']['total_iterations']
@@ -64,13 +65,15 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
 
     boolmore.config.id = STARTING_ID
 
+
     print("Loading experimental data . . .")
     exps, pert, max_score = import_exps(DATA)
     print("Experimental data loaded.\n")
 
     print("Loading base model . . .")
     base_primes = sm.format.import_primes(BASE)
-    base = Model.import_model(base_primes, constraints=CONSTRAINTS, edge_pool=EDGE_POOL, default_sources=DEFAULT_SOURCES)
+    base = Model.import_model(base_primes, constraints=CONSTRAINTS,
+                              edge_pool=EDGE_POOL, default_sources=DEFAULT_SOURCES)
     print("Base model loaded.")
     base.max_score = max_score
     base.get_predictions(pert)
@@ -87,15 +90,6 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
     n1.info()
     print()
 
-    # ### make one mutated model
-    # new_model = n1.mutate(PROB, EDGE_PROB)
-    # new_model.get_predictions(pert)
-    # new_model.get_model_score(exps)
-    # new_model.info()
-    # new_model.export(NAME)
-
-    # from pyboolnet.prime_implicants import primes_are_equal
-    # print(primes_are_equal(n1.primes,new_model.primes))
 
     fp = open(FILE, "w")
 
@@ -119,6 +113,7 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
                 if not line.startswith('#') and not line.isspace():
                     fp.write('# ' + line)
 
+
     ### Genetic Algorithm
     print("- - - - - iteration ", 0, " - - - - -")
     iteration = []
@@ -136,7 +131,7 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
     for i in range(EXPORT_TOP):
         iteration[i].export(NAME, EXPORT_THRESHOLD)
 
-    print("top score :", iteration[0].score)
+    print("top score :", round(iteration[0].score,2))
     print("extra edges :", len(iteration[0].extra_edges))
     print("complexity of the top model :", iteration[0].complexity)
     if not iteration[0].check_constraint():
@@ -181,7 +176,7 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
         new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
         new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
     
-        print("top score : ", new_iteration[0].score)
+        print("top score : ", round(new_iteration[0].score,2))
         print("extra edges :", len(new_iteration[0].extra_edges))
         print("complexity of the top model :", new_iteration[0].complexity)
         if not new_iteration[0].check_constraint():
@@ -205,8 +200,29 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
 
         iteration = new_iteration
 
+    mutated = set()
+    for node in n1.primes:
+        for value in [0, 1]:
+            sorted_primes1 = sorted([sorted(d.items()) for d in n1.primes[node][value]])
+            sorted_primes2 = sorted([sorted(d.items()) for d in final.primes[node][value]])
+            if sorted_primes1 != sorted_primes2:
+                mutated.add(node)
+    mutated = sorted(list(mutated))
+
+    print()
+    print(f"The algorithm ran for {i+1} iterations, and {(i+1)*PER_ITERATION} models were generated and tested") # type: ignore
+    print(f"Mutated {len(mutated)} functions, and increased score from {n1.score} to {final.score}.")
+    print()
+
     final.export(NAME, 0)
     final.info()
+    print()
+
+    for node in mutated:
+        print("start:" + prime2bnet(node, n1.primes[node])) # type: ignore
+        print("final:" + prime2bnet(node, final.primes[node])) # type: ignore
+
+    return base, n1, final
 
 if __name__=='__main__':
     run_ga(SETTINGS, START_MODEL, NAME)
