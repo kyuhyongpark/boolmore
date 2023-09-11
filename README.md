@@ -37,7 +37,7 @@ pip install git+https://github.com/kyuhyongpark/BoolMoRe
 2. download 4 files from Examples and tutorials
 
    `Cortical_Area_Development.txt` : This is the baseline model  
-   `CAD_scrambled.txt` : This is the scrambled starting model  
+   `CAD_starting.txt` : This is the scrambled starting model  
    `CAD_data.tsv` : This is the generated artificial experiments as in benchmarks  
    `CAD_config.json` : This contains the path to above files and other constraints
        
@@ -54,5 +54,5 @@ pip install git+https://github.com/kyuhyongpark/BoolMoRe
    ```
    import boolmore.genetic_algorithm
 
-   boolmore.genetic_algorithm.run_ga('your_path/CAD_config.json', 'your_path/CAD_scrambled.txt')
+   boolmore.genetic_algorithm.run_ga('your_path/CAD_config.json', 'your_path/CAD_starting.txt')
    ```
