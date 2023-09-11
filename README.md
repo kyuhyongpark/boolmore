@@ -7,7 +7,7 @@ We showcase the strength of our algorithm by a case study on plant stomatal mode
 
 ## Install
 ```
-pip install git+https://github.com/kyuhyongpark/BoolMoRe
+pip install git+https://github.com/kyuhyongpark/boolmore
 ```
 <details>
    <summary>Trouble shooting for Mac users</summary>
