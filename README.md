@@ -1,4 +1,4 @@
-# BoolMoRe
+# boolmore
 Boolean Model Refiner
 
 Takes an existing Boolean model and refines it to fit better with the given experimental results. Hundreds or thousands of Boolean models are explored in the process, each being consistent to the interaction graph of the starting model and any extra constraints given. The score (or fitness) of the models are determined by comparing the attractors with the experimental data for every perturbation (or fixes, such as gene KO).
