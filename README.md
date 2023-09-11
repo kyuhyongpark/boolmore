@@ -9,6 +9,27 @@ We showcase the strength of our algorithm by a case study on plant stomatal mode
 ```
 pip install git+https://github.com/kyuhyongpark/BoolMoRe
 ```
+<details>
+   <summary>Trouble shooting for Mac users</summary>
+   <br>
+   Installation of boolmore automatically installs PyBoolNet.<br>
+   For Mac Users, PyBoolNet may not properly install gringo, one of PyBoolNet's requisites.<br>
+   <br>
+   If the below example does not run properly,<br>
+   ones on a mac should use homebrew to install 
+
+   ```
+   brew install clingo
+   ```
+
+   then one may need to overwrite the libraries for pyboolnet to work. For example,
+
+   ```
+   ln -s /usr/local/bin/gringo /Users/.../python3.11/site-packages/pyboolnet/binaries/gringo-4.4.0/gringo_mac64
+   ```
+   Here /usr/local/bin/gringo is where the new gringo is installed.<br>
+   .../pyboolnet/binaries/gringo-4.4.0/gringo_mac64 is where the PyBoolNet looks for gringo.<br>
+</details>
 
 ## Quickstart with an example run
 
