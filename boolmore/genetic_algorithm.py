@@ -210,7 +210,7 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
     mutated = sorted(list(mutated))
 
     print()
-    print(f"The algorithm ran for {i+1} iterations, and {(i+1)*PER_ITERATION} models were generated and tested") # type: ignore
+    print(f"The algorithm ran for {i+1} iterations, and {boolmore.config.id} models were generated and tested") # type: ignore
     print(f"Mutated {len(mutated)} functions, and increased score from {n1.score} to {final.score}.")
     print()
 
