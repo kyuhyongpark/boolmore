@@ -389,7 +389,7 @@ class Model():
         fp.write('# complexity: ' + str(self.complexity) + '\n')
         primes = {k:self.primes[k] for k in sorted(self.primes)}
         for k in primes:
-            s = conv.primes2bnet(k, primes[k])
+            s = conv.prime2bnet(k, primes[k])
             fp.write(s + '\n')
         fp.close()
         
