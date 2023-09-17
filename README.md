@@ -1,4 +1,4 @@
-# BoolMoRe
+# boolmore
 Boolean Model Refiner
 
 Takes an existing Boolean model and refines it to fit better with the given experimental results. Hundreds or thousands of Boolean models are explored in the process, each being consistent to the interaction graph of the starting model and any extra constraints given. The score (or fitness) of the models are determined by comparing the attractors with the experimental data for every perturbation (or fixes, such as gene KO).
@@ -7,7 +7,7 @@ We showcase the strength of our algorithm by a case study on plant stomatal mode
 
 ## Install
 ```
-pip install git+https://github.com/kyuhyongpark/BoolMoRe
+pip install git+https://github.com/kyuhyongpark/boolmore
 ```
 <details>
    <summary>Trouble shooting for Mac users</summary>
@@ -37,7 +37,7 @@ pip install git+https://github.com/kyuhyongpark/BoolMoRe
 2. download 4 files from Examples and tutorials
 
    `Cortical_Area_Development.txt` : This is the baseline model  
-   `CAD_scrambled.txt` : This is the scrambled starting model  
+   `CAD_starting.txt` : This is the scrambled starting model  
    `CAD_data.tsv` : This is the generated artificial experiments as in benchmarks  
    `CAD_config.json` : This contains the path to above files and other constraints
        
@@ -54,5 +54,5 @@ pip install git+https://github.com/kyuhyongpark/BoolMoRe
    ```
    import boolmore.genetic_algorithm
 
-   boolmore.genetic_algorithm.run_ga('your_path/CAD_config.json', 'your_path/CAD_scrambled.txt')
+   boolmore.genetic_algorithm.run_ga('your_path/CAD_config.json', 'your_path/CAD_starting.txt')
    ```
