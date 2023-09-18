@@ -8,7 +8,7 @@ from boolmore.conversions import prime2bnet
 
 SETTINGS = 'BoolMoRe/ABA_case_study/data/ABA_2017.json'
 START_MODEL = None
-NAME = None
+NAME = "ref_20230917"
 
 def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
     """
@@ -177,7 +177,7 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
         new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
     
         print("top score : ", round(new_iteration[0].score,2))
-        print("extra edges :", len(new_iteration[0].extra_edges))
+        print("number of added edges in the top model :", len(new_iteration[0].extra_edges))
         print("complexity of the top model :", new_iteration[0].complexity)
         if not new_iteration[0].check_constraint():
             print("ERROR: model does not follow constraints")
@@ -210,8 +210,10 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
     mutated = sorted(list(mutated))
 
     print()
-    print(f"The algorithm ran for {i+1} iterations, and {boolmore.config.id} models were generated and tested") # type: ignore
-    print(f"Mutated {len(mutated)} functions, and increased score from {n1.score} to {final.score}.")
+    print(f"""The algorithm ran for {i+1} iterations,
+          generating {boolmore.config.id - STARTING_ID} models.\n
+          Mutated {len(mutated)} functions, 
+          and increased score from {round(n1.score,2)} to {round(final.score,2)}.""")
     print()
 
     final.export(NAME, 0)

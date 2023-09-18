@@ -6,8 +6,8 @@ import pyboolnet.prime_implicants as pi
 from boolmore.model import Model
 from boolmore.experiment import import_exps
 
-SETTINGS = 'BoolMoRe/ABA_case_study/data/ABA_Maheshwari.json'
-MODEL = None
+SETTINGS = 'boolmore/ABA_case_study/data/ABA_2017_osc_more_edges.json'
+MODEL = 'boolmore/ABA_case_study/generated_models/osc_more_edges_20230707_7500_gen46.txt'
 NAME = None
 
 def get_detailed_report(json_file:str, model:str|None=None, name:str|None=None):

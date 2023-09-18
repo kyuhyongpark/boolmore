@@ -384,7 +384,7 @@ class Model():
         fp.write("# id: " + str(self.id) + '\n')
         fp.write('# generation: ' + str(self.generation) + '\n')
         fp.write('# extra edges: ' + str(self.extra_edges) + '\n')
-        fp.write('# score: ' + str(self.score) + '/' + str(self.max_score) + '\n')
+        fp.write('# score: ' + str(self.score) + ' / ' + str(self.max_score) + '\n')
         fp.write('# following constraints: ' + str(self.check_constraint()) + '\n')
         fp.write('# complexity: ' + str(self.complexity) + '\n')
         primes = {k:self.primes[k] for k in sorted(self.primes)}
