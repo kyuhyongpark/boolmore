@@ -2,13 +2,15 @@ import json
 import random
 import pystablemotifs as sm
 import boolmore.config
+import time
+
 from boolmore.model import Model, mix_models
 from boolmore.experiment import import_exps
 from boolmore.conversions import prime2bnet
 
 SETTINGS = 'BoolMoRe/ABA_case_study/data/ABA_2017.json'
 START_MODEL = None
-NAME = "ref_20230917"
+NAME = "ref_20230918"
 
 def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
     """
@@ -113,7 +115,7 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
                 if not line.startswith('#') and not line.isspace():
                     fp.write('# ' + line)
 
-
+    start = time.time()
     ### Genetic Algorithm
     print("- - - - - iteration ", 0, " - - - - -")
     iteration = []
@@ -142,6 +144,7 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
     fp.write(str(len(iteration[0].extra_edges)) +'\t')
     fp.write(str(iteration[0].complexity) +'\n')
     
+    i = 0
     for i in range(TOTAL_ITERATIONS):
         print("- - - - - iteration ", i+1, " - - - - -")
         new_iteration = []
@@ -199,6 +202,7 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
             break
 
         iteration = new_iteration
+    end = time.time()
 
     mutated = set()
     for node in n1.primes:
@@ -211,9 +215,11 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
 
     print()
     print(f"""The algorithm ran for {i+1} iterations,
-          generating {boolmore.config.id - STARTING_ID} models.\n
+          evaluating {boolmore.config.id-STARTING_ID} models.\n
           Mutated {len(mutated)} functions, 
-          and increased score from {round(n1.score,2)} to {round(final.score,2)}.""")
+          and increased score from {round(n1.score,2)} to {round(final.score,2)}.\n
+          Total elapsed time: {time.strftime("%H:%M:%S", time.gmtime(end-start))}\n
+          Time per model: {(end-start)/(boolmore.config.id-STARTING_ID)} s""")
     print()
 
     final.export(NAME, 0)
