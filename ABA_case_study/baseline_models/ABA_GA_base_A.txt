@@ -1,6 +1,7 @@
 # Reka Albert et al. (2017) A new discrete dynamic model of ABA-induced stomatal closure predicts key feedback loops
 # Deleted Vacuolar_Acidification regulating KEV
-# 20230407 add strech-activated-calcium-channel (SACC)
+# 20230407 added strech-activated-calcium-channel (SACC)
+# 20230501 added a self loop to H2O_Efflux
 
 # / in node names were replaced by _
 # space in node names were replaced by _
@@ -11,10 +12,9 @@
 # , in node names were replaced by _
 # () in node names were deleted
 
-# extra edges:  []
-# score:  291.7263791171307
-# following constraints: True
-# complexity: 195
+# score:  311.71313474579495  
+# complexity: 199
+# default_sources: {'ABA': 0}
 
 ABA* = ABA
 ABH1* = 1
@@ -96,5 +96,5 @@ Depolarization* = (AnionEM or Ca2c or KEV) and (not H_ATPase or not K_efflux)
 KOUT* = (not NO or not ROS or pHc) and Depolarization
 K_efflux* = KEV and KOUT
 AquaporinPIP2_1* = OST1
-H2O_Efflux* = (AnionEM and AquaporinPIP2_1 and K_efflux) and not Malate
+H2O_Efflux* = AnionEM and AquaporinPIP2_1 and (K_efflux or H2O_Efflux) and not Malate
 Closure* = Microtubule_Depolymerization and H2O_Efflux

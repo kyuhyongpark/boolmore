@@ -1,3 +1,4 @@
+# Song Li et al. (2006) Predicting essential components of signal transduction networks: a dynamic model of guard cell abscisic acid signaling
 # Changed node names to correspond with 2017 ABA model
 # added rule for ABA explicitely
 # deleted Arg which was a source that does not regulate any other node

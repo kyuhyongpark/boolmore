@@ -1,3 +1,4 @@
+# Pramuditha Waidyarathne et al. (2018) Boolean Calcium Signalling Model Predicts Calcium Role in Acceleration and Stability of Abscisic Acid-Mediated Stomatal Closure
 # Changed node names to correspond with 2017 ABA model
 # added rule for ABA explicitely
 

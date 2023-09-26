@@ -1,7 +1,4 @@
 # Reka Albert et al. (2017) A new discrete dynamic model of ABA-induced stomatal closure predicts key feedback loops
-# Modified so that a node calcium_oscillation represents the oscillation of calcium
-# Deleted Ca2_ATPase
-# Deleted self loops from Microtubule_Depolymerization, MPK9_12, CPK3_21, Vacuolar_Acidification
 # Deleted Vacuolar_Acidification regulating KEV
 # 20230407 add strech-activated-calcium-channel (SACC)
 
@@ -14,10 +11,9 @@
 # , in node names were replaced by _
 # () in node names were deleted
 
-# extra edges:  []
-# score:  184.19875019051986 
-# following constraints: True
-# complexity: 188
+# score:  291.73 / 505 (57.8%)
+# complexity: 195
+# default_sources: {'ABA': 0}
 
 ABA* = ABA
 ABH1* = 1
@@ -64,15 +60,16 @@ cADPR* = NAD and ADPRc
 CIS* = InsP3 or InsP6 or cADPR
 SACC* = Actin_Reorganization
 CaIM* = SACC or (NtSyp121 and GHR1 and MRP5) or not ABH1 or not ERA1
-Ca2osc* = CIS or CaIM
-CPK3_21* = Ca2osc
-MPK9_12* = Ca2osc
+Ca2c* = (CIS or CaIM) and not Ca2_ATPase
+Ca2_ATPase* = Ca2c
+CPK3_21* = Ca2c or CPK3_21
+MPK9_12* = Ca2c or MPK9_12
 PtdIns4_5P2* = PtdInsP4
-PLC* = Ca2osc
+PLC* = Ca2c
 DAG* = PtdIns4_5P2 and PLC
 InsP3* = PLC and PtdIns4_5P2
 InsP6* = InsP3
-PLDalpha* = GPA1 and Ca2osc
+PLDalpha* = GPA1 and Ca2c
 PLDdelta* = NO or ROS and GAPC1_2
 PA* = PC and (PLDdelta or PLDalpha) or DAG and DAGK
 SPHK1_2* = PA or ABA
@@ -80,21 +77,21 @@ S1P_PhytoS1P* = SPHK1_2 and Sph and not SPP1
 GPA1* = S1P_PhytoS1P or not GCR1
 PtdIns3_5P2* = PI3P5K
 V-PPase* = PtdIns3_5P2
-V-ATPase* = Ca2osc
-Vacuolar_Acidification* = V-PPase or V-ATPase
-TCTP* = Ca2osc
-Microtubule_Depolymerization* = TCTP
-pHc* = (OST1 and not ABI2 and not ABI1 or Ca2osc) and Vacuolar_Acidification
-H_ATPase* = not pHc and not Ca2osc and not ROS
+V-ATPase* = Ca2c
+Vacuolar_Acidification* = V-PPase or V-ATPase or Vacuolar_Acidification
+TCTP* = Ca2c
+Microtubule_Depolymerization* = TCTP or Microtubule_Depolymerization
+pHc* = (OST1 and not ABI2 and not ABI1 or Ca2c) and Vacuolar_Acidification
+H_ATPase* = not pHc and not Ca2c and not ROS
 AtRAC1* = not ABA or ABI1
 Actin_Reorganization* = (PtdInsP4 or PtdInsP3) and not AtRAC1 and ARP_Complex and SCAB1
 SLAC1* = (CPK6 or CPK23 or CPK3_21) and MPK9_12 and OST1 and GHR1 and pHc and not ABI1 and not PP2CA and not ABI2
-QUAC1* = OST1 and Ca2osc
+QUAC1* = OST1 and Ca2c
 SLAH3* = (CPK6 or CPK23) and CPK3_21 and not ABI1
 AnionEM* = SLAC1 or QUAC1 and SLAH3
 Malate* = PEPC and not ABA and not AnionEM
-KEV* = Ca2osc
-Depolarization* = (AnionEM or Ca2osc or KEV) and (not H_ATPase or not K_efflux)
+KEV* = Ca2c
+Depolarization* = (AnionEM or Ca2c or KEV) and (not H_ATPase or not K_efflux)
 KOUT* = (not NO or not ROS or pHc) and Depolarization
 K_efflux* = KEV and KOUT
 AquaporinPIP2_1* = OST1

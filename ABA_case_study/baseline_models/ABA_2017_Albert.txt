@@ -1,5 +1,5 @@
 # Reka Albert et al. (2017) A new discrete dynamic model of ABA-induced stomatal closure predicts key feedback loops
-# 20230407 add strech-activated-calcium-channel (SACC)
+# 20230407 added strech-activated-calcium-channel (SACC)
 
 # / in node names were replaced by _
 # space in node names were replaced by _
@@ -10,10 +10,9 @@
 # , in node names were replaced by _
 # () in node names were deleted
 
-# extra edges:  []
-# score:  310.47918999740824
-# following constraints: True
+# score:  310.48 / 505 (61.5%)
 # complexity: 196
+# default_sources: {'ABA': 0}
 
 # percolated rules: 
 # 8-nitro-cGMP* = NO & ROS & cGMP
