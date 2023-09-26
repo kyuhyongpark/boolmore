@@ -10,7 +10,7 @@ from boolmore.conversions import prime2bnet
 
 SETTINGS = 'BoolMoRe/ABA_case_study/data/ABA_2017.json'
 START_MODEL = None
-NAME = "ref_20230918"
+NAME = "ref_20230925"
 
 def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
     """
@@ -214,12 +214,12 @@ def run_ga(json_file:str, start_model:str|None=None, name:str|None=None):
     mutated = sorted(list(mutated))
 
     print()
-    print(f"""The algorithm ran for {i+1} iterations,
-          evaluating {boolmore.config.id-STARTING_ID} models.\n
-          Mutated {len(mutated)} functions, 
-          and increased score from {round(n1.score,2)} to {round(final.score,2)}.\n
-          Total elapsed time: {time.strftime("%H:%M:%S", time.gmtime(end-start))}\n
-          Time per model: {(end-start)/(boolmore.config.id-STARTING_ID)} s""")
+    print(f"""\tThe algorithm ran for {i+1} iterations,
+        generating {boolmore.config.id-STARTING_ID} models.
+        Mutated {len(mutated)} functions, 
+        and increased score from {round(n1.score,2)} to {round(final.score,2)}.\n
+        Total elapsed time: {time.strftime("%H:%M:%S", time.gmtime(end-start))}
+        Time per model: {(end-start)/(boolmore.config.id-STARTING_ID)} s""")
     print()
 
     final.export(NAME, 0)

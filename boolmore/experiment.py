@@ -6,15 +6,15 @@ ExpType = tuple[int, float, FixesType, str, str]
 def comment_removal(line:str) -> bool:
     return not line.startswith("#") and not line.isspace()
 
-# 20230425 import from tsv files
 def import_exps(location:str) -> tuple[list[ExpType], list[FixesType], float]:
     """
     Reads a tsv file and returns experiments and interventions.
 
-    The tsv file should have 5 columns
+    The tsv file should have 6 columns
     ID    - e.g. 1
     SCORE - e.g. 1.0
-    FIXES - e.g. A=1,B=0,C=0
+    SOURCE - e.g. A=1
+    PERT - e.g. B KO, C KO, D CA
     NODE  - the observed node
     VALUE - one of OFF, OFF/Some, Some, Some/ON, ON
 
@@ -40,15 +40,11 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType], float]:
     max_score     - possible maximum score              :float
 
     """
-    ID = 0
-    SCORE = 1
-    FIXES = 2
-    NODE = 3
-    VALUE = 4
+    ID, SCORE, SOURCE, PERT, NODE, VALUE = 0, 1, 2, 3, 4, 5
     
     file = open(location, "r")
     lines = filter(comment_removal, file)
-    data = csv.reader(lines, delimiter='\t')
+    data = csv.reader(lines, delimiter="\t")
 
     # skip the first row
     next(data)
@@ -60,19 +56,36 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType], float]:
         exp = [int(row[ID]), float(row[SCORE])]
         max_score += float(row[SCORE])
 
-        if row[FIXES] == '':
+        if row[SOURCE] == "" and row[PERT] == "":
             fixes = tuple()
             exp.append(fixes)
-        else:
-            fixes = []
-            fixes_string = row[FIXES].split(',')
-            for sth in fixes_string:
-                node_value = sth.strip().split('=')
-                fix = tuple([node_value[0], int(node_value[1])])
+            continue
+
+        fixes = []
+        if row[SOURCE] != "":
+            # add source node values to the fixes
+            source_str = row[SOURCE].split(",")
+            for sth in source_str:
+                node, value = sth.strip().split("=")
+                fix = tuple([node, int(value)])
                 fixes.append(fix)
-            # fixes should be sorted so that they do not depend on the order of user input
-            fixes = tuple(sorted(fixes, key= lambda x:x[0]))
-            exp.append(fixes)
+        
+        if row[PERT] != "":
+            # add other perturbations to the fixes
+            pert_str = row[PERT].split(",")
+            for sth in pert_str:
+                node, value_str = sth.strip().split(" ")
+                if value_str == "KO":
+                    value = 0
+                elif value_str == "CA":
+                    value = 1
+                else:
+                    raise Exception("Perturbation should be KO or CA")
+                fix = tuple([node, int(value)])
+                fixes.append(fix)
+        # fixes should be sorted so that they do not depend on the order of user input
+        fixes = tuple(sorted(fixes, key= lambda x:x[0]))
+        exp.append(fixes)
 
         exp.append(row[NODE])
         exp.append(row[VALUE])
@@ -82,7 +95,7 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType], float]:
         else:
             for experiment in experiments:
                 if fixes in experiment:
-                    assert exp[NODE] != experiment[NODE], f'{experiment[ID]} and {exp[ID]} are duplicates' 
+                    assert exp[3] != experiment[3], f"{experiment[0]} and {exp[0]} are duplicates" 
 
         # add the entry
         experiments.append(tuple(exp))
