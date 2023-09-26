@@ -1,3 +1,4 @@
+# original name='20230512_7790_gen125_mod.txt'
 # modified to make MPK9_12 be regulated by Ca2c and deleted the self loop
 
 # extra edges: [('PA', 'ABI2', '0'), ('ROS', 'Actin_Reorganization', '1'), ('PA', 'HAB1', '0'), ('PA', 'Microtubule_Depolymerization', '1'), ('AquaporinPIP2_1', 'ROS', '1'), ('pHc', 'Vacuolar_Acidification', '1')]

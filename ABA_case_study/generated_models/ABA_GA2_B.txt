@@ -1,3 +1,5 @@
+# original name='osc_more_edges_20230707_7500_gen46.txt'
+
 # id: 7500
 # generation: 46
 # extra edges: [('PA', 'ABI2', '0'), ('ROS', 'Actin_Reorganization', '1'), ('CIS', 'AnionEM', '1'), ('GHR1', 'KOUT', '1'), ('PA', 'Microtubule_Depolymerization', '1'), ('Actin_Reorganization', 'RBOH', '1'), ('AquaporinPIP2_1', 'ROS', '1')]

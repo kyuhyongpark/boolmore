@@ -1,3 +1,5 @@
+# original name='osc_20230514_8025_gen128.txt'
+
 # id: 8025
 # generation: 128
 # extra edges: [('Ca2osc', 'ABI2', '0'), ('PA', 'ABI2', '0'), ('ROS', 'Actin_Reorganization', '1'), ('PA', 'Microtubule_Depolymerization', '1'), ('Actin_Reorganization', 'RBOH', '1'), ('AquaporinPIP2_1', 'ROS', '1'), ('pHc', 'Vacuolar_Acidification', '1')]
