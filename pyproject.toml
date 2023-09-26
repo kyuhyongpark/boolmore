@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "boolmore"
 authors = [{ name = "Kyu Hyong Park", email = "kjp5774@psu.edu" }]
-version = "0.1.0"
+version = "0.1.1"
 description = "Python package for refining Boolean models"
 license = { file = "LISENSE" }
 requires-python = ">=3.11"
