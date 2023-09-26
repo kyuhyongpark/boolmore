@@ -3,6 +3,28 @@ sys.path.insert(0, "./boolmore/boolmore")
 
 from experiment import *
 
+# test data for tsv input, hierarchy scoring
+# experimental data input should be a tsv file with 6 columns
+
+# ID: id of the experiment
+# e.g. 1
+
+# SCORE: The model will get this score if it agrees with all the experiments in the
+#        higher hierarchy.
+# e.g. 1.0
+
+# SOURCE: The source nodes, and the values (0 or 1)
+# e.g. A=1,B=0,C=0
+
+# PERTURBATION: The nodes, and the intervention (KO or CA)
+# e.g. A CA, B KO,C KO
+
+# NODE - the observed node
+# e.g. Closure
+
+# VALUE - one of OFF, OFF/Some, Some, Some/ON, ON
+# e.g. Some/ON
+
 location = "test_data.txt"
 
 fp = open(location, "w")
