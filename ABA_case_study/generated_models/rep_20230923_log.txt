@@ -1,0 +1,194 @@
+# DATA='BoolMoRe/ABA_case_study/data/data_20230426.tsv'
+# DEFAULT_SOURCES={'ABA': 0}
+# CONSTRAINTS={'fixed': ['Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'], 'regulate': {'ABI1': ['RCARs'], 'ABI2': ['RCARs'], 'HAB1': ['RCARs'], 'PP2CA': ['RCARs'], 'K_efflux': ['KEV', 'KOUT'], 'OST1': ['ABI1', 'ABI2'], 'Depolarization': ['AnionEM']}, 'necessary': {'8-nitro-cGMP': ['cGMP'], 'KOUT': ['Depolarization'], 'Malate': ['PEPC', 'AnionEM'], 'ROS': ['NADPH', 'RBOH']}, 'group': {'PA': [['PC', 'PLDalpha'], ['PC', 'PLDdelta'], ['DAG', 'DAGK']], 'S1P_PhytoS1P': [['SPHK1_2', 'Sph']]}, 'possible_constant': []}
+# EDGE_POOL=[['Ca2c', 'ABI2', '0'], ['Ca2c', 'HAB1', '0'], ['Ca2c', 'PP2CA', '0'], ['PA', 'ABI2', '0'], ['PA', 'HAB1', '0'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['Actin_Reorganization', 'RBOH', '1'], ['ROS', 'Actin_Reorganization', '1'], ['pHc', 'Vacuolar_Acidification', '1'], ['ABI1', 'GEF1_4_10', '1'], ['GHR1', 'CPK3_21', '1'], ['PA', 'Microtubule_Depolymerization', '1']]
+
+# BASE='BoolMoRe/ABA_case_study/baseline_models/ABA_GA_base_A_20230501.txt'
+# extra edges: []
+# score: 311.71313474579495
+# ABA* = ABA
+# ABH1* = 1
+# ARP_Complex* = 1
+# CPK6* = 1
+# CPK23* = 1
+# DAGK* = 1
+# ERA1* = 1
+# GAPC1_2* = 1
+# GCR1* = 1
+# GTP* = 1
+# MRP5* = 1
+# NAD* = 1
+# NADPH* = 1
+# Nitrite* = 1
+# NtSyp121* = 1
+# PC* = 1
+# PtdInsP3* = 1
+# PtdInsP4* = 1
+# RCN1* = 1
+# SCAB1* = 1
+# Sph* = 1
+# GEF1_4_10* = 0
+# SPP1* = 0
+# RCARs* = ABA
+# PEPC* = not ABA
+# PI3P5K* = ABA
+# ROP11* = GEF1_4_10
+# ABI1* = not PA and (not RCARs or ROP11) and not ROS and pHc
+# ABI2* = (not RCARs or ROP11) and not ROS
+# HAB1* = not RCARs and not ROS
+# PP2CA* = not RCARs and not ROS
+# OST1* = (not ABI1 and not HAB1) or (not PP2CA and not ABI2) or (not ABI1 and not ABI2) or (not HAB1 and not PP2CA) or (not HAB1 and not ABI2) or (not ABI1 and not PP2CA)
+# RBOH* = pHc and not ABI1 and PtdInsP3 and OST1 and GPA1 and PA and RCN1
+# ROS* = NADPH and RBOH
+# GHR1* = not ABI2 and ROS
+# NO* = Nitrite and NIA1_2 and NADPH
+# NIA1_2* = ROS
+# NOGC1* = NO
+# cGMP* = NOGC1 and GTP
+# 8-nitro-cGMP* = cGMP and ROS and NO
+# ADPRc* = 8-nitro-cGMP
+# cADPR* = NAD and ADPRc
+# CIS* = InsP3 or InsP6 or cADPR
+# SACC* = Actin_Reorganization
+# CaIM* = SACC or (NtSyp121 and GHR1 and MRP5) or not ABH1 or not ERA1
+# Ca2c* = (CIS or CaIM) and not Ca2_ATPase
+# Ca2_ATPase* = Ca2c
+# CPK3_21* = Ca2c or CPK3_21
+# MPK9_12* = Ca2c or MPK9_12
+# PtdIns4_5P2* = PtdInsP4
+# PLC* = Ca2c
+# DAG* = PtdIns4_5P2 and PLC
+# InsP3* = PLC and PtdIns4_5P2
+# InsP6* = InsP3
+# PLDalpha* = GPA1 and Ca2c
+# PLDdelta* = NO or ROS and GAPC1_2
+# PA* = PC and (PLDdelta or PLDalpha) or DAG and DAGK
+# SPHK1_2* = PA or ABA
+# S1P_PhytoS1P* = SPHK1_2 and Sph and not SPP1
+# GPA1* = S1P_PhytoS1P or not GCR1
+# PtdIns3_5P2* = PI3P5K
+# V-PPase* = PtdIns3_5P2
+# V-ATPase* = Ca2c
+# Vacuolar_Acidification* = V-PPase or V-ATPase or Vacuolar_Acidification
+# TCTP* = Ca2c
+# Microtubule_Depolymerization* = TCTP or Microtubule_Depolymerization
+# pHc* = (OST1 and not ABI2 and not ABI1 or Ca2c) and Vacuolar_Acidification
+# H_ATPase* = not pHc and not Ca2c and not ROS
+# AtRAC1* = not ABA or ABI1
+# Actin_Reorganization* = (PtdInsP4 or PtdInsP3) and not AtRAC1 and ARP_Complex and SCAB1
+# SLAC1* = (CPK6 or CPK23 or CPK3_21) and MPK9_12 and OST1 and GHR1 and pHc and not ABI1 and not PP2CA and not ABI2
+# QUAC1* = OST1 and Ca2c
+# SLAH3* = (CPK6 or CPK23) and CPK3_21 and not ABI1
+# AnionEM* = SLAC1 or QUAC1 and SLAH3
+# Malate* = PEPC and not ABA and not AnionEM
+# KEV* = Ca2c
+# Depolarization* = (AnionEM or Ca2c or KEV) and (not H_ATPase or not K_efflux)
+# KOUT* = (not NO or not ROS or pHc) and Depolarization
+# K_efflux* = KEV and KOUT
+# AquaporinPIP2_1* = OST1
+# H2O_Efflux* = AnionEM and AquaporinPIP2_1 and (K_efflux or H2O_Efflux) and not Malate
+# Closure* = Microtubule_Depolymerization and H2O_Efflux
+
+# START_MODEL='BoolMoRe/ABA_case_study/baseline_models/ABA_GA_base_A_20230501.txt'
+iteration	top score	extra edges	complexity
+0	339.0086805555556	1	198
+1	339.0086805555556	1	198
+2	339.0086805555556	1	197
+3	339.90868055555563	2	205
+4	353.25868055555554	3	210
+5	354.25868055555554	4	220
+6	362.01273148148147	2	197
+7	363.01273148148147	3	190
+8	367.2638888888888	4	206
+9	368.8300000000001	3	192
+10	370.275	3	191
+11	371.4650000000002	5	193
+12	374.02500000000015	5	197
+13	375.52500000000015	5	202
+14	375.52500000000015	5	202
+15	375.52500000000015	4	198
+16	378.77500000000015	5	203
+17	379.77500000000015	5	212
+18	380.52500000000015	6	199
+19	381.2216666666668	6	194
+20	382.2216666666668	6	203
+21	383.63500000000005	6	212
+22	384.7216666666668	6	213
+23	386.13500000000005	6	229
+24	386.63500000000005	6	215
+25	387.78000000000014	7	221
+26	387.78000000000014	7	221
+27	387.985	5	193
+28	387.985	5	193
+29	401.17500000000007	6	206
+30	401.17500000000007	6	206
+31	401.17500000000007	6	206
+32	401.17500000000007	5	206
+33	401.17500000000007	5	206
+34	401.17500000000007	4	206
+35	401.415	5	209
+36	401.415	4	203
+37	402.2150000000001	6	202
+38	402.2150000000001	5	201
+39	402.2150000000001	4	207
+40	402.4450000000001	6	217
+41	402.4450000000001	4	216
+42	402.52500000000003	6	211
+43	402.52500000000003	6	211
+44	402.52500000000003	6	206
+45	403.29	6	207
+46	403.29	6	207
+47	403.7250000000001	5	201
+48	404.49	5	198
+49	404.49	5	198
+50	404.49	5	198
+51	404.49	5	183
+52	404.49	5	183
+53	404.49	4	181
+54	405.0557142857143	6	186
+55	405.17571428571426	6	188
+56	405.17571428571426	6	188
+57	405.17571428571426	6	187
+58	405.17571428571426	5	179
+59	405.17571428571426	5	177
+60	405.17571428571426	5	171
+61	405.17571428571426	5	171
+62	405.17571428571426	5	169
+63	405.17571428571426	5	169
+64	405.17571428571426	5	169
+65	405.7877777777777	6	174
+66	406.98777777777775	5	168
+67	406.98777777777775	5	167
+68	408.54	6	191
+69	408.54	6	161
+70	409.54	7	190
+71	409.54	7	190
+72	410.49000000000007	7	173
+73	410.74000000000007	6	183
+74	411.5214285714287	6	192
+75	411.80134779750165	7	180
+76	413.6098765432099	8	183
+77	414.6933333333334	7	189
+78	415.4433333333334	7	190
+79	415.4433333333334	7	190
+80	415.807264957265	8	194
+81	415.807264957265	7	190
+82	416.73333333333335	7	182
+83	416.98333333333335	7	192
+84	417.48333333333335	6	186
+85	417.98333333333335	6	183
+86	417.98333333333335	6	183
+87	417.98333333333335	5	184
+88	417.98333333333335	5	183
+89	417.98333333333335	5	181
+90	417.98333333333335	5	181
+91	418.37000000000006	6	180
+92	418.37000000000006	5	174
+93	418.37000000000006	5	174
+94	418.48333333333335	6	179
+95	418.48333333333335	6	179
+96	418.48333333333335	6	178
+97	418.5233333333333	7	174
+98	418.5233333333333	6	174
+99	418.5233333333333	6	167
+100	418.5233333333333	6	165
