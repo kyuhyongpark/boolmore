@@ -6,7 +6,7 @@ ExpType = tuple[int, float, FixesType, str, str]
 def comment_removal(line:str) -> bool:
     return not line.startswith("#") and not line.isspace()
 
-def import_exps(location:str) -> tuple[list[ExpType], list[FixesType], float]:
+def import_exps(location:str) -> tuple[list[ExpType], list[FixesType]]:
     """
     Reads a tsv file and returns experiments and interventions.
 
@@ -37,8 +37,6 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType], float]:
     interventions - summarized list of fixes for convenience    :list[FixesType]
         fixes     - ((node A, value1), (node B, value2), ...)   :FixesType = tuple[tuple[str, int]]
 
-    max_score     - possible maximum score              :float
-
     """
     ID, SCORE, SOURCE, PERT, NODE, VALUE = 0, 1, 2, 3, 4, 5
     
@@ -51,24 +49,17 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType], float]:
 
     experiments = []
     interventions = []
-    max_score = 0.0
     for row in data:
         exp = [int(row[ID]), float(row[SCORE])]
-        max_score += float(row[SCORE])
 
-        if row[SOURCE] == "" and row[PERT] == "":
-            fixes = tuple()
-            exp.append(fixes)
-            continue
-
-        fixes = []
+        fixes_list = []
         if row[SOURCE] != "":
             # add source node values to the fixes
             source_str = row[SOURCE].split(",")
             for sth in source_str:
                 node, value = sth.strip().split("=")
                 fix = tuple([node, int(value)])
-                fixes.append(fix)
+                fixes_list.append(fix)
         
         if row[PERT] != "":
             # add other perturbations to the fixes
@@ -82,9 +73,9 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType], float]:
                 else:
                     raise Exception("Perturbation should be KO or CA")
                 fix = tuple([node, int(value)])
-                fixes.append(fix)
+                fixes_list.append(fix)
         # fixes should be sorted so that they do not depend on the order of user input
-        fixes = tuple(sorted(fixes, key= lambda x:x[0]))
+        fixes = tuple(sorted(fixes_list, key= lambda x:x[0]))
         exp.append(fixes)
 
         exp.append(row[NODE])
@@ -100,4 +91,4 @@ def import_exps(location:str) -> tuple[list[ExpType], list[FixesType], float]:
         # add the entry
         experiments.append(tuple(exp))
 
-    return experiments, interventions, max_score
+    return experiments, interventions

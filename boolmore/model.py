@@ -24,6 +24,7 @@ class Model():
         id              - unique id for a model in a single run                     :int
         generation      - starting model considered as 0th gen                      :int
                           first mutated models are 1st gen
+        name            - name of the model                                         :str
         
         base            - the base model (not the neccesarily the starting model)   :Model class
                           from which the regulators, fixed functions, constants,
@@ -59,10 +60,11 @@ class Model():
         """
         self.id = 0
         self.generation = 0
+        self.name = ""
 
         self.base = None
-        self.constraints = {'fixed': [], 'regulate': {}, 'necessary' : {},
-                            'group': {}, 'possible_constant': []}
+        self.constraints = {"fixed": [], "regulate": {}, "necessary" : {},
+                            "group": {}, "possible_constant": []}
         self.edge_pool = []
         self.default_sources = {}
         
@@ -94,7 +96,7 @@ class Model():
         id              - unique id for a model in a single run                     :int
         generation      - starting model considered as 0th gen                      :int
                           first mutated models are 1st gen
-
+                          
         base            - the base model (not the neccesarily the starting model)   :Model class
                           from which the regulators, fixed functions, constants,
                           extra edges, etc. are decided.
@@ -136,6 +138,7 @@ class Model():
             x.default_sources.update(base.default_sources)
             generate_default_sources = False
             x.max_score = base.max_score
+            x.name = base.name
         
         for node in x.primes:
             # generate default_sources if necessary
@@ -237,7 +240,7 @@ class Model():
             for i in tr:
                 for node in self.primes.keys():
                     if node not in i.keys(): # type: ignore
-                        i[node] = '?' # type: ignore
+                        i[node] = "?" # type: ignore
                     else:
                         i[node] = str(i[node]) # type: ignore
 
@@ -246,16 +249,16 @@ class Model():
                 for node in self.primes.keys():
                     if node not in result.keys():
                         result[node] = 0.0
-                    if i[node] == '1': # type: ignore
+                    if i[node] == "1": # type: ignore
                         result[node] += (1.0/len(tr))
-                    elif i[node] == '?': # type: ignore
+                    elif i[node] == "?": # type: ignore
                         result[node] += (0.5/len(tr))
 
             predictions[fixes] = result
 
         self.predictions = predictions
 
-    def get_model_score(self, exps:list[ExpType], report:bool=False, file:str='score_report.tsv'):
+    def get_model_score(self, exps:list[ExpType], report:bool=False, file:str="score_report.tsv"):
         """
         Assigns self.score when given experiments.
         Requires self.predictions to be calculated beforehand.
@@ -264,10 +267,14 @@ class Model():
         
         Assigns
         -------
-        self.score - how well the model agrees with experimental results       :float
-                     one point in score means agreement to one perturbation
+        self.max_score - max possible score of the model                        :float
+        self.score     - how well the model agrees with experimental results    :float
+                         one point in score means agreement to one perturbation
         
         """
+        self.max_score = 0.0
+        for exp in exps:
+            self.max_score += exp[1]
         agreements = score.get_agreement(exps, self.predictions)
         self.score = score.get_hierarchy_score(agreements, self.default_sources, report=report, file=file)
 
@@ -296,6 +303,7 @@ class Model():
         mutated_model.edge_pool = self.edge_pool
         mutated_model.default_sources = self.default_sources
         mutated_model.max_score = self.max_score
+        mutated_model.name = self.name
 
         mutated_model.primes = self.primes.copy()
         mutated_model.regulators_dict = self.regulators_dict.copy()
@@ -357,43 +365,44 @@ class Model():
         prints out a brief summary of the model info
         """
         # TODO: print out total score as well
-        print('id: ', self.id)
-        print('generation: ', self.generation)
-        print('extra edges: ', self.extra_edges)
-        print('score: ', round(self.score,2), '/', self.max_score,
-              '(',round(self.score/self.max_score*100,1),'%)')
-        print('following constraints:', self.check_constraint())
-        print('complexity:', self.complexity)
+        print("id: ", self.id)
+        print("generation: ", self.generation)
+        print("extra edges: ", self.extra_edges)
+        print("score: ", round(self.score,2), "/", self.max_score,
+              "(",round(self.score/self.max_score*100,1),"%)")
+        print("following constraints:", self.check_constraint())
+        print("complexity:", self.complexity)
 
-    def export(self, name:str, threshold:float=0.0):
-        # TODO: print out total score as well
-
+    def export(self, file_name:str|None=None, threshold:float=0.0):
         """
         Exports the model rules with scores above a certain threshold.
 
         Parameters
         ----------
-        name      - output file is in the form 'name_id_gen.txt'                    :str
-        threshold - only models with higher score than the threshold get exported   :float
+        file_name - location of the output file                                     :str
+                    if None, output file is in the form "(model's name)_id_gen.txt"
+        threshold - only models with score higher than the threshold get exported   :float
 
         """
         if threshold != 0.0 and self.score < threshold:
             return
-        file = name + "_" + str(self.id) + "_gen" + str(self.generation) + ".txt"
-        fp = open(file, "w")
-        fp.write("# id: " + str(self.id) + '\n')
-        fp.write('# generation: ' + str(self.generation) + '\n')
-        fp.write('# extra edges: ' + str(self.extra_edges) + '\n')
-        fp.write('# score: ' + str(self.score) + ' / ' + str(self.max_score) + '\n')
-        fp.write('# following constraints: ' + str(self.check_constraint()) + '\n')
-        fp.write('# complexity: ' + str(self.complexity) + '\n')
+        if file_name == None:
+            file_name = self.name + "_" + str(self.id) + "_gen" + str(self.generation) + ".txt"
+
+        fp = open(file_name, "w")
+        fp.write("# id: " + str(self.id) + "\n")
+        fp.write("# generation: " + str(self.generation) + "\n")
+        fp.write("# extra edges: " + str(self.extra_edges) + "\n")
+        fp.write("# score: " + str(self.score) + " / " + str(self.max_score) + "\n")
+        fp.write("# following constraints: " + str(self.check_constraint()) + "\n")
+        fp.write("# complexity: " + str(self.complexity) + "\n\n")
         primes = {k:self.primes[k] for k in sorted(self.primes)}
         for k in primes:
             s = conv.prime2bnet(k, primes[k])
-            fp.write(s + '\n')
+            fp.write(s + "\n")
         fp.close()
         
-        print('Exported generated model to', os.path.abspath(file))
+        print("Exported generated model to", os.path.abspath(file_name))
 
 
 def mix_models(model1:Model, model2:Model) -> Model:
@@ -418,6 +427,7 @@ def mix_models(model1:Model, model2:Model) -> Model:
     mixed_model.edge_pool = model1.edge_pool
     mixed_model.default_sources = model1.default_sources
     mixed_model.max_score = model1.max_score
+    mixed_model.name = model1.name
 
     mixed_model.primes = {}
     mixed_model.regulators_dict = {}
