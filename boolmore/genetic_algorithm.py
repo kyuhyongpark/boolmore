@@ -66,7 +66,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         CONSTRAINTS = json_dict["constraints"]
         EDGE_POOL = json_dict["edge_pool"]
 
-    elif data_file != None and base_file != None:
+    else:
+        assert data_file != None and base_file != None, "either json or the data and base files should be provided"
         STARTING_ID = 1
         STARTING_GEN = 1
         TOTAL_ITERATIONS = 100
@@ -82,10 +83,6 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         EDGE_POOL = []
         DATA = data_file
         BASE = base_file
-    
-    else:
-        print("Either json_file or (data_file and base_file) should be given")
-        return
 
     # if starting model is not given, take the base as the start
     if start_model != None:
@@ -162,7 +159,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
     fp.write("\niteration\ttop score\textra edges\tcomplexity\n")
     for sth in log:
-        fp.write("\t".join(sth)+"\n")
+        fp.write("\t".join([str(x) for x in sth])+"\n")
 
     mutated = set()
     for node in start.primes:
@@ -260,7 +257,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
 
     final = iteration[0]
     print("top score :", round(final.score,2))
-    print(f"{len(final.extra_edges)} extra edges :", final.extra_edges)
+    print(f"{len(final.extra_edges)} extra edges in the top model:", final.extra_edges)
     print("complexity of the top model :", final.complexity)
     if not final.check_constraint():
         print("ERROR: model does not follow constraints")
@@ -302,7 +299,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     
         final = new_iteration[0]
         print("top score : ", round(final.score,2))
-        print("number of added edges in the top model :", len(final.extra_edges))
+        print(f"{len(final.extra_edges)} extra edges in the top model:", final.extra_edges)
         print("complexity of the top model :", final.complexity)
         if not final.check_constraint():
             print("ERROR: model does not follow constraints")
