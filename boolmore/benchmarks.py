@@ -9,8 +9,9 @@ FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
 
 
-def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None, export:bool=False,
-                         file:str='artificial_experiments.tsv') -> tuple[list[ExpType], list[FixesType], float]:
+def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None,
+                         export:bool=False, file_name:str="artificial_experiments.tsv"
+                         ) -> tuple[list[ExpType], list[FixesType]]:
     """
     Given the primes dictionary, generates and returns artificial experiments and interventions
 
@@ -31,6 +32,9 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None, expo
              {node: prime}
     n_exps - number of experiments to generate  :int|None
              when None, generates 10*N
+    
+    export - if true, export the data to file_name              :bool
+    file_name - location of the exported data in tsv format      :str
 
     Returns
     -------
@@ -44,10 +48,8 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None, expo
             exp[4] - outcome_value                      :str
                      one of OFF, OFF/Some, Some, Some/ON, ON
 
-    interventions - summarized list of fixes for convenience    :list[FixesType]
+    fixes_list - summarized list of fixes for convenience    :list[FixesType]
         fixes     - ((node A, value1), (node B, value2), ...)   :FixesType = tuple[tuple[str, int]]
-    
-    max_score   - possible max score        :float
         
     """
     if n_exps == None:
@@ -73,7 +75,7 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None, expo
     N_other = len(other_nodes)
 
     # generate fixes-observations pairs
-    interventions = []
+    fixes_list_temp = []
     dct = {}
     n = 0
     while n < n_exps:
@@ -83,11 +85,12 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None, expo
             if random.random() < 1/N_other:
                 fixed_nodes.append(node)
 
-        fixes = [(node, random.randrange(2)) for node in fixed_nodes]
-        fixes = tuple(sorted(fixes))
+        lst = [(node, random.randrange(2)) for node in fixed_nodes]
+        fixes = tuple(sorted(lst))
 
-        if fixes not in interventions:
-            interventions.append(fixes)
+        # new fixes
+        if fixes not in fixes_list_temp:
+            fixes_list_temp.append(fixes)
             dct[fixes] = set()
 
         # observations should be all sink node + 1 or 2 or 3 or 4 ... other nodes
@@ -102,12 +105,18 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None, expo
         for key in dct:
             n += len(dct[key])
 
-    model = Model.import_model(primes)
-    model.get_predictions(interventions)
+    # there can be fixes that have no observations. remove them.
+    for fixes in fixes_list_temp:
+        if len(dct[fixes]) == 0:
+            fixes_list_temp.remove(fixes)
+            del dct[fixes]
 
-    experiments = []
+    model = Model.import_model(primes)
+    model.get_predictions(fixes_list_temp)
+
+    experiments_temp = []
     exp_id = 0
-    for fixes in interventions:
+    for fixes in fixes_list_temp:
         for observed_node in dct[fixes]:
             exp_id += 1
             exp = [exp_id, 1.0, fixes, observed_node]
@@ -115,35 +124,143 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None, expo
             value = model.predictions[fixes][observed_node]
 
             if value < 0.0001:
-                exp.append('OFF')
+                exp.append("OFF")
             elif value < 0.33:
-                exp.append('OFF/Some')
+                exp.append("OFF/Some")
             elif value < 0.67:
-                exp.append('Some')
+                exp.append("Some")
             elif value < 0.9999:
-                exp.append('Some/ON')
+                exp.append("Some/ON")
             elif value < 1.0001:
-                exp.append('ON')
+                exp.append("ON")
             else:
                 print("Unexpected value", value)
                 raise Exception("Unexpected experiment output")
 
             exp = tuple(exp)
-            experiments.append(exp)
+            experiments_temp.append(exp)
 
-    experiments = experiments[0:n_exps]
+    # trim experiments and fixes_list to fit the required size
+    experiments = experiments_temp[0:n_exps]
+    fixes_list = []
+    for exp in experiments:
+        if exp[2] not in fixes_list:
+            fixes_list.append(exp[2])
 
+    # export
     if export == True:
-        fp = open(file, "w")
-        fp.write('ID\tSCORE\tFIXES\tNODE\tVALUE\n')
-        for exp in experiments:
-            fp.write(str(exp[0]) + '\t')
-            fp.write(str(exp[1]) + '\t')
-            lst = [fix[0] + '=' + str(fix[1]) for fix in exp[2]]
-            fp.write(','.join(lst) + '\t')
-            fp.write(exp[3] + '\t')
-            fp.write(exp[4] + '\n')
+        export_exps(primes, experiments, file_name)
 
-        print('Exported generated experiments to', os.path.abspath(file))
+    return experiments, fixes_list
 
-    return experiments, interventions, float(n_exps)
+def export_exps(primes:dict[str, PrimeType], experiments:list[ExpType], 
+                file_name:str="artificial_experiments.tsv"):
+    """
+    Export the experiments in a tsv format.
+    Primes are required to separate out the source nodes.
+
+    Parameters
+    ----------
+    primes - pyboolnet primes dictionary        :length N dict[str, PrimeType]
+             {node: prime}
+    experiments - list of exp                   :list[ExpType]
+    file_name - location of the exported data   :str
+
+    Exports
+    -------
+    The tsv file has 6 columns
+    ID     - e.g. 1
+    SCORE  - e.g. 1.0
+    SOURCE - e.g. A=1
+    PERT   - e.g. B KO, C KO, D CA
+    NODE   - the observed node
+    VALUE  - one of OFF, OFF/Some, Some, Some/ON, ON
+
+    """
+    # find source nodes
+    source_vars = []
+    for node in primes:
+        if primes[node] == [[{node:0}],[{node:1}]]:
+            source_vars.append(node)
+
+    fp = open(file_name, "w")
+    fp.write("ID\tScore\tSource\tPerturbation\tObserved node\tCategorization\n")
+    for exp in experiments:
+        fp.write(str(exp[0]) + "\t")
+        fp.write(str(exp[1]) + "\t")
+        sources = []
+        interv = []
+        for fix in exp[2]:
+            if fix[0] in source_vars:
+                sources.append(fix[0] + "=" + str(fix[1]))
+            else:
+                if fix[1] == 1:
+                    interv.append(fix[0] + " CA")
+                else:
+                    interv.append(fix[0] + " KO")
+        fp.write(",".join(sources) + "\t")
+        fp.write(",".join(interv) + "\t")
+        fp.write(exp[3] + "\t")
+        fp.write(exp[4] + "\n")
+
+    print("Exported generated experiments to", os.path.abspath(file_name))
+
+def train_and_valid(experiments:list[ExpType], ratio:float|None=None, valid_ids:list[int]|None=None
+                    ) -> tuple[list[ExpType],list[ExpType],list[int]]:
+    """
+    Given the artificial experiments, generate a training set and a validation set.
+    If given the ratio, the validation set is randomly created with the given ratio.
+    The training set is the rest.
+    If given an ID list, the validation set is created with the given ids.
+
+    Parameters
+    ----------
+    experiments - list of exp                           :list[ExpType]
+        exp     - info of a single experiment           :ExpType = tuple[int, float, FixesType, str, str]
+            exp[0] - id of the experiment               :int
+            exp[1] - max_score for the experiment       :float
+            exp[2] - fixes                              :FixesType = tuple[tuple[str, int]]
+                     ((node A, value1), (node B, value2), ...)
+            exp[3] - observed_node                      :str
+            exp[4] - outcome_value                      :str
+                     one of OFF, OFF/Some, Some, Some/ON, ON
+
+    ratio - ratio of the validation set                         :float|None
+    id_list - list of IDs of experments for the validation set  :list[int]|None
+
+    Returns
+    -------
+    training_exps - list of exp                          :list[ExpType]
+                    contains (1-ratio) of experiments
+                    or all experiments excluding the id_list
+
+    validation_exps - list of exp                        :list[ExpType]
+                      contains all of experiments.
+                      score is set to 0 for (1-ratio) of experiments
+                      or for all experiments excluding the id_list
+                      It is necessary for the validation set to contain all experiments,
+                      so that hierachy scoring works.
+
+    valid_ids - same as the input id_list if it was given     :list[int]
+                or newly created if given the ratio
+    """
+    n_exps = len(experiments)
+    ids = [exp[0] for exp in experiments]
+    if ratio != None:
+        n_valid = int(n_exps * ratio)
+        valid_ids = sorted(random.sample(ids,n_valid))
+    else:
+        assert valid_ids != None, "either ratio or id_list should be given"
+
+    training_exps = [exp for exp in experiments if exp[0] not in valid_ids]
+
+    validation_exps = []
+    for exp in experiments:
+        if exp[0] in valid_ids:
+            validation_exps.append(exp)
+        else:
+            lst = list(exp)
+            lst[1] = 0.0
+            validation_exps.append(tuple(lst))
+
+    return training_exps, validation_exps, sorted(valid_ids)

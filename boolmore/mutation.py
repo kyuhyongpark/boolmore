@@ -180,8 +180,8 @@ def mutate_rr_constraint(regulators:tuple[str], rr:str, base_rr:str, constraints
     return mutated_rr, modified
 
 
-def add_regulator(regulators:tuple[str], rr:str, signs:str, new_regulator:str, new_sign:str,
-                  bias:float=0.5) -> tuple[tuple[str], str, str]:
+def add_regulator(regulators:tuple[str, ...], rr:str, signs:str, new_regulator:str, new_sign:str,
+                  bias:float=0.5) -> tuple[tuple[str, ...], str, str]:
     """
     Returns a new representation of a rule with an extra regulator.
 
@@ -222,8 +222,8 @@ def add_regulator(regulators:tuple[str], rr:str, signs:str, new_regulator:str, n
     return added_regulators, added_rr, added_signs
 
 
-def delete_regulator(regulators:tuple[str], rr:str, signs:str, target_regulator:str,
-                     bias:float=0.5) -> tuple[tuple[str], str, str]:
+def delete_regulator(regulators:tuple[str, ...], rr:str, signs:str, target_regulator:str,
+                     bias:float=0.5) -> tuple[tuple[str, ...], str, str]:
     """
     Returns a new representation of a rule with the target regulator deleted.
 
