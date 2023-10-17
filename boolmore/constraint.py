@@ -24,7 +24,7 @@ def check_constant(rr:str) -> bool:
         return True
 
 
-def check_source(regulators:tuple[str], rr:str, node:str) -> bool:
+def check_source(regulators:tuple[str, ...], rr:str, node:str) -> bool:
     """
     Check if the node became a source node.
 
@@ -55,7 +55,7 @@ def check_source(regulators:tuple[str], rr:str, node:str) -> bool:
         return False
 
 
-def check_regulate(regulators:tuple[str], rr:str, reg:str, is_min:bool=False) -> bool:
+def check_regulate(regulators:tuple[str, ...], rr:str, reg:str, is_min:bool=False) -> bool:
     """
     Checks if a regulator appears in the rule in a non-redundant manner.
 
@@ -98,7 +98,7 @@ def check_regulate(regulators:tuple[str], rr:str, reg:str, is_min:bool=False) ->
     return check
 
 
-def check_necessary(regulators:tuple[str], rr:str, nec:str) -> bool:
+def check_necessary(regulators:tuple[str, ...], rr:str, nec:str) -> bool:
     """
     Checks if the node is necessary for the rule.
 
@@ -135,7 +135,7 @@ def check_necessary(regulators:tuple[str], rr:str, nec:str) -> bool:
     return check
 
 
-def check_node(regulators:tuple[str], rr:str, base_rr:str, constraints:dict, node:str) -> bool:
+def check_node(regulators:tuple[str, ...], rr:str, base_rr:str, constraints:dict, node:str) -> bool:
     """
     Checks if the model follows fixed, regulate, necessary, possible_constant constraints.
     Also checks if a non-source became a source, or if a non-constant became a constant.
@@ -218,7 +218,7 @@ def check_node(regulators:tuple[str], rr:str, base_rr:str, constraints:dict, nod
     return True
 
 
-def impose_necessary(regulators, rr, nec) -> str:
+def impose_necessary(regulators:tuple[str, ...], rr:str, nec:str) -> str:
     """
     Impose the necessary condition for the rule.
 
@@ -251,7 +251,7 @@ def impose_necessary(regulators, rr, nec) -> str:
     return necessary_rr
 
 
-def group_bi2bi(group_bi:str, group_regulators:tuple[str, tuple[str]]) -> str:
+def group_bi2bi(group_bi:str, group_regulators:tuple[str, tuple[str, ...]]) -> str:
     """
     Returns the binary position of the old representation
     when given a binary position of the group representation
@@ -297,7 +297,7 @@ def group_bi2bi(group_bi:str, group_regulators:tuple[str, tuple[str]]) -> str:
     return bi
 
 
-def rr2group_rr(regulators:tuple[str], rr:str, groups:list[list[str]]) -> tuple[str, tuple[str, tuple[str]]]:
+def rr2group_rr(regulators:tuple[str, ...], rr:str, groups:list[list[str]]) -> tuple[str, tuple[str, tuple[str, ...]]]:
     """
     Convert the representation of a rule into a representation in which
     certain nodes are grouped together.
@@ -340,7 +340,7 @@ def rr2group_rr(regulators:tuple[str], rr:str, groups:list[list[str]]) -> tuple[
     return group_rr, group_regulators # type: ignore
 
 
-def group_rr2rr(regulators:tuple[str], group_rr:str, group_regulators:tuple[str, tuple[str]]) -> str:
+def group_rr2rr(regulators:tuple[str, ...], group_rr:str, group_regulators:tuple[str, tuple[str, ...]]) -> str:
     """
     Convert the representation of a rule with grouped regulators
     into a representation with original regulators.

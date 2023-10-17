@@ -18,7 +18,7 @@ DATA = None
 BASE = None
 
 def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
-           data_file:str|None=None, base_file:str|None=None, stop_if_max:bool=False):
+           data_file:str|None=None, base_file:str|None=None, stop_if_max:bool=True):
     """
     Imports parameters, experiments, base model in the json file.
     Runs genetic algorithm and exports refined models.
@@ -193,7 +193,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
             total_iter:int=100, per_iter:int=100, keep:int=20,
             prob:float=0.01, edge_prob:float=0.5,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
-            stop_if_max:bool=False
+            stop_if_max:bool=True
             ) -> tuple[Model, list]:
     """
     Main part of the genetic algorithm
@@ -225,7 +225,8 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     export_thresh - only models above this threshold are exported, default 0.0  :float
     export_name   - models are exported as (export_name)_id_gen.txt             :str
                     if None, use the start model name
-    stop_if_max - if True, stop when the max score is reached. defalut False   :bool
+                    
+    stop_if_max - if True, stop when the max score is reached. default True   :bool
 
     Returns
     -------

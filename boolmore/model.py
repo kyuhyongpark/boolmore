@@ -43,8 +43,8 @@ class Model():
         regulators_dict - dictionary of the regulating nodes                        :length N dict[str, tuple[str]]
         signs_dict      - dictionary of the signs of regulators                     :length N dict[str, str]
         rr_dict         - dictionary of the binary rule representations             :length N dict[str, str]
-        extra_edges     - edges from the pool that are present in the model         :list[tuple[str]]
-                          [(regulator, target, sign), ...]
+        extra_edges     - edges from the pool that are present in the model         :list[list[str]]
+                          [[regulator, target, sign], ...]
         complexity      - shows the complexity of the model functions,              :int
                           by summing the number of prime implicants
 

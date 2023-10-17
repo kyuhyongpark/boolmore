@@ -65,7 +65,7 @@ def mutate_rr_bias(rr:str, probability:float, bias:float=0.5) -> str:
     return mutated_rr
 
 
-def mutate_rr_constraint(regulators:tuple[str], rr:str, base_rr:str, constraints:dict,
+def mutate_rr_constraint(regulators:tuple[str, ...], rr:str, base_rr:str, constraints:dict,
                          node:str, probability:float, bias:float=0.5) -> tuple[str, bool]:
     """
     When given any representation of a rule,
