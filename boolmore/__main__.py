@@ -2,14 +2,17 @@ def main():
     import boolmore.genetic_algorithm as ga
     from sys import argv
     """
-    Example Usage:
     python -m boolmore <parameters file> <starting model>
 
-    <parameters file> is the path to the parameters json, e.g. "./data/ABA_2017.json"
-    <starting model> is the path to a starting model file, e.g. "./generated_models/20230512_7790_gen125_mod.txt".
+    <parameters file> is the path to the parameters json, e.g. "CAD_config.json"
+    <starting model> is the path to a starting model file, e.g. "CAD_start.txt"
     if <starting mdoel> is not provided, the base model will be the starting model.
 
     This will run the algorithm and export the models with the top score.
+
+    Example Usage:
+    cd boolmore/demo
+    python -m boolmore "CAD_config.json" "CAD_start.txt"
     """
 
     print("""
