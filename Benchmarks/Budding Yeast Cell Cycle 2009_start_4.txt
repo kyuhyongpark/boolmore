@@ -1,0 +1,25 @@
+# id: 183441
+# generation: 1
+# extra edges: []
+# score: 10.0625 / 144.0
+# following constraints: True
+# complexity: 46
+
+B* = Clb5 & Cln2
+CD* = Cdc14 | M
+CKI* = CKI & Cdc14 & !Clb2 & !Clb5 & Swi5
+Cdc14* = FEAR
+Cdc20* = Clb2 & M
+Cdh1* = !Clb2 | !Cln2
+Clb2* = B | !CKI & !Cdh1 & Clb2 | !Cdc20 | SFF
+Clb5* = !Cdc20 | SMBF
+Cln2* = SMBF
+Cln3* = !Yhp1
+FEAR* = Cdc20
+M* = M | S
+MEN* = Clb2
+S* = Clb2 | Clb5 | S
+SFF* = B & !CKI & !Cdc20 & !Cdh1 & SFF | B & !CKI & !Cdc20 & Clb2
+SMBF* = !Clb2 & Cln3 | Cln2 | SMBF
+Swi5* = Cdc14
+Yhp1* = SMBF

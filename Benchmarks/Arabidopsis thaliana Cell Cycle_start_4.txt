@@ -1,0 +1,21 @@
+# id: 24061
+# generation: 1
+# extra edges: []
+# score: 29.666666666666668 / 112.0
+# following constraints: True
+# complexity: 98
+
+APC_C* = E2Fa & MYB3R1_4 & !RBR | MYB3R1_4 & MYB77 & !RBR
+CDKB1_1* = CYCD3_1 & E2Fb & !E2Fc & !KRP1 & MYB3R1_4 | CYCD3_1 & E2Fb & !KRP1 & MYB3R1_4 & MYB77 & !RBR | E2Fb & !E2Fc & !KRP1 & MYB3R1_4 & !RBR
+CYCA2_3* = MYB3R1_4
+CYCB1_1* = !APC_C & CYCD3_1 | !APC_C & E2Fb | !APC_C & !KRP1 & MYB77 | !APC_C & MYB3R1_4 | CYCD3_1 & !KRP1 & MYB77 | CYCD3_1 & MYB3R1_4 | E2Fb & !KRP1 | E2Fb & MYB77 | !E2Fc | MYB3R1_4 & MYB77 | !RBR
+CYCD3_1* = !SCF
+E2Fa* = !CDKB1_1 & !CYCA2_3 & !E2Fc | !CDKB1_1 & E2Fa & !E2Fc
+E2Fb* = E2Fa
+E2Fc* = !CYCD3_1 & E2Fa & KRP1 & MYB3R1_4 & !SCF
+E2Fe* = CYCD3_1 | E2Fb & !E2Fc | E2Fb & MYB77 | !E2Fc & MYB77 | !KRP1 | MYB77 & !RBR
+KRP1* = !CDKB1_1 & !SCF | !CYCA2_3 & !SCF | MYB3R1_4 | MYB77
+MYB3R1_4* = CYCB1_1 & !KRP1 | CYCB1_1 & MYB3R1_4 | MYB77
+MYB77* = CYCD3_1 & E2Fb & !KRP1 | CYCD3_1 & E2Fb & !RBR
+RBR* = !CYCD3_1 | E2Fa | KRP1 | MYB3R1_4 | !RBR
+SCF* = CYCD3_1 & E2Fb & !KRP1 & MYB3R1_4 | CYCD3_1 & E2Fb & MYB3R1_4 & !RBR

@@ -1,0 +1,29 @@
+# id: 100077
+# generation: 86
+# extra edges: []
+# score: 176.0 / 176.0
+# following constraints: True
+# complexity: 32
+
+AID* = !Blimp1 & NF_kB & Pax5 | !Blimp1 & STAT6
+Ag* = Ag
+BCR* = Ag
+Bach2* = Pax5
+Bcl6* = !ERK & !Irf4 & STAT5
+Blimp1* = !Bach2 & !Bcl6 & !Pax5
+CD40* = CD40L
+CD40L* = CD40L
+ERK* = BCR
+IL_2* = IL_2
+IL_21* = IL_21
+IL_21R* = IL_21
+IL_2R* = IL_2
+IL_4* = IL_4
+IL_4R* = IL_4
+Irf4* = Irf4 | NF_kB
+NF_kB* = CD40
+Pax5* = !Blimp1 & !ERK
+STAT3* = IL_21R
+STAT5* = IL_2R
+STAT6* = IL_4R
+XBP1* = Blimp1

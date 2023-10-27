@@ -1,0 +1,30 @@
+# id: 70929
+# generation: 103
+# extra edges: []
+# score: 182.0 / 184.0
+# following constraints: True
+# complexity: 44
+
+AJUBA* = AJUBA
+AURKAActive* = AJUBA & AURKAPresent & BORA | AJUBA & AURKAPresent & !PP1 | !AURKAActive & NEDD9 | AURKAPresent & TPX2
+AURKAPresent* = !PP2A
+BORA* = !Cytokinesis & GSK3B
+CDC25B* = PLK1
+CDK1CCNBComplex* = CDC25B & !Cytokinesis | !Cytokinesis & !WEE1 | !Cytokinesis & hCPEB
+CentrosomeMat* = CDK1CCNBComplex & !SpindleAssembly
+Cytokinesis* = SpindleAssembly
+ENSA* = GWL_MASTL
+GSK3B* = GSK3B
+GWL_MASTL* = CDK1CCNBComplex
+MT* = !STMN
+MTCanAct* = MTCanAct
+NEDD9* = AURKAActive
+PLK1* = AURKAActive | MT
+PP1* = !AURKAActive & !CDK1CCNBComplex | !AURKAActive & !Cytokinesis
+PP2A* = !ENSA & PP1
+STMN* = !AURKAActive
+STMNCanAct* = STMNCanAct
+SpindleAssembly* = CentrosomeMat
+TPX2* = PLK1
+WEE1* = !PLK1
+hCPEB* = AURKAActive

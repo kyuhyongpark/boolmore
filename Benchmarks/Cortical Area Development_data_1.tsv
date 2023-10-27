@@ -1,0 +1,51 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0		Sp8 KO	Coup_fti	ON
+2	1.0		Sp8 KO	Emx2	ON
+3	1.0		Sp8 KO	Pax6	OFF
+4	1.0		Sp8 KO	Fgf8	OFF
+5	1.0		Pax6 KO	Coup_fti	Some
+6	1.0		Pax6 KO	Sp8	Some
+7	1.0			Fgf8	Some
+8	1.0			Sp8	Some
+9	1.0			Coup_fti	Some
+10	1.0			Emx2	Some
+11	1.0			Pax6	Some
+12	1.0		Sp8 CA	Coup_fti	OFF
+13	1.0		Sp8 CA	Emx2	OFF
+14	1.0		Sp8 CA	Pax6	ON
+15	1.0		Coup_fti CA,Pax6 KO	Emx2	Some
+16	1.0		Coup_fti CA,Pax6 KO	Sp8	Some
+17	1.0		Coup_fti CA,Pax6 KO	Fgf8	Some
+18	1.0		Emx2 CA,Sp8 KO	Coup_fti	ON
+19	1.0		Emx2 KO,Fgf8 CA	Coup_fti	OFF
+20	1.0		Emx2 KO,Fgf8 CA	Pax6	ON
+21	1.0		Pax6 CA	Coup_fti	Some
+22	1.0		Pax6 CA	Emx2	OFF
+23	1.0		Pax6 CA	Sp8	Some
+24	1.0		Coup_fti KO,Emx2 KO	Fgf8	Some
+25	1.0		Emx2 KO,Pax6 KO	Coup_fti	Some
+26	1.0		Emx2 KO,Pax6 KO	Sp8	Some
+27	1.0		Coup_fti CA,Fgf8 KO	Sp8	OFF
+28	1.0		Fgf8 CA	Coup_fti	OFF
+29	1.0		Coup_fti CA,Emx2 CA,Fgf8 CA	Pax6	OFF
+30	1.0		Pax6 CA,Sp8 CA	Emx2	OFF
+31	1.0		Coup_fti KO	Emx2	OFF
+32	1.0		Coup_fti KO	Sp8	Some
+33	1.0		Coup_fti KO	Fgf8	Some
+34	1.0		Fgf8 KO	Coup_fti	ON
+35	1.0		Emx2 CA	Coup_fti	ON
+36	1.0		Emx2 CA	Pax6	OFF
+37	1.0		Emx2 CA	Sp8	OFF
+38	1.0		Emx2 KO	Sp8	Some
+39	1.0		Coup_fti CA	Emx2	Some
+40	1.0		Coup_fti CA	Sp8	Some
+41	1.0		Coup_fti CA	Pax6	OFF
+42	1.0		Coup_fti CA	Fgf8	Some
+43	1.0		Emx2 CA,Pax6 KO	Sp8	OFF
+44	1.0		Emx2 CA,Pax6 KO,Sp8 CA	Fgf8	OFF
+45	1.0		Emx2 CA,Fgf8 CA	Sp8	OFF
+46	1.0		Emx2 CA,Fgf8 CA	Pax6	OFF
+47	1.0		Coup_fti CA,Fgf8 CA,Pax6 KO	Sp8	ON
+48	1.0		Coup_fti KO,Pax6 CA	Emx2	OFF
+49	1.0		Coup_fti KO,Pax6 CA	Sp8	Some
+50	1.0		Coup_fti KO,Pax6 CA	Fgf8	Some

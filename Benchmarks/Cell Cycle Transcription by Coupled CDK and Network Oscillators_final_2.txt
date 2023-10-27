@@ -1,0 +1,16 @@
+# id: 1829
+# generation: 15
+# extra edges: []
+# score: 72.0 / 72.0
+# following constraints: True
+# complexity: 16
+
+ACE2* = SFF
+CLN3* = ACE2 & SWI5 & !YOX1
+HCM1* = MBF & SBF
+MBF* = CLN3
+SBF* = MBF & !YHP1 & !YOX1
+SFF* = HCM1 & SBF
+SWI5* = SFF
+YHP1* = MBF
+YOX1* = MBF & SBF

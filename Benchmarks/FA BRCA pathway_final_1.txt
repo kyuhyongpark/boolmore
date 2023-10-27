@@ -1,0 +1,35 @@
+# id: 314706
+# generation: 131
+# extra edges: []
+# score: 210.75 / 224.0
+# following constraints: True
+# complexity: 91
+
+ADD* = ADD & !PCNATLS
+ATM* = !CHKREC
+ATR* = FANCM | ssDNARPA
+BRCA1* = ATM
+CHK1* = ATM
+CHK2* = ATM
+CHKREC* = !ADD & !DSB & HRR | !ADD & !DSB & !ICL | !DSB & HRR & !ICL | !DSB & PCNATLS | HRR & NHEJ
+DNAPK* = DSB
+DSB* = DSB & !HRR & !NHEJ | DSB & XPF | FAN1 & !HRR | !NHEJ & XPF
+FAN1* = MUS81
+FANCD1N* = BRCA1 & ssDNARPA
+FANCD2I* = DSB | H2AX
+FANCJBRCA1* = ATM & ssDNARPA | ATR & ssDNARPA
+FANCM* = !CHKREC
+FAcore* = ATR | FANCM
+H2AX* = ATM & ATR | !CHKREC
+HRR* = FANCD1N
+ICL* = !DSB & ICL
+KU* = !CHKREC & DSB & !MRN
+MRN* = ATM & !CHKREC & DSB & !RAD51 | !CHKREC & !FANCD2I & !RAD51
+MUS81* = ICL
+NHEJ* = !ATM & !ATR & DSB & !ssDNARPA | !ATM & !ATR & XPF & !ssDNARPA | !ATM & DNAPK & !ssDNARPA | !ATM & !FANCJBRCA1 & XPF & !ssDNARPA
+PCNATLS* = ADD & !FAN1
+RAD51* = FANCD1N
+USP1* = FANCD1N & FANCD2I & !FANCM | PCNATLS
+XPF* = !FAN1 & MUS81 | !FANCM & !FAcore & MUS81
+p53* = CHK1
+ssDNARPA* = DSB & !KU & MRN

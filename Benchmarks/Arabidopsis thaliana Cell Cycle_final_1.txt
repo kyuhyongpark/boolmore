@@ -1,0 +1,21 @@
+# id: 7958
+# generation: 118
+# extra edges: []
+# score: 103.66666666666667 / 112.0
+# following constraints: True
+# complexity: 46
+
+APC_C* = !E2Fe
+CDKB1_1* = E2Fb & !E2Fc | !KRP1 & MYB3R1_4
+CYCA2_3* = MYB3R1_4 | MYB77
+CYCB1_1* = !APC_C | CYCD3_1 & E2Fb | E2Fb & !KRP1 | !E2Fc
+CYCD3_1* = !SCF
+E2Fa* = !CDKB1_1 & E2Fa | !CYCA2_3 | !E2Fc
+E2Fb* = !RBR
+E2Fc* = MYB3R1_4 | !RBR & !SCF
+E2Fe* = E2Fb & MYB77 | !E2Fc
+KRP1* = !CDKB1_1 & MYB3R1_4 | MYB3R1_4 & !SCF
+MYB3R1_4* = CYCB1_1 & MYB77 | MYB3R1_4 & MYB77
+MYB77* = !RBR
+RBR* = !CYCD3_1 & MYB3R1_4 | !CYCD3_1 & !RBR | E2Fa & !RBR | KRP1 & !RBR
+SCF* = !APC_C & !KRP1 & !RBR | MYB3R1_4

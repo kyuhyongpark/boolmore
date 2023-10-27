@@ -1,0 +1,181 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0			M	Some
+2	1.0			FEAR	Some
+3	1.0			SFF	Some
+4	1.0			MEN	Some
+5	1.0			SMBF	Some
+6	1.0			Cdc20	Some
+7	1.0			B	Some
+8	1.0			S	Some
+9	1.0			CKI	Some
+10	1.0			Cln3	Some
+11	1.0			Cdc14	Some
+12	1.0			Yhp1	Some
+13	1.0			Clb2	Some
+14	1.0			Clb5	Some
+15	1.0			CD	Some
+16	1.0			Cln2	Some
+17	1.0			Swi5	Some
+18	1.0			Cdh1	Some
+19	1.0		Clb2 KO,SFF CA	S	ON
+20	1.0		MEN CA	M	Some
+21	1.0		MEN CA	SFF	Some
+22	1.0		MEN CA	Clb5	Some
+23	1.0		MEN CA	CKI	Some
+24	1.0		CD CA,Cdc20 CA,FEAR KO,Yhp1 KO	SFF	Some
+25	1.0		SMBF KO	MEN	OFF
+26	1.0		SMBF KO	Cdc20	OFF
+27	1.0		SMBF KO	Yhp1	OFF
+28	1.0		SMBF KO	Clb2	OFF
+29	1.0		SMBF KO	Cdc14	OFF
+30	1.0		CD CA,CKI CA	SMBF	ON
+31	1.0		Cln3 CA	SFF	Some
+32	1.0		Cln3 CA	B	Some
+33	1.0		Cln3 CA	S	Some
+34	1.0		Cln3 CA	CKI	Some
+35	1.0		Cln3 CA	Clb2	Some
+36	1.0		Cln3 CA	Clb5	Some
+37	1.0		Cln3 CA	M	Some
+38	1.0		MEN KO	SMBF	OFF
+39	1.0		CD KO	FEAR	Some
+40	1.0		Yhp1 KO	SFF	Some
+41	1.0		Yhp1 KO	MEN	Some
+42	1.0		Yhp1 KO	Cln3	ON
+43	1.0		Yhp1 KO	SMBF	Some
+44	1.0		CKI CA,Cdc14 KO	Clb2	OFF
+45	1.0		B CA,Cdc20 CA,MEN CA,SMBF KO	S	Some
+46	1.0		SFF CA	Swi5	Some
+47	1.0		SFF CA	S	Some
+48	1.0		SFF CA	B	Some
+49	1.0		SFF CA	CKI	Some
+50	1.0		SFF CA	Clb2	Some
+51	1.0		SFF CA	Cdc14	Some
+52	1.0		SFF CA	M	Some
+53	1.0		CKI KO	FEAR	Some
+54	1.0		CKI KO	S	Some
+55	1.0		CKI KO	Clb2	Some
+56	1.0		CKI KO	Clb5	Some
+57	1.0		CKI KO	CD	Some
+58	1.0		CKI KO	Cln2	Some
+59	1.0		FEAR KO	Cdc14	OFF
+60	1.0		FEAR KO	Cln3	ON
+61	1.0		Cdc20 KO,Cln2 CA	MEN	OFF
+62	1.0		CD KO,Cdc20 CA,Cln2 CA,SFF CA	M	ON
+63	1.0		B CA	SMBF	Some
+64	1.0		B CA	Yhp1	Some
+65	1.0		B CA	CKI	Some
+66	1.0		B CA	Clb5	Some
+67	1.0		B CA	M	Some
+68	1.0		B CA	Cdh1	Some
+69	1.0		Swi5 CA	FEAR	Some
+70	1.0		Swi5 CA	Cdc20	Some
+71	1.0		Swi5 CA	Yhp1	Some
+72	1.0		Swi5 CA	Clb5	Some
+73	1.0		Swi5 CA	Cln2	Some
+74	1.0		Cdc20 CA	Cln2	Some
+75	1.0		Cdc20 CA	Swi5	Some
+76	1.0		Cdc20 CA	S	Some
+77	1.0		Cdc20 CA	CKI	Some
+78	1.0		B KO,Cdc14 KO,SMBF CA	Cdh1	OFF
+79	1.0		S KO	SFF	ON
+80	1.0		S KO	Clb5	OFF
+81	1.0		Clb5 KO	FEAR	Some
+82	1.0		Clb5 KO	Cdh1	Some
+83	1.0		Clb5 KO	CKI	Some
+84	1.0		S KO,SFF CA	Cdh1	OFF
+85	1.0		S KO,SFF CA	Clb2	ON
+86	1.0		S KO,SFF CA	B	Some
+87	1.0		S KO,SFF CA	Cln3	ON
+88	1.0		Cdc14 CA,Clb5 CA,MEN CA,Yhp1 CA	Cln2	OFF
+89	1.0		Cln2 KO	Cdc20	Some
+90	1.0		Cln2 KO	SMBF	Some
+91	1.0		Clb5 CA	Cln3	Some
+92	1.0		Cln2 CA	Cdc14	Some
+93	1.0		Cln2 CA	Cdh1	Some
+94	1.0		Cln2 CA	Cln3	Some
+95	1.0		Cln2 CA	CKI	Some
+96	1.0		SFF KO	Cdh1	OFF
+97	1.0		SFF KO	Yhp1	OFF
+98	1.0		SFF KO	CD	OFF
+99	1.0		CKI CA	MEN	OFF
+100	1.0		CKI CA	B	ON
+101	1.0		CKI CA	Yhp1	ON
+102	1.0		CKI CA	Clb2	OFF
+103	1.0		CKI CA	Clb5	ON
+104	1.0		CKI CA	CD	OFF
+105	1.0		Cln2 CA,MEN KO	FEAR	ON
+106	1.0		S CA,Yhp1 KO	Cdc20	Some
+107	1.0		MEN CA,SFF KO	M	ON
+108	1.0		Cdh1 CA	Cdc20	Some
+109	1.0		Cdh1 CA	M	Some
+110	1.0		Cdh1 CA	Swi5	Some
+111	1.0		Cdh1 CA	CD	Some
+112	1.0		CD CA	S	OFF
+113	1.0		CD CA	Clb2	Some
+114	1.0		CD CA	Clb5	Some
+115	1.0		CD CA	Swi5	OFF
+116	1.0		CD CA	Cdh1	OFF
+117	1.0		Cln3 KO	Swi5	OFF
+118	1.0		Yhp1 CA	Clb2	OFF
+119	1.0		Cln2 CA,M CA	CKI	Some
+120	1.0		B CA,Cdh1 CA	S	Some
+121	1.0		CD CA,SFF KO	Clb2	OFF
+122	1.0		SMBF CA	Cdc20	Some
+123	1.0		SMBF CA	Swi5	Some
+124	1.0		SMBF CA	Clb5	Some
+125	1.0		SMBF CA	FEAR	Some
+126	1.0		SMBF KO,Swi5 CA	Clb2	OFF
+127	1.0		CKI KO,Clb2 CA	Yhp1	OFF
+128	1.0		CKI KO,Clb2 CA	CD	OFF/Some
+129	1.0		Cdc20 CA,M CA	SFF	Some
+130	1.0		B CA,Clb5 CA	Clb2	Some
+131	1.0		B CA,Clb5 CA	S	Some
+132	1.0		B CA,Clb5 CA	CKI	Some
+133	1.0		SMBF CA,Yhp1 KO	S	Some
+134	1.0		SMBF CA,Yhp1 KO	Cdh1	Some
+135	1.0		Cdc14 KO,Cdh1 KO,Cln2 KO	S	ON
+136	1.0		B KO	S	ON
+137	1.0		B KO	CKI	OFF
+138	1.0		Cdc14 CA,Cln2 CA	Cdc20	Some
+139	1.0		Cdc14 CA,Cln2 CA	CD	Some
+140	1.0		Clb2 CA,SFF CA	Cdh1	Some
+141	1.0		Cln2 KO,FEAR CA	Clb2	Some
+142	1.0		Cln2 KO,FEAR CA	Swi5	Some
+143	1.0		Cdc20 CA,Clb2 KO,SFF KO	Swi5	OFF
+144	1.0		CD CA,MEN KO	SMBF	Some
+145	1.0		Cdc20 KO,SFF CA	Swi5	OFF
+146	1.0		B CA,CKI CA	FEAR	OFF
+147	1.0		M KO	FEAR	OFF
+148	1.0		M KO	SFF	ON
+149	1.0		M KO	Cdh1	OFF
+150	1.0		Swi5 KO	Cdc14	Some
+151	1.0		Swi5 KO	Cdc20	Some
+152	1.0		Swi5 KO	SFF	Some
+153	1.0		Swi5 KO	CD	Some
+154	1.0		FEAR KO,Swi5 CA	M	ON
+155	1.0		FEAR KO,Swi5 CA	CD	OFF
+156	1.0		Cdc20 CA,Cdh1 CA	Yhp1	ON
+157	1.0		Cdc20 CA,Cdh1 CA	CD	OFF
+158	1.0		CKI CA,Cdc14 CA	Clb2	OFF
+159	1.0		SFF CA,Swi5 KO	SMBF	Some
+160	1.0		SFF CA,Swi5 KO	CD	Some
+161	1.0		SFF CA,Swi5 KO	Cln3	Some
+162	1.0		Cdc14 CA	Swi5	Some
+163	1.0		Cdc14 CA	Cln3	Some
+164	1.0		Clb5 CA,SFF CA	Cln2	Some
+165	1.0		Cdc14 KO,S KO	Cln2	OFF
+166	1.0		CD KO,CKI CA	Swi5	OFF
+167	1.0		Cdh1 KO,Cln2 KO	SFF	Some
+168	1.0		Cdh1 KO,Cln2 KO	SMBF	Some
+169	1.0		Cln3 KO,S CA	Cln2	OFF
+170	1.0		Cln3 KO,S CA	Yhp1	OFF
+171	1.0		Cdc14 CA,Cln2 CA,S CA	MEN	Some
+172	1.0		M KO,MEN KO	Swi5	OFF
+173	1.0		Cln3 KO,Swi5 KO	Cln2	OFF
+174	1.0		Cln3 KO,Swi5 KO	FEAR	OFF
+175	1.0		Cdc20 CA,SMBF CA	CKI	Some
+176	1.0		Cdc14 KO,FEAR KO,Yhp1 KO	CKI	OFF
+177	1.0		Cdc14 KO,FEAR KO,Yhp1 KO	Cln3	ON
+178	1.0		Cdc14 KO,FEAR KO,Yhp1 KO	CD	OFF
+179	1.0		CKI CA,Yhp1 CA	S	Some
+180	1.0		Clb5 KO,M CA	Cdc14	Some

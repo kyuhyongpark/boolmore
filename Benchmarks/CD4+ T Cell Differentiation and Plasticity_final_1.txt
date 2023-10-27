@@ -1,0 +1,25 @@
+# id: 248674
+# generation: 112
+# extra edges: []
+# score: 139.675 / 144.0
+# following constraints: True
+# complexity: 274
+
+BCL6* = IL21 & !TGFB
+FOXP3* = IL2
+GATA3* = !BCL6 & GATA3 & !IFNG & !IL21 & !TBET | !BCL6 & GATA3 & !IFNG & IL4 | !BCL6 & GATA3 & !IFNG & !TBET & !TGFB | !BCL6 & !IFNG & IL2 & !IL21 & !TBET | !BCL6 & !IFNG & IL2 & IL4 | !BCL6 & !IFNG & IL2 & !TBET & !TGFB | GATA3 & !IFNG & IL2 & !IL21 & !TBET | GATA3 & !IFNG & IL2 & IL4 & !TBET | GATA3 & !IFNG & IL2 & !TBET & !TGFB | GATA3 & !IFNG & !IL21 & IL4 & !TBET
+IFNG* = !BCL6 & !GATA3 & IFNG & IFNGe & !IL10 & !IL4 | !BCL6 & !GATA3 & IFNG & !IL10 & !IL21 & !IL4 & !TGFB | !BCL6 & !GATA3 & IFNG & !IL10 & !IL21 & !IL9 & TBET | !BCL6 & !GATA3 & IFNGe & !IL10 & !IL4 & TBET | !BCL6 & !GATA3 & !IL10 & !IL21 & !IL4 & TBET | !BCL6 & !GATA3 & !IL10 & !IL21 & !IL9 & TBET & !TGFB | !BCL6 & IFNG & IFNGe & !IL10 & !IL21 & !IL4 & !TGFB | !GATA3 & IFNG & IFNGe & !IL10 & !IL21 & !IL4 & !TGFB | !GATA3 & IFNG & !IL10 & !IL21 & !IL4 & !IL9 & TBET & !TGFB | !GATA3 & IFNGe & !IL10 & !IL21 & !IL4 & !IL9 & TBET | !GATA3 & IFNGe & !IL10 & !IL4 & TBET & !TGFB | !GATA3 & IFNGe & !IL10 & !IL9 & TBET & !TGFB | IFNG & IFNGe & !IL10 & !IL21 & !IL4 & TBET & !TGFB | IFNG & IFNGe & !IL10 & !IL4 & !IL9 & !TGFB | IFNG & IFNGe & !IL10 & !IL9 & TBET
+IFNGe* = IFNGe
+IL10* = GATA3 & IFNG & TGFB | GATA3 & IL10 & TGFB | GATA3 & IL10e | IFNG & IL10 | IFNG & IL10e | IL10 & IL21 | IL10e & IL21 | IL10e & TGFB
+IL10e* = IL10e
+IL2* = !FOXP3 & !IFNG & !IL10 & IL2 | !IFNG & !IL10 & !IL21 | !IFNG & !IL10 & IL2e
+IL21* = BCL6 & !IFNG & !IL10 & !IL4 & !IL9 & RORGT | BCL6 & !IFNG & !IL2 & IL21 & IL21e & !IL9 & RORGT | BCL6 & !IL10 & !IL2 & !IL4 & !IL9 & RORGT | BCL6 & !IL10 & IL21e & !IL4 & !IL9 & RORGT | BCL6 & IL21 & IL21e & !IL4 & !IL9 | !IFNG & !IL10 & IL21 & !IL4 & !IL9 | !IFNG & !IL2 & IL21 & !IL4 & !IL9 | !IFNG & IL21 & IL21e & !IL4 & !IL9 | !IL10 & IL21 & IL21e & !IL4 & !IL9 | !IL10 & IL21 & !IL9 & RORGT
+IL21e* = IL21e
+IL2e* = IL2e
+IL4* = GATA3 & IL4e | !IFNG & IL4e | IL2 & !IL21 & IL4e | !IL21 & IL4 & IL4e | IL4 & IL4e & !TBET
+IL4e* = IL4e
+IL9* = !IFNG & IL2 & IL4 | !IFNG & IL4 & TGFB
+RORGT* = !BCL6 & !FOXP3 & !GATA3 & IL21 & !TBET
+TBET* = !BCL6 & !GATA3 & IFNG & !IL21 & !IL9 | !GATA3 & !IL4 & !IL9 | IFNG & TBET
+TGFB* = FOXP3 | TGFB | TGFBe
+TGFBe* = TGFBe

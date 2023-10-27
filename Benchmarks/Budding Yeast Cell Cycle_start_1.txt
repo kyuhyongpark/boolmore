@@ -1,0 +1,27 @@
+# id: 199481
+# generation: 1
+# extra edges: []
+# score: 119.66666666666666 / 160.0
+# following constraints: True
+# complexity: 40
+
+BuddingCP* = BuddingCP
+Cdc14* = FEAR
+Cdc20* = Clb2 & SpindleCP
+Cdh1* = !Clb2 & !Cln2
+Clb2* = !Cdc20 & !Cdh1 & !Sic1
+Clb5* = SMBF | !Sic1
+Cln2* = SMBF & Start
+Cln3* = Size & !Yhp1
+FEAR* = Cdc20
+MEN* = Clb2 | FEAR
+SFF* = Clb2
+SMBF* = !Clb2 & !Whi5
+Sic1* = !Cdc14 & !Cln2 | !Clb2 & Swi5 | !Clb5 | !Cln2 & Swi5 | Sic1
+Size* = Size
+SpindleCP* = SpindleCP
+Start* = Start
+Swe1* = !BuddingCP
+Swi5* = Cdc14 & !Clb2 & SFF & !Swi5
+Whi5* = !Cln3 & !Start
+Yhp1* = SMBF

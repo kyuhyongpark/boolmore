@@ -234,6 +234,9 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     log     - log of iterations     :list[list[]]
               [[iteration, top score, extra_edges, complexity], ...]
     """
+    assert per_iter > keep, "We need more models per iteration than the number of models to carry over to the next iteration"
+    assert prob < 1.0 and edge_prob < 1.0, "Probabilities should be less than 1"
+
     if export_name == None:
         export_name = start.name
 

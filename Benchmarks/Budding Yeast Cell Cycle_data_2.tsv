@@ -1,0 +1,201 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1	Swe1 KO,Swi5 CA	Yhp1	OFF
+2	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=0	FEAR CA	Swi5	OFF
+3	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=1		Cdc14	OFF
+4	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=1		FEAR	OFF
+5	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=1		Swe1	ON
+6	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1	Cdc14 CA	Swi5	OFF
+7	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1		Sic1	ON
+8	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1		SMBF	OFF
+9	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1		Cdc20	OFF
+10	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1		Yhp1	OFF
+11	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1		Cdc14	OFF
+12	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1		Clb5	OFF
+13	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1		Swi5	OFF
+14	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=1	Sic1 CA	Yhp1	ON
+15	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=0		Cdh1	ON
+16	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1	Clb2 KO	Swi5	OFF
+17	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1	Clb2 KO	Yhp1	Some
+18	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1	Clb2 KO	SMBF	Some
+19	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0		FEAR	OFF
+20	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0		SFF	Some
+21	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0		MEN	OFF
+22	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0		Cdc20	OFF
+23	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0		Whi5	ON
+24	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0		Cln3	ON
+25	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0		Yhp1	OFF
+26	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0		Swe1	OFF
+27	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0		Cdh1	Some
+28	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=0	Clb2 KO,Cln3 KO	Sic1	ON
+29	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=0	Cdc20 CA	Sic1	ON
+30	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=0		MEN	OFF
+31	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=0		SMBF	OFF
+32	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=0		Yhp1	OFF
+33	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=0		Cdc14	OFF
+34	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=0		Clb5	OFF
+35	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=0		Swe1	ON
+36	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=1		Cdc20	OFF
+37	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=1		Cdh1	OFF
+38	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=0	Cdc20 KO,Sic1 CA	Yhp1	OFF
+39	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=1		MEN	OFF
+40	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=1		Cln3	OFF
+41	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=1		Cdc14	OFF
+42	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=1		Cln2	Some
+43	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=1		Cdh1	Some
+44	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=0	Cln3 KO	Cdc14	OFF
+45	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=0	Cln3 KO	Sic1	ON
+46	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=0		Whi5	ON
+47	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=0		Clb2	OFF
+48	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=0		Clb5	OFF
+49	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=0		Swe1	ON
+50	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=0		Cdh1	ON
+51	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=0	SFF KO,Sic1 KO	Swi5	OFF
+52	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=0	SFF KO,Sic1 KO	Whi5	ON
+53	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=0	Cdc14 CA	SMBF	OFF
+54	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=1	MEN KO,Swi5 CA	Cln2	Some
+55	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=0	SMBF CA,Swi5 KO	Cdc20	OFF
+56	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=0	SMBF CA,Swi5 KO	MEN	OFF
+57	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=1	Swi5 CA	FEAR	OFF
+58	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0	FEAR CA,Swe1 KO	Cdc20	OFF
+59	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0	FEAR CA,Swe1 KO	MEN	Some
+60	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=1		FEAR	OFF
+61	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=1		SFF	OFF
+62	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=1		Cdc20	OFF
+63	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=1		Yhp1	ON
+64	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=1		Cln2	ON
+65	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=0	Cdc14 KO	Yhp1	OFF
+66	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=1	SFF KO,SMBF CA	Cdh1	OFF
+67	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1	FEAR KO,SMBF CA	SFF	ON
+68	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0		SFF	OFF
+69	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0		MEN	OFF
+70	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0		SMBF	OFF
+71	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0		Cdc20	OFF
+72	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0		Whi5	ON
+73	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0		Yhp1	OFF
+74	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0		Clb2	OFF
+75	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0		Cdc14	OFF
+76	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0		Swi5	OFF
+77	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0	SFF KO,Yhp1 KO	Cdc14	OFF
+78	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=1	FEAR CA	Cln2	ON
+79	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=1	FEAR CA	MEN	OFF
+80	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=1	FEAR CA	Cln3	OFF
+81	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=0		SFF	Some
+82	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=0		Sic1	Some
+83	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=0		Cdc14	OFF
+84	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=0		Cln2	OFF
+85	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=0		Cdh1	Some
+86	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1	MEN CA	Clb5	OFF
+87	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1	MEN CA	Cln3	OFF
+88	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=1	MEN KO,Swe1 CA	Swi5	OFF
+89	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=1	MEN KO,Swe1 CA	SMBF	ON
+90	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=1	Sic1 CA	Clb2	OFF
+91	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=1	Sic1 CA	MEN	OFF
+92	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=1	Sic1 CA	Cdc20	OFF
+93	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=1	Sic1 CA	Cln2	ON
+94	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1	Cdc20 KO,Cdh1 CA,Whi5 KO	MEN	OFF
+95	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1	Cdc20 CA	Yhp1	Some
+96	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1		SFF	Some
+97	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1		MEN	OFF
+98	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1		Cdc20	OFF
+99	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1		Whi5	ON
+100	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1		Cln3	OFF
+101	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1		Swe1	OFF
+102	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1		Cln2	OFF
+103	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1		Cdh1	Some
+104	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0	Cdh1 CA	FEAR	OFF
+105	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=0		SFF	OFF
+106	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=0		Cdc20	OFF
+107	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=0		Yhp1	OFF
+108	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=0		Swe1	ON
+109	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=0		Cdh1	ON
+110	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=0		MEN	OFF
+111	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=0		Sic1	ON
+112	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=1	SFF CA	Cdc14	OFF
+113	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1	FEAR KO	Clb2	Some
+114	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=1		FEAR	Some
+115	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=1		Whi5	Some
+116	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=1		Cdc14	Some
+117	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=1		Swe1	OFF
+118	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=1		Swi5	Some
+119	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=1		Cdh1	Some
+120	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=0	Clb2 KO	Cln2	OFF
+121	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1	SFF CA	Cdc20	OFF
+122	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1	SFF CA	Sic1	OFF
+123	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=1	Swe1 KO	Clb2	ON
+124	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=0	Swe1 CA	Cdc14	OFF
+125	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=0	Swe1 CA	Cdc20	OFF
+126	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=0	Swe1 CA	Swi5	OFF
+127	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=0	Swe1 CA	FEAR	OFF
+128	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1	Clb2 CA,Swe1 CA	Whi5	ON
+129	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=1	Clb2 KO,FEAR CA,Sic1 CA,Swe1 KO,Whi5 CA	MEN	OFF
+130	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=1		Cln2	Some
+131	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=1		Cdh1	Some
+132	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=0	MEN KO	SFF	OFF
+133	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=1	MEN KO	SFF	ON
+134	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=1	Cdh1 KO	SFF	OFF
+135	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=1	FEAR KO,MEN CA	Cln3	OFF
+136	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=0	FEAR KO,SFF CA,Swe1 KO,Yhp1 CA	SMBF	OFF
+137	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=0	Clb5 KO	Cln3	ON
+138	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=1	Yhp1 CA	Whi5	ON
+139	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0	Cdh1 KO	Cln2	OFF
+140	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=0	Swi5 KO,Yhp1 KO	Cdc14	OFF
+141	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=0	FEAR CA,MEN CA	Cln2	OFF
+142	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=1	Swe1 CA,Yhp1 CA	Clb2	OFF
+143	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=1	Swe1 CA,Yhp1 CA	Cdh1	Some
+144	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=1	Whi5 KO	Swe1	OFF
+145	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=1	Whi5 KO	Yhp1	OFF
+146	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=1	Sic1 KO	Cln2	Some
+147	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=0	Sic1 KO	Clb2	OFF
+148	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=0	Sic1 KO	Cdc14	OFF
+149	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1	Sic1 KO	Cdh1	Some
+150	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1	Sic1 KO	SMBF	OFF
+151	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=1	Cdh1 CA,SFF KO,Yhp1 CA	MEN	OFF
+152	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0	Cdh1 CA	Whi5	ON
+153	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=0	Cdc14 CA	Whi5	ON
+154	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=1	Swe1 CA	Cln2	Some
+155	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=1	Swe1 CA	Yhp1	Some
+156	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=0	Swe1 CA	Cdc14	OFF
+157	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=0	Swe1 CA	FEAR	OFF
+158	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=0	Swe1 CA	SFF	OFF
+159	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0	Cdh1 CA,Sic1 CA	Cln3	OFF
+160	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=1	Swe1 KO	Clb2	Some
+161	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=1	Clb2 CA	Swe1	ON
+162	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=1	Swi5 KO	MEN	OFF
+163	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=1	Cdc14 KO,Swi5 KO	Clb5	OFF
+164	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=1	Cdc14 KO,Swi5 KO	SMBF	OFF
+165	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=1	Yhp1 CA	SFF	OFF
+166	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=1	Yhp1 KO	Sic1	OFF
+167	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=1	Yhp1 KO	Clb5	ON
+168	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=1	Cln3 CA	Swi5	Some
+169	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1	Cln3 KO	Cln2	OFF
+170	1.0	BuddingCP=0,Size=0,SpindleCP=1,Start=1	Cln3 CA,Swe1 CA,Swi5 KO	Clb5	ON
+171	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0	Swe1 KO	Whi5	ON
+172	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0	Swe1 KO	SMBF	OFF
+173	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0	FEAR KO	SFF	Some
+174	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0	FEAR KO	Yhp1	OFF
+175	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=0	Whi5 KO	FEAR	OFF
+176	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=0	Whi5 KO	Clb5	Some
+177	1.0	BuddingCP=0,Size=1,SpindleCP=1,Start=0	MEN CA,SFF KO	Cdh1	ON
+178	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=0	Cdh1 KO,Cln3 KO	MEN	OFF
+179	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=1	Sic1 KO	SMBF	Some
+180	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=1	Sic1 KO	Clb5	Some
+181	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=1	Sic1 KO	Cln3	OFF
+182	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1	Sic1 CA	Cdc14	OFF
+183	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1	SMBF KO	Clb2	OFF
+184	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1	SMBF KO	Whi5	ON
+185	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=1	SMBF KO	Clb5	OFF
+186	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=1	Clb5 KO	Cdc14	OFF
+187	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=0	Cln2 CA	Cdc20	OFF
+188	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=0	SFF CA	Clb5	OFF
+189	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0	Sic1 CA	MEN	OFF
+190	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0	Sic1 CA	Clb5	OFF
+191	1.0	BuddingCP=1,Size=0,SpindleCP=1,Start=0	Sic1 CA	SMBF	OFF
+192	1.0	BuddingCP=0,Size=1,SpindleCP=0,Start=0	Clb5 CA,FEAR CA	Cdc14	OFF
+193	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=1	Cln2 CA	Cdc14	Some
+194	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=1	Cln2 CA	MEN	Some
+195	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=0	Cdh1 CA,Whi5 CA	Clb5	OFF
+196	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=0	Yhp1 CA	Sic1	ON
+197	1.0	BuddingCP=1,Size=1,SpindleCP=0,Start=0	Sic1 CA	Cdc14	OFF
+198	1.0	BuddingCP=0,Size=0,SpindleCP=0,Start=1	MEN CA	Cln2	Some
+199	1.0	BuddingCP=1,Size=1,SpindleCP=1,Start=1	Cdc14 KO	MEN	ON
+200	1.0	BuddingCP=1,Size=0,SpindleCP=0,Start=0	Cln2 KO,Whi5 KO	MEN	OFF

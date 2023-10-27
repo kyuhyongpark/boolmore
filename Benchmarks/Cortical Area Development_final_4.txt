@@ -1,0 +1,12 @@
+# id: 11307
+# generation: 19
+# extra edges: []
+# score: 40.0 / 40.0
+# following constraints: True
+# complexity: 8
+
+Coup_fti* = !Fgf8
+Emx2* = Coup_fti & !Fgf8 & !Pax6
+Fgf8* = !Emx2 & Sp8
+Pax6* = Sp8
+Sp8* = Fgf8
