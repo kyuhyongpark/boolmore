@@ -33,7 +33,7 @@ pip install git+https://github.com/kyuhyongpark/boolmore
 ## Quickstart with an example run
 
 1. install `boolmore`
-2. download 4 files from Examples and tutorials
+2. download 4 files from demo
 
    `CAD.txt` : This is the baseline model  
    `CAD_start.txt` : This is the scrambled starting model  
