@@ -1,0 +1,22 @@
+# id: 378880
+# generation: 108
+# extra edges: []
+# score: 118.0 / 120.0
+# following constraints: True
+# complexity: 43
+
+ADD* = NUC2 & !TLS
+ATM* = !CHKREC & !FAcore | DSB
+ATR* = ATM & !CHKREC & ICL
+CHKREC* = !ADD & !ICL | !CHKREC & !DSB & TLS | FAHRR | HRR2 | !ICL & TLS | NHEJ
+DSB* = !FAHRR & NUC1 | !FAHRR & NUC2 | !NHEJ & NUC1
+FAHRR* = FANCD2I
+FANCD2I* = ATR & FAcore
+FAcore* = ATM & !CHKREC | !CHKREC & ICL
+HRR2* = !CHKREC & NUC2
+ICL* = !DSB & ICL
+NHEJ* = !CHKREC & DSB
+NUC1* = ICL
+NUC2* = ATM & ATR & ICL
+TLS* = ADD
+p53* = !CHKREC

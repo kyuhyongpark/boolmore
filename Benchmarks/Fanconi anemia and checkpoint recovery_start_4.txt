@@ -1,0 +1,22 @@
+# id: 371001
+# generation: 1
+# extra edges: []
+# score: 42.5 / 120.0
+# following constraints: True
+# complexity: 104
+
+ADD* = NUC2
+ATM* = !CHKREC | DSB | !FAcore
+ATR* = ATM & ICL
+CHKREC* = !ADD & !CHKREC & !DSB & FAHRR & NHEJ & TLS | !ADD & !CHKREC & !DSB & HRR2 & NHEJ & TLS | !ADD & !DSB & FAHRR & !ICL & NHEJ & TLS | !ADD & !DSB & HRR2 & !ICL & NHEJ & TLS
+DSB* = !FAHRR | !HRR2 & !NHEJ | NUC1 | NUC2
+FAHRR* = !CHKREC | FANCD2I | !NHEJ
+FANCD2I* = ATM & !CHKREC | ATM & FAcore
+FAcore* = ATM | !CHKREC & ICL
+HRR2* = !CHKREC & !NHEJ | !CHKREC & NUC2 | DSB & NUC2 | !FAHRR | ICL | TLS
+ICL* = !DSB & ICL
+NHEJ* = !CHKREC & !HRR2 & NUC2 | DSB & !FAHRR & NUC2 | DSB & !HRR2 & NUC2 | !FAHRR & !HRR2 & NUC2
+NUC1* = ICL
+NUC2* = ATM & ATR & !FANCD2I & NUC1 & p53 | ATM & !FANCD2I & ICL & NUC1 & p53 | ATM & !FAcore & ICL & NUC1 & p53 | ATR & !FANCD2I & !FAcore & NUC1 & p53 | ATR & !FANCD2I & ICL & NUC1 & p53 | !FANCD2I & !FAcore & ICL & NUC1 & p53
+TLS* = ADD | !CHKREC
+p53* = ATM | ATR | !CHKREC

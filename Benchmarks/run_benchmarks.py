@@ -16,8 +16,9 @@ FILE = "benchmark_log.csv"
 N_LIMIT = 30
 
 fp = open(FILE, "a")
-fp.write("model_name,N,repeat,start_train,final_train,valid_ids, start_valid, final_valid,")
+fp.write("model_name,N,repeat,start_train,final_train,valid_ids,start_valid,final_valid,")
 fp.write(",".join([str(x) for x in range(1,101)]) + "\n")
+fp.close()
 
 for model_file in os.listdir(DIRECTORY):
     BASE = model_file
@@ -85,7 +86,9 @@ for model_file in os.listdir(DIRECTORY):
         print("final validation score:", final_valid)
         print("training score curve: "+",".join([str(x[1]) for x in log]))
 
-        lst = [model_name, N, i, start_train, final_train, valid_ids, start_valid, final_valid]
+        valid_ids_str = "\"" + ",".join([str(x) for x in valid_ids]) + "\""
+        lst = [model_name, N, i, start_train, final_train, valid_ids_str, start_valid, final_valid]
         lst.append([x[1] for x in log])
-        fp.write(",".join([str(x) for x in lst]) + "\n")
+        with open(FILE, mode="a") as fp:
+            fp.write(",".join([str(x) for x in lst]) + "\n")
     

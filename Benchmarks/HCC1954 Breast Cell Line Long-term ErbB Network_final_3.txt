@@ -1,0 +1,30 @@
+# id: 414637
+# generation: 126
+# extra edges: []
+# score: 183.8 / 184.0
+# following constraints: True
+# complexity: 49
+
+AKT* = CyclinB1 | ERBB2 & !PTEN | ERBB3 & !PTEN
+CyclinB1* = CyclinB1 & !p53
+CyclinD1* = AKT | ERK1_2
+ERBB1* = !erlotinib & !pertuzumab
+ERBB2* = !erlotinib & !pertuzumab & !trastuzumab
+ERBB3* = ERBB3 & RPS6 & !erlotinib & !pertuzumab | !erlotinib & !pertuzumab & stimulus
+ERK1_2* = ERK1_2 | cRAF
+FOXO1_3a* = !AKT & FOXO1_3a
+GSKa_b* = p53 | GSKa_b
+PRAS* = PRAS | cJUN
+PTEN* = !GSKa_b & PTEN
+RB* = p53
+RPS6* = RPS6 | p70S6K
+TSC2* = !ERK1_2 & !GSKa_b & RB
+cJUN* = !GSKa_b
+cRAF* = ERBB2
+erlotinib* = erlotinib
+p38* = p38 | AKT
+p53* = RB | p38
+p70S6K* = !TSC2 & p70S6K
+pertuzumab* = pertuzumab
+stimulus* = stimulus
+trastuzumab* = trastuzumab

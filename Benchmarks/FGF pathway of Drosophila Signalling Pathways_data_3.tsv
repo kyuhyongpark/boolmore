@@ -1,0 +1,231 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=1	Dsor1 KO	Targets	OFF
+2	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=1	Dsor1 KO	Gap	ON
+3	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=0		Targets	OFF
+4	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=0		Drk	OFF
+5	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=0		Dsor1	OFF
+6	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=0		Ras	OFF
+7	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=0		Gap	OFF
+8	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Drk CA	Targets	OFF
+9	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Drk CA	Aop	ON
+10	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Drk CA	Raf	ON
+11	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Drk CA	Gap	ON
+12	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=0		Targets	OFF
+13	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=0		Raf	OFF
+14	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=0		Gap	OFF
+15	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=1	Dsor1 CA,Stumps KO	Targets	OFF
+16	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=1	Dsor1 CA,Stumps KO	Rl	OFF
+17	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=1	Dsor1 CA,Stumps KO	Gap	OFF
+18	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=1	Dsor1 CA,Stumps KO	PLCg	OFF
+19	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=0,Src42=1,Sty=0,Ths=0	Ras CA	Targets	OFF
+20	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=0,Src42=1,Sty=0,Ths=0	Ras CA	Raf	OFF
+21	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=0,Src42=1,Sty=0,Ths=0	Ras CA	Gap	OFF
+22	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=1	Rl CA	Targets	ON
+23	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=1	Rl CA	Gap	ON
+24	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=1		Targets	OFF
+25	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=1		Gap	OFF
+26	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=0		Sos	OFF
+27	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=0		Targets	OFF
+28	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=0		Gap	OFF
+29	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=0		Htl	ON
+30	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=1	Dsor1 KO,PLCg KO,Rl CA	Targets	ON
+31	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=1	Dsor1 KO,PLCg KO,Rl CA	Aop	OFF
+32	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=1	Dsor1 KO,PLCg KO,Rl CA	Gap	OFF
+33	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=1	Dsor1 KO,PLCg KO,Rl CA	Stumps	ON
+34	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=0,Ths=1		Targets	OFF
+35	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=0,Ths=1		Gap	ON
+36	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=1,Sty=1,Ths=1	Ras KO	Targets	OFF
+37	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=1,Sty=1,Ths=1	Ras KO	Pnt	OFF
+38	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=1,Sty=1,Ths=1	Ras KO	Gap	ON
+39	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=1,Ths=1		Targets	OFF
+40	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=1,Ths=1		Drk	ON
+41	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=1,Ths=1		PLCg	ON
+42	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=1,Ths=1		Dsor1	OFF
+43	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=1,Ths=1		Gap	ON
+44	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0	Btl CA	Sos	ON
+45	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0	Btl CA	Targets	OFF
+46	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0	Btl CA	PLCg	ON
+47	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0	Btl CA	Raf	OFF
+48	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0	Btl CA	Ras	ON
+49	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0	Btl CA	Gap	ON
+50	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0	Btl CA	Aop	ON
+51	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=1,Ths=0		Dsor1	OFF
+52	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=1,Ths=0		Targets	OFF
+53	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=1,Ths=0		Raf	OFF
+54	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=1,Ths=0		Gap	ON
+55	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=0,Ths=0	Ras KO	Targets	OFF
+56	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=0,Ths=0	Ras KO	Gap	ON
+57	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=0,Ths=0	Ras KO	PLCg	ON
+58	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Rl CA	Targets	ON
+59	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Rl CA	Gap	OFF
+60	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=0,Ths=1	Raf KO	Targets	OFF
+61	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=0,Ths=1	Raf KO	Gap	OFF
+62	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=0,Ths=1	Raf KO	PLCg	OFF
+63	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=0	Pnt KO	Targets	OFF
+64	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=0	Pnt KO	Btl	OFF
+65	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=0	Pnt KO	Gap	OFF
+66	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1	Sos CA	Targets	OFF
+67	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1	Sos CA	Gap	OFF
+68	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1	Sos CA	Ras	ON
+69	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1	Sos CA	Stumps	ON
+70	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Aop KO,Htl KO,Ras CA	Dsor1	OFF
+71	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Aop KO,Htl KO,Ras CA	Targets	OFF
+72	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Aop KO,Htl KO,Ras CA	Sos	OFF
+73	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Aop KO,Htl KO,Ras CA	Gap	OFF
+74	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=1	Ras CA,Stumps CA	Targets	OFF
+75	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=1	Ras CA,Stumps CA	Gap	OFF
+76	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=0	PLCg CA	Targets	OFF
+77	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=0	PLCg CA	Gap	ON
+78	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=1	Htl KO	Sos	OFF
+79	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=1	Htl KO	Targets	OFF
+80	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=1	Htl KO	Gap	OFF
+81	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=0,Ths=0	Btl CA,Drk CA	Targets	ON
+82	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=0,Ths=0	Btl CA,Drk CA	Gap	ON
+83	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=0,Ths=0	Btl CA,Drk CA	Ras	ON
+84	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=0,Ths=0	Btl CA,Drk CA	PLCg	ON
+85	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Pnt KO	Targets	OFF
+86	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Pnt KO	Gap	OFF
+87	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Pnt KO	Htl	OFF
+88	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=0,Sty=1,Ths=1	Pnt KO	Dsor1	OFF
+89	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=0,Sty=1,Ths=1	Pnt KO	Targets	OFF
+90	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=0,Sty=1,Ths=1	Pnt KO	Gap	OFF
+91	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=1	Drk KO,Dsor1 KO	Targets	OFF
+92	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=1	Drk KO,Dsor1 KO	Btl	ON
+93	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=1	Drk KO,Dsor1 KO	Gap	OFF
+94	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=1	Dsor1 CA	Targets	OFF
+95	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=1	Dsor1 CA	Gap	ON
+96	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=1		Targets	OFF
+97	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=1		Rl	OFF
+98	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=1		Gap	OFF
+99	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=1	PLCg CA	Targets	OFF
+100	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=1	PLCg CA	Gap	ON
+101	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Aop CA,PLCg KO,Rl KO	Sos	OFF
+102	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Aop CA,PLCg KO,Rl KO	Targets	OFF
+103	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Aop CA,PLCg KO,Rl KO	Drk	OFF
+104	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Aop CA,PLCg KO,Rl KO	Htl	OFF
+105	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Aop CA,PLCg KO,Rl KO	Gap	OFF
+106	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0		Targets	OFF
+107	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0		Gap	OFF
+108	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=1		Targets	OFF
+109	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=1		Gap	OFF
+110	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=1	Drk CA,Raf CA	Sos	ON
+111	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=1	Drk CA,Raf CA	Targets	OFF
+112	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=1	Drk CA,Raf CA	Gap	ON
+113	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0	Raf KO	Targets	OFF
+114	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0	Raf KO	Gap	OFF
+115	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=1,Pyr=1,Src42=0,Sty=0,Ths=0		Sos	OFF
+116	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=1,Pyr=1,Src42=0,Sty=0,Ths=0		Targets	OFF
+117	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=1,Pyr=1,Src42=0,Sty=0,Ths=0		Drk	OFF
+118	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=1,Pyr=1,Src42=0,Sty=0,Ths=0		Dsor1	OFF
+119	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=1,Pyr=1,Src42=0,Sty=0,Ths=0		Gap	OFF
+120	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=0,Sty=0,Ths=1	Dsor1 CA	Targets	OFF
+121	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=0,Sty=0,Ths=1	Dsor1 CA	Gap	OFF
+122	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Pnt CA,Sos KO	Targets	OFF
+123	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Pnt CA,Sos KO	Gap	OFF
+124	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Pnt CA,Sos KO	PLCg	OFF
+125	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=1,Ths=1	Drk KO	Targets	OFF
+126	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=1,Ths=1	Drk KO	Gap	OFF
+127	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0	Rl CA	Targets	ON
+128	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0	Rl CA	Gap	OFF
+129	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=0	Rl CA	PLCg	OFF
+130	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=0,Sty=1,Ths=0	Drk KO,Rl CA,Stumps KO	Targets	ON
+131	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=0,Sty=1,Ths=0	Drk KO,Rl CA,Stumps KO	Gap	OFF
+132	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0		Targets	OFF
+133	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0		Gap	OFF
+134	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=0	Aop CA	Targets	OFF
+135	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=0	Aop CA	Gap	ON
+136	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=1,Sty=1,Ths=0	Btl KO,Ras KO	Targets	OFF
+137	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=1,Sty=1,Ths=0	Btl KO,Ras KO	Pnt	OFF
+138	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=1,Sty=1,Ths=0	Btl KO,Ras KO	Gap	OFF
+139	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=0,Msk=1,Pyr=1,Src42=0,Sty=0,Ths=1	PLCg CA	Targets	OFF
+140	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=0,Msk=1,Pyr=1,Src42=0,Sty=0,Ths=1	PLCg CA	Gap	ON
+141	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=0	Pnt KO,Stumps KO	Targets	OFF
+142	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=0	Pnt KO,Stumps KO	Gap	OFF
+143	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=0		Targets	OFF
+144	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=0		Drk	OFF
+145	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=0		Gap	OFF
+146	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=0		Stumps	ON
+147	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=1		Dsor1	OFF
+148	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=1		Targets	OFF
+149	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=1		Gap	ON
+150	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=0,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=1	Dsor1 CA,Rl CA	Targets	ON
+151	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=0,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=1	Dsor1 CA,Rl CA	Gap	OFF
+152	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=0,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=1	Dsor1 CA,Rl CA	Htl	ON
+153	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=0,Ths=0		Dsor1	OFF
+154	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=0,Ths=0		Targets	OFF
+155	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=0,Ths=0		Gap	ON
+156	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=1		Targets	OFF
+157	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=1		Drk	ON
+158	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=1		Gap	ON
+159	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Dsor1 KO	Sos	OFF
+160	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Dsor1 KO	Targets	OFF
+161	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Dsor1 KO	Pnt	OFF
+162	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=0	Dsor1 KO	Gap	OFF
+163	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1		Targets	ON
+164	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1		Drk	ON
+165	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1		Gap	ON
+166	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1		Stumps	ON
+167	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=0,Sty=1,Ths=1	Rl KO	Targets	OFF
+168	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=0,Sty=1,Ths=1	Rl KO	Gap	OFF
+169	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=0	Stumps CA	Targets	OFF
+170	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=0	Stumps CA	Gap	OFF
+171	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=1	Sos KO	Targets	OFF
+172	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=1	Sos KO	Gap	OFF
+173	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=1		Targets	OFF
+174	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=1		Aop	ON
+175	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=1		Gap	OFF
+176	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=1	Sos KO	Targets	OFF
+177	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=1	Sos KO	Rl	OFF
+178	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=1	Sos KO	Gap	ON
+179	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=1		Targets	OFF
+180	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=1		Pnt	OFF
+181	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=1		Gap	OFF
+182	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1	Raf CA	Sos	ON
+183	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1	Raf CA	Targets	ON
+184	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1	Raf CA	Gap	ON
+185	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1	Raf CA	Htl	ON
+186	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=0		Targets	OFF
+187	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=0		Btl	ON
+188	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=0		Gap	ON
+189	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=1,Ths=0	Ras KO	Targets	OFF
+190	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=1,Msk=1,Pyr=0,Src42=0,Sty=1,Ths=0	Ras KO	Gap	OFF
+191	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=1	Dsor1 KO,Raf KO	Targets	OFF
+192	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=1	Dsor1 KO,Raf KO	Gap	ON
+193	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=0,Ths=1	Btl KO	Targets	OFF
+194	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=0,Ths=1	Btl KO	Pnt	OFF
+195	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=1,Sty=0,Ths=1	Btl KO	Gap	ON
+196	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1		Targets	OFF
+197	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1		Aop	ON
+198	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1		Btl	ON
+199	1.0	Bnl=1,Cnk=0,Csw=0,Ksr=0,Msk=1,Pyr=1,Src42=1,Sty=1,Ths=1		Gap	OFF
+200	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=1	Drk CA	Targets	OFF
+201	1.0	Bnl=1,Cnk=1,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=0,Ths=1	Drk CA	Gap	ON
+202	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=1		Sos	ON
+203	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=1		Targets	OFF
+204	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=1		Gap	ON
+205	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=1,Pyr=0,Src42=0,Sty=0,Ths=1		Stumps	ON
+206	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=1,Sty=1,Ths=0	Ras KO	Targets	OFF
+207	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=1,Sty=1,Ths=0	Ras KO	Gap	OFF
+208	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=0,Msk=1,Pyr=0,Src42=1,Sty=1,Ths=0	Ras KO	Stumps	ON
+209	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=1	Htl KO	Targets	OFF
+210	1.0	Bnl=0,Cnk=0,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=0,Ths=1	Htl KO	Gap	OFF
+211	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=1	Drk CA,Stumps KO	Targets	OFF
+212	1.0	Bnl=1,Cnk=1,Csw=0,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=1	Drk CA,Stumps KO	Gap	ON
+213	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=0	Dsor1 CA	Targets	OFF
+214	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=0	Dsor1 CA	Gap	ON
+215	1.0	Bnl=0,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=1,Src42=0,Sty=1,Ths=0	Dsor1 CA	PLCg	ON
+216	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=0		Targets	OFF
+217	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=0		Btl	ON
+218	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=0,Src42=0,Sty=1,Ths=0		Gap	ON
+219	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=0	Pnt KO,Sos CA	Targets	OFF
+220	1.0	Bnl=0,Cnk=1,Csw=0,Ksr=0,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=0	Pnt KO,Sos CA	Gap	OFF
+221	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=0	Sos KO	Targets	OFF
+222	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=1,Msk=0,Pyr=1,Src42=1,Sty=1,Ths=0	Sos KO	Gap	ON
+223	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Dsor1 KO	Targets	OFF
+224	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Dsor1 KO	Rl	OFF
+225	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Dsor1 KO	Pnt	OFF
+226	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Dsor1 KO	Gap	ON
+227	1.0	Bnl=1,Cnk=0,Csw=1,Ksr=0,Msk=0,Pyr=0,Src42=1,Sty=1,Ths=0	Dsor1 KO	Aop	ON
+228	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=0,Msk=1,Pyr=0,Src42=1,Sty=1,Ths=1		Dsor1	OFF
+229	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=0,Msk=1,Pyr=0,Src42=1,Sty=1,Ths=1		Targets	OFF
+230	1.0	Bnl=0,Cnk=1,Csw=1,Ksr=0,Msk=1,Pyr=0,Src42=1,Sty=1,Ths=1		Gap	ON

@@ -1,0 +1,231 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		FOXO1_3a	Some
+2	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		cJUN	OFF/Some
+3	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		ERBB3	OFF
+4	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		ERBB2	OFF
+5	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		p70S6K	OFF/Some
+6	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		PTEN	OFF/Some
+7	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		RB	OFF/Some
+8	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		GSKa_b	Some
+9	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		p38	OFF/Some
+10	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		p53	OFF/Some
+11	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		AKT	OFF/Some
+12	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		PRAS	Some
+13	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		RPS6	Some
+14	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0		CyclinB1	OFF
+15	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1		TSC2	OFF/Some
+16	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1		CyclinD1	Some/ON
+17	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1		RB	OFF/Some
+18	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1		PRAS	Some
+19	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1		RPS6	Some
+20	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1		CyclinB1	OFF
+21	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0		ERBB3	OFF
+22	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0		ERBB1	OFF
+23	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0		GSKa_b	Some
+24	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0		PRAS	Some
+25	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0		CyclinB1	OFF
+26	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1		ERK1_2	OFF/Some
+27	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1		p53	OFF/Some
+28	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1		ERBB1	OFF
+29	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=1	ERBB2 KO	p70S6K	OFF/Some
+30	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=1	ERBB2 KO	p53	OFF/Some
+31	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=1		ERBB1	ON
+32	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=1		CyclinD1	ON
+33	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=1		RB	OFF/Some
+34	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=1		p38	OFF/Some
+35	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=1		AKT	OFF/Some
+36	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=1		RPS6	Some
+37	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=1		p38	OFF/Some
+38	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=1		CyclinD1	Some
+39	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=1		RB	OFF/Some
+40	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1	p38 KO	p53	OFF/Some
+41	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1	p38 KO	p70S6K	OFF/Some
+42	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1	p38 KO	RPS6	Some
+43	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1	p38 KO	ERK1_2	OFF/Some
+44	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1	p38 KO	CyclinB1	OFF
+45	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1	p38 KO	p53	OFF/Some
+46	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1	p38 KO	ERBB1	OFF
+47	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=0		cRAF	OFF
+48	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=0		ERK1_2	ON
+49	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=0		p70S6K	OFF/Some
+50	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=0		TSC2	OFF
+51	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=0		GSKa_b	OFF/Some
+52	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=0		p53	OFF/Some
+53	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1		ERBB1	OFF
+54	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1		p70S6K	OFF/Some
+55	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1		ERK1_2	OFF/Some
+56	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1		ERBB2	OFF
+57	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1	ERBB1 CA,PTEN CA	p38	OFF/Some
+58	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	GSKa_b CA,cJUN KO	RB	Some/ON
+59	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	GSKa_b CA,cJUN KO	RPS6	OFF/Some
+60	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0	AKT CA,ERBB3 CA	RPS6	Some/ON
+61	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1	PTEN KO	GSKa_b	Some
+62	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=1	ERK1_2 CA	p53	OFF/Some
+63	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	ERK1_2 KO	p70S6K	OFF/Some
+64	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	ERK1_2 KO	TSC2	OFF/Some
+65	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	ERK1_2 KO	ERBB1	OFF
+66	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1	ERBB2 CA,PRAS CA,p70S6K CA	cJUN	Some
+67	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1	GSKa_b KO,p53 KO	cRAF	OFF
+68	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1	GSKa_b KO,p53 KO	ERBB1	OFF
+69	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=1	ERBB3 CA	CyclinD1	Some/ON
+70	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=1	ERBB3 CA	ERK1_2	OFF/Some
+71	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1	RPS6 KO	p70S6K	OFF/Some
+72	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=0	ERBB2 CA	cRAF	OFF
+73	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1		cJUN	OFF/Some
+74	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1		ERBB3	OFF
+75	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1		p38	OFF/Some
+76	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1		PRAS	Some
+77	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1		CyclinB1	OFF
+78	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1		FOXO1_3a	Some
+79	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1		ERBB3	OFF
+80	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1		PTEN	OFF/Some
+81	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1		TSC2	OFF/Some
+82	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1		ERBB1	OFF
+83	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	ERBB1 KO,TSC2 KO	cJUN	OFF/Some
+84	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=0		cRAF	OFF
+85	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=0		PTEN	OFF/Some
+86	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=0		ERK1_2	OFF/Some
+87	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1	RB CA	PRAS	Some
+88	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0		cRAF	OFF
+89	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0		FOXO1_3a	Some
+90	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0		cJUN	OFF/Some
+91	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0		ERK1_2	OFF/Some
+92	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0		ERBB3	OFF
+93	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0		TSC2	OFF/Some
+94	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0		ERBB1	OFF
+95	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0		CyclinD1	Some/ON
+96	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0		GSKa_b	Some
+97	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0		RPS6	Some
+98	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=1	p70S6K KO	FOXO1_3a	Some
+99	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=0	ERBB2 KO,TSC2 KO	PTEN	OFF/Some
+100	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	cJUN KO	ERK1_2	Some
+101	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	cJUN KO	ERBB2	OFF/Some
+102	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	cJUN KO	p70S6K	OFF/Some
+103	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	cJUN KO	GSKa_b	Some
+104	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	cJUN KO	PRAS	Some
+105	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	cJUN KO	RPS6	OFF/Some
+106	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	cJUN KO	CyclinB1	OFF
+107	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=0	CyclinB1 CA	cRAF	OFF
+108	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=0	CyclinB1 CA	p53	ON
+109	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	ERBB3 CA	cRAF	OFF
+110	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	ERBB3 CA	RB	OFF/Some
+111	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	ERBB3 CA	GSKa_b	OFF/Some
+112	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=0	ERBB3 KO,RB CA	p70S6K	OFF/Some
+113	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=0	ERBB3 KO,RB CA	ERBB2	OFF
+114	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	RB KO	ERBB1	OFF
+115	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1	ERBB1 KO,p53 KO	p70S6K	OFF/Some
+116	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1	ERBB1 CA,RB KO	AKT	OFF/Some
+117	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1	ERBB1 CA,RB KO	p53	OFF/Some
+118	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=0	ERBB1 CA	cJUN	Some
+119	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=0	ERBB1 CA	p53	OFF/Some
+120	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1	ERK1_2 KO	ERBB2	OFF
+121	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=0		p70S6K	OFF/Some
+122	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=0		cJUN	OFF/Some
+123	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1	AKT CA,cJUN KO	RPS6	Some/ON
+124	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=1	ERBB3 CA,ERK1_2 KO,RB KO,cRAF KO	PTEN	Some/ON
+125	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=1	ERBB3 CA,ERK1_2 KO,RB KO,cRAF KO	cJUN	OFF/Some
+126	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1	ERK1_2 CA,FOXO1_3a KO,RPS6 KO,cRAF KO	PTEN	OFF/Some
+127	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1	RB KO,p38 CA	ERBB2	OFF
+128	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1	RB KO,p38 CA	ERBB1	OFF
+129	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=0	ERBB1 CA,RPS6 CA	RB	OFF/Some
+130	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=0	ERBB1 CA,RPS6 CA	p53	OFF/Some
+131	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=0	GSKa_b CA	p38	Some
+132	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1	ERBB3 KO	PRAS	Some
+133	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0	AKT KO	p53	OFF/Some
+134	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=0	PRAS CA	ERBB2	OFF
+135	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	AKT CA,ERK1_2 CA,RB CA	ERBB2	Some
+136	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=0	cRAF CA	TSC2	OFF
+137	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1	ERBB1 CA,cJUN CA	CyclinB1	OFF
+138	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1	TSC2 KO	AKT	OFF/Some
+139	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=1	p38 CA	FOXO1_3a	Some
+140	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=0	ERBB1 CA,cRAF CA	GSKa_b	OFF/Some
+141	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=0	ERBB1 CA,cRAF CA	CyclinB1	OFF
+142	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=0	CyclinD1 KO,ERBB3 KO	CyclinB1	OFF
+143	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=0	CyclinB1 CA,ERK1_2 CA,p53 KO	cRAF	OFF
+144	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=0	CyclinB1 CA,ERK1_2 CA,p53 KO	cJUN	Some
+145	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0	RB KO	AKT	OFF/Some
+146	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0	RB KO	ERBB3	OFF
+147	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0	RB KO	ERBB1	OFF
+148	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	p70S6K KO	cRAF	OFF
+149	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	p70S6K KO	p53	OFF/Some
+150	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	CyclinB1 KO,RB CA	GSKa_b	ON
+151	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=0	PRAS CA,p70S6K KO	AKT	OFF/Some
+152	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0	p53 KO	PRAS	Some
+153	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0	p53 KO	TSC2	Some
+154	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1	p38 CA,p70S6K CA	RB	ON
+155	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1	p38 CA,p70S6K CA	CyclinB1	OFF
+156	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1	p38 CA,p70S6K CA	ERBB2	OFF
+157	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1	cRAF CA	PTEN	Some
+158	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1	ERBB2 KO,cJUN CA	PTEN	OFF/Some
+159	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0	CyclinD1 KO,TSC2 CA	p53	Some
+160	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=0	ERBB2 KO	TSC2	OFF
+161	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=0	cJUN KO	GSKa_b	Some
+162	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=0	cJUN KO	ERK1_2	OFF/Some
+163	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1	CyclinB1 KO	FOXO1_3a	Some
+164	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1	CyclinB1 KO	p70S6K	OFF/Some
+165	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0	AKT KO	GSKa_b	Some
+166	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0	AKT KO	ERBB3	OFF
+167	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	ERBB1 CA	cJUN	Some
+168	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1	ERBB1 CA,p38 CA	PRAS	OFF
+169	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=0	CyclinB1 KO	p38	OFF/Some
+170	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=1	RPS6 KO,p70S6K KO	CyclinD1	Some/ON
+171	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=1	RPS6 KO,p70S6K KO	PTEN	Some
+172	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0	AKT CA	cRAF	OFF
+173	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0	AKT CA	PRAS	OFF
+174	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	FOXO1_3a CA	ERBB3	OFF
+175	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1	RB KO,RPS6 CA	cRAF	OFF
+176	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1	RB KO,RPS6 CA	CyclinB1	OFF
+177	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1	RB KO,RPS6 CA	ERK1_2	OFF/Some
+178	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=0	ERBB2 CA,cJUN CA	cRAF	OFF
+179	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1	CyclinD1 KO	cJUN	OFF/Some
+180	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	PTEN CA	AKT	OFF
+181	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1	CyclinB1 CA	AKT	ON
+182	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1	CyclinB1 CA	ERBB2	OFF
+183	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1	FOXO1_3a CA	CyclinD1	Some/ON
+184	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=0	ERBB3 KO,TSC2 CA	AKT	OFF/Some
+185	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1	RPS6 CA,p53 CA	PTEN	OFF
+186	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1	RPS6 CA,p53 CA	TSC2	OFF
+187	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=1	RPS6 CA,p53 CA	p38	Some
+188	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=0	cJUN KO	FOXO1_3a	Some
+189	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=1	ERBB2 CA,RB CA	PTEN	OFF
+190	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=1	CyclinD1 CA	ERBB1	OFF
+191	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=1	cRAF KO	AKT	OFF/Some
+192	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	CyclinB1 CA,ERBB3 KO	cJUN	OFF
+193	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=0	CyclinD1 CA,ERBB3 KO,PRAS KO,p70S6K KO	TSC2	OFF/Some
+194	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1	cJUN CA,p70S6K CA	FOXO1_3a	Some
+195	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=1	cJUN CA,p70S6K CA	ERBB3	OFF
+196	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=1	ERBB2 CA,PTEN KO,p53 CA	cRAF	OFF
+197	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=0		TSC2	OFF/Some
+198	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	AKT KO,GSKa_b CA,PRAS KO	cJUN	OFF
+199	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	AKT KO,GSKa_b CA,PRAS KO	p38	Some
+200	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=1	CyclinB1 KO,FOXO1_3a CA,PRAS CA	RB	OFF/Some
+201	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0	cJUN KO	RB	Some
+202	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=0	GSKa_b CA,PTEN KO	ERBB2	ON
+203	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=1	ERBB3 CA	p70S6K	OFF/Some
+204	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=1	ERBB3 CA	PTEN	Some/ON
+205	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=1	ERBB3 CA	GSKa_b	OFF/Some
+206	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=1	ERBB3 CA	p53	OFF/Some
+207	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0	RB CA	CyclinD1	Some/ON
+208	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0	RB CA	p53	ON
+209	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0	RB CA	cRAF	OFF
+210	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	CyclinD1 KO,GSKa_b CA	PRAS	Some
+211	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=0	CyclinD1 KO,GSKa_b CA	p53	Some/ON
+212	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=0	PTEN KO,RPS6 KO,p38 CA	GSKa_b	ON
+213	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=0	cJUN CA,cRAF KO	ERBB1	OFF
+214	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=1	CyclinB1 CA,RB CA	p70S6K	ON
+215	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=0	PTEN CA,p38 KO	p70S6K	OFF/Some
+216	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=0	PTEN CA,p38 KO	RPS6	Some
+217	1.0	erlotinib=1,pertuzumab=1,stimulus=0,trastuzumab=1	p38 KO	TSC2	OFF/Some
+218	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1	cRAF CA	FOXO1_3a	Some
+219	1.0	erlotinib=1,pertuzumab=0,stimulus=1,trastuzumab=1	cRAF CA	p53	Some
+220	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=1	RPS6 CA,p38 KO	PTEN	OFF/Some
+221	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=1	FOXO1_3a CA	p53	OFF/Some
+222	1.0	erlotinib=0,pertuzumab=1,stimulus=1,trastuzumab=0	AKT KO,ERBB3 CA	RPS6	Some
+223	1.0	erlotinib=0,pertuzumab=1,stimulus=0,trastuzumab=0	ERBB2 CA,GSKa_b KO	FOXO1_3a	Some
+224	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1	ERBB2 KO,p38 CA,p70S6K KO	RB	ON
+225	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0	RPS6 CA	GSKa_b	Some
+226	1.0	erlotinib=0,pertuzumab=0,stimulus=0,trastuzumab=1	AKT KO,ERBB1 KO,PTEN CA	TSC2	OFF/Some
+227	1.0	erlotinib=0,pertuzumab=0,stimulus=1,trastuzumab=1	cRAF KO	ERBB3	ON
+228	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0	CyclinB1 CA,CyclinD1 KO,ERBB1 KO,ERBB3 CA	TSC2	OFF
+229	1.0	erlotinib=1,pertuzumab=1,stimulus=1,trastuzumab=0	CyclinB1 CA,CyclinD1 KO,ERBB1 KO,ERBB3 CA	ERK1_2	OFF/Some
+230	1.0	erlotinib=1,pertuzumab=0,stimulus=0,trastuzumab=1	GSKa_b KO	AKT	OFF/Some

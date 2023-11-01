@@ -1,0 +1,161 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=0	ERBB1 CA	MEK1_2	ON
+2	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=0		AKT	ON
+3	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=0		p70S6K	ON
+4	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=0		PLCg	Some
+5	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=1	ERBB3 CA	ERBB1	OFF
+6	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=0	ERBB2 KO,ERBB3 CA	ERK1_2	ON
+7	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=0	ERBB2 KO,ERBB3 CA	ERBB1	OFF
+8	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=1	p70S6K CA	MEK1_2	Some
+9	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=1		AKT	ON
+10	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1		PLCg	Some
+11	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1		ERBB2	OFF
+12	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=0		ERK1_2	Some/ON
+13	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0	ERBB1 CA,ERBB2 CA	PKCa	ON
+14	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=0	ERBB1 CA	PKCa	ON
+15	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=0	ERBB1 CA	ERK1_2	ON
+16	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=0	ERBB1 CA	mTOR	ON
+17	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=0	ERBB2 KO,PDK1 KO	ERBB1	OFF
+18	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=1	ERBB3 CA,PDK1 KO	p70S6K	ON
+19	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=1	ERBB3 CA,PDK1 KO	ERBB1	ON
+20	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=0	PDK1 CA,PKCa CA	mTOR	ON
+21	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=0	PDK1 CA,PKCa CA	ERBB2	ON
+22	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=1	PKCa KO	ERBB2	OFF
+23	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=0	ERBB2 KO	mTOR	ON
+24	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=0	ERBB3 CA	PKCa	ON
+25	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=0	ERBB3 CA	PLCg	ON
+26	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=1	ERK1_2 KO	AKT	ON
+27	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=1	ERK1_2 KO	p70S6K	ON
+28	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=1	ERBB3 CA,mTOR CA	PKCa	ON
+29	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=1		p70S6K	ON
+30	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=1		mTOR	ON
+31	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=1	ERBB1 CA	ERK1_2	ON
+32	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1	AKT CA	ERBB2	OFF
+33	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=1		mTOR	ON
+34	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=1		ERBB1	OFF
+35	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=0	mTOR KO	PLCg	ON
+36	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=0	mTOR KO	ERBB3	ON
+37	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=0	mTOR KO	ERBB2	ON
+38	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=0		AKT	ON
+39	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=0		ERBB2	OFF
+40	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=0		ERBB1	OFF
+41	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=1	AKT CA,ERBB1 CA,ERBB3 KO	MEK1_2	ON
+42	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0	ERBB2 CA,MEK1_2 KO,PLCg CA	mTOR	ON
+43	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=0		PLCg	Some
+44	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=0		mTOR	ON
+45	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0		ERBB2	OFF
+46	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0		PLCg	Some
+47	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0		PKCa	Some
+48	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=1	ERBB1 KO,ERK1_2 KO,MEK1_2 CA,p70S6K KO	PDK1	Some
+49	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=1	ERBB1 KO,ERK1_2 KO,MEK1_2 CA,p70S6K KO	ERBB3	OFF/Some
+50	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=0	ERBB3 KO	ERK1_2	Some/ON
+51	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1	ERBB2 KO,ERBB3 KO	AKT	ON
+52	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1	ERBB2 KO,ERBB3 KO	ERBB1	ON
+53	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=1	ERBB3 CA	PDK1	ON
+54	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=1	ERBB3 CA	MEK1_2	ON
+55	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=1	ERBB3 CA	PLCg	ON
+56	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0	ERBB1 CA	PDK1	ON
+57	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=0	PLCg KO	mTOR	ON
+58	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1	ERBB1 CA	MEK1_2	ON
+59	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1	ERBB1 CA	ERK1_2	ON
+60	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0	ERBB2 KO	mTOR	Some/ON
+61	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=0		MEK1_2	Some
+62	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=0		mTOR	ON
+63	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=0	ERBB3 KO,p70S6K KO	mTOR	Some
+64	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1	PKCa KO	PDK1	ON
+65	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1	PKCa KO	p70S6K	ON
+66	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1	PKCa KO	mTOR	ON
+67	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1	ERBB2 CA	MEK1_2	ON
+68	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1	AKT KO,ERBB1 CA,MEK1_2 KO,PKCa CA,PLCg CA	ERK1_2	Some
+69	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=0	PKCa KO	p70S6K	ON
+70	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=1	MEK1_2 CA	ERBB1	OFF
+71	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1		AKT	ON
+72	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1		MEK1_2	ON
+73	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1		ERK1_2	ON
+74	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=0	ERBB1 KO,PDK1 KO,mTOR KO	PKCa	Some
+75	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=0	PLCg KO	AKT	ON
+76	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=1	mTOR KO,p70S6K CA	ERBB3	Some
+77	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=1	ERBB2 CA	ERBB3	ON
+78	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=1	ERBB3 KO,PLCg CA,mTOR KO,p70S6K KO	MEK1_2	Some
+79	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=1	ERBB3 KO,PLCg CA,mTOR KO,p70S6K KO	ERBB1	OFF
+80	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=1		MEK1_2	Some
+81	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=1		ERBB3	OFF
+82	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=1	mTOR CA	AKT	ON
+83	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=1	mTOR CA	PKCa	ON
+84	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=1	mTOR CA	PLCg	Some
+85	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=1		ERBB2	OFF
+86	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=1		MEK1_2	Some
+87	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=1		PKCa	ON
+88	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=1		PLCg	Some
+89	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=0	ERK1_2 CA,MEK1_2 KO,PDK1 KO	ERBB2	OFF
+90	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=0		mTOR	Some
+91	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=0		PLCg	OFF/Some
+92	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=0		ERBB2	OFF/Some
+93	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=1		MEK1_2	Some
+94	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0	AKT CA,MEK1_2 KO,mTOR CA	PDK1	Some
+95	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0	AKT CA,MEK1_2 KO,mTOR CA	ERBB1	OFF
+96	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=0	ERK1_2 KO	ERBB3	OFF
+97	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=0		ERBB2	OFF
+98	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=0		MEK1_2	Some
+99	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=0		PLCg	Some
+100	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=0		mTOR	ON
+101	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=1	ERBB3 KO	PLCg	Some
+102	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=1	ERBB3 KO	ERK1_2	Some
+103	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1	ERBB3 CA,MEK1_2 CA	mTOR	ON
+104	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=1	ERBB1 KO,ERBB3 CA,MEK1_2 KO,p70S6K KO	PLCg	ON
+105	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=0	AKT CA	PDK1	OFF/Some
+106	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=0	ERBB1 KO	mTOR	Some
+107	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1	ERBB3 CA	ERK1_2	ON
+108	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=0		ERK1_2	ON
+109	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=0,trastuzumab=0	ERBB2 KO,PKCa KO	AKT	ON
+110	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=1	AKT KO,mTOR KO	PDK1	OFF/Some
+111	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=1	AKT KO,mTOR KO	PLCg	Some
+112	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=1		ERBB1	OFF
+113	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=0	ERBB3 CA	ERK1_2	ON
+114	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=0	ERBB3 CA	mTOR	ON
+115	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=0	PLCg KO	ERK1_2	Some/ON
+116	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=0	PLCg KO	mTOR	ON
+117	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0	MEK1_2 KO	PLCg	Some
+118	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0		PLCg	Some
+119	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=0	PDK1 KO	p70S6K	ON
+120	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=1		ERK1_2	Some/ON
+121	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=1		ERBB3	OFF
+122	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0	ERK1_2 CA	mTOR	ON
+123	1.0	EGF=1,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0	ERK1_2 CA	ERBB1	OFF
+124	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=1	mTOR KO	PLCg	Some
+125	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=0		ERK1_2	Some
+126	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=0	AKT KO,PKCa KO	ERBB2	OFF
+127	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1	p70S6K KO	mTOR	Some
+128	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1	p70S6K KO	ERK1_2	Some/ON
+129	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1	p70S6K KO	ERBB2	OFF
+130	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1	ERBB2 CA	MEK1_2	ON
+131	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=1	ERBB1 KO,ERBB2 CA,ERK1_2 KO	PDK1	ON
+132	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=0	AKT KO,PKCa KO	ERBB3	OFF
+133	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=0		PDK1	ON
+134	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=0		p70S6K	ON
+135	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=0		ERBB3	ON
+136	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=0		ERBB1	ON
+137	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=0	mTOR CA,p70S6K KO	MEK1_2	Some
+138	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=1	p70S6K CA	MEK1_2	Some
+139	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=0	p70S6K CA	PKCa	Some
+140	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=0	ERBB2 CA,ERBB3 KO	PKCa	ON
+141	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1		AKT	ON
+142	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=1		p70S6K	Some/ON
+143	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1	p70S6K CA	ERK1_2	ON
+144	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1	p70S6K CA	ERBB3	ON
+145	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=0	MEK1_2 KO	PKCa	Some
+146	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=1,trastuzumab=0	ERK1_2 KO	MEK1_2	Some
+147	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=0	PKCa CA	PLCg	Some
+148	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=0,trastuzumab=0	PKCa CA	ERBB2	OFF
+149	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=1	MEK1_2 CA	ERK1_2	ON
+150	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=1,trastuzumab=1	ERBB2 CA	PKCa	ON
+151	1.0	EGF=0,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=1	mTOR KO,p70S6K CA	PDK1	OFF/Some
+152	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=0	PDK1 CA	AKT	ON
+153	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=0	PDK1 CA	ERK1_2	ON
+154	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1	PKCa CA	PDK1	ON
+155	1.0	EGF=0,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1	PKCa CA	ERBB3	ON
+156	1.0	EGF=0,HRG=0,erlotinib=0,pertuzumab=1,trastuzumab=1	ERK1_2 CA	ERBB2	OFF
+157	1.0	EGF=0,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=0	ERBB1 KO,PDK1 CA	AKT	ON
+158	1.0	EGF=1,HRG=1,erlotinib=0,pertuzumab=0,trastuzumab=1	ERBB3 KO	PKCa	ON
+159	1.0	EGF=1,HRG=0,erlotinib=1,pertuzumab=1,trastuzumab=1	PLCg CA	MEK1_2	Some
+160	1.0	EGF=1,HRG=1,erlotinib=1,pertuzumab=0,trastuzumab=1	PLCg KO	ERBB3	OFF
