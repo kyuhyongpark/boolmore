@@ -5,7 +5,7 @@ import math
 from collections.abc import Iterable
 
 
-FixesType = tuple[tuple[str, int]]
+FixesType = tuple[tuple[str, int],...]
 ExpType = tuple[int, float, FixesType, str, str]
 PredictType = dict[FixesType, dict[str, float]]
 AgreeType = dict[str, dict[FixesType, tuple[int, float, str, float, float]]]
@@ -192,36 +192,49 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
     
     for observed_node in agreements:
         for fixes in agreements[observed_node]:
-            for source in default_sources:
-                assert tuple([source, 0]) in fixes or tuple([source, 1]) in fixes, "default sources must always be specified"
-            lst = agreements[observed_node][fixes]
+
+            fixes_dict = {key:value for (key, value) in fixes}
+
+            # for given fixes, find the subset fixes
+            subset_fixes_set = set()
+            for other_fixes in agreements[observed_node]:
+                other_fixes_dict = {key:value for (key, value) in other_fixes}
+
+                is_subset = True
+                for node in other_fixes_dict:
+                    # source nodes
+                    if node in default_sources:
+                        # source node same as default sources
+                        if other_fixes_dict[node] == default_sources[node]:
+                            continue
+                        # source node same as in given fixes
+                        elif other_fixes_dict[node] == fixes_dict[node]:
+                            continue
+                        else:
+                            is_subset = False
+                            break
+                    # non source nodes
+                    else:
+                        # the node is not in given fixes
+                        if node not in fixes_dict:
+                            is_subset = False
+                            break
+                        # the node is fixed to same value as in given fixes
+                        elif other_fixes_dict[node] == fixes_dict[node]:
+                            continue
+                        else:
+                            is_subset = False
+                            break
+
+                if is_subset:
+                    subset_fixes_set.add(other_fixes)
 
             current_score = 0.0
-            current_score += lst[MAX_SCORE]
-            model_max_score += lst[MAX_SCORE]
-
-            subsets = list(powerset(fixes))
-
-            subset_fixes_set = set()
-            for subset in subsets:
-                if len(default_sources) == 0:
-                    subset_fixes = subset
-                # if there are default values for sources, they should always be included
-                # in the fixes themselves and their subsets(subset_fixes)
-                else:
-                    for source in default_sources:
-                        if tuple([source, 0]) not in subset and tuple([source, 1]) not in subset:
-                            subset_fixes = list(subset)
-                            subset_fixes.append(tuple([source,default_sources[source]]))
-                            subset_fixes = tuple(sorted(subset_fixes, key= lambda x:x[0]))
-                        else:
-                            subset_fixes = subset
-
-                subset_fixes_set.add(subset_fixes) # type: ignore
+            current_score += agreements[observed_node][fixes][MAX_SCORE]
+            model_max_score += agreements[observed_node][fixes][MAX_SCORE]
 
             for subset_fixes in subset_fixes_set:
-                if subset_fixes in agreements[observed_node]:
-                    current_score *= agreements[observed_node][subset_fixes][AGREEMENT]
+                current_score *= agreements[observed_node][subset_fixes][AGREEMENT]
 
             score += current_score
                 

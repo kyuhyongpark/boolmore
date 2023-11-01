@@ -9,7 +9,16 @@ def comment_removal(line:str) -> bool:
 def import_exps(location:str) -> tuple[list[ExpType], list[FixesType]]:
     """
     Reads a tsv file and returns experiments and interventions.
+    
+    Note:
+    All source nodes that have a default source value specified in `default_sources`
+    should be specified for every experiment.
 
+    By default, `default_sources` has all source nodes set to 0,
+    and hence all source nodes should be specified.
+    If `default_sources` is given manually,
+    source nodes that are not in the `default_sources` can be omitted in the experiements.
+    
     The tsv file should have 6 columns
     ID    - e.g. 1
     SCORE - e.g. 1.0
