@@ -20,10 +20,17 @@ fp.write("model_name,N,repeat,start_train,final_train,valid_ids,start_valid,fina
 fp.write(",".join([str(x) for x in range(1,101)]) + "\n")
 fp.close()
 
-for model_file in sorted(os.listdir(DIRECTORY), reverse=True):
+start_from = False
+for model_file in os.listdir(DIRECTORY):
     BASE = model_file
 
     model_name = BASE.split("/")[-1][:-4]
+
+    if model_name == "HGF Signaling in Keratinocytes":
+        start_from = True
+
+    if not start_from:
+        continue
 
     base_primes = sm.format.import_primes(DIRECTORY+"/"+BASE)
 
@@ -60,11 +67,14 @@ for model_file in sorted(os.listdir(DIRECTORY), reverse=True):
         print("valid ids:", valid_ids)
         print("start validation score:", start_valid)
 
-        # set a trap and redirect stdout
-        trap = io.StringIO()
+        # # set a trap and redirect stdout
+        # trap = io.StringIO()
 
-        with redirect_stdout(trap):
-            final, log = ga_main(start, train, fixes_list, export_name="bench_"+model_name+"_"+str(i))
+        # with redirect_stdout(trap):
+        #     final, log = ga_main(start, train, fixes_list, export_name="bench_"+model_name+"_"+str(i))
+
+        final, log = ga_main(start, train, fixes_list, export_name="bench_"+model_name+"_"+str(i))
+
 
         # # getting redirected output
         # captured_stdout = trap.getvalue()
@@ -82,7 +92,7 @@ for model_file in sorted(os.listdir(DIRECTORY), reverse=True):
 
         valid_ids_str = "\"" + ",".join([str(x) for x in valid_ids]) + "\""
         lst = [model_name, N, i, start_train, final_train, valid_ids_str, start_valid, final_valid]
-        lst.append([x[1] for x in log])
+        lst.extend([x[1] for x in log])
         with open(FILE, mode="a") as fp:
             fp.write(",".join([str(x) for x in lst]) + "\n")
     

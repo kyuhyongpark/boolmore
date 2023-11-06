@@ -1,0 +1,31 @@
+# id: 19413
+# generation: 36
+# extra edges: []
+# score: 192.0 / 192.0
+# following constraints: True
+# complexity: 40
+
+Boi* = Boi
+CK1a* = CK1a
+Ci_act* = !CK1a & !Pka & !Sgg | !Cos | !Slmb | !SuFu
+Ci_rep* = CK1a & Cos & Pka & Slmb & SuFu
+Cos* = !Smo | !Fu
+Dally* = Ttv
+Disp* = Disp
+Dlp* = Ttv
+Fu* = Smo
+Gprk2* = Gprk2
+Hh* = Dally & Lipophorin & Rasp
+Lipophorin* = Lipophorin
+Pka* = Pka
+Ptc* = !Hh
+Rasp* = Rasp
+Sgg* = Sgg
+Shf* = Shf
+Slmb* = Slmb
+Smo* = Gprk2 & !Ptc | Gprk2 & !Tow
+SuFu* = !Fu
+Targets* = Ci_act & !Ci_rep
+Tow* = Tow
+Ttv* = Ttv
+iHog* = iHog

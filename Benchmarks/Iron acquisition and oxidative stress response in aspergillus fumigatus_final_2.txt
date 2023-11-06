@@ -1,0 +1,29 @@
+# id: 73629
+# generation: 52
+# extra edges: []
+# score: 170.0 / 176.0
+# following constraints: True
+# complexity: 31
+
+Cat1_2* = !HapX | Yap1
+CccA* = !HapX
+EstB* = !SreA
+FCminusFe* = SidA
+FCplusFe* = FCminusFe
+HapX* = !LIP
+ICP* = !HapX
+Iron* = Iron
+LIP* = EstB & Iron & RIA | EstB & TAFC
+MirB* = !SreA
+RIA* = !SreA
+ROS* = !Cat1_2 & ROS | LIP | !SOD2_3 & Superoxide
+SOD2_3* = Yap1
+SidA* = HapX
+SreA* = LIP
+Superoxide* = Superoxide
+TAFC* = SidA
+ThP* = Yap1
+VAC* = CccA
+Yap1* = ROS
+hapX* = !SreA
+sreA* = !HapX

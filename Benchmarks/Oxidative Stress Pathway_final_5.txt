@@ -1,0 +1,26 @@
+# id: 212919
+# generation: 21
+# extra edges: []
+# score: 152.0 / 152.0
+# following constraints: True
+# complexity: 33
+
+ARE* = !Bach1 & !GSK3b & Nrf2
+ATM* = ROS
+Akt* = PIP3
+Bach1* = !ROS
+Bad* = !Akt
+Bcl2* = !Bad & !p53
+GSK3b* = !Akt
+Keap1* = !Bach1 & Nrf2 | Keap1 & Nrf2
+Mdm2* = !ATM & Akt | !ATM & p53
+Nrf2* = Akt & PKC | !Keap1
+PI3K* = Ras
+PIP2* = PI3K
+PIP3* = PIP2 & !PTEN
+PKC* = ROS
+PTEN* = !ROS
+ROS* = !ARE & Stress
+Ras* = ROS
+Stress* = Stress
+p53* = ATM & !Mdm2

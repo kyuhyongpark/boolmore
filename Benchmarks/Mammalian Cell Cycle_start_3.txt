@@ -1,0 +1,27 @@
+# id: 155981
+# generation: 1
+# extra edges: []
+# score: 69.5 / 160.0
+# following constraints: True
+# complexity: 52
+
+Akt1* = ErbB1 | ErbB1_2 & ErbB2_3 | IGF1R
+CDK2* = CycE1 & !p21 | CycE1 & !p27 | !p21 & !p27
+CDK4* = CycD1 & !p21 | !p27
+CDK6* = CycD1
+CycD1* = Akt1 & MEK1 & cMYC | ERa & MEK1
+CycE1* = cMYC
+EGF* = EGF
+ERa* = MEK1
+ErbB1* = EGF
+ErbB1_2* = ErbB1 | ErbB2
+ErbB1_3* = ErbB1 & ErbB3
+ErbB2* = EGF
+ErbB2_3* = ErbB3
+ErbB3* = EGF
+IGF1R* = Akt1 | ERa & !ErbB2_3
+MEK1* = ErbB1 | ErbB1_2 | ErbB1_3 | ErbB2_3
+cMYC* = MEK1 | ERa | Akt1
+p21* = !Akt1 & !CDK4 & ERa | !Akt1 & ERa & !cMYC
+p27* = !Akt1 & ERa | !CDK2 | !CDK4 | !cMYC
+pRB* = CDK6

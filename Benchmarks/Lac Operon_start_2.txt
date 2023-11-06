@@ -1,0 +1,20 @@
+# id: 86801
+# generation: 1
+# extra edges: []
+# score: 19.0 / 104.0
+# following constraints: True
+# complexity: 24
+
+A* = L
+Am* = L
+B* = M
+C* = !Ge
+Ge* = Ge
+L* = !Ge & P | Le & P
+Le* = Le
+Lem* = Lem
+Lm* = !Ge | P
+M* = C | !R & !Rm
+P* = M
+R* = !A
+Rm* = !A & !Am | !A & R | !Am & R
