@@ -1,0 +1,151 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Dkk1 CA	Bmp2	OFF
+2	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Dkk1 CA	Fgf8	OFF
+3	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Dkk1 CA	exogen_CanWnt_II	OFF
+4	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Tbx5 CA	exogen_BMP2_II	ON
+5	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Tbx5 CA	exogen_CanWnt_II	ON
+6	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Tbx5 CA	canWnt	ON
+7	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Mesp1 CA,exogen_BMP2_II KO	Bmp2	OFF
+8	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Mesp1 CA,exogen_BMP2_II KO	Foxc1_2	OFF
+9	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Mesp1 CA,exogen_BMP2_II KO	Tbx1	OFF
+10	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Mesp1 CA,exogen_BMP2_II KO	canWnt	OFF
+11	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Foxc1_2 KO,Tbx5 KO	Isl1	OFF
+12	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Tbx5 CA	Isl1	OFF
+13	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Dkk1 CA	canWnt	ON
+14	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	exogen_BMP2_II CA,exogen_CanWnt_II KO	Tbx5	Some
+15	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	exogen_BMP2_II CA,exogen_CanWnt_II KO	Nkx2_5	Some
+16	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1		Fgf8	ON
+17	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1		Foxc1_2	ON
+18	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1		Bmp2	OFF
+19	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1		Tbx1	ON
+20	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1		Dkk1	OFF
+21	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1		canWnt	ON
+22	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1		exogen_CanWnt_II	ON
+23	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1		Isl1	ON
+24	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1		Tbx5	OFF
+25	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1		Mesp1	OFF
+26	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1		GATAs	ON
+27	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1		Nkx2_5	ON
+28	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Isl1 CA,Tbx1 KO	exogen_BMP2_II	ON
+29	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Isl1 CA,Tbx1 KO	Fgf8	ON
+30	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1		Fgf8	OFF
+31	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1		Foxc1_2	ON
+32	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1		Bmp2	OFF
+33	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1		Tbx1	ON
+34	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1		Dkk1	ON
+35	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1		exogen_CanWnt_II	ON
+36	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1		exogen_BMP2_II	OFF
+37	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1		GATAs	ON
+38	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0		Fgf8	OFF
+39	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0		Foxc1_2	OFF
+40	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0		Bmp2	ON
+41	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0		canWnt	OFF
+42	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0		exogen_BMP2_II	ON
+43	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0		GATAs	Some
+44	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0		Nkx2_5	Some
+45	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	exogen_BMP2_II KO	exogen_CanWnt_II	ON
+46	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	exogen_BMP2_II KO	Tbx1	ON
+47	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	canWnt KO,exogen_CanWnt_II KO	Isl1	OFF
+48	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	canWnt KO,exogen_CanWnt_II KO	Dkk1	OFF
+49	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0		Fgf8	OFF
+50	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0		Foxc1_2	OFF
+51	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0		Bmp2	OFF
+52	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0		Tbx1	OFF
+53	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0		Dkk1	OFF
+54	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0		exogen_CanWnt_II	OFF
+55	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0		exogen_BMP2_II	OFF
+56	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0		Tbx5	Some
+57	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0		GATAs	Some
+58	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0		Nkx2_5	Some
+59	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Bmp2 KO	exogen_BMP2_II	OFF
+60	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Bmp2 KO	GATAs	ON
+61	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Isl1 KO,Mesp1 CA	Dkk1	ON
+62	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Nkx2_5 KO	Isl1	ON
+63	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Nkx2_5 KO	Tbx5	OFF
+64	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Nkx2_5 KO	exogen_CanWnt_II	ON
+65	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	GATAs KO,canWnt KO	Nkx2_5	Some
+66	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Fgf8 CA	exogen_BMP2_II	OFF
+67	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Fgf8 CA	Isl1	ON
+68	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Fgf8 CA	exogen_CanWnt_II	OFF
+69	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Tbx5 CA	canWnt	OFF
+70	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	GATAs KO	Foxc1_2	OFF
+71	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	GATAs KO	Isl1	OFF
+72	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	GATAs KO	Mesp1	OFF
+73	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	GATAs KO	Dkk1	OFF
+74	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	canWnt CA	Isl1	ON
+75	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	canWnt CA	Bmp2	OFF
+76	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	canWnt CA	Dkk1	ON
+77	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	exogen_CanWnt_II KO	Fgf8	OFF
+78	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	exogen_CanWnt_II KO	Foxc1_2	OFF
+79	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	exogen_CanWnt_II KO	Tbx5	Some
+80	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Foxc1_2 CA	Isl1	ON
+81	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	GATAs CA	Mesp1	OFF
+82	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	GATAs CA	Dkk1	OFF
+83	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Nkx2_5 KO,Tbx1 KO	Tbx5	Some
+84	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Nkx2_5 KO,Tbx1 KO	Foxc1_2	OFF
+85	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Mesp1 KO,exogen_CanWnt_II KO	GATAs	Some
+86	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Fgf8 KO,Isl1 KO	Bmp2	OFF
+87	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Foxc1_2 CA	exogen_BMP2_II	OFF
+88	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Foxc1_2 CA	Tbx5	OFF
+89	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Foxc1_2 CA	exogen_CanWnt_II	OFF
+90	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Tbx5 KO	Fgf8	OFF
+91	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Tbx5 KO	Dkk1	ON
+92	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Dkk1 KO	Fgf8	ON
+93	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Dkk1 KO	Tbx5	OFF
+94	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	canWnt CA	Isl1	ON
+95	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	canWnt CA	Fgf8	OFF
+96	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	canWnt CA	exogen_CanWnt_II	OFF
+97	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	canWnt CA	GATAs	ON
+98	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Nkx2_5 KO,exogen_BMP2_II CA	Tbx5	Some
+99	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Nkx2_5 KO,exogen_BMP2_II CA	Tbx1	OFF
+100	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Isl1 KO	Tbx5	Some
+101	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Foxc1_2 CA,canWnt CA	Mesp1	ON
+102	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	GATAs CA,Isl1 KO	Bmp2	OFF
+103	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Tbx1 CA	Isl1	ON
+104	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Bmp2 CA,Mesp1 CA,Tbx5 CA	exogen_CanWnt_II	ON
+105	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Mesp1 CA,canWnt CA	exogen_BMP2_II	ON
+106	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Tbx1 KO,canWnt KO	Isl1	OFF
+107	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Tbx1 KO,canWnt KO	Mesp1	OFF
+108	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Tbx1 KO,canWnt KO	exogen_CanWnt_II	ON
+109	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Dkk1 CA,Foxc1_2 CA	Isl1	ON
+110	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Dkk1 CA,Foxc1_2 CA	Nkx2_5	ON
+111	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Dkk1 CA,Foxc1_2 CA	canWnt	ON
+112	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Tbx1 KO	Mesp1	OFF
+113	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	exogen_CanWnt_II CA	Tbx1	ON
+114	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	exogen_CanWnt_II CA	GATAs	ON
+115	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Dkk1 CA	Isl1	OFF
+116	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Dkk1 CA	Tbx1	OFF
+117	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Fgf8 KO	Isl1	ON
+118	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Fgf8 KO	Tbx5	OFF
+119	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Fgf8 KO	GATAs	ON
+120	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Fgf8 KO	Nkx2_5	ON
+121	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Isl1 CA,exogen_CanWnt_II CA	canWnt	ON
+122	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Tbx1 KO	exogen_CanWnt_II	OFF
+123	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Tbx1 KO	GATAs	Some
+124	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Tbx1 KO	Dkk1	OFF
+125	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Mesp1 CA	Bmp2	OFF
+126	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Mesp1 CA	GATAs	ON
+127	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	Mesp1 CA	canWnt	OFF
+128	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	canWnt KO	Foxc1_2	OFF
+129	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	canWnt KO	Tbx1	OFF
+130	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Fgf8 CA,Tbx1 KO,exogen_CanWnt_II KO	Foxc1_2	OFF
+131	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Fgf8 CA,Tbx1 KO,exogen_CanWnt_II KO	Mesp1	OFF
+132	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Fgf8 KO	Mesp1	OFF
+133	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Bmp2 CA,Fgf8 KO	Tbx5	Some
+134	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Nkx2_5 CA	Tbx5	ON
+135	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Bmp2 CA,Foxc1_2 KO,canWnt KO	Mesp1	OFF
+136	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	exogen_BMP2_II KO	canWnt	OFF
+137	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	GATAs KO,Nkx2_5 KO	Dkk1	OFF
+138	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Dkk1 CA	GATAs	ON
+139	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Isl1 CA,exogen_CanWnt_II KO	exogen_BMP2_II	OFF
+140	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Isl1 CA,exogen_CanWnt_II KO	Tbx1	OFF
+141	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=1	Isl1 CA,exogen_CanWnt_II KO	GATAs	Some
+142	1.0	exogen_BMP2_I=0,exogen_CanWnt_I=0	GATAs CA,Isl1 KO,Tbx5 CA	Tbx1	OFF
+143	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	canWnt CA,exogen_BMP2_II CA	Isl1	OFF
+144	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Fgf8 CA,GATAs CA	Isl1	ON
+145	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	GATAs CA,exogen_BMP2_II KO	Foxc1_2	OFF
+146	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	Isl1 KO,exogen_CanWnt_II CA	exogen_BMP2_II	ON
+147	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=0	exogen_BMP2_II KO	Tbx5	Some
+148	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Mesp1 CA,exogen_BMP2_II CA	exogen_CanWnt_II	ON
+149	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Nkx2_5 CA	Fgf8	ON
+150	1.0	exogen_BMP2_I=1,exogen_CanWnt_I=1	Nkx2_5 KO	Tbx5	OFF
