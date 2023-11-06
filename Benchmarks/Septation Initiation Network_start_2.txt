@@ -1,0 +1,37 @@
+# id: 136001
+# generation: 1
+# extra edges: []
+# score: 162.0 / 240.0
+# following constraints: True
+# complexity: 35
+
+CK1* = 0
+Rga4* = !pom1
+SIP* = cdk_H
+byr4* = !cdc42 & !cdk_H & cdk_L
+byr4_cdc16* = byr4 & cdc16
+cdc11* = cdc16
+cdc14_sid1* = cdc7
+cdc16* = !fin1
+cdc42* = !Rga4 | scd1
+cdc7* = cdc11 & spg1
+cdk_H* = cdk_H
+cdk_L* = cdk_L
+dma1* = CK1 & sid4
+etd1* = 0
+fin1* = cdk_H
+flp1* = !cdk_H & !cdk_L
+gef1* = orb6
+nak1* = pmo25
+orb6* = nak1
+pak1* = cdc42
+plo1* = cdk_H | !dma1
+pmo25* = cdc14_sid1
+pom1* = pak1
+ppc89* = 1
+ras1* = 0
+scd1* = ras1
+sid2* = cdc7
+sid2_mob1* = cdc7
+sid4* = ppc89
+spg1* = cdc11 | etd1

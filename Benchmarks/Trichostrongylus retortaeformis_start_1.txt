@@ -1,0 +1,33 @@
+# id: 11001
+# generation: 1
+# extra edges: []
+# score: 61.625 / 208.0
+# following constraints: True
+# complexity: 54
+
+AD* = AD | IS & !IgG | IS & !NE | !IgG & !NE
+BC* = T0
+DCI* = PIC
+DCII* = DCI
+EC* = AD & IS
+EL* = !EL2 | IS
+EL2* = IL13 | IL5
+IFNgI* = DCI & Th1I
+IL10I* = Th2I
+IL12II* = DCII | T0
+IL13* = EL & IS | EL2 & IS | Th2I
+IL4I* = IL4II
+IL4II* = DCII | EL2 | T0 | Th2II
+IL5* = Th2I | EL2
+IS* = IS
+IgA* = BC
+IgE* = BC & IL4II
+IgG* = BC
+NE* = AD & PIC | IFNgI | !IL10I | !IL4I
+PIC* = !IL10I & !IgA
+T0* = DCII
+TEL* = EL2
+Th1I* = Th1II
+Th1II* = T0
+Th2I* = Th2II
+Th2II* = DCII & T0 | !IL12II & T0

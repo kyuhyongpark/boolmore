@@ -20,16 +20,10 @@ fp.write("model_name,N,repeat,start_train,final_train,valid_ids,start_valid,fina
 fp.write(",".join([str(x) for x in range(1,101)]) + "\n")
 fp.close()
 
-for model_file in os.listdir(DIRECTORY):
+for model_file in sorted(os.listdir(DIRECTORY), reverse=True):
     BASE = model_file
 
     model_name = BASE.split("/")[-1][:-4]
-
-    if model_name == "Cortical Area Development":
-        continue
-
-    if model_name == "Cell Cycle Transcription by Coupled CDK and Network Oscillators":
-        continue
 
     base_primes = sm.format.import_primes(DIRECTORY+"/"+BASE)
 

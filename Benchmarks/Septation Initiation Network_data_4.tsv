@@ -1,0 +1,301 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	cdk_H=0,cdk_L=1	dma1 CA,pak1 KO	sid2	OFF
+2	1.0	cdk_H=0,cdk_L=1	dma1 CA,pak1 KO	SIP	OFF
+3	1.0	cdk_H=0,cdk_L=1	dma1 CA,pak1 KO	plo1	OFF
+4	1.0	cdk_H=0,cdk_L=1	dma1 CA,pak1 KO	flp1	OFF
+5	1.0	cdk_H=1,cdk_L=0	orb6 CA	sid2	ON
+6	1.0	cdk_H=1,cdk_L=0	orb6 CA	SIP	ON
+7	1.0	cdk_H=1,cdk_L=0	orb6 CA	plo1	ON
+8	1.0	cdk_H=1,cdk_L=0	orb6 CA	flp1	OFF
+9	1.0	cdk_H=1,cdk_L=0	cdc42 CA,orb6 CA,ppc89 KO	fin1	ON
+10	1.0	cdk_H=1,cdk_L=0	cdc42 CA,orb6 CA,ppc89 KO	flp1	OFF
+11	1.0	cdk_H=1,cdk_L=0	cdc42 CA,orb6 CA,ppc89 KO	sid2	Some
+12	1.0	cdk_H=1,cdk_L=0	cdc42 CA,orb6 CA,ppc89 KO	SIP	ON
+13	1.0	cdk_H=1,cdk_L=0	cdc42 CA,orb6 CA,ppc89 KO	plo1	ON
+14	1.0	cdk_H=1,cdk_L=0	byr4_cdc16 CA,cdc7 CA	cdc42	Some
+15	1.0	cdk_H=1,cdk_L=0	byr4_cdc16 CA,cdc7 CA	flp1	OFF
+16	1.0	cdk_H=1,cdk_L=0	byr4_cdc16 CA,cdc7 CA	orb6	ON
+17	1.0	cdk_H=1,cdk_L=0	byr4_cdc16 CA,cdc7 CA	sid2	ON
+18	1.0	cdk_H=1,cdk_L=0	byr4_cdc16 CA,cdc7 CA	SIP	ON
+19	1.0	cdk_H=1,cdk_L=0	byr4_cdc16 CA,cdc7 CA	plo1	ON
+20	1.0	cdk_H=1,cdk_L=1		pmo25	ON
+21	1.0	cdk_H=1,cdk_L=1		flp1	OFF
+22	1.0	cdk_H=1,cdk_L=1		spg1	ON
+23	1.0	cdk_H=1,cdk_L=1		orb6	ON
+24	1.0	cdk_H=1,cdk_L=1		sid2	ON
+25	1.0	cdk_H=1,cdk_L=1		SIP	ON
+26	1.0	cdk_H=1,cdk_L=1		nak1	ON
+27	1.0	cdk_H=1,cdk_L=1		plo1	ON
+28	1.0	cdk_H=0,cdk_L=0	gef1 CA	cdc16	ON
+29	1.0	cdk_H=0,cdk_L=0	gef1 CA	flp1	ON
+30	1.0	cdk_H=0,cdk_L=0	gef1 CA	sid2	ON
+31	1.0	cdk_H=0,cdk_L=0	gef1 CA	SIP	OFF
+32	1.0	cdk_H=0,cdk_L=0	gef1 CA	plo1	ON
+33	1.0	cdk_H=0,cdk_L=0	cdc42 CA,spg1 CA	sid2	ON
+34	1.0	cdk_H=0,cdk_L=0	cdc42 CA,spg1 CA	SIP	OFF
+35	1.0	cdk_H=0,cdk_L=0	cdc42 CA,spg1 CA	plo1	ON
+36	1.0	cdk_H=0,cdk_L=0	cdc42 CA,spg1 CA	flp1	ON
+37	1.0	cdk_H=1,cdk_L=0	cdc16 KO	cdc7	ON
+38	1.0	cdk_H=1,cdk_L=0	cdc16 KO	flp1	OFF
+39	1.0	cdk_H=1,cdk_L=0	cdc16 KO	sid2	ON
+40	1.0	cdk_H=1,cdk_L=0	cdc16 KO	SIP	ON
+41	1.0	cdk_H=1,cdk_L=0	cdc16 KO	plo1	ON
+42	1.0	cdk_H=1,cdk_L=0		flp1	OFF
+43	1.0	cdk_H=1,cdk_L=0		spg1	ON
+44	1.0	cdk_H=1,cdk_L=0		cdc11	ON
+45	1.0	cdk_H=1,cdk_L=0		sid2	ON
+46	1.0	cdk_H=1,cdk_L=0		SIP	ON
+47	1.0	cdk_H=1,cdk_L=0		plo1	ON
+48	1.0	cdk_H=1,cdk_L=0		sid2_mob1	ON
+49	1.0	cdk_H=0,cdk_L=1		pak1	Some
+50	1.0	cdk_H=0,cdk_L=1		pmo25	Some
+51	1.0	cdk_H=0,cdk_L=1		flp1	Some
+52	1.0	cdk_H=0,cdk_L=1		orb6	Some
+53	1.0	cdk_H=0,cdk_L=1		byr4	Some
+54	1.0	cdk_H=0,cdk_L=1		sid2	Some
+55	1.0	cdk_H=0,cdk_L=1		Rga4	Some
+56	1.0	cdk_H=0,cdk_L=1		SIP	OFF
+57	1.0	cdk_H=0,cdk_L=1		dma1	OFF
+58	1.0	cdk_H=0,cdk_L=1		plo1	ON
+59	1.0	cdk_H=0,cdk_L=1		byr4_cdc16	Some
+60	1.0	cdk_H=0,cdk_L=0	pom1 KO	flp1	ON
+61	1.0	cdk_H=0,cdk_L=0	pom1 KO	cdc7	ON
+62	1.0	cdk_H=0,cdk_L=0	pom1 KO	cdc11	ON
+63	1.0	cdk_H=0,cdk_L=0	pom1 KO	sid2	ON
+64	1.0	cdk_H=0,cdk_L=0	pom1 KO	SIP	OFF
+65	1.0	cdk_H=0,cdk_L=0	pom1 KO	dma1	OFF
+66	1.0	cdk_H=0,cdk_L=0	pom1 KO	plo1	ON
+67	1.0	cdk_H=0,cdk_L=0	pom1 KO	nak1	ON
+68	1.0	cdk_H=0,cdk_L=1	pom1 KO	flp1	OFF
+69	1.0	cdk_H=0,cdk_L=1	pom1 KO	sid2	OFF
+70	1.0	cdk_H=0,cdk_L=1	pom1 KO	SIP	OFF
+71	1.0	cdk_H=0,cdk_L=1	pom1 KO	plo1	ON
+72	1.0	cdk_H=0,cdk_L=1	pom1 KO	gef1	OFF
+73	1.0	cdk_H=1,cdk_L=1	cdc11 KO,pak1 CA	flp1	OFF
+74	1.0	cdk_H=1,cdk_L=1	cdc11 KO,pak1 CA	sid2	OFF
+75	1.0	cdk_H=1,cdk_L=1	cdc11 KO,pak1 CA	SIP	ON
+76	1.0	cdk_H=1,cdk_L=1	cdc11 KO,pak1 CA	scd1	OFF
+77	1.0	cdk_H=1,cdk_L=1	cdc11 KO,pak1 CA	plo1	ON
+78	1.0	cdk_H=1,cdk_L=1	cdc14_sid1 CA,cdc7 KO	sid2	OFF
+79	1.0	cdk_H=1,cdk_L=1	cdc14_sid1 CA,cdc7 KO	SIP	ON
+80	1.0	cdk_H=1,cdk_L=1	cdc14_sid1 CA,cdc7 KO	plo1	ON
+81	1.0	cdk_H=1,cdk_L=1	cdc14_sid1 CA,cdc7 KO	flp1	OFF
+82	1.0	cdk_H=0,cdk_L=1	pak1 CA	sid2	ON
+83	1.0	cdk_H=0,cdk_L=1	pak1 CA	SIP	OFF
+84	1.0	cdk_H=0,cdk_L=1	pak1 CA	plo1	ON
+85	1.0	cdk_H=0,cdk_L=1	pak1 CA	flp1	ON
+86	1.0	cdk_H=1,cdk_L=0	pmo25 CA	sid2	ON
+87	1.0	cdk_H=1,cdk_L=0	pmo25 CA	SIP	ON
+88	1.0	cdk_H=1,cdk_L=0	pmo25 CA	plo1	ON
+89	1.0	cdk_H=1,cdk_L=0	pmo25 CA	flp1	OFF
+90	1.0	cdk_H=1,cdk_L=0	dma1 CA,nak1 CA,pmo25 KO	flp1	OFF
+91	1.0	cdk_H=1,cdk_L=0	dma1 CA,nak1 CA,pmo25 KO	orb6	ON
+92	1.0	cdk_H=1,cdk_L=0	dma1 CA,nak1 CA,pmo25 KO	sid2	ON
+93	1.0	cdk_H=1,cdk_L=0	dma1 CA,nak1 CA,pmo25 KO	SIP	ON
+94	1.0	cdk_H=1,cdk_L=0	dma1 CA,nak1 CA,pmo25 KO	plo1	OFF
+95	1.0	cdk_H=1,cdk_L=0	etd1 CA	flp1	OFF
+96	1.0	cdk_H=1,cdk_L=0	etd1 CA	sid2	ON
+97	1.0	cdk_H=1,cdk_L=0	etd1 CA	SIP	ON
+98	1.0	cdk_H=1,cdk_L=0	etd1 CA	plo1	ON
+99	1.0	cdk_H=1,cdk_L=0	etd1 CA	cdc14_sid1	ON
+100	1.0	cdk_H=0,cdk_L=0	etd1 CA	sid2	ON
+101	1.0	cdk_H=0,cdk_L=0	etd1 CA	SIP	OFF
+102	1.0	cdk_H=0,cdk_L=0	etd1 CA	plo1	ON
+103	1.0	cdk_H=0,cdk_L=0	etd1 CA	flp1	ON
+104	1.0	cdk_H=0,cdk_L=0	nak1 KO	sid2	ON
+105	1.0	cdk_H=0,cdk_L=0	nak1 KO	SIP	OFF
+106	1.0	cdk_H=0,cdk_L=0	nak1 KO	plo1	ON
+107	1.0	cdk_H=0,cdk_L=0	nak1 KO	flp1	ON
+108	1.0	cdk_H=0,cdk_L=0		pak1	Some
+109	1.0	cdk_H=0,cdk_L=0		sid4	ON
+110	1.0	cdk_H=0,cdk_L=0		flp1	ON
+111	1.0	cdk_H=0,cdk_L=0		orb6	ON
+112	1.0	cdk_H=0,cdk_L=0		sid2	ON
+113	1.0	cdk_H=0,cdk_L=0		Rga4	Some
+114	1.0	cdk_H=0,cdk_L=0		SIP	OFF
+115	1.0	cdk_H=0,cdk_L=0		scd1	OFF
+116	1.0	cdk_H=0,cdk_L=0		plo1	ON
+117	1.0	cdk_H=0,cdk_L=0		nak1	ON
+118	1.0	cdk_H=0,cdk_L=0		gef1	ON
+119	1.0	cdk_H=0,cdk_L=0		cdc14_sid1	ON
+120	1.0	cdk_H=0,cdk_L=1	etd1 KO,sid4 KO	sid2	Some
+121	1.0	cdk_H=0,cdk_L=1	etd1 KO,sid4 KO	SIP	OFF
+122	1.0	cdk_H=0,cdk_L=1	etd1 KO,sid4 KO	plo1	OFF
+123	1.0	cdk_H=0,cdk_L=1	etd1 KO,sid4 KO	flp1	Some
+124	1.0	cdk_H=0,cdk_L=0	CK1 KO	sid2	ON
+125	1.0	cdk_H=0,cdk_L=0	CK1 KO	SIP	OFF
+126	1.0	cdk_H=0,cdk_L=0	CK1 KO	plo1	ON
+127	1.0	cdk_H=0,cdk_L=0	CK1 KO	flp1	ON
+128	1.0	cdk_H=0,cdk_L=0	pak1 CA,pmo25 CA	sid2	ON
+129	1.0	cdk_H=0,cdk_L=0	pak1 CA,pmo25 CA	SIP	OFF
+130	1.0	cdk_H=0,cdk_L=0	pak1 CA,pmo25 CA	plo1	ON
+131	1.0	cdk_H=0,cdk_L=0	pak1 CA,pmo25 CA	flp1	ON
+132	1.0	cdk_H=0,cdk_L=0	byr4_cdc16 KO	flp1	ON
+133	1.0	cdk_H=0,cdk_L=0	byr4_cdc16 KO	sid2	ON
+134	1.0	cdk_H=0,cdk_L=0	byr4_cdc16 KO	SIP	OFF
+135	1.0	cdk_H=0,cdk_L=0	byr4_cdc16 KO	plo1	ON
+136	1.0	cdk_H=0,cdk_L=0	byr4_cdc16 KO	gef1	ON
+137	1.0	cdk_H=1,cdk_L=1	cdc11 KO,cdc14_sid1 KO,ras1 CA,sid4 CA	flp1	OFF
+138	1.0	cdk_H=1,cdk_L=1	cdc11 KO,cdc14_sid1 KO,ras1 CA,sid4 CA	sid2	OFF
+139	1.0	cdk_H=1,cdk_L=1	cdc11 KO,cdc14_sid1 KO,ras1 CA,sid4 CA	SIP	ON
+140	1.0	cdk_H=1,cdk_L=1	cdc11 KO,cdc14_sid1 KO,ras1 CA,sid4 CA	plo1	ON
+141	1.0	cdk_H=1,cdk_L=1	cdc11 KO,cdc14_sid1 KO,ras1 CA,sid4 CA	gef1	Some
+142	1.0	cdk_H=1,cdk_L=0	fin1 KO,sid2_mob1 CA	sid2	ON
+143	1.0	cdk_H=1,cdk_L=0	fin1 KO,sid2_mob1 CA	SIP	ON
+144	1.0	cdk_H=1,cdk_L=0	fin1 KO,sid2_mob1 CA	plo1	ON
+145	1.0	cdk_H=1,cdk_L=0	fin1 KO,sid2_mob1 CA	flp1	OFF
+146	1.0	cdk_H=0,cdk_L=1	cdc16 KO	sid2	ON
+147	1.0	cdk_H=0,cdk_L=1	cdc16 KO	SIP	OFF
+148	1.0	cdk_H=0,cdk_L=1	cdc16 KO	plo1	ON
+149	1.0	cdk_H=0,cdk_L=1	cdc16 KO	flp1	ON
+150	1.0	cdk_H=0,cdk_L=1	gef1 CA,pmo25 KO	flp1	Some
+151	1.0	cdk_H=0,cdk_L=1	gef1 CA,pmo25 KO	sid2	Some
+152	1.0	cdk_H=0,cdk_L=1	gef1 CA,pmo25 KO	SIP	OFF
+153	1.0	cdk_H=0,cdk_L=1	gef1 CA,pmo25 KO	plo1	ON
+154	1.0	cdk_H=0,cdk_L=1	gef1 CA,pmo25 KO	sid2_mob1	Some
+155	1.0	cdk_H=1,cdk_L=1	CK1 CA,sid2_mob1 KO	flp1	OFF
+156	1.0	cdk_H=1,cdk_L=1	CK1 CA,sid2_mob1 KO	sid2	ON
+157	1.0	cdk_H=1,cdk_L=1	CK1 CA,sid2_mob1 KO	SIP	ON
+158	1.0	cdk_H=1,cdk_L=1	CK1 CA,sid2_mob1 KO	plo1	OFF
+159	1.0	cdk_H=1,cdk_L=1	CK1 CA,sid2_mob1 KO	gef1	ON
+160	1.0	cdk_H=1,cdk_L=1	sid4 KO	sid2	Some
+161	1.0	cdk_H=1,cdk_L=1	sid4 KO	SIP	ON
+162	1.0	cdk_H=1,cdk_L=1	sid4 KO	plo1	ON
+163	1.0	cdk_H=1,cdk_L=1	sid4 KO	flp1	OFF
+164	1.0	cdk_H=0,cdk_L=1	ras1 KO,scd1 CA	flp1	Some
+165	1.0	cdk_H=0,cdk_L=1	ras1 KO,scd1 CA	cdc11	ON
+166	1.0	cdk_H=0,cdk_L=1	ras1 KO,scd1 CA	sid2	Some
+167	1.0	cdk_H=0,cdk_L=1	ras1 KO,scd1 CA	SIP	OFF
+168	1.0	cdk_H=0,cdk_L=1	ras1 KO,scd1 CA	plo1	ON
+169	1.0	cdk_H=0,cdk_L=1	byr4 KO,cdc42 KO	flp1	ON
+170	1.0	cdk_H=0,cdk_L=1	byr4 KO,cdc42 KO	sid2	ON
+171	1.0	cdk_H=0,cdk_L=1	byr4 KO,cdc42 KO	SIP	OFF
+172	1.0	cdk_H=0,cdk_L=1	byr4 KO,cdc42 KO	plo1	ON
+173	1.0	cdk_H=0,cdk_L=1	byr4 KO,cdc42 KO	cdc14_sid1	ON
+174	1.0	cdk_H=0,cdk_L=1	dma1 KO	sid2	Some
+175	1.0	cdk_H=0,cdk_L=1	dma1 KO	SIP	OFF
+176	1.0	cdk_H=0,cdk_L=1	dma1 KO	plo1	ON
+177	1.0	cdk_H=0,cdk_L=1	dma1 KO	flp1	Some
+178	1.0	cdk_H=0,cdk_L=1	cdc14_sid1 CA	sid2	Some
+179	1.0	cdk_H=0,cdk_L=1	cdc14_sid1 CA	SIP	OFF
+180	1.0	cdk_H=0,cdk_L=1	cdc14_sid1 CA	plo1	ON
+181	1.0	cdk_H=0,cdk_L=1	cdc14_sid1 CA	flp1	Some
+182	1.0	cdk_H=1,cdk_L=1	ppc89 KO	flp1	OFF
+183	1.0	cdk_H=1,cdk_L=1	ppc89 KO	sid2	Some
+184	1.0	cdk_H=1,cdk_L=1	ppc89 KO	SIP	ON
+185	1.0	cdk_H=1,cdk_L=1	ppc89 KO	scd1	OFF
+186	1.0	cdk_H=1,cdk_L=1	ppc89 KO	plo1	ON
+187	1.0	cdk_H=1,cdk_L=1	ppc89 KO	sid2_mob1	Some
+188	1.0	cdk_H=1,cdk_L=0	etd1 CA,orb6 KO	sid2	ON
+189	1.0	cdk_H=1,cdk_L=0	etd1 CA,orb6 KO	SIP	ON
+190	1.0	cdk_H=1,cdk_L=0	etd1 CA,orb6 KO	plo1	ON
+191	1.0	cdk_H=1,cdk_L=0	etd1 CA,orb6 KO	flp1	OFF
+192	1.0	cdk_H=1,cdk_L=0	orb6 KO	sid2	ON
+193	1.0	cdk_H=1,cdk_L=0	orb6 KO	SIP	ON
+194	1.0	cdk_H=1,cdk_L=0	orb6 KO	plo1	ON
+195	1.0	cdk_H=1,cdk_L=0	orb6 KO	flp1	OFF
+196	1.0	cdk_H=0,cdk_L=1	ppc89 KO	flp1	Some
+197	1.0	cdk_H=0,cdk_L=1	ppc89 KO	sid2	Some
+198	1.0	cdk_H=0,cdk_L=1	ppc89 KO	SIP	OFF
+199	1.0	cdk_H=0,cdk_L=1	ppc89 KO	dma1	OFF
+200	1.0	cdk_H=0,cdk_L=1	ppc89 KO	plo1	OFF
+201	1.0	cdk_H=0,cdk_L=1	Rga4 KO	flp1	Some
+202	1.0	cdk_H=0,cdk_L=1	Rga4 KO	sid2	Some
+203	1.0	cdk_H=0,cdk_L=1	Rga4 KO	SIP	OFF
+204	1.0	cdk_H=0,cdk_L=1	Rga4 KO	nak1	Some
+205	1.0	cdk_H=0,cdk_L=1	Rga4 KO	plo1	ON
+206	1.0	cdk_H=0,cdk_L=1	etd1 KO	sid2	Some
+207	1.0	cdk_H=0,cdk_L=1	etd1 KO	SIP	OFF
+208	1.0	cdk_H=0,cdk_L=1	etd1 KO	plo1	ON
+209	1.0	cdk_H=0,cdk_L=1	etd1 KO	flp1	Some
+210	1.0	cdk_H=1,cdk_L=0	fin1 KO	flp1	OFF
+211	1.0	cdk_H=1,cdk_L=0	fin1 KO	spg1	ON
+212	1.0	cdk_H=1,cdk_L=0	fin1 KO	sid2	ON
+213	1.0	cdk_H=1,cdk_L=0	fin1 KO	SIP	ON
+214	1.0	cdk_H=1,cdk_L=0	fin1 KO	plo1	ON
+215	1.0	cdk_H=0,cdk_L=1	nak1 CA	sid2	Some
+216	1.0	cdk_H=0,cdk_L=1	nak1 CA	SIP	OFF
+217	1.0	cdk_H=0,cdk_L=1	nak1 CA	plo1	ON
+218	1.0	cdk_H=0,cdk_L=1	nak1 CA	flp1	Some
+219	1.0	cdk_H=1,cdk_L=0	cdc42 CA	fin1	ON
+220	1.0	cdk_H=1,cdk_L=0	cdc42 CA	flp1	OFF
+221	1.0	cdk_H=1,cdk_L=0	cdc42 CA	sid2	ON
+222	1.0	cdk_H=1,cdk_L=0	cdc42 CA	SIP	ON
+223	1.0	cdk_H=1,cdk_L=0	cdc42 CA	plo1	ON
+224	1.0	cdk_H=1,cdk_L=0	fin1 KO,pmo25 KO,ppc89 KO	flp1	OFF
+225	1.0	cdk_H=1,cdk_L=0	fin1 KO,pmo25 KO,ppc89 KO	spg1	ON
+226	1.0	cdk_H=1,cdk_L=0	fin1 KO,pmo25 KO,ppc89 KO	sid2	ON
+227	1.0	cdk_H=1,cdk_L=0	fin1 KO,pmo25 KO,ppc89 KO	SIP	ON
+228	1.0	cdk_H=1,cdk_L=0	fin1 KO,pmo25 KO,ppc89 KO	plo1	ON
+229	1.0	cdk_H=0,cdk_L=0	Rga4 CA,byr4_cdc16 CA,spg1 CA	sid2	ON
+230	1.0	cdk_H=0,cdk_L=0	Rga4 CA,byr4_cdc16 CA,spg1 CA	SIP	OFF
+231	1.0	cdk_H=0,cdk_L=0	Rga4 CA,byr4_cdc16 CA,spg1 CA	plo1	ON
+232	1.0	cdk_H=0,cdk_L=0	Rga4 CA,byr4_cdc16 CA,spg1 CA	flp1	ON
+233	1.0	cdk_H=1,cdk_L=1	cdc14_sid1 CA,dma1 KO,pom1 KO	flp1	OFF
+234	1.0	cdk_H=1,cdk_L=1	cdc14_sid1 CA,dma1 KO,pom1 KO	sid2	ON
+235	1.0	cdk_H=1,cdk_L=1	cdc14_sid1 CA,dma1 KO,pom1 KO	SIP	ON
+236	1.0	cdk_H=1,cdk_L=1	cdc14_sid1 CA,dma1 KO,pom1 KO	plo1	ON
+237	1.0	cdk_H=1,cdk_L=1	cdc14_sid1 CA,dma1 KO,pom1 KO	byr4_cdc16	OFF
+238	1.0	cdk_H=1,cdk_L=1	CK1 CA,cdc7 CA	flp1	OFF
+239	1.0	cdk_H=1,cdk_L=1	CK1 CA,cdc7 CA	orb6	ON
+240	1.0	cdk_H=1,cdk_L=1	CK1 CA,cdc7 CA	sid2	ON
+241	1.0	cdk_H=1,cdk_L=1	CK1 CA,cdc7 CA	SIP	ON
+242	1.0	cdk_H=1,cdk_L=1	CK1 CA,cdc7 CA	scd1	OFF
+243	1.0	cdk_H=1,cdk_L=1	CK1 CA,cdc7 CA	plo1	OFF
+244	1.0	cdk_H=0,cdk_L=1	ras1 CA	flp1	Some
+245	1.0	cdk_H=0,cdk_L=1	ras1 CA	sid2	Some
+246	1.0	cdk_H=0,cdk_L=1	ras1 CA	SIP	OFF
+247	1.0	cdk_H=0,cdk_L=1	ras1 CA	dma1	OFF
+248	1.0	cdk_H=0,cdk_L=1	ras1 CA	plo1	ON
+249	1.0	cdk_H=0,cdk_L=1	ras1 CA	gef1	Some
+250	1.0	cdk_H=1,cdk_L=0	cdc11 CA,pak1 CA	sid2	ON
+251	1.0	cdk_H=1,cdk_L=0	cdc11 CA,pak1 CA	SIP	ON
+252	1.0	cdk_H=1,cdk_L=0	cdc11 CA,pak1 CA	plo1	ON
+253	1.0	cdk_H=1,cdk_L=0	cdc11 CA,pak1 CA	flp1	OFF
+254	1.0	cdk_H=0,cdk_L=1	cdc11 KO,pmo25 KO	sid2	OFF
+255	1.0	cdk_H=0,cdk_L=1	cdc11 KO,pmo25 KO	SIP	OFF
+256	1.0	cdk_H=0,cdk_L=1	cdc11 KO,pmo25 KO	plo1	ON
+257	1.0	cdk_H=0,cdk_L=1	cdc11 KO,pmo25 KO	flp1	OFF
+258	1.0	cdk_H=0,cdk_L=1	gef1 CA	sid2	Some
+259	1.0	cdk_H=0,cdk_L=1	gef1 CA	SIP	OFF
+260	1.0	cdk_H=0,cdk_L=1	gef1 CA	plo1	ON
+261	1.0	cdk_H=0,cdk_L=1	gef1 CA	flp1	Some
+262	1.0	cdk_H=0,cdk_L=0	cdc7 KO	cdc42	Some
+263	1.0	cdk_H=0,cdk_L=0	cdc7 KO	flp1	ON
+264	1.0	cdk_H=0,cdk_L=0	cdc7 KO	sid2	OFF
+265	1.0	cdk_H=0,cdk_L=0	cdc7 KO	SIP	OFF
+266	1.0	cdk_H=0,cdk_L=0	cdc7 KO	scd1	OFF
+267	1.0	cdk_H=0,cdk_L=0	cdc7 KO	plo1	ON
+268	1.0	cdk_H=0,cdk_L=0	cdc7 KO	cdc14_sid1	OFF
+269	1.0	cdk_H=1,cdk_L=1	pak1 CA	pmo25	ON
+270	1.0	cdk_H=1,cdk_L=1	pak1 CA	flp1	OFF
+271	1.0	cdk_H=1,cdk_L=1	pak1 CA	sid2	ON
+272	1.0	cdk_H=1,cdk_L=1	pak1 CA	SIP	ON
+273	1.0	cdk_H=1,cdk_L=1	pak1 CA	plo1	ON
+274	1.0	cdk_H=1,cdk_L=0	CK1 CA	sid2	ON
+275	1.0	cdk_H=1,cdk_L=0	CK1 CA	SIP	ON
+276	1.0	cdk_H=1,cdk_L=0	CK1 CA	plo1	OFF
+277	1.0	cdk_H=1,cdk_L=0	CK1 CA	flp1	OFF
+278	1.0	cdk_H=0,cdk_L=0	CK1 CA,spg1 KO	sid2	OFF
+279	1.0	cdk_H=0,cdk_L=0	CK1 CA,spg1 KO	SIP	OFF
+280	1.0	cdk_H=0,cdk_L=0	CK1 CA,spg1 KO	plo1	OFF
+281	1.0	cdk_H=0,cdk_L=0	CK1 CA,spg1 KO	flp1	ON
+282	1.0	cdk_H=0,cdk_L=1	byr4 KO,pmo25 CA	flp1	ON
+283	1.0	cdk_H=0,cdk_L=1	byr4 KO,pmo25 CA	sid2	ON
+284	1.0	cdk_H=0,cdk_L=1	byr4 KO,pmo25 CA	SIP	OFF
+285	1.0	cdk_H=0,cdk_L=1	byr4 KO,pmo25 CA	nak1	ON
+286	1.0	cdk_H=0,cdk_L=1	byr4 KO,pmo25 CA	plo1	ON
+287	1.0	cdk_H=1,cdk_L=0	nak1 KO	pmo25	ON
+288	1.0	cdk_H=1,cdk_L=0	nak1 KO	flp1	OFF
+289	1.0	cdk_H=1,cdk_L=0	nak1 KO	sid2	ON
+290	1.0	cdk_H=1,cdk_L=0	nak1 KO	Rga4	Some
+291	1.0	cdk_H=1,cdk_L=0	nak1 KO	SIP	ON
+292	1.0	cdk_H=1,cdk_L=0	nak1 KO	plo1	ON
+293	1.0	cdk_H=1,cdk_L=1	Rga4 CA	sid2	ON
+294	1.0	cdk_H=1,cdk_L=1	Rga4 CA	SIP	ON
+295	1.0	cdk_H=1,cdk_L=1	Rga4 CA	plo1	ON
+296	1.0	cdk_H=1,cdk_L=1	Rga4 CA	flp1	OFF
+297	1.0	cdk_H=1,cdk_L=0	cdc14_sid1 CA,fin1 KO,orb6 KO,ras1 KO	sid2	ON
+298	1.0	cdk_H=1,cdk_L=0	cdc14_sid1 CA,fin1 KO,orb6 KO,ras1 KO	SIP	ON
+299	1.0	cdk_H=1,cdk_L=0	cdc14_sid1 CA,fin1 KO,orb6 KO,ras1 KO	plo1	ON
+300	1.0	cdk_H=1,cdk_L=0	cdc14_sid1 CA,fin1 KO,orb6 KO,ras1 KO	flp1	OFF

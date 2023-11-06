@@ -1,0 +1,261 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	Boca=1,CK1alpha=1,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Arm CA,Sgg KO	Dally	OFF
+2	1.0	Boca=1,CK1alpha=1,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Arm CA,Sgg KO	APC	ON
+3	1.0	Boca=1,CK1alpha=1,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Arm CA,Sgg KO	Axin	ON
+4	1.0	Boca=1,CK1alpha=1,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Arm CA,Sgg KO	Targets	OFF
+5	1.0	Boca=1,CK1alpha=1,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Arm CA,Sgg KO	Dlp	OFF
+6	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=0		Dally	ON
+7	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=0		Sgg	ON
+8	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=0		Arr	OFF
+9	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=0		Targets	OFF
+10	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=0		Dlp	ON
+11	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=0,Ttv=0,Wf=0,Wg=0	Arr CA	Dsh	ON
+12	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=0,Ttv=0,Wf=0,Wg=0	Arr CA	Targets	OFF
+13	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=0,Ttv=0,Wf=0,Wg=0	Arr CA	Dally	OFF
+14	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=0,Ttv=0,Wf=0,Wg=0	Arr CA	Dlp	OFF
+15	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1	Arm CA	Dally	OFF
+16	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1	Arm CA	Nemo	Some
+17	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1	Arm CA	Fz	ON
+18	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1	Arm CA	Targets	OFF
+19	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1	Arm CA	Dlp	OFF
+20	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Arr CA	Targets	OFF
+21	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Arr CA	Dally	OFF
+22	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Arr CA	Dlp	OFF
+23	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Pan CA	Dally	OFF
+24	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Pan CA	Arm	OFF
+25	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Pan CA	Nemo	ON
+26	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Pan CA	Targets	OFF
+27	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Pan CA	Dlp	OFF
+28	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	APC KO,Arm KO,Axin CA	Pan	OFF
+29	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	APC KO,Arm KO,Axin CA	Targets	OFF
+30	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	APC KO,Arm KO,Axin CA	Dally	OFF
+31	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	APC KO,Arm KO,Axin CA	Dlp	OFF
+32	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=1		Pan	OFF
+33	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=1		Dally	OFF
+34	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=1		Arr	ON
+35	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=1		Nemo	OFF
+36	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=1		Targets	OFF
+37	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=1		Dlp	OFF
+38	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=1,Wg=1	Pan CA	Targets	OFF
+39	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=1,Wg=1	Pan CA	Dally	OFF
+40	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=1,Wg=1	Pan CA	Dlp	OFF
+41	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Arm KO	Targets	OFF
+42	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Arm KO	Dally	OFF
+43	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Arm KO	Dlp	OFF
+44	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1		Targets	OFF
+45	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1		Dally	OFF
+46	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1		Dlp	OFF
+47	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=0		Nemo	OFF
+48	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=0		Targets	OFF
+49	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=0		Dally	ON
+50	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=0		Dlp	ON
+51	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Nemo CA	Targets	OFF
+52	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Nemo CA	Arm	OFF
+53	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Nemo CA	Dally	OFF
+54	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Nemo CA	Dlp	OFF
+55	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0		Targets	OFF
+56	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0		Dally	OFF
+57	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0		Dlp	OFF
+58	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	Fz KO,Pan KO	Targets	OFF
+59	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	Fz KO,Pan KO	Dally	OFF
+60	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	Fz KO,Pan KO	Dlp	OFF
+61	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=0,Wg=0	Pan KO	Targets	OFF
+62	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=0,Wg=0	Pan KO	Dally	OFF
+63	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=0,Wg=0	Pan KO	Dlp	OFF
+64	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=0	Nemo KO	Dally	ON
+65	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=0	Nemo KO	APC	ON
+66	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=0	Nemo KO	Arm	OFF
+67	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=0	Nemo KO	Dsh	OFF
+68	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=0	Nemo KO	Sgg	ON
+69	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=0	Nemo KO	Targets	OFF
+70	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=0	Nemo KO	Dlp	ON
+71	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Axin KO	Targets	OFF
+72	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Axin KO	Dally	OFF
+73	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=0	Axin KO	Dlp	OFF
+74	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=1	Pan KO	Dally	ON
+75	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=1	Pan KO	Arm	OFF
+76	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=1	Pan KO	Nemo	OFF
+77	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=1	Pan KO	Targets	OFF
+78	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=1	Pan KO	Dlp	ON
+79	1.0	Boca=1,CK1alpha=1,Gro=1,Hipk=0,Hyx=1,Lgs=0,Nej=1,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0	Fz KO	Targets	OFF
+80	1.0	Boca=1,CK1alpha=1,Gro=1,Hipk=0,Hyx=1,Lgs=0,Nej=1,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0	Fz KO	Dally	OFF
+81	1.0	Boca=1,CK1alpha=1,Gro=1,Hipk=0,Hyx=1,Lgs=0,Nej=1,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0	Fz KO	Dlp	OFF
+82	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=1,Nej=1,Nkd=1,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=1,Wg=1	APC KO,Fz KO	Targets	OFF
+83	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=1,Nej=1,Nkd=1,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=1,Wg=1	APC KO,Fz KO	Axin	ON
+84	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=1,Nej=1,Nkd=1,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=1,Wg=1	APC KO,Fz KO	Dally	OFF
+85	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=1,Nej=1,Nkd=1,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=1,Wg=1	APC KO,Fz KO	Dlp	OFF
+86	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Fz CA,Pan CA	Dsh	ON
+87	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Fz CA,Pan CA	Targets	OFF
+88	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Fz CA,Pan CA	Dally	OFF
+89	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Fz CA,Pan CA	Dlp	OFF
+90	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=1,Slmb=0,Ttv=1,Wf=1,Wg=0	Dsh KO	Targets	OFF
+91	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=1,Slmb=0,Ttv=1,Wf=1,Wg=0	Dsh KO	Dally	OFF
+92	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=1,Slmb=0,Ttv=1,Wf=1,Wg=0	Dsh KO	Dlp	OFF
+93	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=1		Nemo	OFF
+94	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=1		Targets	OFF
+95	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=1		Dally	ON
+96	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=0,Wg=1		Dlp	ON
+97	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=1,Wg=0		Pan	OFF
+98	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=1,Wg=0		Dally	OFF
+99	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=1,Wg=0		Arm	OFF
+100	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=1,Wg=0		Fz	OFF
+101	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=1,Wg=0		Targets	OFF
+102	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=1,Wg=0		Dlp	OFF
+103	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=1,Slmb=0,Ttv=1,Wf=1,Wg=0	APC CA,Pan KO	Targets	OFF
+104	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=1,Slmb=0,Ttv=1,Wf=1,Wg=0	APC CA,Pan KO	Dally	OFF
+105	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=1,Slmb=0,Ttv=1,Wf=1,Wg=0	APC CA,Pan KO	Dlp	OFF
+106	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Arm KO,Fz KO	Targets	OFF
+107	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Arm KO,Fz KO	Axin	ON
+108	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Arm KO,Fz KO	Dally	OFF
+109	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Arm KO,Fz KO	Dlp	OFF
+110	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=1	APC KO,Axin CA,Sgg KO	Pan	OFF
+111	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=1	APC KO,Axin CA,Sgg KO	Dally	ON
+112	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=1	APC KO,Axin CA,Sgg KO	Dsh	OFF
+113	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=1	APC KO,Axin CA,Sgg KO	Targets	OFF
+114	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=1,Wf=0,Wg=1	APC KO,Axin CA,Sgg KO	Dlp	ON
+115	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Axin KO	Dally	OFF
+116	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Axin KO	Sgg	ON
+117	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Axin KO	Arr	ON
+118	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Axin KO	Targets	OFF
+119	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=1	Axin KO	Dlp	OFF
+120	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1		Dally	OFF
+121	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1		Dsh	OFF
+122	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1		Arm	ON
+123	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1		Sgg	ON
+124	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1		Targets	OFF
+125	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1		Dlp	OFF
+126	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=0	Pan CA	Dsh	OFF
+127	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=0	Pan CA	Targets	OFF
+128	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=0	Pan CA	Dally	OFF
+129	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=0	Pan CA	Dlp	OFF
+130	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1		Targets	OFF
+131	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1		Fz	ON
+132	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1		Dally	OFF
+133	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1		Dlp	OFF
+134	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=0		Dally	OFF
+135	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=0		APC	ON
+136	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=0		Sgg	ON
+137	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=0		Targets	OFF
+138	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=0		Dlp	OFF
+139	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1	Dsh CA	Targets	OFF
+140	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1	Dsh CA	Fz	ON
+141	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1	Dsh CA	Dally	ON
+142	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1	Dsh CA	Dlp	ON
+143	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=0,Ttv=1,Wf=0,Wg=0	Sgg KO	Targets	OFF
+144	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=0,Ttv=1,Wf=0,Wg=0	Sgg KO	Dally	ON
+145	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=0,Ttv=1,Wf=0,Wg=0	Sgg KO	Dlp	ON
+146	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=0	Arm CA,Fz CA	Pan	Some
+147	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=0	Arm CA,Fz CA	Dally	OFF
+148	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=0	Arm CA,Fz CA	Arr	OFF
+149	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=0	Arm CA,Fz CA	Targets	OFF
+150	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=0,Wf=0,Wg=0	Arm CA,Fz CA	Dlp	OFF
+151	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=0	Arm KO	Targets	OFF
+152	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=0	Arm KO	Fz	OFF
+153	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=0	Arm KO	Dally	OFF
+154	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=0	Arm KO	Dlp	OFF
+155	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1		Targets	OFF
+156	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1		Dally	OFF
+157	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=1		Dlp	OFF
+158	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0		Targets	OFF
+159	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0		Fz	OFF
+160	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0		Dally	OFF
+161	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0		Dlp	OFF
+162	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=0		Targets	OFF
+163	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=0		Dally	OFF
+164	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=0,Hyx=1,Lgs=0,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=1,Wf=1,Wg=0		Dlp	OFF
+165	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	Arm KO	Dsh	ON
+166	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	Arm KO	Targets	OFF
+167	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	Arm KO	Dally	OFF
+168	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=0,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	Arm KO	Dlp	OFF
+169	1.0	Boca=1,CK1alpha=1,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1	Arm CA,Dsh KO	Pan	Some
+170	1.0	Boca=1,CK1alpha=1,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1	Arm CA,Dsh KO	Dally	OFF
+171	1.0	Boca=1,CK1alpha=1,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1	Arm CA,Dsh KO	Arr	ON
+172	1.0	Boca=1,CK1alpha=1,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1	Arm CA,Dsh KO	Targets	OFF
+173	1.0	Boca=1,CK1alpha=1,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1	Arm CA,Dsh KO	Dlp	OFF
+174	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	APC KO,Arm KO,Dsh CA,Fz KO	Pan	OFF
+175	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	APC KO,Arm KO,Dsh CA,Fz KO	Dally	OFF
+176	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	APC KO,Arm KO,Dsh CA,Fz KO	Nemo	OFF
+177	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	APC KO,Arm KO,Dsh CA,Fz KO	Targets	OFF
+178	1.0	Boca=0,CK1alpha=0,Gro=0,Hipk=0,Hyx=1,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	APC KO,Arm KO,Dsh CA,Fz KO	Dlp	OFF
+179	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1		Targets	OFF
+180	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1		Arm	OFF
+181	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1		Dally	ON
+182	1.0	Boca=1,CK1alpha=0,Gro=0,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1		Dlp	ON
+183	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=1	Dsh CA,Sgg CA	Targets	OFF
+184	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=1	Dsh CA,Sgg CA	Dally	OFF
+185	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=1	Dsh CA,Sgg CA	APC	OFF
+186	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=1	Dsh CA,Sgg CA	Dlp	OFF
+187	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1	Fz KO	Targets	OFF
+188	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1	Fz KO	Dally	ON
+189	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1	Fz KO	APC	OFF
+190	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1	Fz KO	Dlp	ON
+191	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=0	Axin CA	Targets	OFF
+192	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=0	Axin CA	Dally	OFF
+193	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=0	Axin CA	Dlp	OFF
+194	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0	Axin KO	Nemo	OFF
+195	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0	Axin KO	Targets	OFF
+196	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0	Axin KO	Dally	OFF
+197	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0	Axin KO	Dlp	OFF
+198	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Dsh KO	Targets	OFF
+199	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Dsh KO	Dally	OFF
+200	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Dsh KO	Dlp	OFF
+201	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	APC KO	Dally	OFF
+202	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	APC KO	Dsh	ON
+203	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	APC KO	Sgg	OFF
+204	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	APC KO	Arr	ON
+205	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	APC KO	Targets	OFF
+206	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=0,Wg=1	APC KO	Dlp	OFF
+207	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0	APC CA	Pan	OFF
+208	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0	APC CA	Dally	OFF
+209	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0	APC CA	Arm	OFF
+210	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0	APC CA	Axin	ON
+211	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0	APC CA	Targets	OFF
+212	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=0	APC CA	Dlp	OFF
+213	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=1,Wg=0		Dally	OFF
+214	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=1,Wg=0		Nemo	OFF
+215	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=1,Wg=0		Axin	ON
+216	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=1,Wg=0		Targets	OFF
+217	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=1,Wg=0		Dlp	OFF
+218	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=1,Wg=0	Dsh CA,Fz KO	Targets	OFF
+219	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=1,Wg=0	Dsh CA,Fz KO	Arm	OFF
+220	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=1,Wg=0	Dsh CA,Fz KO	Dally	OFF
+221	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=1,Nej=0,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=1,Wg=0	Dsh CA,Fz KO	Dlp	OFF
+222	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=1,Slmb=0,Ttv=0,Wf=0,Wg=0	Pan KO	Nemo	OFF
+223	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=1,Slmb=0,Ttv=0,Wf=0,Wg=0	Pan KO	Targets	OFF
+224	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=1,Slmb=0,Ttv=0,Wf=0,Wg=0	Pan KO	Dally	OFF
+225	1.0	Boca=0,CK1alpha=1,Gro=0,Hipk=0,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=1,Slmb=0,Ttv=0,Wf=0,Wg=0	Pan KO	Dlp	OFF
+226	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1		Targets	OFF
+227	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1		Axin	ON
+228	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1		Dally	ON
+229	1.0	Boca=0,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=0,Wg=1		Dlp	ON
+230	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=1	Sgg CA	Targets	OFF
+231	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=1	Sgg CA	Dally	OFF
+232	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=1	Sgg CA	Dlp	OFF
+233	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=1		Dally	OFF
+234	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=1		APC	OFF
+235	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=1		Sgg	OFF
+236	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=1		Arr	ON
+237	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=1		Targets	Some
+238	1.0	Boca=1,CK1alpha=1,Gro=0,Hipk=1,Hyx=1,Lgs=1,Nej=1,Nkd=0,Proteasome=1,Pygo=1,Slmb=1,Ttv=0,Wf=1,Wg=1		Dlp	OFF
+239	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1		Dally	OFF
+240	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1		APC	OFF
+241	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1		Arm	OFF
+242	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1		Targets	OFF
+243	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=0,Nkd=0,Proteasome=1,Pygo=0,Slmb=0,Ttv=1,Wf=1,Wg=1		Dlp	OFF
+244	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0		Dally	OFF
+245	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0		APC	ON
+246	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0		Nemo	OFF
+247	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0		Targets	OFF
+248	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=0,Hyx=0,Lgs=1,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0		Dlp	OFF
+249	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Arr CA,Axin KO	Targets	OFF
+250	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Arr CA,Axin KO	Dally	OFF
+251	1.0	Boca=0,CK1alpha=1,Gro=1,Hipk=1,Hyx=0,Lgs=0,Nej=0,Nkd=1,Proteasome=1,Pygo=0,Slmb=1,Ttv=0,Wf=0,Wg=0	Arr CA,Axin KO	Dlp	OFF
+252	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=1		Dally	OFF
+253	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=1		APC	ON
+254	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=1		Arr	ON
+255	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=1		Axin	ON
+256	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=1		Targets	OFF
+257	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=0,Pygo=0,Slmb=1,Ttv=1,Wf=1,Wg=1		Dlp	OFF
+258	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=1,Wg=1	Fz KO	Targets	OFF
+259	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=1,Wg=1	Fz KO	Dally	OFF
+260	1.0	Boca=1,CK1alpha=0,Gro=1,Hipk=1,Hyx=1,Lgs=0,Nej=1,Nkd=1,Proteasome=1,Pygo=1,Slmb=0,Ttv=0,Wf=1,Wg=1	Fz KO	Dlp	OFF

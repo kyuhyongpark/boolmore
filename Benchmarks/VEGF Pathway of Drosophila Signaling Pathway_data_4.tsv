@@ -1,0 +1,181 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=1		Targets	OFF
+2	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=1		Sos	ON
+3	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=1		Rl	OFF
+4	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=1		Ras	ON
+5	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=1,Sty=1,msk=1	Raf CA	Targets	ON
+6	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Aop KO,Pnt CA	Targets	ON
+7	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Aop KO,Pnt CA	Pvr	OFF
+8	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Aop KO,Pnt CA	Ras	OFF
+9	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=0,Src42=0,Sty=1,msk=0	Dsor1 KO,Ras KO,Rl KO	Targets	OFF
+10	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=0,Src42=0,Sty=1,msk=0	Dsor1 KO,Ras KO,Rl KO	Drk	OFF
+11	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=0,msk=0	Drk KO,Rl CA,Sos KO	Targets	ON
+12	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=0,msk=0	Drk KO,Rl CA,Sos KO	Raf	OFF
+13	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=0		Targets	OFF
+14	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=0		Sos	ON
+15	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=0		Aop	ON
+16	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Pvr CA,Raf KO,Sos KO	Targets	OFF
+17	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Pvr CA,Raf KO,Sos KO	Pnt	OFF
+18	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Pvr CA,Raf KO,Sos KO	Rl	OFF
+19	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=1		Targets	OFF
+20	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=0	Ras CA	Targets	OFF
+21	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=0	Ras CA	Pnt	OFF
+22	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=0	Ras CA	Pvr	ON
+23	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=1,Src42=1,Sty=1,msk=0	Aop KO,Pvr CA	Targets	OFF
+24	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=1,Src42=1,Sty=1,msk=0	Aop KO,Pvr CA	Raf	OFF
+25	1.0	CNK=0,Ksr=1,Pvf1=1,Pvf2=0,Pvf3=1,Src42=0,Sty=0,msk=1	Raf CA	Targets	ON
+26	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=0	Pnt KO,Raf KO	Targets	OFF
+27	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=0	Pnt KO,Raf KO	Drk	ON
+28	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Sos KO	Targets	OFF
+29	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Sos KO	Dsor1	OFF
+30	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Sos KO	Ras	OFF
+31	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=1	Drk CA	Targets	OFF
+32	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=1	Drk CA	Pvr	ON
+33	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=1	Drk CA	Aop	ON
+34	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=1,msk=0	Aop KO,Raf KO,Sos CA	Targets	OFF
+35	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=1,msk=0	Aop KO,Raf KO,Sos CA	Drk	ON
+36	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Sos KO	Targets	OFF
+37	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Sos KO	Raf	OFF
+38	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=0,Src42=0,Sty=1,msk=1	Aop KO,Pvr CA,Ras KO	Targets	OFF
+39	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=0		Targets	OFF
+40	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=0		Pnt	OFF
+41	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=0		Sos	ON
+42	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=0,Sty=1,msk=1	Aop CA	Targets	OFF
+43	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=0,Sty=1,msk=1	Aop CA	Dsor1	OFF
+44	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Ras KO,Rl CA,Sos KO	Targets	ON
+45	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Ras KO,Rl CA,Sos KO	Aop	OFF
+46	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=0,msk=1	Dsor1 KO,Pvr CA	Targets	OFF
+47	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1	Pnt KO	Targets	OFF
+48	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1	Pnt KO	Ras	OFF
+49	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1	Pnt KO	Drk	ON
+50	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1	Pnt KO	Rl	OFF
+51	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=1	Drk CA,Pnt KO	Targets	OFF
+52	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=1,msk=0	Pvr KO	Targets	OFF
+53	1.0	CNK=0,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1		Targets	OFF
+54	1.0	CNK=0,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1		Aop	ON
+55	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=0		Targets	OFF
+56	1.0	CNK=0,Ksr=1,Pvf1=1,Pvf2=0,Pvf3=1,Src42=0,Sty=0,msk=0		Targets	OFF
+57	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1	Dsor1 CA	Targets	ON
+58	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1	Dsor1 CA	Pvr	ON
+59	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1	Dsor1 CA	Rl	ON
+60	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1	Ras KO,Rl CA	Targets	ON
+61	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1	Ras KO,Rl CA	Sos	ON
+62	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=0,msk=1		Targets	OFF
+63	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=0,msk=1		Pnt	OFF
+64	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=0,msk=1		Rl	OFF
+65	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=1,Sty=0,msk=0	Drk KO	Targets	OFF
+66	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=1,Sty=0,msk=0	Drk KO	Raf	OFF
+67	1.0	CNK=0,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=0,Sty=1,msk=1	Aop CA,Pvr CA	Targets	OFF
+68	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=1,Src42=0,Sty=0,msk=0		Targets	OFF
+69	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=1,Src42=0,Sty=0,msk=0		Ras	ON
+70	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=1,Src42=0,Sty=0,msk=0		Raf	OFF
+71	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=1		Targets	OFF
+72	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=1		Aop	ON
+73	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=1		Rl	OFF
+74	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=1,msk=1		Targets	OFF
+75	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=0,Src42=1,Sty=0,msk=1	Sos KO	Targets	OFF
+76	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=0,Src42=1,Sty=0,msk=1	Sos KO	Aop	ON
+77	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=0	Drk KO	Targets	OFF
+78	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=0	Drk KO	Rl	OFF
+79	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=0,Sty=1,msk=0		Targets	OFF
+80	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=1,Sty=1,msk=1	Pnt CA	Targets	OFF
+81	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=1,Sty=1,msk=1	Pnt CA	Dsor1	OFF
+82	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=1,Sty=1,msk=1	Pnt CA	Drk	ON
+83	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=1,Sty=1,msk=1	Pnt CA	Pvr	ON
+84	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1	Ras CA,Rl KO	Targets	OFF
+85	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=0		Targets	OFF
+86	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=0		Rl	OFF
+87	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=1,Src42=1,Sty=0,msk=0		Targets	OFF
+88	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=0,Sty=1,msk=1	Ras KO	Targets	OFF
+89	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=0,Sty=1,msk=1	Ras KO	Drk	ON
+90	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=1,msk=1	Pvr KO	Targets	OFF
+91	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=1,msk=1	Pvr KO	Dsor1	OFF
+92	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=0,msk=0	Aop CA,Pvr CA,Ras CA	Targets	OFF
+93	1.0	CNK=0,Ksr=1,Pvf1=1,Pvf2=0,Pvf3=0,Src42=1,Sty=0,msk=0	Raf KO,Sos KO	Targets	OFF
+94	1.0	CNK=0,Ksr=1,Pvf1=1,Pvf2=0,Pvf3=0,Src42=1,Sty=0,msk=0	Raf KO,Sos KO	Ras	OFF
+95	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1		Targets	OFF
+96	1.0	CNK=0,Ksr=1,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=1,msk=0	Aop KO,Drk KO,Raf CA	Targets	OFF
+97	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=0,msk=1	Pnt CA,Raf KO	Targets	OFF
+98	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=0,msk=1	Pnt CA,Raf KO	Dsor1	OFF
+99	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=0,msk=1	Pnt CA,Raf KO	Sos	ON
+100	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=1	Sos KO	Targets	OFF
+101	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1	Aop KO,Dsor1 CA	Targets	ON
+102	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=1,Src42=1,Sty=1,msk=0		Targets	OFF
+103	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=1,Src42=1,Sty=1,msk=0		Dsor1	OFF
+104	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=1,Src42=1,Sty=1,msk=0		Ras	OFF
+105	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=1	Drk CA,Raf CA	Targets	ON
+106	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=1,Src42=0,Sty=0,msk=0	Dsor1 CA	Targets	OFF
+107	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=1,Src42=0,Sty=0,msk=0	Dsor1 CA	Drk	ON
+108	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=1,Src42=1,Sty=0,msk=0	Raf KO	Targets	OFF
+109	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=1,Src42=1,Sty=0,msk=0	Raf KO	Sos	ON
+110	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=1		Targets	OFF
+111	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=1		Sos	ON
+112	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=1		Rl	OFF
+113	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=0	Ras CA	Targets	OFF
+114	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=0	Ras CA	Pnt	OFF
+115	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=0	Ras CA	Pvr	ON
+116	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=1		Targets	OFF
+117	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=1		Pnt	OFF
+118	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=1		Pvr	ON
+119	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=1		Sos	ON
+120	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=1,Src42=0,Sty=0,msk=1	Pvr KO,Raf KO	Targets	OFF
+121	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=1,Src42=0,Sty=0,msk=1	Pvr KO,Raf KO	Aop	ON
+122	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=1		Targets	OFF
+123	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=1,msk=1		Targets	OFF
+124	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=1,msk=1		Pvr	ON
+125	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=1,msk=1		Raf	OFF
+126	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=1	Rl CA	Targets	ON
+127	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=1	Rl CA	Sos	ON
+128	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=1	Rl CA	Ras	ON
+129	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=0	Dsor1 CA	Targets	OFF
+130	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=0	Dsor1 CA	Pvr	ON
+131	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=1,Src42=0,Sty=0,msk=0	Raf CA,Sos KO	Targets	OFF
+132	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=0,Src42=1,Sty=0,msk=1	Drk KO,Pvr KO,Raf CA	Targets	ON
+133	1.0	CNK=0,Ksr=1,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Ras CA	Targets	OFF
+134	1.0	CNK=0,Ksr=1,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Ras CA	Drk	ON
+135	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=1,Src42=0,Sty=0,msk=0		Targets	OFF
+136	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=1,Src42=0,Sty=0,msk=0		Sos	ON
+137	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=0	Aop CA,Sos CA	Raf	ON
+138	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=0	Aop CA,Sos CA	Targets	OFF
+139	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=0	Aop CA,Sos CA	Ras	ON
+140	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=0	Aop CA,Sos CA	Drk	ON
+141	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=0,msk=0	Sos KO	Targets	OFF
+142	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=0,msk=0	Sos KO	Rl	OFF
+143	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=0,msk=0	Sos KO	Drk	ON
+144	1.0	CNK=0,Ksr=1,Pvf1=1,Pvf2=0,Pvf3=0,Src42=1,Sty=0,msk=0		Targets	OFF
+145	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=1,Sty=0,msk=1		Targets	OFF
+146	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=0,Src42=1,Sty=0,msk=1		Rl	OFF
+147	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=0,msk=0	Pnt KO,Pvr CA	Targets	OFF
+148	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=1,msk=0	Aop KO,Pnt CA	Targets	ON
+149	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=1,Src42=1,Sty=1,msk=0	Dsor1 KO,Raf CA	Targets	OFF
+150	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=1,Src42=1,Sty=1,msk=0	Dsor1 KO,Raf CA	Aop	ON
+151	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Dsor1 CA	Targets	OFF
+152	1.0	CNK=0,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=0,Src42=0,Sty=0,msk=0	Dsor1 CA	Raf	OFF
+153	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=0,Src42=1,Sty=1,msk=1	Dsor1 CA,Pnt KO,Raf CA	Targets	OFF
+154	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=1,msk=1	Ras KO	Targets	OFF
+155	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=1,Src42=1,Sty=1,msk=1	Ras KO	Aop	ON
+156	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=1,Src42=1,Sty=0,msk=0	Dsor1 KO,Pnt CA,Raf KO	Targets	OFF
+157	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=0,Pvf3=1,Src42=1,Sty=0,msk=0	Dsor1 KO,Pnt CA,Raf KO	Aop	ON
+158	1.0	CNK=0,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=0	Ras CA	Targets	OFF
+159	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1		Targets	OFF
+160	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=1,msk=1		Ras	OFF
+161	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=0,Pvf3=0,Src42=1,Sty=1,msk=1		Targets	OFF
+162	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=0,msk=1	Pvr KO,Rl KO	Targets	OFF
+163	1.0	CNK=1,Ksr=1,Pvf1=1,Pvf2=1,Pvf3=0,Src42=1,Sty=0,msk=1	Pvr KO,Rl KO	Ras	OFF
+164	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=0	Aop CA	Targets	OFF
+165	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=1,Pvf3=1,Src42=0,Sty=1,msk=0		Targets	OFF
+166	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=0,Sty=1,msk=1		Targets	OFF
+167	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=0,Sty=1,msk=1		Drk	ON
+168	1.0	CNK=1,Ksr=1,Pvf1=0,Pvf2=1,Pvf3=0,Src42=0,Sty=1,msk=0	Drk CA,Pnt KO	Targets	OFF
+169	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=1,Sty=0,msk=0	Sos CA	Targets	OFF
+170	1.0	CNK=0,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=1,Sty=0,msk=0	Sos CA	Ras	ON
+171	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=1,Sty=0,msk=1		Targets	OFF
+172	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=1,Sty=0,msk=1		Pvr	ON
+173	1.0	CNK=0,Ksr=1,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=1		Targets	OFF
+174	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=1,Sty=0,msk=1	Raf CA	Targets	ON
+175	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=1,Sty=0,msk=1	Raf CA	Ras	ON
+176	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=0	Drk CA	Targets	OFF
+177	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=0	Drk CA	Pvr	ON
+178	1.0	CNK=1,Ksr=0,Pvf1=1,Pvf2=1,Pvf3=0,Src42=0,Sty=0,msk=0	Drk CA	Sos	ON
+179	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=1	Pvr KO,Raf CA,Sos CA	Targets	ON
+180	1.0	CNK=1,Ksr=0,Pvf1=0,Pvf2=0,Pvf3=1,Src42=0,Sty=1,msk=1	Pvr KO,Raf CA,Sos CA	Rl	ON
