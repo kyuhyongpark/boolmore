@@ -1,0 +1,121 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Barnesiella KO,Enterococcus KO	Akkermansia	ON
+2	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Barnesiella KO,Enterococcus KO	Lachnospiraceae_other	OFF
+3	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=0	Clostridium_difficile KO	Akkermansia	OFF
+4	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1	Enterococcus CA,Lachnospiraceae CA	Akkermansia	OFF
+5	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0	Clostridium_difficile KO	Akkermansia	OFF
+6	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0		Lachnospiraceae_other	OFF
+7	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0		Clostridium_difficile	Some
+8	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0		Other	OFF
+9	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0		Akkermansia	ON
+10	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0		Barnesiella	OFF
+11	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Blautia KO	Enterococcus	ON
+12	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Blautia KO	Akkermansia	ON
+13	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1		Barnesiella	Some
+14	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1		Enterococcus	ON
+15	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1		Akkermansia	OFF
+16	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1		Lachnospiraceae	Some
+17	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1		Akkermansia	ON
+18	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1		Lachnospiraceae_other	Some
+19	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=1	Barnesiella CA,Other KO	Akkermansia	OFF
+20	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Lachnospiraceae_other CA	Blautia	ON
+21	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Lachnospiraceae_other CA	Akkermansia	ON
+22	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Lachnospiraceae_other CA	Clostridium_difficile	OFF
+23	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1		Akkermansia	ON
+24	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1		Clostridium_difficile	Some
+25	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1	Enterococcus CA	Akkermansia	ON
+26	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Clostridium_difficile CA	Blautia	ON
+27	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Clostridium_difficile CA	Akkermansia	ON
+28	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0		Akkermansia	ON
+29	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Other KO	Akkermansia	ON
+30	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Enterococcus CA	Akkermansia	ON
+31	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1	Blautia CA	Akkermansia	ON
+32	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1		Enterococcus	ON
+33	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1		Akkermansia	OFF
+34	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1		Lachnospiraceae_other	OFF
+35	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1		Enterococcus	ON
+36	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1		Blautia	ON
+37	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1		Akkermansia	ON
+38	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Blautia CA	Enterococcus	ON
+39	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Blautia CA	Akkermansia	ON
+40	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Blautia CA	Clostridium_difficile	Some
+41	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=0	Barnesiella KO,Blautia KO	Akkermansia	OFF
+42	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1	Lachnospiraceae_other KO	Enterococcus	ON
+43	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1	Lachnospiraceae_other KO	Akkermansia	ON
+44	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Clostridium_difficile CA	Akkermansia	ON
+45	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=1	Clostridium_difficile KO,Enterococcus CA	Akkermansia	OFF
+46	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1	Blautia KO	Akkermansia	ON
+47	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1	Blautia KO	Lachnospiraceae_other	OFF
+48	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=0	Lachnospiraceae_other KO	Akkermansia	OFF
+49	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=1	Clostridium_difficile KO,Enterococcus KO	Akkermansia	OFF
+50	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=0		Akkermansia	OFF
+51	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=1	Barnesiella KO,Other CA	Enterococcus	ON
+52	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=1	Barnesiella KO,Other CA	Akkermansia	OFF
+53	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1	Barnesiella KO	Akkermansia	OFF
+54	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1	Barnesiella KO	Lachnospiraceae_other	OFF
+55	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0		Akkermansia	ON
+56	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=0	Lachnospiraceae KO,Lachnospiraceae_other CA	Akkermansia	OFF
+57	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=1		Akkermansia	OFF
+58	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=1		Other	OFF
+59	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0		Akkermansia	OFF
+60	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0		Clostridium_difficile	Some
+61	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Lachnospiraceae CA	Barnesiella	ON
+62	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Lachnospiraceae CA	Blautia	ON
+63	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Lachnospiraceae CA	Akkermansia	ON
+64	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1	Clostridium_difficile KO	Akkermansia	ON
+65	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1	Clostridium_difficile KO	Lachnospiraceae	Some
+66	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Other CA	Akkermansia	ON
+67	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0	Blautia CA,Lachnospiraceae_other KO	Enterococcus	ON
+68	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0	Blautia CA,Lachnospiraceae_other KO	Akkermansia	OFF
+69	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=1	Lachnospiraceae CA	Akkermansia	OFF
+70	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Barnesiella CA	Akkermansia	ON
+71	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0		Enterococcus	ON
+72	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0		Akkermansia	OFF
+73	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0		Other	OFF
+74	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1	Clostridium_difficile KO	Akkermansia	ON
+75	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Lachnospiraceae CA	Akkermansia	ON
+76	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1	Blautia CA	Barnesiella	OFF
+77	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1	Blautia CA	Akkermansia	OFF
+78	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=1	Barnesiella CA	Blautia	ON
+79	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=1	Barnesiella CA	Akkermansia	OFF
+80	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=1	Barnesiella CA	Other	OFF
+81	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=0		Akkermansia	OFF
+82	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=0		Lachnospiraceae_other	OFF
+83	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=0		Other	OFF
+84	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0	Other CA	Blautia	ON
+85	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0	Other CA	Akkermansia	ON
+86	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0	Lachnospiraceae_other CA	Enterococcus	ON
+87	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0	Lachnospiraceae_other CA	Blautia	ON
+88	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0	Lachnospiraceae_other CA	Akkermansia	OFF
+89	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Barnesiella KO	Blautia	ON
+90	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Barnesiella KO	Akkermansia	ON
+91	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Barnesiella KO	Lachnospiraceae_other	OFF
+92	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0	Clostridium_difficile KO	Barnesiella	Some
+93	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0	Clostridium_difficile KO	Akkermansia	ON
+94	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1	Lachnospiraceae_other CA	Akkermansia	OFF
+95	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1	Lachnospiraceae_other CA	Other	ON
+96	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Barnesiella CA,Clostridium_difficile CA,Lachnospiraceae KO,Other KO	Enterococcus	ON
+97	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=0	Barnesiella CA,Clostridium_difficile CA,Lachnospiraceae KO,Other KO	Akkermansia	ON
+98	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0	Blautia CA,Other CA	Akkermansia	OFF
+99	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0	Blautia CA,Other CA	Lachnospiraceae_other	OFF
+100	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1	Enterococcus CA,Other CA	Blautia	ON
+101	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1	Enterococcus CA,Other CA	Akkermansia	OFF
+102	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0	Other KO	Akkermansia	ON
+103	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1		Blautia	ON
+104	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1		Akkermansia	ON
+105	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0	Enterococcus KO	Akkermansia	OFF
+106	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0	Enterococcus KO	Clostridium_difficile	Some
+107	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=0	Enterococcus KO	Lachnospiraceae	Some
+108	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0	Enterococcus CA	Akkermansia	ON
+109	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=1,Mollicutes=1	Other CA	Akkermansia	OFF
+110	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Blautia CA,Clostridium_difficile KO,Lachnospiraceae_other KO	Barnesiella	OFF
+111	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Blautia CA,Clostridium_difficile KO,Lachnospiraceae_other KO	Akkermansia	ON
+112	1.0	Clindamycin=0,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=1	Blautia KO,Lachnospiraceae CA,Lachnospiraceae_other CA,Other KO	Akkermansia	OFF
+113	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0	Blautia KO	Akkermansia	ON
+114	1.0	Clindamycin=0,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=0	Blautia KO	Clostridium_difficile	Some
+115	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=1,Mollicutes=1	Barnesiella CA,Lachnospiraceae_other CA	Akkermansia	ON
+116	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=1	Blautia KO,Clostridium_difficile CA,Lachnospiraceae_other CA	Akkermansia	OFF
+117	1.0	Clindamycin=1,Coprobacillus=1,Enterobacteriaceae=0,Mollicutes=1	Barnesiella KO,Lachnospiraceae_other KO	Akkermansia	ON
+118	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=0	Clostridium_difficile CA	Akkermansia	OFF
+119	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=0	Other KO	Barnesiella	OFF
+120	1.0	Clindamycin=1,Coprobacillus=0,Enterobacteriaceae=0,Mollicutes=0	Other KO	Akkermansia	OFF

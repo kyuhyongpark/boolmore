@@ -1,0 +1,241 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=0	Dlp KO,SuFu KO	Targets	ON
+2	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=0,Ttv=1,iHog=1	Ci_rep CA	Targets	OFF
+3	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=0,Ttv=1,iHog=1	Ci_rep CA	Dally	ON
+4	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=0	Ci_act KO,Dlp CA	Ci_rep	OFF
+5	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=0	Ci_act KO,Dlp CA	Targets	OFF
+6	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=0	Ci_act KO,Dlp CA	Fu	OFF
+7	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=1	Dlp CA,Ptc KO	Targets	ON
+8	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=1	Dlp CA,Ptc KO	Dally	ON
+9	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=0		Targets	ON
+10	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=0		Ci_act	ON
+11	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=0	Ci_rep CA	Targets	OFF
+12	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=1,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=0	Ci_rep CA,Fu CA	Targets	OFF
+13	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=1,iHog=1	Ptc KO	Targets	ON
+14	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=1,iHog=1	Ptc KO	Ci_act	ON
+15	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=1,iHog=1	Ptc KO	SuFu	OFF
+16	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=1,iHog=0	Dally KO,Ptc CA,Smo KO	Targets	OFF
+17	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=1,iHog=0	Dally KO,Ptc CA,Smo KO	Cos	ON
+18	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=1	Ci_rep KO,Cos CA	Targets	OFF
+19	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=1,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=1	Fu KO,SuFu KO	Targets	ON
+20	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=0,iHog=1		Targets	ON
+21	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=0,iHog=0		Targets	ON
+22	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=0,iHog=0		Cos	ON
+23	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=1	Ptc CA	Targets	OFF
+24	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=1	Ptc CA	Dally	ON
+25	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=1	Ptc CA	Cos	ON
+26	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=1		Ci_rep	OFF
+27	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=1		Targets	OFF
+28	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=0		Ci_rep	OFF
+29	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=0		Targets	ON
+30	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=1	Ptc CA,SuFu CA	Hh	OFF
+31	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=1	Ptc CA,SuFu CA	Targets	ON
+32	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=1	Dally KO	Hh	OFF
+33	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=1	Dally KO	Targets	OFF
+34	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=1	Dally KO	Ci_act	OFF
+35	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=0		Dlp	OFF
+36	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=0		Targets	ON
+37	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=0		Hh	OFF
+38	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=1	Ci_act CA,Dlp KO,Hh CA	Ci_rep	OFF
+39	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=1	Ci_act CA,Dlp KO,Hh CA	Targets	ON
+40	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Dally CA	Targets	ON
+41	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=1		Targets	ON
+42	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=1		SuFu	ON
+43	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=0		Targets	ON
+44	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Cos KO,SuFu KO	Ci_rep	OFF
+45	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Cos KO,SuFu KO	Targets	ON
+46	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Cos KO,SuFu KO	Ptc	ON
+47	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=0	Dally CA,Dlp KO	Targets	OFF
+48	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=0	Dally CA,Dlp KO	Smo	OFF
+49	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=0,iHog=0		Fu	ON
+50	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=0,iHog=0		Targets	ON
+51	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=0,iHog=0		Dally	OFF
+52	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=0	Dlp KO	Hh	OFF
+53	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=0	Dlp KO	Targets	OFF
+54	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=0	Dlp KO	Ci_act	OFF
+55	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=0	Dlp KO	Cos	ON
+56	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=0		Targets	OFF
+57	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=0		Ci_act	OFF
+58	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=0		Dlp	OFF
+59	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=0		Targets	OFF
+60	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=1,iHog=1	SuFu CA	Targets	OFF
+61	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=0,iHog=0		Fu	ON
+62	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=0,iHog=0		Targets	ON
+63	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=0,iHog=0		Cos	OFF
+64	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=1,Tow=1,Ttv=1,iHog=0		Ci_rep	OFF
+65	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=1,Tow=1,Ttv=1,iHog=0		Targets	OFF
+66	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=1,Tow=1,Ttv=1,iHog=0		Dally	ON
+67	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=1,Tow=1,Ttv=1,iHog=0		Fu	OFF
+68	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=1		Targets	OFF
+69	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=1		Smo	OFF
+70	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=0,iHog=1		Targets	ON
+71	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=0		Dlp	ON
+72	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=0		Targets	ON
+73	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=0,iHog=0	Cos KO	Fu	OFF
+74	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=0,iHog=0	Cos KO	Targets	ON
+75	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=1		Hh	OFF
+76	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=1		Targets	ON
+77	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=1		Cos	OFF
+78	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=1,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=0	Cos CA	Ci_rep	OFF
+79	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=1,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=0	Cos CA	Targets	ON
+80	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=1,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=0	Cos CA	Fu	ON
+81	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=0	Ci_act CA,Ci_rep KO	Targets	ON
+82	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=0,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=1	SuFu KO	Dlp	ON
+83	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=0,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=1	SuFu KO	Targets	ON
+84	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=0	Dally CA	Targets	ON
+85	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=0		Targets	OFF
+86	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=1	Hh CA	Dlp	OFF
+87	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=1	Hh CA	Targets	ON
+88	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=1	Hh CA	Cos	ON
+89	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=1	Ci_act CA,Smo CA	Targets	ON
+90	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Fu CA	Ci_rep	OFF
+91	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Fu CA	Targets	ON
+92	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=1		Hh	OFF
+93	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=1		Targets	ON
+94	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=1		SuFu	OFF
+95	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=0	Ci_rep CA,SuFu KO	Targets	OFF
+96	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=0	Ci_rep CA,SuFu KO	Dally	OFF
+97	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=0,iHog=0	Cos CA,Hh KO	Targets	OFF
+98	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=0,iHog=0	Cos CA,Hh KO	Smo	OFF
+99	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=0,Ttv=1,iHog=1	Hh CA	Targets	ON
+100	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=1	Ci_rep CA,Smo KO	Targets	OFF
+101	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=1	Ci_rep CA,Smo KO	Cos	ON
+102	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=1	Cos CA,Fu KO	Targets	ON
+103	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=1	Cos CA,Fu KO	Ptc	ON
+104	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=1,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=0		Targets	ON
+105	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=1,iHog=0		Targets	OFF
+106	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=1,iHog=0		Ci_act	OFF
+107	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Ci_rep CA,Hh KO	Targets	OFF
+108	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=1,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=1		Hh	OFF
+109	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=1,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=1		Targets	ON
+110	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=1,Lipophorin=0,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=1	SuFu KO	Targets	ON
+111	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=1		Hh	OFF
+112	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=1		Targets	OFF
+113	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=1		Cos	ON
+114	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=0	Dlp KO,Hh CA,Ptc CA	Targets	ON
+115	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=0	Dlp KO,SuFu KO	Targets	ON
+116	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=0	Dlp KO,SuFu KO	Dally	ON
+117	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=1,iHog=1		Targets	OFF
+118	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=1		Targets	OFF
+119	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=1		Dally	OFF
+120	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=1		Ptc	ON
+121	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=1,Rasp=0,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=1		Dlp	OFF
+122	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=1,Rasp=0,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=1		Targets	ON
+123	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=1,Rasp=0,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=1		Hh	OFF
+124	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=1		Ci_rep	OFF
+125	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=1		Targets	OFF
+126	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=1		Dlp	OFF
+127	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=0		Dlp	OFF
+128	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=0		Targets	OFF
+129	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=0		Fu	OFF
+130	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=0	Fu CA	Targets	ON
+131	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=1	SuFu CA	Targets	ON
+132	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=1	SuFu CA	Ci_act	ON
+133	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=1,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=1	Ci_rep KO,Fu CA	Hh	OFF
+134	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=1,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=1	Ci_rep KO,Fu CA	Targets	ON
+135	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=1	Fu CA,SuFu KO	Targets	ON
+136	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=0	Hh KO,SuFu KO	Targets	ON
+137	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=1		Targets	ON
+138	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=1		Dlp	ON
+139	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=1		Targets	ON
+140	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=1		Ci_act	ON
+141	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=1		Cos	ON
+142	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=0		Targets	ON
+143	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=0		Targets	ON
+144	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=0	SuFu CA	Targets	ON
+145	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=0	SuFu CA	Ci_act	ON
+146	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=1	Ci_act KO	Targets	OFF
+147	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=1	Ci_act KO	Dally	OFF
+148	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Ci_act KO,Smo CA	Dlp	OFF
+149	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Ci_act KO,Smo CA	Targets	OFF
+150	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Ci_act KO,Smo CA	SuFu	OFF
+151	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=0		Ci_rep	OFF
+152	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=0		Targets	ON
+153	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=0		Fu	OFF
+154	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=1,iHog=0	Ptc KO	Targets	ON
+155	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=1,iHog=0	Ptc KO	Ci_act	ON
+156	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=0	Ci_act CA,Ci_rep KO,Cos KO	Targets	ON
+157	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=0	Ci_act CA,Ci_rep KO,Cos KO	SuFu	ON
+158	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=1		Targets	ON
+159	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=1		SuFu	ON
+160	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=0,iHog=1	Smo CA	Targets	ON
+161	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=0,iHog=1	Smo CA	Cos	OFF
+162	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=0,Shf=0,Slmb=1,Tow=0,Ttv=1,iHog=1	Ci_rep KO,Hh KO,Ptc CA	Targets	OFF
+163	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=0,Shf=0,Slmb=1,Tow=0,Ttv=1,iHog=1	Ci_rep KO,Hh KO,Ptc CA	Ci_act	OFF
+164	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=0,Shf=0,Slmb=1,Tow=0,Ttv=1,iHog=0	Ci_act CA	Targets	ON
+165	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=0,iHog=1	Dally KO,Dlp KO	Targets	OFF
+166	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=0	Dlp KO,Ptc CA	Targets	ON
+167	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=1	Ci_rep KO,Ptc KO	Targets	ON
+168	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=1		Targets	ON
+169	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=1		Dally	ON
+170	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=1		Ci_act	ON
+171	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=1	SuFu KO	Targets	ON
+172	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=1	SuFu KO	Cos	ON
+173	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=1	Cos CA	Hh	OFF
+174	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=1	Cos CA	Targets	ON
+175	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=0,Ttv=1,iHog=1	Dlp CA	Targets	ON
+176	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=0,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=0	Smo KO,SuFu CA	Targets	ON
+177	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=0,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=0	Smo KO,SuFu CA	Dally	OFF
+178	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=0,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=1	Ptc KO	Targets	OFF
+179	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=0	Ci_rep KO,Fu CA	Targets	ON
+180	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	SuFu KO	Targets	ON
+181	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	SuFu KO	Ci_act	ON
+182	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=1		Targets	OFF
+183	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=1		Ci_act	OFF
+184	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=1	Hh CA	Targets	ON
+185	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=1	Hh CA	Dally	OFF
+186	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=1	Hh CA	Ci_act	ON
+187	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=0	Fu CA,Smo CA	Targets	ON
+188	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=1	Hh CA	Fu	ON
+189	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=1	Hh CA	Targets	ON
+190	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=0	Ptc CA	Targets	ON
+191	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=0	Ptc CA	Ci_act	ON
+192	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=1		Targets	ON
+193	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=1,iHog=0	SuFu KO	Targets	ON
+194	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=1,iHog=0	SuFu KO	Smo	ON
+195	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=1		Ci_rep	OFF
+196	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=1		Targets	OFF
+197	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=1		Ci_act	OFF
+198	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=1,Tow=0,Ttv=1,iHog=1		SuFu	ON
+199	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=1	Cos CA	Targets	ON
+200	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=1	Cos CA	Ci_act	ON
+201	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=1,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=1	Cos CA	Ptc	ON
+202	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Fu KO	Ci_rep	OFF
+203	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Fu KO	Targets	ON
+204	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Fu KO	Dally	OFF
+205	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=0,Rasp=0,Sgg=0,Shf=0,Slmb=1,Tow=1,Ttv=0,iHog=1	Fu KO	Smo	OFF
+206	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=1,iHog=1	Ci_act CA,Dally CA,Smo CA	Targets	ON
+207	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=0	Ci_act KO	Fu	OFF
+208	1.0	Boi=1,CK1a=0,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=0	Ci_act KO	Targets	OFF
+209	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=0	Dally KO	Targets	OFF
+210	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=1,Ttv=1,iHog=0	Dally KO	Ci_act	OFF
+211	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=1,Tow=0,Ttv=0,iHog=0		Targets	OFF
+212	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=1,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=1,Tow=0,Ttv=0,iHog=0	Ptc CA	Targets	ON
+213	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=0,Tow=1,Ttv=0,iHog=0	Fu CA	Targets	ON
+214	1.0	Boi=0,CK1a=0,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=1,Tow=1,Ttv=0,iHog=1		Targets	OFF
+215	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=0	Fu CA	Targets	ON
+216	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=0,Tow=1,Ttv=0,iHog=0	Smo KO	Targets	ON
+217	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=0,Tow=1,Ttv=0,iHog=0	Smo KO	Ptc	ON
+218	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=0,Rasp=0,Sgg=0,Shf=1,Slmb=0,Tow=1,Ttv=0,iHog=0	Smo KO	SuFu	ON
+219	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=1	Dally KO,Dlp CA	Fu	ON
+220	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=1	Dally KO,Dlp CA	SuFu	OFF
+221	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=1	Dally KO,Dlp CA	Ci_act	ON
+222	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=1	Dally KO,Dlp CA	Smo	ON
+223	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=1	Dally KO,Dlp CA	Hh	OFF
+224	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=0,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=1	Dally KO,Dlp CA	Targets	ON
+225	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=0	Ci_rep CA	Dlp	OFF
+226	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=0	Ci_rep CA	Targets	OFF
+227	1.0	Boi=1,CK1a=0,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=0	Ci_rep CA	Ptc	ON
+228	1.0	Boi=0,CK1a=1,Disp=1,Gprk2=0,Lipophorin=1,Pka=1,Rasp=1,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=1,iHog=1	Ci_act KO,Dlp KO,Smo CA	Targets	OFF
+229	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=1,Lipophorin=0,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=0	Fu CA	Ci_rep	OFF
+230	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=1,Lipophorin=0,Pka=0,Rasp=1,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=1,iHog=0	Fu CA	Targets	ON
+231	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=0	Dlp CA,Hh KO	Ci_rep	OFF
+232	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=1,Lipophorin=1,Pka=1,Rasp=1,Sgg=1,Shf=1,Slmb=0,Tow=1,Ttv=1,iHog=0	Dlp CA,Hh KO	Targets	ON
+233	1.0	Boi=1,CK1a=1,Disp=1,Gprk2=0,Lipophorin=0,Pka=0,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=0		Targets	ON
+234	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=1,Shf=0,Slmb=0,Tow=0,Ttv=0,iHog=1		Targets	ON
+235	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=0	Cos CA,Hh CA	Dlp	OFF
+236	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=0	Cos CA,Hh CA	Targets	ON
+237	1.0	Boi=0,CK1a=0,Disp=0,Gprk2=0,Lipophorin=0,Pka=1,Rasp=1,Sgg=0,Shf=1,Slmb=0,Tow=0,Ttv=0,iHog=0	Cos CA,Hh CA	Fu	OFF
+238	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=0,Ttv=1,iHog=1	Dally KO	Fu	ON
+239	1.0	Boi=1,CK1a=1,Disp=0,Gprk2=1,Lipophorin=0,Pka=0,Rasp=0,Sgg=1,Shf=1,Slmb=0,Tow=0,Ttv=1,iHog=1	Dally KO	Targets	ON
+240	1.0	Boi=0,CK1a=1,Disp=0,Gprk2=0,Lipophorin=1,Pka=1,Rasp=0,Sgg=0,Shf=0,Slmb=0,Tow=1,Ttv=0,iHog=0	Ptc CA,SuFu KO	Targets	ON

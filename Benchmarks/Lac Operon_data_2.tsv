@@ -1,0 +1,131 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	Ge=0,Le=0,Lem=0		P	OFF
+2	1.0	Ge=0,Le=0,Lem=0		C	ON
+3	1.0	Ge=0,Le=0,Lem=0		A	OFF
+4	1.0	Ge=0,Le=0,Lem=0		Lm	OFF
+5	1.0	Ge=0,Le=0,Lem=0		L	OFF
+6	1.0	Ge=0,Le=0,Lem=0		M	OFF
+7	1.0	Ge=0,Le=0,Lem=0		Rm	ON
+8	1.0	Ge=1,Le=0,Lem=0		R	ON
+9	1.0	Ge=1,Le=0,Lem=0		L	OFF
+10	1.0	Ge=1,Le=0,Lem=0		C	OFF
+11	1.0	Ge=1,Le=0,Lem=0		Lm	OFF
+12	1.0	Ge=1,Le=0,Lem=0		A	OFF
+13	1.0	Ge=1,Le=0,Lem=0	A KO,Lm CA	M	OFF
+14	1.0	Ge=0,Le=1,Lem=0	R KO	Rm	OFF
+15	1.0	Ge=0,Le=1,Lem=0	R KO	C	ON
+16	1.0	Ge=0,Le=1,Lem=0	R KO	Lm	ON
+17	1.0	Ge=1,Le=1,Lem=1		R	ON
+18	1.0	Ge=1,Le=1,Lem=1		B	OFF
+19	1.0	Ge=1,Le=1,Lem=1		L	OFF
+20	1.0	Ge=1,Le=1,Lem=1		A	OFF
+21	1.0	Ge=1,Le=1,Lem=1		Lm	OFF
+22	1.0	Ge=1,Le=1,Lem=1		M	OFF
+23	1.0	Ge=1,Le=0,Lem=1	C KO,R KO	P	OFF
+24	1.0	Ge=1,Le=0,Lem=1	M CA	B	ON
+25	1.0	Ge=0,Le=1,Lem=1	P KO	A	OFF
+26	1.0	Ge=0,Le=1,Lem=1	C KO,P CA	Rm	OFF
+27	1.0	Ge=0,Le=1,Lem=1	A KO,Lm CA	C	ON
+28	1.0	Ge=0,Le=1,Lem=0		P	ON
+29	1.0	Ge=0,Le=1,Lem=0		Am	ON
+30	1.0	Ge=0,Le=1,Lem=0		R	OFF
+31	1.0	Ge=0,Le=1,Lem=0		L	ON
+32	1.0	Ge=0,Le=1,Lem=0		A	ON
+33	1.0	Ge=0,Le=1,Lem=0		B	ON
+34	1.0	Ge=0,Le=1,Lem=0		M	ON
+35	1.0	Ge=0,Le=1,Lem=0		C	ON
+36	1.0	Ge=0,Le=1,Lem=1		P	ON
+37	1.0	Ge=0,Le=1,Lem=1		R	OFF
+38	1.0	Ge=0,Le=1,Lem=1		L	ON
+39	1.0	Ge=0,Le=1,Lem=1		A	ON
+40	1.0	Ge=0,Le=1,Lem=1		Lm	ON
+41	1.0	Ge=0,Le=1,Lem=1		B	ON
+42	1.0	Ge=0,Le=0,Lem=1		P	Some
+43	1.0	Ge=0,Le=0,Lem=1		R	Some
+44	1.0	Ge=0,Le=0,Lem=1		C	ON
+45	1.0	Ge=0,Le=0,Lem=1		Lm	Some
+46	1.0	Ge=0,Le=0,Lem=1		A	OFF
+47	1.0	Ge=0,Le=0,Lem=1		M	Some
+48	1.0	Ge=0,Le=0,Lem=1		B	Some
+49	1.0	Ge=0,Le=0,Lem=1		Rm	Some
+50	1.0	Ge=1,Le=1,Lem=0		P	OFF
+51	1.0	Ge=1,Le=1,Lem=0		R	ON
+52	1.0	Ge=1,Le=1,Lem=0		L	OFF
+53	1.0	Ge=1,Le=1,Lem=0	M CA	Am	OFF
+54	1.0	Ge=0,Le=1,Lem=1	Rm CA	P	OFF
+55	1.0	Ge=0,Le=1,Lem=0	C CA	M	ON
+56	1.0	Ge=1,Le=0,Lem=1		L	OFF
+57	1.0	Ge=1,Le=0,Lem=1		Lm	OFF
+58	1.0	Ge=1,Le=0,Lem=1		M	OFF
+59	1.0	Ge=1,Le=1,Lem=0	Am CA	L	OFF
+60	1.0	Ge=1,Le=1,Lem=0	Am CA	A	OFF
+61	1.0	Ge=1,Le=0,Lem=1	C KO,L KO	P	OFF
+62	1.0	Ge=1,Le=0,Lem=1	C KO,L KO	R	ON
+63	1.0	Ge=1,Le=0,Lem=1	C KO,L KO	B	OFF
+64	1.0	Ge=0,Le=0,Lem=1	Am KO	C	ON
+65	1.0	Ge=0,Le=0,Lem=1	Am KO	A	OFF
+66	1.0	Ge=1,Le=1,Lem=1	Rm KO	R	ON
+67	1.0	Ge=1,Le=1,Lem=1	Rm KO	Lm	OFF
+68	1.0	Ge=0,Le=0,Lem=0	Rm CA	A	OFF
+69	1.0	Ge=0,Le=0,Lem=1	A KO,C CA,Lm CA,R KO	Am	ON
+70	1.0	Ge=1,Le=0,Lem=0	M KO	Rm	ON
+71	1.0	Ge=1,Le=0,Lem=0	M KO	Am	OFF
+72	1.0	Ge=0,Le=1,Lem=1	A CA,L CA	M	ON
+73	1.0	Ge=1,Le=1,Lem=1	L CA	M	OFF
+74	1.0	Ge=1,Le=1,Lem=0	M KO	B	OFF
+75	1.0	Ge=1,Le=1,Lem=1	B CA	Lm	OFF
+76	1.0	Ge=1,Le=0,Lem=0	A CA	M	OFF
+77	1.0	Ge=1,Le=0,Lem=1	A KO	Rm	ON
+78	1.0	Ge=1,Le=0,Lem=1	A KO	C	OFF
+79	1.0	Ge=1,Le=0,Lem=1	A KO	Lm	OFF
+80	1.0	Ge=1,Le=0,Lem=0	Am KO	A	OFF
+81	1.0	Ge=1,Le=0,Lem=0	Am KO	Lm	OFF
+82	1.0	Ge=0,Le=1,Lem=0	Rm CA	M	OFF
+83	1.0	Ge=1,Le=1,Lem=0	A CA	Rm	OFF
+84	1.0	Ge=1,Le=1,Lem=0	A CA	C	OFF
+85	1.0	Ge=1,Le=1,Lem=0	A CA	B	OFF
+86	1.0	Ge=1,Le=1,Lem=0	A CA	Lm	OFF
+87	1.0	Ge=0,Le=1,Lem=1	R CA,Rm CA	A	OFF
+88	1.0	Ge=0,Le=0,Lem=1	Lm CA	B	ON
+89	1.0	Ge=0,Le=0,Lem=1	M KO,P KO	Lm	OFF
+90	1.0	Ge=0,Le=0,Lem=0	A KO,P KO,R KO	Lm	OFF
+91	1.0	Ge=1,Le=0,Lem=0	L CA	Am	ON
+92	1.0	Ge=1,Le=1,Lem=0	Am CA,B CA	L	OFF
+93	1.0	Ge=0,Le=1,Lem=0	M KO,P CA	L	ON
+94	1.0	Ge=1,Le=1,Lem=0	Am CA,Lm KO,P KO	Rm	OFF
+95	1.0	Ge=1,Le=1,Lem=0	Am CA,Lm KO,P KO	L	OFF
+96	1.0	Ge=1,Le=0,Lem=1	B CA,M KO,P KO	Lm	OFF
+97	1.0	Ge=0,Le=0,Lem=0	R KO	L	OFF
+98	1.0	Ge=1,Le=1,Lem=0	Rm CA	R	ON
+99	1.0	Ge=1,Le=1,Lem=0	Rm CA	L	OFF
+100	1.0	Ge=1,Le=1,Lem=0	Rm CA	B	OFF
+101	1.0	Ge=1,Le=1,Lem=0	Rm CA	Lm	OFF
+102	1.0	Ge=0,Le=0,Lem=0	Am KO,B CA	P	OFF
+103	1.0	Ge=1,Le=0,Lem=0	A KO,Lm CA,M KO	R	OFF
+104	1.0	Ge=1,Le=0,Lem=0	A KO,Lm CA,M KO	C	OFF
+105	1.0	Ge=1,Le=1,Lem=1	A CA	Rm	OFF
+106	1.0	Ge=1,Le=1,Lem=1	A CA	C	OFF
+107	1.0	Ge=1,Le=1,Lem=1	A CA	Lm	OFF
+108	1.0	Ge=1,Le=1,Lem=0	R CA	L	OFF
+109	1.0	Ge=1,Le=1,Lem=0	R CA	Lm	OFF
+110	1.0	Ge=0,Le=1,Lem=0	Lm CA,R CA	C	ON
+111	1.0	Ge=0,Le=1,Lem=0	Lm CA,R CA	L	OFF
+112	1.0	Ge=0,Le=1,Lem=0	Lm CA,R CA	B	OFF
+113	1.0	Ge=0,Le=0,Lem=0	Lm CA,P KO,Rm KO	L	OFF
+114	1.0	Ge=1,Le=1,Lem=1	P CA	Rm	ON
+115	1.0	Ge=1,Le=1,Lem=1	L KO,M KO	Am	OFF
+116	1.0	Ge=0,Le=0,Lem=1	A KO,C KO	P	OFF
+117	1.0	Ge=0,Le=0,Lem=1	A KO,C KO	R	ON
+118	1.0	Ge=0,Le=1,Lem=1	C CA	L	ON
+119	1.0	Ge=0,Le=1,Lem=1	C CA	B	ON
+120	1.0	Ge=0,Le=0,Lem=0	B CA	R	ON
+121	1.0	Ge=0,Le=1,Lem=0	M CA,R CA	Rm	ON
+122	1.0	Ge=0,Le=1,Lem=0	M CA,R CA	C	ON
+123	1.0	Ge=0,Le=1,Lem=1	C CA,Lm KO,R KO	B	Some
+124	1.0	Ge=0,Le=1,Lem=0	Am KO,B CA,P CA,Rm CA	M	OFF
+125	1.0	Ge=0,Le=0,Lem=1	R CA	L	OFF
+126	1.0	Ge=1,Le=1,Lem=1	M CA,Rm CA	Am	OFF
+127	1.0	Ge=0,Le=1,Lem=1	L KO	Am	ON
+128	1.0	Ge=0,Le=0,Lem=1	A KO	Am	Some
+129	1.0	Ge=0,Le=0,Lem=1	A KO	M	Some
+130	1.0	Ge=1,Le=0,Lem=0	B KO,M CA	Lm	OFF

@@ -1,0 +1,161 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	Glutamate=1,Tryosine_hydroxylase=0	Dopamine_Receptor_1 CA	Exocytosis	Some
+2	1.0	Glutamate=0,Tryosine_hydroxylase=0		Adenylate_cyclase	OFF
+3	1.0	Glutamate=0,Tryosine_hydroxylase=0		Dopamine_Receptor_1	OFF
+4	1.0	Glutamate=0,Tryosine_hydroxylase=0		Calcineurin	OFF
+5	1.0	Glutamate=0,Tryosine_hydroxylase=0		Dopamine	OFF
+6	1.0	Glutamate=0,Tryosine_hydroxylase=0		Protein_Kinase_A	OFF
+7	1.0	Glutamate=0,Tryosine_hydroxylase=0		Protein_Phosphatase_1	ON
+8	1.0	Glutamate=0,Tryosine_hydroxylase=0		Exocytosis	OFF
+9	1.0	Glutamate=0,Tryosine_hydroxylase=0		DARPP32	OFF
+10	1.0	Glutamate=0,Tryosine_hydroxylase=0		Packaging_Proteins	OFF
+11	1.0	Glutamate=0,Tryosine_hydroxylase=0		Phospholipase_C	OFF
+12	1.0	Glutamate=1,Tryosine_hydroxylase=0	Glutamate_Receptor KO	COMT	OFF
+13	1.0	Glutamate=1,Tryosine_hydroxylase=0	Glutamate_Receptor KO	Adenylate_cyclase	OFF
+14	1.0	Glutamate=1,Tryosine_hydroxylase=0	Glutamate_Receptor KO	Exocytosis	OFF
+15	1.0	Glutamate=0,Tryosine_hydroxylase=1	COMT KO,Dopamine_Receptor_2 CA	Packaging_Proteins	OFF
+16	1.0	Glutamate=0,Tryosine_hydroxylase=1	COMT KO,Dopamine_Receptor_2 CA	Exocytosis	OFF
+17	1.0	Glutamate=1,Tryosine_hydroxylase=1		Dopamine_Receptor_1	Some
+18	1.0	Glutamate=1,Tryosine_hydroxylase=1		Calcineurin	Some
+19	1.0	Glutamate=1,Tryosine_hydroxylase=1		Dopamine	Some
+20	1.0	Glutamate=1,Tryosine_hydroxylase=1		Dopamine_Receptor_2	Some
+21	1.0	Glutamate=1,Tryosine_hydroxylase=1		Exocytosis	Some
+22	1.0	Glutamate=1,Tryosine_hydroxylase=1		DARPP32	Some
+23	1.0	Glutamate=1,Tryosine_hydroxylase=1		Phospholipase_C	Some
+24	1.0	Glutamate=1,Tryosine_hydroxylase=1		Glutamate_Receptor	Some
+25	1.0	Glutamate=0,Tryosine_hydroxylase=0	Adenylate_cyclase CA	Glutamate_Receptor	OFF
+26	1.0	Glutamate=0,Tryosine_hydroxylase=0	Adenylate_cyclase CA	Exocytosis	OFF
+27	1.0	Glutamate=0,Tryosine_hydroxylase=1	DARPP32 CA	Dopamine_Receptor_1	Some
+28	1.0	Glutamate=0,Tryosine_hydroxylase=1	DARPP32 CA	Exocytosis	OFF
+29	1.0	Glutamate=1,Tryosine_hydroxylase=1	Adenylate_cyclase CA,Dopamine_Receptor_2 KO	Exocytosis	Some
+30	1.0	Glutamate=0,Tryosine_hydroxylase=1	COMT KO	Exocytosis	OFF
+31	1.0	Glutamate=1,Tryosine_hydroxylase=1	Adenylate_cyclase CA,Protein_Kinase_A KO	Dopamine	Some
+32	1.0	Glutamate=1,Tryosine_hydroxylase=1	Adenylate_cyclase CA,Protein_Kinase_A KO	Exocytosis	OFF
+33	1.0	Glutamate=0,Tryosine_hydroxylase=1	Protein_Kinase_A KO	Calcium	Some
+34	1.0	Glutamate=0,Tryosine_hydroxylase=1	Protein_Kinase_A KO	Exocytosis	OFF
+35	1.0	Glutamate=1,Tryosine_hydroxylase=1	COMT KO,Phospholipase_C KO	Dopamine	ON
+36	1.0	Glutamate=1,Tryosine_hydroxylase=1	COMT KO,Phospholipase_C KO	Protein_Kinase_A	OFF
+37	1.0	Glutamate=1,Tryosine_hydroxylase=1	COMT KO,Phospholipase_C KO	Protein_Phosphatase_1	ON
+38	1.0	Glutamate=1,Tryosine_hydroxylase=1	COMT KO,Phospholipase_C KO	Exocytosis	OFF
+39	1.0	Glutamate=1,Tryosine_hydroxylase=1	COMT KO,Phospholipase_C KO	Glutamate_Receptor	OFF
+40	1.0	Glutamate=0,Tryosine_hydroxylase=1		Dopamine_Receptor_1	Some
+41	1.0	Glutamate=0,Tryosine_hydroxylase=1		Protein_Phosphatase_1	Some
+42	1.0	Glutamate=0,Tryosine_hydroxylase=1		Dopamine_Receptor_2	Some
+43	1.0	Glutamate=0,Tryosine_hydroxylase=1		Exocytosis	OFF
+44	1.0	Glutamate=0,Tryosine_hydroxylase=1		COMT	Some
+45	1.0	Glutamate=0,Tryosine_hydroxylase=1		Packaging_Proteins	OFF
+46	1.0	Glutamate=0,Tryosine_hydroxylase=1		Phospholipase_C	Some
+47	1.0	Glutamate=0,Tryosine_hydroxylase=1	Dopamine_Receptor_1 KO,Dopamine_Receptor_2 CA	Exocytosis	OFF
+48	1.0	Glutamate=1,Tryosine_hydroxylase=1	Calcineurin KO	Adenylate_cyclase	Some
+49	1.0	Glutamate=1,Tryosine_hydroxylase=1	Calcineurin KO	Protein_Phosphatase_1	Some
+50	1.0	Glutamate=1,Tryosine_hydroxylase=1	Calcineurin KO	Exocytosis	Some
+51	1.0	Glutamate=1,Tryosine_hydroxylase=1	Adenylate_cyclase KO,Protein_Phosphatase_1 CA	Exocytosis	OFF
+52	1.0	Glutamate=0,Tryosine_hydroxylase=0	COMT KO	Glutamate_Receptor	OFF
+53	1.0	Glutamate=0,Tryosine_hydroxylase=0	COMT KO	Exocytosis	OFF
+54	1.0	Glutamate=1,Tryosine_hydroxylase=0	Phospholipase_C KO,Protein_Phosphatase_1 CA	Dopamine_Receptor_1	OFF
+55	1.0	Glutamate=1,Tryosine_hydroxylase=0	Phospholipase_C KO,Protein_Phosphatase_1 CA	Exocytosis	OFF
+56	1.0	Glutamate=1,Tryosine_hydroxylase=1	Dopamine_Receptor_1 CA	Calcineurin	Some
+57	1.0	Glutamate=1,Tryosine_hydroxylase=1	Dopamine_Receptor_1 CA	Exocytosis	Some
+58	1.0	Glutamate=1,Tryosine_hydroxylase=0		Adenylate_cyclase	OFF
+59	1.0	Glutamate=1,Tryosine_hydroxylase=0		Calcineurin	OFF
+60	1.0	Glutamate=1,Tryosine_hydroxylase=0		Dopamine_Receptor_1	OFF
+61	1.0	Glutamate=1,Tryosine_hydroxylase=0		Dopamine	OFF
+62	1.0	Glutamate=1,Tryosine_hydroxylase=0		Protein_Kinase_A	OFF
+63	1.0	Glutamate=1,Tryosine_hydroxylase=0		Calcium	OFF
+64	1.0	Glutamate=1,Tryosine_hydroxylase=0		Exocytosis	OFF
+65	1.0	Glutamate=1,Tryosine_hydroxylase=0		COMT	OFF
+66	1.0	Glutamate=1,Tryosine_hydroxylase=0		Packaging_Proteins	OFF
+67	1.0	Glutamate=1,Tryosine_hydroxylase=0	Protein_Phosphatase_1 CA	Phospholipase_C	OFF
+68	1.0	Glutamate=1,Tryosine_hydroxylase=0	Protein_Phosphatase_1 CA	Exocytosis	OFF
+69	1.0	Glutamate=0,Tryosine_hydroxylase=0	Calcium CA,Glutamate_Receptor CA	Exocytosis	ON
+70	1.0	Glutamate=0,Tryosine_hydroxylase=1	Dopamine_Receptor_1 CA	Protein_Phosphatase_1	Some
+71	1.0	Glutamate=0,Tryosine_hydroxylase=1	Dopamine_Receptor_1 CA	Exocytosis	OFF
+72	1.0	Glutamate=1,Tryosine_hydroxylase=0	Glutamate_Receptor KO,Protein_Kinase_A CA	Packaging_Proteins	OFF
+73	1.0	Glutamate=1,Tryosine_hydroxylase=0	Glutamate_Receptor KO,Protein_Kinase_A CA	Exocytosis	OFF
+74	1.0	Glutamate=1,Tryosine_hydroxylase=0	Dopamine KO,Dopamine_Receptor_1 KO,Packaging_Proteins KO	Exocytosis	OFF
+75	1.0	Glutamate=0,Tryosine_hydroxylase=1	Dopamine KO	Protein_Kinase_A	OFF
+76	1.0	Glutamate=0,Tryosine_hydroxylase=1	Dopamine KO	Exocytosis	OFF
+77	1.0	Glutamate=0,Tryosine_hydroxylase=1	Protein_Phosphatase_1 KO	Packaging_Proteins	OFF
+78	1.0	Glutamate=0,Tryosine_hydroxylase=1	Protein_Phosphatase_1 KO	Exocytosis	OFF
+79	1.0	Glutamate=1,Tryosine_hydroxylase=1	DARPP32 CA,Dopamine_Receptor_1 KO	COMT	Some
+80	1.0	Glutamate=1,Tryosine_hydroxylase=1	DARPP32 CA,Dopamine_Receptor_1 KO	Glutamate_Receptor	OFF
+81	1.0	Glutamate=1,Tryosine_hydroxylase=1	DARPP32 CA,Dopamine_Receptor_1 KO	Exocytosis	OFF
+82	1.0	Glutamate=1,Tryosine_hydroxylase=0	COMT KO	Calcineurin	OFF
+83	1.0	Glutamate=1,Tryosine_hydroxylase=0	COMT KO	Dopamine	OFF
+84	1.0	Glutamate=1,Tryosine_hydroxylase=0	COMT KO	Dopamine_Receptor_2	OFF
+85	1.0	Glutamate=1,Tryosine_hydroxylase=0	COMT KO	Exocytosis	OFF
+86	1.0	Glutamate=1,Tryosine_hydroxylase=0	COMT KO	Packaging_Proteins	OFF
+87	1.0	Glutamate=0,Tryosine_hydroxylase=0	COMT KO,Calcium KO	Exocytosis	OFF
+88	1.0	Glutamate=1,Tryosine_hydroxylase=0	Calcium KO,Phospholipase_C KO,Protein_Phosphatase_1 CA	COMT	OFF
+89	1.0	Glutamate=1,Tryosine_hydroxylase=0	Calcium KO,Phospholipase_C KO,Protein_Phosphatase_1 CA	Exocytosis	OFF
+90	1.0	Glutamate=0,Tryosine_hydroxylase=1	COMT KO,Calcium KO	Adenylate_cyclase	OFF
+91	1.0	Glutamate=0,Tryosine_hydroxylase=1	COMT KO,Calcium KO	Protein_Phosphatase_1	ON
+92	1.0	Glutamate=0,Tryosine_hydroxylase=1	COMT KO,Calcium KO	Exocytosis	OFF
+93	1.0	Glutamate=0,Tryosine_hydroxylase=1	Packaging_Proteins KO	Exocytosis	OFF
+94	1.0	Glutamate=0,Tryosine_hydroxylase=1	Protein_Kinase_A CA	COMT	Some
+95	1.0	Glutamate=0,Tryosine_hydroxylase=1	Protein_Kinase_A CA	Exocytosis	OFF
+96	1.0	Glutamate=0,Tryosine_hydroxylase=1	Packaging_Proteins KO,Phospholipase_C KO	Exocytosis	OFF
+97	1.0	Glutamate=0,Tryosine_hydroxylase=0	Packaging_Proteins KO	Calcineurin	OFF
+98	1.0	Glutamate=0,Tryosine_hydroxylase=0	Packaging_Proteins KO	Phospholipase_C	OFF
+99	1.0	Glutamate=0,Tryosine_hydroxylase=0	Packaging_Proteins KO	Protein_Kinase_A	OFF
+100	1.0	Glutamate=0,Tryosine_hydroxylase=0	Packaging_Proteins KO	Exocytosis	OFF
+101	1.0	Glutamate=0,Tryosine_hydroxylase=1	Dopamine_Receptor_2 CA,Glutamate_Receptor KO	COMT	Some
+102	1.0	Glutamate=0,Tryosine_hydroxylase=1	Dopamine_Receptor_2 CA,Glutamate_Receptor KO	Adenylate_cyclase	OFF
+103	1.0	Glutamate=0,Tryosine_hydroxylase=1	Dopamine_Receptor_2 CA,Glutamate_Receptor KO	Calcium	ON
+104	1.0	Glutamate=0,Tryosine_hydroxylase=1	Dopamine_Receptor_2 CA,Glutamate_Receptor KO	Exocytosis	OFF
+105	1.0	Glutamate=0,Tryosine_hydroxylase=1	Phospholipase_C KO	Adenylate_cyclase	Some
+106	1.0	Glutamate=0,Tryosine_hydroxylase=1	Phospholipase_C KO	Calcium	OFF
+107	1.0	Glutamate=0,Tryosine_hydroxylase=1	Phospholipase_C KO	Dopamine_Receptor_2	Some
+108	1.0	Glutamate=0,Tryosine_hydroxylase=1	Phospholipase_C KO	Exocytosis	OFF
+109	1.0	Glutamate=0,Tryosine_hydroxylase=1	Phospholipase_C KO	Packaging_Proteins	OFF
+110	1.0	Glutamate=1,Tryosine_hydroxylase=0	Protein_Phosphatase_1 KO	COMT	OFF
+111	1.0	Glutamate=1,Tryosine_hydroxylase=0	Protein_Phosphatase_1 KO	Exocytosis	OFF
+112	1.0	Glutamate=0,Tryosine_hydroxylase=1	Phospholipase_C CA	Exocytosis	OFF
+113	1.0	Glutamate=1,Tryosine_hydroxylase=1	Protein_Kinase_A CA	Dopamine_Receptor_1	Some
+114	1.0	Glutamate=1,Tryosine_hydroxylase=1	Protein_Kinase_A CA	Glutamate_Receptor	Some
+115	1.0	Glutamate=1,Tryosine_hydroxylase=1	Protein_Kinase_A CA	Exocytosis	Some
+116	1.0	Glutamate=1,Tryosine_hydroxylase=0	Adenylate_cyclase CA,Dopamine_Receptor_1 CA	Calcineurin	Some
+117	1.0	Glutamate=1,Tryosine_hydroxylase=0	Adenylate_cyclase CA,Dopamine_Receptor_1 CA	Exocytosis	Some
+118	1.0	Glutamate=1,Tryosine_hydroxylase=1	DARPP32 KO,Glutamate_Receptor KO,Packaging_Proteins CA	Exocytosis	ON
+119	1.0	Glutamate=0,Tryosine_hydroxylase=0	COMT CA	Phospholipase_C	OFF
+120	1.0	Glutamate=0,Tryosine_hydroxylase=0	COMT CA	Dopamine	OFF
+121	1.0	Glutamate=0,Tryosine_hydroxylase=0	COMT CA	Exocytosis	OFF
+122	1.0	Glutamate=1,Tryosine_hydroxylase=1	Dopamine KO,Dopamine_Receptor_2 CA	Protein_Kinase_A	OFF
+123	1.0	Glutamate=1,Tryosine_hydroxylase=1	Dopamine KO,Dopamine_Receptor_2 CA	Exocytosis	OFF
+124	1.0	Glutamate=0,Tryosine_hydroxylase=1	Dopamine CA,Dopamine_Receptor_1 CA,Phospholipase_C KO	Packaging_Proteins	OFF
+125	1.0	Glutamate=0,Tryosine_hydroxylase=1	Dopamine CA,Dopamine_Receptor_1 CA,Phospholipase_C KO	Exocytosis	OFF
+126	1.0	Glutamate=0,Tryosine_hydroxylase=1	Adenylate_cyclase CA	Calcium	Some
+127	1.0	Glutamate=0,Tryosine_hydroxylase=1	Adenylate_cyclase CA	Exocytosis	OFF
+128	1.0	Glutamate=1,Tryosine_hydroxylase=1	Adenylate_cyclase KO,Packaging_Proteins CA,Phospholipase_C CA	Exocytosis	ON
+129	1.0	Glutamate=1,Tryosine_hydroxylase=1	Phospholipase_C KO	Exocytosis	Some
+130	1.0	Glutamate=1,Tryosine_hydroxylase=1	Protein_Phosphatase_1 KO	Exocytosis	Some
+131	1.0	Glutamate=1,Tryosine_hydroxylase=1	Adenylate_cyclase CA	Protein_Kinase_A	ON
+132	1.0	Glutamate=1,Tryosine_hydroxylase=1	Adenylate_cyclase CA	Exocytosis	Some
+133	1.0	Glutamate=1,Tryosine_hydroxylase=0	Phospholipase_C CA	Packaging_Proteins	OFF
+134	1.0	Glutamate=1,Tryosine_hydroxylase=0	Phospholipase_C CA	Exocytosis	OFF
+135	1.0	Glutamate=1,Tryosine_hydroxylase=0	Adenylate_cyclase KO	Dopamine	OFF
+136	1.0	Glutamate=1,Tryosine_hydroxylase=0	Adenylate_cyclase KO	Exocytosis	OFF
+137	1.0	Glutamate=0,Tryosine_hydroxylase=1	Calcineurin CA	Exocytosis	OFF
+138	1.0	Glutamate=0,Tryosine_hydroxylase=1	Dopamine KO,Dopamine_Receptor_2 CA	Exocytosis	OFF
+139	1.0	Glutamate=1,Tryosine_hydroxylase=0	Packaging_Proteins CA,Protein_Phosphatase_1 CA	Dopamine_Receptor_2	OFF
+140	1.0	Glutamate=1,Tryosine_hydroxylase=0	Packaging_Proteins CA,Protein_Phosphatase_1 CA	Dopamine	OFF
+141	1.0	Glutamate=1,Tryosine_hydroxylase=0	Packaging_Proteins CA,Protein_Phosphatase_1 CA	Exocytosis	ON
+142	1.0	Glutamate=1,Tryosine_hydroxylase=0	Dopamine_Receptor_1 KO,Glutamate_Receptor CA	Adenylate_cyclase	OFF
+143	1.0	Glutamate=1,Tryosine_hydroxylase=0	Dopamine_Receptor_1 KO,Glutamate_Receptor CA	Exocytosis	ON
+144	1.0	Glutamate=0,Tryosine_hydroxylase=1	Calcium KO	Dopamine_Receptor_1	Some
+145	1.0	Glutamate=0,Tryosine_hydroxylase=1	Calcium KO	Exocytosis	OFF
+146	1.0	Glutamate=0,Tryosine_hydroxylase=0	Protein_Kinase_A KO	Adenylate_cyclase	OFF
+147	1.0	Glutamate=0,Tryosine_hydroxylase=0	Protein_Kinase_A KO	Packaging_Proteins	OFF
+148	1.0	Glutamate=0,Tryosine_hydroxylase=0	Protein_Kinase_A KO	Glutamate_Receptor	OFF
+149	1.0	Glutamate=0,Tryosine_hydroxylase=0	Protein_Kinase_A KO	Exocytosis	OFF
+150	1.0	Glutamate=0,Tryosine_hydroxylase=0	Adenylate_cyclase KO	Exocytosis	OFF
+151	1.0	Glutamate=1,Tryosine_hydroxylase=0	Dopamine CA	Exocytosis	OFF
+152	1.0	Glutamate=0,Tryosine_hydroxylase=0	Protein_Phosphatase_1 KO	DARPP32	OFF
+153	1.0	Glutamate=0,Tryosine_hydroxylase=0	Protein_Phosphatase_1 KO	Exocytosis	OFF
+154	1.0	Glutamate=0,Tryosine_hydroxylase=1	Adenylate_cyclase CA,Packaging_Proteins CA	COMT	Some
+155	1.0	Glutamate=0,Tryosine_hydroxylase=1	Adenylate_cyclase CA,Packaging_Proteins CA	Exocytosis	ON
+156	1.0	Glutamate=1,Tryosine_hydroxylase=0	Adenylate_cyclase CA	Calcineurin	Some
+157	1.0	Glutamate=1,Tryosine_hydroxylase=0	Adenylate_cyclase CA	Dopamine	OFF
+158	1.0	Glutamate=1,Tryosine_hydroxylase=0	Adenylate_cyclase CA	Calcium	Some
+159	1.0	Glutamate=1,Tryosine_hydroxylase=0	Adenylate_cyclase CA	Exocytosis	Some
+160	1.0	Glutamate=1,Tryosine_hydroxylase=0	Adenylate_cyclase CA	DARPP32	Some

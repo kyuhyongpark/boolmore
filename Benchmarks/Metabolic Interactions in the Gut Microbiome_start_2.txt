@@ -1,0 +1,19 @@
+# id: 175261
+# generation: 1
+# extra edges: []
+# score: 73.74999999999999 / 96.0
+# following constraints: True
+# complexity: 30
+
+Akkermansia* = Coprobacillus
+Barnesiella* = !Clindamycin & Lachnospiraceae_other
+Blautia* = Blautia & Coprobacillus | Blautia & Enterococcus | Coprobacillus & Enterococcus
+Clindamycin* = Clindamycin
+Clostridium_difficile* = !Barnesiella
+Coprobacillus* = Coprobacillus
+Enterobacteriaceae* = Enterobacteriaceae
+Enterococcus* = Clostridium_difficile & !Coprobacillus & Enterobacteriaceae | Clostridium_difficile & Enterobacteriaceae & Mollicutes
+Lachnospiraceae* = !Clindamycin | Lachnospiraceae | Other
+Lachnospiraceae_other* = !Clindamycin & Lachnospiraceae & Other
+Mollicutes* = Mollicutes
+Other* = !Clindamycin & Lachnospiraceae_other | Lachnospiraceae_other & Other

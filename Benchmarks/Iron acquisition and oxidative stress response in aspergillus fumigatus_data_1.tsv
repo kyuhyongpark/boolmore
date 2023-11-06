@@ -1,0 +1,221 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	Iron=1,Superoxide=0	Cat1_2 KO	FCplusFe	Some
+2	1.0	Iron=1,Superoxide=0	Cat1_2 KO	CccA	Some
+3	1.0	Iron=1,Superoxide=0	Cat1_2 KO	ICP	Some
+4	1.0	Iron=0,Superoxide=1	FCplusFe KO	LIP	Some
+5	1.0	Iron=0,Superoxide=1	FCplusFe KO	ICP	Some
+6	1.0	Iron=0,Superoxide=1	FCplusFe KO	SOD2_3	Some
+7	1.0	Iron=0,Superoxide=1	FCplusFe KO	Yap1	Some
+8	1.0	Iron=0,Superoxide=1	FCplusFe KO	SreA	Some
+9	1.0	Iron=1,Superoxide=0	FCminusFe KO	VAC	Some
+10	1.0	Iron=1,Superoxide=0	FCminusFe KO	Yap1	Some
+11	1.0	Iron=1,Superoxide=0	FCminusFe KO	ICP	Some
+12	1.0	Iron=0,Superoxide=1	EstB CA	LIP	Some
+13	1.0	Iron=0,Superoxide=1	EstB CA	ICP	Some
+14	1.0	Iron=1,Superoxide=1		TAFC	Some
+15	1.0	Iron=1,Superoxide=1		EstB	Some
+16	1.0	Iron=1,Superoxide=1		LIP	Some
+17	1.0	Iron=1,Superoxide=1		ICP	Some
+18	1.0	Iron=1,Superoxide=1		SidA	Some
+19	1.0	Iron=1,Superoxide=1		MirB	Some
+20	1.0	Iron=1,Superoxide=1		ROS	Some
+21	1.0	Iron=1,Superoxide=1		SreA	Some
+22	1.0	Iron=0,Superoxide=1	SOD2_3 KO	ICP	Some
+23	1.0	Iron=0,Superoxide=1	ThP CA	ICP	Some
+24	1.0	Iron=0,Superoxide=1	ThP CA	Cat1_2	Some
+25	1.0	Iron=1,Superoxide=1	Cat1_2 KO,MirB KO	CccA	Some
+26	1.0	Iron=1,Superoxide=1	Cat1_2 KO,MirB KO	ICP	Some
+27	1.0	Iron=0,Superoxide=1	Cat1_2 KO,LIP CA,sreA CA	ICP	ON
+28	1.0	Iron=0,Superoxide=0	ROS CA	ICP	Some
+29	1.0	Iron=1,Superoxide=1	CccA CA,FCminusFe CA,RIA KO	TAFC	Some
+30	1.0	Iron=1,Superoxide=1	CccA CA,FCminusFe CA,RIA KO	ICP	Some
+31	1.0	Iron=1,Superoxide=1	CccA CA,FCminusFe CA,RIA KO	Cat1_2	Some
+32	1.0	Iron=1,Superoxide=0	CccA KO	ICP	Some
+33	1.0	Iron=0,Superoxide=1	SreA KO,ThP CA	ICP	Some
+34	1.0	Iron=0,Superoxide=1	SreA KO,ThP CA	hapX	ON
+35	1.0	Iron=1,Superoxide=1	CccA KO,RIA CA	sreA	ON
+36	1.0	Iron=1,Superoxide=1	CccA KO,RIA CA	ICP	OFF
+37	1.0	Iron=1,Superoxide=0	ThP CA	CccA	Some
+38	1.0	Iron=1,Superoxide=0	ThP CA	ICP	Some
+39	1.0	Iron=1,Superoxide=0	ThP CA	SidA	Some
+40	1.0	Iron=0,Superoxide=0	Cat1_2 KO,MirB CA	ICP	Some
+41	1.0	Iron=0,Superoxide=0	Cat1_2 KO,MirB CA	EstB	Some
+42	1.0	Iron=0,Superoxide=0	Cat1_2 KO,MirB CA	ROS	Some
+43	1.0	Iron=0,Superoxide=0		FCminusFe	Some
+44	1.0	Iron=0,Superoxide=0		TAFC	Some
+45	1.0	Iron=0,Superoxide=0		HapX	Some
+46	1.0	Iron=0,Superoxide=0		Cat1_2	Some
+47	1.0	Iron=0,Superoxide=0		CccA	Some
+48	1.0	Iron=0,Superoxide=0		hapX	Some
+49	1.0	Iron=0,Superoxide=0		RIA	Some
+50	1.0	Iron=0,Superoxide=0		LIP	Some
+51	1.0	Iron=0,Superoxide=0		ICP	Some
+52	1.0	Iron=0,Superoxide=0		SOD2_3	Some
+53	1.0	Iron=0,Superoxide=0		SidA	Some
+54	1.0	Iron=0,Superoxide=0		Yap1	Some
+55	1.0	Iron=0,Superoxide=0		ThP	Some
+56	1.0	Iron=0,Superoxide=0		SreA	Some
+57	1.0	Iron=1,Superoxide=0	VAC KO	ICP	Some
+58	1.0	Iron=1,Superoxide=0	VAC KO	MirB	Some
+59	1.0	Iron=1,Superoxide=0	VAC KO	Cat1_2	Some
+60	1.0	Iron=0,Superoxide=0	TAFC CA	FCminusFe	Some
+61	1.0	Iron=0,Superoxide=0	TAFC CA	ICP	Some
+62	1.0	Iron=1,Superoxide=0	SreA CA	ICP	OFF
+63	1.0	Iron=1,Superoxide=0	SreA CA	HapX	OFF
+64	1.0	Iron=0,Superoxide=0	hapX KO	ICP	OFF
+65	1.0	Iron=1,Superoxide=1	SreA KO	ICP	ON
+66	1.0	Iron=1,Superoxide=1	Cat1_2 KO,TAFC KO	FCminusFe	Some
+67	1.0	Iron=1,Superoxide=1	Cat1_2 KO,TAFC KO	ICP	Some
+68	1.0	Iron=1,Superoxide=1	Cat1_2 KO,TAFC KO	SidA	Some
+69	1.0	Iron=1,Superoxide=1	SreA CA	ICP	OFF
+70	1.0	Iron=0,Superoxide=1	TAFC CA	ICP	Some
+71	1.0	Iron=0,Superoxide=1	TAFC CA	SOD2_3	Some
+72	1.0	Iron=0,Superoxide=0	EstB KO	TAFC	ON
+73	1.0	Iron=0,Superoxide=0	EstB KO	HapX	ON
+74	1.0	Iron=0,Superoxide=0	EstB KO	ICP	OFF
+75	1.0	Iron=0,Superoxide=0	EstB KO	SidA	ON
+76	1.0	Iron=0,Superoxide=0	EstB KO	ThP	OFF
+77	1.0	Iron=1,Superoxide=0	SreA KO	FCplusFe	OFF
+78	1.0	Iron=1,Superoxide=0	SreA KO	ICP	ON
+79	1.0	Iron=1,Superoxide=0	SreA KO	ROS	ON
+80	1.0	Iron=1,Superoxide=0	SreA KO	ThP	ON
+81	1.0	Iron=0,Superoxide=1		FCminusFe	Some
+82	1.0	Iron=0,Superoxide=1		FCplusFe	Some
+83	1.0	Iron=0,Superoxide=1		ICP	Some
+84	1.0	Iron=0,Superoxide=1		SOD2_3	Some
+85	1.0	Iron=0,Superoxide=1		SidA	Some
+86	1.0	Iron=0,Superoxide=1		VAC	Some
+87	1.0	Iron=0,Superoxide=1		ThP	Some
+88	1.0	Iron=1,Superoxide=1	FCminusFe KO	Yap1	Some
+89	1.0	Iron=1,Superoxide=1	FCminusFe KO	ICP	Some
+90	1.0	Iron=1,Superoxide=1	SOD2_3 KO	ICP	Some
+91	1.0	Iron=0,Superoxide=1	MirB CA	ICP	Some
+92	1.0	Iron=0,Superoxide=1	MirB CA	HapX	Some
+93	1.0	Iron=0,Superoxide=1	MirB CA	SreA	Some
+94	1.0	Iron=1,Superoxide=0	SOD2_3 CA	ICP	Some
+95	1.0	Iron=1,Superoxide=0	SOD2_3 CA	HapX	Some
+96	1.0	Iron=1,Superoxide=0	SOD2_3 CA	RIA	Some
+97	1.0	Iron=1,Superoxide=0		Cat1_2	Some
+98	1.0	Iron=1,Superoxide=0		EstB	Some
+99	1.0	Iron=1,Superoxide=0		FCplusFe	Some
+100	1.0	Iron=1,Superoxide=0		ICP	Some
+101	1.0	Iron=1,Superoxide=0		SOD2_3	Some
+102	1.0	Iron=1,Superoxide=0		MirB	Some
+103	1.0	Iron=1,Superoxide=0		SreA	Some
+104	1.0	Iron=1,Superoxide=0	LIP CA	TAFC	OFF
+105	1.0	Iron=1,Superoxide=0	LIP CA	ICP	ON
+106	1.0	Iron=1,Superoxide=0	LIP CA	hapX	OFF
+107	1.0	Iron=1,Superoxide=1	ROS CA,hapX KO	ICP	Some
+108	1.0	Iron=1,Superoxide=1	ROS CA,hapX KO	HapX	OFF
+109	1.0	Iron=1,Superoxide=1	ROS CA,hapX KO	ThP	ON
+110	1.0	Iron=0,Superoxide=0	EstB KO,sreA KO	SreA	OFF
+111	1.0	Iron=0,Superoxide=0	EstB KO,sreA KO	ICP	OFF
+112	1.0	Iron=0,Superoxide=0	EstB KO,sreA KO	SOD2_3	OFF
+113	1.0	Iron=0,Superoxide=0	EstB KO,sreA KO	SidA	ON
+114	1.0	Iron=0,Superoxide=1	Yap1 KO	FCplusFe	Some
+115	1.0	Iron=0,Superoxide=1	Yap1 KO	CccA	Some
+116	1.0	Iron=0,Superoxide=1	Yap1 KO	ICP	Some
+117	1.0	Iron=0,Superoxide=1	Yap1 KO	SidA	Some
+118	1.0	Iron=1,Superoxide=1	SidA CA	CccA	Some
+119	1.0	Iron=1,Superoxide=1	SidA CA	ICP	Some
+120	1.0	Iron=1,Superoxide=1	SidA CA	SOD2_3	Some
+121	1.0	Iron=0,Superoxide=0	HapX KO,ThP KO	ICP	OFF
+122	1.0	Iron=0,Superoxide=0	HapX KO,ThP KO	ROS	OFF
+123	1.0	Iron=1,Superoxide=0	HapX CA,RIA CA	ICP	OFF
+124	1.0	Iron=0,Superoxide=1	SidA CA	TAFC	ON
+125	1.0	Iron=0,Superoxide=1	SidA CA	Yap1	Some
+126	1.0	Iron=0,Superoxide=1	SidA CA	ICP	Some
+127	1.0	Iron=1,Superoxide=0	Yap1 KO	FCplusFe	Some
+128	1.0	Iron=1,Superoxide=0	Yap1 KO	ICP	Some
+129	1.0	Iron=1,Superoxide=0	Yap1 KO	EstB	Some
+130	1.0	Iron=1,Superoxide=0	Yap1 KO	Cat1_2	OFF
+131	1.0	Iron=1,Superoxide=0	HapX KO,sreA CA	ICP	Some
+132	1.0	Iron=1,Superoxide=1	Cat1_2 KO,VAC KO	ICP	Some
+133	1.0	Iron=0,Superoxide=1	SreA KO	ICP	Some
+134	1.0	Iron=0,Superoxide=1	SreA KO	ROS	Some
+135	1.0	Iron=1,Superoxide=0	FCplusFe KO,HapX KO	ICP	Some
+136	1.0	Iron=0,Superoxide=1	FCplusFe CA	ICP	Some
+137	1.0	Iron=0,Superoxide=1	ROS CA	ICP	Some
+138	1.0	Iron=1,Superoxide=1	LIP CA,SidA KO	ICP	ON
+139	1.0	Iron=1,Superoxide=1	LIP CA,SidA KO	ThP	ON
+140	1.0	Iron=1,Superoxide=0	FCminusFe CA	CccA	Some
+141	1.0	Iron=1,Superoxide=0	FCminusFe CA	ICP	Some
+142	1.0	Iron=1,Superoxide=0	FCminusFe CA	SreA	Some
+143	1.0	Iron=0,Superoxide=0	ThP CA,sreA CA	ICP	Some
+144	1.0	Iron=1,Superoxide=0	ROS KO	LIP	Some
+145	1.0	Iron=1,Superoxide=0	ROS KO	ICP	Some
+146	1.0	Iron=0,Superoxide=0	CccA CA,FCplusFe KO	ICP	Some
+147	1.0	Iron=1,Superoxide=1	Cat1_2 CA,sreA CA	ICP	Some
+148	1.0	Iron=1,Superoxide=1	EstB CA	TAFC	Some
+149	1.0	Iron=1,Superoxide=1	EstB CA	ICP	Some
+150	1.0	Iron=1,Superoxide=1	EstB CA	SidA	Some
+151	1.0	Iron=1,Superoxide=1	FCminusFe CA,HapX CA,SreA KO,sreA CA	LIP	ON
+152	1.0	Iron=1,Superoxide=1	FCminusFe CA,HapX CA,SreA KO,sreA CA	ICP	OFF
+153	1.0	Iron=0,Superoxide=0	CccA CA	ICP	Some
+154	1.0	Iron=0,Superoxide=0	CccA CA	HapX	Some
+155	1.0	Iron=1,Superoxide=1	FCminusFe CA,MirB KO,VAC KO	ICP	Some
+156	1.0	Iron=0,Superoxide=0	FCminusFe KO,SidA CA	ICP	Some
+157	1.0	Iron=1,Superoxide=1	HapX CA	ICP	OFF
+158	1.0	Iron=1,Superoxide=0	FCplusFe CA,SOD2_3 CA	ICP	Some
+159	1.0	Iron=1,Superoxide=0	Yap1 CA	FCplusFe	Some
+160	1.0	Iron=1,Superoxide=0	Yap1 CA	TAFC	Some
+161	1.0	Iron=1,Superoxide=0	Yap1 CA	ICP	Some
+162	1.0	Iron=1,Superoxide=0	Yap1 CA	SreA	Some
+163	1.0	Iron=1,Superoxide=1	HapX CA,hapX KO	ICP	OFF
+164	1.0	Iron=1,Superoxide=1	sreA CA	ICP	Some
+165	1.0	Iron=0,Superoxide=0	HapX KO,LIP KO	ICP	OFF
+166	1.0	Iron=0,Superoxide=0	HapX KO,LIP KO	SOD2_3	OFF
+167	1.0	Iron=1,Superoxide=0	Cat1_2 KO,SidA KO	ICP	Some
+168	1.0	Iron=1,Superoxide=1	LIP CA,ROS CA,SOD2_3 KO	FCplusFe	OFF
+169	1.0	Iron=1,Superoxide=1	LIP CA,ROS CA,SOD2_3 KO	ICP	ON
+170	1.0	Iron=1,Superoxide=1	Cat1_2 KO	CccA	Some
+171	1.0	Iron=1,Superoxide=1	Cat1_2 KO	ICP	Some
+172	1.0	Iron=1,Superoxide=1	Cat1_2 KO	SreA	Some
+173	1.0	Iron=1,Superoxide=0	LIP CA,SreA CA,Yap1 CA	ICP	ON
+174	1.0	Iron=1,Superoxide=1	SOD2_3 CA	ICP	Some
+175	1.0	Iron=0,Superoxide=0	ROS CA,ThP CA	ICP	Some
+176	1.0	Iron=0,Superoxide=0	SreA CA	Yap1	OFF
+177	1.0	Iron=0,Superoxide=0	SreA CA	ICP	OFF
+178	1.0	Iron=1,Superoxide=1	CccA KO,HapX KO,LIP CA,MirB KO	VAC	OFF
+179	1.0	Iron=1,Superoxide=1	CccA KO,HapX KO,LIP CA,MirB KO	TAFC	OFF
+180	1.0	Iron=1,Superoxide=1	CccA KO,HapX KO,LIP CA,MirB KO	ICP	OFF
+181	1.0	Iron=1,Superoxide=0	LIP KO,SreA KO	Yap1	OFF
+182	1.0	Iron=1,Superoxide=0	LIP KO,SreA KO	ICP	OFF
+183	1.0	Iron=1,Superoxide=0	EstB CA,SidA CA	ICP	Some
+184	1.0	Iron=1,Superoxide=0	MirB CA	TAFC	Some
+185	1.0	Iron=1,Superoxide=0	MirB CA	ICP	Some
+186	1.0	Iron=1,Superoxide=0	MirB CA	ThP	Some
+187	1.0	Iron=0,Superoxide=0	HapX CA	ICP	OFF
+188	1.0	Iron=0,Superoxide=0	HapX CA	Cat1_2	OFF
+189	1.0	Iron=0,Superoxide=0	EstB KO,FCplusFe KO,TAFC KO	ICP	OFF
+190	1.0	Iron=0,Superoxide=0	LIP KO,RIA KO	FCminusFe	ON
+191	1.0	Iron=0,Superoxide=0	LIP KO,RIA KO	ICP	OFF
+192	1.0	Iron=0,Superoxide=0	LIP KO,RIA KO	SidA	ON
+193	1.0	Iron=0,Superoxide=0	LIP KO,RIA KO	FCplusFe	OFF
+194	1.0	Iron=0,Superoxide=1	EstB CA,LIP CA,TAFC KO,ThP CA	ICP	ON
+195	1.0	Iron=0,Superoxide=1	EstB CA,LIP CA,TAFC KO,ThP CA	SOD2_3	ON
+196	1.0	Iron=0,Superoxide=1	EstB CA,LIP CA,TAFC KO,ThP CA	Cat1_2	ON
+197	1.0	Iron=1,Superoxide=1	HapX KO	ICP	Some
+198	1.0	Iron=1,Superoxide=1	HapX KO,hapX KO	ICP	Some
+199	1.0	Iron=1,Superoxide=1	EstB KO	ICP	Some
+200	1.0	Iron=1,Superoxide=1	EstB KO	MirB	Some
+201	1.0	Iron=1,Superoxide=1	EstB KO	SreA	Some
+202	1.0	Iron=0,Superoxide=0	FCplusFe CA	SreA	Some
+203	1.0	Iron=0,Superoxide=0	FCplusFe CA	ICP	Some
+204	1.0	Iron=0,Superoxide=0	FCplusFe CA	EstB	Some
+205	1.0	Iron=0,Superoxide=0	FCplusFe CA	Cat1_2	Some
+206	1.0	Iron=0,Superoxide=0	Yap1 CA	ICP	Some
+207	1.0	Iron=0,Superoxide=1	CccA CA,SreA CA	ICP	OFF
+208	1.0	Iron=0,Superoxide=0	EstB CA	ICP	Some
+209	1.0	Iron=1,Superoxide=0	sreA KO	ICP	ON
+210	1.0	Iron=1,Superoxide=0	hapX KO	ICP	Some
+211	1.0	Iron=1,Superoxide=1	LIP KO,hapX KO	FCminusFe	OFF
+212	1.0	Iron=1,Superoxide=1	LIP KO,hapX KO	CccA	ON
+213	1.0	Iron=1,Superoxide=1	LIP KO,hapX KO	ICP	OFF
+214	1.0	Iron=0,Superoxide=1	RIA KO	FCminusFe	Some
+215	1.0	Iron=0,Superoxide=1	RIA KO	ICP	Some
+216	1.0	Iron=0,Superoxide=1	RIA KO	ThP	Some
+217	1.0	Iron=0,Superoxide=1	RIA KO	SidA	Some
+218	1.0	Iron=0,Superoxide=1	Cat1_2 KO	ICP	Some
+219	1.0	Iron=0,Superoxide=1	sreA CA	Yap1	Some
+220	1.0	Iron=0,Superoxide=1	sreA CA	ICP	Some

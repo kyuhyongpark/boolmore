@@ -1,0 +1,26 @@
+# id: 45617
+# generation: 105
+# extra edges: []
+# score: 142.47395833333334 / 152.0
+# following constraints: True
+# complexity: 50
+
+AMH* = !CTNNB1 & GATA4 | GATA4 & !NR0B1
+CBX2* = !NR0B1 & UGR & !WNT4
+CTNNB1* = !AMH & !SOX9 | RSPO1 & !SRY | !SOX9 & !SRY
+DHH* = SOX9
+DKK1* = SOX9
+DMRT1* = !FOXL2 & SRY | SOX9
+FGF9* = SOX9
+FOXL2* = CTNNB1 | !DMRT1 & !SOX9
+GATA4* = NR5A1 & UGR | WNT4
+NR0B1* = CTNNB1 | !NR5A1 | WNT4 & WT1mKTS
+NR5A1* = CBX2 & !NR0B1 & WT1mKTS | !WNT4 & WT1mKTS
+PGD2* = SOX9
+RSPO1* = !DKK1
+SOX9* = !FOXL2 & SOX9 | SRY
+SRY* = !CTNNB1 & WT1pKTS
+UGR* = UGR | !WNT4
+WNT4* = CTNNB1 & RSPO1 | !FGF9
+WT1mKTS* = GATA4
+WT1pKTS* = !CTNNB1 & UGR | !WNT4
