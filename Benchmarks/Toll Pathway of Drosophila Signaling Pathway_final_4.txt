@@ -1,0 +1,18 @@
+# id: 50129
+# generation: 7
+# extra edges: []
+# score: 88.0 / 88.0
+# following constraints: True
+# complexity: 13
+
+Cactus* = !Pelle | !Slmb
+Dif* = !Cactus
+Dorsal* = !Cactus
+MyD88* = Toll
+Nec* = Nec
+Pelle* = Tube
+Slmb* = Slmb
+Spz* = !Nec
+Targets* = Dif | Dorsal
+Toll* = Spz
+Tube* = MyD88

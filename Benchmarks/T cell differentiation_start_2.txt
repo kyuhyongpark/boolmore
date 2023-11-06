@@ -1,0 +1,30 @@
+# id: 122541
+# generation: 1
+# extra edges: []
+# score: 135.375 / 184.0
+# following constraints: True
+# complexity: 36
+
+GATA3* = GATA3 & STAT6
+IFNb* = IFNb
+IFNbR* = IFNb
+IFNg* = IRAK & NFAT & !STAT3 & Tbet | IRAK & NFAT & STAT4 & Tbet
+IFNgR* = IFNg
+IL10* = GATA3
+IL10R* = IL10
+IL12* = IL12
+IL12R* = IL12
+IL18* = IL18
+IL18R* = !STAT6
+IL4* = GATA3 & !STAT1
+IL4R* = IL4 | !SOCS1
+IRAK* = IL18R
+JAK1* = IFNgR & !SOCS1
+NFAT* = TCR
+SOCS1* = Tbet | STAT1
+STAT1* = JAK1
+STAT3* = IL10R
+STAT4* = IL12R
+STAT6* = IL4R
+TCR* = TCR
+Tbet* = !GATA3 | STAT1

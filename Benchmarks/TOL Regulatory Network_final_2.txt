@@ -1,0 +1,31 @@
+# id: 65043
+# generation: 48
+# extra edges: []
+# score: 185.0 / 192.0
+# following constraints: True
+# complexity: 138
+
+CAA* = CAA
+CellDens* = CellDens
+Cold* = Cold
+Crc* = CAA & !CellDens
+Glu* = Glu
+HU* = HU
+Heat* = Heat
+IHF* = CellDens
+Meta* = !Crc & RpoD & RpoS & XylS & number_3MBz | !Crc & RpoH & Upper & XylS & m_xyl | !Crc & RpoH & XylS & number_3MBz | !Crc & Upper & XylS & XylSh | !Crc & Upper & XylS & number_3MBz | RpoD & Upper & XylS & XylSh | RpoD & XylS & XylSh & number_3MBz
+Meta2* = !Crc & !ProX & RpoD & RpoH & XylS & m_xyl | !Crc & !ProX & RpoD & XylS & XylSh | !Crc & !ProX & RpoH & XylS & m_xyl & number_3MBz | !Crc & RpoD & RpoH & RpoS & XylSh & m_xyl | !Crc & RpoH & Upper & XylSh | !Crc & RpoH & XylS & XylSh & m_xyl & number_3MBz | !Crc & RpoS & XylS & number_3MBz | !Crc & Upper & XylS & XylSh | !ProX & RpoD & RpoS & Upper & XylS & m_xyl & number_3MBz | !ProX & RpoH & Upper & XylS & m_xyl | RpoD & RpoH & Upper & number_3MBz | RpoD & Upper & XylSh | Upper & XylS & XylSh & m_xyl
+PprA* = Cold
+ProX* = !CellDens
+PtsN* = !CellDens & Glu
+RpoD* = RpoD
+RpoH* = Heat
+RpoN* = RpoN
+RpoS* = CellDens
+TurA* = Cold
+Upper* = IHF & !PprA & !PtsN & !TurA | IHF & !PprA & !TurA & XylR
+XylR* = !Crc & !ProX | !Crc & RpoD
+XylS* = RpoD
+XylSh* = !Crc & RpoN & m_xyl | HU & !PtsN & RpoN & m_xyl | HU & RpoN & XylR & m_xyl
+m_xyl* = m_xyl
+number_3MBz* = number_3MBz

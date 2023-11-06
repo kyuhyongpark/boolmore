@@ -1,0 +1,241 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	CAA=1,CellDens=0,Cold=0,Glu=1,HU=0,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0		Meta	OFF
+2	1.0	CAA=1,CellDens=0,Cold=0,Glu=1,HU=0,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0		Meta2	OFF
+3	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	PtsN KO	TurA	OFF
+4	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	PtsN KO	Meta	OFF
+5	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	PtsN KO	Meta2	OFF
+6	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1	Crc KO,XylR KO	XylS	ON
+7	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1	Crc KO,XylR KO	Meta	ON
+8	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1	Crc KO,XylR KO	Meta2	ON
+9	1.0	CAA=1,CellDens=0,Cold=0,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1	RpoH KO	Crc	ON
+10	1.0	CAA=1,CellDens=0,Cold=0,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1	RpoH KO	ProX	ON
+11	1.0	CAA=1,CellDens=0,Cold=0,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1	RpoH KO	Meta	OFF
+12	1.0	CAA=1,CellDens=0,Cold=0,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1	RpoH KO	Meta2	OFF
+13	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	RpoS CA	Meta	ON
+14	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	RpoS CA	Meta2	OFF
+15	1.0	CAA=0,CellDens=1,Cold=0,Glu=1,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	Crc KO	XylS	OFF
+16	1.0	CAA=0,CellDens=1,Cold=0,Glu=1,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	Crc KO	Meta	OFF
+17	1.0	CAA=0,CellDens=1,Cold=0,Glu=1,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	Crc KO	Meta2	OFF
+18	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=1	ProX CA,XylR CA	Crc	ON
+19	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=1	ProX CA,XylR CA	RpoH	ON
+20	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=1	ProX CA,XylR CA	Meta	OFF
+21	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=1	ProX CA,XylR CA	Meta2	OFF
+22	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1		XylR	ON
+23	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1		Meta2	ON
+24	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1		XylS	ON
+25	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1		Meta	ON
+26	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1		RpoS	ON
+27	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=1	TurA CA	Meta	OFF
+28	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=1	TurA CA	Meta2	OFF
+29	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0		RpoH	OFF
+30	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0		Meta	OFF
+31	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0		Meta2	OFF
+32	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=1	XylR CA	Meta	OFF
+33	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=1	XylR CA	Meta2	OFF
+34	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	PprA KO	Meta	OFF
+35	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	PprA KO	Meta2	OFF
+36	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=0,Heat=0,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	PtsN KO	XylSh	OFF
+37	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=0,Heat=0,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	PtsN KO	Meta	OFF
+38	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=0,Heat=0,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	PtsN KO	Meta2	OFF
+39	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	PprA KO	PtsN	OFF
+40	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	PprA KO	Upper	OFF
+41	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	PprA KO	Meta	ON
+42	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	PprA KO	Meta2	ON
+43	1.0	CAA=0,CellDens=0,Cold=1,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=0	Crc CA,IHF CA	XylSh	OFF
+44	1.0	CAA=0,CellDens=0,Cold=1,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=0	Crc CA,IHF CA	Meta	OFF
+45	1.0	CAA=0,CellDens=0,Cold=1,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=0	Crc CA,IHF CA	Meta2	OFF
+46	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0		Meta	OFF
+47	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0		Meta2	OFF
+48	1.0	CAA=0,CellDens=1,Cold=0,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1		Meta	OFF
+49	1.0	CAA=0,CellDens=1,Cold=0,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1		Meta2	OFF
+50	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1		Meta	OFF
+51	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1		Meta2	OFF
+52	1.0	CAA=0,CellDens=1,Cold=1,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0	PprA CA,XylR CA	Meta	ON
+53	1.0	CAA=0,CellDens=1,Cold=1,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0	PprA CA,XylR CA	Meta2	ON
+54	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0	XylR CA,XylSh KO	PprA	ON
+55	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0	XylR CA,XylSh KO	XylS	ON
+56	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0	XylR CA,XylSh KO	Meta	OFF
+57	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0	XylR CA,XylSh KO	Meta2	OFF
+58	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=1	PtsN CA,XylR CA	Upper	OFF
+59	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=1	PtsN CA,XylR CA	Meta	ON
+60	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=1	PtsN CA,XylR CA	Meta2	ON
+61	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=1	IHF CA	Crc	OFF
+62	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=1	IHF CA	XylR	ON
+63	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=1	IHF CA	Meta2	ON
+64	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=1	IHF CA	PtsN	OFF
+65	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=1	IHF CA	Meta	ON
+66	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0		Meta2	OFF
+67	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0		Upper	OFF
+68	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0		TurA	OFF
+69	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0		Meta	OFF
+70	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0		RpoH	ON
+71	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=0		XylS	OFF
+72	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=0		Meta	OFF
+73	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=0		Meta2	OFF
+74	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=1	PprA CA	Crc	OFF
+75	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=1	PprA CA	ProX	OFF
+76	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=1	PprA CA	Meta2	ON
+77	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=1	PprA CA	Meta	ON
+78	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=1	PprA CA	RpoH	ON
+79	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	PtsN CA	XylS	OFF
+80	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	PtsN CA	Meta	OFF
+81	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	PtsN CA	Meta2	OFF
+82	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1		XylR	OFF
+83	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1		Meta2	OFF
+84	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1		TurA	OFF
+85	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1		PtsN	OFF
+86	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1		Meta	OFF
+87	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1		Meta	OFF
+88	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1		Meta2	OFF
+89	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1	Upper KO	Meta	OFF
+90	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1	Upper KO	Meta2	OFF
+91	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=1,Heat=0,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	PprA CA	Meta	OFF
+92	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=1,Heat=0,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	PprA CA	Meta2	OFF
+93	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	PprA CA	RpoH	ON
+94	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	PprA CA	Meta	OFF
+95	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	PprA CA	Meta2	OFF
+96	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=0,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0	TurA KO	PprA	ON
+97	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=0,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0	TurA KO	RpoH	ON
+98	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=0,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0	TurA KO	Meta	OFF
+99	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=0,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0	TurA KO	Meta2	OFF
+100	1.0	CAA=0,CellDens=0,Cold=1,Glu=0,HU=0,Heat=0,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	ProX CA	Meta	ON
+101	1.0	CAA=0,CellDens=0,Cold=1,Glu=0,HU=0,Heat=0,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	ProX CA	Meta2	OFF
+102	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1		Crc	OFF
+103	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1		ProX	OFF
+104	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1		Meta2	OFF
+105	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1		TurA	ON
+106	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1		Meta	OFF
+107	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1		RpoS	ON
+108	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	Upper CA	PprA	ON
+109	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	Upper CA	Meta	OFF
+110	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	Upper CA	Meta2	OFF
+111	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	Upper CA	RpoS	ON
+112	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	XylR KO	RpoH	ON
+113	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	XylR KO	Meta	OFF
+114	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	XylR KO	Meta2	OFF
+115	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0		Meta	ON
+116	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0		Meta2	ON
+117	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	Crc KO,RpoH CA,XylR CA	PtsN	OFF
+118	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	Crc KO,RpoH CA,XylR CA	Meta	OFF
+119	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	Crc KO,RpoH CA,XylR CA	Meta2	OFF
+120	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	Crc KO,RpoH CA,XylR CA	IHF	ON
+121	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1	TurA CA,XylSh CA	Meta	ON
+122	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1	TurA CA,XylSh CA	Meta2	ON
+123	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=0	PprA KO,RpoS KO	XylR	OFF
+124	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=0	PprA KO,RpoS KO	Meta	OFF
+125	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=0	PprA KO,RpoS KO	Meta2	OFF
+126	1.0	CAA=0,CellDens=1,Cold=0,Glu=1,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0	Upper KO,XylS KO	Meta	OFF
+127	1.0	CAA=0,CellDens=1,Cold=0,Glu=1,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0	Upper KO,XylS KO	Meta2	OFF
+128	1.0	CAA=0,CellDens=1,Cold=1,Glu=1,HU=0,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	XylS KO	PtsN	OFF
+129	1.0	CAA=0,CellDens=1,Cold=1,Glu=1,HU=0,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	XylS KO	ProX	OFF
+130	1.0	CAA=0,CellDens=1,Cold=1,Glu=1,HU=0,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	XylS KO	Meta	OFF
+131	1.0	CAA=0,CellDens=1,Cold=1,Glu=1,HU=0,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	XylS KO	Meta2	OFF
+132	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1	IHF KO	XylSh	OFF
+133	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1	IHF KO	XylS	OFF
+134	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1	IHF KO	Meta	OFF
+135	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1	IHF KO	Meta2	OFF
+136	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=1	PprA CA,ProX KO,TurA KO,Upper CA	Meta	OFF
+137	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=1	PprA CA,ProX KO,TurA KO,Upper CA	Meta2	OFF
+138	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=0,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=1	PprA KO	Meta	ON
+139	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=0,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=1	PprA KO	Meta2	ON
+140	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=0,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=1	PprA KO	IHF	ON
+141	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1	TurA KO,XylS KO	Crc	ON
+142	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1	TurA KO,XylS KO	Meta	OFF
+143	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1	TurA KO,XylS KO	Meta2	OFF
+144	1.0	CAA=0,CellDens=1,Cold=1,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1	Crc CA	Upper	OFF
+145	1.0	CAA=0,CellDens=1,Cold=1,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1	Crc CA	Meta	OFF
+146	1.0	CAA=0,CellDens=1,Cold=1,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1	Crc CA	Meta2	OFF
+147	1.0	CAA=0,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1		XylS	OFF
+148	1.0	CAA=0,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1		Meta	OFF
+149	1.0	CAA=0,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1		Meta2	OFF
+150	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	PtsN CA,RpoH KO	XylR	ON
+151	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	PtsN CA,RpoH KO	ProX	OFF
+152	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	PtsN CA,RpoH KO	Meta	ON
+153	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1	PtsN CA,RpoH KO	Meta2	ON
+154	1.0	CAA=1,CellDens=1,Cold=0,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=1	Upper CA	Meta	ON
+155	1.0	CAA=1,CellDens=1,Cold=0,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=1	Upper CA	Meta2	ON
+156	1.0	CAA=1,CellDens=1,Cold=0,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=1	Upper CA	IHF	ON
+157	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0		Meta2	ON
+158	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0		RpoS	ON
+159	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0		TurA	OFF
+160	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0		Meta	ON
+161	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0		RpoH	OFF
+162	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		RpoH	OFF
+163	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		Meta	OFF
+164	1.0	CAA=1,CellDens=0,Cold=0,Glu=0,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		Meta2	OFF
+165	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		Meta	OFF
+166	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		Meta2	OFF
+167	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0	ProX CA,TurA KO,XylS KO	PtsN	OFF
+168	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0	ProX CA,TurA KO,XylS KO	Meta	OFF
+169	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0	ProX CA,TurA KO,XylS KO	Meta2	OFF
+170	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1	Crc KO,PtsN KO	Meta	OFF
+171	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1	Crc KO,PtsN KO	Meta2	OFF
+172	1.0	CAA=1,CellDens=1,Cold=1,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1	Crc KO,PtsN KO	IHF	ON
+173	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		Upper	OFF
+174	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		Meta	OFF
+175	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		Meta2	OFF
+176	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		RpoS	ON
+177	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		XylSh	OFF
+178	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		Meta	OFF
+179	1.0	CAA=1,CellDens=1,Cold=0,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		Meta2	OFF
+180	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=1		Meta	OFF
+181	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=1		Meta2	OFF
+182	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	PprA KO	Crc	OFF
+183	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	PprA KO	PtsN	OFF
+184	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	PprA KO	Meta	OFF
+185	1.0	CAA=0,CellDens=1,Cold=1,Glu=0,HU=1,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	PprA KO	Meta2	OFF
+186	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=0,Heat=1,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1	ProX CA	Crc	OFF
+187	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=0,Heat=1,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1	ProX CA	Meta	OFF
+188	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=0,Heat=1,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1	ProX CA	Meta2	OFF
+189	1.0	CAA=0,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0	Crc CA	ProX	OFF
+190	1.0	CAA=0,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0	Crc CA	Meta2	OFF
+191	1.0	CAA=0,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0	Crc CA	PprA	ON
+192	1.0	CAA=0,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0	Crc CA	XylS	ON
+193	1.0	CAA=0,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0	Crc CA	Meta	OFF
+194	1.0	CAA=0,CellDens=0,Cold=1,Glu=0,HU=0,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1	XylR KO	TurA	ON
+195	1.0	CAA=0,CellDens=0,Cold=1,Glu=0,HU=0,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1	XylR KO	Meta	ON
+196	1.0	CAA=0,CellDens=0,Cold=1,Glu=0,HU=0,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1	XylR KO	Meta2	ON
+197	1.0	CAA=0,CellDens=0,Cold=1,Glu=0,HU=0,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=1	XylR KO	RpoS	OFF
+198	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=1,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1	PprA KO	Upper	OFF
+199	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=1,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1	PprA KO	Meta	OFF
+200	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=1,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1	PprA KO	Meta2	OFF
+201	1.0	CAA=1,CellDens=1,Cold=1,Glu=1,HU=0,Heat=1,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1	PprA KO	RpoS	ON
+202	1.0	CAA=0,CellDens=0,Cold=1,Glu=1,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0	RpoS CA,Upper KO	RpoH	OFF
+203	1.0	CAA=0,CellDens=0,Cold=1,Glu=1,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0	RpoS CA,Upper KO	Meta	OFF
+204	1.0	CAA=0,CellDens=0,Cold=1,Glu=1,HU=1,Heat=0,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0	RpoS CA,Upper KO	Meta2	OFF
+205	1.0	CAA=0,CellDens=0,Cold=1,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0	XylSh KO	XylR	OFF
+206	1.0	CAA=0,CellDens=0,Cold=1,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0	XylSh KO	RpoH	ON
+207	1.0	CAA=0,CellDens=0,Cold=1,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0	XylSh KO	Meta	OFF
+208	1.0	CAA=0,CellDens=0,Cold=1,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0	XylSh KO	Meta2	OFF
+209	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1		Meta	OFF
+210	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=1		Meta2	OFF
+211	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0	XylS CA	Meta	OFF
+212	1.0	CAA=1,CellDens=0,Cold=1,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=1,number_3MBz=0	XylS CA	Meta2	OFF
+213	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0		Meta	OFF
+214	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0		Meta2	OFF
+215	1.0	CAA=1,CellDens=0,Cold=1,Glu=1,HU=0,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0		RpoS	OFF
+216	1.0	CAA=1,CellDens=1,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0	RpoS KO,Upper CA,XylR KO	Meta	OFF
+217	1.0	CAA=1,CellDens=1,Cold=0,Glu=0,HU=1,Heat=1,RpoD=1,RpoN=1,m_xyl=0,number_3MBz=0	RpoS KO,Upper CA,XylR KO	Meta2	OFF
+218	1.0	CAA=1,CellDens=0,Cold=0,Glu=1,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	Crc KO	Meta	OFF
+219	1.0	CAA=1,CellDens=0,Cold=0,Glu=1,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	Crc KO	Meta2	OFF
+220	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=1	ProX KO	Meta	OFF
+221	1.0	CAA=0,CellDens=0,Cold=0,Glu=0,HU=1,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=1	ProX KO	Meta2	OFF
+222	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	RpoH CA	ProX	OFF
+223	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	RpoH CA	Meta	OFF
+224	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	RpoH CA	Meta2	OFF
+225	1.0	CAA=0,CellDens=1,Cold=0,Glu=0,HU=0,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=0	RpoH CA	RpoS	ON
+226	1.0	CAA=0,CellDens=0,Cold=1,Glu=0,HU=0,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0	Upper KO	Meta	OFF
+227	1.0	CAA=0,CellDens=0,Cold=1,Glu=0,HU=0,Heat=1,RpoD=0,RpoN=0,m_xyl=1,number_3MBz=0	Upper KO	Meta2	OFF
+228	1.0	CAA=0,CellDens=1,Cold=0,Glu=1,HU=0,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	Upper CA	XylS	ON
+229	1.0	CAA=0,CellDens=1,Cold=0,Glu=1,HU=0,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	Upper CA	Meta	OFF
+230	1.0	CAA=0,CellDens=1,Cold=0,Glu=1,HU=0,Heat=0,RpoD=1,RpoN=0,m_xyl=0,number_3MBz=0	Upper CA	Meta2	OFF
+231	1.0	CAA=0,CellDens=1,Cold=1,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		Meta	OFF
+232	1.0	CAA=0,CellDens=1,Cold=1,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=0,m_xyl=0,number_3MBz=1		Meta2	OFF
+233	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	PtsN KO,RpoH KO	TurA	OFF
+234	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	PtsN KO,RpoH KO	XylS	ON
+235	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	PtsN KO,RpoH KO	Meta	OFF
+236	1.0	CAA=0,CellDens=0,Cold=0,Glu=1,HU=1,Heat=1,RpoD=1,RpoN=0,m_xyl=1,number_3MBz=0	PtsN KO,RpoH KO	Meta2	OFF
+237	1.0	CAA=1,CellDens=0,Cold=0,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1	PprA KO	Meta	OFF
+238	1.0	CAA=1,CellDens=0,Cold=0,Glu=1,HU=0,Heat=0,RpoD=0,RpoN=1,m_xyl=1,number_3MBz=1	PprA KO	Meta2	OFF
+239	1.0	CAA=0,CellDens=1,Cold=1,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1	PprA CA,RpoS KO	ProX	OFF
+240	1.0	CAA=0,CellDens=1,Cold=1,Glu=1,HU=1,Heat=0,RpoD=0,RpoN=1,m_xyl=0,number_3MBz=1	PprA CA,RpoS KO	Meta	OFF

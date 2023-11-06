@@ -1,0 +1,33 @@
+# id: 2281
+# generation: 1
+# extra edges: []
+# score: 159.5 / 208.0
+# following constraints: True
+# complexity: 53
+
+APC* = !Dsh
+Arm* = !APC & !Axin & CK1alpha & Hipk & !Proteasome & !Sgg
+Arr* = Wg
+Axin* = !Dsh
+Boca* = Boca
+CK1alpha* = CK1alpha
+Dally* = Ttv | !Wf
+Dlp* = Ttv & !Wf
+Dsh* = Fz | !Nkd
+Fz* = Boca & Wg
+Gro* = Gro
+Hipk* = Hipk
+Hyx* = Hyx
+Lgs* = Lgs
+Nej* = Nej
+Nemo* = Pan
+Nkd* = Nkd
+Pan* = Arm & !Nemo
+Proteasome* = Proteasome
+Pygo* = Pygo
+Sgg* = !Dsh
+Slmb* = Slmb
+Targets* = !Gro & Hyx & Lgs & Nej | !Gro & Hyx & Lgs & Pan & Pygo | !Gro & Hyx & Nej & Pan & Pygo | !Gro & Lgs & Nej & Pygo
+Ttv* = Ttv
+Wf* = Wf
+Wg* = Wg

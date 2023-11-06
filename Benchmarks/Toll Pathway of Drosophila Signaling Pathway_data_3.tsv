@@ -1,0 +1,111 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	Nec=1,Slmb=0		MyD88	OFF
+2	1.0	Nec=1,Slmb=0		Spz	OFF
+3	1.0	Nec=1,Slmb=0		Dif	OFF
+4	1.0	Nec=1,Slmb=0		Tube	OFF
+5	1.0	Nec=1,Slmb=0		Targets	OFF
+6	1.0	Nec=0,Slmb=0	MyD88 CA,Toll KO	Targets	OFF
+7	1.0	Nec=0,Slmb=0	MyD88 CA,Toll KO	Tube	ON
+8	1.0	Nec=1,Slmb=0	Spz KO,Toll CA	Targets	OFF
+9	1.0	Nec=1,Slmb=0	Spz KO,Toll CA	Dif	OFF
+10	1.0	Nec=0,Slmb=0	Toll CA	MyD88	ON
+11	1.0	Nec=0,Slmb=0	Toll CA	Targets	OFF
+12	1.0	Nec=0,Slmb=0	Toll CA	Dorsal	OFF
+13	1.0	Nec=0,Slmb=0		MyD88	ON
+14	1.0	Nec=0,Slmb=0		Dif	OFF
+15	1.0	Nec=0,Slmb=0		Cactus	ON
+16	1.0	Nec=0,Slmb=0		Pelle	ON
+17	1.0	Nec=0,Slmb=0		Tube	ON
+18	1.0	Nec=0,Slmb=0		Targets	OFF
+19	1.0	Nec=0,Slmb=0		Toll	ON
+20	1.0	Nec=0,Slmb=0		Dorsal	OFF
+21	1.0	Nec=0,Slmb=1	MyD88 CA,Toll CA	Targets	ON
+22	1.0	Nec=0,Slmb=1	Toll CA	MyD88	ON
+23	1.0	Nec=0,Slmb=1	Toll CA	Targets	ON
+24	1.0	Nec=0,Slmb=1	Toll CA	Tube	ON
+25	1.0	Nec=1,Slmb=1		MyD88	OFF
+26	1.0	Nec=1,Slmb=1		Spz	OFF
+27	1.0	Nec=1,Slmb=1		Dif	OFF
+28	1.0	Nec=1,Slmb=1		Cactus	ON
+29	1.0	Nec=1,Slmb=1		Pelle	OFF
+30	1.0	Nec=1,Slmb=1		Tube	OFF
+31	1.0	Nec=1,Slmb=1		Targets	OFF
+32	1.0	Nec=1,Slmb=1		Toll	OFF
+33	1.0	Nec=1,Slmb=1	Cactus CA,MyD88 KO,Toll KO	Targets	OFF
+34	1.0	Nec=1,Slmb=1	Cactus CA,MyD88 KO,Toll KO	Dif	OFF
+35	1.0	Nec=0,Slmb=1	Dif KO,Spz CA	Targets	ON
+36	1.0	Nec=0,Slmb=0	Spz KO	Targets	OFF
+37	1.0	Nec=0,Slmb=0	Dorsal CA,Spz KO,Tube CA	Targets	ON
+38	1.0	Nec=1,Slmb=0	MyD88 KO	Targets	OFF
+39	1.0	Nec=1,Slmb=0	MyD88 KO	Dif	OFF
+40	1.0	Nec=1,Slmb=1	Tube CA	Targets	ON
+41	1.0	Nec=1,Slmb=0	Toll KO	Targets	OFF
+42	1.0	Nec=1,Slmb=1	Dif KO	Targets	OFF
+43	1.0	Nec=1,Slmb=1	Dif KO	Spz	OFF
+44	1.0	Nec=1,Slmb=0	Dorsal KO	Targets	OFF
+45	1.0	Nec=1,Slmb=0	Dorsal KO	Cactus	ON
+46	1.0	Nec=1,Slmb=1	Cactus KO	Targets	ON
+47	1.0	Nec=1,Slmb=1	Cactus KO	Spz	OFF
+48	1.0	Nec=1,Slmb=1	Toll KO	Targets	OFF
+49	1.0	Nec=1,Slmb=1	Toll KO	Cactus	ON
+50	1.0	Nec=0,Slmb=0	Dif CA,Toll CA	Targets	ON
+51	1.0	Nec=1,Slmb=0	Cactus CA,Dif KO,Spz CA	Targets	OFF
+52	1.0	Nec=1,Slmb=1	Spz CA	Targets	ON
+53	1.0	Nec=1,Slmb=1	Spz CA	Dorsal	ON
+54	1.0	Nec=1,Slmb=0	Tube CA	Targets	OFF
+55	1.0	Nec=1,Slmb=0	Dif CA,Dorsal CA,MyD88 CA,Tube KO	Targets	ON
+56	1.0	Nec=1,Slmb=0	Dif CA,Dorsal CA,MyD88 CA,Tube KO	Toll	OFF
+57	1.0	Nec=0,Slmb=1		MyD88	ON
+58	1.0	Nec=0,Slmb=1		Spz	ON
+59	1.0	Nec=0,Slmb=1		Cactus	OFF
+60	1.0	Nec=0,Slmb=1		Targets	ON
+61	1.0	Nec=0,Slmb=1		Dorsal	ON
+62	1.0	Nec=1,Slmb=1	MyD88 CA	Targets	ON
+63	1.0	Nec=1,Slmb=1	MyD88 CA	Dif	ON
+64	1.0	Nec=1,Slmb=1	MyD88 CA	Toll	OFF
+65	1.0	Nec=0,Slmb=1	Cactus KO,Spz CA,Tube CA	Targets	ON
+66	1.0	Nec=0,Slmb=0	MyD88 KO	Targets	OFF
+67	1.0	Nec=1,Slmb=1	Toll CA	Pelle	ON
+68	1.0	Nec=1,Slmb=1	Toll CA	Targets	ON
+69	1.0	Nec=1,Slmb=1	Toll CA	Tube	ON
+70	1.0	Nec=1,Slmb=1	Toll CA	Cactus	OFF
+71	1.0	Nec=1,Slmb=0	Pelle KO,Toll KO	Targets	OFF
+72	1.0	Nec=1,Slmb=0	Pelle KO,Toll KO	Dif	OFF
+73	1.0	Nec=1,Slmb=0	Pelle KO,Toll KO	Tube	OFF
+74	1.0	Nec=1,Slmb=0	Pelle KO,Toll KO	Cactus	ON
+75	1.0	Nec=0,Slmb=0	Cactus KO,MyD88 CA	Targets	ON
+76	1.0	Nec=0,Slmb=0	Cactus KO,MyD88 CA	Dorsal	ON
+77	1.0	Nec=1,Slmb=1	Dif CA,MyD88 CA	Pelle	ON
+78	1.0	Nec=1,Slmb=1	Dif CA,MyD88 CA	Targets	ON
+79	1.0	Nec=1,Slmb=1	Dif CA,MyD88 CA	Dorsal	ON
+80	1.0	Nec=1,Slmb=1	Dif CA,MyD88 CA	Cactus	OFF
+81	1.0	Nec=0,Slmb=0	MyD88 CA,Tube KO	Targets	OFF
+82	1.0	Nec=0,Slmb=0	MyD88 CA,Tube KO	Dif	OFF
+83	1.0	Nec=1,Slmb=1	Spz CA,Toll KO	Targets	OFF
+84	1.0	Nec=0,Slmb=1	MyD88 CA,Tube KO	Targets	OFF
+85	1.0	Nec=0,Slmb=1	Dorsal CA	MyD88	ON
+86	1.0	Nec=0,Slmb=1	Dorsal CA	Targets	ON
+87	1.0	Nec=0,Slmb=1	Dorsal CA	Tube	ON
+88	1.0	Nec=1,Slmb=0	Toll CA	Pelle	ON
+89	1.0	Nec=1,Slmb=0	Toll CA	Targets	OFF
+90	1.0	Nec=1,Slmb=0	Toll CA	Spz	OFF
+91	1.0	Nec=1,Slmb=0	Toll CA	Tube	ON
+92	1.0	Nec=0,Slmb=1	MyD88 CA,Toll KO	Targets	ON
+93	1.0	Nec=0,Slmb=0	Cactus CA	Targets	OFF
+94	1.0	Nec=0,Slmb=1	Pelle CA,Toll CA	Targets	ON
+95	1.0	Nec=0,Slmb=1	Cactus KO	MyD88	ON
+96	1.0	Nec=0,Slmb=1	Cactus KO	Targets	ON
+97	1.0	Nec=1,Slmb=1	Dorsal CA,Pelle KO	Targets	ON
+98	1.0	Nec=0,Slmb=0	Dif CA	MyD88	ON
+99	1.0	Nec=0,Slmb=0	Dif CA	Targets	ON
+100	1.0	Nec=1,Slmb=1	Cactus KO,Toll KO	Targets	ON
+101	1.0	Nec=1,Slmb=1	Cactus KO,Toll KO	Dorsal	ON
+102	1.0	Nec=0,Slmb=0	Dorsal KO,MyD88 CA	Targets	OFF
+103	1.0	Nec=0,Slmb=0	Dorsal KO,MyD88 CA	Toll	ON
+104	1.0	Nec=0,Slmb=0	Dorsal KO,MyD88 CA	Cactus	ON
+105	1.0	Nec=1,Slmb=0	Cactus CA,Dif KO	Targets	OFF
+106	1.0	Nec=1,Slmb=0	Cactus CA,Dif KO	Tube	OFF
+107	1.0	Nec=1,Slmb=0	Cactus CA,Dif KO	Toll	OFF
+108	1.0	Nec=0,Slmb=1	MyD88 CA	Pelle	ON
+109	1.0	Nec=0,Slmb=1	MyD88 CA	Targets	ON
+110	1.0	Nec=0,Slmb=1	MyD88 CA	Cactus	OFF
