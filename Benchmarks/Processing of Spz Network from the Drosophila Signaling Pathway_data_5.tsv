@@ -1,0 +1,241 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1	ModSP CA,Snk KO	Spz	ON
+2	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1	ModSP CA,Snk KO	Ndl	OFF
+3	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	PGRP_SD CA,Snk CA	Spz	ON
+4	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	PGRP_SD CA,Snk CA	Gd	ON
+5	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	PGRP_SD CA,Snk CA	Spd	ON
+6	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=1		Spz	OFF
+7	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=1		Gd	OFF
+8	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=1		Viru_Fact	OFF
+9	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=1	GNBP1 KO	Spz	ON
+10	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1		Spz	ON
+11	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1		Psh	OFF
+12	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=0	PGRP_SD CA	Spz	ON
+13	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	Spirit CA	Spz	ON
+14	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	Spirit CA	PGRP_SA	OFF
+15	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1		Spz	ON
+16	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	Ndl KO	Spz	ON
+17	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	Ndl KO	ModSP	ON
+18	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1	Easter KO,GNBP1 KO,Spd KO	DAP	ON
+19	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1	Easter KO,GNBP1 KO,Spd KO	Spz	ON
+20	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1		Spz	ON
+21	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1		Spd	ON
+22	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1		Spirit	ON
+23	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1		ModSP	ON
+24	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1	DAP CA,ModSP CA	Sphinx	ON
+25	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1	DAP CA,ModSP CA	Spz	ON
+26	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1	DAP CA,ModSP CA	Ndl	ON
+27	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=0		Spz	OFF
+28	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	GNBP3 CA	Spz	ON
+29	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	GNBP3 CA	Viru_Fact	ON
+30	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	GNBP3 CA	PGRP_SD	ON
+31	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	Ndl CA	Spz	ON
+32	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	Ndl CA	Psh	ON
+33	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	Ndl CA	Easter	ON
+34	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	Ndl CA	Spd	ON
+35	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1	Grass CA	Spz	ON
+36	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0		Sphinx	ON
+37	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0		Spz	ON
+38	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=0		Spz	OFF
+39	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=0		PGRP_SD	OFF
+40	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	DAP CA,Grass KO,ModSP CA,Psh KO	Spz	OFF
+41	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	PGRP_SD CA,Snk CA	Spz	ON
+42	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Psh KO,Viru_Fact CA	Spz	ON
+43	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Psh KO,Viru_Fact CA	Ndl	OFF
+44	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0		Ndl	OFF
+45	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0		Sphinx	ON
+46	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0		Spz	ON
+47	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0		Gd	OFF
+48	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0		Psh	OFF
+49	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=1		Spz	ON
+50	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Grass CA	Spz	ON
+51	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Grass CA	Snk	ON
+52	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Grass CA	GNBP3	ON
+53	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1		Spz	ON
+54	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1		Spz	ON
+55	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=1		Spz	ON
+56	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=1		Spd	ON
+57	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	Spirit KO	Sphinx	ON
+58	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	Spirit KO	Spz	ON
+59	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	Spirit KO	PGRP_SA	OFF
+60	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=0	PGRP_SA CA	Spz	ON
+61	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=0	PGRP_SA CA	Spirit	ON
+62	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0	Snk KO	Spz	ON
+63	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0	Snk KO	SPE	ON
+64	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=0	SPE KO	Sphinx	ON
+65	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=0	SPE KO	Spz	OFF
+66	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=0	Snk KO	Spz	OFF
+67	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1		Spz	ON
+68	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1	GNBP3 CA,Sphinx CA	Spz	ON
+69	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1	GNBP3 CA,Sphinx CA	Spd	ON
+70	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1	GNBP3 CA,Sphinx CA	GNBP1	ON
+71	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1	GNBP3 CA,Sphinx CA	Ndl	OFF
+72	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0		Spz	ON
+73	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0		PGRP_SA	ON
+74	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0		Spd	ON
+75	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0		Ndl	ON
+76	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1		Spz	ON
+77	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=0		Spz	OFF
+78	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=0	SPE KO	Sphinx	ON
+79	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=0	SPE KO	Spz	OFF
+80	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=0	SPE KO	Spirit	ON
+81	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=0	SPE KO	GNBP3	ON
+82	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	Ndl CA	Spz	ON
+83	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	Ndl CA	Psh	OFF
+84	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1		Spz	ON
+85	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1		GNBP1	OFF
+86	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	ModSP KO,Viru_Fact KO	Spz	OFF
+87	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	ModSP KO,Viru_Fact KO	PGRP_SA	OFF
+88	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	DAP KO	Spz	OFF
+89	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	DAP KO	Gd	ON
+90	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	DAP KO	Easter	OFF
+91	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	SPE CA	Spz	ON
+92	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	SPE CA	Ndl	OFF
+93	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=0		Spz	ON
+94	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=0		Viru_Fact	ON
+95	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0		DAP	ON
+96	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0		Spz	ON
+97	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=0		DAP	OFF
+98	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=0		Spz	ON
+99	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=0		Psh	OFF
+100	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=1	GNBP3 KO	Spz	ON
+101	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=1	GNBP3 KO	Spirit	OFF
+102	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=0	GNBP1 CA,GNBP3 CA,Spd CA	Spz	ON
+103	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=0	GNBP1 CA,GNBP3 CA,Spd CA	Viru_Fact	ON
+104	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Ndl CA	Grass	ON
+105	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Ndl CA	Spz	ON
+106	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	Snk CA	Spz	ON
+107	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1	Spd KO	Spz	ON
+108	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1	Spd KO	Psh	ON
+109	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1	Spd KO	Viru_Fact	ON
+110	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=0	Sphinx CA	Spz	ON
+111	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	Gd KO	Spz	ON
+112	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1		Spz	OFF
+113	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1		ModSP	OFF
+114	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	GNBP3 CA,Sphinx CA	Spz	ON
+115	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	Grass KO,Ndl CA,Snk KO,Spirit KO,Viru_Fact KO	Spz	OFF
+116	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	Grass KO,Ndl CA,Snk KO,Spirit KO,Viru_Fact KO	GNBP1	ON
+117	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	Grass KO,Ndl CA,Snk KO,Spirit KO,Viru_Fact KO	Easter	OFF
+118	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	Grass KO,Ndl CA,Snk KO,Spirit KO,Viru_Fact KO	PGRP_SD	ON
+119	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=0	GNBP3 KO,Gd KO,Psh CA	Grass	OFF
+120	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=0	GNBP3 KO,Gd KO,Psh CA	Spz	ON
+121	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=0	GNBP3 KO,Gd KO,Psh CA	Ndl	ON
+122	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	ModSP KO	Spz	ON
+123	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=1	PGRP_SA CA	Spz	ON
+124	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	GNBP1 CA,Gd CA	Spz	ON
+125	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	GNBP1 CA,Gd CA	GNBP3	OFF
+126	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=0	DAP CA,GNBP1 CA,Ndl KO	Spz	ON
+127	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	Psh KO	Spz	ON
+128	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	Easter KO	Sphinx	ON
+129	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	Easter KO	Spz	ON
+130	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Viru_Fact KO	DAP	OFF
+131	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Viru_Fact KO	Spz	ON
+132	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=1	Easter KO	Spz	ON
+133	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1		Spz	ON
+134	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1		Spd	ON
+135	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1		SPE	ON
+136	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1		PGRP_SD	ON
+137	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=0	Grass CA	Spz	ON
+138	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0	DAP KO,Ndl KO,Psh KO	Spz	ON
+139	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0	Spirit KO	Spz	ON
+140	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	GNBP3 CA	Spz	ON
+141	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	GNBP3 CA	ModSP	ON
+142	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0	ModSP CA	Spz	ON
+143	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	Easter KO	Sphinx	ON
+144	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1	Easter KO	Spz	ON
+145	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1	Gd KO,Spirit CA	Spz	ON
+146	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=0	ModSP CA	Spz	ON
+147	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1		Spz	ON
+148	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0		Spz	ON
+149	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0		Easter	OFF
+150	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0	Snk KO	Grass	ON
+151	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0	Snk KO	Spz	ON
+152	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0	Snk KO	Ndl	ON
+153	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1	Ndl CA	Spz	ON
+154	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=0	GNBP3 CA,Spirit KO	Spz	ON
+155	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=0	GNBP3 CA,Spirit KO	ModSP	ON
+156	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=1	DAP KO,Easter CA	Spz	ON
+157	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=0		Spz	ON
+158	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	Grass CA,SPE CA	Spz	ON
+159	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1	ModSP CA	Spz	ON
+160	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=0	SPE CA	DAP	ON
+161	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=0	SPE CA	Spz	ON
+162	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=0	SPE CA	Spd	ON
+163	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1		Spz	ON
+164	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=1		Easter	OFF
+165	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Psh KO	Spz	ON
+166	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Psh KO	Ndl	ON
+167	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1	Grass CA	Spz	ON
+168	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1	Grass CA	Spd	ON
+169	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1	Grass CA	Spirit	ON
+170	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	DAP KO,PGRP_SA CA	Spz	ON
+171	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	DAP KO,PGRP_SA CA	Spirit	ON
+172	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	DAP KO,PGRP_SA CA	Ndl	ON
+173	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1	DAP CA,Gd KO	Spz	ON
+174	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1	DAP CA,Gd KO	Psh	ON
+175	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	Easter CA,Psh CA,SPE KO,Spd CA	Spz	OFF
+176	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0		Grass	ON
+177	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0		Spz	ON
+178	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0		Snk	ON
+179	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0		Spirit	ON
+180	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1	SPE KO	Spz	OFF
+181	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=1	GNBP1 CA,Spd KO	Spz	ON
+182	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	GNBP1 KO	Spz	ON
+183	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Easter KO,Snk CA	Spz	ON
+184	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	Viru_Fact CA	Sphinx	ON
+185	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	Viru_Fact CA	Spz	ON
+186	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	Viru_Fact CA	Gd	OFF
+187	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	Viru_Fact CA	PGRP_SA	OFF
+188	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	DAP CA,SPE CA,Sphinx CA	Spz	ON
+189	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=0	Spirit KO	Spz	ON
+190	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=0	Spirit KO	Psh	ON
+191	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=0	DAP KO	SPE	ON
+192	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=0	DAP KO	Spz	ON
+193	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=0	DAP KO	PGRP_SA	ON
+194	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=0	DAP KO	Easter	OFF
+195	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=1	Psh CA	Spz	ON
+196	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=1	Psh CA	Spirit	ON
+197	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	Ndl CA	Spz	ON
+198	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	Ndl CA	Spirit	ON
+199	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0	Grass KO,PGRP_SA KO	Spz	ON
+200	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=1	Grass KO,Spirit KO	Spz	ON
+201	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=0	PGRP_SD KO	Spz	ON
+202	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1	GNBP1 KO	Spz	ON
+203	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=1	GNBP1 KO	Snk	OFF
+204	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=0	DAP KO	Spz	ON
+205	1.0	DV_patterning=0,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=0	DAP KO,PGRP_SA KO,Spd KO	Spz	ON
+206	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	Spd KO,Spirit CA	Spz	ON
+207	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	Ndl CA	Spz	ON
+208	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	Ndl CA	Spirit	ON
+209	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0	GNBP1 KO,SPE CA	Spz	ON
+210	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=0,Pipe=0	GNBP1 KO,SPE CA	Psh	ON
+211	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=0	SPE KO	Spz	OFF
+212	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=0	SPE KO	PGRP_SA	OFF
+213	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0		Spz	ON
+214	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0		PGRP_SD	ON
+215	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Sphinx KO	Spz	ON
+216	1.0	DV_patterning=1,Fungi=0,GramN_Bact=0,GramP_Bact=1,Nec=1,Pipe=1	Sphinx KO	Spd	ON
+217	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1		Spz	ON
+218	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1		Gd	ON
+219	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1		GNBP3	ON
+220	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1		Spd	ON
+221	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1		SPE	ON
+222	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1	Snk KO	Spz	ON
+223	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1	Snk KO	Easter	OFF
+224	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=0,Pipe=0		Spz	ON
+225	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1	Gd CA,Spirit KO	DAP	ON
+226	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=1	Gd CA,Spirit KO	Spz	ON
+227	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	DAP KO,Easter CA	Spz	ON
+228	1.0	DV_patterning=1,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=0	DAP KO,Easter CA	SPE	ON
+229	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	Sphinx CA	Spz	ON
+230	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	Sphinx CA	GNBP3	OFF
+231	1.0	DV_patterning=0,Fungi=0,GramN_Bact=1,GramP_Bact=0,Nec=0,Pipe=1	Sphinx CA	Ndl	OFF
+232	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=0		Spz	ON
+233	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=0		SPE	ON
+234	1.0	DV_patterning=0,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=0		ModSP	ON
+235	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	Easter KO,Ndl CA	Spz	ON
+236	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	Easter KO,Ndl CA	PGRP_SD	ON
+237	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=1,Nec=1,Pipe=0	PGRP_SA CA,Viru_Fact CA	Spz	ON
+238	1.0	DV_patterning=1,Fungi=1,GramN_Bact=0,GramP_Bact=0,Nec=1,Pipe=0	Viru_Fact CA	Spz	ON
+239	1.0	DV_patterning=0,Fungi=0,GramN_Bact=0,GramP_Bact=0,Nec=0,Pipe=1	GNBP1 CA,Grass KO	Spz	OFF
+240	1.0	DV_patterning=1,Fungi=1,GramN_Bact=1,GramP_Bact=0,Nec=1,Pipe=0	Easter CA	Spz	ON

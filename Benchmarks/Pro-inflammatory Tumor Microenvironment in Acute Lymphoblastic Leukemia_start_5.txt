@@ -1,0 +1,33 @@
+# id: 8021
+# generation: 1
+# extra edges: []
+# score: 93.0 / 208.0
+# following constraints: True
+# complexity: 74
+
+Bcatenin_H* = !GSK3B_H
+Bcatenin_M* = !GSK3B_M | !NfkB_M
+CXCL12_M* = Cx43_M | !GCSF | !NfkB_M
+CXCR4_H* = !CXCR7_H | !Gfi1_H
+CXCR7_H* = CXCL12_M
+Cx43_M* = Cx43_M
+ERK_H* = CXCR4_H | CXCR7_H & PI3KAkt_H | CXCR7_H & VLA4_H | !FoxO3a_H | GCSF & PI3KAkt_H & VLA4_H | !GSK3B_H | Gfi1_H | ROS_H
+ERK_M* = GCSF & TLR_M | ROS_M & TLR_M
+FoxO3a_H* = Bcatenin_H & !PI3KAkt_H
+FoxO3a_M* = Bcatenin_M & !ERK_M & ROS_M | !ERK_M & !PI3KAkt_M & ROS_M
+GCSF* = IL1
+GSK3B_H* = !PI3KAkt_H
+GSK3B_M* = !PI3KAkt_M
+Gfi1_H* = GCSF | TLR_H
+IL1* = NfkB_H | !PI3KAkt_H | !PI3KAkt_M | ROS_H
+NfkB_H* = IL1 | PI3KAkt_H | ROS_H & TLR_H
+NfkB_M* = ERK_M | IL1 | PI3KAkt_M
+PI3KAkt_H* = CXCR4_H & CXCR7_H & !FoxO3a_H & ROS_H & TLR_H | CXCR4_H & !FoxO3a_H & GCSF & ROS_H & TLR_H & VLA4_H
+PI3KAkt_M* = TLR_M | ROS_M | GCSF
+ROS_H* = TLR_H
+ROS_M* = !FoxO3a_M & IL1 & TLR_M
+TLR_H* = lTLR
+TLR_M* = lTLR
+VCAM1_M* = !Bcatenin_M & PI3KAkt_M
+VLA4_H* = CXCR4_H
+lTLR* = lTLR

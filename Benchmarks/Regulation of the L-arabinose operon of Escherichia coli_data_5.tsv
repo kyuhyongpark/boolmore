@@ -1,0 +1,131 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	Ae=1,Aem=1,Ara_=0,Ge=0	MT CA	E	OFF
+2	1.0	Ae=1,Aem=1,Ara_=0,Ge=0	MT CA	L	OFF
+3	1.0	Ae=0,Aem=0,Ara_=0,Ge=1		E	OFF
+4	1.0	Ae=0,Aem=0,Ara_=0,Ge=1		Ara_plus_	OFF
+5	1.0	Ae=0,Aem=0,Ara_=0,Ge=1		L	OFF
+6	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	A KO	E	OFF
+7	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	A KO	T	OFF
+8	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	A KO	L	OFF
+9	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	A KO	MT	OFF
+10	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	T KO	C	OFF
+11	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	T KO	E	OFF
+12	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	T KO	MS	OFF
+13	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	T KO	Am	ON
+14	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	T KO	L	OFF
+15	1.0	Ae=1,Aem=0,Ara_=1,Ge=0	A KO,C CA,MS CA,MT KO	E	ON
+16	1.0	Ae=1,Aem=0,Ara_=1,Ge=0	A KO,C CA,MS CA,MT KO	L	OFF
+17	1.0	Ae=0,Aem=1,Ara_=0,Ge=1	Am CA	E	OFF
+18	1.0	Ae=0,Aem=1,Ara_=0,Ge=1	Am CA	T	OFF
+19	1.0	Ae=0,Aem=1,Ara_=0,Ge=1	Am CA	C	OFF
+20	1.0	Ae=0,Aem=1,Ara_=0,Ge=1	Am CA	L	OFF
+21	1.0	Ae=1,Aem=0,Ara_=1,Ge=0		E	ON
+22	1.0	Ae=1,Aem=0,Ara_=1,Ge=0		C	ON
+23	1.0	Ae=1,Aem=0,Ara_=1,Ge=0		L	OFF
+24	1.0	Ae=1,Aem=0,Ara_=1,Ge=0		MS	ON
+25	1.0	Ae=1,Aem=1,Ara_=0,Ge=0	Am KO,MS CA	E	ON
+26	1.0	Ae=1,Aem=1,Ara_=0,Ge=0	Am KO,MS CA	T	OFF
+27	1.0	Ae=1,Aem=1,Ara_=0,Ge=0	Am KO,MS CA	L	OFF
+28	1.0	Ae=1,Aem=0,Ara_=0,Ge=1		A	OFF
+29	1.0	Ae=1,Aem=0,Ara_=0,Ge=1		E	OFF
+30	1.0	Ae=1,Aem=0,Ara_=0,Ge=1		C	OFF
+31	1.0	Ae=1,Aem=0,Ara_=0,Ge=1		L	OFF
+32	1.0	Ae=0,Aem=0,Ara_=0,Ge=0	Ara_plus_ CA,MS KO,MT KO	E	OFF
+33	1.0	Ae=0,Aem=0,Ara_=0,Ge=0	Ara_plus_ CA,MS KO,MT KO	T	OFF
+34	1.0	Ae=0,Aem=0,Ara_=0,Ge=0	Ara_plus_ CA,MS KO,MT KO	L	OFF
+35	1.0	Ae=0,Aem=0,Ara_=1,Ge=1	A KO,Am CA,MT KO	E	OFF
+36	1.0	Ae=0,Aem=0,Ara_=1,Ge=1	A KO,Am CA,MT KO	L	OFF
+37	1.0	Ae=1,Aem=1,Ara_=0,Ge=0		C	ON
+38	1.0	Ae=1,Aem=1,Ara_=0,Ge=0		E	OFF
+39	1.0	Ae=1,Aem=1,Ara_=0,Ge=0		Ara_plus_	OFF
+40	1.0	Ae=1,Aem=1,Ara_=0,Ge=0		T	OFF
+41	1.0	Ae=1,Aem=1,Ara_=0,Ge=0		L	OFF
+42	1.0	Ae=1,Aem=1,Ara_=0,Ge=1	A KO,C KO,T CA	E	OFF
+43	1.0	Ae=1,Aem=1,Ara_=0,Ge=1	A KO,C KO,T CA	L	OFF
+44	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	Ara_plus_ KO,MS KO,T CA	E	OFF
+45	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	Ara_plus_ KO,MS KO,T CA	C	OFF
+46	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	Ara_plus_ KO,MS KO,T CA	L	ON
+47	1.0	Ae=0,Aem=1,Ara_=1,Ge=1		E	OFF
+48	1.0	Ae=0,Aem=1,Ara_=1,Ge=1		MS	OFF
+49	1.0	Ae=0,Aem=1,Ara_=1,Ge=1		MT	OFF
+50	1.0	Ae=0,Aem=1,Ara_=1,Ge=1		Am	OFF
+51	1.0	Ae=0,Aem=1,Ara_=1,Ge=1		L	ON
+52	1.0	Ae=0,Aem=0,Ara_=1,Ge=0		E	OFF
+53	1.0	Ae=0,Aem=0,Ara_=1,Ge=0		Ara_plus_	OFF
+54	1.0	Ae=0,Aem=0,Ara_=1,Ge=0		L	ON
+55	1.0	Ae=0,Aem=0,Ara_=1,Ge=0		MS	OFF
+56	1.0	Ae=1,Aem=0,Ara_=0,Ge=0	Ara_plus_ KO	C	ON
+57	1.0	Ae=1,Aem=0,Ara_=0,Ge=0	Ara_plus_ KO	E	OFF
+58	1.0	Ae=1,Aem=0,Ara_=0,Ge=0	Ara_plus_ KO	MT	OFF
+59	1.0	Ae=1,Aem=0,Ara_=0,Ge=0	Ara_plus_ KO	Am	ON
+60	1.0	Ae=1,Aem=0,Ara_=0,Ge=0	Ara_plus_ KO	L	OFF
+61	1.0	Ae=0,Aem=0,Ara_=0,Ge=1	Ara_plus_ KO	A	OFF
+62	1.0	Ae=0,Aem=0,Ara_=0,Ge=1	Ara_plus_ KO	E	OFF
+63	1.0	Ae=0,Aem=0,Ara_=0,Ge=1	Ara_plus_ KO	C	OFF
+64	1.0	Ae=0,Aem=0,Ara_=0,Ge=1	Ara_plus_ KO	L	OFF
+65	1.0	Ae=0,Aem=1,Ara_=0,Ge=1	C KO	E	OFF
+66	1.0	Ae=0,Aem=1,Ara_=0,Ge=1	C KO	L	OFF
+67	1.0	Ae=0,Aem=0,Ara_=1,Ge=1	C CA	E	OFF
+68	1.0	Ae=0,Aem=0,Ara_=1,Ge=1	C CA	L	ON
+69	1.0	Ae=1,Aem=0,Ara_=0,Ge=1	MT CA	E	OFF
+70	1.0	Ae=1,Aem=0,Ara_=0,Ge=1	MT CA	L	OFF
+71	1.0	Ae=0,Aem=0,Ara_=0,Ge=0	Ara_plus_ CA,MS KO	E	OFF
+72	1.0	Ae=0,Aem=0,Ara_=0,Ge=0	Ara_plus_ CA,MS KO	T	ON
+73	1.0	Ae=0,Aem=0,Ara_=0,Ge=0	Ara_plus_ CA,MS KO	L	OFF
+74	1.0	Ae=0,Aem=1,Ara_=0,Ge=0		E	OFF
+75	1.0	Ae=0,Aem=1,Ara_=0,Ge=0		Am	OFF
+76	1.0	Ae=0,Aem=1,Ara_=0,Ge=0		L	OFF
+77	1.0	Ae=0,Aem=1,Ara_=0,Ge=0		MS	OFF
+78	1.0	Ae=1,Aem=1,Ara_=1,Ge=1	Am KO,C CA	E	Some
+79	1.0	Ae=1,Aem=1,Ara_=1,Ge=1	Am KO,C CA	L	Some
+80	1.0	Ae=1,Aem=1,Ara_=1,Ge=1	Am KO,C CA	MS	Some
+81	1.0	Ae=0,Aem=0,Ara_=0,Ge=1	Am KO,MS KO	A	OFF
+82	1.0	Ae=0,Aem=0,Ara_=0,Ge=1	Am KO,MS KO	E	OFF
+83	1.0	Ae=0,Aem=0,Ara_=0,Ge=1	Am KO,MS KO	L	OFF
+84	1.0	Ae=0,Aem=0,Ara_=0,Ge=1	Am KO,MS KO	MT	OFF
+85	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	C CA	E	ON
+86	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	C CA	L	OFF
+87	1.0	Ae=1,Aem=0,Ara_=1,Ge=1	C CA	MT	ON
+88	1.0	Ae=0,Aem=0,Ara_=1,Ge=1	Ara_plus_ CA,MT KO	A	OFF
+89	1.0	Ae=0,Aem=0,Ara_=1,Ge=1	Ara_plus_ CA,MT KO	E	OFF
+90	1.0	Ae=0,Aem=0,Ara_=1,Ge=1	Ara_plus_ CA,MT KO	L	OFF
+91	1.0	Ae=1,Aem=1,Ara_=1,Ge=1		E	OFF
+92	1.0	Ae=1,Aem=1,Ara_=1,Ge=1		L	OFF
+93	1.0	Ae=1,Aem=1,Ara_=0,Ge=0	A KO	E	OFF
+94	1.0	Ae=1,Aem=1,Ara_=0,Ge=0	A KO	Am	ON
+95	1.0	Ae=1,Aem=1,Ara_=0,Ge=0	A KO	L	OFF
+96	1.0	Ae=0,Aem=0,Ara_=0,Ge=0		E	OFF
+97	1.0	Ae=0,Aem=0,Ara_=0,Ge=0		L	OFF
+98	1.0	Ae=0,Aem=0,Ara_=0,Ge=0		MT	OFF
+99	1.0	Ae=1,Aem=0,Ara_=0,Ge=0	Ara_plus_ KO,T KO	E	OFF
+100	1.0	Ae=1,Aem=0,Ara_=0,Ge=0	Ara_plus_ KO,T KO	L	OFF
+101	1.0	Ae=0,Aem=1,Ara_=0,Ge=0	A CA	E	OFF
+102	1.0	Ae=0,Aem=1,Ara_=0,Ge=0	A CA	C	ON
+103	1.0	Ae=0,Aem=1,Ara_=0,Ge=0	A CA	L	OFF
+104	1.0	Ae=0,Aem=1,Ara_=1,Ge=1	C KO	E	OFF
+105	1.0	Ae=0,Aem=1,Ara_=1,Ge=1	C KO	L	ON
+106	1.0	Ae=1,Aem=0,Ara_=0,Ge=1	A KO	E	OFF
+107	1.0	Ae=1,Aem=0,Ara_=0,Ge=1	A KO	Ara_plus_	OFF
+108	1.0	Ae=1,Aem=0,Ara_=0,Ge=1	A KO	L	OFF
+109	1.0	Ae=1,Aem=0,Ara_=1,Ge=0	A KO,MS KO	E	OFF
+110	1.0	Ae=1,Aem=0,Ara_=1,Ge=0	A KO,MS KO	L	OFF
+111	1.0	Ae=0,Aem=1,Ara_=0,Ge=1		E	OFF
+112	1.0	Ae=0,Aem=1,Ara_=0,Ge=1		L	OFF
+113	1.0	Ae=0,Aem=1,Ara_=0,Ge=1		MT	OFF
+114	1.0	Ae=0,Aem=1,Ara_=0,Ge=1	MT KO	E	OFF
+115	1.0	Ae=0,Aem=1,Ara_=0,Ge=1	MT KO	T	OFF
+116	1.0	Ae=0,Aem=1,Ara_=0,Ge=1	MT KO	L	OFF
+117	1.0	Ae=0,Aem=0,Ara_=1,Ge=1	MS KO	E	OFF
+118	1.0	Ae=0,Aem=0,Ara_=1,Ge=1	MS KO	T	OFF
+119	1.0	Ae=0,Aem=0,Ara_=1,Ge=1	MS KO	L	ON
+120	1.0	Ae=0,Aem=0,Ara_=1,Ge=1	MS KO	MT	OFF
+121	1.0	Ae=0,Aem=1,Ara_=1,Ge=1	Am CA,MT CA	E	OFF
+122	1.0	Ae=0,Aem=1,Ara_=1,Ge=1	Am CA,MT CA	T	ON
+123	1.0	Ae=0,Aem=1,Ara_=1,Ge=1	Am CA,MT CA	L	OFF
+124	1.0	Ae=1,Aem=1,Ara_=1,Ge=0		E	ON
+125	1.0	Ae=1,Aem=1,Ara_=1,Ge=0		MS	ON
+126	1.0	Ae=1,Aem=1,Ara_=1,Ge=0		MT	ON
+127	1.0	Ae=1,Aem=1,Ara_=1,Ge=0		T	ON
+128	1.0	Ae=1,Aem=1,Ara_=1,Ge=0		L	OFF
+129	1.0	Ae=0,Aem=0,Ara_=1,Ge=0	Ara_plus_ KO,C CA,T CA	E	OFF
+130	1.0	Ae=0,Aem=0,Ara_=1,Ge=0	Ara_plus_ KO,C CA,T CA	L	ON

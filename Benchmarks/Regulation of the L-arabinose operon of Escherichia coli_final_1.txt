@@ -1,0 +1,20 @@
+# id: 41144
+# generation: 22
+# extra edges: []
+# score: 104.0 / 104.0
+# following constraints: True
+# complexity: 22
+
+A* = Ae & T
+Ae* = Ae
+Aem* = Aem
+Am* = Ae | Aem & T
+Ara_* = Ara_
+Ara_plus_* = A & Ara_ | Am & Ara_
+C* = !Ge
+E* = MS
+Ge* = Ge
+L* = Ara_ & !Ara_plus_
+MS* = Ara_plus_ & C
+MT* = Ara_plus_ & C
+T* = MT

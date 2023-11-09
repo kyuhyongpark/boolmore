@@ -1,0 +1,33 @@
+# id: 241181
+# generation: 1
+# extra edges: []
+# score: 126.625 / 208.0
+# following constraints: True
+# complexity: 121
+
+Bcatenin_H* = !GSK3B_H
+Bcatenin_M* = !FoxO3a_M & !NfkB_M | !GSK3B_M
+CXCL12_M* = !Bcatenin_M | Cx43_M | !GCSF
+CXCR4_H* = CXCL12_M & !GCSF | !Gfi1_H
+CXCR7_H* = NfkB_H
+Cx43_M* = Cx43_M
+ERK_H* = CXCR4_H & CXCR7_H & !FoxO3a_H & !GSK3B_H & Gfi1_H & ROS_H & VLA4_H | CXCR4_H & CXCR7_H & !FoxO3a_H & !GSK3B_H & PI3KAkt_H & ROS_H & VLA4_H | CXCR4_H & !FoxO3a_H & GCSF & !GSK3B_H & PI3KAkt_H & ROS_H & VLA4_H | CXCR7_H & !FoxO3a_H & GCSF & !GSK3B_H & Gfi1_H & PI3KAkt_H & ROS_H | CXCR7_H & !FoxO3a_H & GCSF & !GSK3B_H & Gfi1_H & ROS_H & VLA4_H
+ERK_M* = GCSF & TLR_M | ROS_M & TLR_M
+FoxO3a_H* = Bcatenin_H & !PI3KAkt_H & ROS_H
+FoxO3a_M* = Bcatenin_M & !ERK_M & !PI3KAkt_M
+GCSF* = IL1
+GSK3B_H* = !PI3KAkt_H
+GSK3B_M* = !PI3KAkt_M
+Gfi1_H* = GCSF | !Gfi1_H & TLR_H
+IL1* = NfkB_H & NfkB_M & !PI3KAkt_H & !PI3KAkt_M & ROS_M | NfkB_H & NfkB_M & !PI3KAkt_H & ROS_H & ROS_M
+NfkB_H* = !FoxO3a_H & IL1 & PI3KAkt_H | !FoxO3a_H & IL1 & TLR_H | IL1 & PI3KAkt_H & TLR_H
+NfkB_M* = ERK_M & IL1 & PI3KAkt_M & ROS_M | ERK_M & IL1 & ROS_M & TLR_M
+PI3KAkt_H* = CXCR4_H & CXCR7_H | CXCR4_H & GCSF | CXCR4_H & ROS_H | CXCR4_H & TLR_H | CXCR7_H & GCSF | CXCR7_H & ROS_H | !FoxO3a_H | GCSF & ROS_H | GCSF & VLA4_H
+PI3KAkt_M* = GCSF & TLR_M
+ROS_H* = !FoxO3a_H | IL1
+ROS_M* = !FoxO3a_M & IL1 & TLR_M
+TLR_H* = lTLR
+TLR_M* = lTLR
+VCAM1_M* = !Bcatenin_M & NfkB_M
+VLA4_H* = CXCR4_H | VCAM1_M
+lTLR* = lTLR
