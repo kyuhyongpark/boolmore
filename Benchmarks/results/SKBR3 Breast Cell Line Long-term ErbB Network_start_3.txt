@@ -1,0 +1,32 @@
+# id: 191981
+# generation: 1
+# extra edges: []
+# score: 84.97017283950616 / 200.0
+# following constraints: True
+# complexity: 81
+
+AKT* = AKT | !CyclinB1 & ERBB3 | !CyclinB1 & stimulus | ERBB2 | ERBB3 & stimulus | !PTEN
+BAX* = ERBB1 | BAX
+CyclinB1* = !p53 | p70S6K
+CyclinD1* = AKT & cJUN | CyclinD1 | ERK1_2 | !GSKa_b | PTEN & cJUN
+ERBB1* = !erlotinib & !pertuzumab
+ERBB2* = BAX | !erlotinib | !pertuzumab | stimulus
+ERBB3* = !AKT & ERBB3 & !pertuzumab | !AKT & !erlotinib & !pertuzumab
+ERK1_2* = CyclinB1 & ERK1_2 & cRAF
+FoxO1_3a* = !AKT | FoxO1_3a
+GSKa_b* = p53
+Nfkb* = ERBB3 | Nfkb & RPS6
+PRAS* = ERBB3 & PRAS
+PTEN* = p70S6K
+RB* = ERBB2 | RB | !TSC2 | !p53
+RPS6* = p70S6K | RPS6
+TSC2* = ERBB2 & !GSKa_b & TSC2
+cJUN* = !GSKa_b | cJUN
+cRAF* = ERBB1 & ERBB2 & !ERK1_2 & RPS6 | ERBB1 & ERBB2 & !ERK1_2 & cRAF | ERBB1 & ERBB2 & RPS6 & cRAF
+erlotinib* = erlotinib
+p38* = AKT
+p53* = PTEN & RB & p53
+p70S6K* = ERBB2 | ERK1_2 | !PRAS & p70S6K | !TSC2 & p70S6K
+pertuzumab* = pertuzumab
+stimulus* = stimulus
+trastuzumab* = trastuzumab
