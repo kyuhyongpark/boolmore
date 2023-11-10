@@ -1,0 +1,200 @@
+# DATA='boolmore/case_study/data/data_20230925.tsv'
+# DEFAULT_SOURCES={'ABA': 0}
+# CONSTRAINTS={'fixed': ['Ca2_ATPase', 'Ca2c', 'Closure', 'DAG', 'H2O_Efflux', 'InsP3', 'InsP6', 'NO', 'PtdIns3_5P2', 'PtdIns4_5P2', 'RCARs', 'cADPR', 'cGMP'], 'regulate': {'ABI1': ['RCARs'], 'ABI2': ['RCARs'], 'HAB1': ['RCARs'], 'PP2CA': ['RCARs'], 'K_efflux': ['KEV', 'KOUT'], 'OST1': ['ABI1', 'ABI2'], 'Depolarization': ['AnionEM']}, 'necessary': {'8-nitro-cGMP': ['cGMP'], 'KOUT': ['Depolarization'], 'Malate': ['PEPC', 'AnionEM'], 'ROS': ['NADPH', 'RBOH']}, 'group': {'PA': [['PC', 'PLDalpha'], ['PC', 'PLDdelta'], ['DAG', 'DAGK']], 'S1P_PhytoS1P': [['SPHK1_2', 'Sph']]}, 'possible_constant': []}
+# EDGE_POOL=[['Ca2c', 'ABI2', '0'], ['Ca2c', 'HAB1', '0'], ['Ca2c', 'PP2CA', '0'], ['PA', 'ABI2', '0'], ['PA', 'HAB1', '0'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['Actin_Reorganization', 'RBOH', '1'], ['ROS', 'Actin_Reorganization', '1'], ['pHc', 'Vacuolar_Acidification', '1'], ['ABI1', 'GEF1_4_10', '1'], ['GHR1', 'CPK3_21', '1'], ['PA', 'Microtubule_Depolymerization', '1']]
+
+# TOTAL_ITERATIONS=100
+# PER_ITERATION=100
+# KEEP=20
+# PROB=0.01
+# EDGE_PROB=0.5
+
+# BASE='boolmore/case_study/baseline_models/ABA_2017_VA-KEV_del.txt'
+# extra edges: []
+# score: 291.7263791171307
+# ABA* = ABA
+# ABH1* = 1
+# ARP_Complex* = 1
+# CPK6* = 1
+# CPK23* = 1
+# DAGK* = 1
+# ERA1* = 1
+# GAPC1_2* = 1
+# GCR1* = 1
+# GTP* = 1
+# MRP5* = 1
+# NAD* = 1
+# NADPH* = 1
+# Nitrite* = 1
+# NtSyp121* = 1
+# PC* = 1
+# PtdInsP3* = 1
+# PtdInsP4* = 1
+# RCN1* = 1
+# SCAB1* = 1
+# Sph* = 1
+# GEF1_4_10* = 0
+# SPP1* = 0
+# RCARs* = ABA
+# PEPC* = not ABA
+# PI3P5K* = ABA
+# ROP11* = GEF1_4_10
+# ABI1* = not PA and (not RCARs or ROP11) and not ROS and pHc
+# ABI2* = (not RCARs or ROP11) and not ROS
+# HAB1* = not RCARs and not ROS
+# PP2CA* = not RCARs and not ROS
+# OST1* = (not ABI1 and not HAB1) or (not PP2CA and not ABI2) or (not ABI1 and not ABI2) or (not HAB1 and not PP2CA) or (not HAB1 and not ABI2) or (not ABI1 and not PP2CA)
+# RBOH* = pHc and not ABI1 and PtdInsP3 and OST1 and GPA1 and PA and RCN1
+# ROS* = NADPH and RBOH
+# GHR1* = not ABI2 and ROS
+# NO* = Nitrite and NIA1_2 and NADPH
+# NIA1_2* = ROS
+# NOGC1* = NO
+# cGMP* = NOGC1 and GTP
+# 8-nitro-cGMP* = cGMP and ROS and NO
+# ADPRc* = 8-nitro-cGMP
+# cADPR* = NAD and ADPRc
+# CIS* = InsP3 or InsP6 or cADPR
+# SACC* = Actin_Reorganization
+# CaIM* = SACC or (NtSyp121 and GHR1 and MRP5) or not ABH1 or not ERA1
+# Ca2c* = (CIS or CaIM) and not Ca2_ATPase
+# Ca2_ATPase* = Ca2c
+# CPK3_21* = Ca2c or CPK3_21
+# MPK9_12* = Ca2c or MPK9_12
+# PtdIns4_5P2* = PtdInsP4
+# PLC* = Ca2c
+# DAG* = PtdIns4_5P2 and PLC
+# InsP3* = PLC and PtdIns4_5P2
+# InsP6* = InsP3
+# PLDalpha* = GPA1 and Ca2c
+# PLDdelta* = NO or ROS and GAPC1_2
+# PA* = PC and (PLDdelta or PLDalpha) or DAG and DAGK
+# SPHK1_2* = PA or ABA
+# S1P_PhytoS1P* = SPHK1_2 and Sph and not SPP1
+# GPA1* = S1P_PhytoS1P or not GCR1
+# PtdIns3_5P2* = PI3P5K
+# V-PPase* = PtdIns3_5P2
+# V-ATPase* = Ca2c
+# Vacuolar_Acidification* = V-PPase or V-ATPase or Vacuolar_Acidification
+# TCTP* = Ca2c
+# Microtubule_Depolymerization* = TCTP or Microtubule_Depolymerization
+# pHc* = (OST1 and not ABI2 and not ABI1 or Ca2c) and Vacuolar_Acidification
+# H_ATPase* = not pHc and not Ca2c and not ROS
+# AtRAC1* = not ABA or ABI1
+# Actin_Reorganization* = (PtdInsP4 or PtdInsP3) and not AtRAC1 and ARP_Complex and SCAB1
+# SLAC1* = (CPK6 or CPK23 or CPK3_21) and MPK9_12 and OST1 and GHR1 and pHc and not ABI1 and not PP2CA and not ABI2
+# QUAC1* = OST1 and Ca2c
+# SLAH3* = (CPK6 or CPK23) and CPK3_21 and not ABI1
+# AnionEM* = SLAC1 or QUAC1 and SLAH3
+# Malate* = PEPC and not ABA and not AnionEM
+# KEV* = Ca2c
+# Depolarization* = (AnionEM or Ca2c or KEV) and (not H_ATPase or not K_efflux)
+# KOUT* = (not NO or not ROS or pHc) and Depolarization
+# K_efflux* = KEV and KOUT
+# AquaporinPIP2_1* = OST1
+# H2O_Efflux* = (AnionEM and AquaporinPIP2_1 and K_efflux) and not Malate
+# Closure* = Microtubule_Depolymerization and H2O_Efflux
+
+# START_MODEL='boolmore/case_study/baseline_models/ABA_2017_VA-KEV_del.txt'
+
+iteration	top score	extra edges	complexity
+1	314.1729292404345	[]	192
+2	314.6215667836872	[]	189
+3	318.1751561836916	[['pHc', 'Vacuolar_Acidification', '1'], ['Ca2c', 'ABI2', '0']]	202
+4	318.1751561836916	[['pHc', 'Vacuolar_Acidification', '1'], ['Ca2c', 'ABI2', '0']]	202
+5	321.75545900839717	[['Ca2c', 'ABI2', '0']]	197
+6	322.15996688998115	[['Ca2c', 'ABI2', '0'], ['pHc', 'Vacuolar_Acidification', '1']]	192
+7	327.1875	[['Ca2c', 'ABI2', '0'], ['AquaporinPIP2_1', 'ROS', '1']]	196
+8	342.6875	[['Ca2c', 'ABI2', '0'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['PA', 'PP2CA', '0']]	199
+9	342.6875	[['Ca2c', 'ABI2', '0'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['PA', 'PP2CA', '0']]	199
+10	345.2238854595337	[['Ca2c', 'ABI2', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	168
+11	345.2238854595337	[['Ca2c', 'ABI2', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	168
+12	355.3125	[['Ca2c', 'ABI2', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['PA', 'ABI2', '0']]	198
+13	355.3125	[['Ca2c', 'ABI2', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['PA', 'ABI2', '0']]	198
+14	359.63250000000005	[['Ca2c', 'ABI2', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['PA', 'ABI2', '0']]	202
+15	359.63250000000005	[['Ca2c', 'ABI2', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['PA', 'ABI2', '0']]	197
+16	362.5825000000001	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	199
+17	364.0625	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1'], ['GHR1', 'CPK3_21', '1']]	197
+18	365.8325000000001	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1']]	200
+19	366.0625	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	197
+20	367.5625	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	194
+21	368.0625	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1']]	195
+22	368.9825000000001	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1']]	204
+23	369.0625	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1']]	204
+24	375.5625	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1'], ['PA', 'HAB1', '0']]	229
+25	375.5625	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'Microtubule_Depolymerization', '1'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1'], ['PA', 'HAB1', '0']]	229
+26	379.0625	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	218
+27	379.0625	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	211
+28	379.7125	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1'], ['Ca2c', 'HAB1', '0']]	223
+29	380.0625	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['PA', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1'], ['Ca2c', 'HAB1', '0']]	209
+30	380.4902777777778	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1'], ['Ca2c', 'PP2CA', '0']]	241
+31	380.4902777777778	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1'], ['Ca2c', 'PP2CA', '0']]	241
+32	380.4902777777778	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	227
+33	380.8125	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	229
+34	380.8125	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	220
+35	380.8125	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	220
+36	380.8125	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	220
+37	380.8125	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	220
+38	380.8125	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	212
+39	380.8125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	224
+40	380.8125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	215
+41	380.8125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	207
+42	381.8125	[['Ca2c', 'ABI2', '0'], ['PA', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	211
+43	384.8125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	216
+44	384.8125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	211
+45	384.8125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	200
+46	384.8125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	196
+47	385.0625	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	209
+48	385.0625	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	209
+49	385.0625	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	192
+50	385.0625	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	192
+51	385.0625	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	190
+52	385.0625	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	190
+53	385.0625	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	190
+54	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	191
+55	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	191
+56	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	188
+57	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	183
+58	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	183
+59	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	182
+60	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	182
+61	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	181
+62	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	179
+63	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	179
+64	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	178
+65	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	178
+66	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	178
+67	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	177
+68	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	177
+69	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	177
+70	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	177
+71	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	177
+72	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	176
+73	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	176
+74	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	174
+75	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	173
+76	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	173
+77	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	171
+78	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	171
+79	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	171
+80	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	171
+81	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	169
+82	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	169
+83	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	169
+84	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	167
+85	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	167
+86	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	166
+87	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	160
+88	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	159
+89	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	157
+90	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	157
+91	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	157
+92	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	157
+93	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	156
+94	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	156
+95	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	156
+96	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	156
+97	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	156
+98	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	156
+99	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	156
+100	385.3125	[['Ca2c', 'ABI2', '0'], ['GHR1', 'CPK3_21', '1'], ['PA', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['Ca2c', 'PP2CA', '0'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]	155

@@ -26,12 +26,6 @@ for model_file in os.listdir(DIRECTORY):
 
     model_name = BASE.split("/")[-1][:-4]
 
-    if model_name == "HGF Signaling in Keratinocytes":
-        start_from = True
-
-    if not start_from:
-        continue
-
     base_primes = sm.format.import_primes(DIRECTORY+"/"+BASE)
 
     # skip the model if importing the primes fails
