@@ -11,9 +11,9 @@
     "edge_prob": 0.5
     },
 
-"data": "boolmore/ABA_case_study/data/data_osc_20230925.tsv",
+"data": "boolmore/case_study/data/data_osc_20230925.tsv",
 
-"base": "boolmoRe/ABA_case_study/baseline_models/ABA_GA_base_B.txt",
+"base": "boolmoRe/case_study/baseline_models/ABA_GA_base_B.txt",
     
 "default_sources": {"ABA":0},
 
