@@ -7,18 +7,20 @@ import time
 from boolmore.model import Model, mix_models
 from boolmore.experiment import import_exps
 from boolmore.conversions import prime2bnet
+from joblib import Parallel, delayed
+
 
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
 
-JSON = "../ABA_case_study/data/ABA_2017.json"
-START_MODEL = "../ABA_case_study/generated_models/ABA_GA1_A.txt"
+JSON = "../case_study/data/ABA_2017.json"
+START_MODEL = "../case_study/generated_models/ABA_GA_base_A.txt"
 RUN_NAME = "test"
 DATA = None
 BASE = None
 
 def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
-           data_file:str|None=None, base_file:str|None=None, stop_if_max:bool=True):
+           data_file:str|None=None, base_file:str|None=None, stop_if_max:bool=True, core:int=2):
     """
     Imports parameters, experiments, base model in the json file.
     Runs genetic algorithm and exports refined models.
@@ -41,7 +43,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     data_file   - location of the data file if json file is not given   :str|None
     base_file   - location of the base file if json file is not given   :str|None
 
-    stop_if_max - if True, stop when the max score is reached   :bool
+    stop_if_max - if True, stop when the max score is reached                 :bool
+    core        - if larger than 1, model evaluation is done in parallel      :int
 
     """
     if json_file != None:
@@ -133,6 +136,9 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     fp.write(f"# {PROB=}\n")
     fp.write(f"# {EDGE_PROB=}\n\n")
 
+    fp.write(f"# {stop_if_max=}\n")
+    fp.write(f"# {core=}\n\n")
+
     fp.write(f"# {BASE=}\n")
     fp.write(f"# extra edges: {base.extra_edges}\n")
     fp.write(f"# score: {base.score}\n")
@@ -154,7 +160,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
                          total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP,
                          prob=PROB, edge_prob=EDGE_PROB,
                          export_top=EXPORT_TOP, export_thresh=EXPORT_THRESHOLD,
-                         stop_if_max=stop_if_max)
+                         stop_if_max=stop_if_max, core=core)
     end_time = time.time()
 
     fp.write("\niteration\ttop score\textra edges\tcomplexity\n")
@@ -193,7 +199,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
             total_iter:int=100, per_iter:int=100, keep:int=20,
             prob:float=0.01, edge_prob:float=0.5,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
-            stop_if_max:bool=True
+            stop_if_max:bool=True, core:int=2
             ) -> tuple[Model, list]:
     """
     Main part of the genetic algorithm
@@ -227,6 +233,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
                     if None, use the start model name
                     
     stop_if_max - if True, stop when the max score is reached. default True   :bool
+    core        - if larger than 1, model evaluation is done in parallel      :int
 
     Returns
     -------
@@ -245,11 +252,23 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     print("- - - - - iteration ", 1, " - - - - -")
     iteration = []
     iteration.append(start)
+
+    new_model_lst = []
     for i in range(per_iter-1):
         new_model = start.mutate(prob, edge_prob)
-        new_model.get_predictions(fixes_list)
-        new_model.get_model_score(exps)
-        iteration.append(new_model)
+        new_model_lst.append(new_model)    
+    if core > 1:
+        results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(new_model, fixes_list, exps) for new_model in new_model_lst)
+        for result in results:
+            for new_model in new_model_lst:
+                if new_model.id == result[0]:
+                    new_model.predictions = result[1]
+                    new_model.score = result[2]
+    else:
+        for new_model in new_model_lst:
+            new_model.get_predictions(fixes_list)
+            new_model.get_model_score(exps)
+    iteration.extend(new_model_lst)
     
     iteration = sorted(iteration, key=lambda x: (len(x.extra_edges), x.complexity))
     iteration = sorted(iteration, key=lambda x: x.score, reverse=True)
@@ -279,12 +298,24 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         to_be_mixed = sorted(to_be_mixed, key=lambda x: x.score, reverse=True)
         weights = list(range(1, keep+1))
         weights.reverse()
+
+        mixed_model_lst = []
         for j in range(keep):
             mix = random.choices(to_be_mixed, weights=weights, k=2)
             mixed_model = mix_models(mix[0], mix[1])
-            mixed_model.get_predictions(fixes_list)
-            mixed_model.get_model_score(exps)
-            new_iteration.append(mixed_model)
+            mixed_model_lst.append(mixed_model)    
+        if core > 1:
+            results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(mixed_model, fixes_list, exps) for mixed_model in mixed_model_lst)
+            for result in results:
+                for mixed_model in mixed_model_lst:
+                    if mixed_model.id == result[0]:
+                        mixed_model.predictions = result[1]
+                        mixed_model.score = result[2]
+        else:
+            for mixed_model in mixed_model_lst:
+                mixed_model.get_predictions(fixes_list)
+                mixed_model.get_model_score(exps)
+        new_iteration.extend(mixed_model_lst)
     
         # mutate the good ones
         weights = list(range(1, 2*keep+1))
@@ -292,12 +323,23 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
         new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
         targets = random.choices(new_iteration, weights=weights, k=per_iter-2*keep)
+        new_model_lst = []
         for target in targets:
             new_model = target.mutate(prob, edge_prob)
-            new_model.get_predictions(fixes_list)
-            new_model.get_model_score(exps)
-            new_iteration.append(new_model)
-        
+            new_model_lst.append(new_model)    
+        if core > 1:
+            results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(new_model, fixes_list, exps) for new_model in new_model_lst)
+            for result in results:
+                for new_model in new_model_lst:
+                    if new_model.id == result[0]:
+                        new_model.predictions = result[1]
+                        new_model.score = result[2]
+        else:
+            for new_model in new_model_lst:
+                new_model.get_predictions(fixes_list)
+                new_model.get_model_score(exps)
+        new_iteration.extend(new_model_lst)
+      
         new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
         new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
     
@@ -322,6 +364,12 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         iteration = new_iteration
 
     return final, log
+
+def parallel_pred_and_score(model, fixes_list, exps):
+    model.get_predictions(fixes_list)
+    model.get_model_score(exps)
+
+    return model.id, model.predictions, model.score
 
 if __name__=="__main__":
     run_ga(JSON, START_MODEL, RUN_NAME, DATA, BASE)
