@@ -5,6 +5,7 @@
     "total_iterations": 100,
     "per_iteration": 10,
     "keep": 2,
+    "mix":2,
     "export_top": 0,
     "export_threshold": 0.0,
     "prob": 0.2,

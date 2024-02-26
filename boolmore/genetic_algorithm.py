@@ -57,6 +57,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         TOTAL_ITERATIONS = json_dict["parameters"]["total_iterations"]
         PER_ITERATION = json_dict["parameters"]["per_iteration"]
         KEEP = json_dict["parameters"]["keep"]
+        MIX = json_dict["parameters"]["mix"]
         PROB = json_dict["parameters"]["prob"]
         EDGE_PROB = json_dict["parameters"]["edge_prob"]
         EXPORT_TOP = json_dict["parameters"]["export_top"]
@@ -76,6 +77,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         TOTAL_ITERATIONS = 100
         PER_ITERATION = 100
         KEEP = 20
+        MIX = None
         PROB = 0.01
         EDGE_PROB = 0.5
         EXPORT_TOP = 0
@@ -133,6 +135,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     fp.write(f"# {TOTAL_ITERATIONS=}\n")
     fp.write(f"# {PER_ITERATION=}\n")
     fp.write(f"# {KEEP=}\n")
+    fp.write(f"# {MIX=}\n")
     fp.write(f"# {PROB=}\n")
     fp.write(f"# {EDGE_PROB=}\n\n")
 
@@ -157,7 +160,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
     start_time = time.time()
     final, log = ga_main(start, exps, fixes_list,
-                         total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP,
+                         total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                          prob=PROB, edge_prob=EDGE_PROB,
                          export_top=EXPORT_TOP, export_thresh=EXPORT_THRESHOLD,
                          stop_if_max=stop_if_max, core=core)
@@ -196,8 +199,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     return base, start, final
 
 def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
-            total_iter:int=100, per_iter:int=100, keep:int=20,
-            prob:float=0.01, edge_prob:float=0.5,
+            total_iter:int=100, per_iter:int=100, keep:int=20, mix:int|None=None,
+            prob:float|list[float]=0.01, edge_prob:float=0.5,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
             stop_if_max:bool=True, core:int=2
             ) -> tuple[Model, list]:
@@ -223,8 +226,11 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     total_iter - total number of iterations, default 100                :int
     per_iter   - models per iterations, default 100                     :int
     keep       - models to carry over tot he next iteration, default 20 :int
+    mix        - number of models to mix from the keep, default keep    :int|None
 
-    prob      - probability for each digit in the rule representation to mutate, default 0.01   :float
+    prob      - probability for each digit in the rule representation to mutate, default 0.01   :float | list[float]
+                if given a list, each probability is applied for each iteration
+                last item is used for the remaining iterations if the length is shorter.
     edge_prob - probability to add/delete extra edge, default 0.5                               :float
  
     export_top    - number of models to export at each iteration, default 0     :int
@@ -242,10 +248,20 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
               [[iteration, top score, extra_edges, complexity], ...]
     """
     assert per_iter > keep, "We need more models per iteration than the number of models to carry over to the next iteration"
-    assert prob < 1.0 and edge_prob < 1.0, "Probabilities should be less than 1"
 
     if export_name == None:
         export_name = start.name
+
+    if mix == None:
+        mix = keep
+
+    if type(prob) == float:
+        prob_list = [prob] * total_iter
+    elif len(prob) < total_iter:
+        prob_list = prob
+        prob_list.extend([prob[-1]] * (total_iter-len(prob)))
+    else:
+        prob_list = prob
 
     log = []
 
@@ -255,7 +271,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
 
     new_model_lst = []
     for i in range(per_iter-1):
-        new_model = start.mutate(prob, edge_prob)
+        new_model = start.mutate(prob_list[0], edge_prob)
         new_model_lst.append(new_model)    
     if core > 1:
         results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(new_model, fixes_list, exps) for new_model in new_model_lst)
@@ -300,9 +316,9 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         weights.reverse()
 
         mixed_model_lst = []
-        for j in range(keep):
-            mix = random.choices(to_be_mixed, weights=weights, k=2)
-            mixed_model = mix_models(mix[0], mix[1])
+        for j in range(mix):
+            model_choice = random.choices(to_be_mixed, weights=weights, k=2)
+            mixed_model = mix_models(model_choice[0], model_choice[1])
             mixed_model_lst.append(mixed_model)    
         if core > 1:
             results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(mixed_model, fixes_list, exps) for mixed_model in mixed_model_lst)
@@ -318,14 +334,14 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         new_iteration.extend(mixed_model_lst)
     
         # mutate the good ones
-        weights = list(range(1, 2*keep+1))
+        weights = list(range(1, keep+mix+1))
         weights.reverse()
         new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
         new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
-        targets = random.choices(new_iteration, weights=weights, k=per_iter-2*keep)
+        targets = random.choices(new_iteration, weights=weights, k=per_iter-keep-mix)
         new_model_lst = []
         for target in targets:
-            new_model = target.mutate(prob, edge_prob)
+            new_model = target.mutate(prob_list[i-1], edge_prob)
             new_model_lst.append(new_model)    
         if core > 1:
             results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(new_model, fixes_list, exps) for new_model in new_model_lst)
