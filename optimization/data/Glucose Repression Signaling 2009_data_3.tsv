@@ -1,0 +1,731 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		ACS1	OFF
+2	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		Mig1p	ON
+3	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		MALS	OFF
+4	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		ICL1	OFF
+5	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		HXT5	ON
+6	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		HXT4	OFF
+7	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		Sip4p	OFF
+8	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		FBP1	OFF
+9	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		PCK1	OFF
+10	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		IDP2	OFF
+11	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		GAL10	OFF
+12	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		SFC1	OFF
+13	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		HXT1	ON
+14	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		number_4ORFs	OFF
+15	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		HXT2	OFF
+16	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		maltose_int	ON
+17	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		GAL7	OFF
+18	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		MEL1	OFF
+19	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		Mig3p	ON
+20	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		GAL5	OFF
+21	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		HXT3	ON
+22	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		MDH2	OFF
+23	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		JEN1	OFF
+24	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		MLS1	OFF
+25	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		Gal11p	ON
+26	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		HXT8	ON
+27	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1		SUC2	OFF
+28	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	ACS1	ON
+29	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	MALS	OFF
+30	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	ICL1	ON
+31	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	HXT5	OFF
+32	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	HXT4	OFF
+33	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	FBP1	ON
+34	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	PCK1	ON
+35	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	IDP2	ON
+36	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	GAL10	ON
+37	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	SFC1	ON
+38	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	HXT1	OFF
+39	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	number_4ORFs	OFF
+40	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	HXT2	OFF
+41	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	GAL7	ON
+42	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	MEL1	ON
+43	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	Mig3p	OFF
+44	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	GAL5	Some
+45	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	HXT3	OFF
+46	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	MDH2	ON
+47	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	JEN1	ON
+48	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	MLS1	ON
+49	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	Gal11p	ON
+50	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	HXT8	OFF
+51	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GLC7 CA	SUC2	ON
+52	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	ACS1	ON
+53	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	MALS	ON
+54	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	ICL1	ON
+55	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	HXT5	ON
+56	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	HXT4	ON
+57	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	FBP1	ON
+58	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	PCK1	ON
+59	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	IDP2	ON
+60	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	GAL10	ON
+61	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	SFC1	ON
+62	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	HXT1	ON
+63	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	number_4ORFs	OFF
+64	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	HXT2	ON
+65	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	GAL7	ON
+66	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	MEL1	ON
+67	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	Mig3p	OFF
+68	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	GAL5	Some
+69	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	HXT3	ON
+70	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	MDH2	ON
+71	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	JEN1	ON
+72	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	MLS1	ON
+73	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	Gal11p	ON
+74	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	HXT8	ON
+75	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Snf1p CA	SUC2	OFF
+76	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	ACS1	OFF
+77	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	MALS	OFF
+78	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	ICL1	OFF
+79	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	HXT5	ON
+80	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	HXT4	OFF
+81	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	FBP1	OFF
+82	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	PCK1	OFF
+83	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	IDP2	OFF
+84	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	GAL10	OFF
+85	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	SFC1	OFF
+86	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	HXT1	ON
+87	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	number_4ORFs	OFF
+88	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	HXT2	OFF
+89	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	GAL7	OFF
+90	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	MEL1	OFF
+91	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	Mig3p	ON
+92	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	GAL5	OFF
+93	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	HXT3	ON
+94	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	MDH2	OFF
+95	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	JEN1	OFF
+96	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	MLS1	OFF
+97	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	Gal11p	ON
+98	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	HXT8	ON
+99	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	GAL2 CA,YCK1_2 CA,maltose_int KO	SUC2	OFF
+100	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		ACS1	OFF
+101	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		MALS	OFF
+102	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		ICL1	OFF
+103	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		HXT5	ON
+104	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		HXT4	OFF
+105	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		FBP1	OFF
+106	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		PCK1	OFF
+107	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		IDP2	OFF
+108	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		GAL10	OFF
+109	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		SFC1	OFF
+110	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		HXT1	ON
+111	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		number_4ORFs	OFF
+112	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		HXT2	OFF
+113	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		GAL7	OFF
+114	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		MEL1	OFF
+115	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		Mig3p	ON
+116	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		GAL5	OFF
+117	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		HXT3	ON
+118	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		MDH2	OFF
+119	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		JEN1	OFF
+120	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		MLS1	OFF
+121	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		Gal11p	ON
+122	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		HXT8	ON
+123	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=0		SUC2	OFF
+124	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	ACS1	ON
+125	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	MALS	OFF
+126	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	ICL1	ON
+127	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	HXT5	OFF
+128	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	HXT4	OFF
+129	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	FBP1	ON
+130	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	PCK1	ON
+131	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	IDP2	ON
+132	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	GAL10	ON
+133	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	SFC1	ON
+134	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	HXT1	OFF
+135	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	number_4ORFs	OFF
+136	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	HXT2	OFF
+137	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	GAL7	ON
+138	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	MEL1	ON
+139	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	Mig3p	OFF
+140	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	GAL5	Some
+141	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	HXT3	OFF
+142	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	MDH2	ON
+143	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	JEN1	ON
+144	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	MLS1	ON
+145	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	Gal11p	ON
+146	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	HXT8	OFF
+147	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Sip4p KO	SUC2	ON
+148	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		ACS1	OFF
+149	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		MALS	OFF
+150	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		ICL1	OFF
+151	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		HXT5	ON
+152	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		HXT4	OFF
+153	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		FBP1	OFF
+154	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		PCK1	OFF
+155	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		IDP2	OFF
+156	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		GAL10	OFF
+157	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		SFC1	OFF
+158	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		HXT1	ON
+159	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		number_4ORFs	OFF
+160	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		HXT2	OFF
+161	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		GAL7	OFF
+162	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		MEL1	OFF
+163	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		Mig3p	ON
+164	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		GAL5	OFF
+165	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		HXT3	ON
+166	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		MDH2	OFF
+167	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		JEN1	OFF
+168	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		MLS1	OFF
+169	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		Gal11p	ON
+170	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		HXT8	ON
+171	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0		SUC2	OFF
+172	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	ACS1	OFF
+173	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	MALS	OFF
+174	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	ICL1	OFF
+175	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	HXT5	ON
+176	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	HXT4	OFF
+177	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	FBP1	OFF
+178	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	PCK1	OFF
+179	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	IDP2	OFF
+180	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	Gal3p	OFF
+181	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	GAL10	OFF
+182	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	SFC1	OFF
+183	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	HXT1	ON
+184	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	number_4ORFs	ON
+185	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	HXT2	OFF
+186	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	GAL7	OFF
+187	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	MEL1	OFF
+188	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	Mig3p	ON
+189	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	GAL5	OFF
+190	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	HXT3	ON
+191	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	MDH2	OFF
+192	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	JEN1	OFF
+193	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	MLS1	OFF
+194	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	Gal11p	ON
+195	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	HXT8	ON
+196	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	RGT1 KO	SUC2	OFF
+197	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	ACS1	OFF
+198	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	MALS	OFF
+199	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	ICL1	OFF
+200	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	HXT5	OFF
+201	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	HXT4	OFF
+202	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	FBP1	OFF
+203	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	PCK1	OFF
+204	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	IDP2	OFF
+205	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	GAL10	OFF
+206	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	SFC1	OFF
+207	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	HXT1	OFF
+208	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	number_4ORFs	OFF
+209	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	HXT2	OFF
+210	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	GAL7	OFF
+211	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	MEL1	OFF
+212	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	Mig3p	OFF
+213	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	GAL5	OFF
+214	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	HXT3	OFF
+215	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	MDH2	OFF
+216	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	JEN1	OFF
+217	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	Gal4p	OFF
+218	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	MLS1	OFF
+219	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	Gal11p	ON
+220	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	HXT8	OFF
+221	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GLC7 KO,Glc7Reg1 CA	SUC2	OFF
+222	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	ACS1	OFF
+223	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	MALS	OFF
+224	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	ICL1	OFF
+225	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	HXT5	ON
+226	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	HXT4	OFF
+227	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	FBP1	OFF
+228	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	PCK1	OFF
+229	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	IDP2	OFF
+230	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	GAL10	OFF
+231	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	SFC1	OFF
+232	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	HXT1	ON
+233	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	number_4ORFs	OFF
+234	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	HXT2	OFF
+235	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	GAL7	OFF
+236	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	MEL1	OFF
+237	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	Mig3p	ON
+238	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	GAL5	OFF
+239	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	HXT3	ON
+240	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	MDH2	OFF
+241	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	JEN1	OFF
+242	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	MLS1	OFF
+243	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	Gal11p	ON
+244	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	HXT8	ON
+245	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	SNF4 KO,Snf3p CA	SUC2	OFF
+246	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	ACS1	ON
+247	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	MALS	OFF
+248	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	ICL1	ON
+249	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	HXT5	OFF
+250	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	HXT4	OFF
+251	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	FBP1	ON
+252	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	PCK1	ON
+253	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	IDP2	ON
+254	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	GAL10	ON
+255	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	SFC1	ON
+256	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	HXT1	OFF
+257	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	number_4ORFs	OFF
+258	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	HXT2	OFF
+259	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	GAL7	ON
+260	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	MEL1	ON
+261	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	Mig3p	OFF
+262	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	GAL5	OFF
+263	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	HXT3	OFF
+264	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	MDH2	ON
+265	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	JEN1	ON
+266	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	MLS1	ON
+267	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	Gal11p	ON
+268	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	HXT8	OFF
+269	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	Gal80p CA	SUC2	ON
+270	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	ACS1	OFF
+271	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	MALS	OFF
+272	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	ICL1	OFF
+273	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	HXT5	ON
+274	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	HXT4	OFF
+275	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	Rgt1p	OFF
+276	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	MalTp	ON
+277	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	SCF_grr1	ON
+278	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	FBP1	OFF
+279	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	PCK1	OFF
+280	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	IDP2	OFF
+281	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	GAL10	OFF
+282	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	SFC1	OFF
+283	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	HXT1	ON
+284	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	number_4ORFs	OFF
+285	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	HXT2	OFF
+286	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	GAL7	OFF
+287	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	MEL1	OFF
+288	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	Mig3p	ON
+289	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	GAL5	OFF
+290	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	HXT3	ON
+291	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	MDH2	OFF
+292	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	JEN1	OFF
+293	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	MLS1	OFF
+294	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	Gal11p	ON
+295	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	HXT8	ON
+296	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	CAT8	OFF
+297	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1	Gal80p KO,Snf3p CA	SUC2	OFF
+298	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	ACS1	ON
+299	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	MALS	OFF
+300	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	ICL1	ON
+301	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	HXT5	OFF
+302	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	HXT4	OFF
+303	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	FBP1	ON
+304	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	PCK1	ON
+305	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	IDP2	ON
+306	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	GAL10	ON
+307	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	SFC1	ON
+308	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	HXT1	OFF
+309	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	number_4ORFs	OFF
+310	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	HXT2	OFF
+311	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	GAL7	ON
+312	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	MEL1	ON
+313	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	Mig3p	OFF
+314	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	GAL5	Some
+315	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	HXT3	OFF
+316	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	MDH2	ON
+317	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	JEN1	ON
+318	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	MLS1	ON
+319	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	Gal11p	ON
+320	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	HXT8	OFF
+321	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL80 CA	SUC2	ON
+322	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	ACS1	ON
+323	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	MALS	OFF
+324	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	ICL1	ON
+325	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	HXT5	OFF
+326	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	HXT4	OFF
+327	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	FBP1	ON
+328	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	PCK1	ON
+329	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	IDP2	ON
+330	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	GAL10	OFF
+331	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	SFC1	ON
+332	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	HXT1	OFF
+333	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	number_4ORFs	OFF
+334	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	HXT2	OFF
+335	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	GAL7	OFF
+336	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	MEL1	ON
+337	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	Mig3p	OFF
+338	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	GAL5	OFF
+339	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	HXT3	OFF
+340	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	Mig2p	OFF
+341	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	MDH2	ON
+342	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	JEN1	ON
+343	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	MLS1	ON
+344	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	Gal11p	ON
+345	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	HXT8	OFF
+346	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	GAL4 KO,Gal1p CA	SUC2	ON
+347	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		ACS1	OFF
+348	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		MALS	OFF
+349	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		Snf3p	ON
+350	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		ICL1	OFF
+351	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		HXT5	ON
+352	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		HXT4	OFF
+353	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		FBP1	OFF
+354	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		PCK1	OFF
+355	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		MALR	OFF
+356	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		IDP2	OFF
+357	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		GAL10	OFF
+358	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		SFC1	OFF
+359	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		HXT1	ON
+360	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		number_4ORFs	OFF
+361	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		HXT2	OFF
+362	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		GAL7	OFF
+363	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		MEL1	OFF
+364	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		Mig3p	ON
+365	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		GAL5	OFF
+366	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		HXT3	ON
+367	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		MDH2	OFF
+368	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		JEN1	OFF
+369	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		MLS1	OFF
+370	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		Gal11p	ON
+371	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		HXT8	ON
+372	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		CAT8	OFF
+373	1.0	galactose_ext=0,glucose_ext=1,maltose_ext=1		SUC2	OFF
+374	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	ACS1	ON
+375	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	MALS	OFF
+376	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	ICL1	ON
+377	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	HXT5	ON
+378	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	HXT4	ON
+379	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	FBP1	ON
+380	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	PCK1	ON
+381	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	IDP2	ON
+382	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	GAL10	ON
+383	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	SFC1	ON
+384	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	HXT1	ON
+385	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	number_4ORFs	OFF
+386	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	HXT2	ON
+387	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	GAL7	ON
+388	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	MEL1	ON
+389	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	Mig3p	OFF
+390	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	GAL5	ON
+391	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	HXT3	ON
+392	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	MDH2	ON
+393	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	JEN1	ON
+394	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	MLS1	ON
+395	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	Gal11p	ON
+396	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	HXT8	ON
+397	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	Rgt1p KO	SUC2	OFF
+398	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	ACS1	ON
+399	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	MALS	OFF
+400	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	ICL1	ON
+401	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	HXT5	OFF
+402	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	HXT4	ON
+403	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	FBP1	ON
+404	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	PCK1	ON
+405	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	IDP2	ON
+406	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	GAL10	ON
+407	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	SFC1	ON
+408	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	HXT1	OFF
+409	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	number_4ORFs	OFF
+410	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	HXT2	OFF
+411	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	GAL7	ON
+412	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	MEL1	ON
+413	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	Mig3p	OFF
+414	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	GAL5	ON
+415	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	HXT3	ON
+416	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	MDH2	ON
+417	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	JEN1	ON
+418	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	MLS1	ON
+419	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	Gal11p	ON
+420	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	HXT8	OFF
+421	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	CAT8	ON
+422	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0	GRR1 CA,Mth1p KO	SUC2	ON
+423	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	ACS1	OFF
+424	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	MALS	OFF
+425	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	ICL1	OFF
+426	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	HXT5	ON
+427	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	HXT4	OFF
+428	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	FBP1	OFF
+429	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	PCK1	OFF
+430	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	IDP2	OFF
+431	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	GAL10	OFF
+432	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	SFC1	OFF
+433	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	HXT1	ON
+434	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	number_4ORFs	OFF
+435	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	HXT2	OFF
+436	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	GAL7	OFF
+437	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	MEL1	OFF
+438	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	Mig3p	ON
+439	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	GAL5	OFF
+440	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	HXT3	ON
+441	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	MDH2	OFF
+442	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	JEN1	OFF
+443	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	MLS1	OFF
+444	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	Gal11p	ON
+445	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	HXT8	ON
+446	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SIP4 CA,YCK1_2 CA	SUC2	OFF
+447	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	ACS1	ON
+448	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	MALS	ON
+449	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	galactose_int	OFF
+450	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	ICL1	ON
+451	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	HXT5	OFF
+452	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	HXT4	OFF
+453	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	FBP1	ON
+454	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	PCK1	ON
+455	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	IDP2	ON
+456	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	GAL10	ON
+457	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	SFC1	ON
+458	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	HXT1	OFF
+459	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	number_4ORFs	OFF
+460	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	HXT2	OFF
+461	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	GAL7	ON
+462	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	MEL1	ON
+463	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	MalRp	ON
+464	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	Mig3p	OFF
+465	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	GAL5	ON
+466	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	HXT3	OFF
+467	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	MDH2	ON
+468	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	JEN1	ON
+469	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	MLS1	ON
+470	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	Gal11p	ON
+471	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	HXT8	OFF
+472	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=1	Gal80p KO,maltose_int CA	SUC2	ON
+473	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	ACS1	OFF
+474	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	MALS	OFF
+475	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	ICL1	OFF
+476	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	HXT5	ON
+477	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	HXT4	OFF
+478	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	FBP1	OFF
+479	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	PCK1	OFF
+480	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	IDP2	OFF
+481	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	GAL10	OFF
+482	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	SFC1	OFF
+483	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	HXT1	ON
+484	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	number_4ORFs	OFF
+485	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	HXT2	OFF
+486	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	GAL7	OFF
+487	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	MEL1	OFF
+488	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	Mig3p	ON
+489	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	GAL5	OFF
+490	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	HXT3	ON
+491	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	MDH2	OFF
+492	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	JEN1	OFF
+493	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	MLS1	OFF
+494	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	Gal11p	ON
+495	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	HXT8	ON
+496	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SNF3 CA	SUC2	OFF
+497	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	ACS1	OFF
+498	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	MALS	OFF
+499	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	ICL1	OFF
+500	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	HXT5	OFF
+501	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	HXT4	OFF
+502	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	FBP1	OFF
+503	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	PCK1	OFF
+504	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	IDP2	OFF
+505	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	GAL10	OFF
+506	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	SFC1	OFF
+507	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	HXT1	OFF
+508	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	number_4ORFs	OFF
+509	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	HXT2	OFF
+510	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	GAL7	OFF
+511	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	MEL1	OFF
+512	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	Mig3p	OFF
+513	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	GAL5	OFF
+514	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	HXT3	OFF
+515	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	MDH2	OFF
+516	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	JEN1	OFF
+517	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	MLS1	OFF
+518	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	Gal11p	ON
+519	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	HXT8	OFF
+520	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Mig1p CA,Rgt2p KO,Yck1p KO	SUC2	OFF
+521	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	ACS1	OFF
+522	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	MALS	OFF
+523	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	ICL1	OFF
+524	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	HXT5	ON
+525	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	HXT4	OFF
+526	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	FBP1	OFF
+527	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	GAL1	OFF
+528	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	PCK1	OFF
+529	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	IDP2	OFF
+530	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	GAL10	OFF
+531	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	SFC1	OFF
+532	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	HXT1	ON
+533	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	number_4ORFs	OFF
+534	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	HXT2	OFF
+535	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	maltose_int	ON
+536	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	GAL7	OFF
+537	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	MEL1	OFF
+538	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	Mig3p	ON
+539	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	GAL5	OFF
+540	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	HXT3	ON
+541	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	MDH2	OFF
+542	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	JEN1	OFF
+543	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	MLS1	OFF
+544	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	Gal11p	ON
+545	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	HXT8	ON
+546	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	SNF4 CA	SUC2	OFF
+547	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	ACS1	OFF
+548	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	MALS	OFF
+549	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	ICL1	ON
+550	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	HXT5	ON
+551	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	HXT4	OFF
+552	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	FBP1	ON
+553	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	PCK1	OFF
+554	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	IDP2	OFF
+555	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	GAL10	OFF
+556	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	SFC1	OFF
+557	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	HXT1	ON
+558	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	number_4ORFs	OFF
+559	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	HXT2	OFF
+560	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	GAL7	OFF
+561	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	MEL1	OFF
+562	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	Mig3p	ON
+563	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	GAL5	OFF
+564	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	HXT3	ON
+565	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	MDH2	ON
+566	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	JEN1	OFF
+567	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	MLS1	ON
+568	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	Gal11p	ON
+569	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	HXT8	ON
+570	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Sip4p CA	SUC2	OFF
+571	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	ACS1	OFF
+572	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	MALS	OFF
+573	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	ICL1	OFF
+574	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	HXT5	OFF
+575	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	HXT4	OFF
+576	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	FBP1	OFF
+577	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	GAL1	OFF
+578	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	PCK1	OFF
+579	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	IDP2	OFF
+580	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	GAL10	OFF
+581	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	SFC1	OFF
+582	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	HXT1	OFF
+583	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	number_4ORFs	OFF
+584	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	HXT2	OFF
+585	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	GAL7	OFF
+586	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	MEL1	OFF
+587	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	Mig3p	OFF
+588	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	GAL5	OFF
+589	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	HXT3	OFF
+590	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	MDH2	OFF
+591	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	JEN1	OFF
+592	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	GAL3	OFF
+593	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	MLS1	OFF
+594	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	Gal11p	ON
+595	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	HXT8	OFF
+596	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	Gal4p KO,SCF_grr1 KO	SUC2	OFF
+597	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		ACS1	ON
+598	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		MALS	ON
+599	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		ICL1	ON
+600	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		HXT5	OFF
+601	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		HXT4	OFF
+602	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		FBP1	ON
+603	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		PCK1	ON
+604	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		IDP2	ON
+605	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		GAL10	ON
+606	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		SFC1	ON
+607	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		HXT1	OFF
+608	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		number_4ORFs	OFF
+609	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		HXT2	OFF
+610	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		GAL7	ON
+611	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		MEL1	ON
+612	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		Mig3p	OFF
+613	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		GAL5	ON
+614	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		HXT3	OFF
+615	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		MDH2	ON
+616	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		Mth1p	ON
+617	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		JEN1	ON
+618	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		MLS1	ON
+619	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		Gal11p	ON
+620	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		HXT8	OFF
+621	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=1		SUC2	ON
+622	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	ACS1	OFF
+623	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	MALS	OFF
+624	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	ICL1	OFF
+625	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	HXT5	ON
+626	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	HXT4	OFF
+627	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	FBP1	OFF
+628	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	PCK1	OFF
+629	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	MALR	OFF
+630	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	IDP2	OFF
+631	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	GAL10	OFF
+632	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	SFC1	OFF
+633	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	HXT1	ON
+634	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	number_4ORFs	OFF
+635	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	HXT2	OFF
+636	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	GAL7	OFF
+637	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	MEL1	OFF
+638	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	Mig3p	ON
+639	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	GAL5	OFF
+640	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	HXT3	ON
+641	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	MDH2	OFF
+642	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	JEN1	OFF
+643	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	MLS1	OFF
+644	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	Gal11p	ON
+645	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	HXT8	ON
+646	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=0	SCF_grr1 CA	SUC2	OFF
+647	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	ACS1	OFF
+648	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	MALS	OFF
+649	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	ICL1	OFF
+650	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	HXT5	ON
+651	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	HXT4	OFF
+652	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	FBP1	OFF
+653	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	PCK1	OFF
+654	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	IDP2	OFF
+655	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	GAL10	OFF
+656	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	SFC1	OFF
+657	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	HXT1	ON
+658	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	number_4ORFs	OFF
+659	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	HXT2	OFF
+660	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	GAL7	OFF
+661	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	MEL1	OFF
+662	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	Mig3p	ON
+663	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	GAL5	OFF
+664	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	HXT3	ON
+665	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	MDH2	OFF
+666	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	JEN1	OFF
+667	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	MLS1	OFF
+668	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	Gal11p	ON
+669	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	HXT8	ON
+670	1.0	galactose_ext=1,glucose_ext=1,maltose_ext=1	MIG3 CA,Mig2p CA,Snf3p CA	SUC2	OFF
+671	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	ACS1	ON
+672	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	MALS	OFF
+673	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	ICL1	ON
+674	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	HXT5	OFF
+675	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	HXT4	OFF
+676	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	FBP1	ON
+677	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	PCK1	ON
+678	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	IDP2	ON
+679	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	GAL10	ON
+680	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	SFC1	ON
+681	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	HXT1	OFF
+682	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	number_4ORFs	OFF
+683	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	HXT2	OFF
+684	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	GAL7	ON
+685	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	MEL1	ON
+686	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	Mig3p	OFF
+687	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	GAL5	Some
+688	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	HXT3	OFF
+689	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	MDH2	ON
+690	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	JEN1	ON
+691	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	MLS1	ON
+692	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	Gal11p	ON
+693	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	HXT8	OFF
+694	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0	SNF3 CA	SUC2	ON
+695	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		ACS1	ON
+696	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		MALS	OFF
+697	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		Snf3p	OFF
+698	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		ICL1	ON
+699	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		HXT5	OFF
+700	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		HXT4	OFF
+701	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		FBP1	ON
+702	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		PCK1	ON
+703	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		IDP2	ON
+704	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		GAL10	ON
+705	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		SFC1	ON
+706	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		HXT1	OFF
+707	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		number_4ORFs	OFF
+708	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		HXT2	OFF
+709	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		GAL7	ON
+710	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		MEL1	ON
+711	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		Mig3p	OFF
+712	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		GAL5	Some
+713	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		HXT3	OFF
+714	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		MDH2	ON
+715	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		JEN1	ON
+716	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		MLS1	ON
+717	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		Gal11p	ON
+718	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		HXT8	OFF
+719	1.0	galactose_ext=0,glucose_ext=0,maltose_ext=0		SUC2	ON
+720	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0		ACS1	ON
+721	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0		MALS	OFF
+722	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0		ICL1	ON
+723	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0		HXT5	OFF
+724	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0		HXT4	OFF
+725	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0		FBP1	ON
+726	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0		PCK1	ON
+727	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0		IDP2	ON
+728	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0		GAL10	ON
+729	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0		SFC1	ON
+730	1.0	galactose_ext=1,glucose_ext=0,maltose_ext=0		HXT1	OFF

@@ -1,0 +1,17 @@
+# id: 114261
+# generation: 1
+# extra edges: []
+# score: 21.333333333333336 / 80.0
+# following constraints: True
+# complexity: 41
+
+Cdc20* = CycB
+Cdh1* = !CycA | !CycB | p27
+CycA* = !Cdc20 & !Cdh1 | !Cdc20 & CycA | !Cdc20 & !Rb | !Cdc20 & !UbcH10 | !Cdh1 & CycA | !Cdh1 & !Rb | !Cdh1 & !UbcH10 | E2F | !Rb & !UbcH10
+CycB* = !Cdc20 | !Cdh1
+CycD* = CycD
+CycE* = E2F
+E2F* = !CycA & !Rb | !Rb & p27
+Rb* = !CycA & !CycB | !CycD | !CycE | p27
+UbcH10* = !Cdh1 | CycA | CycB | UbcH10
+p27* = !CycA & !CycD & p27
