@@ -1,25 +1,29 @@
-# import boolmore.genetic_algorithm
-import os
-import re
-import itertools as it
 import pystablemotifs as sm
 import boolmore.config
-import time
 import json
 
 from boolmore.experiment import import_exps
 from boolmore.model import Model
 from boolmore.genetic_algorithm import ga_main
-from boolmore.benchmarks import generate_experiments
 
 
+REPEAT = 25
 TOTAL_ITERATIONS = 10
 PER_ITERATION = 10
 KEEP = 2
-PROB_LIST = [0.005, 0.01, 0.05, 0.1, 0.2, 0.5]
+MIX = 0
+PROB_LIST = [0.01,
+             0.05,
+             0.1,
+             0.2,
+             0.5,
+             [0.5,0.5,0.5,0.1]]
+
+total = TOTAL_ITERATIONS * (PER_ITERATION-KEEP)
+
 
 json_file = "boolmore/case_study/data/ABA_2017.json"
-start = "boolmore/case_study/baseline_models/ABA_GA_base_A.txt"
+start_path = "boolmore/case_study/baseline_models/ABA_GA_base_A.txt"
 
 f = open(json_file)
 json_dict = json.load(f)
@@ -40,28 +44,44 @@ exps, fixes_list = import_exps(DATA)
 base_primes = sm.format.import_primes(BASE)
 base = Model.import_model(base_primes, constraints=CONSTRAINTS, edge_pool=EDGE_POOL, default_sources=DEFAULT_SOURCES)
 
-primes = sm.format.import_primes(start)
+primes = sm.format.import_primes(start_path)
 start = Model.import_model(primes, boolmore.config.id, 1, base)
 start.get_predictions(fixes_list)
 start.get_model_score(exps)
 start.info()
 print()
 
-fp = open("boolmore/optimization/probability log.csv", "a")
-fp.write(f"# {TOTAL_ITERATIONS=},{PER_ITERATION=},{KEEP=}\n")
+fp = open("boolmore/optimization/probability_log.csv", "a")
+fp.write("sample_model,iter,pop,keep,mix,prob")
+for i in range(total + 1):
+    fp.write(f",{i}")
+fp.write("\n")
 fp.close()
 
-for i in range(25):
+for i in range(REPEAT):
     for prob in PROB_LIST:
         final, log = ga_main(start, exps, fixes_list,
-                            total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP,
+                            total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                             prob=prob, edge_prob=EDGE_PROB,
                             stop_if_max=True, core=6)
 
-        fp = open("boolmore/optimization/probability log.csv", "a")
+        fp = open("boolmore/optimization/probability_log.csv", "a")
 
-        fp.write(f"ABA_scrambled,{prob},{start.score}")
+        fp.write(f"ABA_GA_base_A,{TOTAL_ITERATIONS},{PER_ITERATION},{KEEP},{MIX},\"{prob}\",{start.score}")
+
         for iteration in log:
-            fp.write(f",{iteration[1]}")
+            # extra commas to make the output csv file neat
+            for i in range(int(total/TOTAL_ITERATIONS)):
+                fp.write(",")
+            fp.write(f"{iteration[1]}")
+
+        # if the genetic algorithm ended early, have the final score appended.
+        if len(log) != TOTAL_ITERATIONS:
+            for i in range(len(log) - TOTAL_ITERATIONS):
+                # extra commas to make the output csv file neat
+                for i in range(int(total/TOTAL_ITERATIONS)):
+                    fp.write(",")
+                fp.write(f"{log[-1][1]}")        
+
         fp.write("\n")
         fp.close()
