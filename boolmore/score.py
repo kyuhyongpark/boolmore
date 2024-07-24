@@ -198,8 +198,6 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
             # get the hierarchy
             hierarchy = 0
             for node in fixes_dict:
-                print(node, fixes_dict[node])
-
                 if node in default_sources:
                     # source node value not same as default sources
                     if fixes_dict[node] != default_sources[node]:
