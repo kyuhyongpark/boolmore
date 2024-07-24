@@ -240,6 +240,7 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
                 
             if report:
                 fp.write(str(agreements[observed_node][fixes][ID]) + '\t') # type: ignore
+                # TODO: fix reporting hierarchy number
                 fp.write(str(int(math.log2(len(subset_fixes_set)))) + '\t') # type: ignore
                 for fix in fixes:
                     fp.write(str(fix[0]) + '=' + str(fix[1]) + ',') # type: ignore
