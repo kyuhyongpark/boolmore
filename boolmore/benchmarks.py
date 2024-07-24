@@ -10,6 +10,7 @@ ExpType = tuple[int, float, FixesType, str, str]
 
 
 def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None,
+                         seed:int|None=None,
                          export:bool=False, file_name:str="artificial_experiments.tsv"
                          ) -> tuple[list[ExpType], list[FixesType]]:
     """
@@ -32,6 +33,7 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None,
              {node: prime}
     n_exps - number of experiments to generate  :int|None
              when None, generates 10*N
+    seed - random seed                                          :int|None
     
     export - if true, export the data to file_name              :bool
     file_name - location of the exported data in tsv format      :str
@@ -54,6 +56,9 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None,
     """
     if n_exps == None:
         n_exps = 10*len(primes)
+
+    if seed != None:
+        random.seed(seed)
 
     # find source nodes
     source_vars = []
@@ -205,7 +210,8 @@ def export_exps(primes:dict[str, PrimeType], experiments:list[ExpType],
 
     print("Exported generated experiments to", os.path.abspath(file_name))
 
-def train_and_valid(experiments:list[ExpType], ratio:float|None=None, valid_ids:list[int]|None=None
+def train_and_valid(experiments:list[ExpType], ratio:float|None=None, valid_ids:list[int]|None=None,
+                    seed:int|None = None,
                     ) -> tuple[list[ExpType],list[ExpType],list[int]]:
     """
     Given the artificial experiments, generate a training set and a validation set.
@@ -227,6 +233,7 @@ def train_and_valid(experiments:list[ExpType], ratio:float|None=None, valid_ids:
 
     ratio - ratio of the validation set                         :float|None
     id_list - list of IDs of experments for the validation set  :list[int]|None
+    seed - random seed                                          :int|None
 
     Returns
     -------
@@ -244,6 +251,10 @@ def train_and_valid(experiments:list[ExpType], ratio:float|None=None, valid_ids:
     valid_ids - same as the input id_list if it was given     :list[int]
                 or newly created if given the ratio
     """
+
+    if seed != None:
+        random.seed(seed)
+
     n_exps = len(experiments)
     ids = [exp[0] for exp in experiments]
     if ratio != None:
