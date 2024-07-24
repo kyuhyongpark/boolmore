@@ -20,7 +20,8 @@ DATA = None
 BASE = None
 
 def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
-           data_file:str|None=None, base_file:str|None=None, stop_if_max:bool=True, core:int=2):
+           data_file:str|None=None, base_file:str|None=None, stop_if_max:bool=True, core:int=2,
+           seed:int|None = None):
     """
     Imports parameters, experiments, base model in the json file.
     Runs genetic algorithm and exports refined models.
@@ -45,6 +46,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
     stop_if_max - if True, stop when the max score is reached                 :bool
     core        - if larger than 1, model evaluation is done in parallel      :int
+    seed        - random seed                                                 :int|None
+
 
     """
     if json_file != None:
@@ -98,6 +101,9 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     if run_name == None:
         run_name = START_MODEL.split("/")[-1][:-4]
     LOG = run_name + "_log.txt"
+
+    if seed != None:
+        random.seed(seed)
 
     boolmore.config.id = STARTING_ID
 
@@ -202,7 +208,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
             total_iter:int=100, per_iter:int=100, keep:int=20, mix:int|None=None,
             prob:float|list[float]=0.01, edge_prob:float=0.5,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
-            stop_if_max:bool=True, core:int=2
+            stop_if_max:bool=True, core:int=2, seed:int|None=None,
             ) -> tuple[Model, list]:
     """
     Main part of the genetic algorithm
@@ -240,6 +246,8 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
                     
     stop_if_max - if True, stop when the max score is reached. default True   :bool
     core        - if larger than 1, model evaluation is done in parallel      :int
+    seed        - random seed                                                 :int|None
+
 
     Returns
     -------
@@ -262,6 +270,9 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         prob_list.extend([prob[-1]] * (total_iter-len(prob)))
     else:
         prob_list = prob
+
+    if seed != None:
+        random.seed(seed)
 
     log = []
 
