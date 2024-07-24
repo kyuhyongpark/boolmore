@@ -201,15 +201,11 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
                 print(node, fixes_dict[node])
 
                 if node in default_sources:
-                    print("node is in default sources")
                     # source node value not same as default sources
                     if fixes_dict[node] != default_sources[node]:
-                        print("but the value is different")
                         hierarchy += 1
                 # non source nodes
                 else:
-                    print("node is not in default sources")
-
                     hierarchy += 1
 
             # for given fixes, find the subset fixes
