@@ -49,16 +49,13 @@ for i in range(total + 1):
 fp.write("\n")
 fp.close()
 
-for i in range(25):    
-    start_path = "boolmore/optimization/data/ABA_scramble_"+str(i+1)+".txt"
+for run_number in range(25):    
+    start_path = "boolmore/optimization/data/ABA_scramble_"+str(run_number+1)+".txt"
 
     primes = sm.format.import_primes(start_path)
     start = Model.import_model(primes, boolmore.config.id, 1, base)
     start.get_predictions(fixes_list)
     start.get_model_score(exps)
-    start.info()
-    print()
-
 
     for prob in PROB_LIST:
         final, log = ga_main(start, exps, fixes_list,
@@ -68,7 +65,7 @@ for i in range(25):
 
         fp = open("boolmore/optimization/probability_log.csv", "a")
 
-        fp.write(f"ABA_scrambled_{i+1},{TOTAL_ITERATIONS},{PER_ITERATION},{KEEP},{MIX},\"{prob}\",{start.score}")
+        fp.write(f"ABA_scrambled_{run_number+1},{TOTAL_ITERATIONS},{PER_ITERATION},{KEEP},{MIX},\"{prob}\",{start.score}")
 
         for iteration in log:
             # extra commas to make the output csv file neat

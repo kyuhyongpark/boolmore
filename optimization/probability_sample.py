@@ -65,27 +65,26 @@ fp.close()
 
 for sample_model in sample_models:
     print(sample_model)
-    for prob, base, data, start in it.product(PROB_LIST,
+    for prob, base, data, start_path in it.product(PROB_LIST,
                                               [base_paths[sample_model]],
                                               data_paths[sample_model],
                                               start_paths[sample_model]):
-        
+
         exps, fixes_list = import_exps(data)
     
         base_primes = sm.format.import_primes(base)
         base = Model.import_model(base_primes)
     
-        primes = sm.format.import_primes(start)
+        primes = sm.format.import_primes(start_path)
         start = Model.import_model(primes, boolmore.config.id, 1, base)
         start.get_predictions(fixes_list)
         start.get_model_score(exps)
-        start.info()
-        print()
 
         final, log = ga_main(start, exps, fixes_list,
                             total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                             prob=prob, edge_prob=0,
                             stop_if_max=True, core=4)
+
 
         fp = open("boolmore/optimization/probability_log.csv", "a")
 
@@ -101,7 +100,7 @@ for sample_model in sample_models:
         if len(log) != TOTAL_ITERATIONS:
             for i in range(len(log) - TOTAL_ITERATIONS):
                 # extra commas to make the output csv file neat
-                for i in range(int(total/TOTAL_ITERATIONS)):
+                for j in range(int(total/TOTAL_ITERATIONS)):
                     fp.write(",")
                 fp.write(f"{log[-1][1]}")
                 
