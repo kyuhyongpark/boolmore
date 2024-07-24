@@ -24,10 +24,10 @@ CONSTRAINTS = json_dict["constraints"]
 EDGE_POOL = json_dict["edge_pool"]
 
 PRAM_LIST = [
-            #  [1,101,1,0],
-            #  [2,51,1,0],
-            #  [5,21,1,0],
-            #  [10,11,1,0],
+             [1,101,1,0],
+             [2,51,1,0],
+             [5,21,1,0],
+             [10,11,1,0],
              [20,6,1,0],
              [50,3,1,0],
              [100,2,1,0]
@@ -68,8 +68,6 @@ for parameters in PRAM_LIST:
             # extra commas to make the output csv file neat
             for i in range(int(100/parameters[0])):
                 fp.write(",")
-
-            # fp.write(",")
             fp.write(f"{iteration[1]}")
             last_score = iteration[1]
 
