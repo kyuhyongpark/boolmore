@@ -307,7 +307,6 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     
     ### Second to last iterations ###
     for i in range(2,total_iter+1):
-        print("- - - - - iteration ", i, " - - - - -")
         new_iteration = []
         # keep the good ones
         for j in range(keep):
