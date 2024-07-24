@@ -1,7 +1,5 @@
-# TODO: Allow hierarchy score to have a default setting for default sources
-
 import itertools as it
-import math
+
 from collections.abc import Iterable
 
 
@@ -9,6 +7,11 @@ FixesType = tuple[tuple[str, int],...]
 ExpType = tuple[int, float, FixesType, str, str]
 PredictType = dict[FixesType, dict[str, float]]
 AgreeType = dict[str, dict[FixesType, tuple[int, float, str, float, float]]]
+
+
+DATA = "boolmore/case_study/data/data_20230925.tsv"
+MODEL = "boolmore/case_study/baseline_models/ABA_GA_base_A.txt"
+NAME = "test"
 
 
 def line(input:float, start:tuple[float, float], end:tuple[float, float]) -> float:
@@ -47,7 +50,6 @@ def powerset(iterable:Iterable) -> it.chain:
     return it.chain.from_iterable(it.combinations(s, r) for r in range(len(s)+1))
 
 
-# 20230425 attractor agreement function update
 def get_agreement(experiments:list[ExpType], predictions:PredictType) -> AgreeType:
     """
     Returns attractor agreements
@@ -147,7 +149,6 @@ def get_agreement(experiments:list[ExpType], predictions:PredictType) -> AgreeTy
     return agreements
 
 
-# 20230511 multi-dimensional scoring update
 def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
                         report:bool=False, file:str='score_report.tsv') -> float:
     """
@@ -184,16 +185,32 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
 
     if report:
         fp = open(file, 'w')
-        fp.write('id\thierarchy\tfixes\tobserved node\texperimental outcome\t')
-        fp.write('predict value\tattractor agreement\tscore\n')
+        fp.write('id\thierarchy\tfixes\tobserved_node\texperimental_outcome\t')
+        fp.write('predict_value\tattractor_agreement\tscore\n')
 
     score = 0.0
     model_max_score = 0.0
     
     for observed_node in agreements:
         for fixes in agreements[observed_node]:
-
             fixes_dict = {key:value for (key, value) in fixes}
+
+            # get the hierarchy
+            hierarchy = 0
+            for node in fixes_dict:
+                print(node, fixes_dict[node])
+
+                if node in default_sources:
+                    print("node is in default sources")
+                    # source node value not same as default sources
+                    if fixes_dict[node] != default_sources[node]:
+                        print("but the value is different")
+                        hierarchy += 1
+                # non source nodes
+                else:
+                    print("node is not in default sources")
+
+                    hierarchy += 1
 
             # for given fixes, find the subset fixes
             subset_fixes_set = set()
@@ -241,7 +258,7 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
             if report:
                 fp.write(str(agreements[observed_node][fixes][ID]) + '\t') # type: ignore
                 # TODO: fix reporting hierarchy number
-                fp.write(str(int(math.log2(len(subset_fixes_set)))) + '\t') # type: ignore
+                fp.write(str(hierarchy) + '\t') # type: ignore
                 for fix in fixes:
                     fp.write(str(fix[0]) + '=' + str(fix[1]) + ',') # type: ignore
                 fp.write('\t') # type: ignore
@@ -257,7 +274,29 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
     # print("Total ", score, "/", model_max_score)
     if report:
         fp.write('total\t\t\t\t\t\t\t' + str(score) + '\n') # type: ignore
-        fp.write('out of\t\t\t\t\t\t\t' + str(model_max_score) + '\n') # type: ignore
-        fp.write('out of\t\t\t\t\t\t\t' + str(score/model_max_score*100) + '%\n') # type: ignore
+        fp.write('max\t\t\t\t\t\t\t' + str(model_max_score) + '\n') # type: ignore
+        fp.write('\t\t\t\t\t\t\t' + str(score/model_max_score*100) + '%\n') # type: ignore
 
     return score
+
+
+if __name__=="__main__":
+    import pystablemotifs as sm
+
+    from boolmore.experiment import import_exps
+    from boolmore.model import Model
+
+    if NAME == None:
+        NAME = MODEL.split("/")[-1][:-4]+'_score.tsv'
+
+    print("Loading experimental data . . .")
+    exps, pert = import_exps(DATA)
+    print("Experimental data loaded.\n")
+
+    print("Loading model . . .")
+    primes = sm.format.import_primes(MODEL)
+    n1 = Model.import_model(primes)
+    print("Model loaded.")
+    n1.get_predictions(pert)
+    n1.get_model_score(exps, report=True, file=NAME+".tsv")
+    n1.info()
