@@ -1,16 +1,16 @@
-# id: 5281
+# id: 5
 # generation: 1
 # extra edges: []
-# score: 38.0 / 72.0
+# score: 25.75 / 90.0
 # following constraints: True
-# complexity: 16
+# complexity: 13
 
 ACE2* = SFF
-CLN3* = ACE2 & SWI5 | !YHP1 | !YOX1
-HCM1* = MBF | SBF
+CLN3* = !YHP1 & !YOX1
+HCM1* = MBF
 MBF* = CLN3
-SBF* = CLN3 & MBF & !YOX1
-SFF* = HCM1 & SBF
+SBF* = CLN3 | MBF
+SFF* = HCM1 | SBF
 SWI5* = SFF
-YHP1* = SBF
-YOX1* = MBF
+YHP1* = MBF & SBF
+YOX1* = SBF

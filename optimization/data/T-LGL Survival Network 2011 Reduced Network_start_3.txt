@@ -1,25 +1,25 @@
-# id: 102381
+# id: 18
 # generation: 1
 # extra edges: []
-# score: 37.66666666666667 / 144.0
+# score: 78.63449546485262 / 180.0
 # following constraints: True
-# complexity: 37
+# complexity: 34
 
-Apoptosis* = Caspase | Apoptosis
-BID* = !Apoptosis
-CREB* = !Apoptosis | IFNG
-CTLA4* = !Apoptosis & TCR
-Caspase* = !Apoptosis & DISC | BID | !IAP
-Ceramide* = !Apoptosis & !S1P | Fas
-DISC* = !Apoptosis | Ceramide & !FLIP | Ceramide & Fas
+Apoptosis* = Caspase
+BID* = !MCL1
+CREB* = !Apoptosis & IFNG
+CTLA4* = TCR
+Caspase* = !Apoptosis & !IAP | BID & !IAP | DISC & !IAP
+Ceramide* = !Apoptosis | !S1P
+DISC* = Ceramide & !FLIP & Fas
 FLIP* = !DISC
 Fas* = !Apoptosis & !sFas
-GPCR* = !Apoptosis
+GPCR* = S1P
 IAP* = !BID
-IFNG* = !Apoptosis & !SMAD | !P2 & !SMAD
-MCL1* = !DISC
-P2* = !Apoptosis & IFNG | P2
-S1P* = !Ceramide
-SMAD* = !Apoptosis
+IFNG* = !Apoptosis | !P2 & !SMAD
+MCL1* = !Apoptosis
+P2* = !Apoptosis & P2 | IFNG & P2
+S1P* = !Apoptosis | !Ceramide
+SMAD* = GPCR
 TCR* = !CTLA4
-sFas* = !Apoptosis & S1P
+sFas* = S1P
