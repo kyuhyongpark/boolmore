@@ -7,7 +7,7 @@ import pyboolnet.prime_implicants as pi
 from boolmore.model import Model
 from boolmore.experiment import import_exps
 
-SETTINGS = "boolmore/case_study/data/ABA_2017_VA-KEV_del.json"
+JSON = "boolmore/case_study/data/ABA_2017_VA-KEV_del.json"
 MODEL = "boolmore/case_study/generated_models/GA_VA-KEV_del.txt"
 NAME = None
 
@@ -194,4 +194,4 @@ def get_detailed_report(json_file:str, model:str|None=None, name:str|None=None):
         print()
 
 if __name__ == '__main__':
-    get_detailed_report(SETTINGS, MODEL, NAME)
+    get_detailed_report(JSON, MODEL, NAME)

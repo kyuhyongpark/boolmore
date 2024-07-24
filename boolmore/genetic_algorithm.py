@@ -13,8 +13,8 @@ from joblib import Parallel, delayed
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
 
-JSON = "../case_study/data/ABA_2017.json"
-START_MODEL = "../case_study/generated_models/ABA_GA_base_A.txt"
+JSON = "boolmore/case_study/data/ABA_2017.json"
+START_MODEL = "boolmore/case_study/baseline_models/ABA_GA_base_A.txt"
 RUN_NAME = "test"
 DATA = None
 BASE = None
@@ -77,7 +77,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         TOTAL_ITERATIONS = 100
         PER_ITERATION = 100
         KEEP = 20
-        MIX = None
+        MIX = 0
         PROB = 0.01
         EDGE_PROB = 0.5
         EXPORT_TOP = 0
@@ -199,7 +199,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     return base, start, final
 
 def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
-            total_iter:int=100, per_iter:int=100, keep:int=20, mix:int|None=None,
+            total_iter:int=100, per_iter:int=100, keep:int=20, mix:int=0,
             prob:float|list[float]=0.01, edge_prob:float=0.5,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
             stop_if_max:bool=True, core:int=2
@@ -226,7 +226,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     total_iter - total number of iterations, default 100                :int
     per_iter   - models per iterations, default 100                     :int
     keep       - models to carry over tot he next iteration, default 20 :int
-    mix        - number of models to mix from the keep, default keep    :int|None
+    mix        - number of models to mix from the keep, default 0       :int
 
     prob      - probability for each digit in the rule representation to mutate, default 0.01   :float | list[float]
                 if given a list, each probability is applied for each iteration
@@ -252,9 +252,6 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     if export_name == None:
         export_name = start.name
 
-    if mix == None:
-        mix = keep
-
     if type(prob) == float:
         prob_list = [prob] * total_iter
     elif len(prob) < total_iter:
@@ -264,13 +261,18 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         prob_list = prob
 
     log = []
-
-    print("- - - - - iteration ", 1, " - - - - -")
     iteration = []
-    iteration.append(start)
 
+    ### First iteration ###
+
+    # this ensures that models worse than the start are not carried on.
+    # also ensures that same number of models are generated in the first iteration as in the other iterations.
+    for i in range(keep):
+        iteration.append(start)
+
+    # generate (per_iter - keep) new models
     new_model_lst = []
-    for i in range(per_iter-1):
+    for i in range(per_iter-keep):
         new_model = start.mutate(prob_list[0], edge_prob)
         new_model_lst.append(new_model)    
     if core > 1:
@@ -295,15 +297,16 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         iteration[i].export(threshold=export_thresh)
 
     final = iteration[0]
-    print("top score :", round(final.score,2))
-    print(f"{len(final.extra_edges)} extra edges in the top model:", final.extra_edges)
-    print("complexity of the top model :", final.complexity)
+
+    print(f"iteration 1, genearted {boolmore.config.id-start.id}, top score {round(final.score,2)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
+
     if not final.check_constraint():
         print("ERROR: model does not follow constraints")
+
     log.append([1, final.score, final.extra_edges, final.complexity])
     
+    ### Second to last iterations ###
     for i in range(2,total_iter+1):
-        print("- - - - - iteration ", i, " - - - - -")
         new_iteration = []
         # keep the good ones
         for j in range(keep):
@@ -360,11 +363,12 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
     
         final = new_iteration[0]
-        print("top score : ", round(final.score,2))
-        print(f"{len(final.extra_edges)} extra edges in the top model:", final.extra_edges)
-        print("complexity of the top model :", final.complexity)
+
+        print(f"iteration {i}, genearted {boolmore.config.id-start.id}, top score {round(final.score,2)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
+
         if not final.check_constraint():
             print("ERROR: model does not follow constraints")
+
         log.append([i, final.score, final.extra_edges, final.complexity])
 
         # Export models that exceed the threshold score
