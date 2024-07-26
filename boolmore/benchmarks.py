@@ -119,10 +119,10 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None,
     model = Model.import_model(primes)
     model.get_predictions(fixes_list_temp)
 
-    experiments_temp = []
+    experiments = []
     exp_id = 0
     for fixes in fixes_list_temp:
-        for observed_node in dct[fixes]:
+        for observed_node in sorted(list(dct[fixes])):
             exp_id += 1
             exp = [exp_id, 1.0, fixes, observed_node]
 
@@ -143,10 +143,13 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None,
                 raise Exception("Unexpected experiment output")
 
             exp = tuple(exp)
-            experiments_temp.append(exp)
+            experiments.append(exp)
 
     # trim experiments and fixes_list to fit the required size
-    experiments = experiments_temp[0:n_exps]
+    while len(experiments) > n_exps:
+        random_exp = random.choice(experiments)
+        experiments.remove(random_exp)
+
     fixes_list = []
     for exp in experiments:
         if exp[2] not in fixes_list:
@@ -156,7 +159,7 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None,
     if export == True:
         export_exps(primes, experiments, file_name)
 
-    return experiments, fixes_list
+    return experiments, sorted(fixes_list)
 
 def export_exps(primes:dict[str, PrimeType], experiments:list[ExpType], 
                 file_name:str="artificial_experiments.tsv"):
