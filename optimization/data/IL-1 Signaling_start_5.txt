@@ -1,7 +1,7 @@
 # id: 25
 # generation: 1
 # extra edges: []
-# score: 348.0625 / 1180.0
+# score: 358.125 / 1180.0
 # following constraints: True
 # complexity: 197
 
