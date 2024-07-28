@@ -98,7 +98,7 @@ for sample_model in sample_models:
 
         # if the genetic algorithm ended early, have the final score appended.
         if len(log) != TOTAL_ITERATIONS:
-            for i in range(len(log) - TOTAL_ITERATIONS):
+            for i in range(TOTAL_ITERATIONS - len(log)):
                 # extra commas to make the output csv file neat
                 for j in range(int(total/TOTAL_ITERATIONS)):
                     fp.write(",")

@@ -94,7 +94,7 @@ for sample_model in sample_models:
 
         # if the genetic algorithm ended early, have the final score appended.
         if len(log) != parameters[0]:
-            for i in range(len(log) - parameters[0]):
+            for i in range(parameters[0] - len(log)):
                 # extra commas to make the output csv file neat
                 for i in range(int(parameters[1]-parameters[2])):
                     fp.write(",")
