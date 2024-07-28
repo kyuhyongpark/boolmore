@@ -25,7 +25,7 @@ base = Model.import_model(base_primes, constraints=CONSTRAINTS, edge_pool=EDGE_P
 
 # generate scrambled models
 for i in range(25):
-    start = base.mutate(0.5, 0)
+    start = base.mutate(0.5, 0, seed=i)
 
     start.get_predictions(fixes_list)
     start.get_model_score(exps)
