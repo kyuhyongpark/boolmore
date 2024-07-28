@@ -321,10 +321,12 @@ def rr2group_rr(regulators:tuple[str, ...], rr:str, groups:list[list[str]]) -> t
         for node in group:
             assert node in regulators, f"{node} is not one of the regulators {regulators}"
 
-    group_regulators = set(regulators)
+    group_regulators = []
+    individual_regulators = set(regulators)
     for i, group in enumerate(groups):
-        group_regulators.add(tuple(group)) # type: ignore
-        group_regulators -= set(group)
+        group_regulators.append(tuple(group)) # type: ignore
+        individual_regulators -= set(group)
+    group_regulators.extend((sorted(list(individual_regulators))))
     group_regulators = tuple(group_regulators)
 
     m = len(group_regulators)

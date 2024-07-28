@@ -278,7 +278,7 @@ class Model():
         agreements = score.get_agreement(exps, self.predictions)
         self.score = score.get_hierarchy_score(agreements, self.default_sources, report=report, file=file)
 
-    def mutate(self, probability:float, edge_prob:float, bias:float=0.5) -> Model:
+    def mutate(self, probability:float, edge_prob:float, bias:float=0.5, seed:int|None=None) -> Model:
         """
         Returns a mutated model.
 
@@ -287,6 +287,7 @@ class Model():
         probability - probability that each binary is mutated               :float between 0 and 1
         edge_prob   - probability to add or delete an edge from the pool    :float between 0 and 1
         bias        - probability to invert rr when mutating                :float between 0 and 1
+        seed        - random seed                                           :int|None
 
         Returns
         -------
@@ -310,6 +311,9 @@ class Model():
         mutated_model.signs_dict = self.signs_dict.copy()        
         mutated_model.rr_dict = self.rr_dict.copy()
         mutated_model.extra_edges = self.extra_edges.copy()
+
+        if seed != None:
+            random.seed(seed)
 
         rnd = random.random()
         if rnd < edge_prob and len(mutated_model.edge_pool)>0:
