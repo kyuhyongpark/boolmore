@@ -325,7 +325,7 @@ def rr2group_rr(regulators:tuple[str, ...], rr:str, groups:list[list[str]]) -> t
     for i, group in enumerate(groups):
         group_regulators.add(tuple(group)) # type: ignore
         group_regulators -= set(group)
-    group_regulators = tuple(group_regulators)
+    group_regulators = tuple(sorted(list(group_regulators)))
 
     m = len(group_regulators)
     group_rr = ['0']*(2**m)
