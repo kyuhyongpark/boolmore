@@ -1,9 +1,9 @@
 # id: 17
 # generation: 1
 # extra edges: []
-# score: 127.1875 / 505.0
+# score: 130.8125 / 505.0
 # following constraints: True
-# complexity: 153
+# complexity: 152
 
 8-nitro-cGMP* = NO & cGMP
 ABA* = ABA
@@ -54,7 +54,7 @@ NOGC1* = NO
 Nitrite* = 1
 NtSyp121* = 1
 OST1* = !ABI1 | !ABI2 | !PP2CA
-PA* = DAG & DAGK & PC & PLDalpha | PC & PLDdelta
+PA* = DAG & DAGK | PC & PLDalpha & PLDdelta
 PC* = 1
 PEPC* = !ABA
 PI3P5K* = ABA

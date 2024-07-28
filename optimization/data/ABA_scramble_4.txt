@@ -1,7 +1,7 @@
 # id: 4
 # generation: 1
 # extra edges: []
-# score: 151.125 / 505.0
+# score: 156.125 / 505.0
 # following constraints: True
 # complexity: 215
 
@@ -54,7 +54,7 @@ NOGC1* = NO
 Nitrite* = 1
 NtSyp121* = 1
 OST1* = !ABI1 & !HAB1 & !PP2CA | !ABI2 & !HAB1 & !PP2CA
-PA* = PC & PLDalpha | PC & PLDdelta
+PA* = DAG & DAGK | PC & PLDalpha
 PC* = 1
 PEPC* = !ABA
 PI3P5K* = ABA

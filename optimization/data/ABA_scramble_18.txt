@@ -3,7 +3,7 @@
 # extra edges: []
 # score: 179.9375 / 505.0
 # following constraints: True
-# complexity: 196
+# complexity: 197
 
 8-nitro-cGMP* = cGMP
 ABA* = ABA
@@ -54,7 +54,7 @@ NOGC1* = NO
 Nitrite* = 1
 NtSyp121* = 1
 OST1* = !ABI1 & !ABI2 | !ABI1 & !PP2CA | !ABI2 & !HAB1
-PA* = PC & PLDalpha & PLDdelta
+PA* = DAG & DAGK & PC & PLDalpha
 PC* = 1
 PEPC* = !ABA
 PI3P5K* = ABA
