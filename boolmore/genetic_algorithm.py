@@ -4,7 +4,6 @@ import pystablemotifs as sm
 import boolmore.config
 import time
 import numpy as np
-import numpy as np
 
 from boolmore.model import Model, mix_models
 from boolmore.experiment import import_exps
@@ -272,7 +271,6 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
 
     if seed != None:
         random.seed(seed)
-        np.random.seed(seed)
         np.random.seed(seed)
 
     log = []
