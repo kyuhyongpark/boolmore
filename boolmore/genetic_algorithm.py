@@ -333,7 +333,6 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         weights = list(range(1, keep+1))
         weights.reverse()
         p = np.array(weights)/np.sum(np.array(weights))
-        print(p)
 
         mixed_model_lst = []
         for j in range(mix):
@@ -381,7 +380,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     
         final = new_iteration[0]
 
-        print(f"iteration {i}, genearted {boolmore.config.id-start.id}, top score {round(final.score,2)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
+        print(f"iteration {i}, generated {boolmore.config.id-start.id}, top score {round(final.score,2)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
 
         if not final.check_constraint():
             print("ERROR: model does not follow constraints")
