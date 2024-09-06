@@ -3,6 +3,7 @@ import random
 import pystablemotifs as sm
 import boolmore.config
 import time
+import numpy as np
 
 from boolmore.model import Model, mix_models
 from boolmore.experiment import import_exps
@@ -270,6 +271,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
 
     if seed != None:
         random.seed(seed)
+        np.random.seed(seed)
 
     log = []
     iteration = []
@@ -328,10 +330,12 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         to_be_mixed = sorted(to_be_mixed, key=lambda x: x.score, reverse=True)
         weights = list(range(1, keep+1))
         weights.reverse()
+        p = np.array(weights)/np.sum(np.array(weights))
+        print(p)
 
         mixed_model_lst = []
         for j in range(mix):
-            model_choice = random.choices(to_be_mixed, weights=weights, k=2)
+            model_choice = np.random.choice(to_be_mixed, size = 2, replace = False, p=p)
             mixed_model = mix_models(model_choice[0], model_choice[1])
             mixed_model_lst.append(mixed_model)    
         if core > 1:
