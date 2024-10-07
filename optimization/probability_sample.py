@@ -9,8 +9,8 @@ from boolmore.model import Model
 from boolmore.genetic_algorithm import ga_main
 
 
-TOTAL_ITERATIONS = 10
-PER_ITERATION = 10
+TOTAL_ITERATIONS = 20
+PER_ITERATION = 7
 KEEP = 2
 MIX = 0
 PROB_LIST = [0.01,
@@ -57,7 +57,7 @@ for sample_model in sample_models:
                 start_paths[sample_model].append(data_directory + "/" + filename)
 
 fp = open("boolmore/optimization/probability_log.csv", "a")
-fp.write("sample_model,iter,pop,keep,mix,prob")
+fp.write("sample_model,seed,iter,pop,keep,mix,prob")
 for i in range(total + 1):
     fp.write(f",{i}")
 fp.write("\n")
@@ -65,10 +65,14 @@ fp.close()
 
 for sample_model in sample_models:
     print(sample_model)
+    seed = 0
     for prob, base, data, start_path in it.product(PROB_LIST,
                                               [base_paths[sample_model]],
                                               data_paths[sample_model],
                                               start_paths[sample_model]):
+
+        boolmore.config.id = 0
+        seed += 1
 
         exps, fixes_list = import_exps(data)
     
@@ -83,13 +87,11 @@ for sample_model in sample_models:
         final, log = ga_main(start, exps, fixes_list,
                             total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                             prob=prob, edge_prob=0,
-                            stop_if_max=True, core=4)
-
+                            stop_if_max=True, core=6, seed=seed)
 
         fp = open("boolmore/optimization/probability_log.csv", "a")
 
-        fp.write(f"{sample_model},{TOTAL_ITERATIONS},{PER_ITERATION},{KEEP},{MIX},\"{prob}\",{start.score}")
-
+        fp.write(f"{sample_model},{seed},{TOTAL_ITERATIONS},{PER_ITERATION},{KEEP},{MIX},\"{prob}\",{start.score}")
         for iteration in log:
             # extra commas to make the output csv file neat
             for i in range(int(total/TOTAL_ITERATIONS)):
