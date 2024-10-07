@@ -1,0 +1,1181 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	ccl2	OFF
+2	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	cox2	Some
+3	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	hgf	Some
+4	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	il1b_new	OFF
+5	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	il6	OFF
+6	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	il8	OFF
+7	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	irs1_ps	Some
+8	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	lbp	Some
+9	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	nc_nfkb_pathway	OFF
+10	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	pi3k	OFF
+11	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	saa	OFF
+12	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	sil1r_ap	OFF
+13	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	tdum_a20_traf6_ub	ON
+14	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	tdum_cyt_p38_tak1_tab	OFF
+15	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	tdum_hsp27_ps_traf6_ub	OFF
+16	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	tdum_il1r2_il1rc	OFF
+17	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	tdum_il1ra_ilr12	OFF
+18	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	tdum_irak1c_irak12	OFF
+19	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	tdum_mkp1_p38_jnk_erk12	Some
+20	1.0	src=0,trika1=1	dum_cebp_il1ra KO,tpl2 CA	tdum_tpl2_degr_tp2	ON
+21	1.0	src=1,trika1=1		akt	OFF
+22	1.0	src=1,trika1=1		ccl2	OFF
+23	1.0	src=1,trika1=1		cebpd	OFF
+24	1.0	src=1,trika1=1		cox2	OFF
+25	1.0	src=1,trika1=1		hgf	OFF
+26	1.0	src=1,trika1=1		ikkaa	ON
+27	1.0	src=1,trika1=1		il1b_new	OFF
+28	1.0	src=1,trika1=1		il1r1	OFF
+29	1.0	src=1,trika1=1		il6	OFF
+30	1.0	src=1,trika1=1		il8	OFF
+31	1.0	src=1,trika1=1		irak2	OFF
+32	1.0	src=1,trika1=1		irs1_ps	OFF
+33	1.0	src=1,trika1=1		ksrp	ON
+34	1.0	src=1,trika1=1		lbp	OFF
+35	1.0	src=1,trika1=1		mek1	OFF
+36	1.0	src=1,trika1=1		nc_nfkb_pathway	OFF
+37	1.0	src=1,trika1=1		saa	OFF
+38	1.0	src=1,trika1=1		sil1r_ap	OFF
+39	1.0	src=1,trika1=1		tak1_tab	OFF
+40	1.0	src=1,trika1=1		tdum_a20_traf6_ub	ON
+41	1.0	src=1,trika1=1		tdum_cyt_p38_tak1_tab	OFF
+42	1.0	src=1,trika1=1		tdum_hsp27_ps_traf6_ub	OFF
+43	1.0	src=1,trika1=1		tdum_il1r2_il1rc	OFF
+44	1.0	src=1,trika1=1		tdum_il1ra_ilr12	OFF
+45	1.0	src=1,trika1=1		tdum_irak1c_irak12	OFF
+46	1.0	src=1,trika1=1		tdum_mkp1_p38_jnk_erk12	OFF
+47	1.0	src=1,trika1=1		tdum_tpl2_degr_tp2	OFF
+48	1.0	src=1,trika1=1		tollip	OFF
+49	1.0	src=1,trika1=0	nfkb KO	ccl2	OFF
+50	1.0	src=1,trika1=0	nfkb KO	cebpd	OFF
+51	1.0	src=1,trika1=0	nfkb KO	cox2	OFF
+52	1.0	src=1,trika1=0	nfkb KO	dum_ikkab_or_ikkbb_nemo_ikkb_a	OFF
+53	1.0	src=1,trika1=0	nfkb KO	hgf	OFF
+54	1.0	src=1,trika1=0	nfkb KO	hsp27_ps	OFF
+55	1.0	src=1,trika1=0	nfkb KO	ikka_a	OFF
+56	1.0	src=1,trika1=0	nfkb KO	il1b_new	OFF
+57	1.0	src=1,trika1=0	nfkb KO	il6	OFF
+58	1.0	src=1,trika1=0	nfkb KO	il8	OFF
+59	1.0	src=1,trika1=0	nfkb KO	irs1_ps	OFF
+60	1.0	src=1,trika1=0	nfkb KO	lbp	OFF
+61	1.0	src=1,trika1=0	nfkb KO	nc_nfkb_pathway	OFF
+62	1.0	src=1,trika1=0	nfkb KO	saa	OFF
+63	1.0	src=1,trika1=0	nfkb KO	sil1r_ap	OFF
+64	1.0	src=1,trika1=0	nfkb KO	tdum_a20_traf6_ub	ON
+65	1.0	src=1,trika1=0	nfkb KO	tdum_cyt_p38_tak1_tab	OFF
+66	1.0	src=1,trika1=0	nfkb KO	tdum_hsp27_ps_traf6_ub	OFF
+67	1.0	src=1,trika1=0	nfkb KO	tdum_il1r2_il1rc	OFF
+68	1.0	src=1,trika1=0	nfkb KO	tdum_il1ra_ilr12	OFF
+69	1.0	src=1,trika1=0	nfkb KO	tdum_irak1c_irak12	OFF
+70	1.0	src=1,trika1=0	nfkb KO	tdum_mkp1_p38_jnk_erk12	OFF
+71	1.0	src=1,trika1=0	nfkb KO	tdum_tpl2_degr_tp2	OFF
+72	1.0	src=1,trika1=0		akt	OFF
+73	1.0	src=1,trika1=0		ap1	OFF
+74	1.0	src=1,trika1=0		ccl2	OFF
+75	1.0	src=1,trika1=0		cjun	OFF
+76	1.0	src=1,trika1=0		cox2	OFF
+77	1.0	src=1,trika1=0		dum_cebp_pro_il1b	OFF
+78	1.0	src=1,trika1=0		gsk3	ON
+79	1.0	src=1,trika1=0		hgf	OFF
+80	1.0	src=1,trika1=0		il1b_new	OFF
+81	1.0	src=1,trika1=0		il1r2	OFF
+82	1.0	src=1,trika1=0		il6	OFF
+83	1.0	src=1,trika1=0		il8	OFF
+84	1.0	src=1,trika1=0		irs1_ps	OFF
+85	1.0	src=1,trika1=0		lbp	OFF
+86	1.0	src=1,trika1=0		nc_nfkb_pathway	OFF
+87	1.0	src=1,trika1=0		saa	OFF
+89	1.0	src=1,trika1=0		tdum_a20_traf6_ub	ON
+90	1.0	src=1,trika1=0		tdum_cyt_p38_tak1_tab	OFF
+91	1.0	src=1,trika1=0		tdum_hsp27_ps_traf6_ub	OFF
+92	1.0	src=1,trika1=0		tdum_il1r2_il1rc	OFF
+93	1.0	src=1,trika1=0		tdum_il1ra_ilr12	OFF
+94	1.0	src=1,trika1=0		tdum_irak1c_irak12	OFF
+95	1.0	src=1,trika1=0		tdum_mkp1_p38_jnk_erk12	OFF
+96	1.0	src=1,trika1=0		tdum_tpl2_degr_tp2	OFF
+97	1.0	src=1,trika1=0		tpl2	OFF
+98	1.0	src=1,trika1=0		traf6_ub	OFF
+99	1.0	src=0,trika1=1	pi3k KO	ccl2	OFF
+100	1.0	src=0,trika1=1	pi3k KO	cox2	OFF
+101	1.0	src=0,trika1=1	pi3k KO	hgf	OFF
+102	1.0	src=0,trika1=1	pi3k KO	il1b_new	OFF
+103	1.0	src=0,trika1=1	pi3k KO	il6	OFF
+104	1.0	src=0,trika1=1	pi3k KO	il8	OFF
+105	1.0	src=0,trika1=1	pi3k KO	irs1_ps	OFF
+106	1.0	src=0,trika1=1	pi3k KO	lbp	OFF
+107	1.0	src=0,trika1=1	pi3k KO	nc_nfkb_pathway	OFF
+109	1.0	src=0,trika1=1	pi3k KO	sil1r_ap	OFF
+110	1.0	src=0,trika1=1	pi3k KO	tdum_a20_traf6_ub	ON
+111	1.0	src=0,trika1=1	pi3k KO	tdum_cyt_p38_tak1_tab	OFF
+112	1.0	src=0,trika1=1	pi3k KO	tdum_hsp27_ps_traf6_ub	OFF
+113	1.0	src=0,trika1=1	pi3k KO	tdum_il1r2_il1rc	OFF
+114	1.0	src=0,trika1=1	pi3k KO	tdum_il1ra_ilr12	OFF
+115	1.0	src=0,trika1=1	pi3k KO	tdum_irak1c_irak12	OFF
+116	1.0	src=0,trika1=1	pi3k KO	tdum_mkp1_p38_jnk_erk12	OFF
+117	1.0	src=0,trika1=1	pi3k KO	tdum_tpl2_degr_tp2	OFF
+118	1.0	src=0,trika1=1	pi3k KO	ttp	ON
+119	1.0	src=1,trika1=1	ksrp CA	ccl2	OFF
+120	1.0	src=1,trika1=1	ksrp CA	cox2	OFF
+121	1.0	src=1,trika1=1	ksrp CA	hgf	OFF
+122	1.0	src=1,trika1=1	ksrp CA	il1b_new	OFF
+124	1.0	src=1,trika1=1	ksrp CA	il6	OFF
+125	1.0	src=1,trika1=1	ksrp CA	il8	OFF
+126	1.0	src=1,trika1=1	ksrp CA	irs1_ps	OFF
+127	1.0	src=1,trika1=1	ksrp CA	lbp	OFF
+128	1.0	src=1,trika1=1	ksrp CA	nc_nfkb_pathway	OFF
+129	1.0	src=1,trika1=1	ksrp CA	saa	OFF
+130	1.0	src=1,trika1=1	ksrp CA	sil1r_ap	OFF
+131	1.0	src=1,trika1=1	ksrp CA	tdum_a20_traf6_ub	ON
+132	1.0	src=1,trika1=1	ksrp CA	tdum_cyt_p38_tak1_tab	OFF
+133	1.0	src=1,trika1=1	ksrp CA	tdum_hsp27_ps_traf6_ub	OFF
+134	1.0	src=1,trika1=1	ksrp CA	tdum_il1r2_il1rc	OFF
+135	1.0	src=1,trika1=1	ksrp CA	tdum_il1ra_ilr12	OFF
+136	1.0	src=1,trika1=1	ksrp CA	tdum_irak1c_irak12	OFF
+137	1.0	src=1,trika1=1	ksrp CA	tdum_mkp1_p38_jnk_erk12	OFF
+138	1.0	src=1,trika1=1	ksrp CA	tdum_tpl2_degr_tp2	OFF
+139	1.0	src=0,trika1=0	elk1 KO,nfkb CA	ap1	OFF
+140	1.0	src=0,trika1=0	elk1 KO,nfkb CA	ccl2	OFF
+141	1.0	src=0,trika1=0	elk1 KO,nfkb CA	cjun	OFF
+142	1.0	src=0,trika1=0	elk1 KO,nfkb CA	cox2	ON
+143	1.0	src=0,trika1=0	elk1 KO,nfkb CA	dum_cebp_cox2	OFF
+144	1.0	src=0,trika1=0	elk1 KO,nfkb CA	hgf	OFF
+145	1.0	src=0,trika1=0	elk1 KO,nfkb CA	il1b_new	OFF
+146	1.0	src=0,trika1=0	elk1 KO,nfkb CA	il6	OFF
+147	1.0	src=0,trika1=0	elk1 KO,nfkb CA	il8	OFF
+148	1.0	src=0,trika1=0	elk1 KO,nfkb CA	irs1_ps	OFF
+149	1.0	src=0,trika1=0	elk1 KO,nfkb CA	lbp	OFF
+150	1.0	src=0,trika1=0	elk1 KO,nfkb CA	nc_nfkb_pathway	OFF
+151	1.0	src=0,trika1=0	elk1 KO,nfkb CA	saa	OFF
+152	1.0	src=0,trika1=0	elk1 KO,nfkb CA	sil1r_ap	OFF
+153	1.0	src=0,trika1=0	elk1 KO,nfkb CA	tdum_a20_traf6_ub	ON
+154	1.0	src=0,trika1=0	elk1 KO,nfkb CA	tdum_cyt_p38_tak1_tab	OFF
+155	1.0	src=0,trika1=0	elk1 KO,nfkb CA	tdum_hsp27_ps_traf6_ub	OFF
+156	1.0	src=0,trika1=0	elk1 KO,nfkb CA	tdum_il1r2_il1rc	OFF
+157	1.0	src=0,trika1=0	elk1 KO,nfkb CA	tdum_il1ra_ilr12	OFF
+158	1.0	src=0,trika1=0	elk1 KO,nfkb CA	tdum_irak1c_irak12	OFF
+159	1.0	src=0,trika1=0	elk1 KO,nfkb CA	tdum_mkp1_p38_jnk_erk12	OFF
+160	1.0	src=0,trika1=0	elk1 KO,nfkb CA	tdum_tpl2_degr_tp2	OFF
+161	1.0	src=0,trika1=1	il1b CA	ccl2	OFF
+162	1.0	src=0,trika1=1	il1b CA	cox2	OFF
+163	1.0	src=0,trika1=1	il1b CA	hgf	OFF
+164	1.0	src=0,trika1=1	il1b CA	il1b_new	OFF
+165	1.0	src=0,trika1=1	il1b CA	il6	OFF
+166	1.0	src=0,trika1=1	il1b CA	il8	OFF
+167	1.0	src=0,trika1=1	il1b CA	irs1_ps	OFF
+168	1.0	src=0,trika1=1	il1b CA	lbp	OFF
+169	1.0	src=0,trika1=1	il1b CA	nc_nfkb_pathway	OFF
+170	1.0	src=0,trika1=1	il1b CA	p105	ON
+171	1.0	src=0,trika1=1	il1b CA	saa	OFF
+172	1.0	src=0,trika1=1	il1b CA	sil1r_ap	OFF
+174	1.0	src=0,trika1=1	il1b CA	tdum_cyt_p38_tak1_tab	OFF
+175	1.0	src=0,trika1=1	il1b CA	tdum_hsp27_ps_traf6_ub	OFF
+176	1.0	src=0,trika1=1	il1b CA	tdum_il1r2_il1rc	ON
+177	1.0	src=0,trika1=1	il1b CA	tdum_il1ra_ilr12	OFF
+178	1.0	src=0,trika1=1	il1b CA	tdum_irak1c_irak12	OFF
+179	1.0	src=0,trika1=1	il1b CA	tdum_mkp1_p38_jnk_erk12	OFF
+180	1.0	src=0,trika1=1	il1b CA	tdum_tpl2_degr_tp2	OFF
+181	1.0	src=0,trika1=0	akt CA	ccl2	OFF
+182	1.0	src=0,trika1=0	akt CA	cox2	OFF
+183	1.0	src=0,trika1=0	akt CA	hgf	OFF
+184	1.0	src=0,trika1=0	akt CA	il1b_new	OFF
+185	1.0	src=0,trika1=0	akt CA	il6	OFF
+186	1.0	src=0,trika1=0	akt CA	il8	OFF
+187	1.0	src=0,trika1=0	akt CA	irs1_ps	OFF
+188	1.0	src=0,trika1=0	akt CA	lbp	OFF
+189	1.0	src=0,trika1=0	akt CA	nc_nfkb_pathway	OFF
+190	1.0	src=0,trika1=0	akt CA	pro_hgf	OFF
+191	1.0	src=0,trika1=0	akt CA	saa	OFF
+192	1.0	src=0,trika1=0	akt CA	sil1r_ap	OFF
+193	1.0	src=0,trika1=0	akt CA	tdum_a20_traf6_ub	ON
+194	1.0	src=0,trika1=0	akt CA	tdum_cyt_p38_tak1_tab	OFF
+195	1.0	src=0,trika1=0	akt CA	tdum_hsp27_ps_traf6_ub	OFF
+196	1.0	src=0,trika1=0	akt CA	tdum_il1r2_il1rc	OFF
+197	1.0	src=0,trika1=0	akt CA	tdum_il1ra_ilr12	OFF
+198	1.0	src=0,trika1=0	akt CA	tdum_irak1c_irak12	OFF
+199	1.0	src=0,trika1=0	akt CA	tdum_mkp1_p38_jnk_erk12	OFF
+200	1.0	src=0,trika1=0	akt CA	tdum_tpl2_degr_tp2	OFF
+201	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	ccl2	OFF
+202	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	cox2	OFF
+203	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	hgf	OFF
+204	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	il1b_new	OFF
+205	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	il6	OFF
+206	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	il8	OFF
+207	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	irs1_ps	OFF
+208	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	lbp	OFF
+209	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	nc_nfkb_pathway	OFF
+210	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	saa	OFF
+211	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	sil1r_ap	OFF
+212	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	tdum_a20_traf6_ub	ON
+213	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	tdum_cyt_p38_tak1_tab	OFF
+214	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	tdum_hsp27_ps_traf6_ub	OFF
+215	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	tdum_il1r2_il1rc	OFF
+217	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	tdum_irak1c_irak12	OFF
+218	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	tdum_mkp1_p38_jnk_erk12	OFF
+219	1.0	src=1,trika1=1	dum_ikkab_or_ikkbb_nemo_ikkb_a CA	tdum_tpl2_degr_tp2	OFF
+220	1.0	src=1,trika1=1	a20 KO	ccl2	OFF
+221	1.0	src=1,trika1=1	a20 KO	cox2	OFF
+222	1.0	src=1,trika1=1	a20 KO	hgf	OFF
+223	1.0	src=1,trika1=1	a20 KO	il1b_new	OFF
+224	1.0	src=1,trika1=1	a20 KO	il6	OFF
+225	1.0	src=1,trika1=1	a20 KO	il8	OFF
+226	1.0	src=1,trika1=1	a20 KO	irs1_ps	OFF
+227	1.0	src=1,trika1=1	a20 KO	lbp	OFF
+228	1.0	src=1,trika1=1	a20 KO	nc_nfkb_pathway	OFF
+229	1.0	src=1,trika1=1	a20 KO	saa	OFF
+230	1.0	src=1,trika1=1	a20 KO	sil1r_ap	OFF
+231	1.0	src=1,trika1=1	a20 KO	tdum_a20_traf6_ub	OFF
+232	1.0	src=1,trika1=1	a20 KO	tdum_cyt_p38_tak1_tab	OFF
+233	1.0	src=1,trika1=1	a20 KO	tdum_hsp27_ps_traf6_ub	OFF
+234	1.0	src=1,trika1=1	a20 KO	tdum_il1r2_il1rc	OFF
+235	1.0	src=1,trika1=1	a20 KO	tdum_il1ra_ilr12	OFF
+236	1.0	src=1,trika1=1	a20 KO	tdum_irak1c_irak12	OFF
+237	1.0	src=1,trika1=1	a20 KO	tdum_mkp1_p38_jnk_erk12	OFF
+238	1.0	src=1,trika1=1	a20 KO	tdum_tpl2_degr_tp2	OFF
+239	1.0	src=0,trika1=1		akt	OFF
+240	1.0	src=0,trika1=1		ccl2	OFF
+241	1.0	src=0,trika1=1		cox2	OFF
+242	1.0	src=0,trika1=1		dum_mek3_or_4_or_6_nuc_p38	OFF
+243	1.0	src=0,trika1=1		dum_sap1_or_elk_cfos	OFF
+244	1.0	src=0,trika1=1		hgf	OFF
+245	1.0	src=0,trika1=1		il1b_new	OFF
+246	1.0	src=0,trika1=1		il6	OFF
+247	1.0	src=0,trika1=1		il8	OFF
+248	1.0	src=0,trika1=1		irak1c	OFF
+249	1.0	src=0,trika1=1		irs1_ps	OFF
+250	1.0	src=0,trika1=1		jnk	OFF
+251	1.0	src=0,trika1=1		lbp	OFF
+253	1.0	src=0,trika1=1		saa	OFF
+254	1.0	src=0,trika1=1		sap1	OFF
+255	1.0	src=0,trika1=1		sil1r_ap	OFF
+256	1.0	src=0,trika1=1		tdum_a20_traf6_ub	ON
+257	1.0	src=0,trika1=1		tdum_cyt_p38_tak1_tab	OFF
+258	1.0	src=0,trika1=1		tdum_hsp27_ps_traf6_ub	OFF
+259	1.0	src=0,trika1=1		tdum_il1r2_il1rc	OFF
+260	1.0	src=0,trika1=1		tdum_il1ra_ilr12	OFF
+261	1.0	src=0,trika1=1		tdum_irak1c_irak12	OFF
+262	1.0	src=0,trika1=1		tdum_mkp1_p38_jnk_erk12	OFF
+263	1.0	src=0,trika1=1		tdum_tpl2_degr_tp2	OFF
+264	1.0	src=0,trika1=1		tollip	OFF
+265	1.0	src=0,trika1=1		traf6	OFF
+266	1.0	src=1,trika1=0	irak1_ub KO	ccl2	OFF
+267	1.0	src=1,trika1=0	irak1_ub KO	cox2	OFF
+268	1.0	src=1,trika1=0	irak1_ub KO	hgf	OFF
+269	1.0	src=1,trika1=0	irak1_ub KO	ikkab_nemo	OFF
+270	1.0	src=1,trika1=0	irak1_ub KO	il1b_new	OFF
+271	1.0	src=1,trika1=0	irak1_ub KO	il6	OFF
+272	1.0	src=1,trika1=0	irak1_ub KO	il8	OFF
+273	1.0	src=1,trika1=0	irak1_ub KO	irs1_ps	OFF
+274	1.0	src=1,trika1=0	irak1_ub KO	lbp	OFF
+275	1.0	src=1,trika1=0	irak1_ub KO	nc_nfkb_pathway	OFF
+276	1.0	src=1,trika1=0	irak1_ub KO	saa	OFF
+277	1.0	src=1,trika1=0	irak1_ub KO	sil1r_ap	OFF
+278	1.0	src=1,trika1=0	irak1_ub KO	tdum_a20_traf6_ub	ON
+279	1.0	src=1,trika1=0	irak1_ub KO	tdum_cyt_p38_tak1_tab	OFF
+280	1.0	src=1,trika1=0	irak1_ub KO	tdum_hsp27_ps_traf6_ub	OFF
+281	1.0	src=1,trika1=0	irak1_ub KO	tdum_il1r2_il1rc	OFF
+282	1.0	src=1,trika1=0	irak1_ub KO	tdum_il1ra_ilr12	OFF
+283	1.0	src=1,trika1=0	irak1_ub KO	tdum_irak1c_irak12	OFF
+285	1.0	src=1,trika1=0	irak1_ub KO	tdum_tpl2_degr_tp2	OFF
+286	1.0	src=1,trika1=1	pellino KO	atf2	OFF
+287	1.0	src=1,trika1=1	pellino KO	ccl2	OFF
+288	1.0	src=1,trika1=1	pellino KO	cox2	OFF
+289	1.0	src=1,trika1=1	pellino KO	hgf	OFF
+290	1.0	src=1,trika1=1	pellino KO	il1b_new	OFF
+291	1.0	src=1,trika1=1	pellino KO	il6	OFF
+292	1.0	src=1,trika1=1	pellino KO	il8	OFF
+293	1.0	src=1,trika1=1	pellino KO	irs1_ps	OFF
+294	1.0	src=1,trika1=1	pellino KO	lbp	OFF
+295	1.0	src=1,trika1=1	pellino KO	nc_nfkb_pathway	OFF
+296	1.0	src=1,trika1=1	pellino KO	nuc_p38	OFF
+297	1.0	src=1,trika1=1	pellino KO	saa	OFF
+298	1.0	src=1,trika1=1	pellino KO	sil1r_ap	OFF
+299	1.0	src=1,trika1=1	pellino KO	tdum_a20_traf6_ub	ON
+300	1.0	src=1,trika1=1	pellino KO	tdum_cyt_p38_tak1_tab	OFF
+301	1.0	src=1,trika1=1	pellino KO	tdum_hsp27_ps_traf6_ub	OFF
+302	1.0	src=1,trika1=1	pellino KO	tdum_il1r2_il1rc	OFF
+303	1.0	src=1,trika1=1	pellino KO	tdum_il1ra_ilr12	OFF
+304	1.0	src=1,trika1=1	pellino KO	tdum_irak1c_irak12	OFF
+305	1.0	src=1,trika1=1	pellino KO	tdum_mkp1_p38_jnk_erk12	OFF
+306	1.0	src=1,trika1=1	pellino KO	tdum_tpl2_degr_tp2	OFF
+307	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	ccl2	OFF
+308	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	cox2	OFF
+309	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	dum_irak1_or_2_traf6_ub	OFF
+310	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	hgf	OFF
+311	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	il1b_new	OFF
+312	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	il6	OFF
+313	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	il8	OFF
+314	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	irs1_ps	OFF
+315	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	lbp	OFF
+316	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	nc_nfkb_pathway	OFF
+318	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	sil1r_ap	OFF
+319	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	tdum_a20_traf6_ub	ON
+320	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	tdum_cyt_p38_tak1_tab	OFF
+321	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	tdum_hsp27_ps_traf6_ub	OFF
+322	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	tdum_il1r2_il1rc	OFF
+323	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	tdum_il1ra_ilr12	OFF
+324	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	tdum_irak1c_irak12	ON
+325	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	tdum_mkp1_p38_jnk_erk12	OFF
+326	1.0	src=0,trika1=0	il1r1 CA,socs1 CA	tdum_tpl2_degr_tp2	OFF
+327	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	ccl2	OFF
+328	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	cox2	OFF
+329	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	dum_tak1_tab_or_mekk3_ikkb_a	OFF
+330	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	hgf	OFF
+331	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	il1b_new	OFF
+332	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	il6	OFF
+333	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	il8	OFF
+334	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	irs1_ps	OFF
+335	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	lbp	OFF
+336	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	nc_nfkb_pathway	OFF
+337	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	nik	OFF
+338	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	saa	OFF
+339	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	sil1r_ap	OFF
+340	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	tdum_a20_traf6_ub	ON
+341	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	tdum_cyt_p38_tak1_tab	OFF
+342	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	tdum_hsp27_ps_traf6_ub	OFF
+344	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	tdum_il1ra_ilr12	OFF
+345	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	tdum_irak1c_irak12	OFF
+346	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	tdum_mkp1_p38_jnk_erk12	OFF
+347	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	tdum_tpl2_degr_tp2	OFF
+348	1.0	src=0,trika1=0	dum_sap1_or_elk_cfos CA	tollip	OFF
+349	1.0	src=0,trika1=0	mek1 CA	ccl2	OFF
+350	1.0	src=0,trika1=0	mek1 CA	cox2	Some
+351	1.0	src=0,trika1=0	mek1 CA	hgf	Some
+352	1.0	src=0,trika1=0	mek1 CA	il1b_new	OFF
+353	1.0	src=0,trika1=0	mek1 CA	il6	OFF
+354	1.0	src=0,trika1=0	mek1 CA	il8	OFF
+355	1.0	src=0,trika1=0	mek1 CA	irs1_ps	Some
+356	1.0	src=0,trika1=0	mek1 CA	lbp	Some
+357	1.0	src=0,trika1=0	mek1 CA	nc_nfkb_pathway	OFF
+358	1.0	src=0,trika1=0	mek1 CA	saa	OFF
+359	1.0	src=0,trika1=0	mek1 CA	sil1r_ap	OFF
+360	1.0	src=0,trika1=0	mek1 CA	tdum_a20_traf6_ub	ON
+361	1.0	src=0,trika1=0	mek1 CA	tdum_cyt_p38_tak1_tab	OFF
+362	1.0	src=0,trika1=0	mek1 CA	tdum_hsp27_ps_traf6_ub	OFF
+363	1.0	src=0,trika1=0	mek1 CA	tdum_il1r2_il1rc	OFF
+364	1.0	src=0,trika1=0	mek1 CA	tdum_il1ra_ilr12	OFF
+365	1.0	src=0,trika1=0	mek1 CA	tdum_irak1c_irak12	OFF
+366	1.0	src=0,trika1=0	mek1 CA	tdum_mkp1_p38_jnk_erk12	Some
+367	1.0	src=0,trika1=0	mek1 CA	tdum_tpl2_degr_tp2	OFF
+368	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	ccl2	OFF
+369	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	cox2	OFF
+370	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	hgf	OFF
+371	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	il1b_new	OFF
+372	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	il6	OFF
+373	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	il8	OFF
+374	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	irs1_ps	OFF
+375	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	lbp	OFF
+376	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	nc_nfkb_pathway	OFF
+377	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	saa	OFF
+378	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	sil1r_ap	OFF
+379	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	tdum_a20_traf6_ub	ON
+380	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	tdum_cyt_p38_tak1_tab	OFF
+381	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	tdum_hsp27_ps_traf6_ub	OFF
+382	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	tdum_il1r2_il1rc	OFF
+383	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	tdum_il1ra_ilr12	OFF
+384	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	tdum_irak1c_irak12	OFF
+385	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	tdum_mkp1_p38_jnk_erk12	OFF
+386	1.0	src=1,trika1=1	dum_cebp_il1ra KO,il1ra KO	tdum_tpl2_degr_tp2	OFF
+387	1.0	src=1,trika1=1	pi3k CA	ccl2	OFF
+388	1.0	src=1,trika1=1	pi3k CA	cox2	OFF
+389	1.0	src=1,trika1=1	pi3k CA	hgf	OFF
+390	1.0	src=1,trika1=1	pi3k CA	il1b_new	OFF
+391	1.0	src=1,trika1=1	pi3k CA	il6	OFF
+392	1.0	src=1,trika1=1	pi3k CA	il8	OFF
+393	1.0	src=1,trika1=1	pi3k CA	irs1_ps	OFF
+394	1.0	src=1,trika1=1	pi3k CA	lbp	OFF
+395	1.0	src=1,trika1=1	pi3k CA	nc_nfkb_pathway	OFF
+396	1.0	src=1,trika1=1	pi3k CA	saa	OFF
+397	1.0	src=1,trika1=1	pi3k CA	sil1r_ap	OFF
+398	1.0	src=1,trika1=1	pi3k CA	tdum_a20_traf6_ub	ON
+399	1.0	src=1,trika1=1	pi3k CA	tdum_cyt_p38_tak1_tab	OFF
+400	1.0	src=1,trika1=1	pi3k CA	tdum_hsp27_ps_traf6_ub	OFF
+401	1.0	src=1,trika1=1	pi3k CA	tdum_il1r2_il1rc	OFF
+402	1.0	src=1,trika1=1	pi3k CA	tdum_il1ra_ilr12	OFF
+403	1.0	src=1,trika1=1	pi3k CA	tdum_irak1c_irak12	OFF
+404	1.0	src=1,trika1=1	pi3k CA	tdum_mkp1_p38_jnk_erk12	OFF
+405	1.0	src=1,trika1=1	pi3k CA	tdum_tpl2_degr_tp2	OFF
+406	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	ccl2	OFF
+407	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	cox2	OFF
+408	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	hgf	OFF
+409	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	il1b_new	OFF
+410	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	il6	OFF
+411	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	il8	OFF
+412	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	irs1_ps	OFF
+413	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	lbp	OFF
+414	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	nc_nfkb_pathway	OFF
+415	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	saa	OFF
+416	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	sil1r_ap	OFF
+417	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	tdum_a20_traf6_ub	ON
+418	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	tdum_cyt_p38_tak1_tab	OFF
+419	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	tdum_hsp27_ps_traf6_ub	OFF
+420	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	tdum_il1r2_il1rc	OFF
+421	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	tdum_il1ra_ilr12	OFF
+422	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	tdum_irak1c_irak12	OFF
+423	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	tdum_mkp1_p38_jnk_erk12	OFF
+424	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	tdum_tpl2_degr_tp2	OFF
+425	1.0	src=0,trika1=1	mtorc2 CA,sil1r12 KO	upa	OFF
+426	1.0	src=0,trika1=0	cjun_gene CA	atf2	OFF
+427	1.0	src=0,trika1=0	cjun_gene CA	ccl2	OFF
+428	1.0	src=0,trika1=0	cjun_gene CA	cox2	ON
+429	1.0	src=0,trika1=0	cjun_gene CA	hgf	OFF
+430	1.0	src=0,trika1=0	cjun_gene CA	il1b_new	OFF
+431	1.0	src=0,trika1=0	cjun_gene CA	il6	OFF
+432	1.0	src=0,trika1=0	cjun_gene CA	il8	OFF
+433	1.0	src=0,trika1=0	cjun_gene CA	irs1_ps	OFF
+434	1.0	src=0,trika1=0	cjun_gene CA	lbp	OFF
+435	1.0	src=0,trika1=0	cjun_gene CA	nc_nfkb_pathway	OFF
+436	1.0	src=0,trika1=0	cjun_gene CA	saa	OFF
+437	1.0	src=0,trika1=0	cjun_gene CA	sil1r_ap	OFF
+439	1.0	src=0,trika1=0	cjun_gene CA	tdum_cyt_p38_tak1_tab	OFF
+440	1.0	src=0,trika1=0	cjun_gene CA	tdum_hsp27_ps_traf6_ub	OFF
+441	1.0	src=0,trika1=0	cjun_gene CA	tdum_il1r2_il1rc	OFF
+442	1.0	src=0,trika1=0	cjun_gene CA	tdum_il1ra_ilr12	OFF
+443	1.0	src=0,trika1=0	cjun_gene CA	tdum_irak1c_irak12	OFF
+444	1.0	src=0,trika1=0	cjun_gene CA	tdum_mkp1_p38_jnk_erk12	ON
+445	1.0	src=0,trika1=0	cjun_gene CA	tdum_tpl2_degr_tp2	OFF
+446	1.0	src=1,trika1=0	cfos KO	ccl2	OFF
+447	1.0	src=1,trika1=0	cfos KO	cox2	OFF
+448	1.0	src=1,trika1=0	cfos KO	hgf	OFF
+449	1.0	src=1,trika1=0	cfos KO	il1b_new	OFF
+450	1.0	src=1,trika1=0	cfos KO	il6	OFF
+451	1.0	src=1,trika1=0	cfos KO	il8	OFF
+452	1.0	src=1,trika1=0	cfos KO	irs1_ps	OFF
+453	1.0	src=1,trika1=0	cfos KO	lbp	OFF
+454	1.0	src=1,trika1=0	cfos KO	nc_nfkb_pathway	OFF
+455	1.0	src=1,trika1=0	cfos KO	saa	OFF
+456	1.0	src=1,trika1=0	cfos KO	sil1r_ap	OFF
+457	1.0	src=1,trika1=0	cfos KO	tdum_a20_traf6_ub	ON
+458	1.0	src=1,trika1=0	cfos KO	tdum_cyt_p38_tak1_tab	OFF
+459	1.0	src=1,trika1=0	cfos KO	tdum_hsp27_ps_traf6_ub	OFF
+460	1.0	src=1,trika1=0	cfos KO	tdum_il1r2_il1rc	OFF
+461	1.0	src=1,trika1=0	cfos KO	tdum_il1ra_ilr12	OFF
+462	1.0	src=1,trika1=0	cfos KO	tdum_irak1c_irak12	OFF
+463	1.0	src=1,trika1=0	cfos KO	tdum_mkp1_p38_jnk_erk12	OFF
+464	1.0	src=1,trika1=0	cfos KO	tdum_tpl2_degr_tp2	OFF
+465	1.0	src=1,trika1=0	cfos CA	ccl2	OFF
+466	1.0	src=1,trika1=0	cfos CA	cox2	ON
+467	1.0	src=1,trika1=0	cfos CA	hgf	OFF
+468	1.0	src=1,trika1=0	cfos CA	il1b_new	OFF
+469	1.0	src=1,trika1=0	cfos CA	il6	OFF
+470	1.0	src=1,trika1=0	cfos CA	il8	OFF
+471	1.0	src=1,trika1=0	cfos CA	irs1_ps	OFF
+472	1.0	src=1,trika1=0	cfos CA	lbp	OFF
+473	1.0	src=1,trika1=0	cfos CA	nc_nfkb_pathway	OFF
+474	1.0	src=1,trika1=0	cfos CA	saa	OFF
+475	1.0	src=1,trika1=0	cfos CA	sil1r_ap	OFF
+476	1.0	src=1,trika1=0	cfos CA	tdum_a20_traf6_ub	ON
+477	1.0	src=1,trika1=0	cfos CA	tdum_cyt_p38_tak1_tab	OFF
+478	1.0	src=1,trika1=0	cfos CA	tdum_hsp27_ps_traf6_ub	OFF
+479	1.0	src=1,trika1=0	cfos CA	tdum_il1r2_il1rc	OFF
+480	1.0	src=1,trika1=0	cfos CA	tdum_il1ra_ilr12	OFF
+481	1.0	src=1,trika1=0	cfos CA	tdum_irak1c_irak12	OFF
+482	1.0	src=1,trika1=0	cfos CA	tdum_mkp1_p38_jnk_erk12	ON
+483	1.0	src=1,trika1=0	cfos CA	tdum_tpl2_degr_tp2	OFF
+484	1.0	src=0,trika1=1	inos CA	ccl2	OFF
+485	1.0	src=0,trika1=1	inos CA	cox2	OFF
+486	1.0	src=0,trika1=1	inos CA	hgf	OFF
+487	1.0	src=0,trika1=1	inos CA	il1b_new	OFF
+488	1.0	src=0,trika1=1	inos CA	il6	OFF
+489	1.0	src=0,trika1=1	inos CA	il8	OFF
+490	1.0	src=0,trika1=1	inos CA	irs1_ps	OFF
+491	1.0	src=0,trika1=1	inos CA	lbp	OFF
+492	1.0	src=0,trika1=1	inos CA	nc_nfkb_pathway	OFF
+493	1.0	src=0,trika1=1	inos CA	saa	OFF
+494	1.0	src=0,trika1=1	inos CA	sap1	OFF
+495	1.0	src=0,trika1=1	inos CA	sil1r_ap	OFF
+496	1.0	src=0,trika1=1	inos CA	tdum_a20_traf6_ub	ON
+497	1.0	src=0,trika1=1	inos CA	tdum_cyt_p38_tak1_tab	OFF
+498	1.0	src=0,trika1=1	inos CA	tdum_hsp27_ps_traf6_ub	OFF
+499	1.0	src=0,trika1=1	inos CA	tdum_il1r2_il1rc	OFF
+500	1.0	src=0,trika1=1	inos CA	tdum_il1ra_ilr12	OFF
+501	1.0	src=0,trika1=1	inos CA	tdum_irak1c_irak12	OFF
+502	1.0	src=0,trika1=1	inos CA	tdum_mkp1_p38_jnk_erk12	OFF
+503	1.0	src=0,trika1=1	inos CA	tdum_tpl2_degr_tp2	OFF
+504	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	ccl2	OFF
+505	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	cox2	ON
+506	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	hgf	OFF
+507	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	il1b_new	OFF
+508	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	il6	OFF
+509	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	il8	OFF
+510	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	irs1_ps	OFF
+511	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	lbp	OFF
+512	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	nc_nfkb_pathway	OFF
+513	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	pro_hgf	OFF
+514	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	saa	OFF
+515	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	sil1r_ap	OFF
+516	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	tdum_a20_traf6_ub	ON
+517	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	tdum_cyt_p38_tak1_tab	OFF
+518	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	tdum_hsp27_ps_traf6_ub	OFF
+519	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	tdum_il1r2_il1rc	OFF
+520	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	tdum_il1ra_ilr12	OFF
+521	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	tdum_irak1c_irak12	OFF
+522	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	tdum_mkp1_p38_jnk_erk12	OFF
+523	1.0	src=1,trika1=0	dum_cebp_cox2 CA,dum_cebp_pro_il1b CA,irak1_ub KO	tdum_tpl2_degr_tp2	OFF
+524	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	ccl2	OFF
+525	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	cox2	OFF
+526	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	dum_il1_r2	OFF
+527	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	hgf	OFF
+528	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	il1b_new	OFF
+529	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	il6	OFF
+530	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	il8	OFF
+531	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	irs1_ps	OFF
+532	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	lbp	OFF
+533	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	nc_nfkb_pathway	OFF
+534	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	saa	OFF
+535	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	sil1r_ap	OFF
+536	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	tdum_a20_traf6_ub	ON
+537	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	tdum_cyt_p38_tak1_tab	OFF
+538	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	tdum_hsp27_ps_traf6_ub	OFF
+539	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	tdum_il1r2_il1rc	OFF
+540	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	tdum_il1ra_ilr12	OFF
+541	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	tdum_irak1c_irak12	OFF
+542	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	tdum_mkp1_p38_jnk_erk12	OFF
+543	1.0	src=0,trika1=1	elk1 CA,ikka KO,il1b KO	tdum_tpl2_degr_tp2	OFF
+544	1.0	src=1,trika1=0	smyd88 KO	ccl2	OFF
+545	1.0	src=1,trika1=0	smyd88 KO	cox2	OFF
+546	1.0	src=1,trika1=0	smyd88 KO	hgf	OFF
+547	1.0	src=1,trika1=0	smyd88 KO	il1b_new	OFF
+548	1.0	src=1,trika1=0	smyd88 KO	il6	OFF
+549	1.0	src=1,trika1=0	smyd88 KO	il8	OFF
+550	1.0	src=1,trika1=0	smyd88 KO	irs1_ps	OFF
+551	1.0	src=1,trika1=0	smyd88 KO	lbp	OFF
+552	1.0	src=1,trika1=0	smyd88 KO	mk2	OFF
+553	1.0	src=1,trika1=0	smyd88 KO	nc_nfkb_pathway	OFF
+554	1.0	src=1,trika1=0	smyd88 KO	saa	OFF
+555	1.0	src=1,trika1=0	smyd88 KO	sil1r_ap	OFF
+556	1.0	src=1,trika1=0	smyd88 KO	tdum_a20_traf6_ub	ON
+557	1.0	src=1,trika1=0	smyd88 KO	tdum_cyt_p38_tak1_tab	OFF
+558	1.0	src=1,trika1=0	smyd88 KO	tdum_hsp27_ps_traf6_ub	OFF
+559	1.0	src=1,trika1=0	smyd88 KO	tdum_il1r2_il1rc	OFF
+560	1.0	src=1,trika1=0	smyd88 KO	tdum_il1ra_ilr12	OFF
+561	1.0	src=1,trika1=0	smyd88 KO	tdum_irak1c_irak12	OFF
+562	1.0	src=1,trika1=0	smyd88 KO	tdum_mkp1_p38_jnk_erk12	OFF
+563	1.0	src=1,trika1=0	smyd88 KO	tdum_tpl2_degr_tp2	OFF
+564	1.0	src=1,trika1=0	smyd88 KO	tpl2	OFF
+565	1.0	src=0,trika1=1	socs3 CA	ccl2	OFF
+566	1.0	src=0,trika1=1	socs3 CA	cox2	OFF
+567	1.0	src=0,trika1=1	socs3 CA	hgf	OFF
+568	1.0	src=0,trika1=1	socs3 CA	il1b_new	OFF
+569	1.0	src=0,trika1=1	socs3 CA	il6	OFF
+570	1.0	src=0,trika1=1	socs3 CA	il8	OFF
+571	1.0	src=0,trika1=1	socs3 CA	irs1_ps	OFF
+572	1.0	src=0,trika1=1	socs3 CA	lbp	OFF
+573	1.0	src=0,trika1=1	socs3 CA	nc_nfkb_pathway	OFF
+574	1.0	src=0,trika1=1	socs3 CA	saa	OFF
+575	1.0	src=0,trika1=1	socs3 CA	sil1r_ap	OFF
+576	1.0	src=0,trika1=1	socs3 CA	tdum_a20_traf6_ub	ON
+577	1.0	src=0,trika1=1	socs3 CA	tdum_cyt_p38_tak1_tab	OFF
+578	1.0	src=0,trika1=1	socs3 CA	tdum_hsp27_ps_traf6_ub	OFF
+579	1.0	src=0,trika1=1	socs3 CA	tdum_il1r2_il1rc	OFF
+580	1.0	src=0,trika1=1	socs3 CA	tdum_il1ra_ilr12	OFF
+581	1.0	src=0,trika1=1	socs3 CA	tdum_irak1c_irak12	OFF
+582	1.0	src=0,trika1=1	socs3 CA	tdum_mkp1_p38_jnk_erk12	OFF
+583	1.0	src=0,trika1=1	socs3 CA	tdum_tpl2_degr_tp2	OFF
+584	1.0	src=1,trika1=1	mtorc2 KO	ccl2	OFF
+585	1.0	src=1,trika1=1	mtorc2 KO	cox2	OFF
+586	1.0	src=1,trika1=1	mtorc2 KO	hgf	OFF
+587	1.0	src=1,trika1=1	mtorc2 KO	il1b_new	OFF
+588	1.0	src=1,trika1=1	mtorc2 KO	il6	OFF
+589	1.0	src=1,trika1=1	mtorc2 KO	il8	OFF
+590	1.0	src=1,trika1=1	mtorc2 KO	irs1_ps	OFF
+591	1.0	src=1,trika1=1	mtorc2 KO	lbp	OFF
+592	1.0	src=1,trika1=1	mtorc2 KO	nc_nfkb_pathway	OFF
+593	1.0	src=1,trika1=1	mtorc2 KO	saa	OFF
+594	1.0	src=1,trika1=1	mtorc2 KO	sil1r_ap	OFF
+595	1.0	src=1,trika1=1	mtorc2 KO	tdum_a20_traf6_ub	ON
+596	1.0	src=1,trika1=1	mtorc2 KO	tdum_cyt_p38_tak1_tab	OFF
+597	1.0	src=1,trika1=1	mtorc2 KO	tdum_hsp27_ps_traf6_ub	OFF
+598	1.0	src=1,trika1=1	mtorc2 KO	tdum_il1r2_il1rc	OFF
+599	1.0	src=1,trika1=1	mtorc2 KO	tdum_il1ra_ilr12	OFF
+600	1.0	src=1,trika1=1	mtorc2 KO	tdum_irak1c_irak12	OFF
+601	1.0	src=1,trika1=1	mtorc2 KO	tdum_mkp1_p38_jnk_erk12	OFF
+602	1.0	src=1,trika1=1	mtorc2 KO	tdum_tpl2_degr_tp2	OFF
+603	1.0	src=0,trika1=1	mek4 KO	ccl2	OFF
+604	1.0	src=0,trika1=1	mek4 KO	cox2	OFF
+605	1.0	src=0,trika1=1	mek4 KO	dum_ikkab_or_ikkbb_nemo_ikkb_a	OFF
+606	1.0	src=0,trika1=1	mek4 KO	hgf	OFF
+607	1.0	src=0,trika1=1	mek4 KO	ikkaa	ON
+608	1.0	src=0,trika1=1	mek4 KO	il1b_new	OFF
+609	1.0	src=0,trika1=1	mek4 KO	il6	OFF
+610	1.0	src=0,trika1=1	mek4 KO	il8	OFF
+611	1.0	src=0,trika1=1	mek4 KO	irs1_ps	OFF
+613	1.0	src=0,trika1=1	mek4 KO	nc_nfkb_pathway	OFF
+614	1.0	src=0,trika1=1	mek4 KO	saa	OFF
+615	1.0	src=0,trika1=1	mek4 KO	sil1r_ap	OFF
+616	1.0	src=0,trika1=1	mek4 KO	tdum_a20_traf6_ub	ON
+617	1.0	src=0,trika1=1	mek4 KO	tdum_cyt_p38_tak1_tab	OFF
+618	1.0	src=0,trika1=1	mek4 KO	tdum_hsp27_ps_traf6_ub	OFF
+619	1.0	src=0,trika1=1	mek4 KO	tdum_il1r2_il1rc	OFF
+620	1.0	src=0,trika1=1	mek4 KO	tdum_il1ra_ilr12	OFF
+621	1.0	src=0,trika1=1	mek4 KO	tdum_irak1c_irak12	OFF
+622	1.0	src=0,trika1=1	mek4 KO	tdum_mkp1_p38_jnk_erk12	OFF
+623	1.0	src=0,trika1=1	mek4 KO	tdum_tpl2_degr_tp2	OFF
+624	1.0	src=0,trika1=0		ccl2	OFF
+625	1.0	src=0,trika1=0		cox2	OFF
+626	1.0	src=0,trika1=0		hgf	OFF
+627	1.0	src=0,trika1=0		ikkaa_nemo	OFF
+628	1.0	src=0,trika1=0		il1b_new	OFF
+629	1.0	src=0,trika1=0		il6	OFF
+630	1.0	src=0,trika1=0		il8	OFF
+631	1.0	src=0,trika1=0		irs1_ps	OFF
+632	1.0	src=0,trika1=0		lbp	OFF
+633	1.0	src=0,trika1=0		mekk3	OFF
+634	1.0	src=0,trika1=0		nc_nfkb_pathway	OFF
+635	1.0	src=0,trika1=0		pi3k	OFF
+636	1.0	src=0,trika1=0		saa	OFF
+637	1.0	src=0,trika1=0		sil1r_ap	OFF
+638	1.0	src=0,trika1=0		tdum_a20_traf6_ub	ON
+639	1.0	src=0,trika1=0		tdum_cyt_p38_tak1_tab	OFF
+640	1.0	src=0,trika1=0		tdum_hsp27_ps_traf6_ub	OFF
+641	1.0	src=0,trika1=0		tdum_il1r2_il1rc	OFF
+642	1.0	src=0,trika1=0		tdum_il1ra_ilr12	OFF
+643	1.0	src=0,trika1=0		tdum_irak1c_irak12	OFF
+644	1.0	src=0,trika1=0		tdum_mkp1_p38_jnk_erk12	OFF
+645	1.0	src=0,trika1=0		tdum_tpl2_degr_tp2	OFF
+646	1.0	src=0,trika1=0		traf6	OFF
+647	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	ccl2	OFF
+648	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	cox2	Some
+649	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	dum_tak1_tab_or_mekk3_ikkb_a	OFF
+650	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	hgf	Some
+651	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	il1b_new	OFF
+652	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	il6	OFF
+653	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	il8	OFF
+654	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	irs1_ps	OFF
+655	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	lbp	Some
+656	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	nc_nfkb_pathway	OFF
+657	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	saa	OFF
+658	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	sil1r_ap	OFF
+659	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	tdum_a20_traf6_ub	ON
+660	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	tdum_cyt_p38_tak1_tab	Some
+661	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	tdum_hsp27_ps_traf6_ub	Some
+662	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	tdum_il1r2_il1rc	OFF
+663	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	tdum_il1ra_ilr12	OFF
+664	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	tdum_irak1c_irak12	OFF
+665	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	tdum_mkp1_p38_jnk_erk12	Some
+666	1.0	src=1,trika1=1	dum_mek3_or_4_or_6_nuc_p38 CA	tdum_tpl2_degr_tp2	OFF
+667	1.0	src=0,trika1=1	nemo CA,smyd88 CA	ccl2	OFF
+668	1.0	src=0,trika1=1	nemo CA,smyd88 CA	cox2	OFF
+669	1.0	src=0,trika1=1	nemo CA,smyd88 CA	hgf	OFF
+670	1.0	src=0,trika1=1	nemo CA,smyd88 CA	il1b_new	OFF
+671	1.0	src=0,trika1=1	nemo CA,smyd88 CA	il6	OFF
+672	1.0	src=0,trika1=1	nemo CA,smyd88 CA	il8	OFF
+673	1.0	src=0,trika1=1	nemo CA,smyd88 CA	irs1_ps	OFF
+674	1.0	src=0,trika1=1	nemo CA,smyd88 CA	lbp	OFF
+675	1.0	src=0,trika1=1	nemo CA,smyd88 CA	nc_nfkb_pathway	OFF
+676	1.0	src=0,trika1=1	nemo CA,smyd88 CA	saa	OFF
+677	1.0	src=0,trika1=1	nemo CA,smyd88 CA	sil1r_ap	OFF
+678	1.0	src=0,trika1=1	nemo CA,smyd88 CA	tdum_a20_traf6_ub	ON
+680	1.0	src=0,trika1=1	nemo CA,smyd88 CA	tdum_hsp27_ps_traf6_ub	OFF
+681	1.0	src=0,trika1=1	nemo CA,smyd88 CA	tdum_il1r2_il1rc	OFF
+682	1.0	src=0,trika1=1	nemo CA,smyd88 CA	tdum_il1ra_ilr12	OFF
+683	1.0	src=0,trika1=1	nemo CA,smyd88 CA	tdum_irak1c_irak12	OFF
+684	1.0	src=0,trika1=1	nemo CA,smyd88 CA	tdum_mkp1_p38_jnk_erk12	OFF
+685	1.0	src=0,trika1=1	nemo CA,smyd88 CA	tdum_tpl2_degr_tp2	OFF
+686	1.0	src=1,trika1=0	hnf4a CA	ccl2	OFF
+687	1.0	src=1,trika1=0	hnf4a CA	cox2	OFF
+688	1.0	src=1,trika1=0	hnf4a CA	hgf	OFF
+689	1.0	src=1,trika1=0	hnf4a CA	il1b_new	OFF
+690	1.0	src=1,trika1=0	hnf4a CA	il6	OFF
+691	1.0	src=1,trika1=0	hnf4a CA	il8	OFF
+692	1.0	src=1,trika1=0	hnf4a CA	irs1_ps	OFF
+693	1.0	src=1,trika1=0	hnf4a CA	lbp	OFF
+694	1.0	src=1,trika1=0	hnf4a CA	nc_nfkb_pathway	OFF
+695	1.0	src=1,trika1=0	hnf4a CA	saa	OFF
+696	1.0	src=1,trika1=0	hnf4a CA	sil1r_ap	OFF
+697	1.0	src=1,trika1=0	hnf4a CA	tdum_a20_traf6_ub	ON
+698	1.0	src=1,trika1=0	hnf4a CA	tdum_cyt_p38_tak1_tab	OFF
+699	1.0	src=1,trika1=0	hnf4a CA	tdum_hsp27_ps_traf6_ub	OFF
+700	1.0	src=1,trika1=0	hnf4a CA	tdum_il1r2_il1rc	OFF
+701	1.0	src=1,trika1=0	hnf4a CA	tdum_il1ra_ilr12	OFF
+702	1.0	src=1,trika1=0	hnf4a CA	tdum_irak1c_irak12	OFF
+703	1.0	src=1,trika1=0	hnf4a CA	tdum_mkp1_p38_jnk_erk12	OFF
+704	1.0	src=1,trika1=0	hnf4a CA	tdum_tpl2_degr_tp2	OFF
+705	1.0	src=1,trika1=0	hnf4a CA	tollip	OFF
+706	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	ccl2	OFF
+707	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	cox2	OFF
+708	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	dum_cebp_saa	OFF
+709	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	hgf	OFF
+710	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	il1b_new	OFF
+711	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	il6	OFF
+712	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	il8	OFF
+713	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	irs1_ps	OFF
+714	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	lbp	OFF
+715	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	nc_nfkb_pathway	OFF
+716	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	saa	OFF
+717	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	sil1r_ap	OFF
+718	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	tdum_a20_traf6_ub	ON
+719	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	tdum_cyt_p38_tak1_tab	OFF
+720	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	tdum_hsp27_ps_traf6_ub	OFF
+721	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	tdum_il1r2_il1rc	OFF
+722	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	tdum_il1ra_ilr12	OFF
+723	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	tdum_irak1c_irak12	OFF
+724	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	tdum_mkp1_p38_jnk_erk12	OFF
+725	1.0	src=0,trika1=1	ikka_a KO,ksrp KO,myd88 KO,p105_degr KO	tdum_tpl2_degr_tp2	OFF
+726	1.0	src=0,trika1=1	sil1r12 KO	ccl2	OFF
+727	1.0	src=0,trika1=1	sil1r12 KO	cox2	OFF
+728	1.0	src=0,trika1=1	sil1r12 KO	hgf	OFF
+729	1.0	src=0,trika1=1	sil1r12 KO	il1b_new	OFF
+730	1.0	src=0,trika1=1	sil1r12 KO	il6	OFF
+731	1.0	src=0,trika1=1	sil1r12 KO	il8	OFF
+732	1.0	src=0,trika1=1	sil1r12 KO	irs1_ps	OFF
+733	1.0	src=0,trika1=1	sil1r12 KO	lbp	OFF
+734	1.0	src=0,trika1=1	sil1r12 KO	nc_nfkb_pathway	OFF
+735	1.0	src=0,trika1=1	sil1r12 KO	saa	OFF
+736	1.0	src=0,trika1=1	sil1r12 KO	sil1r_ap	OFF
+737	1.0	src=0,trika1=1	sil1r12 KO	tdum_a20_traf6_ub	ON
+738	1.0	src=0,trika1=1	sil1r12 KO	tdum_cyt_p38_tak1_tab	OFF
+739	1.0	src=0,trika1=1	sil1r12 KO	tdum_hsp27_ps_traf6_ub	OFF
+740	1.0	src=0,trika1=1	sil1r12 KO	tdum_il1r2_il1rc	OFF
+741	1.0	src=0,trika1=1	sil1r12 KO	tdum_il1ra_ilr12	OFF
+742	1.0	src=0,trika1=1	sil1r12 KO	tdum_irak1c_irak12	OFF
+743	1.0	src=0,trika1=1	sil1r12 KO	tdum_mkp1_p38_jnk_erk12	OFF
+744	1.0	src=0,trika1=1	sil1r12 KO	tdum_tpl2_degr_tp2	OFF
+745	1.0	src=0,trika1=1	mk2 CA,myd88 KO	ccl2	OFF
+746	1.0	src=0,trika1=1	mk2 CA,myd88 KO	cox2	OFF
+747	1.0	src=0,trika1=1	mk2 CA,myd88 KO	hgf	OFF
+748	1.0	src=0,trika1=1	mk2 CA,myd88 KO	il1b_new	OFF
+749	1.0	src=0,trika1=1	mk2 CA,myd88 KO	il6	OFF
+750	1.0	src=0,trika1=1	mk2 CA,myd88 KO	il8	OFF
+751	1.0	src=0,trika1=1	mk2 CA,myd88 KO	irs1_ps	OFF
+752	1.0	src=0,trika1=1	mk2 CA,myd88 KO	lbp	OFF
+753	1.0	src=0,trika1=1	mk2 CA,myd88 KO	nc_nfkb_pathway	OFF
+754	1.0	src=0,trika1=1	mk2 CA,myd88 KO	saa	OFF
+755	1.0	src=0,trika1=1	mk2 CA,myd88 KO	sil1r_ap	OFF
+756	1.0	src=0,trika1=1	mk2 CA,myd88 KO	tdum_a20_traf6_ub	ON
+757	1.0	src=0,trika1=1	mk2 CA,myd88 KO	tdum_cyt_p38_tak1_tab	OFF
+758	1.0	src=0,trika1=1	mk2 CA,myd88 KO	tdum_hsp27_ps_traf6_ub	ON
+759	1.0	src=0,trika1=1	mk2 CA,myd88 KO	tdum_il1r2_il1rc	OFF
+760	1.0	src=0,trika1=1	mk2 CA,myd88 KO	tdum_il1ra_ilr12	OFF
+761	1.0	src=0,trika1=1	mk2 CA,myd88 KO	tdum_irak1c_irak12	OFF
+762	1.0	src=0,trika1=1	mk2 CA,myd88 KO	tdum_mkp1_p38_jnk_erk12	OFF
+763	1.0	src=0,trika1=1	mk2 CA,myd88 KO	tdum_tpl2_degr_tp2	OFF
+764	1.0	src=1,trika1=1	il1b CA,il1ra CA	ccl2	OFF
+765	1.0	src=1,trika1=1	il1b CA,il1ra CA	cox2	OFF
+766	1.0	src=1,trika1=1	il1b CA,il1ra CA	hgf	OFF
+767	1.0	src=1,trika1=1	il1b CA,il1ra CA	ikkbb_nemo	OFF
+768	1.0	src=1,trika1=1	il1b CA,il1ra CA	il1b_new	OFF
+769	1.0	src=1,trika1=1	il1b CA,il1ra CA	il6	OFF
+770	1.0	src=1,trika1=1	il1b CA,il1ra CA	il8	OFF
+771	1.0	src=1,trika1=1	il1b CA,il1ra CA	irs1_ps	OFF
+772	1.0	src=1,trika1=1	il1b CA,il1ra CA	lbp	OFF
+773	1.0	src=1,trika1=1	il1b CA,il1ra CA	nc_nfkb_pathway	OFF
+774	1.0	src=1,trika1=1	il1b CA,il1ra CA	saa	OFF
+775	1.0	src=1,trika1=1	il1b CA,il1ra CA	sil1r_ap	OFF
+776	1.0	src=1,trika1=1	il1b CA,il1ra CA	tdum_a20_traf6_ub	ON
+777	1.0	src=1,trika1=1	il1b CA,il1ra CA	tdum_cyt_p38_tak1_tab	OFF
+778	1.0	src=1,trika1=1	il1b CA,il1ra CA	tdum_hsp27_ps_traf6_ub	OFF
+779	1.0	src=1,trika1=1	il1b CA,il1ra CA	tdum_il1r2_il1rc	OFF
+780	1.0	src=1,trika1=1	il1b CA,il1ra CA	tdum_il1ra_ilr12	ON
+781	1.0	src=1,trika1=1	il1b CA,il1ra CA	tdum_irak1c_irak12	OFF
+782	1.0	src=1,trika1=1	il1b CA,il1ra CA	tdum_mkp1_p38_jnk_erk12	OFF
+783	1.0	src=1,trika1=1	il1b CA,il1ra CA	tdum_tpl2_degr_tp2	OFF
+784	1.0	src=0,trika1=1	il1b CA,inos KO	ccl2	OFF
+785	1.0	src=0,trika1=1	il1b CA,inos KO	cox2	OFF
+786	1.0	src=0,trika1=1	il1b CA,inos KO	hgf	OFF
+787	1.0	src=0,trika1=1	il1b CA,inos KO	il1b_new	OFF
+788	1.0	src=0,trika1=1	il1b CA,inos KO	il6	OFF
+789	1.0	src=0,trika1=1	il1b CA,inos KO	il8	OFF
+790	1.0	src=0,trika1=1	il1b CA,inos KO	irs1_ps	OFF
+791	1.0	src=0,trika1=1	il1b CA,inos KO	lbp	OFF
+792	1.0	src=0,trika1=1	il1b CA,inos KO	nc_nfkb_pathway	OFF
+793	1.0	src=0,trika1=1	il1b CA,inos KO	saa	OFF
+794	1.0	src=0,trika1=1	il1b CA,inos KO	sil1r_ap	OFF
+795	1.0	src=0,trika1=1	il1b CA,inos KO	tdum_a20_traf6_ub	ON
+796	1.0	src=0,trika1=1	il1b CA,inos KO	tdum_cyt_p38_tak1_tab	OFF
+797	1.0	src=0,trika1=1	il1b CA,inos KO	tdum_hsp27_ps_traf6_ub	OFF
+798	1.0	src=0,trika1=1	il1b CA,inos KO	tdum_il1r2_il1rc	ON
+799	1.0	src=0,trika1=1	il1b CA,inos KO	tdum_il1ra_ilr12	OFF
+800	1.0	src=0,trika1=1	il1b CA,inos KO	tdum_irak1c_irak12	OFF
+801	1.0	src=0,trika1=1	il1b CA,inos KO	tdum_mkp1_p38_jnk_erk12	OFF
+802	1.0	src=0,trika1=1	il1b CA,inos KO	tdum_tpl2_degr_tp2	OFF
+803	1.0	src=0,trika1=0	mek6 KO	ccl2	OFF
+804	1.0	src=0,trika1=0	mek6 KO	cox2	OFF
+805	1.0	src=0,trika1=0	mek6 KO	hgf	OFF
+806	1.0	src=0,trika1=0	mek6 KO	il1b_new	OFF
+807	1.0	src=0,trika1=0	mek6 KO	il6	OFF
+808	1.0	src=0,trika1=0	mek6 KO	il8	OFF
+809	1.0	src=0,trika1=0	mek6 KO	irs1_ps	OFF
+810	1.0	src=0,trika1=0	mek6 KO	lbp	OFF
+811	1.0	src=0,trika1=0	mek6 KO	nc_nfkb_pathway	OFF
+812	1.0	src=0,trika1=0	mek6 KO	saa	OFF
+813	1.0	src=0,trika1=0	mek6 KO	sil1r_ap	OFF
+814	1.0	src=0,trika1=0	mek6 KO	tdum_a20_traf6_ub	ON
+815	1.0	src=0,trika1=0	mek6 KO	tdum_cyt_p38_tak1_tab	OFF
+816	1.0	src=0,trika1=0	mek6 KO	tdum_hsp27_ps_traf6_ub	OFF
+817	1.0	src=0,trika1=0	mek6 KO	tdum_il1r2_il1rc	OFF
+818	1.0	src=0,trika1=0	mek6 KO	tdum_il1ra_ilr12	OFF
+819	1.0	src=0,trika1=0	mek6 KO	tdum_irak1c_irak12	OFF
+820	1.0	src=0,trika1=0	mek6 KO	tdum_mkp1_p38_jnk_erk12	OFF
+821	1.0	src=0,trika1=0	mek6 KO	tdum_tpl2_degr_tp2	OFF
+822	1.0	src=0,trika1=0	mek6 KO	tpl2	OFF
+823	1.0	src=0,trika1=1	upa CA	ccl2	OFF
+824	1.0	src=0,trika1=1	upa CA	cebpd	OFF
+825	1.0	src=0,trika1=1	upa CA	cox2	OFF
+826	1.0	src=0,trika1=1	upa CA	hgf	OFF
+827	1.0	src=0,trika1=1	upa CA	il1b_new	OFF
+828	1.0	src=0,trika1=1	upa CA	il6	OFF
+829	1.0	src=0,trika1=1	upa CA	il8	OFF
+830	1.0	src=0,trika1=1	upa CA	irs1_ps	OFF
+831	1.0	src=0,trika1=1	upa CA	jnk	OFF
+832	1.0	src=0,trika1=1	upa CA	lbp	OFF
+833	1.0	src=0,trika1=1	upa CA	nc_nfkb_pathway	OFF
+834	1.0	src=0,trika1=1	upa CA	nfkb	OFF
+835	1.0	src=0,trika1=1	upa CA	saa	OFF
+836	1.0	src=0,trika1=1	upa CA	sil1r_ap	OFF
+837	1.0	src=0,trika1=1	upa CA	tdum_a20_traf6_ub	ON
+838	1.0	src=0,trika1=1	upa CA	tdum_cyt_p38_tak1_tab	OFF
+839	1.0	src=0,trika1=1	upa CA	tdum_hsp27_ps_traf6_ub	OFF
+840	1.0	src=0,trika1=1	upa CA	tdum_il1r2_il1rc	OFF
+841	1.0	src=0,trika1=1	upa CA	tdum_il1ra_ilr12	OFF
+842	1.0	src=0,trika1=1	upa CA	tdum_irak1c_irak12	OFF
+843	1.0	src=0,trika1=1	upa CA	tdum_mkp1_p38_jnk_erk12	OFF
+844	1.0	src=0,trika1=1	upa CA	tdum_tpl2_degr_tp2	OFF
+845	1.0	src=1,trika1=0	ros CA	ccl2	OFF
+846	1.0	src=1,trika1=0	ros CA	cfos	OFF
+847	1.0	src=1,trika1=0	ros CA	cox2	OFF
+848	1.0	src=1,trika1=0	ros CA	dum_cebp_cox2	OFF
+849	1.0	src=1,trika1=0	ros CA	hgf	OFF
+850	1.0	src=1,trika1=0	ros CA	il1b_new	OFF
+851	1.0	src=1,trika1=0	ros CA	il6	OFF
+852	1.0	src=1,trika1=0	ros CA	il8	OFF
+853	1.0	src=1,trika1=0	ros CA	irs1_ps	OFF
+855	1.0	src=1,trika1=0	ros CA	nc_nfkb_pathway	OFF
+856	1.0	src=1,trika1=0	ros CA	saa	OFF
+857	1.0	src=1,trika1=0	ros CA	sil1r_ap	OFF
+858	1.0	src=1,trika1=0	ros CA	tdum_a20_traf6_ub	ON
+859	1.0	src=1,trika1=0	ros CA	tdum_cyt_p38_tak1_tab	OFF
+860	1.0	src=1,trika1=0	ros CA	tdum_hsp27_ps_traf6_ub	OFF
+861	1.0	src=1,trika1=0	ros CA	tdum_il1r2_il1rc	OFF
+862	1.0	src=1,trika1=0	ros CA	tdum_il1ra_ilr12	OFF
+863	1.0	src=1,trika1=0	ros CA	tdum_irak1c_irak12	OFF
+864	1.0	src=1,trika1=0	ros CA	tdum_mkp1_p38_jnk_erk12	OFF
+865	1.0	src=1,trika1=0	ros CA	tdum_tpl2_degr_tp2	OFF
+866	1.0	src=1,trika1=0	ros CA	upa	OFF
+867	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	ccl2	OFF
+868	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	cox2	OFF
+869	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	hgf	OFF
+870	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	il1b_new	OFF
+871	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	il6	OFF
+872	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	il8	OFF
+873	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	irs1_ps	OFF
+874	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	lbp	OFF
+875	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	nc_nfkb_pathway	OFF
+876	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	saa	OFF
+877	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	sil1r_ap	ON
+878	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	tdum_a20_traf6_ub	ON
+879	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	tdum_cyt_p38_tak1_tab	OFF
+880	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	tdum_hsp27_ps_traf6_ub	OFF
+881	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	tdum_il1r2_il1rc	ON
+882	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	tdum_il1ra_ilr12	ON
+883	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	tdum_irak1c_irak12	OFF
+884	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	tdum_mkp1_p38_jnk_erk12	OFF
+885	1.0	src=1,trika1=1	il1r2 CA,nemo KO,sil1r12 CA	tdum_tpl2_degr_tp2	OFF
+886	1.0	src=1,trika1=0	cfos CA,hnf4a CA	ccl2	OFF
+887	1.0	src=1,trika1=0	cfos CA,hnf4a CA	cox2	ON
+888	1.0	src=1,trika1=0	cfos CA,hnf4a CA	hgf	OFF
+889	1.0	src=1,trika1=0	cfos CA,hnf4a CA	il1b_new	OFF
+890	1.0	src=1,trika1=0	cfos CA,hnf4a CA	il6	OFF
+891	1.0	src=1,trika1=0	cfos CA,hnf4a CA	il8	OFF
+892	1.0	src=1,trika1=0	cfos CA,hnf4a CA	irs1_ps	OFF
+893	1.0	src=1,trika1=0	cfos CA,hnf4a CA	lbp	OFF
+894	1.0	src=1,trika1=0	cfos CA,hnf4a CA	nc_nfkb_pathway	OFF
+895	1.0	src=1,trika1=0	cfos CA,hnf4a CA	saa	OFF
+896	1.0	src=1,trika1=0	cfos CA,hnf4a CA	sil1r_ap	OFF
+897	1.0	src=1,trika1=0	cfos CA,hnf4a CA	tdum_a20_traf6_ub	ON
+898	1.0	src=1,trika1=0	cfos CA,hnf4a CA	tdum_cyt_p38_tak1_tab	OFF
+899	1.0	src=1,trika1=0	cfos CA,hnf4a CA	tdum_hsp27_ps_traf6_ub	OFF
+900	1.0	src=1,trika1=0	cfos CA,hnf4a CA	tdum_il1r2_il1rc	OFF
+901	1.0	src=1,trika1=0	cfos CA,hnf4a CA	tdum_il1ra_ilr12	OFF
+902	1.0	src=1,trika1=0	cfos CA,hnf4a CA	tdum_irak1c_irak12	OFF
+903	1.0	src=1,trika1=0	cfos CA,hnf4a CA	tdum_mkp1_p38_jnk_erk12	ON
+904	1.0	src=1,trika1=0	cfos CA,hnf4a CA	tdum_tpl2_degr_tp2	OFF
+906	1.0	src=1,trika1=1	cyt_p38 KO	cox2	OFF
+907	1.0	src=1,trika1=1	cyt_p38 KO	hgf	OFF
+908	1.0	src=1,trika1=1	cyt_p38 KO	il1b_new	OFF
+909	1.0	src=1,trika1=1	cyt_p38 KO	il6	OFF
+910	1.0	src=1,trika1=1	cyt_p38 KO	il8	OFF
+911	1.0	src=1,trika1=1	cyt_p38 KO	irs1_ps	OFF
+912	1.0	src=1,trika1=1	cyt_p38 KO	lbp	OFF
+913	1.0	src=1,trika1=1	cyt_p38 KO	mek6	OFF
+914	1.0	src=1,trika1=1	cyt_p38 KO	nc_nfkb_pathway	OFF
+915	1.0	src=1,trika1=1	cyt_p38 KO	saa	OFF
+916	1.0	src=1,trika1=1	cyt_p38 KO	sil1r_ap	OFF
+917	1.0	src=1,trika1=1	cyt_p38 KO	tdum_a20_traf6_ub	ON
+918	1.0	src=1,trika1=1	cyt_p38 KO	tdum_cyt_p38_tak1_tab	OFF
+919	1.0	src=1,trika1=1	cyt_p38 KO	tdum_hsp27_ps_traf6_ub	OFF
+920	1.0	src=1,trika1=1	cyt_p38 KO	tdum_il1r2_il1rc	OFF
+921	1.0	src=1,trika1=1	cyt_p38 KO	tdum_il1ra_ilr12	OFF
+922	1.0	src=1,trika1=1	cyt_p38 KO	tdum_irak1c_irak12	OFF
+923	1.0	src=1,trika1=1	cyt_p38 KO	tdum_mkp1_p38_jnk_erk12	OFF
+924	1.0	src=1,trika1=1	cyt_p38 KO	tdum_tpl2_degr_tp2	OFF
+925	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	ccl2	OFF
+926	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	cox2	OFF
+927	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	hgf	OFF
+928	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	il1b_new	OFF
+929	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	il6	OFF
+930	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	il8	OFF
+931	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	irs1_ps	OFF
+932	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	lbp	OFF
+933	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	nc_nfkb_pathway	OFF
+934	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	saa	OFF
+935	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	sil1r_ap	OFF
+936	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	tdum_a20_traf6_ub	ON
+937	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	tdum_cyt_p38_tak1_tab	OFF
+938	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	tdum_hsp27_ps_traf6_ub	OFF
+939	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	tdum_il1r2_il1rc	OFF
+940	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	tdum_il1ra_ilr12	OFF
+941	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	tdum_irak1c_irak12	OFF
+942	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	tdum_mkp1_p38_jnk_erk12	OFF
+943	1.0	src=1,trika1=1	dum_irak1_or_2_traf6_ub CA	tdum_tpl2_degr_tp2	OFF
+944	1.0	src=0,trika1=1	hnf4a KO	ccl2	OFF
+945	1.0	src=0,trika1=1	hnf4a KO	cox2	OFF
+946	1.0	src=0,trika1=1	hnf4a KO	hgf	OFF
+947	1.0	src=0,trika1=1	hnf4a KO	il1b_new	OFF
+948	1.0	src=0,trika1=1	hnf4a KO	il6	OFF
+949	1.0	src=0,trika1=1	hnf4a KO	il8	OFF
+950	1.0	src=0,trika1=1	hnf4a KO	irs1_ps	OFF
+951	1.0	src=0,trika1=1	hnf4a KO	lbp	OFF
+953	1.0	src=0,trika1=1	hnf4a KO	saa	OFF
+954	1.0	src=0,trika1=1	hnf4a KO	sil1r_ap	OFF
+955	1.0	src=0,trika1=1	hnf4a KO	tdum_a20_traf6_ub	ON
+956	1.0	src=0,trika1=1	hnf4a KO	tdum_cyt_p38_tak1_tab	OFF
+957	1.0	src=0,trika1=1	hnf4a KO	tdum_hsp27_ps_traf6_ub	OFF
+958	1.0	src=0,trika1=1	hnf4a KO	tdum_il1r2_il1rc	OFF
+959	1.0	src=0,trika1=1	hnf4a KO	tdum_il1ra_ilr12	OFF
+960	1.0	src=0,trika1=1	hnf4a KO	tdum_irak1c_irak12	OFF
+961	1.0	src=0,trika1=1	hnf4a KO	tdum_mkp1_p38_jnk_erk12	OFF
+962	1.0	src=0,trika1=1	hnf4a KO	tdum_tpl2_degr_tp2	OFF
+963	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	ccl2	OFF
+964	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	cox2	OFF
+965	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	hgf	OFF
+966	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	il1b_new	OFF
+967	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	il6	OFF
+968	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	il8	OFF
+969	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	irs1_ps	OFF
+970	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	lbp	OFF
+971	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	nc_nfkb_pathway	OFF
+972	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	saa	OFF
+973	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	sil1r_ap	OFF
+974	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	tdum_a20_traf6_ub	ON
+975	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	tdum_cyt_p38_tak1_tab	OFF
+976	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	tdum_hsp27_ps_traf6_ub	OFF
+977	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	tdum_il1r2_il1rc	OFF
+978	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	tdum_il1ra_ilr12	OFF
+979	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	tdum_irak1c_irak12	OFF
+980	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	tdum_mkp1_p38_jnk_erk12	OFF
+981	1.0	src=1,trika1=0	ikba_diss CA,ikkaa KO	tdum_tpl2_degr_tp2	OFF
+982	1.0	src=0,trika1=0	dum_cebp_il1ra CA	ccl2	OFF
+983	1.0	src=0,trika1=0	dum_cebp_il1ra CA	cox2	OFF
+984	1.0	src=0,trika1=0	dum_cebp_il1ra CA	hgf	OFF
+985	1.0	src=0,trika1=0	dum_cebp_il1ra CA	il1b_new	OFF
+986	1.0	src=0,trika1=0	dum_cebp_il1ra CA	il6	OFF
+987	1.0	src=0,trika1=0	dum_cebp_il1ra CA	il8	OFF
+988	1.0	src=0,trika1=0	dum_cebp_il1ra CA	irs1_ps	OFF
+989	1.0	src=0,trika1=0	dum_cebp_il1ra CA	lbp	OFF
+990	1.0	src=0,trika1=0	dum_cebp_il1ra CA	nc_nfkb_pathway	OFF
+991	1.0	src=0,trika1=0	dum_cebp_il1ra CA	saa	OFF
+992	1.0	src=0,trika1=0	dum_cebp_il1ra CA	sil1r_ap	OFF
+993	1.0	src=0,trika1=0	dum_cebp_il1ra CA	tdum_a20_traf6_ub	ON
+994	1.0	src=0,trika1=0	dum_cebp_il1ra CA	tdum_cyt_p38_tak1_tab	OFF
+995	1.0	src=0,trika1=0	dum_cebp_il1ra CA	tdum_hsp27_ps_traf6_ub	OFF
+996	1.0	src=0,trika1=0	dum_cebp_il1ra CA	tdum_il1r2_il1rc	OFF
+997	1.0	src=0,trika1=0	dum_cebp_il1ra CA	tdum_il1ra_ilr12	OFF
+998	1.0	src=0,trika1=0	dum_cebp_il1ra CA	tdum_irak1c_irak12	OFF
+999	1.0	src=0,trika1=0	dum_cebp_il1ra CA	tdum_mkp1_p38_jnk_erk12	OFF
+1001	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	ccl2	OFF
+1002	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	cox2	ON
+1003	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	hgf	OFF
+1004	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	ikkaa	ON
+1005	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	il1b_new	OFF
+1006	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	il6	OFF
+1007	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	il8	OFF
+1008	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	irs1_ps	OFF
+1009	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	lbp	OFF
+1010	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	nc_nfkb_pathway	OFF
+1011	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	saa	OFF
+1012	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	sil1r_ap	OFF
+1013	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	tdum_a20_traf6_ub	ON
+1014	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	tdum_cyt_p38_tak1_tab	OFF
+1015	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	tdum_hsp27_ps_traf6_ub	OFF
+1016	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	tdum_il1r2_il1rc	OFF
+1017	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	tdum_il1ra_ilr12	OFF
+1018	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	tdum_irak1c_irak12	OFF
+1019	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	tdum_mkp1_p38_jnk_erk12	ON
+1020	1.0	src=0,trika1=0	ap1 CA,smyd88 KO	tdum_tpl2_degr_tp2	OFF
+1021	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	ccl2	OFF
+1022	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	cox2	ON
+1023	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	dum_cebp_pro_il1b	OFF
+1024	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	hgf	OFF
+1025	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	il1b_new	OFF
+1026	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	il6	OFF
+1027	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	il8	OFF
+1028	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	irak2	OFF
+1029	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	irs1_ps	OFF
+1030	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	lbp	OFF
+1031	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	nc_nfkb_pathway	OFF
+1032	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	saa	OFF
+1033	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	sil1r_ap	OFF
+1034	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	tdum_a20_traf6_ub	ON
+1035	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	tdum_cyt_p38_tak1_tab	OFF
+1036	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	tdum_hsp27_ps_traf6_ub	OFF
+1037	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	tdum_il1r2_il1rc	OFF
+1038	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	tdum_il1ra_ilr12	OFF
+1039	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	tdum_irak1c_irak12	OFF
+1040	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	tdum_mkp1_p38_jnk_erk12	ON
+1041	1.0	src=1,trika1=0	cjun_gene CA,ikkab_nemo KO	tdum_tpl2_degr_tp2	OFF
+1042	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	ccl2	OFF
+1043	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	cox2	Some
+1044	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	hgf	Some
+1045	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	il1b_new	OFF
+1046	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	il6	OFF
+1047	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	il8	OFF
+1048	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	irak4	OFF
+1049	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	irs1_ps	Some
+1050	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	lbp	Some
+1051	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	nc_nfkb_pathway	OFF
+1052	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	saa	OFF
+1053	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	sil1r_ap	OFF
+1054	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	tdum_a20_traf6_ub	OFF
+1055	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	tdum_cyt_p38_tak1_tab	Some
+1056	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	tdum_hsp27_ps_traf6_ub	Some
+1057	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	tdum_il1r2_il1rc	OFF
+1058	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	tdum_il1ra_ilr12	OFF
+1059	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	tdum_irak1c_irak12	OFF
+1060	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	tdum_mkp1_p38_jnk_erk12	Some
+1061	1.0	src=0,trika1=1	a20 KO,mek4 CA,p65 KO	tdum_tpl2_degr_tp2	OFF
+1062	1.0	src=1,trika1=0	irakm CA	ccl2	OFF
+1063	1.0	src=1,trika1=0	irakm CA	cox2	OFF
+1064	1.0	src=1,trika1=0	irakm CA	hgf	OFF
+1065	1.0	src=1,trika1=0	irakm CA	il1b_new	OFF
+1066	1.0	src=1,trika1=0	irakm CA	il6	OFF
+1067	1.0	src=1,trika1=0	irakm CA	il8	OFF
+1068	1.0	src=1,trika1=0	irakm CA	irs1_ps	OFF
+1069	1.0	src=1,trika1=0	irakm CA	lbp	OFF
+1070	1.0	src=1,trika1=0	irakm CA	nc_nfkb_pathway	OFF
+1071	1.0	src=1,trika1=0	irakm CA	saa	OFF
+1072	1.0	src=1,trika1=0	irakm CA	sil1r_ap	OFF
+1073	1.0	src=1,trika1=0	irakm CA	tdum_a20_traf6_ub	ON
+1074	1.0	src=1,trika1=0	irakm CA	tdum_cyt_p38_tak1_tab	OFF
+1075	1.0	src=1,trika1=0	irakm CA	tdum_hsp27_ps_traf6_ub	OFF
+1076	1.0	src=1,trika1=0	irakm CA	tdum_il1r2_il1rc	OFF
+1077	1.0	src=1,trika1=0	irakm CA	tdum_il1ra_ilr12	OFF
+1078	1.0	src=1,trika1=0	irakm CA	tdum_irak1c_irak12	OFF
+1079	1.0	src=1,trika1=0	irakm CA	tdum_mkp1_p38_jnk_erk12	OFF
+1080	1.0	src=1,trika1=0	irakm CA	tdum_tpl2_degr_tp2	OFF
+1081	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	ccl2	OFF
+1082	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	cox2	ON
+1083	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	hgf	OFF
+1084	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	il1b_new	OFF
+1085	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	il6	OFF
+1086	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	il8	OFF
+1087	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	irs1_ps	OFF
+1088	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	lbp	OFF
+1089	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	nc_nfkb_pathway	OFF
+1090	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	saa	OFF
+1091	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	sil1r_ap	OFF
+1092	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	tdum_a20_traf6_ub	ON
+1093	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	tdum_cyt_p38_tak1_tab	OFF
+1094	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	tdum_hsp27_ps_traf6_ub	OFF
+1095	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	tdum_il1r2_il1rc	OFF
+1096	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	tdum_il1ra_ilr12	OFF
+1097	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	tdum_irak1c_irak12	OFF
+1098	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	tdum_mkp1_p38_jnk_erk12	ON
+1099	1.0	src=0,trika1=1	cfos CA,ikkb_a KO,mek3 KO	tdum_tpl2_degr_tp2	OFF
+1100	1.0	src=0,trika1=0	abin2 CA	ccl2	OFF
+1101	1.0	src=0,trika1=0	abin2 CA	cox2	OFF
+1102	1.0	src=0,trika1=0	abin2 CA	hgf	OFF
+1103	1.0	src=0,trika1=0	abin2 CA	il1b_new	OFF
+1104	1.0	src=0,trika1=0	abin2 CA	il6	OFF
+1105	1.0	src=0,trika1=0	abin2 CA	il8	OFF
+1106	1.0	src=0,trika1=0	abin2 CA	inos	OFF
+1107	1.0	src=0,trika1=0	abin2 CA	irs1_ps	OFF
+1108	1.0	src=0,trika1=0	abin2 CA	lbp	OFF
+1109	1.0	src=0,trika1=0	abin2 CA	nc_nfkb_pathway	OFF
+1110	1.0	src=0,trika1=0	abin2 CA	saa	OFF
+1111	1.0	src=0,trika1=0	abin2 CA	sil1r_ap	OFF
+1112	1.0	src=0,trika1=0	abin2 CA	tdum_a20_traf6_ub	ON
+1113	1.0	src=0,trika1=0	abin2 CA	tdum_cyt_p38_tak1_tab	OFF
+1114	1.0	src=0,trika1=0	abin2 CA	tdum_hsp27_ps_traf6_ub	OFF
+1115	1.0	src=0,trika1=0	abin2 CA	tdum_il1r2_il1rc	OFF
+1116	1.0	src=0,trika1=0	abin2 CA	tdum_il1ra_ilr12	OFF
+1117	1.0	src=0,trika1=0	abin2 CA	tdum_irak1c_irak12	OFF
+1118	1.0	src=0,trika1=0	abin2 CA	tdum_mkp1_p38_jnk_erk12	OFF
+1119	1.0	src=0,trika1=0	abin2 CA	tdum_tpl2_degr_tp2	OFF
+1120	1.0	src=1,trika1=1	akt CA	ccl2	OFF
+1121	1.0	src=1,trika1=1	akt CA	cox2	OFF
+1122	1.0	src=1,trika1=1	akt CA	hgf	OFF
+1124	1.0	src=1,trika1=1	akt CA	il6	OFF
+1125	1.0	src=1,trika1=1	akt CA	il8	OFF
+1126	1.0	src=1,trika1=1	akt CA	irs1_ps	OFF
+1127	1.0	src=1,trika1=1	akt CA	lbp	OFF
+1128	1.0	src=1,trika1=1	akt CA	nc_nfkb_pathway	OFF
+1129	1.0	src=1,trika1=1	akt CA	saa	OFF
+1130	1.0	src=1,trika1=1	akt CA	sil1r_ap	OFF
+1131	1.0	src=1,trika1=1	akt CA	tdum_a20_traf6_ub	ON
+1132	1.0	src=1,trika1=1	akt CA	tdum_cyt_p38_tak1_tab	OFF
+1133	1.0	src=1,trika1=1	akt CA	tdum_hsp27_ps_traf6_ub	OFF
+1134	1.0	src=1,trika1=1	akt CA	tdum_il1r2_il1rc	OFF
+1135	1.0	src=1,trika1=1	akt CA	tdum_il1ra_ilr12	OFF
+1136	1.0	src=1,trika1=1	akt CA	tdum_irak1c_irak12	OFF
+1137	1.0	src=1,trika1=1	akt CA	tdum_mkp1_p38_jnk_erk12	OFF
+1138	1.0	src=1,trika1=1	akt CA	tdum_tpl2_degr_tp2	OFF
+1139	1.0	src=1,trika1=1	il1r1 KO	ccl2	OFF
+1140	1.0	src=1,trika1=1	il1r1 KO	cox2	OFF
+1141	1.0	src=1,trika1=1	il1r1 KO	hgf	OFF
+1142	1.0	src=1,trika1=1	il1r1 KO	il1b_new	OFF
+1143	1.0	src=1,trika1=1	il1r1 KO	il6	OFF
+1144	1.0	src=1,trika1=1	il1r1 KO	il8	OFF
+1145	1.0	src=1,trika1=1	il1r1 KO	irs1_ps	OFF
+1146	1.0	src=1,trika1=1	il1r1 KO	lbp	OFF
+1147	1.0	src=1,trika1=1	il1r1 KO	nc_nfkb_pathway	OFF
+1148	1.0	src=1,trika1=1	il1r1 KO	saa	OFF
+1149	1.0	src=1,trika1=1	il1r1 KO	sil1r_ap	OFF
+1150	1.0	src=1,trika1=1	il1r1 KO	tdum_a20_traf6_ub	ON
+1151	1.0	src=1,trika1=1	il1r1 KO	tdum_cyt_p38_tak1_tab	OFF
+1152	1.0	src=1,trika1=1	il1r1 KO	tdum_hsp27_ps_traf6_ub	OFF
+1153	1.0	src=1,trika1=1	il1r1 KO	tdum_il1r2_il1rc	OFF
+1154	1.0	src=1,trika1=1	il1r1 KO	tdum_il1ra_ilr12	OFF
+1155	1.0	src=1,trika1=1	il1r1 KO	tdum_irak1c_irak12	OFF
+1156	1.0	src=1,trika1=1	il1r1 KO	tdum_mkp1_p38_jnk_erk12	OFF
+1157	1.0	src=1,trika1=1	il1r1 KO	tdum_tpl2_degr_tp2	OFF
+1158	1.0	src=0,trika1=1	mekk3 CA,p105 CA	ccl2	OFF
+1159	1.0	src=0,trika1=1	mekk3 CA,p105 CA	cox2	Some
+1160	1.0	src=0,trika1=1	mekk3 CA,p105 CA	hgf	Some
+1161	1.0	src=0,trika1=1	mekk3 CA,p105 CA	il1b_new	OFF
+1162	1.0	src=0,trika1=1	mekk3 CA,p105 CA	il6	OFF
+1163	1.0	src=0,trika1=1	mekk3 CA,p105 CA	il8	OFF
+1164	1.0	src=0,trika1=1	mekk3 CA,p105 CA	irs1_ps	Some
+1165	1.0	src=0,trika1=1	mekk3 CA,p105 CA	lbp	Some
+1166	1.0	src=0,trika1=1	mekk3 CA,p105 CA	nc_nfkb_pathway	OFF
+1167	1.0	src=0,trika1=1	mekk3 CA,p105 CA	saa	OFF
+1168	1.0	src=0,trika1=1	mekk3 CA,p105 CA	sil1r_ap	OFF
+1169	1.0	src=0,trika1=1	mekk3 CA,p105 CA	tdum_a20_traf6_ub	ON
+1170	1.0	src=0,trika1=1	mekk3 CA,p105 CA	tdum_cyt_p38_tak1_tab	Some
+1171	1.0	src=0,trika1=1	mekk3 CA,p105 CA	tdum_hsp27_ps_traf6_ub	Some
+1172	1.0	src=0,trika1=1	mekk3 CA,p105 CA	tdum_il1r2_il1rc	OFF
+1173	1.0	src=0,trika1=1	mekk3 CA,p105 CA	tdum_il1ra_ilr12	OFF
+1174	1.0	src=0,trika1=1	mekk3 CA,p105 CA	tdum_irak1c_irak12	OFF
+1175	1.0	src=0,trika1=1	mekk3 CA,p105 CA	tdum_mkp1_p38_jnk_erk12	Some
+1176	1.0	src=0,trika1=1	mekk3 CA,p105 CA	tdum_tpl2_degr_tp2	OFF
+1177	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	ccl2	OFF
+1178	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	cox2	OFF
+1179	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	erk12	OFF
+1180	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	hgf	OFF
+1181	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	il1a	OFF
+1182	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	il1b_new	OFF
+1183	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	il6	OFF
+1184	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	il8	OFF
+1185	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	irs1_ps	OFF
+1186	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	lbp	OFF
+1187	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	nc_nfkb_pathway	OFF
+1188	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	saa	OFF
+1189	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	sil1r_ap	OFF
+1190	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	tdum_a20_traf6_ub	ON
+1191	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	tdum_cyt_p38_tak1_tab	OFF
+1192	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	tdum_hsp27_ps_traf6_ub	OFF
+1193	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	tdum_il1r2_il1rc	OFF
+1194	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	tdum_il1ra_ilr12	OFF
+1195	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	tdum_irak1c_irak12	OFF
+1196	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	tdum_mkp1_p38_jnk_erk12	OFF
+1197	1.0	src=1,trika1=0	dum_irak1_or_2_traf6_ub CA	tdum_tpl2_degr_tp2	OFF

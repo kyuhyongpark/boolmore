@@ -118,7 +118,7 @@ def mutate_rr_constraint(regulators:tuple[str, ...], rr:str, base_rr:str, constr
     redo = True
     trial = 0
     while redo == True:
-        if trial > 1000:
+        if trial > 10000:
             raise Exception("too many trials. check mutation parameter")
         
         ### mutation module ###

@@ -1,0 +1,25 @@
+# id: 16
+# generation: 1
+# extra edges: []
+# score: 75.65625 / 180.0
+# following constraints: True
+# complexity: 31
+
+Apoptosis* = Caspase
+BID* = !Apoptosis | !MCL1
+CREB* = IFNG
+CTLA4* = TCR
+Caspase* = !Apoptosis & DISC & !IAP
+Ceramide* = !Apoptosis & Fas
+DISC* = !Apoptosis & Ceramide | Ceramide & !FLIP | Fas
+FLIP* = !Apoptosis
+Fas* = !Apoptosis
+GPCR* = !Apoptosis
+IAP* = !BID
+IFNG* = !Apoptosis & !SMAD | !P2
+MCL1* = !Apoptosis | !DISC
+P2* = !Apoptosis | IFNG
+S1P* = !Apoptosis | !Ceramide
+SMAD* = !Apoptosis
+TCR* = !Apoptosis
+sFas* = !Apoptosis
