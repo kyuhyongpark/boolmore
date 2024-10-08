@@ -4,6 +4,7 @@ import pystablemotifs as sm
 import boolmore.config
 import datetime
 import numpy as np
+import os
 
 from boolmore.model import Model, mix_models
 from boolmore.experiment import import_exps
@@ -14,11 +15,12 @@ from joblib import Parallel, delayed
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
 
-JSON = "boolmore/case_study/data/ABA_2017.json"
-START_MODEL = "boolmore/case_study/baseline_models/ABA_GA_base_A.txt"
+JSON = None
+START_MODEL = "boolmore/benchmarks/results/Cortical Area Development_start_1.txt"
 RUN_NAME = "test"
-DATA = None
-BASE = None
+DATA = "boolmore/benchmarks/results/Cortical Area Development_data_1.tsv"
+BASE = "boolmore/benchmarks/benchmark_models/Cortical Area Development.txt"
+
 
 def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
            data_file:str|None=None, base_file:str|None=None, parameter_dict:dict|None=None,
@@ -77,11 +79,11 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         
         parameters = {"starting_id" : 1,
                       "starting_gen" : 1,
-                      "total_iterations" : 100,
-                      "per_iteration" : 100,
-                      "keep" : 20,
+                      "total_iterations" : 10,
+                      "per_iteration" : 10,
+                      "keep" : 2,
                       "mix" : 0,
-                      "prob" : 0.01,
+                      "prob" : 0.1,
                       "edge_prob" : 0.5,
                       "export_top" : 0,
                       "export_threshold" : 0.0}
@@ -124,26 +126,26 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
     boolmore.config.id = STARTING_ID
 
-    print("Loading experimental data . . .")
+    print(f"Loading experimental data from {os.path.abspath(DATA)}")
     exps, fixes_list = import_exps(DATA)
     print("Experimental data loaded.\n")
 
-    print("Loading base model . . .")
+    print(f"Loading base model from {os.path.abspath(BASE)}")
     base_primes = sm.format.import_primes(BASE)
     base = Model.import_model(base_primes, constraints=CONSTRAINTS,
                               edge_pool=EDGE_POOL, default_sources=DEFAULT_SOURCES)
     print("Base model loaded.")
-    start_time = datetime.datetime.now()
+    start_single = datetime.datetime.now()
     base.get_predictions(fixes_list)
     base.get_model_score(exps)
-    end_time = datetime.datetime.now()
+    end_single = datetime.datetime.now()
     base.info()
     print(f"""
-          Elapsed time for evaluation: {end_time-start_time}
-          Estimated total run time: {(end_time-start_time)*TOTAL_ITERATIONS*PER_ITERATION}""")
+          Elapsed time for single evaluation: {end_single-start_single}
+          Estimated total run time: {(end_single-start_single)*TOTAL_ITERATIONS*PER_ITERATION}""")
     print()
 
-    print("Loading starting model . . .")
+    print(f"Loading starting model from {os.path.abspath(START_MODEL)}")
     primes = sm.format.import_primes(START_MODEL)
     start = Model.import_model(primes, boolmore.config.id, STARTING_GEN, base)
     print("Starting model loaded.")
@@ -155,7 +157,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
     fp = open(LOG, "w")
 
-    fp.write(f"# {DATA=}\n")
+    fp.write(f"# DATA: {os.path.abspath(DATA)}\n")
     fp.write(f"# {DEFAULT_SOURCES=}\n")
     fp.write(f"# {CONSTRAINTS=}\n")
     fp.write(f"# {EDGE_POOL=}\n\n")
@@ -171,14 +173,14 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     fp.write(f"# {core=}\n")
     fp.write(f"# {seed=}\n\n")
 
-    fp.write(f"# {BASE=}\n")
+    fp.write(f"# BASE: {os.path.abspath(BASE)}\n")
     fp.write(f"# extra edges: {base.extra_edges}\n")
     fp.write(f"# score: {base.score}\n")
     with open(BASE, "r") as base_text:
         for line in base_text:
             if not line.startswith("#") and not line.isspace():
                 fp.write("# " + line)
-    fp.write(f"\n# {START_MODEL=}\n")
+    fp.write(f"\n\n# START MODEL: {os.path.abspath(START_MODEL)}\n")
     if BASE != START_MODEL:
         fp.write(f"# score: {start.score}\n")
         fp.write(f"# extra edges: {start.extra_edges}\n")
@@ -196,10 +198,15 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
                          stop_if_max=stop_if_max, core=core)
     end_time = datetime.datetime.now()
 
-    fp.open(LOG, "a")
-    fp.write("\niteration\ttop score\textra edges\tcomplexity\n")
-    for sth in log:
-        fp.write("\t".join([str(x) for x in sth])+"\n")
+    fp = open(LOG, "a")
+
+    fp.write(f"\n# {start_time=}\n")
+    fp.write(f"# {end_time=}\n")
+    fp.write(f"# elapsed time: {end_time-start_time}\n\n")
+
+    fp.write("iteration,top score,extra edges,complexity\n")
+    for iter in log:
+        fp.write(f"{iter[0]},{iter[1]},\"{iter[2]}\",{iter[3]}\n")
 
     mutated = set()
     for node in start.primes:
@@ -210,13 +217,12 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
                 mutated.add(node)
     mutated = sorted(list(mutated))
 
-    print()
-    print(f"""\tThe algorithm ran for {log[-1][0]} iterations,
+    print(f"""
+        The algorithm ran for {log[-1][0]} iterations,
         generating {boolmore.config.id-STARTING_ID} models.
         Mutated {len(mutated)} functions, 
         and increased score from {round(start.score,2)} to {round(final.score,2)}.\n
-        Total elapsed time: {end_time-start_time}
-        Time per model: {(end_time-start_time)/(boolmore.config.id-STARTING_ID)}""")
+        Total elapsed time: {end_time-start_time}""")
     print()
 
     final.export()
@@ -230,8 +236,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     return base, start, final
 
 def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
-            total_iter:int=100, per_iter:int=100, keep:int=20, mix:int=0,
-            prob:float|list[float]=0.01, edge_prob:float=0.5,
+            total_iter:int, per_iter:int, keep:int, mix:int,
+            prob:float|list[float], edge_prob:float=0.5,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
             stop_if_max:bool=True, core:int=2, seed:int|None=None,
             ) -> tuple[Model, list]:
@@ -261,13 +267,13 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
             ((node A, value1), (node B, value2), ...)
 
     total_iter : int
-        total number of iterations, default 100
+        total number of iterations
     per_iter : int
-        new models generated per iteration, default 100
+        new models generated per iteration
     keep : int
-        models to carry over tot he next iteration, default 20
+        models to carry over tot he next iteration
     mix : int
-        number of models to mix from the keep, default 0
+        number of models to mix from the keep
 
     prob : float | list[float]
         probability for each digit in the rule representation to mutate, default 0.01
@@ -353,7 +359,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
 
     final = iteration[0]
 
-    print(f"iteration 1, generated {boolmore.config.id-start.id}, top score {round(final.score,2)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
+    print(f"iteration 1, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
 
     if not final.check_constraint():
         print("ERROR: model does not follow constraints")
@@ -420,7 +426,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     
         final = new_iteration[0]
 
-        print(f"iteration {i}, generated {boolmore.config.id-start.id}, top score {round(final.score,2)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
+        print(f"iteration {i}, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
 
         if not final.check_constraint():
             print("ERROR: model does not follow constraints")
