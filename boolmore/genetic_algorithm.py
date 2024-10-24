@@ -36,6 +36,9 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     ----------
     json_file : str | None
         location of the json file containing parameters
+    
+    Optional
+    --------
     start_model : str | None
         location of the txt file of the starting model
         if None, base_model is the starting model
@@ -43,13 +46,12 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         models are exported as (run_name)_id_gen.txt
         log is exported as (run_name)_log.txt
         if None, takes the start_model name
-    
-    Optional
-    --------
     data_file : str | None
-        location of the data file if json file is not given
+        location of the data file that overrides the json file.
+        Must be given if json_file is not given.
     base_file : str | None
-        location of the base file if json file is not given
+        location of the base file that overrides the json file.
+        Must be given if json_file is not given.
     parameter_dict : dict | None
         If given, overwrites any parameters.
 
@@ -61,6 +63,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         random seed for reproducibility
 
     """
+    # load json file if given
     if json_file != None:
         f = open(json_file)
         json_dict = json.load(f)
@@ -88,13 +91,36 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
                       "export_top" : 0,
                       "export_threshold" : 0.0}
 
-        DATA = data_file
-        BASE = base_file
+        # all source nodes being 0 is considered the default
         DEFAULT_SOURCES = {}
+        # no constraint is assumed
         CONSTRAINTS = {"fixed": [], "regulate": {}, "necessary" : {},
                             "group": {}, "possible_constant": []}
+        # no extra edge is assumed
         EDGE_POOL = []
 
+    # if data file is given, overwrite DATA
+    if data_file != None:
+        DATA = data_file
+
+    # if base file is given, overwrite BASE
+    if base_file != None:
+        BASE = base_file
+
+    # if starting model is not given, take the base as the start
+    if start_model != None:
+        START_MODEL = start_model
+    else:
+        START_MODEL = BASE
+
+    if run_name == None:
+        run_name = START_MODEL.split("/")[-1][:-4]
+    LOG = run_name + "_log.txt"
+
+    if seed != None:
+        random.seed(seed)
+
+    # if parameter_dict is given, overwrite parameters
     if parameter_dict != None:
         parameters.update(parameter_dict)
 
@@ -109,20 +135,6 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     EDGE_PROB = parameters["edge_prob"]
     EXPORT_TOP = parameters["export_top"]
     EXPORT_THRESHOLD = parameters["export_threshold"]
-
-
-    # if starting model is not given, take the base as the start
-    if start_model != None:
-        START_MODEL = start_model
-    else:
-        START_MODEL = BASE
-
-    if run_name == None:
-        run_name = START_MODEL.split("/")[-1][:-4]
-    LOG = run_name + "_log.txt"
-
-    if seed != None:
-        random.seed(seed)
 
     boolmore.config.id = STARTING_ID
 
@@ -275,10 +287,9 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     mix : int
         number of models to mix from the keep
 
-    prob : float | list[float]
-        probability for each digit in the rule representation to mutate, default 0.01
-        if given a list, each probability is applied for each iteration
-        last item is used for the remaining iterations if the length is shorter.
+    prob : float | dict[int, float]
+        probability for each digit in the rule representation to mutate.
+        if given a dict, each value is used as probability starting from each key iteration.
     edge_prob : float
         probability to add/delete extra edge, default 0.5
  
@@ -311,11 +322,19 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
 
     if type(prob) == float:
         prob_list = [prob] * total_iter
-    elif len(prob) < total_iter:
-        prob_list = prob
-        prob_list.extend([prob[-1]] * (total_iter-len(prob)))
-    else:
-        prob_list = prob
+    
+    # if prob is a dictionary, make a list of probabilities
+    # with the same length as total_iter
+    elif type(prob) == dict:
+        # ensure that 1 is in the key of the dictionary
+        assert 1 in prob.keys(), "1 must be in the keys of the dictionary"
+
+        prob_list = []
+        for i in range(1, total_iter+1):
+            if i in prob:
+                prob_list.append(prob[i])
+            else:
+                prob_list.append(prob_list[-1])
 
     if seed != None:
         random.seed(seed)
