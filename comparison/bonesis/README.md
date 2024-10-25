@@ -1,13 +1,13 @@
 ## Description
 
-1. constraints and extra edges are implemented in aeon file
-- "fixed" constraint is implemented by specifying the function in aeon file.
-- "regulatory" constraint is implemented by specifying the regulation as "->" or "-|" in the aeon file.
+1. Constraints and extra edges are implemented in aeon file
+    - "fixed" constraint is implemented by specifying the function in aeon file.
+    - "regulatory" constraint is implemented by specifying the regulation as "->" or "-|" in the aeon file.  
 Other regulations are written as "->?" or "-|?", which allows them to be non-functional.
-- "necessary" constraint cannot be implemented fully. Instead, they are implemented as "regulatory".
-- "group" constraint is implemented by creating new nodes with fixed inputs, and making this node regulate the original target.
+    - "necessary" constraint cannot be implemented fully. Instead, they are implemented as "regulatory".
+    - "group" constraint is implemented by creating new nodes with fixed inputs, and making this node regulate the original target.  
 For example, PC and PLDalpha regulating PC in a group is implemented by creating a node PLDalpha_complex that has a rule `PC & PLDalpha` which regulates PA.
-- Extra edges are added into the aeon file from the beginning.
+    - Extra edges are added into the aeon file from the beginning.
 
 2. Experimental results categorized as "OFF/Some", "Some", and "Some/ON" are ignored.
 This is because there is no way in bonesis to specify that a certain node must oscillate or be bistable.
@@ -16,12 +16,12 @@ This is because there is no way in bonesis to specify that a certain node must o
 It is implemented by a constraint that a trap space that satisfy the experimental result exists, and that all fixed points, if exist, must satisfy the experimental result.
 For example, say we have a result Closure "ON" when ABA=1.
 We create a data dictionary {"Closure_ON" : {"Closure: 1}}, and run following script:
-```
-with bo.mutant({"ABA":1}):
-    bo.fixed(bo.obs("Closure_ON"))
-    bo.all_fixpoints(bo.obs("Closure_ON"))
-```
-This ensures that when ABA=1, the models have a trap space with Closure=1, and all of their fixed points satisfy Closure=1.
+    ```
+    with bo.mutant({"ABA":1}):
+        bo.fixed(bo.obs("Closure_ON"))
+        bo.all_fixpoints(bo.obs("Closure_ON"))
+    ```
+    This ensures that when ABA=1, the models have a trap space with Closure=1, and all of their fixed points satisfy Closure=1.
 However, note that some models may have trap space with Closure=0 when ABA=1, as this is not forbidden.
 
 
