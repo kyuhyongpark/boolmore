@@ -1,33 +1,33 @@
 ## Description
 
-1. Constraints and extra edges are implemented in aeon file
-    - "fixed" constraint is implemented by specifying the function in aeon file.
-    - "regulatory" constraint is implemented by specifying the regulation as "->" or "-|" in the aeon file.  
+1. The constraints and extra edges are implemented in the aeon file
+    -  The "fixed" constraint is implemented by specifying the function the in aeon file.
+    - The "regulatory" constraint is implemented by specifying the regulation as "->" or "-|" in the aeon file.  
 Other regulations are written as "->?" or "-|?", which allows them to be non-functional.
-    - "necessary" constraint cannot be implemented fully. Instead, they are implemented as "regulatory".
-    - "group" constraint is implemented by creating new nodes with fixed inputs, and making this node regulate the original target.  
-For example, PC and PLDalpha regulating PC in a group is implemented by creating a node PLDalpha_complex that has a rule `PC & PLDalpha` which regulates PA.
-    - Extra edges are added into the aeon file from the beginning.
+    - The "necessary" constraint cannot be implemented fully. Instead, it is implemented as "regulatory".
+    - The "group" constraint is implemented by creating new nodes with fixed inputs, and making this node regulate the original target.  
+For example, the fact that PC and PLDalpha regulate PC as a group is implemented by creating a node PLDalpha_complex that has the function `PC & PLDalpha`, which regulates PA.
+    - The extra edges are added into the aeon file from the beginning.
 
-2. Experimental results categorized as "OFF/Some", "Some", and "Some/ON" are ignored.
+2. The experimental results categorized as "OFF/Some", "Some", and "Some/ON" are ignored.
 This is because there is no way in bonesis to specify that a certain node must oscillate or be bistable.
 
-3. Experimental results categorized as "OFF" or "ON" are implemented in the best possible way.
-It is implemented by a constraint that a trap space that satisfy the experimental result exists, and that all fixed points, if exist, must satisfy the experimental result.
-For example, say we have a result Closure "ON" when ABA=1.
-We create a data dictionary {"Closure_ON" : {"Closure: 1}}, and run following script:
+3. The experimental results categorized as "OFF" or "ON" are implemented in the closest possible way.
+Each experimental result is implemented by two constraints (i) that a trap space that satisfies the experimental result exists, and (ii) that all fixed points, if they exist, must satisfy the experimental result.
+For example, consider the result "Closure = ON" when ABA=1.
+We create a data dictionary {"Closure_ON" : {"Closure: 1}}, and run the following script:
     ```
     with bo.mutant({"ABA":1}):
         bo.fixed(bo.obs("Closure_ON"))
         bo.all_fixpoints(bo.obs("Closure_ON"))
     ```
     This ensures that when ABA=1, the models have a trap space with Closure=1, and all of their fixed points satisfy Closure=1.
-However, note that some models may have trap space with Closure=0 when ABA=1, as this is not forbidden.
+However, note that some models may have a trap space with Closure=0 when ABA=1, as this is not forbidden.
 
 
 ## Scripts
 
-Install following packages to run the scripts.
+Install the following packages to run the scripts.
 
 ```
 pip install bonesis
@@ -96,16 +96,20 @@ Furthermore, it illustrates how the experimental input used in boolmore is conve
 
 ### ABA case study
 
-Run `ABA_A.ipynb` or `ABA_B.ipynb` to reproduce results of bonesis on ABA case study.
+Run `ABA_A.ipynb` or `ABA_B.ipynb` to reproduce the results of bonesis on the ABA case study.
 
-Extra experimental results are skipped, as specfied in skip_list by their IDs.
-Even with just the experimental results categorized as "OFF" or "ON", there is no Boolean model that can satisfy them all.
-This is shown by running `bo.is_satisfiable()`.
-Therefore, we need to ignore more experimental results. We took the baseline model or the GA generated model, and skipped all experimental results that each cannot satisfy.
-This ensures that the experiments are satisfiable, as we know that there exist at least one model that satisfy them.
+The skip_list contains the IDs of experimental results that are skipped (not given as input to bonesis).
 
-bonesis could not generate any model within 24 hours in 4 settings.
+Even when considering just the experimental results categorized as "OFF" or "ON", running `bo.is_satisfiable()` indicates that there is no Boolean model that can satisfy them all.
+
+Therefore, we need to ignore more experimental results. 
+
+We took the baseline model or a GA-generated model, and in each case skipped all experimental results that the model does not reproduce.
+This ensures that the experiments are satisfiable, as we know that there exists at least one model that satisfies them.
+We considered 4 settings:
 - ABA_A with 291 experiments satisfied in ABA_GA1_A
 - ABA_A with 172 experiments satisfied in ABA_base_A
 - ABA_B with 311 experiments satisfied in ABA_GA1_B
 - ABA_B with 177 experiments satisfied in ABA_base_B
+
+We found that bonesis could not generate any model within 24 hours in any of these cases.
