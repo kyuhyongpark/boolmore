@@ -1,0 +1,5 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	T=1		A	ON
+2	1.0	T=1		B	ON
+3	1.0	T=1		C	ON
+4	1.0	T=1	C KO	B	OFF
