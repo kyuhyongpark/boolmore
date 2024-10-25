@@ -1,7 +1,7 @@
 ## Description
 
 1. The constraints and extra edges are implemented in the aeon file
-    -  The "fixed" constraint is implemented by specifying the function the in aeon file.
+    -  The "fixed" constraint is implemented by specifying the function in the aeon file.
     - The "regulatory" constraint is implemented by specifying the regulation as "->" or "-|" in the aeon file.  
 Other regulations are written as "->?" or "-|?", which allows them to be non-functional.
     - The "necessary" constraint cannot be implemented fully. Instead, it is implemented as "regulatory".
@@ -13,7 +13,7 @@ For example, the fact that PC and PLDalpha regulate PC as a group is implemented
 This is because there is no way in bonesis to specify that a certain node must oscillate or be bistable.
 
 3. The experimental results categorized as "OFF" or "ON" are implemented in the closest possible way.
-Each experimental result is implemented by two constraints (i) that a trap space that satisfies the experimental result exists, and (ii) that all fixed points, if they exist, must satisfy the experimental result.
+Each experimental result is implemented by two constraints, (i) that a trap space that satisfies the experimental result exists, and (ii) that all fixed points, if they exist, must satisfy the experimental result.
 For example, consider the result "Closure = ON" when ABA=1.
 We create a data dictionary {"Closure_ON" : {"Closure: 1}}, and run the following script:
     ```
