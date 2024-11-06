@@ -42,7 +42,7 @@ pip install git+https://github.com/kyuhyongpark/boolmore
        
 4. in `CAD_config.json`, modify paths for data and base
 
-   ```
+   ```json
    "data": "your_path/CAD.txt"
    
    "base": "your_path/CAD_data.tsv"
@@ -50,7 +50,7 @@ pip install git+https://github.com/kyuhyongpark/boolmore
 
 5. run python script such as
 
-   ```
+   ```python
    import boolmore.genetic_algorithm
 
    boolmore.genetic_algorithm.run_ga("your_path/CAD_config.json", "your_path/CAD_start.txt")
@@ -90,7 +90,7 @@ A* = A & (!B | C)
 ### 3. json file
 For example, see case_study/data/ABA_2017.json
 
-```
+```json
 {
 "parameters" : {
     "starting_id": 1,           

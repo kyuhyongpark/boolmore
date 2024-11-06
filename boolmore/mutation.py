@@ -1,4 +1,5 @@
 import random
+
 import boolmore.conversions as conv
 import boolmore.constraint as cons
 

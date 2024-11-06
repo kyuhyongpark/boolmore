@@ -1,8 +1,9 @@
 from __future__ import annotations
-
 import random
 import os
+
 import pyboolnet.trap_spaces
+
 import boolmore.mutation as m
 import boolmore.conversions as conv
 import boolmore.constraint as cons

@@ -1,6 +1,8 @@
 import random
 import os
+
 from pyboolnet.interaction_graphs import primes2igraph
+
 from boolmore.model import Model
 
 
