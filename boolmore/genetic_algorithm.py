@@ -1,26 +1,20 @@
-import json
-import random
-import pystablemotifs as sm
-import boolmore.config
 import datetime
-import numpy as np
+import json
 import os
+import random
 
-from boolmore.model import Model, mix_models
-from boolmore.experiment import import_exps
-from boolmore.conversions import prime2bnet
 from joblib import Parallel, delayed
+import numpy as np
+from pyboolnet.external.bnet2primes import bnet_file2primes
+
+import boolmore.config
+from boolmore.conversions import prime2bnet
+from boolmore.experiment import import_exps
+from boolmore.model import Model, mix_models
 
 
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
-
-JSON = None
-START_MODEL = "boolmore/benchmarks/results/Cortical Area Development_start_1.txt"
-RUN_NAME = "test"
-DATA = "boolmore/benchmarks/results/Cortical Area Development_data_1.tsv"
-BASE = "boolmore/benchmarks/benchmark_models/Cortical Area Development.txt"
-
 
 def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
            data_file:str|None=None, base_file:str|None=None, parameter_dict:dict|None=None,
@@ -143,7 +137,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     print("Experimental data loaded.\n")
 
     print(f"Loading base model from {os.path.abspath(BASE)}")
-    base_primes = sm.format.import_primes(BASE)
+    base_primes = bnet_file2primes(BASE)
     base = Model.import_model(base_primes, constraints=CONSTRAINTS,
                               edge_pool=EDGE_POOL, default_sources=DEFAULT_SOURCES)
     print("Base model loaded.")
@@ -158,7 +152,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     print()
 
     print(f"Loading starting model from {os.path.abspath(START_MODEL)}")
-    primes = sm.format.import_primes(START_MODEL)
+    primes = bnet_file2primes(START_MODEL)
     start = Model.import_model(primes, boolmore.config.id, STARTING_GEN, base)
     print("Starting model loaded.")
     start.name = run_name
@@ -241,6 +235,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     final.info()
     print()
 
+    print("-----modified functions-----")
     for node in mutated:
         print("start:" + prime2bnet(node, start.primes[node]))
         print("final:" + prime2bnet(node, final.primes[node]))
@@ -472,5 +467,17 @@ def parallel_pred_and_score(model, fixes_list, exps):
 
     return model.id, model.predictions, model.score
 
-if __name__=="__main__":
-    run_ga(JSON, START_MODEL, RUN_NAME, DATA, BASE)
+if __name__ == "__main__":
+
+    JSON = None
+    START_MODEL = "benchmarks/results/Cortical Area Development_start_1.bnet"
+    RUN_NAME = "test"
+    DATA = "benchmarks/results/Cortical Area Development_data_1.tsv"
+    BASE = "benchmarks/benchmark_models/Cortical Area Development.bnet"
+
+    base, start, final = run_ga(JSON, START_MODEL, RUN_NAME, DATA, BASE)
+
+    print("\n-----comparing all functions-----")
+    for node in base.primes:
+        print("base:" + prime2bnet(node, base.primes[node])) # type: ignore
+        print("final:" + prime2bnet(node, final.primes[node])) # type: ignore

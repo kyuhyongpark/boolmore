@@ -1,5 +1,4 @@
 import itertools as it
-
 from collections.abc import Iterable
 
 
@@ -7,11 +6,6 @@ FixesType = tuple[tuple[str, int],...]
 ExpType = tuple[int, float, FixesType, str, str]
 PredictType = dict[FixesType, dict[str, float]]
 AgreeType = dict[str, dict[FixesType, tuple[int, float, str, float, float]]]
-
-
-DATA = "boolmore/case_study/data/data_20230925.tsv"
-MODEL = "boolmore/case_study/baseline_models/ABA_GA_base_A.txt"
-NAME = "test"
 
 
 def line(input:float, start:tuple[float, float], end:tuple[float, float]) -> float:
@@ -267,30 +261,36 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
             
     # print("Total ", score, "/", model_max_score)
     if report:
-        fp.write('total\t\t\t\t\t\t\t' + str(score) + '\n') # type: ignore
-        fp.write('max\t\t\t\t\t\t\t' + str(model_max_score) + '\n') # type: ignore
-        fp.write('\t\t\t\t\t\t\t' + str(score/model_max_score*100) + '%\n') # type: ignore
+        fp.write('total\t' + str(score) + '\n') # type: ignore
+        fp.write('max\t' + str(model_max_score) + '\n') # type: ignore
+        fp.write('per\t' + str(score/model_max_score*100) + '%\n') # type: ignore
 
     return score
 
 
 if __name__=="__main__":
-    import pystablemotifs as sm
+    from pyboolnet.external.bnet2primes import bnet_file2primes
 
     from boolmore.experiment import import_exps
     from boolmore.model import Model
 
+    DATA = "boolmore/comparison/gitsbe/ABA_A_gitsbe.tsv"
+    # MODEL = "boolmore/comparison/gitsbe/ABA_A_20241105_214621/models/ABA_A_network_run_0__G399_M138.bnet"
+    MODEL = "boolmore/comparison/gitsbe/20241014130450_9902_gen56.bnet"
+    # MODEL = "boolmore/comparison/gitsbe/ABA_GA1_A.bnet"
+    NAME = None
+
     if NAME == None:
-        NAME = MODEL.split("/")[-1][:-4]+'_score.tsv'
+        NAME = MODEL.split("/")[-1][:-4]
 
     print("Loading experimental data . . .")
     exps, pert = import_exps(DATA)
     print("Experimental data loaded.\n")
 
     print("Loading model . . .")
-    primes = sm.format.import_primes(MODEL)
+    primes = bnet_file2primes(MODEL)
     n1 = Model.import_model(primes)
     print("Model loaded.")
     n1.get_predictions(pert)
-    n1.get_model_score(exps, report=True, file=NAME+".tsv")
+    n1.get_model_score(exps, report=True, file=NAME+'_score.tsv')
     n1.info()

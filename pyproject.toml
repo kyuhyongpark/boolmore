@@ -9,8 +9,9 @@ version = "0.1.1"
 description = "Python package for refining Boolean models"
 license = { file = "LISENSE" }
 requires-python = ">=3.11"
-dependencies = ["pyboolnet @ git+https://github.com/hklarner/pyboolnet@3.0.11",
-                "pystablemotifs"]
+dependencies = ["pyboolnet @ git+https://github.com/hklarner/pyboolnet",
+                "joblib",
+                "ipykernel"]
 
 [tool.setuptools]
 packages = ["boolmore"]
