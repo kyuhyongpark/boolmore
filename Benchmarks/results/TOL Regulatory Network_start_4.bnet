@@ -1,0 +1,32 @@
+# id: 74541
+# generation: 1
+# extra edges: []
+# score: 60.0 / 192.0
+# following constraints: True
+# complexity: 84
+
+targets,	factors
+CAA,	CAA
+CellDens,	CellDens
+Cold,	Cold
+Crc,	!CellDens
+Glu,	Glu
+HU,	HU
+Heat,	Heat
+IHF,	CellDens
+Meta,	!Crc | RpoD & RpoS & m_xyl | RpoH | Upper | XylS | XylSh | m_xyl & number_3MBz
+Meta2,	!Crc & RpoD | !Crc & RpoH | !Crc & XylSh | !Crc & m_xyl | !ProX | RpoD & RpoH | RpoD & Upper | RpoD & XylSh | RpoD & m_xyl | RpoH & Upper | RpoH & XylSh | RpoH & m_xyl | RpoS | Upper & m_xyl | XylS | XylSh & m_xyl | number_3MBz
+PprA,	Cold
+ProX,	!CellDens | Glu
+PtsN,	!CellDens & Glu
+RpoD,	RpoD
+RpoH,	Heat
+RpoN,	RpoN
+RpoS,	CellDens
+TurA,	Cold
+Upper,	!Crc | IHF | !PprA & !PtsN & RpoN | !PprA & RpoN & XylR | !PtsN & XylR | !TurA | m_xyl
+XylR,	!Crc & RpoD
+XylS,	RpoD
+XylSh,	!Crc | HU & !PtsN | HU & XylR | !PtsN & XylR | RpoN | m_xyl
+m_xyl,	m_xyl
+number_3MBz,	number_3MBz

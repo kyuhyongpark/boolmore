@@ -42,7 +42,7 @@ pip install git+https://github.com/kyuhyongpark/boolmore
        
 4. in `CAD_config.json`, modify paths for data and base
 
-   ```
+   ```json
    "data": "your_path/CAD.txt"
    
    "base": "your_path/CAD_data.tsv"
@@ -50,7 +50,7 @@ pip install git+https://github.com/kyuhyongpark/boolmore
 
 5. run python script such as
 
-   ```
+   ```python
    import boolmore.genetic_algorithm
 
    boolmore.genetic_algorithm.run_ga("your_path/CAD_config.json", "your_path/CAD_start.txt")
@@ -70,7 +70,7 @@ Example
 
 - ID : id of the experiment for easy reference  
 - Score : A model that agrees with this experiment will get this score.  
-- Source : Values of the source nodes. For example, source1=0, source2=1. *Note that the values of all source nodes must be specified for every experiment.*  
+- Source : Values of the source nodes. For example, source1=0, source2=1. *Note that all source nodes that have a default value (see parameters), must have their values specified for every experiment.*  
 - Perturbation : Any known interventions. For example, node1 KO, node2 CA, node3 KO  
 - Observed node : the observed node  
 - Categorization : one of OFF, OFF/Some, Some, Some/ON, ON  
@@ -90,7 +90,7 @@ A* = A & (!B | C)
 ### 3. json file
 For example, see case_study/data/ABA_2017.json
 
-```
+```json
 {
 "parameters" : {
     "starting_id": 1,           
@@ -99,7 +99,7 @@ For example, see case_study/data/ABA_2017.json
     "per_iteration": 100,
     "keep": 20,
     "prob": 0.01,
-    "edge_prob": 0.5
+    "edge_prob": 0.5,
     "export_top": 1,
     "export_threshold": 430,
     },

@@ -1,0 +1,24 @@
+# id: 188141
+# generation: 1
+# extra edges: []
+# score: 59.0 / 128.0
+# following constraints: True
+# complexity: 18
+
+targets,	factors
+Adenylate_cyclase,	Dopamine_Receptor_1 | !Dopamine_Receptor_2
+COMT,	Dopamine
+Calcineurin,	Calcium
+Calcium,	Glutamate_Receptor & Phospholipase_C
+DARPP32,	Protein_Kinase_A
+Dopamine,	Tryosine_hydroxylase
+Dopamine_Receptor_1,	Dopamine
+Dopamine_Receptor_2,	Dopamine
+Exocytosis,	Packaging_Proteins
+Glutamate,	Glutamate
+Glutamate_Receptor,	Glutamate
+Packaging_Proteins,	Glutamate_Receptor
+Phospholipase_C,	Dopamine_Receptor_2
+Protein_Kinase_A,	Adenylate_cyclase
+Protein_Phosphatase_1,	!DARPP32
+Tryosine_hydroxylase,	Tryosine_hydroxylase

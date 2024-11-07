@@ -1,0 +1,32 @@
+# id: 17181
+# generation: 1
+# extra edges: []
+# score: 140.0 / 192.0
+# following constraints: True
+# complexity: 55
+
+targets,	factors
+Boi,	Boi
+CK1a,	CK1a
+Ci_act,	!CK1a | !Cos | !Sgg | !Slmb
+Ci_rep,	CK1a & Cos & Pka & Sgg & SuFu | CK1a & Pka & Sgg & Slmb & SuFu
+Cos,	!Smo | !Fu
+Dally,	Ttv
+Disp,	Disp
+Dlp,	Ttv
+Fu,	Smo
+Gprk2,	Gprk2
+Hh,	Boi & Dally | Boi & Lipophorin | Boi & Rasp | Dally & Lipophorin | Dally & Rasp | Disp | Dlp & Lipophorin | Dlp & iHog | Lipophorin & iHog | Shf
+Lipophorin,	Lipophorin
+Pka,	Pka
+Ptc,	!Hh
+Rasp,	Rasp
+Sgg,	Sgg
+Shf,	Shf
+Slmb,	Slmb
+Smo,	Gprk2 & !Ptc
+SuFu,	!Fu
+Targets,	Ci_act
+Tow,	Tow
+Ttv,	Ttv
+iHog,	iHog

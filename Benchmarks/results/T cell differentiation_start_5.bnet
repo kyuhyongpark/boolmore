@@ -1,0 +1,31 @@
+# id: 126601
+# generation: 1
+# extra edges: []
+# score: 94.0 / 184.0
+# following constraints: True
+# complexity: 30
+
+targets,	factors
+GATA3,	GATA3 & STAT6 & !Tbet
+IFNb,	IFNb
+IFNbR,	IFNb
+IFNg,	IRAK & STAT4 | NFAT | Tbet
+IFNgR,	IFNg
+IL10,	GATA3
+IL10R,	IL10
+IL12,	IL12
+IL12R,	IL12
+IL18,	IL18
+IL18R,	IL18
+IL4,	!STAT1
+IL4R,	IL4
+IRAK,	IL18R
+JAK1,	IFNgR
+NFAT,	TCR
+SOCS1,	Tbet
+STAT1,	JAK1
+STAT3,	IL10R
+STAT4,	IL12R
+STAT6,	IL4R
+TCR,	TCR
+Tbet,	!GATA3 | STAT1 | Tbet

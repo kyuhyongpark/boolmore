@@ -1,0 +1,62 @@
+# Pramuditha Waidyarathne et al. (2018) Boolean Calcium Signalling Model Predicts Calcium Role in Acceleration & Stability of Abscisic Acid-Mediated Stomatal Closure
+# Changed node names to correspond with 2017 ABA model
+# added rule for ABA explicitely
+
+# score:  175.79 / 296 (59.4%)
+# complexity: 178
+# default_sources: {'ABA': 0}
+
+targets,	factors
+ABA,	ABA
+SPHK1_2,	ABA | PA
+S1P_PhytoS1P,	SPHK1_2
+GPA1,	S1P_PhytoS1P
+PLDalpha,	GPA1 | NO | Ca2c
+GTG,	ABA & !GPA1
+PA,	PLDalpha | (PLC & PtdIns4_5P2)
+RCN1,	PA
+CuAO,	ABA
+PtdInsP4,	ABA | PA
+PtdInsP3,	ABA
+PtdIns4_5P2,	PtdInsP4
+PLC,	ABA & Ca2c
+InsP3,	PtdIns4_5P2 & PLC
+InsP6,	InsP3 & !MRP5
+RCARs,	ABA
+pHc,	OST1 & !H_ATPase
+PP2C,	(!RCARs & !PA & !ROS & !ATGPX3 & (pHc | ROP11)) | (!RCARs & !PA & !ROS & !ATGPX3 & ROP11) | !RCARs | (!RCARs & ABH1)
+ROP11,	ERA1
+OST1,	!PP2C
+RBOH,	(OST1 | (CDPK & Ca2c)) & RCN1 & PA & (PtdInsP3 | PtdInsP4) & pHc
+ROS,	((CuAO | RBOH) & !ATGPX3) | (CuAO & RBOH)
+ATGPX3,	ROS
+NO,	ROS & CaM
+cADPR,	cGMP
+cGMP,	NO
+Ica,	(!ABH1 | !ERA1 | MRP5) & ROS & !Depolarization
+SLAC1,	(OST1 | (CDPK & !PP2C)) & MPK9_12 & (!ERA1 | MRP5 | !ABH1) & !Malate
+MPK9_12,	(ROS | (CDPK & Ca2c)) & !PP2C 
+CDPK,	Ca2c & !PP2C
+Ca2c,	(SACC | cADPR | Ica | InsP6) & !Ca2_ATPase & !CAX
+CBL,	Ca2c
+KOUT,	(!NO | ROS | pHc) & Depolarization
+Ca2_ATPase,	CaM
+CaM,	Ca2c
+QUAC1,	OST1 & Depolarization
+CAX,	CIPK
+SCAB1,	ABA | InsP6
+SACC,	Actin_Reorganization
+CIPK,	CBL & !PP2C
+KEV,	Ca2c & !pHc
+PP1,	!PA
+H_ATPase,	PP1 & !Ca2c & !pHc
+ABPS,	Ca2c & !PtdInsP3 & !PtdInsP4
+Actin_Reorganization,	ARP_Complex & SCAB1 & !AtRAC1 & (ROS | (Ca2c & ABPS))
+PEPC,	!Malate & !ABA
+Malate,	PEPC & !QUAC1 & !ATALMT6
+AtRAC1,	PP2C
+ARP_Complex,	PtdIns4_5P2 | ROS
+Depolarization,	Ca2c | KEV | !H_ATPase | SLAC1 | QUAC1
+ATALMT6,	Ca2c
+KAT1,	!CDPK & !OST1 & !Depolarization
+Closure,	KOUT & Actin_Reorganization & !Malate & SLAC1

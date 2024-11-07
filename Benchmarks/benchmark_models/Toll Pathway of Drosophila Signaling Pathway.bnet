@@ -1,0 +1,12 @@
+targets,	factors
+Spz,	!Nec
+MyD88,	Toll
+Tube,	MyD88
+Pelle,	Tube
+Cactus,	!(Pelle & Slmb)
+Toll,	Spz
+Targets,	!(!Dorsal & !Dif)
+Dorsal,	!Cactus
+Dif,	!Cactus
+Nec,	Nec
+Slmb,	Slmb

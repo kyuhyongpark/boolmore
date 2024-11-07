@@ -1,0 +1,120 @@
+# constant nodes from the original paper: abin2=ck2=ikka=ikkb=mtorc2=pdk1=1, irakm=pten=sil1r12=smyd88=socs1=socs3=0
+targets,	factors
+ikkaa,	ikka
+pro_il1b,	nfkb & dum_cebp_pro_il1b & cjun & ck2
+hnf4a,	nuc_p38 & ros
+il1rc,	il1r1 & !il1r2 & !sil1r12
+mek6,	!(!tak1_tab & !mekk3)
+nuc_p38,	dum_mek3_or_4_or_6_nuc_p38 & !mkp1
+cebpd,	nfkb & jnk & ck2
+tdum_il1r2_il1rc,	il1r2
+ikka_a,	ikkaa_nemo & mekk3
+p50,	p105_degr
+tollip,	il1rc
+irak1,	tollip & myd88 & !irak1c & irak4 & !irakm
+nemo,	!a20
+tdum_cyt_p38_tak1_tab,	cyt_p38
+mk2,	nuc_p38
+ap1,	!(!cfos & !atf2 & !cjun)
+msk1,	!(!nuc_p38 & !erk12)
+irak1_ub,	pellino & trika1
+ros,	!inos & !nfkb
+irak2,	tollip & myd88 & !irak1c & irak4
+akt,	pip3 & pdk1 & mtorc2
+a20,	abin2
+traf6,	irak1
+tdum_tpl2_degr_tp2,	tpl2_degr
+sil1r_ap,	sil1r12
+ikba_degr,	!(!ikkaa & !ikkb_a & !ck2 | !ikkb_a & !nik & !ck2)
+irs1_ps,	!(!erk12 & !ikkb_a & !jnk)
+inos,	!(!hnf4a & !nfkb)
+il1a,	sil1r12
+tak1_tab,	traf6_ub & !cyt_p38 & mekk3 & trika1
+upa,	ap1 & atf2
+hsp27_ps,	mk2
+nalp_infl,	!erk12
+p65,	dum_ikkab_nemo_akt_or_ck2_p65 & !socs1
+cfos,	msk1 & dum_sap1_or_elk_cfos
+il1r1,	!il1ra & dum_il1_r1
+dum_il1_r2,	!(!il1a & !il1b)
+erk12,	mek1 & !mkp1
+myd88,	il1rc
+il1b,	sil1r12
+dum_cebp_cox2,	!(!cebpd & !cebpb)
+ksrp,	!cyt_p38
+ikkb_a,	dum_tak1_tab_or_mekk3_ikkb_a & dum_ikkab_or_ikkbb_nemo_ikkb_a
+p105_degr,	ikkb_a
+dum_tak1_tab_or_mekk3_ikkb_a,	!(!irak1_ub & !mekk3 | !tak1_tab & !mekk3)
+mek1,	tpl2
+atf2,	!(!nuc_p38 & !erk12 & !jnk)
+dum_mek3_or_4_or_6_nuc_p38,	!(!mek6 & !mek3 & !mek4)
+irak1c,	tollip & myd88
+nfkb,	p50 & p65 & !ikba
+ttp,	!mk2
+ikkaa_nemo,	nemo & ikka
+il1ra,	!(!nfkb & !sil1r12 | !dum_cebp_il1ra & !sil1r12)
+tpl2,	!tpl2_degr & !p105 & abin2 & src
+tdum_mkp1_p38_jnk_erk12,	mkp1
+ccl2,	ap1 & nfkb & gsk3 & cjun
+jnk,	!mkp1 & dum_mek4_or_7_jnk
+sap1,	!(!nuc_p38 & !erk12 & !jnk)
+dum_ikkab_nemo_akt_or_ck2_p65,	!(!akt & !ck2 | !ikkab_nemo & !ck2)
+dum_cebp_il1ra,	!(!cebpd & !cebpb)
+dum_irak1_or_2_traf6_ub,	!(!irak1 & !irak2)
+hgf,	upa & pro_hgf
+dum_cebp_pro_il1b,	!(!cebpd & !cebpb)
+pellino,	!(!irak1 & !irak4)
+mkp1,	ap1
+saa,	nfkb & dum_cebp_saa
+cjun_gene,	msk1
+tdum_a20_traf6_ub,	a20
+tpl2_degr,	tpl2
+il8,	ap1 & cfos & !ksrp & nfkb & !ttp
+nc_nfkb_pathway,	ikkaa & nik
+nik,	tak1_tab
+dum_sap1_or_elk_cfos,	!(!sap1 & !elk1)
+traf6_ub,	!a20 & !hsp27_ps & dum_irak1_or_2_traf6_ub & !socs3 & trika1
+gsk3,	!akt
+cyt_p38,	nuc_p38 & mk2
+ikba,	!(ikba_degr & !nfkb | !nfkb & ikba_diss)
+mek3,	!(!tak1_tab & !mekk3)
+p105,	!p105_degr
+ikkab_nemo,	nemo & ikka & ikkb
+dum_mek4_or_7_jnk,	!(!mek7 & !mek4)
+mek7,	!(!tak1_tab & !mekk3)
+tdum_il1ra_ilr12,	il1ra
+mek4,	!(!tak1_tab & !mekk3)
+cox2,	!(!ap1 & !dum_cebp_cox2 & !nfkb & !cjun)
+il1r2,	dum_il1_r2 & !il1ra
+dum_il1_r1,	!(!il1a & !il1b)
+elk1,	!(!nuc_p38 & !erk12 & !jnk)
+lbp,	ap1 & cebpb
+ikkbb_nemo,	nemo & ikkb
+irak4,	myd88 & !smyd88
+pro_hgf,	!(!cebpd & !cebpb)
+pi3k,	!(!il1rc & !myd88)
+il6,	ap1 & !ksrp & nfkb & !ttp & gsk3 & cebpb
+mekk3,	!(!traf6 & !traf6_ub)
+dum_cebp_saa,	!(!cebpd & !cebpb)
+ikba_diss,	ikka_a
+tdum_hsp27_ps_traf6_ub,	hsp27_ps
+cjun,	!(!jnk & !cjun_gene)
+il1b_new,	pro_il1b & nalp_infl
+pip3,	pi3k & !pten
+tdum_irak1c_irak12,	irak1c
+cebpb,	!(!nuc_p38 & !erk12)
+dum_ikkab_or_ikkbb_nemo_ikkb_a,	!(!ikkab_nemo & !ikkbb_nemo)
+pdk1,	1
+socs3,	0
+irakm,	0
+abin2,	1
+ck2,	1
+ikka,	1
+ikkb,	1
+trika1,	trika1
+sil1r12,	0
+mtorc2,	1
+socs1,	0
+smyd88,	0
+src,	src
+pten,	0

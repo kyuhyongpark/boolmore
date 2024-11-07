@@ -1,71 +1,68 @@
+import datetime
 import json
+import os
 import random
-import pystablemotifs as sm
-import boolmore.config
-import time
-import numpy as np
 
-from boolmore.model import Model, mix_models
-from boolmore.experiment import import_exps
-from boolmore.conversions import prime2bnet
 from joblib import Parallel, delayed
+import numpy as np
+from pyboolnet.external.bnet2primes import bnet_file2primes
+
+import boolmore.config
+from boolmore.conversions import prime2bnet
+from boolmore.experiment import import_exps
+from boolmore.model import Model, mix_models
 
 
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
 
-JSON = "boolmore/case_study/data/ABA_2017.json"
-START_MODEL = "boolmore/case_study/baseline_models/ABA_GA_base_A.txt"
-RUN_NAME = "test"
-DATA = None
-BASE = None
-
 def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
-           data_file:str|None=None, base_file:str|None=None, stop_if_max:bool=True, core:int=2,
-           seed:int|None = None):
+           data_file:str|None=None, base_file:str|None=None, parameter_dict:dict|None=None,
+           stop_if_max:bool=True, core:int=2, seed:int|None = None):
     """
     Imports parameters, experiments, base model in the json file.
     Runs genetic algorithm and exports refined models.
     
     Instead of json file, locations of the data and base model can be used.
-    In this case, all parameters are set to default,
-    and constraints or extra edges are inapplicable.
+    In this case, constraints or extra edges are inapplicable.
 
     Parameters
     ----------
-    json_file   - location of the json file containing parameters   :str
-    start_model - location of the txt file of the starting model    :str|None
-                  if None, base_model is the starting model
-    run_name    - models are exported as (run_name)_id_gen.txt      :str|None
-                  log is exported as (run_name)_log.txt
-                  if None, takes the start_model name
+    json_file : str | None
+        location of the json file containing parameters
     
     Optional
     --------
-    data_file   - location of the data file if json file is not given   :str|None
-    base_file   - location of the base file if json file is not given   :str|None
+    start_model : str | None
+        location of the txt file of the starting model
+        if None, base_model is the starting model
+    run_name : str | None
+        models are exported as (run_name)_id_gen.txt
+        log is exported as (run_name)_log.txt
+        if None, takes the start_model name
+    data_file : str | None
+        location of the data file that overrides the json file.
+        Must be given if json_file is not given.
+    base_file : str | None
+        location of the base file that overrides the json file.
+        Must be given if json_file is not given.
+    parameter_dict : dict | None
+        If given, overwrites any parameters.
 
-    stop_if_max - if True, stop when the max score is reached                 :bool
-    core        - if larger than 1, model evaluation is done in parallel      :int
-    seed        - random seed                                                 :int|None
-
+    stop_if_max : bool
+        if True, stop when the max score is reached
+    core : int
+        if larger than 1, model evaluation is done in parallel
+    seed : int | None
+        random seed for reproducibility
 
     """
+    # load json file if given
     if json_file != None:
         f = open(json_file)
         json_dict = json.load(f)
 
-        # take parameters from the json file
-        STARTING_ID = json_dict["parameters"]["starting_id"]
-        STARTING_GEN = json_dict["parameters"]["starting_gen"]
-        TOTAL_ITERATIONS = json_dict["parameters"]["total_iterations"]
-        PER_ITERATION = json_dict["parameters"]["per_iteration"]
-        KEEP = json_dict["parameters"]["keep"]
-        MIX = json_dict["parameters"]["mix"]
-        PROB = json_dict["parameters"]["prob"]
-        EDGE_PROB = json_dict["parameters"]["edge_prob"]
-        EXPORT_TOP = json_dict["parameters"]["export_top"]
-        EXPORT_THRESHOLD = json_dict["parameters"]["export_threshold"]
+        parameters = json_dict["parameters"]
 
         # take model specific data from the json file
         DATA:str = json_dict["data"]
@@ -76,21 +73,32 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
     else:
         assert data_file != None and base_file != None, "either json or the data and base files should be provided"
-        STARTING_ID = 1
-        STARTING_GEN = 1
-        TOTAL_ITERATIONS = 100
-        PER_ITERATION = 100
-        KEEP = 20
-        MIX = 0
-        PROB = 0.01
-        EDGE_PROB = 0.5
-        EXPORT_TOP = 0
-        EXPORT_THRESHOLD = 0.0
+        
+        parameters = {"starting_id" : 1,
+                      "starting_gen" : 1,
+                      "total_iterations" : 10,
+                      "per_iteration" : 10,
+                      "keep" : 2,
+                      "mix" : 0,
+                      "prob" : 0.1,
+                      "edge_prob" : 0.5,
+                      "export_top" : 0,
+                      "export_threshold" : 0.0}
+
+        # all source nodes being 0 is considered the default
         DEFAULT_SOURCES = {}
+        # no constraint is assumed
         CONSTRAINTS = {"fixed": [], "regulate": {}, "necessary" : {},
                             "group": {}, "possible_constant": []}
+        # no extra edge is assumed
         EDGE_POOL = []
+
+    # if data file is given, overwrite DATA
+    if data_file != None:
         DATA = data_file
+
+    # if base file is given, overwrite BASE
+    if base_file != None:
         BASE = base_file
 
     # if starting model is not given, take the base as the start
@@ -100,30 +108,51 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         START_MODEL = BASE
 
     if run_name == None:
-        run_name = START_MODEL.split("/")[-1][:-4]
+        run_name = START_MODEL.split("/")[-1][:-5]
     LOG = run_name + "_log.txt"
 
     if seed != None:
         random.seed(seed)
 
+    # if parameter_dict is given, overwrite parameters
+    if parameter_dict != None:
+        parameters.update(parameter_dict)
+
+    # take parameters
+    STARTING_ID = parameters["starting_id"]
+    STARTING_GEN = parameters["starting_gen"]
+    TOTAL_ITERATIONS = parameters["total_iterations"]
+    PER_ITERATION = parameters["per_iteration"]
+    KEEP = parameters["keep"]
+    MIX = parameters["mix"]
+    PROB = parameters["prob"]
+    EDGE_PROB = parameters["edge_prob"]
+    EXPORT_TOP = parameters["export_top"]
+    EXPORT_THRESHOLD = parameters["export_threshold"]
+
     boolmore.config.id = STARTING_ID
 
-    print("Loading experimental data . . .")
+    print(f"Loading experimental data from {os.path.abspath(DATA)}")
     exps, fixes_list = import_exps(DATA)
     print("Experimental data loaded.\n")
 
-    print("Loading base model . . .")
-    base_primes = sm.format.import_primes(BASE)
+    print(f"Loading base model from {os.path.abspath(BASE)}")
+    base_primes = bnet_file2primes(BASE)
     base = Model.import_model(base_primes, constraints=CONSTRAINTS,
                               edge_pool=EDGE_POOL, default_sources=DEFAULT_SOURCES)
     print("Base model loaded.")
+    start_single = datetime.datetime.now()
     base.get_predictions(fixes_list)
     base.get_model_score(exps)
+    end_single = datetime.datetime.now()
     base.info()
+    print(f"""
+          Elapsed time for single evaluation: {end_single-start_single}
+          Estimated total run time: {(end_single-start_single)*TOTAL_ITERATIONS*PER_ITERATION}""")
     print()
 
-    print("Loading starting model . . .")
-    primes = sm.format.import_primes(START_MODEL)
+    print(f"Loading starting model from {os.path.abspath(START_MODEL)}")
+    primes = bnet_file2primes(START_MODEL)
     start = Model.import_model(primes, boolmore.config.id, STARTING_GEN, base)
     print("Starting model loaded.")
     start.name = run_name
@@ -134,7 +163,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
     fp = open(LOG, "w")
 
-    fp.write(f"# {DATA=}\n")
+    fp.write(f"# DATA: {os.path.abspath(DATA)}\n")
     fp.write(f"# {DEFAULT_SOURCES=}\n")
     fp.write(f"# {CONSTRAINTS=}\n")
     fp.write(f"# {EDGE_POOL=}\n\n")
@@ -147,35 +176,43 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     fp.write(f"# {EDGE_PROB=}\n\n")
 
     fp.write(f"# {stop_if_max=}\n")
-    fp.write(f"# {core=}\n\n")
+    fp.write(f"# {core=}\n")
+    fp.write(f"# {seed=}\n\n")
 
-    fp.write(f"# {BASE=}\n")
+    fp.write(f"# BASE: {os.path.abspath(BASE)}\n")
     fp.write(f"# extra edges: {base.extra_edges}\n")
-    fp.write(f"# score: {base.score}\n")
+    fp.write(f"# score: {base.score} / {base.max_score} ({base.score/base.max_score*100}%)\n")
     with open(BASE, "r") as base_text:
         for line in base_text:
             if not line.startswith("#") and not line.isspace():
                 fp.write("# " + line)
-    fp.write(f"\n# {START_MODEL=}\n")
+    fp.write(f"\n\n# START MODEL: {os.path.abspath(START_MODEL)}\n")
     if BASE != START_MODEL:
-        fp.write(f"# score: {start.score}\n")
+        fp.write(f"# score: {start.score} / {start.max_score} ({start.score/start.max_score*100}%)\n")
         fp.write(f"# extra edges: {start.extra_edges}\n")
         with open(START_MODEL, "r") as model_text:
             for line in model_text:
                 if not line.startswith("#") and not line.isspace():
                     fp.write("# " + line)
+    fp.close()
 
-    start_time = time.time()
+    start_time = datetime.datetime.now()
     final, log = ga_main(start, exps, fixes_list,
                          total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                          prob=PROB, edge_prob=EDGE_PROB,
                          export_top=EXPORT_TOP, export_thresh=EXPORT_THRESHOLD,
                          stop_if_max=stop_if_max, core=core)
-    end_time = time.time()
+    end_time = datetime.datetime.now()
 
-    fp.write("\niteration\ttop score\textra edges\tcomplexity\n")
-    for sth in log:
-        fp.write("\t".join([str(x) for x in sth])+"\n")
+    fp = open(LOG, "a")
+
+    fp.write(f"\n# {start_time=}\n")
+    fp.write(f"# {end_time=}\n")
+    fp.write(f"# elapsed time: {end_time-start_time}\n\n")
+
+    fp.write("iteration,top score,extra edges,complexity\n")
+    for iter in log:
+        fp.write(f"{iter[0]},{iter[1]},\"{iter[2]}\",{iter[3]}\n")
 
     mutated = set()
     for node in start.primes:
@@ -186,19 +223,20 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
                 mutated.add(node)
     mutated = sorted(list(mutated))
 
-    print()
-    print(f"""\tThe algorithm ran for {log[-1][0]} iterations,
+    print(f"""
+        The algorithm ran for {log[-1][0]} iterations,
         generating {boolmore.config.id-STARTING_ID} models.
         Mutated {len(mutated)} functions, 
-        and increased score from {round(start.score,2)} to {round(final.score,2)}.\n
-        Total elapsed time: {time.strftime("%H:%M:%S", time.gmtime(end_time-start_time))}
-        Time per model: {(end_time-start_time)/(boolmore.config.id-STARTING_ID)} s""")
+        and increased score from {round(start.score,2)} / {start.max_score} ({round(start.score/start.max_score*100,1)}%)
+        to {round(final.score,2)} / {final.max_score} ({round(final.score/final.max_score*100,1)}%).\n
+        Total elapsed time: {end_time-start_time}""")
     print()
 
     final.export()
     final.info()
     print()
 
+    print("-----modified functions-----")
     for node in mutated:
         print("start:" + prime2bnet(node, start.primes[node]))
         print("final:" + prime2bnet(node, final.primes[node]))
@@ -206,68 +244,93 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     return base, start, final
 
 def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
-            total_iter:int=100, per_iter:int=100, keep:int=20, mix:int=0,
-            prob:float|list[float]=0.01, edge_prob:float=0.5,
+            total_iter:int, per_iter:int, keep:int, mix:int,
+            prob:float|list[float], edge_prob:float=0.5,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
             stop_if_max:bool=True, core:int=2, seed:int|None=None,
             ) -> tuple[Model, list]:
     """
-    Main part of the genetic algorithm
+    Main part of the genetic algorithm.
 
     Parameters
     ----------
-    start      - the start model                            :Model
-    exps       - list of exp                                :list[ExpType]
-        exp      - info of a single experiment                :ExpType = tuple[...]
-            exp[0] - id of the experiment                       :int
-            exp[1] - max_score for the experiment               :float
-            exp[2] - fixes                                      :FixesType = tuple[tuple[str, int]]
-                     ((node A, value1), (node B, value2), ...)
-            exp[3] - observed_node                              :str
-            exp[4] - outcome_value                              :str
-                     one of OFF, OFF/Some, Some, Some/ON, ON
-    fixes_list - summarized list of fixes for convenience   :list[FixesType]
-        fixes    - ((node A, value1), (node B, value2), ...)  :FixesType = tuple[tuple[str, int]]
+    start : Model
+        the starting model
+    exps : list[ExpType]
+        exp : ExpType
+            info of a single experiment                
+            exp[0] : int
+                id of the experiment
+            exp[1] : float
+                max_score for the experiment
+            exp[2] : FixesType
+                fixes - ((node A, value1), (node B, value2), ...)
+            exp[3] : str
+                observed_node
+            exp[4] : str
+                outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
+    fixes_list : list[FixesType]
+        summarized list of fixes for convenience
+        fixes : FixesType
+            ((node A, value1), (node B, value2), ...)
 
+    total_iter : int
+        total number of iterations
+    per_iter : int
+        new models generated per iteration
+    keep : int
+        models to carry over tot he next iteration
+    mix : int
+        number of models to mix from the keep
 
-    total_iter - total number of iterations, default 100                :int
-    per_iter   - models per iterations, default 100                     :int
-    keep       - models to carry over tot he next iteration, default 20 :int
-    mix        - number of models to mix from the keep, default 0       :int
-
-    prob      - probability for each digit in the rule representation to mutate, default 0.01   :float | list[float]
-                if given a list, each probability is applied for each iteration
-                last item is used for the remaining iterations if the length is shorter.
-    edge_prob - probability to add/delete extra edge, default 0.5                               :float
+    prob : float | dict[int, float]
+        probability for each digit in the rule representation to mutate.
+        if given a dict, each value is used as probability starting from each key iteration.
+    edge_prob : float
+        probability to add/delete extra edge, default 0.5
  
-    export_top    - number of models to export at each iteration, default 0     :int
-    export_thresh - only models above this threshold are exported, default 0.0  :float
-    export_name   - models are exported as (export_name)_id_gen.txt             :str
-                    if None, use the start model name
+    export_top : int
+        number of models to export at each iteration, default 0
+    export_thresh : float
+        only models with scores above this threshold are exported, default 0.0
+    export_name : str
+        models are exported as (export_name)_id_gen.txt
+        if None, use the start model name
                     
-    stop_if_max - if True, stop when the max score is reached. default True   :bool
-    core        - if larger than 1, model evaluation is done in parallel      :int
-    seed        - random seed                                                 :int|None
+    stop_if_max : bool
+        if True, stop when the max score is reached. default True
+    core : int
+        if larger than 1, model evaluation is done in parallel      :int
+    seed : int | None
+        random seed for reproducibility
 
 
     Returns
     -------
-    final   - the final model       :Model
-    log     - log of iterations     :list[list[]]
-              [[iteration, top score, extra_edges, complexity], ...]
-    """
-    assert per_iter > keep, "We need more models per iteration than the number of models to carry over to the next iteration"
+    final : Model
+        the final model
+    log : list[list[]]
+        [[iteration #, top score, extra_edges, complexity], ...]
 
+    """
     if export_name == None:
         export_name = start.name
 
     if type(prob) == float:
         prob_list = [prob] * total_iter
-    elif len(prob) < total_iter:
-        prob_list = prob
-        prob_list.extend([prob[-1]] * (total_iter-len(prob)))
-    else:
-        prob_list = prob
+    
+    # if prob is a dictionary, make a list of probabilities
+    # with the same length as total_iter
+    elif type(prob) == dict:
+        # ensure that 1 is in the key of the dictionary
+        assert 1 in prob.keys(), "1 must be in the keys of the dictionary"
+
+        prob_list = []
+        for i in range(1, total_iter+1):
+            if i in prob:
+                prob_list.append(prob[i])
+            else:
+                prob_list.append(prob_list[-1])
 
     if seed != None:
         random.seed(seed)
@@ -283,9 +346,9 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     for i in range(keep):
         iteration.append(start)
 
-    # generate (per_iter - keep) new models
+    # generate (per_iter) new models
     new_model_lst = []
-    for i in range(per_iter-keep):
+    for i in range(per_iter):
         new_model = start.mutate(prob_list[0], edge_prob)
         new_model_lst.append(new_model)    
     if core > 1:
@@ -311,7 +374,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
 
     final = iteration[0]
 
-    print(f"iteration 1, genearted {boolmore.config.id-start.id}, top score {round(final.score,2)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
+    print(f"iteration 1, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
 
     if not final.check_constraint():
         print("ERROR: model does not follow constraints")
@@ -355,7 +418,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         weights.reverse()
         new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
         new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
-        targets = random.choices(new_iteration, weights=weights, k=per_iter-keep-mix)
+        targets = random.choices(new_iteration, weights=weights, k=per_iter-mix)
         new_model_lst = []
         for target in targets:
             new_model = target.mutate(prob_list[i-1], edge_prob)
@@ -378,7 +441,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     
         final = new_iteration[0]
 
-        print(f"iteration {i}, generated {boolmore.config.id-start.id}, top score {round(final.score,2)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
+        print(f"iteration {i}, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
 
         if not final.check_constraint():
             print("ERROR: model does not follow constraints")
@@ -405,5 +468,17 @@ def parallel_pred_and_score(model, fixes_list, exps):
 
     return model.id, model.predictions, model.score
 
-if __name__=="__main__":
-    run_ga(JSON, START_MODEL, RUN_NAME, DATA, BASE)
+if __name__ == "__main__":
+
+    JSON = None
+    START_MODEL = "benchmarks/results/Cortical Area Development_start_1.bnet"
+    RUN_NAME = "test"
+    DATA = "benchmarks/results/Cortical Area Development_data_1.tsv"
+    BASE = "benchmarks/benchmark_models/Cortical Area Development.bnet"
+
+    base, start, final = run_ga(JSON, START_MODEL, RUN_NAME, DATA, BASE)
+
+    print("\n-----comparing all functions-----")
+    for node in base.primes:
+        print("base:" + prime2bnet(node, base.primes[node])) # type: ignore
+        print("final:" + prime2bnet(node, final.primes[node])) # type: ignore

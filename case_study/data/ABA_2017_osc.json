@@ -12,23 +12,39 @@
     "edge_prob": 0.5
     },
 
-"data": "boolmore/case_study/data/data_osc_20230925.tsv",
+"data": "./data/data_osc_20230925.tsv",
 
-"base": "boolmoRe/case_study/baseline_models/ABA_GA_base_B.txt",
+"base": "./baseline_models/ABA_GA_base_B.bnet",
     
 "default_sources": {"ABA":0},
 
 "constraints": {"fixed": ["Ca2osc", "Closure", "DAG", "H2O_Efflux", "InsP3", "InsP6", "NO", "PtdIns3_5P2", "PtdIns4_5P2", "RCARs", "cADPR", "cGMP"],
-                "regulate": {"ABI1":["RCARs"], "ABI2":["RCARs"], "HAB1":["RCARs"], "PP2CA":["RCARs"], "K_efflux":["KEV","KOUT"], "OST1":["ABI1","ABI2"], "Depolarization":["AnionEM"]},
-                "necessary" : {"8-nitro-cGMP":["cGMP"], "KOUT":["Depolarization"], "Malate":["PEPC", "AnionEM"], "ROS":["NADPH", "RBOH"]},
-                "group": {"PA":[["PC","PLDalpha"],["PC","PLDdelta"],["DAG","DAGK"]], "S1P_PhytoS1P":[["SPHK1_2","Sph"]]},
+                "regulate": {"ABI1":["RCARs"],
+                             "ABI2":["RCARs"],
+                             "HAB1":["RCARs"],
+                             "PP2CA":["RCARs"],
+                             "K_efflux":["KEV","KOUT"],
+                             "OST1":["ABI1","ABI2"],
+                             "Depolarization":["AnionEM"]},
+                "necessary" : {"8-nitro-cGMP":["cGMP"],
+                               "KOUT":["Depolarization"],
+                               "Malate":["PEPC", "AnionEM"],
+                               "ROS":["NADPH", "RBOH"]},
+                "group": {"PA":[["PC","PLDalpha"],["PC","PLDdelta"],["DAG","DAGK"]],
+                          "S1P_PhytoS1P":[["SPHK1_2","Sph"]]},
                 "possible_constant": []},
 
-"edge_pool": [["Ca2osc", "ABI2", "0"],["Ca2osc", "HAB1", "0"],["Ca2osc", "PP2CA", "0"],
-              ["PA", "ABI2", "0"],["PA", "HAB1", "0"],["PA", "PP2CA", "0"],
+"edge_pool": [["Ca2osc", "ABI2", "0"],
+              ["Ca2osc", "HAB1", "0"],
+              ["Ca2osc", "PP2CA", "0"],
+              ["PA", "ABI2", "0"],
+              ["PA", "HAB1", "0"],
+              ["PA", "PP2CA", "0"],
               ["AquaporinPIP2_1", "ROS", "1"],
-              ["Actin_Reorganization", "RBOH", "1"], ["ROS", "Actin_Reorganization", "1"],
-              ["pHc", "Vacuolar_Acidification", "1"], ["ABI1", "GEF1_4_10", "1"],
+              ["Actin_Reorganization", "RBOH", "1"],
+              ["ROS", "Actin_Reorganization", "1"],
+              ["pHc", "Vacuolar_Acidification", "1"],
+              ["ABI1", "GEF1_4_10", "1"],
               ["GHR1", "CPK3_21", "1"],
               ["PA", "Microtubule_Depolymerization", "1"]]
 }

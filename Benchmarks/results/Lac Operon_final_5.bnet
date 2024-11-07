@@ -1,0 +1,21 @@
+# id: 100904
+# generation: 31
+# extra edges: []
+# score: 103.0 / 104.0
+# following constraints: True
+# complexity: 23
+
+targets,	factors
+A,	B & L
+Am,	L | Lm
+B,	M
+C,	!Ge
+Ge,	Ge
+L,	!Ge & Le & P
+Le,	Le
+Lem,	Lem
+Lm,	!Ge & Le | !Ge & Lem & P
+M,	C & !R & !Rm
+P,	M
+R,	!Am
+Rm,	!Am

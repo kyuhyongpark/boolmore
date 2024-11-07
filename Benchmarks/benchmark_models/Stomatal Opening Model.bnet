@@ -1,0 +1,52 @@
+# extra constraints from the original paper: CO2_high=1 & CO2=0 is !a valid combination
+# replaced CO2 by (CO2 | CO2_high) so that CO2_high=1 & CO2=0 is considered as CO2_high=1 & CO2=1
+targets,	factors
+PK_2,	!Ci & !Ci_sup & PP1cc_1 & PP1cc_2 | !Ci & !Ci_sup & !PP1cc_3 & PP1cc_2 | !Ci & !Ci_sup & !PP1cc_1 & !PP1cc_2 | !Ci & !Ci_sup & !PP1cc_1 & !PP1cc_3 | !Ci & Ci_sup & PP1cc_1 & !PP1cc_3 | !Ci & PP1cc_1 & !PP1cc_3 & PP1cc_2 | !Ci & Ci_sup & !PP1cc_1 & PP1cc_3 & PP1cc_2 | Ci & !Ci_sup & PP1cc_1 & !PP1cc_2
+sucrose,	PLD & !ABA
+Ci,	!carbfix_high & !MCPS_high & (CO2 | CO2_high) | CO2_high & (CO2 | CO2_high)
+Cac,	!(CaATPase & !ABA | !CaR & !CaIc & !ABA)
+phph_high,	BL & RL
+PLA2,	!(!phot1_complex & !BL & !RL)
+ROS,	phph & !ABI1 & PLD
+carbfix_high,	Ci & phph_high | phph_high & (CO2 | CO2_high)
+NO,	ROS & phph
+phph,	!(!BL & !RL)
+PK_3,	!Ci & Ci_sup & PP1cc_1 & PP1cc_3 & !PP1cc_2 | !Ci & !Ci_sup & PP1cc_1 & !PP1cc_3 & PP1cc_2 | Ci & !Ci_sup & PP1cc_1 & PP1cc_3 & !PP1cc_2
+AnionCh_high,	!(!Ci_sup & ABI1 | !Ci & !Cac_high & !ABA | !Cac_high & !Ci_sup & !ABA | !Ci & ABI1)
+MCPS_high,	Ci_sup & BL & RL | Ci & BL & RL
+CaATPase,	Cac
+Cac_high,	!CaATPase & CaR & ABA | !CaATPase & CaIc & ABA
+PK_1,	!Ci & !Ci_sup & PP1cc_1 & !PP1cc_3 | !Ci & PP1cc_1 & !PP1cc_3 & PP1cc_2 | !Ci & !Ci_sup & PP1cc_1 & !PP1cc_2 | !Ci & !Ci_sup & !PP1cc_1 & PP1cc_3 & PP1cc_2 | !Ci & PP1cc_1 & PP1cc_3 & !PP1cc_2 | !Ci_sup & PP1cc_1 & !PP1cc_3 & PP1cc_2
+Kc,	!AnionCh_high & HATPase_3 & !Kout & Kin & !AnionCh | !AnionCh_high & HATPase_3 & !Kout & Kv & !AnionCh & KEV | !AnionCh_high & HATPase_2 & !Kout & Kin & !AnionCh | !AnionCh_high & HATPase_2 & !Kout & Kv & !AnionCh & KEV | !Kout & Kin & HATPase_1 | !Kout & HATPase_1 & Kv & KEV | !AnionCh_high & HATPase_3 & HATPase_2 & !Kout & Kv & KEV | !AnionCh_high & HATPase_3 & HATPase_2 & !Kout & Kin
+PMV_pos,	!HATPase_3 & !HATPase_2 & !HATPase_1 & !PMV_neg & KEV | Cac_high & PMV_pos & !PMV_neg | PMV_pos & !HATPase_3 & !HATPase_2 & !HATPase_1 & !PMV_neg | !HATPase_3 & !HATPase_2 & !HATPase_1 & AnionCh & KEV | PMV_pos & !PMV_neg & KEV | Cac_high & !HATPase_3 & !HATPase_2 & !HATPase_1 & !PMV_neg | Cac_high & !HATPase_3 & !HATPase_2 & !HATPase_1 & AnionCh
+SO_3,	HATPase_3 & Kv
+Ci_sup,	carbfix_high & (CO2 | CO2_high) | CO2_high & (CO2 | CO2_high) | MCPS_high & (CO2 | CO2_high)
+HATPase_3,	PK_2 & !phph & !Cac_high & !PK_1 & FFA | phph_high & PLA2 & PK_3 & !Cac_high & PK_1 | PK_2 & phph_high & PLA2 & !Cac_high & !PK_1 | !phph_high & phph & !PK_3 & !Cac_high & PK_1 & FFA | PK_2 & !phph_high & !phph & !Cac_high & FFA | phph_high & PK_3 & !Cac_high & PK_1 & FFA | PK_2 & !phph_high & !PK_3 & !Cac_high & PK_1 & FFA | !PK_2 & PLA2 & phph & !Cac_high & PK_1 | PK_2 & phph_high & !Cac_high & !PK_1 & FFA | PK_2 & phph_high & PK_3 & !Cac_high & FFA | !PK_2 & PK_3 & !Cac_high & PK_1 & FFA | !PK_2 & phph & !Cac_high & PK_1 & FFA | PK_2 & PLA2 & !phph & !Cac_high & !PK_1 | PK_2 & !phph & PK_3 & !Cac_high & FFA | PK_2 & !phph_high & PLA2 & !PK_3 & !Cac_high & PK_1 | PLA2 & !phph & PK_3 & !Cac_high & PK_1 | PK_2 & !phph_high & PLA2 & !phph & !Cac_high | !phph_high & PLA2 & phph & !PK_3 & !Cac_high & PK_1 | !PK_2 & PLA2 & PK_3 & !Cac_high & PK_1 | PK_2 & PLA2 & !phph & PK_3 & !Cac_high | PK_2 & phph_high & PLA2 & PK_3 & !Cac_high | !phph & PK_3 & !Cac_high & PK_1 & FFA
+PLC,	!(!BL & !ABA | !Cac & !BL)
+HATPase_2,	PK_2 & PLA2 & phph & PK_3 & !Cac_high & PK_1 | phph_high & PLA2 & !phph & !PK_3 & !Cac_high & PK_1 | PK_2 & phph_high & PLA2 & phph & !PK_3 & !Cac_high | !PK_2 & !phph & !PK_3 & !Cac_high & PK_1 & FFA | !PK_2 & PLA2 & !phph & !PK_3 & !Cac_high & PK_1 | PK_2 & phph & !PK_3 & !Cac_high & !PK_1 & FFA | PK_2 & phph_high & PLA2 & phph & !Cac_high & PK_1 | PK_2 & phph_high & phph & !Cac_high & PK_1 & FFA | PK_2 & phph & PK_3 & !Cac_high & PK_1 & FFA | phph_high & !phph & !PK_3 & !Cac_high & PK_1 & FFA | PK_2 & phph_high & PLA2 & !PK_3 & !Cac_high & PK_1 | PK_2 & PLA2 & phph & !PK_3 & !Cac_high & !PK_1 | PK_2 & phph_high & !PK_3 & !Cac_high & PK_1 & FFA | PK_2 & phph_high & phph & !PK_3 & !Cac_high & FFA
+PP1cc_1,	!(!phot1_complex & !BL)
+MCPS,	!(!Ci & !Ci_sup | !BL & !RL)
+Kout,	!NO & PMV_pos | PMV_pos & !FFA | Ci & PMV_pos & Ci_sup | PMV_pos & ABA | !ROS & PMV_pos
+CaR,	!(!NO & !PLC)
+PP1cc_3,	!PLD_high & PLD & BL | !phot1_complex & PLD_high & !BL | !phot1_complex & !PLD & !BL | phot1_complex & !PLD_high & PLD
+SO_1,	HATPase_1 & Kv
+SO_2,	sucrose & !Kv | sucrose & HATPase_2 | HATPase_2 & Kv
+PP1cc_2,	!phot1_complex & !PLD_high & !BL | !PLD_high & !PLD
+Kin,	!Ci_sup & PMV_neg & ABA | !Ci & !Cac_high & PMV_neg | !Ci & PMV_neg & ABA | !Ci_sup & FFA & PMV_neg | !Cac_high & !Ci_sup & PMV_neg | !Ci & FFA & PMV_neg
+phot1_complex,	BL
+HATPase_1,	PK_3 & !Cac_high & PK_1 & FFA | PK_2 & !Cac_high & PK_1 & FFA | PK_2 & PLA2 & !Cac_high & PK_1 | PLA2 & PK_3 & !Cac_high & PK_1 | phph & !Cac_high & PK_1 & FFA | PLA2 & phph & !Cac_high & PK_1 | PK_2 & PLA2 & phph & PK_3 & !Cac_high | PK_2 & phph & PK_3 & !Cac_high & FFA
+FFA,	PLA2
+CaIc,	!(!ROS & !PMV_neg)
+PLD_high,	NO & ABA
+Kv,	Kc
+AnionCh,	!(!Ci_sup & ABI1 & BL | !Ci & !Cac_high & phot1_complex & !ABA | !Ci & !Cac_high & BL & !ABA | !Cac_high & !Ci_sup & phot1_complex & !ABA | !Cac_high & !Ci_sup & BL & !ABA | !Ci & ABI1 & BL | !Ci & phot1_complex & ABI1 | !Ci_sup & phot1_complex & ABI1)
+carbfix,	Ci & phph | phph & (CO2 | CO2_high)
+PMV_neg,	!Cac_high & !AnionCh & PMV_neg & !KEV | HATPase_1 & !AnionCh & PMV_neg | !Cac_high & HATPase_1 & PMV_neg & !KEV | !Cac_high & !PMV_pos & HATPase_3 & !KEV | HATPase_2 & !AnionCh & PMV_neg | !Cac_high & !PMV_pos & HATPase_1 & !KEV | !Cac_high & HATPase_2 & PMV_neg & !KEV | !Cac_high & !PMV_pos & HATPase_2 & !KEV | HATPase_3 & !AnionCh & PMV_neg | !Cac_high & HATPase_3 & PMV_neg & !KEV
+ABI1,	!ABA
+PLD,	!(!NO & !ABA)
+KEV,	Cac_high & Kv
+BL,	BL
+CO2_high,	CO2_high
+RL,	RL
+ABA,	ABA
+CO2,	CO2

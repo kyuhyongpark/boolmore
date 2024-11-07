@@ -1,0 +1,32 @@
+# id: 129661
+# generation: 1
+# extra edges: []
+# score: 134.90888888888887 / 192.0
+# following constraints: True
+# complexity: 76
+
+targets,	factors
+AKT,	AKT | ERBB2 & !PTEN | ERBB3
+CyclinB1,	CyclinB1 & ERBB1 & !p53
+CyclinD1,	AKT & CyclinD1 & ERK1_2 & !GSK3a_b | AKT & CyclinD1 & !GSK3a_b & RPS6
+ERBB1,	ERBB1 & !erlotinib & !pertuzumab & stimulus
+ERBB2,	ERBB2 & !erlotinib & !pertuzumab & stimulus & !trastuzumab
+ERBB3,	ERBB3 & RPS6 | ERBB3 & !erlotinib | !PTEN | RPS6 & !erlotinib | !pertuzumab | stimulus
+ERK1_2,	cRAF
+FoxO1_3a,	!AKT
+GSK3a_b,	CyclinD1 | p53
+Nfkb,	Nfkb
+PRAS,	!AKT
+PTEN,	!GSK3a_b | PTEN
+RB,	!CyclinD1 | Nfkb & RB
+RPS6,	p70S6K
+TSC2,	!AKT & !ERK1_2 & TSC2 | !ERK1_2 & !GSK3a_b & TSC2
+cJUN,	!GSK3a_b | cJUN
+cRAF,	ERBB1 & cRAF | ERBB2
+erlotinib,	erlotinib
+p38,	AKT
+p53,	CyclinB1 & p38 | CyclinB1 & p53 | PTEN | RB | stimulus
+p70S6K,	ERK1_2 & !Nfkb & !PRAS & !TSC2 | ERK1_2 & !Nfkb & !PRAS & p70S6K
+pertuzumab,	pertuzumab
+stimulus,	stimulus
+trastuzumab,	trastuzumab

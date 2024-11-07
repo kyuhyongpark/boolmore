@@ -1,0 +1,89 @@
+# id: 8037
+# generation: 129
+# extra edges: [['PA', 'ABI2', '0'], ['Ca2c', 'HAB1', '0'], ['PA', 'Microtubule_Depolymerization', '1'], ['AquaporinPIP2_1', 'ROS', '1'], ['pHc', 'Vacuolar_Acidification', '1']]
+# score: 419.27777777777777 / 505.0
+# following constraints: True
+# complexity: 196
+targets,	factors
+8-nitro-cGMP,	NO & cGMP
+ABA,	ABA
+ABH1,	1
+ABI1,	!PA & !RCARs | !PA & pHc | ROP11 & !ROS
+ABI2,	!RCARs & !PA
+ADPRc,	8-nitro-cGMP
+ARP_Complex,	1
+Actin_Reorganization,	ARP_Complex & !AtRAC1 & PtdInsP3 & PtdInsP4
+AnionEM,	QUAC1 & SLAH3 | SLAC1
+AquaporinPIP2_1,	OST1
+AtRAC1,	!ABA | ABI1
+CIS,	cADPR | InsP6 | InsP3
+CPK23,	1
+CPK3_21,	Ca2c
+CPK6,	1
+Ca2_ATPase,	Ca2c
+Ca2c,	!Ca2_ATPase & CaIM | CIS & !Ca2_ATPase
+CaIM,	!ABH1 & !ERA1 & MRP5 & NtSyp121 | !ABH1 & !ERA1 & SACC | !ABH1 & GHR1 & MRP5 | !ABH1 & MRP5 & SACC | !ERA1 & GHR1 | !ERA1 & NtSyp121 & SACC | GHR1 & MRP5 & NtSyp121 | MRP5 & NtSyp121 & SACC
+Closure,	H2O_Efflux & Microtubule_Depolymerization
+DAG,	PLC & PtdIns4_5P2
+DAGK,	1
+Depolarization,	AnionEM & !H_ATPase
+ERA1,	1
+GAPC1_2,	1
+GCR1,	1
+GEF1_4_10,	0
+GHR1,	ROS
+GPA1,	S1P_PhytoS1P
+GTP,	1
+H2O_Efflux,	AnionEM & AquaporinPIP2_1 & K_efflux & !Malate | AnionEM & AquaporinPIP2_1 & H2O_Efflux & !Malate
+HAB1,	!RCARs & !ROS & !Ca2c
+H_ATPase,	!Ca2c & !ROS
+InsP3,	PLC & PtdIns4_5P2
+InsP6,	InsP3
+KEV,	Ca2c
+KOUT,	Depolarization & pHc
+K_efflux,	KEV & KOUT
+MPK9_12,	Ca2c
+MRP5,	1
+Malate,	!AnionEM & PEPC
+Microtubule_Depolymerization,	Microtubule_Depolymerization & TCTP | PA
+NAD,	1
+NADPH,	1
+NIA1_2,	ROS
+NO,	NADPH & NIA1_2 & Nitrite
+NOGC1,	NO
+Nitrite,	1
+NtSyp121,	1
+OST1,	!ABI1 & !ABI2 | !ABI1 & !HAB1 | !ABI2 & !HAB1 | !ABI2 & !PP2CA | !HAB1 & !PP2CA
+PA,	DAG & DAGK & PC & PLDalpha | PC & PLDdelta
+PC,	1
+PEPC,	!ABA
+PI3P5K,	ABA
+PLC,	Ca2c
+PLDalpha,	Ca2c
+PLDdelta,	GAPC1_2 & NO & ROS
+PP2CA,	!RCARs & !ROS
+PtdIns3_5P2,	PI3P5K
+PtdIns4_5P2,	PtdInsP4
+PtdInsP3,	1
+PtdInsP4,	1
+QUAC1,	Ca2c | OST1
+RBOH,	!ABI1 & GPA1 & OST1 & PA & PtdInsP3 & RCN1
+RCARs,	ABA
+RCN1,	1
+ROP11,	GEF1_4_10
+ROS,	NADPH & RBOH & AquaporinPIP2_1
+S1P_PhytoS1P,	SPHK1_2 & !SPP1 & Sph
+SACC,	Actin_Reorganization
+SCAB1,	1
+SLAC1,	!ABI1 & !ABI2 & CPK6 & GHR1 | !ABI1 & !ABI2 & CPK6 & MPK9_12 & pHc | !ABI1 & CPK23 & CPK3_21 & MPK9_12 & !PP2CA | !ABI1 & CPK3_21 & CPK6 & GHR1 & OST1 | CPK23 & CPK3_21 & CPK6 & GHR1 & MPK9_12 & OST1 | CPK23 & CPK6 & pHc | CPK3_21 & GHR1 & MPK9_12 & OST1 & !PP2CA & pHc
+SLAH3,	!ABI1 & CPK23 & CPK3_21
+SPHK1_2,	ABA
+SPP1,	0
+Sph,	1
+TCTP,	Ca2c
+V-ATPase,	Ca2c
+V-PPase,	PtdIns3_5P2
+Vacuolar_Acidification,	V-ATPase & pHc | V-PPase & pHc
+cADPR,	ADPRc & NAD
+cGMP,	GTP & NOGC1
+pHc,	!ABI1 & !ABI2 | !ABI2 & Ca2c & OST1 | !ABI2 & Ca2c & Vacuolar_Acidification

@@ -1,0 +1,19 @@
+# id: 50141
+# generation: 1
+# extra edges: []
+# score: 39.0 / 88.0
+# following constraints: True
+# complexity: 11
+
+targets,	factors
+Cactus,	!Pelle
+Dif,	!Cactus
+Dorsal,	!Cactus
+MyD88,	Toll
+Nec,	Nec
+Pelle,	Tube
+Slmb,	Slmb
+Spz,	!Nec
+Targets,	Dorsal
+Toll,	Spz
+Tube,	MyD88

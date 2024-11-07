@@ -1,0 +1,9 @@
+# score: 30.25 / 50.0
+# complexity: 14
+
+targets,	factors
+Coup_fti,	!Fgf8 | !Sp8
+Emx2,	Coup_fti | !Fgf8 | !Pax6 | !Sp8
+Fgf8,	!Emx2 & Sp8 | Fgf8
+Pax6,	!Coup_fti & !Emx2 & Sp8
+Sp8,	!Emx2 & Fgf8

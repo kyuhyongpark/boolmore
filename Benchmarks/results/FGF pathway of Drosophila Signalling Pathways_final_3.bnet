@@ -1,0 +1,31 @@
+# id: 389174
+# generation: 21
+# extra edges: []
+# score: 184.0 / 184.0
+# following constraints: True
+# complexity: 31
+
+targets,	factors
+Aop,	!Rl
+Bnl,	Bnl
+Btl,	Bnl
+Cnk,	Cnk
+Csw,	Csw
+Drk,	Csw & Stumps
+Dsor1,	Raf
+Gap,	PLCg
+Htl,	Ths | Pyr
+Ksr,	Ksr
+Msk,	Msk
+PLCg,	Drk
+Pnt,	Rl
+Pyr,	Pyr
+Raf,	Cnk & Ksr & Ras & Src42
+Ras,	Sos
+Rl,	Dsor1 & Msk
+Sos,	Drk
+Src42,	Src42
+Stumps,	Btl | Htl
+Sty,	Sty
+Targets,	!Aop & Pnt
+Ths,	Ths

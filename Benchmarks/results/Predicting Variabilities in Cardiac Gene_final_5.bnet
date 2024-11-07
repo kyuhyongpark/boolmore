@@ -1,0 +1,23 @@
+# id: 233151
+# generation: 14
+# extra edges: []
+# score: 120.0 / 120.0
+# following constraints: True
+# complexity: 30
+
+targets,	factors
+Bmp2,	!canWnt
+Dkk1,	canWnt & !exogen_BMP2_II
+Fgf8,	Foxc1_2 & !Mesp1
+Foxc1_2,	canWnt & exogen_CanWnt_II
+GATAs,	Mesp1 | Nkx2_5
+Isl1,	Fgf8 | Tbx1
+Mesp1,	canWnt & !exogen_BMP2_II
+Nkx2_5,	Dkk1 & Mesp1 | GATAs | Isl1
+Tbx1,	Foxc1_2
+Tbx5,	!Dkk1 & Nkx2_5 & !Tbx1 | !Dkk1 & !Tbx1 & Tbx5 & !canWnt
+canWnt,	exogen_CanWnt_II
+exogen_BMP2_I,	exogen_BMP2_I
+exogen_BMP2_II,	exogen_BMP2_I
+exogen_CanWnt_I,	exogen_CanWnt_I
+exogen_CanWnt_II,	exogen_CanWnt_I

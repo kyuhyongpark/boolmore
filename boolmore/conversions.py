@@ -189,11 +189,11 @@ def prime2bnet(node:str, prime:PrimeType) -> str:
     k = node
     v = prime
     
-    s = k + "* = "
+    s = k + ",\t"
     sl = []
     for c in v[1]:
         sll = []
-        for kk,vv in c.items():
+        for kk,vv in sorted(c.items()):
             if vv: sli = kk
             else: sli = '!'+kk
             sll.append(sli)
@@ -202,9 +202,9 @@ def prime2bnet(node:str, prime:PrimeType) -> str:
     if len(sl) > 0:
         s += ' | '.join(sl)
     if v[1]==[]:
-        s = k + "* = 0"
+        s = k + ",\t0"
     if v[1]==[{}]:
-        s = k + "* = 1"
+        s = k + ",\t1"
     
     return s
 

@@ -1,0 +1,30 @@
+# id: 73761
+# generation: 1
+# extra edges: []
+# score: 7.5 / 176.0
+# following constraints: True
+# complexity: 35
+
+targets,	factors
+Cat1_2,	Yap1
+CccA,	!HapX
+EstB,	!SreA
+FCminusFe,	SidA
+FCplusFe,	FCminusFe
+HapX,	!LIP & hapX
+ICP,	!HapX
+Iron,	Iron
+LIP,	EstB | Iron & RIA | MirB | RIA & TAFC
+MirB,	HapX | !SreA
+RIA,	!SreA
+ROS,	!Cat1_2 & LIP & ROS & !SOD2_3 & !ThP
+SOD2_3,	Yap1
+SidA,	HapX | !SreA
+SreA,	LIP | sreA
+Superoxide,	Superoxide
+TAFC,	SidA
+ThP,	Yap1
+VAC,	LIP
+Yap1,	ROS
+hapX,	!SreA
+sreA,	!HapX

@@ -1,0 +1,140 @@
+# constant nodes from the original paper: antigen=BCAR1=CD45=Chemokine=CRKL=DLGH1=GADD45=GRKL=ICOS=IKBNFKB=PDCD1_PD1=1,  RASA=0
+targets,	factors
+DGK,	TCR
+MAP3K14_NIK,	!(!MAP3K8_COT & !tat)
+PRKCZ,	!(!gp160 & !PIP3)
+PKCB_D,	!(!gp160 & !VAV1 & !VAV3 | !gp160 & !DAG | !gp160 & !PDPK1)
+capsid,	!(!PKA & !STAT)
+RPS6KA1_RSK,	MAPK1_3_Erk
+BCL2L1,	!BAD
+Cam,	Ca2
+nucleocapsid,	DLGH1
+NOX4,	NCF1
+gp120,	!(!MAPK14_p38 & !ITK & !CD45)
+CTNNB1_bcat,	!GSK3 & !vpu
+TCR,	!(!nucleocapsid & !LCK & !antigen | !nucleocapsid & !FYN & !antigen)
+GRAP2_GADS,	!(!LAT & !CD28)
+rt,	!(!PRKCZ & !PKCB_D & !MAPK1_3_Erk & !MAP2K1_2_MEK1_2 & !PKCth & !NFAT)
+BAD,	0
+MAP3K8_COT,	AKT
+MAPK1_3_Erk,	!(!PRKCZ & !MAP2K1_2_MEK1_2)
+ROCK,	RHOA
+SHC,	!(!TCR & !Src & !tat)
+Ccblp,	FYN
+PIP2,	PTEN & PIP3
+RAC,	!(!DOCK2_CRK_ELMO1 & !VAV1 & !P_REX1 & !PRKCZPar3Tiam1)
+LAT,	!(!gp120 & !ZAP70 | !LCK & !ZAP70)
+CD28,	!nef & !vpr & !gp41
+MAPK14_p38,	!(!ZAP70 & !DLGH1)
+CRK,	ZAP70
+CREB,	RPS6KA1_RSK
+nef,	!(!LCP2_SLP76 & !PKA)
+GSK3,	!AKT
+FOXO3,	!AKT
+API,	JUN & FOS
+PPP2R4_PP2A,	CTLA4
+RASGRP2,	PKCB_D & DAG | DAG & Ca2
+WASP,	LCP2_SLP76 & CDC42 & NCK
+CTLA4,	vpr
+ABL,	!(!LCK & !FYN)
+PTEN,	!(!RHOA & !CBLB & !tat)
+gp160,	!DLGH1
+MAP3K7_TAK1,	!(!PKCth & !MAP4K1_Hpk1 & !gp41)
+GaiGby,	CCR5_CXCR4 & GRK & !B_arrestin
+LCP2_SLP76,	gp120 & LCK | GRAP2_GADS & ZAP70
+DOCK2_CRK_ELMO1,	!(!nef & !Src)
+CARMA1BCL10MALT1,	PKCth
+in,	!CDKN1A_p21
+PXN,	!(!Src & !MAPK8_JNK)
+PTK2,	!(!gp120 & !Src & !tat | !Src & !tat & !CD4)
+VAV1,	!(!LAT & !CD28 & !nef & !ZAP70 | !LAT & !CD28 & !nef & !SH3BP2 | !CD28 & !nef & !ITK & !ZAP70 | !CD28 & !nef & !SH3BP2 & !ITK)
+MAP2K1_2_MEK1_2,	RAF
+cAMP,	!(!matrix & !AC)
+CYC1,	!GSK3
+Src,	!(!Gai & !PTK2B_Pyk2)
+GRB2,	!(!SHC & !LAT & !CD28)
+RHOA,	VAV1
+PKA,	cAMP
+PKCth,	!(!gp160 & !VAV1 & !AKT & !VAV3 | !gp160 & !AKT & !DAG | !gp160 & !AKT & !PDPK1)
+PLCy1,	!(!LAT & !LCK & !tat | !gp120 & !LAT & !tat)
+P_REX1,	PIP3 & Gby
+JUN,	MAPK8_JNK
+MAP2K4_Mkk4,	!(!MAP3K7_TAK1 & !MAP3K1_Mekk1 & !MAP3K1_Mlk3)
+RAS,	!(!SOS & !RASGRP1 | !SHC & !LAT & !RASGRP1 | !GRB2 & !RASGRP1)
+PTPN6_SHP1,	!(!CTLA4 & !LCK & !PDCD1_PD1)
+vif,	MAPK1_3_Erk
+GAB2,	GRAP2_GADS & LAT & ZAP70 | LAT & GRB2 & ZAP70
+NFKB,	protease & IKBNFKB | Ikkb_Ikky_Ikka & IKBNFKB
+Gai,	GaiGby
+SH3BP2,	LAT & ZAP70
+CDC42,	!(!VAV1 & !RAP)
+protease,	!PRKCZ & !PKCB_D & !PKCth
+SIT1,	!(!LCK & !FYN)
+RAF,	!(!gp120 & !nef & !RAS | !nef & !RAS & !CD4 | !nef & !RAS & !LCK)
+matrix,	!(!PRKCZ & !PKCB_D & !MAPK1_3_Erk & !nef & !PKCth & !PAK)
+CCR5_CXCR4,	!(!gp120 & !Chemokine & !gp41)
+GRK,	GRKL
+p6,	MAPK1_3_Erk
+DNA,	!(!NFKB & !NFAT & !STAT)
+MAP4K1_Hpk1,	!(!GRAP2_GADS & !LAT & !CRKL | !GRAP2_GADS & !LAT & !CRK)
+LCK,	!(!gp120 & !gp160 & CSK & !tat | !gp120 & !gp160 & PTPN6_SHP1 & !tat | !gp120 & !gp160 & !tat & !CD45 | !gp120 & !gp160 & !tat & !CD4)
+PI3K,	!(!LAT & PTPN6_SHP1 & !LCK & CBL & !Gby & !tat & !ZAP70 & !ICOS | !LAT & !CD28 & !Src & !LCK & !Gby & !tat & !ICOS | !LAT & !nef & PTPN11_SHP2 & CBLB & !Gby & !tat & !CD4 & !ICOS | !LAT & !CD28 & !gp160 & PTPN6_SHP1 & !Gby & !tat & !ZAP70 & !ICOS | !LAT & !CD28 & !nef & !gp160 & PTPN6_SHP1 & !Gby & !tat & !ICOS | !LAT & !CD28 & !gp160 & !Src & PTPN6_SHP1 & !Gby & !tat & !ICOS | !LAT & !nef & PTPN6_SHP1 & !LCK & PTPN11_SHP2 & !Gby & !tat & !ICOS | !LAT & !nef & PTPN6_SHP1 & PTPN11_SHP2 & !Gby & !tat & !CD4 & !ICOS | !LAT & !LCK & CBL & CBLB & !Gby & !tat & !ZAP70 & !ICOS | !LAT & !CD28 & !nef & PTPN6_SHP1 & !Gby & !tat & !CD4 & !ICOS | !LAT & !CD28 & PTPN6_SHP1 & !LCK & !Gby & !tat & !ZAP70 & !ICOS | !LAT & !gp160 & !Src & CBL & CBLB & !Gby & !tat & !ICOS | !LAT & !gp160 & !Src & PTPN6_SHP1 & PTPN11_SHP2 & !Gby & !tat & !ICOS | !LAT & !Src & CBL & CBLB & !Gby & !tat & !CD4 & !ICOS | !LAT & !CD28 & !Src & CBLB & !Gby & !tat & !CD4 & !ICOS | !LAT & !CD28 & !nef & !LCK & CBLB & !Gby & !tat & !ICOS | !LAT & !CD28 & !nef & CBLB & !Gby & !tat & !CD4 & !ICOS | !LAT & !gp160 & PTPN6_SHP1 & CBL & !Gby & !tat & !ZAP70 & !ICOS | !LAT & !nef & !LCK & CBL & CBLB & !Gby & !tat & !ICOS | !LAT & !LCK & PTPN11_SHP2 & CBLB & !Gby & !tat & !ZAP70 & !ICOS | !LAT & PTPN6_SHP1 & PTPN11_SHP2 & !Gby & !tat & !ZAP70 & !CD4 & !ICOS | !LAT & !Src & PTPN6_SHP1 & CBL & !Gby & !tat & !CD4 & !ICOS | !LAT & !CD28 & !nef & PTPN6_SHP1 & !LCK & !Gby & !tat & !ICOS | !LAT & !gp160 & CBL & CBLB & !Gby & !tat & !ZAP70 & !ICOS | !LAT & !Src & !LCK & PTPN11_SHP2 & !Gby & !tat & !ICOS | !LAT & !Src & !LCK & CBL & !Gby & !tat & !ICOS | !LAT & !gp160 & PTPN6_SHP1 & PTPN11_SHP2 & !Gby & !tat & !ZAP70 & !ICOS | !LAT & !nef & !gp160 & PTPN6_SHP1 & CBL & !Gby & !tat & !ICOS | !LAT & !gp160 & PTPN11_SHP2 & CBLB & !Gby & !tat & !ZAP70 & !ICOS | !LAT & !CD28 & CBLB & !Gby & !tat & !ZAP70 & !CD4 & !ICOS | !LAT & !nef & PTPN6_SHP1 & CBL & !Gby & !tat & !CD4 & !ICOS | !LAT & !CD28 & !LCK & CBLB & !Gby & !tat & !ZAP70 & !ICOS | !LAT & !CD28 & !gp160 & !Src & CBLB & !Gby & !tat & !ICOS | !LAT & PTPN6_SHP1 & !LCK & PTPN11_SHP2 & !Gby & !tat & !ZAP70 & !ICOS | !LAT & !CD28 & !gp160 & CBLB & !Gby & !tat & !ZAP70 & !ICOS | !LAT & !nef & !gp160 & CBL & CBLB & !Gby & !tat & !ICOS | !LAT & !gp160 & !Src & PTPN6_SHP1 & CBL & !Gby & !tat & !ICOS | !LAT & !CD28 & !Src & PTPN6_SHP1 & !Gby & !tat & !CD4 & !ICOS | !LAT & !nef & !gp160 & PTPN6_SHP1 & PTPN11_SHP2 & !Gby & !tat & !ICOS | !LAT & !nef & !gp160 & PTPN11_SHP2 & CBLB & !Gby & !tat & !ICOS | !LAT & !nef & PTPN6_SHP1 & !LCK & CBL & !Gby & !tat & !ICOS | !LAT & CBL & CBLB & !Gby & !tat & !ZAP70 & !CD4 & !ICOS | !LAT & !Src & PTPN11_SHP2 & CBLB & !Gby & !tat & !CD4 & !ICOS | !LAT & !nef & CBL & CBLB & !Gby & !tat & !CD4 & !ICOS | !LAT & !CD28 & !nef & !gp160 & CBLB & !Gby & !tat & !ICOS | !LAT & !nef & !LCK & PTPN11_SHP2 & CBLB & !Gby & !tat & !ICOS | !LAT & PTPN11_SHP2 & CBLB & !Gby & !tat & !ZAP70 & !CD4 & !ICOS | !LAT & !gp160 & !Src & PTPN11_SHP2 & CBLB & !Gby & !tat & !ICOS | !LAT & !CD28 & PTPN6_SHP1 & !Gby & !tat & !ZAP70 & !CD4 & !ICOS | !LAT & !Src & PTPN6_SHP1 & PTPN11_SHP2 & !Gby & !tat & !CD4 & !ICOS | !LAT & PTPN6_SHP1 & CBL & !Gby & !tat & !ZAP70 & !CD4 & !ICOS)
+MAP3K1_Mekk1,	!(!RAC & !CDC42 & !MAP4K1_Hpk1)
+PTPN11_SHP2,	!(!CTLA4 & !GAB2 & !PDCD1_PD1)
+IP3,	!(!PIP2 & !nef | !nef & !PLCy1 & !PLCB)
+AC,	gp41
+PRKCZPar3Tiam1,	CDC42
+JAK3,	CCR5_CXCR4
+FOS,	MAPK1_3_Erk
+Sre,	!(!RAC & !CDC42)
+NFAT,	!(!PXN & !CaN)
+NCF1,	PKCB_D
+STAT,	!(!JAK3 & !tat)
+CDKN1A_p21,	!(!gp120 & !vpr & !tat)
+AKT,	!(!PIP3 & !PDPK1)
+ITK,	CD28 & LCK | LCP2_SLP76 & PIP3 & ZAP70
+MAPK8_JNK,	!(!MAP2K4_Mkk4 & !MAP3K1_Mekk1 & !MAP2K7_MKK7)
+PIP3,	PIP2 & PI3K
+IKB,	!(!Ikkb_Ikky_Ikka & !vpu | !IKBNFKB & !vpu)
+CaN,	Cam
+PDPK1,	PIP3
+DAG,	PIP2 & PLCB | PIP2 & PLCy1
+VAV3,	!(!LAT & !nef & !SH3BP2 | !nef & !SH3BP2 & !ITK)
+FYN,	!(!gp120 & !LCK | !gp120 & !TCR & !CD45)
+CBL,	!(!PTEN & !ZAP70)
+NCK,	TCR
+CBLB,	!(!nef & !CTLA4 & !ZAP70 | !CTLA4 & !LCK & !ZAP70)
+rev,	MAPK1_3_Erk
+CSK,	PAG
+Gby,	GaiGby
+RAP,	RASGRP2
+MAP2K7_MKK7,	MAP3K7_TAK1
+SOS,	!(!GRB2 & !RASGRP1)
+MAP3K1_Mlk3,	!(!RAC & !CDC42 & !MAP4K1_Hpk1)
+PAG,	!(!TCR & !FYN)
+PLCB,	!(!Gby & !tat)
+Ca2,	IP3
+PAK,	!(!RAC & !nef & !NCK | !nef & !CDC42 & !NCK)
+PTK2B_Pyk2,	!(!Src & !FYN)
+RASGRP1,	PKCth & DAG
+vpr,	PKA
+tat,	!(!PRKCZ & !nef & !PKCth & !IKB)
+ZAP70,	gp120 & LCK | TCR & ABL
+CD4,	!(!gp160 & !vif)
+Ikkb_Ikky_Ikka,	!(!MAP3K14_NIK & !nef & !CARMA1BCL10MALT1 | !MAP3K14_NIK & !nef & !MAP3K7_TAK1)
+Rik,	CD28 & LCK
+B_arrestin,	protease
+RASA,	0
+IKBNFKB,	1
+Chemokine,	1
+GRKL,	1
+PDCD1_PD1,	1
+DLGH1,	1
+CD45,	1
+GADD45,	1
+CRKL,	1
+vpu,	vpu
+BCAR1,	1
+ICOS,	1
+antigen,	1
+gp41,	gp41

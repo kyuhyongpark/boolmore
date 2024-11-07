@@ -1,0 +1,26 @@
+# id: 7081
+# generation: 1
+# extra edges: []
+# score: 70.0 / 144.0
+# following constraints: True
+# complexity: 21
+
+targets,	factors
+Aop,	!Rl
+CNK,	CNK
+Drk,	Pvr
+Dsor1,	Raf
+Ksr,	Ksr
+Pnt,	Rl
+Pvf1,	Pvf1
+Pvf2,	Pvf2
+Pvf3,	Pvf3
+Pvr,	Pvf3
+Raf,	Ksr & Ras
+Ras,	Sos | !Sty
+Rl,	Dsor1 | msk
+Sos,	Drk
+Src42,	Src42
+Sty,	Sty
+Targets,	!Aop
+msk,	msk

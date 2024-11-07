@@ -1,0 +1,31 @@
+# id: 398841
+# generation: 1
+# extra edges: []
+# score: 117.11495844997641 / 184.0
+# following constraints: True
+# complexity: 72
+
+targets,	factors
+AKT,	AKT | ERBB1 | ERBB3 | !PTEN
+CyclinB1,	CyclinB1 | !p53
+CyclinD1,	CyclinD1 | cJUN | p70S6K
+ERBB1,	ERBB1 | ERBB3 & cJUN & !erlotinib | ERBB3 & cJUN & stimulus | !pertuzumab
+ERBB2,	ERBB2 & !erlotinib & stimulus & !trastuzumab
+ERBB3,	ERBB3 & !erlotinib & !pertuzumab
+ERK1_2,	ERBB1 & cRAF | ERK1_2 & cRAF
+FOXO1_3a,	!AKT
+GSKa_b,	GSKa_b & p53
+PRAS,	!AKT & cJUN
+PTEN,	cRAF
+RB,	!CyclinB1 | RB & p53
+RPS6,	p70S6K | RPS6
+TSC2,	!AKT & !ERK1_2 & !GSKa_b | !AKT & !GSKa_b & TSC2 | !ERK1_2 & !GSKa_b & RB | !ERK1_2 & !GSKa_b & TSC2
+cJUN,	!GSKa_b
+cRAF,	ERBB1 & !ERK1_2 & cRAF | ERBB2 & !ERK1_2 & cRAF
+erlotinib,	erlotinib
+p38,	p38 | AKT
+p53,	CyclinB1 & RB & p38 | RB & p38 & p53
+p70S6K,	!PRAS & p70S6K
+pertuzumab,	pertuzumab
+stimulus,	stimulus
+trastuzumab,	trastuzumab

@@ -1,0 +1,34 @@
+# id: 14041
+# generation: 51
+# extra edges: []
+# score: 203.0 / 208.0
+# following constraints: True
+# complexity: 34
+
+targets,	factors
+AD,	AD | IS
+BC,	BC | T0
+DCI,	PIC
+DCII,	DCI
+EC,	IS
+EL,	!EL2 & IS
+EL2,	IL5
+IFNgI,	Th1I
+IL10I,	Th2I
+IL12II,	T0
+IL13,	IS
+IL4I,	IL4II
+IL4II,	EL2
+IL5,	EL2
+IS,	IS
+IgA,	BC & IS
+IgE,	BC
+IgG,	BC
+NE,	IFNgI & !IL4I
+PIC,	EC & !IL10I & !IgA
+T0,	DCII
+TEL,	EL | EL2
+Th1I,	Th1II
+Th1II,	T0
+Th2I,	Th2II
+Th2II,	DCII

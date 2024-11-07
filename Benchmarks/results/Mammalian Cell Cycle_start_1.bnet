@@ -1,0 +1,28 @@
+# id: 139941
+# generation: 1
+# extra edges: []
+# score: 35.333333333333336 / 160.0
+# following constraints: True
+# complexity: 47
+
+targets,	factors
+Akt1,	ErbB1 & ErbB1_2 & ErbB1_3 & IGF1R | ErbB1 & ErbB1_2 & ErbB2_3 & IGF1R
+CDK2,	CycE1 & !p27 | !p21
+CDK4,	!p21 | !p27
+CDK6,	CycD1
+CycD1,	Akt1 | ERa | cMYC
+CycE1,	cMYC
+EGF,	EGF
+ERa,	MEK1
+ErbB1,	EGF
+ErbB1_2,	ErbB1 | ErbB2
+ErbB1_3,	ErbB1 & ErbB3
+ErbB2,	EGF
+ErbB2_3,	ErbB2 | ErbB3
+ErbB3,	EGF
+IGF1R,	Akt1 & ERa
+MEK1,	ErbB1 & ErbB2_3 & IGF1R | ErbB1_2 & ErbB2_3 & IGF1R
+cMYC,	MEK1 | ERa | Akt1
+p21,	!Akt1 | ERa
+p27,	!Akt1 | !CDK2 | !CDK4 & !cMYC
+pRB,	CDK6

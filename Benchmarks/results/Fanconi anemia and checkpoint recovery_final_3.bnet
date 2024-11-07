@@ -1,0 +1,23 @@
+# id: 370730
+# generation: 92
+# extra edges: []
+# score: 110.5 / 120.0
+# following constraints: True
+# complexity: 57
+
+targets,	factors
+ADD,	NUC1 & NUC2
+ATM,	ATR & !FAcore | !CHKREC & !FAcore
+ATR,	!CHKREC
+CHKREC,	!ADD & NHEJ | !CHKREC & NHEJ | !DSB & FAHRR | !DSB & !ICL | TLS
+DSB,	!HRR2 & !NHEJ & NUC1 | !NHEJ & NUC1 & NUC2
+FAHRR,	DSB
+FANCD2I,	ATM & ATR
+FAcore,	ATM & ATR | ATR & !CHKREC
+HRR2,	!CHKREC & TLS | DSB | ICL & !NHEJ & NUC2 | ICL & !NHEJ & TLS | NUC2 & TLS
+ICL,	!DSB & ICL
+NHEJ,	!CHKREC & DSB & NUC2 | !HRR2 & NUC2
+NUC1,	ICL
+NUC2,	ATM & NUC1 | ATR & !FANCD2I & ICL
+TLS,	ADD & !CHKREC
+p53,	ATM | !CHKREC
