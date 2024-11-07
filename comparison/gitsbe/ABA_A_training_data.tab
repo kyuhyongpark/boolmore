@@ -1,0 +1,1242 @@
+Condition
+ABA:0
+Response
+Closure:0	ROS:0	NO:0	pHc:0	CaIM:0	SACC:0	AquaporinPIP2_1:0	SLAC1:0	Ca2c:0	Actin_Reorganization:0	AtRAC1:1	nitro_cGMP:0	K_efflux:0	KEV:0	Microtubule_Depolymerization:0	Vacuolar_Acidification:0	PA:0	AnionEM:0	PLDalpha:0	PLDdelta:0	OST1:0	ABI1:1	ABI2:1	HAB1:1	PP2CA:1	H_ATPase:1	Malate:1	InsP3:0	S1P_PhytoS1P:0	SPHK1_2:0	RCARs:0	
+Weight:31
+
+Condition
+ABA:1
+Response
+Closure:1	ROS:1	NO:1	pHc:1	CaIM:1	AquaporinPIP2_1:1	SLAC1:1	Ca2c:0.5	Actin_Reorganization:1	AtRAC1:0	nitro_cGMP:1	K_efflux:1	KEV:1	Microtubule_Depolymerization:1	Vacuolar_Acidification:1	PA:1	AnionEM:1	Depolarization:1	PLDalpha:0.75	PLDdelta:0.75	DAG:0.25	OST1:1	ABI1:0	ABI2:0	HAB1:0	PP2CA:0	H_ATPase:0	Malate:0	InsP3:1	S1P_PhytoS1P:1	SPHK1_2:1	RCARs:1	
+Weight:32
+
+Condition
+ABA:0	ROS:1
+Response
+Closure:1	NO:1	SLAC1:0.75	nitro_cGMP:0.75	Actin_Reorganization:0.5	
+Weight:5
+
+Condition
+ABA:0	RBOH:0
+Response
+Closure:0	NO:0	Actin_Reorganization:0	ROS:0	
+Weight:4
+
+Condition
+ABA:0	RBOH:0	ROS:1
+Response
+Closure:1	NO:1	
+Weight:2
+
+Condition
+ABA:0	ROS:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	ROS:0
+Response
+Closure:0.25	Actin_Reorganization:0.25	nitro_cGMP:0	
+Weight:3
+
+Condition
+ABA:1	RBOH:0
+Response
+Closure:0.25	NO:0	Actin_Reorganization:0.25	ROS:0	
+Weight:4
+
+Condition
+ABA:1	PLDalpha:0	RBOH:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	CaIM:1
+Response
+Closure:1	pHc:1	KEV:0.75	Microtubule_Depolymerization:1	Ca2c:0.5	SLAC1:0.75	
+Weight:6
+
+Condition
+ABA:0	Ca2c:0
+Response
+Closure:0	pHc:0	ROS:0	NO:0	Microtubule_Depolymerization:0	QUAC1:0	
+Weight:6
+
+Condition
+ABA:1	Ca2c:0
+Response
+Closure:0.25	pHc:0	ROS:1	NO:0	Microtubule_Depolymerization:0.25	QUAC1:1	
+Weight:6
+
+Condition
+ABA:0	SPHK1_2:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	SPHK1_2:0
+Response
+Closure:0.5	
+Weight:1
+
+Condition
+ABA:0	SPHK1_2:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	SPHK1_2:1
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	ABI1:0
+Response
+Closure:0	NO:0	ROS:0	
+Weight:3
+
+Condition
+ABA:1	ABI1:0
+Response
+Closure:1	NO:1	ROS:1	
+Weight:3
+
+Condition
+ABA:0	HAB1:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	HAB1:0
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	ABI1:0	HAB1:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	ABI1:0	HAB1:0
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	ABI1:0	ROS:1
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	ABI1:0	NO:1
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	ABI1:1
+Response
+Closure:0	Actin_Reorganization:0	AtRAC1:1	ROS:0	NO:0	
+Weight:5
+
+Condition
+ABA:1	ABI1:1
+Response
+Closure:0	pHc:0	Actin_Reorganization:0	AtRAC1:1	ROS:0	NO:1	
+Weight:6
+
+Condition
+ABA:0	ABI1:1	ROS:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	ABI2:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	ABI2:0
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	ABI2:1
+Response
+Closure:0	ROS:0	NO:0	
+Weight:3
+
+Condition
+ABA:1	ABI2:1
+Response
+Closure:0.25	pHc:0	ROS:1	NO:1	
+Weight:4
+
+Condition
+ABA:0	RCARs:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	RCARs:1
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	RCARs:0
+Response
+Closure:0	ROS:0	NO:0	pHc:0	
+Weight:4
+
+Condition
+ABA:1	RCARs:0
+Response
+Closure:0.5	ROS:0	NO:0	pHc:0	
+Weight:4
+
+Condition
+ABA:0	CaIM:1	RCARs:0
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	TCTP:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	TCTP:1
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	S1P_PhytoS1P:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	S1P_PhytoS1P:0
+Response
+Closure:0.25	
+Weight:1
+
+Condition
+ABA:0	OST1:0
+Response
+Closure:0	AquaporinPIP2_1:0	SLAC1:0	Ca2c:0	CaIM:0	ROS:0	
+Weight:6
+
+Condition
+ABA:1	OST1:0
+Response
+Closure:0	AquaporinPIP2_1:0	SLAC1:0	pHc:0	Ca2c:0	CaIM:0	ROS:0	
+Weight:7
+
+Condition
+ABA:0	OST1:1
+Response
+Closure:0	CaIM:0	ROS:0	
+Weight:3
+
+Condition
+ABA:1	OST1:1
+Response
+Closure:1	CaIM:1	ROS:1	
+Weight:3
+
+Condition
+ABA:0	PLDalpha:0
+Response
+Closure:0	Microtubule_Depolymerization:0	PA:0	ROS:0.25	NO:0	
+Weight:5
+
+Condition
+ABA:1	PLDalpha:0
+Response
+Closure:0.25	Microtubule_Depolymerization:0.5	PA:0.5	ROS:0.5	NO:0	
+Weight:5
+
+Condition
+ABA:0	PLDalpha:0	ROS:1
+Response
+Closure:1	NO:1	
+Weight:2
+
+Condition
+ABA:0	PLDdelta:0
+Response
+Closure:0	NO:0	ROS:0	
+Weight:3
+
+Condition
+ABA:1	PLDdelta:0
+Response
+Closure:0	NO:1	ROS:0.75	PA:0.5	
+Weight:4
+
+Condition
+ABA:0	PLDdelta:0	ROS:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	PA:1
+Response
+Closure:0.75	Microtubule_Depolymerization:1	Ca2c:0	RBOH:1	ROS:0.75	NO:0	pHc:1	
+Weight:7
+
+Condition
+ABA:1	PA:1
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	PLDalpha:0	PLDdelta:0
+Response
+Closure:0	pHc:0	Ca2c:0	
+Weight:3
+
+Condition
+ABA:1	PLDalpha:0	PLDdelta:0
+Response
+Closure:0.5	pHc:0	Ca2c:0.5	ROS:0.25	NO:0	PA:0	
+Weight:6
+
+Condition
+ABA:0	PLDalpha:0	PLDdelta:0	ROS:1
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	PA:1	PLDalpha:0	PLDdelta:0
+Response
+Closure:0.75	ROS:0.5	NO:0	pHc:0.75	
+Weight:4
+
+Condition
+ABA:0	DAG:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	ABI1:0	PA:1
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	ABI1:1	PA:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	PA:1	PLDalpha:0
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	PA:1	PLDdelta:0
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	GPA1:0	PA:1
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	GPA1:0	PA:1	PLDalpha:0
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	ABI1:0	PLDalpha:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	ABI1:0	PLDalpha:0
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	GPA1:0
+Response
+Closure:0	ROS:0	
+Weight:2
+
+Condition
+ABA:1	GPA1:0
+Response
+Closure:1	ROS:0	
+Weight:2
+
+Condition
+ABA:0	GPA1:0	PLDalpha:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	GPA1:0	PLDalpha:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	PP2CA:0
+Response
+Closure:0	Microtubule_Depolymerization:0	
+Weight:2
+
+Condition
+ABA:0	PA:1	PP2CA:0
+Response
+Closure:0.75	Microtubule_Depolymerization:0.75	
+Weight:2
+
+Condition
+ABA:0	Ca2c:0	PLDalpha:0
+Response
+Closure:0	Microtubule_Depolymerization:0.25	
+Weight:2
+
+Condition
+ABA:1	Ca2c:0	PLDalpha:0
+Response
+Closure:0.25	Microtubule_Depolymerization:0.25	
+Weight:2
+
+Condition
+ABA:0	PA:1	Ca2c:0
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	PA:1	Ca2c:0	PLDalpha:0
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	CPK3_21:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	CPK3_21:0
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	cGMP:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	NOGC1:0	cGMP:1
+Response
+Closure:0.75	nitro_cGMP:1	
+Weight:2
+
+Condition
+ABA:0	cADPR:0
+Response
+Closure:0.25	AnionEM:0	
+Weight:2
+
+Condition
+ABA:1	cADPR:0
+Response
+Closure:0.75	AnionEM:0	Depolarization:0	
+Weight:3
+
+Condition
+ABA:0	ADPRc:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	ADPRc:0
+Response
+Closure:0.25	
+Weight:1
+
+Condition
+ABA:0	PI3P5K:0
+Response
+Closure:0	Vacuolar_Acidification:0	pHc:0	
+Weight:3
+
+Condition
+ABA:1	PI3P5K:0
+Response
+Closure:0.75	Vacuolar_Acidification:0.25	pHc:0.25	
+Weight:3
+
+Condition
+ABA:0	V_ATPase:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	V_ATPase:0
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	V_PPase:0
+Response
+Closure:0	Vacuolar_Acidification:0	
+Weight:2
+
+Condition
+ABA:1	V_PPase:0
+Response
+Closure:0.75	Vacuolar_Acidification:0.5	
+Weight:2
+
+Condition
+ABA:0	Vacuolar_Acidification:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	Vacuolar_Acidification:0
+Response
+Closure:0.5	
+Weight:1
+
+Condition
+ABA:0	PLC:0
+Response
+Closure:0.25	AnionEM:0	PA:0	
+Weight:3
+
+Condition
+ABA:1	PLC:0
+Response
+Closure:0.75	Actin_Reorganization:1	AnionEM:0	Depolarization:0	
+Weight:4
+
+Condition
+ABA:0	InsP3:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	InsP3:0
+Response
+Closure:0.25	
+Weight:1
+
+Condition
+ABA:1	PLDalpha:0	PLDdelta:0	cADPR:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	PLC:0	PLDalpha:0	PLDdelta:0
+Response
+Closure:0.25	
+Weight:1
+
+Condition
+ABA:1	PLC:0	cADPR:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	PLC:0	PLDalpha:0	PLDdelta:0	cADPR:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	pHc:0
+Response
+Closure:0	NO:0	Vacuolar_Acidification:0	ROS:0	
+Weight:4
+
+Condition
+ABA:1	pHc:0
+Response
+Closure:0.25	NO:0	Ca2c:0.25	Vacuolar_Acidification:0.25	ROS:0.5	
+Weight:5
+
+Condition
+ABA:0	OST1:0	pHc:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	OST1:0	pHc:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	GPA1:0	pHc:0
+Response
+Closure:0.25	
+Weight:1
+
+Condition
+ABA:0	NO:1	RBOH:0
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	KOUT:0
+Response
+Closure:0	ROS:0	
+Weight:2
+
+Condition
+ABA:1	KOUT:0
+Response
+Closure:0.5	ROS:1	
+Weight:2
+
+Condition
+ABA:0	K_efflux:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	K_efflux:0
+Response
+Closure:0.5	
+Weight:1
+
+Condition
+ABA:0	KOUT:0	pHc:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	KOUT:0	pHc:0
+Response
+Closure:0.5	
+Weight:1
+
+Condition
+ABA:0	PP2CA:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	PP2CA:1
+Response
+Closure:0.5	
+Weight:1
+
+Condition
+ABA:1	PP2CA:0
+Response
+Closure:1	Microtubule_Depolymerization:1	
+Weight:2
+
+Condition
+ABA:0	H_ATPase:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	H_ATPase:1
+Response
+Closure:0.5	
+Weight:1
+
+Condition
+ABA:0	AtRAC1:0
+Response
+Closure:0.75	Actin_Reorganization:0.75	
+Weight:2
+
+Condition
+ABA:0	AtRAC1:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	AtRAC1:1
+Response
+Closure:0.5	
+Weight:1
+
+Condition
+ABA:0	QUAC1:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	QUAC1:0
+Response
+Closure:0.25	
+Weight:1
+
+Condition
+ABA:0	CaIM:1	QUAC1:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	MPK9_12:0
+Response
+Closure:0	SLAC1:0	
+Weight:2
+
+Condition
+ABA:1	MPK9_12:0
+Response
+Closure:0.25	SLAC1:0	
+Weight:2
+
+Condition
+ABA:0	MPK9_12:0	ROS:1
+Response
+Closure:0.5	
+Weight:1
+
+Condition
+ABA:0	SLAC1:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	SLAC1:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	AquaporinPIP2_1:0
+Response
+Closure:0	ROS:0	
+Weight:2
+
+Condition
+ABA:1	AquaporinPIP2_1:0
+Response
+Closure:0.5	ROS:0	
+Weight:2
+
+Condition
+ABA:0	GHR1:0
+Response
+Closure:0	SLAC1:0	ROS:0	
+Weight:3
+
+Condition
+ABA:1	GHR1:0
+Response
+Closure:0	SLAC1:0.25	ROS:1	
+Weight:3
+
+Condition
+ABA:0	GHR1:0	ROS:1
+Response
+Closure:0	SLAC1:0.25	
+Weight:2
+
+Condition
+ABA:0	OST1:0	ROS:1
+Response
+Closure:0.75	SLAC1:0.75	
+Weight:2
+
+Condition
+ABA:0	CaIM:1	GHR1:0
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	NIA1_2:0
+Response
+Closure:0.25	NO:0.25	
+Weight:2
+
+Condition
+ABA:1	NIA1_2:0
+Response
+Closure:0	NO:0	
+Weight:2
+
+Condition
+ABA:0	Microtubule_Depolymerization:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	Microtubule_Depolymerization:0
+Response
+Closure:0.25	
+Weight:1
+
+Condition
+ABA:0	Microtubule_Depolymerization:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	Microtubule_Depolymerization:1
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	Microtubule_Depolymerization:1	PLDalpha:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	Microtubule_Depolymerization:1	PLDalpha:0
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	Microtubule_Depolymerization:1	PP2CA:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	Microtubule_Depolymerization:1	PP2CA:0
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	Microtubule_Depolymerization:0	PLDalpha:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	Microtubule_Depolymerization:0	PLDalpha:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	Microtubule_Depolymerization:0	PP2CA:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	Microtubule_Depolymerization:0	PP2CA:0
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	NOGC1:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:1	NOGC1:0
+Response
+Closure:0	nitro_cGMP:0	
+Weight:2
+
+Condition
+ABA:0	NO:1	NOGC1:0
+Response
+Closure:0	nitro_cGMP:0	
+Weight:2
+
+Condition
+ABA:0	pHc:1
+Response
+Closure:0.75	NO:1	
+Weight:2
+
+Condition
+ABA:1	pHc:1
+Response
+Closure:1	NO:1	
+Weight:2
+
+Condition
+ABA:0	NO:0
+Response
+Closure:0	pHc:0	
+Weight:2
+
+Condition
+ABA:1	NO:0
+Response
+Closure:0	pHc:0.5	ROS:1	nitro_cGMP:0	
+Weight:4
+
+Condition
+ABA:1	SLAH3:0
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	S1P_PhytoS1P:1
+Response
+Closure:0.75	Ca2c:0.5	
+Weight:2
+
+Condition
+ABA:0	GPA1:0	S1P_PhytoS1P:1
+Response
+Closure:0.25	
+Weight:1
+
+Condition
+ABA:0	NO:1
+Response
+Closure:0.75	pHc:0.5	ROS:0	nitro_cGMP:0.75	PA:0.75	
+Weight:5
+
+Condition
+ABA:0	NIA1_2:0	NO:1
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	NIA1_2:0	ROS:1
+Response
+Closure:0.75	NO:0	
+Weight:2
+
+Condition
+ABA:0	NO:1	NOGC1:0	cGMP:1
+Response
+Closure:0.75	nitro_cGMP:1	
+Weight:2
+
+Condition
+ABA:0	GPA1:0	ROS:1
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	Actin_Reorganization:0	ROS:1
+Response
+Closure:0.5	
+Weight:1
+
+Condition
+ABA:0	nitro_cGMP:1
+Response
+Closure:0.5	
+Weight:1
+
+Condition
+ABA:0	nitro_cGMP:1	SLAC1:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	cADPR:1
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	ABI1:1	AtRAC1:0
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	ABI1:1	AtRAC1:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	InsP3:1
+Response
+Closure:0.75	Ca2c:0.5	
+Weight:2
+
+Condition
+ABA:0	CaIM:0
+Response
+Closure:0	Ca2c:0	
+Weight:2
+
+Condition
+ABA:0	CaIM:0	InsP3:1
+Response
+Closure:0.75	Ca2c:0.5	
+Weight:2
+
+Condition
+ABA:0	NO:1	PLC:0
+Response
+Closure:0	PA:0.25	
+Weight:2
+
+Condition
+ABA:0	NO:1	PLDdelta:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	NO:1	PLDalpha:0
+Response
+Closure:0.75	
+Weight:1
+
+Condition
+ABA:0	NO:1	PLDalpha:0	PLDdelta:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	nitro_cGMP:1	cADPR:0
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	nitro_cGMP:1	Ca2c:0
+Response
+Closure:0.25	
+Weight:1
+
+Condition
+ABA:0	CaIM:1	CPK3_21:0
+Response
+Closure:0.5	
+Weight:1
+
+Condition
+ABA:0	ABI1:1	NO:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	ABI2:1	NO:1
+Response
+Closure:0	
+Weight:1
+
+Condition
+ABA:0	CaIM:1	TCTP:1
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:0	CaIM:1	PLDalpha:0
+Response
+Closure:0	Microtubule_Depolymerization:0.5	
+Weight:2
+
+Condition
+ABA:0	NO:0	ROS:1
+Response
+Closure:0.25	
+Weight:1
+
+Condition
+ABA:0	NO:1	ROS:0
+Response
+Closure:1	
+Weight:1
+
+Condition
+ABA:1	NO:1
+Response
+pHc:1	
+Weight:1
+
+Condition
+ABA:0	SACC:0
+Response
+CaIM:0	
+Weight:1
+
+Condition
+ABA:1	SACC:0
+Response
+CaIM:1	
+Weight:1
+
+Condition
+ABA:0	SACC:0	GPA1:0
+Response
+CaIM:0	
+Weight:1
+
+Condition
+ABA:1	SACC:0	GPA1:0
+Response
+CaIM:0	
+Weight:1
+
+Condition
+ABA:0	CaIM:1	ABI1:1
+Response
+pHc:1	
+Weight:1
+
+Condition
+ABA:0	CaIM:1	ABI2:1
+Response
+pHc:1	
+Weight:1
+
+Condition
+ABA:0	CaIM:1	OST1:0
+Response
+pHc:1	
+Weight:1
+
+Condition
+ABA:0	Ca2c:0	PA:1
+Response
+Microtubule_Depolymerization:1	
+Weight:1
+
+Condition
+ABA:0	Ca2c:0	PA:1	PLDalpha:0
+Response
+Microtubule_Depolymerization:1	
+Weight:1
+
+Condition
+ABA:0	OST1:0	RBOH:0
+Response
+ROS:0	
+Weight:1
+
+Condition
+ABA:1	OST1:0	RBOH:0
+Response
+ROS:0	
+Weight:1
+
+Condition
+ABA:0	KOUT:0	RBOH:0
+Response
+ROS:0	
+Weight:1
+
+Condition
+ABA:1	KOUT:0	RBOH:0
+Response
+ROS:0	
+Weight:1
+
+Condition
+ABA:1	ABI1:1	Ca2c:0
+Response
+QUAC1:0	
+Weight:1
+
+Condition
+ABA:1	Ca2c:0	OST1:0
+Response
+QUAC1:0	
+Weight:1
+
+Condition
+ABA:0	SACC:0	ROS:1
+Response
+CaIM:0.75	
+Weight:1
+
+Condition
+ABA:0	SACC:0	GPA1:0	ROS:1
+Response
+CaIM:0.75	
+Weight:1
+
+Condition
+ABA:0	CaIM:1	MPK9_12:0
+Response
+SLAC1:0	
+Weight:1
+
+Condition
+ABA:0	PA:1	RBOH:0
+Response
+ROS:0	
+Weight:1
+
+Condition
+ABA:0	ABI1:0	ABI2:0	HAB1:0	PP2CA:0
+Response
+OST1:0	
+Weight:1
+
+Condition
+ABA:1	ABI1:0	ABI2:0	HAB1:0	PP2CA:0
+Response
+OST1:1	
+Weight:1
+

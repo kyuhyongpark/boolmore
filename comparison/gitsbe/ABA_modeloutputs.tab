@@ -1,0 +1,9 @@
+# File for defining model outputs
+# Model outputs specified must match names used in model definition
+# 
+# Use tab-separated columns
+# Name: Node name
+# Weight: Signed integer used for calculating model simulation output.
+# 
+# Name	Weight
+ABA	1
