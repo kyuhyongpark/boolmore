@@ -1,0 +1,36 @@
+# id: 298821
+# generation: 1
+# extra edges: []
+# score: 131.2222222222223 / 224.0
+# following constraints: True
+# complexity: 40
+
+targets,	factors
+ATP,	!MPT
+BAX,	!BCL2 | CASP8
+BCL2,	NFkB
+CASP3,	apoptosome
+CASP8,	CASP3 | DISC_FAS | DISC_TNF
+Cyt_c,	MOMP
+DISC_FAS,	FADD | FASL
+DISC_TNF,	FADD | TNFR
+FADD,	FADD
+FASL,	FASL
+IKK,	RIP1ub
+MOMP,	MPT
+MPT,	!BCL2 & ROS
+NFkB,	!CASP3
+NonACD,	!ATP
+RIP1,	DISC_FAS
+RIP1k,	RIP1
+RIP1ub,	RIP1 | cIAP
+ROS,	MPT | !NFkB
+SMAC,	MOMP
+TNF,	TNF
+TNFR,	TNF
+XIAP,	!SMAC
+apoptosis,	CASP3
+apoptosome,	Cyt_c & !XIAP
+cFLIP,	NFkB
+cIAP,	NFkB & cIAP | !SMAC & cIAP
+survival,	NFkB

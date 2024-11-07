@@ -1,0 +1,24 @@
+# id: 450820
+# generation: 76
+# extra edges: []
+# score: 128.0 / 128.0
+# following constraints: True
+# complexity: 49
+
+targets,	factors
+AKT,	ERBB3 | PDK1 | p70S6K
+EGF,	EGF
+ERBB1,	EGF & !erlotinib & !pertuzumab | PLCg & !erlotinib & !pertuzumab
+ERBB2,	ERBB1 & !trastuzumab | PDK1 & !erlotinib & !trastuzumab
+ERBB3,	ERK1_2 & HRG & !pertuzumab | ERK1_2 & !erlotinib & !pertuzumab | HRG & !erlotinib & !pertuzumab
+ERK1_2,	ERK1_2 | MEK1_2
+HRG,	HRG
+MEK1_2,	ERBB2 | ERBB3 | MEK1_2
+PDK1,	ERBB1 | ERBB2 & ERBB3 | ERBB3 & PDK1
+PKCa,	PKCa | PLCg | trastuzumab
+PLCg,	ERBB1 | ERBB3 | PLCg
+erlotinib,	erlotinib
+mTOR,	AKT | mTOR
+p70S6K,	erlotinib | mTOR | p70S6K
+pertuzumab,	pertuzumab
+trastuzumab,	trastuzumab

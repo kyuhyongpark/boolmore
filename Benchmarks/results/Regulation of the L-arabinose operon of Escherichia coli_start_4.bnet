@@ -1,0 +1,21 @@
+# id: 43081
+# generation: 1
+# extra edges: []
+# score: 82.0 / 104.0
+# following constraints: True
+# complexity: 19
+
+targets,	factors
+A,	Ae & T
+Ae,	Ae
+Aem,	Aem
+Am,	Ae & Aem | Ae & T
+Ara_,	Ara_
+Ara_plus_,	Am & Ara_
+C,	!Ge
+E,	MS
+Ge,	Ge
+L,	Ara_ & !Ara_plus_
+MS,	Ara_plus_
+MT,	C
+T,	MT

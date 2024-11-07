@@ -1,0 +1,21 @@
+# id: 94821
+# generation: 1
+# extra edges: []
+# score: 63.0 / 104.0
+# following constraints: True
+# complexity: 26
+
+targets,	factors
+A,	B | L
+Am,	L & Lm
+B,	M
+C,	!Ge
+Ge,	Ge
+L,	!Ge & Le | !Ge & P
+Le,	Le
+Lem,	Lem
+Lm,	!Ge & Le & P | !Ge & Lem & P
+M,	!Rm
+P,	M
+R,	!A | !Am
+Rm,	!A & !Am & R

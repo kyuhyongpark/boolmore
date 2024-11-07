@@ -1,0 +1,34 @@
+# id: 6584
+# generation: 30
+# extra edges: []
+# score: 208.0 / 208.0
+# following constraints: True
+# complexity: 50
+
+targets,	factors
+APC,	!Dsh
+Arm,	!APC & CK1alpha & Hipk & !Proteasome | CK1alpha & !Proteasome & !Sgg | CK1alpha & !Slmb
+Arr,	Wg
+Axin,	!Dsh
+Boca,	Boca
+CK1alpha,	CK1alpha
+Dally,	Ttv & !Wf
+Dlp,	Ttv & !Wf
+Dsh,	Arr & Fz | Arr & !Nkd
+Fz,	Boca & Wg
+Gro,	Gro
+Hipk,	Hipk
+Hyx,	Hyx
+Lgs,	Lgs
+Nej,	Nej
+Nemo,	Pan
+Nkd,	Nkd
+Pan,	Arm & !Nemo
+Proteasome,	Proteasome
+Pygo,	Pygo
+Sgg,	!Dsh
+Slmb,	Slmb
+Targets,	!Gro & Hyx & Lgs & Nej & Pan | !Gro & Hyx & Nej & Pan & Pygo
+Ttv,	Ttv
+Wf,	Wf
+Wg,	Wg

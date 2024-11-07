@@ -1,0 +1,34 @@
+# id: 7417
+# generation: 112
+# extra edges: []
+# score: 205.5 / 208.0
+# following constraints: True
+# complexity: 53
+
+targets,	factors
+Bcatenin_H,	!GSK3B_H
+Bcatenin_M,	!GSK3B_M & !NfkB_M
+CXCL12_M,	Cx43_M & !NfkB_M
+CXCR4_H,	CXCL12_M & !GCSF & !Gfi1_H
+CXCR7_H,	CXCL12_M
+Cx43_M,	Cx43_M
+ERK_H,	CXCR4_H | CXCR7_H | !FoxO3a_H & Gfi1_H | Gfi1_H & PI3KAkt_H | ROS_H | VLA4_H
+ERK_M,	TLR_M
+FoxO3a_H,	Bcatenin_H & !PI3KAkt_H | Bcatenin_H & ROS_H
+FoxO3a_M,	ROS_M
+GCSF,	IL1
+GSK3B_H,	!PI3KAkt_H
+GSK3B_M,	!PI3KAkt_M
+Gfi1_H,	!Gfi1_H & TLR_H
+IL1,	NfkB_H & !PI3KAkt_H & ROS_H | NfkB_M & !PI3KAkt_M & ROS_H
+NfkB_H,	TLR_H
+NfkB_M,	IL1 & TLR_M | PI3KAkt_M
+PI3KAkt_H,	CXCR4_H | !FoxO3a_H & TLR_H | GCSF
+PI3KAkt_M,	TLR_M
+ROS_H,	!FoxO3a_H & IL1
+ROS_M,	IL1 & TLR_M
+TLR_H,	lTLR
+TLR_M,	lTLR
+VCAM1_M,	!Bcatenin_M
+VLA4_H,	CXCR4_H
+lTLR,	lTLR

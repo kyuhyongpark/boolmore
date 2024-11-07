@@ -1,0 +1,26 @@
+# id: 179535
+# generation: 67
+# extra edges: []
+# score: 140.0 / 144.0
+# following constraints: True
+# complexity: 40
+
+targets,	factors
+B,	Clb5 | Cln2
+CD,	Cdc14 & FEAR & M
+CKI,	Cdc14 & !Clb5 | Cdc14 & !Cln2
+Cdc14,	MEN
+Cdc20,	Clb2 & M & SFF
+Cdh1,	Cdc14
+Clb2,	!Cdc20 & SFF | !Cdh1 & SFF
+Clb5,	!Cdc20 & SMBF
+Cln2,	SMBF
+Cln3,	!Yhp1
+FEAR,	Cdc20
+M,	Clb2 | S
+MEN,	Clb2 & FEAR
+S,	!CD
+SFF,	B & !CKI | !CKI & !Cdh1 & Clb2
+SMBF,	!Clb2 & Cln2 | !Clb2 & Cln3
+Swi5,	Cdc14 & !Clb2
+Yhp1,	SMBF

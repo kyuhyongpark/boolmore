@@ -1,0 +1,13 @@
+# id: 6181
+# generation: 1
+# extra edges: []
+# score: 35.5 / 40.0
+# following constraints: True
+# complexity: 7
+
+targets,	factors
+Coup_fti,	!Sp8
+Emx2,	Coup_fti & !Fgf8 & !Pax6
+Fgf8,	Sp8
+Pax6,	Sp8
+Sp8,	Fgf8

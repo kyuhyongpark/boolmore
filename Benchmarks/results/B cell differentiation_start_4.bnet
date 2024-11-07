@@ -1,0 +1,30 @@
+# id: 92421
+# generation: 1
+# extra edges: []
+# score: 79.65555555555557 / 176.0
+# following constraints: True
+# complexity: 33
+
+targets,	factors
+AID,	!Blimp1 & STAT6
+Ag,	Ag
+BCR,	Ag
+Bach2,	!Blimp1 | Pax5
+Bcl6,	Bcl6 | !Blimp1 | !ERK | !Irf4 | Pax5
+Blimp1,	!Bach2 & Irf4 & STAT3
+CD40,	CD40L
+CD40L,	CD40L
+ERK,	BCR
+IL_2,	IL_2
+IL_21,	IL_21
+IL_21R,	IL_21
+IL_2R,	IL_2
+IL_4,	IL_4
+IL_4R,	IL_4
+Irf4,	Irf4 & NF_kB
+NF_kB,	CD40
+Pax5,	!ERK | Pax5
+STAT3,	IL_21R
+STAT5,	IL_2R
+STAT6,	IL_4R
+XBP1,	Blimp1 & !Pax5

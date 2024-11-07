@@ -1,0 +1,32 @@
+# id: 17281
+# generation: 23
+# extra edges: []
+# score: 192.0 / 192.0
+# following constraints: True
+# complexity: 32
+
+targets,	factors
+DAP,	GramN_Bact
+DV_patterning,	DV_patterning
+Easter,	Pipe & Snk
+Fungi,	Fungi
+GNBP1,	GramP_Bact
+GNBP3,	Fungi
+Gd,	Ndl
+GramN_Bact,	GramN_Bact
+GramP_Bact,	GramP_Bact
+Grass,	ModSP
+ModSP,	GNBP1 | GNBP3 | PGRP_SD
+Ndl,	DV_patterning
+Nec,	Nec
+PGRP_SA,	GramP_Bact
+PGRP_SD,	DAP
+Pipe,	Pipe
+Psh,	!Nec & Viru_Fact
+SPE,	Easter | Psh | Spd | Spirit
+Snk,	Gd
+Spd,	Grass
+Sphinx,	Grass
+Spirit,	Grass
+Spz,	SPE
+Viru_Fact,	Fungi | GramP_Bact

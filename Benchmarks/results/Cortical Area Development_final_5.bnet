@@ -1,0 +1,13 @@
+# id: 13359
+# generation: 28
+# extra edges: []
+# score: 39.0 / 40.0
+# following constraints: True
+# complexity: 7
+
+targets,	factors
+Coup_fti,	!Sp8
+Emx2,	!Pax6 & !Sp8
+Fgf8,	!Emx2 & Fgf8
+Pax6,	!Coup_fti
+Sp8,	Fgf8

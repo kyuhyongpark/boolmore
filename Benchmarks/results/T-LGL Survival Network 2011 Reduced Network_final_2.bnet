@@ -1,0 +1,26 @@
+# id: 102348
+# generation: 65
+# extra edges: []
+# score: 144.0 / 144.0
+# following constraints: True
+# complexity: 31
+
+targets,	factors
+Apoptosis,	Caspase | Apoptosis
+BID,	!Apoptosis & !MCL1
+CREB,	!Apoptosis & IFNG
+CTLA4,	!Apoptosis & TCR
+Caspase,	BID | DISC
+Ceramide,	!Apoptosis & !S1P
+DISC,	Ceramide
+FLIP,	!Apoptosis
+Fas,	!Apoptosis & !sFas
+GPCR,	S1P
+IAP,	!Apoptosis
+IFNG,	!Apoptosis & !P2 & !SMAD
+MCL1,	!Apoptosis
+P2,	!Apoptosis & P2 | IFNG
+S1P,	!Apoptosis & !Ceramide
+SMAD,	GPCR
+TCR,	!Apoptosis & !CTLA4
+sFas,	!Apoptosis
