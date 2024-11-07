@@ -1,0 +1,60 @@
+Logger started, logging to directory: /home/troonmel/Gitsbe/gitsbe/ABA/ABA_A_20241105_214621/log
+
+gitsbe 1.3.1
+------------
+Start: 2024/11/05 21:46:21
+Reading config file: /home/troonmel/Gitsbe/gitsbe/ABA/ABA_config.tab
+
+Config options
+--------------
+verbosity: 1
+delete_tmp_files: true
+compress_log_and_tmp_files: false
+use_parallel_sim: true
+parallel_sim_num: 6
+attractor_tool: biolqm_trapspaces
+remove_output_nodes: false
+remove_input_nodes: false
+export_to_gitsbe: true
+export_to_sif: false
+export_to_ginml: false
+export_to_sbml_qual: false
+export_to_boolnet: true
+simulations: 6
+generations: 400
+population: 400
+crossovers: 1
+selection: 80
+balance_mutations: 10
+random_mutations: 10
+shuffle_mutations: 10
+topology_mutations: 10
+target_fitness: 1
+bootstrap_mutations_factor: 1000
+mutations_factor: 1
+bootstrap_shuffle_factor: 1000
+shuffle_factor: 1
+bootstrap_topology_mutations_factor: 5
+topology_mutations_factor: 1
+models_saved: 3
+best_models_export_to_ginml: false
+best_models_export_to_sbml_qual: false
+best_models_export_to_boolnet: true
+fitness_threshold: 0.1
+
+Reading .sif file: /home/troonmel/Gitsbe/gitsbe/ABA/ABA_A_network.sif
+
+Model Outputs
+-------------
+ABA with weight: 1
+Created directory: /home/troonmel/Gitsbe/gitsbe/ABA/ABA_A_20241105_214621/gitsbe_tmp
+
+Setting number of parallel simulations to: 6
+
+
+The end
+--------
+End: 2024/11/06 11:17:39
+Analysis completed in 13 hours, 31 minutes, and 18 seconds 
+
+With that we say thank you and good bye!
