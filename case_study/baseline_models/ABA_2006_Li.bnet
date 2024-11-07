@@ -1,0 +1,54 @@
+# Song Li et al. (2006) Predicting essential components of signal transduction networks: a dynamic model of guard cell abscisic acid signaling
+# Changed node names to correspond with 2017 ABA model
+# added rule for ABA explicitely
+# deleted Arg which was a source that does !regulate any other node
+# assigned constant values to nodes that were originally source nodes: ABH1, AGB1, ERA1
+
+# score:  135.25 / 248.0 ( 54.5 %)
+# complexity: 91
+# default_sources: {'ABA': 0}
+
+targets,	factors
+ABH1,	1
+AGB1,	1
+ERA1,	1
+ABA,	ABA
+SPHK1_2,	ABA  
+S1P_PhytoS1P,	SPHK1_2 
+GPA1,	(S1P_PhytoS1P | !GCR1) & AGB1
+GCR1,	GCR1
+PLDalpha,	GPA1
+PA,	PLDalpha
+pHc,	ABA 
+OST1,	ABA 
+ROP2,	PA 
+RBOH,	pHc & OST1 & ROP2 & !ABI1 
+ROS,	RBOH 
+H_ATPase,	!ROS & !pHc & !Ca2c
+ABI1,	pHc & !PA & !ROS
+RCN1,	ABA 
+NIA1_2,	RCN1 
+NOS,	Ca2c 
+NO,	NIA1_2 & NOS 
+NOGC1,	NO
+ADPRc,	NO
+cADPR,	ADPRc
+cGMP,	NOGC1
+PLC,	ABA & Ca2c
+InsP3,	PLC 
+InsPK,	ABA
+InsP6,	InsPK 
+CIS,	(cGMP & cADPR) | (InsP3 & InsP6)  
+Ca2_ATPase,	Ca2c 
+Ca2c,	(CaIM | CIS) & (!Ca2_ATPase)
+AnionEM,	((Ca2c | pHc) & !ABI1 ) | (Ca2c & pHc)
+Depolarization,	KEV | AnionEM  | (!H_ATPase) | (!KOUT) | Ca2c 
+CaIM,	(ROS | !ERA1 | !ABH1) & (!Depolarization)
+KOUT,	(pHc | !ROS  | !NO) & Depolarization
+KAP,	(!pHc | !Ca2c) & Depolarization
+KEV,	Ca2c 
+PEPC,	!ABA
+Malate,	PEPC & !ABA & !AnionEM
+AtRAC1,	!ABA & !ABI1
+Actin_Reorganization,	Ca2c  | !AtRAC1 
+Closure,	(KOUT | KAP ) & AnionEM  & Actin_Reorganization & !Malate

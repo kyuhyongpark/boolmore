@@ -1,0 +1,55 @@
+# Parul Maheshwari et al. (2019) Model-driven discovery of calcium-related protein-phosphatase inhibition in plant guard cell signaling
+# added rule for ABA explicitely
+
+# score:  238.34 / 385 (61.9%)
+# complexity: 129
+# default_sources: {'ABA': 0}
+
+targets,	factors
+ABA,	ABA
+RCARs,	ABA
+PEPC,	!ABA
+V-PPase,	ABA
+ABI1,	!PA & !RCARs & !ROS & pHc
+ABI2,	!RCARs & !ROS & !PA
+HAB1,	!RCARs & !ROS
+PP2CA,	!RCARs & !ROS
+OST1,	(!ABI1 & !HAB1) | (!PP2CA & !ABI2) | (!ABI1 & !ABI2) | (!HAB1 & !PP2CA) | (!HAB1 & !ABI2) | (!ABI1 & !PP2CA)
+ROS,	pHc & !ABI1 & OST1 & S1P_PhytoS1P & PA
+GHR1,	!ABI2 & ROS
+NO,	NIA1_2
+NIA1_2,	ROS
+cGMP,	NO
+cADPR,	cGMP & ROS & NO
+CIS,	InsP3 | cADPR
+CaIM,	Actin_Reorganization | GHR1  
+Ca2c,	(CIS | CaIM) & !Ca2_ATPase 
+Ca2_ATPase,	Ca2c
+CPK3_21,	Ca2c | CPK3_21
+MPK9_12,	Ca2c | MPK9_12
+PLC,	Ca2c
+DAG,	PLC
+InsP3,	PLC
+PLDalpha,	S1P_PhytoS1P & Ca2c
+PLDdelta,	NO | ROS
+PA,	PLDdelta | PLDalpha | DAG
+S1P_PhytoS1P,	PA | ABA
+V-ATPase,	Ca2c
+TCTP,	Ca2c
+Microtubule_Depolymerization,	TCTP | Microtubule_Depolymerization
+pHc,	((OST1 & !ABI2 & !ABI1) | Ca2c) & Vacuolar_Acidification
+H_ATPase,	!pHc & !Ca2c & !ROS
+AtRAC1,	!ABA | ABI1
+Actin_Reorganization,	!AtRAC1
+SLAC1,	CPK3_21 & MPK9_12 & OST1 & GHR1 & !ABI1 & !PP2CA & !ABI2 & pHc 
+QUAC1,	OST1 & Ca2c
+SLAH3,	CPK3_21 & !ABI1
+AnionEM,	SLAC1 | QUAC1 & SLAH3
+Malate,	PEPC & !ABA & !AnionEM
+KEV,	Vacuolar_Acidification | Ca2c
+Depolarization,	(AnionEM | Ca2c | KEV) & (!H_ATPase | !K_efflux)  
+KOUT,	(!NO | !ROS | pHc) & Depolarization
+K_efflux,	KEV & KOUT 
+H2O_Efflux,	AnionEM & OST1 & K_efflux & !Malate
+Closure,	Microtubule_Depolymerization & H2O_Efflux
+Vacuolar_Acidification,	V-PPase | V-ATPase | Vacuolar_Acidification
