@@ -113,7 +113,7 @@ Result of Gitsbe is in the `ABA_A_20241105_214621` directory.
 Whole process took ~13 hours. We score the models using the hierarchy method of boolmore, based on the 429 experimental results that Gitsbe could process.
 
 The 18 Gitsbe models had max 305.0/429 (71.1%) score and max 343.7/429 (80.1%) attactor agreement(non-hierarchy score).  
-The 15 boolmore had min 334.3/429 (77.9%) score with 359.3/429 83.8(%) attactor agreement(non-hierarchy score).
+The 15 boolmore models had min 334.3/429 (77.9%) score with 359.3/429 83.8(%) attactor agreement(non-hierarchy score).
 
 Also note that Gitsbe models did not follow any biological constraints, as they cannot be specified in Gitsbe.
 For example, all 18 models had a function `Closure, Microtubule_Depolymerization`, which is biologically unrealistic.
