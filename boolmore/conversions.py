@@ -193,7 +193,7 @@ def prime2bnet(node:str, prime:PrimeType) -> str:
     sl = []
     for c in v[1]:
         sll = []
-        for kk,vv in c.items():
+        for kk,vv in sorted(c.items()):
             if vv: sli = kk
             else: sli = '!'+kk
             sll.append(sli)

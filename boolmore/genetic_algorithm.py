@@ -108,7 +108,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         START_MODEL = BASE
 
     if run_name == None:
-        run_name = START_MODEL.split("/")[-1][:-4]
+        run_name = START_MODEL.split("/")[-1][:-5]
     LOG = run_name + "_log.txt"
 
     if seed != None:
@@ -181,14 +181,14 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
     fp.write(f"# BASE: {os.path.abspath(BASE)}\n")
     fp.write(f"# extra edges: {base.extra_edges}\n")
-    fp.write(f"# score: {base.score}\n")
+    fp.write(f"# score: {base.score} / {base.max_score} ({base.score/base.max_score*100}%)\n")
     with open(BASE, "r") as base_text:
         for line in base_text:
             if not line.startswith("#") and not line.isspace():
                 fp.write("# " + line)
     fp.write(f"\n\n# START MODEL: {os.path.abspath(START_MODEL)}\n")
     if BASE != START_MODEL:
-        fp.write(f"# score: {start.score}\n")
+        fp.write(f"# score: {start.score} / {start.max_score} ({start.score/start.max_score*100}%)\n")
         fp.write(f"# extra edges: {start.extra_edges}\n")
         with open(START_MODEL, "r") as model_text:
             for line in model_text:
@@ -227,7 +227,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         The algorithm ran for {log[-1][0]} iterations,
         generating {boolmore.config.id-STARTING_ID} models.
         Mutated {len(mutated)} functions, 
-        and increased score from {round(start.score,2)} to {round(final.score,2)}.\n
+        and increased score from {round(start.score,2)} / {start.max_score} ({round(start.score/start.max_score*100,1)}%)
+        to {round(final.score,2)} / {final.max_score} ({round(final.score/final.max_score*100,1)}%).\n
         Total elapsed time: {end_time-start_time}""")
     print()
 

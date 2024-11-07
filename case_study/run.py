@@ -3,7 +3,7 @@ import datetime
 from boolmore.genetic_algorithm import run_ga
 
 JSON = "./data/ABA_2017.json"
-START_MODEL = "./baseline_models/ABA_GA_base_A.txt"
+START_MODEL = "./baseline_models/ABA_GA_base_A.bnet"
 
 overwrite_parameters = {
     "total_iterations" : 100,
@@ -11,6 +11,7 @@ overwrite_parameters = {
     "keep" : 20,
     "mix" : 0,
     }
+
 for i in range(3, 30):
     RUN_NAME = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 
