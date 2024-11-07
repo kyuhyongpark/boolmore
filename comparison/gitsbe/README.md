@@ -2,9 +2,9 @@
 
 ## Install Gitsbe
 
-See https://druglogics.github.io/druglogics-doc/gitsbe-install.html to install gitsbe
+See https://druglogics.github.io/druglogics-doc/gitsbe-install.html to install gitsbe.
 Note that the installation didn't work on Windows.
-Below worked on Windows subsystem for linux (WSL)
+Below worked with Ubuntu on Windows subsystem for linux (WSL).
 
 1. install JDK
     `sudo apt install openjdk-21-jdk-headless`
@@ -47,14 +47,12 @@ Using mpbn to calculate trapspaces offer a significant speedup when the network 
     ```
 
 2. allow Gitsbe to access mpbn
-    see https://github.com/druglogics/druglogics-dep#readme
+    See https://github.com/druglogics/druglogics-dep#readme.
 
-    For example, in file
-    `home/user_name/.profile`, add
+    For example, in file `home/user_name/.profile`, add
     ```
     export MPBN_HOME=/pathTo/dir-that-has-the-mpbn-attractors.py
     ```
-
     so that mpbn-attractors.py is accessible at the environment variable MPBN_HOME
 
 # ABA case study
@@ -108,12 +106,12 @@ Each simulation generates 3 best models, resulting in 18 models.
 
 ## Results
 
-Result of Gitsbe is in the `ABA_A_20241105_214621` directory.
+Result of a Gitsbe run is in the `ABA_A_20241105_214621` directory.
 
-Whole process took ~13 hours. We score the models using the hierarchy method of boolmore, based on the 429 experimental results that Gitsbe could process.
+Whole process took ~13 hours. We score the models using the method of boolmore, based on the 429 experimental results that Gitsbe could process.
 
 The 18 Gitsbe models had max 305.0/429 (71.1%) score and max 343.7/429 (80.1%) attactor agreement(non-hierarchy score).  
-The 15 boolmore models had min 334.3/429 (77.9%) score with 359.3/429 83.8(%) attactor agreement(non-hierarchy score).
+The 15 boolmore models had min 334.3/429 (77.9%) score and min 359.3/429 (83.8%) attactor agreement(non-hierarchy score).
 
 Also note that Gitsbe models did not follow any biological constraints, as they cannot be specified in Gitsbe.
 For example, all 18 models had a function `Closure, Microtubule_Depolymerization`, which is biologically unrealistic.
