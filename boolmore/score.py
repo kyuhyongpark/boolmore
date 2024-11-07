@@ -274,14 +274,15 @@ if __name__=="__main__":
     from boolmore.experiment import import_exps
     from boolmore.model import Model
 
-    DATA = "boolmore/comparison/gitsbe/ABA_A_gitsbe.tsv"
+    DATA = "boolmore/case_study/data/data_Li_20230926.tsv"
     # MODEL = "boolmore/comparison/gitsbe/ABA_A_20241105_214621/models/ABA_A_network_run_0__G399_M138.bnet"
-    MODEL = "boolmore/comparison/gitsbe/20241014130450_9902_gen56.bnet"
+    MODEL = "boolmore/case_study/baseline_models/ABA_2006_Li.bnet"
     # MODEL = "boolmore/comparison/gitsbe/ABA_GA1_A.bnet"
     NAME = None
+    DEFAULT_SOURCES = {"ABA":0}
 
     if NAME == None:
-        NAME = MODEL.split("/")[-1][:-4]
+        NAME = MODEL.split("/")[-1][:-5]
 
     print("Loading experimental data . . .")
     exps, pert = import_exps(DATA)
@@ -289,7 +290,7 @@ if __name__=="__main__":
 
     print("Loading model . . .")
     primes = bnet_file2primes(MODEL)
-    n1 = Model.import_model(primes)
+    n1 = Model.import_model(primes, default_sources=DEFAULT_SOURCES)
     print("Model loaded.")
     n1.get_predictions(pert)
     n1.get_model_score(exps, report=True, file=NAME+'_score.tsv')

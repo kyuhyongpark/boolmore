@@ -70,7 +70,7 @@ Example
 
 - ID : id of the experiment for easy reference  
 - Score : A model that agrees with this experiment will get this score.  
-- Source : Values of the source nodes. For example, source1=0, source2=1. *Note that the values of all source nodes must be specified for every experiment.*  
+- Source : Values of the source nodes. For example, source1=0, source2=1. *Note that all source nodes that have a default value (see parameters), must have their values specified for every experiment.*  
 - Perturbation : Any known interventions. For example, node1 KO, node2 CA, node3 KO  
 - Observed node : the observed node  
 - Categorization : one of OFF, OFF/Some, Some, Some/ON, ON  
@@ -99,7 +99,7 @@ For example, see case_study/data/ABA_2017.json
     "per_iteration": 100,
     "keep": 20,
     "prob": 0.01,
-    "edge_prob": 0.5
+    "edge_prob": 0.5,
     "export_top": 1,
     "export_threshold": 430,
     },
