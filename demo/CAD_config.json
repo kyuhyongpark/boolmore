@@ -2,7 +2,7 @@
 "parameters" : {
     "starting_id": 1,           
     "starting_gen": 1,
-    "total_iterations": 100,
+    "total_iterations": 10,
     "per_iteration": 10,
     "keep": 2,
     "mix":2,
@@ -12,9 +12,9 @@
     "edge_prob": 0.0
     },
 
-"data" : "CAD_data.tsv",
+"data" : "./CAD_data.tsv",
 
-"base" : "CAD.txt",
+"base" : "./CAD.bnet",
 
 "default_sources": {},
 
