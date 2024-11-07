@@ -1,0 +1,26 @@
+targets,	factors
+RPS6,	!(!RPS6 & !p70S6K)
+ERBB2,	BAX & !trastuzumab & !pertuzumab & !erlotinib | ERBB2 & !trastuzumab & !pertuzumab & !erlotinib | !trastuzumab & !pertuzumab & stimulus & !erlotinib
+cRAF,	RPS6 & !ERK1_2 & !p53 | !ERK1_2 & !p53 & ERBB1 | cRAF & !ERK1_2 & !p53 | ERBB2 & !ERK1_2 & !p53
+GSKa_b,	!(!GSKa_b & !p53)
+ERBB3,	!AKT & !pertuzumab & stimulus & !erlotinib | ERBB3 & !AKT & !pertuzumab & !erlotinib
+Nfkb,	!(!RPS6 & !ERBB3 & !Nfkb)
+ERK1_2,	!(!cRAF & !ERK1_2 & !CyclinB1 & !ERBB1)
+PRAS,	PRAS & !AKT | ERBB3 & !AKT
+AKT,	AKT & !CyclinB1 & !PTEN | ERBB3 & !CyclinB1 & !PTEN | !CyclinB1 & !PTEN & stimulus | !CyclinB1 & ERBB1 & !PTEN | ERBB2 & !CyclinB1 & !PTEN
+CyclinB1,	p70S6K & !p53 | CyclinB1 & !p53
+CyclinD1,	!GSKa_b & PTEN | !GSKa_b & AKT | !GSKa_b & CyclinD1 | !GSKa_b & ERK1_2 | !GSKa_b & cJUN
+RB,	!CyclinD1 & RB & !p53 & !TSC2 | ERBB2 & !CyclinD1 & !p53 & !TSC2
+p70S6K,	!PRAS & p70S6K & !TSC2 | ERBB2 & !PRAS & !TSC2 | ERK1_2 & !PRAS & !TSC2
+p53,	!(!CyclinB1 & !RB & !p53 & !PTEN)
+ERBB1,	!pertuzumab & stimulus & !erlotinib | ERBB1 & !pertuzumab & !erlotinib
+p38,	!(!AKT & !p38)
+BAX,	!(!ERBB1 & !BAX)
+cJUN,	!GSKa_b & cJUN
+FoxO1_3a,	!AKT & FoxO1_3a
+TSC2,	!GSKa_b & !ERK1_2 & !AKT & TSC2 | ERBB2 & !GSKa_b & !ERK1_2 & !AKT
+PTEN,	!GSKa_b & p70S6K | !GSKa_b & PTEN
+trastuzumab,	trastuzumab
+pertuzumab,	pertuzumab
+stimulus,	stimulus
+erlotinib,	erlotinib

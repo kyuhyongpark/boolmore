@@ -1,0 +1,39 @@
+targets,	factors
+TGFbR,	NFAT & TGFb
+STAT1,	!(!Jak1 & !IL27 | !NFAT & !Jak1)
+IL4,	!STAT1 & GATA3 & NFAT
+IL12R,	!(!Tbet & GATA3 & !NFAT | !Tbet & !STAT4 & !NFAT & !TCR | !Tbet & !STAT4 & !TCR & !IL12 | !Tbet & GATA3 & !IL12)
+IFNg,	!(!Tbet & !NFkB | !NFkB & STAT3)
+STAT5,	IL2R
+IL21,	STAT3 & NFAT
+Foxp3,	STAT5 & !GATA3 & !STAT3 & !IL21R | TGFbR & !GATA3 & !IL6R & !IL21R | STAT5 & !GATA3 & !IL6R & !IL21R | TGFbR & !GATA3 & !STAT3 & !IL21R
+IRAK,	IL18R
+IL4R,	!(SOCS1 & !IL4_e | !IL4 & !IL4_e)
+IL6,	RORgt
+IL18R,	!STAT6 & IL18 & IL12
+Tbet,	STAT1 & !Foxp3 & !RORgt | !Foxp3 & STAT4 & !RORgt | !IFNg & !Foxp3 & Tbet & !RORgt & !IL12
+GATA3,	STAT5 & !Foxp3 & !Tbet & !RORgt & !TGFb | !Tbet & GATA3 | !Foxp3 & !Tbet & STAT6 & NFAT & !RORgt & !TGFb
+STAT6,	!IFNg & IL4R & !SOCS1
+NFkB,	!Foxp3 & IRAK
+STAT3,	!(!IL23R & !IL6R & !IL21R)
+STAT4,	IL12R & !GATA3 & IL12
+IL2,	!Tbet & NFkB & NFAT
+NFAT,	!Foxp3 & TCR
+IFNgR,	IFNg & NFAT | NFAT & IFNg_e
+IL23R,	STAT3
+IL6R,	!(!IL6 & !IL6_e)
+SOCS1,	!(!STAT1 & !Tbet)
+Jak1,	IFNgR & !SOCS1
+RORgt,	TGFbR & !Foxp3 & !Tbet & !GATA3 & STAT3 & IL21R | TGFbR & !Foxp3 & !Tbet & !GATA3 & STAT3 & IL6R
+IL17,	!STAT1 & RORgt | !STAT1 & !STAT5 & STAT3 & IL23R & IL17
+IL2R,	IL2 & NFAT
+IL21R,	IL21
+IL6_e,	IL6_e
+TCR,	TCR
+IL18,	IL18
+IL4_e,	IL4_e
+IL23,	IL23
+IL12,	IL12
+IFNg_e,	IFNg_e
+TGFb,	TGFb
+IL27,	IL27

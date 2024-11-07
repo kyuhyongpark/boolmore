@@ -1,0 +1,21 @@
+targets,	factors
+SMBF,	!Whi5 & !Clb2
+Sic1,	Sic1 & !Clb2 & !Cln2 & !Clb5 | !Clb2 & !Cln2 & !Clb5 & !Cdc14 | !Clb2 & Swi5 & !Cln2 & !Clb5 | Swi5 & Cdc14 | Sic1 & Cdc14
+Whi5,	!(Cln2 & Start | Cln3 & Start)
+Clb2,	!Sic1 & !Swe1 & !Cdc20 & !Cdh1 | !Swe1 & SFF & !Cdc20 | !Swe1 & SFF & !Cdh1
+Swe1,	!BuddingCP
+FEAR,	Cdc20
+Swi5,	!Clb2 & !Swi5 & SFF & Cdc14
+SFF,	Clb2
+Cln2,	SMBF & Start
+Yhp1,	SMBF
+Clb5,	SMBF & !Sic1 & !Cdc20
+Cln3,	!Yhp1 & Size
+Cdc20,	Clb2 & SFF & SpindleCP
+Cdc14,	FEAR & MEN
+MEN,	Clb2 & FEAR
+Cdh1,	!(Clb2 & !Cdc14 | Cln2 & !Cdc14 | Clb5 & !Cdc14)
+SpindleCP,	SpindleCP
+BuddingCP,	BuddingCP
+Size,	Size
+Start,	Start

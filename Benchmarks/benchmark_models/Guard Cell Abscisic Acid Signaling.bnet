@@ -1,0 +1,46 @@
+# constant nodes from the original paper: ABH1=ERA1=GCR1=1
+targets,	factors
+ROS,	Atrboh
+NOS,	Ca2_c
+AGB1,	GPA1
+KAP,	!Ca2_c & Depolar | !pH & Depolar
+cGMP,	GC
+GPA1,	AGB1 & !GCR1 | AGB1 & S1P
+AnionEM,	pH & !ABI1 | Ca2_c & !ABI1 | Ca2_c & pH
+PA,	PLD
+Ca2_c,	CaIM & !Ca2_ATPase | CIS & !Ca2_ATPase
+S1P,	SphK
+pH,	ABA
+CIS,	cGMP & cADPR | InsP3 & InsP6
+OST1,	ABA
+GC,	NO
+ABI1,	!ROS & !PA & pH
+SphK,	ABA
+ROP2,	PA
+NO,	NOS & NIA12
+RCN1,	ABA
+Depolar,	!(!AnionEM & !Ca2_c & KOUT & HTPase & !KEV)
+PEPC,	!ABA
+cADPR,	ADPRc
+InsPK,	ABA
+Atrboh,	pH & OST1 & !ABI1 & ROP2
+Actin,	!(!Ca2_c & RAC1)
+CaIM,	!Depolar & !ERA1 | !Depolar & !ABH1 | ROS & !Depolar
+Malate,	!AnionEM & PEPC & !ABA
+RAC1,	!ABI1 & !ABA
+InsP3,	PLC
+InsP6,	InsPK
+KOUT,	pH & Depolar | !ROS & Depolar | !NO & Depolar
+HTPase,	!ROS & !Ca2_c & !pH
+PLC,	Ca2_c & ABA
+ROP10,	ERA1
+KEV,	Ca2_c
+ADPRc,	NO
+Ca2_ATPase,	Ca2_c
+NIA12,	RCN1
+Closure,	KAP & AnionEM & Actin & !Malate | AnionEM & Actin & !Malate & KOUT
+PLD,	GPA1
+ERA1,	1
+ABA,	ABA
+GCR1,	1
+ABH1,	1

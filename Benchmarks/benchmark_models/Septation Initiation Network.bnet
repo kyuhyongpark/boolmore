@@ -1,0 +1,36 @@
+# constant nodes from the original paper: ppc89=1, CK1=etd1=ras1=0
+# extra constraints: cdk_0, cdk_L, cdk_H represent levels of cdk; only one should be active
+# fix: sid2-mob1 should be regulated by cdc7
+# removed source node cdk_0 & replaced it in the rules by (!cdk_L & !cdk_H)
+# replaced cdk_L by (cdk_L & !cdk_H) so that combinations such as cdk_L=1 & cdk_H=1 is considered as cdk_H=1.
+targets,	factors
+dma1,	sid4 & CK1
+pom1,	pak1
+flp1,	sid2_mob1 & !cdk_H | (!(cdk_L & !cdk_H) & !cdk_H) & !cdk_H
+spg1,	cdc11 & !byr4_cdc16 | !byr4_cdc16 & etd1
+cdc42,	!Rga4 & scd1 | !Rga4 & gef1
+cdc16,	!fin1
+sid2,	cdc7
+orb6,	!(!pak1 & !nak1)
+cdc7,	spg1 & cdc11
+SIP,	!(!(cdk_L & !cdk_H) & !cdk_H) & cdk_H | !ppc89 & cdk_H
+Rga4,	!pom1
+cdc11,	!(!cdc16 & !cdc7 & !sid4)
+byr4,	!cdc42 & (cdk_L & !cdk_H) & !cdk_H | !cdc42 & !plo1 & (cdk_L & !cdk_H)
+fin1,	cdk_H
+sid4,	ppc89
+plo1,	!dma1 & !(cdk_L & !cdk_H) & cdk_H | !dma1 & sid4 | !sid4 & !(cdk_L & !cdk_H) & cdk_H
+pmo25,	!(!cdc7 & !cdc14_sid1)
+byr4_cdc16,	cdc16 & byr4
+scd1,	ras1
+pak1,	cdc42
+cdc14_sid1,	cdc7
+nak1,	!(!pmo25 & !cdk_H | !pmo25 & !sid2_mob1)
+gef1,	orb6
+CK1,	0
+cdk_L,	cdk_L
+sid2_mob1,	cdc7
+etd1,	0
+ppc89,	1
+cdk_H,	cdk_H
+ras1,	0
