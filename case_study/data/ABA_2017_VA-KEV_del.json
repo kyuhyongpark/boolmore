@@ -12,9 +12,9 @@
     "edge_prob": 0.5
     },
 
-"data": "boolmore/case_study/data/data_20230925.tsv",
+"data": "./data/data_20230925.tsv",
 
-"base": "boolmore/case_study/baseline_models/ABA_2017_VA-KEV_del.txt",
+"base": "./baseline_models/ABA_2017_VA-KEV_del.bnet",
 
 "default_sources": {"ABA":0},
 

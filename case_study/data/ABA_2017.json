@@ -14,7 +14,7 @@
 
 "data": "./data/data_20230925.tsv",
 
-"base": "./baseline_models/ABA_GA_base_A.txt",
+"base": "./baseline_models/ABA_GA_base_A.bnet",
 
 "default_sources": {"ABA":0},
 
