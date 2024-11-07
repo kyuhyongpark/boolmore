@@ -49,14 +49,21 @@ class Model():
         complexity      - shows the complexity of the model functions,              :int
                           by summing the number of prime implicants
 
-        predictions     - average attractor values for all fixes                    :PredictType = dict[FixesType, dict]
-            key         - fixes                                                     :FixesType = tuple[tuple[str, int]]
-                          ((node A, value1), (node B, value2), ...)
-            value       - average value of a node in the attractors                 :dict[str, float]
-                          {observed_node: predict_value}
-        score           - how well the model agrees with experimental results       :float
-                          one point in score means agreement to one perturbation
-        max_score       - possible maximum score                                    :float
+        predictions : PredictType
+            average attractor values for all fixes
+            keys : FixesType
+            values : dict[str, float]
+                average values of nodes - {observed_node: predict_value}
+
+        score : float
+            how well the model agrees with experimental results
+            one point in score means agreement to one perturbation
+
+        non_hierarchy_score : float
+            how well the model agrees with experimental results, ignoring hierarchy
+ 
+        max_score : float
+            possible maximum score w/o hierarchy
 
         """
         self.id = 0
@@ -78,6 +85,7 @@ class Model():
 
         self.predictions:PredictType = {}
         self.score = 0.0
+        self.non_hierarchy_score = 0.0
         self.max_score = 0.0
 
     @classmethod
@@ -268,15 +276,21 @@ class Model():
         
         Assigns
         -------
-        self.max_score - max possible score of the model                        :float
-        self.score     - how well the model agrees with experimental results    :float
-                         one point in score means agreement to one perturbation
+        self.max_score : float
+            max possible score of the model
+
+        self.non_hierarchy_score : float
+            how well the model agrees with experimental results, ignoring hierarchy
+        
+        self.score : float
+            how well the model agrees with experimental results
+            one point in score means agreement to one perturbation
         
         """
         self.max_score = 0.0
         for exp in exps:
             self.max_score += exp[1]
-        agreements = score.get_agreement(exps, self.predictions)
+        agreements, self.non_hierarchy_score = score.get_agreement(exps, self.predictions)
         self.score = score.get_hierarchy_score(agreements, self.default_sources, report=report, file=file)
 
     def mutate(self, probability:float, edge_prob:float, bias:float=0.5, seed:int|None=None) -> Model:
