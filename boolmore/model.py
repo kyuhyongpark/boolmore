@@ -384,15 +384,17 @@ class Model():
 
         Parameters
         ----------
-        file_name - location of the output file                                     :str
-                    if None, output file is in the form "(model's name)_id_gen.txt"
-        threshold - only models with score higher than the threshold get exported   :float
+        file_name : str
+            location of the output file
+            if None, output file is in the form "(model's name)_id_gen.txt"
+        threshold : float
+            only models with score higher than the threshold get exported
 
         """
         if threshold != 0.0 and self.score < threshold:
             return
         if file_name == None:
-            file_name = self.name + "_" + str(self.id) + "_gen" + str(self.generation) + ".txt"
+            file_name = self.name + "_" + str(self.id) + "_gen" + str(self.generation) + ".bnet"
 
         fp = open(file_name, "w")
         fp.write("# id: " + str(self.id) + "\n")
@@ -401,6 +403,7 @@ class Model():
         fp.write("# score: " + str(self.score) + " / " + str(self.max_score) + "\n")
         fp.write("# following constraints: " + str(self.check_constraint()) + "\n")
         fp.write("# complexity: " + str(self.complexity) + "\n\n")
+        fp.write("targets,\tfactors\n")
         primes = {k:self.primes[k] for k in sorted(self.primes)}
         for k in primes:
             s = conv.prime2bnet(k, primes[k])

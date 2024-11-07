@@ -4,6 +4,9 @@ __pycache__/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# editable install
+boolmore.egg-info/
+
 # Obsolete files
 .obsolete/
 
