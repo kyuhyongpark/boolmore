@@ -1,0 +1,137 @@
+#Boolean model file in gitsbe format
+modelname: ABA_A_network_run_3__G399_M394
+fitness: 0.8682114
+stablestate: 0011000010000000000011000000100000010000100000000000000000
+stablestate: 0100010100000000001011000000000001001000011010110010010000
+stablestate: 1100111101011111111100111111011111101111011111111011110111
+stablestate: 1100111101011111111000111110011111101111011111111011110111
+stablestate: 1100111101011111111000111110011111101111011111111011111111
+stablestate: 1100111101011111111000111111011111101111011111111011110111
+stablestate: 1100111101011111111000111111011111101111011111111011111111
+stablestate: 1100111101011111111100111110011111101111011111111011110111
+stablestate: 1100111101011111111100111110011111101111011111111011111111
+stablestate: 1100111101011111111100111111011111101111011111111011111111
+stablestate: 1100111101111111111000111110011111101111011111111111110111
+stablestate: 1100111101111111111000111110011111101111011111111111111111
+stablestate: 1100111101111111111000111111011111101111011111111111110111
+stablestate: 1100111101111111111000111111011111101111011111111111111111
+stablestate: 1100111101111111111100111110011111101111011111111111110111
+stablestate: 1100111101111111111100111110011111101111011111111111111111
+stablestate: 1100111101111111111100111111011111101111011111111111110111
+stablestate: 1100111101111111111100111111011111101111011111111111111111
+equation:  nitro_cGMP *=  (  cGMP ) 
+equation:  ABA *=  (  ABA ) 
+equation:  ABI1 *=  not  ( RCARs ) 
+equation:  ABI2 *=  not  ( RCARs ) 
+equation:  ADPRc *=  (  nitro_cGMP ) 
+equation:  Actin_Reorganization *=  not  ( AtRAC1 ) 
+equation:  AnionEM *=  (  SLAC1 ) 
+equation:  AquaporinPIP2_1 *=  (  OST1 ) 
+equation:  AtRAC1 *=  (  ABI1 ) 
+equation:  CIS *=  (  InsP3 ) 
+equation:  CPK3_21 *=  (  (  (  CPK3_21 )   and  GHR1 )   and  Ca2c ) 
+equation:  Ca2_ATPase *=  (  Ca2c ) 
+equation:  Ca2c *=  (  CaIM ) 
+equation:  CaIM *=  (  GHR1 ) 
+equation:  Closure *=  (  Microtubule_Depolymerization ) 
+equation:  DAG *=  (  PLC ) 
+equation:  Depolarization *=  (  KEV ) 
+equation:  GHR1 *=  (  ROS ) 
+equation:  GPA1 *=  (  S1P_PhytoS1P ) 
+equation:  H2O_Efflux *=  (  (  (  K_efflux )   and  H2O_Efflux )   and  AquaporinPIP2_1 ) and not  ( Malate ) 
+equation:  HAB1 *=  not  ( Ca2c ) 
+equation:  H_ATPase *=  not  ( pHc ) 
+equation:  InsP3 *=  (  PLC ) 
+equation:  InsP6 *=  (  InsP3 ) 
+equation:  KEV *=  (  Ca2c ) 
+equation:  KOUT *=  (  Depolarization ) 
+equation:  K_efflux *=  (  KEV ) 
+equation:  MPK9_12 *=  (  (  MPK9_12 )   and  Ca2c ) 
+equation:  Malate *=  (  PEPC ) 
+equation:  Microtubule_Depolymerization *=  (  PA ) 
+equation:  NIA1_2 *=  (  ROS ) 
+equation:  NO *=  (  NIA1_2 ) 
+equation:  NOGC1 *=  (  NO ) 
+equation:  OST1 *=  not  ( ABI1 ) 
+equation:  PA *=  (  (  DAG )   and  PLDalpha ) 
+equation:  PEPC *=  not  ( ABA ) 
+equation:  PI3P5K *=  (  ABA ) 
+equation:  PLC *=  (  Ca2c ) 
+equation:  PLDalpha *=  (  Ca2c ) 
+equation:  PLDdelta *=  (  ROS ) 
+equation:  PP2CA *=  not  ( RCARs ) 
+equation:  PtdIns3_5P2 *=  (  PI3P5K ) 
+equation:  QUAC1 *=  (  OST1 ) 
+equation:  RBOH *=  (  (  (  (  (  PA )   and  pHc )   and  GPA1 )   and  Actin_Reorganization )   and  OST1 ) 
+equation:  RCARs *=  (  ABA ) 
+equation:  ROS *=  (  RBOH ) 
+equation:  S1P_PhytoS1P *=  (  SPHK1_2 ) 
+equation:  SACC *=  (  Actin_Reorganization ) 
+equation:  SLAC1 *=  (  pHc ) 
+equation:  SLAH3 *=  (  CPK3_21 ) 
+equation:  SPHK1_2 *=  (  ABA ) 
+equation:  TCTP *=  (  Ca2c ) 
+equation:  V_ATPase *=  (  Ca2c ) 
+equation:  V_PPase *=  (  PtdIns3_5P2 ) 
+equation:  Vacuolar_Acidification *=  (  (  (  V_ATPase )   and  V_PPase )   and  Vacuolar_Acidification ) 
+equation:  cADPR *=  (  ADPRc ) 
+equation:  cGMP *=  (  NOGC1 ) 
+equation:  pHc *=  (  Ca2c ) 
+mapping: nitro_cGMP = x1
+mapping: ABA = x2
+mapping: ABI1 = x3
+mapping: ABI2 = x4
+mapping: ADPRc = x5
+mapping: Actin_Reorganization = x6
+mapping: AnionEM = x7
+mapping: AquaporinPIP2_1 = x8
+mapping: AtRAC1 = x9
+mapping: CIS = x10
+mapping: CPK3_21 = x11
+mapping: Ca2_ATPase = x12
+mapping: Ca2c = x13
+mapping: CaIM = x14
+mapping: Closure = x15
+mapping: DAG = x16
+mapping: Depolarization = x17
+mapping: GHR1 = x18
+mapping: GPA1 = x19
+mapping: H2O_Efflux = x20
+mapping: HAB1 = x21
+mapping: H_ATPase = x22
+mapping: InsP3 = x23
+mapping: InsP6 = x24
+mapping: KEV = x25
+mapping: KOUT = x26
+mapping: K_efflux = x27
+mapping: MPK9_12 = x28
+mapping: Malate = x29
+mapping: Microtubule_Depolymerization = x30
+mapping: NIA1_2 = x31
+mapping: NO = x32
+mapping: NOGC1 = x33
+mapping: OST1 = x34
+mapping: PA = x35
+mapping: PEPC = x36
+mapping: PI3P5K = x37
+mapping: PLC = x38
+mapping: PLDalpha = x39
+mapping: PLDdelta = x40
+mapping: PP2CA = x41
+mapping: PtdIns3_5P2 = x42
+mapping: QUAC1 = x43
+mapping: RBOH = x44
+mapping: RCARs = x45
+mapping: ROS = x46
+mapping: S1P_PhytoS1P = x47
+mapping: SACC = x48
+mapping: SLAC1 = x49
+mapping: SLAH3 = x50
+mapping: SPHK1_2 = x51
+mapping: TCTP = x52
+mapping: V_ATPase = x53
+mapping: V_PPase = x54
+mapping: Vacuolar_Acidification = x55
+mapping: cADPR = x56
+mapping: cGMP = x57
+mapping: pHc = x58

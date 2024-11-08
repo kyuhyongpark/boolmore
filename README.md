@@ -76,16 +76,9 @@ Example
 - Categorization : one of OFF, OFF/Some, Some, Some/ON, ON  
 
 ### 2. Base model
-This model is the base of all generated models. Every edge in the base model can be deleted and then added back at any time. The Boolean functions should be specified in the following ways.
-
-Example 1
+This model is the base of all generated models. Every edge in the base model can be deleted and then added back at any time. The Boolean functions should be specified in a bnet format.
 ```
-A* = A and (not B or C) 
-```
-
-Example 2
-```
-A* = A & (!B | C) 
+A, A & (!B | C) 
 ```
 ### 3. json file
 For example, see case_study/data/ABA_2017.json

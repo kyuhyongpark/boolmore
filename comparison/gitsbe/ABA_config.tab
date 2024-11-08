@@ -1,0 +1,95 @@
+# Gitsbe config file (tab-delimited)
+# Parameter:	Value
+
+### Global
+
+# Output verbosity level (0 = nothing - 3 = everything)
+verbosity:	1
+
+# Delete all files in *_tmp dirs
+delete_tmp_files:	true
+
+# If true, it will compress the log and tmp files
+compress_log_and_tmp_files:	false
+
+# Run simulations in parallel
+use_parallel_sim:	true
+
+# The number (>1) of simulations to execute in parallel
+# The standard value would be to have as many parallel simulations as the 
+# machine's Cores (reduce it if too many parallel simulations are causing issues)
+parallel_sim_num:	6
+
+# Tool to use for the calculation of attractors
+# Supported values: bnet_reduction, bnet_reduction_reduced, biolqm_stable_states, biolqm_trapspaces, mpbn_trapspaces
+attractor_tool:	biolqm_trapspaces
+
+### Gitsbe section
+
+## Model trimming
+remove_output_nodes:	false
+remove_input_nodes:	false
+
+## Exporting input network file
+export_to_gitsbe:	true
+export_to_sif:	false
+export_to_ginml:	false
+export_to_sbml_qual:	false
+export_to_boolnet:	true
+
+# Parameters for evolutionary algorithms
+# Number of simulations (evolutions) to run
+simulations:	6
+
+# Number of generations per simulation (or less if target_fitness is reached, see below)
+generations:	400
+
+# Number of models per generation
+population:	400
+
+# Number of crossovers
+crossovers:	1
+
+# Number of models selected for next generation
+selection:	80
+
+# Type of mutations to introduce and a value that corresponds to the number of 
+# (randomly selected) boolean equations that the specific mutation is going 
+# to be applied to
+balance_mutations:	10
+random_mutations:	10
+shuffle_mutations:	10
+topology_mutations:	10
+
+# Target fitness threshold to stop evolution (1 is the absolute maximum value)
+target_fitness:	1
+
+# Factor to multiply number of mutations until initial phase is over (>0 stable states obtained)
+bootstrap_mutations_factor:	1000
+
+# Factor to multiply number of mutations after initial phase is over (>0 stable states obtained)
+mutations_factor:	1
+
+# Factor to multiply number of regulator priority shuffles until initial phase is over
+bootstrap_shuffle_factor:	1000
+
+# Factor to multiply number of regulator priority shuffles after initial phase is over
+shuffle_factor:	1
+
+# Factor to multiply number of topology mutations until initial phase is over
+bootstrap_topology_mutations_factor:	5
+
+# Factor to multiply number of topology mutations after initial phase is over
+topology_mutations_factor:	1
+
+# Number of models to save
+models_saved:	3
+
+# Additional formats to export best models (gitsbe format is enabled by default)
+best_models_export_to_ginml:	false
+best_models_export_to_sbml_qual:	false
+best_models_export_to_boolnet:	true
+
+# Threshold for saving models
+fitness_threshold:	0.1
+

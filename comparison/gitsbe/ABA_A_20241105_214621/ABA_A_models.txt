@@ -1,0 +1,19 @@
+# Each line contains a filename pointing to a model that will be used by Drabme
+ABA_A_network_run_0__G399_M200.gitsbe
+ABA_A_network_run_0__G399_M275.gitsbe
+ABA_A_network_run_0__G399_M138.gitsbe
+ABA_A_network_run_1__G399_M216.gitsbe
+ABA_A_network_run_1__G399_M183.gitsbe
+ABA_A_network_run_1__G399_M260.gitsbe
+ABA_A_network_run_2__G399_M379.gitsbe
+ABA_A_network_run_2__G399_M86.gitsbe
+ABA_A_network_run_2__G399_M143.gitsbe
+ABA_A_network_run_3__G399_M394.gitsbe
+ABA_A_network_run_3__G399_M66.gitsbe
+ABA_A_network_run_3__G399_M152.gitsbe
+ABA_A_network_run_4__G399_M378.gitsbe
+ABA_A_network_run_4__G399_M394.gitsbe
+ABA_A_network_run_4__G399_M357.gitsbe
+ABA_A_network_run_5__G399_M89.gitsbe
+ABA_A_network_run_5__G399_M36.gitsbe
+ABA_A_network_run_5__G399_M122.gitsbe

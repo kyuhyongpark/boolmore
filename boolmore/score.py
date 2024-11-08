@@ -44,41 +44,49 @@ def powerset(iterable:Iterable) -> it.chain:
     return it.chain.from_iterable(it.combinations(s, r) for r in range(len(s)+1))
 
 
-def get_agreement(experiments:list[ExpType], predictions:PredictType) -> AgreeType:
+def get_agreement(experiments:list[ExpType], predictions:PredictType) -> tuple[AgreeType, float]:
     """
-    Returns attractor agreements
-    when given experimental outcomes and model predictions
+    Returns attractor agreements when given experimental outcomes and model predictions.
+    agreements are categorized by observed node,
+    so that it is easier to find all the interventions for that observed node.
+    Also returns non-hierarchy score.
 
     Parameters
     ----------
-    experiments - list of exp                           :list[ExpType]
-        exp     - info of a single experiment           :ExpType = tuple[int, float, FixesType, str, str]
-            exp[0] - id of the experiment               :int
-            exp[1] - max_score for the experiment       :float
-            exp[2] - fixes                              :FixesType = tuple[tuple[str, int]]
-                     ((node A, value1), (node B, value2), ...)
-            exp[3] - observed_node                      :str
-            exp[4] - outcome_value                      :str
-                     one of OFF, OFF/Some, Some, Some/ON, ON
+    experiments : list[ExpType]
+        exp : ExpType
+            info of a single experiment                
+            exp[0] : int
+                id of the experiment
+            exp[1] : float
+                max_score for the experiment
+            exp[2] : FixesType
+                fixes - ((node A, value1), (node B, value2), ...)
+            exp[3] : str
+                observed_node
+            exp[4] : str
+                outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
 
-    predictions - average attractor values for all fixes    :PredictType = dict[FixesType, dict]
-        keys   - fixes                                      :FixesType = tuple[tuple[str, int]]
-        values - average values of nodes                    :dict[str, float]
-                 {observed_node: predict_value}
+    predictions : PredictType
+        average attractor values for all fixes
+        keys : FixesType
+        values : dict[str, float]
+            average values of nodes - {observed_node: predict_value}
     
     Returns
     -------
-    agreements - collection of all data                     :AgreeType = dict[str, dict]
-        key   - observed_node                               :str
-        value - data for the node                           :dict[FixesType, tuple]
-            key   - fixes                                   :FixesType = tuple[tuple[str, int]]
-            value - data for given fixes                    :tuple[int, float, str, float, float]
-                    (id, max_score, outcome_value, predict_value, agreement)
+    agreements : AgreeType
+        collection of all data
+        key : str
+            observed_node
+        value : dict[FixesType, tuple]
+            data for the node
+            key : FixesType
+            value : tuple[int, float, str, float, float]
+                data for given fixes - (id, max_score, outcome_value, predict_value, agreement)
 
-    Notes
-    -----
-    agreements are categorized by observed node,
-    so that it is easier to find all the interventions for that observed node.
+    non_hierarchy_score : float
+        non-hierarchy score considering all attractor agreements
 
     """
 
@@ -87,6 +95,8 @@ def get_agreement(experiments:list[ExpType], predictions:PredictType) -> AgreeTy
     FIXES = 2
     NODE = 3
     VALUE = 4
+
+    non_hierarchy_score = 0
 
     agreements = {}
     for exp in experiments:
@@ -133,6 +143,8 @@ def get_agreement(experiments:list[ExpType], predictions:PredictType) -> AgreeTy
         
         agreements[observed_node][fixes] = id, max_score, outcome_value, predict_value, agreement
 
+        non_hierarchy_score += max_score * agreement
+
         #     print("Fixes: ", fixes)
         #     print("Observed node: ", observed_node)
         #     print("Outcome: ", outcome_value)
@@ -140,7 +152,7 @@ def get_agreement(experiments:list[ExpType], predictions:PredictType) -> AgreeTy
         #     print("agreement: ", agreement)
         # print("- - - - - - - - - -")
 
-    return agreements
+    return agreements, non_hierarchy_score
 
 
 def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
@@ -151,24 +163,31 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
 
     Parameters
     ----------
-    agreements - collection of all data                     :AgreeType = dict[str, dict]
-        key   - observed_node                               :str
-        value - data for the node                           :dict[FixesType, tuple]
-            key   - fixes                                   :FixesType = tuple[tuple[str, int]]
-                    ((node A, value1), (node B, value2), ...)
-            value - data for given fixes                    :tuple[int, float, str, float, float]
-                    (id, max_score, outcome_value, predict_value, agreement)
+    agreements : AgreeType
+        collection of all data
+        key : str
+            observed_node
+        value : dict[FixesType, tuple]
+            data for the node
+            key : FixesType
+            value : tuple[int, float, str, float, float]
+                data for given fixes - (id, max_score, outcome_value, predict_value, agreement)
     
-    default_sources - Shows the default settings for the source nodes,      :dict[str, int]
-                      which is considered the top of the hierarchy
-                      These source nodes must have a defined value in
-                      every experiments
-    report          - if True, make a csv file with detailed report         :bool
-    file            - the location and name of the detailed report file     :str
+    default_sources : dict[str, int]
+        Shows the default settings for the source nodes, which is considered the top of the hierarchy
+        These source nodes must have a defined value in every experiments.
+
+    report : bool
+        if True, make a csv file with detailed report
+    
+    file : str
+        the location and name of the detailed report file
 
     Returns
     -------
-    score - The model's score   :float
+    score : float
+        how well the model agrees with experimental results
+        one point in score means agreement to one perturbation
 
     """
     ID = 0
@@ -234,8 +253,7 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
                 if is_subset:
                     subset_fixes_set.add(other_fixes)
 
-            current_score = 0.0
-            current_score += agreements[observed_node][fixes][MAX_SCORE]
+            current_score = agreements[observed_node][fixes][MAX_SCORE]
             model_max_score += agreements[observed_node][fixes][MAX_SCORE]
 
             for subset_fixes in subset_fixes_set:
