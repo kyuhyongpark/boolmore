@@ -2,7 +2,7 @@
 
 ## Install Gitsbe
 
-See https://druglogics.github.io/druglogics-doc/gitsbe-install.html to install gitsbe.
+See https://druglogics.github.io/druglogics-doc/gitsbe-install.html to install Gitsbe.
 Note that the installation didn't work on Windows.
 The solution given below worked with Ubuntu on a Windows subsystem for linux (WSL).
 
@@ -47,6 +47,7 @@ Using mpbn to calculate trapspaces offers a significant speedup when the network
     ```
 
 2. allow Gitsbe to access mpbn
+
     See https://github.com/druglogics/druglogics-dep#readme.
 
     For example, in file `home/user_name/.profile`, add
@@ -61,7 +62,7 @@ Using mpbn to calculate trapspaces offers a significant speedup when the network
 
 Run `conversion.ipynb`. This converts the baseline start model into a list of edges in sif format. It also adds all extra edges specified in the json file to the list. Note that we cannot enforce constraints nor distinguish the original edges from the extra edges.
 Since an interaction graph cannot distinguish source nodes from constant nodes, Gitsbe considers all constant nodes as source nodes. The ABA model has 22 constant nodes, and considering them as source nodes makes it very difficult to enumerate all attractors. For this reason, we substitute the constant node values to other functions (aka percolate the constant values). This eliminates 24 nodes (22 original constants and 2 additional nodes fixed by percolating constant node values).
-The result is stored as `ABA_A_network.sif`. We note that certain node names were changed since Gitsbe does not allow certain characters in node names.
+The result is stored as `ABA_A_network.sif`. Note that we changed certain node names since Gitsbe does not allow certain characters in node names.
 
 `conversion.ipynb` also converts the input of boolmore into training data for Gitsbe. Source node values and perturbations are added as `Condition`. Experiments that have the same perturbation conditions are grouped together for faster computation. The observation categories "OFF", "OFF/Some", "Some", "Some/ON", "ON" are assigned thee values 0, 0.25, 0.5, 0.75, 1.0, respectively as `Response`. Each `Condition`-`Response` pair is assigned a weight equal to the number of observations so that each observation is treated equally.
 
