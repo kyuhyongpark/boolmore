@@ -1,0 +1,13 @@
+targets,	factors
+Akkermansia,	Coprobacillus
+Barnesiella,	Lachnospiraceae & Other | Lachnospiraceae_other
+Blautia,	Enterococcus | Coprobacillus | Blautia
+Clindamycin,	Clindamycin
+Clostridium_difficile,	!Barnesiella | Clostridium_difficile
+Coprobacillus,	Coprobacillus
+Enterobacteriaceae,	Enterobacteriaceae
+Enterococcus,	Clostridium_difficile & !Coprobacillus & Enterobacteriaceae
+Lachnospiraceae,	!Clindamycin & Lachnospiraceae & Other | !Clindamycin & Lachnospiraceae_other & Other
+Lachnospiraceae_other,	!Clindamycin | Lachnospiraceae | Other
+Mollicutes,	Mollicutes
+Other,	!Clindamycin & Other | !Clindamycin & Lachnospiraceae_other | !Clindamycin & Lachnospiraceae

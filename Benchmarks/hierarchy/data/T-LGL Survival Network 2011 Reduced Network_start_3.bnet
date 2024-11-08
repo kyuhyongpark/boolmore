@@ -1,0 +1,19 @@
+targets,	factors
+Apoptosis,	Caspase
+BID,	!MCL1
+CREB,	!Apoptosis & IFNG
+CTLA4,	TCR
+Caspase,	!Apoptosis & !IAP | BID & !IAP | DISC & !IAP
+Ceramide,	!Apoptosis | !S1P
+DISC,	Ceramide & !FLIP & Fas
+FLIP,	!DISC
+Fas,	!Apoptosis & !sFas
+GPCR,	S1P
+IAP,	!BID
+IFNG,	!Apoptosis | !P2 & !SMAD
+MCL1,	!Apoptosis
+P2,	!Apoptosis & P2 | IFNG & P2
+S1P,	!Apoptosis | !Ceramide
+SMAD,	GPCR
+TCR,	!CTLA4
+sFas,	S1P

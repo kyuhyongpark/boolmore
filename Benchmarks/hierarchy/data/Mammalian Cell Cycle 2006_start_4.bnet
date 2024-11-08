@@ -1,0 +1,11 @@
+targets,	factors
+Cdc20,	CycB
+Cdh1,	Cdc20 & p27 | !CycA | !CycB
+CycA,	!Cdc20 & !Cdh1 | !Cdc20 & CycA & !UbcH10 | !Cdc20 & E2F | !Cdh1 & !Rb | !Cdh1 & !UbcH10 | CycA & E2F | CycA & !Rb | E2F & !UbcH10 | !Rb & !UbcH10
+CycB,	!Cdc20 & !Cdh1
+CycD,	CycD
+CycE,	!Rb
+E2F,	!CycA & !CycB & !Rb & p27
+Rb,	!CycA & !CycB & !CycD & !CycE
+UbcH10,	Cdc20 & CycA & CycB & UbcH10 | !Cdh1 & CycA & UbcH10
+p27,	!CycA & !CycB & !CycD & !CycE | !CycA & !CycB & !CycE & p27
