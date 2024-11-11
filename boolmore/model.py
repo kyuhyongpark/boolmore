@@ -221,11 +221,12 @@ class Model():
                     
         Assigns
         -------
-        self.predictions - average attractor values for all fixes   :PredictType = dict[FixesType, dict]
-            key   - fixes                                           :FixesType = tuple[tuple[str, int]]
-                    ((node A, value1), (node B, value2), ...)
-            value - average value of a node in the attractors       :dict[str, float]
-                    {observed_node: predict_value}
+        self.predictions : PredictType
+            average attractor values for all fixes
+            key : FixesType
+                fixes - ((node A, value1), (node B, value2), ...)
+            value : dict[str, float]
+                average value of a node in the attractors - {observed_node: predict_value}
 
         """
         predictions = {}

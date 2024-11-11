@@ -15,10 +15,13 @@ from boolmore.model import Model, mix_models
 
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
+PredictType = dict[FixesType, dict]
 
 def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
            data_file:str|None=None, base_file:str|None=None, parameter_dict:dict|None=None,
-           stop_if_max:bool=True, core:int=2, seed:int|None = None):
+           stop_if_max:bool=True, core:int=2, seed:int|None = None,
+           hierarchy:bool=True,
+           )-> tuple[Model, Model, Model, list]:
     """
     Imports parameters, experiments, base model in the json file.
     Runs genetic algorithm and exports refined models.
@@ -55,6 +58,17 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         if larger than 1, model evaluation is done in parallel
     seed : int | None
         random seed for reproducibility
+
+    Returns
+    -------
+    base : Model
+        the base model
+    start : Model
+        the starting model
+    final : Model
+        the final model
+    log : list
+        the log
 
     """
     # load json file if given
@@ -110,9 +124,6 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     if run_name == None:
         run_name = START_MODEL.split("/")[-1][:-5]
     LOG = run_name + "_log.txt"
-
-    if seed != None:
-        random.seed(seed)
 
     # if parameter_dict is given, overwrite parameters
     if parameter_dict != None:
@@ -201,7 +212,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
                          total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                          prob=PROB, edge_prob=EDGE_PROB,
                          export_top=EXPORT_TOP, export_thresh=EXPORT_THRESHOLD,
-                         stop_if_max=stop_if_max, core=core)
+                         stop_if_max=stop_if_max, core=core, seed=seed,
+                         hierarchy=hierarchy)
     end_time = datetime.datetime.now()
 
     fp = open(LOG, "a")
@@ -241,13 +253,14 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         print("start:" + prime2bnet(node, start.primes[node]))
         print("final:" + prime2bnet(node, final.primes[node]))
 
-    return base, start, final
+    return base, start, final, log
 
 def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
             total_iter:int, per_iter:int, keep:int, mix:int,
             prob:float|list[float], edge_prob:float=0.5,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
             stop_if_max:bool=True, core:int=2, seed:int|None=None,
+            hierarchy:bool=True,
             ) -> tuple[Model, list]:
     """
     Main part of the genetic algorithm.
@@ -304,6 +317,9 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     seed : int | None
         random seed for reproducibility
 
+    hierarchy : bool
+        if True, use the hierarchy of the model to score. default True
+
 
     Returns
     -------
@@ -358,6 +374,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
                 if new_model.id == result[0]:
                     new_model.predictions = result[1]
                     new_model.score = result[2]
+                    new_model.non_hierarchy_score = result[3]
     else:
         for new_model in new_model_lst:
             new_model.get_predictions(fixes_list)
@@ -365,7 +382,10 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     iteration.extend(new_model_lst)
     
     iteration = sorted(iteration, key=lambda x: (len(x.extra_edges), x.complexity))
-    iteration = sorted(iteration, key=lambda x: x.score, reverse=True)
+    if hierarchy:
+        iteration = sorted(iteration, key=lambda x: x.score, reverse=True)
+    else:
+        iteration = sorted(iteration, key=lambda x: x.non_hierarchy_score, reverse=True)
 
     # Export models that exceed the threshold score
     for i in range(export_top):
@@ -390,7 +410,10 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     
         # mix the good ones
         to_be_mixed = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
-        to_be_mixed = sorted(to_be_mixed, key=lambda x: x.score, reverse=True)
+        if hierarchy:
+            to_be_mixed = sorted(to_be_mixed, key=lambda x: x.score, reverse=True)
+        else:
+            to_be_mixed = sorted(to_be_mixed, key=lambda x: x.non_hierarchy_score, reverse=True)
         weights = list(range(1, keep+1))
         weights.reverse()
         p = np.array(weights)/np.sum(np.array(weights))
@@ -407,6 +430,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
                     if mixed_model.id == result[0]:
                         mixed_model.predictions = result[1]
                         mixed_model.score = result[2]
+                        mixed_model.non_hierarchy_score = result[3]
         else:
             for mixed_model in mixed_model_lst:
                 mixed_model.get_predictions(fixes_list)
@@ -417,7 +441,10 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         weights = list(range(1, keep+mix+1))
         weights.reverse()
         new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
-        new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
+        if hierarchy:
+            new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
+        else:
+            new_iteration = sorted(new_iteration, key=lambda x: x.non_hierarchy_score, reverse=True)
         targets = random.choices(new_iteration, weights=weights, k=per_iter-mix)
         new_model_lst = []
         for target in targets:
@@ -430,6 +457,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
                     if new_model.id == result[0]:
                         new_model.predictions = result[1]
                         new_model.score = result[2]
+                        new_model.non_hierarchy_score = result[3]
         else:
             for new_model in new_model_lst:
                 new_model.get_predictions(fixes_list)
@@ -437,7 +465,10 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         new_iteration.extend(new_model_lst)
       
         new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
-        new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
+        if hierarchy:
+            new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
+        else:
+            new_iteration = sorted(new_iteration, key=lambda x: x.non_hierarchy_score, reverse=True)
     
         final = new_iteration[0]
 
@@ -462,11 +493,58 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
 
     return final, log
 
-def parallel_pred_and_score(model, fixes_list, exps):
+def parallel_pred_and_score(model, fixes_list, exps)-> tuple[Model, PredictType, float, float]:
+    """
+    Gets predictions and scores for a model in parallel.
+    This function must return all the values that the models will assign to their attributes.
+
+    Parameters
+    ----------
+    model : Model
+        The model to get predictions and scores for
+
+    fixes_list : list[FixesType]
+        summarized list of fixes for convenience
+        fixes : FixesType
+            ((node A, value1), (node B, value2), ...)
+
+    exps : list[ExpType]
+        exp : ExpType
+            info of a single experiment                
+            exp[0] : int
+                id of the experiment
+            exp[1] : float
+                max_score for the experiment
+            exp[2] : FixesType
+                fixes - ((node A, value1), (node B, value2), ...)
+            exp[3] : str
+                observed_node
+            exp[4] : str
+                outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
+
+    Returns
+    -------
+    model.id : int
+        id of the model
+
+    model.predictions : PredictType
+        average attractor values for all fixes
+        key : FixesType
+            fixes - ((node A, value1), (node B, value2), ...)
+        value : dict[str, float]
+            average value of a node in the attractors - {observed_node: predict_value}
+
+    model.score : float
+        score of the model
+
+    model.non_hierarchy_score : float
+        non-hierarchy score of the model
+    
+    """
     model.get_predictions(fixes_list)
     model.get_model_score(exps)
 
-    return model.id, model.predictions, model.score
+    return model.id, model.predictions, model.score, model.non_hierarchy_score
 
 if __name__ == "__main__":
 
