@@ -1,0 +1,96 @@
+ID	Score	Source	Perturbation	Observed node	Categorization
+1	1.0	Food=1, oxidative_stress=0		lipl-3_high	OFF
+2	1.0	Food=0, oxidative_stress=0		lipl-3_high	ON
+3	1.0	Food=1, oxidative_stress=1		lipl-3_high	ON
+4	1.0	Food=1, oxidative_stress=0	hlh-30_basal KO	lipl-3_high	OFF
+5	1.0	Food=0, oxidative_stress=0	hlh-30_basal KO	lipl-3_high	OFF
+6	1.0	Food=1, oxidative_stress=1	hlh-30_basal KO	lipl-3_high	ON
+7	1.0	Food=1, oxidative_stress=0	DAF-16_basal KO	lipl-3_high	ON
+8	1.0	Food=0, oxidative_stress=0	DAF-16_basal KO	lipl-3_high	ON
+9	1.0	Food=1, oxidative_stress=1	DAF-16_basal KO	lipl-3_high	OFF
+10	1.0	Food=1, oxidative_stress=0	HSF-1_basal KO	lipl-3_high	OFF
+11	1.0	Food=0, oxidative_stress=0	HSF-1_basal KO	lipl-3_high	ON
+12	1.0	Food=1, oxidative_stress=0	HSF-1_basal CA, HSF-1_high CA	lipl-3_high	ON
+13	1.0	Food=1, oxidative_stress=0	DAF-16_basal CA, DAF-16_high CA	lipl-3_high	ON
+14	1.0	Food=1, oxidative_stress=0	mTORC1_basal KO	lipl-3_high	ON
+15	1.0	Food=1, oxidative_stress=1	HSF-1_basal KO	lipl-3_high	OFF
+16	1.0	Food=1, oxidative_stress=0	DAF-2 KO	lipl-3_high	ON
+17	1.0	Food=1, oxidative_stress=0	GLP-1 KO	lipl-3_high	ON
+18	1.0	Food=1, oxidative_stress=0	mxl-3_basal KO	lipl-3_high	ON
+19	1.0	Food=1, oxidative_stress=0	hlh-30_basal KO, mTORC1_basal KO	lipl-3_high	OFF
+20	1.0	Food=1, oxidative_stress=0	hlh-30_basal KO, DAF-16_basal KO	lipl-3_high	OFF
+21	1.0	Food=0, oxidative_stress=0	hlh-30_basal KO, DAF-16_basal KO	lipl-3_high	OFF
+22	1.0	Food=1, oxidative_stress=0	mTORC1_basal KO, DAF-16_basal KO	lipl-3_high	ON
+23	1.0	Food=1, oxidative_stress=0	hlh-30_basal KO, GLP-1 KO	lipl-3_high	ON
+24	1.0	Food=1, oxidative_stress=0	hlh-30_basal KO, mxl-3_basal KO	lipl-3_high	OFF
+25	1.0	Food=1, oxidative_stress=0	DAF-2 KO, DAF-16_basal KO	lipl-3_high	OFF
+26	1.0	Food=1, oxidative_stress=0	DAF-2 KO, hlh-30_basal KO	lipl-3_high	ON
+27	1.0	Food=1, oxidative_stress=0	DAF-2 KO, HSF-1_basal KO	lipl-3_high	OFF
+28	1.0	Food=1, oxidative_stress=0	GLP-1 KO, DAF-16_basal KO	lipl-3_high	ON
+29	1.0	Food=1, oxidative_stress=0	DAF-16_basal CA, DAF-16_high CA, HSF-1_basal KO	lipl-3_high	OFF
+30	1.0	Food=1, oxidative_stress=0	GLP-1 KO, HSF-1_basal KO	lipl-3_high	OFF
+31	1.0	Food=0, oxidative_stress=0	HSF-1_basal KO, hlh-30_basal KO	lipl-3_high	OFF
+32	1.0	Food=1, oxidative_stress=1	HSF-1_basal KO, hlh-30_basal KO	lipl-3_high	OFF
+33	1.0	Food=1, oxidative_stress=0	HSF-1_basal KO, mxl-3_basal KO	lipl-3_high	ON
+34	1.0	Food=1, oxidative_stress=0	HSF-1_basal KO, mxl-3_basal KO, hlh-30_basal KO	lipl-3_high	OFF
+35	0.5	Food=1, oxidative_stress=0		hlh-30_basal	ON
+36	0.5	Food=1, oxidative_stress=0		hlh-30_high	OFF
+37	1.0	Food=0, oxidative_stress=0		hlh-30_high	ON
+38	0.5	Food=1, oxidative_stress=1		HLH-30_basal	ON
+39	0.5	Food=1, oxidative_stress=1		HLH-30_high	OFF
+40	0.5	Food=1, oxidative_stress=0		HLH-30_basal	ON
+41	0.5	Food=1, oxidative_stress=0		HLH-30_high	OFF
+42	1.0	Food=0, oxidative_stress=0		HLH-30_high	ON
+43	1.0	Food=1, oxidative_stress=0		DAF-2	ON
+44	1.0	Food=0, oxidative_stress=0		DAF-2	OFF
+45	1.0	Food=1, oxidative_stress=0		GLP-1	ON
+46	1.0	Food=0, oxidative_stress=0		GLP-1	OFF
+47	1.0	Food=1, oxidative_stress=0		DAF-16_high	OFF
+48	1.0	Food=0, oxidative_stress=0		DAF-16_high	ON
+49	1.0	Food=1, oxidative_stress=1		DAF-16_high	ON
+50	0.5	Food=1, oxidative_stress=0		HSF-1_basal	ON
+51	0.5	Food=1, oxidative_stress=0		HSF-1_high	OFF
+52	1.0	Food=1, oxidative_stress=1		HSF-1_high	ON
+53	0.5	Food=1, oxidative_stress=0		mxl-3_basal	ON
+54	0.5	Food=1, oxidative_stress=0		mxl-3_high	OFF
+55	1.0	Food=0, oxidative_stress=0		mxl-3_basal	OFF
+56	0.5	Food=1, oxidative_stress=0		MXL-3_basal	ON
+57	0.5	Food=1, oxidative_stress=0		MXL-3_high	OFF
+58	1.0	Food=1, oxidative_stress=1		MXL-3_high	ON
+59	1.0	Food=0, oxidative_stress=0		MXL-3_basal	OFF
+60	1.0	Food=1, oxidative_stress=1		mTORC1_high	ON
+61	1.0	Food=1, oxidative_stress=0	mTORC1_basal KO	MXL-3_basal	OFF
+62	1.0	Food=1, oxidative_stress=0	HSF-1_basal KO	MXL-3_basal	OFF
+63	0.5	Food=1, oxidative_stress=0	DAF-16_basal KO	MXL-3_basal	ON
+64	0.5	Food=1, oxidative_stress=0	DAF-16_basal KO	MXL-3_high	OFF
+65	1.0	Food=1, oxidative_stress=0	GLP-1 KO	mxl-3_high	ON
+66	0.5	Food=1, oxidative_stress=0	DAF-2 KO	mxl-3_basal	ON
+67	0.5	Food=1, oxidative_stress=0	DAF-2 KO	mxl-3_high	OFF
+68	0.5	Food=1, oxidative_stress=0	DAF-16_basal KO	mxl-3_basal	ON
+69	0.5	Food=1, oxidative_stress=0	DAF-16_basal KO	mxl-3_high	OFF
+70	1.0	Food=1, oxidative_stress=0	HSF-1_basal CA, HSF-1_high CA	mxl-3_high	ON
+71	0.5	Food=1, oxidative_stress=0	hlh-30_basal KO	mxl-3_basal	ON
+72	0.5	Food=1, oxidative_stress=0	hlh-30_basal KO	mxl-3_high	OFF
+73	1.0	Food=0, oxidative_stress=0	hlh-30_basal KO	mxl-3_basal	OFF
+74	1.0	Food=1, oxidative_stress=0	DAF-16_basal KO	hlh-30_high	ON
+75	1.0	Food=0, oxidative_stress=0	DAF-16_basal KO	hlh-30_high	ON
+76	1.0	Food=1, oxidative_stress=0	HSF-1_basal KO	hlh-30_high	ON
+77	1.0	Food=1, oxidative_stress=1	HSF-1_basal KO	hlh-30_high	ON
+78	1.0	Food=1, oxidative_stress=0	mTORC1_basal KO	hlh-30_high	ON
+79	0.5	Food=1, oxidative_stress=0	mxl-3_basal KO	hlh-30_basal	ON
+80	0.5	Food=1, oxidative_stress=0	mxl-3_basal KO	hlh-30_high	OFF
+81	1.0	Food=0, oxidative_stress=0	mxl-3_basal KO	hlh-30_high	ON
+82	1.0	Food=1, oxidative_stress=0	mTORC1_basal KO	HLH-30_high	ON
+83	0.5	Food=1, oxidative_stress=0	DAF-2 KO	HLH-30_basal	ON
+84	0.5	Food=1, oxidative_stress=0	DAF-2 KO	HLH-30_high	OFF
+85	0.5	Food=1, oxidative_stress=0	GLP-1 KO	HLH-30_basal	ON
+86	0.5	Food=1, oxidative_stress=0	GLP-1 KO	HLH-30_high	OFF
+87	1.0	Food=1, oxidative_stress=0	mxl-3_basal KO	HSF-1_basal	OFF
+88	1.0	Food=1, oxidative_stress=0	mTORC1_basal KO	HSF-1_basal	OFF
+89	0.5	Food=1, oxidative_stress=0	hlh-30_basal KO	HSF-1_basal	ON
+90	0.5	Food=1, oxidative_stress=0	hlh-30_basal KO	HSF-1_high	OFF
+91	1.0	Food=1, oxidative_stress=0	hlh-30_basal KO	DAF-16_high	OFF
+92	1.0	Food=1, oxidative_stress=0	HLH-30_basal CA, HLH-30_high CA	DAF-16_high	OFF
+93	1.0	Food=1, oxidative_stress=0	mxl-3_basal KO	DAF-16_high	OFF
+94	1.0	Food=1, oxidative_stress=0	DAF-2 KO	DAF-16_high	ON
+95	1.0	Food=1, oxidative_stress=0	DAF-16_basal KO	DAF-2	ON

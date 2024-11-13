@@ -1,0 +1,159 @@
+# DATA='boolmore/c_elegans/data_20231121.tsv'
+# DEFAULT_SOURCES={'Food': 1, 'oxidative_stress': 0}
+# CONSTRAINTS={'fixed': [], 'regulate': {'lipl-3_high': ['HLH-30_high'], 'HLH-30_basal': ['MXL-3_high'], 'HLH-30_high': ['MXL-3_high'], 'DAF_16_high': ['DAF-2']}, 'necessary': {'8-nitro-cGMP': ['cGMP'], 'KOUT': ['Depolarization'], 'Malate': ['PEPC', 'AnionEM'], 'ROS': ['NADPH', 'RBOH'], 'DAF-16_high': ['DAF-16_basal'], 'mTORC1_high': ['mTORC1_basal'], 'MXL-3_basal': ['mxl-3_basal'], 'MXL-3_high': ['MXL-3_basal'], 'HSF-1_high': ['HSF-1_basal'], 'mxl-3_high': ['mxl-3_basal'], 'hlh-30_high': ['hlh-30_basal'], 'HLH-30_basal': ['hlh-30_basal'], 'HLH-30_high': ['HLH-30_basal'], 'lipl-3_high': ['lipl-3_basal']}, 'group': {}, 'possible_constant': ['DAF-16_basal', 'lipl-3_basal']}
+# EDGE_POOL=[]
+
+# TOTAL_ITERATIONS=100
+# PER_ITERATION=100
+# KEEP=20
+# PROB=0.01
+# EDGE_PROB=0.5
+
+# BASE='boolmore/c_elegans/base_20231121.txt'
+# extra edges: []
+# score: 22.5
+# Food, Food
+# oxidative_stress, oxidative_stress
+# GLP-1, Food & !oxidative_stress
+# DAF-2, Food & !oxidative_stress
+# DAF-16_basal, !DAF-2 & !GLP-1
+# DAF-16_high, !DAF-2 & !GLP-1 & DAF-16_basal
+# mTORC1_basal, Food & oxidative_stress
+# mTORC1_high, Food & oxidative_stress & mTORC1_basal
+# MXL-3_basal, mxl-3_basal & mxl-3_high & mTORC1_basal & mTORC1_high
+# MXL-3_high, mxl-3_basal & mxl-3_high & mTORC1_basal & mTORC1_high & MXL-3_basal
+# HSF-1_basal, !DAF-2 & DAF-16_basal & DAF-16_high & MXL-3_basal & MXL-3_high
+# HSF-1_high, !DAF-2 & DAF-16_basal & DAF-16_high & MXL-3_basal & MXL-3_high & HSF-1_basal
+# mxl-3_basal,  HSF-1_basal & HSF-1_high & !GLP-1
+# mxl-3_high, HSF-1_basal & HSF-1_high & !GLP-1 & mxl-3_basal
+# hlh-30_basal, !mTORC1_basal & !mTORC1_high & !DAF-16_basal & !DAF-16_high & !HSF-1_basal & !HSF-1_high
+# hlh-30_high, !mTORC1_basal & !mTORC1_high & !DAF-16_basal & !DAF-16_high & !HSF-1_basal & !HSF-1_high & hlh-30_basal
+# HLH-30_basal, hlh-30_basal & hlh-30_high & !MXL-3_basal & !MXL-3_high & !mTORC1_basal & !mTORC1_high
+# HLH-30_high, hlh-30_basal & hlh-30_high & !MXL-3_basal & !MXL-3_high & !mTORC1_basal & !mTORC1_high & HLH-30_basal
+# lipl-3_basal, HSF-1_basal & HSF-1_high & HLH-30_basal & HLH-30_high
+# lipl-3_high, HSF-1_basal & HSF-1_high & HLH-30_basal & HLH-30_high & lipl-3_basal
+
+# START_MODEL='boolmore/c_elegans/start_20231121.txt'
+# score: 42.125
+# extra edges: []
+# Food, Food
+# oxidative_stress, oxidative_stress
+# GLP-1, Food & !oxidative_stress
+# DAF-2, Food & !oxidative_stress
+# DAF-16_basal, 1
+# DAF-16_high, (!DAF-2 | !GLP-1) & DAF-16_basal
+# mTORC1_basal, Food | oxidative_stress
+# mTORC1_high, Food & oxidative_stress & mTORC1_basal
+# MXL-3_basal, mxl-3_basal & mTORC1_basal
+# MXL-3_high, mxl-3_high & MXL-3_basal
+# HSF-1_basal, !DAF-2 & DAF-16_high | MXL-3_basal
+# HSF-1_high, DAF-16_high & MXL-3_basal & HSF-1_basal
+# mxl-3_basal,  HSF-1_basal
+# mxl-3_high, HSF-1_high & mxl-3_basal
+# hlh-30_basal, !mTORC1_high | !DAF-16_high | !HSF-1_high
+# hlh-30_high, (!mTORC1_basal | !DAF-16_basal | !HSF-1_basal) & hlh-30_basal
+# HLH-30_basal, hlh-30_basal & !mTORC1_high & !MXL-3_high
+# HLH-30_high, hlh-30_high & HLH-30_basal
+# lipl-3_basal, 1
+# lipl-3_high, (HSF-1_high | HLH-30_high) & lipl-3_basal
+iteration	top score	extra edges	complexity
+1	61.5	[]	56
+2	61.5	[]	56
+3	61.5	[]	56
+4	61.5	[]	52
+5	65.0	[]	70
+6	65.0	[]	51
+7	67.5	[]	55
+8	67.5	[]	55
+9	67.5	[]	50
+10	67.5	[]	50
+11	67.5	[]	46
+12	67.5	[]	45
+13	68.5	[]	62
+14	68.5	[]	62
+15	68.5	[]	62
+16	69.0	[]	85
+17	69.0	[]	76
+18	69.0	[]	68
+19	69.0	[]	68
+20	69.0	[]	64
+21	69.0	[]	64
+22	69.0	[]	61
+23	69.0	[]	61
+24	69.0	[]	58
+25	69.0	[]	58
+26	69.0	[]	58
+27	69.0	[]	57
+28	69.0	[]	54
+29	69.5	[]	60
+30	69.5	[]	55
+31	69.5	[]	55
+32	69.5	[]	55
+33	69.5	[]	53
+34	69.5	[]	53
+35	69.5	[]	51
+36	69.5	[]	51
+37	69.5	[]	51
+38	69.5	[]	51
+39	69.5	[]	51
+40	69.5	[]	51
+41	69.5	[]	51
+42	69.5	[]	51
+43	69.5	[]	51
+44	69.5	[]	51
+45	69.5	[]	50
+46	69.5	[]	50
+47	69.5	[]	50
+48	69.5	[]	49
+49	69.5	[]	48
+50	69.5	[]	48
+51	69.5	[]	48
+52	69.5	[]	47
+53	69.5	[]	47
+54	69.5	[]	47
+55	69.5	[]	46
+56	69.5	[]	46
+57	69.5	[]	46
+58	69.5	[]	45
+59	69.5	[]	45
+60	69.5	[]	45
+61	69.5	[]	45
+62	69.5	[]	45
+63	69.5	[]	45
+64	69.5	[]	45
+65	69.5	[]	45
+66	69.5	[]	45
+67	69.5	[]	45
+68	69.5	[]	45
+69	69.5	[]	45
+70	69.5	[]	45
+71	69.5	[]	45
+72	69.5	[]	45
+73	69.5	[]	45
+74	69.5	[]	45
+75	69.5	[]	45
+76	69.5	[]	45
+77	69.5	[]	45
+78	69.5	[]	45
+79	69.5	[]	45
+80	69.5	[]	45
+81	69.5	[]	45
+82	69.5	[]	45
+83	69.5	[]	45
+84	69.5	[]	45
+85	69.5	[]	45
+86	69.5	[]	44
+87	69.5	[]	44
+88	69.5	[]	44
+89	69.5	[]	44
+90	69.5	[]	44
+91	69.5	[]	44
+92	69.5	[]	44
+93	69.5	[]	44
+94	69.5	[]	44
+95	69.5	[]	44
+96	69.5	[]	44
+97	69.5	[]	44
+98	69.5	[]	44
+99	69.5	[]	44
+100	69.5	[]	44

@@ -1,0 +1,44 @@
+{
+"parameters" : {
+    "starting_id": 1,           
+    "starting_gen": 1,
+    "total_iterations": 100,
+    "per_iteration": 100,
+    "keep": 20,
+    "mix":20,
+    "export_top": 1,
+    "export_threshold": 430,
+    "prob": 0.01,
+    "edge_prob": 0.5
+    },
+
+"data": "boolmore/c_elegans/data_20231121.tsv",
+
+"base": "boolmore/c_elegans/base_20231121.txt",
+
+"default_sources": {"Food":1, "oxidative_stress":0},
+
+"constraints": {"fixed": [],
+                "regulate": {"lipl-3_high":["HLH-30_high"],
+                             "HLH-30_basal":["MXL-3_high"],
+                             "HLH-30_high":["MXL-3_high"],
+                             "DAF_16_high":["DAF-2"]},
+                "necessary" : {"8-nitro-cGMP":["cGMP"],
+                               "KOUT":["Depolarization"],
+                               "Malate":["PEPC", "AnionEM"],
+                               "ROS":["NADPH", "RBOH"],
+                               "DAF-16_high":["DAF-16_basal"],
+                               "mTORC1_high":["mTORC1_basal"],
+                               "MXL-3_basal":["mxl-3_basal"],
+                               "MXL-3_high":["MXL-3_basal"],
+                               "HSF-1_high":["HSF-1_basal"],
+                               "mxl-3_high":["mxl-3_basal"],
+                               "hlh-30_high":["hlh-30_basal"],
+                               "HLH-30_basal":["hlh-30_basal"],
+                               "HLH-30_high":["HLH-30_basal"],
+                               "lipl-3_high":["lipl-3_basal"]},
+                "group": {},
+                "possible_constant": ["DAF-16_basal", "lipl-3_basal"]},
+
+"edge_pool": []
+}

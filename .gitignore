@@ -12,6 +12,3 @@ boolmore.egg-info/
 
 # Obsolete files
 .obsolete/
-
-# Work in progress
-c_elegans/
