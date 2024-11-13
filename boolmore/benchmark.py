@@ -31,29 +31,42 @@ def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None,
 
     Parameters
     ----------
-    primes - pyboolnet primes dictionary        :length N dict[str, PrimeType]
-             {node: prime}
-    n_exps - number of experiments to generate  :int|None
-             when None, generates 10*N
-    seed - random seed                                          :int|None
+    primes : dict[str, PrimeType]
+        pyboolnet primes dictionary of length N - {node: prime}
+
+    n_exps : int|None
+        number of experiments to generate
+        when None, generates 10*N
+
+    seed : int|None
+        random seed
     
-    export - if true, export the data to file_name              :bool
-    file_name - location of the exported data in tsv format      :str
+    export : bool
+        if true, export the data to file_name
+
+    file_name : str
+        location of the exported data in tsv format
 
     Returns
     -------
-    experiments - list of exp                           :list[ExpType]
-        exp     - info of a single experiment           :ExpType = tuple[int, float, FixesType, str, str]
-            exp[0] - id of the experiment               :int
-            exp[1] - max_score for the experiment       :float
-            exp[2] - fixes                              :FixesType = tuple[tuple[str, int]]
-                     ((node A, value1), (node B, value2), ...)
-            exp[3] - observed_node                      :str
-            exp[4] - outcome_value                      :str
-                     one of OFF, OFF/Some, Some, Some/ON, ON
+    experiments : list[ExpType]
+        exp : ExpType
+            info of a single experiment                
+            exp[0] : int
+                id of the experiment
+            exp[1] : float
+                max_score for the experiment
+            exp[2] : FixesType
+                fixes - ((node A, value1), (node B, value2), ...)
+            exp[3] : str
+                observed_node
+            exp[4] : str
+                outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
 
-    fixes_list - summarized list of fixes for convenience    :list[FixesType]
-        fixes     - ((node A, value1), (node B, value2), ...)   :FixesType = tuple[tuple[str, int]]
+    fixes_list : list[FixesType]
+        summarized list of fixes for convenience
+        fixes : FixesType
+            ((node A, value1), (node B, value2), ...)
         
     """
     if n_exps == None:
@@ -171,10 +184,25 @@ def export_exps(primes:dict[str, PrimeType], experiments:list[ExpType],
 
     Parameters
     ----------
-    primes - pyboolnet primes dictionary        :length N dict[str, PrimeType]
-             {node: prime}
-    experiments - list of exp                   :list[ExpType]
-    file_name - location of the exported data   :str
+    primes : dict[str, PrimeType]
+        pyboolnet primes dictionary of length N - {node: prime}
+    
+    experiments : list[ExpType]
+        exp : ExpType
+            info of a single experiment                
+            exp[0] : int
+                id of the experiment
+            exp[1] : float
+                max_score for the experiment
+            exp[2] : FixesType
+                fixes - ((node A, value1), (node B, value2), ...)
+            exp[3] : str
+                observed_node
+            exp[4] : str
+                outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
+    
+    file_name : str
+        location of the exported data
 
     Exports
     -------
@@ -226,35 +254,47 @@ def train_and_valid(experiments:list[ExpType], ratio:float|None=None, valid_ids:
 
     Parameters
     ----------
-    experiments - list of exp                           :list[ExpType]
-        exp     - info of a single experiment           :ExpType = tuple[int, float, FixesType, str, str]
-            exp[0] - id of the experiment               :int
-            exp[1] - max_score for the experiment       :float
-            exp[2] - fixes                              :FixesType = tuple[tuple[str, int]]
-                     ((node A, value1), (node B, value2), ...)
-            exp[3] - observed_node                      :str
-            exp[4] - outcome_value                      :str
-                     one of OFF, OFF/Some, Some, Some/ON, ON
+    experiments : list[ExpType]
+        exp : ExpType
+            info of a single experiment                
+            exp[0] : int
+                id of the experiment
+            exp[1] : float
+                max_score for the experiment
+            exp[2] : FixesType
+                fixes - ((node A, value1), (node B, value2), ...)
+            exp[3] : str
+                observed_node
+            exp[4] : str
+                outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
 
-    ratio - ratio of the validation set                         :float|None
-    id_list - list of IDs of experments for the validation set  :list[int]|None
-    seed - random seed                                          :int|None
+    ratio : float|None
+        ratio of the validation set
+        if None, valid_ids should be given
+
+    valid_ids : list[int]|None
+        the list of IDs of experments for the validation set
+        if ratio is None, valid_ids should be given
+            
+    seed : int|None
+        random seed
 
     Returns
     -------
-    training_exps - list of exp                          :list[ExpType]
-                    contains (1-ratio) of experiments
-                    or all experiments excluding the id_list
+    training_exps : list[ExpType]
+        A list of exp that contains (1-ratio) of experiments
+        or all experiments excluding the valid_ids.
 
-    validation_exps - list of exp                        :list[ExpType]
-                      contains all of experiments.
-                      score is set to 0 for (1-ratio) of experiments
-                      or for all experiments excluding the id_list
-                      It is necessary for the validation set to contain all experiments,
-                      so that hierachy scoring works.
+    validation_exps : list[ExpType]
+        A list of exp that contains all of experiments.
+        Max_score is set to 0 for (1-ratio) of experiments
+        or for all experiments excluding the valid_ids.
+        It is necessary for the validation set to contain all experiments,
+        so that hierachy scoring works.
 
-    valid_ids - same as the input id_list if it was given     :list[int]
-                or newly created if given the ratio
+    valid_ids : list[int]
+        the same as the input valid_ids if it was given
+        or newly created if given the ratio
     """
 
     if seed != None:
@@ -266,7 +306,7 @@ def train_and_valid(experiments:list[ExpType], ratio:float|None=None, valid_ids:
         n_valid = int(n_exps * ratio)
         valid_ids = sorted(random.sample(ids,n_valid))
     else:
-        assert valid_ids != None, "either ratio or id_list should be given"
+        assert valid_ids != None, "either ratio or valid_ids should be given"
 
     training_exps = [exp for exp in experiments if exp[0] not in valid_ids]
 

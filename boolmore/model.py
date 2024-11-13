@@ -221,11 +221,12 @@ class Model():
                     
         Assigns
         -------
-        self.predictions - average attractor values for all fixes   :PredictType = dict[FixesType, dict]
-            key   - fixes                                           :FixesType = tuple[tuple[str, int]]
-                    ((node A, value1), (node B, value2), ...)
-            value - average value of a node in the attractors       :dict[str, float]
-                    {observed_node: predict_value}
+        self.predictions : PredictType
+            average attractor values for all fixes
+            key : FixesType
+                fixes - ((node A, value1), (node B, value2), ...)
+            value : dict[str, float]
+                average value of a node in the attractors - {observed_node: predict_value}
 
         """
         predictions = {}
@@ -391,7 +392,7 @@ class Model():
         print("following constraints:", self.check_constraint())
         print("complexity:", self.complexity)
 
-    def export(self, file_name:str|None=None, threshold:float=0.0):
+    def export(self, file_name:str|None=None, threshold:float=0.0, details:bool=True):
         """
         Exports the model rules with scores above a certain threshold.
 
@@ -402,7 +403,9 @@ class Model():
             if None, output file is in the form "(model's name)_id_gen.txt"
         threshold : float
             only models with score higher than the threshold get exported
-
+        details : bool
+            whether to print out the details of the model as comments
+            
         """
         if threshold != 0.0 and self.score < threshold:
             return
@@ -410,12 +413,14 @@ class Model():
             file_name = self.name + "_" + str(self.id) + "_gen" + str(self.generation) + ".bnet"
 
         fp = open(file_name, "w")
-        fp.write("# id: " + str(self.id) + "\n")
-        fp.write("# generation: " + str(self.generation) + "\n")
-        fp.write("# extra edges: " + str(self.extra_edges) + "\n")
-        fp.write("# score: " + str(self.score) + " / " + str(self.max_score) + "\n")
-        fp.write("# following constraints: " + str(self.check_constraint()) + "\n")
-        fp.write("# complexity: " + str(self.complexity) + "\n\n")
+
+        if details:
+            fp.write("# id: " + str(self.id) + "\n")
+            fp.write("# generation: " + str(self.generation) + "\n")
+            fp.write("# extra edges: " + str(self.extra_edges) + "\n")
+            fp.write("# score: " + str(self.score) + " / " + str(self.max_score) + "\n")
+            fp.write("# following constraints: " + str(self.check_constraint()) + "\n")
+            fp.write("# complexity: " + str(self.complexity) + "\n\n")
         fp.write("targets,\tfactors\n")
         primes = {k:self.primes[k] for k in sorted(self.primes)}
         for k in primes:

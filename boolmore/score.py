@@ -145,11 +145,11 @@ def get_agreement(experiments:list[ExpType], predictions:PredictType) -> tuple[A
 
         non_hierarchy_score += max_score * agreement
 
-        #     print("Fixes: ", fixes)
-        #     print("Observed node: ", observed_node)
-        #     print("Outcome: ", outcome_value)
-        #     print("Prediction: ", predict_value)
-        #     print("agreement: ", agreement)
+        # print("Fixes: ", fixes)
+        # print("Observed node: ", observed_node)
+        # print("Outcome: ", outcome_value)
+        # print("Prediction: ", predict_value)
+        # print("agreement: ", agreement)
         # print("- - - - - - - - - -")
 
     return agreements, non_hierarchy_score

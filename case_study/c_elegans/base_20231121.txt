@@ -1,0 +1,20 @@
+Food, Food
+oxidative_stress, oxidative_stress
+GLP-1, Food & !oxidative_stress
+DAF-2, Food & !oxidative_stress
+DAF-16_basal, !DAF-2 & !GLP-1
+DAF-16_high, !DAF-2 & !GLP-1 & DAF-16_basal
+mTORC1_basal, Food & oxidative_stress
+mTORC1_high, Food & oxidative_stress & mTORC1_basal
+MXL-3_basal, mxl-3_basal & mxl-3_high & mTORC1_basal & mTORC1_high
+MXL-3_high, mxl-3_basal & mxl-3_high & mTORC1_basal & mTORC1_high & MXL-3_basal
+HSF-1_basal, !DAF-2 & DAF-16_basal & DAF-16_high & MXL-3_basal & MXL-3_high
+HSF-1_high, !DAF-2 & DAF-16_basal & DAF-16_high & MXL-3_basal & MXL-3_high & HSF-1_basal
+mxl-3_basal,  HSF-1_basal & HSF-1_high & !GLP-1
+mxl-3_high, HSF-1_basal & HSF-1_high & !GLP-1 & mxl-3_basal
+hlh-30_basal, !mTORC1_basal & !mTORC1_high & !DAF-16_basal & !DAF-16_high & !HSF-1_basal & !HSF-1_high
+hlh-30_high, !mTORC1_basal & !mTORC1_high & !DAF-16_basal & !DAF-16_high & !HSF-1_basal & !HSF-1_high & hlh-30_basal
+HLH-30_basal, hlh-30_basal & hlh-30_high & !MXL-3_basal & !MXL-3_high & !mTORC1_basal & !mTORC1_high
+HLH-30_high, hlh-30_basal & hlh-30_high & !MXL-3_basal & !MXL-3_high & !mTORC1_basal & !mTORC1_high & HLH-30_basal
+lipl-3_basal, HSF-1_basal & HSF-1_high & HLH-30_basal & HLH-30_high
+lipl-3_high, HSF-1_basal & HSF-1_high & HLH-30_basal & HLH-30_high & lipl-3_basal
