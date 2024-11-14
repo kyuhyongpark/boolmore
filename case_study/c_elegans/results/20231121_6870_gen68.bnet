@@ -1,0 +1,28 @@
+# id: 6870
+# generation: 68
+# extra edges: []
+# score: 69.5 / 81.0
+# following constraints: True
+# complexity: 44
+
+targets,	factors
+DAF-16_basal,	1
+DAF-16_high,	DAF-16_basal & !GLP-1 | DAF-16_basal & !DAF-2
+DAF-2,	Food & !oxidative_stress
+Food,	Food
+GLP-1,	Food
+HLH-30_basal,	!MXL-3_basal & !MXL-3_high & hlh-30_basal
+HLH-30_high,	HLH-30_basal & !MXL-3_high & !mTORC1_basal | HLH-30_basal & hlh-30_high
+HSF-1_basal,	DAF-16_basal | !DAF-2
+HSF-1_high,	DAF-16_high & HSF-1_basal & MXL-3_basal
+MXL-3_basal,	mTORC1_basal & mxl-3_basal
+MXL-3_high,	MXL-3_basal & mxl-3_high
+hlh-30_basal,	!HSF-1_high
+hlh-30_high,	!DAF-16_basal & hlh-30_basal | !HSF-1_high & hlh-30_basal & !mTORC1_basal
+lipl-3_basal,	1
+lipl-3_high,	HLH-30_basal & HSF-1_basal & lipl-3_basal | HLH-30_high & lipl-3_basal | HSF-1_high & lipl-3_basal
+mTORC1_basal,	Food
+mTORC1_high,	mTORC1_basal
+mxl-3_basal,	HSF-1_basal
+mxl-3_high,	HSF-1_high & mxl-3_basal
+oxidative_stress,	oxidative_stress
