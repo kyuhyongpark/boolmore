@@ -36,7 +36,7 @@ See the supplementary information of the manuscript for details.
                                     "HLH-30_high":["HLH-30_basal"],
                                     "lipl-3_high":["lipl-3_basal"]},
                         "group": {},
-                        "possible_constant": {["DAF-16_basal", "lipl-3_basal"]},
+                        "possible_constant": ["DAF-16_basal", "lipl-3_basal"]},
         ```
 
 - The `results` directory contains the results of the run.
