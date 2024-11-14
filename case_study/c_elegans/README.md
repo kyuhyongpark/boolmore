@@ -5,9 +5,9 @@ See supplementary information of the manuscript for details.
 
 ## File Description
 
-- `run.py` runs the refinement process and saves the log and the final model into the `results` directory.
+- `run.py` runs the refinement process and saves the log and the final model.
 
-- `detailed_report.py` saves tsv files containing the detailed report of agreement with the experiments into the `results` directory. It also compares the starting model with the final model and analyzes the dynamics of the final model.
+- `detailed_report.py` saves tsv files containing the detailed report of agreement with the experiments. It also compares the starting model with the final model and analyzes the dynamics of the final model.
 
 - `data` directory contains the necessary data to run the genetic algorithm.
 
