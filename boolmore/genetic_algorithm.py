@@ -257,7 +257,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
 def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
             total_iter:int, per_iter:int, keep:int, mix:int,
-            prob:float|list[float], edge_prob:float=0.5,
+            prob:float|dict[int,float], edge_prob:float=0.5,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
             stop_if_max:bool=True, core:int=2, seed:int|None=None,
             hierarchy:bool=True,

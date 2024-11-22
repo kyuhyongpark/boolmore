@@ -81,7 +81,7 @@ This model is the base of all generated models. Every edge in the base model can
 A, A & (!B | C) 
 ```
 ### 3. json file
-For example, see case_study/data/ABA_2017.json
+For example, see case_study/ABA/data/ABA_2017.json
 
 ```json
 {
@@ -135,7 +135,7 @@ Constraints limit the searchspace, and also ensures that only reasonable models 
 - fixed ( list[ str ] ) : a list of nodes whose functions will not be mutated  
 - regulate ( dict{ str: list[ str ] } ) : the regulated node (key) is guaranteed to be regulated by the regulators (nodes in the list). i.e., the edge is preserved.  
 - necessary ( dict{ str: list[ str ] } ) : certain values of the regulators (nodes in the list) are necessary for the activation of the regulated node (key). In case of activation, the regulators being ON is necessary. In case of inhibition, the regulators being OFF is necessary.  
-- group ( dict{ str: list[ list[ str ] ] } ): the regulators must appear in a group in the regulatory function. In case of {A: [[B,C], [D,E]]}, the regulators B and C must appear together with an AND rule, and same goes with regulators D and E. For example, A* = B & C | D & E, A* = B & C, A* = B & C & D & E are allowed, and A*= B & D, A* = B | E are not allowed.  
+- group ( dict{ str: list[ list[ str ] ] } ): the regulators must appear in a group in the regulatory function. In case of {A: [[B,C], [D,E]]}, the regulators B and C must appear together with an AND rule, and same goes with regulators D and E. For example, B & C | D & E, B & C, B & C & D & E are allowed, and B & D, B | E are not allowed.  
 - possible_constant ( list[ str ] ): only the nodes in this list are allowed to become constant nodes. The nodes that were constant nodes in the base model can become constant nodes even if they are not on this list.  
 
 #### edge_pool

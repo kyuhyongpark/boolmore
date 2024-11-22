@@ -1,26 +1,29 @@
+# run with the location of this script as the working directory
+
 import os
 import re
 import itertools as it
-import pystablemotifs as sm
-import boolmore.config
 
+from pyboolnet.external.bnet2primes import bnet_file2primes
+
+import boolmore.config
 from boolmore.experiment import import_exps
 from boolmore.model import Model
 from boolmore.genetic_algorithm import ga_main
 
-
-TOTAL_ITERATIONS = 20
-PER_ITERATION = 7
-KEEP = 2
-MIX = 0
 PROB_LIST = [0.01,
              0.05,
              0.1,
              0.2,
              0.5,
-             [0.5,0.5,0.5,0.1]]
+             {1: 0.5, 4:0.1}]
+TOTAL_ITERATIONS = 20
+PER_ITERATION = 5
+KEEP = 2
+MIX = 0
 
-total = TOTAL_ITERATIONS * (PER_ITERATION-KEEP)
+
+total = TOTAL_ITERATIONS * PER_ITERATION
 
 
 sample_models = ["Cell Cycle Transcription by Coupled CDK and Network Oscillators",
@@ -32,9 +35,11 @@ sample_models = ["Cell Cycle Transcription by Coupled CDK and Network Oscillator
                  "Signaling in Macrophage Activation",
                  "Influenza A Virus Replication Cycle"]
 
-base_directory = "boolmore/benchmarks/benchmark_models"
+base_directory = "../../models"
 
-data_directory = "boolmore/optimization/data"
+data_directory = "../data"
+
+results_directory = "../results"
 
 
 ### benchmark runs
@@ -44,19 +49,19 @@ start_paths = dict()
 
 for sample_model in sample_models:
     for filename in os.listdir(base_directory):
-        if filename == sample_model+".txt":
-            base_paths[sample_model] = base_directory + "/" + filename
+        if filename == sample_model+".bnet":
+            base_paths[sample_model] = f"{base_directory}/{filename}"
 
     data_paths[sample_model] = []
     start_paths[sample_model] = []
     for filename in os.listdir(data_directory):
         if filename.startswith(sample_model):
             if filename.endswith(".tsv"):
-                data_paths[sample_model].append(data_directory + "/" + filename)
+                data_paths[sample_model].append(f"{data_directory}/{filename}")
             elif re.match(r".+_start_", filename):
-                start_paths[sample_model].append(data_directory + "/" + filename)
+                start_paths[sample_model].append(f"{data_directory}/{filename}")
 
-fp = open("boolmore/optimization/probability_log.csv", "a")
+fp = open(f"{results_directory}/probability_log.csv", "a")
 fp.write("sample_model,seed,iter,pop,keep,mix,prob")
 for i in range(total + 1):
     fp.write(f",{i}")
@@ -66,20 +71,19 @@ fp.close()
 for sample_model in sample_models:
     print(sample_model)
     seed = 0
-    for prob, base, data, start_path in it.product(PROB_LIST,
-                                              [base_paths[sample_model]],
-                                              data_paths[sample_model],
-                                              start_paths[sample_model]):
+    for prob, data, start_path in it.product(PROB_LIST, data_paths[sample_model], start_paths[sample_model]):
+
+        PROB = prob
 
         boolmore.config.id = 0
         seed += 1
 
         exps, fixes_list = import_exps(data)
     
-        base_primes = sm.format.import_primes(base)
+        base_primes = bnet_file2primes(base_paths[sample_model])
         base = Model.import_model(base_primes)
     
-        primes = sm.format.import_primes(start_path)
+        primes = bnet_file2primes(start_path)
         start = Model.import_model(primes, boolmore.config.id, 1, base)
         start.get_predictions(fixes_list)
         start.get_model_score(exps)
@@ -89,12 +93,12 @@ for sample_model in sample_models:
                             prob=prob, edge_prob=0,
                             stop_if_max=True, core=6, seed=seed)
 
-        fp = open("boolmore/optimization/probability_log.csv", "a")
+        fp = open(f"{results_directory}/probability_log.csv", "a")
 
-        fp.write(f"{sample_model},{seed},{TOTAL_ITERATIONS},{PER_ITERATION},{KEEP},{MIX},\"{prob}\",{start.score}")
+        fp.write(f"{sample_model},{seed},{TOTAL_ITERATIONS},{PER_ITERATION},{KEEP},{MIX},\"{PROB}\",{start.score}")
         for iteration in log:
             # extra commas to make the output csv file neat
-            for i in range(int(total/TOTAL_ITERATIONS)):
+            for i in range(int(PER_ITERATION)):
                 fp.write(",")
             fp.write(f"{iteration[1]}")
 
@@ -102,7 +106,7 @@ for sample_model in sample_models:
         if len(log) != TOTAL_ITERATIONS:
             for i in range(TOTAL_ITERATIONS - len(log)):
                 # extra commas to make the output csv file neat
-                for j in range(int(total/TOTAL_ITERATIONS)):
+                for j in range(int(PER_ITERATION)):
                     fp.write(",")
                 fp.write(f"{log[-1][1]}")
                 
