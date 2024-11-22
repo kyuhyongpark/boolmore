@@ -1,55 +1,55 @@
 # Parameter Optimization
-Boolmore contains multiple tunable parameters. Here we describe the process of our parameter analysis and present the general conclusions. We found significant robustness to changes in these parameter values. See also the Methods section of the manuscript and Supplementary Information Text S4.
+`Boolmore` contains multiple tunable parameters. Here we describe the process of our parameter analysis and present general conclusions. We found significant robustness to changes in these parameter values. See also the Methods section of the manuscript and Supplementary Information Text S4.
 
 ## Models and data
 
-### sample models
+### Sample models
 We explored multiple values of each parameter for a compilation of 8 models from the Cell collective. These 8 models were selected to exemplify a variety of properties: small (<20) or large (>70) number of nodes, presence or absence of source nodes, single or multiple point attractors, single or multiple complex attractors.
 
 | network size | single point attractor | many point attractors | single complex attractor | many attractors including complex | source nodes |
 | -----------: | :--------------------: | :-------------------: | :----------------------: | :-------------------------------: | :----------- |
 |        small | Cell Cycle Transcription by Coupled CDK and Network Oscillators |                     |                          | T-LGL Survival Network 2011 Reduced Network       | none         |
-|        small |          |  Metabolic Interactions in the Gut Microbiome  | Mamallian Cell Cycle 2006  |                                 | exists       |
-|        large | IL-1 Signaling | Glucose Repression Signaling 2009 | Signalling in Macrophage Activation | Influenza A Virus Replication Cycle  | exists |
+|        small |          |  Metabolic Interactions in the Gut Microbiome  | Mamallian Cell Cycle 2006  |                                 | exist       |
+|        large | IL-1 Signaling | Glucose Repression Signaling 2009 | Signalling in Macrophage Activation | Influenza A Virus Replication Cycle  | exist |
 
 We used each model to generate 5 sets of 10*N artificial experiments. We generated five starting models for each model by randomizing the binary representation of the update functions of the original model.
 
-### ABA model and the scrambled model
-We also used the baseliine A model and the real experimental data for the ABA case study. We also generated 25 starting models by randomizing the binary representation of the update functions of the baseline model while keeping the biological constraints.
+### ABA model and scrambled versions of the model
+We also used the baseline A model and the real experimental data for the ABA case study. We also generated 25 starting models by randomizing the binary representation of the update functions of the baseline model while keeping the biological constraints.
 
 
 ## Parameters
-For all following analysis, we generated 100 models for a single run.
+For all the following analyses we generated 100 models in a single run.
 
 ### Mutation probability
-The mutation probability denotes the probability of changing (flipping) each bit of the binary representation of each regulatory function. High mutation probabilities are an appropriate choice for starting models with a low fitness and low mutation probabilities are an appropriate choice for higher-fitness starting models. Probability settings with iteration-dependent probabilities (e.g. high mutation probability for the initial exploration, followed by low mutation probability for refinement) may be the best choice in certain use cases. See Supplementary information Text S4 for a illustrative description of the optimization of the mutation probability.
+The mutation probability denotes the probability of changing (flipping) each bit of the binary representation of each regulatory function. A high mutation probability is an appropriate choice for starting models with a low fitness and a low mutation probability is a suitable choice for higher-fitness starting models. Probability settings with iteration-dependent probabilities (e.g. high mutation probability for the initial exploration, followed by low mutation probability for refinement) may be the best choice in certain use cases. See Supplementary information Text S4 for an illustrative description of the optimization of the mutation probability.
 
-Setting: 20 iterations, 5 per iteration, keep 2, mix 0
+Setting: 20 iterations, 5 models per iteration, keep 2, mix 0
 
 #### 8 sampled models
-Tested 5 probability values, [0.01, 0.05, 0.1, 0.2, 0.5], with 200 runs each (8 models * 5 start * 5 data). Constant probability of 0.1 had the highest accuracy in the end, closely followed by 0.05 and 0.2. Adaptive probability setting with a value of 0.5 for the first 3 iterations and a value of 0.1 afterward `{1:0.5 4:0.1}` yielded the better accuracy.
+We tested 5 probability values, [0.01, 0.05, 0.1, 0.2, 0.5], with 200 runs for each (8 models * 5 starting models * 5 sets of artificial experiments). A constant probability of 0.1 had the highest accuracy in the end, closely followed by 0.05 and 0.2. An adaptive probability setting with a value of 0.5 for the first 3 iterations and a value of 0.1 afterward `{1:0.5 4:0.1}` yielded the best accuracy.
 
 #### ABA model
-Tested 6 probability values, [0.005, 0.01, 0.05, 0.1, 0.2, 0.5]. 50 independent runs per probability value with baseline A as the starting model showed that constant probability of 0.1 led to the highest accuracy, closely followed by 0.005. Starting from the 25 randomized models per probability, the probability that yielded the best accuracy was 0.05, followed by 0.1 and 0.01.
+We tested 6 probability values, [0.005, 0.01, 0.05, 0.1, 0.2, 0.5]. 50 independent runs per probability value with baseline A as the starting model showed that a constant probability of 0.1 led to the highest accuracy, closely followed by 0.005. Starting from 25 randomized models per probability value, the probability that yielded the best accuracy was 0.05, followed by 0.1 and 0.01.
 
-### number of iterations / generated models per iteration
-Since we fix the number of generated models per run to 100, number of iterations determined the generated models per iteration. We tested 7 iteration settings, [1, 2, 5, 10, 20, 50, 100]. 1 iteration generates 100 models at once, and hence is equivalent to a simple random sampling.
+### The number of iterations / generated models per iteration
+Since we fixed the number of generated models per run to 100, the number of iterations determined the generated models per iteration. We tested 7 iteration settings, [1, 2, 5, 10, 20, 50, 100]. One iteration generates 100 models at once, hence it is equivalent to a simple random sampling.
 
-Setting: probability 0.2 for sampled models, probability 0.01 for the ABA model, keep 1, mix 0
+Setting: probability of 0.2 for the sampled models, probability of 0.01 for the ABA model, keep 1, mix 0
 
-For the sampled models, we had 200 runs (8 models * 5 start * 5 data) for each iteration value. 100 iterations showed best accuracy, closely followed by 20, 50, 10.
+For the sampled models, we had 200 runs (8 models * 5 starting models * 5 sets of artificial experiments) for each iteration value. 100 iterations showed the best accuracy, closely followed by 20, 50, and 10.
 
-For the ABA model, we had 50 independent runs for each iteration value. 50 iterations showed best accuracy, followed by 100, 10, 20.
+For the ABA model, we had 50 independent runs for each iteration value. Using 50 iterations showed the best accuracy, followed by 100, 10, then 20.
 
-### number of top-scoring models kept at each step (keep)
-Setting: probability 0.2 for sampled models, probability 0.01 for the ABA model, 20 iterations, mix 0
+### The number of top-scoring models kept at each step (keep)
+Setting: probability of 0.2 for sampled models, probability of 0.01 for the ABA model, 20 iterations, mix 0
 
-For the sampled models, we had 200 runs (8 models * 5 start * 5 data) for each keep value. keeping 4 showed best accuracy, closely followed by 2, 1, 3, 5.
+For the sampled models, we had 200 runs (8 models * 5 starting models * 5 sets of artificial experiments) for each keep value. Keeping 4 showed the best accuracy, closely followed by 2, 1, 3, then 5.
 
-For the ABA model, we had 50 independent runs for each keep value. keeping 1 showed best accuracy, closely followed by 2, 5, 4, 3.
+For the ABA model, we had 50 independent runs for each keep value. Keeping 1 showed the best accuracy, closely followed by 2, 5, 4, then 3.
 
-### number of models generated by crossing existing models (mix)
-`Boolmore` can also generate a new model by crossing the two existing models. This is done by randomly taking functions from either of the two models and then mutating them. Note that since the number of generated models is fixed per run, if a model is generated by crossing existing models, the tradeoff is the opportunity to fine-tune the best model.
+### The number of models generated by crossing existing models (mix)
+`Boolmore` can also generate a new model by crossing two existing models. This is done by randomly taking functions from either of the two models and then mutating them. Note that since the number of generated models is fixed per run, if a model is generated by crossing existing models, the tradeoff is the opportunity to fine-tune the best model.
 
 Setting: probability 0.2 for sampled models, probability 0.01 for the ABA model, 20 iterations, mix 0
 
