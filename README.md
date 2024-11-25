@@ -2,7 +2,7 @@
 Boolean Model Refiner
 
 The algorithm takes an existing Boolean model and refines it to fit better with the given experimental results. Hundreds or thousands of Boolean models are explored in the process, each being consistent with the interaction graph of the starting model and any mechanistic constraints given (such as a documented enzyme-substrate pair). The score (or fitness) of each model is determined by comparing its attractors with the experimental data for every perturbation (fixed node state, such as gene KO).  
-We showcase the strength of our algorithm by a case study on a plant signaling model. After several hours of automatic refinement, the fittest models recapture and surpass the accuracy gain achieved over 10 years of manual revision and provide new, testable predictions.
+We showcase the strength of our algorithm by a case study on a plant signaling model. After several hours of automatic refinement, the fittest models recapture and surpass the accuracy gain achieved over 10 years of manual revision and provide new, testable predictions. See our manuscript at [bioRxiv](https://www.biorxiv.org/content/10.1101/2023.11.14.567002v2).
 
 ## Install
 ```
