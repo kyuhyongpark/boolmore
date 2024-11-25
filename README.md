@@ -35,7 +35,7 @@ pip install git+https://github.com/kyuhyongpark/boolmore
 1. install `boolmore`
 2. download 4 files from demo
 
-   `CAD.txt` : This is the baseline model  
+   `CAD.bnet` : This is the baseline model  
    `CAD_start.txt` : This is the scrambled starting model  
    `CAD_data.tsv` : This is the generated artificial experiments as in benchmarks  
    `CAD_config.json` : This contains the path to above files and other constraints
@@ -43,7 +43,7 @@ pip install git+https://github.com/kyuhyongpark/boolmore
 4. in `CAD_config.json`, modify paths for data and base
 
    ```json
-   "data": "your_path/CAD.txt"
+   "data": "your_path/CAD.bnet"
    
    "base": "your_path/CAD_data.tsv"
    ```
