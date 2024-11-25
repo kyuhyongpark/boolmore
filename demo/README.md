@@ -9,8 +9,8 @@ Demonstration of `boolmore` on the Cortical Area Development (CAD) model.
     pip install git+https://github.com/kyuhyongpark/boolmore
     ```
 2. download 5 files from the `demo` directory  
-   `CAD.txt` : This is the baseline model  
-   `CAD_start.txt` : This is the scrambled starting model  
+   `CAD.bnet` : This is the baseline model  
+   `CAD_start.bnet` : This is the scrambled starting model  
    `CAD_data.tsv` : This is the generated artificial experiments as in benchmarks  
    `CAD_config.json` : This contains the path to above files and other constraints  
    `run.py` : This is the run file
