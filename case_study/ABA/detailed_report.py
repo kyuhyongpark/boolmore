@@ -1,3 +1,6 @@
+# use setting used for the genetic algorithm
+# to get detailed report of the model
+
 import json
 
 from pyboolnet.trap_spaces import compute_trap_spaces
@@ -10,9 +13,9 @@ from boolmore.experiment import import_exps
 from boolmore.conversions import prime2bnet
 
 
-SETTINGS = "./data/ABA_B.json"
+SETTINGS = "./data/ABA_A.json"
 # model to analyze
-MODEL = "./baseline_models/ABA_GA_base_B.bnet"
+MODEL = "./generated_models/GA1_A.bnet"
 # None if the model is not from the genetic algorithm, or if the base model is the starting model
 START = None
 

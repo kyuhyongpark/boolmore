@@ -1,7 +1,7 @@
 # Case study: C. elegans lipase regulation
 
 Here we demonstrate how to adapt `boolmore` to multi-level models.
-See the supplementary information of the manuscript for details.
+See the supplementary information of the manuscript for details ([bioRxiv](https://www.biorxiv.org/content/10.1101/2023.11.14.567002v2)).
 
 ## File Descriptions
 

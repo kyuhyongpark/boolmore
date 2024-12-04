@@ -67,6 +67,7 @@ def get_detailed_report(json_file:str, final:str, start:str|None=None):
     n1.info()
     print()
 
+
     print("Comparing the starting model and the final model . . .\n")
 
     ### find nodes that have different functions
@@ -107,7 +108,7 @@ def get_detailed_report(json_file:str, final:str, start:str|None=None):
     print("percolated rules of the starting model: ")
     sorted_primes = {k:pprimes0[k] for k in sorted(pprimes0)}
     for k in sorted_primes:
-        s = prime2bnet(k, start_primes[k])
+        s = prime2bnet(k, sorted_primes[k])
         print(s)
     print()
 
@@ -115,7 +116,7 @@ def get_detailed_report(json_file:str, final:str, start:str|None=None):
     print("percolated rules of the final model: ")
     sorted_primes = {k:pprimes1[k] for k in sorted(pprimes1)}
     for k in sorted_primes:
-        s = prime2bnet(k, final_primes[k])
+        s = prime2bnet(k, sorted_primes[k])
         print(s)
     print()
 
@@ -134,6 +135,7 @@ def get_detailed_report(json_file:str, final:str, start:str|None=None):
             different_nodes.append(node)
     print("Nodes with changed percolated functions: ", sorted(different_nodes))
     print()
+
 
     print("Analyzing the final model . . .")
 
