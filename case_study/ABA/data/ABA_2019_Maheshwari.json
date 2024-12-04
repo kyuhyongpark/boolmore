@@ -12,9 +12,9 @@
     "edge_prob": 0.5
     },
 
-"data": "./data/data_Waidyarathne_20230926.tsv",
+"data": "./data/data_2019_Maheshwari.tsv",
 
-"base": "./baseline_models/ABA_2018_Waidyarathne.bnet",
+"base": "./baseline_models/ABA_2019_Maheshwari.bnet",
 
 "default_sources": {"ABA":0},
 

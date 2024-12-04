@@ -12,13 +12,13 @@
     "edge_prob": 0.5
     },
 
-"data": "./data/data_20230925.tsv",
+"data": "./data/data_B.tsv",
 
-"base": "./baseline_models/ABA_GA_base_A.bnet",
-
+"base": "./baseline_models/ABA_GA_base_B.bnet",
+    
 "default_sources": {"ABA":0},
 
-"constraints": {"fixed": ["Ca2_ATPase", "Ca2c", "Closure", "DAG", "H2O_Efflux", "InsP3", "InsP6", "NO", "PtdIns3_5P2", "PtdIns4_5P2", "RCARs", "cADPR", "cGMP"],
+"constraints": {"fixed": ["Ca2osc", "Closure", "DAG", "H2O_Efflux", "InsP3", "InsP6", "NO", "PtdIns3_5P2", "PtdIns4_5P2", "RCARs", "cADPR", "cGMP"],
                 "regulate": {"ABI1":["RCARs"],
                              "ABI2":["RCARs"],
                              "HAB1":["RCARs"],
@@ -34,9 +34,9 @@
                           "S1P_PhytoS1P":[["SPHK1_2","Sph"]]},
                 "possible_constant": []},
 
-"edge_pool": [["Ca2c", "ABI2", "0"],
-              ["Ca2c", "HAB1", "0"],
-              ["Ca2c", "PP2CA", "0"],
+"edge_pool": [["Ca2osc", "ABI2", "0"],
+              ["Ca2osc", "HAB1", "0"],
+              ["Ca2osc", "PP2CA", "0"],
               ["PA", "ABI2", "0"],
               ["PA", "HAB1", "0"],
               ["PA", "PP2CA", "0"],

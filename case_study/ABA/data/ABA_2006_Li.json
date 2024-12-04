@@ -12,7 +12,7 @@
     "edge_prob": 0.5
     },
 
-"data": "./data/data_Li_20230926.tsv",
+"data": "./data/data_2006_Li.tsv",
 
 "base": "./baseline_models/ABA_2006_Li.bnet",
 
