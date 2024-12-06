@@ -25,7 +25,7 @@ This directory contains the ABA models from different sources, and the baseline 
 
 - `ABA_GA_base_A.bnet`: The baseline A model. See the Supplementary Information of the manuscript for the details.
 
-- `ABA_GA_base_B.bnet`: The baseline B model, which has a node calcium_oscillation to represent the oscillations of cytosolic calcium. See the Supplementary Information of the manuscript for the details.
+- `ABA_GA_base_B.bnet`: The baseline B model, which has a node Ca2osc to represent the oscillations of cytosolic calcium. See the Supplementary Information of the manuscript for the details.
 
 
 ### 2. data

@@ -1,5 +1,5 @@
 # Reka Albert et al. (2017) A new discrete dynamic model of ABA-induced stomatal closure predicts key feedback loops
-# Modified so that a node calcium_oscillation represents the oscillation of calcium
+# Modified so that a node Ca2osc represents the oscillation of calcium
 # Deleted Ca2_ATPase
 # Deleted self loops from Microtubule_Depolymerization, MPK9_12, CPK3_21, Vacuolar_Acidification
 # Deleted Vacuolar_Acidification regulating KEV
