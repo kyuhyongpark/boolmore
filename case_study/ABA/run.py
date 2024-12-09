@@ -2,7 +2,7 @@ import datetime
 
 from boolmore.genetic_algorithm import run_ga
 
-JSON = "./data/ABA_2017.json"
+JSON = "./data/ABA_A.json"
 START_MODEL = "./baseline_models/ABA_GA_base_A.bnet"
 
 overwrite_parameters = {

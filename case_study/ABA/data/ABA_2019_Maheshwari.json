@@ -1,0 +1,28 @@
+{
+"parameters" : {
+    "starting_id": 1,           
+    "starting_gen": 1,
+    "total_iterations": 100,
+    "per_iteration": 100,
+    "keep": 20,
+    "mix":20,
+    "export_top": 1,
+    "export_threshold": 430,
+    "prob": 0.01,
+    "edge_prob": 0.5
+    },
+
+"data": "./data/data_2019_Maheshwari.tsv",
+
+"base": "./baseline_models/ABA_2019_Maheshwari.bnet",
+
+"default_sources": {"ABA":0},
+
+"constraints": {"fixed": [],
+                "regulate": {},
+                "necessary" : {},
+                "group": {},
+                "possible_constant": []},
+
+"edge_pool": []
+}

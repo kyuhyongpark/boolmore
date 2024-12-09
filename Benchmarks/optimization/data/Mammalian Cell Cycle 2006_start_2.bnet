@@ -1,0 +1,18 @@
+# id: 12
+# generation: 1
+# extra edges: []
+# score: 26.375 / 100.0
+# following constraints: True
+# complexity: 36
+
+targets,	factors
+Cdc20,	CycB
+Cdh1,	!CycA | p27
+CycA,	!Cdc20 | !Cdh1 & !Rb | !Cdh1 & !UbcH10 | CycA & E2F | CycA & !Rb | E2F & !Rb | E2F & !UbcH10
+CycB,	!Cdc20
+CycD,	CycD
+CycE,	E2F & !Rb
+E2F,	!CycA & !Rb & p27
+Rb,	!CycA | !CycB & !CycE | !CycD & !CycE | p27
+UbcH10,	!Cdh1 & CycA & CycB & UbcH10
+p27,	!CycA | !CycD | p27

@@ -1,13 +1,12 @@
 # generate data for optimization
-# only the data for the large models are generated.
-# for the small models, use data pre-generated for the benchmark.
+# run with the location of this script as the working directory
 
-import pystablemotifs as sm
+from pyboolnet.external.bnet2primes import bnet_file2primes
 
 from boolmore.model import Model
-from boolmore.benchmarks import generate_experiments
+from boolmore.benchmark import generate_experiments
 
-base_directory = "boolmore/benchmarks/benchmark_models"
+base_directory = "../../models"
 
 sample_models = ["Cell Cycle Transcription by Coupled CDK and Network Oscillators",
                  "Metabolic Interactions in the Gut Microbiome",
@@ -18,14 +17,14 @@ sample_models = ["Cell Cycle Transcription by Coupled CDK and Network Oscillator
                  "Signaling in Macrophage Activation",
                  "Influenza A Virus Replication Cycle"]
 
-data_directory = "boolmore/optimization/data"
+data_directory = "../data"
 
 ### Generate data
 for model_name in sample_models:
-    base_primes = sm.format.import_primes(base_directory + "/" + model_name + ".txt")
+    base_primes = bnet_file2primes(f"{base_directory}/{model_name}.bnet")
     for i in range(5):
         exps, fixes_list = generate_experiments(base_primes, seed = i,
-                                                export=True, file_name="boolmore/optimization/data/"+model_name+"_data_"+str(i+1)+".tsv")
+                                                export=True, file_name=f"../data/{model_name}_data_{i+1}.tsv")
         
         base = Model.import_model(base_primes)
         
@@ -34,4 +33,4 @@ for model_name in sample_models:
         start.get_predictions(fixes_list)
         start.get_model_score(exps)
         
-        start.export("boolmore/optimization/data/"+model_name+"_start_"+str(i+1)+".txt")
+        start.export(f"../data/{model_name}_start_{i+1}.bnet")

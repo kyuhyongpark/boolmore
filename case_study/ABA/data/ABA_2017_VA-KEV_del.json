@@ -12,7 +12,7 @@
     "edge_prob": 0.5
     },
 
-"data": "./data/data_20230925.tsv",
+"data": "./data/data_A.tsv",
 
 "base": "./baseline_models/ABA_2017_VA-KEV_del.bnet",
 

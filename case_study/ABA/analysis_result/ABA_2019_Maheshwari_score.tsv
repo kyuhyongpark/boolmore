@@ -1,4 +1,4 @@
-id	hierarchy	fixes	observed node	experimental outcome	predict value	attractor agreement	score
+id	hierarchy	fixes	observed_node	experimental_outcome	predict_value	attractor_agreement	score
 1	0	ABA=0,	Closure	OFF	0.059	0.941	3.765
 2	1	ABA=1,	Closure	ON	1.0	1.0	3.765
 3	1	ABA=0,ROS=1,	Closure	ON	1.0	1.0	1.882
@@ -366,6 +366,6 @@ id	hierarchy	fixes	observed node	experimental outcome	predict value	attractor ag
 501	1	ABA=1,	S1P_PhytoS1P	ON	1.0	1.0	0.941
 504	0	ABA=0,	RCARs	OFF	0.0	1.0	1.0
 505	1	ABA=1,	RCARs	ON	1.0	1.0	1.0
-total							239.99881142746534
-out of							385.0
-out of							62.33735361752346%
+total	239.99881142746534
+max	385.0
+per	62.33735361752346%

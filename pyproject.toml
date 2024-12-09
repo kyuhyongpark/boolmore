@@ -4,15 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "boolmore"
+version = "0.1.2"
 authors = [{ name = "Kyu Hyong Park", email = "kjp5774@psu.edu" }]
-version = "0.1.1"
 description = "Python package for refining Boolean models"
-license = { file = "LISENSE" }
+readme = "README.md"
+license = { file = "LICENSE" }
 requires-python = ">=3.11"
 dependencies = ["pyboolnet @ git+https://github.com/hklarner/pyboolnet",
                 "joblib",
                 "ipykernel",
                 "pandas",]
 
-[tool.setuptools]
-packages = ["boolmore"]
+[project.urls]
+Homepage = "https://github.com/kyuhyongpark/boolmore"
