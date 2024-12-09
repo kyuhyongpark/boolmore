@@ -53,7 +53,7 @@ pip install git+https://github.com/kyuhyongpark/boolmore
    ```python
    import boolmore.genetic_algorithm
 
-   boolmore.genetic_algorithm.run_ga("your_path/CAD_config.json", "your_path/CAD_start.txt")
+   boolmore.genetic_algorithm.run_ga("your_path/CAD_config.json", "your_path/CAD_start.bnet")
    ```
 
 ## Details for configuring input files
@@ -81,7 +81,7 @@ This model is the base of all generated models. Every edge in the base model can
 A, A & (!B | C) 
 ```
 ### 3. json file
-For example, see case_study/ABA/data/ABA_2017.json
+For example, see case_study/ABA/data/ABA_A.json
 
 ```json
 {
@@ -97,9 +97,9 @@ For example, see case_study/ABA/data/ABA_2017.json
     "export_threshold": 430,
     },
 
-"data": "boolmore/ABA_case_study/data/data_20230925.tsv",
+"data": "boolmore/ABA_case_study/data/data_A.tsv",
 
-"base": "boolmore/ABA_case_study/baseline_models/ABA_GA_base_A.txt",
+"base": "boolmore/ABA_case_study/baseline_models/ABA_GA_base_A.bnet",
 
 "default_sources": {"ABA":0},
 
