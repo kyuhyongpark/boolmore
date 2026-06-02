@@ -47,13 +47,19 @@ def prime2rr(prime:PrimeType,
     # Get the rr and signs of the regulators
     rr = ['0'] * (2**len(regulators)) # type: ignore
     if signs == None:
-        signs_list = ['1'] * len(regulators) # type: ignore
+        signs_list = ['*'] * len(regulators) # type: ignore
         for implicant in prime[1]:
             # check whether certain node is inside
             for i, node in enumerate(regulators): # type: ignore
                 if node in implicant:
-                    if implicant[node] == 0:
+                    if implicant[node] == 0 and signs_list[i] == '*':
                         signs_list[i] = '0'
+                    elif implicant[node] == 1 and signs_list[i] == '*':
+                        signs_list[i] = '1'
+                    else:
+                        if implicant[node] != int(signs_list[i]):
+                            print(f"Warning: the sign of the regulator {node} is not consistent in the prime implicants.")
+        assert '*' not in signs_list, "The signs of the regulators cannot be determined from the prime implicants. Please check the input prime implicants."
         signs = ''.join(signs_list)
     # Get a binary number that gives us the position of the implicant on the rr
     # for every piece of rule that gives 1 to the regulated node,
@@ -208,66 +214,76 @@ def prime2bnet(node:str, prime:PrimeType) -> str:
     
     return s
 
-def get_uni_rr(rr:str, max:bool=True) -> str:
+def get_uni_rr(rr: str, max: bool = True) -> str:
     """
-    Returns the unique binary representation (max or min) of a rule
-    when given any binary representation of a rule.
+    Returns the unique canonical representation (maximal truth table or 
+    minimal Blake canonical form) of a Boolean rule.
+    
+    This function processes a binary string of length 2^k (where k is the 
+    number of regulators) by identifying and filling out sub-cubes of a 
+    hypercube using fast bitwise integer logic.
 
     Parameters
     ----------
-    rr  - representation of the rule            :length 2^k binary str
-    max - if True, get maximal representation   :bool
+    rr  - representation of the rule            : length 2^k binary str
+    max - if True, get maximal representation   : bool
           if False, get minimal representation
 
     Returns
     -------
-    uni_rr - unique representation of the rules                 :length 2^k binary str
-             if maximal, it is equivalent to the truth table
-             if minimal, it is in a Blake canonical form
-
+    uni_rr - unique representation of the rule  : length 2^k binary str
     """
-    # k = number of regulators
     n = len(rr)
-    k = int(math.log2(n))
-
-    # already minimal if the node is a fixed node
-    if k == 0:
+    
+    # Base case: if the string length is 1 or less (k = 0 regulators),
+    # the rule represents a fixed node configuration and cannot be minimized further.
+    if n <= 1:
         return rr
 
+    # Convert the string to a list of characters to allow fast, 
+    # in-place mutations at specific index positions.
     uni_rr = list(rr)
+    
+    # Store already visited sub-cube positions in a set to ensure 
+    # instant O(1) lookup speeds and prevent redundant evaluations.
+    modified = set()
+    fill_value = '1' if max else '0'
 
-    modified = []
-
-    # iterate through the string in reverse
+    # Iterate through all binary rule configurations in reverse order (from n-1 down to 0).
+    # Processing in reverse ensures that higher-order implicants are evaluated first.
     for i in range(n):
-        # get the regulator values if there is '1'
-        if uni_rr[-i-1] == '1':
-            # bi represents the regulator values in binary string
-            bi = format(i, '0' + str(k) + 'b')
-        else:
+        # Calculate the actual array index corresponding to the reversed loop variable.
+        rev_idx = n - i - 1
+        
+        # We only evaluate active rule states ('1'). Inactive states ('0') 
+        # do not trigger prime implicant/sub-cube expansions.
+        if uni_rr[rev_idx] != '1':
             continue
-        # find all the positions that need to be changed to 0
-        if bi in modified:
+            
+        # Skip this position if it has already been covered and filled 
+        # by a previously processed sub-cube.
+        if i in modified:
             continue
 
-        lst = []
-        for num in bi:
-            if num == '0':
-                lst.append(['0', '1'])
-            else:
-                lst.append(['1'])
-        positions = [''.join(p) for p in it.product(*lst)]
-        # do not change the original position
-        positions.remove(bi)
-        modified.extend(positions)
-        # change to '0' if min or '1' if max in the gained positions
-        for position in positions:
-            j = n - int(position,2) - 1
-            uni_rr[j] = str(int(max))
+        # Scan the entire state space to locate sub-cube coordinates.
+        # Instead of slow string generation, we use low-level bitwise operations.
+        for position in range(n):
+            if position == i:
+                continue
+                
+            # BITWISE LOGIC: (position & i) == i
+            # Checks if 'position' contains a 1 at every single binary slot where 'i' has a 1.
+            # If True, 'position' is mathematically verified to be a sub-cube coordinate
+            # covered by the root implicant 'i'.
+            if (position & i) == i:
+                modified.add(position)
+                
+                # Maps the integer position back to its correct index in the output array.
+                target_idx = n - position - 1
+                uni_rr[target_idx] = fill_value
 
-    uni_rr = ''.join(uni_rr)
-
-    return uni_rr
+    # Recombine the character array into the final canonical binary string representation.
+    return ''.join(uni_rr)
 
 
 def get_max_irr(rr:str) -> str:
@@ -291,3 +307,70 @@ def get_max_irr(rr:str) -> str:
     max_irr = max_rr[::-1]
 
     return(max_irr)
+
+def merge_primes(primes_list:list[PrimeType]) -> tuple[tuple[str],str,str]:
+    """
+    Returns the prime implicants of the merged rule
+    when given a list of prime implicants of rules to be merged.
+    Note that here we only use the activation primes of the rules to be merged, and we do not use the inhibition primes.
+    Opposite can be done by using th deactivation primes if needed.
+
+    Parameters
+    ----------
+    list[PrimeType] - a list of prime implicants of rules to be merged
+
+    Returns
+    -------
+    prime - prime implicants of the merged rule   :PrimeType = list[list[dict[str,int]]]
+        
+    """
+
+    activation_primes = []
+    for prime in primes_list:
+        activation_primes.extend(prime[1])
+    
+    # get the regulators and signs of the merged rule
+    regulators, rr, signs = prime2rr([[], activation_primes], regulators=None, signs=None)
+
+    return regulators, rr, signs
+
+def merge_rules(primes_list:list[dict[str, PrimeType]]) -> tuple[dict[str, PrimeType], dict[str, tuple[str]], dict[str, str], dict[str, str]]:
+    """
+    Returns the prime implicants of the merged rules
+    when given a list of prime implicants of rules to be merged.
+    Note that here we only use the activation primes of the rules to be merged, and we do not use the inhibition primes.
+    Opposite can be done by using th deactivation primes if needed.
+
+    Parameters
+    ----------
+    list[dict[str, PrimeType]] - a list of dictionaries of prime implicants of rules to be merged
+
+    Returns
+    -------
+    dict[str, PrimeType] - a dictionary of prime implicants of the merged rules
+                            keys are nodes and values are prime implicants of the rules for the nodes
+        
+    """
+
+    nodes = set()
+    for primes in primes_list:
+        nodes = nodes.union(set(primes.keys()))
+    nodes = sorted(nodes)
+
+    merged_primes = {}
+    merged_regulators_dict = {}
+    merged_rr_dict = {}
+    merged_signs_dict = {}
+    for node in nodes:
+        node_primes_list = []
+        for primes in primes_list:
+            if node in primes:
+                node_primes_list.append(primes[node])
+        regulators, rr, signs = merge_primes(node_primes_list)
+
+        merged_primes[node] = rr2prime(regulators, rr, signs, inverted = False)
+        merged_regulators_dict[node] = regulators
+        merged_rr_dict[node] = rr
+        merged_signs_dict[node] = signs
+
+    return merged_primes, merged_regulators_dict, merged_rr_dict, merged_signs_dict
