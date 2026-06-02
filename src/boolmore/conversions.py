@@ -307,3 +307,70 @@ def get_max_irr(rr:str) -> str:
     max_irr = max_rr[::-1]
 
     return(max_irr)
+
+def merge_primes(primes_list:list[PrimeType]) -> tuple[tuple[str],str,str]:
+    """
+    Returns the prime implicants of the merged rule
+    when given a list of prime implicants of rules to be merged.
+    Note that here we only use the activation primes of the rules to be merged, and we do not use the inhibition primes.
+    Opposite can be done by using th deactivation primes if needed.
+
+    Parameters
+    ----------
+    list[PrimeType] - a list of prime implicants of rules to be merged
+
+    Returns
+    -------
+    prime - prime implicants of the merged rule   :PrimeType = list[list[dict[str,int]]]
+        
+    """
+
+    activation_primes = []
+    for prime in primes_list:
+        activation_primes.extend(prime[1])
+    
+    # get the regulators and signs of the merged rule
+    regulators, rr, signs = prime2rr([[], activation_primes], regulators=None, signs=None)
+
+    return regulators, rr, signs
+
+def merge_rules(primes_list:list[dict[str, PrimeType]]) -> tuple[dict[str, PrimeType], dict[str, tuple[str]], dict[str, str], dict[str, str]]:
+    """
+    Returns the prime implicants of the merged rules
+    when given a list of prime implicants of rules to be merged.
+    Note that here we only use the activation primes of the rules to be merged, and we do not use the inhibition primes.
+    Opposite can be done by using th deactivation primes if needed.
+
+    Parameters
+    ----------
+    list[dict[str, PrimeType]] - a list of dictionaries of prime implicants of rules to be merged
+
+    Returns
+    -------
+    dict[str, PrimeType] - a dictionary of prime implicants of the merged rules
+                            keys are nodes and values are prime implicants of the rules for the nodes
+        
+    """
+
+    nodes = set()
+    for primes in primes_list:
+        nodes = nodes.union(set(primes.keys()))
+    nodes = sorted(nodes)
+
+    merged_primes = {}
+    merged_regulators_dict = {}
+    merged_rr_dict = {}
+    merged_signs_dict = {}
+    for node in nodes:
+        node_primes_list = []
+        for primes in primes_list:
+            if node in primes:
+                node_primes_list.append(primes[node])
+        regulators, rr, signs = merge_primes(node_primes_list)
+
+        merged_primes[node] = rr2prime(regulators, rr, signs, inverted = False)
+        merged_regulators_dict[node] = regulators
+        merged_rr_dict[node] = rr
+        merged_signs_dict[node] = signs
+
+    return merged_primes, merged_regulators_dict, merged_rr_dict, merged_signs_dict
