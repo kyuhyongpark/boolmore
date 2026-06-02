@@ -47,13 +47,19 @@ def prime2rr(prime:PrimeType,
     # Get the rr and signs of the regulators
     rr = ['0'] * (2**len(regulators)) # type: ignore
     if signs == None:
-        signs_list = ['1'] * len(regulators) # type: ignore
+        signs_list = ['*'] * len(regulators) # type: ignore
         for implicant in prime[1]:
             # check whether certain node is inside
             for i, node in enumerate(regulators): # type: ignore
                 if node in implicant:
-                    if implicant[node] == 0:
+                    if implicant[node] == 0 and signs_list[i] == '*':
                         signs_list[i] = '0'
+                    elif implicant[node] == 1 and signs_list[i] == '*':
+                        signs_list[i] = '1'
+                    else:
+                        if implicant[node] != int(signs_list[i]):
+                            print(f"Warning: the sign of the regulator {node} is not consistent in the prime implicants.")
+        assert '*' not in signs_list, "The signs of the regulators cannot be determined from the prime implicants. Please check the input prime implicants."
         signs = ''.join(signs_list)
     # Get a binary number that gives us the position of the implicant on the rr
     # for every piece of rule that gives 1 to the regulated node,
