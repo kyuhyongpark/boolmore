@@ -9,7 +9,7 @@ from boolmore.mask import (
     )
 
 from boolmore.phenotypes import (
-    get_phenotypes_for_source_comb,
+    get_mintr_for_source_comb,
 )
 
 
@@ -35,7 +35,7 @@ class TestPhenotypes(unittest.TestCase):
 
         source_comb = {"A": 0, "B": 1}
 
-        phenotypes = get_phenotypes_for_source_comb(primes, source_comb)
+        phenotypes = get_mintr_for_source_comb(primes, source_comb)
 
         expected = [
             {'A': 0, 'B': 1, 'C': 0, 'D': 0},
@@ -62,8 +62,8 @@ class TestPhenotypes(unittest.TestCase):
         comb1 = {"A": 0, "B": 1}
         comb2 = {"B": 1, "A": 0}
 
-        p1 = get_phenotypes_for_source_comb(primes, comb1)
-        p2 = get_phenotypes_for_source_comb(primes, comb2)
+        p1 = get_mintr_for_source_comb(primes, comb1)
+        p2 = get_mintr_for_source_comb(primes, comb2)
 
         self.assertEqual(p1, p2)
 
@@ -78,7 +78,7 @@ class TestPhenotypes(unittest.TestCase):
         source_comb = {"X": 1}
 
         with self.assertRaises(ValueError):
-            get_phenotypes_for_source_comb(primes, source_comb)
+            get_mintr_for_source_comb(primes, source_comb)
 
     def test_determinism(self):
         bnet = """
@@ -91,8 +91,8 @@ class TestPhenotypes(unittest.TestCase):
 
         source_comb = {"A": 0, "B": 1}
 
-        p1 = get_phenotypes_for_source_comb(primes, source_comb)
-        p2 = get_phenotypes_for_source_comb(primes, source_comb)
+        p1 = get_mintr_for_source_comb(primes, source_comb)
+        p2 = get_mintr_for_source_comb(primes, source_comb)
 
         self.assertEqual(p1, p2)
 
@@ -108,7 +108,7 @@ class TestPhenotypes(unittest.TestCase):
 
         source_comb = {"A": 0, "B": 1}
 
-        _ = get_phenotypes_for_source_comb(primes, source_comb)
+        _ = get_mintr_for_source_comb(primes, source_comb)
 
         self.assertEqual(str(primes), original)
 
@@ -120,7 +120,7 @@ class TestPhenotypes(unittest.TestCase):
 
         primes = bnet_text2primes(bnet)
 
-        phenotypes = get_phenotypes_for_source_comb(primes, {})
+        phenotypes = get_mintr_for_source_comb(primes, {})
 
         self.assertIn({'A': 0, 'B': 0}, phenotypes)
         self.assertIn({'A': 0, 'B': 1}, phenotypes)
@@ -136,7 +136,7 @@ class TestPhenotypes(unittest.TestCase):
         primes = bnet_text2primes(bnet)
 
         with self.assertRaises(ValueError):
-            get_phenotypes_for_source_comb(primes, {}, DEBUG=True)
+            get_mintr_for_source_comb(primes, {}, DEBUG=True)
 
 
 class TestFullPipelineExactOutput(unittest.TestCase):
@@ -162,7 +162,7 @@ class TestFullPipelineExactOutput(unittest.TestCase):
         self.answer_sheet = {}
         for mask in generate_source_masks(self.source_nodes, self.sources_partial):
             source_comb = mask_to_sources(mask, self.source_nodes)
-            phenotypes = get_phenotypes_for_source_comb(self.primes, source_comb)
+            phenotypes = get_mintr_for_source_comb(self.primes, source_comb)
             self.answer_sheet[mask_to_str(mask, len(self.source_nodes))] = phenotypes
 
     def test_exact_source_nodes(self):
