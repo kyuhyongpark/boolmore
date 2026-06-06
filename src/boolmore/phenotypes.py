@@ -19,6 +19,7 @@ def get_phenotypes_for_source_comb(primes, source_comb, DEBUG=False):
     -------
     list
         List of minimal trap spaces after applying the source constraints.
+        Nodes not appearing in each trap space are considered free (can take either value).
 
     Raises
     ------
@@ -31,6 +32,17 @@ def get_phenotypes_for_source_comb(primes, source_comb, DEBUG=False):
     -----
     This function applies constant assignments to selected nodes by replacing
     their update rules with fixed Boolean states before computing trap spaces.
+
+    Examples
+    --------
+    >>> primes = {
+    ...     'A': [[{'A': 0}], [{'A': 1}]],
+    ...     'B': [[{'B': 0}, {'A': 0}], [{'A': 1, 'B': 1}]],
+    ...     'C': [[{'C': 1}], [{'C': 0}]]
+    ... }
+    >>> source_comb = {'A': 1}
+    >>> get_phenotypes_for_source_comb(primes, source_comb)
+    [{'A': 1, 'B': 1}, {'A': 1, 'B': 0}]
     """
 
     if DEBUG:
