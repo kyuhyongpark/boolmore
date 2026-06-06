@@ -3,10 +3,8 @@ import unittest
 from boolmore.mask import (
     generate_source_masks,
     mask_to_sources,
+    mask_to_str,
 )
-
-def _mask_to_str(mask, n):
-    return format(mask, f"0{n}b")
 
 
 class TestGenerateSourceMasks(unittest.TestCase):
@@ -15,7 +13,7 @@ class TestGenerateSourceMasks(unittest.TestCase):
         sources_partial = {"b": 0, "c": 1}
 
         actual = [
-            _mask_to_str(m, len(source_order))
+            mask_to_str(m, len(source_order))
             for m in generate_source_masks(source_order, sources_partial)
         ]
 
@@ -47,7 +45,7 @@ class TestGenerateSourceMasks(unittest.TestCase):
         sources_partial = {"b": 0, "c": 1}
 
         for mask in generate_source_masks(source_order, sources_partial):
-            bits = _mask_to_str(mask, len(source_order))
+            bits = mask_to_str(mask, len(source_order))
 
             for i, source in enumerate(source_order):
                 if source in sources_partial:
@@ -139,7 +137,7 @@ class TestMaskPipeline(unittest.TestCase):
         sources_partial = {"b": 0, "c": 1}
 
         actual = [
-            _mask_to_str(m, len(source_order))
+            mask_to_str(m, len(source_order))
             for m in generate_source_masks(source_order, sources_partial)
         ]
 

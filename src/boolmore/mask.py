@@ -80,3 +80,6 @@ def mask_to_sources(mask, source_order):
         result[s] = (mask >> bit_pos) & 1
 
     return result
+
+def mask_to_str(mask, n):
+    return format(mask, f"0{n}b")
