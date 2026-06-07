@@ -51,9 +51,8 @@ IL27R,          IL27_e
 IL27_e,         IL27_e
 IL29R,          IL29_e
 IL29_e,         IL29_e
-IL2R,           IL2 | IL2R | IL2_e
+IL2R,           IL2 | IL2R&IL2R_2 | IL2_e
 IL2RA,          FOXP3&NFAT | NFAT&NFKB | NFAT&SMAD3 | NFAT&STAT5
-IL2R_1,         IL2 | IL2R&IL2R_2 | IL2_e
 IL2R_2,         IL2&IL2R&IL2RA | IL2R&IL2RA&IL2_e
 IL2_e,          IL2_e
 IL3,            GATA3&NFAT&proliferation

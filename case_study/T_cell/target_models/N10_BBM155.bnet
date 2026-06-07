@@ -19,7 +19,7 @@ IL23, NFAT & STAT3 & proliferation
 IL23R, (!IL23_e & IL23 & STAT3 & RORGT) | (IL23_e & STAT3 & RORGT)
 IL27R, IL27_e
 IL2RA, (!FOXP3 & NFAT & !STAT5 & !SMAD3 & NFKB) | (!FOXP3 & NFAT & !STAT5 & SMAD3) | (!FOXP3 & NFAT & STAT5) | (FOXP3 & NFAT)
-IL2R_1, (!IL2_e & !IL2R & IL2) | (!IL2_e & IL2R & !IL2R_2 & IL2) | (!IL2_e & IL2R & IL2R_2) | (IL2_e & !IL2R) | (IL2_e & IL2R & !IL2R_2 ) | (IL2_e & IL2R & IL2R_2)
+IL2R, (!IL2_e & !IL2R & IL2) | (!IL2_e & IL2R & !IL2R_2 & IL2) | (!IL2_e & IL2R & IL2R_2) | (IL2_e & !IL2R) | (IL2_e & IL2R & !IL2R_2 ) | (IL2_e & IL2R & IL2R_2)
 IL2R_2, (!IL2_e & IL2R & IL2RA & IL2) | (IL2_e & IL2R & IL2RA)
 IL4, (!TBET & GATA3 & !FOXP3 & NFAT & !IRF1 & proliferation) | (TBET & GATA3 & !FOXP3 & NFAT & !IRF1 & !RUNX3 & proliferation)
 IL4RA_2, STAT5 & STAT5_2
