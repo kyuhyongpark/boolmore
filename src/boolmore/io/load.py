@@ -232,6 +232,73 @@ def parse_assignment_block(block: str, field: str, line_num: int, errors: list[P
 # -------------------------
 
 def import_phenotypes(location: str) -> list[Experiment]:
+    """
+    Import phenotype-based experiments from a csv file.
+
+    Each row in the file corresponds to a single Experiment. All structured
+    fields are encoded as strings and must follow a strict assignment format.
+
+    The function parses each row and converts it into an Experiment object.
+
+    ------------------------------------------------------------------------
+    REQUIRED COLUMN HEADERS
+    ------------------------------------------------------------------------
+
+    id : str or int
+        Unique identifier of the experiment.
+
+    sources : str
+        Assignment of source node states.
+        Format:
+            "node1=value1; node2=value2;..."
+        Example:
+            "A=1; B=0; C=1"
+
+    perturbation : str
+        Assignment of perturbation conditions.
+        Same format as sources
+
+    phenotype : str
+        Observed phenotype assignment.
+        Same format as sources
+
+    expected_exists : int or bool
+        Whether the phenotype is expected to exist under the given conditions.
+        Allowed values:
+            true / false
+
+    weight : float
+        Importance weight of this experiment in scoring/benchmarking.
+        Must be a valid floating point number (e.g. 1.0, 0.5, 2.3).
+
+    ------------------------------------------------------------------------
+    CELL ENCODING RULES
+    ------------------------------------------------------------------------
+
+    - Node names are strings without commas or parentheses.
+    - Whitespace is ignored
+    - # comments are ignored
+    - Order of nodes does NOT matter; internally they are normalized.
+
+    ------------------------------------------------------------------------
+    RETURNS
+    ------------------------------------------------------------------------
+
+    list[Experiment]
+        Parsed experiments as immutable Experiment dataclass instances.
+
+    ------------------------------------------------------------------------
+    ERRORS
+    ------------------------------------------------------------------------
+
+    Raises:
+        ValueError:
+            - Missing required columns
+            - Malformed assignment strings
+            - invalid values in fields
+            - Duplicate experiment ids
+            - Duplicate signatures (sources, perturbation, phenotype)
+    """
     experiments: list[Experiment] = []
     errors: list[ParseError] = []
 
