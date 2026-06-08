@@ -1,7 +1,8 @@
 import random
 
-import boolmore.conversions as conv
-import boolmore.constraint as cons
+import boolmore.core.conversions as conv
+import boolmore.eval.constraint as cons
+import boolmore.algo.constraint_enforcement as ce
 
 
 def mutate_rr(rr:str, probability:float) -> str:
@@ -126,16 +127,16 @@ def mutate_rr_constraint(regulators:tuple[str, ...], rr:str, base_rr:str, constr
         # impose constraint - group
         if node in constraints['group']:
             groups = constraints['group'][node]
-            group_rr, group_regulators = cons.rr2group_rr(regulators, rr, groups)
+            group_rr, group_regulators = ce.rr2group_rr(regulators, rr, groups)
             mutated_group_rr = mutate_rr_bias(group_rr, probability, bias)
-            mutated_rr = cons.group_rr2rr(regulators, mutated_group_rr, group_regulators)
+            mutated_rr = ce.group_rr2rr(regulators, mutated_group_rr, group_regulators)
         else:
             mutated_rr = mutate_rr_bias(rr, probability, bias)
 
         # impose constraint - necessary
         if node in constraints['necessary']: 
             for necc in constraints['necessary'][node]:
-                mutated_rr = cons.impose_necessary(regulators, mutated_rr, necc)
+                mutated_rr = ce.impose_necessary(regulators, mutated_rr, necc)
         ### end of mutation ###
 
         redo = False

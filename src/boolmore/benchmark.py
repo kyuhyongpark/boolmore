@@ -3,7 +3,7 @@ import os
 
 from pyboolnet.interaction_graphs import primes2igraph
 
-from boolmore.model import Model
+from boolmore.core.model import Model
 
 
 PrimeType = list[list[dict[str, int]]]

@@ -5,9 +5,9 @@ import json
 from pyboolnet.external.bnet2primes import bnet_file2primes
 
 import boolmore.config
-from boolmore.experiment import import_exps
-from boolmore.model import Model
-from boolmore.genetic_algorithm import ga_main
+from boolmore.io.load import import_exps
+from boolmore.core.model import Model
+from boolmore.algo.genetic_algorithm import ga_main
 
 
 REPEAT = 50

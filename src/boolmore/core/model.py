@@ -4,10 +4,10 @@ import os
 
 import pyboolnet.trap_spaces
 
-import boolmore.mutation as m
-import boolmore.conversions as conv
-import boolmore.constraint as cons
-import boolmore.score as score
+import boolmore.algo.mutation as m
+import boolmore.core.conversions as conv
+import boolmore.eval.constraint as cons
+import boolmore.eval.score as score
 import boolmore.config as config
 
 

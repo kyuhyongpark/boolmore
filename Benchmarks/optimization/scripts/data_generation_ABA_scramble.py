@@ -5,8 +5,8 @@ import json
 
 from pyboolnet.external.bnet2primes import bnet_file2primes
 
-from boolmore.experiment import import_exps
-from boolmore.model import Model
+from boolmore.io.load import import_exps
+from boolmore.core.model import Model
 
 # take ABA model specific data from the json file
 json_file = "../../../case_study/ABA/data/ABA_2017.json"

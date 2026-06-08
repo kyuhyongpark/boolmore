@@ -8,9 +8,9 @@ import numpy as np
 from pyboolnet.external.bnet2primes import bnet_file2primes
 
 import boolmore.config
-from boolmore.conversions import prime2bnet
-from boolmore.experiment import import_exps
-from boolmore.model import Model, mix_models
+from boolmore.core.conversions import prime2bnet
+from boolmore.io.load import import_exps
+from boolmore.core.model import Model, mix_models
 
 
 FixesType = tuple[tuple[str, int]]

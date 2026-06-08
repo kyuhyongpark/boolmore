@@ -289,8 +289,8 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
 if __name__=="__main__":
     from pyboolnet.external.bnet2primes import bnet_file2primes
 
-    from boolmore.experiment import import_exps
-    from boolmore.model import Model
+    from boolmore.io.load import import_exps
+    from boolmore.core.model import Model
 
     DATA = "boolmore/case_study/data/data_Li_20230926.tsv"
     # MODEL = "boolmore/comparison/gitsbe/ABA_A_20241105_214621/models/ABA_A_network_run_0__G399_M138.bnet"

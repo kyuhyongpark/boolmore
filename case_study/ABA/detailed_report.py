@@ -8,9 +8,9 @@ from pyboolnet.prime_implicants import percolate
 from pyboolnet.prime_implicants import find_predecessors
 from pyboolnet.external.bnet2primes import bnet_file2primes
 
-from boolmore.model import Model
-from boolmore.experiment import import_exps
-from boolmore.conversions import prime2bnet
+from boolmore.core.model import Model
+from boolmore.io.load import import_exps
+from boolmore.core.conversions import prime2bnet
 
 
 SETTINGS = "./data/ABA_A.json"
