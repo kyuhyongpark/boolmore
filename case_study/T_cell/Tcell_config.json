@@ -43,8 +43,8 @@
                     "IL13": ["CMAF", "FOXP3", "GATA3", "IL33R"],
                     "IL15R": ["IL15_e"],
                     "IL17": ["FOXP3","NFAT","NFKB","RORGT","STAT1","STAT3","STAT5","STAT6"],
-                    "IL18R": ["(IL12_e, IL18_e)", "IL18_e", "STAT4", "STAT6"],
-                    "IL1R": ["IL1A_e", "IL1B_e", "IL1R1"],
+                    "IL18R": ["IL18_e", "STAT4", "STAT6"],
+                    "IL1R": ["IL1R1", "IL1_e"],
                     "IL2": ["FOXP3", "NFAT", "NFKB", "NFkB", "STAT5", "STAT6", "TBET"],
                     "IL21": ["BCL6", "CMAF", "NFAT", "STAT3", "STAT4"],
                     "IL21R": ["IL21", "IL21_e"],
@@ -80,7 +80,7 @@
                     "proliferation": ["STAT5"],
                     "PU1": ["TGFBR"],
                     "RORGT": ["BCL6","FOXP3","GATA3","IL17","RORGT","SMAD2","STAT3","TBET"],
-                    "RUNX3": ["CD8", "STAT5", "TBET", "ThPOK"],
+                    "RUNX3": ["CD8", "STAT5", "TBET", "THPOK"],
                     "SMAD2": ["TGFBR"],
                     "SMAD3": ["TGFBR"],
                     "SOCS1": ["STAT1", "TBET"],
@@ -92,8 +92,7 @@
                     "TBET": ["BCL6", "GATA3", "IL36R", "RORGT", "STAT1", "STAT4", "TBET"],
                     "TGFB": ["FOXP3", "NFAT"],
                     "TGFBR": ["NFAT", "TGFB", "TGFB_e"],
-                    "THPOK": ["GATA3", "THPOK"],
-                    "ThPOK": ["RUNX3"]
+                    "THPOK": ["GATA3", "RUNX3", "THPOK"]
                 },
                 "necessary": {
                     "IL15R": ["IL2RB"],
@@ -101,7 +100,7 @@
                     "IL4R": ["IL4RA"],
                     "TCR": ["APC"]
                 },
-                "group": {},
+                "group": {"IL18R":[["IL12_e", "IL18_e"]]},
                 "possible_constant": []},
 
 "edge_pool": []
