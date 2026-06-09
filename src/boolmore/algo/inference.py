@@ -2,37 +2,13 @@ from collections import defaultdict
 from time import perf_counter
 
 from pyboolnet.trap_spaces import compute_trapspaces_within_subspace
-from pyboolnet.prime_implicants import percolate
 
 from boolmore.core.experiment import Experiment
 from boolmore.core.prediction import Prediction
+from boolmore.core.conversions import assignment_to_dict
 
 Assignment = tuple[tuple[str, int], ...]
 
-def _assignment_to_dict(assignment: Assignment):
-    """
-    Convert an immutable assignment representation into a dictionary.
-
-    Parameters
-    ----------
-    assignment : Assignment
-        Tuple of ``(node, value)`` pairs, where ``value`` is typically
-        ``0`` or ``1``.
-
-    Returns
-    -------
-    dict[str, int]
-        Dictionary mapping each node to its assigned value.
-
-    Notes
-    -----
-    If the same node appears multiple times, the last occurrence
-    overwrites any previous value.
-    """
-    result = {}
-    for node, value in assignment:
-        result[node] = value
-    return result
 
 def get_phenotype_prediction(
     primes,
@@ -101,8 +77,8 @@ def get_phenotype_prediction(
         # check cache
         t0 = perf_counter()
 
-        sources = _assignment_to_dict(exp.sources)
-        phenotype = _assignment_to_dict(exp.phenotype)
+        sources = assignment_to_dict(exp.sources)
+        phenotype = assignment_to_dict(exp.phenotype)
 
         if exp.perturbation in traps_cache:
             for max_trap in traps_cache[exp.perturbation]:
@@ -137,7 +113,7 @@ def get_phenotype_prediction(
             results.append(result)
             continue
 
-        perturbation = _assignment_to_dict(exp.perturbation)
+        perturbation = assignment_to_dict(exp.perturbation)
 
         # get percolated primes
         t0 = perf_counter()

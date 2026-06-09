@@ -3,6 +3,7 @@ import itertools as it
 
 
 PrimeType = list[list[dict[str, int]]]
+Assignment = tuple[tuple[str, int], ...]
 
 
 def prime2rr(prime:PrimeType,
@@ -374,3 +375,29 @@ def merge_rules(primes_list:list[dict[str, PrimeType]]) -> tuple[dict[str, Prime
         merged_signs_dict[node] = signs
 
     return merged_primes, merged_regulators_dict, merged_rr_dict, merged_signs_dict
+
+
+def assignment_to_dict(assignment: Assignment):
+    """
+    Convert an immutable assignment representation into a dictionary.
+
+    Parameters
+    ----------
+    assignment : Assignment
+        Tuple of ``(node, value)`` pairs, where ``value`` is typically
+        ``0`` or ``1``.
+
+    Returns
+    -------
+    dict[str, int]
+        Dictionary mapping each node to its assigned value.
+
+    Notes
+    -----
+    If the same node appears multiple times, the last occurrence
+    overwrites any previous value.
+    """
+    result = {}
+    for node, value in assignment:
+        result[node] = value
+    return result
