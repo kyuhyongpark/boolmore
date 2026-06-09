@@ -75,7 +75,7 @@ class TestGetPhenotypePrediction(unittest.TestCase):
         self.assertEqual(len(results), 2)
 
         self.assertTrue(results[0].predicted_exists)
-        self.assertEqual(results[0].found_phenotypes, [{"A": 0, "B": 0, "D": 1}])
+        self.assertEqual(results[0].found_phenotypes, [{"A": 0, "B": 0, "C": 1, "D": 1}])
 
         self.assertTrue(results[1].predicted_exists)
         self.assertEqual(results[1].found_phenotypes, [{"A": 1, "B": 0, "D": 1}])
