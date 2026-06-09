@@ -1,0 +1,51 @@
+# DATA: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_data.tsv
+# DEFAULT_SOURCES={}
+# CONSTRAINTS={'fixed': [], 'regulate': {}, 'necessary': {}, 'group': {}, 'possible_constant': []}
+# EDGE_POOL=[]
+
+# TOTAL_ITERATIONS=10
+# PER_ITERATION=10
+# KEEP=2
+# MIX=2
+# PROB=0.2
+# EDGE_PROB=0.0
+
+# stop_if_max=True
+# core=2
+# seed=0
+
+# BASE: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD.bnet
+# extra edges: []
+# score: 50.0 / 50.0 (100.0%)
+# targets,	factors
+# Emx2,	!Pax6 & !Fgf8 & Coup_fti & !Sp8
+# Pax6,	!Emx2 & !Coup_fti & Sp8
+# Fgf8,	!Emx2 & Fgf8 & Sp8
+# Coup_fti,	!Fgf8 & !Sp8
+# Sp8,	!Emx2 & Fgf8
+
+# START MODEL: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_start.bnet
+# score: 33.958333333333336 / 50.0 (67.91666666666667%)
+# extra edges: []
+# targets,	factors
+# Coup_fti,	!Fgf8
+# Emx2,	Coup_fti & !Fgf8 | !Pax6 | !Sp8
+# Fgf8,	!Emx2 | Sp8
+# Pax6,	!Coup_fti & Sp8 | !Emx2
+# Sp8,	Fgf8
+
+# start_time=datetime.datetime(2026, 6, 9, 17, 46, 53, 402928)
+# end_time=datetime.datetime(2026, 6, 9, 17, 46, 58, 292327)
+# elapsed time: 0:00:04.889399
+
+iteration,top score,extra edges,complexity
+1,41.625,"[]",13
+2,42.58333333333333,"[]",14
+3,42.58333333333333,"[]",14
+4,46.08333333333333,"[]",15
+5,46.08333333333333,"[]",15
+6,46.08333333333333,"[]",15
+7,46.08333333333333,"[]",15
+8,46.08333333333333,"[]",15
+9,46.58333333333333,"[]",13
+10,46.58333333333333,"[]",13
