@@ -1,6 +1,9 @@
 import itertools as it
 from collections.abc import Iterable
 
+from boolmore.core.experiment import Experiment
+from boolmore.core.prediction import Prediction
+
 
 FixesType = tuple[tuple[str, int],...]
 ExpType = tuple[int, float, FixesType, str, str]
@@ -284,6 +287,41 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
         fp.write('per\t' + str(score/model_max_score*100) + '%\n') # type: ignore
 
     return score
+
+
+def get_phenotype_score(
+    experiments: list[Experiment],
+    predictions: list[Prediction],
+) -> None:
+    """
+    Update each Prediction with its agreement and score.
+
+    agreement is 1.0 if predicted_exists matches the corresponding
+    Experiment's expected_exists, and 0.0 otherwise.
+
+    score is weight * agreement.
+
+    Experiments and Predictions are matched by their id.
+    """
+    exp_by_id = {exp.id: exp for exp in experiments}
+
+    missing = []
+
+    for pred in predictions:
+        exp = exp_by_id.get(pred.id)
+        if exp is None:
+            missing.append(pred.id)
+            continue
+
+        pred.agreement = (
+            1.0 if pred.predicted_exists == exp.expected_exists else 0.0
+        )
+        pred.score = exp.weight * pred.agreement
+
+    if missing:
+        raise ValueError(
+            f"No Experiment found for Prediction id(s): {missing}"
+        )
 
 
 if __name__=="__main__":
