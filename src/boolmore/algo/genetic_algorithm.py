@@ -2,6 +2,7 @@ import datetime
 import json
 import os
 import random
+from dataclasses import dataclass
 
 from joblib import Parallel, delayed
 import numpy as np
@@ -16,6 +17,19 @@ from boolmore.core.model import Model, mix_models
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
 PredictType = dict[FixesType, dict]
+
+
+class Evaluator:
+    def evaluate(self, model, fixes_list, exps):
+        model.get_predictions(fixes_list)
+        model.get_model_score(exps)
+        return EvalResult(score=model.score, non_hierarchy_score=model.non_hierarchy_score)
+
+@dataclass
+class EvalResult:
+    score: float
+    non_hierarchy_score: float
+
 
 def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
            data_file:str|None=None, base_file:str|None=None, parameter_dict:dict|None=None,
@@ -208,7 +222,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     fp.close()
 
     start_time = datetime.datetime.now()
-    final, log = ga_main(start, exps, fixes_list,
+    evaluator = Evaluator()
+    final, log = ga_main(start, exps, fixes_list, evaluator,
                          total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                          prob=PROB, edge_prob=EDGE_PROB,
                          export_top=EXPORT_TOP, export_thresh=EXPORT_THRESHOLD,
@@ -256,6 +271,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     return base, start, final, log
 
 def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
+            evaluator:Evaluator,
             total_iter:int, per_iter:int, keep:int, mix:int,
             prob:float|dict[int,float], edge_prob:float=0.5,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
@@ -368,7 +384,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         new_model = start.mutate(prob_list[0], edge_prob)
         new_model_lst.append(new_model)    
     if core > 1:
-        results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(new_model, fixes_list, exps) for new_model in new_model_lst)
+        results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(new_model, fixes_list, exps, evaluator) for new_model in new_model_lst)
         for result in results:
             for new_model in new_model_lst:
                 if new_model.id == result[0]:
@@ -377,8 +393,8 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
                     new_model.non_hierarchy_score = result[3]
     else:
         for new_model in new_model_lst:
-            new_model.get_predictions(fixes_list)
-            new_model.get_model_score(exps)
+            result = evaluator.evaluate(new_model, fixes_list, exps)
+            new_model.score = result.score
     iteration.extend(new_model_lst)
     
     iteration = sorted(iteration, key=lambda x: (len(x.extra_edges), x.complexity))
@@ -424,7 +440,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
             mixed_model = mix_models(model_choice[0], model_choice[1])
             mixed_model_lst.append(mixed_model)    
         if core > 1:
-            results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(mixed_model, fixes_list, exps) for mixed_model in mixed_model_lst)
+            results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(mixed_model, fixes_list, exps, evaluator) for mixed_model in mixed_model_lst)
             for result in results:
                 for mixed_model in mixed_model_lst:
                     if mixed_model.id == result[0]:
@@ -433,8 +449,8 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
                         mixed_model.non_hierarchy_score = result[3]
         else:
             for mixed_model in mixed_model_lst:
-                mixed_model.get_predictions(fixes_list)
-                mixed_model.get_model_score(exps)
+                result = evaluator.evaluate(mixed_model, fixes_list, exps)
+                mixed_model.score = result.score
         new_iteration.extend(mixed_model_lst)
     
         # mutate the good ones
@@ -451,7 +467,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
             new_model = target.mutate(prob_list[i-1], edge_prob)
             new_model_lst.append(new_model)    
         if core > 1:
-            results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(new_model, fixes_list, exps) for new_model in new_model_lst)
+            results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(new_model, fixes_list, exps, evaluator) for new_model in new_model_lst)
             for result in results:
                 for new_model in new_model_lst:
                     if new_model.id == result[0]:
@@ -460,8 +476,8 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
                         new_model.non_hierarchy_score = result[3]
         else:
             for new_model in new_model_lst:
-                new_model.get_predictions(fixes_list)
-                new_model.get_model_score(exps)
+                result = evaluator.evaluate(new_model, fixes_list, exps)
+                new_model.score = result.score
         new_iteration.extend(new_model_lst)
       
         new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
@@ -493,7 +509,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
 
     return final, log
 
-def parallel_pred_and_score(model, fixes_list, exps)-> tuple[Model, PredictType, float, float]:
+def parallel_pred_and_score(model, fixes_list, exps, evaluator)-> tuple[Model, PredictType, float, float]:
     """
     Gets predictions and scores for a model in parallel.
     This function must return all the values that the models will assign to their attributes.
@@ -541,10 +557,9 @@ def parallel_pred_and_score(model, fixes_list, exps)-> tuple[Model, PredictType,
         non-hierarchy score of the model
     
     """
-    model.get_predictions(fixes_list)
-    model.get_model_score(exps)
-
-    return model.id, model.predictions, model.score, model.non_hierarchy_score
+    
+    result = evaluator.evaluate(model, fixes_list, exps)
+    return model.id, model.predictions, result.score, result.non_hierarchy_score
 
 if __name__ == "__main__":
 
