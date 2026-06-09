@@ -395,3 +395,42 @@ def import_phenotypes(location: str) -> list[Experiment]:
         raise CSVParseException(errors)
 
     return experiments
+
+def check_phenotypes(primes: dict, experiments: list[Experiment]) -> None:
+    """
+    Verify that every node appearing in the experiments exists in `primes`.
+
+    Checks the nodes appearing in
+    - sources
+    - perturbation
+    - phenotype
+
+    Collects all errors before raising a CSVParseException.
+    """
+    errors: list[ParseError] = []
+
+    valid_nodes = set(primes.keys())
+
+    for exp in experiments:
+        for field_name, assignment in (
+            ("sources", exp.sources),
+            ("perturbation", exp.perturbation),
+            ("phenotype", exp.phenotype),
+        ):
+            for node, _ in assignment:
+                if node not in valid_nodes:
+                    errors.append(
+                        ParseError(
+                            line=0,
+                            id=str(exp.id),
+                            message=f"Unknown node '{node}' in {field_name}",
+                            row={
+                                "sources": exp.sources,
+                                "perturbation": exp.perturbation,
+                                "phenotype": exp.phenotype,
+                            },
+                        )
+                    )
+
+    if errors:
+        raise CSVParseException(errors)
