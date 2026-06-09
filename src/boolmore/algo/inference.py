@@ -1,4 +1,5 @@
 from collections import defaultdict
+from time import perf_counter
 
 from pyboolnet.trap_spaces import compute_trapspaces_within_subspace
 from pyboolnet.prime_implicants import percolate
@@ -33,7 +34,11 @@ def _assignment_to_dict(assignment: Assignment):
         result[node] = value
     return result
 
-def get_phenotype_prediction(primes, experiments:list[Experiment]):
+def get_phenotype_prediction(
+    primes,
+    experiments: list[Experiment],
+    debug: bool = False,
+):
     """
     Predict whether each experiment's phenotype is compatible with the
     Boolean network under its perturbation and source assignments.
@@ -76,49 +81,94 @@ def get_phenotype_prediction(primes, experiments:list[Experiment]):
     results = []
     traps_cache = defaultdict(list)
     primes_cache = defaultdict(list)
+
     for exp in experiments:
-        
+
+        if debug:
+            print(f"\nExperiment {exp.id}")
+
         result = Prediction(
-            id = exp.id,
-            perturbation = exp.perturbation,
-            sources = exp.sources,
-            phenotype = exp.phenotype,
-            found_phenotypes = [],
-            predicted_exists = False,
-            agreement = 0.0,
-            score = 0.0
+            id=exp.id,
+            perturbation=exp.perturbation,
+            sources=exp.sources,
+            phenotype=exp.phenotype,
+            found_phenotypes=[],
+            predicted_exists=False,
+            agreement=0.0,
+            score=0.0,
         )
 
+        # check cache
+        t0 = perf_counter()
 
-        # check if the experiment can be predicted from already cached trapspaces
         sources = _assignment_to_dict(exp.sources)
         phenotype = _assignment_to_dict(exp.phenotype)
 
         if exp.perturbation in traps_cache:
             for max_trap in traps_cache[exp.perturbation]:
-                # check if the max_trap agrees with both sources and phenotype
-                if all(sources[node] == max_trap[node] for node in sources.keys()) and all(phenotype[node] == max_trap[node] for node in phenotype.keys()):
+                if not all(node in max_trap for node in sources):
+                    continue
+                if not all(node in max_trap for node in phenotype):
+                    continue
+                if (
+                    all(
+                        sources[node] == max_trap[node]
+                        for node in sources
+                    )
+                    and
+                    all(
+                        phenotype[node] == max_trap[node]
+                        for node in phenotype
+                    )
+                ):
                     result.found_phenotypes.append(max_trap)
                     result.predicted_exists = True
                     break
-        
+
+        if debug:
+            print(
+                f"  cache check: "
+                f"{perf_counter() - t0:.6f} s"
+            )
+
         if result.predicted_exists:
+            if debug:
+                print("  cache hit (found_phenotypes)")
             results.append(result)
             continue
 
-        # moving on to predict the experiment from scratch
         perturbation = _assignment_to_dict(exp.perturbation)
 
-        # get the percolated primes
+        # get percolated primes
+        t0 = perf_counter()
+
         if exp.perturbation in primes_cache:
             perc_primes = primes_cache[exp.perturbation]
+            if debug:
+                print("  cache hit (perc_primes)")
         else:
+            perc_primes = primes.copy()
             for node in perturbation:
                 if node not in primes:
                     raise ValueError(f"{node} is not in the model")
 
-            perc_primes = percolate(primes, add_constants = perturbation, remove_constants = False, copy=True)
-            primes_cache[exp.perturbation] = perc_primes.copy()
+            # perc_primes = percolate(
+            #     primes,
+            #     add_constants=perturbation,
+            #     remove_constants=False,
+            #     copy=True,
+            # )
+                if perturbation[node] == 0:
+                    perc_primes[node] = [[{}],[]]
+                else:
+                    perc_primes[node] = [[],[{}]]
+            primes_cache[exp.perturbation] = perc_primes
+
+        if debug:
+            print(
+                f"  get perc_primes: "
+                f"{perf_counter() - t0:.6f} s"
+            )
 
         subspace = sources.copy()
         subspace.update(phenotype)
@@ -127,13 +177,24 @@ def get_phenotype_prediction(primes, experiments:list[Experiment]):
             if node not in perc_primes:
                 raise ValueError(f"{node} not in the model.")
 
-        max_traps = compute_trapspaces_within_subspace(perc_primes,
-                                                subspace = subspace,
-                                                type_="max",
-                                                max_output=1)
-        
+        # compute max traps
+        t0 = perf_counter()
+
+        max_traps = compute_trapspaces_within_subspace(
+            perc_primes,
+            subspace=subspace,
+            type_="max",
+            max_output=1,
+        )
+
+        if debug:
+            print(
+                f"  compute max_trap: "
+                f"{perf_counter() - t0:.6f} s"
+            )
+
         if max_traps:
-            result.found_phenotypes += max_traps            
+            result.found_phenotypes += max_traps
             result.predicted_exists = True
             traps_cache[exp.perturbation] += max_traps
 
