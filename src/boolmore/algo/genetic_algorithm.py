@@ -123,24 +123,8 @@ class GeneticAlgorithm:
         model : Model
             The model to get predictions and scores for
 
-        fixes_list : list[FixesType]
-            summarized list of fixes for convenience
-            fixes : FixesType
-                ((node A, value1), (node B, value2), ...)
-
-        exps : list[ExpType]
-            exp : ExpType
-                info of a single experiment                
-                exp[0] : int
-                    id of the experiment
-                exp[1] : float
-                    max_score for the experiment
-                exp[2] : FixesType
-                    fixes - ((node A, value1), (node B, value2), ...)
-                exp[3] : str
-                    observed_node
-                exp[4] : str
-                    outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
+        evaluator : Evaluator
+            evaluator to get predictions and scores
 
         Returns
         -------
@@ -445,7 +429,9 @@ def ga_main(start:Model,
     ----------
     start : Model
         the starting model
-
+    evaluator : Evaluator
+        evaluator to get predictions and scores
+    config : GAConfig
 
     export_top : int
         number of models to export at each iteration, default 0
@@ -456,7 +442,7 @@ def ga_main(start:Model,
         if None, use the start model name
                     
     hierarchy : bool
-        if True, use the hierarchy of the model to score. default True
+        if True, use the hierarchy score of the models to order them. default True
 
     Returns
     -------
@@ -502,10 +488,8 @@ def ga_main(start:Model,
     state = GAState(population=[], iteration=0, log=[])
     ga = GeneticAlgorithm(config, hierarchy=hierarchy)
 
-
     ### First iteration ###
     state.iteration = 1
-
     state.population = ga.initialize_population(state.population, start)
 
     # generate (per_iter) new models
@@ -514,24 +498,20 @@ def ga_main(start:Model,
         new_model = start.mutate(prob_list[0], edge_prob)
         offsprings.append(new_model)    
     ga.evaluate_offsprings(offsprings, evaluator)
-    state.population.extend(offsprings)
-    
 
+    state.population.extend(offsprings)
     state.population = sort_population(state.population, hierarchy=hierarchy)
+
+    final = state.population[0]
+    print(f"iteration {state.iteration}, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
+    if not final.check_constraint():
+        print("ERROR: model does not follow constraints")
+    state.log.append([1, final.score, final.extra_edges, final.complexity])
 
     # Export models that exceed the threshold score
     for i in range(export_top):
         state.population[i].name = export_name
         state.population[i].export(threshold=export_thresh)
-
-    final = state.population[0]
-
-    print(f"iteration {state.iteration}, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
-
-    if not final.check_constraint():
-        print("ERROR: model does not follow constraints")
-
-    state.log.append([1, final.score, final.extra_edges, final.complexity])
     
     ### Second to last iterations ###
     for i in range(2,total_iter+1):
@@ -546,29 +526,26 @@ def ga_main(start:Model,
         for parents in parents_lst:
             mixed_model = mix_models(parents[0], parents[1])
             mixed_offsprings.append(mixed_model)
-    
         ga.evaluate_offsprings(mixed_offsprings, evaluator)
+
         state.population.extend(mixed_offsprings)
+        state.population = sort_population(state.population, hierarchy=hierarchy)
     
         # mutate the good ones
-        state.population = sort_population(state.population, hierarchy=hierarchy)
         targets = ga.mutation_sampler(state.population, p=reproduction_bias(state.population), n=per_iter-mix)
         offsprings = []
         for target in targets:
             new_model = target.mutate(prob_list[i-1], edge_prob)
             offsprings.append(new_model)    
         ga.evaluate_offsprings(offsprings, evaluator)
+
         state.population.extend(offsprings)
-      
         state.population = sort_population(state.population, hierarchy=hierarchy)
     
         final = state.population[0]
-
         print(f"iteration {i}, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
-
         if not final.check_constraint():
             print("ERROR: model does not follow constraints")
-
         state.log.append([i, final.score, final.extra_edges, final.complexity])
 
         # Export models that exceed the threshold score
