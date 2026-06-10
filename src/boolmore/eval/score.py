@@ -2,7 +2,7 @@ import itertools as it
 from collections.abc import Iterable
 
 from boolmore.core.experiment import Experiment
-from boolmore.core.prediction import Prediction
+from boolmore.core.prediction import PhenotypePrediction
 
 
 FixesType = tuple[tuple[str, int],...]
@@ -291,10 +291,10 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
 
 def get_phenotype_score(
     experiments: list[Experiment],
-    predictions: list[Prediction],
+    predictions: list[PhenotypePrediction],
 ) -> None:
     """
-    Update each Prediction with its agreement and score.
+    Update each PhenotypePrediction with its agreement and score.
 
     agreement is 1.0 if predicted_exists matches the corresponding
     Experiment's expected_exists, and 0.0 otherwise.

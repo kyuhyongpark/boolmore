@@ -2,7 +2,7 @@ import pytest
 
 from boolmore.eval.score import get_phenotype_score
 from boolmore.core.experiment import Experiment
-from boolmore.core.prediction import Prediction
+from boolmore.core.prediction import PhenotypePrediction
 
 
 def test_get_phenotype_score_match():
@@ -15,7 +15,7 @@ def test_get_phenotype_score_match():
         weight=2.0,
     )
 
-    pred = Prediction(
+    pred = PhenotypePrediction(
         id=1,
         perturbation=(),
         sources=(),
@@ -42,7 +42,7 @@ def test_get_phenotype_score_mismatch():
         weight=3.0,
     )
 
-    pred = Prediction(
+    pred = PhenotypePrediction(
         id=1,
         perturbation=(),
         sources=(),
@@ -69,7 +69,7 @@ def test_get_phenotype_score_missing_id():
         weight=1.0,
     )
 
-    pred = Prediction(
+    pred = PhenotypePrediction(
         id=2,
         perturbation=(),
         sources=(),

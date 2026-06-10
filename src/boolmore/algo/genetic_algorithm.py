@@ -464,9 +464,7 @@ def ga_main(start:Model,
     export_name : str
         models are exported as (export_name)_id_gen.txt
         if None, use the start model name
-                    
-    hierarchy : bool
-        if True, use the hierarchy score of the models to order them. default True
+
 
     Returns
     -------

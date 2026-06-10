@@ -3,7 +3,7 @@ from dataclasses import dataclass
 Assignment = tuple[tuple[str, int], ...]
 
 @dataclass
-class Prediction:
+class PhenotypePrediction:
     id: int
 
     perturbation: Assignment

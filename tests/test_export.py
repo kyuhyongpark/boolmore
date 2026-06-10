@@ -2,7 +2,7 @@ import csv
 
 from boolmore.io.export import export_phenotype_results
 from boolmore.core.experiment import Experiment
-from boolmore.core.prediction import Prediction
+from boolmore.core.prediction import PhenotypePrediction
 
 
 def test_export_phenotype_results(tmp_path):
@@ -15,7 +15,7 @@ def test_export_phenotype_results(tmp_path):
         weight=2.0,
     )
 
-    pred = Prediction(
+    pred = PhenotypePrediction(
         id=1,
         perturbation=(("A", 1),),
         sources=(("S", 1),),

@@ -1,13 +1,13 @@
 import csv
 
 from boolmore.core.experiment import Experiment
-from boolmore.core.prediction import Prediction
+from boolmore.core.prediction import PhenotypePrediction
 from boolmore.core.conversions import assignment_to_dict
 
 
 def export_phenotype_results(
     experiments: list[Experiment],
-    predictions: list[Prediction],
+    predictions: list[PhenotypePrediction],
     filename: str,
 ) -> None:
     """

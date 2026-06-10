@@ -4,7 +4,7 @@ from time import perf_counter
 from pyboolnet.trap_spaces import compute_trapspaces_within_subspace
 
 from boolmore.core.experiment import Experiment
-from boolmore.core.prediction import Prediction
+from boolmore.core.prediction import PhenotypePrediction
 from boolmore.core.conversions import assignment_to_dict
 
 Assignment = tuple[tuple[str, int], ...]
@@ -63,7 +63,7 @@ def get_phenotype_prediction(
         if debug:
             print(f"\nExperiment {exp.id}")
 
-        result = Prediction(
+        result = PhenotypePrediction(
             id=exp.id,
             perturbation=exp.perturbation,
             sources=exp.sources,
