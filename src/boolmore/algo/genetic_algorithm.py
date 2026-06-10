@@ -20,23 +20,60 @@ ExpType = tuple[int, float, FixesType, str, str]
 PredictType = dict[FixesType, dict]
 
 
-class Evaluator:
-    def evaluate(self, model:Model, fixes_list, exps):
-        predictions = model.get_predictions(fixes_list)
-        score, non_hierarchy_score = model.get_model_score(exps)
-        return EvalResult(predictions=predictions, score=score, non_hierarchy_score=non_hierarchy_score)
-
 @dataclass
 class EvalResult:
     predictions: PredictType
     score: float
     non_hierarchy_score: float
 
+class Evaluator:
+    def evaluate(self, model:Model, fixes_list, exps):
+        predictions = model.get_predictions(fixes_list)
+        score, non_hierarchy_score = model.get_model_score(exps)
+        return EvalResult(predictions=predictions, score=score, non_hierarchy_score=non_hierarchy_score)
+
+
+@dataclass
+class GAConfig:
+    """
+    total_iter : int
+        total number of iterations
+    per_iter : int
+        new models generated per iteration
+    keep : int
+        models to carry over tot he next iteration
+    mix : int
+        number of models to mix from the keep
+
+    prob : float | dict[int, float]
+        probability for each digit in the rule representation to mutate.
+        if given a dict, each value is used as probability starting from each key iteration.
+    edge_prob : float
+        probability to add/delete extra edge, default 0.5
+
+    stop_if_max : bool
+        if True, stop when the max score is reached. default True
+    core : int
+        if larger than 1, model evaluation is done in parallel      :int
+    seed : int | None
+        random seed for reproducibility
+    """
+    total_iter: int
+    per_iter: int
+    keep: int
+    mix: int
+    prob: float | dict[int, float]
+    edge_prob: float
+    stop_if_max: bool
+    core: int
+    seed: int | None
+
 @dataclass
 class GAstate:
     population: list[Model]
     iteration: int
     log: list
+
 
 class GeneticAlgorithm:
     def __init__(self, config, evaluator:Evaluator, hierarchy, per_iter, keep, mix):
@@ -253,11 +290,11 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
     start_time = datetime.datetime.now()
     evaluator = Evaluator()
-    final, log = ga_main(start, exps, fixes_list, evaluator,
-                         total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
-                         prob=PROB, edge_prob=EDGE_PROB,
+    config = GAConfig(total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
+                      prob=PROB, edge_prob=EDGE_PROB,
+                      stop_if_max=stop_if_max, core=core, seed=seed)
+    final, log = ga_main(start, exps, fixes_list, evaluator, config,
                          export_top=EXPORT_TOP, export_thresh=EXPORT_THRESHOLD,
-                         stop_if_max=stop_if_max, core=core, seed=seed,
                          hierarchy=hierarchy)
     end_time = datetime.datetime.now()
 
@@ -302,10 +339,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
 def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
             evaluator:Evaluator,
-            total_iter:int, per_iter:int, keep:int, mix:int,
-            prob:float|dict[int,float], edge_prob:float=0.5,
+            config:GAConfig,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
-            stop_if_max:bool=True, core:int=2, seed:int|None=None,
             hierarchy:bool=True,
             ) -> tuple[Model, list]:
     """
@@ -333,21 +368,6 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         fixes : FixesType
             ((node A, value1), (node B, value2), ...)
 
-    total_iter : int
-        total number of iterations
-    per_iter : int
-        new models generated per iteration
-    keep : int
-        models to carry over tot he next iteration
-    mix : int
-        number of models to mix from the keep
-
-    prob : float | dict[int, float]
-        probability for each digit in the rule representation to mutate.
-        if given a dict, each value is used as probability starting from each key iteration.
-    edge_prob : float
-        probability to add/delete extra edge, default 0.5
- 
     export_top : int
         number of models to export at each iteration, default 0
     export_thresh : float
@@ -356,16 +376,8 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         models are exported as (export_name)_id_gen.txt
         if None, use the start model name
                     
-    stop_if_max : bool
-        if True, stop when the max score is reached. default True
-    core : int
-        if larger than 1, model evaluation is done in parallel      :int
-    seed : int | None
-        random seed for reproducibility
-
     hierarchy : bool
         if True, use the hierarchy of the model to score. default True
-
 
     Returns
     -------
@@ -375,6 +387,16 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         [[iteration #, top score, extra_edges, complexity], ...]
 
     """
+    total_iter = config.total_iter
+    per_iter = config.per_iter
+    keep = config.keep
+    mix = config.mix
+    prob = config.prob
+    edge_prob = config.edge_prob
+    stop_if_max = config.stop_if_max
+    core = config.core
+    seed = config.seed
+
     if export_name == None:
         export_name = start.name
 
