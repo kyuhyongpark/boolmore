@@ -14,6 +14,7 @@ from boolmore.io.load import import_exps
 from boolmore.core.model import Model, mix_models
 
 from boolmore.algo.selection import reproduction_bias, sort_population
+from boolmore.algo.inference import get_NAV_prediction
 
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
@@ -53,7 +54,8 @@ class Evaluator:
         self.hierarchy = hierarchy
 
     def evaluate(self, model:Model):
-        predictions = model.get_predictions(self.fixes_list)
+        predictions = get_NAV_prediction(model.primes, self.fixes_list)
+        model.predictions = predictions
         max_score, score = model.get_model_score(self.exps, hierarchy=self.hierarchy)
         result = EvalResult(model_id=model.id,
                             predictions=predictions,
@@ -335,7 +337,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
                               edge_pool=EDGE_POOL, default_sources=DEFAULT_SOURCES)
     print("Base model loaded.")
     start_single = datetime.datetime.now()
-    base.get_predictions(fixes_list)
+    predictions = get_NAV_prediction(base.primes, fixes_list)
+    base.predictions = predictions
     base.get_model_score(exps, hierarchy=hierarchy)
     end_single = datetime.datetime.now()
     base.info()
@@ -349,7 +352,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     start = Model.import_model(primes, boolmore.config.id, STARTING_GEN, base)
     print("Starting model loaded.")
     start.name = run_name
-    start.get_predictions(fixes_list)
+    predictions = get_NAV_prediction(start.primes, fixes_list)
+    start.predictions = predictions
     start.get_model_score(exps, hierarchy=hierarchy)
     start.info()
     print()

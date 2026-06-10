@@ -214,65 +214,6 @@ class Model():
                                     self.constraints, node) and check
         return check
 
-    def get_predictions(self, interventions:list[FixesType]):
-        """
-        Assigns self.predictions when given interventions
-
-        Parameters
-        ----------
-        interventions - summarized list of fixes for convenience    :list[FixesType]
-            fixes     - ((nodeA, value1),(nodeB, value2), ...)      :FixesType = tuple[tuple[str, int]]
-                    
-        Assigns
-        -------
-        self.predictions : PredictType
-            average attractor values for all fixes
-            key : FixesType
-                fixes - ((node A, value1), (node B, value2), ...)
-            value : dict[str, float]
-                average value of a node in the attractors - {observed_node: predict_value}
-
-        """
-        predictions = {}
-        for fixes in interventions:
-            perturbation = {}
-            for fix in fixes:
-                perturbation[fix[0]] = fix[1]
-            # print("- - - - - - - - - -")
-            # print("fixed: ", perturbation)
-
-            new_primes = self.primes.copy()
-            for node in perturbation.keys():
-                assert node in new_primes.keys(), f"{node} is not in the model"
-                if int(perturbation[node]) == 0:
-                    new_primes[node] = [[{}],[]]
-                else:
-                    new_primes[node] = [[],[{}]]
-
-            tr = pyboolnet.trap_spaces.compute_trap_spaces(new_primes, "min")
-
-            for i in tr:
-                for node in self.primes.keys():
-                    if node not in i.keys(): # type: ignore
-                        i[node] = "?" # type: ignore
-                    else:
-                        i[node] = str(i[node]) # type: ignore
-
-            result = {}
-            for i in tr:
-                for node in self.primes.keys():
-                    if node not in result.keys():
-                        result[node] = 0.0
-                    if i[node] == "1": # type: ignore
-                        result[node] += (1.0/len(tr))
-                    elif i[node] == "?": # type: ignore
-                        result[node] += (0.5/len(tr))
-
-            predictions[fixes] = result
-
-        self.predictions = predictions
-
-        return predictions
 
     def get_model_score(self, exps:list[ExpType], hierarchy:bool=True, report:bool=False, file:str="score_report.tsv"):
         """

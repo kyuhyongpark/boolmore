@@ -1,7 +1,7 @@
 from collections import defaultdict
 from time import perf_counter
 
-from pyboolnet.trap_spaces import compute_trapspaces_within_subspace
+from pyboolnet.trap_spaces import compute_trapspaces_within_subspace, compute_trap_spaces
 
 from boolmore.core.experiment import Experiment
 from boolmore.core.prediction import PhenotypePrediction
@@ -14,7 +14,7 @@ def get_phenotype_prediction(
     primes,
     experiments: list[Experiment],
     debug: bool = False,
-):
+)-> list[PhenotypePrediction]:
     """
     Predict whether each experiment's phenotype is compatible with the
     Boolean network under its perturbation and source assignments.
@@ -177,3 +177,68 @@ def get_phenotype_prediction(
         results.append(result)
 
     return results
+
+def get_NAV_prediction(
+    primes,
+    interventions:list[Assignment]
+):
+    """
+    Returns predictions when given interventions
+
+    Parameters
+    ----------
+    primes
+        Prime implicants of the Boolean network in the format expected by
+        PyBoolNet.
+
+    interventions - summarized list of fixes for convenience    :list[Assignment]
+        fixes     - ((nodeA, value1),(nodeB, value2), ...)
+                
+    Returns
+    -------
+    predictions : PredictType
+        average attractor values for all fixes
+        key : Assignment
+            fixes - ((node A, value1), (node B, value2), ...)
+        value : dict[str, float]
+            average value of a node in the attractors - {observed_node: predict_value}
+
+    """
+    predictions = {}
+    for fixes in interventions:
+        perturbation = {}
+        for fix in fixes:
+            perturbation[fix[0]] = fix[1]
+        # print("- - - - - - - - - -")
+        # print("fixed: ", perturbation)
+
+        new_primes = primes.copy()
+        for node in perturbation.keys():
+            assert node in new_primes.keys(), f"{node} is not in the model"
+            if int(perturbation[node]) == 0:
+                new_primes[node] = [[{}],[]]
+            else:
+                new_primes[node] = [[],[{}]]
+
+        tr = compute_trap_spaces(new_primes, "min")
+
+        for i in tr:
+            for node in primes:
+                if node not in i: # type: ignore
+                    i[node] = "?" # type: ignore
+                else:
+                    i[node] = str(i[node]) # type: ignore
+
+        result = {}
+        for i in tr:
+            for node in primes:
+                if node not in result:
+                    result[node] = 0.0
+                if i[node] == "1": # type: ignore
+                    result[node] += (1.0/len(tr))
+                elif i[node] == "?": # type: ignore
+                    result[node] += (0.5/len(tr))
+
+        predictions[fixes] = result
+
+    return predictions
