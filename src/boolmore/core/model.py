@@ -7,9 +7,12 @@ import pyboolnet.trap_spaces
 import boolmore.algo.mutation as m
 import boolmore.core.conversions as conv
 import boolmore.eval.constraint as cons
-import boolmore.eval.score as score
+
 import boolmore.config as config
 
+from boolmore.eval.score import (
+    get_agreement, get_hierarchy_score
+)
 
 PrimeType = list[list[dict[str, int]]]
 FixesType = tuple[tuple[str, int]]
@@ -268,6 +271,8 @@ class Model():
 
         self.predictions = predictions
 
+        return predictions
+
     def get_model_score(self, exps:list[ExpType], report:bool=False, file:str="score_report.tsv"):
         """
         Assigns self.score when given experiments.
@@ -291,8 +296,13 @@ class Model():
         self.max_score = 0.0
         for exp in exps:
             self.max_score += exp[1]
-        agreements, self.non_hierarchy_score = score.get_agreement(exps, self.predictions)
-        self.score = score.get_hierarchy_score(agreements, self.default_sources, report=report, file=file)
+        agreements, non_hierarchy_score = get_agreement(exps, self.predictions)
+        score = get_hierarchy_score(agreements, self.default_sources, report=report, file=file)
+
+        self.non_hierarchy_score = non_hierarchy_score
+        self.score = score
+
+        return score, non_hierarchy_score
 
     def mutate(self, probability:float, edge_prob:float, bias:float=0.5, seed:int|None=None) -> Model:
         """

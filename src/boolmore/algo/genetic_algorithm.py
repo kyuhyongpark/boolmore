@@ -13,6 +13,7 @@ from boolmore.core.conversions import prime2bnet
 from boolmore.io.load import import_exps
 from boolmore.core.model import Model, mix_models
 
+from boolmore.algo.selection import reproduction_bias, sort_population
 
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
@@ -20,16 +21,45 @@ PredictType = dict[FixesType, dict]
 
 
 class Evaluator:
-    def evaluate(self, model, fixes_list, exps):
-        model.get_predictions(fixes_list)
-        model.get_model_score(exps)
-        return EvalResult(score=model.score, non_hierarchy_score=model.non_hierarchy_score)
+    def evaluate(self, model:Model, fixes_list, exps):
+        predictions = model.get_predictions(fixes_list)
+        score, non_hierarchy_score = model.get_model_score(exps)
+        return EvalResult(predictions=predictions, score=score, non_hierarchy_score=non_hierarchy_score)
 
 @dataclass
 class EvalResult:
+    predictions: PredictType
     score: float
     non_hierarchy_score: float
 
+@dataclass
+class GAstate:
+    population: list[Model]
+    iteration: int
+    log: list
+
+class GeneticAlgorithm:
+    def __init__(self, config, evaluator:Evaluator, hierarchy, per_iter, keep, mix):
+        self.config = config
+        self.evaluator = evaluator
+        self.hierarchy = hierarchy
+        self.per_iter = per_iter
+        self.keep = keep
+        self.mix = mix
+    
+    def select_survivors(self, population):
+        return population[:self.keep]
+
+    def parent_sampler(self, population, p, n):
+        parents_lst = []
+        for j in range(n):
+            model_choice = np.random.choice(population, size = 2, replace = False, p=p)
+            parents_lst.append(model_choice)
+        return parents_lst
+    
+    def mutation_sampler(self, population, p, n):
+        targets = random.choices(population, weights=p, k=n)
+        return targets
 
 def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
            data_file:str|None=None, base_file:str|None=None, parameter_dict:dict|None=None,
@@ -397,11 +427,9 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
             new_model.score = result.score
     iteration.extend(new_model_lst)
     
-    iteration = sorted(iteration, key=lambda x: (len(x.extra_edges), x.complexity))
-    if hierarchy:
-        iteration = sorted(iteration, key=lambda x: x.score, reverse=True)
-    else:
-        iteration = sorted(iteration, key=lambda x: x.non_hierarchy_score, reverse=True)
+    ga = GeneticAlgorithm(boolmore.config, evaluator, hierarchy=hierarchy, per_iter=per_iter, keep=keep, mix=mix)
+
+    iteration = sort_population(iteration, hierarchy=hierarchy)
 
     # Export models that exceed the threshold score
     for i in range(export_top):
@@ -419,26 +447,15 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     
     ### Second to last iterations ###
     for i in range(2,total_iter+1):
-        new_iteration = []
-        # keep the good ones
-        for j in range(keep):
-            new_iteration.append(iteration[j])
+        new_iteration = ga.select_survivors(iteration)
     
         # mix the good ones
-        to_be_mixed = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
-        if hierarchy:
-            to_be_mixed = sorted(to_be_mixed, key=lambda x: x.score, reverse=True)
-        else:
-            to_be_mixed = sorted(to_be_mixed, key=lambda x: x.non_hierarchy_score, reverse=True)
-        weights = list(range(1, keep+1))
-        weights.reverse()
-        p = np.array(weights)/np.sum(np.array(weights))
-
+        parents_lst = ga.parent_sampler(new_iteration, p=reproduction_bias(new_iteration), n=mix)
         mixed_model_lst = []
-        for j in range(mix):
-            model_choice = np.random.choice(to_be_mixed, size = 2, replace = False, p=p)
-            mixed_model = mix_models(model_choice[0], model_choice[1])
-            mixed_model_lst.append(mixed_model)    
+        for parents in parents_lst:
+            mixed_model = mix_models(parents[0], parents[1])
+            mixed_model_lst.append(mixed_model)
+    
         if core > 1:
             results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(mixed_model, fixes_list, exps, evaluator) for mixed_model in mixed_model_lst)
             for result in results:
@@ -454,14 +471,8 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         new_iteration.extend(mixed_model_lst)
     
         # mutate the good ones
-        weights = list(range(1, keep+mix+1))
-        weights.reverse()
-        new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
-        if hierarchy:
-            new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
-        else:
-            new_iteration = sorted(new_iteration, key=lambda x: x.non_hierarchy_score, reverse=True)
-        targets = random.choices(new_iteration, weights=weights, k=per_iter-mix)
+        new_iteration = sort_population(new_iteration, hierarchy=hierarchy)
+        targets = ga.mutation_sampler(new_iteration, p=reproduction_bias(new_iteration), n=per_iter-mix)
         new_model_lst = []
         for target in targets:
             new_model = target.mutate(prob_list[i-1], edge_prob)
@@ -480,11 +491,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
                 new_model.score = result.score
         new_iteration.extend(new_model_lst)
       
-        new_iteration = sorted(new_iteration, key=lambda x: (len(x.extra_edges), x.complexity))
-        if hierarchy:
-            new_iteration = sorted(new_iteration, key=lambda x: x.score, reverse=True)
-        else:
-            new_iteration = sorted(new_iteration, key=lambda x: x.non_hierarchy_score, reverse=True)
+        new_iteration = sort_population(new_iteration, hierarchy=hierarchy)
     
         final = new_iteration[0]
 
