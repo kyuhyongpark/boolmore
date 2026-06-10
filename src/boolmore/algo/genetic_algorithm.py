@@ -27,9 +27,32 @@ class EvalResult:
     non_hierarchy_score: float
 
 class Evaluator:
-    def evaluate(self, model:Model, fixes_list, exps):
-        predictions = model.get_predictions(fixes_list)
-        score, non_hierarchy_score = model.get_model_score(exps)
+    def __init__(self, fixes_list, exps):
+        """
+        exps : list[ExpType]
+            exp : ExpType
+                info of a single experiment                
+                exp[0] : int
+                    id of the experiment
+                exp[1] : float
+                    max_score for the experiment
+                exp[2] : FixesType
+                    fixes - ((node A, value1), (node B, value2), ...)
+                exp[3] : str
+                    observed_node
+                exp[4] : str
+                    outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
+        fixes_list : list[FixesType]
+            summarized list of fixes for convenience
+            fixes : FixesType
+                ((node A, value1), (node B, value2), ...)
+        """
+        self.fixes_list = fixes_list
+        self.exps = exps
+
+    def evaluate(self, model:Model):
+        predictions = model.get_predictions(self.fixes_list)
+        score, non_hierarchy_score = model.get_model_score(self.exps)
         return EvalResult(predictions=predictions, score=score, non_hierarchy_score=non_hierarchy_score)
 
 
@@ -76,13 +99,12 @@ class GAState:
 
 
 class GeneticAlgorithm:
-    def __init__(self, config, hierarchy, per_iter, keep, mix, core):
-        self.config = config
+    def __init__(self, config:GAConfig, hierarchy):
         self.hierarchy = hierarchy
-        self.per_iter = per_iter
-        self.keep = keep
-        self.mix = mix
-        self.core = core
+        self.per_iter = config.per_iter
+        self.keep = config.keep
+        self.mix = config.mix
+        self.core = config.core
     
     def initialize_population(self, population, start):
         # this ensures that models worse than the start are not carried on.
@@ -91,7 +113,7 @@ class GeneticAlgorithm:
             population.append(start)
         return population
 
-    def parallel_pred_and_score(self, model, fixes_list, exps, evaluator)-> tuple[Model, PredictType, float, float]:
+    def parallel_pred_and_score(self, model, evaluator)-> tuple[Model, PredictType, float, float]:
         """
         Gets predictions and scores for a model in parallel.
         This function must return all the values that the models will assign to their attributes.
@@ -140,12 +162,12 @@ class GeneticAlgorithm:
         
         """
         
-        result = evaluator.evaluate(model, fixes_list, exps)
+        result = evaluator.evaluate(model)
         return model.id, model.predictions, result.score, result.non_hierarchy_score
 
-    def evaluate_offsprings(self, offsprings, evaluator, fixes_list, exps):
+    def evaluate_offsprings(self, offsprings, evaluator):
         if self.core > 1:
-            results = Parallel(n_jobs=self.core)(delayed(self.parallel_pred_and_score)(new_model, fixes_list, exps, evaluator) for new_model in offsprings)
+            results = Parallel(n_jobs=self.core)(delayed(self.parallel_pred_and_score)(new_model, evaluator) for new_model in offsprings)
             for result in results:
                 for new_model in offsprings:
                     if new_model.id == result[0]:
@@ -154,7 +176,7 @@ class GeneticAlgorithm:
                         new_model.non_hierarchy_score = result[3]
         else:
             for new_model in offsprings:
-                result = evaluator.evaluate(new_model, fixes_list, exps)
+                result = evaluator.evaluate(new_model)
                 new_model.score = result.score
 
     def select_survivors(self, population):
@@ -362,11 +384,11 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     fp.close()
 
     start_time = datetime.datetime.now()
-    evaluator = Evaluator()
+    evaluator = Evaluator(fixes_list=fixes_list, exps=exps)
     config = GAConfig(total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                       prob=PROB, edge_prob=EDGE_PROB,
                       stop_if_max=stop_if_max, core=core, seed=seed)
-    final, log = ga_main(start, exps, fixes_list, evaluator, config,
+    final, log = ga_main(start, evaluator, config,
                          export_top=EXPORT_TOP, export_thresh=EXPORT_THRESHOLD,
                          hierarchy=hierarchy)
     end_time = datetime.datetime.now()
@@ -410,7 +432,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
     return base, start, final, log
 
-def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
+def ga_main(start:Model,
             evaluator:Evaluator,
             config:GAConfig,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
@@ -423,23 +445,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     ----------
     start : Model
         the starting model
-    exps : list[ExpType]
-        exp : ExpType
-            info of a single experiment                
-            exp[0] : int
-                id of the experiment
-            exp[1] : float
-                max_score for the experiment
-            exp[2] : FixesType
-                fixes - ((node A, value1), (node B, value2), ...)
-            exp[3] : str
-                observed_node
-            exp[4] : str
-                outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
-    fixes_list : list[FixesType]
-        summarized list of fixes for convenience
-        fixes : FixesType
-            ((node A, value1), (node B, value2), ...)
+
 
     export_top : int
         number of models to export at each iteration, default 0
@@ -494,7 +500,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         np.random.seed(seed)
 
     state = GAState(population=[], iteration=0, log=[])
-    ga = GeneticAlgorithm(boolmore.config, hierarchy=hierarchy, per_iter=per_iter, keep=keep, mix=mix, core=core)
+    ga = GeneticAlgorithm(config, hierarchy=hierarchy)
 
 
     ### First iteration ###
@@ -507,7 +513,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     for i in range(per_iter):
         new_model = start.mutate(prob_list[0], edge_prob)
         offsprings.append(new_model)    
-    ga.evaluate_offsprings(offsprings, evaluator, fixes_list, exps)
+    ga.evaluate_offsprings(offsprings, evaluator)
     state.population.extend(offsprings)
     
 
@@ -541,7 +547,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
             mixed_model = mix_models(parents[0], parents[1])
             mixed_offsprings.append(mixed_model)
     
-        ga.evaluate_offsprings(mixed_offsprings, evaluator, fixes_list, exps)
+        ga.evaluate_offsprings(mixed_offsprings, evaluator)
         state.population.extend(mixed_offsprings)
     
         # mutate the good ones
@@ -551,7 +557,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         for target in targets:
             new_model = target.mutate(prob_list[i-1], edge_prob)
             offsprings.append(new_model)    
-        ga.evaluate_offsprings(offsprings, evaluator, fixes_list, exps)
+        ga.evaluate_offsprings(offsprings, evaluator)
         state.population.extend(offsprings)
       
         state.population = sort_population(state.population, hierarchy=hierarchy)
