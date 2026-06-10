@@ -132,6 +132,25 @@ class GAConfig:
     core: int
     seed: int | None
 
+    def __post_init__(self):
+        if type(self.prob) == float:
+            prob_list = [self.prob] * self.total_iter
+        
+        # if prob is a dictionary, make a list of probabilities
+        # with the same length as total_iter
+        elif type(self.prob) == dict:
+            # ensure that 1 is in the key of the dictionary
+            assert 1 in self.prob, "1 must be in the keys of the dictionary"
+
+            prob_list = []
+            for i in range(1, self.total_iter+1):
+                if i in self.prob:
+                    prob_list.append(self.prob[i])
+                else:
+                    prob_list.append(prob_list[-1])
+        
+        self.prob_list = prob_list
+
 @dataclass
 class GAState:
     iteration: int
@@ -487,30 +506,13 @@ def ga_main(start:Model,
 
     """
     total_iter = config.total_iter
-    per_iter = config.per_iter
-    prob = config.prob
     edge_prob = config.edge_prob
     stop_if_max = config.stop_if_max
     seed = config.seed
+    prob_list = config.prob_list
 
     if export_name == None:
         export_name = start.name
-
-    if type(prob) == float:
-        prob_list = [prob] * total_iter
-    
-    # if prob is a dictionary, make a list of probabilities
-    # with the same length as total_iter
-    elif type(prob) == dict:
-        # ensure that 1 is in the key of the dictionary
-        assert 1 in prob.keys(), "1 must be in the keys of the dictionary"
-
-        prob_list = []
-        for i in range(1, total_iter+1):
-            if i in prob:
-                prob_list.append(prob[i])
-            else:
-                prob_list.append(prob_list[-1])
 
     if seed != None:
         random.seed(seed)
