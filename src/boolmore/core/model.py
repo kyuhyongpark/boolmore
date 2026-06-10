@@ -80,10 +80,8 @@ class Model():
         self.extra_edges = []
         self.complexity = 0
 
-        self.score = 0.0
-        self.hierarchy_score = 0.0
-        self.non_hierarchy_score = 0.0
         self.max_score = 0.0
+        self.score = 0.0
 
     @classmethod
     def import_model(cls, primes:dict[str, PrimeType], id:int=0, generation:int=0,

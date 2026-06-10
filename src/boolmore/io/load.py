@@ -13,7 +13,7 @@ Signature = tuple[Assignment, Assignment, Assignment]  # sources, perturbation, 
 def comment_removal(line:str) -> bool:
     return not line.startswith("#") and not line.isspace()
 
-def import_exps(location:str) -> tuple[list[ExpType], list[Assignment]]:
+def import_NAV_exps(location:str) -> list[ExpType]:
     """
     Reads a tsv file and returns experiments and interventions.
     
@@ -49,9 +49,6 @@ def import_exps(location:str) -> tuple[list[ExpType], list[Assignment]]:
             exp[3] - observed_node                      :str
             exp[4] - outcome_value                      :str
                      one of OFF, OFF/Some, Some, Some/ON, ON
-
-    interventions - summarized list of fixes for convenience    :list[FixesType]
-        fixes     - ((node A, value1), (node B, value2), ...)   :FixesType = tuple[tuple[str, int]]
 
     """
     ID, SCORE, SOURCE, PERT, NODE, VALUE = 0, 1, 2, 3, 4, 5
@@ -107,7 +104,7 @@ def import_exps(location:str) -> tuple[list[ExpType], list[Assignment]]:
         # add the entry
         experiments.append(tuple(exp))
 
-    return experiments, interventions
+    return experiments
 
 
 # -------------------------

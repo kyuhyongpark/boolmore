@@ -180,7 +180,7 @@ def get_phenotype_prediction(
 
 def get_NAV_prediction(
     primes,
-    interventions:list[Assignment]
+    exps: list,
 ):
     """
     Returns predictions when given interventions
@@ -204,6 +204,13 @@ def get_NAV_prediction(
             average value of a node in the attractors - {observed_node: predict_value}
 
     """
+
+    interventions = set()
+    for exp in exps:
+        interventions.add(exp[2])
+
+    interventions = sorted(interventions)
+
     predictions = {}
     for fixes in interventions:
         perturbation = {}

@@ -10,7 +10,7 @@ from pyboolnet.external.bnet2primes import bnet_file2primes
 
 import boolmore.config
 from boolmore.core.conversions import prime2bnet
-from boolmore.io.load import import_exps
+from boolmore.io.load import import_NAV_exps
 from boolmore.core.model import Model, mix_models
 
 from boolmore.algo.selection import reproduction_bias, sort_population
@@ -30,7 +30,7 @@ class EvalResult:
     score: float
 
 class Evaluator:
-    def __init__(self, fixes_list, exps, hierarchy):
+    def __init__(self, exps, hierarchy):
         """
         exps : list[ExpType]
             exp : ExpType
@@ -45,17 +45,12 @@ class Evaluator:
                     observed_node
                 exp[4] : str
                     outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
-        fixes_list : list[FixesType]
-            summarized list of fixes for convenience
-            fixes : FixesType
-                ((node A, value1), (node B, value2), ...)
         """
-        self.fixes_list = fixes_list
         self.exps = exps
         self.hierarchy = hierarchy
 
     def evaluate(self, model:Model):
-        predictions = get_NAV_prediction(model.primes, self.fixes_list)
+        predictions = get_NAV_prediction(model.primes, self.exps)
         max_score, score = get_NAV_score(self.exps, predictions, default_sources=model.default_sources, hierarchy=self.hierarchy)
         result = EvalResult(model_id=model.id,
                             predictions=predictions,
@@ -326,7 +321,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     boolmore.config.id = STARTING_ID
 
     print(f"Loading experimental data from {os.path.abspath(DATA)}")
-    exps, fixes_list = import_exps(DATA)
+    exps = import_NAV_exps(DATA)
     print("Experimental data loaded.\n")
 
     print(f"Loading base model from {os.path.abspath(BASE)}")
@@ -335,7 +330,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
                               edge_pool=EDGE_POOL, default_sources=DEFAULT_SOURCES)
     print("Base model loaded.")
     start_single = datetime.datetime.now()
-    predictions = get_NAV_prediction(base.primes, fixes_list)
+    predictions = get_NAV_prediction(base.primes, exps)
     max_score, score = get_NAV_score(exps, predictions, default_sources=base.default_sources, hierarchy=hierarchy)
     base.max_score = max_score
     base.score = score
@@ -351,7 +346,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     start = Model.import_model(primes, boolmore.config.id, STARTING_GEN, base)
     print("Starting model loaded.")
     start.name = run_name
-    predictions = get_NAV_prediction(start.primes, fixes_list)
+    predictions = get_NAV_prediction(start.primes, exps)
     max_score, score = get_NAV_score(exps, predictions, default_sources=start.default_sources, hierarchy=hierarchy)
     start.max_score = max_score
     start.score = score
@@ -394,7 +389,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     fp.close()
 
     start_time = datetime.datetime.now()
-    evaluator = Evaluator(fixes_list=fixes_list, exps=exps, hierarchy=hierarchy)
+    evaluator = Evaluator(exps=exps, hierarchy=hierarchy)
     config = GAConfig(total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                       prob=PROB, edge_prob=EDGE_PROB,
                       stop_if_max=stop_if_max, core=core, seed=seed)
