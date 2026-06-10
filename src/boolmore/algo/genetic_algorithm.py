@@ -56,6 +56,45 @@ class Evaluator:
         return EvalResult(predictions=predictions, score=score, non_hierarchy_score=non_hierarchy_score)
 
 
+class Selector:
+    def __init__(self, config:GAConfig):
+        self.keep = config.keep
+    def select_survivors(self, population):
+        return population[:self.keep]
+
+
+class Reproducer:
+    def __init__(self, config:GAConfig):
+        self.per_iter = config.per_iter
+        self.keep = config.keep
+        self.mix = config.mix
+
+    def asexual(self, population, prob, edge_prob):
+        p = reproduction_bias(population)
+        # number of offsprings to generate
+        # total population should be keep + per_iter
+        n = self.keep + self.per_iter - len(population)
+        # generate (per_iter) new models
+        offsprings = []
+        targets = random.choices(population, weights=p, k=n)
+        for target in targets:
+            new_model = target.mutate(prob, edge_prob)
+            offsprings.append(new_model)    
+        return offsprings
+
+    def sexual(self, population):
+        p = reproduction_bias(population)
+        parents_lst = []
+        for j in range(self.mix):
+            model_choice = np.random.choice(population, size = 2, replace = False, p=p)
+            parents_lst.append(model_choice)
+        mixed_offsprings = []
+        for parents in parents_lst:
+            mixed_model = mix_models(parents[0], parents[1])
+            mixed_offsprings.append(mixed_model)
+        return mixed_offsprings
+
+
 @dataclass
 class GAConfig:
     """
@@ -85,18 +124,21 @@ class GAConfig:
     per_iter: int
     keep: int
     mix: int
+
     prob: float | dict[int, float]
     edge_prob: float
+    
     stop_if_max: bool
     core: int
     seed: int | None
 
 @dataclass
 class GAState:
-    population: list[Model]
     iteration: int
+    population: list[Model]
     log: list
-
+    best: Model | None = None
+    best_score: float = 0
 
 class GeneticAlgorithm:
     def __init__(self, config:GAConfig, hierarchy):
@@ -163,19 +205,7 @@ class GeneticAlgorithm:
                 result = evaluator.evaluate(new_model)
                 new_model.score = result.score
 
-    def select_survivors(self, population):
-        return population[:self.keep]
 
-    def parent_sampler(self, population, p, n):
-        parents_lst = []
-        for j in range(n):
-            model_choice = np.random.choice(population, size = 2, replace = False, p=p)
-            parents_lst.append(model_choice)
-        return parents_lst
-    
-    def mutation_sampler(self, population, p, n):
-        targets = random.choices(population, weights=p, k=n)
-        return targets
 
 def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
            data_file:str|None=None, base_file:str|None=None, parameter_dict:dict|None=None,
@@ -372,7 +402,9 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     config = GAConfig(total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                       prob=PROB, edge_prob=EDGE_PROB,
                       stop_if_max=stop_if_max, core=core, seed=seed)
-    final, log = ga_main(start, evaluator, config,
+    selector = Selector(config)
+    reproducer = Reproducer(config)
+    final, log = ga_main(start, evaluator, selector, reproducer, config,
                          export_top=EXPORT_TOP, export_thresh=EXPORT_THRESHOLD,
                          hierarchy=hierarchy)
     end_time = datetime.datetime.now()
@@ -418,6 +450,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
 def ga_main(start:Model,
             evaluator:Evaluator,
+            selector:Selector,
+            reproducer:Reproducer,
             config:GAConfig,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
             hierarchy:bool=True,
@@ -454,12 +488,9 @@ def ga_main(start:Model,
     """
     total_iter = config.total_iter
     per_iter = config.per_iter
-    keep = config.keep
-    mix = config.mix
     prob = config.prob
     edge_prob = config.edge_prob
     stop_if_max = config.stop_if_max
-    core = config.core
     seed = config.seed
 
     if export_name == None:
@@ -493,10 +524,7 @@ def ga_main(start:Model,
     state.population = ga.initialize_population(state.population, start)
 
     # generate (per_iter) new models
-    offsprings = []
-    for i in range(per_iter):
-        new_model = start.mutate(prob_list[0], edge_prob)
-        offsprings.append(new_model)    
+    offsprings = reproducer.asexual(state.population, prob=prob_list[0], edge_prob=edge_prob)
     ga.evaluate_offsprings(offsprings, evaluator)
 
     state.population.extend(offsprings)
@@ -518,25 +546,16 @@ def ga_main(start:Model,
         state.iteration = i
 
         # select the survivors
-        state.population = ga.select_survivors(state.population)
+        state.population = selector.select_survivors(state.population)
     
         # mix the good ones
-        parents_lst = ga.parent_sampler(state.population, p=reproduction_bias(state.population), n=mix)
-        mixed_offsprings = []
-        for parents in parents_lst:
-            mixed_model = mix_models(parents[0], parents[1])
-            mixed_offsprings.append(mixed_model)
+        mixed_offsprings = reproducer.sexual(state.population)
         ga.evaluate_offsprings(mixed_offsprings, evaluator)
 
         state.population.extend(mixed_offsprings)
         state.population = sort_population(state.population, hierarchy=hierarchy)
     
-        # mutate the good ones
-        targets = ga.mutation_sampler(state.population, p=reproduction_bias(state.population), n=per_iter-mix)
-        offsprings = []
-        for target in targets:
-            new_model = target.mutate(prob_list[i-1], edge_prob)
-            offsprings.append(new_model)    
+        offsprings = reproducer.asexual(state.population, prob=prob_list[i-1], edge_prob=edge_prob)
         ga.evaluate_offsprings(offsprings, evaluator)
 
         state.population.extend(offsprings)
@@ -559,20 +578,3 @@ def ga_main(start:Model,
             break
 
     return final, state.log
-
-
-
-if __name__ == "__main__":
-
-    JSON = None
-    START_MODEL = "benchmarks/results/Cortical Area Development_start_1.bnet"
-    RUN_NAME = "test"
-    DATA = "benchmarks/results/Cortical Area Development_data_1.tsv"
-    BASE = "benchmarks/benchmark_models/Cortical Area Development.bnet"
-
-    base, start, final = run_ga(JSON, START_MODEL, RUN_NAME, DATA, BASE)
-
-    print("\n-----comparing all functions-----")
-    for node in base.primes:
-        print("base:" + prime2bnet(node, base.primes[node])) # type: ignore
-        print("final:" + prime2bnet(node, final.primes[node])) # type: ignore
