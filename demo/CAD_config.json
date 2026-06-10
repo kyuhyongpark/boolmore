@@ -1,7 +1,6 @@
 {
 "parameters" : {
-    "starting_id": 1,           
-    "starting_gen": 1,
+    "starting_gen": 0,
     "total_iterations": 10,
     "per_iteration": 10,
     "keep": 2,

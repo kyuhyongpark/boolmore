@@ -3,6 +3,7 @@ import json
 import os
 import random
 from dataclasses import dataclass
+from functools import partial
 
 from joblib import Parallel, delayed
 import numpy as np
@@ -14,8 +15,8 @@ from boolmore.io.load import import_NAV_exps
 from boolmore.core.model import Model, mix_models
 
 from boolmore.algo.selection import reproduction_bias, sort_population
-from boolmore.algo.inference import get_NAV_prediction
-from boolmore.eval.score import get_NAV_score
+from boolmore.algo.inference import get_NAV_prediction, get_phenotype_prediction
+from boolmore.eval.score import get_NAV_score, get_phenotype_score
 
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
@@ -30,16 +31,17 @@ class EvalResult:
     score: float
 
 class Evaluator:
-    def __init__(self, exps, hierarchy):
+    def __init__(self, exps, prediction_fn, score_fn):
         """
         exps : list of experiment dataclasses
         """
         self.exps = exps
-        self.hierarchy = hierarchy
+        self.prediction_fn = prediction_fn
+        self.score_fn = score_fn
 
     def evaluate(self, model:Model):
-        predictions = get_NAV_prediction(model.primes, self.exps)
-        max_score, score = get_NAV_score(self.exps, predictions, default_sources=model.default_sources, hierarchy=self.hierarchy)
+        predictions = self.prediction_fn(model.primes, self.exps)
+        max_score, score = self.score_fn(self.exps, predictions)
         result = EvalResult(model_id=model.id,
                             predictions=predictions,
                             max_score=max_score,
@@ -182,7 +184,8 @@ class GeneticAlgorithm:
 
 
 
-def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
+def run_ga(run_type:str,
+        json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
            data_file:str|None=None, base_file:str|None=None, parameter_dict:dict|None=None,
            stop_if_max:bool=True, core:int=2, seed:int|None = None,
            hierarchy:bool=True,
@@ -196,6 +199,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
     Parameters
     ----------
+    run_type : str
+        "Phenotype" or "NAV"
     json_file : str | None
         location of the json file containing parameters
     
@@ -247,14 +252,14 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         DATA:str = json_dict["data"]
         BASE:str = json_dict["base"]
         DEFAULT_SOURCES = json_dict["default_sources"]
+        generate_default_sources = False
         CONSTRAINTS = json_dict["constraints"]
         EDGE_POOL = json_dict["edge_pool"]
 
     else:
         assert data_file != None and base_file != None, "either json or the data and base files should be provided"
         
-        parameters = {"starting_id" : 1,
-                      "starting_gen" : 1,
+        parameters = {"starting_gen" : 0,
                       "total_iterations" : 10,
                       "per_iteration" : 10,
                       "keep" : 2,
@@ -266,6 +271,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
         # all source nodes being 0 is considered the default
         DEFAULT_SOURCES = {}
+        generate_default_sources = True
         # no constraint is assumed
         CONSTRAINTS = {"fixed": [], "regulate": {}, "necessary" : {},
                             "group": {}, "possible_constant": []}
@@ -295,7 +301,6 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
         parameters.update(parameter_dict)
 
     # take parameters
-    STARTING_ID = parameters["starting_id"]
     STARTING_GEN = parameters["starting_gen"]
     TOTAL_ITERATIONS = parameters["total_iterations"]
     PER_ITERATION = parameters["per_iteration"]
@@ -306,7 +311,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     EXPORT_TOP = parameters["export_top"]
     EXPORT_THRESHOLD = parameters["export_threshold"]
 
-    boolmore.config.id = STARTING_ID
+    boolmore.config.id = 0
 
     print(f"Loading experimental data from {os.path.abspath(DATA)}")
     exps = import_NAV_exps(DATA)
@@ -315,11 +320,25 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     print(f"Loading base model from {os.path.abspath(BASE)}")
     base_primes = bnet_file2primes(BASE)
     base = Model.import_model(base_primes, constraints=CONSTRAINTS,
-                              edge_pool=EDGE_POOL, default_sources=DEFAULT_SOURCES)
+                              edge_pool=EDGE_POOL)
     print("Base model loaded.")
+
+    if run_type == "NAV":
+        if generate_default_sources:
+            for node in base_primes:
+                if base_primes[node] == [[{node:0}], [{node:1}]]:
+                    DEFAULT_SOURCES[node] = 0
+
+        prediction_fn = get_NAV_prediction
+        score_fn = partial(get_NAV_score, default_sources=DEFAULT_SOURCES, hierarchy=hierarchy)
+    elif run_type == "Phenotype":
+        prediction_fn = get_phenotype_prediction
+        score_fn = get_phenotype_score
+
+
     start_single = datetime.datetime.now()
-    predictions = get_NAV_prediction(base.primes, exps)
-    max_score, score = get_NAV_score(exps, predictions, default_sources=base.default_sources, hierarchy=hierarchy)
+    predictions = prediction_fn(base.primes, exps)
+    max_score, score = score_fn(exps, predictions)
     base.max_score = max_score
     base.score = score
     end_single = datetime.datetime.now()
@@ -334,8 +353,8 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     start = Model.import_model(primes, boolmore.config.id, STARTING_GEN, base)
     print("Starting model loaded.")
     start.name = run_name
-    predictions = get_NAV_prediction(start.primes, exps)
-    max_score, score = get_NAV_score(exps, predictions, default_sources=start.default_sources, hierarchy=hierarchy)
+    predictions = prediction_fn(start.primes, exps)
+    max_score, score = score_fn(exps, predictions)
     start.max_score = max_score
     start.score = score
     start.info()
@@ -377,7 +396,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     fp.close()
 
     start_time = datetime.datetime.now()
-    evaluator = Evaluator(exps=exps, hierarchy=hierarchy)
+    evaluator = Evaluator(exps=exps, prediction_fn=prediction_fn, score_fn=score_fn)
     config = GAConfig(total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                       prob=PROB, edge_prob=EDGE_PROB,
                       stop_if_max=stop_if_max, core=core, seed=seed)
@@ -408,7 +427,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
 
     print(f"""
         The algorithm ran for {log[-1][0]} iterations,
-        generating {boolmore.config.id-STARTING_ID} models.
+        generating {boolmore.config.id} models.
         Mutated {len(mutated)} functions, 
         and increased score from {round(start.score,2)} / {start.max_score} ({round(start.score/start.max_score*100,1)}%)
         to {round(final.score,2)} / {final.max_score} ({round(final.score/final.max_score*100,1)}%).\n
@@ -488,7 +507,7 @@ def ga_main(start:Model,
 
     state.population = sort_population(state.population)
     final = state.population[0]
-    print(f"iteration {state.iteration}, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
+    print(f"iteration {state.iteration}, generated {boolmore.config.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
     if not final.check_constraint():
         print("ERROR: model does not follow constraints")
     
@@ -517,7 +536,7 @@ def ga_main(start:Model,
 
         state.population = sort_population(state.population)
         final = state.population[0]
-        print(f"iteration {i}, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
+        print(f"iteration {i}, generated {boolmore.config.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
         if not final.check_constraint():
             print("ERROR: model does not follow constraints")
         

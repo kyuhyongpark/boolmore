@@ -7,11 +7,13 @@ from boolmore.core.conversions import prime2bnet, prime2rr
 # seed for the random number generator
 SEED = 0
 
-base, start, final, log = run_ga("CAD_config.json",
-                                 "CAD_start.bnet",
-                                 run_name="demo",
-                                 stop_if_max=True,
-                                 seed=SEED)
+base, start, final, log = run_ga(
+    run_type="NAV",
+    json_file="CAD_config.json",
+    start_model="CAD_start.bnet",
+    run_name="demo",
+    stop_if_max=True,
+    seed=SEED)
 
 print("\n-----comparing with the baseline functions-----")
 modified = 0

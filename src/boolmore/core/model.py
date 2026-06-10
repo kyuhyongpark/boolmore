@@ -71,7 +71,6 @@ class Model():
         self.constraints = {"fixed": [], "regulate": {}, "necessary" : {},
                             "group": {}, "possible_constant": []}
         self.edge_pool = []
-        self.default_sources = {}
         
         self.primes:dict[str, PrimeType] = {}
         self.regulators_dict = {}
@@ -84,9 +83,9 @@ class Model():
         self.score = 0.0
 
     @classmethod
-    def import_model(cls, primes:dict[str, PrimeType], id:int=0, generation:int=0,
+    def import_model(cls, primes:dict[str, PrimeType], id:int=-1, generation:int=0,
                      base:Model|None=None, constraints:dict={}, edge_pool:list[list[str]]=[],
-                     default_sources:dict[str,int]={}) -> Model:
+        ) -> Model:
         """
         Import a model.
         If base=None, the output model is considered the base model,
@@ -111,10 +110,7 @@ class Model():
                           (fixed, regulate, necessary, group, possible_constant)
         edge_pool       - the pool of edges. 0 is negative, 1 is positive           :list[list[str]]
                           [[regulator, target, sign], ...]
-        default_sources - Shows the default settings for the source nodes,          :dict[str, int]
-                          which is considered the top of the hierarchy
-                          if given an empty dict, all sources being 0 is taken
-                          as the default value
+
         Returns
         -------
         model           - model with all attributes except predictions and score    :Model class
@@ -126,30 +122,19 @@ class Model():
         x.generation = generation
         x.primes = primes
 
-        # get constraints, edge pool, and default sources
+        # get constraints, edge pool
         if base == None:
             x.constraints.update(constraints)
             x.edge_pool.extend(edge_pool)
-            x.default_sources.update(default_sources)
-            if len(x.default_sources) == 0:
-                generate_default_sources = True
-            else:
-                generate_default_sources = False
+
         else:
             x.base = base
             x.constraints.update(base.constraints)
             x.edge_pool.extend(base.edge_pool)
-            x.default_sources.update(base.default_sources)
-            generate_default_sources = False
             x.max_score = base.max_score
             x.name = base.name
         
         for node in x.primes:
-            # generate default_sources if necessary
-            if generate_default_sources:
-                if x.primes[node] == [[{node:0}],[{node:1}]]:
-                    x.default_sources[node] = 0
-
             # get complexity
             for prime_implicant in x.primes[node][1]:
                 x.complexity += len(prime_implicant)
@@ -230,7 +215,6 @@ class Model():
         mutated_model.base = self.base
         mutated_model.constraints = self.constraints
         mutated_model.edge_pool = self.edge_pool
-        mutated_model.default_sources = self.default_sources
         mutated_model.max_score = self.max_score
         mutated_model.name = self.name
 
@@ -363,7 +347,6 @@ def mix_models(model1:Model, model2:Model) -> Model:
     mixed_model.base = model1.base
     mixed_model.constraints = model1.constraints
     mixed_model.edge_pool = model1.edge_pool
-    mixed_model.default_sources = model1.default_sources
     mixed_model.max_score = model1.max_score
     mixed_model.name = model1.name
 
