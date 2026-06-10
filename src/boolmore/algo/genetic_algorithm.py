@@ -76,14 +76,87 @@ class GAState:
 
 
 class GeneticAlgorithm:
-    def __init__(self, config, evaluator:Evaluator, hierarchy, per_iter, keep, mix):
+    def __init__(self, config, hierarchy, per_iter, keep, mix, core):
         self.config = config
-        self.evaluator = evaluator
         self.hierarchy = hierarchy
         self.per_iter = per_iter
         self.keep = keep
         self.mix = mix
+        self.core = core
     
+    def initialize_population(self, population, start):
+        # this ensures that models worse than the start are not carried on.
+        # also ensures that same number of models are generated in the first iteration as in the other iterations.
+        for i in range(self.keep):
+            population.append(start)
+        return population
+
+    def parallel_pred_and_score(self, model, fixes_list, exps, evaluator)-> tuple[Model, PredictType, float, float]:
+        """
+        Gets predictions and scores for a model in parallel.
+        This function must return all the values that the models will assign to their attributes.
+
+        Parameters
+        ----------
+        model : Model
+            The model to get predictions and scores for
+
+        fixes_list : list[FixesType]
+            summarized list of fixes for convenience
+            fixes : FixesType
+                ((node A, value1), (node B, value2), ...)
+
+        exps : list[ExpType]
+            exp : ExpType
+                info of a single experiment                
+                exp[0] : int
+                    id of the experiment
+                exp[1] : float
+                    max_score for the experiment
+                exp[2] : FixesType
+                    fixes - ((node A, value1), (node B, value2), ...)
+                exp[3] : str
+                    observed_node
+                exp[4] : str
+                    outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
+
+        Returns
+        -------
+        model.id : int
+            id of the model
+
+        model.predictions : PredictType
+            average attractor values for all fixes
+            key : FixesType
+                fixes - ((node A, value1), (node B, value2), ...)
+            value : dict[str, float]
+                average value of a node in the attractors - {observed_node: predict_value}
+
+        model.score : float
+            score of the model
+
+        model.non_hierarchy_score : float
+            non-hierarchy score of the model
+        
+        """
+        
+        result = evaluator.evaluate(model, fixes_list, exps)
+        return model.id, model.predictions, result.score, result.non_hierarchy_score
+
+    def evaluate_offsprings(self, offsprings, evaluator, fixes_list, exps):
+        if self.core > 1:
+            results = Parallel(n_jobs=self.core)(delayed(self.parallel_pred_and_score)(new_model, fixes_list, exps, evaluator) for new_model in offsprings)
+            for result in results:
+                for new_model in offsprings:
+                    if new_model.id == result[0]:
+                        new_model.predictions = result[1]
+                        new_model.score = result[2]
+                        new_model.non_hierarchy_score = result[3]
+        else:
+            for new_model in offsprings:
+                result = evaluator.evaluate(new_model, fixes_list, exps)
+                new_model.score = result.score
+
     def select_survivors(self, population):
         return population[:self.keep]
 
@@ -421,35 +494,21 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         np.random.seed(seed)
 
     state = GAState(population=[], iteration=0, log=[])
-    ga = GeneticAlgorithm(boolmore.config, evaluator, hierarchy=hierarchy, per_iter=per_iter, keep=keep, mix=mix)
+    ga = GeneticAlgorithm(boolmore.config, hierarchy=hierarchy, per_iter=per_iter, keep=keep, mix=mix, core=core)
 
 
     ### First iteration ###
     state.iteration = 1
 
-    # this ensures that models worse than the start are not carried on.
-    # also ensures that same number of models are generated in the first iteration as in the other iterations.
-    for i in range(keep):
-        state.population.append(start)
+    state.population = ga.initialize_population(state.population, start)
 
     # generate (per_iter) new models
-    new_model_lst = []
+    offsprings = []
     for i in range(per_iter):
         new_model = start.mutate(prob_list[0], edge_prob)
-        new_model_lst.append(new_model)    
-    if core > 1:
-        results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(new_model, fixes_list, exps, evaluator) for new_model in new_model_lst)
-        for result in results:
-            for new_model in new_model_lst:
-                if new_model.id == result[0]:
-                    new_model.predictions = result[1]
-                    new_model.score = result[2]
-                    new_model.non_hierarchy_score = result[3]
-    else:
-        for new_model in new_model_lst:
-            result = evaluator.evaluate(new_model, fixes_list, exps)
-            new_model.score = result.score
-    state.population.extend(new_model_lst)
+        offsprings.append(new_model)    
+    ga.evaluate_offsprings(offsprings, evaluator, fixes_list, exps)
+    state.population.extend(offsprings)
     
 
     state.population = sort_population(state.population, hierarchy=hierarchy)
@@ -477,45 +536,23 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
     
         # mix the good ones
         parents_lst = ga.parent_sampler(state.population, p=reproduction_bias(state.population), n=mix)
-        mixed_model_lst = []
+        mixed_offsprings = []
         for parents in parents_lst:
             mixed_model = mix_models(parents[0], parents[1])
-            mixed_model_lst.append(mixed_model)
+            mixed_offsprings.append(mixed_model)
     
-        if core > 1:
-            results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(mixed_model, fixes_list, exps, evaluator) for mixed_model in mixed_model_lst)
-            for result in results:
-                for mixed_model in mixed_model_lst:
-                    if mixed_model.id == result[0]:
-                        mixed_model.predictions = result[1]
-                        mixed_model.score = result[2]
-                        mixed_model.non_hierarchy_score = result[3]
-        else:
-            for mixed_model in mixed_model_lst:
-                result = evaluator.evaluate(mixed_model, fixes_list, exps)
-                mixed_model.score = result.score
-        state.population.extend(mixed_model_lst)
+        ga.evaluate_offsprings(mixed_offsprings, evaluator, fixes_list, exps)
+        state.population.extend(mixed_offsprings)
     
         # mutate the good ones
         state.population = sort_population(state.population, hierarchy=hierarchy)
         targets = ga.mutation_sampler(state.population, p=reproduction_bias(state.population), n=per_iter-mix)
-        new_model_lst = []
+        offsprings = []
         for target in targets:
             new_model = target.mutate(prob_list[i-1], edge_prob)
-            new_model_lst.append(new_model)    
-        if core > 1:
-            results = Parallel(n_jobs=core)(delayed(parallel_pred_and_score)(new_model, fixes_list, exps, evaluator) for new_model in new_model_lst)
-            for result in results:
-                for new_model in new_model_lst:
-                    if new_model.id == result[0]:
-                        new_model.predictions = result[1]
-                        new_model.score = result[2]
-                        new_model.non_hierarchy_score = result[3]
-        else:
-            for new_model in new_model_lst:
-                result = evaluator.evaluate(new_model, fixes_list, exps)
-                new_model.score = result.score
-        state.population.extend(new_model_lst)
+            offsprings.append(new_model)    
+        ga.evaluate_offsprings(offsprings, evaluator, fixes_list, exps)
+        state.population.extend(offsprings)
       
         state.population = sort_population(state.population, hierarchy=hierarchy)
     
@@ -540,57 +577,7 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
 
     return final, state.log
 
-def parallel_pred_and_score(model, fixes_list, exps, evaluator)-> tuple[Model, PredictType, float, float]:
-    """
-    Gets predictions and scores for a model in parallel.
-    This function must return all the values that the models will assign to their attributes.
 
-    Parameters
-    ----------
-    model : Model
-        The model to get predictions and scores for
-
-    fixes_list : list[FixesType]
-        summarized list of fixes for convenience
-        fixes : FixesType
-            ((node A, value1), (node B, value2), ...)
-
-    exps : list[ExpType]
-        exp : ExpType
-            info of a single experiment                
-            exp[0] : int
-                id of the experiment
-            exp[1] : float
-                max_score for the experiment
-            exp[2] : FixesType
-                fixes - ((node A, value1), (node B, value2), ...)
-            exp[3] : str
-                observed_node
-            exp[4] : str
-                outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
-
-    Returns
-    -------
-    model.id : int
-        id of the model
-
-    model.predictions : PredictType
-        average attractor values for all fixes
-        key : FixesType
-            fixes - ((node A, value1), (node B, value2), ...)
-        value : dict[str, float]
-            average value of a node in the attractors - {observed_node: predict_value}
-
-    model.score : float
-        score of the model
-
-    model.non_hierarchy_score : float
-        non-hierarchy score of the model
-    
-    """
-    
-    result = evaluator.evaluate(model, fixes_list, exps)
-    return model.id, model.predictions, result.score, result.non_hierarchy_score
 
 if __name__ == "__main__":
 
