@@ -4,12 +4,12 @@ import os
 import random
 from dataclasses import dataclass
 from functools import partial
+from itertools import count
 
 from joblib import Parallel, delayed
 import numpy as np
 from pyboolnet.external.bnet2primes import bnet_file2primes
 
-import boolmore.config
 from boolmore.core.conversions import prime2bnet
 from boolmore.io.load import import_NAV_exps
 from boolmore.core.model import Model, mix_models
@@ -61,6 +61,10 @@ class Reproducer:
         self.per_iter = config.per_iter
         self.keep = config.keep
         self.mix = config.mix
+        self._id_gen = count(start=1)
+
+    def get_next_id(self):
+        return next(self._id_gen)
 
     def asexual(self, population, prob, edge_prob):
         population = sort_population(population)
@@ -72,7 +76,7 @@ class Reproducer:
         offsprings = []
         targets = random.choices(population, weights=p, k=n)
         for target in targets:
-            new_model = target.mutate(prob, edge_prob)
+            new_model = target.mutate(self.get_next_id(), prob, edge_prob)
             offsprings.append(new_model)    
         return offsprings
 
@@ -85,7 +89,7 @@ class Reproducer:
             parents_lst.append(model_choice)
         mixed_offsprings = []
         for parents in parents_lst:
-            mixed_model = mix_models(parents[0], parents[1])
+            mixed_model = mix_models(self.get_next_id(), parents[0], parents[1])
             mixed_offsprings.append(mixed_model)
         return mixed_offsprings
 
@@ -153,6 +157,7 @@ class GAState:
     log: list
     best: Model | None = None
     best_score: float = 0
+    generated: int = 0
 
 class GeneticAlgorithm:
     def __init__(self, config:GAConfig):
@@ -311,8 +316,6 @@ def run_ga(run_type:str,
     EXPORT_TOP = parameters["export_top"]
     EXPORT_THRESHOLD = parameters["export_threshold"]
 
-    boolmore.config.id = 0
-
     print(f"Loading experimental data from {os.path.abspath(DATA)}")
     exps = import_NAV_exps(DATA)
     print("Experimental data loaded.\n")
@@ -350,7 +353,7 @@ def run_ga(run_type:str,
 
     print(f"Loading starting model from {os.path.abspath(START_MODEL)}")
     primes = bnet_file2primes(START_MODEL)
-    start = Model.import_model(primes, boolmore.config.id, STARTING_GEN, base)
+    start = Model.import_model(primes, id=0, generation=STARTING_GEN, base=base)
     print("Starting model loaded.")
     start.name = run_name
     predictions = prediction_fn(start.primes, exps)
@@ -427,7 +430,7 @@ def run_ga(run_type:str,
 
     print(f"""
         The algorithm ran for {log[-1][0]} iterations,
-        generating {boolmore.config.id} models.
+        generating {TOTAL_ITERATIONS*PER_ITERATION} models.
         Mutated {len(mutated)} functions, 
         and increased score from {round(start.score,2)} / {start.max_score} ({round(start.score/start.max_score*100,1)}%)
         to {round(final.score,2)} / {final.max_score} ({round(final.score/final.max_score*100,1)}%).\n
@@ -504,10 +507,11 @@ def ga_main(start:Model,
     offsprings = reproducer.asexual(state.population, prob=prob_list[0], edge_prob=edge_prob)
     ga.evaluate_offsprings(offsprings, evaluator)
     state.population.extend(offsprings)
+    state.generated += len(offsprings)
 
     state.population = sort_population(state.population)
     final = state.population[0]
-    print(f"iteration {state.iteration}, generated {boolmore.config.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
+    print(f"iteration {state.iteration}, generated {state.generated}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
     if not final.check_constraint():
         print("ERROR: model does not follow constraints")
     
@@ -529,14 +533,16 @@ def ga_main(start:Model,
         mixed_offsprings = reproducer.sexual(state.population)
         ga.evaluate_offsprings(mixed_offsprings, evaluator)
         state.population.extend(mixed_offsprings)
+        state.generated += len(mixed_offsprings)
     
         offsprings = reproducer.asexual(state.population, prob=prob_list[i-1], edge_prob=edge_prob)
         ga.evaluate_offsprings(offsprings, evaluator)
         state.population.extend(offsprings)
+        state.generated += len(offsprings)
 
         state.population = sort_population(state.population)
         final = state.population[0]
-        print(f"iteration {i}, generated {boolmore.config.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
+        print(f"iteration {i}, generated {state.generated}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
         if not final.check_constraint():
             print("ERROR: model does not follow constraints")
         

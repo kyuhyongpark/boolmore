@@ -6,8 +6,6 @@ import boolmore.algo.mutation as m
 import boolmore.core.conversions as conv
 import boolmore.eval.constraint as cons
 
-import boolmore.config as config
-
 PrimeType = list[list[dict[str, int]]]
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
@@ -191,7 +189,7 @@ class Model():
         return check
 
 
-    def mutate(self, probability:float, edge_prob:float, bias:float=0.5, seed:int|None=None) -> Model:
+    def mutate(self, model_id:int, probability:float, edge_prob:float, bias:float=0.5, seed:int|None=None) -> Model:
         """
         Returns a mutated model.
 
@@ -207,9 +205,8 @@ class Model():
         mutated_model - a new model with mutated functions  :Model class
 
         """
-        config.id += 1
         mutated_model = Model()
-        mutated_model.id = config.id
+        mutated_model.id = model_id
         mutated_model.generation = self.generation + 1
 
         mutated_model.base = self.base
@@ -327,7 +324,7 @@ class Model():
         print("Exported generated model to", os.path.abspath(file_name))
 
 
-def mix_models(model1:Model, model2:Model) -> Model:
+def mix_models(model_id:int, model1:Model, model2:Model) -> Model:
     """
     For each node, take the rule from one of the parent model randomly.
 
@@ -339,9 +336,8 @@ def mix_models(model1:Model, model2:Model) -> Model:
     -------
     mixed_model - model that takes functions from the parents   :Model class
     """
-    config.id += 1
     mixed_model = Model()
-    mixed_model.id = config.id
+    mixed_model.id = model_id
     mixed_model.generation = max(model1.generation,model2.generation) + 1
 
     mixed_model.base = model1.base
