@@ -22,12 +22,13 @@ PredictType = dict[FixesType, dict]
 
 @dataclass
 class EvalResult:
+    model_id: int
     predictions: PredictType
+    max_score: float
     score: float
-    non_hierarchy_score: float
 
 class Evaluator:
-    def __init__(self, fixes_list, exps):
+    def __init__(self, fixes_list, exps, hierarchy):
         """
         exps : list[ExpType]
             exp : ExpType
@@ -49,11 +50,16 @@ class Evaluator:
         """
         self.fixes_list = fixes_list
         self.exps = exps
+        self.hierarchy = hierarchy
 
     def evaluate(self, model:Model):
         predictions = model.get_predictions(self.fixes_list)
-        score, non_hierarchy_score = model.get_model_score(self.exps)
-        return EvalResult(predictions=predictions, score=score, non_hierarchy_score=non_hierarchy_score)
+        max_score, score = model.get_model_score(self.exps, hierarchy=self.hierarchy)
+        result = EvalResult(model_id=model.id,
+                            predictions=predictions,
+                            max_score=max_score,
+                            score=score)
+        return result
 
 
 class Selector:
@@ -70,6 +76,7 @@ class Reproducer:
         self.mix = config.mix
 
     def asexual(self, population, prob, edge_prob):
+        population = sort_population(population)
         p = reproduction_bias(population)
         # number of offsprings to generate
         # total population should be keep + per_iter
@@ -83,6 +90,7 @@ class Reproducer:
         return offsprings
 
     def sexual(self, population):
+        population = sort_population(population)
         p = reproduction_bias(population)
         parents_lst = []
         for j in range(self.mix):
@@ -160,8 +168,7 @@ class GAState:
     best_score: float = 0
 
 class GeneticAlgorithm:
-    def __init__(self, config:GAConfig, hierarchy):
-        self.hierarchy = hierarchy
+    def __init__(self, config:GAConfig):
         self.per_iter = config.per_iter
         self.keep = config.keep
         self.mix = config.mix
@@ -174,54 +181,20 @@ class GeneticAlgorithm:
             population.append(start)
         return population
 
-    def parallel_pred_and_score(self, model, evaluator)-> tuple[Model, PredictType, float, float]:
-        """
-        Gets predictions and scores for a model in parallel.
-        This function must return all the values that the models will assign to their attributes.
-
-        Parameters
-        ----------
-        model : Model
-            The model to get predictions and scores for
-
-        evaluator : Evaluator
-            evaluator to get predictions and scores
-
-        Returns
-        -------
-        model.id : int
-            id of the model
-
-        model.predictions : PredictType
-            average attractor values for all fixes
-            key : FixesType
-                fixes - ((node A, value1), (node B, value2), ...)
-            value : dict[str, float]
-                average value of a node in the attractors - {observed_node: predict_value}
-
-        model.score : float
-            score of the model
-
-        model.non_hierarchy_score : float
-            non-hierarchy score of the model
-        
-        """
-        
-        result = evaluator.evaluate(model)
-        return model.id, model.predictions, result.score, result.non_hierarchy_score
-
     def evaluate_offsprings(self, offsprings, evaluator):
         if self.core > 1:
-            results = Parallel(n_jobs=self.core)(delayed(self.parallel_pred_and_score)(new_model, evaluator) for new_model in offsprings)
+            results = Parallel(n_jobs=self.core)(delayed(evaluator.evaluate)(new_model) for new_model in offsprings)
             for result in results:
                 for new_model in offsprings:
-                    if new_model.id == result[0]:
-                        new_model.predictions = result[1]
-                        new_model.score = result[2]
-                        new_model.non_hierarchy_score = result[3]
+                    if new_model.id == result.model_id:
+                        new_model.predictions = result.predictions
+                        new_model.max_score = result.max_score
+                        new_model.score = result.score
         else:
             for new_model in offsprings:
                 result = evaluator.evaluate(new_model)
+                new_model.predictions = result.predictions
+                new_model.max_score = result.max_score
                 new_model.score = result.score
 
 
@@ -363,7 +336,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     print("Base model loaded.")
     start_single = datetime.datetime.now()
     base.get_predictions(fixes_list)
-    base.get_model_score(exps)
+    base.get_model_score(exps, hierarchy=hierarchy)
     end_single = datetime.datetime.now()
     base.info()
     print(f"""
@@ -377,7 +350,7 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     print("Starting model loaded.")
     start.name = run_name
     start.get_predictions(fixes_list)
-    start.get_model_score(exps)
+    start.get_model_score(exps, hierarchy=hierarchy)
     start.info()
     print()
 
@@ -417,15 +390,14 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     fp.close()
 
     start_time = datetime.datetime.now()
-    evaluator = Evaluator(fixes_list=fixes_list, exps=exps)
+    evaluator = Evaluator(fixes_list=fixes_list, exps=exps, hierarchy=hierarchy)
     config = GAConfig(total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                       prob=PROB, edge_prob=EDGE_PROB,
                       stop_if_max=stop_if_max, core=core, seed=seed)
     selector = Selector(config)
     reproducer = Reproducer(config)
     final, log = ga_main(start, evaluator, selector, reproducer, config,
-                         export_top=EXPORT_TOP, export_thresh=EXPORT_THRESHOLD,
-                         hierarchy=hierarchy)
+                         export_top=EXPORT_TOP, export_thresh=EXPORT_THRESHOLD)
     end_time = datetime.datetime.now()
 
     fp = open(LOG, "a")
@@ -473,7 +445,6 @@ def ga_main(start:Model,
             reproducer:Reproducer,
             config:GAConfig,
             export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
-            hierarchy:bool=True,
             ) -> tuple[Model, list]:
     """
     Main part of the genetic algorithm.
@@ -519,7 +490,7 @@ def ga_main(start:Model,
         np.random.seed(seed)
 
     state = GAState(population=[], iteration=0, log=[])
-    ga = GeneticAlgorithm(config, hierarchy=hierarchy)
+    ga = GeneticAlgorithm(config)
 
     ### First iteration ###
     state.iteration = 1
@@ -528,14 +499,14 @@ def ga_main(start:Model,
     # generate (per_iter) new models
     offsprings = reproducer.asexual(state.population, prob=prob_list[0], edge_prob=edge_prob)
     ga.evaluate_offsprings(offsprings, evaluator)
-
     state.population.extend(offsprings)
-    state.population = sort_population(state.population, hierarchy=hierarchy)
 
+    state.population = sort_population(state.population)
     final = state.population[0]
     print(f"iteration {state.iteration}, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
     if not final.check_constraint():
         print("ERROR: model does not follow constraints")
+    
     state.log.append([1, final.score, final.extra_edges, final.complexity])
 
     # Export models that exceed the threshold score
@@ -553,20 +524,18 @@ def ga_main(start:Model,
         # mix the good ones
         mixed_offsprings = reproducer.sexual(state.population)
         ga.evaluate_offsprings(mixed_offsprings, evaluator)
-
         state.population.extend(mixed_offsprings)
-        state.population = sort_population(state.population, hierarchy=hierarchy)
     
         offsprings = reproducer.asexual(state.population, prob=prob_list[i-1], edge_prob=edge_prob)
         ga.evaluate_offsprings(offsprings, evaluator)
-
         state.population.extend(offsprings)
-        state.population = sort_population(state.population, hierarchy=hierarchy)
-    
+
+        state.population = sort_population(state.population)
         final = state.population[0]
         print(f"iteration {i}, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
         if not final.check_constraint():
             print("ERROR: model does not follow constraints")
+        
         state.log.append([i, final.score, final.extra_edges, final.complexity])
 
         # Export models that exceed the threshold score

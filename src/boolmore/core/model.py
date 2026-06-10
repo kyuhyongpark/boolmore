@@ -88,6 +88,7 @@ class Model():
 
         self.predictions:PredictType = {}
         self.score = 0.0
+        self.hierarchy_score = 0.0
         self.non_hierarchy_score = 0.0
         self.max_score = 0.0
 
@@ -273,7 +274,7 @@ class Model():
 
         return predictions
 
-    def get_model_score(self, exps:list[ExpType], report:bool=False, file:str="score_report.tsv"):
+    def get_model_score(self, exps:list[ExpType], hierarchy:bool=True, report:bool=False, file:str="score_report.tsv"):
         """
         Assigns self.score when given experiments.
         Requires self.predictions to be calculated beforehand.
@@ -293,16 +294,20 @@ class Model():
             one point in score means agreement to one perturbation
         
         """
-        self.max_score = 0.0
+        max_score = 0.0
         for exp in exps:
-            self.max_score += exp[1]
+            max_score += exp[1]
         agreements, non_hierarchy_score = get_agreement(exps, self.predictions)
-        score = get_hierarchy_score(agreements, self.default_sources, report=report, file=file)
 
-        self.non_hierarchy_score = non_hierarchy_score
+        if hierarchy:
+            score = get_hierarchy_score(agreements, self.default_sources, report=report, file=file)
+        else:
+            score = non_hierarchy_score
+
+        self.max_score = max_score
         self.score = score
 
-        return score, non_hierarchy_score
+        return max_score, score
 
     def mutate(self, probability:float, edge_prob:float, bias:float=0.5, seed:int|None=None) -> Model:
         """
