@@ -15,6 +15,7 @@ from boolmore.core.model import Model, mix_models
 
 from boolmore.algo.selection import reproduction_bias, sort_population
 from boolmore.algo.inference import get_NAV_prediction
+from boolmore.eval.score import get_NAV_score
 
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
@@ -55,8 +56,7 @@ class Evaluator:
 
     def evaluate(self, model:Model):
         predictions = get_NAV_prediction(model.primes, self.fixes_list)
-        model.predictions = predictions
-        max_score, score = model.get_model_score(self.exps, hierarchy=self.hierarchy)
+        max_score, score = get_NAV_score(self.exps, predictions, default_sources=model.default_sources, hierarchy=self.hierarchy)
         result = EvalResult(model_id=model.id,
                             predictions=predictions,
                             max_score=max_score,
@@ -189,13 +189,11 @@ class GeneticAlgorithm:
             for result in results:
                 for new_model in offsprings:
                     if new_model.id == result.model_id:
-                        new_model.predictions = result.predictions
                         new_model.max_score = result.max_score
                         new_model.score = result.score
         else:
             for new_model in offsprings:
                 result = evaluator.evaluate(new_model)
-                new_model.predictions = result.predictions
                 new_model.max_score = result.max_score
                 new_model.score = result.score
 
@@ -338,8 +336,9 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     print("Base model loaded.")
     start_single = datetime.datetime.now()
     predictions = get_NAV_prediction(base.primes, fixes_list)
-    base.predictions = predictions
-    base.get_model_score(exps, hierarchy=hierarchy)
+    max_score, score = get_NAV_score(exps, predictions, default_sources=base.default_sources, hierarchy=hierarchy)
+    base.max_score = max_score
+    base.score = score
     end_single = datetime.datetime.now()
     base.info()
     print(f"""
@@ -353,8 +352,9 @@ def run_ga(json_file:str|None=None, start_model:str|None=None, run_name:str|None
     print("Starting model loaded.")
     start.name = run_name
     predictions = get_NAV_prediction(start.primes, fixes_list)
-    start.predictions = predictions
-    start.get_model_score(exps, hierarchy=hierarchy)
+    max_score, score = get_NAV_score(exps, predictions, default_sources=start.default_sources, hierarchy=hierarchy)
+    start.max_score = max_score
+    start.score = score
     start.info()
     print()
 

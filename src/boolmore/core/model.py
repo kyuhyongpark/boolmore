@@ -2,17 +2,11 @@ from __future__ import annotations
 import random
 import os
 
-import pyboolnet.trap_spaces
-
 import boolmore.algo.mutation as m
 import boolmore.core.conversions as conv
 import boolmore.eval.constraint as cons
 
 import boolmore.config as config
-
-from boolmore.eval.score import (
-    get_agreement, get_hierarchy_score
-)
 
 PrimeType = list[list[dict[str, int]]]
 FixesType = tuple[tuple[str, int]]
@@ -86,7 +80,6 @@ class Model():
         self.extra_edges = []
         self.complexity = 0
 
-        self.predictions:PredictType = {}
         self.score = 0.0
         self.hierarchy_score = 0.0
         self.non_hierarchy_score = 0.0
@@ -214,41 +207,6 @@ class Model():
                                     self.constraints, node) and check
         return check
 
-
-    def get_model_score(self, exps:list[ExpType], hierarchy:bool=True, report:bool=False, file:str="score_report.tsv"):
-        """
-        Assigns self.score when given experiments.
-        Requires self.predictions to be calculated beforehand.
-
-        Can be modified to meet the desired criteria.
-        
-        Assigns
-        -------
-        self.max_score : float
-            max possible score of the model
-
-        self.non_hierarchy_score : float
-            how well the model agrees with experimental results, ignoring hierarchy
-        
-        self.score : float
-            how well the model agrees with experimental results
-            one point in score means agreement to one perturbation
-        
-        """
-        max_score = 0.0
-        for exp in exps:
-            max_score += exp[1]
-        agreements, non_hierarchy_score = get_agreement(exps, self.predictions)
-
-        if hierarchy:
-            score = get_hierarchy_score(agreements, self.default_sources, report=report, file=file)
-        else:
-            score = non_hierarchy_score
-
-        self.max_score = max_score
-        self.score = score
-
-        return max_score, score
 
     def mutate(self, probability:float, edge_prob:float, bias:float=0.5, seed:int|None=None) -> Model:
         """

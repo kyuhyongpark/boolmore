@@ -324,30 +324,40 @@ def get_phenotype_score(
         )
 
 
-if __name__=="__main__":
-    from pyboolnet.external.bnet2primes import bnet_file2primes
+def get_NAV_score(
+    exps:list[ExpType],
+    predictions,
+    default_sources,
+    hierarchy:bool=True,
+    report:bool=False,
+    file:str="score_report.tsv"):
+    """
+    Assigns self.score when given experiments.
+    Requires self.predictions to be calculated beforehand.
 
-    from boolmore.io.load import import_exps
-    from boolmore.core.model import Model
+    Can be modified to meet the desired criteria.
+    
+    Assigns
+    -------
+    self.max_score : float
+        max possible score of the model
 
-    DATA = "boolmore/case_study/data/data_Li_20230926.tsv"
-    # MODEL = "boolmore/comparison/gitsbe/ABA_A_20241105_214621/models/ABA_A_network_run_0__G399_M138.bnet"
-    MODEL = "boolmore/case_study/baseline_models/ABA_2006_Li.bnet"
-    # MODEL = "boolmore/comparison/gitsbe/ABA_GA1_A.bnet"
-    NAME = None
-    DEFAULT_SOURCES = {"ABA":0}
+    self.non_hierarchy_score : float
+        how well the model agrees with experimental results, ignoring hierarchy
+    
+    self.score : float
+        how well the model agrees with experimental results
+        one point in score means agreement to one perturbation
+    
+    """
+    max_score = 0.0
+    for exp in exps:
+        max_score += exp[1]
+    agreements, non_hierarchy_score = get_agreement(exps, predictions)
 
-    if NAME == None:
-        NAME = MODEL.split("/")[-1][:-5]
+    if hierarchy:
+        score = get_hierarchy_score(agreements, default_sources, report=report, file=file)
+    else:
+        score = non_hierarchy_score
 
-    print("Loading experimental data . . .")
-    exps, pert = import_exps(DATA)
-    print("Experimental data loaded.\n")
-
-    print("Loading model . . .")
-    primes = bnet_file2primes(MODEL)
-    n1 = Model.import_model(primes, default_sources=DEFAULT_SOURCES)
-    print("Model loaded.")
-    n1.get_predictions(pert)
-    n1.get_model_score(exps, report=True, file=NAME+'_score.tsv')
-    n1.info()
+    return max_score, score
