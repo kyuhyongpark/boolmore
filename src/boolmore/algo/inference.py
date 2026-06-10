@@ -3,7 +3,7 @@ from time import perf_counter
 
 from pyboolnet.trap_spaces import compute_trapspaces_within_subspace, compute_trap_spaces
 
-from boolmore.core.experiment import Experiment
+from boolmore.core.experiment import Experiment, NAVExperiment
 from boolmore.core.prediction import PhenotypePrediction
 from boolmore.core.conversions import assignment_to_dict
 
@@ -180,7 +180,7 @@ def get_phenotype_prediction(
 
 def get_NAV_prediction(
     primes,
-    exps: list,
+    exps: list[NAVExperiment],
 ):
     """
     Returns predictions when given interventions
@@ -207,7 +207,7 @@ def get_NAV_prediction(
 
     interventions = set()
     for exp in exps:
-        interventions.add(exp[2])
+        interventions.add(exp.fixes)
 
     interventions = sorted(interventions)
 

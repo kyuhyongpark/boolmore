@@ -32,19 +32,7 @@ class EvalResult:
 class Evaluator:
     def __init__(self, exps, hierarchy):
         """
-        exps : list[ExpType]
-            exp : ExpType
-                info of a single experiment                
-                exp[0] : int
-                    id of the experiment
-                exp[1] : float
-                    max_score for the experiment
-                exp[2] : FixesType
-                    fixes - ((node A, value1), (node B, value2), ...)
-                exp[3] : str
-                    observed_node
-                exp[4] : str
-                    outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
+        exps : list of experiment dataclasses
         """
         self.exps = exps
         self.hierarchy = hierarchy

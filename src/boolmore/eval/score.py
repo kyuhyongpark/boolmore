@@ -1,7 +1,7 @@
 import itertools as it
 from collections.abc import Iterable
 
-from boolmore.core.experiment import Experiment
+from boolmore.core.experiment import Experiment, NAVExperiment
 from boolmore.core.prediction import PhenotypePrediction
 
 
@@ -47,7 +47,7 @@ def powerset(iterable:Iterable) -> it.chain:
     return it.chain.from_iterable(it.combinations(s, r) for r in range(len(s)+1))
 
 
-def get_agreement(experiments:list[ExpType], predictions:PredictType) -> tuple[AgreeType, float]:
+def get_agreement(exps:list[NAVExperiment], predictions:PredictType) -> tuple[AgreeType, float]:
     """
     Returns attractor agreements when given experimental outcomes and model predictions.
     agreements are categorized by observed node,
@@ -56,19 +56,7 @@ def get_agreement(experiments:list[ExpType], predictions:PredictType) -> tuple[A
 
     Parameters
     ----------
-    experiments : list[ExpType]
-        exp : ExpType
-            info of a single experiment                
-            exp[0] : int
-                id of the experiment
-            exp[1] : float
-                max_score for the experiment
-            exp[2] : FixesType
-                fixes - ((node A, value1), (node B, value2), ...)
-            exp[3] : str
-                observed_node
-            exp[4] : str
-                outcome_value - one of OFF, OFF/Some, Some, Some/ON, ON
+    exps : list[NAVExperiment]
 
     predictions : PredictType
         average attractor values for all fixes
@@ -93,21 +81,15 @@ def get_agreement(experiments:list[ExpType], predictions:PredictType) -> tuple[A
 
     """
 
-    ID = 0
-    SCORE = 1
-    FIXES = 2
-    NODE = 3
-    VALUE = 4
-
     non_hierarchy_score = 0
 
     agreements = {}
-    for exp in experiments:
-        id = exp[ID]
-        max_score = exp[SCORE]
-        fixes = exp[FIXES]
-        observed_node = exp[NODE]
-        outcome_value = exp[VALUE]
+    for exp in exps:
+        id = exp.id
+        max_score = exp.weight
+        fixes = exp.fixes
+        observed_node = exp.observed
+        outcome_value = exp.outcome
 
         predict_value = predictions[fixes][observed_node]
 
@@ -147,13 +129,6 @@ def get_agreement(experiments:list[ExpType], predictions:PredictType) -> tuple[A
         agreements[observed_node][fixes] = id, max_score, outcome_value, predict_value, agreement
 
         non_hierarchy_score += max_score * agreement
-
-        # print("Fixes: ", fixes)
-        # print("Observed node: ", observed_node)
-        # print("Outcome: ", outcome_value)
-        # print("Prediction: ", predict_value)
-        # print("agreement: ", agreement)
-        # print("- - - - - - - - - -")
 
     return agreements, non_hierarchy_score
 
@@ -325,7 +300,7 @@ def get_phenotype_score(
 
 
 def get_NAV_score(
-    exps:list[ExpType],
+    exps:list[NAVExperiment],
     predictions,
     default_sources,
     hierarchy:bool=True,
@@ -352,7 +327,7 @@ def get_NAV_score(
     """
     max_score = 0.0
     for exp in exps:
-        max_score += exp[1]
+        max_score += exp.weight
     agreements, non_hierarchy_score = get_agreement(exps, predictions)
 
     if hierarchy:

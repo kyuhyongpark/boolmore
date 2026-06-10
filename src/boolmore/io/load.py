@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Optional
 from collections import defaultdict
 
-from boolmore.core.experiment import Experiment
+from boolmore.core.experiment import Experiment, NAVExperiment
 
 Assignment = tuple[tuple[str, int], ...]
 ExpType = tuple[int, float, Assignment, str, str]
@@ -13,7 +13,7 @@ Signature = tuple[Assignment, Assignment, Assignment]  # sources, perturbation, 
 def comment_removal(line:str) -> bool:
     return not line.startswith("#") and not line.isspace()
 
-def import_NAV_exps(location:str) -> list[ExpType]:
+def import_NAV_exps(location:str) -> list[NAVExperiment]:
     """
     Reads a tsv file and returns experiments and interventions.
     
@@ -40,15 +40,7 @@ def import_NAV_exps(location:str) -> list[ExpType]:
 
     Returns
     -------
-    experiments - list of exp                           :list[ExpType]
-        exp     - info of a single experiment           :ExpType = tuple[int, float, FixesType, str, str]
-            exp[0] - id of the experiment               :int
-            exp[1] - max_score for the experiment       :float
-            exp[2] - fixes                              :FixesType = tuple[tuple[str, int]]
-                     ((node A, value1), (node B, value2), ...)
-            exp[3] - observed_node                      :str
-            exp[4] - outcome_value                      :str
-                     one of OFF, OFF/Some, Some, Some/ON, ON
+    experiments - list[NAVExperiment]
 
     """
     ID, SCORE, SOURCE, PERT, NODE, VALUE = 0, 1, 2, 3, 4, 5
@@ -60,10 +52,9 @@ def import_NAV_exps(location:str) -> list[ExpType]:
     # skip the first row
     next(data)
 
-    experiments = []
+    exps = []
     interventions = []
     for row in data:
-        exp = [int(row[ID]), float(row[SCORE])]
 
         fixes_list = []
         if row[SOURCE] != "":
@@ -89,22 +80,24 @@ def import_NAV_exps(location:str) -> list[ExpType]:
                 fixes_list.append(fix)
         # fixes should be sorted so that they do not depend on the order of user input
         fixes = tuple(sorted(fixes_list, key= lambda x:x[0]))
-        exp.append(fixes)
 
-        exp.append(row[NODE])
-        exp.append(row[VALUE])
+        exp = NAVExperiment(id =int(row[ID]),
+                            fixes = fixes,
+                            observed = row[NODE],
+                            outcome = row[VALUE],
+                            weight = float(row[SCORE]))
 
         if fixes not in interventions:
             interventions.append(fixes)
         else:
-            for experiment in experiments:
-                if fixes in experiment:
-                    assert exp[3] != experiment[3], f"{experiment[0]} and {exp[0]} are duplicates" 
+            for other_exp in exps:
+                if fixes == other_exp.fixes:
+                    assert exp.observed != other_exp.observed, f"{other_exp.id} and {exp.id} are duplicates" 
 
         # add the entry
-        experiments.append(tuple(exp))
+        exps.append(exp)
 
-    return experiments
+    return exps
 
 
 # -------------------------
