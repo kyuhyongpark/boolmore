@@ -69,7 +69,7 @@ class GAConfig:
     seed: int | None
 
 @dataclass
-class GAstate:
+class GAState:
     population: list[Model]
     iteration: int
     log: list
@@ -420,15 +420,17 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         random.seed(seed)
         np.random.seed(seed)
 
-    log = []
-    iteration = []
+    state = GAState(population=[], iteration=0, log=[])
+    ga = GeneticAlgorithm(boolmore.config, evaluator, hierarchy=hierarchy, per_iter=per_iter, keep=keep, mix=mix)
+
 
     ### First iteration ###
+    state.iteration = 1
 
     # this ensures that models worse than the start are not carried on.
     # also ensures that same number of models are generated in the first iteration as in the other iterations.
     for i in range(keep):
-        iteration.append(start)
+        state.population.append(start)
 
     # generate (per_iter) new models
     new_model_lst = []
@@ -447,32 +449,34 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
         for new_model in new_model_lst:
             result = evaluator.evaluate(new_model, fixes_list, exps)
             new_model.score = result.score
-    iteration.extend(new_model_lst)
+    state.population.extend(new_model_lst)
     
-    ga = GeneticAlgorithm(boolmore.config, evaluator, hierarchy=hierarchy, per_iter=per_iter, keep=keep, mix=mix)
 
-    iteration = sort_population(iteration, hierarchy=hierarchy)
+    state.population = sort_population(state.population, hierarchy=hierarchy)
 
     # Export models that exceed the threshold score
     for i in range(export_top):
-        iteration[i].name = export_name
-        iteration[i].export(threshold=export_thresh)
+        state.population[i].name = export_name
+        state.population[i].export(threshold=export_thresh)
 
-    final = iteration[0]
+    final = state.population[0]
 
-    print(f"iteration 1, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
+    print(f"iteration {state.iteration}, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
 
     if not final.check_constraint():
         print("ERROR: model does not follow constraints")
 
-    log.append([1, final.score, final.extra_edges, final.complexity])
+    state.log.append([1, final.score, final.extra_edges, final.complexity])
     
     ### Second to last iterations ###
     for i in range(2,total_iter+1):
-        new_iteration = ga.select_survivors(iteration)
+        state.iteration = i
+
+        # select the survivors
+        state.population = ga.select_survivors(state.population)
     
         # mix the good ones
-        parents_lst = ga.parent_sampler(new_iteration, p=reproduction_bias(new_iteration), n=mix)
+        parents_lst = ga.parent_sampler(state.population, p=reproduction_bias(state.population), n=mix)
         mixed_model_lst = []
         for parents in parents_lst:
             mixed_model = mix_models(parents[0], parents[1])
@@ -490,11 +494,11 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
             for mixed_model in mixed_model_lst:
                 result = evaluator.evaluate(mixed_model, fixes_list, exps)
                 mixed_model.score = result.score
-        new_iteration.extend(mixed_model_lst)
+        state.population.extend(mixed_model_lst)
     
         # mutate the good ones
-        new_iteration = sort_population(new_iteration, hierarchy=hierarchy)
-        targets = ga.mutation_sampler(new_iteration, p=reproduction_bias(new_iteration), n=per_iter-mix)
+        state.population = sort_population(state.population, hierarchy=hierarchy)
+        targets = ga.mutation_sampler(state.population, p=reproduction_bias(state.population), n=per_iter-mix)
         new_model_lst = []
         for target in targets:
             new_model = target.mutate(prob_list[i-1], edge_prob)
@@ -511,32 +515,30 @@ def ga_main(start:Model, exps:list[ExpType], fixes_list:list[FixesType],
             for new_model in new_model_lst:
                 result = evaluator.evaluate(new_model, fixes_list, exps)
                 new_model.score = result.score
-        new_iteration.extend(new_model_lst)
+        state.population.extend(new_model_lst)
       
-        new_iteration = sort_population(new_iteration, hierarchy=hierarchy)
+        state.population = sort_population(state.population, hierarchy=hierarchy)
     
-        final = new_iteration[0]
+        final = state.population[0]
 
         print(f"iteration {i}, generated {boolmore.config.id-start.id}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
 
         if not final.check_constraint():
             print("ERROR: model does not follow constraints")
 
-        log.append([i, final.score, final.extra_edges, final.complexity])
+        state.log.append([i, final.score, final.extra_edges, final.complexity])
 
         # Export models that exceed the threshold score
         for j in range(export_top):
-            new_iteration[j].name = export_name
-            new_iteration[j].export(threshold=export_thresh)
+            state.population[j].name = export_name
+            state.population[j].export(threshold=export_thresh)
 
         # Stop iteration if max score is reached
-        if stop_if_max and new_iteration[0].score == new_iteration[0].max_score:
+        if stop_if_max and state.population[0].score == state.population[0].max_score:
             print("max score reached")
             break
 
-        iteration = new_iteration
-
-    return final, log
+    return final, state.log
 
 def parallel_pred_and_score(model, fixes_list, exps, evaluator)-> tuple[Model, PredictType, float, float]:
     """
