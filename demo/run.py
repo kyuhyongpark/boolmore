@@ -17,10 +17,10 @@ base, start, final, log = run_ga(
 
 print("\n-----comparing with the baseline functions-----")
 modified = 0
-for node in base.primes:
-    if prime2rr(base.primes[node])[1] != prime2rr(final.primes[node])[1]:
+for node in base.model.primes:
+    if prime2rr(base.model.primes[node])[1] != prime2rr(final.model.primes[node])[1]:
         modified += 1
-        print("base:" + prime2bnet(node, base.primes[node]))
-        print("final:" + prime2bnet(node, final.primes[node]))
+        print("base:" + prime2bnet(node, base.model.primes[node]))
+        print("final:" + prime2bnet(node, final.model.primes[node]))
 
-print(f"\n{modified} out of {len(base.primes)} functions differ from the baseline")
+print(f"\n{modified} out of {len(base.model.primes)} functions differ from the baseline")

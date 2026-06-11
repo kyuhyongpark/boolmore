@@ -44,22 +44,6 @@ class Model():
         complexity      - shows the complexity of the model functions,              :int
                           by summing the number of prime implicants
 
-        predictions : PredictType
-            average attractor values for all fixes
-            keys : FixesType
-            values : dict[str, float]
-                average values of nodes - {observed_node: predict_value}
-
-        score : float
-            how well the model agrees with experimental results
-            one point in score means agreement to one perturbation
-
-        non_hierarchy_score : float
-            how well the model agrees with experimental results, ignoring hierarchy
- 
-        max_score : float
-            possible maximum score w/o hierarchy
-
         """
         self.id = 0
         self.generation = 0
@@ -76,9 +60,6 @@ class Model():
         self.rr_dict = {}
         self.extra_edges = []
         self.complexity = 0
-
-        self.max_score = 0.0
-        self.score = 0.0
 
     @classmethod
     def import_model(cls, primes:dict[str, PrimeType], id:int=-1, generation:int=0,
@@ -111,7 +92,7 @@ class Model():
 
         Returns
         -------
-        model           - model with all attributes except predictions and score    :Model class
+        model - the imported model :Model class
 
         """
         x = cls()
@@ -129,7 +110,6 @@ class Model():
             x.base = base
             x.constraints.update(base.constraints)
             x.edge_pool.extend(base.edge_pool)
-            x.max_score = base.max_score
             x.name = base.name
         
         for node in x.primes:
@@ -212,7 +192,6 @@ class Model():
         mutated_model.base = self.base
         mutated_model.constraints = self.constraints
         mutated_model.edge_pool = self.edge_pool
-        mutated_model.max_score = self.max_score
         mutated_model.name = self.name
 
         mutated_model.primes = self.primes.copy()
@@ -277,31 +256,25 @@ class Model():
         """
         prints out a brief summary of the model info
         """
-        # TODO: print out total score as well
         print("id: ", self.id)
         print("generation: ", self.generation)
         print("extra edges: ", self.extra_edges)
-        print(f"score: {round(self.score,2)} / {self.max_score} ({round(self.score/self.max_score*100,1)}%)")
         print("following constraints:", self.check_constraint())
         print("complexity:", self.complexity)
 
-    def export(self, file_name:str|None=None, threshold:float=0.0, details:bool=True):
+    def export(self, file_name:str|None=None, details:bool=True):
         """
-        Exports the model rules with scores above a certain threshold.
+        Exports the model rules.
 
         Parameters
         ----------
         file_name : str
             location of the output file
             if None, output file is in the form "(model's name)_id_gen.txt"
-        threshold : float
-            only models with score higher than the threshold get exported
         details : bool
             whether to print out the details of the model as comments
             
         """
-        if threshold != 0.0 and self.score < threshold:
-            return
         if file_name == None:
             file_name = self.name + "_" + str(self.id) + "_gen" + str(self.generation) + ".bnet"
 
@@ -311,7 +284,7 @@ class Model():
             fp.write("# id: " + str(self.id) + "\n")
             fp.write("# generation: " + str(self.generation) + "\n")
             fp.write("# extra edges: " + str(self.extra_edges) + "\n")
-            fp.write("# score: " + str(self.score) + " / " + str(self.max_score) + "\n")
+            # fp.write("# score: " + str(self.score) + " / " + str(self.max_score) + "\n")
             fp.write("# following constraints: " + str(self.check_constraint()) + "\n")
             fp.write("# complexity: " + str(self.complexity) + "\n\n")
         fp.write("targets,\tfactors\n")
@@ -343,7 +316,6 @@ def mix_models(model_id:int, model1:Model, model2:Model) -> Model:
     mixed_model.base = model1.base
     mixed_model.constraints = model1.constraints
     mixed_model.edge_pool = model1.edge_pool
-    mixed_model.max_score = model1.max_score
     mixed_model.name = model1.name
 
     mixed_model.primes = {}

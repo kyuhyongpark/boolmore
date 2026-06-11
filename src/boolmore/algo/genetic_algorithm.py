@@ -11,12 +11,11 @@ import numpy as np
 from pyboolnet.external.bnet2primes import bnet_file2primes
 
 from boolmore.core.conversions import prime2bnet
-from boolmore.io.load import import_NAV_exps
+from boolmore.io.load import import_NAV_exps, import_phenotypes
 from boolmore.core.model import Model, mix_models
 
-from boolmore.algo.selection import reproduction_bias, sort_population
 from boolmore.algo.inference import get_NAV_prediction, get_phenotype_prediction
-from boolmore.eval.score import get_NAV_score, get_phenotype_score
+from boolmore.eval.score import get_NAV_scores, get_phenotype_scores, get_model_score
 
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
@@ -26,9 +25,9 @@ PredictType = dict[FixesType, dict]
 @dataclass
 class EvalResult:
     model_id: int
-    predictions: PredictType
     max_score: float
     score: float
+    details: any
 
 class Evaluator:
     def __init__(self, exps, prediction_fn, score_fn):
@@ -41,20 +40,36 @@ class Evaluator:
 
     def evaluate(self, model:Model):
         predictions = self.prediction_fn(model.primes, self.exps)
-        max_score, score = self.score_fn(self.exps, predictions)
+        score_items = self.score_fn(self.exps, predictions)
+        max_score, score = get_model_score(score_items)
         result = EvalResult(model_id=model.id,
-                            predictions=predictions,
                             max_score=max_score,
-                            score=score)
+                            score=score,
+                            details=[predictions, score_items])
         return result
 
+@dataclass
+class Candidate:
+    model:Model
+    eval_result:EvalResult
+
+def sort_population(population: list[Candidate]):
+    population = sorted(population, key=lambda x: (len(x.model.extra_edges), x.model.complexity))
+    population = sorted(population, key=lambda x: x.eval_result.score, reverse=True)
+    return population
 
 class Selector:
     def __init__(self, config:GAConfig):
         self.keep = config.keep
-    def select_survivors(self, population):
+    def select_survivors(self, population:list[Candidate]):
+        population = sort_population(population)
         return population[:self.keep]
 
+def reproduction_bias(population: list[Candidate]):
+    weights = list(range(1, len(population)+1))
+    weights.reverse()
+    p = np.array(weights)/np.sum(np.array(weights))
+    return p
 
 class Reproducer:
     def __init__(self, config:GAConfig):
@@ -66,7 +81,7 @@ class Reproducer:
     def get_next_id(self):
         return next(self._id_gen)
 
-    def asexual(self, population, prob, edge_prob):
+    def asexual(self, population: list[Candidate], prob, edge_prob)->list[Model]:
         population = sort_population(population)
         p = reproduction_bias(population)
         # number of offsprings to generate
@@ -76,11 +91,11 @@ class Reproducer:
         offsprings = []
         targets = random.choices(population, weights=p, k=n)
         for target in targets:
-            new_model = target.mutate(self.get_next_id(), prob, edge_prob)
+            new_model = target.model.mutate(self.get_next_id(), prob, edge_prob)
             offsprings.append(new_model)    
         return offsprings
 
-    def sexual(self, population):
+    def sexual(self, population: list[Candidate])->list[Model]:
         population = sort_population(population)
         p = reproduction_bias(population)
         parents_lst = []
@@ -89,7 +104,7 @@ class Reproducer:
             parents_lst.append(model_choice)
         mixed_offsprings = []
         for parents in parents_lst:
-            mixed_model = mix_models(self.get_next_id(), parents[0], parents[1])
+            mixed_model = mix_models(self.get_next_id(), parents[0].model, parents[1].model)
             mixed_offsprings.append(mixed_model)
         return mixed_offsprings
 
@@ -153,9 +168,9 @@ class GAConfig:
 @dataclass
 class GAState:
     iteration: int
-    population: list[Model]
+    population: list[Candidate]
     log: list
-    best: Model | None = None
+    best: Candidate | None = None
     best_score: float = 0
     generated: int = 0
 
@@ -166,27 +181,31 @@ class GeneticAlgorithm:
         self.mix = config.mix
         self.core = config.core
     
-    def initialize_population(self, population, start):
+    def initialize_population(self, population: list[Candidate], start:Candidate):
         # this ensures that models worse than the start are not carried on.
         # also ensures that same number of models are generated in the first iteration as in the other iterations.
         for i in range(self.keep):
             population.append(start)
         return population
 
-    def evaluate_offsprings(self, offsprings, evaluator):
+    def new_candidates(self, offsprings:list[Model], evaluator:Evaluator)-> list[EvalResult]:
         if self.core > 1:
             results = Parallel(n_jobs=self.core)(delayed(evaluator.evaluate)(new_model) for new_model in offsprings)
+            new_candidates = []
             for result in results:
-                for new_model in offsprings:
-                    if new_model.id == result.model_id:
-                        new_model.max_score = result.max_score
-                        new_model.score = result.score
+                for model in offsprings:
+                    if model.id == result.model_id:
+                        new_candidate = Candidate(model, result)
+                        new_candidates.append(new_candidate)
+            return new_candidates
         else:
+            # single core
+            new_candidates = []
             for new_model in offsprings:
                 result = evaluator.evaluate(new_model)
-                new_model.max_score = result.max_score
-                new_model.score = result.score
-
+                new_candidate = Candidate(new_model, result)
+                new_candidates.append(new_candidate)
+            return new_candidates
 
 
 def run_ga(run_type:str,
@@ -236,12 +255,12 @@ def run_ga(run_type:str,
 
     Returns
     -------
-    base : Model
-        the base model
-    start : Model
-        the starting model
-    final : Model
-        the final model
+    base : Candidate
+        the base model and its evaluation
+    start : Candidate
+        the starting model and its evaluation
+    final : Candidate
+        the final model and its evaluation
     log : list
         the log
 
@@ -316,36 +335,37 @@ def run_ga(run_type:str,
     EXPORT_TOP = parameters["export_top"]
     EXPORT_THRESHOLD = parameters["export_threshold"]
 
-    print(f"Loading experimental data from {os.path.abspath(DATA)}")
-    exps = import_NAV_exps(DATA)
-    print("Experimental data loaded.\n")
-
     print(f"Loading base model from {os.path.abspath(BASE)}")
     base_primes = bnet_file2primes(BASE)
-    base = Model.import_model(base_primes, constraints=CONSTRAINTS,
+    base_model = Model.import_model(base_primes, constraints=CONSTRAINTS,
                               edge_pool=EDGE_POOL)
     print("Base model loaded.")
 
+    print(f"Loading experimental data from {os.path.abspath(DATA)}")
     if run_type == "NAV":
         if generate_default_sources:
             for node in base_primes:
                 if base_primes[node] == [[{node:0}], [{node:1}]]:
                     DEFAULT_SOURCES[node] = 0
 
+        exps = import_NAV_exps(DATA)
         prediction_fn = get_NAV_prediction
-        score_fn = partial(get_NAV_score, default_sources=DEFAULT_SOURCES, hierarchy=hierarchy)
+        score_fn = partial(get_NAV_scores, default_sources=DEFAULT_SOURCES, hierarchy=hierarchy)
     elif run_type == "Phenotype":
+        exps = import_phenotypes(DATA)
         prediction_fn = get_phenotype_prediction
-        score_fn = get_phenotype_score
-
+        score_fn = get_phenotype_scores
+    print("Experimental data loaded.\n")
 
     start_single = datetime.datetime.now()
-    predictions = prediction_fn(base.primes, exps)
-    max_score, score = score_fn(exps, predictions)
-    base.max_score = max_score
-    base.score = score
+    predictions = prediction_fn(base_model.primes, exps)
+    score_items = score_fn(exps, predictions)
+    max_score, score = get_model_score(score_items)
+    base_eval = EvalResult(model_id=base_model.id, max_score=max_score, score=score, details=[predictions, score_items])
+    base = Candidate(base_model, base_eval)    
     end_single = datetime.datetime.now()
-    base.info()
+    base.model.info()
+    print(f"score: {round(base.eval_result.score,2)} / {base.eval_result.max_score} ({round(base.eval_result.score/base.eval_result.max_score*100,1)}%)")
     print(f"""
           Elapsed time for single evaluation: {end_single-start_single}
           Estimated total run time: {(end_single-start_single)*TOTAL_ITERATIONS*PER_ITERATION}""")
@@ -353,14 +373,16 @@ def run_ga(run_type:str,
 
     print(f"Loading starting model from {os.path.abspath(START_MODEL)}")
     primes = bnet_file2primes(START_MODEL)
-    start = Model.import_model(primes, id=0, generation=STARTING_GEN, base=base)
+    start_model = Model.import_model(primes, id=0, generation=STARTING_GEN, base=base.model)
     print("Starting model loaded.")
-    start.name = run_name
-    predictions = prediction_fn(start.primes, exps)
-    max_score, score = score_fn(exps, predictions)
-    start.max_score = max_score
-    start.score = score
-    start.info()
+    start_model.name = run_name
+    predictions = prediction_fn(start_model.primes, exps)
+    score_items = score_fn(exps, predictions)
+    max_score, score = get_model_score(score_items)
+    start_eval = EvalResult(model_id=start_model.id, max_score=max_score, score=score, details=[predictions, score_items])
+    start = Candidate(start_model, start_eval)
+    start.model.info()
+    print(f"score: {round(start.eval_result.score,2)} / {start.eval_result.max_score} ({round(start.eval_result.score/start.eval_result.max_score*100,1)}%)")
     print()
 
     fp = open(LOG, "w")
@@ -382,16 +404,16 @@ def run_ga(run_type:str,
     fp.write(f"# {seed=}\n\n")
 
     fp.write(f"# BASE: {os.path.abspath(BASE)}\n")
-    fp.write(f"# extra edges: {base.extra_edges}\n")
-    fp.write(f"# score: {base.score} / {base.max_score} ({base.score/base.max_score*100}%)\n")
+    fp.write(f"# extra edges: {base.model.extra_edges}\n")
+    fp.write(f"# score: {base.eval_result.score} / {base.eval_result.max_score} ({base.eval_result.score/base.eval_result.max_score*100}%)\n")
     with open(BASE, "r") as base_text:
         for line in base_text:
             if not line.startswith("#") and not line.isspace():
                 fp.write("# " + line)
     fp.write(f"\n\n# START MODEL: {os.path.abspath(START_MODEL)}\n")
     if BASE != START_MODEL:
-        fp.write(f"# score: {start.score} / {start.max_score} ({start.score/start.max_score*100}%)\n")
-        fp.write(f"# extra edges: {start.extra_edges}\n")
+        fp.write(f"# score: {start.eval_result.score} / {start.eval_result.max_score} ({start.eval_result.score/start.eval_result.max_score*100}%)\n")
+        fp.write(f"# extra edges: {start.model.extra_edges}\n")
         with open(START_MODEL, "r") as model_text:
             for line in model_text:
                 if not line.startswith("#") and not line.isspace():
@@ -405,7 +427,7 @@ def run_ga(run_type:str,
                       stop_if_max=stop_if_max, core=core, seed=seed)
     selector = Selector(config)
     reproducer = Reproducer(config)
-    final, log = ga_main(start, evaluator, selector, reproducer, config,
+    final, log = ga_main(base, start, evaluator, selector, reproducer, config,
                          export_top=EXPORT_TOP, export_thresh=EXPORT_THRESHOLD)
     end_time = datetime.datetime.now()
 
@@ -420,10 +442,10 @@ def run_ga(run_type:str,
         fp.write(f"{iter[0]},{iter[1]},\"{iter[2]}\",{iter[3]}\n")
 
     mutated = set()
-    for node in start.primes:
+    for node in start.model.primes:
         for value in [0, 1]:
-            sorted_primes1 = sorted([sorted(d.items()) for d in start.primes[node][value]])
-            sorted_primes2 = sorted([sorted(d.items()) for d in final.primes[node][value]])
+            sorted_primes1 = sorted([sorted(d.items()) for d in start.model.primes[node][value]])
+            sorted_primes2 = sorted([sorted(d.items()) for d in final.model.primes[node][value]])
             if sorted_primes1 != sorted_primes2:
                 mutated.add(node)
     mutated = sorted(list(mutated))
@@ -432,23 +454,24 @@ def run_ga(run_type:str,
         The algorithm ran for {log[-1][0]} iterations,
         generating {TOTAL_ITERATIONS*PER_ITERATION} models.
         Mutated {len(mutated)} functions, 
-        and increased score from {round(start.score,2)} / {start.max_score} ({round(start.score/start.max_score*100,1)}%)
-        to {round(final.score,2)} / {final.max_score} ({round(final.score/final.max_score*100,1)}%).\n
+        and increased score from {round(start_eval.score,2)} / {start_eval.max_score} ({round(start_eval.score/start_eval.max_score*100,1)}%)
+        to {round(final.eval_result.score,2)} / {final.eval_result.max_score} ({round(final.eval_result.score/final.eval_result.max_score*100,1)}%).\n
         Total elapsed time: {end_time-start_time}""")
     print()
 
-    final.export()
-    final.info()
+    final.model.export()
+    final.model.info()
     print()
 
     print("-----modified functions-----")
     for node in mutated:
-        print("start:" + prime2bnet(node, start.primes[node]))
-        print("final:" + prime2bnet(node, final.primes[node]))
+        print("start:" + prime2bnet(node, start.model.primes[node]))
+        print("final:" + prime2bnet(node, final.model.primes[node]))
 
     return base, start, final, log
 
-def ga_main(start:Model,
+def ga_main(base:Candidate,
+            start:Candidate,
             evaluator:Evaluator,
             selector:Selector,
             reproducer:Reproducer,
@@ -460,8 +483,10 @@ def ga_main(start:Model,
 
     Parameters
     ----------
-    start : Model
-        the starting model
+    base: Candidate
+        the base model and its evaluation
+    start : Candidate
+        the starting model and its evaluation
     evaluator : Evaluator
         evaluator to get predictions and scores
     config : GAConfig
@@ -477,8 +502,8 @@ def ga_main(start:Model,
 
     Returns
     -------
-    final : Model
-        the final model
+    final : Candidate
+        the final model and its evaluation
     log : list[list[]]
         [[iteration #, top score, extra_edges, complexity], ...]
 
@@ -490,7 +515,7 @@ def ga_main(start:Model,
     prob_list = config.prob_list
 
     if export_name == None:
-        export_name = start.name
+        export_name = start.model.name
 
     if seed != None:
         random.seed(seed)
@@ -505,17 +530,17 @@ def ga_main(start:Model,
 
     # generate (per_iter) new models
     offsprings = reproducer.asexual(state.population, prob=prob_list[0], edge_prob=edge_prob)
-    ga.evaluate_offsprings(offsprings, evaluator)
-    state.population.extend(offsprings)
-    state.generated += len(offsprings)
+    new_candidates = ga.new_candidates(offsprings, evaluator)
+    state.population.extend(new_candidates)
+    state.generated += len(new_candidates)
 
     state.population = sort_population(state.population)
     final = state.population[0]
-    print(f"iteration {state.iteration}, generated {state.generated}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
-    if not final.check_constraint():
+    print(f"iteration {state.iteration}, generated {state.generated}, top score {round(final.eval_result.score,1)}/{final.eval_result.max_score} ({round(final.eval_result.score/final.eval_result.max_score*100,1)}%)")
+    if not final.model.check_constraint():
         print("ERROR: model does not follow constraints")
     
-    state.log.append([1, final.score, final.extra_edges, final.complexity])
+    state.log.append([1, final.eval_result.score, final.model.extra_edges, final.model.complexity])
 
     # Export models that exceed the threshold score
     for i in range(export_top):
@@ -531,30 +556,30 @@ def ga_main(start:Model,
     
         # mix the good ones
         mixed_offsprings = reproducer.sexual(state.population)
-        ga.evaluate_offsprings(mixed_offsprings, evaluator)
-        state.population.extend(mixed_offsprings)
-        state.generated += len(mixed_offsprings)
+        new_candidates = ga.new_candidates(mixed_offsprings, evaluator)
+        state.population.extend(new_candidates)
+        state.generated += len(new_candidates)
     
         offsprings = reproducer.asexual(state.population, prob=prob_list[i-1], edge_prob=edge_prob)
-        ga.evaluate_offsprings(offsprings, evaluator)
-        state.population.extend(offsprings)
-        state.generated += len(offsprings)
+        new_candidates = ga.new_candidates(offsprings, evaluator)
+        state.population.extend(new_candidates)
+        state.generated += len(new_candidates)
 
         state.population = sort_population(state.population)
         final = state.population[0]
-        print(f"iteration {i}, generated {state.generated}, top score {round(final.score,1)}/{final.max_score} ({round(final.score/final.max_score*100,1)}%)")
-        if not final.check_constraint():
+        print(f"iteration {i}, generated {state.generated}, top score {round(final.eval_result.score,1)}/{final.eval_result.max_score} ({round(final.eval_result.score/final.eval_result.max_score*100,1)}%)")
+        if not final.model.check_constraint():
             print("ERROR: model does not follow constraints")
         
-        state.log.append([i, final.score, final.extra_edges, final.complexity])
+        state.log.append([i, final.eval_result.score, final.model.extra_edges, final.model.complexity])
 
         # Export models that exceed the threshold score
         for j in range(export_top):
-            state.population[j].name = export_name
-            state.population[j].export(threshold=export_thresh)
+            if state.population[j].eval_result.score > export_thresh:
+                state.population[j].model.export()
 
         # Stop iteration if max score is reached
-        if stop_if_max and state.population[0].score == state.population[0].max_score:
+        if stop_if_max and state.population[0].eval_result.score == state.population[0].eval_result.max_score:
             print("max score reached")
             break
 

@@ -54,7 +54,7 @@ def powerset(iterable:Iterable) -> it.chain:
     return it.chain.from_iterable(it.combinations(s, r) for r in range(len(s)+1))
 
 
-def get_agreement(exps:list[NAVExperiment], predictions:PredictType) -> tuple[AgreeType, float]:
+def get_agreements(exps:list[NAVExperiment], predictions:PredictType) -> tuple[AgreeType, float]:
     """
     Returns attractor agreements when given experimental outcomes and model predictions.
     agreements are categorized by observed node,
@@ -83,13 +83,7 @@ def get_agreement(exps:list[NAVExperiment], predictions:PredictType) -> tuple[Ag
             value : tuple[int, float, str, float, float]
                 data for given fixes - (id, max_score, outcome_value, predict_value, agreement)
 
-    non_hierarchy_score : float
-        non-hierarchy score considering all attractor agreements
-
     """
-
-    non_hierarchy_score = 0
-
     agreements = {}
     for exp in exps:
         id = exp.id
@@ -135,13 +129,44 @@ def get_agreement(exps:list[NAVExperiment], predictions:PredictType) -> tuple[Ag
         
         agreements[observed_node][fixes] = id, max_score, outcome_value, predict_value, agreement
 
-        non_hierarchy_score += max_score * agreement
+    return agreements
 
-    return agreements, non_hierarchy_score
+def get_non_hierarchy_scores(
+    agreements: AgreeType,
+) -> list[EvaluationItemScore]:
+    ID = 0
+    MAX_SCORE = 1
+    AGREEMENT = 4
+
+    results: list[EvaluationItemScore] = []
+
+    for observed_node in agreements:
+        for fixes in agreements[observed_node]:
+
+            base_weight = agreements[observed_node][fixes][MAX_SCORE]
+            agreement = agreements[observed_node][fixes][AGREEMENT]
+
+            # no hierarchy / subset effects
+            score = base_weight * agreement
+
+            results.append(
+                EvaluationItemScore(
+                    id=agreements[observed_node][fixes][ID],
+                    weight=base_weight,
+                    agreement=agreement,
+                    score=score,
+                )
+            )
+
+    return results
 
 
-def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
-                        report:bool=False, file:str='score_report.tsv') -> float:
+def get_hierarchy_scores(
+    agreements: AgreeType,
+    default_sources: dict[str, int],
+    report: bool = False,
+    file: str = 'score_report.tsv'
+) -> list[EvaluationItemScore]:
     """
     Returns model score
     when given attractor agreements
@@ -175,6 +200,7 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
         one point in score means agreement to one perturbation
 
     """
+
     ID = 0
     MAX_SCORE = 1
     OUTCOME_VALUE = 2
@@ -186,49 +212,39 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
         fp.write('id\thierarchy\tfixes\tobserved_node\texperimental_outcome\t')
         fp.write('predict_value\tattractor_agreement\tscore\n')
 
-    score = 0.0
     model_max_score = 0.0
-    
+    results: list[EvaluationItemScore] = []
+
     for observed_node in agreements:
         for fixes in agreements[observed_node]:
-            fixes_dict = {key:value for (key, value) in fixes}
+            fixes_dict = {key: value for (key, value) in fixes}
 
-            # get the hierarchy
             hierarchy = 0
             for node in fixes_dict:
                 if node in default_sources:
-                    # source node value not same as default sources
                     if fixes_dict[node] != default_sources[node]:
                         hierarchy += 1
-                # non source nodes
                 else:
                     hierarchy += 1
 
-            # for given fixes, find the subset fixes
             subset_fixes_set = set()
             for other_fixes in agreements[observed_node]:
-                other_fixes_dict = {key:value for (key, value) in other_fixes}
+                other_fixes_dict = {key: value for (key, value) in other_fixes}
 
                 is_subset = True
                 for node in other_fixes_dict:
-                    # source nodes
                     if node in default_sources:
-                        # source node same as default sources
                         if other_fixes_dict[node] == default_sources[node]:
                             continue
-                        # source node same as in given fixes
                         elif other_fixes_dict[node] == fixes_dict[node]:
                             continue
                         else:
                             is_subset = False
                             break
-                    # non source nodes
                     else:
-                        # the node is not in given fixes
                         if node not in fixes_dict:
                             is_subset = False
                             break
-                        # the node is fixed to same value as in given fixes
                         elif other_fixes_dict[node] == fixes_dict[node]:
                             continue
                         else:
@@ -238,40 +254,44 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
                 if is_subset:
                     subset_fixes_set.add(other_fixes)
 
-            current_score = agreements[observed_node][fixes][MAX_SCORE]
-            model_max_score += agreements[observed_node][fixes][MAX_SCORE]
+            base_weight = agreements[observed_node][fixes][MAX_SCORE]
 
+            current_score = base_weight
             for subset_fixes in subset_fixes_set:
                 current_score *= agreements[observed_node][subset_fixes][AGREEMENT]
 
-            score += current_score
-                
+            results.append(
+                EvaluationItemScore(
+                    id=agreements[observed_node][fixes][ID],
+                    weight=base_weight,
+                    agreement=agreements[observed_node][fixes][AGREEMENT],
+                    score=current_score,
+                )
+            )
+
             if report:
-                fp.write(str(agreements[observed_node][fixes][ID]) + '\t') # type: ignore
-                # TODO: fix reporting hierarchy number
-                fp.write(str(hierarchy) + '\t') # type: ignore
+                fp.write(str(agreements[observed_node][fixes][ID]) + '\t')
+                fp.write(str(hierarchy) + '\t')
                 for fix in fixes:
-                    fp.write(str(fix[0]) + '=' + str(fix[1]) + ',') # type: ignore
-                fp.write('\t') # type: ignore
-                fp.write(str(observed_node) + '\t') # type: ignore
-                fp.write(str(agreements[observed_node][fixes][OUTCOME_VALUE]) + '\t') # type: ignore
-                fp.write(str(round(agreements[observed_node][fixes][PREDICT_VALUE],3)) + '\t') # type: ignore
-                fp.write(str(round(agreements[observed_node][fixes][AGREEMENT],3)) + '\t') # type: ignore
-                fp.write(str(round(current_score,3)) + '\n') # type: ignore
+                    fp.write(str(fix[0]) + '=' + str(fix[1]) + ',')
+                fp.write('\t')
+                fp.write(str(observed_node) + '\t')
+                fp.write(str(agreements[observed_node][fixes][OUTCOME_VALUE]) + '\t')
+                fp.write(str(round(agreements[observed_node][fixes][PREDICT_VALUE], 3)) + '\t')
+                fp.write(str(round(agreements[observed_node][fixes][AGREEMENT], 3)) + '\t')
+                fp.write(str(round(current_score, 3)) + '\n')
 
-            # print("Adding ", current_score)
-            # print("- - - - - - - - - -")
-            
-    # print("Total ", score, "/", model_max_score)
     if report:
-        fp.write('total\t' + str(score) + '\n') # type: ignore
-        fp.write('max\t' + str(model_max_score) + '\n') # type: ignore
-        fp.write('per\t' + str(score/model_max_score*100) + '%\n') # type: ignore
+        total_score = sum(r.score for r in results)
+        model_max_score = sum(r.weight for r in results)
+        fp.write('total\t' + str(total_score) + '\n')
+        fp.write('max\t' + str(model_max_score) + '\n')
+        fp.write('per\t' + str(total_score / model_max_score * 100) + '%\n')
 
-    return score
+    return results
 
 
-def get_phenotype_score(
+def get_phenotype_scores(
     experiments: list[PhenotypeExperiment],
     predictions: list[PhenotypePrediction],
 ) -> list[EvaluationItemScore]:
@@ -339,10 +359,10 @@ def get_model_score(
     return max_score, total_score
 
 
-def get_NAV_score(
+def get_NAV_scores(
     exps:list[NAVExperiment],
     predictions,
-    default_sources,
+    default_sources:dict={},
     hierarchy:bool=True,
     report:bool=False,
     file:str="score_report.tsv"):
@@ -362,14 +382,11 @@ def get_NAV_score(
         one point in score means agreement to one perturbation
     
     """
-    max_score = 0.0
-    for exp in exps:
-        max_score += exp.weight
-    agreements, non_hierarchy_score = get_agreement(exps, predictions)
+    agreements = get_agreements(exps, predictions)
 
     if hierarchy:
-        score = get_hierarchy_score(agreements, default_sources, report=report, file=file)
+        scores = get_hierarchy_scores(agreements, default_sources, report=report, file=file)
     else:
-        score = non_hierarchy_score
+        scores = get_non_hierarchy_scores(agreements)
 
-    return max_score, score
+    return scores
