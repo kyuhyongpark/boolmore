@@ -3,6 +3,7 @@ import csv
 from boolmore.io.export import export_phenotype_results
 from boolmore.core.experiment import PhenotypeExperiment
 from boolmore.core.prediction import PhenotypePrediction
+from boolmore.eval.score import EvaluationItemScore
 
 
 def test_export_phenotype_results(tmp_path):
@@ -22,13 +23,18 @@ def test_export_phenotype_results(tmp_path):
         phenotype=(("P", 1),),
         found_phenotypes=[],
         predicted_exists=True,
+    )
+
+    score_item = EvaluationItemScore(
+        id=1,
+        weight=2.0,
         agreement=1.0,
         score=2.0,
     )
 
     file_path = tmp_path / "results.csv"
 
-    export_phenotype_results([exp], [pred], str(file_path))
+    export_phenotype_results([exp], [pred], [score_item], str(file_path))
 
     assert file_path.exists()
 

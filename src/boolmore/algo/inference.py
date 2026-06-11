@@ -63,16 +63,8 @@ def get_phenotype_prediction(
         if debug:
             print(f"\nExperiment {exp.id}")
 
-        result = PhenotypePrediction(
-            id=exp.id,
-            perturbation=exp.perturbation,
-            sources=exp.sources,
-            phenotype=exp.phenotype,
-            found_phenotypes=[],
-            predicted_exists=False,
-            agreement=0.0,
-            score=0.0,
-        )
+        found_phenotypes = []
+        predicted_exists = False
 
         # check cache
         t0 = perf_counter()
@@ -97,8 +89,8 @@ def get_phenotype_prediction(
                         for node in phenotype
                     )
                 ):
-                    result.found_phenotypes.append(max_trap)
-                    result.predicted_exists = True
+                    found_phenotypes.append(max_trap)
+                    predicted_exists = True
                     break
 
         if debug:
@@ -107,9 +99,19 @@ def get_phenotype_prediction(
                 f"{perf_counter() - t0:.6f} s"
             )
 
-        if result.predicted_exists:
+        if predicted_exists:
             if debug:
                 print("  cache hit (found_phenotypes)")
+
+            result = PhenotypePrediction(
+                id=exp.id,
+                perturbation=exp.perturbation,
+                sources=exp.sources,
+                phenotype=exp.phenotype,
+                found_phenotypes=found_phenotypes,
+                predicted_exists=predicted_exists,
+            )
+            
             results.append(result)
             continue
 
@@ -128,12 +130,6 @@ def get_phenotype_prediction(
                 if node not in primes:
                     raise ValueError(f"{node} is not in the model")
 
-            # perc_primes = percolate(
-            #     primes,
-            #     add_constants=perturbation,
-            #     remove_constants=False,
-            #     copy=True,
-            # )
                 if perturbation[node] == 0:
                     perc_primes[node] = [[{}],[]]
                 else:
@@ -170,9 +166,18 @@ def get_phenotype_prediction(
             )
 
         if max_traps:
-            result.found_phenotypes += max_traps
-            result.predicted_exists = True
+            found_phenotypes += max_traps
+            predicted_exists = True
             traps_cache[exp.perturbation] += max_traps
+
+        result = PhenotypePrediction(
+            id=exp.id,
+            perturbation=exp.perturbation,
+            sources=exp.sources,
+            phenotype=exp.phenotype,
+            found_phenotypes=found_phenotypes,
+            predicted_exists=predicted_exists,
+        )
 
         results.append(result)
 

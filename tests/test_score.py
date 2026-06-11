@@ -1,6 +1,6 @@
 import pytest
 
-from boolmore.eval.score import get_phenotype_score
+from boolmore.eval.score import get_phenotype_score, get_model_score
 from boolmore.core.experiment import PhenotypeExperiment
 from boolmore.core.prediction import PhenotypePrediction
 
@@ -22,14 +22,13 @@ def test_get_phenotype_score_match():
         phenotype=(),
         found_phenotypes=[],
         predicted_exists=True,
-        agreement=0.0,
-        score=0.0,
     )
 
-    max_score, score = get_phenotype_score([exp], [pred])
+    scores = get_phenotype_score([exp], [pred])
+    max_score, score = get_model_score(scores)
 
-    assert pred.agreement == 1.0
-    assert pred.score == 2.0
+    assert scores[0].agreement == 1.0
+    assert scores[0].score == 2.0
     assert max_score == 2.0
     assert score == 2.0
 
@@ -51,14 +50,13 @@ def test_get_phenotype_score_mismatch():
         phenotype=(),
         found_phenotypes=[],
         predicted_exists=True,
-        agreement=0.0,
-        score=0.0,
     )
 
-    max_score, score = get_phenotype_score([exp], [pred])
+    scores = get_phenotype_score([exp], [pred])
+    max_score, score = get_model_score(scores)
 
-    assert pred.agreement == 0.0
-    assert pred.score == 0.0
+    assert scores[0].agreement == 0.0
+    assert scores[0].score == 0.0
     assert max_score == 3.0
     assert score == 0.0
 
@@ -80,8 +78,6 @@ def test_get_phenotype_score_missing_id():
         phenotype=(),
         found_phenotypes=[],
         predicted_exists=True,
-        agreement=0.0,
-        score=0.0,
     )
 
     with pytest.raises(ValueError):

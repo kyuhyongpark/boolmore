@@ -2,12 +2,14 @@ import csv
 
 from boolmore.core.experiment import PhenotypeExperiment
 from boolmore.core.prediction import PhenotypePrediction
+from boolmore.eval.score import EvaluationItemScore
 from boolmore.core.conversions import assignment_to_dict
 
 
 def export_phenotype_results(
     experiments: list[PhenotypeExperiment],
     predictions: list[PhenotypePrediction],
+    score_items: list[EvaluationItemScore],
     filename: str,
 ) -> None:
     """
@@ -16,6 +18,7 @@ def export_phenotype_results(
     Experiments and Predictions are matched by their id.
     """
     pred_by_id = {pred.id: pred for pred in predictions}
+    score_by_id = {score_item.id: score_item for score_item in score_items}
 
     headers = [
         "id",
@@ -34,9 +37,12 @@ def export_phenotype_results(
 
     for exp in experiments:
         pred = pred_by_id.get(exp.id)
+        score_item = score_by_id.get(exp.id)
         if pred is None:
             raise ValueError(f"No Prediction found for Experiment id={exp.id}")
-
+        if score_item is None:
+            raise ValueError(f"No Score found for Experiment id={exp.id}")
+        
         row = {
             "id": exp.id,
             "perturbation": assignment_to_dict(exp.perturbation),
@@ -44,9 +50,9 @@ def export_phenotype_results(
             "phenotype": assignment_to_dict(exp.phenotype),
             "expected_exists": exp.expected_exists,
             "predicted_exists": pred.predicted_exists,
-            "agreement": pred.agreement,
+            "agreement": score_item.agreement,
             "weight": exp.weight,
-            "score": pred.score,
+            "score": score_item.score,
             "found_phenotypes": pred.found_phenotypes,
         }
         rows.append(row)

@@ -1,5 +1,6 @@
 import itertools as it
 from collections.abc import Iterable
+from dataclasses import dataclass
 
 from boolmore.core.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.core.prediction import PhenotypePrediction
@@ -10,6 +11,12 @@ ExpType = tuple[int, float, FixesType, str, str]
 PredictType = dict[FixesType, dict[str, float]]
 AgreeType = dict[str, dict[FixesType, tuple[int, float, str, float, float]]]
 
+@dataclass(frozen=True)
+class EvaluationItemScore:
+    id:int
+    weight:float
+    agreement:float
+    score:float
 
 def line(input:float, start:tuple[float, float], end:tuple[float, float]) -> float:
     """
@@ -267,7 +274,7 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
 def get_phenotype_score(
     experiments: list[PhenotypeExperiment],
     predictions: list[PhenotypePrediction],
-) -> tuple[float, float]:
+) -> list[EvaluationItemScore]:
     """
     Update each PhenotypePrediction with its agreement and score.
 
@@ -289,12 +296,9 @@ def get_phenotype_score(
     """
     exp_by_id = {exp.id: exp for exp in experiments}
 
-    missing = []
-    max_score = 0.0
-    score = 0.0
+    scores: list[EvaluationItemScore] = []
 
-    for exp in experiments:
-        max_score += exp.weight
+    missing = []
 
     for pred in predictions:
         exp = exp_by_id.get(pred.id)
@@ -302,18 +306,37 @@ def get_phenotype_score(
             missing.append(pred.id)
             continue
 
-        pred.agreement = (
+        agreement = (
             1.0 if pred.predicted_exists == exp.expected_exists else 0.0
         )
-        pred.score = exp.weight * pred.agreement
-        score += pred.score
+
+        score = exp.weight * agreement
+
+        scores.append(
+            EvaluationItemScore(
+                id=pred.id,
+                weight=exp.weight,
+                agreement=agreement,
+                score=score,
+            )
+        )
 
     if missing:
         raise ValueError(
             f"No Experiment found for Prediction id(s): {missing}"
         )
 
-    return max_score, score
+    return scores
+
+
+def get_model_score(
+    scores: list[EvaluationItemScore],
+) -> tuple[float, float]:
+
+    max_score = sum(s.weight for s in scores)
+    total_score = sum(s.score for s in scores)
+
+    return max_score, total_score
 
 
 def get_NAV_score(
