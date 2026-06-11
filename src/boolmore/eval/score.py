@@ -267,7 +267,7 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
 def get_phenotype_score(
     experiments: list[PhenotypeExperiment],
     predictions: list[PhenotypePrediction],
-) -> None:
+) -> tuple[float, float]:
     """
     Update each PhenotypePrediction with its agreement and score.
 
@@ -277,10 +277,24 @@ def get_phenotype_score(
     score is weight * agreement.
 
     Experiments and Predictions are matched by their id.
+
+    Returns
+    -------
+    max_score : float
+        Sum of the experiment weights.
+
+    score : float
+        Sum of the individual prediction scores.
+    TODO: return or modify input, not do both at the same time.
     """
     exp_by_id = {exp.id: exp for exp in experiments}
 
     missing = []
+    max_score = 0.0
+    score = 0.0
+
+    for exp in experiments:
+        max_score += exp.weight
 
     for pred in predictions:
         exp = exp_by_id.get(pred.id)
@@ -292,11 +306,14 @@ def get_phenotype_score(
             1.0 if pred.predicted_exists == exp.expected_exists else 0.0
         )
         pred.score = exp.weight * pred.agreement
+        score += pred.score
 
     if missing:
         raise ValueError(
             f"No Experiment found for Prediction id(s): {missing}"
         )
+
+    return max_score, score
 
 
 def get_NAV_score(
@@ -307,20 +324,17 @@ def get_NAV_score(
     report:bool=False,
     file:str="score_report.tsv"):
     """
-    Assigns self.score when given experiments.
-    Requires self.predictions to be calculated beforehand.
+    Returns score when given experiments.
+    Requires predictions to be calculated beforehand.
 
     Can be modified to meet the desired criteria.
     
-    Assigns
+    Returns
     -------
-    self.max_score : float
+    max_score : float
         max possible score of the model
 
-    self.non_hierarchy_score : float
-        how well the model agrees with experimental results, ignoring hierarchy
-    
-    self.score : float
+    score : float
         how well the model agrees with experimental results
         one point in score means agreement to one perturbation
     

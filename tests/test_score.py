@@ -26,10 +26,12 @@ def test_get_phenotype_score_match():
         score=0.0,
     )
 
-    get_phenotype_score([exp], [pred])
+    max_score, score = get_phenotype_score([exp], [pred])
 
     assert pred.agreement == 1.0
     assert pred.score == 2.0
+    assert max_score == 2.0
+    assert score == 2.0
 
 
 def test_get_phenotype_score_mismatch():
@@ -53,10 +55,12 @@ def test_get_phenotype_score_mismatch():
         score=0.0,
     )
 
-    get_phenotype_score([exp], [pred])
+    max_score, score = get_phenotype_score([exp], [pred])
 
     assert pred.agreement == 0.0
     assert pred.score == 0.0
+    assert max_score == 3.0
+    assert score == 0.0
 
 
 def test_get_phenotype_score_missing_id():
