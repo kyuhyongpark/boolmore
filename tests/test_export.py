@@ -1,12 +1,12 @@
 import csv
 
 from boolmore.io.export import export_phenotype_results
-from boolmore.core.experiment import Experiment
+from boolmore.core.experiment import PhenotypeExperiment
 from boolmore.core.prediction import PhenotypePrediction
 
 
 def test_export_phenotype_results(tmp_path):
-    exp = Experiment(
+    exp = PhenotypeExperiment(
         id=1,
         perturbation=(("A", 1),),
         sources=(("S", 1),),

@@ -3,7 +3,7 @@ from time import perf_counter
 
 from pyboolnet.trap_spaces import compute_trapspaces_within_subspace, compute_trap_spaces
 
-from boolmore.core.experiment import Experiment, NAVExperiment
+from boolmore.core.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.core.prediction import PhenotypePrediction
 from boolmore.core.conversions import assignment_to_dict
 
@@ -12,7 +12,7 @@ Assignment = tuple[tuple[str, int], ...]
 
 def get_phenotype_prediction(
     primes,
-    experiments: list[Experiment],
+    experiments: list[PhenotypeExperiment],
     debug: bool = False,
 )-> list[PhenotypePrediction]:
     """

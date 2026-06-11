@@ -1,12 +1,12 @@
 import pytest
 
 from boolmore.eval.score import get_phenotype_score
-from boolmore.core.experiment import Experiment
+from boolmore.core.experiment import PhenotypeExperiment
 from boolmore.core.prediction import PhenotypePrediction
 
 
 def test_get_phenotype_score_match():
-    exp = Experiment(
+    exp = PhenotypeExperiment(
         id=1,
         perturbation=(),
         sources=(),
@@ -33,7 +33,7 @@ def test_get_phenotype_score_match():
 
 
 def test_get_phenotype_score_mismatch():
-    exp = Experiment(
+    exp = PhenotypeExperiment(
         id=1,
         perturbation=(),
         sources=(),
@@ -60,7 +60,7 @@ def test_get_phenotype_score_mismatch():
 
 
 def test_get_phenotype_score_missing_id():
-    exp = Experiment(
+    exp = PhenotypeExperiment(
         id=1,
         perturbation=(),
         sources=(),

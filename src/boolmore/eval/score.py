@@ -1,7 +1,7 @@
 import itertools as it
 from collections.abc import Iterable
 
-from boolmore.core.experiment import Experiment, NAVExperiment
+from boolmore.core.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.core.prediction import PhenotypePrediction
 
 
@@ -265,7 +265,7 @@ def get_hierarchy_score(agreements:AgreeType, default_sources:dict[str,int],
 
 
 def get_phenotype_score(
-    experiments: list[Experiment],
+    experiments: list[PhenotypeExperiment],
     predictions: list[PhenotypePrediction],
 ) -> None:
     """

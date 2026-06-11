@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Optional
 from collections import defaultdict
 
-from boolmore.core.experiment import Experiment, NAVExperiment
+from boolmore.core.experiment import PhenotypeExperiment, NAVExperiment
 
 Assignment = tuple[tuple[str, int], ...]
 ExpType = tuple[int, float, Assignment, str, str]
@@ -221,7 +221,7 @@ def parse_assignment_block(block: str, field: str, line_num: int, errors: list[P
 # Main loader
 # -------------------------
 
-def import_phenotypes(location: str) -> list[Experiment]:
+def import_phenotypes(location: str) -> list[PhenotypeExperiment]:
     """
     Import phenotype-based experiments from a csv file.
 
@@ -289,7 +289,7 @@ def import_phenotypes(location: str) -> list[Experiment]:
             - Duplicate experiment ids
             - Duplicate signatures (sources, perturbation, phenotype)
     """
-    experiments: list[Experiment] = []
+    experiments: list[PhenotypeExperiment] = []
     errors: list[ParseError] = []
 
     signatures: dict[Signature, list[int]] = defaultdict(list)
@@ -324,7 +324,7 @@ def import_phenotypes(location: str) -> list[Experiment]:
 
             # Only construct Experiment if core fields are valid
             if None not in (exp_id, weight, expected_exists):
-                exp = Experiment(
+                exp = PhenotypeExperiment(
                     id=exp_id,
                     weight=weight,
                     sources=sources,
@@ -386,7 +386,7 @@ def import_phenotypes(location: str) -> list[Experiment]:
 
     return experiments
 
-def check_phenotypes(primes: dict, experiments: list[Experiment]) -> None:
+def check_phenotypes(primes: dict, experiments: list[PhenotypeExperiment]) -> None:
     """
     Verify that every node appearing in the experiments exists in `primes`.
 

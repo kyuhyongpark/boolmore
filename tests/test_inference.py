@@ -2,7 +2,7 @@ import unittest
 
 from pyboolnet.external.bnet2primes import bnet_text2primes
 
-from boolmore.core.experiment import Experiment
+from boolmore.core.experiment import PhenotypeExperiment
 from boolmore.algo.inference import get_phenotype_prediction
 
 
@@ -21,7 +21,7 @@ class TestGetPhenotypePrediction(unittest.TestCase):
 
     def test_positive_and_negative_prediction(self):
         experiments = [
-            Experiment(
+            PhenotypeExperiment(
                 id=1,
                 perturbation=(),
                 sources=(("A", 1), ("B", 1)),
@@ -29,7 +29,7 @@ class TestGetPhenotypePrediction(unittest.TestCase):
                 weight=1.0,
                 expected_exists=True
             ),
-            Experiment(
+            PhenotypeExperiment(
                 id=2,
                 perturbation=(),
                 sources=(("A", 1), ("B", 0)),
@@ -52,7 +52,7 @@ class TestGetPhenotypePrediction(unittest.TestCase):
 
     def test_perturbation(self):
         experiments = [
-            Experiment(
+            PhenotypeExperiment(
                 id=1,
                 perturbation=(("C", 1),),
                 sources=(("A", 0), ("B", 0)),
@@ -60,7 +60,7 @@ class TestGetPhenotypePrediction(unittest.TestCase):
                 weight=1.0,
                 expected_exists=True
             ),
-            Experiment(
+            PhenotypeExperiment(
                 id=2,
                 perturbation=(("D", 1),),
                 sources=(("A", 1), ("B", 0)),
