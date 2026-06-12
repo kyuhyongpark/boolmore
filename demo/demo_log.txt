@@ -18,25 +18,28 @@
 # extra edges: []
 # score: 50.0 / 50.0 (100.0%)
 # targets,	factors
-# Emx2,	!Pax6 & !Fgf8 & Coup_fti & !Sp8
-# Pax6,	!Emx2 & !Coup_fti & Sp8
-# Fgf8,	!Emx2 & Fgf8 & Sp8
-# Coup_fti,	!Fgf8 & !Sp8
-# Sp8,	!Emx2 & Fgf8
+# Coup_fti,  !Fgf8&!Sp8
+# Emx2,      Coup_fti&!Fgf8&!Pax6&!Sp8
+# Fgf8,      !Emx2&Fgf8&Sp8
+# Pax6,      !Coup_fti&!Emx2&Sp8
+# Sp8,       !Emx2&Fgf8
+# 
+
 
 # START MODEL: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_start.bnet
 # score: 33.958333333333336 / 50.0 (67.91666666666667%)
 # extra edges: []
 # targets,	factors
-# Coup_fti,	!Fgf8
-# Emx2,	Coup_fti & !Fgf8 | !Pax6 | !Sp8
-# Fgf8,	!Emx2 | Sp8
-# Pax6,	!Coup_fti & Sp8 | !Emx2
-# Sp8,	Fgf8
+# Coup_fti,  !Fgf8
+# Emx2,      Coup_fti&!Fgf8 | !Sp8 | !Pax6
+# Fgf8,      Sp8 | !Emx2
+# Pax6,      !Coup_fti&Sp8 | !Emx2
+# Sp8,       Fgf8
+# 
 
-# start_time=datetime.datetime(2026, 6, 10, 17, 9, 55, 264915)
-# end_time=datetime.datetime(2026, 6, 10, 17, 9, 58, 253138)
-# elapsed time: 0:00:02.988223
+# start_time=datetime.datetime(2026, 6, 12, 20, 30, 44, 757517)
+# end_time=datetime.datetime(2026, 6, 12, 20, 30, 49, 560400)
+# elapsed time: 0:00:04.802883
 
 iteration,top score,extra edges,complexity
 1,41.75,"[]",8

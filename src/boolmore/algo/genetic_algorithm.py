@@ -10,6 +10,7 @@ from joblib import Parallel, delayed
 
 import numpy as np
 from pyboolnet.external.bnet2primes import bnet_file2primes
+from pystablemotifs.format import primes2bnet
 
 from boolmore.core.conversions import prime2bnet
 from boolmore.io.load import import_NAV_exps, import_phenotypes
@@ -413,14 +414,18 @@ def run_ga(run_type:str,
     fp.write(f"# BASE: {os.path.abspath(BASE)}\n")
     fp.write(f"# extra edges: {base.model.extra_edges}\n")
     fp.write(f"# score: {base.eval_result.score} / {base.eval_result.max_score} ({base.eval_result.score/base.eval_result.max_score*100}%)\n")
+    fp.write("# targets,\tfactors\n")
+    base_bnet = primes2bnet(base.model.primes)
+    for line in base_bnet.split("\n"):
+        fp.write("# " + line + "\n")
     fp.write(f"\n\n# START MODEL: {os.path.abspath(START_MODEL)}\n")
     if BASE != START_MODEL:
         fp.write(f"# score: {start.eval_result.score} / {start.eval_result.max_score} ({start.eval_result.score/start.eval_result.max_score*100}%)\n")
         fp.write(f"# extra edges: {start.model.extra_edges}\n")
-        with open(START_MODEL, "r") as model_text:
-            for line in model_text:
-                if not line.startswith("#") and not line.isspace():
-                    fp.write("# " + line)
+        fp.write("# targets,\tfactors\n")
+        start_bnet = primes2bnet(start.model.primes)
+        for line in start_bnet.split("\n"):
+            fp.write("# " + line + "\n")
     fp.close()
 
     start_time = datetime.datetime.now()
