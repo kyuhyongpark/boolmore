@@ -1,7 +1,3 @@
-import math
-import itertools as it
-
-
 PrimeType = list[list[dict[str, int]]]
 Assignment = tuple[tuple[str, int], ...]
 

@@ -1,3 +1,4 @@
+import logging
 from collections import defaultdict
 from time import perf_counter
 
@@ -152,12 +153,14 @@ def get_phenotype_prediction(
         # compute max traps
         t0 = perf_counter()
 
+        logging.disable(logging.CRITICAL)
         max_traps = compute_trapspaces_within_subspace(
             perc_primes,
             subspace=subspace,
             type_="max",
             max_output=1,
         )
+        logging.disable(logging.NOTSET)
 
         if debug:
             print(
