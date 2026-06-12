@@ -230,57 +230,31 @@ def get_uni_rr(rr: str, max: bool = True) -> str:
     -------
     uni_rr - unique representation of the rule  : length 2^k binary str
     """
+    rr = rr[::-1]
     n = len(rr)
     
-    # Base case: if the string length is 1 or less (k = 0 regulators),
-    # the rule represents a fixed node configuration and cannot be minimized further.
     if n <= 1:
         return rr
 
-    # Convert the string to a list of characters to allow fast, 
-    # in-place mutations at specific index positions.
     uni_rr = list(rr)
     
-    # Store already visited sub-cube positions in a set to ensure 
-    # instant O(1) lookup speeds and prevent redundant evaluations.
     modified = set()
     fill_value = '1' if max else '0'
 
-    # Iterate through all binary rule configurations in reverse order (from n-1 down to 0).
-    # Processing in reverse ensures that higher-order implicants are evaluated first.
     for i in range(n):
-        # Calculate the actual array index corresponding to the reversed loop variable.
-        rev_idx = n - i - 1
-        
-        # We only evaluate active rule states ('1'). Inactive states ('0') 
-        # do not trigger prime implicant/sub-cube expansions.
-        if uni_rr[rev_idx] != '1':
+        if uni_rr[i] != '1':
             continue
             
-        # Skip this position if it has already been covered and filled 
-        # by a previously processed sub-cube.
         if i in modified:
             continue
 
-        # Scan the entire state space to locate sub-cube coordinates.
-        # Instead of slow string generation, we use low-level bitwise operations.
-        for position in range(n):
-            if position == i:
-                continue
-                
-            # BITWISE LOGIC: (position & i) == i
-            # Checks if 'position' contains a 1 at every single binary slot where 'i' has a 1.
-            # If True, 'position' is mathematically verified to be a sub-cube coordinate
-            # covered by the root implicant 'i'.
+        for position in range(i+1, n):               
             if (position & i) == i:
                 modified.add(position)
                 
-                # Maps the integer position back to its correct index in the output array.
-                target_idx = n - position - 1
-                uni_rr[target_idx] = fill_value
+                uni_rr[position] = fill_value
 
-    # Recombine the character array into the final canonical binary string representation.
-    return ''.join(uni_rr)
+    return ''.join(uni_rr)[::-1]
 
 
 def get_max_irr(rr:str) -> str:
