@@ -2,18 +2,18 @@ import datetime
 import json
 import os
 import random
+import pickle
 from dataclasses import dataclass
 from functools import partial
 from itertools import count
-
 from joblib import Parallel, delayed
+
 import numpy as np
 from pyboolnet.external.bnet2primes import bnet_file2primes
 
 from boolmore.core.conversions import prime2bnet
 from boolmore.io.load import import_NAV_exps, import_phenotypes
 from boolmore.core.model import Model, mix_models
-
 from boolmore.algo.inference import get_NAV_prediction, get_phenotype_prediction
 from boolmore.eval.score import get_NAV_scores, get_phenotype_scores, get_model_score
 
@@ -231,10 +231,10 @@ def run_ga(run_type:str,
     Optional
     --------
     start_model : str | None
-        location of the txt file of the starting model
+        location of the bnet file of the starting model
         if None, base_model is the starting model
     run_name : str | None
-        models are exported as (run_name)_id_gen.txt
+        models are exported as (run_name)_id_gen.bent
         log is exported as (run_name)_log.txt
         if None, takes the start_model name
     data_file : str | None
@@ -336,7 +336,11 @@ def run_ga(run_type:str,
     EXPORT_THRESHOLD = parameters["export_threshold"]
 
     print(f"Loading base model from {os.path.abspath(BASE)}")
-    base_primes = bnet_file2primes(BASE)
+    if BASE.endswith(".bnet"):
+        base_primes = bnet_file2primes(BASE)
+    elif BASE.endswith(".pkl"):
+        with open(BASE, "rb") as f:
+            base_primes = pickle.load(f)
     base_model = Model.import_model(base_primes, constraints=CONSTRAINTS,
                               edge_pool=EDGE_POOL)
     print("Base model loaded.")
@@ -371,9 +375,12 @@ def run_ga(run_type:str,
           Estimated total run time: {(end_single-start_single)*TOTAL_ITERATIONS*PER_ITERATION}""")
     print()
 
-    print(f"Loading starting model from {os.path.abspath(START_MODEL)}")
-    primes = bnet_file2primes(START_MODEL)
-    start_model = Model.import_model(primes, id=0, generation=STARTING_GEN, base=base.model)
+    if START_MODEL == BASE:
+        start_primes = base_primes
+    else:
+        print(f"Loading starting model from {os.path.abspath(START_MODEL)}")
+        start_primes = bnet_file2primes(START_MODEL)
+    start_model = Model.import_model(start_primes, id=0, generation=STARTING_GEN, base=base.model)
     print("Starting model loaded.")
     start_model.name = run_name
     predictions = prediction_fn(start_model.primes, exps)
@@ -406,10 +413,6 @@ def run_ga(run_type:str,
     fp.write(f"# BASE: {os.path.abspath(BASE)}\n")
     fp.write(f"# extra edges: {base.model.extra_edges}\n")
     fp.write(f"# score: {base.eval_result.score} / {base.eval_result.max_score} ({base.eval_result.score/base.eval_result.max_score*100}%)\n")
-    with open(BASE, "r") as base_text:
-        for line in base_text:
-            if not line.startswith("#") and not line.isspace():
-                fp.write("# " + line)
     fp.write(f"\n\n# START MODEL: {os.path.abspath(START_MODEL)}\n")
     if BASE != START_MODEL:
         fp.write(f"# score: {start.eval_result.score} / {start.eval_result.max_score} ({start.eval_result.score/start.eval_result.max_score*100}%)\n")
