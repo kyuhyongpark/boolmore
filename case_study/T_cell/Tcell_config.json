@@ -1,7 +1,6 @@
 {
 "parameters" : {
-    "starting_id": 1,           
-    "starting_gen": 1,
+    "starting_gen": 0,
     "total_iterations": 100,
     "per_iteration": 100,
     "keep": 20,
@@ -12,14 +11,14 @@
     "edge_prob": 0.0
     },
 
-"data" : "./CAD_data.tsv",
+"data" : "./Tcell_data.csv",
 
-"base" : "./CAD.bnet",
+"base" : "./Tcell_primes.pkl",
 
 "default_sources": {},
 
 "constraints": {"fixed": [],
-                "regulates": {
+                "regulate": {
                     "BCL6": ["STAT1", "STAT3", "STAT4", "STAT5", "TBET"],
                     "CD28": ["APC"],
                     "CD4": ["NOTCH1", "RUNX3", "THPOK"],
@@ -45,7 +44,7 @@
                     "IL17": ["FOXP3","NFAT","NFKB","RORGT","STAT1","STAT3","STAT5","STAT6"],
                     "IL18R": ["IL18_e", "STAT4", "STAT6"],
                     "IL1R": ["IL1R1", "IL1_e"],
-                    "IL2": ["FOXP3", "NFAT", "NFKB", "NFkB", "STAT5", "STAT6", "TBET"],
+                    "IL2": ["FOXP3", "NFAT", "NFKB", "STAT5", "STAT6", "TBET"],
                     "IL21": ["BCL6", "CMAF", "NFAT", "STAT3", "STAT4"],
                     "IL21R": ["IL21", "IL21_e"],
                     "IL22": ["CMAF", "NFAT", "STAT1", "STAT3"],
@@ -64,7 +63,7 @@
                     "IL35": ["FOXP3"],
                     "IL36R": ["IL36_e"],
                     "IL4": ["CMAF","FOXP3","GATA3","IRF1","NFAT","RUNX3","STAT1","STAT5","TBET"],
-                    "IL4R": ["IL4", "IL4_e", "SOCS", "SOCS1"],
+                    "IL4R": ["IL4", "IL4_e", "SOCS1"],
                     "IL5": ["CMAF", "FOXP3", "GATA3", "IL33R"],
                     "IL6": ["STAT3"],
                     "IL6R": ["IL6", "IL6_e"],
@@ -95,9 +94,6 @@
                     "THPOK": ["GATA3", "RUNX3", "THPOK"]
                 },
                 "necessary": {
-                    "IL15R": ["IL2RB"],
-                    "IL23R": ["IL12RB1_1"],
-                    "IL4R": ["IL4RA"],
                     "TCR": ["APC"]
                 },
                 "group": {"IL18R":[["IL12_e", "IL18_e"]]},
