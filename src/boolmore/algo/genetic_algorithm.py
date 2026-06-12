@@ -552,8 +552,9 @@ def ga_main(base:Candidate,
 
     # Export models that exceed the threshold score
     for i in range(export_top):
-        state.population[i].name = export_name
-        state.population[i].export(threshold=export_thresh)
+        if state.population[i].eval_result.score > export_thresh:
+            state.population[i].model.name = export_name
+            state.population[i].model.export()
     
     ### Second to last iterations ###
     for i in range(2,total_iter+1):
@@ -584,6 +585,7 @@ def ga_main(base:Candidate,
         # Export models that exceed the threshold score
         for j in range(export_top):
             if state.population[j].eval_result.score > export_thresh:
+                state.population[j].model.name = export_name
                 state.population[j].model.export()
 
         # Stop iteration if max score is reached
