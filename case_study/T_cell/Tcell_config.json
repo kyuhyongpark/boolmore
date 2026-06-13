@@ -65,7 +65,16 @@
                     "TBET": ["BCL6", "TBET"],
                     "TGFBR": ["TGFB", "TGFB_e"]
                 },
-                "necessary": {"TCR": ["APC"]},
+                "necessary": {
+                    "IFNGR_2": ["IFNGR"],
+                    "IFNG_2": ["IFNG"],
+                    "IL2R_2": ["IL2R"],
+                    "IL4R_2": ["IL4R"],
+                    "STAT1_2": ["STAT1"],
+                    "STAT5_2": ["STAT5"],
+                    "TBET_2": ["TBET"],
+                    "TCR": ["APC"]
+                },
                 "group": {"IL18R": [["IL12_e", "IL18_e"]]},
                 "possible_constant": []},
 
