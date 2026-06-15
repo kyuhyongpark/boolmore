@@ -12,6 +12,7 @@ base, start, final, log = run_ga(
     json_file="N10_config.json",
     run_name="N10",
     stop_if_max=False,
+    export_same=True,
     seed=SEED,
     core=3)
 

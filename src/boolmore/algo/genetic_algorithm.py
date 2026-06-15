@@ -457,7 +457,7 @@ def run_ga(run_type:str,
 
     print(f"""
         The algorithm ran for {log[-1][0]} iterations,
-        generating {TOTAL_ITERATIONS*PER_ITERATION} models.
+        generating {log[-1][0]*PER_ITERATION} models.
         Mutated {len(mutated)} functions, 
         and increased score from {round(start_eval.score,2)} / {start_eval.max_score} ({round(start_eval.score/start_eval.max_score*100,1)}%)
         to {round(final.eval_result.score,2)} / {final.eval_result.max_score} ({round(final.eval_result.score/final.eval_result.max_score*100,1)}%).\n

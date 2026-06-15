@@ -1,12 +1,10 @@
 {
 "parameters" : {
     "starting_gen": 0,
-    "total_iterations": 100,
+    "total_iterations": 10,
     "per_iteration": 100,
     "keep": 20,
     "mix":20,
-    "export_top": 1,
-    "export_threshold": 0.0,
     "prob": 0.01,
     "edge_prob": 0.0
     },
