@@ -40,6 +40,8 @@
                     "IL6R": ["IL6_e"],
                     "NFAT": ["CD28", "TCR"],
                     "NFKB": ["FOXP3", "IKB"],
+                    "STAT1": ["IL27R"],
+                    "STAT3": ["IL27R", "IL6R"],
                     "TBET": ["TBET"],
                     "TGFBR": ["TGFB", "TGFB_e"]
                 },

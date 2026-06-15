@@ -1,0 +1,98 @@
+# DATA: /home/kyuhyongpark/Boolmore/boolmore/case_study/T_cell/N10/N10_data.csv
+# DEFAULT_SOURCES={}
+# CONSTRAINTS={'fixed': [], 'regulate': {'CD28': ['APC'], 'FOXP3': ['NFAT', 'RORGT', 'SMAD3', 'STAT5'], 'IFGNR': ['IFNG_e'], 'IFNBR': ['IFNB_e'], 'IFNG': ['RUNX3'], 'IFNGR': ['IFNG', 'IFNG_e'], 'IKB': ['TCR'], 'IL10R': ['IL10', 'IL10_e'], 'IL12R': ['IL12RB2', 'IL12_e'], 'IL15R': ['IL15_e'], 'IL17': ['STAT3', 'STAT5'], 'IL2': ['NFKB'], 'IL21': ['STAT3'], 'IL21R': ['IL21', 'IL21_e'], 'IL23R': ['IL23', 'IL23_e'], 'IL27R': ['IL27_e'], 'IL2R': ['IL2', 'IL2_e'], 'IL2RA': ['NFAT', 'NFKB', 'STAT5'], 'IL4': ['RUNX3', 'TBET'], 'IL4R': ['IL4', 'IL4_e'], 'IL6R': ['IL6_e'], 'NFAT': ['CD28', 'TCR'], 'NFKB': ['FOXP3', 'IKB'], 'STAT1': ['IL27R'], 'STAT3': ['IL27R', 'IL6R'], 'TBET': ['TBET'], 'TGFBR': ['TGFB', 'TGFB_e']}, 'necessary': {'IL2R_2': ['IL2R'], 'IL4R_2': ['IL4R'], 'STAT5_2': ['STAT5'], 'TCR': ['APC']}, 'group': {}, 'possible_constant': []}
+# EDGE_POOL=[]
+
+# TOTAL_ITERATIONS=10
+# PER_ITERATION=100
+# KEEP=20
+# MIX=20
+# PROB=0.01
+# EDGE_PROB=0.0
+
+# stop_if_max=False
+# core=3
+# seed=0
+
+# BASE: /home/kyuhyongpark/Boolmore/boolmore/case_study/T_cell/target_models/N10_BBM155.bnet
+# extra edges: []
+# score: 19.0 / 19.0 (100.0%)
+# targets,	factors
+# APC,            APC
+# CD28,           APC
+# FOXP3,          NFAT&SMAD3&!STAT1&!STAT3&STAT5 | NFAT&!RORGT&SMAD3&!STAT1&STAT5 | FOXP3&NFAT&STAT5
+# GATA3,          STAT6&!TBET | GATA3&!TBET
+# IFNBR,          IFNB_e
+# IFNB_e,         IFNB_e
+# IFNG,           !FOXP3&NFAT&RUNX3&!STAT3&TBET&proliferation | !FOXP3&NFAT&!STAT3&STAT4&proliferation
+# IFNGR,          IFNG_e | IFNG
+# IFNG_e,         IFNG_e
+# IKB,            !TCR
+# IL10,           NFAT&STAT3&proliferation | GATA3&NFAT&proliferation
+# IL10R,          IL10_e | IL10
+# IL10_e,         IL10_e
+# IL12R,          IL12RB1_2&IL12RB2&IL12_e
+# IL12RB1_2,      IRF1
+# IL12RB2,        !STAT6
+# IL12_e,         IL12_e
+# IL15R,          IL15_e
+# IL15_e,         IL15_e
+# IL17,           !FOXP3&NFAT&NFKB&RORGT&!STAT1&STAT3&!STAT5&!STAT6&proliferation
+# IL2,            !FOXP3&NFAT&!STAT6&!TBET | !FOXP3&NFAT&!STAT5&!TBET | !FOXP3&NFAT&!NFKB&!STAT6 | !FOXP3&NFAT&!NFKB&!STAT5 | NFKB&!STAT6&!TBET | NFKB&!STAT5&!TBET
+# IL21,           NFAT&STAT3&proliferation
+# IL21R,          IL21_e | IL21
+# IL21_e,         IL21_e
+# IL23,           NFAT&STAT3&proliferation
+# IL23R,          IL23_e&RORGT&STAT3 | IL23&RORGT&STAT3
+# IL23_e,         IL23_e
+# IL27R,          IL27_e
+# IL27_e,         IL27_e
+# IL2R,           IL2R&IL2R_2 | IL2_e | IL2
+# IL2RA,          NFAT&STAT5 | NFAT&SMAD3 | NFAT&NFKB | FOXP3&NFAT
+# IL2R_2,         IL2R&IL2RA&IL2_e | IL2&IL2R&IL2RA
+# IL2_e,          IL2_e
+# IL4,            !FOXP3&GATA3&!IRF1&NFAT&!TBET&proliferation | !FOXP3&GATA3&!IRF1&NFAT&!RUNX3&proliferation
+# IL4R,           IL4R&IL4R_2 | IL4_e | IL4
+# IL4RA_2,        STAT5&STAT5_2
+# IL4R_2,         IL4R&IL4RA_2&IL4_e | IL4&IL4R&IL4RA_2
+# IL4_e,          IL4_e
+# IL6R,           IL6_e
+# IL6_e,          IL6_e
+# IRF1,           STAT1
+# NFAT,           CD28&TCR
+# NFKB,           !FOXP3&!IKB
+# RORGT,          STAT3&TGFBR | RORGT&TGFBR | RORGT&STAT3
+# RUNX3,          TBET
+# SMAD3,          TGFBR
+# STAT1,          IL27R | IFNGR | IFNBR
+# STAT3,          IL6R | IL27R | IL23R | IL21R | IL10R
+# STAT4,          !GATA3&IL12R
+# STAT5,          STAT5&STAT5_2 | IL4R | IL2R | IL15R
+# STAT5_2,        IL4R&IL4R_2&STAT5 | IL2R&IL2R_2&STAT5
+# STAT6,          IL4R
+# TBET,           !GATA3&TBET | !GATA3&STAT1
+# TCR,            APC
+# TGFB,           FOXP3&NFAT&proliferation
+# TGFBR,          TGFB_e | TGFB
+# TGFB_e,         TGFB_e
+# proliferation,  STAT5&STAT5_2 | proliferation
+# 
+
+
+# START MODEL: /home/kyuhyongpark/Boolmore/boolmore/case_study/T_cell/target_models/N10_BBM155.bnet
+
+# start_time=datetime.datetime(2026, 6, 15, 14, 33, 37, 690733)
+# end_time=datetime.datetime(2026, 6, 15, 14, 35, 5, 180695)
+# elapsed time: 0:01:27.489962
+
+iteration,top score,extra edges,complexity,best_model
+1,19.0,"[]",190,"91_gen1"
+2,19.0,"[]",188,"174_gen2"
+3,19.0,"[]",181,"211_gen4"
+4,19.0,"[]",173,"356_gen6"
+5,19.0,"[]",167,"483_gen8"
+6,19.0,"[]",167,"483_gen8"
+7,19.0,"[]",158,"686_gen11"
+8,19.0,"[]",154,"704_gen12"
+9,19.0,"[]",154,"704_gen12"
+10,19.0,"[]",154,"704_gen12"
