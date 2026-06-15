@@ -1,6 +1,7 @@
 from __future__ import annotations
 import random
 import os
+import pickle
 
 import boolmore.algo.mutation as m
 import boolmore.core.conversions as conv
@@ -276,9 +277,13 @@ class Model():
             
         """
         if file_name == None:
-            file_name = self.name + "_" + str(self.id) + "_gen" + str(self.generation) + ".bnet"
+            file_name = self.name + "_" + str(self.id) + "_gen" + str(self.generation)
+        bnet_file_name = file_name + ".bnet"
+        pkl_file_name = file_name + ".pkl"
 
-        fp = open(file_name, "w")
+
+        # write bnet file
+        fp = open(bnet_file_name, "w")
 
         if details:
             fp.write("# id: " + str(self.id) + "\n")
@@ -294,7 +299,12 @@ class Model():
             fp.write(s + "\n")
         fp.close()
         
-        print("Exported generated model to", os.path.abspath(file_name))
+        # also pickle primes
+        with open(pkl_file_name, "wb") as f:
+            pickle.dump(self.primes, f)
+
+        print("Exported generated model to", os.path.abspath(bnet_file_name))
+        print("Pickled primes to", os.path.abspath(pkl_file_name))
 
 
 def mix_models(model_id:int, model1:Model, model2:Model) -> Model:

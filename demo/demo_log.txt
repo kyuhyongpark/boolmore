@@ -37,9 +37,9 @@
 # Sp8,       Fgf8
 # 
 
-# start_time=datetime.datetime(2026, 6, 15, 11, 35, 37, 648734)
-# end_time=datetime.datetime(2026, 6, 15, 11, 35, 42, 343302)
-# elapsed time: 0:00:04.694568
+# start_time=datetime.datetime(2026, 6, 15, 11, 43, 4, 858790)
+# end_time=datetime.datetime(2026, 6, 15, 11, 43, 9, 408082)
+# elapsed time: 0:00:04.549292
 
 iteration,top score,extra edges,complexity,best_model
 1,41.75,"[]",8,"9_gen1"
