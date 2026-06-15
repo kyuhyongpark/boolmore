@@ -212,6 +212,7 @@ class GeneticAlgorithm:
 def run_ga(run_type:str,
         json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
            data_file:str|None=None, base_file:str|None=None, parameter_dict:dict|None=None,
+           export_top:int=0, export_thresh:float=0.0, export_name:str|None=None, export_same:bool=False,
            stop_if_max:bool=True, core:int=2, seed:int|None = None,
            hierarchy:bool=True,
            )-> tuple[Model, Model, Model, list]:
@@ -290,9 +291,7 @@ def run_ga(run_type:str,
                       "keep" : 2,
                       "mix" : 0,
                       "prob" : 0.1,
-                      "edge_prob" : 0.5,
-                      "export_top" : 0,
-                      "export_threshold" : 0.0}
+                      "edge_prob" : 0.5}
 
         # all source nodes being 0 is considered the default
         DEFAULT_SOURCES = {}
@@ -333,8 +332,6 @@ def run_ga(run_type:str,
     MIX = parameters["mix"]
     PROB = parameters["prob"]
     EDGE_PROB = parameters["edge_prob"]
-    EXPORT_TOP = parameters["export_top"]
-    EXPORT_THRESHOLD = parameters["export_threshold"]
 
     print(f"Loading base model from {os.path.abspath(BASE)}")
     if BASE.endswith(".bnet"):
@@ -435,8 +432,8 @@ def run_ga(run_type:str,
                       stop_if_max=stop_if_max, core=core, seed=seed)
     selector = Selector(config)
     reproducer = Reproducer(config)
-    final, log = ga_main(base, start, evaluator, selector, reproducer, config,
-                         export_top=EXPORT_TOP, export_thresh=EXPORT_THRESHOLD)
+    final, log = ga_main(start, evaluator, selector, reproducer, config,
+                         export_top=export_top, export_thresh=export_thresh, export_name=export_name, export_same=export_same)
     end_time = datetime.datetime.now()
 
     fp = open(LOG, "a")
@@ -445,9 +442,9 @@ def run_ga(run_type:str,
     fp.write(f"# {end_time=}\n")
     fp.write(f"# elapsed time: {end_time-start_time}\n\n")
 
-    fp.write("iteration,top score,extra edges,complexity\n")
+    fp.write("iteration,top score,extra edges,complexity,best_model\n")
     for iter in log:
-        fp.write(f"{iter[0]},{iter[1]},\"{iter[2]}\",{iter[3]}\n")
+        fp.write(f"{iter[0]},{iter[1]},\"{iter[2]}\",{iter[3]},\"{iter[4]}\"\n")
 
     mutated = set()
     for node in start.model.primes:
@@ -478,13 +475,12 @@ def run_ga(run_type:str,
 
     return base, start, final, log
 
-def ga_main(base:Candidate,
-            start:Candidate,
+def ga_main(start:Candidate,
             evaluator:Evaluator,
             selector:Selector,
             reproducer:Reproducer,
             config:GAConfig,
-            export_top:int=0, export_thresh:float=0.0, export_name:str|None=None,
+            export_top:int=0, export_thresh:float=0.0, export_name:str|None=None, export_same:bool=False
             ) -> tuple[Model, list]:
     """
     Main part of the genetic algorithm.
@@ -548,7 +544,8 @@ def ga_main(base:Candidate,
     if not final.model.check_constraint():
         print("ERROR: model does not follow constraints")
     
-    state.log.append([1, final.eval_result.score, final.model.extra_edges, final.model.complexity])
+    final_info = str(final.model.id) + "_gen" + str(final.model.generation)
+    state.log.append([1, final.eval_result.score, final.model.extra_edges, final.model.complexity, final_info])
 
     # Export models that exceed the threshold score
     for i in range(export_top):
@@ -580,7 +577,8 @@ def ga_main(base:Candidate,
         if not final.model.check_constraint():
             print("ERROR: model does not follow constraints")
         
-        state.log.append([i, final.eval_result.score, final.model.extra_edges, final.model.complexity])
+        final_info = str(final.model.id) + "_gen" + str(final.model.generation)
+        state.log.append([i, final.eval_result.score, final.model.extra_edges, final.model.complexity, final_info])
 
         # Export models that exceed the threshold score
         for j in range(export_top):
@@ -592,5 +590,11 @@ def ga_main(base:Candidate,
         if stop_if_max and state.population[0].eval_result.score == state.population[0].eval_result.max_score:
             print("max score reached")
             break
+
+    if export_same:
+        for candidate in state.population:
+            if candidate.eval_result.score == final.eval_result.score:
+                candidate.model.name = export_name
+                candidate.model.export()
 
     return final, state.log
