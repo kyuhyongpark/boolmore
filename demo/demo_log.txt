@@ -9,6 +9,7 @@
 # MIX=2
 # PROB=0.2
 # EDGE_PROB=0.0
+# ORDER_BY=['n_extra_edges', 'n_prime_implicants']
 
 # stop_if_max=True
 # core=2
@@ -37,9 +38,9 @@
 # Sp8,       Fgf8
 # 
 
-# start_time=datetime.datetime(2026, 6, 16, 15, 40, 20, 461635)
-# end_time=datetime.datetime(2026, 6, 16, 15, 40, 25, 335839)
-# elapsed time: 0:00:04.874204
+# start_time=datetime.datetime(2026, 6, 16, 15, 56, 47, 100415)
+# end_time=datetime.datetime(2026, 6, 16, 15, 56, 52, 153288)
+# elapsed time: 0:00:05.052873
 
 iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model
 1,41.75,"[]",8,1,8,"9_gen1"

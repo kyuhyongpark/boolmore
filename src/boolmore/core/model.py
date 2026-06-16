@@ -44,6 +44,7 @@ class Model():
                           [[regulator, target, sign], ...]
 
         n_edges         - number of edges in the model                              :int
+        n_extra_edges   - number of extra edges in the model                        :int
         n_self_edges    - number of self-edges in the model                         :int
         n_prime_implicants - number of prime implicants in the model                 :int
 
@@ -63,6 +64,7 @@ class Model():
         self.rr_dict = {}
         self.extra_edges = []
         self.n_edges = 0
+        self.n_extra_edges = 0
         self.n_self_edges = 0
         self.n_prime_implicants = 0
 
@@ -105,7 +107,6 @@ class Model():
         x.id = id
         x.generation = generation
         x.primes = primes
-        x.get_complexity()
 
         # get constraints, edge pool
         if base == None:
@@ -150,6 +151,10 @@ class Model():
 
         if base == None:
             x.base = x
+
+        x.get_complexity()
+
+        x.check_constraint()
 
         return x
 

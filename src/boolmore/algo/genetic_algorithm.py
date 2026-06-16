@@ -54,16 +54,42 @@ class Candidate:
     model:Model
     eval_result:EvalResult
 
-def sort_population(population: list[Candidate]):
-    population = sorted(population, key=lambda x: (len(x.model.extra_edges), x.model.n_prime_implicants))
-    population = sorted(population, key=lambda x: x.eval_result.score, reverse=True)
+def sort_population(
+    population: list[Candidate],
+    order_by: list[str] | None = None,
+) -> list[Candidate]:
+    """
+    Sort by:
+        1. score (highest first)
+        2. tie-breakers in order_by (lowest first)
+
+    Example:
+        sort_population(pop, ["n_edges"])
+        sort_population(pop, ["n_self_edges", "n_prime_implicants"])
+    """
+    if order_by is None:
+        order_by = []
+
+    for attr in reversed(order_by):
+        population = sorted(
+            population,
+            key=lambda x: getattr(x.model, attr),
+        )
+
+    population = sorted(
+        population,
+        key=lambda x: x.eval_result.score,
+        reverse=True,
+    )
+
     return population
 
 class Selector:
     def __init__(self, config:GAConfig):
         self.keep = config.keep
+        self.order_by = config.order_by
     def select_survivors(self, population:list[Candidate]):
-        population = sort_population(population)
+        population = sort_population(population, self.order_by)
         return population[:self.keep]
 
 def reproduction_bias(population: list[Candidate]):
@@ -77,13 +103,14 @@ class Reproducer:
         self.per_iter = config.per_iter
         self.keep = config.keep
         self.mix = config.mix
+        self.order_by = config.order_by
         self._id_gen = count(start=1)
 
     def get_next_id(self):
         return next(self._id_gen)
 
     def asexual(self, population: list[Candidate], prob, edge_prob)->list[Model]:
-        population = sort_population(population)
+        population = sort_population(population, self.order_by)
         p = reproduction_bias(population)
         # number of offsprings to generate
         # total population should be keep + per_iter
@@ -97,7 +124,7 @@ class Reproducer:
         return offsprings
 
     def sexual(self, population: list[Candidate])->list[Model]:
-        population = sort_population(population)
+        population = sort_population(population, self.order_by)
         p = reproduction_bias(population)
         parents_lst = []
         for j in range(self.mix):
@@ -127,6 +154,9 @@ class GAConfig:
         if given a dict, each value is used as probability starting from each key iteration.
     edge_prob : float
         probability to add/delete extra edge, default 0.5
+    
+    order_by : list[str]
+        list of attributes to sort by
 
     stop_if_max : bool
         if True, stop when the max score is reached. default True
@@ -142,6 +172,8 @@ class GAConfig:
 
     prob: float | dict[int, float]
     edge_prob: float
+
+    order_by: list[str]
     
     stop_if_max: bool
     core: int
@@ -291,7 +323,8 @@ def run_ga(run_type:str,
                       "keep" : 2,
                       "mix" : 0,
                       "prob" : 0.1,
-                      "edge_prob" : 0.5}
+                      "edge_prob" : 0.5,
+                      "order_by" : ["n_extra_edges", "n_prime_implicants"]}
 
         # all source nodes being 0 is considered the default
         DEFAULT_SOURCES = {}
@@ -332,6 +365,7 @@ def run_ga(run_type:str,
     MIX = parameters["mix"]
     PROB = parameters["prob"]
     EDGE_PROB = parameters["edge_prob"]
+    ORDER_BY = parameters["order_by"]
 
     print(f"Loading base model from {os.path.abspath(BASE)}")
     if BASE.endswith(".bnet"):
@@ -402,7 +436,8 @@ def run_ga(run_type:str,
     fp.write(f"# {KEEP=}\n")
     fp.write(f"# {MIX=}\n")
     fp.write(f"# {PROB=}\n")
-    fp.write(f"# {EDGE_PROB=}\n\n")
+    fp.write(f"# {EDGE_PROB=}\n")
+    fp.write(f"# {ORDER_BY=}\n\n")
 
     fp.write(f"# {stop_if_max=}\n")
     fp.write(f"# {core=}\n")
@@ -428,7 +463,7 @@ def run_ga(run_type:str,
     start_time = datetime.datetime.now()
     evaluator = Evaluator(exps=exps, prediction_fn=prediction_fn, score_fn=score_fn)
     config = GAConfig(total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
-                      prob=PROB, edge_prob=EDGE_PROB,
+                      prob=PROB, edge_prob=EDGE_PROB, order_by=ORDER_BY,
                       stop_if_max=stop_if_max, core=core, seed=seed)
     selector = Selector(config)
     reproducer = Reproducer(config)
@@ -517,6 +552,7 @@ def ga_main(start:Candidate,
     stop_if_max = config.stop_if_max
     seed = config.seed
     prob_list = config.prob_list
+    order_by = config.order_by
 
     if export_name == None:
         export_name = start.model.name
@@ -538,7 +574,7 @@ def ga_main(start:Candidate,
     state.population.extend(new_candidates)
     state.generated += len(new_candidates)
 
-    state.population = sort_population(state.population)
+    state.population = sort_population(state.population, order_by)
     final = state.population[0]
     print(f"iteration {state.iteration}, generated {state.generated}, top score {round(final.eval_result.score,1)}/{final.eval_result.max_score} ({round(final.eval_result.score/final.eval_result.max_score*100,1)}%)")
     if not final.model.check_constraint():
@@ -571,7 +607,7 @@ def ga_main(start:Candidate,
         state.population.extend(new_candidates)
         state.generated += len(new_candidates)
 
-        state.population = sort_population(state.population)
+        state.population = sort_population(state.population, order_by)
         final = state.population[0]
         print(f"iteration {i}, generated {state.generated}, top score {round(final.eval_result.score,1)}/{final.eval_result.max_score} ({round(final.eval_result.score/final.eval_result.max_score*100,1)}%)")
         if not final.model.check_constraint():

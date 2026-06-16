@@ -6,7 +6,8 @@
     "keep": 2,
     "mix":2,
     "prob": 0.2,
-    "edge_prob": 0.0
+    "edge_prob": 0.0,
+    "order_by": ["n_extra_edges", "n_prime_implicants"]
     },
 
 "data" : "./CAD_data.tsv",
