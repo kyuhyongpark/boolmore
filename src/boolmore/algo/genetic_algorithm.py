@@ -576,7 +576,14 @@ def ga_main(start:Candidate,
 
     state.population = sort_population(state.population, order_by)
     final = state.population[0]
-    print(f"iteration {state.iteration}, generated {state.generated}, top score {round(final.eval_result.score,1)}/{final.eval_result.max_score} ({round(final.eval_result.score/final.eval_result.max_score*100,1)}%)")
+    print(f"iteration {state.iteration}, ",
+          f"generated {state.generated}, ",
+          f"top score {round(final.eval_result.score,1)}/{final.eval_result.max_score} ",
+          f"({round(final.eval_result.score/final.eval_result.max_score*100,1)}%)",
+          f"extra edges {final.model.extra_edges}, ",
+          f"n edges {final.model.n_edges}, ",
+          f"n self edges {final.model.n_self_edges}, ",
+          f"n prime implicants {final.model.n_prime_implicants}")
     if not final.model.check_constraint():
         print("ERROR: model does not follow constraints")
     
@@ -609,7 +616,14 @@ def ga_main(start:Candidate,
 
         state.population = sort_population(state.population, order_by)
         final = state.population[0]
-        print(f"iteration {i}, generated {state.generated}, top score {round(final.eval_result.score,1)}/{final.eval_result.max_score} ({round(final.eval_result.score/final.eval_result.max_score*100,1)}%)")
+        print(f"iteration {i}, ",
+              f"generated {state.generated}, ",
+              f"top score {round(final.eval_result.score,1)}/{final.eval_result.max_score} ",
+              f"({round(final.eval_result.score/final.eval_result.max_score*100,1)}%)",
+              f"extra edges {final.model.extra_edges}, ",
+              f"n edges {final.model.n_edges}, ",
+              f"n self edges {final.model.n_self_edges}, ",
+              f"n prime implicants {final.model.n_prime_implicants}")
         if not final.model.check_constraint():
             print("ERROR: model does not follow constraints")
         

@@ -149,7 +149,7 @@ def mutate_rr_constraint(regulators:tuple[str, ...], rr:str, base_rr:str, constr
                     break
         
         # node with a self loop should not become a source node
-        elif node in regulators:
+        if node in regulators:
             redo = redo or cons.check_source(regulators, mutated_rr, node)
             # if redo == True:
                 # print('redo to ensure', node, 'is not a source')
