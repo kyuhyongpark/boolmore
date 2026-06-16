@@ -42,8 +42,10 @@ class Model():
         rr_dict         - dictionary of the binary rule representations             :length N dict[str, str]
         extra_edges     - edges from the pool that are present in the model         :list[list[str]]
                           [[regulator, target, sign], ...]
-        complexity      - shows the complexity of the model functions,              :int
-                          by summing the number of prime implicants
+
+        n_edges         - number of edges in the model                              :int
+        n_self_edges    - number of self-edges in the model                         :int
+        n_prime_implicants - number of prime implicants in the model                 :int
 
         """
         self.id = 0
@@ -60,7 +62,9 @@ class Model():
         self.signs_dict = {}
         self.rr_dict = {}
         self.extra_edges = []
-        self.complexity = 0
+        self.n_edges = 0
+        self.n_self_edges = 0
+        self.n_prime_implicants = 0
 
     @classmethod
     def import_model(cls, primes:dict[str, PrimeType], id:int=-1, generation:int=0,
@@ -101,6 +105,7 @@ class Model():
         x.id = id
         x.generation = generation
         x.primes = primes
+        x.get_complexity()
 
         # get constraints, edge pool
         if base == None:
@@ -114,10 +119,6 @@ class Model():
             x.name = base.name
         
         for node in x.primes:
-            # get complexity
-            for prime_implicant in x.primes[node][1]:
-                x.complexity += len(prime_implicant)
-
             # find current regulators and signs
             regulators, rr, signs = conv.prime2rr(x.primes[node])
 
@@ -169,6 +170,21 @@ class Model():
                                     self.constraints, node) and check
         return check
 
+    def get_complexity(self):
+        self.n_edges = 0
+        self.n_self_edges = 0
+        self.n_prime_implicants = 0
+        
+        for node in self.primes:
+            regulators_set = set()
+            for prime_implicant in self.primes[node][1]:
+                self.n_prime_implicants += len(prime_implicant)
+
+                for reg in prime_implicant:
+                    regulators_set.add(reg)
+            self.n_edges += len(regulators_set)
+            if node in regulators_set:
+                self.n_self_edges += 1
 
     def mutate(self, model_id:int, probability:float, edge_prob:float, bias:float=0.5, seed:int|None=None) -> Model:
         """
@@ -247,9 +263,7 @@ class Model():
                 # prime2 = rr2prime(mutated_model.regulators_dict[node], irr, mutated_model.signs_dict[node], inverted = True)
                 # assert prime1 == prime2, "rr and irr lead to different result!"
             
-            # get complexity
-            for prime_implicant in mutated_model.primes[node][1]:
-                mutated_model.complexity += len(prime_implicant)        
+        mutated_model.get_complexity()       
 
         return mutated_model
 
@@ -261,7 +275,9 @@ class Model():
         print("generation: ", self.generation)
         print("extra edges: ", self.extra_edges)
         print("following constraints:", self.check_constraint())
-        print("complexity:", self.complexity)
+        print("number of edges: ", self.n_edges)
+        print("number of self edges: ", self.n_self_edges)
+        print("number of prime implicants: ", self.n_prime_implicants)
 
     def export(self, file_name:str|None=None, details:bool=True):
         """
@@ -291,7 +307,10 @@ class Model():
             fp.write("# extra edges: " + str(self.extra_edges) + "\n")
             # fp.write("# score: " + str(self.score) + " / " + str(self.max_score) + "\n")
             fp.write("# following constraints: " + str(self.check_constraint()) + "\n")
-            fp.write("# complexity: " + str(self.complexity) + "\n\n")
+            fp.write("# number of edges: " + str(self.n_edges) + "\n")
+            fp.write("# number of self edges: " + str(self.n_self_edges) + "\n")
+            fp.write("# number of prime implicants: " + str(self.n_prime_implicants) + "\n\n")
+
         fp.write("targets,\tfactors\n")
         primes = {k:self.primes[k] for k in sorted(self.primes)}
         for k in primes:
@@ -328,14 +347,6 @@ def mix_models(model_id:int, model1:Model, model2:Model) -> Model:
     mixed_model.edge_pool = model1.edge_pool
     mixed_model.name = model1.name
 
-    mixed_model.primes = {}
-    mixed_model.regulators_dict = {}
-    mixed_model.signs_dict = {}    
-    mixed_model.rr_dict = {}
-    mixed_model.extra_edges = []
-
-    mixed_model.complexity = 0
-
     for node in model1.rr_dict:
         # get mutated_rr from rr
         rnd = random.random()
@@ -351,8 +362,6 @@ def mix_models(model_id:int, model1:Model, model2:Model) -> Model:
             if edge[1] == node:
                 mixed_model.extra_edges.append(edge)
 
-        # get complexity
-        for prime_implicant in mixed_model.primes[node][1]:
-            mixed_model.complexity += len(prime_implicant)
+    mixed_model.get_complexity()
 
     return mixed_model

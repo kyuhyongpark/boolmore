@@ -37,14 +37,14 @@
 # Sp8,       Fgf8
 # 
 
-# start_time=datetime.datetime(2026, 6, 15, 11, 43, 4, 858790)
-# end_time=datetime.datetime(2026, 6, 15, 11, 43, 9, 408082)
-# elapsed time: 0:00:04.549292
+# start_time=datetime.datetime(2026, 6, 16, 15, 40, 20, 461635)
+# end_time=datetime.datetime(2026, 6, 16, 15, 40, 25, 335839)
+# elapsed time: 0:00:04.874204
 
-iteration,top score,extra edges,complexity,best_model
-1,41.75,"[]",8,"9_gen1"
-2,43.375,"[]",15,"18_gen3"
-3,44.0,"[]",12,"23_gen4"
-4,45.125,"[]",12,"31_gen5"
-5,47.5,"[]",13,"41_gen7"
-6,50.0,"[]",15,"53_gen8"
+iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model
+1,41.75,"[]",8,1,8,"9_gen1"
+2,43.375,"[]",10,1,15,"18_gen3"
+3,44.0,"[]",10,0,12,"23_gen4"
+4,45.125,"[]",10,1,12,"31_gen5"
+5,47.5,"[]",11,1,13,"41_gen7"
+6,50.0,"[]",13,1,15,"53_gen8"

@@ -55,7 +55,7 @@ class Candidate:
     eval_result:EvalResult
 
 def sort_population(population: list[Candidate]):
-    population = sorted(population, key=lambda x: (len(x.model.extra_edges), x.model.complexity))
+    population = sorted(population, key=lambda x: (len(x.model.extra_edges), x.model.n_prime_implicants))
     population = sorted(population, key=lambda x: x.eval_result.score, reverse=True)
     return population
 
@@ -442,9 +442,9 @@ def run_ga(run_type:str,
     fp.write(f"# {end_time=}\n")
     fp.write(f"# elapsed time: {end_time-start_time}\n\n")
 
-    fp.write("iteration,top score,extra edges,complexity,best_model\n")
+    fp.write("iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model\n")
     for iter in log:
-        fp.write(f"{iter[0]},{iter[1]},\"{iter[2]}\",{iter[3]},\"{iter[4]}\"\n")
+        fp.write(f"{iter[0]},{iter[1]},\"{iter[2]}\",{iter[3]},{iter[4]},{iter[5]},\"{iter[6]}\"\n")
 
     mutated = set()
     for node in start.model.primes:
@@ -509,7 +509,7 @@ def ga_main(start:Candidate,
     final : Candidate
         the final model and its evaluation
     log : list[list[]]
-        [[iteration #, top score, extra_edges, complexity], ...]
+        [[iteration #, top score, extra_edges, n_edges, n_self_edges, n_prime_implicants, best_model], ...]
 
     """
     total_iter = config.total_iter
@@ -545,7 +545,7 @@ def ga_main(start:Candidate,
         print("ERROR: model does not follow constraints")
     
     final_info = str(final.model.id) + "_gen" + str(final.model.generation)
-    state.log.append([1, final.eval_result.score, final.model.extra_edges, final.model.complexity, final_info])
+    state.log.append([1, final.eval_result.score, final.model.extra_edges, final.model.n_edges, final.model.n_self_edges, final.model.n_prime_implicants, final_info])
 
     # Export models that exceed the threshold score
     for i in range(export_top):
@@ -578,7 +578,7 @@ def ga_main(start:Candidate,
             print("ERROR: model does not follow constraints")
         
         final_info = str(final.model.id) + "_gen" + str(final.model.generation)
-        state.log.append([i, final.eval_result.score, final.model.extra_edges, final.model.complexity, final_info])
+        state.log.append([i, final.eval_result.score, final.model.extra_edges, final.model.n_edges, final.model.n_self_edges, final.model.n_prime_implicants, final_info])
 
         # Export models that exceed the threshold score
         for j in range(export_top):

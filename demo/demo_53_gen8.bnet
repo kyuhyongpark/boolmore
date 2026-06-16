@@ -2,7 +2,9 @@
 # generation: 8
 # extra edges: []
 # following constraints: True
-# complexity: 15
+# number of edges: 13
+# number of self edges: 1
+# number of prime implicants: 15
 
 targets,	factors
 Coup_fti,	!Fgf8 & !Sp8
