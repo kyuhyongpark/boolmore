@@ -1,12 +1,13 @@
 {
 "parameters" : {
     "starting_gen": 0,
-    "total_iterations": 10,
+    "total_iterations": 100,
     "per_iteration": 100,
     "keep": 20,
     "mix":20,
     "prob": 0.01,
-    "edge_prob": 0.0
+    "edge_prob": 0.0,
+    "order_by": ["n_self_edges", "n_edges", "n_prime_implicants"]
     },
 
 "data" : "./N10_data.csv",
