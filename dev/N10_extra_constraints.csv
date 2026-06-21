@@ -1,0 +1,69 @@
+regulator,target,constraint,sign,model,direct?,Note
+APC,CD28,regulate,positive,N10,direct,
+APC,TCR,necessary,positive,N10,direct,
+CD28,NFAT,regulate,positive,N10,direct,
+FOXP3,IL2RA,regulate,positive,ChatGPT,direct,"FOXP3 binds regulatory regions of IL2RA, maintaining high-affinity IL-2 receptor expression, reinforcing Treg IL-2 sensitivity."
+FOXP3,NFKB,regulate,negative,N10,direct,
+GATA3,IL4,regulate,positive,ChatGPT,direct,"GATA3 directly binds IL4/IL5/IL13 locus control regions, establishes Th2 cytokine program via chromatin remodeling and enhancer activation."
+IFNB_e,IFNBR,regulate,positive,N10,direct,
+IFNBR,STAT1,regulate,positive,ChatGPT,direct,Canonical type I IFN signaling.
+IFNG,IFNGR,regulate,positive,N10,direct,
+IFNG_e,IFGNR,regulate,positive,N10,direct,
+IFNG_e,IFNGR,regulate,positive,N10,direct,
+IFNGR,STAT1,regulate,positive,ChatGPT,direct,Canonical IFN-γ signaling pathway. Necessary for IFNγ-induced STAT1 activation. Not globally necessary because IFN-I and IL27 also activate STAT1.
+IKB,NFKB,regulate,negative,N10,direct,
+IL10,IL10R,regulate,positive,N10,direct,
+IL10_e,IL10R,regulate,positive,N10,direct,
+IL10R,STAT3,regulate,positive,ChatGPT,direct,Canonical signaling pathway.
+IL12_e,IL12R,regulate,positive,N10,direct,
+IL12RB2,IL12R,regulate,positive,N10,direct,
+IL15_e,IL15R,regulate,positive,N10,direct,
+IL2,IL2R,regulate,positive,N10,direct,
+IL2,IL2R,regulate,positive,N10,direct,
+IL2_e,IL2R,regulate,positive,N10,direct,
+IL2_e,IL2R,regulate,positive,N10,direct,
+IL21,IL21R,regulate,positive,N10,direct,
+IL21_e,IL21R,regulate,positive,N10,direct,
+IL23,IL23R,regulate,positive,N10,direct,
+IL23_e,IL23R,regulate,positive,N10,direct,
+IL23R,STAT3,regulate,positive,ChatGPT,direct,This is the canonical signaling pathway. The receptor directly activates STAT3 through JAKs. Necessary for IL23-induced STAT3 activation. Not for all STAT3 activation.
+IL27_e,IL27R,regulate,positive,N10,direct,
+IL27R,STAT1,regulate,positive,N10,,extra constraints to prevent segmentation
+IL27R,STAT3,regulate,positive,N10,,extra constraints to prevent segmentation
+IL2R,STAT5,regulate,positive,ChatGPT,direct,"Canonical receptor signaling. IL-2R activates STAT5 directly via JAK1/JAK3. IL2R is not globally necessary for STAT5, but IL2R is necessary for IL2-mediated STAT5 activation"
+IL2R,IL2R_2,necessary,positive,N10,,constraint from multi-level
+IL4,IL4R,regulate,positive,N10,direct,
+IL4_e,IL4R,regulate,positive,N10,direct,
+IL4R,IL4R_2,necessary,positive,N10,,constraint from multi-level
+IL6_e,IL6R,regulate,positive,N10,direct,
+IL6R,STAT3,regulate,positive,N10,,extra constraints to prevent segmentation
+NFAT,IL2,necessary,positive,ChatGPT,direct,NFAT directly binds the IL2 promoter/enhancer. NFAT-deficient T cells have a profound defect in IL2 transcription.
+NFAT,IL4,regulate,positive,ChatGPT,direct,NFAT has been shown to bind regulatory elements of the IL4 locus and directly contribute to transcription.
+NFAT,FOXP3,regulate,positive,N10,direct,
+NFAT,IL2RA,regulate,positive,N10,direct,
+NFKB,IL2,regulate,ambiguous,N10,direct,add NFKB_neg so that regulation becomes locally monotonic
+NFKB,IL2RA,regulate,positive,N10,direct,
+RORGT,IL17,necessary,positive,ChatGPT,direct,RORγt directly binds and activates the IL17 locus. This is one of the strongest TF-target relationships in Th17 biology.
+RORGT,IL23R,regulate,positive,ChatGPT,direct,"There is substantial evidence that RORγt directly promotes IL23R transcription, and together with STAT3 forms the core Th17 positive feedback loop."
+RORGT,FOXP3,regulate,negative,N10,direct,
+RUNX3,IFNG,regulate,positive,N10,direct,
+RUNX3,IL4,regulate,negative,N10,direct,
+SMAD3,FOXP3,regulate,positive,N10,direct,
+STAT1,TBET,regulate,positive,ChatGPT,direct,STAT1 directly induces TBX21 downstream of IFN-γ. Losing this removes the canonical Th1 initiation pathway. Required for canonical IFNγ-driven Th1 initiation. Later TBET self-maintains.
+STAT3,IL23,regulate,positive,ChatGPT,direct,Strong evidence that STAT3 directly promotes IL23 (especially IL23A/p19) transcription in T cells and other immune cells.
+STAT3,IL23R,regulate,positive,ChatGPT,direct,"STAT3 directly induces IL23R transcription, forming the Th17 positive feedback loop."
+STAT3,RORGT,regulate,positive,ChatGPT,direct,STAT3 is activated downstream of IL-6/IL-21/IL-23 signaling and directly induces RORC (RORγt) transcription. This is an early lineage-specification step for Th17 differentiation.
+STAT3,IL17,regulate,positive,N10,direct,
+STAT3,IL21,regulate,positive,N10,direct,
+STAT5,FOXP3,regulate,positive,N10,direct,
+STAT5,IL17,regulate,negative,N10,direct,
+STAT5,IL2RA,regulate,positive,N10,direct,
+STAT5,STAT5_2,necessary,positive,N10,,constraint from multi-level
+STAT6,GATA3,regulate,positive,ChatGPT,direct,"STAT6 directly activates GATA3 during Th2 differentiation. Required for initiating canonical Th2 differentiation. Once GATA3 is established, maintenance can become STAT6-independent."
+TBET,IFNG,regulate,positive,ChatGPT,direct,"T-bet directly binds regulatory regions of the IFNG locus, recruits chromatin modifiers, and establishes an open enhancer landscape for IFN-γ transcription in Th1 cells. Acts as lineage-defining TF."
+TBET,IL4,regulate,negative,N10,direct,
+TBET,TBET,regulate,positive,N10,direct,
+TCR,IKB,regulate,negative,N10,direct,
+TCR,NFAT,regulate,positive,N10,direct,
+TGFB,TGFBR,regulate,positive,N10,direct,
+TGFB_e,TGFBR,regulate,positive,N10,direct,

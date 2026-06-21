@@ -9,7 +9,7 @@ SEED = 0
 
 base, start, final, log = run_ga(
     run_type="Phenotype",
-    json_file="N10_config.json",
+    json_file="N10_config_extra.json",
     run_name="N10",
     stop_if_max=False,
     export_same=True,
