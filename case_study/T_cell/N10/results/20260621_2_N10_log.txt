@@ -1,0 +1,189 @@
+# DATA: /home/kyuhyongpark/Boolmore/boolmore/case_study/T_cell/N10/N10_data.csv
+# DEFAULT_SOURCES={}
+# CONSTRAINTS={'fixed': [], 'regulate': {'CD28': ['APC'], 'FOXP3': ['NFAT', 'RORGT', 'SMAD3', 'STAT5'], 'GATA3': ['STAT6'], 'IFGNR': ['IFNG_e'], 'IFNBR': ['IFNB_e'], 'IFNG': ['RUNX3', 'TBET'], 'IFNGR': ['IFNG', 'IFNG_e'], 'IKB': ['TCR'], 'IL10R': ['IL10', 'IL10_e'], 'IL12R': ['IL12RB2', 'IL12_e'], 'IL15R': ['IL15_e'], 'IL17': ['STAT3', 'STAT5'], 'IL2': ['NFKB'], 'IL21': ['STAT3'], 'IL21R': ['IL21', 'IL21_e'], 'IL23': ['STAT3'], 'IL23R': ['IL23', 'IL23_e', 'RORGT', 'STAT3'], 'IL27R': ['IL27_e'], 'IL2R': ['IL2', 'IL2_e'], 'IL2RA': ['FOXP3', 'NFAT', 'NFKB', 'STAT5'], 'IL4': ['GATA3', 'NFAT', 'RUNX3', 'TBET'], 'IL4R': ['IL4', 'IL4_e'], 'IL6R': ['IL6_e'], 'NFAT': ['CD28', 'TCR'], 'NFKB': ['FOXP3', 'IKB'], 'RORGT': ['STAT3'], 'STAT1': ['IFNBR', 'IFNGR', 'IL27R'], 'STAT3': ['IL10R', 'IL23R', 'IL27R', 'IL6R'], 'STAT5': ['IL2R'], 'TBET': ['STAT1', 'TBET'], 'TGFBR': ['TGFB', 'TGFB_e']}, 'necessary': {'IL17': ['RORGT'], 'IL2': ['NFAT'], 'IL2R_2': ['IL2R'], 'IL4R_2': ['IL4R'], 'STAT5_2': ['STAT5'], 'TCR': ['APC']}, 'group': {}, 'possible_constant': []}
+# EDGE_POOL=[]
+
+# TOTAL_ITERATIONS=100
+# PER_ITERATION=100
+# KEEP=20
+# MIX=20
+# PROB=0.01
+# EDGE_PROB=0.0
+# ORDER_BY=['n_self_edges', 'n_edges', 'n_prime_implicants']
+
+# stop_if_max=False
+# core=3
+# seed=2
+
+# BASE: /home/kyuhyongpark/Boolmore/boolmore/case_study/T_cell/target_models/N10_BBM155.bnet
+# extra edges: []
+# score: 18.0 / 19.0 (94.73684210526315%)
+# targets,	factors
+# APC,            APC
+# CD28,           APC
+# FOXP3,          NFAT&SMAD3&!STAT1&!STAT3&STAT5 | NFAT&!RORGT&SMAD3&!STAT1&STAT5 | FOXP3&NFAT&STAT5
+# GATA3,          STAT6&!TBET | GATA3&!TBET
+# IFNBR,          IFNB_e
+# IFNB_e,         IFNB_e
+# IFNG,           !FOXP3&NFAT&RUNX3&!STAT3&TBET&proliferation | !FOXP3&NFAT&!STAT3&STAT4&proliferation
+# IFNGR,          IFNG_e | IFNG
+# IFNG_e,         IFNG_e
+# IKB,            !TCR
+# IL10,           NFAT&STAT3&proliferation | GATA3&NFAT&proliferation
+# IL10R,          IL10_e | IL10
+# IL10_e,         IL10_e
+# IL12R,          IL12RB1_2&IL12RB2&IL12_e
+# IL12RB1_2,      IRF1
+# IL12RB2,        !STAT6
+# IL12_e,         IL12_e
+# IL15R,          IL15_e
+# IL15_e,         IL15_e
+# IL17,           !FOXP3&NFAT&NFKB&RORGT&!STAT1&STAT3&!STAT5&!STAT6&proliferation
+# IL2,            !FOXP3&NFAT&!STAT6&!TBET | !FOXP3&NFAT&!STAT5&!TBET | !FOXP3&NFAT&NFKB&!STAT6 | !FOXP3&NFAT&NFKB&!STAT5 | NFKB&!STAT6&!TBET | NFKB&!STAT5&!TBET
+# IL21,           NFAT&STAT3&proliferation
+# IL21R,          IL21_e | IL21
+# IL21_e,         IL21_e
+# IL23,           NFAT&STAT3&proliferation
+# IL23R,          IL23_e&RORGT&STAT3 | IL23&RORGT&STAT3
+# IL23_e,         IL23_e
+# IL27R,          IL27_e
+# IL27_e,         IL27_e
+# IL2R,           IL2R&IL2R_2 | IL2_e | IL2
+# IL2RA,          NFAT&STAT5 | NFAT&SMAD3 | NFAT&NFKB | FOXP3&NFAT
+# IL2R_2,         IL2R&IL2RA&IL2_e | IL2&IL2R&IL2RA
+# IL2_e,          IL2_e
+# IL4,            !FOXP3&GATA3&!IRF1&NFAT&!TBET&proliferation | !FOXP3&GATA3&!IRF1&NFAT&!RUNX3&proliferation
+# IL4R,           IL4R&IL4R_2 | IL4_e | IL4
+# IL4RA_2,        STAT5&STAT5_2
+# IL4R_2,         IL4R&IL4RA_2&IL4_e | IL4&IL4R&IL4RA_2
+# IL4_e,          IL4_e
+# IL6R,           IL6_e
+# IL6_e,          IL6_e
+# IRF1,           STAT1
+# NFAT,           CD28&TCR
+# NFKB,           !FOXP3&!IKB
+# RORGT,          STAT3&TGFBR | RORGT&TGFBR | RORGT&STAT3
+# RUNX3,          TBET
+# SMAD3,          TGFBR
+# STAT1,          IL27R | IFNGR | IFNBR
+# STAT3,          IL6R | IL27R | IL23R | IL21R | IL10R
+# STAT4,          !GATA3&IL12R
+# STAT5,          STAT5&STAT5_2 | IL4R | IL2R | IL15R
+# STAT5_2,        IL4R&IL4R_2&STAT5 | IL2R&IL2R_2&STAT5
+# STAT6,          IL4R
+# TBET,           !GATA3&TBET | !GATA3&STAT1
+# TCR,            APC
+# TGFB,           FOXP3&NFAT&proliferation
+# TGFBR,          TGFB_e | TGFB
+# TGFB_e,         TGFB_e
+# proliferation,  STAT5&STAT5_2 | proliferation
+# 
+
+
+# START MODEL: /home/kyuhyongpark/Boolmore/boolmore/case_study/T_cell/target_models/N10_BBM155.bnet
+
+# start_time=datetime.datetime(2026, 6, 21, 21, 3, 19, 959722)
+# end_time=datetime.datetime(2026, 6, 21, 21, 23, 40, 367597)
+# elapsed time: 0:20:20.407875
+
+iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model
+1,19.0,"[]",145,20,199,"91_gen1"
+2,19.0,"[]",146,19,211,"180_gen2"
+3,19.0,"[]",142,19,199,"222_gen4"
+4,19.0,"[]",140,18,190,"335_gen7"
+5,19.0,"[]",137,18,191,"464_gen8"
+6,19.0,"[]",137,18,191,"464_gen8"
+7,19.0,"[]",134,18,188,"606_gen12"
+8,19.0,"[]",133,18,186,"765_gen13"
+9,19.0,"[]",132,18,184,"837_gen17"
+10,19.0,"[]",132,18,184,"837_gen17"
+11,19.0,"[]",130,18,188,"1057_gen20"
+12,19.0,"[]",128,18,182,"1120_gen21"
+13,19.0,"[]",126,18,187,"1227_gen22"
+14,19.0,"[]",128,17,182,"1324_gen23"
+15,19.0,"[]",128,17,182,"1324_gen23"
+16,19.0,"[]",122,17,161,"1520_gen25"
+17,19.0,"[]",121,17,171,"1608_gen27"
+18,19.0,"[]",119,17,155,"1777_gen29"
+19,19.0,"[]",117,17,155,"1820_gen31"
+20,19.0,"[]",117,17,155,"1820_gen31"
+21,19.0,"[]",116,17,150,"2019_gen32"
+22,19.0,"[]",115,17,140,"2161_gen35"
+23,19.0,"[]",115,17,140,"2161_gen35"
+24,19.0,"[]",115,17,140,"2161_gen35"
+25,19.0,"[]",115,17,140,"2161_gen35"
+26,19.0,"[]",113,16,140,"2573_gen41"
+27,19.0,"[]",113,16,139,"2615_gen42"
+28,19.0,"[]",113,16,138,"2789_gen42"
+29,19.0,"[]",113,16,138,"2789_gen42"
+30,19.0,"[]",112,16,158,"2964_gen46"
+31,19.0,"[]",112,16,153,"3008_gen47"
+32,19.0,"[]",112,16,136,"3114_gen48"
+33,19.0,"[]",111,16,140,"3238_gen51"
+34,19.0,"[]",110,16,131,"3362_gen52"
+35,19.0,"[]",110,16,131,"3362_gen52"
+36,19.0,"[]",110,16,131,"3362_gen52"
+37,19.0,"[]",108,16,128,"3603_gen53"
+38,19.0,"[]",108,16,128,"3603_gen53"
+39,19.0,"[]",107,16,127,"3818_gen59"
+40,19.0,"[]",107,16,126,"3906_gen61"
+41,19.0,"[]",106,16,128,"4031_gen61"
+42,19.0,"[]",106,16,125,"4129_gen62"
+43,19.0,"[]",106,16,124,"4205_gen63"
+44,19.0,"[]",105,16,120,"4331_gen65"
+45,19.0,"[]",105,16,119,"4412_gen66"
+46,19.0,"[]",105,16,119,"4412_gen66"
+47,19.0,"[]",105,16,118,"4604_gen67"
+48,19.0,"[]",105,16,118,"4604_gen67"
+49,19.0,"[]",105,16,118,"4604_gen67"
+50,19.0,"[]",108,15,121,"4974_gen68"
+51,19.0,"[]",104,15,115,"5005_gen70"
+52,19.0,"[]",104,15,115,"5005_gen70"
+53,19.0,"[]",104,15,115,"5005_gen70"
+54,19.0,"[]",103,15,121,"5355_gen73"
+55,19.0,"[]",103,15,114,"5404_gen74"
+56,19.0,"[]",103,15,114,"5404_gen74"
+57,19.0,"[]",103,15,114,"5404_gen74"
+58,19.0,"[]",103,15,113,"5731_gen77"
+59,19.0,"[]",103,15,113,"5731_gen77"
+60,19.0,"[]",103,15,113,"5731_gen77"
+61,19.0,"[]",103,15,113,"5731_gen77"
+62,19.0,"[]",103,15,113,"5731_gen77"
+63,19.0,"[]",103,15,113,"5731_gen77"
+64,19.0,"[]",103,15,113,"5731_gen77"
+65,19.0,"[]",103,15,113,"5731_gen77"
+66,19.0,"[]",102,15,112,"6570_gen80"
+67,19.0,"[]",102,15,112,"6570_gen80"
+68,19.0,"[]",102,15,112,"6570_gen80"
+69,19.0,"[]",102,15,112,"6570_gen80"
+70,19.0,"[]",102,15,111,"6967_gen83"
+71,19.0,"[]",102,15,111,"6967_gen83"
+72,19.0,"[]",102,15,111,"6967_gen83"
+73,19.0,"[]",102,15,111,"6967_gen83"
+74,19.0,"[]",102,15,111,"6967_gen83"
+75,19.0,"[]",102,15,111,"6967_gen83"
+76,19.0,"[]",102,15,111,"6967_gen83"
+77,19.0,"[]",102,15,111,"6967_gen83"
+78,19.0,"[]",102,15,111,"6967_gen83"
+79,19.0,"[]",102,15,111,"6967_gen83"
+80,19.0,"[]",102,15,111,"6967_gen83"
+81,19.0,"[]",102,15,111,"6967_gen83"
+82,19.0,"[]",102,15,111,"6967_gen83"
+83,19.0,"[]",101,15,110,"8237_gen88"
+84,19.0,"[]",101,15,110,"8237_gen88"
+85,19.0,"[]",101,15,110,"8237_gen88"
+86,19.0,"[]",101,15,109,"8524_gen91"
+87,19.0,"[]",101,15,108,"8602_gen92"
+88,19.0,"[]",101,15,107,"8717_gen92"
+89,19.0,"[]",101,15,107,"8717_gen92"
+90,19.0,"[]",101,15,107,"8717_gen92"
+91,19.0,"[]",101,15,107,"8717_gen92"
+92,19.0,"[]",101,15,107,"8717_gen92"
+93,19.0,"[]",101,15,107,"8717_gen92"
+94,19.0,"[]",101,15,107,"8717_gen92"
+95,19.0,"[]",101,15,107,"8717_gen92"
+96,19.0,"[]",101,15,107,"8717_gen92"
+97,19.0,"[]",101,15,107,"8717_gen92"
+98,19.0,"[]",101,15,107,"8717_gen92"
+99,19.0,"[]",101,15,107,"8717_gen92"
+100,19.0,"[]",101,15,107,"8717_gen92"
