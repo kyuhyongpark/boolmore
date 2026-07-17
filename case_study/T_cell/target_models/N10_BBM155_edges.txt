@@ -7,6 +7,7 @@ IL2R -> IL2R
 IL2 -> IL2R
 IL2_e -> IL2R_2
 IL2R -> IL2R_2
+IL2R_2 -> IL2R
 IL2RA -> IL2R_2
 IL2 -> IL2R_2
 IL4_e -> IL4R
@@ -24,7 +25,6 @@ IL12_e -> IL12R
 IL12RB1_2 -> IL12R
 IL12RB2 -> IL12R
 IL15_e -> IL15R
-IL15R -> IL15R
 IL21_e -> IL21R
 IL21 -> IL21R
 IL23_e -> IL23R
@@ -134,8 +134,3 @@ STAT6 -| IL17
 proliferation -> IL17
 NFKB -> IL17
 RORGT -> IL17
-
- 
-
-
-

@@ -118,9 +118,9 @@ IFNBR,STAT1,positive,M06,1,regulates,direct,,"STAT1 directly docks onto phosphor
 IFNBR,STAT1,positive,MSM,1,regulates,direct ,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
 IFNBR,STAT1,positive,MX,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
 IFNBR,STAT1,positive,N10,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
-IFNG,GATA3,negative,MS15,3,,indirect,,IFNG->IFNGR->JAK1->STAT1->TBET-|GATA3
-IFNG,IFNG,positive,M06,3,,indirect,,IFNG->IFNGR->JAK1->STAT1->TBET->IFNG
-IFNG,IFNG,positive,MS15,3,,indirect,,IFNG->IFNGR->JAK1->STAT1->TBET->IFNG
+IFNG,GATA3,negative,MS15,3,,indirect,,"causal effect, mediated by IFNGR, STAT1, TBET"
+IFNG,IFNG,positive,M06,3,,indirect,,"feedback loop, IFNG->IFNGR->STAT1->TBET->IFNG"
+IFNG,IFNG,positive,MS15,3,,indirect,,"feedback loop, IFNG->IFNGR->STAT1->TBET->IFNG"
 IFNG,IFNG_2,positive,M06,0,necessary,,,reaching a higher level necessitates achieving the lower level first
 IFNG,IFNGR,positive,AJ,1,regulates,direct ,,ligand-receptor binding
 IFNG,IFNGR,positive,M06,1,regulates,direct,main text,ligand-receptor binding
@@ -128,44 +128,44 @@ IFNG,IFNGR,positive,MSM,1,regulates,direct,,ligand-receptor binding
 IFNG,IFNGR,positive,MX,1,regulates,direct ,,ligand-receptor binding
 IFNG,IFNGR,positive,N10,1,regulates,direct,,ligand-receptor binding
 IFNG,IFNGR,positive,P18,1,regulates,direct,,ligand-receptor binding
-IFNG,IFNGR_2,positive,M06,,,,,
-IFNG,IL10,positive,MS15,3,,,,
-IFNG,IL2,negative,MS15,3,,indirect,,IFNG->IFNGR->JAK1->STAT1->TBET-|IL2
-IFNG,IL21,negative,MS15,3?,,indirect,,IFNG->IFNGR->JAK1->STAT1->TBET-|BCL6->IL21
-IFNG,IL4,negative,MS15,3?,,indirect,,IFNG->IFNGR->JAK1->STAT1->TBET-|GATA3->IL4
-IFNG,IL9,negative,MS15,,,,,
-IFNG,STAT6,negative,P18,3?,,indirect,,IFNG->IFNGR->JAK1->STAT1->SOCS1-|STAT6
+IFNG,IFNGR_2,positive,M06,0,necessary,direct,,reaching a higher level necessitates achieving the lower level first
+IFNG,IL10,positive,MS15,3,,indirect,,"causal effect, mediated by IFNGR, STAT1"
+IFNG,IL2,negative,MS15,3,,indirect,,"causal effect, mediated by IFNGR, STAT1, TBET"
+IFNG,IL21,negative,MS15,3,,indirect,,"causal effect, mediated by IFNGR, STAT1, TBET"
+IFNG,IL4,negative,MS15,3,,indirect,,"causal effect, mediated by IFNGR, STAT1, TBET"
+IFNG,IL9,negative,MS15,3,,indirect,,"causal effect, mediated by IFNGR, STAT1, TBET"
+IFNG,STAT6,negative,P18,3,,indirect,,"causal effect, mediated by IFNGR, STAT1, SOCS1"
 IFNG,TBET,negative,P18,-,,wrong,,"assumption, contradicted by known positive feedback loop of IFNG and TBET"
-IFNG,TBET,positive,MS15,3?,,indirect,,IFNG->IFNGR->JAK1->STAT1->TBET
-IFNG_2,IFNG,positive,M06,-,,wrong,,high-level should not activate low-level
+IFNG,TBET,positive,MS15,3,,indirect,,"causal effect, IFNG->IFNGR->STAT1->TBET"
+IFNG_2,IFNG,positive,M06,-,,wrong,,Artifact of the Booleanization; high-level should not activate low-level
 IFNG_2,IFNGR_2,positive,M06,1,regulates,direct,,ligand-receptor binding
-IFNG_e,IFNG,positive,MS15,3?,,indirect,,IFNG_e->IFNGR->JAK1->STAT1->TBET->IFNG
+IFNG_e,IFNG,positive,MS15,3,,indirect,,"causal effect, IFNG_e->IFNGR->STAT1->TBET->IFNG"
 IFNG_e,IFNGR,positive,AJ,1,regulates,direct,,ligand-receptor binding
 IFNG_e,IFNGR,positive,N10,1,regulates,direct,,ligand-receptor binding
 IFNG_e,IFNGR,positive,P18,1,regulates,direct,,ligand-receptor binding
-IFNGR,IFNGR,positive,M06,3,,indirect,,IFNGR->JAK1->STAT1->TBET->IFNG->IFNGR
+IFNGR,IFNGR,positive,M06,3,,indirect,,"causal effect, IFNGR->STAT1->TBET->IFNG->IFNGR"
 IFNGR,IFNGR_2,positive,M06,0,necessary,,,reaching a higher level necessitates achieving the lower level first
 IFNGR,JAK1,positive,MSM,1,regulates,direct,,protein-protein interaction. JAK1 is constitutively bound to the intracellular domain of the IFN-γ receptor complex.
 IFNGR,JAK1,positive,MX,1,regulates,direct,Methods,protein-protein interaction. JAK1 is constitutively bound to the intracellular domain of the IFN-γ receptor complex.
 IFNGR,JAK1,positive,P18,1,regulates,direct,,protein-protein interaction. JAK1 is constitutively bound to the intracellular domain of the IFN-γ receptor complex.
-IFNGR,STAT1,positive,AJ,3,,indirect,,IFNGR->JAK1->STAT1
-IFNGR,STAT1,positive,M06,3,,indirect,,IFNGR->JAK1->STAT1
-IFNGR,STAT1,positive,N10,3,,indirect,,IFNGR->JAK1->STAT1
-IFNGR,STAT1_2,positive,M06,3,,indirect,,the classification of the IFNGR->STAT1 applies
-IFNGR_2,IFNGR,positive,M06,-,,wrong,,high-level should not activate low-level
-IFNGR_2,STAT1_2,positive,M06,,,,,
+IFNGR,STAT1,positive,AJ,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNGR, then is phosphorylated by receptor-bound JAK1 or JAK2."
+IFNGR,STAT1,positive,M06,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
+IFNGR,STAT1,positive,N10,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
+IFNGR,STAT1_2,positive,M06,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNGR, then is phosphorylated by receptor-bound JAK1 or JAK2; the classification of IFNGR->STAT1 applies"
+IFNGR_2,IFNGR,positive,M06,-,,wrong,,Artifact of the Booleanization; high-level should not activate low-level
+IFNGR_2,STAT1_2,positive,M06,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNGR, then is phosphorylated by receptor-bound JAK1 or JAK2; the classification of IFNGR->STAT1 applies"
 IKB,NFKB,negative,AJ,1,regulates,direct,,protein-protein interaction. IκB proteins physically bind NF-κB dimers and inhibit their transcriptional activity.
 IKB,NFKB,negative,N10,1,regulates,direct,,protein-protein interaction. IκB proteins physically bind NF-κB dimers and inhibit their transcriptional activity.
 IL1_e,IL1R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL10,IFNG,negative,MS15,3?,,indirect,,IL10->IL10R->STAT3->BCL6-|TBET->IFNG
-IL10,IL10,positive,MS15,3?,,indirect,,IL10->IL10R->STAT3->IL10
+IL10,IFNG,negative,MS15,3,,indirect,,"causal effect, mediated by IL10R, STAT3, TBET"
+IL10,IL10,positive,MS15,3,,indirect,,"feedback loop, IL10->IL10R->STAT3->IL10"
 IL10,IL10R,positive,AJ,1,regulates,direct,,ligand-receptor binding
 IL10,IL10R,positive,MSM,1,regulates,direct,,ligand-receptor binding
 IL10,IL10R,positive,MX,1,regulates,direct,,ligand-receptor binding
 IL10,IL10R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL10,IL2,negative,MS15,,,,,
-IL10,IL21,negative,MS15,,,,,
-IL10,IL9,positive,MS15,,,,,
+IL10,IL2,negative,MS15,3,,indirect,,"causal effect, mediated by STAT3 and an indirect effect of STAT3 on IL2"
+IL10,IL21,negative,MS15,-,,wrong,,the observed effect is more often positive
+IL10,IL9,positive,MS15,4,,correlation,,IL-10 is often coexpressed with IL-9 in Th9 cells
 IL10_e,IL10,positive,MS15,3,,indirect,,IL10_e->IL10R->STAT3->IL10
 IL10_e,IL10R,positive,AJ,1,regulates,direct,,ligand-receptor binding
 IL10_e,IL10R,positive,N10,1,regulates,direct,,ligand-receptor binding
@@ -179,8 +179,8 @@ IL12_e,IL12R,positive,MX,1,regulates,direct,,ligand-receptor binding
 IL12_e,IL12R,positive,N10,1,regulates,direct,,ligand-receptor binding
 IL12_e,IL12R,positive,P18,1,regulates,direct,,ligand-receptor binding
 IL12_e,IL18R,positive,P18,3,,indirect,,"IL12_e does not bind to IL18R, IL12_e->IL12R->STAT4->IL18R"
-IL12_e,STAT4,positive,P18,3?,,indirect,,IL12_e-> IL12R->STAT4
-IL12_e,TBET,negative,P18,-,,wrong,,"spurious assumed edge, goes against known positive path"
+IL12_e,STAT4,positive,P18,3,,indirect,,causal effect mediated by IL12R
+IL12_e,TBET,negative,P18,-,,wrong,,"spurious assumed edge, contradicted by known positive causal effect"
 IL12R,STAT4,positive,AJ,1,regulates,direct,,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
 IL12R,STAT4,positive,M06,1,regulates,direct,,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
 IL12R,STAT4,positive,MSM,1,regulates,direct,,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
@@ -192,36 +192,35 @@ IL12RB2,IL12R,positive,AJ,0,necessary,direct,,IL12RB2 is one of the two subunits
 IL12RB2,IL12R,positive,N10,0,necessary,direct,,IL12RB2 is one of the two subunits that physically assemble to form the functional IL-12 receptor.
 IL15_e,IL15R,positive,AJ,1,regulates,direct,,ligand-receptor binding
 IL15_e,IL15R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL15R,IL15R,positive,N10,,,,,
 IL15R,STAT5,positive,AJ,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL15R, then is phosphorylated by receptor-bound JAK1 or JAK3."
 IL15R,STAT5,positive,N10,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL15R, then is phosphorylated by receptor-bound JAK1 or JAK3."
-IL17,IL17,positive,P18,,,,,
+IL17,IL17,positive,P18,-,,wrong,,"spurious assumed edge, not supported by experimental evidence"
 IL18_e,IL18R,positive,AJ,1,regulates,direct,,ligand-receptor binding
 IL18_e,IL18R,positive,M06,1,regulates,direct,,ligand-receptor binding
 IL18_e,IL18R,positive,MSM,1,regulates,direct,,ligand-receptor binding
 IL18_e,IL18R,positive,MX,1,regulates,direct,,ligand-receptor binding
 IL18_e,IL18R,positive,P18,1,regulates,direct ,,ligand-receptor binding 
-IL18R,IFNG,positive,AJ,3,,indirect,,IL18R->IRAK->NFKB->IFNG
+IL18R,IFNG,positive,AJ,3,,indirect,,"causal effect, IL18R->IRAK->NFKB->IFNG"
 IL18R,IL10,negative,AJ,-,,wrong,,There is more support for a positive indirect relationship.
 IL18R,IRAK,positive,M06,1,regulate,direct in the network sense,,Activated IL18R recruits the MyD88–IRAK signaling complex.
 IL18R,IRAK,positive,MSM,1,regulates,direct in the network sense,,Activated IL18R recruits the MyD88–IRAK signaling complex.
 IL18R,IRAK,positive,MX,1,regulates,direct in the network sense,,Activated IL18R recruits the MyD88–IRAK signaling complex.
 IL18R,IRAK,positive,P18,1,regulates,direct in the network sense,,Activated IL18R recruits the MyD88–IRAK signaling complex.
-IL1R,STAT3,positive,AJ,3,,indirect,,"Long pathway mediated by MyD88, IRAK, MAPK signaling, NFKB"
+IL1R,STAT3,positive,AJ,3,,indirect,,"causal effect mediated by MyD88, IRAK, MAPK signaling, NFKB"
 IL1R1,IL1R,positive,AJ,0,necessary,direct,,IL1R1 is the ligand-binding subunit of the functional IL-1 receptor complex. Note that this is even stronger than a direct interaction.
-IL2,BCL6,negative,MS15,3?,,indirect,,IL2->IL2R->STAT5-|BCL6
-IL2,FOXP3,positive,MS15,3?,,indirect,,IL2->IL2R->STAT5->FOXP3
-IL2,GATA3,positive,MS15,3?,,indirect,,IL2->IL2R->STAT5->GATA3
-IL2,IL2,positive,MS15,3,,indirect,,IL2->IL2R->STAT5->GATA3-|STAT4->IFNG->IFNGR->JAK1->STAT1->TBET-| IL2
-IL2,IL21,negative,MS15,3?,,indirect,,IL2->IL2R->STAT5-|BCL6->IL21
+IL2,BCL6,negative,MS15,3,,indirect,,"causal effect, IL2->IL2R->STAT5-|BCL6"
+IL2,FOXP3,positive,MS15,3,,indirect,,"causal effect, IL2->IL2R->STAT5->FOXP3"
+IL2,GATA3,positive,MS15,3,,indirect,,"causal effect, IL2->IL2R->STAT5->GATA3"
+IL2,IL2,positive,MS15,3,,indirect,,"causal effect, IL2->IL2R->STAT5->GATA3-|STAT4->IFNG->IFNGR->STAT1->TBET-| IL2"
+IL2,IL21,negative,MS15,3,,indirect,,"causal effect, IL2->IL2R->STAT5-|BCL6->IL21"
 IL2,IL2R,positive,AJ,1,regulates,direct,,ligand-receptor binding
 IL2,IL2R,positive,N10,1,regulates,direct,,ligand-receptor binding
 IL2,IL2R,positive,P18,1,regulates,direct,,ligand-receptor binding
 IL2,IL2R_2,positive,AJ,1,regulates,direct,,ligand-receptor binding; the same classification as IL2->IL2R
 IL2,IL2R_2,positive,N10,1,regulates,direct,,ligand-receptor binding; the same classification as IL2->IL2R
-IL2,IL4,positive,MS15,3?,,indirect,,IL2->IL2R->STAT5->GATA3->IL4
-IL2,IL9,positive,MS15,,,,,
-IL2_e,IL2,positive,MS15,3?,,indirect,,IL2_e->IL2R->STAT5->GATA3-|STAT4->IFNG->IFNGR->JAK1->STAT1->TBET-| IL2
+IL2,IL4,positive,MS15,3,,indirect,,"causal effect, IL2->IL2R->STAT5->GATA3->IL4"
+IL2,IL9,positive,MS15,3,,indirect,,"causal effect, mediated by STAT5"
+IL2_e,IL2,positive,MS15,3,,indirect,,IL2_e->IL2R->STAT5->GATA3-|STAT4->IFNG->IFNGR->STAT1->TBET-| IL2
 IL2_e,IL2R,positive,AJ,1,regulates,direct,,ligand-receptor binding
 IL2_e,IL2R,positive,MSM,1,regulates,direct,,ligand-receptor binding
 IL2_e,IL2R,positive,N10,1,regulates,direct,,ligand-receptor binding
@@ -285,7 +284,8 @@ IL2R,STAT5,positive,N10,1,regulates,direct,,"STAT5 directly docks onto phosphory
 IL2R,STAT5,positive,P18,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3."
 IL2R,STAT5_2,positive,AJ,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of the IL2R->STAT5 edge."
 IL2R,STAT5_2,positive,N10,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of the IL2R->STAT5 edge."
-IL2R_2,IL2R,positive,AJ,-,,wrong,,high-level should not activate low-level
+IL2R_2,IL2R,positive,AJ,-,,wrong,,This is an artifact of the Booleanization; high-level should not activate low-level.
+IL2R_2,IL2R,positive,N10,-,,wrong,,This is an artifact of the Booleanization; high-level should not activate low-level.
 IL2R_2,STAT5_2,positive,AJ,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of the IL2R->STAT5 edge."
 IL2R_2,STAT5_2,positive,N10,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of the IL2R->STAT5 edge."
 IL2RA,IL2R_2,positive,AJ,,,,,
@@ -315,7 +315,7 @@ IL4_e,IL4R,positive,AJ,1,regulates,direct,,ligand-receptor binding
 IL4_e,IL4R,positive,N10,1,regulates,direct,,ligand-receptor binding
 IL4_e,IL4R,positive,P18,1,regulates,direct,,ligand-receptor binding
 IL4_e,IL4R_2,positive,N10,1,regulates,direct,,ligand-receptor binding; the classification is the same as that of IL4_e->IL4R
-IL4R,IL4R,positive,N10,,,,,
+IL4R,IL4R,positive,N10,-,,wrong,,Artifact of the Booleanization 
 IL4R,IL4R_2,positive,N10,0,necessary,,,reaching a higher level necessitates achieving the lower level first
 IL4R,STAT5,positive,N10,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
 IL4R,STAT5_2,positive,N10,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of IL4R->STAT5."
@@ -323,9 +323,9 @@ IL4R,STAT6,positive,AJ,1,regulates,direct,,"STAT6 directly docks onto phosphoryl
 IL4R,STAT6,positive,M06,1,regulates,direct,,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
 IL4R,STAT6,positive,MSM,1,regulates,direct,,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
 IL4R,STAT6,positive,MX,1,regulates,direct,,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
-IL4R,STAT6,positive,N10,2,regulates,can be considered direct,,STAT6 activation is mediated by JAK1 or JAK3. None of the models has a higher resolution.
-IL4R,STAT6,positive,P18,2,regulates,can be considered direct,,STAT6 activation is mediated by JAK1 or JAK3. None of the models has a higher resolution.
-IL4R_2,IL4R,positive,N10,-,,wrong,,high-level should not activate low-level
+IL4R,STAT6,positive,N10,1,regulates,direct,,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
+IL4R,STAT6,positive,P18,1,regulates,direct,,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
+IL4R_2,IL4R,positive,N10,-,,wrong,,This is an artifact of the Booleanization; high-level should not activate low-level
 IL4R_2,STAT5_2,positive,N10,1?,regulates?,direct in the network sense?,,STAT5 activation is mediated by JAK1 or JAK3. None of the models has a higher resolution.?
 IL4RA_2,IL4R_2,positive,N10,,,,,
 IL6,IL6R,positive,AJ,1,regulates,direct,,ligand-receptor binding
@@ -341,7 +341,7 @@ IL6R,STAT3,positive,AJ,3?,,indirect,,IL6R->JAK3->STAT3
 IL6R,STAT3,positive,N10,3?,,indirect,,IL6R->JAK3->STAT3
 IL6R,STAT3,positive,P18,3?,,indirect,,IL6R->JAK3->STAT3
 IL7_e,IL7R,positive,MSM,1,regulates,direct,,ligand-receptor binding
-IL7R,STAT5,positive,MSM,2,regulates,can be considered direct,,Mediated by JAK1 or JAK3. 
+IL7R,STAT5,positive,MSM,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL7R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
 IL9,IFNG,negative,MS15,,,,,
 IL9,IL21,negative,MS15,,,,,
 IL9,TBET,negative,MS15,,,,,
@@ -479,8 +479,8 @@ SOCS1,IL4R,negative,MX,-,,wrong,,"Unsupported assumption. SOCS1 strongly reduces
 SOCS1,IL4R,negative,P18,-,,wrong,,"Unsupported assumption. SOCS1 strongly reduces IL-4-induced JAK1 and STAT6 activation, thereby suppressing IL-4 responses. But it does not affect IL4R itself."
 SOCS1,JAK1,negative,MX,1,regulates,direct,,protein-protein interaction. SOCS1 directly binds the JAK1 kinase domain and inhibits its catalytic activity.
 SOCS1,JAK1,negative,P18,1,regulates,direct,,protein-protein interaction. SOCS1 directly binds the JAK1 kinase domain and inhibits its catalytic activity.
-SOCS1,STAT5,negative,MSM,2,regulates,can be considered direct,,"SOCS1 binds activated JAK1, JAK2, and/or TYK2, and inhibits JAK-STAT signaling"
-SOCS1,STAT6,negative,P18,2,regulates,can be considered direct,,"SOCS1 binds activated JAK1, JAK2, and/or TYK2, and inhibits JAK-STAT signaling"
+SOCS1,STAT5,negative,MSM,1,regulates,direct,,"SOCS1 binds activated JAK1, JAK2, and/or TYK2, and inhibits JAK-STAT signaling"
+SOCS1,STAT6,negative,P18,1,regulates,direct,,"SOCS1 binds activated JAK1, JAK2, and/or TYK2, and inhibits JAK-STAT signaling"
 ST2,IL33R,positive,AJ,,,,,
 STAT1,BCL6,positive,AJ,3,regulate,indirect,,likely mediated by STAT3
 STAT1,FOXP3,negative,AJ,3,regulate,indirect,,STAT1->TBET-|FOXP3
@@ -570,7 +570,6 @@ STAT5,IL4RA_2,positive,N10,,,,,
 STAT5,proliferation,positive,AJ,1,regulates,direct in the network sense,,STAT5 activates the transcription of cell cycle genes such as Cyclin D2 and MYC.
 STAT5,proliferation,positive,N10,1,regulates,direct in the network sense,,STAT5 activates the transcription of cell cycle genes such as Cyclin D2 and MYC.
 STAT5,RUNX3,positive,MSM,1,regulates,direct,,regulation of transcription. STAT5 binds regulatory elements of the Runx3 locus. Constitutively active STAT5 induces Runx3 expression. Loss of IL-7/STAT5 signaling reduces Runx3 expression.
-STAT5,RUNX3,positive,MSM,1,,,,regulation of transcription. STAT5 binds regulatory elements of the Runx3 locus. Constitutively active STAT5 induces Runx3 expression. Loss of IL-7/STAT5 signaling reduces Runx3 expression.
 STAT5,STAT5,positive,AJ,,,,,
 STAT5,STAT5,positive,N10,5,,assumption,,comes from the Booleanization of the original multi-level model
 STAT5,STAT5_2,positive,AJ,0,necessary,,,reaching a higher level necessitates achieving the lower level first
