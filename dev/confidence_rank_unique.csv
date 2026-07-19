@@ -1,0 +1,431 @@
+Regulator,Target,Sign,Model,Confidence Rank,Constraint,Direct
+APC,CD28,positive,"AJ, N10",1,regulates,direct
+APC,TCR,positive,"AJ, N10",1,necessary,direct
+BCL6,GATA3,negative,"AJ, MS15",1,regulates,direct
+BCL6,IFNG,negative,MS15,1,regulates,direct
+BCL6,IFNG_2,negative,MS15,1,regulates,direct
+BCL6,IL21,positive,MS15,1,regulates,direct in the network sense
+BCL6,RORGT,negative,"AJ, MS15",2,,indirect
+BCL6,TBET,negative,"AJ, MS15",1,regulates,direct
+BCL6,TBET_2,negative,"AJ, MS15",1,regulates,direct
+CD28,NFAT,positive,"AJ, N10",1,regulates,direct in the network sense
+CD4,CD4,positive,MSM,4,,assumption
+CD4,RUNX3,negative,MSM,3,,correlation
+CD4,THPOK,positive,MSM,2,,indirect
+CD8,CD8,positive,MSM,4,,assumption
+CD8,RUNX3,positive,MSM,2,,indirect
+CD8,THPOK,negative,MSM,3,,correlation
+CMAF,IL10,positive,AJ,1,regulates,direct
+CMAF,IL13,positive,AJ,2,,indirect
+CMAF,IL21,positive,AJ,1,regulates,direct
+CMAF,IL22,negative,AJ,1,regulates,direct
+CMAF,IL4,positive,AJ,1,regulates,direct
+CMAF,IL5,positive,AJ,2,,indirect
+DLL1,NOTCH1,positive,MSM,1,regulates,direct
+EOMES,GZMB,positive,MSM,1,regulates,direct
+EOMES,IFNG,positive,MSM,1,regulates,direct
+EOMES,IFNG_2,positive,MSM,1,regulates,direct
+EOMES,PRF1,positive,MSM,1,regulates,direct
+FOXP3,FOXP3,positive,"AJ, MS15, MSM, N10",2,,indirect
+FOXP3,GATA3,negative,"MSM, P18",1,regulates,direct
+FOXP3,IFNG,negative,"AJ, N10",2,,indirect
+FOXP3,IFNG_2,negative,"AJ, N10",2,,indirect
+FOXP3,IL13,negative,AJ,2,,indirect
+FOXP3,IL17,negative,"AJ, N10",2,,indirect
+FOXP3,IL2,negative,"AJ, MS15, N10",1,regulates,direct
+FOXP3,IL2RA,positive,"AJ, N10",1,regulates,direct
+FOXP3,IL35,positive,AJ,2,,indirect
+FOXP3,IL4,negative,"AJ, N10",2,,indirect
+FOXP3,IL5,negative,AJ,2,,indirect
+FOXP3,NFAT,negative,P18,1,regulates,direct
+FOXP3,NFKB,negative,"AJ, N10, P18",1,regulates,direct
+FOXP3,RORGT,negative,"AJ, MS15, MSM, P18",1,regulates,direct
+FOXP3,TBET,negative,"MSM, P18",4,,assumption
+FOXP3,TBET_2,negative,"MSM, P18",4,,assumption
+FOXP3,TGFB,positive,"AJ, MS15, MSM, N10",3,,correlation
+FOXP3,THPOK,positive,MSM,4,,assumption
+GATA3,FOXP3,negative,"MSM, P18",2,,indirect
+GATA3,GATA3,positive,"AJ, MS15, MSM, MX, N10, P18",1,regulates,direct
+GATA3,IFNG,negative,MS15,1,regulates,direct
+GATA3,IFNG_2,negative,MS15,1,regulates,direct
+GATA3,IL10,positive,"AJ, MS15, MSM, MX, N10",2,,indirect
+GATA3,IL12R,negative,P18,2,,indirect
+GATA3,IL13,positive,AJ,1,regulates,direct
+GATA3,IL25,positive,AJ,4,,assumption
+GATA3,IL3,positive,AJ,1,regulates,direct
+GATA3,IL4,positive,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct
+GATA3,IL5,positive,AJ,1,regulates,direct
+GATA3,RORGT,negative,"MS15, MSM, P18",1,regulates,direct in the network sense
+GATA3,ST2,positive,AJ,1,regulates,direct
+GATA3,STAT4,negative,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+GATA3,TBET,negative,"M06, MS15, MSM, MX, N10",1,regulates,direct
+GATA3,TBET_2,negative,"M06, MS15, MSM, MX, N10",1,regulates,direct
+GATA3,THPOK,positive,MSM,1,regulates,direct
+IFNAR,STAT1,positive,AJ,1,regulates,direct
+IFNAR,STAT1_2,positive,AJ,1,regulates,direct
+IFNA_e,IFNAR,positive,AJ,1,regulates,direct
+IFNBR,STAT1,positive,"M06, MSM, MX, N10",1,regulates,direct
+IFNBR,STAT1_2,positive,"MSM, MX, N10",1,regulates,direct
+IFNB_e,IFNAR,positive,AJ,1,regulates,direct
+IFNB_e,IFNBR,positive,"M06, MSM, MX, N10",1,regulates,direct
+IFNG,GATA3,negative,MS15,2,,indirect
+IFNG,IFNG,positive,"M06, MS15",2,,indirect
+IFNG,IFNGR,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IFNG,IFNGR_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IFNG,IFNG_2,positive,"M06, MS15",0,necessary,
+IFNG,IL10,positive,MS15,2,,indirect
+IFNG,IL2,negative,MS15,2,,indirect
+IFNG,IL21,negative,MS15,2,,indirect
+IFNG,IL4,negative,MS15,2,,indirect
+IFNG,IL9,negative,MS15,2,,indirect
+IFNG,STAT6,negative,P18,2,,indirect
+IFNG,TBET,positive,MS15,2,,indirect
+IFNG,TBET_2,positive,MS15,2,,indirect
+IFNGR,IFNGR,positive,M06,2,,indirect
+IFNGR,IFNGR_2,positive,M06,0,necessary,
+IFNGR,JAK1,positive,"MSM, MX, P18",1,regulates,direct
+IFNGR,STAT1,positive,"AJ, M06, N10",1,regulates,direct
+IFNGR,STAT1_2,positive,"AJ, M06, N10",1,regulates,direct
+IFNGR_2,JAK1,positive,"MSM, MX, P18",1,regulates,direct
+IFNGR_2,STAT1,positive,"AJ, N10",1,regulates,direct
+IFNGR_2,STAT1_2,positive,"AJ, M06, N10",1,regulates,direct
+IFNG_2,GATA3,negative,MS15,2,,indirect
+IFNG_2,IFNGR,positive,"AJ, MSM, MX, N10, P18",1,regulates,direct
+IFNG_2,IFNGR_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IFNG_2,IFNG_2,positive,MS15,2,,indirect
+IFNG_2,IL10,positive,MS15,2,,indirect
+IFNG_2,IL2,negative,MS15,2,,indirect
+IFNG_2,IL21,negative,MS15,2,,indirect
+IFNG_2,IL4,negative,MS15,2,,indirect
+IFNG_2,IL9,negative,MS15,2,,indirect
+IFNG_2,STAT6,negative,P18,2,,indirect
+IFNG_2,TBET,positive,MS15,2,,indirect
+IFNG_2,TBET_2,positive,MS15,2,,indirect
+IFNG_e,IFNG,positive,MS15,2,,indirect
+IFNG_e,IFNGR,positive,"AJ, N10, P18",1,regulates,direct
+IFNG_e,IFNGR_2,positive,"AJ, N10, P18",1,regulates,direct
+IFNG_e,IFNG_2,positive,MS15,2,,indirect
+IKB,NFKB,negative,"AJ, N10",1,regulates,direct
+IL10,IFNG,negative,MS15,2,,indirect
+IL10,IFNG_2,negative,MS15,2,,indirect
+IL10,IL10,positive,MS15,2,,indirect
+IL10,IL10R,positive,"AJ, MSM, MX, N10",1,regulates,direct
+IL10,IL2,negative,MS15,2,,indirect
+IL10,IL9,positive,MS15,3,,correlation
+IL10R,STAT3,positive,"MSM, MX, N10",1,regulates,direct
+IL10_e,IL10,positive,MS15,2,,indirect
+IL10_e,IL10R,positive,"AJ, N10",1,regulates,direct
+IL12R,STAT4,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IL12RB1_2,IL12R,positive,N10,0,regulates,direct
+IL12RB2,IL12R,positive,"AJ, N10",0,necessary,direct
+IL12_e,IL12R,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IL12_e,IL18R,positive,P18,2,,indirect
+IL12_e,STAT4,positive,P18,2,,indirect
+IL15R,STAT5,positive,"AJ, N10",1,regulates,direct
+IL15_e,IL15R,positive,"AJ, N10",1,regulates,direct
+IL18R,IFNG,positive,AJ,2,,indirect
+IL18R,IFNG_2,positive,AJ,2,,indirect
+IL18R,IRAK,positive,"M06, MSM, MX, P18",1,regulates,direct in the network sense
+IL18_e,IL18R,positive,"AJ, M06, MSM, MX, P18",1,regulates,direct
+IL1R,STAT3,positive,AJ,2,,indirect
+IL1R1,IL1R,positive,AJ,0,necessary,direct
+IL1_e,IL1R,positive,AJ,1,regulates,direct
+IL2,BCL6,negative,MS15,2,,indirect
+IL2,FOXP3,positive,MS15,2,,indirect
+IL2,GATA3,positive,MS15,2,,indirect
+IL2,IL2,positive,MS15,2,,indirect
+IL2,IL21,negative,MS15,2,,indirect
+IL2,IL2R,positive,"AJ, N10, P18",1,regulates,direct
+IL2,IL2R_2,positive,"AJ, N10, P18",1,regulates,direct
+IL2,IL4,positive,MS15,2,,indirect
+IL2,IL9,positive,MS15,2,,indirect
+IL21,BCL6,positive,MS15,2,,indirect
+IL21,FOXP3,negative,MS15,2,,indirect
+IL21,GATA3,negative,MS15,3,,correlation
+IL21,IFNG,negative,MS15,3,,correlation
+IL21,IFNG_2,negative,MS15,3,,correlation
+IL21,IL10,positive,MS15,2,,indirect
+IL21,IL2,negative,MS15,2,,indirect
+IL21,IL21,positive,MS15,2,,indirect
+IL21,IL21R,positive,"AJ, N10, P18",1,regulates,direct
+IL21,IL9,negative,MS15,3,,correlation
+IL21,RORGT,positive,MS15,2,,indirect
+IL21R,FOXP3,negative,P18,2,,indirect
+IL21R,RORGT,positive,P18,2,,indirect
+IL21R,STAT3,positive,"AJ, N10, P18",1,regulates,direct
+IL21_e,IL21,positive,MS15,2,,indirect
+IL21_e,IL21R,positive,"AJ, N10",1,regulates,direct
+IL23,IL23R,positive,N10,1,regulates,direct
+IL23R,IL17,positive,P18,2,,indirect
+IL23R,STAT3,positive,"AJ, MSM, N10, P18",1,regulates,direct
+IL23_e,IL23R,positive,"AJ, MSM, N10, P18",1,regulates,direct
+IL25,IL25R,positive,AJ,1,regulates,direct
+IL25R,GATA3,positive,AJ,2,,indirect
+IL25_e,IL25R,positive,AJ,1,regulates,direct
+IL27R,EOMES,positive,MSM,2,,indirect
+IL27R,STAT1,positive,"AJ, MSM, N10",1,regulates,direct
+IL27R,STAT1_2,positive,"AJ, MSM, N10",1,regulates,direct
+IL27R,STAT3,positive,"AJ, N10",1,regulates,direct
+IL27_e,IL27R,positive,"AJ, MSM, N10",1,regulates,direct
+IL27_e,STAT1,positive,P18,2,,indirect
+IL27_e,STAT1_2,positive,P18,2,,indirect
+IL29R,GATA3,negative,AJ,2,,indirect
+IL29_e,IL29R,positive,AJ,1,regulates,direct
+IL2R,IL2R_2,positive,"AJ, N10",0,necessary,
+IL2R,STAT5,positive,"AJ, MSM, N10, P18",1,regulates,direct
+IL2R,STAT5_2,positive,"AJ, MSM, N10, P18",1,regulates,direct
+IL2RA,IL2R_2,positive,"AJ, N10",0,necessary,direct
+IL2R_2,STAT5,positive,"MSM, P18",1,regulates,direct
+IL2R_2,STAT5_2,positive,"AJ, MSM, N10, P18",1,regulates,direct
+IL2_e,IL2,positive,MS15,2,,indirect
+IL2_e,IL2R,positive,"AJ, MSM, N10",1,regulates,direct
+IL2_e,IL2R_2,positive,"AJ, MSM, N10",1,regulates,direct
+IL33R,IL13,positive,AJ,2,,indirect
+IL33R,IL5,positive,AJ,2,,indirect
+IL33R,IL9,positive,AJ,2,,indirect
+IL33_e,IL33R,positive,AJ,1,regulates,direct
+IL36R,TBET,positive,AJ,2,,indirect
+IL36R,TBET_2,positive,AJ,2,,indirect
+IL36_e,IL36R,positive,AJ,1,regulates,direct
+IL4,GATA3,positive,MS15,2,,indirect
+IL4,IFNG,negative,MS15,2,,indirect
+IL4,IFNG_2,negative,MS15,2,,indirect
+IL4,IL4,positive,MS15,2,,indirect
+IL4,IL4R,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IL4,IL4R_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IL4,IL9,positive,MS15,2,,indirect
+IL4,TBET,negative,MS15,2,,indirect
+IL4,TBET_2,negative,MS15,2,,indirect
+IL4R,IL4R_2,positive,N10,0,necessary,
+IL4R,STAT5,positive,N10,1,regulates,direct
+IL4R,STAT5_2,positive,N10,1,regulates,direct
+IL4R,STAT6,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IL4RA_2,IL4R_2,positive,N10,0,regulates,direct
+IL4R_2,STAT5_2,positive,N10,1,regulates,direct
+IL4R_2,STAT6,positive,"AJ, M06, MSM, MX, P18",1,regulates,direct
+IL4_e,IL4,positive,MS15,2,,indirect
+IL4_e,IL4R,positive,"AJ, N10, P18",1,regulates,direct
+IL4_e,IL4R_2,positive,"AJ, N10, P18",1,regulates,direct
+IL6,IL6R,positive,"AJ, MSM, P18",1,regulates,direct
+IL6R,FOXP3,negative,P18,2,,indirect
+IL6R,RORGT,positive,P18,2,,indirect
+IL6R,STAT3,positive,"AJ, N10, P18",1,regulates,direct
+IL6_e,IL6R,positive,"AJ, N10, P18",1,regulates,direct
+IL7R,STAT5,positive,MSM,1,regulates,direct
+IL7R,STAT5_2,positive,MSM,1,regulates,direct
+IL7_e,IL7R,positive,MSM,1,regulates,direct
+IL9,IFNG,negative,MS15,3,,correlation
+IL9,IFNG_2,negative,MS15,3,,correlation
+IL9,TBET,negative,MS15,3,,correlation
+IL9,TBET_2,negative,MS15,3,,correlation
+IRAK,IFNG,positive,"MSM, MX",2,,indirect
+IRAK,IFNG_2,positive,"M06, MSM, MX",2,,indirect
+IRAK,NFKB,positive,P18,2,,indirect
+IRF1,IL10,positive,AJ,1,regulates,direct
+IRF1,IL12RB1_2,positive,N10,1,regulates,direct
+IRF1,IL4,negative,"AJ, N10",1,regulates,direct
+JAK1,STAT1,positive,"MSM, MX, P18",1,regulates,direct
+JAK1,STAT1_2,positive,"MSM, MX, P18",1,regulates,direct
+JAK3,STAT3,positive,MSM,1,regulates,direct
+NFAT,FOXP3,positive,"AJ, N10",1,regulates,direct
+NFAT,GATA3,positive,P18,1,regulates,direct
+NFAT,IFNG,positive,"AJ, MX, N10, P18",1,regulates,direct
+NFAT,IFNGR,positive,P18,2,,indirect
+NFAT,IFNGR_2,positive,P18,2,,indirect
+NFAT,IFNG_2,positive,"AJ, MX, N10, P18",1,regulates,direct
+NFAT,IL10,positive,"AJ, N10",1,regulates,direct
+NFAT,IL13,positive,AJ,1,regulates,direct
+NFAT,IL17,positive,"AJ, N10",1,regulates,direct
+NFAT,IL2,positive,"AJ, N10, P18",1,necessary,direct
+NFAT,IL21,positive,"AJ, N10, P18",1,necessary,direct
+NFAT,IL22,positive,AJ,1,regulates,direct
+NFAT,IL24,positive,AJ,4,,assumption
+NFAT,IL2R,positive,P18,2,,indirect
+NFAT,IL2RA,positive,"AJ, N10",1,regulates,direct
+NFAT,IL2R_2,positive,P18,2,,indirect
+NFAT,IL3,positive,AJ,1,regulates,direct
+NFAT,IL31,positive,AJ,1,regulates,direct
+NFAT,IL4,positive,"AJ, N10, P18",1,necessary,direct
+NFAT,IL5,positive,AJ,1,regulates,direct
+NFAT,IL9,positive,AJ,1,regulates,direct
+NFAT,STAT1,positive,P18,2,,indirect
+NFAT,STAT1_2,positive,P18,2,,indirect
+NFAT,TGFB,positive,"AJ, N10",1,regulates,direct
+NFAT,TGFBR,positive,P18,2,,indirect
+NFKB,IFNG,positive,P18,1,regulates,direct
+NFKB,IFNG_2,positive,P18,1,regulates,direct
+NFKB,IL17,positive,"AJ, N10",1,regulates,direct
+NFKB,IL2,positive,"AJ, N10, P18",1,regulates,direct
+NFKB,IL2RA,positive,"AJ, N10",1,regulates,direct
+NFKB,IL9,positive,AJ,1,regulates,direct
+NOTCH1,CD4,positive,MSM,2,,indirect
+NOTCH1,CD8,positive,MSM,2,,indirect
+PU1,GATA3,negative,AJ,1,regulates,direct
+PU1,IL9,positive,AJ,1,regulates,direct
+RORGT,IL17,positive,"AJ, MSM, N10, P18",1,regulates,direct
+RORGT,IL21,positive,MS15,3,,correlation
+RORGT,IL23R,positive,"AJ, N10",1,regulates,direct
+RORGT,RORGT,positive,"MSM, N10",1,regulates,direct
+RORGT,TBET,negative,"AJ, MSM, P18",3,,correlation
+RORGT,TBET_2,negative,"AJ, MSM, P18",3,,correlation
+RUNX3,CD4,negative,MSM,1,regulates,direct
+RUNX3,CD8,positive,MSM,1,regulates,direct
+RUNX3,EOMES,positive,MSM,1,regulates,direct
+RUNX3,IFNG,positive,"AJ, N10",1,regulates,direct
+RUNX3,IFNG_2,positive,"AJ, N10",1,regulates,direct
+RUNX3,IL4,negative,"AJ, N10",1,regulates,direct
+RUNX3,RUNX3,positive,MSM,4,,assumption
+RUNX3,THPOK,negative,MSM,1,regulates,direct
+SMAD2,FOXP3,positive,MSM,1,regulates,direct
+SMAD2,RORGT,positive,MSM,1,regulates,direct
+SMAD3,FOXP3,positive,"AJ, N10",1,regulates,direct
+SMAD3,IL2RA,positive,"AJ, N10",1,regulates,direct
+SMAD3,IL9,positive,AJ,1,regulates,direct
+SOCS1,JAK1,negative,"MX, P18",1,regulates,direct
+SOCS1,STAT5,negative,MSM,1,regulates,direct
+SOCS1,STAT5_2,negative,MSM,1,regulates,direct
+SOCS1,STAT6,negative,P18,1,regulates,direct
+ST2,IL33R,positive,AJ,0,necessary,direct
+STAT1,BCL6,positive,AJ,1,regulates,direct
+STAT1,FOXP3,negative,"AJ, N10",2,,indirect
+STAT1,IL17,negative,"AJ, N10, P18",2,,indirect
+STAT1,IL4,negative,"M06, MSM, MX, P18",2,,indirect
+STAT1,IRF1,positive,"AJ, N10",1,regulates,direct
+STAT1,SOCS1,positive,"M06, MSM, MX, P18",1,regulates,direct
+STAT1,STAT1,positive,M06,1,regulates,direct
+STAT1,STAT1_2,positive,M06,0,necessary,
+STAT1,TBET,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+STAT1,TBET_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+STAT1_2,BCL6,positive,AJ,1,regulates,direct
+STAT1_2,FOXP3,negative,"AJ, N10",2,,indirect
+STAT1_2,IL17,negative,"AJ, N10, P18",2,,indirect
+STAT1_2,IL4,negative,"MSM, MX, P18",2,,indirect
+STAT1_2,IRF1,positive,"AJ, N10",1,regulates,direct
+STAT1_2,SOCS1,positive,"MSM, MX, P18",1,regulates,direct
+STAT1_2,TBET,positive,"AJ, MSM, MX, N10, P18",1,regulates,direct
+STAT1_2,TBET_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+STAT3,BCL6,positive,AJ,1,regulates,direct
+STAT3,CMAF,positive,AJ,1,regulates,direct
+STAT3,FOXP3,negative,"AJ, MSM, N10, P18",2,,indirect
+STAT3,IFNG,negative,"MSM, MX, N10, P18",2,,indirect
+STAT3,IFNG_2,negative,"MSM, MX, N10, P18",2,,indirect
+STAT3,IL10,positive,"AJ, N10",1,regulates,direct
+STAT3,IL17,positive,"AJ, N10, P18",1,regulates,direct
+STAT3,IL1R1,positive,AJ,4,,assumption 
+STAT3,IL21,positive,"AJ, N10, P18",1,regulates,direct
+STAT3,IL22,positive,AJ,1,regulates,direct
+STAT3,IL23,positive,N10,1,regulates,direct in the network sense
+STAT3,IL23R,positive,"AJ, N10, P18",1,regulates,direct
+STAT3,IL6,positive,AJ,1,regulates,direct
+STAT3,RORGT,positive,"AJ, MSM, N10, P18",1,regulates,direct
+STAT4,BCL6,positive,AJ,1,regulates,direct
+STAT4,IFNG,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+STAT4,IFNG_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+STAT4,IL10,positive,AJ,2,,indirect
+STAT4,IL12R,positive,P18,2,,indirect
+STAT4,IL18R,positive,AJ,1,regulates,direct in the network sense
+STAT4,IL21,positive,AJ,1,regulates,direct
+STAT4,TBET,positive,P18,1,regulates,direct
+STAT4,TBET_2,positive,P18,1,regulates,direct
+STAT5,BCL6,negative,AJ,1,regulates,direct
+STAT5,FOXP3,positive,"AJ, N10, P18",1,regulates,direct
+STAT5,GATA3,positive,P18,1,regulates,direct
+STAT5,IL17,negative,"AJ, N10, P18",1,regulates,direct
+STAT5,IL2,negative,"AJ, N10",2,,indirect
+STAT5,IL2RA,positive,"AJ, N10",1,regulates,direct
+STAT5,IL4,positive,AJ,1,regulates,direct
+STAT5,IL4RA_2,positive,N10,2,,indirect
+STAT5,RUNX3,positive,MSM,1,regulates,direct
+STAT5,STAT5_2,positive,"AJ, N10",0,necessary,
+STAT5,proliferation,positive,"AJ, N10",1,regulates,direct in the network sense
+STAT5_2,FOXP3,positive,P18,1,regulates,direct
+STAT5_2,GATA3,positive,P18,1,regulates,direct
+STAT5_2,IL17,negative,P18,1,regulates,direct
+STAT5_2,IL4RA_2,positive,N10,2,,indirect
+STAT5_2,RUNX3,positive,MSM,1,regulates,direct
+STAT5_2,proliferation,positive,"AJ, N10",1,regulates,direct in the network sense
+STAT6,FOXP3,negative,AJ,1,regulates,direct
+STAT6,GATA3,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+STAT6,IFNG,negative,P18,2,,indirect
+STAT6,IFNG_2,negative,P18,2,,indirect
+STAT6,IL12R,negative,"M06, MSM",2,,indirect
+STAT6,IL12RB2,negative,"AJ, N10",2,,indirect
+STAT6,IL17,negative,"AJ, N10",2,,indirect
+STAT6,IL18R,negative,"M06, MSM, MX, P18",2,,indirect
+STAT6,IL2,negative,"AJ, N10",2,,indirect
+STAT6,IL24,positive,AJ,1,regulates,direct
+STAT6,IL31,positive,AJ,1,regulates,direct
+STAT6,IL9,positive,AJ,1,regulates,direct
+TBET,BCL6,negative,"AJ, MS15",1,regulates,direct
+TBET,FOXP3,negative,MSM,1,regulates,direct
+TBET,GATA3,negative,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct
+TBET,IFNG,positive,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct
+TBET,IFNG_2,positive,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct
+TBET,IL12R,positive,P18,2,,indirect
+TBET,IL2,negative,"AJ, N10, P18",1,regulates,direct
+TBET,IL23R,negative,P18,1,regulates,direct
+TBET,IL4,negative,"AJ, MS15, N10",1,regulates,direct
+TBET,RORGT,negative,"MS15, MSM, P18",1,regulates,direct in the network sense
+TBET,RUNX3,positive,"AJ, N10",2,,indirect
+TBET,TBET,positive,"AJ, M06, MS15, MSM, MX, N10, P18",2,,indirect
+TBET,TBET_2,positive,"AJ, M06, MS15, MSM, MX, N10, P18",0,necessary,
+TBET_2,BCL6,negative,"AJ, MS15",1,regulates,direct
+TBET_2,FOXP3,negative,MSM,1,regulates,direct
+TBET_2,GATA3,negative,"AJ, MS15, MSM, MX, N10, P18",1,regulates,direct
+TBET_2,IFNG,positive,"AJ, MS15, MSM, MX, N10, P18",1,regulates,direct
+TBET_2,IFNG_2,positive,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct
+TBET_2,IL12R,positive,P18,2,,indirect
+TBET_2,IL2,negative,"AJ, N10, P18",1,regulates,direct
+TBET_2,IL23R,negative,P18,1,regulates,direct
+TBET_2,IL4,negative,"AJ, MS15, N10",1,regulates,direct
+TBET_2,RORGT,negative,"MS15, MSM, P18",1,regulates,direct in the network sense
+TBET_2,RUNX3,positive,"AJ, N10",2,,indirect
+TBET_2,TBET_2,positive,"AJ, M06, MS15, MSM, MX, N10, P18",2,,indirect
+TCR,CD8,negative,MSM,2,,indirect
+TCR,IKB,negative,"AJ, N10",1,regulates,direct in the network sense
+TCR,IL12R,positive,P18,2,,indirect
+TCR,IL7R,negative,MSM,1,regulates,direct in the network sense
+TCR,NFAT,positive,"AJ, MSM, MX, N10, P18",1,regulates,direct in the network sense
+TCR,THPOK,positive,MSM,2,,indirect
+TGFB,BCL6,negative,MS15,1,regulates,direct in the network sense
+TGFB,FOXP3,positive,MS15,2,,indirect
+TGFB,GATA3,negative,MS15,2,,indirect
+TGFB,IFNG,negative,MS15,2,,indirect
+TGFB,IFNG_2,negative,MS15,2,,indirect
+TGFB,IL10,positive,MS15,2,,indirect
+TGFB,IL9,positive,MS15,2,,indirect
+TGFB,RORGT,positive,MS15,2,,indirect
+TGFB,TGFB,positive,MS15,2,,indirect
+TGFB,TGFBR,positive,"AJ, MSM, N10",1,regulates,direct
+TGFBR,CMAF,positive,AJ,2,,indirect
+TGFBR,FOXP3,positive,P18,2,,indirect
+TGFBR,PU1,positive,AJ,2,,indirect
+TGFBR,RORGT,positive,"AJ, N10, P18",2,,indirect
+TGFBR,SMAD2,positive,MSM,1,regulates,direct
+TGFBR,SMAD3,positive,"AJ, N10",1,regulates,direct
+TGFB_e,GATA3,negative,P18,2,,indirect
+TGFB_e,TGFB,positive,MS15,2,,indirect
+TGFB_e,TGFBR,positive,"AJ, N10, P18",1,regulates,direct
+THPOK,CD4,positive,MSM,1,regulates,direct
+THPOK,CD8,negative,MSM,1,regulates,direct
+THPOK,RUNX3,negative,MSM,1,regulates,direct
+THPOK,THPOK,positive,MSM,1,regulates,direct
+proliferation,IFNG,positive,"AJ, N10",4,,assumption
+proliferation,IFNG_2,positive,"AJ, N10",4,,assumption
+proliferation,IL10,positive,"AJ, N10",4,,assumption
+proliferation,IL13,positive,AJ,4,,assumption
+proliferation,IL17,positive,"AJ, N10",4,,assumption
+proliferation,IL21,positive,"AJ, N10",4,,assumption
+proliferation,IL22,positive,AJ,4,,assumption
+proliferation,IL23,positive,N10,4,,assumption
+proliferation,IL24,positive,AJ,4,,assumption
+proliferation,IL25,positive,AJ,4,,assumption
+proliferation,IL3,positive,AJ,4,,assumption
+proliferation,IL31,positive,AJ,4,,assumption
+proliferation,IL35,positive,AJ,4,,assumption
+proliferation,IL4,positive,"AJ, N10",4,,assumption
+proliferation,IL5,positive,AJ,4,,assumption
+proliferation,IL6,positive,AJ,4,,assumption
+proliferation,IL9,positive,AJ,4,,assumption
+proliferation,TGFB,positive,"AJ, N10",4,,assumption
+proliferation,proliferation,positive,"AJ, N10",4,,assumption
