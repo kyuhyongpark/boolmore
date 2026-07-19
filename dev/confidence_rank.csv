@@ -1,692 +1,692 @@
-Regulator,Target,Sign,Model,Confidence Rank,Constraint,Direct,Documentation,Notes
-APC,CD28,positive,AJ,1,regulates,direct,,ligand binding to co-receptor. The costimulatory ligands CD80 (B7-1) and CD86 (B7-2) expressed on the APC directly bind the CD28 receptor on the T cell.
-APC,CD28,positive,N10,1,regulates,direct,,ligand binding to co-receptor. The costimulatory ligands CD80 (B7-1) and CD86 (B7-2) expressed on the APC directly bind the CD28 receptor on the T cell.
-APC,TCR,positive,AJ,1,necessary,direct,SI,ligand-receptor binding. The peptide–MHC on the APC binds the TCR.
-APC,TCR,positive,N10,1,necessary,direct,,ligand-receptor binding. The peptide–MHC on the APC binds the TCR.
-BCL6,GATA3,negative,AJ,1,regulates,direct,,BCL6 binds regulatory DNA at the Gata3 locus and represses transcription.
-BCL6,GATA3,negative,MS15,1,regulates,direct,,BCL6 binds regulatory DNA at the Gata3 locus and represses transcription.
-BCL6,IFNG,negative,MS15,1,regulates,direct,,"TBET recruits BCL6 to the Ifng locus, where it represses transcription."
-BCL6,IL21,positive,MS15,1,regulates,direct in the network sense,,"BCL6 inhibits BLIMP-1, which is a transcriptional inhibitor of IL21. BLIMP-1 is not part of the integrated model."
-BCL6,RORGT,negative,AJ,3,,indirect,SI,"involves STAT3 and RORGT-promoting genes. Although annotated as ""binding and functional data"", the current evidence indicates an indirect effect, competition with STAT3 in regulating genes that activate RORGT."
-BCL6,RORGT,negative,MS15,3,,indirect,,"involves STAT3 and RORGT-promoting genes. the current evidence indicates an indirect effect, competition with STAT3 in regulating genes that activate RORGT."
-BCL6,TBET,negative,AJ,1,regulates,direct,,BCL6 is a sequence-specific transcriptional repressor. It binds the Tbx21 promoter (or regulatory regions of the Tbx21 gene) and represses its transcription.
-BCL6,TBET,negative,MS15,1,regulates,direct,,BCL6 is a sequence-specific transcriptional repressor. It binds the Tbx21 promoter (or regulatory regions of the Tbx21 gene) and represses its transcription.
-CD28,NFAT,positive,AJ,1,regulates,direct in the network sense,,"This is a signaling pathway, CD28 → PI3K/LCK/PLCγ1 → Ca²⁺ → calcineurin → NFAT. None of the mediators are nodes of any of the partial models."
-CD28,NFAT,positive,N10,1,regulates,direct in the network sense,,"This is a signaling pathway, CD28 → PI3K/LCK/PLCγ1 → Ca²⁺ → calcineurin → NFAT. None of the mediators are nodes of any of the partial models."
-CD4,CD4,positive,MSM,5,,assumption,,"assumption, to represent maintenance of CD4+ T cell identity"
-CD4,RUNX3,negative,MSM,4,,correlation,,"CD4 and RUNX3 are negatively associated in CD lineage differentiation, but no causal effect is documented"
-CD4,THPOK,positive,MSM,3,,,,pathway-level consequence of CD4-lineage selection
-CD8,CD8,positive,MSM,5,,assumption,,"assumption, to represent maintenance of CD8+ T cell identity"
-CD8,RUNX3,positive,MSM,3,,indirect,,"The effect is mediated by TCR/Lck signaling, the IL7R pathway, and STAT5"
-CD8,THPOK,negative,MSM,4,,correlation,,CD8 expression and THPOK are negatively associated because they characterize opposing lineage programs
-CMAF,IL10,positive,AJ,1,regulates,direct,,c-Maf directly binds regulatory elements of the Il10 gene and activates its transcription.
-CMAF,IL13,positive,AJ,3,,indirect,,"causal, CMAF->IL4->IL4R->STAT6->GATA3->IL13"
-CMAF,IL21,positive,AJ,1,regulates,direct,,c-Maf is a transcription factor that directly binds regulatory elements of the Il21 gene and activates its transcription.
-CMAF,IL22,negative,AJ,1,regulates,direct,,c-Maf directly binds the Il22 promoter and represses its transcription
-CMAF,IL4,positive,AJ,1,regulates,direct,,c-Maf directly binds regulatory elements of the Il4 gene and activates its transcription. The strongest evidence for a direct target of c-Maf is IL4.
-CMAF,IL5,positive,AJ,3,,indirect,,"causal, CMAF->IL4->IL4R->STAT6->GATA3->IL5"
-DLL1,NOTCH1,positive,MSM,1,regulates,direct,,ligand-receptor binding. DLL1 physically binds the extracellular domain of NOTCH1 and activates the receptor
-EOMES,GZMB,positive,MSM,1,regulates,direct,,"EOMES binds the GZMB regulatory locus and promotes transcription, cooperating with RUNX3 and other cytotoxic-lineage factors."
-EOMES,IFNG,positive,MSM,1,regulates,direct,,EOMES directly binds regulatory elements of the Ifng locus and activates IFN-γ transcription.
-EOMES,PRF1,positive,MSM,1,regulates,direct,,regulation of transcription. EOMES directly binds regulatory elements of the Prf1 locus and activates perforin expression.
-FOXP3,FOXP3,positive,AJ,3,,indirect,SI,"Although indicated as ""binding and functional data"", current evidence indicates that this effect is due to positive feedback and not self-regulation."
-FOXP3,FOXP3,positive,MS15,3,,indirect,,current evidence indicates that this effect is due to positive feedback loop(s)
-FOXP3,FOXP3,positive,MSM,3,,indirect,,current evidence indicates that this effect is due to positive feedback loop(s)
-FOXP3,FOXP3,positive,N10,3,,indirect,,current evidence indicates that this effect is due to positive feedback loop(s)
-FOXP3,GATA3,negative,MSM,1,regulates,direct,,protein-protein interaction. FOXP3 physically associates with GATA3 and inhibits/modulates its transcriptional function
-FOXP3,GATA3,negative,P18,1,regulates,direct,,protein-protein interaction. FOXP3 physically associates with GATA3 and inhibits/modulates its transcriptional function
-FOXP3,IFNG,negative,AJ,3,,indirect,,"mediated by multiple effects, including FOXP3 inhibiting NFAT and NFKB"
-FOXP3,IFNG,negative,N10,3,,indirect,,"mediated by multiple effects, including FOXP3 inhibiting NFAT and NFKB"
-FOXP3,IL13,negative,AJ,3,,indirect,,"mediated by FOXP3 binding to GATA3 and not allowing it it to activate transcription of IL4, IL5, IL13."
-FOXP3,IL17,negative,AJ,3,,indirect,,mediated by FOXP3 binding to RORGT and not allowing it to activate IL17
-FOXP3,IL17,negative,N10,3,,indirect,,mediated by FOXP3 binding to RORGT and not allowing it to activate IL17
-FOXP3,IL2,negative,AJ,1,regulates,direct ,,"regulation of transcription. FOXP3 binds the Il2 promoter and represses transcription, often in complex with NFAT."
-FOXP3,IL2,negative,MS15,1,regulates,direct ,,"regulation of transcription. FOXP3 binds the Il2 promoter and represses transcription, often in complex with NFAT."
-FOXP3,IL2,negative,N10,1,regulates,direct ,,"regulation of transcription. FOXP3 binds the Il2 promoter and represses transcription, often in complex with NFAT."
-FOXP3,IL2RA,positive,AJ,1,regulates,direct ,,"regulation of transcription. FOXP3 binds regulatory regions of IL2RA, maintaining high-affinity IL-2 receptor expression, reinforcing Treg IL-2 sensitivity."
-FOXP3,IL2RA,positive,N10,1,regulates,direct ,,"regulation of transcription. FOXP3 binds regulatory regions of IL2RA, maintaining high-affinity IL-2 receptor expression, reinforcing Treg IL-2 sensitivity."
-FOXP3,IL35,positive,AJ,3,,indirect,,"FOXP3 promotes the Treg suppressive program, and IL-35 is a Treg-associated cytokine"
-FOXP3,IL4,negative,AJ,3,,indirect,,"mediated by FOXP3 binding to GATA3 and not allowing it it to activate transcription of IL4, IL5, IL13."
-FOXP3,IL4,negative,N10,3,,indirect,,"mediated by FOXP3 binding to GATA3 and not allowing it it to activate transcription of IL4, IL5, IL13."
-FOXP3,IL5,negative,AJ,3,,indirect,,"mediated by FOXP3 binding to GATA3 and not allowing it it to activate transcription of IL4, IL5, IL13."
-FOXP3,NFAT,negative,P18,1,regulates,direct,,Direct protein-protein interaction that redirects NFAT transcriptional activity.
-FOXP3,NFKB,negative,AJ,1,regulates,direct,SI,"protein-protein interaction. indicated as ""binding and functional data"". FOXP3 physically binds NF-κB (particularly the RelA/p65 and c-Rel subunits) and represses its transcriptional activity."
-FOXP3,NFKB,negative,N10,1,regulates,direct,,protein-protein interaction. FOXP3 physically binds NF-κB (particularly the RelA/p65 and c-Rel subunits) and represses its transcriptional activity.
-FOXP3,NFKB,negative,P18,1,regulates,direct,,protein-protein interaction. FOXP3 physically binds NF-κB (particularly the RelA/p65 and c-Rel subunits) and represses its transcriptional activity.
-FOXP3,RORGT,negative,AJ,1,regulates,direct,,protein-protein interaction. FOXP3 physically binds RORγt and inhibits its transcriptional activity.
-FOXP3,RORGT,negative,MS15,1,regulates,direct,,protein-protein interaction. FOXP3 physically binds RORγt and inhibits its transcriptional activity.
-FOXP3,RORGT,negative,MSM,1,regulates,direct,,protein-protein interaction. FOXP3 physically binds RORγt and inhibits its transcriptional activity.
-FOXP3,RORGT,negative,P18,1,regulates,direct,,protein-protein interaction. FOXP3 physically binds RORγt and inhibits its transcriptional activity.
-FOXP3,TBET,negative,MSM,5,,assumption,,"assumption, to account for FOXP3's effect on IFNG"
-FOXP3,TBET,negative,P18,5,,assumption,,"assumption, to account for FOXP3's effect on IFNG"
-FOXP3,TGFB,positive,AJ,4,,correlation,,no more specific evidence than Treg cells expressing TGFB
-FOXP3,TGFB,positive,MS15,4,,correlation,,no more specific evidence than Treg cells expressing TGFB
-FOXP3,TGFB,positive,MSM,4,,correlation,,no more specific evidence than Treg cells expressing TGFB
-FOXP3,TGFB,positive,N10,4,,correlation,,no more specific evidence than Treg cells expressing TGFB
-FOXP3,THPOK,positive,MSM,5,,assumption,,
-GATA3,FOXP3,negative,MSM,3,,indirect,,GATA3->IL4->IL4R->STAT6-|FOXP3
-GATA3,FOXP3,negative,P18,3,,indirect,,GATA3->IL4->IL4R->STAT6-|FOXP3
-GATA3,GATA3,positive,AJ,1,regulates,direct,,positive transcriptional autoregulation of GATA3 has been demonstrated
-GATA3,GATA3,positive,MS15,1,regulates,direct,,positive transcriptional autoregulation of GATA3 has been demonstrated
-GATA3,GATA3,positive,MSM,1,regulates,direct,,positive transcriptional autoregulation of GATA3 has been demonstrated
-GATA3,GATA3,positive,MX,1,regulates,direct,,transcriptional auto-regulation
-GATA3,GATA3,positive,N10,1,regulates,direct,,positive  transcriptional autoregulation of GATA3 has been demonstrated
-GATA3,GATA3,positive,P18,1,regulates,direct,,transcriptional auto-regulation
-GATA3,IFNG,negative,MS15,3,,indirect,,GATA3-|TBET->IFNG
-GATA3,IL10,positive,AJ,3,,indirect,,"The most likely mediator is CMAF, which activates IL10. GATA3->CMAF is not in any partial model."
-GATA3,IL10,positive,MS15,3,,indirect,,"The most likely mediator is CMAF, which activates IL10. GATA3->CMAF is not in any partial model."
-GATA3,IL10,positive,MSM,3,,indirect,,"The most likely mediator is CMAF, which activates IL10. GATA3->CMAF is not in any partial model."
-GATA3,IL10,positive,MX,3,,indirect,,"The most likely mediator is CMAF, which activates IL10. GATA3->CMAF is not in any partial model."
-GATA3,IL10,positive,N10,3,,indirect,,"The most likely mediator is CMAF, which activates IL10. GATA3->CMAF is not in any partial model."
-GATA3,IL12R,negative,P18,1,regulates,direct,,"regulation of transcription. GATA3 binds and represses the Il12rb2 locus, which encodes the IL12 receptor subunit IL12RB2. We are considering a direct effect on a receptor subchain as a direct effect on the receptor."
-GATA3,IL13,positive,AJ,1,regulates,direct,SI,"indicated as ""binding data"". GATA3 directly binds regulatory elements in the Il13 locus and activates its transcription."
-GATA3,IL25,positive,AJ,5,,assumption,,"assumption, to account for IL25 expression in Th2 cells, but no specific mechanism is known for this regulation"
-GATA3,IL3,positive,AJ,1,regulates,direct,,GATA3 has been shown to bind regulatory regions of the Il3/Csf2 locus and contributes directly to Il3 transcription.
-GATA3,IL4,positive,AJ,1,regulates,direct,,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
-GATA3,IL4,positive,M06,1,regulates,direct,,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
-GATA3,IL4,positive,MS15,1,regulates,direct,,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
-GATA3,IL4,positive,MSM,1,regulates,direct,,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
-GATA3,IL4,positive,MX,1,regulates,direct,,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
-GATA3,IL4,positive,N10,1,regulates,direct,,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
-GATA3,IL4,positive,P18,1,regulates,direct,,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
-GATA3,IL5,positive,AJ,1,regulates,direct,,"IL5 is part of the Th2 cytokine locus with IL4 and IL13. GATA3 directly binds regulatory elements in this locus and promotes Th2 cytokine transcription, including Il5."
-GATA3,RORGT,negative,MS15,1,regulates,direct in the network sense,,GATA3 physically interacts with RUNX1 and inhibits its ability to activate Rorc (the gene of RORGT). None of the models contain RUNX1.
-GATA3,RORGT,negative,MSM,1,regulates,direct in the network sense,,GATA3 physically interacts with RUNX1 and inhibits its ability to activate Rorc (the gene of RORGT). None of the models contain RUNX1.
-GATA3,RORGT,negative,P18,1,regulates,direct in the network sense,,GATA3 physically interacts with RUNX1 and inhibits its ability to activate Rorc (the gene of RORGT). None of the models contain RUNX1.
-GATA3,ST2,positive,AJ,1,regulates,direct,,regulation of transcription. GATA3 binds regulatory regions of the Il1rl1/ST2 locus and promotes ST2 expression
-GATA3,STAT4,negative,AJ,1,regulates,direct,,regulation of transcription. GATA3 binds the Stat4 locus and recruits chromatin-remodeling/repressive complexes.
-GATA3,STAT4,negative,M06,1,regulates,direct,,regulation of transcription. GATA3 binds the Stat4 locus and recruits chromatin-remodeling/repressive complexes.
-GATA3,STAT4,negative,MSM,1,regulates,direct,,regulation of transcription. GATA3 binds the Stat4 locus and recruits chromatin-remodeling/repressive complexes.
-GATA3,STAT4,negative,MX,1,regulates,direct,,regulation of transcription. GATA3 binds the Stat4 locus and recruits chromatin-remodeling/repressive complexes.
-GATA3,STAT4,negative,N10,1,regulates,direct,,regulation of transcription. GATA3 binds the Stat4 locus and recruits chromatin-remodeling/repressive complexes.
-GATA3,STAT4,negative,P18,1,regulates,direct,,regulation of transcription. GATA3 binds the Stat4 locus and recruits chromatin-remodeling/repressive complexes.
-GATA3,TBET,negative,M06,1,regulates,direct,,regulation of transcription. GATA3 binds the Tbx21 regulatory region and recruits chromatin-remodeling/repressive complexes.
-GATA3,TBET,negative,MS15,1,regulates,direct,,regulation of transcription. GATA3 binds the Tbx21 regulatory region and recruits chromatin-remodeling/repressive complexes.
-GATA3,TBET,negative,MSM,1,regulates,direct,,regulation of transcription. GATA3 binds the Tbx21 regulatory region and recruits chromatin-remodeling/repressive complexes.
-GATA3,TBET,negative,MX,1,regulates,direct,,regulation of transcription. GATA3 binds the Tbx21 regulatory region and recruits chromatin-remodeling/repressive complexes.
-GATA3,TBET,negative,N10,1,regulates,direct,,regulation of transcription. GATA3 binds the Tbx21 regulatory region and recruits chromatin-remodeling/repressive complexes.
-GATA3,TBET_2,negative,M06,1,regulates,direct,,regulation of transcription. GATA3 binds the Tbx21 regulatory region and recruits chromatin-remodeling/repressive complexes.
-GATA3,THPOK,positive,MSM,1,regulates,direct,,"regulation of transcription. GATA3 binds regulatory elements of the Zbtb7b locus. During CD4 T-cell lineage commitment, GATA3 is one of the principal upstream activators of ThPOK (Zbtb7b)."
-IFNA_e,IFNAR,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IFNAR,STAT1,positive,AJ,1,regulates,direct ,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNAR, then is phosphorylated by receptor-bound JAK1 or TYK2."
-IFNB_e,IFNAR,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IFNB_e,IFNBR,positive,M06,1,regulates,direct,,ligand-receptor binding
-IFNB_e,IFNBR,positive,MSM,1,regulates,direct,,ligand-receptor binding
-IFNB_e,IFNBR,positive,MX,1,regulates,direct,,ligand-receptor binding
-IFNB_e,IFNBR,positive,N10,1,regulates,direct,,ligand-receptor binding
-IFNBR,STAT1,positive,M06,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
-IFNBR,STAT1,positive,MSM,1,regulates,direct ,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
-IFNBR,STAT1,positive,MX,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
-IFNBR,STAT1,positive,N10,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
-IFNG,GATA3,negative,MS15,3,,indirect,,"causal effect, mediated by IFNGR, STAT1, TBET"
-IFNG,IFNG,positive,M06,3,,indirect,,"feedback loop, IFNG->IFNGR->STAT1->TBET->IFNG"
-IFNG,IFNG,positive,MS15,3,,indirect,,"feedback loop, IFNG->IFNGR->STAT1->TBET->IFNG"
-IFNG,IFNG_2,positive,M06,0,necessary,,,reaching a higher level necessitates achieving the lower level first
-IFNG,IFNGR,positive,AJ,1,regulates,direct ,,ligand-receptor binding
-IFNG,IFNGR,positive,M06,1,regulates,direct,main text,ligand-receptor binding
-IFNG,IFNGR,positive,MSM,1,regulates,direct,,ligand-receptor binding
-IFNG,IFNGR,positive,MX,1,regulates,direct ,,ligand-receptor binding
-IFNG,IFNGR,positive,N10,1,regulates,direct,,ligand-receptor binding
-IFNG,IFNGR,positive,P18,1,regulates,direct,,ligand-receptor binding
-IFNG,IFNGR_2,positive,M06,0,necessary,direct,,reaching a higher level necessitates achieving the lower level first
-IFNG,IL10,positive,MS15,3,,indirect,,"causal effect, mediated by IFNGR, STAT1"
-IFNG,IL2,negative,MS15,3,,indirect,,"causal effect, mediated by IFNGR, STAT1, TBET"
-IFNG,IL21,negative,MS15,3,,indirect,,"causal effect, mediated by IFNGR, STAT1, TBET"
-IFNG,IL4,negative,MS15,3,,indirect,,"causal effect, mediated by IFNGR, STAT1, TBET"
-IFNG,IL9,negative,MS15,3,,indirect,,"causal effect, mediated by IFNGR, STAT1, TBET"
-IFNG,STAT6,negative,P18,3,,indirect,,"causal effect, mediated by IFNGR, STAT1, SOCS1"
-IFNG,TBET,negative,P18,-,,wrong,,"assumption, contradicted by known positive feedback loop of IFNG and TBET"
-IFNG,TBET,positive,MS15,3,,indirect,,"causal effect, IFNG->IFNGR->STAT1->TBET"
-IFNG_2,IFNG,positive,M06,-,,wrong,,Artifact of the Booleanization; high-level should not activate low-level
-IFNG_2,IFNGR_2,positive,M06,1,regulates,direct,,ligand-receptor binding
-IFNG_e,IFNG,positive,MS15,3,,indirect,,"causal effect, IFNG_e->IFNGR->STAT1->TBET->IFNG"
-IFNG_e,IFNGR,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IFNG_e,IFNGR,positive,N10,1,regulates,direct,,ligand-receptor binding
-IFNG_e,IFNGR,positive,P18,1,regulates,direct,,ligand-receptor binding
-IFNGR,IFNGR,positive,M06,3,,indirect,,"causal effect, IFNGR->STAT1->TBET->IFNG->IFNGR"
-IFNGR,IFNGR_2,positive,M06,0,necessary,,,reaching a higher level necessitates achieving the lower level first
-IFNGR,JAK1,positive,MSM,1,regulates,direct,,protein-protein interaction. JAK1 is constitutively bound to the intracellular domain of the IFN-γ receptor complex.
-IFNGR,JAK1,positive,MX,1,regulates,direct,Methods,protein-protein interaction. JAK1 is constitutively bound to the intracellular domain of the IFN-γ receptor complex.
-IFNGR,JAK1,positive,P18,1,regulates,direct,,protein-protein interaction. JAK1 is constitutively bound to the intracellular domain of the IFN-γ receptor complex.
-IFNGR,STAT1,positive,AJ,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNGR, then is phosphorylated by receptor-bound JAK1 or JAK2."
-IFNGR,STAT1,positive,M06,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
-IFNGR,STAT1,positive,N10,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
-IFNGR,STAT1_2,positive,M06,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNGR, then is phosphorylated by receptor-bound JAK1 or JAK2; the classification of IFNGR->STAT1 applies"
-IFNGR_2,IFNGR,positive,M06,-,,wrong,,Artifact of the Booleanization; high-level should not activate low-level
-IFNGR_2,STAT1_2,positive,M06,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNGR, then is phosphorylated by receptor-bound JAK1 or JAK2; the classification of IFNGR->STAT1 applies"
-IKB,NFKB,negative,AJ,1,regulates,direct,,protein-protein interaction. IκB proteins physically bind NF-κB dimers and inhibit their transcriptional activity.
-IKB,NFKB,negative,N10,1,regulates,direct,,protein-protein interaction. IκB proteins physically bind NF-κB dimers and inhibit their transcriptional activity.
-IL1_e,IL1R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL10,IFNG,negative,MS15,3,,indirect,,"causal effect, mediated by IL10R, STAT3, TBET"
-IL10,IL10,positive,MS15,3,,indirect,,"feedback loop, IL10->IL10R->STAT3->IL10"
-IL10,IL10R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL10,IL10R,positive,MSM,1,regulates,direct,,ligand-receptor binding
-IL10,IL10R,positive,MX,1,regulates,direct,,ligand-receptor binding
-IL10,IL10R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL10,IL2,negative,MS15,3,,indirect,,"causal effect, mediated by STAT3 and an indirect effect of STAT3 on IL2"
-IL10,IL21,negative,MS15,-,,wrong,,the observed effect is more often positive
-IL10,IL9,positive,MS15,4,,correlation,,IL-10 is often coexpressed with IL-9 in Th9 cells
-IL10_e,IL10,positive,MS15,3,,indirect,,IL10_e->IL10R->STAT3->IL10
-IL10_e,IL10R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL10_e,IL10R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL10R,STAT3,positive,MSM,1,regulates,direct,,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL10R, then is phosphorylated by receptor-bound JAK1 or TYK2."
-IL10R,STAT3,positive,MX,1,regulates,direct,,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL10R, then is phosphorylated by receptor-bound JAK1 or TYK2."
-IL10R,STAT3,positive,N10,1,regulates,direct,,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL10R, then is phosphorylated by receptor-bound JAK1 or TYK2."
-IL12_e,IL12R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL12_e,IL12R,positive,M06,1,regulates,direct,,ligand-receptor binding
-IL12_e,IL12R,positive,MSM,1,regulates,direct,,ligand-receptor binding
-IL12_e,IL12R,positive,MX,1,regulates,direct,,ligand-receptor binding
-IL12_e,IL12R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL12_e,IL12R,positive,P18,1,regulates,direct,,ligand-receptor binding
-IL12_e,IL18R,positive,P18,3,,indirect,,"IL12_e does not bind to IL18R, IL12_e->IL12R->STAT4->IL18R"
-IL12_e,STAT4,positive,P18,3,,indirect,,causal effect mediated by IL12R
-IL12_e,TBET,negative,P18,-,,wrong,,"spurious assumed edge, contradicted by known positive causal effect"
-IL12R,STAT4,positive,AJ,1,regulates,direct,,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
-IL12R,STAT4,positive,M06,1,regulates,direct,,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
-IL12R,STAT4,positive,MSM,1,regulates,direct,,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
-IL12R,STAT4,positive,MX,1,regulates,direct,,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
-IL12R,STAT4,positive,N10,1,regulates,direct,,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
-IL12R,STAT4,positive,P18,1,regulates,direct,,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
-IL12RB1_2,IL12R,positive,N10,0,necessary,direct,,IL12RB1_2 represents the highly active state of the IL12RB1 subunit of IL12R. The basal activity of IL12RB1 is assumed to be constitutive.
-IL12RB2,IL12R,positive,AJ,0,necessary,direct,,IL12RB2 is one of the two subunits that physically assemble to form the functional IL-12 receptor. Note that this is even stronger than a direct interaction.
-IL12RB2,IL12R,positive,N10,0,necessary,direct,,IL12RB2 is one of the two subunits that physically assemble to form the functional IL-12 receptor.
-IL15_e,IL15R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL15_e,IL15R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL15R,STAT5,positive,AJ,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL15R, then is phosphorylated by receptor-bound JAK1 or JAK3."
-IL15R,STAT5,positive,N10,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL15R, then is phosphorylated by receptor-bound JAK1 or JAK3."
-IL17,IL17,positive,P18,-,,wrong,,"spurious assumed edge, not supported by experimental evidence"
-IL18_e,IL18R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL18_e,IL18R,positive,M06,1,regulates,direct,,ligand-receptor binding
-IL18_e,IL18R,positive,MSM,1,regulates,direct,,ligand-receptor binding
-IL18_e,IL18R,positive,MX,1,regulates,direct,,ligand-receptor binding
-IL18_e,IL18R,positive,P18,1,regulates,direct ,,ligand-receptor binding 
-IL18R,IFNG,positive,AJ,3,,indirect,,"causal effect, IL18R->IRAK->NFKB->IFNG"
-IL18R,IL10,negative,AJ,-,,wrong,,There is more support for a positive indirect relationship.
-IL18R,IRAK,positive,M06,1,regulate,direct in the network sense,,Activated IL18R recruits the MyD88–IRAK signaling complex.
-IL18R,IRAK,positive,MSM,1,regulates,direct in the network sense,,Activated IL18R recruits the MyD88–IRAK signaling complex.
-IL18R,IRAK,positive,MX,1,regulates,direct in the network sense,,Activated IL18R recruits the MyD88–IRAK signaling complex.
-IL18R,IRAK,positive,P18,1,regulates,direct in the network sense,,Activated IL18R recruits the MyD88–IRAK signaling complex.
-IL1R,STAT3,positive,AJ,3,,indirect,,"causal effect mediated by MyD88, IRAK, MAPK signaling, NFKB"
-IL1R1,IL1R,positive,AJ,0,necessary,direct,,IL1R1 is the ligand-binding subunit of the functional IL-1 receptor complex. Note that this is even stronger than a direct interaction.
-IL2,BCL6,negative,MS15,3,,indirect,,"causal effect, IL2->IL2R->STAT5-|BCL6"
-IL2,FOXP3,positive,MS15,3,,indirect,,"causal effect, IL2->IL2R->STAT5->FOXP3"
-IL2,GATA3,positive,MS15,3,,indirect,,"causal effect, IL2->IL2R->STAT5->GATA3"
-IL2,IL2,positive,MS15,3,,indirect,,"causal effect, IL2->IL2R->STAT5->GATA3-|STAT4->IFNG->IFNGR->STAT1->TBET-| IL2"
-IL2,IL21,negative,MS15,3,,indirect,,"causal effect, IL2->IL2R->STAT5-|BCL6->IL21"
-IL2,IL2R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL2,IL2R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL2,IL2R,positive,P18,1,regulates,direct,,ligand-receptor binding
-IL2,IL2R_2,positive,AJ,1,regulates,direct,,ligand-receptor binding; the same classification as IL2->IL2R
-IL2,IL2R_2,positive,N10,1,regulates,direct,,ligand-receptor binding; the same classification as IL2->IL2R
-IL2,IL4,positive,MS15,3,,indirect,,"causal effect, IL2->IL2R->STAT5->GATA3->IL4"
-IL2,IL9,positive,MS15,3,,indirect,,"causal effect, mediated by STAT5"
-IL2_e,IL2,positive,MS15,3,,indirect,,IL2_e->IL2R->STAT5->GATA3-|STAT4->IFNG->IFNGR->STAT1->TBET-| IL2
-IL2_e,IL2R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL2_e,IL2R,positive,MSM,1,regulates,direct,,ligand-receptor binding
-IL2_e,IL2R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL2_e,IL2R_2,positive,AJ,1,regulates,direct,,ligand-receptor binding; the same classification as IL2_e->IL2R
-IL2_e,IL2R_2,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL21,BCL6,positive,MS15,3?,,indirect,,IL21->IL21R->STAT3->BCL6
-IL21,FOXP3,negative,MS15,3?,,indirect,,IL21->IL21R->STAT3-|FOXP3
-IL21,GATA3,negative,MS15,3?,,indirect,,IL21->IL21R->STAT3->BCL6-|GATA3
-IL21,IFNG,negative,MS15,3?,,indirect,,IL21->IL21R->STAT3->BCL6-|TBET->IFNG
-IL21,IL10,positive,MS15,3?,,indirect,,IL21->IL21R->STAT3->IL10
-IL21,IL2,negative,MS15,,,,,
-IL21,IL21,positive,MS15,3?,,indirect,,IL21-> IL21R -> STAT3 -> IL21
-IL21,IL21R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL21,IL21R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL21,IL21R,positive,P18,1,regulates,direct,,ligand-receptor binding
-IL21,IL4,negative,MS15,3?,,indirect,,IL21->IL21R->STAT3->BCL6-|GATA3->IL4
-IL21,IL9,negative,MS15,,,,,
-IL21,RORGT,positive,MS15,3?,,indirect,,IL21-> IL21R->STAT3->RORGT
-IL21,TBET,negative,MS15,3?,,indirect,,IL21->IL21R->STAT3->BCL6-|TBET
-IL21,TGFB,negative,MS15,3?,,indirect,,IL21->IL21R->STAT3-|FOXP3->TGFB
-IL21_e,IL21,positive,MS15,3?,,indirect,,IL21_e->IL21R->STAT3->IL21
-IL21_e,IL21R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL21_e,IL21R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL21R,FOXP3,negative,P18,3?,,indirect,,IL21R->STAT3-|FOXP3
-IL21R,RORGT,positive,P18,3?,,indirect,,IL21R->STAT3->RORGT
-IL21R,STAT3,positive,AJ,1,regulates,direct,,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL21R, then is phosphorylated by receptor-bound JAK1 or JAK3."
-IL21R,STAT3,positive,N10,1,regulates,direct,,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL21R, then is phosphorylated by receptor-bound JAK1 or JAK3."
-IL21R,STAT3,positive,P18,1,regulates,direct,,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL21R, then is phosphorylated by receptor-bound JAK1 or JAK3."
-IL23,IL23R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL23_e,IL23R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL23_e,IL23R,positive,MSM,1,regulates,direct,,ligand-receptor binding
-IL23_e,IL23R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL23_e,IL23R,positive,P18,1,regulates,direct,,ligand-receptor binding
-IL23R,IL17,positive,P18,3?,,indirect,,IL23R->STAT3->RORGT->IL17
-IL23R,STAT3,positive,AJ,1,regulates,direct,,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL23R, then is phosphorylated by receptor-bound JAK2 or TYK2."
-IL23R,STAT3,positive,MSM,1,regulates,direct,,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL23R, then is phosphorylated by receptor-bound JAK2 or TYK2."
-IL23R,STAT3,positive,N10,1,regulates,direct,,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL23R, then is phosphorylated by receptor-bound JAK2 or TYK2."
-IL23R,STAT3,positive,P18,1,regulates,direct,,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL23R, then is phosphorylated by receptor-bound JAK2 or TYK2."
-IL25,IL25R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL25_e,IL25R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL25R,GATA3,positive,AJ,3,,indirect,,"IL-25 receptor signaling can increase or reinforce GATA3 expression/activity in type-2 cells, but the receptor does not bind GATA3 directly."
-IL27_e,IL27R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL27_e,IL27R,positive,MSM,1,regulates,direct,,ligand-receptor binding
-IL27_e,IL27R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL27_e,STAT1,positive,P18,,,,,
-IL27R,EOMES,positive,MSM,,,,,
-IL27R,STAT1,positive,AJ,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IL27R, then is phosphorylated by receptor-bound JAK1, JAK2, or TYK2."
-IL27R,STAT1,positive,MSM,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IL27R, then is phosphorylated by receptor-bound JAK1, JAK2, or TYK2."
-IL27R,STAT1,positive,N10,1,regulates,direct,,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IL27R, then is phosphorylated by receptor-bound JAK1, JAK2, or TYK2."
-IL27R,STAT3,positive,AJ,1,regulates,direct,,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL27R, then is phosphorylated by receptor-bound JAK1, JAK2, or TYK2."
-IL27R,STAT3,positive,N10,1,regulates,direct,,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL27R, then is phosphorylated by receptor-bound JAK1, JAK2, or TYK2."
-IL29_e,IL29R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL29R,GATA3,negative,AJ,3,,indirect,,mediated by JAK-STAT signaling and IFN response
-IL2R,IL2R,positive,AJ,,,,,
-IL2R,IL2R,positive,N10,,,,,
-IL2R,IL2R_2,positive,AJ,0,necessary,,,reaching a higher level necessitates achieving the lower level first
-IL2R,IL2R_2,positive,N10,0,necessary,,,reaching a higher level necessitates achieving the lower level first
-IL2R,STAT5,positive,AJ,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3."
-IL2R,STAT5,positive,MSM,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3."
-IL2R,STAT5,positive,N10,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3."
-IL2R,STAT5,positive,P18,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3."
-IL2R,STAT5_2,positive,AJ,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of the IL2R->STAT5 edge."
-IL2R,STAT5_2,positive,N10,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of the IL2R->STAT5 edge."
-IL2R_2,IL2R,positive,AJ,-,,wrong,,This is an artifact of the Booleanization; high-level should not activate low-level.
-IL2R_2,IL2R,positive,N10,-,,wrong,,This is an artifact of the Booleanization; high-level should not activate low-level.
-IL2R_2,STAT5_2,positive,AJ,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of the IL2R->STAT5 edge."
-IL2R_2,STAT5_2,positive,N10,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of the IL2R->STAT5 edge."
-IL2RA,IL2R_2,positive,AJ,,,,,
-IL2RA,IL2R_2,positive,N10,,,,,
-IL33_e,IL33R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL33R,IL10,negative,AJ,-,,wrong,,"Indirect, a positive effect is better supported than a negative effect"
-IL33R,IL13,positive,AJ,3,,indirect,,"mediated by MyD88, then MAPK kinase cascade, then multiple transcription factors"
-IL33R,IL5,positive,AJ,3,,indirect,,"The effect is mediated by IRAK, then MAPK signaling, then GATA3"
-IL33R,IL9,positive,AJ,3,,indirect,,"The effect is mediated by IRAK, then NFKB"
-IL36_e,IL36R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL36R,TBET,positive,AJ,3,,indirect,,"The effect is mediated by IRAK, MAPK signaling, NFKB"
-IL4,GATA3,positive,MS15,3?,,indirect,,IL4->IL4R->STAT5->GATA3
-IL4,IFNG,negative,MS15,3?,,indirect,,IL4->IL4R->STAT5->GATA3-|TBET->IFNG
-IL4,IL21,negative,MS15,,,,,
-IL4,IL4,positive,MS15,3?,,indirect,,IL4->IL4R->STAT5->GATA3->IL4
-IL4,IL4R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL4,IL4R,positive,M06,1,regulates,direct,,ligand-receptor binding
-IL4,IL4R,positive,MSM,1,regulates,direct,,ligand-receptor binding
-IL4,IL4R,positive,MX,1,regulates,direct,,ligand-receptor binding
-IL4,IL4R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL4,IL4R,positive,P18,1,regulates,direct,,ligand-receptor binding
-IL4,IL4R_2,positive,N10,1,regulates,direct,,ligand-receptor binding; the classification is the same as that of IL4->IL4R
-IL4,IL9,positive,MS15,,,,,
-IL4,TBET,negative,MS15,3?,,indirect,,IL4->IL4R->STAT5->GATA3-|TBET
-IL4_e,IL4,positive,MS15,3?,,indirect,,IL4_e->IL4R->STAT5->GATA3->IL4
-IL4_e,IL4R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL4_e,IL4R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL4_e,IL4R,positive,P18,1,regulates,direct,,ligand-receptor binding
-IL4_e,IL4R_2,positive,N10,1,regulates,direct,,ligand-receptor binding; the classification is the same as that of IL4_e->IL4R
-IL4R,IL4R,positive,N10,-,,wrong,,Artifact of the Booleanization 
-IL4R,IL4R_2,positive,N10,0,necessary,,,reaching a higher level necessitates achieving the lower level first
-IL4R,STAT5,positive,N10,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
-IL4R,STAT5_2,positive,N10,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of IL4R->STAT5."
-IL4R,STAT6,positive,AJ,1,regulates,direct,,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
-IL4R,STAT6,positive,M06,1,regulates,direct,,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
-IL4R,STAT6,positive,MSM,1,regulates,direct,,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
-IL4R,STAT6,positive,MX,1,regulates,direct,,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
-IL4R,STAT6,positive,N10,1,regulates,direct,,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
-IL4R,STAT6,positive,P18,1,regulates,direct,,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
-IL4R_2,IL4R,positive,N10,-,,wrong,,This is an artifact of the Booleanization; high-level should not activate low-level
-IL4R_2,STAT5_2,positive,N10,1?,regulates?,direct in the network sense?,,STAT5 activation is mediated by JAK1 or JAK3. None of the models has a higher resolution.?
-IL4RA_2,IL4R_2,positive,N10,,,,,
-IL6,IL6R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL6,IL6R,positive,MSM,1,regulates,direct,,ligand-receptor binding
-IL6,IL6R,positive,P18,1,regulates,direct,,ligand-receptor binding
-IL6_e,IL6R,positive,AJ,1,regulates,direct,,ligand-receptor binding
-IL6_e,IL6R,positive,N10,1,regulates,direct,,ligand-receptor binding
-IL6_e,IL6R,positive,P18,1,regulates,direct,,ligand-receptor binding
-IL6R,FOXP3,negative,P18,3?,,indirect,,IL6R->STAT3-|FOXP3
-IL6R,JAK3,positive,MSM,-,,wrong,,"unsupported assumption. IL-6 signaling uses JAK1, with contributions from JAK2 and TYK2, not JAK3."
-IL6R,RORGT,positive,P18,3?,,indirect,,IL6R->STAT3->RORGT
-IL6R,STAT3,positive,AJ,3?,,indirect,,IL6R->JAK3->STAT3
-IL6R,STAT3,positive,N10,3?,,indirect,,IL6R->JAK3->STAT3
-IL6R,STAT3,positive,P18,3?,,indirect,,IL6R->JAK3->STAT3
-IL7_e,IL7R,positive,MSM,1,regulates,direct,,ligand-receptor binding
-IL7R,STAT5,positive,MSM,1,regulates,direct,,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL7R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
-IL9,IFNG,negative,MS15,,,,,
-IL9,IL21,negative,MS15,,,,,
-IL9,TBET,negative,MS15,,,,,
-IRAK,IFNG,positive,MSM,3,,indirect,,"The direct target of IRAK is TRAF6, which affects NFKB, IRAK->NFKB->IFNG"
-IRAK,IFNG,positive,MX,,,,,
-IRAK,IFNG_2,positive,M06,,,,,
-IRAK,NFKB,positive,P18,,,,,
-IRF1,IL10,positive,AJ,1,regulates,direct,SI,"indicated as ""binding and functional data"". IRF1 binds and transactivates the proximal Il10 promoter."
-IRF1,IL12RB1_2,positive,N10,1,regulates,direct,,IRF1 binds the IL12RB1/Il12rb1 promoter and activates transcription
-IRF1,IL4,negative,AJ,1,regulates,direct,SI,"indicated as ""binding and functional data"". IRF1 directly binds the Il4 regulatory region and represses transcription."
-IRF1,IL4,negative,N10,1,regulates,direct,,IRF1 directly binds the Il4 regulatory region and represses transcription.
-JAK1,STAT1,positive,MSM,1,regulates,direct,,"protein-protein interaction. Activated JAK1 physically engages and phosphorylates STAT1, although this occurs within a cytokine-receptor complex."
-JAK1,STAT1,positive,MX,1,regulates,direct,,"protein-protein interaction. Activated JAK1 physically engages and phosphorylates STAT1, although this occurs within a cytokine-receptor complex."
-JAK1,STAT1,positive,P18,1,regulates,direct,Cell Collective,"protein-protein interaction. Activated JAK1 physically engages and phosphorylates STAT1, although this occurs within a cytokine-receptor complex."
-JAK3,STAT3,positive,MSM,1,regulates,direct,,protein-protein interaction. Activated JAK3 directly phosphorylates STAT3 downstream of several γ-chain cytokine receptors. JAK3 is rarely the only JAK involved.
-NFAT,FOXP3,positive,AJ,1,regulates,direct,SI,"indicated as ""binding and functional data"". NFAT directly binds regulatory elements of the Foxp3 locus and contributes to its transcription"
-NFAT,FOXP3,positive,N10,1,regulates,direct,,NFAT directly binds regulatory elements of the Foxp3 locus and contributes to its transcription
-NFAT,GATA3,positive,P18,1,regulates,direct,,Activated NFAT binds the Gata3 promoter and promotes transcription
-NFAT,IFNG,positive,AJ,1,regulates,direct,,NFAT binds regulatory elements of the IFNG locus and activates transcription.
-NFAT,IFNG,positive,MX,1,regulates,direct,,NFAT binds regulatory elements of the IFNG locus and activates transcription.
-NFAT,IFNG,positive,N10,1,regulates,direct,,NFAT binds regulatory elements of the IFNG locus and activates transcription.
-NFAT,IFNG,positive,P18,1,regulates,direct,,NFAT binds regulatory elements of the IFNG locus and activates transcription.
-NFAT,IFNGR,positive,P18,3,regulate,indirect,,NFAT->IFNG->IFNGR
-NFAT,IL10,positive,AJ,,,,,
-NFAT,IL10,positive,N10,,,,,
-NFAT,IL12R,positive,P18,,,,,
-NFAT,IL13,positive,AJ,,,,,
-NFAT,IL17,positive,AJ,1,regulates,direct,,NFAT binds the IL17A locus and activates transcription. 
-NFAT,IL17,positive,N10,1,regulates,direct,,NFAT binds the IL17A locus and activates transcription. 
-NFAT,IL2,positive,AJ,1,regulates,direct,,NFAT directly binds the IL2 promoter/enhancer. NFAT-deficient T cells have a profound defect in IL2 transcription.
-NFAT,IL2,positive,N10,1,regulates,direct,,NFAT directly binds the IL2 promoter/enhancer. NFAT-deficient T cells have a profound defect in IL2 transcription.
-NFAT,IL2,positive,P18,1,regulates,direct,,NFAT directly binds the IL2 promoter/enhancer. NFAT-deficient T cells have a profound defect in IL2 transcription.
-NFAT,IL21,positive,AJ,1,regulates,direct,,NFAT (particularly NFATc2) binds the IL21 promoter and activates transcription.
-NFAT,IL21,positive,N10,1,regulates,direct,,NFAT (particularly NFATc2) binds the IL21 promoter and activates transcription.
-NFAT,IL21,positive,P18,1,regulates,direct,,NFAT (particularly NFATc2) binds the IL21 promoter and activates transcription.
-NFAT,IL22,positive,AJ,1,regulates,direct,,NFAT binds the IL22 promoter and activates transcription. Categorized as assumption in AJ's documentation
-NFAT,IL23,positive,N10,,,,,
-NFAT,IL24,positive,AJ,5,,assumption,,
-NFAT,IL25,positive,AJ,5,,assumption,,
-NFAT,IL2R,positive,P18,1,regulates,direct,,"NFAT binds regulatory elements of the IL2RA gene, which encodes one of two subchains of IL2R, and contributes directly to its transcription. This effect is a direct effect on IL2R. Note that the integrated model does not contain an IL2RA->IL2R edge."
-NFAT,IL2RA,positive,AJ,1,regulates,direct,SI,"Indicated as ""binding and functional data"". NFAT binds regulatory elements of the IL2RA gene and contributes directly to its transcription"
-NFAT,IL2RA,positive,N10,1,regulates,direct,,NFAT binds regulatory elements of the IL2RA gene and contributes directly to its transcription
-NFAT,IL3,positive,AJ,,,,,
-NFAT,IL31,positive,AJ,1,regulates,direct,,NFAT binds the IL31 promoter and activates transcription.
-NFAT,IL35,positive,AJ,5,,assumption,,
-NFAT,IL4,positive,AJ,1,regulates,direct,,NFAT has been shown to bind regulatory elements of the IL4 locus and directly contribute to transcription.
-NFAT,IL4,positive,N10,1,regulates,direct,,NFAT has been shown to bind regulatory elements of the IL4 locus and directly contribute to transcription.
-NFAT,IL4,positive,P18,1,regulates,direct,,NFAT has been shown to bind regulatory elements of the IL4 locus and directly contribute to transcription.
-NFAT,IL5,positive,AJ,,,,,
-NFAT,IL6,positive,AJ,,,,,
-NFAT,IL9,positive,AJ,1,regulates,direct,SI,"indicated as ""binding and functional data"". NFAT directly binds the Il9 promoter and contributes to its transcriptional activation."
-NFAT,STAT1,positive,P18,3?,,indirect,,NFAT->IFNG->IFNGR->JAK1->STAT1
-NFAT,TGFB,positive,AJ,1,regulates,direct,,NFAT binds the TGFB1 promoter and activates transcription.
-NFAT,TGFB,positive,N10,1,regulates,direct,,NFAT binds the TGFB1 promoter and activates transcription.
-NFAT,TGFBR,positive,P18,3,,indirect,,NFAT->TGFB->TGFBR
-NFKB,IFNG,positive,P18,1,regulate,direct,,NFκB-family factors bind regulatory elements of the Ifng locus. NFκB cooperates with STAT4/TBET at the Ifng locus
-NFKB,IL17,positive,AJ,1,regulates,direct,,NF-κB binds regulatory elements of the IL17A locus and promotes transcription.
-NFKB,IL17,positive,N10,1,regulates,direct,,NF-κB binds regulatory elements of the IL17A locus and promotes transcription.
-NFKB,IL2,ambiguous,N10,1,regulates,direct,,treat as positive. NF-κB family members—especially c-Rel and RelA/p65—bind regulatory elements in the IL2 promoter and contribute directly to activation-induced IL-2 transcription. The IL-2 promoter integrates NF-κB with NFAT and AP-1 signals following TCR and costimulatory activation.
-NFKB,IL2,positive,AJ,1,regulates,direct,SI,"indicated as ""binding and functional data"". NF-κB family members—especially c-Rel and RelA/p65—bind regulatory elements in the IL2 promoter and contribute directly to activation-induced IL-2 transcription. The IL-2 promoter integrates NF-κB with NFAT and AP-1 signals following TCR and costimulatory activation."
-NFKB,IL2,positive,P18,1,regulates,direct,,NF-κB family members—especially c-Rel and RelA/p65—bind regulatory elements in the IL2 promoter and contribute directly to activation-induced IL-2 transcription. The IL-2 promoter integrates NF-κB with NFAT and AP-1 signals following TCR and costimulatory activation.
-NFKB,IL2RA,positive,AJ,1,regulates,direct,,NF-κB directly binds regulatory elements of the Il2ra (CD25) gene and activates its transcription.
-NFKB,IL2RA,positive,N10,1,regulates,direct,,NF-κB directly binds regulatory elements of the Il2ra (CD25) gene and activates its transcription.
-NFKB,IL9,positive,AJ,1,regulates,direct,,NF-κB family members directly occupy the Il9 promoter and activate transcription
-NOTCH1,CD4,positive,MSM,3,,indirect,,mediated by TCF1  / BCL11B and then THPOK
-NOTCH1,CD8,positive,MSM,3,,indirect,,mediated by TCF1 / BCL11B and then RUNX3
-proliferation,IFNG,positive,AJ,,,,,
-proliferation,IFNG,positive,N10,,,,,
-proliferation,IL10,positive,AJ,,,,,
-proliferation,IL10,positive,N10,,,,,
-proliferation,IL13,positive,AJ,,,,,
-proliferation,IL17,positive,AJ,,,,,
-proliferation,IL17,positive,N10,,,,,
-proliferation,IL21,positive,AJ,,,,,
-proliferation,IL21,positive,N10,,,,,
-proliferation,IL22,positive,AJ,5,,assumption,,
-proliferation,IL23,positive,N10,,,,,
-proliferation,IL24,positive,AJ,5,,assumption,,
-proliferation,IL25,positive,AJ,5,,assumption,,
-proliferation,IL3,positive,AJ,,,,,
-proliferation,IL31,positive,AJ,5,,assumption,,
-proliferation,IL35,positive,AJ,5,,assumption,,
-proliferation,IL4,positive,AJ,,,,,
-proliferation,IL4,positive,N10,,,,,
-proliferation,IL5,positive,AJ,,,,,
-proliferation,IL6,positive,AJ,,,,,
-proliferation,IL9,positive,AJ,,,,,
-proliferation,proliferation,positive,AJ,,,,,
-proliferation,proliferation,positive,N10,,,,,
-proliferation,TGFB,positive,AJ,,,,,
-proliferation,TGFB,positive,N10,,,,,
-PU1,GATA3,negative,AJ,1,regulates,direct,,protein-protein interaction. PU.1 physically associates with GATA3 and reduces GATA3 DNA-binding and transcriptional activity.
-PU1,IL9,positive,AJ,1,regulates,direct,,PU.1 directly binds the Il9 promoter and promotes IL-9 transcription
-RORGT,FOXP3,negative,AJ,-,,wrong,SI,"Although indicated as ""binding and functional data"", neither binding nor the negative effect is supported"
-RORGT,FOXP3,negative,MS15,-,,wrong,,Neither binding nor the negative effect is sufficiently supported
-RORGT,FOXP3,negative,MSM,-,,wrong,,Neither binding nor the negative effect is sufficiently supported
-RORGT,FOXP3,negative,N10,-,,wrong,,Neither binding nor the negative effect is sufficiently supported
-RORGT,GATA3,negative,MSM,-,,wrong,,"Sign likely incorrect, mechanism unknown"
-RORGT,GATA3,negative,P18,-,,wrong,,"Sign likely incorrect, mechanism unknown"
-RORGT,IL17,positive,AJ,1,regulates,direct,,regulation of transcription. RORγt directly binds and activates the IL17 locus. This is one of the strongest TF-target relationships in Th17 biology.
-RORGT,IL17,positive,MSM,1,regulates,direct,,regulation of transcription. RORγt directly binds and activates the IL17 locus. This is one of the strongest TF-target relationships in Th17 biology.
-RORGT,IL17,positive,N10,1,regulates,direct,,regulation of transcription. RORγt directly binds and activates the IL17 locus. This is one of the strongest TF-target relationships in Th17 biology.
-RORGT,IL17,positive,P18,1,regulates,direct,,regulation of transcription. RORγt directly binds and activates the IL17 locus. This is one of the strongest TF-target relationships in Th17 biology.
-RORGT,IL21,positive,MS15,,,,,
-RORGT,IL23R,positive,AJ,1,regulates,direct,,There is substantial evidence that RORγt directly promotes IL23R transcription.
-RORGT,IL23R,positive,N10,1,regulates,direct,,There is substantial evidence that RORγt directly promotes IL23R transcription.
-RORGT,IL6,positive,MSM,3?,,indirect,,RORGT->IL23R->STAT3->IL6
-RORGT,IL6,positive,P18,3?,,indirect,,RORGT->IL23R->STAT3->IL7
-RORGT,RORGT,positive,MSM,1,regulates,direct,,"self-regulation of transcription. RORγt binds a Rorc cis-regulatory element and helps sustain its own expression, in cooperation with RORα"
-RORGT,RORGT,positive,N10,1,regulates,direct,,"self-regulation of transcription. RORγt binds a Rorc cis-regulatory element and helps sustain its own expression, in cooperation with RORα"
-RORGT,TBET,negative,AJ,3,,indirect,,mechanism & mediators unknown
-RORGT,TBET,negative,MSM,3,,indirect,,mechanism & mediators unknown
-RORGT,TBET,negative,P18,3,,indirect,,mechanism & mediators unknown
-RORGT,THPOK,positive,MSM,5,,assumption,,
-RUNX3,CD4,negative,MSM,1,regulates,direct,,RUNX3-containing complexes bind the Cd4 silencer and repress Cd4 transcription
-RUNX3,CD8,positive,MSM,1,regulates,direct,,regulation of transcription. RUNX3 binds regulatory enhancers of the CD8A/CD8B locus and promotes CD8 expression
-RUNX3,EOMES,positive,MSM,1,regulates,direct,,RUNX3 binds cis-regulatory regions of the Eomes locus and promotes transcription.
-RUNX3,IFNG,positive,AJ,1,regulates,direct,SI,"indicated as ""binding and functional data"". RUNX3 binds regulatory regions of the Ifng locus and promotes transcription, usually in cooperation with T-bet"
-RUNX3,IFNG,positive,N10,1,regulates,direct,,"RUNX3 binds regulatory regions of the Ifng locus and promotes transcription, usually in cooperation with T-bet"
-RUNX3,IL4,negative,AJ,1,regulates,direct,,RUNX3 directly binds regulatory elements within the Il4 locus and represses its transcription.
-RUNX3,IL4,negative,N10,1,regulates,direct,,RUNX3 directly binds regulatory elements within the Il4 locus and represses its transcription.
-RUNX3,RUNX3,positive,MSM,4/5,,,,
-RUNX3,THPOK,negative,MSM,1,regulates,direct,,RUNX3-containing complexes bind the ThPOK (Zbtb7b) silencer and repress transcription.
-SMAD2,FOXP3,positive,MSM,1,regulates,direct,,Activated SMAD2 binds regulatory elements of the FOXP3 locus (with SMAD3 and cofactors) and promotes transcription.
-SMAD2,RORGT,positive,MSM,5,,"indirect, weakly supported",,weakly supported. SMAD2 cooperates with STAT3 and other Th17 transcription factors to permit Rorc induction; no causal path from SMAD2 to STAT3
-SMAD3,FOXP3,positive,AJ,1,regulates,direct,SI,"indicated as ""binding and functional data"". Activated SMAD3 binds the CNS1 enhancer of the Foxp3 locus and promotes transcription."
-SMAD3,FOXP3,positive,N10,1,regulates,direct,,Activated SMAD3 binds the CNS1 enhancer of the Foxp3 locus and promotes transcription.
-SMAD3,IL2RA,positive,AJ,1,regulates,direct,,SMAD3-containing complexes bind a positive regulatory region of IL2RA and cooperate with AP-1/CREB-family factors to activate transcription
-SMAD3,IL2RA,positive,N10,1,regulates,direct,,SMAD3-containing complexes bind a positive regulatory region of IL2RA and cooperate with AP-1/CREB-family factors to activate transcription
-SMAD3,IL9,positive,AJ,1,regulates,direct,,SMAD3 binds the Il9 promoter during Th9 differentiation and promotes transcription
-SOCS1,IFNGR_2,negative,M06,,,,,
-SOCS1,IL4R,negative,M06,-,,wrong,,"Unsupported assumption. SOCS1 strongly reduces IL-4-induced JAK1 and STAT6 activation, thereby suppressing IL-4 responses. But it does not affect IL4R itself."
-SOCS1,IL4R,negative,MSM,-,,wrong,,"Unsupported assumption. SOCS1 strongly reduces IL-4-induced JAK1 and STAT6 activation, thereby suppressing IL-4 responses. But it does not affect IL4R itself."
-SOCS1,IL4R,negative,MX,-,,wrong,,"Unsupported assumption. SOCS1 strongly reduces IL-4-induced JAK1 and STAT6 activation, thereby suppressing IL-4 responses. But it does not affect IL4R itself."
-SOCS1,IL4R,negative,P18,-,,wrong,,"Unsupported assumption. SOCS1 strongly reduces IL-4-induced JAK1 and STAT6 activation, thereby suppressing IL-4 responses. But it does not affect IL4R itself."
-SOCS1,JAK1,negative,MX,1,regulates,direct,,protein-protein interaction. SOCS1 directly binds the JAK1 kinase domain and inhibits its catalytic activity.
-SOCS1,JAK1,negative,P18,1,regulates,direct,,protein-protein interaction. SOCS1 directly binds the JAK1 kinase domain and inhibits its catalytic activity.
-SOCS1,STAT5,negative,MSM,1,regulates,direct,,"SOCS1 binds activated JAK1, JAK2, and/or TYK2, and inhibits JAK-STAT signaling"
-SOCS1,STAT6,negative,P18,1,regulates,direct,,"SOCS1 binds activated JAK1, JAK2, and/or TYK2, and inhibits JAK-STAT signaling"
-ST2,IL33R,positive,AJ,,,,,
-STAT1,BCL6,positive,AJ,3,regulate,indirect,,likely mediated by STAT3
-STAT1,FOXP3,negative,AJ,3,regulate,indirect,,STAT1->TBET-|FOXP3
-STAT1,FOXP3,negative,N10,3,regulate,indirect,,STAT1->TBET-|FOXP3
-STAT1,IL17,negative,AJ,3,regulate,indirect,,STAT1->TBET-|RORGT->IL17
-STAT1,IL17,negative,N10,3,regulate,indirect,,STAT1->TBET-|RORGT->IL17
-STAT1,IL17,negative,P18,3,regulate,indirect,,STAT1->TBET-|RORGT->IL17
-STAT1,IL22,positive,AJ,-,regulate,wrong,,"unsupported assumption. contradicts experimental evidence that STAT1 binds to the IL22 region  and antagonizes STAT3, repressing IL22 transcription"
-STAT1,IL4,negative,M06,3,regulate,indirect,,STAT1->TBET-|IL4
-STAT1,IL4,negative,MSM,3,regulate,indirect,,STAT1->TBET-|IL4
-STAT1,IL4,negative,MX,3,regulate,indirect,,STAT1->TBET-|IL4
-STAT1,IL4,negative,P18,3,regulate,indirect,,STAT1->TBET-|IL4
-STAT1,IRF1,positive,AJ,,,,,
-STAT1,IRF1,positive,N10,,,,,
-STAT1,SOCS1,positive,M06,1,regulates,direct,,"STAT1 directly occupies the SOCS1 promoter/enhancer following IFN-γ stimulation, although IRF1 also plays an important role in full transcriptional activation."
-STAT1,SOCS1,positive,MSM,1,regulates,direct,,"STAT1 directly occupies the SOCS1 promoter/enhancer following IFN-γ stimulation, although IRF1 also plays an important role in full transcriptional activation."
-STAT1,SOCS1,positive,MX,1,regulates,direct,,"STAT1 directly occupies the SOCS1 promoter/enhancer following IFN-γ stimulation, although IRF1 also plays an important role in full transcriptional activation."
-STAT1,SOCS1,positive,P18,1,regulates,direct,,"STAT1 directly occupies the SOCS1 promoter/enhancer following IFN-γ stimulation, although IRF1 also plays an important role in full transcriptional activation."
-STAT1,STAT1,positive,M06,3?,,indirect,,STAT1->TBET->IFGN->IFNGR->JAK1->STAT1
-STAT1,STAT1_2,positive,M06,0,necessary,,,reaching a higher level necessitates achieving the lower level first
-STAT1,TBET,positive,AJ,1,regulates,direct ,,STAT1 activates the transcription of  TBX21 (TBET).
-STAT1,TBET,positive,M06,1,regulates,direct ,,STAT1 activates the transcription of  TBX21 (TBET).
-STAT1,TBET,positive,MSM,1,regulates,direct ,,STAT1 activates the transcription of  TBX21 (TBET).
-STAT1,TBET,positive,MX,1,regulates,direct ,,STAT1 activates the transcription of  TBX21 (TBET).
-STAT1,TBET,positive,N10,1,regulates,direct ,,STAT1 activates the transcription of  TBX21 (TBET).
-STAT1,TBET,positive,P18,1,regulates,direct,,STAT1 activates the transcription of  TBX21 (TBET).
-STAT1,TBET_2,positive,M06,,,,,
-STAT1_2,STAT1,positive,M06,-,,wrong,,high-level should not activate low-level
-STAT1_2,TBET,negative,M06,5,,assumption ,,
-STAT1_2,TBET_2,positive,M06,,,,,
-STAT3,BCL6,positive,AJ,1,regulates,direct,,regulation of transcription. STAT3 binds regulatory elements of the Bcl6 gene. Loss of STAT3 markedly reduces BCL6 induction during Tfh differentiation.
-STAT3,CMAF,positive,AJ,1,regulates,direct,,regulation of transcription. STAT3 binds regulatory regions of the Maf gene and promotes c-Maf expression.
-STAT3,FOXP3,negative,AJ,3,,indirect,,"causal effect, STAT3->RORGT-|FOXP3"
-STAT3,FOXP3,negative,MSM,3,,indirect,,"causal effect, STAT3->RORGT-|FOXP3"
-STAT3,FOXP3,negative,N10,3,,indirect,,"causal effect, STAT3->RORGT-|FOXP3"
-STAT3,FOXP3,negative,P18,3,,indirect,,"causal effect, STAT3->RORGT-|FOXP3"
-STAT3,IFNG,negative,MSM,3,,indirect,,"causal effect, STAT3->BCL6-|TBET->IFNG"
-STAT3,IFNG,negative,MX,3,,indirect,,"causal effect, STAT3->BCL6-|TBET->IFNG"
-STAT3,IFNG,negative,N10,3,,indirect,,"causal effect, STAT3->BCL6-|TBET->IFNG"
-STAT3,IFNG,negative,P18,3,,indirect,,"causal effect, STAT3->BCL6-|TBET->IFNG"
-STAT3,IL10,positive,AJ,1,regulates,direct,,STAT3 regulates the transcription of IL10
-STAT3,IL10,positive,N10,1,regulates,direct ,,STAT3 regulates the transcription of IL10 
-STAT3,IL17,positive,AJ,1,regulates,direct,SI,"indicated as ""binding and functional data"". Activated STAT3 directly binds several regulatory sites across the Il17a/Il17f locus and promotes transcription."
-STAT3,IL17,positive,N10,1,regulates,direct,,Activated STAT3 directly binds several regulatory sites across the Il17a/Il17f locus and promotes transcription.
-STAT3,IL17,positive,P18,1,regulates,direct,,Activated STAT3 directly binds several regulatory sites across the Il17a/Il17f locus and promotes transcription.
-STAT3,IL1R1,positive,AJ,5,,assumption ,,"assumption, to account for IL1R1 differential expression in Th0 and Th17"
-STAT3,IL21,positive,AJ,1,regulates,direct,SI,"indicated as ""binding and functional data"". Activated STAT3 directly binds the Il21 promoter and promotes IL-21 transcription."
-STAT3,IL21,positive,N10,1,regulates,direct,,Activated STAT3 directly binds the Il21 promoter and promotes IL-21 transcription.
-STAT3,IL21,positive,P18,1,regulates,direct,,Activated STAT3 directly binds the Il21 promoter and promotes IL-21 transcription.
-STAT3,IL22,positive,AJ,1,regulates,direct,,"STAT3 binds regulatory elements of the Il22 locus and promotes Il22 transcription, especially in Th17/Th22-related contexts."
-STAT3,IL23,positive,N10,1,regulates,direct,,STAT3 binds the IL23A regulatory region and promotes transcription of the IL-23 p19 subunit
-STAT3,IL23R,positive,AJ,1,regulates,direct,,STAT3 regulates the transcription of IL23R
-STAT3,IL23R,positive,N10,1,regulates,direct,,STAT3 regulates the transcription of IL23R
-STAT3,IL23R,positive,P18,1,regulates,direct,,STAT3 regulates the transcription of IL23R
-STAT3,IL6,positive,AJ,1,regulates,direct,,STAT3 binds the IL6 promoter and increases IL6 transcription
-STAT3,RORGT,positive,AJ,1,regulates,direct,,STAT3 regulates the transcription of RORGT
-STAT3,RORGT,positive,MSM,1,regulates,direct,,STAT3 regulates the transcription of RORGT
-STAT3,RORGT,positive,N10,1,regulates,direct,,STAT3 regulates the transcription of RORGT
-STAT3,RORGT,positive,P18,1,regulates,direct,,STAT3 regulates the transcription of RORGT
-STAT4,BCL6,positive,AJ,1,regulates,direct,,STAT4 binds the Bcl6 regulatory region and activates transcription.
-STAT4,IFNG,positive,AJ,1,regulates,direct,,regulation of transcription. Canonical target; STAT4 binds the Ifng locus.
-STAT4,IFNG,positive,M06,1,regulates,direct,,regulation of transcription. Canonical target; STAT4 binds the Ifng locus.
-STAT4,IFNG,positive,MSM,1,regulates,direct,,regulation of transcription. Canonical target; STAT4 binds the Ifng locus.
-STAT4,IFNG,positive,MX,1,regulates,direct,,regulation of transcription. Canonical target; STAT4 binds the Ifng locus.
-STAT4,IFNG,positive,N10,1,regulates,direct,,regulation of transcription. Canonical target; STAT4 binds the Ifng locus.
-STAT4,IFNG,positive,P18,1,regulates,direct,,regulation of transcription. Canonical target; STAT4 binds the Ifng locus.
-STAT4,IFNG_2,positive,M06,1,regulates,direct,,regulation of transcription. Canonical target; STAT4 binds the Ifng locus. The classification is the same as that of STAT4->IFNG.
-STAT4,IL10,positive,AJ,3,,indirect,,"It may be a negative feedback effect of TBET activation, or be mediated by CMAF"
-STAT4,IL12R,positive,P18,3,,indirect,,"STAT4->TBET->IL12RB2->IL12R. We are considering a direct effect on a receptor subchain as a direct effect on the receptor, but this is an indirect effect on a subchain."
-STAT4,IL18R,positive,AJ,1,regulates,direct,SI,"indicated as ""binding and functional data"". STAT4 directly binds regulatory regions of the Il18r1 locus (the gene of the ligand-binding chain of IL18R) and promotes its transcription. We are interpreting a direct effect on a receptor subchain as a direct effect on the receptor."
-STAT4,IL21,positive,AJ,1,regulates,direct,,STAT4 binds regulatory elements of the Il21 locus and activates transcription (particularly in response to IL-12).
-STAT4,TBET,positive,P18,1,regulates,direct,,STAT4 binds the Tbx21 promoter and promotes TBET expression.
-STAT5,BCL6,negative,AJ,1,regulates,direct,,regulation of transcription. STAT5 and STAT3 compete for occupancy of the same regulatory region. When STAT5 is activated it displaces STAT3 and represses BCL6 expression.
-STAT5,FOXP3,positive,AJ,1,regulates,direct,SI,"indicated as ""binding and functional data"". Activated STAT5 directly binds regulatory elements of the Foxp3 locus and promotes Foxp3 expression and stability."
-STAT5,FOXP3,positive,N10,1,regulates,direct,,Activated STAT5 directly binds regulatory elements of the Foxp3 locus and promotes Foxp3 expression and stability.
-STAT5,FOXP3,positive,P18,1,regulates,direct,,Activated STAT5 directly binds regulatory elements of the Foxp3 locus and promotes Foxp3 expression and stability.
-STAT5,GATA3,positive,P18,1,regulates,direct,,STAT5 binds regulatory DNA at the Gata3 locus and activates transcription.
-STAT5,IL17,negative,AJ,1,regulates,direct,SI,"indicated as ""binding and functional data"". Activated STAT5 directly binds regulatory sites across the Il17a–Il17f locus and represses IL-17 transcription."
-STAT5,IL17,negative,N10,1,regulates,direct,,Activated STAT5 directly binds regulatory sites across the Il17a–Il17f locus and represses IL-17 transcription.
-STAT5,IL17,negative,P18,1,regulates,direct,,Activated STAT5 directly binds regulatory sites across the Il17a–Il17f locus and represses IL-17 transcription.
-STAT5,IL2,negative,AJ,3,,indirect,,"causal effect, STAT5->FOXP3-|IL2"
-STAT5,IL2,negative,N10,3,,indirect,,"causal effect, STAT5->FOXP3-|IL2"
-STAT5,IL2RA,positive,AJ,1,regulates,direct,,Activated STAT5 binds regulatory elements of the IL2RA/CD25 locus and promotes its transcription.
-STAT5,IL2RA,positive,N10,1,regulates,direct,,Activated STAT5 binds regulatory elements of the IL2RA/CD25 locus and promotes its transcription.
-STAT5,IL4,positive,AJ,1,regulates,direct,,Activated STAT5 binds regulatory elements within the Il4 locus and promotes early IL-4 transcription
-STAT5,IL4RA_2,positive,N10,,,,,
-STAT5,proliferation,positive,AJ,1,regulates,direct in the network sense,,STAT5 activates the transcription of cell cycle genes such as Cyclin D2 and MYC.
-STAT5,proliferation,positive,N10,1,regulates,direct in the network sense,,STAT5 activates the transcription of cell cycle genes such as Cyclin D2 and MYC.
-STAT5,RUNX3,positive,MSM,1,regulates,direct,,regulation of transcription. STAT5 binds regulatory elements of the Runx3 locus. Constitutively active STAT5 induces Runx3 expression. Loss of IL-7/STAT5 signaling reduces Runx3 expression.
-STAT5,STAT5,positive,AJ,,,,,
-STAT5,STAT5,positive,N10,5,,assumption,,comes from the Booleanization of the original multi-level model
-STAT5,STAT5_2,positive,AJ,0,necessary,,,reaching a higher level necessitates achieving the lower level first
-STAT5,STAT5_2,positive,N10,0,necessary,,,reaching a higher level necessitates achieving the lower level first
-STAT5_2,IL4RA_2,positive,N10,,,,,
-STAT5_2,proliferation,positive,AJ,,,,,
-STAT5_2,proliferation,positive,N10,,,,,
-STAT5_2,STAT5,positive,AJ,-,,wrong,,high-level should not activate low-level
-STAT5_2,STAT5,positive,N10,-,,wrong,,high-level should not activate low-level
-STAT6,FOXP3,negative,AJ,1,regulate,direct,,STAT6 binds to the Foxp3 locus and represses FOXP3 transcription
-STAT6,GATA3,positive,AJ,1,regulates,direct,,STAT6 binds the regulatory region of GATA3 and regulates its transcription
-STAT6,GATA3,positive,M06,1,regulates,direct,,STAT6 binds the regulatory region of GATA3 and regulates its transcription
-STAT6,GATA3,positive,MSM,1,regulate,direct,,STAT6 binds the regulatory region of GATA3 and regulates its transcription
-STAT6,GATA3,positive,MX,1,regulate,direct,,STAT6 binds the regulatory region of GATA3 and regulates its transcription
-STAT6,GATA3,positive,N10,1,regulate,direct,,STAT6 binds the regulatory region of GATA3 and regulates its transcription
-STAT6,GATA3,positive,P18,1,regulate,direct,,STAT6 binds the regulatory region of GATA3 and regulates its transcription
-STAT6,IFNG,negative,P18,3?,,indirect,,STAT6->GATA3-|TBET->IFNG
-STAT6,IL12R,negative,M06,3,,indirect,,"Mediated by GATA3, STAT6->GATA3-|IL12R. "
-STAT6,IL12R,negative,MSM,3,regulate,indirect,,"Mediated by GATA3, STAT6->GATA3-|IL12R. "
-STAT6,IL12RB2,negative,AJ,,,,,
-STAT6,IL12RB2,negative,N10,3,regulate,indirect,,"Mediated by GATA3, STAT6->GATA3-|IL12RB2. "
-STAT6,IL17,negative,AJ,3,regulate,indirect,,STAT6->GATA3-|RORGT->IL17
-STAT6,IL17,negative,N10,3,regulate,indirect,,STAT6->GATA3-|RORGT->IL17
-STAT6,IL18R,negative,M06,,,,,
-STAT6,IL18R,negative,MSM,3,regulate,indirect,,"likely mediated by GATA3, which inhibits a chain of IL18R"
-STAT6,IL18R,negative,MX,,,,,
-STAT6,IL18R,negative,P18,3,regulate,indirect,,"likely mediated by GATA3, which inhibits a chain of IL18R"
-STAT6,IL2,negative,AJ,3,regulate,indirect,,mediated by the Th2 differentiation program in a difficult to pinpoint way
-STAT6,IL2,negative,N10,3,regulate,indirect,,mediated by the Th2 differentiation program in a difficult to pinpoint way
-STAT6,IL24,positive,AJ,1,regulate,direct,SI,"indicated as ""binding and functional data"". Activated STAT6 binds the Il24 promoter and additional regulatory elements across the Il24 locus and activates transcription"
-STAT6,IL31,positive,AJ,1,regulate,direct,,STAT6 binds the IL31 promoter and activates transcription
-STAT6,IL9,positive,AJ,1,regulate,direct,,STAT6 binds to the IL9 locus and promotes transcription.
-TBET,BCL6,negative,AJ,1,regulate,direct,,"protein-protein interaction. T-bet binds BCL6 directly and recruits it to TBET-bound promoters. The interaction prevents BCL6 from acting at its own canonical DNA-binding sites, effectively antagonizing part of BCL6's normal transcriptional program."
-TBET,BCL6,negative,MS15,1,regulate,direct,,"protein-protein interaction. T-bet binds BCL6 directly and recruits it to TBET-bound promoters. The interaction prevents BCL6 from acting at its own canonical DNA-binding sites, effectively antagonizing part of BCL6's normal transcriptional program."
-TBET,EOMES,positive,MSM,-,,wrong,,"assumption, contradicted by evidence that TBET and EOMES have opposing expression patterns"
-TBET,FOXP3,negative,MSM,1,regulate,direct,,regulation of transcription. T-bet binds a conserved regulatory region of the Foxp3 locus and reduces Foxp3 expression.
-TBET,GATA3,negative,AJ,1,regulate,direct,SI,"Indicated as ""binding and functional data"". T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription."
-TBET,GATA3,negative,M06,1,regulate,direct,,T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription.
-TBET,GATA3,negative,MS15,1,regulate,direct,,T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription.
-TBET,GATA3,negative,MSM,1,regulate,direct,,T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription.
-TBET,GATA3,negative,MX,1,regulate,direct,,T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription.
-TBET,GATA3,negative,N10,1,regulate,direct,,T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription.
-TBET,GATA3,negative,P18,1,regulate,direct,,T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription.
-TBET,IFNG,positive,AJ,1,regulate,direct,SI,"indicated as ""binding and functional data."" T-bet directly binds regulatory elements of the Ifng locus and activates transcription."
-TBET,IFNG,positive,M06,1,regulate,direct,,T-bet directly binds regulatory elements of the Ifng locus and activates transcription.
-TBET,IFNG,positive,MS15,1,regulate,direct,,T-bet directly binds regulatory elements of the Ifng locus and activates transcription.
-TBET,IFNG,positive,MSM,1,regulate,direct,,T-bet directly binds regulatory elements of the Ifng locus and activates transcription.
-TBET,IFNG,positive,MX,1,regulate,direct,,T-bet directly binds regulatory elements of the Ifng locus and activates transcription.
-TBET,IFNG,positive,N10,1,regulate,direct,,T-bet directly binds regulatory elements of the Ifng locus and activates transcription.
-TBET,IFNG,positive,P18,1,regulate,direct,,T-bet directly binds regulatory elements of the Ifng locus and activates transcription.
-TBET,IFNG_2,positive,M06,1,,,,regulation of transcription
-TBET,IL12R,positive,P18,1,regulate,direct,,"TBET regulates the transcription of IL12RB2, which is a subchain of IL12R. We are interpreting a direct effects on a subchain as a direct effect on the receptor."
-TBET,IL2,negative,AJ,1,regulate,direct,,"indicated as ""binding and functional data"". T-bet physically interacts with RelA/p65 at the Il2 promoter, reducing NF-κB binding and inhibiting IL2 trancription."
-TBET,IL2,negative,N10,1,regulate,direct,,"T-bet physically interacts with RelA/p65 at the Il2 promoter, reducing NF-κB binding and inhibiting IL2 trancription."
-TBET,IL2,negative,P18,1,regulate,direct,,"T-bet physically interacts with RelA/p65 at the Il2 promoter, reducing NF-κB binding and inhibiting IL2 trancription."
-TBET,IL23R,negative,P18,1,regulate,direct,,"regulation of transcription. In intestinal/inflammatory CD4⁺ T cells, T-bet was found at a regulatory region in intron 3 of Il23r."
-TBET,IL4,negative,AJ,1,regulate,direct,SI?,"indicated as ""binding and functional data"". T-bet directly binds regulatory elements of the Il4 locus and represses its transcription."
-TBET,IL4,negative,MS15,1,regulate,direct,,T-bet directly binds regulatory elements of the Il4 locus and represses its transcription.
-TBET,IL4,negative,N10,1,regulate,direct,,T-bet directly binds regulatory elements of the Il4 locus and represses its transcription.
-TBET,RORGT,negative,MS15,1,regulate,direct in the network sense,,T-bet suppresses RORγt via binding RUNX1 and preventing it to bind to the Rorc promoter and activating its transcription. RUNX1 is not in any of the partial models.
-TBET,RORGT,negative,MSM,1,regulate,direct in the network sense,,T-bet suppresses RORγt via binding RUNX1 and preventing it to bind to the Rorc promoter and activating its transcription. RUNX1 is not in any of the partial models.
-TBET,RORGT,negative,P18,1,regulate,direct in the network sense,,T-bet suppresses RORγt via binding RUNX1 and preventing it to bind to the Rorc promoter and activating its transcription. RUNX1 is not in any of the partial models.
-TBET,RUNX3,positive,AJ,3,regulate,indirect,,"Runx3 expression is T-bet-dependent during Th1 differentiation, but weak evidence of direct T-bet binding to and activation of the Runx3 locus."
-TBET,RUNX3,positive,N10,3,regulate,indirect,,"Runx3 expression is T-bet-dependent during Th1 differentiation, but weak evidence of direct T-bet binding to and activation of the Runx3 locus."
-TBET,SOCS1,positive,M06,-,,wrong,,"assumption, contradicted by evidence that TBET blocks SOCS1 transcription. The best-characterized effect of TBET on SOCS1 is repression. T-bet binds the Socs1 promoter; recruits BCL6, which represses transcription."
-TBET,SOCS1,positive,MSM,-,,wrong,,"assumption, contradicted by evidence that TBET blocks SOCS1 transcription. The best-characterized effect of TBET on SOCS1 is repression. T-bet binds the Socs1 promoter; recruits BCL6, which represses transcription."
-TBET,SOCS1,positive,MX,-,,wrong,,"assumption, contradicted by evidence that TBET blocks SOCS1 transcription. The best-characterized effect of TBET on SOCS1 is repression. T-bet binds the Socs1 promoter; recruits BCL6, which represses transcription."
-TBET,SOCS1,positive,P18,-,,wrong,,"assumption, contradicted by evidence that TBET blocks SOCS1 transcription. The best-characterized effect of TBET on SOCS1 is repression. T-bet binds the Socs1 promoter; recruits BCL6, which represses transcription."
-TBET,TBET,positive,AJ,3,regulate,indirect,SI,"Although indicated as ""binding and functional data"", the current evidence points to positive feedback loops instead of self-regulation."
-TBET,TBET,positive,M06,3,regulate,indirect,,The current evidence points to positive feedback loops instead of self-regulation.
-TBET,TBET,positive,MS15,3,,indirect,,The current evidence points to positive feedback loops instead of self-regulation.
-TBET,TBET,positive,MSM,3,regulate,indirect,,The current evidence points to positive feedback loops instead of self-regulation.
-TBET,TBET,positive,MX,3,regulate,indirect,,The current evidence points to positive feedback loops instead of self-regulation.
-TBET,TBET,positive,N10,3,regulate,indirect,,The current evidence points to positive feedback loops instead of self-regulation.
-TBET,TBET,positive,P18,3,regulate,indirect,,The current evidence points to positive feedback loops instead of self-regulation.
-TBET,TBET_2,positive,M06,0,necessary,,,reaching a higher level necessitates achieving the lower level first
-TBET,THPOK,positive,MSM,-,,wrong,,"assumption, contradicted by evidence that TBET promotes loss of THPOK."
-TBET_2,IFNG_2,positive,M06,,,,,
-TBET_2,TBET,positive,M06,-,,wrong,,high-level should not activate low-level
-TBET_2,TBET_2,positive,M06,,,,,
-TCR,CD8,negative,MSM,,,,,
-TCR,IKB,negative,AJ,1,regulate,direct in the network sense,,"Mediated by a signaling pathway that activates IKKB, which phosphorylates and inhibits IKB."
-TCR,IKB,negative,N10,1,regulate,direct in the network sense,,"Mediated by a signaling pathway that activates IKKB, which phosphorylates and inhibits IKB."
-TCR,IL12R,positive,P18,3,regulate,indirect,,"TCR engagement activates NFAT, AP-1, NFKB, which lead to the upregulation of IL12RB2, which is a subchain of IL12R"
-TCR,IL7R,negative,MSM,1,regulate,direct in the network sense,,The transcriptional repressor GFI1 is induced following T-cell activation and directly represses the Il7r gene. GFI1 is not a node of the network.
-TCR,NFAT,positive,AJ,1,regulate,direct in the network sense,,"TCR signaling activates PLCγ1, leading to Ca²⁺ influx and calcineurin-mediated NFAT dephosphorylation. None of these mediators are nodes of the network"
-TCR,NFAT,positive,MSM,1,regulate,direct in the network sense,,"TCR signaling activates PLCγ1, leading to Ca²⁺ influx and calcineurin-mediated NFAT dephosphorylation. None of these mediators are nodes of the network"
-TCR,NFAT,positive,MX,1,regulate,direct in the network sense,,"TCR signaling activates PLCγ1, leading to Ca²⁺ influx and calcineurin-mediated NFAT dephosphorylation. None of these mediators are nodes of the network"
-TCR,NFAT,positive,N10,1,regulate,direct in the network sense,,"TCR signaling activates PLCγ1, leading to Ca²⁺ influx and calcineurin-mediated NFAT dephosphorylation. None of these mediators are nodes of the network"
-TCR,NFAT,positive,P18,1,regulate,direct in the network sense,,"TCR signaling activates PLCγ1, leading to Ca²⁺ influx and calcineurin-mediated NFAT dephosphorylation. None of these mediators are nodes of the network"
-TCR,THPOK,positive,MSM,,,,,
-TGFB,BCL6,negative,MS15,,,,,
-TGFB,FOXP3,positive,MS15,3?,,indirect,,TGFB->TGFBR->SMAD3->FOXP3
-TGFB,GATA3,negative,MS15,3?,,indirect,,TGFB->TGFBR->PU1-|GATA3
-TGFB,IFNG,negative,MS15,,,,,
-TGFB,IL10,positive,MS15,,,,,
-TGFB,IL9,positive,MS15,3?,,indirect,,TGFB->TGFBR->SMAD3->IL9
-TGFB,RORGT,positive,MS15,3?,,indirect,,TGFB->TGFBR->SMAD2->RORGT
-TGFB,TGFB,positive,MS15,3?,,indirect,,TGFB->TGFBR->SMAD3->FOXP3->TGFB
-TGFB,TGFBR,positive,AJ,1,regulate,direct,,ligand-receptor binding
-TGFB,TGFBR,positive,MSM,1,regulate,direct,,ligand-receptor binding
-TGFB,TGFBR,positive,N10,1,regulate,direct,,ligand-receptor binding
-TGFB_e,GATA3,negative,P18,,,,,
-TGFB_e,TGFB,positive,MS15,3?,,indirect,,TGFB_e->TGFBR->SMAD3->FOXP3->TGFB
-TGFB_e,TGFBR,positive,AJ,1,regulate,direct,,ligand-receptor binding
-TGFB_e,TGFBR,positive,N10,1,regulate,direct,,ligand-receptor binding
-TGFB_e,TGFBR,positive,P18,1,regulate,direct,,ligand-receptor binding
-TGFBR,CMAF,positive,AJ,3,regulate,indirect,,involves SMAD2/3 and an unknown transcription factor 
-TGFBR,FOXP3,positive,P18,3,regulate,indirect,,Mediated by SMAD3. TGFBR->SMAD3->FOXP3
-TGFBR,PU1,positive,AJ,3,regulate,indirect,,mediated by SMAD2/3 and an unknown transcription factor
-TGFBR,RORGT,positive,AJ,,,,,
-TGFBR,RORGT,positive,N10,,,,,
-TGFBR,RORGT,positive,P18,,,,,
-TGFBR,SMAD2,positive,MSM,1,regulate,direct,,protein-protein interaction. Activated TGFBR1 directly phosphorylates SMAD2
-TGFBR,SMAD3,positive,AJ,1,regulate,direct,,protein-protein interaction. Activated TGFBR1 directly phosphorylates SMAD3
-TGFBR,SMAD3,positive,N10,1,regulate,direct,,protein-protein interaction. Activated TGFBR1 directly phosphorylates SMAD3
-THPOK,CD4,positive,MSM,1,regulate,direct,,regulation of transcription. ThPOK physically associates with the Cd4 regulatory region and counteracts RUNX-dependent silencing
-THPOK,CD8,negative,MSM,1,regulate,direct,,ThPOK directly binds regulatory elements of the Cd8 locus and represses transcription by recruiting chromatin-modifying complexes.
-THPOK,RUNX3,negative,MSM,1,regulate,direct,,"Direct transcriptional repression, has strong experimental support"
-THPOK,THPOK,positive,MSM,1,regulate,direct,,ThPOK binds regulatory elements of the Zbtb7b (ThPOK) locus and contributes to maintenance of its own transcription.
+Regulator,Target,Sign,Model,Confidence Rank,Constraint,Direct,Notes
+APC,CD28,positive,AJ,1,regulates,direct,ligand binding to co-receptor. The costimulatory ligands CD80 (B7-1) and CD86 (B7-2) expressed on the APC directly bind the CD28 receptor on the T cell.
+APC,CD28,positive,N10,1,regulates,direct,ligand binding to co-receptor. The costimulatory ligands CD80 (B7-1) and CD86 (B7-2) expressed on the APC directly bind the CD28 receptor on the T cell.
+APC,TCR,positive,AJ,1,necessary,direct,ligand-receptor binding. The peptide–MHC on the APC binds the TCR.
+APC,TCR,positive,N10,1,necessary,direct,ligand-receptor binding. The peptide–MHC on the APC binds the TCR.
+BCL6,GATA3,negative,AJ,1,regulates,direct,BCL6 binds regulatory DNA at the Gata3 locus and represses transcription.
+BCL6,GATA3,negative,MS15,1,regulates,direct,BCL6 binds regulatory DNA at the Gata3 locus and represses transcription.
+BCL6,IFNG,negative,MS15,1,regulates,direct,"TBET recruits BCL6 to the Ifng locus, where it represses transcription."
+BCL6,IL21,positive,MS15,1,regulates,direct in the network sense,"BCL6 inhibits BLIMP-1, which is a transcriptional inhibitor of IL21. BLIMP-1 is not part of the integrated model."
+BCL6,RORGT,negative,AJ,2,,indirect,"Although annotated as ""binding and functional data"", the current evidence indicates a causal and indirect effect, BCL6 competing with STAT3 in regulating genes that activate RORGT."
+BCL6,RORGT,negative,MS15,2,,indirect,"The current evidence indicates a causal and indirect effect, BCL6 competing with STAT3 in regulating genes that activate RORGT."
+BCL6,TBET,negative,AJ,1,regulates,direct,BCL6 is a sequence-specific transcriptional repressor. It binds the Tbx21 promoter (or regulatory regions of the Tbx21 gene) and represses its transcription.
+BCL6,TBET,negative,MS15,1,regulates,direct,BCL6 is a sequence-specific transcriptional repressor. It binds the Tbx21 promoter (or regulatory regions of the Tbx21 gene) and represses its transcription.
+CD28,NFAT,positive,AJ,1,regulates,direct in the network sense,"This is a signaling pathway, CD28 → PI3K/LCK/PLCγ1 → Ca²⁺ → calcineurin → NFAT. None of the mediators are nodes of any of the partial models."
+CD28,NFAT,positive,N10,1,regulates,direct in the network sense,"This is a signaling pathway, CD28 → PI3K/LCK/PLCγ1 → Ca²⁺ → calcineurin → NFAT. None of the mediators are nodes of any of the partial models."
+CD4,CD4,positive,MSM,4,,assumption,Assumption made to represent maintenance of CD4+ T cell identity
+CD4,RUNX3,negative,MSM,3,,correlation,"CD4 and RUNX3 are negatively associated in CD lineage differentiation, but no causal effect is documented"
+CD4,THPOK,positive,MSM,2,,indirect,"Causal effect, pathway-level consequence of CD4-lineage selection"
+CD8,CD8,positive,MSM,4,,assumption,Assumption made to represent maintenance of CD8+ T cell identity
+CD8,RUNX3,positive,MSM,2,,indirect,"This causal effect is mediated by TCR/Lck signaling, the IL7R pathway, and STAT5"
+CD8,THPOK,negative,MSM,3,,correlation,CD8 expression and THPOK are negatively associated because they characterize opposing lineage programs
+CMAF,IL10,positive,AJ,1,regulates,direct,c-Maf directly binds regulatory elements of the Il10 gene and activates its transcription.
+CMAF,IL13,positive,AJ,2,,indirect,"Causal effect, CMAF->IL4->IL4R->STAT6->GATA3->IL13"
+CMAF,IL21,positive,AJ,1,regulates,direct,c-Maf is a transcription factor that directly binds regulatory elements of the Il21 gene and activates its transcription.
+CMAF,IL22,negative,AJ,1,regulates,direct,c-Maf directly binds the Il22 promoter and represses its transcription
+CMAF,IL4,positive,AJ,1,regulates,direct,c-Maf directly binds regulatory elements of the Il4 gene and activates its transcription. The strongest evidence for a direct target of c-Maf is IL4.
+CMAF,IL5,positive,AJ,2,,indirect,"Causal effect, CMAF->IL4->IL4R->STAT6->GATA3->IL5"
+DLL1,NOTCH1,positive,MSM,1,regulates,direct,ligand-receptor binding. DLL1 physically binds the extracellular domain of NOTCH1 and activates the receptor
+EOMES,GZMB,positive,MSM,1,regulates,direct,"EOMES binds the GZMB regulatory locus and promotes transcription, cooperating with RUNX3 and other cytotoxic-lineage factors."
+EOMES,IFNG,positive,MSM,1,regulates,direct,EOMES directly binds regulatory elements of the Ifng locus and activates IFN-γ transcription.
+EOMES,PRF1,positive,MSM,1,regulates,direct,regulation of transcription. EOMES directly binds regulatory elements of the Prf1 locus and activates perforin expression.
+FOXP3,FOXP3,positive,AJ,2,,indirect,"Although indicated as ""binding and functional data"", current evidence indicates that this effect is due to positive feedback and not self-regulation."
+FOXP3,FOXP3,positive,MS15,2,,indirect,The current evidence indicates that this effect is due to positive feedback loop(s)
+FOXP3,FOXP3,positive,MSM,2,,indirect,The current evidence indicates that this effect is due to positive feedback loop(s)
+FOXP3,FOXP3,positive,N10,2,,indirect,Assumed self-regulation; current evidence indicates that this effect is due to positive feedback loop(s)
+FOXP3,GATA3,negative,MSM,1,regulates,direct,protein-protein interaction. FOXP3 physically associates with GATA3 and inhibits/modulates its transcriptional function
+FOXP3,GATA3,negative,P18,1,regulates,direct,protein-protein interaction. FOXP3 physically associates with GATA3 and inhibits/modulates its transcriptional function
+FOXP3,IFNG,negative,AJ,2,,indirect,"Causal effect mediated by multiple mechanisms, including FOXP3 inhibiting NFAT and NFKB"
+FOXP3,IFNG,negative,N10,2,,indirect,"Causal effect mediated by multiple mechanisms, including FOXP3 inhibiting NFAT and NFKB"
+FOXP3,IL13,negative,AJ,2,,indirect,"Causal effect mediated by FOXP3 binding to GATA3 and not allowing it it to activate transcription of IL4, IL5, IL13."
+FOXP3,IL17,negative,AJ,2,,indirect,Causal effect mediated by FOXP3 binding to RORGT and not allowing it to activate IL17
+FOXP3,IL17,negative,N10,2,,indirect,Causal effect mediated by FOXP3 binding to RORGT and not allowing it to activate IL17
+FOXP3,IL2,negative,AJ,1,regulates,direct,"regulation of transcription. FOXP3 binds the Il2 promoter and represses transcription, often in complex with NFAT."
+FOXP3,IL2,negative,MS15,1,regulates,direct,"regulation of transcription. FOXP3 binds the Il2 promoter and represses transcription, often in complex with NFAT."
+FOXP3,IL2,negative,N10,1,regulates,direct,"regulation of transcription. FOXP3 binds the Il2 promoter and represses transcription, often in complex with NFAT."
+FOXP3,IL2RA,positive,AJ,1,regulates,direct,"regulation of transcription. FOXP3 binds regulatory regions of IL2RA, maintaining high-affinity IL-2 receptor expression, reinforcing Treg IL-2 sensitivity."
+FOXP3,IL2RA,positive,N10,1,regulates,direct,"regulation of transcription. FOXP3 binds regulatory regions of IL2RA, maintaining high-affinity IL-2 receptor expression, reinforcing Treg IL-2 sensitivity."
+FOXP3,IL35,positive,AJ,2,,indirect,"FOXP3 promotes the Treg suppressive program, and IL-35 is a Treg-associated cytokine"
+FOXP3,IL4,negative,AJ,2,,indirect,"mediated by FOXP3 binding to GATA3 and not allowing it it to activate transcription of IL4, IL5, IL13."
+FOXP3,IL4,negative,N10,2,,indirect,"mediated by FOXP3 binding to GATA3 and not allowing it it to activate transcription of IL4, IL5, IL13."
+FOXP3,IL5,negative,AJ,2,,indirect,"mediated by FOXP3 binding to GATA3 and not allowing it it to activate transcription of IL4, IL5, IL13."
+FOXP3,NFAT,negative,P18,1,regulates,direct,Direct protein-protein interaction that redirects NFAT transcriptional activity.
+FOXP3,NFKB,negative,AJ,1,regulates,direct,"protein-protein interaction. indicated as ""binding and functional data"". FOXP3 physically binds NF-κB (particularly the RelA/p65 and c-Rel subunits) and represses its transcriptional activity."
+FOXP3,NFKB,negative,N10,1,regulates,direct,protein-protein interaction. FOXP3 physically binds NF-κB (particularly the RelA/p65 and c-Rel subunits) and represses its transcriptional activity.
+FOXP3,NFKB,negative,P18,1,regulates,direct,protein-protein interaction. FOXP3 physically binds NF-κB (particularly the RelA/p65 and c-Rel subunits) and represses its transcriptional activity.
+FOXP3,RORGT,negative,AJ,1,regulates,direct,protein-protein interaction. FOXP3 physically binds RORγt and inhibits its transcriptional activity.
+FOXP3,RORGT,negative,MS15,1,regulates,direct,protein-protein interaction. FOXP3 physically binds RORγt and inhibits its transcriptional activity.
+FOXP3,RORGT,negative,MSM,1,regulates,direct,protein-protein interaction. FOXP3 physically binds RORγt and inhibits its transcriptional activity.
+FOXP3,RORGT,negative,P18,1,regulates,direct,protein-protein interaction. FOXP3 physically binds RORγt and inhibits its transcriptional activity.
+FOXP3,TBET,negative,MSM,4,,assumption,"assumption, to account for FOXP3's effect on IFNG"
+FOXP3,TBET,negative,P18,4,,assumption,"assumption, to account for FOXP3's effect on IFNG"
+FOXP3,TGFB,positive,AJ,3,,correlation,no more specific evidence than Treg cells expressing TGFB
+FOXP3,TGFB,positive,MS15,3,,correlation,no more specific evidence than Treg cells expressing TGFB
+FOXP3,TGFB,positive,MSM,3,,correlation,no more specific evidence than Treg cells expressing TGFB
+FOXP3,TGFB,positive,N10,3,,correlation,no more specific evidence than Treg cells expressing TGFB
+FOXP3,THPOK,positive,MSM,4,,assumption,
+GATA3,FOXP3,negative,MSM,2,,indirect,"causal effect, GATA3->IL4->IL4R->STAT6-|FOXP3"
+GATA3,FOXP3,negative,P18,2,,indirect,"causal effect, GATA3->IL4->IL4R->STAT6-|FOXP3"
+GATA3,GATA3,positive,AJ,1,regulates,direct,Positive transcriptional autoregulation of GATA3 has been demonstrated
+GATA3,GATA3,positive,MS15,1,regulates,direct,Positive transcriptional autoregulation of GATA3 has been demonstrated
+GATA3,GATA3,positive,MSM,1,regulates,direct,Positive transcriptional autoregulation of GATA3 
+GATA3,GATA3,positive,MX,1,regulates,direct,Positive transcriptional autoregulation of GATA3 
+GATA3,GATA3,positive,N10,1,regulates,direct,Positive  transcriptional autoregulation of GATA3 has been demonstrated
+GATA3,GATA3,positive,P18,1,regulates,direct,Positive transcriptional autoregulation of GATA3 
+GATA3,IFNG,negative,MS15,1,regulates,direct,"GATA3 binds multiple regulatory elements within the Ifng locus, and induces repressive chromatin remodeling of the Ifng locus. There also are strong indirect effects."
+GATA3,IL10,positive,AJ,2,,indirect,"The most likely mediator is CMAF, which activates IL10. GATA3->CMAF is not in any partial model."
+GATA3,IL10,positive,MS15,2,,indirect,"The most likely mediator is CMAF, which activates IL10. GATA3->CMAF is not in any partial model."
+GATA3,IL10,positive,MSM,2,,indirect,"The most likely mediator is CMAF, which activates IL10. GATA3->CMAF is not in any partial model."
+GATA3,IL10,positive,MX,2,,indirect,"The most likely mediator is CMAF, which activates IL10. GATA3->CMAF is not in any partial model."
+GATA3,IL10,positive,N10,2,,indirect,"The most likely mediator is CMAF, which activates IL10. GATA3->CMAF is not in any partial model."
+GATA3,IL12R,negative,P18,2,,indirect,"Causal effect mediated by GATA3 binding to the Il12rb2 locus, and repressesing the transcription of the IL12 receptor subunit IL12RB2. "
+GATA3,IL13,positive,AJ,1,regulates,direct,"indicated as ""binding data"". GATA3 directly binds regulatory elements in the Il13 locus and activates its transcription."
+GATA3,IL25,positive,AJ,4,,assumption,"assumption, to account for IL25 expression in Th2 cells, but no specific mechanism is known for this regulation"
+GATA3,IL3,positive,AJ,1,regulates,direct,GATA3 has been shown to bind regulatory regions of the Il3/Csf2 locus and contributes directly to Il3 transcription.
+GATA3,IL4,positive,AJ,1,regulates,direct,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
+GATA3,IL4,positive,M06,1,regulates,direct,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
+GATA3,IL4,positive,MS15,1,regulates,direct,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
+GATA3,IL4,positive,MSM,1,regulates,direct,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
+GATA3,IL4,positive,MX,1,regulates,direct,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
+GATA3,IL4,positive,N10,1,regulates,direct,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
+GATA3,IL4,positive,P18,1,regulates,direct,Canonical direct target. GATA3 binds multiple regulatory elements in the Il4 locus and is essential for its transcription.
+GATA3,IL5,positive,AJ,1,regulates,direct,"IL5 is part of the Th2 cytokine locus with IL4 and IL13. GATA3 directly binds regulatory elements in this locus and promotes Th2 cytokine transcription, including Il5."
+GATA3,RORGT,negative,MS15,1,regulates,direct in the network sense,GATA3 physically interacts with RUNX1 and inhibits its ability to activate Rorc (the gene of RORGT). None of the models contain RUNX1.
+GATA3,RORGT,negative,MSM,1,regulates,direct in the network sense,GATA3 physically interacts with RUNX1 and inhibits its ability to activate Rorc (the gene of RORGT). None of the models contain RUNX1.
+GATA3,RORGT,negative,P18,1,regulates,direct in the network sense,GATA3 physically interacts with RUNX1 and inhibits its ability to activate Rorc (the gene of RORGT). None of the models contain RUNX1.
+GATA3,ST2,positive,AJ,1,regulates,direct,regulation of transcription. GATA3 binds regulatory regions of the Il1rl1/ST2 locus and promotes ST2 expression
+GATA3,STAT4,negative,AJ,1,regulates,direct,regulation of transcription. GATA3 binds the Stat4 locus and recruits chromatin-remodeling/repressive complexes.
+GATA3,STAT4,negative,M06,1,regulates,direct,regulation of transcription. GATA3 binds the Stat4 locus and recruits chromatin-remodeling/repressive complexes.
+GATA3,STAT4,negative,MSM,1,regulates,direct,regulation of transcription. GATA3 binds the Stat4 locus and recruits chromatin-remodeling/repressive complexes.
+GATA3,STAT4,negative,MX,1,regulates,direct,regulation of transcription. GATA3 binds the Stat4 locus and recruits chromatin-remodeling/repressive complexes.
+GATA3,STAT4,negative,N10,1,regulates,direct,regulation of transcription. GATA3 binds the Stat4 locus and recruits chromatin-remodeling/repressive complexes.
+GATA3,STAT4,negative,P18,1,regulates,direct,regulation of transcription. GATA3 binds the Stat4 locus and recruits chromatin-remodeling/repressive complexes.
+GATA3,TBET,negative,M06,1,regulates,direct,regulation of transcription. GATA3 binds the Tbx21 regulatory region and recruits chromatin-remodeling/repressive complexes.
+GATA3,TBET,negative,MS15,1,regulates,direct,regulation of transcription. GATA3 binds the Tbx21 regulatory region and recruits chromatin-remodeling/repressive complexes.
+GATA3,TBET,negative,MSM,1,regulates,direct,regulation of transcription. GATA3 binds the Tbx21 regulatory region and recruits chromatin-remodeling/repressive complexes.
+GATA3,TBET,negative,MX,1,regulates,direct,regulation of transcription. GATA3 binds the Tbx21 regulatory region and recruits chromatin-remodeling/repressive complexes.
+GATA3,TBET,negative,N10,1,regulates,direct,regulation of transcription. GATA3 binds the Tbx21 regulatory region and recruits chromatin-remodeling/repressive complexes.
+GATA3,TBET_2,negative,M06,1,regulates,direct,regulation of transcription. GATA3 binds the Tbx21 regulatory region and recruits chromatin-remodeling/repressive complexes.
+GATA3,THPOK,positive,MSM,1,regulates,direct,"regulation of transcription. GATA3 binds regulatory elements of the Zbtb7b locus. During CD4 T-cell lineage commitment, GATA3 is one of the principal upstream activators of ThPOK (Zbtb7b)."
+IFNA_e,IFNAR,positive,AJ,1,regulates,direct,ligand-receptor binding
+IFNAR,STAT1,positive,AJ,1,regulates,direct,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNAR, then is phosphorylated by receptor-bound JAK1 or TYK2."
+IFNB_e,IFNAR,positive,AJ,1,regulates,direct,ligand-receptor binding
+IFNB_e,IFNBR,positive,M06,1,regulates,direct,ligand-receptor binding
+IFNB_e,IFNBR,positive,MSM,1,regulates,direct,ligand-receptor binding
+IFNB_e,IFNBR,positive,MX,1,regulates,direct,ligand-receptor binding
+IFNB_e,IFNBR,positive,N10,1,regulates,direct,ligand-receptor binding
+IFNBR,STAT1,positive,M06,1,regulates,direct,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
+IFNBR,STAT1,positive,MSM,1,regulates,direct,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
+IFNBR,STAT1,positive,MX,1,regulates,direct,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
+IFNBR,STAT1,positive,N10,1,regulates,direct,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNBR, then is phosphorylated by receptor-bound JAK1 or TYK2."
+IFNG,GATA3,negative,MS15,2,,indirect,"causal effect, mediated by IFNGR, STAT1, TBET"
+IFNG,IFNG,positive,M06,2,,indirect,"feedback loop, IFNG->IFNGR->STAT1->TBET->IFNG"
+IFNG,IFNG,positive,MS15,2,,indirect,"feedback loop, IFNG->IFNGR->STAT1->TBET->IFNG"
+IFNG,IFNG_2,positive,M06,0,necessary,,reaching a higher level necessitates achieving the lower level first
+IFNG,IFNGR,positive,AJ,1,regulates,direct,ligand-receptor binding
+IFNG,IFNGR,positive,M06,1,regulates,direct,ligand-receptor binding
+IFNG,IFNGR,positive,MSM,1,regulates,direct,ligand-receptor binding
+IFNG,IFNGR,positive,MX,1,regulates,direct,ligand-receptor binding
+IFNG,IFNGR,positive,N10,1,regulates,direct,ligand-receptor binding
+IFNG,IFNGR,positive,P18,1,regulates,direct,ligand-receptor binding
+IFNG,IFNGR_2,positive,M06,1,regulates,direct,We consider that the confidence score of the IFNG->IFNGR edge applies
+IFNG,IL10,positive,MS15,2,,indirect,"causal effect, mediated by IFNGR, STAT1"
+IFNG,IL2,negative,MS15,2,,indirect,"causal effect, mediated by IFNGR, STAT1, TBET"
+IFNG,IL21,negative,MS15,2,,indirect,"causal effect, mediated by IFNGR, STAT1, TBET"
+IFNG,IL4,negative,MS15,2,,indirect,"causal effect, mediated by IFNGR, STAT1, TBET"
+IFNG,IL9,negative,MS15,2,,indirect,"causal effect, mediated by IFNGR, STAT1, TBET"
+IFNG,STAT6,negative,P18,2,,indirect,"causal effect, mediated by IFNGR, STAT1, SOCS1"
+IFNG,TBET,negative,P18,-,,wrong,"assumption, contradicted by known positive feedback loop of IFNG and TBET"
+IFNG,TBET,positive,MS15,2,,indirect,"causal effect, IFNG->IFNGR->STAT1->TBET"
+IFNG_2,IFNG,positive,M06,-,,wrong,Artifact of the Booleanization; high-level should not activate low-level
+IFNG_2,IFNGR_2,positive,M06,1,regulates,direct,ligand-receptor binding
+IFNG_e,IFNG,positive,MS15,2,,indirect,"causal effect, IFNG_e->IFNGR->STAT1->TBET->IFNG"
+IFNG_e,IFNGR,positive,AJ,1,regulates,direct,ligand-receptor binding
+IFNG_e,IFNGR,positive,N10,1,regulates,direct,ligand-receptor binding
+IFNG_e,IFNGR,positive,P18,1,regulates,direct,ligand-receptor binding
+IFNGR,IFNGR,positive,M06,2,,indirect,"causal effect, IFNGR->STAT1->TBET->IFNG->IFNGR"
+IFNGR,IFNGR_2,positive,M06,0,necessary,,reaching a higher level necessitates achieving the lower level first
+IFNGR,JAK1,positive,MSM,1,regulates,direct,protein-protein interaction. JAK1 is constitutively bound to the intracellular domain of the IFN-γ receptor complex.
+IFNGR,JAK1,positive,MX,1,regulates,direct,protein-protein interaction. JAK1 is constitutively bound to the intracellular domain of the IFN-γ receptor complex.
+IFNGR,JAK1,positive,P18,1,regulates,direct,protein-protein interaction. JAK1 is constitutively bound to the intracellular domain of the IFN-γ receptor complex.
+IFNGR,STAT1,positive,AJ,1,regulates,direct,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNGR, then is phosphorylated by receptor-bound JAK1 or JAK2."
+IFNGR,STAT1,positive,M06,1,regulates,direct,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNGR, then is phosphorylated by receptor-bound JAK1 or TYK2."
+IFNGR,STAT1,positive,N10,1,regulates,direct,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNGR, then is phosphorylated by receptor-bound JAK1 or TYK2."
+IFNGR,STAT1_2,positive,M06,1,regulates,direct,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNGR, then is phosphorylated by receptor-bound JAK1 or JAK2; the classification of IFNGR->STAT1 applies"
+IFNGR_2,IFNGR,positive,M06,-,,wrong,Artifact of the Booleanization; high-level should not activate low-level
+IFNGR_2,STAT1_2,positive,M06,1,regulates,direct,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IFNGR, then is phosphorylated by receptor-bound JAK1 or JAK2; the classification of IFNGR->STAT1 applies"
+IKB,NFKB,negative,AJ,1,regulates,direct,protein-protein interaction. IκB proteins physically bind NF-κB dimers and inhibit their transcriptional activity.
+IKB,NFKB,negative,N10,1,regulates,direct,protein-protein interaction. IκB proteins physically bind NF-κB dimers and inhibit their transcriptional activity.
+IL1_e,IL1R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL10,IFNG,negative,MS15,2,,indirect,"causal effect, mediated by IL10R, STAT3, TBET"
+IL10,IL10,positive,MS15,2,,indirect,"feedback loop, IL10->IL10R->STAT3->IL10"
+IL10,IL10R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL10,IL10R,positive,MSM,1,regulates,direct,ligand-receptor binding
+IL10,IL10R,positive,MX,1,regulates,direct,ligand-receptor binding
+IL10,IL10R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL10,IL2,negative,MS15,2,,indirect,"causal effect, mediated by STAT3 and an indirect effect of STAT3 on IL2"
+IL10,IL21,negative,MS15,-,,wrong,the observed effect is more often positive
+IL10,IL9,positive,MS15,3,,correlation,IL-10 is often coexpressed with IL-9 in Th9 cells
+IL10_e,IL10,positive,MS15,2,,indirect,IL10_e->IL10R->STAT3->IL10
+IL10_e,IL10R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL10_e,IL10R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL10R,STAT3,positive,MSM,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL10R, then is phosphorylated by receptor-bound JAK1 or TYK2."
+IL10R,STAT3,positive,MX,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL10R, then is phosphorylated by receptor-bound JAK1 or TYK2."
+IL10R,STAT3,positive,N10,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL10R, then is phosphorylated by receptor-bound JAK1 or TYK2."
+IL12_e,IL12R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL12_e,IL12R,positive,M06,1,regulates,direct,ligand-receptor binding
+IL12_e,IL12R,positive,MSM,1,regulates,direct,ligand-receptor binding
+IL12_e,IL12R,positive,MX,1,regulates,direct,ligand-receptor binding
+IL12_e,IL12R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL12_e,IL12R,positive,P18,1,regulates,direct,ligand-receptor binding
+IL12_e,IL18R,positive,P18,2,,indirect,"IL12_e does not bind to IL18R, instead there is a causal effect, IL12_e->IL12R->STAT4->IL18R"
+IL12_e,STAT4,positive,P18,2,,indirect,causal effect mediated by IL12R
+IL12_e,TBET,negative,P18,-,,wrong,"spurious assumed edge, contradicted by known positive causal effect"
+IL12R,STAT4,positive,AJ,1,regulates,direct,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
+IL12R,STAT4,positive,M06,1,regulates,direct,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
+IL12R,STAT4,positive,MSM,1,regulates,direct,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
+IL12R,STAT4,positive,MX,1,regulates,direct,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
+IL12R,STAT4,positive,N10,1,regulates,direct,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
+IL12R,STAT4,positive,P18,1,regulates,direct,"STAT4 directly docks onto phosphorylated tyrosines in the intracellular domain of IL12R, then is phosphorylated by receptor-bound JAK2 or TYK2."
+IL12RB1_2,IL12R,positive,N10,0,regulates,direct,IL12RB1_2 represents the highly active state of the IL12RB1 subunit of IL12R (the other subunit is IL12RB2). The basal activity of IL12RB1 is assumed to be constitutive in both models that contain IL12RB1.
+IL12RB2,IL12R,positive,AJ,0,necessary,direct,IL12RB2 is one of the two subunits that physically assemble to form the functional IL-12 receptor. Note that this is even stronger than a direct interaction.
+IL12RB2,IL12R,positive,N10,0,necessary,direct,IL12RB2 is one of the two subunits that physically assemble to form the functional IL-12 receptor.
+IL15_e,IL15R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL15_e,IL15R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL15R,STAT5,positive,AJ,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL15R, then is phosphorylated by receptor-bound JAK1 or JAK3."
+IL15R,STAT5,positive,N10,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL15R, then is phosphorylated by receptor-bound JAK1 or JAK3."
+IL17,IL17,positive,P18,-,,wrong,"spurious assumed edge, not supported by experimental evidence"
+IL18_e,IL18R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL18_e,IL18R,positive,M06,1,regulates,direct,ligand-receptor binding
+IL18_e,IL18R,positive,MSM,1,regulates,direct,ligand-receptor binding
+IL18_e,IL18R,positive,MX,1,regulates,direct,ligand-receptor binding
+IL18_e,IL18R,positive,P18,1,regulates,direct,ligand-receptor binding 
+IL18R,IFNG,positive,AJ,2,,indirect,"causal effect, IL18R->IRAK->NFKB->IFNG"
+IL18R,IL10,negative,AJ,-,,wrong,There is more support for a positive indirect relationship.
+IL18R,IRAK,positive,M06,1,regulates,direct in the network sense,Activated IL18R recruits the MyD88–IRAK signaling complex.
+IL18R,IRAK,positive,MSM,1,regulates,direct in the network sense,Activated IL18R recruits the MyD88–IRAK signaling complex.
+IL18R,IRAK,positive,MX,1,regulates,direct in the network sense,Activated IL18R recruits the MyD88–IRAK signaling complex.
+IL18R,IRAK,positive,P18,1,regulates,direct in the network sense,Activated IL18R recruits the MyD88–IRAK signaling complex.
+IL1R,STAT3,positive,AJ,2,,indirect,"causal effect mediated by MyD88, IRAK, MAPK signaling, NFKB"
+IL1R1,IL1R,positive,AJ,0,necessary,direct,IL1R1 is the ligand-binding subunit of the functional IL-1 receptor complex. Note that this is even stronger than a direct interaction.
+IL2,BCL6,negative,MS15,2,,indirect,"causal effect, IL2->IL2R->STAT5-|BCL6"
+IL2,FOXP3,positive,MS15,2,,indirect,"causal effect, IL2->IL2R->STAT5->FOXP3"
+IL2,GATA3,positive,MS15,2,,indirect,"causal effect, IL2->IL2R->STAT5->GATA3"
+IL2,IL2,positive,MS15,2,,indirect,"causal effect, IL2->IL2R->STAT5->GATA3-|STAT4->IFNG->IFNGR->STAT1->TBET-| IL2"
+IL2,IL21,negative,MS15,2,,indirect,"causal effect, IL2->IL2R->STAT5-|BCL6->IL21"
+IL2,IL2R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL2,IL2R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL2,IL2R,positive,P18,1,regulates,direct,ligand-receptor binding
+IL2,IL2R_2,positive,AJ,1,regulates,direct,ligand-receptor binding; we consider the same confidence as IL2->IL2R
+IL2,IL2R_2,positive,N10,1,regulates,direct,ligand-receptor binding; consider the same confidence as IL2->IL2R
+IL2,IL4,positive,MS15,2,,indirect,"causal effect, IL2->IL2R->STAT5->GATA3->IL4"
+IL2,IL9,positive,MS15,2,,indirect,"causal effect, mediated by STAT5"
+IL2_e,IL2,positive,MS15,2,,indirect,"causal effect, IL2_e->IL2R->STAT5->GATA3-|STAT4->IFNG->IFNGR->STAT1->TBET-| IL2"
+IL2_e,IL2R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL2_e,IL2R,positive,MSM,1,regulates,direct,ligand-receptor binding
+IL2_e,IL2R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL2_e,IL2R_2,positive,AJ,1,regulates,direct,ligand-receptor binding; we consider the same confidence as IL2_e->IL2R
+IL2_e,IL2R_2,positive,N10,1,regulates,direct,ligand-receptor binding; we consider the same confidence as IL2_e->IL2R
+IL21,BCL6,positive,MS15,2,,indirect,causal effect mediated by IL21R and STAT3
+IL21,FOXP3,negative,MS15,2,,indirect,causal effect mediated by IL21R and STAT3
+IL21,GATA3,negative,MS15,3,,correlation,"IL-21 exposure is often associated with reduced GATA3 expression or activity, but this is likely due to lineage competition rather than a strong causal effect"
+IL21,IFNG,negative,MS15,3,,correlation,"IL-21 promotes the Tfh program, which is associated with lower IFN-γ production than Th1 cells. However, this reflects a lineage shift rather than a direct inhibitory signaling pathway."
+IL21,IL10,positive,MS15,2,,indirect,causal effect mediated by IL21R and STAT3
+IL21,IL2,negative,MS15,2,,indirect,"causal effect mediated by IL21R, STAT3, and BCL6"
+IL21,IL21,positive,MS15,2,,indirect,"positive feedback loop, IL21-> IL21R -> STAT3 -> IL21"
+IL21,IL21R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL21,IL21R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL21,IL21R,positive,P18,1,regulates,direct,ligand-receptor binding
+IL21,IL4,negative,MS15,-,,wrong,"no mechanism is known, the sign may be opposite"
+IL21,IL9,negative,MS15,3,,correlation,Consistent with a lineage switch between Tfh and Th9 cells
+IL21,RORGT,positive,MS15,2,,indirect,causal effect IL21-> IL21R->STAT3->RORGT
+IL21,TBET,negative,MS15,-,,wrong,No causal effect or correlation is documented
+IL21,TGFB,negative,MS15,-,,wrong,the relationship between IL-21 and TGF-β is cooperative or context-dependent
+IL21_e,IL21,positive,MS15,2,,indirect,"causal effect, IL21_e->IL21R->STAT3->IL21"
+IL21_e,IL21R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL21_e,IL21R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL21R,FOXP3,negative,P18,2,,indirect,"causal effect, IL21R->STAT3-|FOXP3"
+IL21R,RORGT,positive,P18,2,,indirect,"causal effect, IL21R->STAT3->RORGT"
+IL21R,STAT3,positive,AJ,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL21R, then is phosphorylated by receptor-bound JAK1 or JAK3."
+IL21R,STAT3,positive,N10,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL21R, then is phosphorylated by receptor-bound JAK1 or JAK3."
+IL21R,STAT3,positive,P18,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL21R, then is phosphorylated by receptor-bound JAK1 or JAK3."
+IL23,IL23R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL23_e,IL23R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL23_e,IL23R,positive,MSM,1,regulates,direct,ligand-receptor binding
+IL23_e,IL23R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL23_e,IL23R,positive,P18,1,regulates,direct,ligand-receptor binding
+IL23R,IL17,positive,P18,2,,indirect,causal effect mediated by STAT3
+IL23R,STAT3,positive,AJ,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL23R, then is phosphorylated by receptor-bound JAK2 or TYK2."
+IL23R,STAT3,positive,MSM,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL23R, then is phosphorylated by receptor-bound JAK2 or TYK2."
+IL23R,STAT3,positive,N10,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL23R, then is phosphorylated by receptor-bound JAK2 or TYK2."
+IL23R,STAT3,positive,P18,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL23R, then is phosphorylated by receptor-bound JAK2 or TYK2."
+IL25,IL25R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL25_e,IL25R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL25R,GATA3,positive,AJ,2,,indirect,"causal effect, IL-25 receptor signaling can increase or reinforce GATA3 expression/activity in Th2 cells"
+IL27_e,IL27R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL27_e,IL27R,positive,MSM,1,regulates,direct,ligand-receptor binding
+IL27_e,IL27R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL27_e,STAT1,positive,P18,2,,indirect,causal effect mediated by IL27R
+IL27R,EOMES,positive,MSM,2,,indirect,causal effect mediated by IL27R and STAT1 or STAT3
+IL27R,STAT1,positive,AJ,1,regulates,direct,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IL27R, then is phosphorylated by receptor-bound JAK1, JAK2, or TYK2."
+IL27R,STAT1,positive,MSM,1,regulates,direct,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IL27R, then is phosphorylated by receptor-bound JAK1, JAK2, or TYK2."
+IL27R,STAT1,positive,N10,1,regulates,direct,"STAT1 directly docks onto phosphorylated tyrosines in the intracellular domain of IL27R, then is phosphorylated by receptor-bound JAK1, JAK2, or TYK2."
+IL27R,STAT3,positive,AJ,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL27R, then is phosphorylated by receptor-bound JAK1, JAK2, or TYK2."
+IL27R,STAT3,positive,N10,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL27R, then is phosphorylated by receptor-bound JAK1, JAK2, or TYK2."
+IL29_e,IL29R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL29R,GATA3,negative,AJ,2,,indirect,mediated by JAK-STAT signaling and IFN response
+IL2R,IL2R,positive,AJ,-,,wrong,Artifact of the Booleanization
+IL2R,IL2R,positive,N10,-,,wrong,Artifact of the Booleanization
+IL2R,IL2R_2,positive,AJ,0,necessary,,reaching a higher level necessitates achieving the lower level first
+IL2R,IL2R_2,positive,N10,0,necessary,,reaching a higher level necessitates achieving the lower level first
+IL2R,STAT5,positive,AJ,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3."
+IL2R,STAT5,positive,MSM,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3."
+IL2R,STAT5,positive,N10,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3."
+IL2R,STAT5,positive,P18,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3."
+IL2R,STAT5_2,positive,AJ,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of the IL2R->STAT5 edge."
+IL2R,STAT5_2,positive,N10,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of the IL2R->STAT5 edge."
+IL2R_2,IL2R,positive,AJ,-,,wrong,This is an artifact of the Booleanization; high-level should not activate low-level.
+IL2R_2,IL2R,positive,N10,-,,wrong,This is an artifact of the Booleanization; high-level should not activate low-level.
+IL2R_2,STAT5_2,positive,AJ,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of the IL2R->STAT5 edge."
+IL2R_2,STAT5_2,positive,N10,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL2R, then is phosphorylated by receptor-bound JAK1 or JAK3. The classification is the same as that of the IL2R->STAT5 edge."
+IL2RA,IL2R_2,positive,AJ,0,necessary,direct,"IL2RA is the ligand binding subunit of the IL2R. Although there is a functional receptor composed of the other two subunits (IL2RB, IL2RG), it cannot bind IL2. Binding IL2 is the role of the IL2R in these models. The N10 and AJ models assume that the basal activity of IL2R does not need IL2RA, only the level-2 (this node). That assumption seems wrong. Yet, this edge is strongly supported."
+IL2RA,IL2R_2,positive,N10,0,necessary,direct,"IL2RA is the ligand binding subunit of the IL2R. Although there is a functional version of the IL2R composed of the other two subunits (IL2RB, IL2RG), it cannot bind IL2. Binding IL2 is the role of the IL2R in these models. The N10 and AJ models assume that the basal activity of IL2R does not need IL2RA, only the level-2 (this node). That assumption seems wrong. Yet, this edge is strongly supported."
+IL33_e,IL33R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL33R,IL10,negative,AJ,-,,wrong,A positive effect is better supported than a negative effect
+IL33R,IL13,positive,AJ,2,,indirect,"Causal effect mediated by MyD88, then MAPK kinase cascade, then multiple transcription factors"
+IL33R,IL5,positive,AJ,2,,indirect,"This causal effect is mediated by IRAK, then MAPK signaling, then GATA3"
+IL33R,IL9,positive,AJ,2,,indirect,"This causal effect is mediated by IRAK, then NFKB"
+IL36_e,IL36R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL36R,TBET,positive,AJ,2,,indirect,"This causal effect is mediated by IRAK, MAPK signaling, NFKB"
+IL4,GATA3,positive,MS15,2,,indirect,"causal effect, IL4->IL4R->STAT6->GATA3"
+IL4,IFNG,negative,MS15,2,,indirect,"causal effect, IL4->IL4R->STAT6->GATA3-|IFNG"
+IL4,IL21,negative,MS15,-,,wrong,"No support for causality, coexpression (opposite sign) was also observed"
+IL4,IL4,positive,MS15,2,,indirect,"positive feedback loop, IL4->IL4R->STAT6->GATA3->IL4"
+IL4,IL4R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL4,IL4R,positive,M06,1,regulates,direct,ligand-receptor binding
+IL4,IL4R,positive,MSM,1,regulates,direct,ligand-receptor binding
+IL4,IL4R,positive,MX,1,regulates,direct,ligand-receptor binding
+IL4,IL4R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL4,IL4R,positive,P18,1,regulates,direct,ligand-receptor binding
+IL4,IL4R_2,positive,N10,1,regulates,direct,ligand-receptor binding; we consider the confidence the same as that of IL4->IL4R
+IL4,IL9,positive,MS15,2,,indirect,"causal effect, mediated by IL4R, STAT6, then Th9-associated transcription factors"
+IL4,TBET,negative,MS15,2,,indirect,"causal effect, mediated by IL4R, STAT6 or STAT5, GATA3"
+IL4_e,IL4,positive,MS15,2,,indirect,"causal effect, mediated by IL4R, STAT5 or STAT6, GATA3"
+IL4_e,IL4R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL4_e,IL4R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL4_e,IL4R,positive,P18,1,regulates,direct,ligand-receptor binding
+IL4_e,IL4R_2,positive,N10,1,regulates,direct,ligand-receptor binding; we consider the confidence the same as that of IL4_e->IL4R
+IL4R,IL4R,positive,N10,-,,wrong,Artifact of the Booleanization 
+IL4R,IL4R_2,positive,N10,0,necessary,,reaching a higher level necessitates achieving the lower level first
+IL4R,STAT5,positive,N10,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
+IL4R,STAT5_2,positive,N10,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. We consider the confidence the same as that of IL4R->STAT5."
+IL4R,STAT6,positive,AJ,1,regulates,direct,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
+IL4R,STAT6,positive,M06,1,regulates,direct,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
+IL4R,STAT6,positive,MSM,1,regulates,direct,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
+IL4R,STAT6,positive,MX,1,regulates,direct,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
+IL4R,STAT6,positive,N10,1,regulates,direct,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
+IL4R,STAT6,positive,P18,1,regulates,direct,"STAT6 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
+IL4R_2,IL4R,positive,N10,-,,wrong,This is an artifact of the Booleanization; high-level should not activate low-level
+IL4R_2,STAT5_2,positive,N10,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL4R, then is phosphorylated by receptor-bound JAK1 or JAK3. We consider the confidence the same as that of IL4R->STAT5."
+IL4RA_2,IL4R_2,positive,N10,0,regulates,direct,IL4RA is one of two subunits of IL4R (the other is IL4RG). The basal level of IL4RA is assumed to be constitutive in the two models that contain IL4RA. We consider this statement about level-2 activity of IL4RA and IL4R to have the same confidence ranking as IL4RA->IL4R.
+IL6,IL6R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL6,IL6R,positive,MSM,1,regulates,direct,ligand-receptor binding
+IL6,IL6R,positive,P18,1,regulates,direct,ligand-receptor binding
+IL6_e,IL6R,positive,AJ,1,regulates,direct,ligand-receptor binding
+IL6_e,IL6R,positive,N10,1,regulates,direct,ligand-receptor binding
+IL6_e,IL6R,positive,P18,1,regulates,direct,ligand-receptor binding
+IL6R,FOXP3,negative,P18,2,,indirect,"causal effect, IL6R->STAT3-|FOXP3"
+IL6R,JAK3,positive,MSM,-,,wrong,"unsupported assumption. IL-6 signaling uses JAK1, with contributions from JAK2 and TYK2, not JAK3."
+IL6R,RORGT,positive,P18,2,,indirect,"causal effect, mediated by STAT3"
+IL6R,STAT3,positive,AJ,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL6R, then is phosphorylated by receptor-bound JAK1 , JAK2 or TYK. "
+IL6R,STAT3,positive,N10,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL6R, then is phosphorylated by receptor-bound JAK1 , JAK2 or TYK. "
+IL6R,STAT3,positive,P18,1,regulates,direct,"STAT3 directly docks onto phosphorylated tyrosines in the intracellular domain of IL6R, then is phosphorylated by receptor-bound JAK1 , JAK2 or TYK. "
+IL7_e,IL7R,positive,MSM,1,regulates,direct,ligand-receptor binding
+IL7R,STAT5,positive,MSM,1,regulates,direct,"STAT5 directly docks onto phosphorylated tyrosines in the intracellular domain of IL7R, then is phosphorylated by receptor-bound JAK1 or JAK3. "
+IL9,IFNG,negative,MS15,3,,correlation,The apparent antagonism between IL-9 and IFN-γ is better explained by lineage specification between Th9 and Th1 cells
+IL9,IL21,negative,MS15,-,,wrong,no established causal relationship or correlation
+IL9,TBET,negative,MS15,3,,correlation,The apparent negative relationship between IL-9 and T-bet is largely explained by lineage differences between Th9 and Th1 cells.
+IRAK,IFNG,positive,MSM,2,,indirect,"causal effect. The direct target of IRAK is TRAF6, which affects NFKB, IRAK->NFKB->IFNG"
+IRAK,IFNG,positive,MX,2,,indirect,"causal effect. The direct target of IRAK is TRAF6, which affects NFKB, IRAK->NFKB->IFNG"
+IRAK,IFNG_2,positive,M06,2,,indirect,We consider that the same causal effect behind IRAK->IFNG applies to IFNG_2 as well
+IRAK,NFKB,positive,P18,2,,indirect,"causal effect mediated by a pathway that involves nodes not in the network (TRAF6, TAF1, IKK) and IKB"
+IRF1,IL10,positive,AJ,1,regulates,direct,"indicated as ""binding and functional data"". IRF1 binds and transactivates the proximal Il10 promoter."
+IRF1,IL12RB1_2,positive,N10,1,regulates,direct,"IRF1 binds the Il12rb1 promoter and activates transcription. The basal level of IL12RB1 is assumed to be constitutive in the models that contain this node (N10, AJ). "
+IRF1,IL4,negative,AJ,1,regulates,direct,"indicated as ""binding and functional data"". IRF1 directly binds the Il4 regulatory region and represses transcription."
+IRF1,IL4,negative,N10,1,regulates,direct,IRF1 directly binds the Il4 regulatory region and represses transcription.
+JAK1,STAT1,positive,MSM,1,regulates,direct,"protein-protein interaction. Activated JAK1 physically engages and phosphorylates STAT1, although this occurs within a cytokine-receptor complex."
+JAK1,STAT1,positive,MX,1,regulates,direct,"protein-protein interaction. Activated JAK1 physically engages and phosphorylates STAT1, although this occurs within a cytokine-receptor complex."
+JAK1,STAT1,positive,P18,1,regulates,direct,"protein-protein interaction. Activated JAK1 physically engages and phosphorylates STAT1, although this occurs within a cytokine-receptor complex."
+JAK3,STAT3,positive,MSM,1,regulates,direct,protein-protein interaction. Activated JAK3 directly phosphorylates STAT3 downstream of several γ-chain cytokine receptors. JAK3 is rarely the only JAK involved.
+NFAT,FOXP3,positive,AJ,1,regulates,direct,"indicated as ""binding and functional data"". NFAT directly binds regulatory elements of the Foxp3 locus and contributes to its transcription"
+NFAT,FOXP3,positive,N10,1,regulates,direct,NFAT directly binds regulatory elements of the Foxp3 locus and contributes to its transcription
+NFAT,GATA3,positive,P18,1,regulates,direct,Activated NFAT binds the Gata3 promoter and promotes transcription
+NFAT,IFNG,positive,AJ,1,regulates,direct,NFAT binds regulatory elements of the IFNG locus and activates transcription.
+NFAT,IFNG,positive,MX,1,regulates,direct,NFAT binds regulatory elements of the IFNG locus and activates transcription.
+NFAT,IFNG,positive,N10,1,regulates,direct,NFAT binds regulatory elements of the IFNG locus and activates transcription.
+NFAT,IFNG,positive,P18,1,regulates,direct,NFAT binds regulatory elements of the IFNG locus and activates transcription.
+NFAT,IFNGR,positive,P18,2,,indirect,"causal effect, NFAT->IFNG->IFNGR"
+NFAT,IL10,positive,AJ,1,regulates,direct,NFAT binds regulatory elements of the Il10 locus in activated T cells and is required for efficient transcription. Presented as assumption in AJ paper.
+NFAT,IL10,positive,N10,1,regulates,direct,NFAT binds regulatory elements of the Il10 locus in activated T cells and is required for efficient transcription. 
+NFAT,IL12R,positive,P18,-,,wrong,this assumed edge is not supported by conclusive evidence
+NFAT,IL13,positive,AJ,1,regulates,direct,"NFAT binds regulatory elements of the Il13 locus in activated T cells. Without NFAT, IL-13 production after TCR stimulation is markedly reduced. Presented as assumption in AJ paper"
+NFAT,IL17,positive,AJ,1,regulates,direct,NFAT binds the IL17A locus and activates transcription. 
+NFAT,IL17,positive,N10,1,regulates,direct,NFAT binds the IL17A locus and activates transcription. 
+NFAT,IL2,positive,AJ,1,necessary,direct,NFAT directly binds the IL2 promoter/enhancer. NFAT-deficient T cells have a profound defect in IL2 transcription.
+NFAT,IL2,positive,N10,1,necessary,direct,NFAT directly binds the IL2 promoter/enhancer. NFAT-deficient T cells have a profound defect in IL2 transcription.
+NFAT,IL2,positive,P18,1,necessary,direct,NFAT directly binds the IL2 promoter/enhancer. NFAT-deficient T cells have a profound defect in IL2 transcription.
+NFAT,IL21,positive,AJ,1,necessary,direct,NFAT (particularly NFATc2) binds the IL21 promoter and activates transcription. Inhibition of NFAT substantially reduces IL-21 transcription
+NFAT,IL21,positive,N10,1,necessary,direct,NFAT (particularly NFATc2) binds the IL21 promoter and activates transcription. Inhibition of NFAT substantially reduces IL-21 transcription
+NFAT,IL21,positive,P18,1,necessary,direct,NFAT (particularly NFATc2) binds the IL21 promoter and activates transcription. Inhibition of NFAT substantially reduces IL-21 transcription
+NFAT,IL22,positive,AJ,1,regulates,direct,NFAT binds the IL22 promoter and contributes to activation after TCR stimulation. Categorized as assumption in AJ's documentation
+NFAT,IL23,positive,N10,-,,wrong,This assumed edge is not supported by binding or functional information.
+NFAT,IL24,positive,AJ,4,,assumption,This assumed edge is weakly supported. There is some evidence that TCR/calcineurin/NFAT signaling contributes to IL-24 expression in activated T cells but no conclusive binding information.
+NFAT,IL25,positive,AJ,-,,wrong,This assumed edge is not supported. There is no conclusive evidence of NFAT binding to the promoter or a causal effect of NFAT on regulation.
+NFAT,IL2R,positive,P18,2,,indirect,"NFAT binds regulatory elements of the IL2RA gene, which encodes one of two subchains of IL2R, and contributes directly to its transcription. "
+NFAT,IL2RA,positive,AJ,1,regulates,direct,"Indicated as ""binding and functional data"". NFAT binds regulatory elements of the IL2RA gene and contributes directly to its transcription"
+NFAT,IL2RA,positive,N10,1,regulates,direct,NFAT binds regulatory elements of the IL2RA gene and contributes directly to its transcription
+NFAT,IL3,positive,AJ,1,regulates,direct,NFAT binds the IL3 promoter and activates transcription. Presented as an assumption in AJ paper
+NFAT,IL31,positive,AJ,1,regulates,direct,NFAT binds the IL31 promoter and activates transcription.
+NFAT,IL35,positive,AJ,-,,wrong,This assumed edge is not supported. There is no conclusive evidence of NFAT binding to the promoter or a causal effect of NFAT on regulation.
+NFAT,IL4,positive,AJ,1,necessary,direct,NFAT has been shown to bind regulatory elements of the IL4 locus and directly contribute to transcription. NFAT-deficient T cells have a profound defect in IL4 transcription.
+NFAT,IL4,positive,N10,1,necessary,direct,NFAT has been shown to bind regulatory elements of the IL4 locus and directly contribute to transcription. NFAT-deficient T cells have a profound defect in IL4 transcription.
+NFAT,IL4,positive,P18,1,necessary,direct,NFAT has been shown to bind regulatory elements of the IL4 locus and directly contribute to transcription. NFAT-deficient T cells have a profound defect in IL4 transcription.
+NFAT,IL5,positive,AJ,1,regulates,direct,NFAT binds regulatory elements of the Il5 locus in activated T cells and is required for efficient transcription. Presented as assumption in AJ paper.
+NFAT,IL6,positive,AJ,-,,wrong,This assumed edge is not supported. There is no conclusive evidence of NFAT binding to the promoter or a causal effect of NFAT on regulation.
+NFAT,IL9,positive,AJ,1,regulates,direct,"indicated as ""binding and functional data"". NFAT directly binds the Il9 promoter and contributes to its transcriptional activation."
+NFAT,STAT1,positive,P18,2,,indirect,"causal effect, NFAT->IFNG->IFNGR->STAT1"
+NFAT,TGFB,positive,AJ,1,regulates,direct,NFAT binds the TGFB1 promoter and activates transcription.
+NFAT,TGFB,positive,N10,1,regulates,direct,NFAT binds the TGFB1 promoter and activates transcription.
+NFAT,TGFBR,positive,P18,2,,indirect,"causal effect, NFAT->TGFB->TGFBR"
+NFKB,IFNG,positive,P18,1,regulates,direct,NFκB-family factors bind regulatory elements of the Ifng locus and cooperates with STAT4/TBET to regulate IFNG transcription
+NFKB,IL17,positive,AJ,1,regulates,direct,NF-κB binds regulatory elements of the IL17A locus and promotes transcription.
+NFKB,IL17,positive,N10,1,regulates,direct,NF-κB binds regulatory elements of the IL17A locus and promotes transcription.
+NFKB,IL2,ambiguous,N10,1,regulates,direct,treat as positive. NF-κB family members—especially c-Rel and RelA/p65—bind regulatory elements in the IL2 promoter and contribute directly to activation-induced IL-2 transcription. The IL-2 promoter integrates NF-κB with NFAT and AP-1 signals following TCR and costimulatory activation.
+NFKB,IL2,positive,AJ,1,regulates,direct,"indicated as ""binding and functional data"". NF-κB family members—especially c-Rel and RelA/p65—bind regulatory elements in the IL2 promoter and contribute directly to activation-induced IL-2 transcription. The IL-2 promoter integrates NF-κB with NFAT and AP-1 signals following TCR and costimulatory activation."
+NFKB,IL2,positive,P18,1,regulates,direct,NF-κB family members—especially c-Rel and RelA/p65—bind regulatory elements in the IL2 promoter and contribute directly to activation-induced IL-2 transcription. The IL-2 promoter integrates NF-κB with NFAT and AP-1 signals following TCR and costimulatory activation.
+NFKB,IL2RA,positive,AJ,1,regulates,direct,NF-κB directly binds regulatory elements of the Il2ra (CD25) gene and activates its transcription.
+NFKB,IL2RA,positive,N10,1,regulates,direct,NF-κB directly binds regulatory elements of the Il2ra (CD25) gene and activates its transcription.
+NFKB,IL9,positive,AJ,1,regulates,direct,NF-κB family members directly occupy the Il9 promoter and activate transcription
+NOTCH1,CD4,positive,MSM,2,,indirect,mediated by TCF1  / BCL11B and then THPOK
+NOTCH1,CD8,positive,MSM,2,,indirect,mediated by TCF1 / BCL11B and then RUNX3
+proliferation,IFNG,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IFNG,positive,N10,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL10,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL10,positive,N10,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL13,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL17,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL17,positive,N10,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL21,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL21,positive,N10,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL22,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL23,positive,N10,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL24,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL25,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL3,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL31,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL35,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL4,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL4,positive,N10,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL5,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL6,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,IL9,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,proliferation,positive,AJ,4,,assumption,The arrest of cell proliferation is not considered in the model
+proliferation,proliferation,positive,N10,4,,assumption,The arrest of cell proliferation is not considered in the model
+proliferation,TGFB,positive,AJ,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+proliferation,TGFB,positive,N10,4,,assumption,"Circumstantial evidence supporting this assumption is that many cytokines, especially lineage-defining ones, are acquired progressively over several cell divisions."
+PU1,GATA3,negative,AJ,1,regulates,direct,protein-protein interaction. PU.1 physically associates with GATA3 and reduces GATA3 DNA-binding and transcriptional activity.
+PU1,IL9,positive,AJ,1,regulates,direct,PU.1 directly binds the Il9 promoter and promotes IL-9 transcription
+RORGT,FOXP3,negative,AJ,-,,wrong,"Although indicated as ""binding and functional data"", neither binding nor the negative effect is supported"
+RORGT,FOXP3,negative,MS15,-,,wrong,Neither binding nor the negative effect is sufficiently supported
+RORGT,FOXP3,negative,MSM,-,,wrong,Neither binding nor the negative effect is sufficiently supported
+RORGT,FOXP3,negative,N10,-,,wrong,Neither binding nor the negative effect is sufficiently supported
+RORGT,GATA3,negative,MSM,-,,wrong,"Sign likely incorrect, mechanism unknown"
+RORGT,GATA3,negative,P18,-,,wrong,"Sign likely incorrect, mechanism unknown"
+RORGT,IL17,positive,AJ,1,regulates,direct,regulation of transcription. RORγt directly binds and activates the IL17 locus. This is one of the strongest TF-target relationships in Th17 biology.
+RORGT,IL17,positive,MSM,1,regulates,direct,regulation of transcription. RORγt directly binds and activates the IL17 locus. This is one of the strongest TF-target relationships in Th17 biology.
+RORGT,IL17,positive,N10,1,regulates,direct,regulation of transcription. RORγt directly binds and activates the IL17 locus. This is one of the strongest TF-target relationships in Th17 biology.
+RORGT,IL17,positive,P18,1,regulates,direct,regulation of transcription. RORγt directly binds and activates the IL17 locus. This is one of the strongest TF-target relationships in Th17 biology.
+RORGT,IL21,positive,MS15,3,,correlation,RORγt and IL-21 are often coexpressed during Th17 differentiation
+RORGT,IL23R,positive,AJ,1,regulates,direct,There is substantial evidence that RORγt directly promotes IL23R transcription.
+RORGT,IL23R,positive,N10,1,regulates,direct,There is substantial evidence that RORγt directly promotes IL23R transcription.
+RORGT,IL6,positive,MSM,-,,wrong,There is no Th cell-intrinsic mechanism that supports this relationship; it would need to involve other cell types.
+RORGT,IL6,positive,P18,-,,wrong,There is no Th cell-intrinsic mechanism that supports this relationship; it would need to involve other cell types.
+RORGT,RORGT,positive,MSM,1,regulates,direct,"self-regulation of transcription. RORγt binds a Rorc cis-regulatory element and helps sustain its own expression, in cooperation with RORα"
+RORGT,RORGT,positive,N10,1,regulates,direct,"self-regulation of transcription. RORγt binds a Rorc cis-regulatory element and helps sustain its own expression, in cooperation with RORα"
+RORGT,TBET,negative,AJ,3,,correlation,"lineage level antagonism, mechanism & mediators unknown"
+RORGT,TBET,negative,MSM,3,,correlation,"lineage level antagonism, mechanism & mediators unknown"
+RORGT,TBET,negative,P18,3,,correlation,"lineage level antagonism, mechanism & mediators unknown"
+RORGT,THPOK,positive,MSM,-,,wrong,"there is no mechanistic, causal or correlative support for this assumption"
+RUNX3,CD4,negative,MSM,1,regulates,direct,RUNX3-containing complexes bind the Cd4 silencer and repress Cd4 transcription
+RUNX3,CD8,positive,MSM,1,regulates,direct,regulation of transcription. RUNX3 binds regulatory enhancers of the CD8A/CD8B locus and promotes CD8 expression
+RUNX3,EOMES,positive,MSM,1,regulates,direct,RUNX3 binds cis-regulatory regions of the Eomes locus and promotes transcription.
+RUNX3,IFNG,positive,AJ,1,regulates,direct,"indicated as ""binding and functional data"". RUNX3 binds regulatory regions of the Ifng locus and promotes transcription, usually in cooperation with T-bet"
+RUNX3,IFNG,positive,N10,1,regulates,direct,"RUNX3 binds regulatory regions of the Ifng locus and promotes transcription, usually in cooperation with T-bet"
+RUNX3,IL4,negative,AJ,1,regulates,direct,RUNX3 directly binds regulatory elements within the Il4 locus and represses its transcription.
+RUNX3,IL4,negative,N10,1,regulates,direct,RUNX3 directly binds regulatory elements within the Il4 locus and represses its transcription.
+RUNX3,RUNX3,positive,MSM,4,,assumption,
+RUNX3,THPOK,negative,MSM,1,regulates,direct,RUNX3-containing complexes bind the ThPOK (Zbtb7b) silencer and repress transcription.
+SMAD2,FOXP3,positive,MSM,1,regulates,direct,Activated SMAD2 binds regulatory elements of the FOXP3 locus (with SMAD3 and cofactors) and promotes transcription.
+SMAD2,RORGT,positive,MSM,1,regulates,direct,SMAD2 physically interacts with the RORγt protein and enhances its transcriptional activity
+SMAD3,FOXP3,positive,AJ,1,regulates,direct,"indicated as ""binding and functional data"". Activated SMAD3 binds the CNS1 enhancer of the Foxp3 locus and promotes transcription."
+SMAD3,FOXP3,positive,N10,1,regulates,direct,Activated SMAD3 binds the CNS1 enhancer of the Foxp3 locus and promotes transcription.
+SMAD3,IL2RA,positive,AJ,1,regulates,direct,SMAD3-containing complexes bind a positive regulatory region of IL2RA and cooperate with AP-1/CREB-family factors to activate transcription
+SMAD3,IL2RA,positive,N10,1,regulates,direct,SMAD3-containing complexes bind a positive regulatory region of IL2RA and cooperate with AP-1/CREB-family factors to activate transcription
+SMAD3,IL9,positive,AJ,1,regulates,direct,SMAD3 binds the Il9 promoter during Th9 differentiation and promotes transcription
+SOCS1,IFNGR_2,negative,M06,-,,wrong,"Unsupported assumption. SOCS1 targets the JAK proteins bound to IFNGR and inhibits STAT1 activation, but it does not affect the receptor itself."
+SOCS1,IL4R,negative,M06,-,,wrong,"Unsupported assumption. SOCS1 strongly reduces IL-4-induced JAK1 and STAT6 activation, thereby suppressing IL-4 responses. But it does not affect IL4R itself."
+SOCS1,IL4R,negative,MSM,-,,wrong,"Unsupported assumption. SOCS1 strongly reduces IL-4-induced JAK1 and STAT6 activation, thereby suppressing IL-4 responses. But it does not affect IL4R itself."
+SOCS1,IL4R,negative,MX,-,,wrong,"Unsupported assumption. SOCS1 strongly reduces IL-4-induced JAK1 and STAT6 activation, thereby suppressing IL-4 responses. But it does not affect IL4R itself."
+SOCS1,IL4R,negative,P18,-,,wrong,"Unsupported assumption. SOCS1 strongly reduces IL-4-induced JAK1 and STAT6 activation, thereby suppressing IL-4 responses. But it does not affect IL4R itself."
+SOCS1,JAK1,negative,MX,1,regulates,direct,protein-protein interaction. SOCS1 directly binds the JAK1 kinase domain and inhibits its catalytic activity.
+SOCS1,JAK1,negative,P18,1,regulates,direct,protein-protein interaction. SOCS1 directly binds the JAK1 kinase domain and inhibits its catalytic activity.
+SOCS1,STAT5,negative,MSM,1,regulates,direct,"SOCS1 binds activated JAK1, JAK2, and/or TYK2, and inhibits JAK-STAT signaling"
+SOCS1,STAT6,negative,P18,1,regulates,direct,"SOCS1 binds activated JAK1, JAK2, and/or TYK2, and inhibits JAK-STAT signaling"
+ST2,IL33R,positive,AJ,0,necessary,direct,ST2 is the common name for IL1RL1. It is one of two subunits of IL33R
+STAT1,BCL6,positive,AJ,1,regulates,direct,STAT1 binds directly to the Bcl6 promoter and activates Bcl6 transcription
+STAT1,FOXP3,negative,AJ,2,,indirect,"causal effect, mediated by TBET or, in parallel, IRF1"
+STAT1,FOXP3,negative,N10,2,,indirect,"causal effect, mediated by TBET or, in parallel, IRF1"
+STAT1,IL17,negative,AJ,2,,indirect,"causal effect, mediated by TBET and RORGT"
+STAT1,IL17,negative,N10,2,,indirect,"causal effect, mediated by TBET and RORGT"
+STAT1,IL17,negative,P18,2,,indirect,"causal effect, mediated by TBET and RORGT"
+STAT1,IL22,positive,AJ,-,,wrong,"unsupported assumption. contradicts experimental evidence that STAT1 binds to the IL22 region  and antagonizes STAT3, repressing IL22 transcription"
+STAT1,IL4,negative,M06,2,,indirect,"causal effect, mediated byTBET"
+STAT1,IL4,negative,MSM,2,,indirect,"causal effect, mediated byTBET"
+STAT1,IL4,negative,MX,2,,indirect,"causal effect, mediated byTBET"
+STAT1,IL4,negative,P18,2,,indirect,"causal effect, mediated byTBET"
+STAT1,IRF1,positive,AJ,1,regulates,direct,IRF1 is a canonical target of STAT1. STAT1 binds directly to regulatory elements in the IRF1 promoter and activates transcription.
+STAT1,IRF1,positive,N10,1,regulates,direct,IRF1 is a canonical target of STAT1. STAT1 binds directly to regulatory elements in the IRF1 promoter and activates transcription.
+STAT1,SOCS1,positive,M06,1,regulates,direct,"STAT1 directly occupies the SOCS1 promoter/enhancer following IFN-γ stimulation, although IRF1 also plays an important role in full transcriptional activation."
+STAT1,SOCS1,positive,MSM,1,regulates,direct,"STAT1 directly occupies the SOCS1 promoter/enhancer following IFN-γ stimulation, although IRF1 also plays an important role in full transcriptional activation."
+STAT1,SOCS1,positive,MX,1,regulates,direct,"STAT1 directly occupies the SOCS1 promoter/enhancer following IFN-γ stimulation, although IRF1 also plays an important role in full transcriptional activation."
+STAT1,SOCS1,positive,P18,1,regulates,direct,"STAT1 directly occupies the SOCS1 promoter/enhancer following IFN-γ stimulation, although IRF1 also plays an important role in full transcriptional activation."
+STAT1,STAT1,positive,M06,1,regulates,direct,activated STAT1 contributes directly to transcription of its own gene.
+STAT1,STAT1_2,positive,M06,0,necessary,,reaching a higher level necessitates achieving the lower level first
+STAT1,TBET,positive,AJ,1,regulates,direct,STAT1 activates the transcription of  TBX21 (TBET).
+STAT1,TBET,positive,M06,1,regulates,direct,STAT1 activates the transcription of  TBX21 (TBET).
+STAT1,TBET,positive,MSM,1,regulates,direct,STAT1 activates the transcription of  TBX21 (TBET).
+STAT1,TBET,positive,MX,1,regulates,direct,STAT1 activates the transcription of  TBX21 (TBET).
+STAT1,TBET,positive,N10,1,regulates,direct,STAT1 activates the transcription of  TBX21 (TBET).
+STAT1,TBET,positive,P18,1,regulates,direct,STAT1 activates the transcription of  TBX21 (TBET).
+STAT1,TBET_2,positive,M06,1,regulates,direct,STAT1 activates the transcription of  TBX21 (TBET). We assign the same confidence ranking as that of STAT1->TBET
+STAT1_2,STAT1,positive,M06,-,,wrong,This is an artifact of the Booleanization; high-level should not activate low-level.
+STAT1_2,TBET,negative,M06,-,,wrong,This is an artifact of the Booleanization
+STAT1_2,TBET_2,positive,M06,1,regulates,direct,STAT1 activates the transcription of  TBX21 (TBET). We assign the same confidence ranking as that of STAT1->TBET
+STAT3,BCL6,positive,AJ,1,regulates,direct,regulation of transcription. STAT3 binds regulatory elements of the Bcl6 gene. Loss of STAT3 markedly reduces BCL6 induction during Tfh differentiation.
+STAT3,CMAF,positive,AJ,1,regulates,direct,regulation of transcription. STAT3 binds regulatory regions of the Maf gene and promotes c-Maf expression.
+STAT3,FOXP3,negative,AJ,2,,indirect,"causal effect, STAT3->RORGT-|FOXP3"
+STAT3,FOXP3,negative,MSM,2,,indirect,"causal effect, STAT3->RORGT-|FOXP3"
+STAT3,FOXP3,negative,N10,2,,indirect,"causal effect, STAT3->RORGT-|FOXP3"
+STAT3,FOXP3,negative,P18,2,,indirect,"causal effect, STAT3->RORGT-|FOXP3"
+STAT3,IFNG,negative,MSM,2,,indirect,"causal effect, STAT3->BCL6-|TBET->IFNG"
+STAT3,IFNG,negative,MX,2,,indirect,"causal effect, STAT3->BCL6-|TBET->IFNG"
+STAT3,IFNG,negative,N10,2,,indirect,"causal effect, STAT3->BCL6-|TBET->IFNG"
+STAT3,IFNG,negative,P18,2,,indirect,"causal effect, STAT3->BCL6-|TBET->IFNG"
+STAT3,IL10,positive,AJ,1,regulates,direct,STAT3 regulates the transcription of IL10
+STAT3,IL10,positive,N10,1,regulates,direct,STAT3 regulates the transcription of IL10 
+STAT3,IL17,positive,AJ,1,regulates,direct,"indicated as ""binding and functional data"". Activated STAT3 directly binds several regulatory sites across the Il17a/Il17f locus and promotes transcription."
+STAT3,IL17,positive,N10,1,regulates,direct,Activated STAT3 directly binds several regulatory sites across the Il17a/Il17f locus and promotes transcription.
+STAT3,IL17,positive,P18,1,regulates,direct,Activated STAT3 directly binds several regulatory sites across the Il17a/Il17f locus and promotes transcription.
+STAT3,IL1R1,positive,AJ,4,,assumption ,"assumption, to account for IL1R1 differential expression in Th0 and Th17"
+STAT3,IL21,positive,AJ,1,regulates,direct,"indicated as ""binding and functional data"". Activated STAT3 directly binds the Il21 promoter and promotes IL-21 transcription."
+STAT3,IL21,positive,N10,1,regulates,direct,Activated STAT3 directly binds the Il21 promoter and promotes IL-21 transcription.
+STAT3,IL21,positive,P18,1,regulates,direct,Activated STAT3 directly binds the Il21 promoter and promotes IL-21 transcription.
+STAT3,IL22,positive,AJ,1,regulates,direct,"STAT3 binds regulatory elements of the Il22 locus and promotes Il22 transcription, especially in Th17/Th22-related contexts."
+STAT3,IL23,positive,N10,1,regulates,direct in the network sense,STAT3 binds the IL23A regulatory region and promotes transcription of the IL-23 p19 subunit. We consider direct regulation of a receptor subunit as direct in the network sense.
+STAT3,IL23R,positive,AJ,1,regulates,direct,STAT3 regulates the transcription of IL23R
+STAT3,IL23R,positive,N10,1,regulates,direct,STAT3 regulates the transcription of IL23R
+STAT3,IL23R,positive,P18,1,regulates,direct,STAT3 regulates the transcription of IL23R
+STAT3,IL6,positive,AJ,1,regulates,direct,STAT3 binds the IL6 promoter and increases IL6 transcription
+STAT3,RORGT,positive,AJ,1,regulates,direct,STAT3 regulates the transcription of RORGT
+STAT3,RORGT,positive,MSM,1,regulates,direct,STAT3 regulates the transcription of RORGT
+STAT3,RORGT,positive,N10,1,regulates,direct,STAT3 regulates the transcription of RORGT
+STAT3,RORGT,positive,P18,1,regulates,direct,STAT3 regulates the transcription of RORGT
+STAT4,BCL6,positive,AJ,1,regulates,direct,STAT4 binds the Bcl6 regulatory region and activates transcription.
+STAT4,IFNG,positive,AJ,1,regulates,direct,regulation of transcription. Canonical target; STAT4 binds the Ifng locus.
+STAT4,IFNG,positive,M06,1,regulates,direct,regulation of transcription. Canonical target; STAT4 binds the Ifng locus.
+STAT4,IFNG,positive,MSM,1,regulates,direct,regulation of transcription. Canonical target; STAT4 binds the Ifng locus.
+STAT4,IFNG,positive,MX,1,regulates,direct,regulation of transcription. Canonical target; STAT4 binds the Ifng locus.
+STAT4,IFNG,positive,N10,1,regulates,direct,regulation of transcription. Canonical target; STAT4 binds the Ifng locus.
+STAT4,IFNG,positive,P18,1,regulates,direct,regulation of transcription. Canonical target; STAT4 binds the Ifng locus.
+STAT4,IFNG_2,positive,M06,1,regulates,direct,regulation of transcription. Canonical target; STAT4 binds the Ifng locus. The classification is the same as that of STAT4->IFNG.
+STAT4,IL10,positive,AJ,2,,indirect,"causal effect, mediated by CMAF"
+STAT4,IL12R,positive,P18,2,,indirect,"causal effect, STAT4->TBET->IL12RB2->IL12R. "
+STAT4,IL18R,positive,AJ,1,regulates,direct in the network sense,"Indicated as ""binding and functional data"". STAT4 directly binds regulatory regions of the Il18r1 locus (the gene of the ligand-binding chain of IL18R) and promotes its transcription. "
+STAT4,IL21,positive,AJ,1,regulates,direct,STAT4 binds regulatory elements of the Il21 locus and activates transcription (particularly in response to IL-12).
+STAT4,TBET,positive,P18,1,regulates,direct,STAT4 binds the Tbx21 promoter and promotes TBET expression.
+STAT5,BCL6,negative,AJ,1,regulates,direct,regulation of transcription. STAT5 and STAT3 compete for occupancy of the same regulatory region. When STAT5 is activated it displaces STAT3 and represses BCL6 expression.
+STAT5,FOXP3,positive,AJ,1,regulates,direct,"indicated as ""binding and functional data"". Activated STAT5 directly binds regulatory elements of the Foxp3 locus and promotes Foxp3 expression and stability."
+STAT5,FOXP3,positive,N10,1,regulates,direct,Activated STAT5 directly binds regulatory elements of the Foxp3 locus and promotes Foxp3 expression and stability.
+STAT5,FOXP3,positive,P18,1,regulates,direct,Activated STAT5 directly binds regulatory elements of the Foxp3 locus and promotes Foxp3 expression and stability.
+STAT5,GATA3,positive,P18,1,regulates,direct,STAT5 binds regulatory DNA at the Gata3 locus and activates transcription.
+STAT5,IL17,negative,AJ,1,regulates,direct,"indicated as ""binding and functional data"". Activated STAT5 directly binds regulatory sites across the Il17a–Il17f locus and represses IL-17 transcription."
+STAT5,IL17,negative,N10,1,regulates,direct,Activated STAT5 directly binds regulatory sites across the Il17a–Il17f locus and represses IL-17 transcription.
+STAT5,IL17,negative,P18,1,regulates,direct,Activated STAT5 directly binds regulatory sites across the Il17a–Il17f locus and represses IL-17 transcription.
+STAT5,IL2,negative,AJ,2,,indirect,"causal effect, STAT5->FOXP3-|IL2"
+STAT5,IL2,negative,N10,2,,indirect,"causal effect, STAT5->FOXP3-|IL2"
+STAT5,IL2RA,positive,AJ,1,regulates,direct,Activated STAT5 binds regulatory elements of the IL2RA/CD25 locus and promotes its transcription.
+STAT5,IL2RA,positive,N10,1,regulates,direct,Activated STAT5 binds regulatory elements of the IL2RA/CD25 locus and promotes its transcription.
+STAT5,IL4,positive,AJ,1,regulates,direct,Activated STAT5 binds regulatory elements within the Il4 locus and promotes early IL-4 transcription
+STAT5,IL4RA_2,positive,N10,2,,indirect,"There is an indirect causal relationship between STAT5 and IL4RA, but the mediators are not established. The two models that contain IL4RA assume that its basal level is constitutive. We assign the same confidence score to this edge as that of STAT5->IL4RA."
+STAT5,proliferation,positive,AJ,1,regulates,direct in the network sense,STAT5 activates the transcription of cell cycle genes such as Cyclin D2 and MYC.
+STAT5,proliferation,positive,N10,1,regulates,direct in the network sense,STAT5 activates the transcription of cell cycle genes such as Cyclin D2 and MYC.
+STAT5,RUNX3,positive,MSM,1,regulates,direct,regulation of transcription. STAT5 binds regulatory elements of the Runx3 locus. Constitutively active STAT5 induces Runx3 expression. Loss of IL-7/STAT5 signaling reduces Runx3 expression.
+STAT5,STAT5,positive,AJ,-,,wrong,STAT1 activates the transcription of  TBX21 (TBET). We assign the same confidence ranking as that of STAT1->TBET
+STAT5,STAT5,positive,N10,-,,wrong,Artifact of the Booleanization of the original multi-level model
+STAT5,STAT5_2,positive,AJ,0,necessary,,reaching a higher level necessitates achieving the lower level first
+STAT5,STAT5_2,positive,N10,0,necessary,,reaching a higher level necessitates achieving the lower level first
+STAT5_2,IL4RA_2,positive,N10,2,,indirect,"There is an indirect causal relationship between STAT5 and IL4RA, but the mediators are not established. The two models that contain IL4RA assume that its basal level is constitutive. We assign the same confidence score to this edge as that of STAT5->IL4RA."
+STAT5_2,proliferation,positive,AJ,1,regulates,direct in the network sense,STAT5 activates the transcription of cell cycle genes such as Cyclin D2 and MYC. We assign the same confidence as that of the STAT5->proliferation edge.
+STAT5_2,proliferation,positive,N10,1,regulates,direct in the network sense,STAT5 activates the transcription of cell cycle genes such as Cyclin D2 and MYC. We assign the same confidence as that of the STAT5->proliferation edge.
+STAT5_2,STAT5,positive,AJ,-,,wrong,Artifact of the Booleanization; high-level should not activate low-level.
+STAT5_2,STAT5,positive,N10,-,,wrong,Artifact of the Booleanization; high-level should not activate low-level.
+STAT6,FOXP3,negative,AJ,1,regulates,direct,STAT6 binds to the Foxp3 locus and represses FOXP3 transcription
+STAT6,GATA3,positive,AJ,1,regulates,direct,STAT6 binds the regulatory region of GATA3 and regulates its transcription
+STAT6,GATA3,positive,M06,1,regulates,direct,STAT6 binds the regulatory region of GATA3 and regulates its transcription
+STAT6,GATA3,positive,MSM,1,regulates,direct,STAT6 binds the regulatory region of GATA3 and regulates its transcription
+STAT6,GATA3,positive,MX,1,regulates,direct,STAT6 binds the regulatory region of GATA3 and regulates its transcription
+STAT6,GATA3,positive,N10,1,regulates,direct,STAT6 binds the regulatory region of GATA3 and regulates its transcription
+STAT6,GATA3,positive,P18,1,regulates,direct,STAT6 binds the regulatory region of GATA3 and regulates its transcription
+STAT6,IFNG,negative,P18,2,,indirect,causal effect mediated by GATA3 and TBET
+STAT6,IL12R,negative,M06,2,,indirect,"causal effect mediated by GATA3, which inhibits the IL12RB2 subunit of IL12R. The other subunit, IL12RB1, is broadly expressed."
+STAT6,IL12R,negative,MSM,2,,indirect,"Causal effect mediated by GATA3, which inhibits the IL12RB2 subunit of IL12R. The other subunit, IL12RB1, is broadly expressed."
+STAT6,IL12RB2,negative,AJ,2,,indirect,"Causal effect mediated by GATA3, STAT6->GATA3-|IL12RB2. "
+STAT6,IL12RB2,negative,N10,2,,indirect,"Causal effect mediated by GATA3, STAT6->GATA3-|IL12RB2. "
+STAT6,IL17,negative,AJ,2,,indirect,STAT6->GATA3-|RORGT->IL17
+STAT6,IL17,negative,N10,2,,indirect,STAT6->GATA3-|RORGT->IL17
+STAT6,IL18R,negative,M06,2,,indirect,"Causal effect likely mediated by GATA3, which inhibits a subunit of IL18R"
+STAT6,IL18R,negative,MSM,2,,indirect,"Causal effect likely mediated by GATA3, which inhibits a subunit of IL18R"
+STAT6,IL18R,negative,MX,2,,indirect,"Causal effect likely mediated by GATA3, which inhibits a subunit of IL18R"
+STAT6,IL18R,negative,P18,2,,indirect,"Causal effect likely mediated by GATA3, which inhibits a subunit of IL18R"
+STAT6,IL2,negative,AJ,2,,indirect,mediated by the Th2 differentiation program in a difficult to pinpoint way
+STAT6,IL2,negative,N10,2,,indirect,mediated by the Th2 differentiation program in a difficult to pinpoint way
+STAT6,IL24,positive,AJ,1,regulates,direct,"indicated as ""binding and functional data"". Activated STAT6 binds the Il24 promoter and additional regulatory elements across the Il24 locus and activates transcription"
+STAT6,IL31,positive,AJ,1,regulates,direct,STAT6 binds the IL31 promoter and activates transcription
+STAT6,IL9,positive,AJ,1,regulates,direct,STAT6 binds to the IL9 locus and promotes transcription.
+TBET,BCL6,negative,AJ,1,regulates,direct,"protein-protein interaction. T-bet binds BCL6 directly and recruits it to TBET-bound promoters. The interaction prevents BCL6 from acting at its own canonical DNA-binding sites, effectively antagonizing part of BCL6's normal transcriptional program."
+TBET,BCL6,negative,MS15,1,regulates,direct,"protein-protein interaction. T-bet binds BCL6 directly and recruits it to TBET-bound promoters. The interaction prevents BCL6 from acting at its own canonical DNA-binding sites, effectively antagonizing part of BCL6's normal transcriptional program."
+TBET,EOMES,positive,MSM,-,,wrong,"assumption, contradicted by evidence that TBET and EOMES have opposing expression patterns"
+TBET,FOXP3,negative,MSM,1,regulates,direct,regulation of transcription. T-bet binds a conserved regulatory region of the Foxp3 locus and reduces Foxp3 expression.
+TBET,GATA3,negative,AJ,1,regulates,direct,"Indicated as ""binding and functional data"". T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription."
+TBET,GATA3,negative,M06,1,regulates,direct,T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription.
+TBET,GATA3,negative,MS15,1,regulates,direct,T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription.
+TBET,GATA3,negative,MSM,1,regulates,direct,T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription.
+TBET,GATA3,negative,MX,1,regulates,direct,T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription.
+TBET,GATA3,negative,N10,1,regulates,direct,T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription.
+TBET,GATA3,negative,P18,1,regulates,direct,T-bet directly inhibits GATA3 through protein–protein interaction and can also directly repress Gata3 transcription.
+TBET,IFNG,positive,AJ,1,regulates,direct,"indicated as ""binding and functional data."" T-bet directly binds regulatory elements of the Ifng locus and activates transcription."
+TBET,IFNG,positive,M06,1,regulates,direct,T-bet directly binds regulatory elements of the Ifng locus and activates transcription.
+TBET,IFNG,positive,MS15,1,regulates,direct,T-bet directly binds regulatory elements of the Ifng locus and activates transcription.
+TBET,IFNG,positive,MSM,1,regulates,direct,T-bet directly binds regulatory elements of the Ifng locus and activates transcription.
+TBET,IFNG,positive,MX,1,regulates,direct,T-bet directly binds regulatory elements of the Ifng locus and activates transcription.
+TBET,IFNG,positive,N10,1,regulates,direct,T-bet directly binds regulatory elements of the Ifng locus and activates transcription.
+TBET,IFNG,positive,P18,1,regulates,direct,T-bet directly binds regulatory elements of the Ifng locus and activates transcription.
+TBET,IFNG_2,positive,M06,1,regulates,direct,regulation of transcription. T-bet directly binds regulatory elements of the Ifng locus and activates transcription. We assign the same confidence score as that of TBET->IFNG.
+TBET,IL12R,positive,P18,2,,indirect,"TBET regulates the transcription of IL12RB2, which is a subunit of IL12R. "
+TBET,IL2,negative,AJ,1,regulates,direct,"indicated as ""binding and functional data"". T-bet physically interacts with RelA/p65 at the Il2 promoter, reducing NF-κB binding and inhibiting IL2 trancription."
+TBET,IL2,negative,N10,1,regulates,direct,"T-bet physically interacts with RelA/p65 at the Il2 promoter, reducing NF-κB binding and inhibiting IL2 trancription."
+TBET,IL2,negative,P18,1,regulates,direct,"T-bet physically interacts with RelA/p65 at the Il2 promoter, reducing NF-κB binding and inhibiting IL2 trancription."
+TBET,IL23R,negative,P18,1,regulates,direct,"regulation of transcription. In intestinal/inflammatory CD4⁺ T cells, T-bet was found at a regulatory region in intron 3 of Il23r."
+TBET,IL4,negative,AJ,1,regulates,direct,"indicated as ""binding and functional data"". T-bet directly binds regulatory elements of the Il4 locus and represses its transcription."
+TBET,IL4,negative,MS15,1,regulates,direct,T-bet directly binds regulatory elements of the Il4 locus and represses its transcription.
+TBET,IL4,negative,N10,1,regulates,direct,T-bet directly binds regulatory elements of the Il4 locus and represses its transcription.
+TBET,RORGT,negative,MS15,1,regulates,direct in the network sense,T-bet suppresses RORγt via binding RUNX1 and preventing it to bind to the Rorc promoter and activating its transcription. RUNX1 is not in any of the partial models.
+TBET,RORGT,negative,MSM,1,regulates,direct in the network sense,T-bet suppresses RORγt via binding RUNX1 and preventing it to bind to the Rorc promoter and activating its transcription. RUNX1 is not in any of the partial models.
+TBET,RORGT,negative,P18,1,regulates,direct in the network sense,T-bet suppresses RORγt via binding RUNX1 and preventing it to bind to the Rorc promoter and activating its transcription. RUNX1 is not in any of the partial models.
+TBET,RUNX3,positive,AJ,2,,indirect,"Runx3 expression is T-bet-dependent during Th1 differentiation, but weak evidence of direct T-bet binding to and activation of the Runx3 locus."
+TBET,RUNX3,positive,N10,2,,indirect,"Runx3 expression is T-bet-dependent during Th1 differentiation, but weak evidence of direct T-bet binding to and activation of the Runx3 locus."
+TBET,SOCS1,positive,M06,-,,wrong,"assumption, contradicted by evidence that TBET blocks SOCS1 transcription. The best-characterized effect of TBET on SOCS1 is repression. T-bet binds the Socs1 promoter; recruits BCL6, which represses transcription."
+TBET,SOCS1,positive,MSM,-,,wrong,"assumption, contradicted by evidence that TBET blocks SOCS1 transcription. The best-characterized effect of TBET on SOCS1 is repression. T-bet binds the Socs1 promoter; recruits BCL6, which represses transcription."
+TBET,SOCS1,positive,MX,-,,wrong,"assumption, contradicted by evidence that TBET blocks SOCS1 transcription. The best-characterized effect of TBET on SOCS1 is repression. T-bet binds the Socs1 promoter; recruits BCL6, which represses transcription."
+TBET,SOCS1,positive,P18,-,,wrong,"assumption, contradicted by evidence that TBET blocks SOCS1 transcription. The best-characterized effect of TBET on SOCS1 is repression. T-bet binds the Socs1 promoter; recruits BCL6, which represses transcription."
+TBET,TBET,positive,AJ,2,,indirect,"Although indicated as ""binding and functional data"", the current evidence points to positive feedback loops instead of self-regulation."
+TBET,TBET,positive,M06,2,,indirect,The current evidence points to positive feedback loops instead of self-regulation.
+TBET,TBET,positive,MS15,2,,indirect,The current evidence points to positive feedback loops instead of self-regulation.
+TBET,TBET,positive,MSM,2,,indirect,The current evidence points to positive feedback loops instead of self-regulation.
+TBET,TBET,positive,MX,2,,indirect,The current evidence points to positive feedback loops instead of self-regulation.
+TBET,TBET,positive,N10,2,,indirect,The current evidence points to positive feedback loops instead of self-regulation.
+TBET,TBET,positive,P18,2,,indirect,The current evidence points to positive feedback loops instead of self-regulation.
+TBET,TBET_2,positive,M06,0,necessary,,reaching a higher level necessitates achieving the lower level first
+TBET,THPOK,positive,MSM,-,,wrong,"assumption, contradicted by evidence that TBET promotes loss of THPOK."
+TBET_2,IFNG_2,positive,M06,1,regulates,direct,T-bet directly binds regulatory elements of the Ifng locus and activates transcription. We assign the same confidence rank as that of TBET->IFNG
+TBET_2,TBET,positive,M06,-,,wrong,Artifact of Booleanization; high-level should not activate low-level
+TBET_2,TBET_2,positive,M06,2,,indirect,The current evidence points to positive feedback loops instead of self-regulation.
+TCR,CD8,negative,MSM,2,,indirect,"causal effect mediated by multiple mechanisms, one including NFAT, others including nodes not in the network"
+TCR,IKB,negative,AJ,1,regulates,direct in the network sense,"Mediated by a signaling pathway that activates IKKB, which phosphorylates and inhibits IKB."
+TCR,IKB,negative,N10,1,regulates,direct in the network sense,"Mediated by a signaling pathway that activates IKKB, which phosphorylates and inhibits IKB."
+TCR,IL12R,positive,P18,2,,indirect,"TCR engagement activates NFAT, AP-1, NFKB, which lead to the upregulation of IL12RB2, which is a subunit of IL12R."
+TCR,IL7R,negative,MSM,1,regulates,direct in the network sense,"Following T-cell activation, the transcriptional repressor GFI1 is induced  and directly represses the Il7r gene. GFI1 is not a node of the network."
+TCR,NFAT,positive,AJ,1,regulates,direct in the network sense,"TCR signaling activates PLCγ1, leading to Ca²⁺ influx and calcineurin-mediated NFAT dephosphorylation. None of these mediators are nodes of the network"
+TCR,NFAT,positive,MSM,1,regulates,direct in the network sense,"TCR signaling activates PLCγ1, leading to Ca²⁺ influx and calcineurin-mediated NFAT dephosphorylation. None of these mediators are nodes of the network"
+TCR,NFAT,positive,MX,1,regulates,direct in the network sense,"TCR signaling activates PLCγ1, leading to Ca²⁺ influx and calcineurin-mediated NFAT dephosphorylation. None of these mediators are nodes of the network"
+TCR,NFAT,positive,N10,1,regulates,direct in the network sense,"TCR signaling activates PLCγ1, leading to Ca²⁺ influx and calcineurin-mediated NFAT dephosphorylation. None of these mediators are nodes of the network"
+TCR,NFAT,positive,P18,1,regulates,direct in the network sense,"TCR signaling activates PLCγ1, leading to Ca²⁺ influx and calcineurin-mediated NFAT dephosphorylation. None of these mediators are nodes of the network"
+TCR,THPOK,positive,MSM,2,,indirect,"causal effect mediated by multiple mechanisms, one by GATA3, another by NFAT, and a third including nodes not in the network"
+TGFB,BCL6,negative,MS15,1,regulates,direct in the network sense,"BCL6 and BLIMP1 form a well-established mutually antagonistic circuit, and TGF-β can favor BLIMP1 expression in activated T cells, thereby suppressing BCL6.  BLIMP-1 is not part of the integrated model."
+TGFB,FOXP3,positive,MS15,2,,indirect,"strong causal effect, TGFB->TGFBR->SMAD3->FOXP3"
+TGFB,GATA3,negative,MS15,2,,indirect,"causal effect, likely mediated by FOXP3"
+TGFB,IFNG,negative,MS15,2,,indirect,strong causal effect mediated by multiple paths
+TGFB,IL10,positive,MS15,2,,indirect,strong causal effect mediated by multiple paths
+TGFB,IL9,positive,MS15,2,,indirect,"causal effect, TGFB->TGFBR->SMAD3->IL9"
+TGFB,RORGT,positive,MS15,2,,indirect,"strong causal effect, TGFB->TGFBR->SMAD2->RORGT"
+TGFB,TGFB,positive,MS15,2,,indirect,"positive feedback loop mediated by TFGBR, SMAD2/3"
+TGFB,TGFBR,positive,AJ,1,regulates,direct,ligand-receptor binding
+TGFB,TGFBR,positive,MSM,1,regulates,direct,ligand-receptor binding
+TGFB,TGFBR,positive,N10,1,regulates,direct,ligand-receptor binding
+TGFB_e,GATA3,negative,P18,2,,indirect,causal effect mediated by TGFBR and ITK/calcium signaling
+TGFB_e,TGFB,positive,MS15,2,,indirect,"causal effect mediated by TGFBR, SMAD3"
+TGFB_e,TGFBR,positive,AJ,1,regulates,direct,ligand-receptor binding
+TGFB_e,TGFBR,positive,N10,1,regulates,direct,ligand-receptor binding
+TGFB_e,TGFBR,positive,P18,1,regulates,direct,ligand-receptor binding
+TGFBR,CMAF,positive,AJ,2,,indirect,"Causal effect, involves SMAD2/3 and an unknown transcription factor "
+TGFBR,FOXP3,positive,P18,2,,indirect,Causal effect mediated by SMAD3. TGFBR->SMAD3->FOXP3
+TGFBR,PU1,positive,AJ,2,,indirect,Causal effect mediated by SMAD2/3 and an unknown transcription factor
+TGFBR,RORGT,positive,AJ,2,,indirect,Causal effect mediated by SMAD2/3
+TGFBR,RORGT,positive,N10,2,,indirect,Causal effect mediated by SMAD2/3
+TGFBR,RORGT,positive,P18,2,,indirect,Causal effect mediated by SMAD2/3
+TGFBR,SMAD2,positive,MSM,1,regulates,direct,protein-protein interaction. Activated TGFBR1 directly phosphorylates SMAD2
+TGFBR,SMAD3,positive,AJ,1,regulates,direct,protein-protein interaction. Activated TGFBR1 directly phosphorylates SMAD3
+TGFBR,SMAD3,positive,N10,1,regulates,direct,protein-protein interaction. Activated TGFBR1 directly phosphorylates SMAD3
+THPOK,CD4,positive,MSM,1,regulates,direct,regulation of transcription. ThPOK physically associates with the Cd4 regulatory region and counteracts RUNX-dependent silencing
+THPOK,CD8,negative,MSM,1,regulates,direct,ThPOK directly binds regulatory elements of the Cd8 locus and represses transcription by recruiting chromatin-modifying complexes.
+THPOK,RUNX3,negative,MSM,1,regulates,direct,"Direct transcriptional repression, has strong experimental support"
+THPOK,THPOK,positive,MSM,1,regulates,direct,ThPOK binds regulatory elements of the Zbtb7b (ThPOK) locus and contributes to maintenance of its own transcription.
