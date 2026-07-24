@@ -187,6 +187,8 @@ class GAConfig:
         # with the same length as total_iter
         elif type(self.prob) == dict:
             # ensure that 1 is in the key of the dictionary
+            # change every key to int
+            self.prob = {int(k): v for k, v in self.prob.items()}
             assert 1 in self.prob, "1 must be in the keys of the dictionary"
 
             prob_list = []

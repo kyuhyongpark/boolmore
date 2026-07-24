@@ -5,15 +5,14 @@
     "per_iteration": 100,
     "keep": 20,
     "mix":20,
-    "export_top": 1,
-    "export_threshold": 0.0,
-    "prob": 0.01,
-    "edge_prob": 0.0
+    "prob": {"1":0.5, "11":0.01},
+    "edge_prob": 0.0,
+    "order_by": ["n_self_edges", "n_edges", "n_prime_implicants"]
     },
 
 "data" : "./Tcell_data.csv",
 
-"base" : "./Tcell_primes.pkl",
+"base" : "./Tcell_primes_ultrametric.pkl",
 
 "default_sources": {},
 
