@@ -52,7 +52,7 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 51,,,,cJUN,cJUN,cJUN,,,JUN,JUN,JUN,JUN,,JUN is the official gene symbol for cJUN
 52,,,,cRAF,cRAF,cRAF,,,RAF1,RAF1,RAF1,RAF1,,RAF1 is the official gene symbol for cRAF
 53,,,,CyclinB1,CyclinB1,CyclinB1,,,,,,CyclinB1,,
-54,,,,CyclinD1,CyclinD1,CyclinD1,cyclinD,cyclinD,,,,CyclinD1,,
+54,,,,CyclinD1,CyclinD1,CyclinD1,cyclinD,cyclinD,,,,CyclinD,,
 55,,,,FoxO1_3a,FOXO1_3a,FoxO1_3a,,,,,,FOXO1FOXO3,,Refers both to FOXO1 and FOXO3. Other models have  separate FOXO1 and FOXO3 nodes.
 56,,,,GSK3a_b,GSKa_b,GSKa_b,,,GSK3B,GSK3B,GSK3B,GSK3B,,The notation GSKa_b was meant to be GSK3a_b
 57,,,,p38,p38,p38,,,,,,p38,,
