@@ -1,0 +1,1588 @@
+Regulator,Target,Sign in BBM,Model,Sign,Classification,Confidence rank,Constraint,Notes
+ABL1,ABL2,ambiguous,TGEN,positive,,,,
+ABL1,ABL2,ambiguous,MCF7,,,,,
+ABL1,ABL2,ambiguous,T47D,,,,,
+ABL1,JAK2,ambiguous,TGEN,positive,,,,
+ABL1,JAK2,ambiguous,MCF7,,,,,
+ABL1,JAK2,ambiguous,T47D,,,,,
+ABL1,MYOD1,ambiguous,TGEN,negative,,,,
+ABL1,MYOD1,ambiguous,MCF7,,,,,
+ABL1,SRC,ambiguous,TGEN,positive,,,,
+ABL1,SRC,ambiguous,MCF7,,,,,
+ABL1,YAP1,ambiguous,TGEN,positive,,,,
+ABL1,YAP1,ambiguous,MCF7,,,,,
+ABL1,YAP1,ambiguous,T47D,,,,,
+ABL2,CEBPB,ambiguous,TGEN,positive,,,,
+ABL2,CEBPB,ambiguous,MCF7,,,,,
+ABL2,CEBPB,ambiguous,T47D,,,,,
+AKT,AKT,positive,BL,positive,unsupported,,,this inferred self-regulation is not supported by experimental evidence
+AKT,AKT,positive,HL,positive,unsupported,,,AKT functional self-regulation is not supported by experimental evidence
+AKT,AKT,positive,BS,positive,unsupported,,,this inferred self-regulation is not supported by experimental evidence
+AKT,AKT,positive,HS,positive,unsupported,,,this inferred self-regulation is not supported by experimental evidence
+AKT,AKT,positive,SS,positive,unsupported,,,this inferred self-regulation is not supported by experimental evidence
+AKT,AKT,positive,SL,positive,unsupported,,,AKT functional self-regulation is not supported by experimental evidence
+AKT,BAD,ambiguous,Z17,negative,direct ,1,regulates,"AKT phosphorylates BAD, which leads to its sequestration by 14-3-3 proteins, making it unable to inhibit BCLXL"
+AKT,BAD,negative,Z21,negative,direct,1,regulates,"AKT phosphorylates BAD, which leads to its sequestration by 14-3-3 proteins, making it unable to inhibit BCLXL"
+AKT,BAD,ambiguous,TGEN,negative,direct,1,regulates,"AKT phosphorylates BAD, which leads to its sequestration by 14-3-3 proteins, making it unable to inhibit BCLXL"
+AKT,BAD,ambiguous,MCF7,negative,direct,1,regulates,"AKT phosphorylates BAD, which leads to its sequestration by 14-3-3 proteins, making it unable to inhibit BCLXL"
+AKT,BAD,ambiguous,T47D,negative,direct,1,regulates,"AKT phosphorylates BAD, which leads to its sequestration by 14-3-3 proteins, making it unable to inhibit BCLXL"
+AKT,CASP9,ambiguous,TGEN,,,,,
+AKT,CASP9,ambiguous,MCF7,,,,,
+AKT,CASP9,ambiguous,T47D,,,,,
+AKT,CREB1,ambiguous,TGEN,positive,direct,1,regulates,"AKT directly phosphorylates CREB1 Ser133, which increases CREB transcriptional activity"
+AKT,CREB1,ambiguous,MCF7,positive,direct,1,regulates,"AKT directly phosphorylates CREB1 Ser133, which increases CREB transcriptional activity"
+AKT,CREB1,ambiguous,T47D,positive,direct,1,regulates,"AKT directly phosphorylates CREB1 Ser133, which increases CREB transcriptional activity"
+AKT,CyclinD,positive,BL,positive,indirect,2,,causal effect mediated by GSK3B
+AKT,CyclinD,positive,HL,positive,indirect,2,,causal effect mediated by GSK3B
+AKT,CyclinD,positive,SL,positive,indirect,2,,causal effect mediated by GSK3B
+AKT,ESR1,ambiguous,TGEN,positive,direct,1,regulates,"Activated AKT phosphorylates ERα (ESR1 protein) at Ser167, and this phosphorylation increases ERα transcriptional activity."
+AKT,ESR1,ambiguous,MCF7,positive,direct,1,regulates,"Activated AKT phosphorylates ERα (ESR1 protein) at Ser167, and this phosphorylation increases ERα transcriptional activity."
+AKT,ESR1,ambiguous,T47D,positive,direct,1,regulates,"Activated AKT can directly phosphorylate ERα (ESR1 protein) at Ser167, and this phosphorylation increases ERα transcriptional activity."
+AKT,FAS,ambiguous,TGEN,negative,,,,
+AKT,FAS,ambiguous,MCF7,,,,,
+AKT,FAS,ambiguous,T47D,,,,,
+AKT,FOXO1,ambiguous,TGEN,negative,direct,1,regulates,"AKT phosphorylates FOXO1 at several regulatory residues. These promote binding to 14-3-3 proteins and retention in the cytoplasm, which decreases FOXO1 transcriptional activity"
+AKT,FOXO1,ambiguous,MCF7,negative,direct,1,regulates,"AKT phosphorylates FOXO1 at several regulatory residues. These promote binding to 14-3-3 proteins and retention in the cytoplasm, which decreases FOXO1 transcriptional activity"
+AKT,FOXO1,ambiguous,T47D,negative,direct,1,regulates,"AKT phosphorylates FOXO1 at several regulatory residues. These promote binding to 14-3-3 proteins and retention in the cytoplasm, which decreases FOXO1 transcriptional activity"
+AKT,FOXO1FOXO3,negative,BL,negative ,direct,1,regulates,"FOXO1FOXO3 unites the FOXO1 and FOXO3 nodes, which are represented separately in other models. The direct effect of AKT on both FOXO1 and FOXO3 translates to a direct effect on FOXO1FOXO3."
+AKT,FOXO1FOXO3,negative,HL,negative ,direct,1,regulates,"FOXO1FOXO3 unites the FOXO1 and FOXO3 nodes, which are represented separately in other models. The direct effect of AKT on both FOXO1 and FOXO3 translates to a direct effect on FOXO1FOXO3."
+AKT,FOXO1FOXO3,negative,SL,negative ,direct,1,regulates,"FOXO1FOXO3 unites the FOXO1 and FOXO3 nodes, which are represented separately in other models. The direct effect of AKT on both FOXO1 and FOXO3 translates to a direct effect on FOXO1FOXO3."
+AKT,FOXO3,ambiguous,Z17,negative,direct,1,regulates,"AKT phosphorylates FOXO1 at several regulatory residues. These promote binding to 14-3-3 proteins and retention in the cytoplasm, which decreases FOXO1 transcriptional activity"
+AKT,FOXO3,negative,Z21,negative,direct,1,regulates,"AKT phosphorylates FOXO1 at several regulatory residues. These promote binding to 14-3-3 proteins and retention in the cytoplasm, which decreases FOXO1 transcriptional activity"
+AKT,FOXO3,ambiguous,TGEN,negative,direct,1,regulates,"AKT phosphorylates FOXO1 at several regulatory residues. These promote binding to 14-3-3 proteins and retention in the cytoplasm, which decreases FOXO1 transcriptional activity"
+AKT,FOXO3,ambiguous,MCF7,negative,direct,1,regulates,"AKT phosphorylates FOXO1 at several regulatory residues. These promote binding to 14-3-3 proteins and retention in the cytoplasm, which decreases FOXO1 transcriptional activity"
+AKT,FOXO3,ambiguous,T47D,negative ,direct,1,regulates,"AKT phosphorylates FOXO1 at several regulatory residues. These promote binding to 14-3-3 proteins and retention in the cytoplasm, which decreases FOXO1 transcriptional activity"
+AKT,GSK3B,ambiguous,TGEN,negative,direct,1,regulates,"AKT directly phosphorylates GSK3β at Ser9, which inhibits GSK3β kinase activity."
+AKT,GSK3B,ambiguous,MCF7,negative,direct,1,regulates,"AKT directly phosphorylates GSK3β at Ser9, which inhibits GSK3β kinase activity."
+AKT,GSK3B,ambiguous,T47D,negative ,direct,1,regulates,"AKT directly phosphorylates GSK3β at Ser9, which inhibits GSK3β kinase activity."
+AKT,HER3,negative,SL,negative ,correlation,3,,This proteomics- inferred edge is supported as an indirect effect via FOXO3
+AKT,KMT2D,ambiguous,Z17,negative ,direct,1,regulates,AKT phosphorylates KMT2D at Ser1331; this reduces KMT2D chromatin recruitment/function and consequently suppresses KMT2D-dependent ER transcriptional activity.
+AKT,KMT2D,negative,Z21,negative ,direct,1,regulates,AKT phosphorylates KMT2D at Ser1331; this reduces KMT2D chromatin recruitment/function and consequently suppresses KMT2D-dependent ER transcriptional activity.
+AKT,KMT2D,ambiguous,TGEN,negative,direct,1,regulates,AKT phosphorylates KMT2D at Ser1331; this reduces KMT2D chromatin recruitment/function and consequently suppresses KMT2D-dependent ER transcriptional activity.
+AKT,KMT2D,ambiguous,MCF7,negative ,direct,1,regulates,AKT phosphorylates KMT2D at Ser1331; this reduces KMT2D chromatin recruitment/function and consequently suppresses KMT2D-dependent ER transcriptional activity.
+AKT,KMT2D,ambiguous,T47D,negative ,direct,1,regulates,AKT phosphorylates KMT2D at Ser1331; this reduces KMT2D chromatin recruitment/function and consequently suppresses KMT2D-dependent ER transcriptional activity.
+AKT,LCK,ambiguous,TGEN,negative,unsupported,,,"This edge is not supported by evidence; the opposite direction, from LCK to AKT is supported."
+AKT,LCK,ambiguous,MCF7,negative,unsupported,,,
+AKT,LCK,ambiguous,T47D,negative,unsupported,,,
+AKT,MDM2,ambiguous,TGEN,positive,,,,
+AKT,MDM2,ambiguous,MCF7,,,,,
+AKT,MDM2,ambiguous,T47D,,,,,
+AKT,mTORC1,positive,BS,positive,indirect,2,,"causal effect mediated by PRAS40, TSC2"
+AKT,mTORC1,positive,HS,positive,indirect,2,,"causal effect mediated by PRAS40, TSC2"
+AKT,mTORC1,positive,SS,positive,indirect,2,,"causal effect mediated by PRAS40, TSC2"
+AKT,NOS3,ambiguous,TGEN,positive,,,,
+AKT,NOS3,ambiguous,MCF7,,,,,
+AKT,NOS3,ambiguous,T47D,,,,,
+AKT,p21,ambiguous,TGEN,negative,,,,"AKT phosphorylates p21 (CDKN1A), which causes p21 to be retained/relocalized to the cytoplasm, reducing its nuclear inhibition of cyclin–CDK complexes."
+AKT,p21,ambiguous,MCF7,negative,direct,1,regulates,"AKT phosphorylates p21 (CDKN1A), which causes p21 to be retained/relocalized to the cytoplasm, reducing its nuclear inhibition of cyclin–CDK complexes."
+AKT,p21,ambiguous,T47D,negative,direct,1,regulates,"AKT phosphorylates p21 (CDKN1A), which causes p21 to be retained/relocalized to the cytoplasm, reducing its nuclear inhibition of cyclin–CDK complexes."
+AKT,p21_p27,ambiguous,Z17,negative,direct,1,regulates,The p21_p27 node unites p21 and p27. AKT phosphorylates and inhibits both p21 and p27. This inhibition can be interpreted as a direct inhibition of the p21_p27 node.
+AKT,p21_p27,negative,Z21,negative,direct,1,regulates,The p21_p27 node unites p21 and p27. AKT phosphorylates and inhibits both p21 and p27. This inhibition can be interpreted as a direct inhibition of the p21_p27 node.
+AKT,p38,positive,BL,positive,correlation,3,,This observed correlation is consistent with crosstalk between the Pi3K/AKT and p38 MAPK pathway.
+AKT,p38,positive,HL,positive,correlation,3,,This observed correlation is consistent with crosstalk between the Pi3K/AKT and p38 MAPK pathway.
+AKT,p38,positive,SL,positive,correlation,3,,This observed correlation is consistent with crosstalk between the Pi3K/AKT and p38 MAPK pathway.
+AKT,PRAS40,negative,BL,,,,,
+AKT,PRAS40,negative,HL,,,,,
+AKT,PRAS40,negative,SL,,,,,
+AKT,PRAS40,ambiguous,Z17,,,,,
+AKT,PRAS40,negative,Z21,,,,,
+AKT,PRKACA,ambiguous,TGEN,positive,,,,
+AKT,PRKACA,ambiguous,MCF7,,,,,
+AKT,PRKACA,ambiguous,T47D,,,,,
+AKT,RAC1,ambiguous,TGEN,negative,,,,
+AKT,RAC1,ambiguous,MCF7,,,,,
+AKT,RAC1,ambiguous,T47D,,,,,
+AKT,S6K,positive,BS,positive,indirect,2,,this causal effect is mediated by mTORC1
+AKT,S6K,positive,HS,positive,indirect,2,,this causal effect is mediated by mTORC1
+AKT,S6K,positive,SS,positive,indirect,2,,this causal effect is mediated by mTORC1
+AKT,TSC2,negative,BL,negative ,direct,1,,"AKT phosphorylates TSC2 (tuberin) at multiple sites, inhibiting the TSC1–TSC2 complex's GAP activity."
+AKT,TSC2,negative,HL,negative,direct,1,,"AKT phosphorylates TSC2 (tuberin) at multiple sites, inhibiting the TSC1–TSC2 complex's GAP activity."
+AKT,TSC2,negative,SL,negative ,direct,1,,"AKT phosphorylates TSC2 (tuberin) at multiple sites, inhibiting the TSC1–TSC2 complex's GAP activity."
+AKT,TSC2,ambiguous,Z17,negative ,direct,1,,"AKT phosphorylates TSC2 (tuberin) at multiple sites, inhibiting the TSC1–TSC2 complex's GAP activity."
+AKT,TSC2,negative,Z21,negative ,direct,1,,"AKT phosphorylates TSC2 (tuberin) at multiple sites, inhibiting the TSC1–TSC2 complex's GAP activity."
+AKT,TSC2,ambiguous,TGEN,negative,direct,1,,"AKT phosphorylates TSC2 (tuberin) at multiple sites, inhibiting the TSC1–TSC2 complex's GAP activity."
+AKT,TSC2,ambiguous,MCF7,negative,direct,1,,"AKT phosphorylates TSC2 (tuberin) at multiple sites, inhibiting the TSC1–TSC2 complex's GAP activity."
+AKT,TSC2,ambiguous,T47D,negative,direct,1,,"AKT phosphorylates TSC2 (tuberin) at multiple sites, inhibiting the TSC1–TSC2 complex's GAP activity."
+AKT,TWIST1,ambiguous,TGEN,positive,direct,1,,"AKT phosphorylates TSC2 (tuberin) at multiple sites, inhibiting the TSC1–TSC2 complex's GAP activity."
+AKT,TWIST1,ambiguous,MCF7,,,,,
+Alpelisib,PI3K,ambiguous,Z17,,,,,
+Alpelisib,PI3K,negative,Z21,,,,,
+Alpelisib,PI3K_2,ambiguous,Z17,,,,,
+Alpelisib,PI3K_2,negative,Z21,,,,,
+APC,DC,ambiguous,TGEN,positive,,,,
+APC,DC,ambiguous,MCF7,,,,,
+APC,DC,ambiguous,T47D,,,,,
+Apoptosis,Apoptosis,ambiguous,Z17,positive,assumption,4,,This assumed self-regulation reflects the irreversible nature of the commitment to apoptosis.
+Apoptosis,Apoptosis,positive,Z21,positive,assumption,4,,This assumed self-regulation reflects the irreversible nature of the commitment to apoptosis.
+Apoptosis_2,Apoptosis_2,ambiguous,Z17,positive,assumption,4,,This assumed self-regulation reflects the irreversible nature of the commitment to apoptosis.
+Apoptosis_2,Apoptosis_2,positive,Z21,positive,assumption,4,,This assumed self-regulation reflects the irreversible nature of the commitment to apoptosis.
+Apoptosis_3,Apoptosis_3,ambiguous,Z17,positive,assumption,4,,This assumed self-regulation reflects the irreversible nature of the commitment to apoptosis.
+Apoptosis_3,Apoptosis_3,positive,Z21,positive,assumption,4,,This assumed self-regulation reflects the irreversible nature of the commitment to apoptosis.
+AXIN1,APC,ambiguous,TGEN,,,,,
+AXIN1,APC,ambiguous,MCF7,,,,,
+AXIN1,APC,ambiguous,T47D,,,,,
+BAD,Apoptosis,ambiguous,Z17,positive,indirect,2,,"causal effect mediated by CYCS, CASP9, CASP3"
+BAD,Apoptosis,positive,Z21,positive,indirect,2,,"causal effect mediated by CYCS, CASP9, CASP3"
+BAD,Apoptosis_2,ambiguous,Z17,positive,indirect,2,,"causal effect mediated by CYCS, CASP9, CASP3; we consider that the confidence ranking is the same as the BAD->Apoptosis edge."
+BAD,Apoptosis_3,ambiguous,Z17,positive,indirect,2,,"causal effect mediated by CYCS, CASP9, CASP3; we consider that the confidence ranking is the same as the BAD->Apoptosis edge."
+BAD,BCL2,ambiguous,TGEN,negative,direct,1,regulates,"BAD binds BCL-2 through its BH3 domain, occupying the hydrophobic groove of BCL-2. This binding neutralizes BCL-2's anti-apoptotic function."
+BAD,BCL2,ambiguous,MCF7,negative,direct,1,regulates,"BAD binds BCL-2 through its BH3 domain, occupying the hydrophobic groove of BCL-2. This binding neutralizes BCL-2's anti-apoptotic function."
+BAD,BCL2,ambiguous,T47D,negative,direct,1,regulates,"BAD binds BCL-2 through its BH3 domain, occupying the hydrophobic groove of BCL-2. This binding neutralizes BCL-2's anti-apoptotic function."
+BAD,BCLXL,ambiguous,TGEN,negative,direct,1,regulates,"BAD binds BCL-XL through its BH3 domain, occupying the hydrophobic groove of BCL-XL. This binding neutralizes BCL-XL's anti-apoptotic function."
+BAD,BCLXL,ambiguous,MCF7,negative,direct,1,regulates,"BAD binds BCL-XL through its BH3 domain, occupying the hydrophobic groove of BCL-XL. This binding neutralizes BCL-XL's anti-apoptotic function."
+BAD,BCLXL,ambiguous,T47D,negative,direct,1,regulates,"BAD binds BCL-XL through its BH3 domain, occupying the hydrophobic groove of BCL-XL. This binding neutralizes BCL-XL's anti-apoptotic function."
+BAK1,CYCS,ambiguous,TGEN,positive,direct in the network sense,1,regulates,Activated BAK oligomerizes in the mitochondrial outer membrane and helps form pores through which Cytochrome c (CYCS) is released from the mitochondrial intermembrane space into the cytosol.
+BAK1,CYCS,ambiguous,MCF7,positive,direct in the network sense,1,regulates,Activated BAK oligomerizes in the mitochondrial outer membrane and helps form pores through which Cytochrome c (CYCS) is released from the mitochondrial intermembrane space into the cytosol.
+BAK1,CYCS,ambiguous,T47D,positive,direct in the network sense,1,regulates,Activated BAK oligomerizes in the mitochondrial outer membrane and helps form pores through which Cytochrome c (CYCS) is released from the mitochondrial intermembrane space into the cytosol.
+BAX,BAX,positive,SL,positive,direct,1,regulates,"Active BAX oligomerizes, and it also activates additional BAX molecules."
+BAX,CYCS,ambiguous,TGEN,positive,direct in the network sense,1,regulates,Activated BAX oligomerizes in the mitochondrial outer membrane and helps form pores through which Cytochrome c (CYCS) is released from the mitochondrial intermembrane space into the cytosol.
+BAX,CYCS,ambiguous,MCF7,positive,direct in the network sense,1,regulates,Activated BAX oligomerizes in the mitochondrial outer membrane and helps form pores through which Cytochrome c (CYCS) is released from the mitochondrial intermembrane space into the cytosol.
+BAX,CYCS,ambiguous,T47D,positive,direct in the network sense,1,regulates,Activated BAX oligomerizes in the mitochondrial outer membrane and helps form pores through which Cytochrome c (CYCS) is released from the mitochondrial intermembrane space into the cytosol.
+BAX,HER2,positive,SL,positive,unsupported,,,This inferred edge is not supported by evidence
+BCL2,Apoptosis,ambiguous,Z17,negative ,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3"
+BCL2,Apoptosis_2,ambiguous,Z17,negative,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3; we consider the same confidence ranking as that of BCL2->Apoptosis."
+BCL2,Apoptosis_2,negative,Z21,negative,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3; we consider the same confidence ranking as that of BCL2->Apoptosis."
+BCL2,Apoptosis_3,ambiguous,Z17,negative,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3; we consider the same confidence ranking as that of BCL2->Apoptosis."
+BCL2,Apoptosis_3,negative,Z21,negative,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3; we consider the same confidence ranking as that of BCL2->Apoptosis."
+BCL2,BIM,ambiguous,TGEN,negative,direct,1,regulates,"BCL2 directly binds the BH3 domain of BIM, sequestering BIM and preventing it from activating BAX/BAK."
+BCL2,BIM,ambiguous,MCF7,negative,direct,1,regulates,"BCL2 directly binds the BH3 domain of BIM, sequestering BIM and preventing it from activating BAX/BAK."
+BCL2,BIM,ambiguous,T47D,negative,direct,1,regulates,"BCL2 directly binds the BH3 domain of BIM, sequestering BIM and preventing it from activating BAX/BAK."
+BCL2_T,BCL2,ambiguous,Z17,positive,direct,1,necessary,protein translation
+BCL2_T,BCL2,positive,Z21,positive,direct,1,necessary,protein translation
+BCLXL,Apoptosis_2,negative,Z21,negative ,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3"
+BCLXL,Apoptosis_3,negative,Z21,negative ,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3"
+BCLXL,BIM,ambiguous,TGEN,negative,direct,1,regulates,"BCL-XL (BCL2L1) directly binds BIM through BIM's BH3 domain, sequestering BIM and preventing it from activating BAX/BAK."
+BCLXL,BIM,ambiguous,MCF7,negative,direct,1,regulates,"BCL-XL (BCL2L1) directly binds BIM through BIM's BH3 domain, sequestering BIM and preventing it from activating BAX/BAK."
+BCLXL,BIM,ambiguous,T47D,negative,direct,1,regulates,"BCL-XL (BCL2L1) directly binds BIM through BIM's BH3 domain, sequestering BIM and preventing it from activating BAX/BAK."
+BCLXL,CASP9,ambiguous,TGEN,negative,direct in the network sense,1,regulates,"This edge is mediated by the inhibition of mitochondrial cytochrome-c release and apoptosome formation, neither of which is in the network"
+BCLXL,CASP9,ambiguous,MCF7,negative,direct in the network sense,1,regulates,"This edge is mediated by the inhibition of mitochondrial cytochrome-c release and apoptosome formation, neither of which is in the network"
+BCLXL_T,BCLXL,positive,Z21,positive,direct,1,necessary,protein translation
+BID,BAK1,ambiguous,TGEN,positive,direct,1,regulates,"The active form tBID (generated by caspase-8 cleavage of BID) directly engages BAK, promoting the conformational changes and oligomerization that lead to mitochondrial outer-membrane permeabilization (MOMP)."
+BID,BAK1,ambiguous,MCF7,positive,direct,1,regulates,"The active form tBID (generated by caspase-8 cleavage of BID) directly engages BAK, promoting the conformational changes and oligomerization that lead to mitochondrial outer-membrane permeabilization (MOMP)."
+BID,BAK1,ambiguous,T47D,positive,direct,1,regulates,"The active form tBID (generated by caspase-8 cleavage of BID) directly engages BAK, promoting the conformational changes and oligomerization that lead to mitochondrial outer-membrane permeabilization (MOMP)."
+BID,BAX,ambiguous,TGEN,positive,direct,1,regulates,"The active form tBID directly binds BAX and induces the conformational changes that activate BAX, leading to its mitochondrial membrane insertion and oligomerization."
+BID,BAX,ambiguous,MCF7,positive,direct,1,regulates,"The active form tBID directly binds BAX and induces the conformational changes that activate BAX, leading to its mitochondrial membrane insertion and oligomerization."
+BID,BAX,ambiguous,T47D,positive,direct,1,regulates,"The active form tBID directly binds BAX and induces the conformational changes that activate BAX, leading to its mitochondrial membrane insertion and oligomerization."
+BIM,Apoptosis,ambiguous,Z17,positive,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3"
+BIM,Apoptosis,positive,Z21,positive,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3"
+BIM,Apoptosis_2,ambiguous,Z17,positive,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3; we consider the same confidence ranking as that of BIM->Apoptosis."
+BIM,Apoptosis_3,ambiguous,Z17,positive,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3; we consider the same confidence ranking as that of BIM->Apoptosis."
+BIM,Apoptosis_3,positive,Z21,positive,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3; we consider the same confidence ranking as that of BIM->Apoptosis."
+BIM,BAK1,ambiguous,TGEN,positive,direct,1,regulates,"BIM's BH3 domain can directly engage BAK, causing the conformational changes that lead to BAK oligomerization and mitochondrial outer-membrane permeabilization."
+BIM,BAK1,ambiguous,MCF7,positive,direct,1,regulates,"BIM's BH3 domain can directly engage BAK, causing the conformational changes that lead to BAK oligomerization and mitochondrial outer-membrane permeabilization."
+BIM,BAK1,ambiguous,T47D,positive,direct,1,regulates,"BIM's BH3 domain can directly engage BAK, causing the conformational changes that lead to BAK oligomerization and mitochondrial outer-membrane permeabilization."
+BIM,BAX,ambiguous,TGEN,positive,direct,1,regulates,"BIM's BH3 domain physically binds BAX, inducing conformational changes that promote BAX membrane insertion and oligomerization, leading to mitochondrial outer-membrane permeabilization."
+BIM,BAX,ambiguous,MCF7,positive,direct,1,regulates,"BIM's BH3 domain physically binds BAX, inducing conformational changes that promote BAX membrane insertion and oligomerization, leading to mitochondrial outer-membrane permeabilization."
+BIM,BAX,ambiguous,T47D,positive,direct,1,regulates,"BIM's BH3 domain physically binds BAX, inducing conformational changes that promote BAX membrane insertion and oligomerization, leading to mitochondrial outer-membrane permeabilization."
+BIM,BCL2,ambiguous,TGEN,negative,direct,1,regulates,"BIM binds BCL-2 through its BH3 domain, occupying the hydrophobic groove of BCL-2. This binding neutralizes BCL-2's anti-apoptotic function."
+BIM,BCL2,ambiguous,MCF7,negative,direct,1,regulates,"BIM binds BCL-2 through its BH3 domain, occupying the hydrophobic groove of BCL-2. This binding neutralizes BCL-2's anti-apoptotic function."
+BIM,BCL2,ambiguous,T47D,negative,direct,1,regulates,"BIM binds BCL-2 through its BH3 domain, occupying the hydrophobic groove of BCL-2. This binding neutralizes BCL-2's anti-apoptotic function."
+BIM,BCLXL,ambiguous,TGEN,negative,direct,1,regulates,BIM directly binds the hydrophobic BH3-binding groove of BCL-XL (BCL2L1) through BIM's BH3 domain. This binding neutralizes BCL-XL's anti-apoptotic function.
+BIM,BCLXL,ambiguous,MCF7,negative ,direct,1,regulates,BIM directly binds the hydrophobic BH3-binding groove of BCL-XL (BCL2L1) through BIM's BH3 domain. This binding neutralizes BCL-XL's anti-apoptotic function.
+BIM,BCLXL,ambiguous,T47D,negative ,direct,1,regulates,BIM directly binds the hydrophobic BH3-binding groove of BCL-XL (BCL2L1) through BIM's BH3 domain. This binding neutralizes BCL-XL's anti-apoptotic function.
+BIM_T,BIM,ambiguous,Z17,positive,direct,1,protein translation,
+BIM_T,BIM,positive,Z21,positive,direct,1,protein translation,
+CASP3,CASP9,ambiguous,TGEN,positive,direct in the network sense,1,regulates,"The mechanism includes Caspase-3 cleaving caspase-9 and the inhibition of XIAP, which is not in the network"
+CASP3,CASP9,ambiguous,MCF7,positive,direct in the network sense,1,regulates,"The mechanism includes Caspase-3 cleaving caspase-9 and the inhibition of XIAP, which is not in the network"
+CASP3,CASP9,ambiguous,T47D,positive,direct in the network sense,1,regulates,"The mechanism includes Caspase-3 cleaving caspase-9 and the inhibition of XIAP, which is not in the network"
+CASP3,CDKN2A,ambiguous,TGEN,positive,unsupported,,,This assumed edge is not supported by evidence.
+CASP3,CDKN2A,ambiguous,MCF7,positive,unsupported,,,This assumed edge is not supported by evidence.
+CASP3,CDKN2A,ambiguous,T47D,positive,unsupported,,,This assumed edge is not supported by evidence.
+CASP3,HES1,ambiguous,TGEN,negative,unsupported,,,This edge is not supported by evidence.
+CASP8,BID,ambiguous,TGEN,positive,direct,1,regulates,"Active caspase-8 directly cleaves BID, generating truncated BID (tBID). tBID translocates to mitochondria and activates the mitochondrial apoptosis pathway, including BAX/BAK activation."
+CASP8,BID,ambiguous,MCF7,positive,direct,1,regulates,"Active caspase-8 directly cleaves BID, generating truncated BID (tBID). tBID translocates to mitochondria and activates the mitochondrial apoptosis pathway, including BAX/BAK activation."
+CASP8,BID,ambiguous,T47D,positive,direct,1,regulates,"Active caspase-8 directly cleaves BID, generating truncated BID (tBID). tBID translocates to mitochondria and activates the mitochondrial apoptosis pathway, including BAX/BAK activation."
+CASP8,CASP3,ambiguous,T47D,positive,direct,1,regulates,Active caspase-8 directly cleaves and activates procaspase-3
+CASP8,CASP9,ambiguous,TGEN,positive,indirect,2,,"causal effect mediated by BID, BAX and others"
+CASP8,CASP9,ambiguous,MCF7,positive,indirect,2,,"causal effect mediated by BID, BAX and others"
+CASP8,CASP9,ambiguous,T47D,positive,indirect,2,,"causal effect mediated by BID, BAX and others"
+CASP9,CASP3,ambiguous,TGEN,positive,direct,1,regulates,"Active caspase-9 directly cleaves procaspase-3 at its activating processing sites, generating active caspase-3"
+CASP9,CASP3,ambiguous,MCF7,positive,direct,1,regulates,"Active caspase-9 directly cleaves procaspase-3 at its activating processing sites, generating active caspase-3"
+CASP9,CASP3,ambiguous,T47D,positive,direct,1,regulates,"Active caspase-9 directly cleaves procaspase-3 at its activating processing sites, generating active caspase-3"
+CDK46,CYCLINDc,ambiguous,Z17,positive,,0,necessary,CDK4 or CDK6 (denoted CDK46) make up one component of the cyclin-CDK complex CYCLINDc
+CDK46,CYCLINDc,positive,Z21,positive,,0,necessary,CDK4 or CDK6 (denoted CDK46) make up one component of the cyclin-CDK complex CYCLINDc.
+CDK46,CYCLINDc_2,ambiguous,Z17,positive,,0,necessary,CDK4 or CDK6 (denoted CDK46) make up one component of the cyclin-CDK complex CYCLINDc. We consider that the same confidence ranking applies as that of the CDK46->CYCLINDc edge.
+CDK46,CYCLINDc_2,positive,Z21,positive,,0,necessary,CDK4 or CDK6 (denoted CDK46) make up one component of the cyclin-CDK complex CYCLINDc. We consider that the same confidence ranking applies as that of the CDK46->CYCLINDc edge.
+CDKN2A,CYCLINDc,ambiguous,TGEN,negative,,1,regulates,CDKN2A (p16INK4A)  binds CDK4 and CDK6 and prevents/antagonizes formation of functional Cyclin D–CDK4/6 complexes.
+CDKN2A,CYCLINDc,ambiguous,MCF7,negative,,1,regulates,CDKN2A (p16INK4A)  binds CDK4 and CDK6 and prevents/antagonizes formation of functional Cyclin D–CDK4/6 complexes.
+CDKN2A,CYCLINDc,ambiguous,T47D,negative,,1,regulates,CDKN2A (p16INK4A)  binds CDK4 and CDK6 and prevents/antagonizes formation of functional Cyclin D–CDK4/6 complexes.
+CEBPB,PPARG,ambiguous,TGEN,positive,,,,
+CEBPB,PPARG,ambiguous,MCF7,,,,,
+CEBPB,PPARG,ambiguous,T47D,,,,,
+CREB1,BCL2,ambiguous,TGEN,positive,direct,1,regulates,regulation of transcription. CREB/CREB1 directly binds a cAMP-response element (CRE) in the BCL2 promoter and stimulates BCL2 transcription.
+CREB1,BCL2,ambiguous,MCF7,positive,direct,1,regulates,regulation of transcription. CREB/CREB1 directly binds a cAMP-response element (CRE) in the BCL2 promoter and stimulates BCL2 transcription.
+CREB1,BCL2,ambiguous,T47D,positive,direct,1,regulates,regulation of transcription. CREB/CREB1 directly binds a cAMP-response element (CRE) in the BCL2 promoter and stimulates BCL2 transcription.
+CREB1,BCLXL,ambiguous,TGEN,positive,direct,1,regulates,regulation of transcription. CREB/CREB1 can directly bind a cAMP-response element (CRE) in the BCL2L1 (BCLXL) promoter and stimulates its transcription.
+CREB1,BCLXL,ambiguous,MCF7,positive,direct,1,regulates,regulation of transcription. CREB/CREB1 can directly bind a cAMP-response element (CRE) in the BCL2L1 (BCLXL) promoter and stimulates its transcription.
+CREB1,BCLXL,ambiguous,T47D,positive,direct,1,regulates,regulation of transcription. CREB/CREB1 can directly bind a cAMP-response element (CRE) in the BCL2L1 (BCLXL) promoter and stimulates its transcription.
+CREB1,CEBPB,ambiguous,TGEN,positive,,,,
+CREB1,CEBPB,ambiguous,MCF7,,,,,
+CREB1,FZD3,ambiguous,TGEN,positive,,,,
+CREB1,FZD3,ambiguous,MCF7,,,,,
+CTNNB1,MYC,ambiguous,TGEN,positive,,,,
+CTNNB1,MYC,ambiguous,MCF7,,,,,
+CTNNB1,MYC,ambiguous,T47D,,,,,
+CTNNB1,NOTCH1,ambiguous,TGEN,positive,,,,
+CTNNB1,NOTCH1,ambiguous,MCF7,,,,,
+CTNNB1,NOTCH1,ambiguous,T47D,,,,,
+CTNNB1,TCF7L2,ambiguous,TGEN,positive,,,,
+CTNNB1,TCF7L2,ambiguous,MCF7,,,,,
+CTNNB1,TCF7L2,ambiguous,T47D,,,,,
+cycE_CDK2,pRB,ambiguous,Z17,,,,,
+cycE_CDK2,pRB_2,ambiguous,Z17,,,,,
+cycE_CDK2,pRB_2,positive,Z21,,,,,
+cycE_CDK2,pRB_3,ambiguous,Z17,,,,,
+cycE_CDK2T,cycE_CDK2,ambiguous,Z17,,,,,
+cycE_CDK2T,cycE_CDK2,positive,Z21,,,,,
+CyclinB1,AKT,positive,HL,positive,correlation,3,,this inferred edge is supported by perturbation evidence but the mechanism is not clear
+CyclinB1,AKT,negative,SL,negative ,unsupported,,,this inferred edge is not supported by evidence
+CyclinB1,CyclinB1,positive,BL,,,,,
+CyclinB1,CyclinB1,positive,HL,,,,,
+CyclinB1,CyclinB1,positive,SL,,,,,
+CyclinB1,ERK,positive,SL,,,,,
+CyclinB1,p53,positive,BL,,,,,
+CyclinB1,p53,positive,HL,,,,,
+CyclinB1,p53,positive,SL,,,,,
+CyclinB1,RB,negative,HL,,,,,
+CyclinD_2,CyclinD,ambiguous,Z17,positive,unsupported,,,This edge is an artifact of the Boolean representation of a multi-level variable.
+CyclinD_2,CyclinD,positive,Z21,positive,unsupported,,,This edge is an artifact of the Boolean representation of a multi-level variable.
+CyclinD_2,CYCLINDc,ambiguous,Z17,positive,,0,necessary,Cyclin D1 is one of two components of the cyclin-CDK complex CYCLINDc. We assign the same rank as that of the CyclinD1->CYCLIND_c edge.
+CyclinD_2,CYCLINDc,positive,Z21,positive,,0,necessary,Cyclin D1 is one of two components of the cyclin-CDK complex CYCLINDc. We assign the same rank as that of the CyclinD1->CYCLIND_c edge.
+CyclinD_2,CYCLINDc_2,ambiguous,Z17,positive,,0,necessary,Cyclin D1 is one of two components of the cyclin-CDK complex CYCLINDc. We assign the same rank as that of the CyclinD1->CYCLIND_c edge.
+CyclinD_2,CYCLINDc_2,positive,Z21,positive,,0,necessary,Cyclin D1 is one of two components of the cyclin-CDK complex CYCLINDc. We assign the same rank as that of the CyclinD1->CYCLIND_c edge.
+CyclinD,CyclinD_2,ambiguous,Z17,positive,,0,necessary,Reaching a higher level necessitates achieving the lower level first.
+CyclinD,CyclinD_2,positive,Z21,positive,,0,necessary,Reaching a higher level necessitates achieving the lower level first.
+CyclinD,CyclinD,positive,BL,positive,unsupported,,,This inferred self-regulation is not supported by experimental evidence.
+CyclinD,CyclinD,positive,HL,positive,unsupported,,,This inferred self-regulation is not supported by experimental evidence.
+CyclinD,CyclinD,positive,SL,positive,unsupported,,,This inferred self-regulation is not supported by experimental evidence.
+CyclinD,CYCLINDc,ambiguous,Z17,positive,,0,necessary,Cyclin D1 is one of two components of the cyclin-CDK complex CYCLINDc
+CyclinD,CYCLINDc,positive,Z21,positive,,0,necessary,Cyclin D1 is one of two components of the cyclin-CDK complex CYCLINDc
+CyclinD,GSK3B,positive,BL,,,,,
+CyclinD,RB,negative,BL,,,,,
+CyclinD,RB,negative,SL,,,,,
+CYCLINDc,CYCLINDc_2,ambiguous,Z17,positive,,0,necessary,Reaching a higher level necessitates achieving the lower level first.
+CYCLINDc,CYCLINDc_2,positive,Z21,positive,,0,necessary,Reaching a higher level necessitates achieving the lower level first.
+CYCLINDc,pRB,ambiguous,Z17,,,,,
+CYCLINDc,pRB,positive,Z21,,,,,
+CYCLINDc,pRB_2,ambiguous,Z17,,,,,
+CYCLINDc,pRB_2,positive,Z21,,,,,
+CYCLINDc,RB,ambiguous,TGEN,negative,,,,
+CYCLINDc,RB,ambiguous,MCF7,,,,,
+CYCLINDc,RB,ambiguous,T47D,,,,,
+CYCLINDc_2,CYCLINDc,ambiguous,Z17,positive,unsupported,,,This edge is an artifact of the Boolean representation of a multi-level variable.
+CYCLINDc_2,CYCLINDc,positive,Z21,positive,unsupported,,,This edge is an artifact of the Boolean representation of a multi-level variable.
+CYCLINDc_2,pRB,ambiguous,Z17,,,,,
+CYCLINDc_2,pRB,positive,Z21,,,,,
+CYCLINDc_2,pRB_2,ambiguous,Z17,,,,,
+CYCLINDc_2,pRB_2,positive,Z21,,,,,
+CYCLINDc_2,pRB_3,ambiguous,Z17,,,,,
+CYCS,CASP9,ambiguous,TGEN,positive,direct in the network sense,1,regulates,"Cytosolic cytochrome c binds APAF1, causing APAF1 to assemble into the apoptosome. The apoptosome then recruits procaspase-9 through CARD–CARD interactions and activates it by proximity/dimerization.  APAF1 and the apoptosome are not in the network."
+CYCS,CASP9,ambiguous,MCF7,positive,direct in the network sense,1,regulates,"Cytosolic cytochrome c binds APAF1, causing APAF1 to assemble into the apoptosome. The apoptosome then recruits procaspase-9 through CARD–CARD interactions and activates it by proximity/dimerization.  APAF1 and the apoptosome are not in the network."
+CYCS,CASP9,ambiguous,T47D,positive,direct in the network sense,1,regulates,"Cytosolic cytochrome c binds APAF1, causing APAF1 to assemble into the apoptosome. The apoptosome then recruits procaspase-9 through CARD–CARD interactions and activates it by proximity/dimerization.  APAF1 and the apoptosome are not in the network."
+DC,CTNNB1,ambiguous,TGEN,negative,,,,
+DC,CTNNB1,ambiguous,MCF7,,,,,
+DC,CTNNB1,ambiguous,T47D,,,,,
+DLL,NOTCH1,ambiguous,TGEN,positive,,,,
+DLL,NOTCH1,ambiguous,MCF7,,,,,
+DLL,NOTCH1,ambiguous,T47D,,,,,
+DVL1,AXIN1,ambiguous,TGEN,negative,,,,
+DVL1,AXIN1,ambiguous,MCF7,,,,,
+DVL1,AXIN1,ambiguous,T47D,,,,,
+DVL1,RAC1,ambiguous,TGEN,positive,,,,
+DVL1,RAC1,ambiguous,MCF7,,,,,
+DVL1,RAC1,ambiguous,T47D,,,,,
+DVL1,RND1,ambiguous,TGEN,positive,,,,
+DVL1,RND1,ambiguous,MCF7,,,,,
+DVL1,RND1,ambiguous,T47D,,,,,
+E2F,cycE_CDK2T,ambiguous,Z17,,,,,
+E2F,cycE_CDK2T,positive,Z21,,,,,
+E2F,E2F_2,ambiguous,Z17,,,,,
+E2F,E2F_2,positive,Z21,,,,,
+E2F,E2F_3,ambiguous,Z17,,,,,
+E2F,Proliferation,ambiguous,Z17,,,,,
+E2F,Proliferation,positive,Z21,,,,,
+E2F,Proliferation_3,positive,Z21,,,,,
+E2F_2,cycE_CDK2T,ambiguous,Z17,,,,,
+E2F_2,cycE_CDK2T,positive,Z21,,,,,
+E2F_2,E2F,ambiguous,Z17,,,,,
+E2F_2,E2F,positive,Z21,,,,,
+E2F_2,E2F_3,ambiguous,Z17,,,,,
+E2F_2,Proliferation,ambiguous,Z17,,,,,
+E2F_2,Proliferation_2,ambiguous,Z17,,,,,
+E2F_2,Proliferation_2,positive,Z21,,,,,
+E2F_2,Proliferation_3,ambiguous,Z17,,,,,
+E2F_2,Proliferation_3,positive,Z21,,,,,
+E2F_3,cycE_CDK2T,ambiguous,Z17,,,,,
+E2F_3,E2F,ambiguous,Z17,,,,,
+E2F_3,E2F_2,ambiguous,Z17,,,,,
+E2F_3,E2F_3,ambiguous,Z17,,,,,
+E2F_3,Proliferation,ambiguous,Z17,,,,,
+E2F_3,Proliferation_2,ambiguous,Z17,,,,,
+E2F_3,Proliferation_3,ambiguous,Z17,,,,,
+E2F_3,Proliferation_4,ambiguous,Z17,,,,,
+EGF,AKT,ambiguous,T47D,positive,indirect,2,,"causal effect mediated by EGFR, PI3K, others"
+EGF,EGFR,positive,BS,positive,direct,1,regulates,ligand-receptor binding
+EGF,EGFR,positive,HS,positive,direct,1,regulates,ligand-receptor binding
+EGF,EGFR,positive,SS,positive,direct,1,regulates,ligand-receptor binding
+EGF,EGFR,ambiguous,TGEN,positive,direct,1,regulates,ligand-receptor binding
+EGF,EGFR,ambiguous,MCF7,,,,,
+EGF,EGFR,ambiguous,T47D,,,,,
+EGF,ERK,positive,BS,positive,indirect,2,,"causal effect mediated by EGFR, RAS, RAF, MEK"
+EGF,HER2,positive,BS,positive,indirect,2,,causal effect mediated by EGFR heterodimerization with HER2
+EGF,HER2,ambiguous,TGEN,positive,indirect,2,,causal effect mediated by EGFR heterodimerization with HER2
+EGF,HER2,ambiguous,MCF7,,,,,
+EGF,PLCg,positive,BS,positive,indirect,2,,causal effect mediated by EGFR
+EGFR,AKT,positive,BL,positive,indirect,2,,"causal effect mediated by PI3K, others"
+EGFR,AKT,positive,HL,positive,indirect,2,,"causal effect mediated by PI3K, PIP3"
+EGFR,AKT,positive,SL,positive,indirect,2,,"causal effect mediated by PI3K, PIP3"
+EGFR,AKT,ambiguous,T47D,positive,indirect,2,,"causal effect mediated by PI3K, PIP3"
+EGFR,BAX,positive,SL,,,,,
+EGFR,CyclinB1,positive,BL,,,,,
+EGFR,EGFR,positive,BL,,,,,
+EGFR,EGFR,positive,HL,,,,,
+EGFR,EGFR,positive,BS,positive,direct,1,regulates,EGFR homodimers phosphorylate each other
+EGFR,EGFR,positive,HS,positive,direct,1,regulates,EGFR homodimers phosphorylate each other
+EGFR,EGFR,positive,SS,positive,direct,1,regulates,EGFR homodimers phosphorylate each other
+EGFR,EGFR,positive,SL,,,,,
+EGFR,ERK,positive,HL,,,,,
+EGFR,ERK,positive,SL,,,,,
+EGFR,GRB2,ambiguous,TGEN,positive,,,,
+EGFR,GRB2,ambiguous,MCF7,,,,,
+EGFR,GRB2,ambiguous,T47D,,,,,
+EGFR,HER2,positive,HS,positive,direct,1,regulates,protein-protein interaction; heterodimerization activates HER2
+EGFR,KRT14,ambiguous,TGEN,positive,,,,
+EGFR,KRT14,ambiguous,MCF7,,,,,
+EGFR,KRT14,ambiguous,T47D,,,,,
+EGFR,MEK,positive,BS,positive,indirect,2,,"causal effect mediated by RAS, RAF"
+EGFR,MEK,positive,HS,positive,indirect,2,,"causal effect mediated by RAS, RAF"
+EGFR,MEK,positive,SS,positive,indirect,2,,"causal effect mediated by RAS, RAF"
+EGFR,PDK1_pm,positive,BS,positive,indirect,2,,"causal effect mediated by PI3K, PIP3"
+EGFR,PDK1_pm,positive,HS,positive,direct,1,regulates,"causal effect mediated by PI3K, PIP3"
+EGFR,PDK1_pm,positive,SS,positive,direct,1,regulates,"causal effect mediated by PI3K, PIP3"
+EGFR,PI3K,ambiguous,TGEN,positive,direct,1,regulates,Activated EGFR recruits the p85 regulatory subunit of class IA PI3K into a receptor-associated complex
+EGFR,PI3K,ambiguous,MCF7,,,,,
+EGFR,PI3K,ambiguous,T47D,,,,,
+EGFR,PLCg,positive,BS,positive,direct,1,regulates,EGFR recruits PLCgamma1 and phosphorylates it
+EGFR,PLCg,positive,HS,positive,direct,1,regulates,EGFR recruits PLCgamma1 and phosphorylates it
+EGFR,PLCg,positive,SS,positive,direct,1,regulates,EGFR recruits PLCgamma1 and phosphorylates it
+EGFR,RAF1,positive,BL,,,,,
+EGFR,RAF1,positive,HL,,,,,
+EGFR,RAF1,positive,SL,,,,,
+EGFR,STAT1,ambiguous,T47D,,,,,
+EGFR,STAT5,ambiguous,TGEN,positive,,,,
+EGFR,STAT5,ambiguous,MCF7,,,,,
+EIF4,CYCLINDc,ambiguous,MCF7,positive,indirect,2,,"causal effect: eIF4E promotes both Cyclin D1 mRNA export and cap-dependent translation; experimentally increasing eIF4E increases Cyclin D1 protein, thus more CyclinDc complex can be formed."
+EIF4,CYCLINDc,ambiguous,T47D,positive,indirect,2,,"causal effect: eIF4E promotes both Cyclin D1 mRNA export and cap-dependent translation; experimentally increasing eIF4E increases Cyclin D1 protein, thus more CyclinDc complex can be formed."
+EIF4,MYC,ambiguous,TGEN,positive,,,,
+EIF4,MYC,ambiguous,MCF7,,,,,
+EIF4,MYC,ambiguous,T47D,,,,,
+EIF4,Translation,ambiguous,Z17,positive,direct in the network sense,,,eIF4F is part of the molecular machinery that executes cap-dependent translation initiation.
+EIF4,Translation,positive,Z21,positive,direct in the network sense,,,eIF4F is part of the molecular machinery that executes cap-dependent translation initiation.
+EIF4EBP1,EIF4,ambiguous,TGEN,negative,,,,
+EIF4EBP1,EIF4,ambiguous,MCF7,,,,,
+EIF4EBP1,EIF4,ambiguous,T47D,,,,,
+ER,ER_transcription,ambiguous,Z17,,,,,
+ER,ER_transcription_2,ambiguous,Z17,,,,,
+ER,ESR1,ambiguous,Z17,,,,,
+ER,ESR1,positive,Z21,,,,,
+ER,ESR1_2,ambiguous,Z17,,,,,
+ER,ESR1_2,positive,Z21,,,,,
+ER_transcription,ER_transcription_2,ambiguous,Z17,,,,,
+ER_transcription,ER_transcription_2,positive,Z21,,,,,
+ER_transcription,MYC,ambiguous,Z17,,,,,
+ER_transcription,MYC,positive,Z21,,,,,
+ER_transcription_2,BCL2,ambiguous,Z17,,,,,
+ER_transcription_2,ER_transcription,ambiguous,Z17,,,,,
+ER_transcription_2,ER_transcription,positive,Z21,,,,,
+ER_transcription_2,ER_transcription_feedback_1,positive,Z21,,,,,
+ER_transcription_2,MYC_2,ambiguous,Z17,,,,,
+ER_transcription_2,MYC_2,positive,Z21,,,,,
+ER_transcription_feedback_1,ER_transcription_feedback_2,positive,Z21,,,,,
+ER_transcription_feedback_2,ER_transcription_feedback_2,positive,Z21,,,,,
+ER_transcription_feedback_2,ESR1_2,negative,Z21,,,,,
+ERK,BAD,ambiguous,TGEN,negative,direct,1,regulates,"ERK1/2 phosphorylate BAD, which leads to its sequestration by 14-3-3 proteins, making it unable to inhibit BCLXL, BCL2"
+ERK,BAD,ambiguous,MCF7,,,,,
+ERK,BAD,ambiguous,T47D,,,,,
+ERK,BCL2,ambiguous,TGEN,positive,direct,1,regulates,ERK1/2 phosphorylate BCL2 at Ser70. This phosphorylation enhances BCL2's anti-apoptotic function:
+ERK,BCL2,ambiguous,MCF7,,,,,
+ERK,BCL2,ambiguous,T47D,,,,,
+ERK,CASP8,ambiguous,TGEN,negative,,,,
+ERK,CASP8,ambiguous,MCF7,,,,,
+ERK,CASP8,ambiguous,T47D,,,,,
+ERK,CASP9,ambiguous,TGEN,negative,direct,1,regulates,"ERK1/2 directly binds and phosphorylates caspase-9 at Thr125, inhibiting its activation/activity."
+ERK,CASP9,ambiguous,MCF7,,,,,
+ERK,CASP9,ambiguous,T47D,,,,,
+ERK,CyclinD,positive,BL,positive,indirect,2,,causal effect mediated by JUN and other transcription factors that upregulate CCND1 transcription.
+ERK,CyclinD,positive,HL,positive,indirect,2,,causal effect mediated by JUN and other transcription factors that upregulate CCND1 transcription.
+ERK,CyclinD,positive,SL,positive,indirect,2,,causal effect mediated by JUN and other transcription factors that upregulate CCND1 transcription.
+ERK,CYCLINDc,ambiguous,T47D,positive,,2,,causal effect mediated by JUN and other transcription factors that upregulate CCND1 transcription.
+ERK,ERK,positive,BL,,,,,
+ERK,ERK,positive,HL,,,,,
+ERK,ERK,positive,BS,positive,unsupported,,,this inferred self-regulation is not supported by experimental evidence
+ERK,ERK,positive,HS,positive,unsupported,,,this inferred self-regulation is not supported by experimental evidence
+ERK,ERK,positive,SS,positive,unsupported,,,this inferred self-regulation is not supported by experimental evidence
+ERK,ERK,positive,SL,,,,,
+ERK,GSK3B,ambiguous,TGEN,negative,,,,
+ERK,GSK3B,ambiguous,MCF7,,,,,
+ERK,GSK3B,ambiguous,T47D,,,,,
+ERK,HER3,positive,HS,positive,unsupported,,,there is no evidence for a positive relationship; a negative feedback effect is known
+ERK,JUN,ambiguous,TGEN,positive,,,,
+ERK,JUN,ambiguous,MCF7,,,,,
+ERK,JUN,ambiguous,T47D,,,,,
+ERK,LCK,ambiguous,TGEN,positive,,,,
+ERK,LCK,ambiguous,MCF7,,,,,
+ERK,LCK,ambiguous,T47D,,,,,
+ERK,MCL1,ambiguous,TGEN,positive,direct,1,regulates,"ERK1/2 phosphorylates MCL1, which stabilizes MCL1 and increases its anti-apoptotic activity. ERK1/2 also has indirect effects on MCL1 transcription and translation."
+ERK,MCL1,ambiguous,MCF7,positive,direct,1,regulates,"ERK1/2 phosphorylates MCL1, which stabilizes MCL1 and increases its anti-apoptotic activity. ERK1/2 also has indirect effects on MCL1 transcription and translation."
+ERK,MCL1,ambiguous,T47D,positive,direct,1,regulates,"ERK1/2 phosphorylates MCL1, which stabilizes MCL1 and increases its anti-apoptotic activity. ERK1/2 also has indirect effects on MCL1 transcription and translation."
+ERK,MYC,ambiguous,TGEN,positive,,,,
+ERK,MYC,ambiguous,MCF7,,,,,
+ERK,MYC,ambiguous,T47D,,,,,
+ERK,p21,ambiguous,TGEN,negative,,,,
+ERK,p21,ambiguous,MCF7,,,,,
+ERK,p21,ambiguous,T47D,,,,,
+ERK,PGR,ambiguous,TGEN,negative,,,,
+ERK,PGR,ambiguous,MCF7,,,,,
+ERK,PGR,ambiguous,T47D,,,,,
+ERK,RAF1,negative,BL,,,,,
+ERK,RAF1,negative,HL,,,,,
+ERK,RAF1,negative,SL,,,,,
+ERK,S6K,positive,BL,,,,,
+ERK,S6K,positive,HL,,,,,
+ERK,S6K,positive,BS,positive,direct,1,regulates,"ERK phosphorylates S6K, contributing to its activation"
+ERK,S6K,positive,HS,positive,direct,1,regulates,"ERK phosphorylates S6K, contributing to its activation"
+ERK,S6K,positive,SS,positive,direct,1,regulates,"ERK phosphorylates S6K, contributing to its activation"
+ERK,S6K,positive,SL,,,,,
+ERK,S6K,ambiguous,T47D,,,,,
+ERK,STK11,ambiguous,TGEN,negative,,,,
+ERK,STK11,ambiguous,MCF7,,,,,
+ERK,STK11,ambiguous,T47D,,,,,
+ERK,TSC2,negative,BL,,,,,
+ERK,TSC2,negative,HL,,,,,
+ERK,TSC2,negative,SL,,,,,
+ERK,TSC2,ambiguous,TGEN,negative,,,,
+ERK,TSC2,ambiguous,MCF7,,,,,
+ERK,TSC2,ambiguous,T47D,,,,,
+ERK,TWIST1,ambiguous,TGEN,positive,,,,
+ERK,TWIST1,ambiguous,MCF7,,,,,
+ERK,TWIST1,ambiguous,T47D,,,,,
+erlotinib,EGFR,negative,BL,,,,,
+erlotinib,EGFR,negative,HL,,,,,
+erlotinib,EGFR,negative,BS,negative,direct,1,regulates,erlotinib is a small molecule that binds the intracellular kinase domain of EGFR
+erlotinib,EGFR,negative,HS,negative,direct,1,regulates,erlotinib is a small molecule that binds the intracellular kinase domain of EGFR
+erlotinib,EGFR,negative,SS,negative,direct,1,regulates,erlotinib is a small molecule that binds the intracellular kinase domain of EGFR
+erlotinib,EGFR,negative,SL,,,,,
+erlotinib,HER2,negative,BL,,,,,
+erlotinib,HER2,negative,HL,,,,,
+erlotinib,HER2,negative,BS,negative,direct,1,regulates,erlotinib is a small molecule that binds the intracellular kinase domain of HER2
+erlotinib,HER2,negative,HS,negative,direct,1,regulates,erlotinib is a small molecule that binds the intracellular kinase domain of HER2
+erlotinib,HER2,negative,SS,negative,direct,1,regulates,erlotinib is a small molecule that binds the intracellular kinase domain of HER2
+erlotinib,HER2,negative,SL,,,,,
+erlotinib,HER3,negative,BL,,,,,
+erlotinib,HER3,negative,HL,,,,,
+erlotinib,HER3,negative,BS,negative,indirect,2,,indirect causal effect mediated by HER2 or another kinase
+erlotinib,HER3,negative,HS,negative,indirect,2,,indirect causal effect mediated by HER2 or another kinase
+erlotinib,HER3,negative,SS,negative,indirect,2,,indirect causal effect mediated by HER2 or another kinase
+erlotinib,HER3,negative,SL,,,,,
+erlotinib,S6K,positive,HS,positive,unsupported,,,This inferred edge is not supported by experimental evidence
+ES,ESR1,ambiguous,TGEN,positive,direct,1,regulates,ligand-receptor binding
+ES,ESR1,ambiguous,MCF7,positive,direct,1,regulates,ligand-receptor binding
+ES,ESR1,ambiguous,T47D,positive,direct,1,regulates,
+ES,ESR1_2,positive,Z21,positive,direct,1,regulates,
+ESR1,CYCLINDc,ambiguous,TGEN,positive,indirect,2,,Estrogen-activated ERα promotes CCND1 transcription; this allows increased CYCLINDc formation.
+ESR1,CYCLINDc,ambiguous,MCF7,positive,indirect,2,,Estrogen-activated ERα promotes CCND1 transcription; this allows increased CYCLINDc formation.
+ESR1,CYCLINDc,ambiguous,T47D,positive,indirect,2,,Estrogen-activated ERα promotes CCND1 transcription; this allows increased CYCLINDc formation.
+ESR1,ER_transcription,ambiguous,Z17,,,,,
+ESR1,ER_transcription,positive,Z21,,,,,
+ESR1,ESR1_2,ambiguous,Z17,positive,,0,necessary,reaching a higher level necessitates achieving the lower level first
+ESR1,ESR1_2,positive,Z21,positive,,0,necessary,reaching a higher level necessitates achieving the lower level first
+ESR1,HER2,ambiguous,T47D,,,,,
+ESR1,HSP90AA1,ambiguous,T47D,,,,,
+ESR1,IGF1R,ambiguous,TGEN,positive,,,,
+ESR1,IGF1R,ambiguous,MCF7,,,,,
+ESR1,IGF1R,ambiguous,T47D,,,,,
+ESR1,MYC,ambiguous,TGEN,positive,,,,
+ESR1,MYC,ambiguous,MCF7,,,,,
+ESR1,MYC,ambiguous,T47D,,,,,
+ESR1,PGR,ambiguous,TGEN,negative,,,,
+ESR1,PGR,ambiguous,MCF7,,,,,
+ESR1,PGR,ambiguous,T47D,,,,,
+ESR1,PI3K,ambiguous,TGEN,positive,direct,1,regulates,The estrogen receptor ERα (ESR1) physically associates with the p85 regulatory subunit of PI3K.
+ESR1,PI3K,ambiguous,MCF7,positive,direct,1,regulates,The estrogen receptor ERα (ESR1) physically associates with the p85 regulatory subunit of PI3K.
+ESR1,PI3K,ambiguous,T47D,positive,direct,1,regulates,The estrogen receptor ERα (ESR1) physically associates with the p85 regulatory subunit of PI3K.
+ESR1_2,ER_transcription,ambiguous,Z17,,,,,
+ESR1_2,ER_transcription,positive,Z21,,,,,
+ESR1_2,ER_transcription_2,ambiguous,Z17,,,,,
+ESR1_2,ER_transcription_2,positive,Z21,,,,,
+ESR1_2,ESR1,ambiguous,Z17,positive,,,,
+ESR1_2,ESR1,positive,Z21,,,,,
+Everolimus,mTORC1,ambiguous,Z17,negative ,direct in the network sense,1,regulates,"Everolimus binds the intracellular protein FKBP12; the everolimus–FKBP12 complex then binds the FRB domain of mTOR within mTORC1, inhibiting mTORC1 signaling. FKBP12 is not in the network."
+Everolimus,mTORC1,negative,Z21,negative ,direct in the network sense,1,regulates,"Everolimus binds the intracellular protein FKBP12; the everolimus–FKBP12 complex then binds the FRB domain of mTOR within mTORC1, inhibiting mTORC1 signaling. FKBP12 is not in the network."
+Everolimus,mTORC2,ambiguous,Z17,negative ,indirect,2,,Everolimus does not target mTORC2. Prolonged exposure to everolimus can indirectly inhibit mTORC2 because drug-bound mTOR becomes unavailable for assembly of new mTORC2 complexes.
+Everolimus,mTORC2,negative,Z21,negative,indirect,2,,Prolonged exposure to rapalogs can inhibit mTORC2 in some cell types because drug-bound mTOR becomes unavailable for assembly of new mTORC2 complexes.
+Everolimus,mTORC2_pm,ambiguous,Z17,negative ,indirect,2,,"Prolonged exposure to rapalogs can deplete mTORC2, and thus also mTORC2_pm, because drug-bound mTOR becomes unavailable for assembly of new mTORC2 complexes."
+Everolimus,mTORC2_pm,negative,Z21,negative,indirect,2,,"Prolonged exposure to rapalogs can deplete mTORC2, and thus also mTORC2_pm,  because drug-bound mTOR becomes unavailable for assembly of new mTORC2 complexes."
+FADD,CASP8,ambiguous,TGEN,,,,,
+FADD,CASP8,ambiguous,MCF7,,,,,
+FADD,CASP8,ambiguous,T47D,,,,,
+FAS,FADD,ambiguous,TGEN,positive,,,,
+FAS,FADD,ambiguous,MCF7,,,,,
+FAS,FADD,ambiguous,T47D,,,,,
+FASLG,FAS,ambiguous,TGEN,positive,direct,1,regulates,ligand-receptor binding
+FASLG,FAS,ambiguous,MCF7,positive,direct,1,regulates,ligand-receptor binding
+FASLG,FAS,ambiguous,T47D,positive,direct,1,regulates,ligand-receptor binding
+FASLG,FASLG,ambiguous,TGEN,positive,unsupported,,,This assumed self-regulation is not supported by evidence
+FASLG,FASLG,ambiguous,MCF7,positive,unsupported,,,This assumed self-regulation is not supported by evidence
+FASLG,FASLG,ambiguous,T47D,positive,unsupported,,,This assumed self-regulation is not supported by evidence
+FOXA1,ER_transcription_2,ambiguous,Z17,,,,,
+FOXA1,ER_transcription_2,positive,Z21,,,,,
+FOXO1,BIM,ambiguous,TGEN,positive,direct,1,regulates,FOXO1 binds conserved forkhead-response elements in the promoter of  BCL2L11 (the gene encoding BIM) and stimulate its transcription.
+FOXO1,BIM,ambiguous,MCF7,positive,direct,1,regulates,"FOXO1FOXO3 unites the FOXO1 and FOXO3 nodes, which are represented separately in other models. The direct effect of AKT on both FOXO1 and FOXO3 translates to a direct effect on FOXO1FOXO3."
+FOXO1,BIM,ambiguous,T47D,positive,direct,1,regulates,"FOXO1FOXO3 unites the FOXO1 and FOXO3 nodes, which are represented separately in other models. The direct effect of AKT on both FOXO1 and FOXO3 translates to a direct effect on FOXO1FOXO3."
+FOXO1FOXO3,FOXO1FOXO3,positive,BL,positive,unsupported,,,This inferred self-regulation is not supported by evidence;  neither FOXO1 nor FOXO3 has functional self regulation.
+FOXO1FOXO3,FOXO1FOXO3,positive,HL,positive,unsupported,,,This inferred self-regulation is not supported by evidence;  neither FOXO1 nor FOXO3 has functional self regulation.
+FOXO1FOXO3,FOXO1FOXO3,positive,SL,positive,unsupported,,,This inferred self-regulation is not supported by evidence;  neither FOXO1 nor FOXO3 has functional self regulation.
+FOXO3,BIM,ambiguous,Z17,positive,direct,,,FOXO3 binds conserved forkhead-response elements in the promoter of  BCL2L11 (the gene encoding BIM) and stimulates its transcription.
+FOXO3,BIM,positive,Z21,positive,direct,,,FOXO3 binds conserved forkhead-response elements in the promoter of  BCL2L11 (the gene encoding BIM) and stimulates its transcription.
+FOXO3,BIM,ambiguous,TGEN,positive,direct,1,regulates,FOXO3 binds conserved forkhead-response elements in the promoter of  BCL2L11 (the gene encoding BIM) and stimulates its transcription.
+FOXO3,BIM,ambiguous,MCF7,positive,direct,1,regulates,FOXO3 binds conserved forkhead-response elements in the promoter of  BCL2L11 (the gene encoding BIM) and stimulates its transcription.
+FOXO3,BIM,ambiguous,T47D,positive,direct,1,regulates,FOXO3 binds conserved forkhead-response elements in the promoter of  BCL2L11 (the gene encoding BIM) and stimulates its transcription.
+FOXO3,CYCLINDc,ambiguous,MCF7,positive,unsupported,,,"This assumed edge is not supported by evidence. Instead, there is an indirect negative effect mediated by p27."
+FOXO3,CYCLINDc,ambiguous,T47D,positive,unsupported,,,"This assumed edge is not supported by evidence. Instead, there is an indirect negative effect mediated by p27."
+FOXO3,ESR1,ambiguous,Z17,positive,direct,1,regulates,regulation of transcription. FOXO3a directly binds regulatory sites in the ESR1 (ERα) promoter and increases ESR1 transcription
+FOXO3,ESR1,positive,Z21,positive,direct,1,regulates,regulation of transcription. FOXO3a directly binds regulatory sites in the ESR1 (ERα) promoter and increases ESR1 transcription
+FOXO3,ESR1,ambiguous,TGEN,positive,direct,1,regulates,regulation of transcription. FOXO3a directly binds regulatory sites in the ESR1 (ERα) promoter and increases ESR1 transcription
+FOXO3,ESR1,ambiguous,MCF7,positive,direct,1,regulates,regulation of transcription. FOXO3a directly binds regulatory sites in the ESR1 (ERα) promoter and increases ESR1 transcription
+FOXO3,ESR1,ambiguous,T47D,positive,direct,1,regulates,regulation of transcription. FOXO3a directly binds regulatory sites in the ESR1 (ERα) promoter and increases ESR1 transcription
+FOXO3,ESR1_2,ambiguous,Z17,positive,direct,1,regulates,regulation of transcription. FOXO3a directly binds regulatory sites in the ESR1 (ERα) promoter and increases ESR1 transcription. We assume the classification of the FOXO3->ESR1 edge applies to ESR1_2 as well.
+FOXO3,ESR1_2,positive,Z21,positive,direct,1,regulates,"regulation of transcription. FOXO3a directly binds regulatory sites in the ESR1 (ERα) promoter and increases ESR1 transcription. We assume the classification of the FOXO3->ESR1 edge applies to ESR1_2 as well."
+FOXO3,FASLG,ambiguous,TGEN,positive,direct,1,regulates,regulation of transcription. FOXO3 binds forkhead-response elements in the FASLG promoter and activate FASL transcription; constitutively active FOXO3 increases FASL promoter activity.
+FOXO3,FASLG,ambiguous,MCF7,positive,direct,1,regulates,regulation of transcription. FOXO3 in particular has been shown to bind forkhead-response elements in the FASLG promoter and activate FASL transcription; constitutively active FOXO3 increases FASL promoter activity
+FOXO3,FASLG,ambiguous,T47D,positive,direct,1,regulates,regulation of transcription. FOXO3 in particular has been shown to bind forkhead-response elements in the FASLG promoter and activate FASL transcription; constitutively active FOXO3 increases FASL promoter activity
+FOXO3,FOXA1,ambiguous,Z17,,,,,
+FOXO3,HER2,ambiguous,T47D,positive,direct,1,regulates,regulation of transcription. FOXO3a directly binds the ERBB2/HER2 promoter and activates its transcription.
+FOXO3,HER3,ambiguous,Z17,positive,direct,1,regulates,regulation of transcription. FOXO3 binds regulatory regions of ERBB3/HER3 and leads to increased HER3 transcription
+FOXO3,HER3,positive,Z21,positive,direct,1,regulates,regulation of transcription. FOXO3 binds regulatory regions of ERBB3/HER3 and leads to increased HER3 transcription
+FOXO3,HER3_2,ambiguous,Z17,positive,direct,1,regulates,regulation of transcription. FOXO3 binds regulatory regions of ERBB3/HER3 and leads to increased HER3 transcription. We assume that the confidence ranking of this edge is the same as that of FOXO3->HER3.
+FOXO3,HER3_2,positive,Z21,positive,direct,1,regulates,regulation of transcription. FOXO3 binds regulatory regions of ERBB3/HER3 and leads to increased HER3 transcription. We assume that the confidence ranking of this edge is the same as that of FOXO3->HER3.
+FOXO3,IGF1R,ambiguous,Z17,positive,indirect,2,,"There is causal evidence that activated FOXO3 increases IGF1R mRNA and protein expression, and FOXO knockdown decreases IGF1R expression. The exact mechanism is not known."
+FOXO3,IGF1R,positive,Z21,positive,indirect,2,,"There is causal evidence that activated FOXO3 increases IGF1R mRNA and protein expression, and FOXO knockdown decreases IGF1R expression. The exact mechanism is not known."
+FOXO3,IGF1R,ambiguous,TGEN,positive,indirect,2,,"There is causal evidence that activated FOXO3 increases IGF1R mRNA and protein expression, and FOXO knockdown decreases IGF1R expression. The exact mechanism is not known."
+FOXO3,IGF1R,ambiguous,MCF7,positive,indirect,2,,"There is causal evidence that activated FOXO3 increases IGF1R mRNA and protein expression, and FOXO knockdown decreases IGF1R expression. The exact mechanism is not known."
+FOXO3,IGF1R,ambiguous,T47D,positive,indirect,2,,"There is causal evidence that activated FOXO3 increases IGF1R mRNA and protein expression, and FOXO knockdown decreases IGF1R expression. The exact mechanism is not known."
+FOXO3,IGF1R_2,ambiguous,Z17,positive,indirect,2,,"There is causal evidence that activated FOXO3 increases IGF1R mRNA and protein expression, and FOXO knockdown decreases IGF1R expression. The exact mechanism is not known. We assume that the confidence rank of the FOXO3->IGF1 edge applies to IGF1R_2 as well."
+FOXO3,IGF1R_2,positive,Z21,positive,indirect,2,,"There is causal evidence that activated FOXO3 increases IGF1R mRNA and protein expression, and FOXO knockdown decreases IGF1R expression. The exact mechanism is not known."
+FOXO3,INSR,ambiguous,TGEN,positive,unsupported,,,This edge is not supported by experimental evidence
+FOXO3,INSR,ambiguous,MCF7,positive,unsupported,,,This edge is not supported by experimental evidence
+FOXO3,INSR,ambiguous,T47D,positive,unsupported,,,This edge is not supported by experimental evidence
+FOXO3,MYC,ambiguous,MCF7,,,,,
+FOXO3,MYC,ambiguous,T47D,,,,,
+FOXO3,p21_p27_T,ambiguous,Z17,positive,direct,1,regulates,"FOXO3 binds both the CDKN1A (p21) and CDKN1B (p27) promoter, and activates the transcription of both. "
+FOXO3,p21_p27_T,positive,Z21,positive,direct,1,regulates,"FOXO3 binds both the CDKN1A (p21) and CDKN1B (p27) promoter, and activates the transcription of both. "
+FOXO3,STK11,ambiguous,T47D,,,,,
+FOXO3_Ub,FOXO3,ambiguous,Z17,,,,,
+FOXO3_Ub,FOXO3,negative,Z21,,,,,
+Fulvestrant,ESR1,ambiguous,Z17,negative,direct,1,regulates,Fulvestrant is a selective estrogen receptor degrader/downregulator (SERD). It directly binds ERα (ESR1 protein) with high affinity.
+Fulvestrant,ESR1,negative,Z21,negative,direct,1,regulates,Fulvestrant is a selective estrogen receptor degrader/downregulator (SERD). It directly binds ERα (ESR1 protein) with high affinity.
+Fulvestrant,ESR1_2,ambiguous,Z17,negative,direct,1,regulates,Fulvestrant is a selective estrogen receptor degrader/downregulator (SERD). It directly binds ERα (ESR1 protein) with high affinity.
+Fulvestrant,ESR1_2,negative,Z21,negative,direct,1,regulates,Fulvestrant is a selective estrogen receptor degrader/downregulator (SERD). It directly binds ERα (ESR1 protein) with high affinity.
+FZD3,DVL1,ambiguous,TGEN,positive,,,,
+FZD3,DVL1,ambiguous,MCF7,,,,,
+FZD3,DVL1,ambiguous,T47D,,,,,
+GATA3,PPARG,ambiguous,TGEN,negative,,,,
+GATA3,PPARG,ambiguous,MCF7,,,,,
+GATA3,PPARG,ambiguous,T47D,,,,,
+GRB2,ABL1,ambiguous,TGEN,positive,,,,
+GRB2,ABL1,ambiguous,MCF7,,,,,
+GRB2,ABL1,ambiguous,T47D,,,,,
+GRB2,SOS1,ambiguous,TGEN,positive,,,,
+GRB2,SOS1,ambiguous,MCF7,,,,,
+GRB2,SOS1,ambiguous,T47D,,,,,
+GRB7,RND1,ambiguous,TGEN,positive,,,,
+GRB7,RND1,ambiguous,MCF7,,,,,
+GRB7,RND1,ambiguous,T47D,,,,,
+GSK3B,AXIN1,ambiguous,TGEN,positive,,,,
+GSK3B,AXIN1,ambiguous,MCF7,,,,,
+GSK3B,AXIN1,ambiguous,T47D,,,,,
+GSK3B,CyclinD,negative,BL,negative,direct,1,regulates,"GSK3B directly phosphorylates Cyclin D1 at Thr286, promoting its nuclear export and degradation."
+GSK3B,CyclinD,negative,SL,negative,direct,1,regulates,"GSK3B directly phosphorylates Cyclin D1 at Thr286, promoting its nuclear export and degradation."
+GSK3B,CYCLINDc,ambiguous,TGEN,negative,direct,2,,"GSK3B promotes the nuclear export and degradation of CyclinD1, thus less cyclin-CDK complex CYCLINDc can be formed."
+GSK3B,CYCLINDc,ambiguous,MCF7,negative,direct,2,,"GSK3B promotes the nuclear export and degradation of CyclinD1, thus less cyclin-CDK complex CYCLINDc can be formed."
+GSK3B,CYCLINDc,ambiguous,T47D,negative,direct,2,,"GSK3B promotes the nuclear export and degradation of CyclinD1, thus less cyclin-CDK complex CYCLINDc can be formed."
+GSK3B,DC,ambiguous,TGEN,positive,,,,
+GSK3B,DC,ambiguous,MCF7,,,,,
+GSK3B,DC,ambiguous,T47D,,,,,
+GSK3B,GSK3B,positive,BL,,,,,
+GSK3B,GSK3B,positive,HL,,,,,
+GSK3B,GSK3B,positive,SL,,,,,
+GSK3B,JUN,negative,BL,,,,,
+GSK3B,JUN,negative,HL,,,,,
+GSK3B,JUN,negative,SL,,,,,
+GSK3B,MCL1,ambiguous,TGEN,negative,direct in the network sense,1,regulates,"GSK3B phosphorylates MCL1. This creates/promotes a phosphodegron that is recognized by ubiquitin ligases, leading to MCL1 ubiquitination and proteasomal degradation."
+GSK3B,MCL1,ambiguous,MCF7,negative,direct in the network sense,1,regulates,"GSK3B phosphorylates MCL1. This creates/promotes a phosphodegron that is recognized by ubiquitin ligases, leading to MCL1 ubiquitination and proteasomal degradation."
+GSK3B,MCL1,ambiguous,T47D,negative,direct in the network sense,1,regulates,"GSK3B phosphorylates MCL1. This creates/promotes a phosphodegron that is recognized by ubiquitin ligases, leading to MCL1 ubiquitination and proteasomal degradation."
+GSK3B,MYC,ambiguous,TGEN,negative,,,,
+GSK3B,MYC,ambiguous,MCF7,,,,,
+GSK3B,MYC,ambiguous,T47D,,,,,
+GSK3B,PTEN,negative,BL,,,,,
+GSK3B,PTEN,negative,HL,,,,,
+GSK3B,PTEN,negative,SL,,,,,
+GSK3B,TSC2,negative,BL,,,,,
+GSK3B,TSC2,negative,HL,,,,,
+GSK3B,TSC2,negative,SL,,,,,
+GSK3B,TSC2,ambiguous,TGEN,positive,,,,
+GSK3B,TSC2,ambiguous,MCF7,,,,,
+GSK3B,TSC2,ambiguous,T47D,,,,,
+HER2,AKT,positive,BL,positive,indirect,2,,"causal effect mediated by PI3K, others"
+HER2,AKT,positive,HL,positive,indirect,2,,"causal effect mediated by PI3K, others"
+HER2,AKT,positive,SL,positive,indirect,2,,"causal effect mediated by PI3K, PIP3"
+HER2,EGFR,ambiguous,TGEN,positive,direct,1,,protein-protein interaction; heterodimerization activates EGFR
+HER2,EGFR,ambiguous,MCF7,positive,direct,1,,protein-protein interaction; heterodimerization activates EGFR
+HER2,EGFR,ambiguous,T47D,positive,direct,1,,protein-protein interaction; heterodimerization activates EGFR
+HER2,GRB2,ambiguous,T47D,,,,,
+HER2,HER2,positive,BL,positive,direct,1,regulates,homodimerization of HER2 receptors leads to their trans-phosphorylation and activation
+HER2,HER2,positive,HL,positive,direct,1,regulates,homodimerization of HER2 receptors leads to their trans-phosphorylation and activation
+HER2,HER2,positive,BS,positive,direct,1,regulates,homodimerization of HER2 receptors leads to their trans-phosphorylation and activation
+HER2,HER2,positive,HS,positive,direct,1,regulates,homodimerization of HER2 receptors leads to their trans-phosphorylation and activation
+HER2,HER2,positive,SS,positive,direct,1,regulates,homodimerization of HER2 receptors leads to their trans-phosphorylation and activation
+HER2,HER2,positive,SL,,,,,
+HER2,HER2HER3c,ambiguous,Z17,positive,,0,necessary,This edge represents HER2's participation in the HER2HER3c heterodimer complex.
+HER2,HER2HER3c,positive,Z21,positive,,0,necessary,This edge represents HER2's participation in the HER2HER3c heterodimer complex.
+HER2,HER2HER3c_2,ambiguous,Z17,positive,,0,necessary,HER2's participation in the HER2HER3c heterodimer complex; we consider that the confidence ranking applies to this edge as well.
+HER2,HER2HER3c_2,positive,Z21,positive,,0,necessary,HER2's participation in the HER2HER3c heterodimer complex; we consider that the confidence ranking applies to this edge as well.
+HER2,HER3,ambiguous,TGEN,positive,unsupported,,,"The effect of HER2 on HER3 is through HER2-HER3 heterodimer formation, which is represented by the HER2HER3c node."
+HER2,HER3,ambiguous,MCF7,positive,unsupported,,,"The effect of HER2 on HER3 is through HER2-HER3 heterodimer formation, which is represented by the HER2HER3c node."
+HER2,HER3,ambiguous,T47D,positive,unsupported,,,"The effect of HER2 on HER3 is through HER2-HER3 heterodimer formation, which is represented by the HER2HER3c node."
+HER2,IGF1R,ambiguous,Z17,positive,assumption,4,,This assumed edge is consistent with observed higher IGF1R signaling in trastuzumab-resistant cells
+HER2,IGF1R,positive,Z21,positive,assumption,4,,This assumed edge is consistent with observed higher IGF1R signaling in trastuzumab-resistant cells
+HER2,IGF1R_2,ambiguous,Z17,positive,assumption,4,,This assumed edge is consistent with observed higher IGF1R signaling in trastuzumab-resistant cells
+HER2,IGF1R_2,positive,Z21,positive,assumption,4,,This assumed edge is consistent with observed higher IGF1R signaling in trastuzumab-resistant cells
+HER2,MEK,positive,BS,positive,indirect,2,,"causal effect mediated by RAS, RAF"
+HER2,MEK,positive,HS,positive,indirect,2,,"causal effect mediated by RAS, RAF"
+HER2,MEK,positive,SS,positive,indirect,2,,"causal effect mediated by RAS, RAF"
+HER2,PDK1_pm,positive,BS,positive,indirect,2,,"causal effect mediated by PI3K, PIP3"
+HER2,PDK1_pm,positive,HS,positive,indirect,2,,"causal effect mediated by PI3K, PIP3"
+HER2,PDK1_pm,positive,SS,positive,indirect,2,,"causal effect mediated by PI3K, PIP3"
+HER2,PLCg,positive,BS,positive,direct,1,regulates,Activated HER2 binds to PLCgamma1 and phosphorylates it.
+HER2,PLCg,positive,HS,positive,direct,1,regulates,Activated HER2 binds to PLCgamma1 and phosphorylates it.
+HER2,PLCg,positive,SS,positive,direct,1,regulates,Activated HER2 binds to PLCgamma1 and phosphorylates it.
+HER2,RAF1,positive,BL,positive,indirect,2,,causal effect mediated by adaptor proteins and RAS
+HER2,RAF1,positive,HL,positive,indirect,2,,causal effect mediated by adaptor proteins and RAS
+HER2,RAF1,positive,SL,positive,indirect,2,,causal effect mediated by adaptor proteins and RAS
+HER2,RB,positive,SL,,,,,
+HER2,S6K,positive,SL,,,,,
+HER2,TSC2,positive,SL,,,,,
+HER2HER3c,HER2HER3c_2,ambiguous,Z17,positive,,0,necessary,Reaching a higher level necessitates reaching the lower level first
+HER2HER3c,HER2HER3c_2,positive,Z21,positive,,0,necessary,Reaching a higher level necessitates reaching the lower level first
+HER2HER3c,PI3K,ambiguous,Z17,positive,,,,Phosphorylated HER3 within the HER2–HER3 complex directly recruits PI3K by binding to its p85 subunit.
+HER2HER3c,PI3K,positive,Z21,positive,,,,Phosphorylated HER3 within the HER2–HER3 complex directly recruits PI3K by binding to its p85 subunit.
+HER2HER3c,RAS,ambiguous,Z17,positive,,,,
+HER2HER3c,RAS,positive,Z21,positive,,,,
+HER2HER3c,RAS_2,ambiguous,Z17,positive,,,,
+HER2HER3c,RAS_2,positive,Z21,positive,,,,
+HER2HER3c_2,HER2HER3c,ambiguous,Z17,positive,unsupported,,,This edge is an artifact of the representation of multi-level variables
+HER2HER3c_2,HER2HER3c,positive,Z21,positive,unsupported,,,This edge is an artifact of the representation of multi-level variables
+HER2HER3c_2,PI3K,ambiguous,Z17,positive,direct,1,regulates,Phosphorylated HER3 within the HER2–HER3 complex directly recruits PI3K by binding to its p85 subunit. We consider that the confidence ranking of the edge with the lower-level variable applies.
+HER2HER3c_2,PI3K,positive,Z21,positive,direct,1,regulates,Phosphorylated HER3 within the HER2–HER3 complex directly recruits PI3K by binding to its p85 subunit. We consider that the confidence ranking of the edge with the lower-level variable applies.
+HER2HER3c_2,PI3K_2,ambiguous,Z17,positive,direct,1,regulates,Phosphorylated HER3 within the HER2–HER3 complex directly recruits PI3K by binding to its p85 subunit. We consider that the confidence ranking of the edge with the lower-level variable applies.
+HER2HER3c_2,PI3K_2,positive,Z21,positive,direct,1,regulates,Phosphorylated HER3 within the HER2–HER3 complex directly recruits PI3K by binding to its p85 subunit. We consider that the confidence ranking of the edge with the lower-level variable applies.
+HER2HER3c_2,RAS,ambiguous,Z17,,,,,
+HER2HER3c_2,RAS,positive,Z21,,,,,
+HER2HER3c_2,RAS_2,ambiguous,Z17,,,,,
+HER2HER3c_2,RAS_2,positive,Z21,,,,,
+HER2HER3c_2,RAS_3,ambiguous,Z17,,,,,
+HER2HER3c_2,RAS_3,positive,Z21,,,,,
+HER3,AKT,positive,BL,positive,indirect,2,,"causal effect mediated by PI3K, others"
+HER3,AKT,positive,HL,positive,indirect,2,,"causal effect mediated by PI3K, others"
+HER3,AKT,positive,BS,positive,indirect,2,,"causal effect mediated by PI3K, others"
+HER3,AKT,positive,HS,positive,indirect,2,,"causal effect mediated by PI3K, others"
+HER3,AKT,positive,SS,positive,indirect,2,,"causal effect mediated by PI3K, others"
+HER3,AKT,positive,SL,positive,indirect,2,,"causal effect mediated by PI3K, others"
+HER3,CyclinB1,positive,BL,,,,,
+HER3,EGFR,positive,HL,,,,,
+HER3,EGFR,ambiguous,TGEN,positive,direct,1,regulates,protein-protein interaction; heterodimerization activates EGFR
+HER3,EGFR,ambiguous,MCF7,,,,,
+HER3,EGFR,ambiguous,T47D,,,,,
+HER3,ERK,positive,SS,positive,indirect,2,,"causal effect mediated by HER2HER3c, RAS, RAF, MEK"
+HER3,HER2,positive,BS,positive,unsupported,,,The HER2-HER3 heterodimer formation is better represented with a separate HER2HER3c node
+HER3,HER2,ambiguous,TGEN,positive,unsupported,,,The HER2-HER3 heterodimer formation is better represented with a separate HER2HER3c node
+HER3,HER2,ambiguous,MCF7,,,,,
+HER3,HER2,ambiguous,T47D,,,,,
+HER3,HER2HER3c,ambiguous,Z17,,,,,
+HER3,HER2HER3c,positive,Z21,,,,,
+HER3,HER2HER3c_2,ambiguous,Z17,,,,,
+HER3,HER2HER3c_2,positive,Z21,,,,,
+HER3,HER3,positive,BL,,,,,
+HER3,HER3,positive,HL,,,,,
+HER3,HER3,positive,BS,positive,unsupported,,,this inferred self-regulation is not supported by experimental evidence
+HER3,HER3,positive,HS,positive,unsupported,,,this inferred self-regulation is not supported by experimental evidence
+HER3,HER3,positive,SS,positive,unsupported,,,this inferred self-regulation is not supported by experimental evidence
+HER3,HER3,positive,SL,,,,,
+HER3,HER3_2,ambiguous,Z17,,,,,
+HER3,HER3_2,positive,Z21,,,,,
+HER3,MEK,positive,BS,positive,indirect,2,,"causal effect mediated by HER2HER3c, RAS, RAF"
+HER3,MEK,positive,HS,positive,indirect,2,,"causal effect mediated by HER2HER3c, RAS, RAF"
+HER3,MEK,positive,SS,positive,indirect,2,,"causal effect mediated by HER2HER3c, RAS, RAF"
+HER3,NFKB,positive,SL,,,,,
+HER3,PDK1_pm,positive,BS,positive,indirect,2,,"causal effect mediated by PI3K, PIP3"
+HER3,PDK1_pm,positive,HS,positive,indirect,2,,"causal effect mediated by PI3K, PIP3"
+HER3,PDK1_pm,positive,SS,positive,indirect,2,,"causal effect mediated by PI3K, PIP3"
+HER3,PLCg,positive,BS,positive,unsupported,,,This inferred edge is not supported by experimental evidence
+HER3,PLCg,positive,HS,positive,unsupported,,,This inferred edge is not supported by experimental evidence
+HER3,PLCg,positive,SS,positive,unsupported,,,This inferred edge is not supported by experimental evidence
+HER3,PRAS40,positive,SL,,,,,
+HER3_2,HER2HER3c,ambiguous,Z17,,,,,
+HER3_2,HER2HER3c,positive,Z21,,,,,
+HER3_2,HER2HER3c_2,ambiguous,Z17,,,,,
+HER3_2,HER2HER3c_2,positive,Z21,,,,,
+HER3_2,HER3,ambiguous,Z17,,,,,
+HER3_2,HER3,positive,Z21,,,,,
+HER3_T,HER3,ambiguous,Z17,,,,,
+HER3_T,HER3,positive,Z21,,,,,
+HES1,MYOD1,ambiguous,TGEN,negative,,,,
+HES1,MYOD1,ambiguous,MCF7,,,,,
+HES1,MYOD1,ambiguous,T47D,,,,,
+HES1,PAX7,ambiguous,TGEN,negative,,,,
+HES1,PAX7,ambiguous,MCF7,,,,,
+HEY1,MYOG,ambiguous,TGEN,negative,,,,
+HEY1,MYOG,ambiguous,MCF7,,,,,
+HEY1,MYOG,ambiguous,T47D,,,,,
+HEY1,PAX7,ambiguous,TGEN,negative,,,,
+HEY1,PAX7,ambiguous,MCF7,,,,,
+HRAS,RAF1,ambiguous,TGEN,positive,,,,
+HRAS,RAF1,ambiguous,MCF7,,,,,
+HRAS,RAF1,ambiguous,T47D,,,,,
+HSP90AA1,NOS3,ambiguous,TGEN,positive,,,,
+HSP90AA1,NOS3,ambiguous,MCF7,,,,,
+HSP90AA1,NOS3,ambiguous,T47D,,,,,
+IGF1,AKT,ambiguous,TGEN,positive,indirect,2,,"causal effect mediated by IGFR, IRS1, PI3K, others"
+IGF1,AKT,ambiguous,MCF7,positive,indirect,2,,"causal effect mediated by IGFR, IRS1, PI3K"
+IGF1,CYCLINDc,ambiguous,MCF7,positive,indirect,2,,"causal effect mediated by IGFR, PI3K, ERK"
+IGF1,CYCLINDc,ambiguous,T47D,positive,indirect,2,,"causal effect mediated by IGFR, PI3K, ERK"
+IGF1,HRAS,ambiguous,TGEN,positive,,,,
+IGF1,HRAS,ambiguous,MCF7,,,,,
+IGF1,IGF1R,ambiguous,TGEN,positive,,,,
+IGF1,IGF1R,ambiguous,MCF7,,,,,
+IGF1,IGF1R,ambiguous,T47D,,,,,
+IGF1,mTORC1,ambiguous,TGEN,positive,indirect,2,,"causal effect mediated by PI3K, AKT"
+IGF1,mTORC1,ambiguous,MCF7,,,,,
+IGF1,mTORC1,ambiguous,T47D,,,,,
+IGF1,MYC,ambiguous,MCF7,,,,,
+IGF1,MYC,ambiguous,T47D,,,,,
+IGF1,RAS,ambiguous,TGEN,positive,,,,
+IGF1,RAS,ambiguous,MCF7,,,,,
+IGF1R,AKT,ambiguous,TGEN,positive,indirect,2,,"causal effect mediated by IRS1, PI3K, others"
+IGF1R,AKT,ambiguous,MCF7,positive,indirect,2,,"causal effect mediated by IRS1, PI3K"
+IGF1R,AKT,ambiguous,T47D,positive,indirect,2,,"causal effect mediated by IRS1, PI3K"
+IGF1R,IGF1R_2,ambiguous,Z17,,,,,
+IGF1R,IGF1R_2,positive,Z21,,,,,
+IGF1R,IRS1,ambiguous,TGEN,positive,,,,
+IGF1R,IRS1,ambiguous,MCF7,,,,,
+IGF1R,IRS1,ambiguous,T47D,,,,,
+IGF1R,PDK1_pm,ambiguous,TGEN,positive,indirect,2,,"causal effect mediated by PI3K, PIP3"
+IGF1R,PDK1_pm,ambiguous,MCF7,,,,,
+IGF1R,PDK1_pm,ambiguous,T47D,,,,,
+IGF1R,PI3K,ambiguous,Z17,,,,,
+IGF1R,PI3K,positive,Z21,,,,,
+IGF1R,PI3K,ambiguous,TGEN,positive,indirect,2,,causal effect mediated by IRS1
+IGF1R,PI3K,ambiguous,MCF7,,,,,
+IGF1R,PI3K,ambiguous,T47D,,,,,
+IGF1R,RAS,ambiguous,Z17,,,,,
+IGF1R,RAS,positive,Z21,,,,,
+IGF1R_2,IGF1R,ambiguous,Z17,,,,,
+IGF1R_2,IGF1R,positive,Z21,,,,,
+IGF1R_2,PI3K,ambiguous,Z17,,,,,
+IGF1R_2,PI3K,positive,Z21,,,,,
+IGF1R_2,RAS,ambiguous,Z17,,,,,
+IGF1R_2,RAS,positive,Z21,,,,,
+IGF1R_T,IGF1R,ambiguous,Z17,,,,,
+IGF1R_T,IGF1R,positive,Z21,,,,,
+IGF1R_T,IGF1R_2,ambiguous,Z17,,,,,
+IGF1R_T,IGF1R_T,positive,Z21,,,,,
+IGF1R_T,IGF1R_T_2,positive,Z21,,,,,
+IGF1R_T_2,IGF1R_2,positive,Z21,,,,,
+IGF1R_T_2,IGF1R_T,positive,Z21,,,,,
+IGF1R_T_2,IGF1R_T_2,positive,Z21,,,,,
+IL1B,IL6,ambiguous,TGEN,positive,,,,
+IL1B,IL6,ambiguous,MCF7,,,,,
+IL1B,IL6,ambiguous,T47D,,,,,
+IL1B,STAT3,ambiguous,TGEN,positive,,,,
+IL1B,STAT3,ambiguous,MCF7,,,,,
+IL1B,STAT3,ambiguous,T47D,,,,,
+IL6,IL6,ambiguous,TGEN,positive,,,,
+IL6,IL6,ambiguous,MCF7,,,,,
+IL6,IL6,ambiguous,T47D,,,,,
+IL6,IL6R,ambiguous,TGEN,positive,direct,1,regulates,ligand-receptor binding
+IL6,IL6R,ambiguous,MCF7,positive,direct,1,regulates,ligand-receptor binding
+IL6,IL6R,ambiguous,T47D,positive,direct,1,regulates,ligand-receptor binding
+IL6R,JAK2,ambiguous,TGEN,positive,direct,1,regulates,JAK2 is physically associated with the GP130 subunit of the receptor complex; receptor activation directly causes JAK activation.
+IL6R,JAK2,ambiguous,MCF7,positive,direct,1,regulates,JAK2 is physically associated with the GP130 subunit of the receptor complex; receptor activation directly causes JAK activation.
+IL6R,JAK2,ambiguous,T47D,positive,direct,1,regulates,JAK2 is physically associated with the GP130 subunit of the receptor complex; receptor activation directly causes JAK activation.
+IL8,JAK2,ambiguous,TGEN,positive,unsupported,,,"IL-8 (CXCL8) signals through the GPCRs CXCR1 and CXCR2, not through a JAK-associated cytokine receptor."
+IL8,JAK2,ambiguous,MCF7,positive,unsupported,,,"IL-8 (CXCL8) signals through the GPCRs CXCR1 and CXCR2, not through a JAK-associated cytokine receptor."
+IL8,JAK2,ambiguous,T47D,positive,unsupported,,,"IL-8 (CXCL8) signals through the GPCRs CXCR1 and CXCR2, not through a JAK-associated cytokine receptor."
+INS,IGF1R,ambiguous,TGEN,positive,direct,1,regulates,Insulin can directly bind IGF1R and weakly activate its intrinsic tyrosine kinase.
+INS,IGF1R,ambiguous,MCF7,positive,direct,1,regulates,Insulin can directly bind IGF1R and weakly activate its intrinsic tyrosine kinase. 
+INS,INSR,ambiguous,TGEN,positive,direct,1,regulates,ligand-receptor binding
+INS,INSR,ambiguous,MCF7,positive,direct,1,regulates,ligand-receptor binding
+INS,INSR,ambiguous,T47D,positive,direct,1,regulates,ligand-receptor binding
+INSR,GRB7,ambiguous,TGEN,positive,direct,1,regulates,"Activated INSR becomes tyrosine-phosphorylated, the adaptor protein GRB7 bind sit through its SH2 domain, INSR then promotes GRB7 tyrosine phosphorylation."
+INSR,GRB7,ambiguous,MCF7,positive,direct,1,regulates,"Activated INSR becomes tyrosine-phosphorylated, the adaptor protein GRB7 bind sit through its SH2 domain, INSR then promotes GRB7 tyrosine phosphorylation."
+INSR,GRB7,ambiguous,T47D,positive,direct,1,regulates,"Activated INSR becomes tyrosine-phosphorylated, the adaptor protein GRB7 bind sit through its SH2 domain, INSR then promotes GRB7 tyrosine phosphorylation."
+INSR,IRS1,ambiguous,TGEN,positive,direct,1,regulates,Activated INSR recruits IRS1 and phosphorylates IRS1 on multiple tyrosine residues. Those phosphotyrosines then serve as docking sites for downstream signaling proteins.
+INSR,IRS1,ambiguous,MCF7,positive,direct,1,regulates,Activated INSR recruits IRS1 and phosphorylates IRS1 on multiple tyrosine residues. Those phosphotyrosines then serve as docking sites for downstream signaling proteins.
+INSR,IRS1,ambiguous,T47D,positive,direct,1,regulates,Activated INSR recruits IRS1 and phosphorylates IRS1 on multiple tyrosine residues. Those phosphotyrosines then serve as docking sites for downstream signaling proteins.
+INSR,PI3K,ambiguous,TGEN,positive,indirect,2,,causal effect mediated by IRS1
+INSR,PI3K,ambiguous,MCF7,positive,indirect,2,,causal effect mediated by IRS1
+Ipatasertib,AKT,ambiguous,Z17,negative ,direct,1,regulates,Ipatasertib is a small-molecule AKT inhibitor that directly binds the kinase domain of AKT1/2/3 and inhibits its catalytic activity
+Ipatasertib,AKT,negative,Z21,negative ,direct,1,regulates,Ipatasertib is a small-molecule AKT inhibitor that directly binds the kinase domain of AKT1/2/3 and inhibits its catalytic activity
+IRS1,AKT,ambiguous,TGEN,positive,indirect,2,,"causal effect mediated by PI3K, others"
+IRS1,AKT,ambiguous,MCF7,positive,indirect,2,,"causal effect mediated by PI3K, others"
+IRS1,AKT,ambiguous,T47D,positive,indirect,2,,"causal effect mediated by PI3K, others"
+IRS1,GRB2,ambiguous,TGEN,positive,direct,1,regulates,"GRB2 directly binds phosphorylated IRS1 through its SH2 domain, recruiting the GRB2–SOS machinery."
+IRS1,GRB2,ambiguous,MCF7,positive ,direct,1,regulates,"GRB2 directly binds phosphorylated IRS1 through its SH2 domain, recruiting the GRB2–SOS machinery"
+IRS1,GRB2,ambiguous,T47D,positive ,direct,1,regulates,"GRB2 directly binds phosphorylated IRS1 through its SH2 domain, recruiting the GRB2–SOS machinery"
+IRS1,JAK2,ambiguous,TGEN,positive,unsupported,,,There is a JAK2->IRS1 relationship but no evidence to support this edge.
+IRS1,JAK2,ambiguous,MCF7,positive,unsupported,,,There is a JAK2->IRS1 relationship but no evidence to support this edge.
+IRS1,JAK2,ambiguous,T47D,positive,unsupported,,,There is a JAK2->IRS1 relationship but no evidence to support this edge.
+IRS1,PI3K,ambiguous,TGEN,positive,direct,1,regulates,protein-protein interaction. phosphorylated IRS1 proteins bind the p85 regulatory subunit of PI3K.
+IRS1,PI3K,ambiguous,MCF7,positive,direct,1,regulates,protein-protein interaction. phosphorylated IRS1 proteins bind the p85 regulatory subunit of PI3K.
+IRS1,PI3K,ambiguous,T47D,positive,direct,1,regulates,protein-protein interaction. phosphorylated IRS1 proteins bind the p85 regulatory subunit of PI3K.
+JAK2,MYC,ambiguous,T47D,,,,,
+JAK2,STAT1,ambiguous,TGEN,positive,direct,1,regulates,"Activated JAK2 directly phosphorylates STAT1, which promotes STAT1 dimerization, nuclear translocation, DNA binding, and transcriptional activity."
+JAK2,STAT1,ambiguous,MCF7,positive,direct,1,regulates,"Activated JAK2 directly phosphorylates STAT1, which promotes STAT1 dimerization, nuclear translocation, DNA binding, and transcriptional activity."
+JAK2,STAT1,ambiguous,T47D,positive,direct,1,regulates,"Activated JAK2 directly phosphorylates STAT1, which promotes STAT1 dimerization, nuclear translocation, DNA binding, and transcriptional activity."
+JAK2,STAT3,ambiguous,TGEN,positive,direct,1,regulates,"Activated JAK2 directly phosphorylates STAT3, which promotes STAT1 dimerization, nuclear translocation, DNA binding, and transcriptional activity."
+JAK2,STAT3,ambiguous,MCF7,positive,direct,1,regulates,"Activated JAK2 directly phosphorylates STAT3, which promotes STAT3 dimerization, nuclear translocation, DNA binding, and transcriptional activity."
+JAK2,STAT3,ambiguous,T47D,positive,direct,1,regulates,"Activated JAK2 directly phosphorylates STAT3, which promotes STAT3 dimerization, nuclear translocation, DNA binding, and transcriptional activity."
+JAK2,STAT5,ambiguous,TGEN,positive,direct,1,regulates,"Activated JAK2 directly phosphorylates STAT5, which promotes STAT5 dimerization, nuclear translocation, DNA binding, and transcriptional activity."
+JAK2,STAT5,ambiguous,MCF7,positive,direct,1,regulates,"Activated JAK2 directly phosphorylates STAT5, which promotes STAT5 dimerization, nuclear translocation, DNA binding, and transcriptional activity."
+JAK2,STAT5,ambiguous,T47D,positive,direct,1,regulates,"Activated JAK2 directly phosphorylates STAT5, which promotes STAT5 dimerization, nuclear translocation, DNA binding, and transcriptional activity."
+JUN,CyclinD,positive,HL,,,,,
+JUN,CyclinD,positive,SL,,,,,
+JUN,EGFR,positive,HL,,,,,
+JUN,JUN,positive,BL,,,,,
+JUN,JUN,positive,HL,,,,,
+JUN,JUN,positive,SL,,,,,
+JUN,PRAS40,positive,HL,,,,,
+JUN,TCF7L2,ambiguous,TGEN,positive,,,,
+JUN,TCF7L2,ambiguous,MCF7,,,,,
+JUN,TCF7L2,ambiguous,T47D,,,,,
+KMT2D,CYCLINDc,ambiguous,MCF7,positive,assumption,4,,"This assumption is consistent with the fact that KMT2D is a histone methyltransferase complex that helps recruit FOXA1, PBX1, and ERα/ESR1 to chromatin. "
+KMT2D,CYCLINDc,ambiguous,T47D,positive,assumption,4,,"This assumption is consistent with the fact that KMT2D is a histone methyltransferase complex that helps recruit FOXA1, PBX1, and ERα/ESR1 to chromatin. "
+KMT2D,ER_transcription_2,ambiguous,Z17,,,,,
+KMT2D,ER_transcription_2,positive,Z21,,,,,
+KMT2D,ESR1,ambiguous,TGEN,positive,,,,
+KMT2D,ESR1,ambiguous,MCF7,,,,,
+KMT2D,ESR1,ambiguous,T47D,,,,,
+KMT2D,MYC,ambiguous,MCF7,,,,,
+KMT2D,MYC,ambiguous,T47D,,,,,
+KRT14,TRADD,ambiguous,TGEN,negative,,,,
+KRT14,TRADD,ambiguous,MCF7,,,,,
+KRT14,TRADD,ambiguous,T47D,,,,,
+LATS1,GRB2,ambiguous,TGEN,positive,,,,
+LATS1,GRB2,ambiguous,MCF7,,,,,
+LATS1,YAP1,ambiguous,TGEN,negative,,,,
+LATS1,YAP1,ambiguous,MCF7,,,,,
+LATS1,YAP1,ambiguous,T47D,,,,,
+LCK,LATS1,ambiguous,TGEN,positive,,,,
+LCK,LATS1,ambiguous,MCF7,,,,,
+LCK,LATS1,ambiguous,T47D,,,,,
+LCK,NOTCH1,ambiguous,TGEN,positive,,,,
+LCK,NOTCH1,ambiguous,MCF7,,,,,
+LCK,NOTCH1,ambiguous,T47D,,,,,
+MAPK,BAD,ambiguous,Z17,,,,,
+MAPK,MAPK_2,ambiguous,Z17,,,,,
+MAPK,MAPK_2,positive,Z21,,,,,
+MAPK_2,BAD,ambiguous,Z17,,,,,
+MAPK_2,BAD,negative,Z21,,,,,
+MAPK_2,BIM,ambiguous,Z17,,,,,
+MAPK_2,BIM,negative,Z21,,,,,
+MAPK_2,FOXO3_Ub,ambiguous,Z17,,,,,
+MAPK_2,FOXO3_Ub,positive,Z21,,,,,
+MAPK_2,HER2HER3c_2,ambiguous,Z17,,,,,
+MAPK_2,HER2HER3c_2,negative,Z21,,,,,
+MAPK_2,MAPK,ambiguous,Z17,,,,,
+MAPK_2,MAPK,positive,Z21,,,,,
+MAPK_2,TSC2,ambiguous,Z17,,,,,
+MAPK_2,TSC2,negative,Z21,,,,,
+MAPK8,JUN,ambiguous,TGEN,positive,,,,
+MAPK8,JUN,ambiguous,MCF7,,,,,
+MAPK8,JUN,ambiguous,T47D,,,,,
+MAPK8,STAT3,ambiguous,TGEN,positive,,,,
+MAPK8,STAT3,ambiguous,MCF7,,,,,
+MAPK8,STAT3,ambiguous,T47D,,,,,
+MAPK8,TWIST1,ambiguous,TGEN,positive,,,,
+MAPK8,TWIST1,ambiguous,MCF7,,,,,
+MCL1,Apoptosis,ambiguous,Z17,negative ,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3"
+MCL1,Apoptosis_2,ambiguous,Z17,negative,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3. We consider that the confidence rank is the same as that of the MCL1->Apoptosis edge."
+MCL1,Apoptosis_2,negative,Z21,negative ,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3. We consider that the confidence rank is the same as that of the MCL1->Apoptosis edge."
+MCL1,Apoptosis_3,ambiguous,Z17,negative ,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3. We consider that the confidence rank is the same as that of the MCL1->Apoptosis edge."
+MCL1,Apoptosis_3,negative,Z21,negative ,indirect,2,,"causal effect mediated by BAK/BAX, CYCS, CASP9, CASP3. We consider that the confidence rank is the same as that of the MCL1->Apoptosis edge."
+MCL1,BAK1,ambiguous,TGEN,negative,direct,1,regulates,"MCL1 binds activated BAK1 through its BH3-binding groove, sequestering BAK1 and preventing the oligomerization required for mitochondrial outer-membrane permeabilization."
+MCL1,BAK1,ambiguous,MCF7,negative,direct,1,regulates,"MCL1 binds activated BAK1 through its BH3-binding groove, sequestering BAK1 and preventing the oligomerization required for mitochondrial outer-membrane permeabilization."
+MCL1,BAK1,ambiguous,T47D,negative,direct,1,regulates,"MCL1 binds activated BAK1 through its BH3-binding groove, sequestering BAK1 and preventing the oligomerization required for mitochondrial outer-membrane permeabilization."
+MCL1,BAX,ambiguous,TGEN,negative,direct,1,regulates,"MCL1 binds activated BAX through its BH3-binding groove, sequestering BAX and preventing the oligomerization required for mitochondrial outer-membrane permeabilization."
+MCL1,BAX,ambiguous,MCF7,negative,direct,1,regulates,"MCL1 binds activated BAX through its BH3-binding groove, sequestering BAX and preventing the oligomerization required for mitochondrial outer-membrane permeabilization."
+MCL1,BAX,ambiguous,T47D,negative,direct,1,regulates,"MCL1 binds activated BAX through its BH3-binding groove, sequestering BAX and preventing the oligomerization required for mitochondrial outer-membrane permeabilization."
+MCL1_T,MCL1,positive,Z21,positive ,direct,1,regulates,protein translation
+MDM2,NOTCH1,ambiguous,TGEN,positive,,,,
+MDM2,NOTCH1,ambiguous,MCF7,,,,,
+MDM2,p53,ambiguous,TGEN,negative,,,,
+MDM2,p53,ambiguous,MCF7,,,,,
+MDM2,p53,ambiguous,T47D,,,,,
+MEK,EGFR,ambiguous,TGEN,negative,indirect,2,,causal effect mediated by ERK
+MEK,EGFR,ambiguous,MCF7,negative,indirect,2,,causal effect mediated by ERK
+MEK,EGFR,ambiguous,T47D,negative,indirect,2,,causal effect mediated by ERK
+MEK,ERK,positive,BS,positive,direct,1,regulates,MEK1/2 directly binds and phosphorylates ERK1/2
+MEK,ERK,positive,HS,positive,direct,1,regulates,MEK1/2 directly binds and phosphorylates ERK1/2
+MEK,ERK,positive,SS,positive,direct,1,regulates,MEK1/2 directly binds and phosphorylates ERK1/2
+MEK,ERK,ambiguous,TGEN,positive,direct,1,regulates,MEK1/2 directly binds and phosphorylates ERK1/2
+MEK,ERK,ambiguous,MCF7,positive,direct,1,regulates,MEK1/2 directly binds and phosphorylates ERK1/2
+MEK,ERK,ambiguous,T47D,positive,direct,1,regulates,MEK1/2 directly binds and phosphorylates ERK1/2
+MEK,MEK,positive,BS,positive,unsupported,,,this inferred self-regulation is not supported by experimental evidence
+MEK,MEK,positive,HS,positive,unsupported,,,this inferred self-regulation is not supported by experimental evidence
+MEK,MEK,positive,SS,positive,unsupported,,,this inferred self-regulation is not supported by experimental evidence
+MEK,PDK1_pm,positive,BS,positive,unsupported,,,This inferred edge is not supported by evidence
+mTORC1,AKT,positive,BS,positive,unsupported,,,"This inferred edge is not supported by evidence; instead, there is a negative feedback effect"
+mTORC1,AKT,positive,HS,positive,unsupported,,,a positive effect is not supported by evidence; there is a negative feedback effect
+mTORC1,AKT,positive,SS,positive,unsupported,,,a positive effect is not supported by evidence; there is a negative feedback effect
+mTORC1,EIF4,ambiguous,Z17,,,,,
+mTORC1,EIF4,positive,Z21,,,,,
+mTORC1,EIF4EBP1,ambiguous,TGEN,negative,,,,
+mTORC1,EIF4EBP1,ambiguous,MCF7,,,,,
+mTORC1,EIF4EBP1,ambiguous,T47D,,,,,
+mTORC1,mTORC1,positive,BS,positive,unsupported,,,"mTOR kinase undergoes autophosphorylation, but this does not have a functional effect"
+mTORC1,mTORC1,positive,HS,positive,unsupported,,,"This inferred edge is not supported by evidence. mTOR kinase undergoes autophosphorylation, but this does not have a functional effect."
+mTORC1,mTORC1,positive,SS,positive,unsupported,,,"This inferred edge is not supported by evidence. mTOR kinase undergoes autophosphorylation, but this does not have a functional effect."
+mTORC1,S6K,positive,BS,positive,direct,1,regulates,mTORC1 phosphorylates S6K
+mTORC1,S6K,positive,HS,positive,direct,1,regulates,mTORC1 phosphorylates S6K
+mTORC1,S6K,positive,SS,positive,direct,1,regulates,mTORC1 phosphorylates S6K
+mTORC1,S6K,ambiguous,Z17,positive ,direct,1,regulates,mTORC1 phosphorylates S6K
+mTORC1,S6K,positive,Z21,positive ,direct,1,regulates,mTORC1 phosphorylates S6K
+mTORC1,S6K,ambiguous,TGEN,positive,direct,1,regulates,mTORC1 phosphorylates S6K
+mTORC1,S6K,ambiguous,MCF7,positive ,direct,1,regulates,mTORC1 phosphorylates S6K
+mTORC1,S6K,ambiguous,T47D,positive ,direct,1,regulates,mTORC1 phosphorylates S6K
+mTORC1,SGK1,ambiguous,TGEN,positive,unsupported,,,not supported by evidence
+mTORC1,SGK1,ambiguous,MCF7,positive,unsupported,,,not supported by evidence
+mTORC1,SGK1,ambiguous,T47D,positive ,unsupported,,,not supported by evidence
+mTORC2,AKT,ambiguous,TGEN,positive,indirect,2,,"mTORC2 is recruited to the cell membrane, then it phosphorylates AKT"
+mTORC2,AKT,ambiguous,MCF7,positive,indirect,2,,"mTORC2 is recruited to the cell membrane, then it phosphorylates AKT"
+mTORC2,AKT,ambiguous,T47D,positive,indirect,2,,"mTORC2 is recruited to the cell membrane, then it phosphorylates AKT"
+mTORC2,mTORC2,ambiguous,Z17,,,,,
+mTORC2,mTORC2,positive,Z21,,,,,
+mTORC2,SGK1,ambiguous,Z17,positive,direct,1,regulates,"mTORC2 directly phosphorylates the SGK1 hydrophobic-motif site Ser422, enabling subsequent activation by PDK1."
+mTORC2,SGK1,positive,Z21,positive,direct,1,regulates,"mTORC2 directly phosphorylates the SGK1 hydrophobic-motif site Ser422, enabling subsequent activation by PDK1."
+mTORC2,SGK1,ambiguous,TGEN,positive,direct,1,regulates,"mTORC2 directly phosphorylates the SGK1 hydrophobic-motif site Ser422, enabling subsequent activation by PDK1."
+mTORC2,SGK1,ambiguous,MCF7,positive,direct,1,regulates,"mTORC2 directly phosphorylates the SGK1 hydrophobic-motif site Ser422, enabling subsequent activation by PDK1."
+mTORC2,SGK1,ambiguous,T47D,positive,direct,1,regulates,"mTORC2 directly phosphorylates the SGK1 hydrophobic-motif site Ser422, enabling subsequent activation by PDK1."
+mTORC2_pm,AKT,ambiguous,Z17,positive,direct,1,regulates,membrane-associated mTORC2 directly phosphorylates AKT
+mTORC2_pm,AKT,positive,Z21,positive,direct,1,regulates,membrane-associated mTORC2 directly phosphorylates AKT
+MYC,CDKN2A,ambiguous,TGEN,negative,indirect,2,,"MYC can suppress the p16/RB senescence program in proliferating cells through several mechanisms, and MYC loss can lead to increased p16 expression and senescence."
+MYC,CDKN2A,ambiguous,MCF7,negative,indirect,2,,"MYC can suppress the p16/RB senescence program in proliferating cells through several mechanisms, and MYC loss can lead to increased p16 expression and senescence."
+MYC,CDKN2A,ambiguous,T47D,negative,indirect,2,,"MYC can suppress the p16/RB senescence program in proliferating cells through several mechanisms, and MYC loss can lead to increased p16 expression and senescence."
+MYC,CyclinD,ambiguous,Z17,positive,unsupported,,,"Contrary to this assumption, there is evidence that MYC can bind to  the Cyclin D1 promoter and repress CCND1 transcription."
+MYC,CyclinD,positive,Z21,positive,unsupported,,,"Contrary to this assumption, there is evidence that MYC can bind to  the Cyclin D1 promoter and repress CCND1 transcription."
+MYC,CYCLINDc,ambiguous,TGEN,positive,indirect,2,,"c-MYC activates CDK4 transcription, thus leading to more CYCLINDc formation."
+MYC,CYCLINDc,ambiguous,MCF7,positive,indirect,2,,"c-MYC activates CDK4 transcription, thus leading to more CYCLINDc formation."
+MYC,CYCLINDc,ambiguous,T47D,positive,indirect,2,,"c-MYC activates CDK4 transcription, thus leading to more CYCLINDc formation."
+MYC,MYC_2,ambiguous,Z17,positive ,,0,,Reaching a higher level necessitates reaching the lower level first.
+MYC,MYC_2,positive,Z21,positive,,0,,Reaching a higher level necessitates reaching the lower level first.
+MYC,MYC_targets,positive,Z21,positive ,direct ,1,regulates,MYC_targets represents genes regulated both transcriptionally by MYC and translationally by the mTORC1 pathway. 
+MYC,MYC_targets_2,positive,Z21,positive,direct,1,regulates,MYC_targets represents genes regulated both transcriptionally by MYC and translationally by the mTORC1 pathway. We assign the same confidence ranking as that of the MYC->MYC_targets edge.
+MYC,p21,ambiguous,TGEN,negative,indirect,2,,"MYC interacts with transcription factors already associated with the CDKN1A (p21) promoter, particularly MIZ1 (ZBTB17), represssing CDKN1A transcription. As there is a separate p21_T node, this effect on the protein level is indirect."
+MYC,p21,ambiguous,MCF7,negative ,indirect,2,,"MYC interacts with transcription factors already associated with the CDKN1A (p21) promoter, particularly MIZ1 (ZBTB17), represssing CDKN1A transcription. As there is a separate p21_T node, this effect on the protein level is indirect."
+MYC,p21,ambiguous,T47D,negative,indirect,2,,"MYC interacts with transcription factors already associated with the CDKN1A (p21) promoter, particularly MIZ1 (ZBTB17), represssing CDKN1A transcription. As there is a separate p21_T node, this effect on the protein level is indirect."
+MYC,p21_p27_T,ambiguous,Z17,negative ,assumption,4,,The p21_p27_T node refers to the transcripts of p21 and p27. This assumption is consistent with the fact that MYC represses the transcription of CDKN1A (p21).
+MYC,p21_p27_T,negative,Z21,negative,assumption,4,,The p21_p27_T node refers to the transcripts of p21 and p27. This assumption is consistent with the fact that MYC represses the transcription of CDKN1A (p21).
+MYC_2,CyclinD_2,ambiguous,Z17,positive,unsupported,,,"Contrary to this assumption, there is evidence that MYC can bind to  the Cyclin D1 promoter and repress CCND1 transcription."
+MYC_2,CyclinD_2,positive,Z21,positive ,unsupported,,,"Contrary to this assumption, there is evidence that MYC can bind to  the Cyclin D1 promoter and repress CCND1 transcription."
+MYC_2,MYC,ambiguous,Z17,positive ,unsupported,,,This edge is an artifact of the Boolean representation of multi-level nodes.
+MYC_2,MYC,positive,Z21,positive,unsupported,,,This edge is an artifact of the Boolean representation of multi-level nodes.
+MYC_2,MYC_targets,positive,Z21,positive,direct,1,regulates,MYC_targets represents genes regulated both transcriptionally by MYC and translationally by the mTORC1 pathway. We assign the same confidence ranking as that of the MYC->MYC_targets edge.
+MYC_2,MYC_targets_2,positive,Z21,positive,direct,1,regulates,MYC_targets represents genes regulated both transcriptionally by MYC and translationally by the mTORC1 pathway. We assign the same confidence ranking as that of the MYC->MYC_targets edge.
+MYC_2,p21_p27_T,ambiguous,Z17,positive ,assumption,4,,The p21_p27_T node refers to the transcripts of p21 and p27. This assumption is consistent with the fact that MYC represses the transcription of CDKN1A (p21).
+MYC_2,p21_p27_T,negative,Z21,positive,assumption,4,,The p21_p27_T node refers to the transcripts of p21 and p27. This assumption is consistent with the fact that MYC represses the transcription of CDKN1A (p21).
+MYC_T,MYC_2,positive,Z21,positive,direct,1,regulates,translation of the MYC protein. 
+MYC_targets,MYC_targets_2,positive,Z21,positive ,,0,,Reaching a higher level necessitates reaching the lower level first.
+MYC_targets,Proliferation,positive,Z21,positive,assumption,4,,This assumption is consistent with the observation that MYC overexpression can cause resistance to PI3K inhibitors.
+MYC_targets_2,MYC_targets,positive,Z21,positive,unsupported,,,This edge is an artifact of the Boolean representation of multi-level nodes.
+MYC_targets_2,Proliferation_3,positive,Z21,positive,assumption,4,,This assumption is consistent with the observation that MYC overexpression can cause resistance to PI3K inhibitors.
+MYOD1,MYOG,ambiguous,TGEN,positive,,,,
+MYOD1,MYOG,ambiguous,MCF7,,,,,
+MYOD1,MYOG,ambiguous,T47D,,,,,
+MYOG,PAX7,ambiguous,TGEN,negative,,,,
+MYOG,PAX7,ambiguous,MCF7,,,,,
+MYOG,PAX7,ambiguous,T47D,,,,,
+Navitoclax,BCL2,negative,Z21,,,,,
+Navitoclax,BCLXL,negative,Z21,,,,,
+NEDD4L,NF2,ambiguous,TGEN,positive,,,,
+NEDD4L,NF2,ambiguous,MCF7,,,,,
+NEDD4L,NF2,ambiguous,T47D,,,,,
+Neratinib,HER2HER3c,ambiguous,Z17,negative ,direct,1,regulates,Neratinib is an irreversible pan-HER tyrosine kinase inhibitor that covalently binds the kinase domains of HER2 and EGFR.
+Neratinib,HER2HER3c,negative,Z21,negative,direct,1,regulates,Neratinib is an irreversible pan-HER tyrosine kinase inhibitor that covalently binds the kinase domains of HER2 and EGFR.
+Neratinib,HER2HER3c_2,ambiguous,Z17,negative,direct,1,regulates,Neratinib is an irreversible pan-HER tyrosine kinase inhibitor that covalently binds the kinase domains of HER2 and EGFR. We consider that the confidence rank is the same as the Neratinib-| HER2HER3c edge
+Neratinib,HER2HER3c_2,negative,Z21,negative,direct,1,regulates,Neratinib is an irreversible pan-HER tyrosine kinase inhibitor that covalently binds the kinase domains of HER2 and EGFR.
+NF1,CASP8,ambiguous,TGEN,positive,,,,
+NF1,CASP8,ambiguous,MCF7,,,,,
+NF1,DVL1,ambiguous,TGEN,positive,,,,
+NF1,DVL1,ambiguous,MCF7,,,,,
+NF1,HRAS,ambiguous,TGEN,negative,,,,
+NF1,HRAS,ambiguous,MCF7,,,,,
+NF1,HRAS,ambiguous,T47D,,,,,
+NF2,LATS1,ambiguous,TGEN,positive,,,,
+NF2,LATS1,ambiguous,MCF7,,,,,
+NF2,LATS1,ambiguous,T47D,,,,,
+NF2,MYOD1,ambiguous,T47D,,,,,
+NFKB,NFKB,positive,SL,,,,,
+NFKB,PIM,ambiguous,T47D,,,,,
+NFKB,RB,positive,BL,,,,,
+NFKB,RELA,ambiguous,TGEN,positive,,,,
+NFKB,RELA,ambiguous,MCF7,,,,,
+NFKB,RELA,ambiguous,T47D,,,,,
+NFKB,S6K,negative,BL,,,,,
+NICD,HES1,ambiguous,TGEN,positive,,,,
+NICD,HES1,ambiguous,MCF7,,,,,
+NICD,HES1,ambiguous,T47D,,,,,
+NICD,HEY1,ambiguous,TGEN,positive,,,,
+NICD,HEY1,ambiguous,MCF7,,,,,
+NICD,HEY1,ambiguous,T47D,,,,,
+NOS3,IL1B,ambiguous,TGEN,positive,,,,
+NOS3,IL1B,ambiguous,MCF7,,,,,
+NOS3,IL1B,ambiguous,T47D,,,,,
+NOTCH1,NFKB,ambiguous,TGEN,positive,,,,
+NOTCH1,NFKB,ambiguous,MCF7,,,,,
+NOTCH1,NFKB,ambiguous,T47D,,,,,
+NOTCH1,NICD,ambiguous,TGEN,positive,,,,
+NOTCH1,NICD,ambiguous,MCF7,,,,,
+NOTCH1,NICD,ambiguous,T47D,,,,,
+NOTCH1,PAX7,ambiguous,TGEN,positive,,,,
+NOTCH1,PAX7,ambiguous,MCF7,,,,,
+NRG1,AKT,ambiguous,TGEN,positive,indirect,2,,"causal effect mediated by PI3K, others"
+NRG1,AKT,ambiguous,MCF7,positive,indirect,2,,"causal effect mediated by HER3, PI3K, others"
+NRG1,CYCLINDc,ambiguous,MCF7,positive,indirect,2,,"causal effect mediated by HER3, PI3K, others"
+NRG1,CYCLINDc,ambiguous,T47D,positive,indirect,2,,"causal effect mediated by HER3, PI3K, ERK"
+NRG1,HER2HER3c_2,positive,Z21,positive,indirect,2,,"causal effect mediated by HER3, PI3K, ERK"
+NRG1,HER3,positive,BS,positive,direct,1,regulates,ligand-receptor binding
+NRG1,HER3,positive,HS,positive,direct,1,regulates,ligand-receptor binding
+NRG1,HER3,positive,SS,positive,direct,1,regulates,ligand-receptor binding
+NRG1,HER3,ambiguous,TGEN,positive,direct,1,regulates,ligand-receptor binding
+NRG1,HER3,ambiguous,MCF7,positive,direct,1,regulates,ligand-receptor binding
+NRG1,HER3,ambiguous,T47D,positive,direct,1,regulates,ligand-receptor binding
+NRG1,mTORC1,ambiguous,TGEN,positive,indirect,2,,"causal effect mediated by PI3K, AKT"
+NRG1,mTORC1,ambiguous,MCF7,positive,indirect,2,,"causal effect mediated by PI3K, AKT"
+NRG1,mTORC1,ambiguous,T47D,positive,indirect,2,,"causal effect mediated by PI3K, AKT"
+NRG1,MYC,ambiguous,MCF7,,,,,
+NRG1,MYC,ambiguous,T47D,,,,,
+p21,CYCLINDc,ambiguous,TGEN,negative,unsupported,,,This assumed edge is contradicted by evidence that p21 (and p27) can serve as an assembly factor for Cyclin D–CDK4/6 and facilitate nuclear localization.  p21-bound Cyclin D–CDK complexes can retain their kinase activity.
+p21,CYCLINDc,ambiguous,MCF7,negative,unsupported,,,This assumed edge is contradicted by evidence that p21 (and p27) can serve as an assembly factor for Cyclin D–CDK4/6 and facilitate nuclear localization.  p21-bound Cyclin D–CDK complexes can retain their kinase activity.
+p21,CYCLINDc,ambiguous,T47D,negative,unsupported,,,This assumed edge is contradicted by evidence that p21 (and p27) can serve as an assembly factor for Cyclin D–CDK4/6 and facilitate nuclear localization.  p21-bound Cyclin D–CDK complexes can retain their kinase activity.
+p21_p27,cycE_CDK2,ambiguous,Z17,negative,direct,1,regulates,"Both p21 and p27,  members of the CIP/KIP family, bind  Cyclin E–CDK2 complexes. This prevents phosphorylation of substrates required for S-phase entry and progression."
+p21_p27,cycE_CDK2,negative,Z21,negative,direct,1,regulates,"Both p21 and p27,  members of the CIP/KIP family, bind  Cyclin E–CDK2 complexes. This prevents phosphorylation of substrates required for S-phase entry and progression."
+p21_p27_T,p21_p27,ambiguous,Z17,positive,direct,1,regulates,"The p21_p27 node unites the p21 and p27 proteins. The p21_p27_T node unites the transcripts of p21 and p27. Thus, this edge represents translation."
+p21_p27_T,p21_p27,positive,Z21,positive,direct,1,regulates,"The p21_p27 node unites the p21 and p27 proteins. The p21_p27_T node unites the transcripts of p21 and p27. Thus, this edge represents translation."
+p21_T,p21_p27_T,positive,Z21,positive ,,0,,"The p21_p27_T node unites the transcripts of p21 and p27. Thus, this edge represents inclusion."
+p21_T,p21_T,positive,Z21,positive ,assumption,4,,The Z21 model assumes a constitutive basal transcription status in the context of ER+ PIK3CA mutant breast cancer.
+p21_T,p21_T_2,positive,Z21,positive ,,0,,Reaching a higher level necessitates reaching the lower level first.
+p21_T_2,p21_p27_T,positive,Z21,positive ,,0,,The p21_p27_T node unites the transcripts of p21 and p27. We consider that the confidence ranking is the same as that of the p21_T->p21-p27_T edge.
+p21_T_2,p21_T,positive,Z21,positive ,unsupported,,,This edge is an artifact of the Boolean representation of multi-level nodes.
+p21_T_2,p21_T_2,positive,Z21,positive ,assumption,4,,The Z21 model assumes that the transcription status of p21 is constant in ER+ PIK3CA mutant breast cancer. The specific assumption is that p21_T_2=1 in MCF7 and p21_T_2=0 in T47D.
+p27_T,p21_p27_T,positive,Z21,positive ,,0,,"The p21_p27_T node unites the transcripts of p21 and p27. Thus, this edge represents inclusion."
+p38,p38,positive,BL,,,,,
+p38,p38,positive,HL,,,,,
+p38,p38,positive,SL,,,,,
+p38,p53,positive,BL,,,,,
+p38,p53,positive,HL,,,,,
+p53,BAK1,ambiguous,TGEN,positive,direct,1,regulates,p53 binds a p53-response element in the BAK1 promoter and increases BAK1 transcription.
+p53,BAK1,ambiguous,MCF7,,,,,
+p53,BAK1,ambiguous,T47D,,,,,
+p53,BAX,ambiguous,TGEN,positive,direct,1,regulates,p53 binds a p53-response element in the BAX promoter and increases BAX transcription.
+p53,BAX,ambiguous,MCF7,,,,,
+p53,BAX,ambiguous,T47D,,,,,
+p53,CyclinB1,negative,BL,,,,,
+p53,CyclinB1,negative,HL,,,,,
+p53,CyclinB1,negative,SL,,,,,
+p53,FAS,ambiguous,TGEN,positive,,,,
+p53,FAS,ambiguous,MCF7,,,,,
+p53,FAS,ambiguous,T47D,,,,,
+p53,FASLG,ambiguous,TGEN,positive,,,,
+p53,FASLG,ambiguous,MCF7,,,,,
+p53,FASLG,ambiguous,T47D,,,,,
+p53,GSK3B,positive,BL,,,,,
+p53,GSK3B,positive,HL,,,,,
+p53,GSK3B,positive,SL,,,,,
+p53,MDM2,ambiguous,TGEN,positive,,,,
+p53,MDM2,ambiguous,MCF7,,,,,
+p53,MDM2,ambiguous,T47D,,,,,
+p53,NF1,ambiguous,TGEN,positive,,,,
+p53,NF1,ambiguous,MCF7,,,,,
+p53,p53,positive,BL,,,,,
+p53,p53,positive,HL,,,,,
+p53,p53,positive,SL,,,,,
+p53,RAF1,negative,SL,,,,,
+p53,RB,positive,HL,,,,,
+p53,RB,negative,SL,,,,,
+PAK1,BAD,ambiguous,TGEN,negative,direct,1,regulates,"PAK1 phosphorylates BAD, which leads to its sequestration by 14-3-3 proteins, making it unable to inhibit BCLXL, BCL2"
+PAK1,BAD,ambiguous,MCF7,,,,,
+PAK1,BAD,ambiguous,T47D,,,,,
+PAK2,KRT14,ambiguous,TGEN,positive,,,,
+PAK2,KRT14,ambiguous,MCF7,,,,,
+PAK2,KRT14,ambiguous,T47D,,,,,
+Palbociclib,CDK46,ambiguous,Z17,,,,,
+Palbociclib,CDK46,negative,Z21,,,,,
+PAX7,KMT2D,ambiguous,TGEN,positive,,,,
+PAX7,KMT2D,ambiguous,MCF7,,,,,
+PAX7,KMT2D,ambiguous,T47D,,,,,
+PBX1,ER_transcription_2,ambiguous,Z17,,,,,
+PBX1,ER_transcription_2,positive,Z21,,,,,
+PDK1,SGK1,ambiguous,Z17,,,,,
+PDK1,SGK1,positive,Z21,,,,,
+PDK1_pm,AKT,positive,BS,positive,direct,1,regulates,membrane-associated PDK1 directly phosphorylates AKT
+PDK1_pm,AKT,positive,HS,positive,direct,1,regulates,membrane-associated PDK1 directly phosphorylates AKT
+PDK1_pm,AKT,positive,SS,positive,direct,1,regulates,membrane-associated PDK1 directly phosphorylates AKT
+PDK1_pm,AKT,ambiguous,Z17,positive,direct,1,regulates,plasma-membrane-bound PDK1 directly phosphorylates AKT at Thr308 in its activation loop
+PDK1_pm,AKT,positive,Z21,positive,direct,1,regulates,membrane-associated PDK1 directly phosphorylates AKT
+PDK1_pm,AKT,ambiguous,TGEN,positive,direct,1,regulates,plasma-membrane-bound PDK1 directly phosphorylates AKT at Thr308 in its activation loop
+PDK1_pm,AKT,ambiguous,MCF7,positive,direct,1,regulates,plasma-membrane-bound PDK1 directly phosphorylates AKT at Thr308 in its activation loop
+PDK1_pm,AKT,ambiguous,T47D,positive,direct,1,regulates,plasma-membrane-bound PDK1 directly phosphorylates AKT at Thr308 in its activation loop
+PDK1_pm,ERK,positive,SS,positive,indirect,2,,causal effect mediated by MEK
+PDK1_pm,HER2,positive,HS,positive,correlation,3,,This proteomics-inferred edge is consistent with observed co-activation of PDK1 and HER2
+PDK1_pm,HSP90AA1,ambiguous,TGEN,negative,,,,
+PDK1_pm,HSP90AA1,ambiguous,MCF7,,,,,
+PDK1_pm,HSP90AA1,ambiguous,T47D,,,,,
+PDK1_pm,MEK,positive,HS,positive,direct,1,regulates,PDK1 phosphorylates MEK1 and MEK2
+PDK1_pm,PAK1,ambiguous,T47D,,,,,
+PDK1_pm,PDK1_pm,positive,BS,positive,unsupported,,,This inferred self-regulation is not supported by evidence
+PDK1_pm,PDK1_pm,positive,HS,positive,unsupported,,,This inferred self-regulation is not supported by evidence
+PDK1_pm,PDK1_pm,positive,SS,positive,unsupported,,,This inferred self-regulation is not supported by evidence
+PDK1_pm,SGK1,ambiguous,TGEN,positive,direct,1,regulates,"PDK1 directly phosphorylates SGK1 at Thr256 in its activation loop, producing full kinase activation after the hydrophobic-motif site (Ser422) has been phosphorylated."
+PDK1_pm,SGK1,ambiguous,MCF7,positive ,direct,1,regulates,"PDK1 directly phosphorylates SGK1 at Thr256 in its activation loop, producing full kinase activation after the hydrophobic-motif site (Ser422) has been phosphorylated."
+PDK1_pm,SGK1,ambiguous,T47D,positive ,direct,1,regulates,"PDK1 directly phosphorylates SGK1 at Thr256 in its activation loop, producing full kinase activation after the hydrophobic-motif site (Ser422) has been phosphorylated."
+pertuzumab,EGFR,negative,BL,negative,indirect,2,,pertuzumab binds the extracellular domain II of HER2 and inhibits EGFR-HER2 heterodimerization. This is an indirect effect on EGFR.
+pertuzumab,EGFR,negative,HL,negative ,indirect,2,,pertuzumab binds the extracellular domain II of HER2 and inhibits EGFR-HER2 heterodimerization
+pertuzumab,EGFR,negative,BS,negative,indirect,2,,pertuzumab binds the extracellular domain II of HER2 and inhibits EGFR-HER2 heterodimerization. This is an indirect effect on EGFR.
+pertuzumab,EGFR,negative,HS,negative,indirect,2,,pertuzumab binds the extracellular domain II of HER2 and inhibits EGFR-HER2 heterodimerization
+pertuzumab,EGFR,negative,SS,negative,indirect,2,,pertuzumab binds the extracellular domain II of HER2 and inhibits EGFR-HER2 heterodimerization. This is an indirect effect on EGFR.
+pertuzumab,EGFR,negative,SL,pertuzumab,indirect,2,,pertuzumab binds the extracellular domain II of HER2 and inhibits EGFR-HER2 heterodimerization. This is an indirect effect on EGFR.
+pertuzumab,ERK,positive,BS,positive,unsupported,,,this inferred edge is not supported by experimental evidence
+pertuzumab,HER2,negative,BL,negative ,direct,1,regulates,pertuzumab is a monoclonal antibody that binds the extracellular domain II of HER2.
+pertuzumab,HER2,negative,HL,negative,direct,1,regulates,pertuzumab is a monoclonal antibody that binds the extracellular domain II of HER2.
+pertuzumab,HER2,negative,BS,negative,direct,1,regulates,pertuzumab is a monoclonal antibody that binds the extracellular domain II of HER2.
+pertuzumab,HER2,negative,HS,negative,direct,1,regulates,pertuzumab is a monoclonal antibody that binds the extracellular domain II of HER2
+pertuzumab,HER2,negative,SS,negative,direct,1,regulates,pertuzumab is a monoclonal antibody that binds the extracellular domain II of HER2
+pertuzumab,HER2,negative,SL,negative ,direct,1,regulates,pertuzumab is a monoclonal antibody that binds the extracellular domain II of HER2.
+pertuzumab,HER3,negative,BL,negative ,unsupported,,,"pertuzumab does not act on HER3 but on the HER2-HER3 complex, which is a separate node."
+pertuzumab,HER3,negative,HL,negative,unsupported,,,"pertuzumab does not act on HER3 but on the HER2-HER3 complex, which is a separate node."
+pertuzumab,HER3,negative,BS,negative,unsupported,,,"pertuzumab does not act on HER3 but on the HER2-HER3 complex, which is a separate node."
+pertuzumab,HER3,negative,HS,negative,unsupported,,,"pertuzumab does not act on HER3 but on the HER2-HER3 complex, which is a separate node"
+pertuzumab,HER3,negative,SS,negative,unsupported,,,"pertuzumab does not act on HER3 but on the HER2-HER3 complex, which is a separate node"
+pertuzumab,HER3,negative,SL,negative,unsupported,,,"pertuzumab does not act on HER3 but on the HER2-HER3 complex, which is a separate node."
+pertuzumab,mTORC1,positive,BS,positive,unsupported,,,this inferred edge is not supported by evidence
+PG,PGR,ambiguous,TGEN,positive,,,,
+PG,PGR,ambiguous,MCF7,,,,,
+PG,PGR,ambiguous,T47D,,,,,
+PGR,ESR1,ambiguous,TGEN,positive,,,,
+PGR,ESR1,ambiguous,MCF7,,,,,
+PGR,ESR1,ambiguous,T47D,,,,,
+PGR,WNT1,ambiguous,TGEN,positive,,,,
+PI3K,HRAS,ambiguous,TGEN,positive,,,,
+PI3K,PI3K_2,ambiguous,Z17,positive ,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
+PI3K,PI3K_2,positive,Z21,positive,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
+PI3K,PIP3,ambiguous,Z17,positive ,direct,1,regulates,PI3K catalyzes the reaction that produces PIP3.
+PI3K,PIP3,positive,Z21,positive,direct,1,regulates,PI3K catalyzes the reaction that produces PIP3.
+PI3K,PIP3,ambiguous,TGEN,positive,direct,1,regulates,PI3K catalyzes the reaction that produces PIP3.
+PI3K,PIP3,ambiguous,MCF7,positive ,direct,1,regulates,PI3K catalyzes the reaction that produces PIP3.
+PI3K,PIP3,ambiguous,T47D,positive ,direct,1,regulates,PI3K catalyzes the reaction that produces PIP3.
+PI3K,RAC1,ambiguous,TGEN,positive,indirect,2,,causal effect mediated by PIP3  and Rac guanine-nucleotide exchange factors
+PI3K,RAC1,ambiguous,MCF7,positive ,indirect,2,,causal effect mediated by PIP3  and Rac guanine-nucleotide exchange factors
+PI3K,RAC1,ambiguous,T47D,positive ,indirect,2,,causal effect mediated by PIP3  and Rac guanine-nucleotide exchange factors
+PI3K,RAS,ambiguous,TGEN,positive,,,,
+PI3K_2,PI3K,ambiguous,Z17,positive ,unsupported,,,This edge is an artifact of the Boolean representation of multi-level nodes.
+PI3K_2,PI3K,positive,Z21,positive ,unsupported,,,This edge is an artifact of the Boolean representation of multi-level nodes.
+PI3K_2,PIP3,ambiguous,Z17,positive ,direct,1,regulates,PI3K catalyzes the reaction that produces PIP3.
+PI3K_2,PIP3,positive,Z21,positive,direct,1,regulates,PI3K catalyzes the reaction that produces PIP3.
+PI3K_2,PIP3_2,ambiguous,Z17,positive,direct,1,regulates,PI3K catalyzes the reaction that produces PIP3.
+PI3K_2,PIP3_2,positive,Z21,positive,direct,1,regulates,PI3K catalyzes the reaction that produces PIP3.
+PIM,BAD,ambiguous,Z17,negative,direct,1,,"PIM kinases phosphorylate BAD. This promotes BAD's sequestration by 14-3-3 proteins, suppressing BAD's pro-apoptotic function."
+PIM,BAD,negative,Z21,negative,direct,1,,"PIM kinases phosphorylate BAD. This promotes BAD's sequestration by 14-3-3 proteins, suppressing BAD's pro-apoptotic function."
+PIM,BAD,ambiguous,TGEN,negative,direct,1,,"PIM kinases phosphorylate BAD. This promotes BAD's sequestration by 14-3-3 proteins, suppressing BAD's pro-apoptotic function."
+PIM,BAD,ambiguous,MCF7,negative,direct,1,,"PIM kinases phosphorylate BAD. This promotes BAD's sequestration by 14-3-3 proteins, suppressing BAD's pro-apoptotic function."
+PIM,BAD,ambiguous,T47D,negative,direct,1,,"PIM kinases phosphorylate BAD. This promotes BAD's sequestration by 14-3-3 proteins, suppressing BAD's pro-apoptotic function."
+PIM,FOXO3,ambiguous,Z17,negative ,direct,1,,PIM kinases phosphorylate FOXO3 (FOXO3a). This phosphorylation suppresses FOXO3 transcriptional activity by promoting its nuclear exclusion and association with 14-3-3 proteins.
+PIM,FOXO3,negative,Z21,negative,direct,1,,PIM kinases phosphorylate FOXO3 (FOXO3a). This phosphorylation suppresses FOXO3 transcriptional activity by promoting its nuclear exclusion and association with 14-3-3 proteins.
+PIM,mTORC1,ambiguous,MCF7,,,,,
+PIM,mTORC1,ambiguous,T47D,,,,,
+PIM,MYC,ambiguous,TGEN,positive,direct,1,,"PIM kinases, especially PIM1, phosphorylate MYC, which increases MYC protein stability and transcriptional activity."
+PIM,MYC,ambiguous,MCF7,positive,direct,1,,"PIM kinases, especially PIM1, phosphorylate MYC, which increases MYC protein stability and transcriptional activity."
+PIM,MYC,ambiguous,T47D,positive,direct,1,,"PIM kinases, especially PIM1, phosphorylate MYC, which increases MYC protein stability and transcriptional activity."
+PIM,p21_p27,ambiguous,Z17,negative,,?,,The p21_p27 node refers both to p21 and p27. PIM kinases suppress p27 through phosphorylation that promotes its cytoplasmic localization and/or degradation.
+PIM,p21_p27,negative,Z21,negative ,,,,
+PIM,PRAS40,ambiguous,Z17,,,,,
+PIM,PRAS40,negative,Z21,,,,,
+PIM,RELA,ambiguous,TGEN,positive,,,,
+PIM,RELA,ambiguous,MCF7,,,,,
+PIM,RELA,ambiguous,T47D,,,,,
+PIP3,AKT,ambiguous,Z17,positive,direct,1,,"PIP3 directly binds the PH domain of AKT, recruiting AKT to the plasma membrane and inducing conformational changes that expose its activating phosphorylation sites"
+PIP3,AKT,positive,Z21,positive,direct,1,,"PIP3 directly binds the PH domain of AKT, recruiting AKT to the plasma membrane and inducing conformational changes that expose its activating phosphorylation sites"
+PIP3,AKT,ambiguous,TGEN,positive,direct,1,,"PIP3 directly binds the PH domain of AKT, recruiting AKT to the plasma membrane and inducing conformational changes that expose its activating phosphorylation sites"
+PIP3,AKT,ambiguous,MCF7,positive,direct,1,,"PIP3 directly binds the PH domain of AKT, recruiting AKT to the plasma membrane and inducing conformational changes that expose its activating phosphorylation sites"
+PIP3,AKT,ambiguous,T47D,positive,direct,1,,"PIP3 directly binds the PH domain of AKT, recruiting AKT to the plasma membrane and inducing conformational changes that expose its activating phosphorylation sites"
+PIP3,HRAS,ambiguous,MCF7,,,,,
+PIP3,HRAS,ambiguous,T47D,,,,,
+PIP3,MAPK,ambiguous,Z17,,,,,
+PIP3,MAPK,positive,Z21,,,,,
+PIP3,MAPK_2,ambiguous,Z17,,,,,
+PIP3,MAPK_2,positive,Z21,,,,,
+PIP3,mTORC2,ambiguous,TGEN,positive,direct,1,,PIP3 binds the SIN1 component of mTORC2 and relieves mTORC2 autoinhibition
+PIP3,mTORC2,ambiguous,MCF7,,,,,
+PIP3,mTORC2,ambiguous,T47D,,,,,
+PIP3,mTORC2_pm,ambiguous,Z17,,,,,
+PIP3,mTORC2_pm,positive,Z21,,,,,
+PIP3,PDK1_pm,ambiguous,Z17,,,,,
+PIP3,PDK1_pm,positive,Z21,,,,,
+PIP3,PDK1_pm,ambiguous,TGEN,positive,direct,1,,PIP3 recruits PDK1 to the plasma membrane
+PIP3,PDK1_pm,ambiguous,MCF7,,,,,
+PIP3,PDK1_pm,ambiguous,T47D,,,,,
+PIP3,PIP3_2,ambiguous,Z17,,,,,
+PIP3,PIP3_2,positive,Z21,,,,,
+PIP3,RAS,ambiguous,MCF7,,,,,
+PIP3,RAS,ambiguous,T47D,,,,,
+PIP3_2,AKT,ambiguous,Z17,positive,direct,1,,"PIP3 directly binds the PH domain of AKT, recruiting AKT to the plasma membrane and inducing conformational changes that expose its activating phosphorylation sites. We consider the confidence the same as that of the PIP3->AKT edge."
+PIP3_2,AKT,positive,Z21,positive,direct,1,,"PIP3 directly binds the PH domain of AKT, recruiting AKT to the plasma membrane and inducing conformational changes that expose its activating phosphorylation sites. We consider the confidence the same as that of the PIP3->AKT edge."
+PIP3_2,MAPK,ambiguous,Z17,,,,,
+PIP3_2,MAPK,positive,Z21,,,,,
+PIP3_2,MAPK_2,ambiguous,Z17,,,,,
+PIP3_2,MAPK_2,positive,Z21,,,,,
+PIP3_2,mTORC2_pm,ambiguous,Z17,,,,,
+PIP3_2,mTORC2_pm,positive,Z21,,,,,
+PIP3_2,PDK1_pm,ambiguous,Z17,,,,,
+PIP3_2,PDK1_pm,positive,Z21,,,,,
+PIP3_2,PIP3,ambiguous,Z17,,,,,
+PIP3_2,PIP3,positive,Z21,,,,,
+PKCa,PKCa,positive,BS,positive,unsupported,,,This inferred self-regulation is not supported by evidence
+PKCa,PKCa,positive,HS,positive,unsupported,,,This inferred self-regulation is not supported by evidence
+PKCa,PKCa,positive,SS,positive,unsupported,,,This inferred self-regulation is not supported by evidence
+PLCg,EGFR,positive,BS,positive,unsupported,,,"not supported by evidence, there is an indirect negative effect instead"
+PLCg,EGFR,positive,HS,positive,unsupported,,,"not supported by evidence, there is an indirect negative effect instead"
+PLCg,EGFR,positive,SS,positive,unsupported,,,"not supported by evidence, there is an indirect negative effect instead"
+PLCg,PKCa,positive,BS,positive,direct in the network sense,1,,"mediated by DAG, which is not part of the network"
+PLCg,PKCa,positive,HS,positive,direct in the network sense,1,,"mediated by DAG, which is not part of the network"
+PLCg,PKCa,positive,SS,positive,direct in the network sense,1,,"mediated by DAG, which is not part of the network"
+PLCg,PLCg,positive,BS,positive,unsupported,,,This inferred edge is not supported by experimental evidence
+PLCg,PLCg,positive,HS,positive,unsupported,,,This inferred edge is not supported by experimental evidence
+PLCg,PLCg,positive,SS,positive,unsupported,,,This inferred edge is not supported by experimental evidence
+PPARG,JUN,ambiguous,TGEN,positive,,,,
+PPARG,JUN,ambiguous,MCF7,,,,,
+PPARG,JUN,ambiguous,T47D,,,,,
+PRAS40,mTORC1,ambiguous,Z17,,,,,
+PRAS40,mTORC1,negative,Z21,,,,,
+PRAS40,PRAS40,positive,BL,,,,,
+PRAS40,PRAS40,positive,HL,,,,,
+PRAS40,PRAS40,positive,SL,,,,,
+PRAS40,S6K,negative,BL,,,,,
+PRAS40,S6K,negative,HL,,,,,
+PRAS40,S6K,negative,SL,,,,,
+pRB,E2F,ambiguous,Z17,,,,,
+pRB,E2F,positive,Z21,,,,,
+pRB,pRB_2,ambiguous,Z17,,,,,
+pRB,pRB_2,positive,Z21,,,,,
+pRB,pRB_3,ambiguous,Z17,,,,,
+pRB_2,E2F_2,ambiguous,Z17,,,,,
+pRB_2,E2F_2,positive,Z21,,,,,
+pRB_2,E2F_3,ambiguous,Z17,,,,,
+pRB_2,pRB,ambiguous,Z17,,,,,
+pRB_2,pRB,positive,Z21,,,,,
+pRB_2,pRB_3,ambiguous,Z17,,,,,
+pRB_3,E2F_3,ambiguous,Z17,,,,,
+pRB_3,pRB,ambiguous,Z17,,,,,
+pRB_3,pRB_2,ambiguous,Z17,,,,,
+PRKAA2,TSC2,ambiguous,TGEN,positive,,,,
+PRKAA2,TSC2,ambiguous,MCF7,,,,,
+PRKAA2,TSC2,ambiguous,T47D,,,,,
+PRKACA,CASP9,ambiguous,TGEN,negative,,,,
+PRKACA,CASP9,ambiguous,MCF7,,,,,
+PRKACA,GRB7,ambiguous,TGEN,negative,,,,
+PRKACA,GRB7,ambiguous,MCF7,,,,,
+PRKACA,GRB7,ambiguous,T47D,,,,,
+PRKACA,NEDD4L,ambiguous,TGEN,negative,,,,
+PRKACA,NEDD4L,ambiguous,MCF7,,,,,
+PRKACA,PRKAA2,ambiguous,TGEN,negative,,,,
+PRKACA,PRKAA2,ambiguous,MCF7,,,,,
+PRKACA,SRC,ambiguous,TGEN,positive,,,,
+PRKACA,SRC,ambiguous,MCF7,,,,,
+PRKACA,SRC,ambiguous,T47D,,,,,
+PTEN,AKT,negative,BL,negative ,indirect,2,,mediated by PIP3
+PTEN,AKT,negative,HL,negative ,indirect,2,,mediated by PIP3
+PTEN,AKT,negative,SL,negative ,indirect,2,,mediated by PIP3
+PTEN,CREB1,ambiguous,TGEN,negative,,,,
+PTEN,CREB1,ambiguous,MCF7,,,,,
+PTEN,CyclinD,positive,SL,,,,,
+PTEN,HER3,negative,BL,,,,,
+PTEN,p53,positive,BL,,,,,
+PTEN,p53,positive,SL,,,,,
+PTEN,PIP3,ambiguous,Z17,negative,direct,1,,PTEN dephosphorylates PIP3
+PTEN,PIP3,negative,Z21,negative,direct,1,,PTEN dephosphorylates PIP3
+PTEN,PIP3,ambiguous,TGEN,negative,direct,1,,PTEN dephosphorylates PIP3
+PTEN,PIP3,ambiguous,MCF7,negative ,direct,1,,PTEN dephosphorylates PIP3
+PTEN,PIP3,ambiguous,T47D,negative,direct,1,,PTEN dephosphorylates PIP3
+PTEN,PIP3_2,ambiguous,Z17,negative,direct,1,,PTEN dephosphorylates PIP3. We consider that the confidence ranking is the same as that of the PTEN-| PIP3 edge.
+PTEN,PTEN,positive,BL,,,,,
+PTEN,PTEN,positive,HL,,,,,
+PTEN,PTEN,positive,SL,,,,,
+PTEN,PTEN_2,positive,Z21,,,,,
+PTEN_2,PIP3,negative,Z21,negative,direct,1,,PTEN dephosphorylates PIP3. We consider that the confidence ranking is the same as that of the PTEN-| PIP3 edge.
+PTEN_2,PIP3_2,negative,Z21,negative,direct,1,,PTEN dephosphorylates PIP3. We consider that the confidence ranking is the same as that of the PTEN-| PIP3 edge.
+PTEN_2,PTEN,positive,Z21,,,,,
+PTEN_T,PTEN,positive,Z21,,,,,This edge represents translation of the PTEN protein from the PTEN_T transcript
+PTEN_T,PTEN_T,positive,Z21,,,,,
+PTEN_T,PTEN_T_2,positive,Z21,,,,,
+PTEN_T_2,PTEN_2,positive,Z21,,,,,
+PTEN_T_2,PTEN_T,positive,Z21,,,,,
+PTEN_T_2,PTEN_T_2,positive,Z21,,,,,
+RAC1,MAPK8,ambiguous,TGEN,positive,,,,
+RAC1,MAPK8,ambiguous,MCF7,,,,,
+RAC1,MAPK8,ambiguous,T47D,,,,,
+RAC1,PAK1,ambiguous,T47D,,,,,
+RAC1,PAK2,ambiguous,TGEN,positive,,,,
+RAC1,PAK2,ambiguous,MCF7,,,,,
+RAC1,PAK2,ambiguous,T47D,,,,,
+RAF1,ERK,positive,BL,,,,,
+RAF1,ERK,positive,HL,,,,,
+RAF1,ERK,positive,SL,,,,,
+RAF1,MEK,ambiguous,TGEN,positive,direct,1,,RAF1 phosphorylates MEK1/2
+RAF1,MEK,ambiguous,MCF7,,,,,
+RAF1,MEK,ambiguous,T47D,,,,,
+RAF1,PTEN,positive,HL,,,,,
+RAF1,RAF1,positive,BL,,,,,
+RAF1,RAF1,positive,HL,,,,,
+RAF1,RAF1,positive,SL,,,,,
+RAS,MAPK,ambiguous,Z17,,,,,
+RAS,MAPK,positive,Z21,,,,,
+RAS,PI3K,ambiguous,Z17,,,,,
+RAS,PI3K,positive,Z21,,,,,
+RAS,PI3K,ambiguous,TGEN,positive,direct,1,,GTP-bound RAS binds the Ras-binding domain (RBD) of the p110 catalytic subunit of class I PI3K. This interaction promotes PI3K activation.
+RAS,PI3K,ambiguous,MCF7,,,,,
+RAS,RAF1,ambiguous,TGEN,positive,,,,
+RAS,RAF1,ambiguous,MCF7,,,,,
+RAS,RAF1,ambiguous,T47D,,,,,
+RAS,RAS_2,ambiguous,Z17,,,,,
+RAS,RAS_2,positive,Z21,,,,,
+RAS,RAS_3,ambiguous,Z17,,,,,
+RAS,RAS_3,positive,Z21,,,,,
+RAS_2,MAPK,ambiguous,Z17,,,,,
+RAS_2,MAPK,positive,Z21,,,,,
+RAS_2,MAPK_2,ambiguous,Z17,,,,,
+RAS_2,MAPK_2,positive,Z21,,,,,
+RAS_2,PI3K,ambiguous,Z17,,,,,
+RAS_2,PI3K,positive,Z21,,,,,
+RAS_2,RAS,ambiguous,Z17,,,,,
+RAS_2,RAS,positive,Z21,,,,,
+RAS_2,RAS_3,ambiguous,Z17,,,,,
+RAS_2,RAS_3,positive,Z21,,,,,
+RAS_3,MAPK,ambiguous,Z17,,,,,
+RAS_3,MAPK,positive,Z21,,,,,
+RAS_3,MAPK_2,ambiguous,Z17,,,,,
+RAS_3,MAPK_2,positive,Z21,,,,,
+RAS_3,PI3K,ambiguous,Z17,,,,,
+RAS_3,PI3K,positive,Z21,,,,,
+RAS_3,RAS,ambiguous,Z17,,,,,
+RAS_3,RAS,positive,Z21,,,,,
+RAS_3,RAS_2,ambiguous,Z17,,,,,
+RAS_3,RAS_2,positive,Z21,,,,,
+RB,ABL1,ambiguous,MCF7,,,,,
+RB,E2F,ambiguous,TGEN,negative,,,,
+RB,E2F,ambiguous,MCF7,,,,,
+RB,E2F,ambiguous,T47D,,,,,
+RB,p53,positive,BL,,,,,
+RB,p53,positive,HL,,,,,
+RB,p53,positive,SL,,,,,
+RB,RB,positive,BL,,,,,
+RB,RB,positive,HL,,,,,
+RB,RB,positive,SL,,,,,
+RB,TSC2,positive,HL,,,,,
+Rb_T,pRB,negative,Z21,,,,,
+Rb_T,pRB_2,negative,Z21,,,,,
+RELA,EGFR,ambiguous,T47D,,,,,
+RELA,IL1B,ambiguous,TGEN,positive,,,,
+RELA,IL1B,ambiguous,MCF7,,,,,
+RELA,IL1B,ambiguous,T47D,,,,,
+RELA,JUN,ambiguous,TGEN,positive,,,,
+RELA,JUN,ambiguous,MCF7,,,,,
+RELA,JUN,ambiguous,T47D,,,,,
+RHEB,mTORC1,ambiguous,TGEN,positive,direct,1,,"RHEB directly binds mTORC1, and allosterically activates the mTOR kinase"
+RHEB,mTORC1,ambiguous,MCF7,positive,direct,1,,"RHEB directly binds mTORC1, and allosterically activates the mTOR kinase"
+RHEB,mTORC1,ambiguous,T47D,positive,direct,1,,"RHEB directly binds mTORC1, and allosterically activates the mTOR kinase"
+RND1,MAPK8,ambiguous,TGEN,positive,,,,
+RND1,MAPK8,ambiguous,MCF7,,,,,
+RND1,MAPK8,ambiguous,T47D,,,,,
+RPS6,CyclinD,positive,BL,,,,,
+RPS6,HER3,positive,BL,,,,,
+RPS6,HER3,positive,HL,,,,,
+RPS6,NFKB,positive,SL,,,,,
+RPS6,RAF1,positive,SL,,,,,
+RPS6,RPS6,positive,BL,,,,,
+RPS6,RPS6,positive,HL,,,,,
+RPS6,RPS6,positive,SL,,,,,
+S63845,MCL1,negative,Z21,,,,,
+S6K,AKT,positive,HS,positive,unsupported,,,a positive interaction is not supported by evidence; there is a negative feedback effect
+S6K,CyclinB1,positive,SL,,,,,
+S6K,CyclinD,positive,HL,,,,,
+S6K,IGF1R_2,ambiguous,Z17,,,,,
+S6K,IGF1R_2,negative,Z21,,,,,
+S6K,IRS1,ambiguous,TGEN,negative,,,,
+S6K,IRS1,ambiguous,MCF7,,,,,
+S6K,IRS1,ambiguous,T47D,,,,,
+S6K,mTORC2,ambiguous,TGEN,negative,indirect,2,,"causal effect mediated by IRS1, PI3K, PIP3"
+S6K,mTORC2,ambiguous,MCF7,,,,,
+S6K,mTORC2,ambiguous,T47D,,,,,
+S6K,NEDD4L,ambiguous,TGEN,negative,,,,
+S6K,PTEN,positive,SL,,,,,
+S6K,PTEN,ambiguous,TGEN,positive,,,,
+S6K,PTEN,ambiguous,MCF7,,,,,
+S6K,PTEN,ambiguous,T47D,,,,,
+S6K,RPS6,positive,BL,,,,,
+S6K,RPS6,positive,HL,,,,,
+S6K,RPS6,positive,SL,,,,,
+S6K,S6K,positive,BL,,,,,
+S6K,S6K,positive,HL,,,,,
+S6K,S6K,positive,BS,positive,unsupported,,,This inferred edge is not supported by experimental evidence
+S6K,S6K,positive,HS,positive,unsupported,,,This inferred edge is not supported by experimental evidence
+S6K,S6K,positive,SS,positive,unsupported,,,This inferred edge is not supported by experimental evidence
+S6K,S6K,positive,SL,,,,,
+S6K,Translation,ambiguous,Z17,positive,indirect,2,,causal effect mediated by EIF4
+S6K,Translation,positive,Z21,positive,indirect,2,,causal effect mediated by EIF4
+SGK1,CREB1,ambiguous,T47D,,,,,
+SGK1,FOXO1,ambiguous,TGEN,negative,,,,
+SGK1,FOXO1,ambiguous,MCF7,,,,,
+SGK1,FOXO1,ambiguous,T47D,,,,,
+SGK1,FOXO3,ambiguous,Z17,,,,,
+SGK1,FOXO3,negative,Z21,,,,,
+SGK1,NEDD4L,ambiguous,TGEN,negative,,,,
+SGK1,NEDD4L,ambiguous,MCF7,,,,,
+SGK1,NEDD4L,ambiguous,T47D,,,,,
+SGK1,TSC2,ambiguous,Z17,,,,,
+SGK1,TSC2,negative,Z21,,,,,
+SGK1_T,SGK1,ambiguous,Z17,,,,,
+SGK1_T,SGK1,positive,Z21,,,,,
+SOS1,HRAS,ambiguous,TGEN,positive,direct,1,,"SOS1 directly binds HRAS and acts as a guanine-nucleotide exchange factor (GEF), promoting release of GDP so that GTP can bind. This converts RAS into its active GTP-bound state."
+SOS1,HRAS,ambiguous,MCF7,positive,direct,1,,"SOS1 directly binds HRAS and acts as a guanine-nucleotide exchange factor (GEF), promoting release of GDP so that GTP can bind. This converts RAS into its active GTP-bound state."
+SOS1,HRAS,ambiguous,T47D,positive,direct,1,,"SOS1 directly binds HRAS and acts as a guanine-nucleotide exchange factor (GEF), promoting release of GDP so that GTP can bind. This converts RAS into its active GTP-bound state."
+SOS1,RAS,ambiguous,TGEN,positive,direct,1,,"SOS1 directly binds RAS and acts as a guanine-nucleotide exchange factor (GEF), promoting release of GDP so that GTP can bind. This converts RAS into its active GTP-bound state."
+SOS1,RAS,ambiguous,MCF7,positive,direct,1,,"SOS1 directly binds RAS and acts as a guanine-nucleotide exchange factor (GEF), promoting release of GDP so that GTP can bind. This converts RAS into its active GTP-bound state."
+SOS1,RAS,ambiguous,T47D,positive,direct,1,,"SOS1 directly binds RAS and acts as a guanine-nucleotide exchange factor (GEF), promoting release of GDP so that GTP can bind. This converts RAS into its active GTP-bound state."
+SRC,ABL1,ambiguous,TGEN,positive,,,,
+SRC,ABL1,ambiguous,MCF7,,,,,
+SRC,CASP8,ambiguous,TGEN,negative,,,,
+SRC,CASP8,ambiguous,MCF7,,,,,
+SRC,CASP8,ambiguous,T47D,,,,,
+SRC,CDKN2A,ambiguous,TGEN,negative,,,,
+SRC,CDKN2A,ambiguous,MCF7,,,,,
+SRC,CDKN2A,ambiguous,T47D,,,,,
+SRC,CTNNB1,ambiguous,TGEN,positive,,,,
+SRC,CTNNB1,ambiguous,MCF7,,,,,
+SRC,GRB2,ambiguous,TGEN,positive,,,,
+SRC,GRB2,ambiguous,MCF7,,,,,
+SRC,GRB2,ambiguous,T47D,,,,,
+SRC,IGF1R,ambiguous,TGEN,positive,,,,
+SRC,IGF1R,ambiguous,MCF7,,,,,
+SRC,PAK2,ambiguous,TGEN,positive,,,,
+SRC,PAK2,ambiguous,MCF7,,,,,
+SRC,PAK2,ambiguous,T47D,,,,,
+SRC,PTEN,ambiguous,TGEN,negative,,,,
+SRC,PTEN,ambiguous,MCF7,,,,,
+SRC,PTEN,ambiguous,T47D,,,,,
+SRC,STAT1,ambiguous,TGEN,positive,,,,
+SRC,STAT1,ambiguous,MCF7,,,,,
+SRC,STAT1,ambiguous,T47D,,,,,
+SRC,STAT3,ambiguous,TGEN,positive,,,,
+SRC,STAT3,ambiguous,MCF7,,,,,
+SRC,STAT3,ambiguous,T47D,,,,,
+SRC,STAT5,ambiguous,TGEN,positive,,,,
+SRC,STAT5,ambiguous,MCF7,,,,,
+STAT1,GATA3,ambiguous,TGEN,negative,,,,
+STAT1,GATA3,ambiguous,MCF7,,,,,
+STAT1,GATA3,ambiguous,T47D,,,,,
+STAT3,IL6R,ambiguous,T47D,,,,,
+STAT3,MYC,ambiguous,TGEN,positive,,,,
+STAT3,MYC,ambiguous,MCF7,,,,,
+STAT3,MYC,ambiguous,T47D,,,,,
+STAT5,IL8,ambiguous,TGEN,positive,,,,
+STAT5,IL8,ambiguous,MCF7,,,,,
+STAT5,IL8,ambiguous,T47D,,,,,
+STAT5,PIM,ambiguous,TGEN,positive,,,,
+STAT5,PIM,ambiguous,MCF7,,,,,
+stimulus,AKT,positive,SL,positive,correlation,3,,This proteomics-inferred edge is consistent with evidence that growth factors in a growth medium lead to AKT activation
+stimulus,EGFR,positive,BL,positive,correlation,3,,this inferred edge is consistent with evidence that growth factors in a growth medium lead to AKT activation
+stimulus,EGFR,positive,HL,positive,correlation,3,,This proteomics-inferred edge is consistent with evidence that growth factors in a growth medium lead to AKT activation
+stimulus,EGFR,positive,SL,positive,correlation,3,,this inferred edge is consistent with evidence that growth factors in a growth medium lead to AKT activation
+stimulus,HER2,positive,BL,positive,correlation,3,,This proteomics-inferred edge is consistent with evidence that growth factors in a growth medium lead to AKT activation
+stimulus,HER2,positive,HL,positive,correlation,3,,This proteomics-nferred edge is consistent with evidence that growth factors in a growth medium lead to AKT activation
+stimulus,HER2,positive,SL,positive,correlation,3,,This proteomics-inferred edge is consistent with evidence that growth factors in a growth medium lead to AKT activation
+stimulus,HER3,positive,BL,positive,correlation,3,,This proteomics- inferred edge is consistent with evidence that growth factors in a growth medium lead to AKT activation
+stimulus,HER3,positive,HL,positive,correlation,3,,This proteomics-inferred edge is consistent with evidence that growth factors in a growth medium lead to AKT activation
+stimulus,HER3,positive,SL,positive,correlation,3,,This proteomics- inferred edge is consistent with evidence that growth factors in a growth medium lead to AKT activation
+stimulus,p53,positive,BL,positive,unsupported,,,This proteomics-inferred edge is not supported by evidence.
+STK11,PRKAA2,ambiguous,TGEN,positive,,,,
+STK11,PRKAA2,ambiguous,MCF7,,,,,
+STK11,PRKAA2,ambiguous,T47D,,,,,
+TCF7L2,CYCLINDc,ambiguous,TGEN,positive,indirect,2,,"Causal effect mediated by β-catenin/TCF complexes activating CCND1 transcription, which then yields more CYCLINDc."
+TCF7L2,CYCLINDc,ambiguous,MCF7,positive,indirect,2,,"Causal effect mediated by β-catenin/TCF complexes activating CCND1 transcription, which then yields more CYCLINDc."
+TCF7L2,CYCLINDc,ambiguous,T47D,positive,indirect,2,,"Causal effect mediated by β-catenin/TCF complexes activating CCND1 transcription, which then yields more CYCLINDc."
+TCF7L2,PAK1,ambiguous,TGEN,positive,,,,
+TCF7L2,PAK1,ambiguous,MCF7,,,,,
+TCF7L2,PAK1,ambiguous,T47D,,,,,
+TEAD1,CYCLINDc,ambiguous,TGEN,positive,indirect,2,,"causal effect. TEAD-containing YAP/TAZ transcriptional complex binds CCND1 regulatory DNA, leading to increased CCND1 transcription, which then allows more CYCLINDc complex formation."
+TEAD1,CYCLINDc,ambiguous,MCF7,positive,indirect,2,,"causal effect. TEAD-containing YAP/TAZ transcriptional complex binds CCND1 regulatory DNA, leading to increased CCND1 transcription, which then allows more CYCLINDc complex formation."
+TEAD1,CYCLINDc,ambiguous,T47D,positive,indirect,2,,"causal effect. TEAD-containing YAP/TAZ transcriptional complex binds CCND1 regulatory DNA, leading to increased CCND1 transcription, which then allows more CYCLINDc complex formation."
+TRADD,FADD,ambiguous,TGEN,positive,,,,
+TRADD,FADD,ambiguous,MCF7,,,,,
+TRADD,FADD,ambiguous,T47D,,,,,
+Trametinib,MAPK,ambiguous,Z17,,,,,
+Trametinib,MAPK,negative,Z21,,,,,
+Trametinib,MAPK_2,ambiguous,Z17,,,,,
+Trametinib,MAPK_2,negative,Z21,,,,,
+Translation,MCL1,ambiguous,Z17,positive,direct,1,,"MCL1 is translated in a cap-dependent manner. Because MCL1 has a short half-life, translation is an important contributor to MCL1 protein abundance."
+Translation,MYC_targets,positive,Z21,positive,assumption,4,,MYC_targets represents genes regulated both transcriptionally by MYC and translationally by the mTORC1 pathway. This assumption is consistent with findings of convergent effects of these two pathways.
+Translation,MYC_targets_2,positive,Z21,positive,assumption,4,,MYC_targets represents genes regulated both transcriptionally by MYC and translationally by the mTORC1 pathway. This assumption is consistent with findings of convergent effects of these two pathways.
+Translation,Proliferation,ambiguous,Z17,positive,unsupported,,,This assumed effect between the two process nodes was replaced by a refined assumption in the Z21 model.
+Translation,Proliferation_2,ambiguous,Z17,positive,unsupported,,,This assumed effect between the two process nodes was replaced by a refined assumption in the Z21 model.
+Translation,Proliferation_3,ambiguous,Z17,positive,unsupported,,,This assumed effect between the two process nodes was replaced by a refined assumption in the Z21 model.
+Translation,Proliferation_4,ambiguous,Z17,positive,unsupported,,,This assumed effect between the two process nodes was replaced by a refined assumption in the Z21 model.
+trastuzumab,HER2,negative,BL,,,,,This assumed effect between the two process nodes was replaced by a refined assumption in the Z21 model.
+trastuzumab,HER2,negative,HL,,,,,
+trastuzumab,HER2,negative,BS,negative,direct,1,,trastuzumab is a monoclonal antibody binds the extracellular domain IV of HER2
+trastuzumab,HER2,negative,HS,negative,direct,1,,trastuzumab is a monoclonal antibody binds the extracellular domain IV of HER2
+trastuzumab,HER2,negative,SS,negative,direct,1,,trastuzumab is a monoclonal antibody binds the extracellular domain IV of HER2
+trastuzumab,HER2,negative,SL,,,,,
+trastuzumab,PKCa,positive,HS,positive,unsupported,,,this inferred edge is not supported by experimental evidence
+TSC2,mTORC1,ambiguous,Z17,negative ,indirect,2,,causal effect mediated by RHEB
+TSC2,mTORC1,negative,Z21,negative ,indirect,2,,causal effect mediated by RHEB
+TSC2,RB,negative,SL,,,,,
+TSC2,RHEB,ambiguous,TGEN,negative,direct,1,,"TSC2 (as part of the TSC complex) directly acts on RHEB-GTP, stimulates its GTP hydrolysis, which decreases functional RHEB activity."
+TSC2,RHEB,ambiguous,MCF7,negative,direct,1,,"TSC2 (as part of the TSC complex) directly acts on RHEB-GTP, stimulates its GTP hydrolysis, which decreases functional RHEB activity."
+TSC2,RHEB,ambiguous,T47D,negative,direct,1,,"TSC2 (as part of the TSC complex) directly acts on RHEB-GTP, stimulates its GTP hydrolysis, which decreases functional RHEB activity."
+TSC2,S6K,negative,BL,negative ,indirect,2,,"causal effect, mediated by RHEB and mTORC1"
+TSC2,S6K,negative,HL,negative,indirect,2,,"causal effect, mediated by RHEB and mTORC1"
+TSC2,S6K,negative,SL,negative,indirect,2,,"causal effect, mediated by RHEB and mTORC1"
+TSC2,TSC2,positive,BL,,,,,
+TSC2,TSC2,positive,HL,,,,,
+TSC2,TSC2,positive,SL,,,,,
+TWIST1,NF1,ambiguous,TGEN,negative,,,,
+TWIST1,NF1,ambiguous,MCF7,,,,,
+TWIST1,NF1,ambiguous,T47D,,,,,
+WNT1,CTNNB1,ambiguous,TGEN,positive,,,,
+WNT1,CTNNB1,ambiguous,MCF7,,,,,
+WNT1,CTNNB1,ambiguous,T47D,,,,,
+WNT1,FZD3,ambiguous,TGEN,positive,,,,
+WNT1,FZD3,ambiguous,MCF7,,,,,
+WNT1,FZD3,ambiguous,T47D,,,,,
+WNT1,PRKACA,ambiguous,TGEN,positive,,,,
+WNT1,PRKACA,ambiguous,MCF7,,,,,
+WNT1,PRKACA,ambiguous,T47D,,,,,
+WNT1,WNT1,ambiguous,TGEN,positive,,,,
+YAP1,CTNNB1,ambiguous,TGEN,positive,,,,
+YAP1,CTNNB1,ambiguous,MCF7,,,,,
+YAP1,DVL1,ambiguous,T47D,,,,,
+YAP1,TEAD1,ambiguous,TGEN,positive,,,,
+YAP1,TEAD1,ambiguous,MCF7,,,,,
+YAP1,TEAD1,ambiguous,T47D,,,,,
