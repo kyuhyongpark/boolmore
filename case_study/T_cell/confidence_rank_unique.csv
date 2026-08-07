@@ -42,7 +42,7 @@ FOXP3,NFKB,negative,"AJ, N10, P18",1,regulates,direct,KEPT
 FOXP3,RORGT,negative,"AJ, MS15, MSM, P18",1,regulates,direct,KEPT
 FOXP3,TBET,negative,"MSM, P18",4,,assumption,TAKEN_OUT
 FOXP3,TBET_2,negative,"MSM, P18",4,,assumption,TAKEN_OUT
-FOXP3,TGFB,positive,"AJ, MS15, MSM, N10",3,,correlation,TAKEN_OUT
+FOXP3,TGFB,positive,"AJ, MS15, MSM, N10",3,,correlation,KEPT
 FOXP3,THPOK,positive,MSM,4,,assumption,TAKEN_OUT
 GATA3,FOXP3,negative,"MSM, P18",2,,indirect,TAKEN_OUT
 GATA3,GATA3,positive,"AJ, MS15, MSM, MX, N10, P18",1,regulates,direct,KEPT

@@ -26,6 +26,7 @@ FOXP3,IL35,positive,AJ,2,,indirect
 FOXP3,NFAT,negative,P18,1,regulates,direct
 FOXP3,NFKB,negative,"AJ, N10, P18",1,regulates,direct
 FOXP3,RORGT,negative,"AJ, MS15, MSM, P18",1,regulates,direct
+FOXP3,TGFB,positive,"AJ, MS15, MSM, N10",3,,correlation
 GATA3,GATA3,positive,"AJ, MS15, MSM, MX, N10, P18",1,regulates,direct
 GATA3,IFNG,negative,MS15,1,regulates,direct
 GATA3,IFNG_2,negative,MS15,1,regulates,direct
