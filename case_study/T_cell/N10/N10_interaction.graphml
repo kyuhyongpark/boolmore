@@ -1,0 +1,3016 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:java="http://www.yworks.com/xml/yfiles-common/1.0/java" xmlns:sys="http://www.yworks.com/xml/yfiles-common/markup/primitives/2.0" xmlns:x="http://www.yworks.com/xml/yfiles-common/markup/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xmlns:yed="http://www.yworks.com/xml/yed/3" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
+  <!--Created by yEd 3.23.1-->
+  <key attr.name="subgraphs" attr.type="string" for="graph" id="d0"/>
+  <key attr.name="edge" attr.type="string" for="graph" id="d1"/>
+  <key attr.name="node" attr.type="string" for="graph" id="d2"/>
+  <key for="port" id="d3" yfiles.type="portgraphics"/>
+  <key for="port" id="d4" yfiles.type="portgeometry"/>
+  <key for="port" id="d5" yfiles.type="portuserdata"/>
+  <key attr.name="label" attr.type="string" for="node" id="d6"/>
+  <key attr.name="url" attr.type="string" for="node" id="d7"/>
+  <key attr.name="description" attr.type="string" for="node" id="d8"/>
+  <key for="node" id="d9" yfiles.type="nodegraphics"/>
+  <key for="graphml" id="d10" yfiles.type="resources"/>
+  <key attr.name="label" attr.type="string" for="edge" id="d11"/>
+  <key attr.name="type" attr.type="string" for="edge" id="d12"/>
+  <key attr.name="sign" attr.type="string" for="edge" id="d13"/>
+  <key attr.name="url" attr.type="string" for="edge" id="d14"/>
+  <key attr.name="description" attr.type="string" for="edge" id="d15"/>
+  <key for="edge" id="d16" yfiles.type="edgegraphics"/>
+  <graph edgedefault="directed" id="G">
+    <data key="d0" xml:space="preserve"><![CDATA[[]]]></data>
+    <data key="d1" xml:space="preserve"><![CDATA[{}]]></data>
+    <data key="d2" xml:space="preserve"><![CDATA[{"style": "filled", "shape": "circle", "fixedsize": "true", "width": "1.0172413793103448", "color": "none", "fillcolor": "gray95"}]]></data>
+    <node id="n0">
+      <data key="d6" xml:space="preserve"><![CDATA[APC]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="-120.44942586856246" y="627.471350573852"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="28.673828125" x="19.1630859375" xml:space="preserve" y="5.6494140625">APC<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n1">
+      <data key="d6" xml:space="preserve"><![CDATA[CD28]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="-109.72576600685679" y="549.3737226325301"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="34.6796875" x="16.16015625" xml:space="preserve" y="5.6494140625">CD28<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n2">
+      <data key="d6" xml:space="preserve"><![CDATA[FOXP3]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="281.1846986866206" y="632.182507136935"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="43.345703125" x="11.8271484375" xml:space="preserve" y="5.6494140625">FOXP3<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n3">
+      <data key="d6" xml:space="preserve"><![CDATA[GATA3]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="692.5670930782771" y="671.4435515150636"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="43.345703125" x="11.8271484375" xml:space="preserve" y="5.6494140625">GATA3<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n4">
+      <data key="d6" xml:space="preserve"><![CDATA[IFNBR]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="831.28382088636" y="324.34231818199606"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="40.0" x="13.5" xml:space="preserve" y="5.6494140625">IFNBR<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n5">
+      <data key="d6" xml:space="preserve"><![CDATA[IFNB_e]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="862.5031205276111" y="382.3208410173897"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="44.681640625" x="11.1591796875" xml:space="preserve" y="5.6494140625">IFNB_e<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n6">
+      <data key="d6" xml:space="preserve"><![CDATA[IFNG]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="509.52464845100394" y="495.274560993696"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="32.6640625" x="17.16796875" xml:space="preserve" y="5.6494140625">IFNG<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n7">
+      <data key="d6" xml:space="preserve"><![CDATA[IFNGR]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="689.144176897198" y="288.6857503146432"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.330078125" x="12.8349609375" xml:space="preserve" y="5.6494140625">IFNGR<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n8">
+      <data key="d6" xml:space="preserve"><![CDATA[IFNG_e]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="726.8277356251224" y="223.8680740671977"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="46.01171875" x="10.494140625" xml:space="preserve" y="5.6494140625">IFNG_e<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n9">
+      <data key="d6" xml:space="preserve"><![CDATA[IKB]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="-50.90417354434159" y="798.2198307127043"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="23.341796875" x="21.8291015625" xml:space="preserve" y="5.6494140625">IKB<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n10">
+      <data key="d6" xml:space="preserve"><![CDATA[IL10]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="458.85997587308833" y="365.2205221322799"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="27.35546875" x="19.822265625" xml:space="preserve" y="5.6494140625">IL10<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n11">
+      <data key="d6" xml:space="preserve"><![CDATA[IL10R]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="444.1721519946629" y="150.3742277244974"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="36.021484375" x="15.4892578125" xml:space="preserve" y="5.6494140625">IL10R<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n12">
+      <data key="d6" xml:space="preserve"><![CDATA[IL10_e]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="454.1859104879986" y="89.8558818233624"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="40.703125" x="13.1484375" xml:space="preserve" y="5.6494140625">IL10_e<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n13">
+      <data key="d6" xml:space="preserve"><![CDATA[IL12R]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="863.2705019315724" y="703.2593449891842"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="36.021484375" x="15.4892578125" xml:space="preserve" y="5.6494140625">IL12R<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n14">
+      <data key="d6" xml:space="preserve"><![CDATA[IL12RB1_2]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="892.175963538834" y="575.6195611829602"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="64.046875" x="1.4765625" xml:space="preserve" y="5.6494140625">IL12RB1_2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n15">
+      <data key="d6" xml:space="preserve"><![CDATA[IL12RB2]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="806.9124185220909" y="833.8789464608041"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="50.69921875" x="8.150390625" xml:space="preserve" y="5.6494140625">IL12RB2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n16">
+      <data key="d6" xml:space="preserve"><![CDATA[IL12_e]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="850.0446995820747" y="770.2766222259158"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="40.703125" x="13.1484375" xml:space="preserve" y="5.6494140625">IL12_e<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n17">
+      <data key="d6" xml:space="preserve"><![CDATA[IL15R]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="131.27235790393203" y="986.1710806621977"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="36.021484375" x="15.4892578125" xml:space="preserve" y="5.6494140625">IL15R<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n18">
+      <data key="d6" xml:space="preserve"><![CDATA[IL15_e]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="51.59422765999294" y="935.8438362366325"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="40.703125" x="13.1484375" xml:space="preserve" y="5.6494140625">IL15_e<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n19">
+      <data key="d6" xml:space="preserve"><![CDATA[IL17]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="306.0661461261457" y="550.5395849559496"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="27.35546875" x="19.822265625" xml:space="preserve" y="5.6494140625">IL17<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n20">
+      <data key="d6" xml:space="preserve"><![CDATA[IL2]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="379.34128924653976" y="783.6761844095333"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="20.681640625" x="23.1591796875" xml:space="preserve" y="5.6494140625">IL2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n21">
+      <data key="d6" xml:space="preserve"><![CDATA[IL21]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="261.5132895820506" y="371.4771143673764"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="27.35546875" x="19.822265625" xml:space="preserve" y="5.6494140625">IL21<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n22">
+      <data key="d6" xml:space="preserve"><![CDATA[IL21R]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="297.0762704099196" y="136.42858177200407"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="36.021484375" x="15.4892578125" xml:space="preserve" y="5.6494140625">IL21R<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n23">
+      <data key="d6" xml:space="preserve"><![CDATA[IL21_e]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="318.5643977264249" y="59.641958017853014"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="40.703125" x="13.1484375" xml:space="preserve" y="5.6494140625">IL21_e<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n24">
+      <data key="d6" xml:space="preserve"><![CDATA[IL23]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="161.54259870699394" y="326.5503035028861"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="27.35546875" x="19.822265625" xml:space="preserve" y="5.6494140625">IL23<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n25">
+      <data key="d6" xml:space="preserve"><![CDATA[IL23R]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="82.1456634958874" y="255.21276046560905"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="36.021484375" x="15.4892578125" xml:space="preserve" y="5.6494140625">IL23R<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n26">
+      <data key="d6" xml:space="preserve"><![CDATA[IL23_e]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="-6.396959467482077" y="221.32688471038406"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="40.703125" x="13.1484375" xml:space="preserve" y="5.6494140625">IL23_e<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n27">
+      <data key="d6" xml:space="preserve"><![CDATA[IL27R]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="565.9882019309133" y="204.48460611918"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="36.021484375" x="15.4892578125" xml:space="preserve" y="5.6494140625">IL27R<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n28">
+      <data key="d6" xml:space="preserve"><![CDATA[IL27_e]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="594.0488227390482" y="141.35062880053246"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="40.703125" x="13.1484375" xml:space="preserve" y="5.6494140625">IL27_e<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n29">
+      <data key="d6" xml:space="preserve"><![CDATA[IL2R]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="350.3914851901408" y="1017.1404245522892"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="29.34765625" x="18.826171875" xml:space="preserve" y="5.6494140625">IL2R<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n30">
+      <data key="d6" xml:space="preserve"><![CDATA[IL2RA]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="130.68099530811944" y="804.7426018954886"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="37.3515625" x="14.82421875" xml:space="preserve" y="5.6494140625">IL2RA<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n31">
+      <data key="d6" xml:space="preserve"><![CDATA[IL2R_2]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="256.32652476397385" y="982.9405991293629"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="42.6953125" x="12.15234375" xml:space="preserve" y="5.6494140625">IL2R_2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n32">
+      <data key="d6" xml:space="preserve"><![CDATA[IL2_e]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="262.6423116659541" y="1047.2122414380085"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="34.029296875" x="16.4853515625" xml:space="preserve" y="5.6494140625">IL2_e<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n33">
+      <data key="d6" xml:space="preserve"><![CDATA[IL4]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="567.6622575301236" y="683.2265640366842"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="20.681640625" x="23.1591796875" xml:space="preserve" y="5.6494140625">IL4<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n34">
+      <data key="d6" xml:space="preserve"><![CDATA[IL4R]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="616.7568947436689" y="892.9100217067128"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="29.34765625" x="18.826171875" xml:space="preserve" y="5.6494140625">IL4R<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n35">
+      <data key="d6" xml:space="preserve"><![CDATA[IL4RA_2]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="474.3233351743452" y="1037.796787609676"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="50.69921875" x="8.150390625" xml:space="preserve" y="5.6494140625">IL4RA_2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n36">
+      <data key="d6" xml:space="preserve"><![CDATA[IL4R_2]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="581.1879032879876" y="982.6723862983159"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="42.6953125" x="12.15234375" xml:space="preserve" y="5.6494140625">IL4R_2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n37">
+      <data key="d6" xml:space="preserve"><![CDATA[IL4_e]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="669.3086727648107" y="976.4892237504688"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="34.029296875" x="16.4853515625" xml:space="preserve" y="5.6494140625">IL4_e<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n38">
+      <data key="d6" xml:space="preserve"><![CDATA[IL6R]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="188.21914465471085" y="99.40794663432646"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="29.34765625" x="18.826171875" xml:space="preserve" y="5.6494140625">IL6R<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n39">
+      <data key="d6" xml:space="preserve"><![CDATA[IL6_e]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="96.13908637414329" y="137.64310034704096"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="34.029296875" x="16.4853515625" xml:space="preserve" y="5.6494140625">IL6_e<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n40">
+      <data key="d6" xml:space="preserve"><![CDATA[IRF1]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="814.5559307311083" y="520.7437324074962"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.00390625" x="18.498046875" xml:space="preserve" y="5.6494140625">IRF1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n41">
+      <data key="d6" xml:space="preserve"><![CDATA[NFAT]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="179.2478932398081" y="573.890482835492"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="35.330078125" x="15.8349609375" xml:space="preserve" y="5.6494140625">NFAT<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n42">
+      <data key="d6" xml:space="preserve"><![CDATA[NFKB]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="118.62578122953101" y="734.4944995730729"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="36.00390625" x="15.498046875" xml:space="preserve" y="5.6494140625">NFKB<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n43">
+      <data key="d6" xml:space="preserve"><![CDATA[RORGT]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="106.00560376197865" y="399.2428302729162"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="47.330078125" x="9.8349609375" xml:space="preserve" y="5.6494140625">RORGT<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n44">
+      <data key="d6" xml:space="preserve"><![CDATA[RUNX3]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="689.7203593289319" y="522.0926469267422"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="44.67578125" x="11.162109375" xml:space="preserve" y="5.6494140625">RUNX3<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n45">
+      <data key="d6" xml:space="preserve"><![CDATA[SMAD3]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="-3.9941706711410987" y="616.0777071050007"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="45.34375" x="10.828125" xml:space="preserve" y="5.6494140625">SMAD3<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n46">
+      <data key="d6" xml:space="preserve"><![CDATA[STAT1]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="642.1557254444187" y="414.84768982986617"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.341796875" x="12.8291015625" xml:space="preserve" y="5.6494140625">STAT1<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n47">
+      <data key="d6" xml:space="preserve"><![CDATA[STAT3]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="321.287540060909" y="309.12375664379994"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.341796875" x="12.8291015625" xml:space="preserve" y="5.6494140625">STAT3<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n48">
+      <data key="d6" xml:space="preserve"><![CDATA[STAT4]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="785.9156451468498" y="643.7151579218771"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.341796875" x="12.8291015625" xml:space="preserve" y="5.6494140625">STAT4<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n49">
+      <data key="d6" xml:space="preserve"><![CDATA[STAT5]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="301.98548458815384" y="836.1334284456634"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.341796875" x="12.8291015625" xml:space="preserve" y="5.6494140625">STAT5<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n50">
+      <data key="d6" xml:space="preserve"><![CDATA[STAT5_2]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="462.3846393718911" y="943.540073114563"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="54.689453125" x="6.1552734375" xml:space="preserve" y="5.6494140625">STAT5_2<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n51">
+      <data key="d6" xml:space="preserve"><![CDATA[STAT6]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="652.6347894165805" y="788.4181909019147"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="41.341796875" x="12.8291015625" xml:space="preserve" y="5.6494140625">STAT6<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n52">
+      <data key="d6" xml:space="preserve"><![CDATA[TBET]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="574.6250261167414" y="600.918263003744"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="34.66796875" x="16.166015625" xml:space="preserve" y="5.6494140625">TBET<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n53">
+      <data key="d6" xml:space="preserve"><![CDATA[TCR]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="-78.30578025046789" y="706.8320065824299"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="28.662109375" x="19.1689453125" xml:space="preserve" y="5.6494140625">TCR<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n54">
+      <data key="d6" xml:space="preserve"><![CDATA[TGFB]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="82.5944559820159" y="502.723858959336"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="35.998046875" x="15.5009765625" xml:space="preserve" y="5.6494140625">TGFB<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n55">
+      <data key="d6" xml:space="preserve"><![CDATA[TGFBR]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="-48.99398397703915" y="438.4629828700767"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="44.6640625" x="11.16796875" xml:space="preserve" y="5.6494140625">TGFBR<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n56">
+      <data key="d6" xml:space="preserve"><![CDATA[TGFB_e]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="-84.5293473944954" y="370.0548970966517"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="49.345703125" x="8.8271484375" xml:space="preserve" y="5.6494140625">TGFB_e<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="n57">
+      <data key="d6" xml:space="preserve"><![CDATA[proliferation]]></data>
+      <data key="d8"/>
+      <data key="d9">
+        <y:ShapeNode>
+          <y:Geometry height="30.0" width="67.0" x="394.0855343083393" y="540.2994630248803"/>
+          <y:Fill hasColor="false" transparent="false"/>
+          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="66.701171875" x="0.1494140625" xml:space="preserve" y="5.6494140625">proliferation<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="e0" source="n0" target="n0">
+      <data key="d11" xml:space="preserve"><![CDATA[APC->APC]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="-16.75" sy="-15.0" tx="-33.5" ty="-7.5">
+            <y:Point x="-103.69942586856246" y="612.471350573852"/>
+            <y:Point x="-109.69942586856246" y="606.471350573852"/>
+            <y:Point x="-135.44942586856246" y="606.471350573852"/>
+            <y:Point x="-141.44942586856246" y="612.471350573852"/>
+            <y:Point x="-141.44942586856246" y="628.971350573852"/>
+            <y:Point x="-135.44942586856246" y="634.971350573852"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e1" source="n0" target="n1">
+      <data key="d11" xml:space="preserve"><![CDATA[APC->CD28]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e2" source="n0" target="n53">
+      <data key="d11" xml:space="preserve"><![CDATA[APC->TCR]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e3" source="n1" target="n41">
+      <data key="d11" xml:space="preserve"><![CDATA[CD28->NFAT]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e4" source="n2" target="n2">
+      <data key="d11" xml:space="preserve"><![CDATA[FOXP3->FOXP3]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="-16.75" sy="15.0" tx="-33.5" ty="7.5">
+            <y:Point x="297.9346986866206" y="677.182507136935"/>
+            <y:Point x="291.9346986866206" y="683.182507136935"/>
+            <y:Point x="266.1846986866206" y="683.182507136935"/>
+            <y:Point x="260.1846986866206" y="677.182507136935"/>
+            <y:Point x="260.1846986866206" y="660.682507136935"/>
+            <y:Point x="266.1846986866206" y="654.682507136935"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e5" source="n2" target="n6">
+      <data key="d11" xml:space="preserve"><![CDATA[FOXP3->IFNG]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e6" source="n2" target="n19">
+      <data key="d11" xml:space="preserve"><![CDATA[FOXP3->IL17]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e7" source="n2" target="n20">
+      <data key="d11" xml:space="preserve"><![CDATA[FOXP3->IL2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e8" source="n2" target="n30">
+      <data key="d11" xml:space="preserve"><![CDATA[FOXP3->IL2RA]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e9" source="n2" target="n33">
+      <data key="d11" xml:space="preserve"><![CDATA[FOXP3->IL4]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e10" source="n2" target="n42">
+      <data key="d11" xml:space="preserve"><![CDATA[FOXP3->NFKB]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e11" source="n2" target="n54">
+      <data key="d11" xml:space="preserve"><![CDATA[FOXP3->TGFB]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e12" source="n3" target="n3">
+      <data key="d11" xml:space="preserve"><![CDATA[GATA3->GATA3]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="15.0" tx="33.5" ty="7.5">
+            <y:Point x="742.8170930782771" y="716.4435515150636"/>
+            <y:Point x="748.8170930782771" y="722.4435515150636"/>
+            <y:Point x="774.5670930782771" y="722.4435515150636"/>
+            <y:Point x="780.5670930782771" y="716.4435515150636"/>
+            <y:Point x="780.5670930782771" y="699.9435515150636"/>
+            <y:Point x="774.5670930782771" y="693.9435515150636"/>
+          </y:Path>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e13" source="n3" target="n10">
+      <data key="d11" xml:space="preserve"><![CDATA[GATA3->IL10]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e14" source="n3" target="n33">
+      <data key="d11" xml:space="preserve"><![CDATA[GATA3->IL4]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e15" source="n3" target="n48">
+      <data key="d11" xml:space="preserve"><![CDATA[GATA3->STAT4]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e16" source="n3" target="n52">
+      <data key="d11" xml:space="preserve"><![CDATA[GATA3->TBET]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="-9.74257649932008" sy="0.0" tx="-9.742576499319853" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e17" source="n4" target="n46">
+      <data key="d11" xml:space="preserve"><![CDATA[IFNBR->STAT1]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e18" source="n5" target="n4">
+      <data key="d11" xml:space="preserve"><![CDATA[IFNB_e->IFNBR]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e19" source="n5" target="n5">
+      <data key="d11" xml:space="preserve"><![CDATA[IFNB_e->IFNB_e]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="-15.0" tx="33.5" ty="-7.5">
+            <y:Point x="912.7531205276111" y="367.3208410173897"/>
+            <y:Point x="918.7531205276111" y="361.3208410173897"/>
+            <y:Point x="944.5031205276111" y="361.3208410173897"/>
+            <y:Point x="950.5031205276111" y="367.3208410173897"/>
+            <y:Point x="950.5031205276111" y="383.8208410173897"/>
+            <y:Point x="944.5031205276111" y="389.8208410173897"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e20" source="n6" target="n7">
+      <data key="d11" xml:space="preserve"><![CDATA[IFNG->IFNGR]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e21" source="n7" target="n46">
+      <data key="d11" xml:space="preserve"><![CDATA[IFNGR->STAT1]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e22" source="n8" target="n7">
+      <data key="d11" xml:space="preserve"><![CDATA[IFNG_e->IFNGR]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e23" source="n8" target="n8">
+      <data key="d11" xml:space="preserve"><![CDATA[IFNG_e->IFNG_e]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="-15.0" tx="33.5" ty="-7.5">
+            <y:Point x="777.0777356251224" y="208.8680740671977"/>
+            <y:Point x="783.0777356251224" y="202.8680740671977"/>
+            <y:Point x="808.8277356251224" y="202.8680740671977"/>
+            <y:Point x="814.8277356251224" y="208.8680740671977"/>
+            <y:Point x="814.8277356251224" y="225.3680740671977"/>
+            <y:Point x="808.8277356251224" y="231.3680740671977"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e24" source="n9" target="n42">
+      <data key="d11" xml:space="preserve"><![CDATA[IKB->NFKB]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e25" source="n10" target="n11">
+      <data key="d11" xml:space="preserve"><![CDATA[IL10->IL10R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e26" source="n11" target="n47">
+      <data key="d11" xml:space="preserve"><![CDATA[IL10R->STAT3]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e27" source="n12" target="n11">
+      <data key="d11" xml:space="preserve"><![CDATA[IL10_e->IL10R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e28" source="n12" target="n12">
+      <data key="d11" xml:space="preserve"><![CDATA[IL10_e->IL10_e]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="-15.0" tx="33.5" ty="-7.5">
+            <y:Point x="504.4359104879986" y="74.8558818233624"/>
+            <y:Point x="510.4359104879986" y="68.8558818233624"/>
+            <y:Point x="536.1859104879986" y="68.8558818233624"/>
+            <y:Point x="542.1859104879986" y="74.8558818233624"/>
+            <y:Point x="542.1859104879986" y="91.3558818233624"/>
+            <y:Point x="536.1859104879986" y="97.3558818233624"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e29" source="n13" target="n48">
+      <data key="d11" xml:space="preserve"><![CDATA[IL12R->STAT4]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e30" source="n14" target="n13">
+      <data key="d11" xml:space="preserve"><![CDATA[IL12RB1_2->IL12R]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e31" source="n15" target="n13">
+      <data key="d11" xml:space="preserve"><![CDATA[IL12RB2->IL12R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e32" source="n16" target="n13">
+      <data key="d11" xml:space="preserve"><![CDATA[IL12_e->IL12R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e33" source="n16" target="n16">
+      <data key="d11" xml:space="preserve"><![CDATA[IL12_e->IL12_e]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="-16.75" sy="-15.0" tx="-33.5" ty="-7.5">
+            <y:Point x="866.7946995820747" y="755.2766222259158"/>
+            <y:Point x="860.7946995820747" y="749.2766222259158"/>
+            <y:Point x="835.0446995820747" y="749.2766222259158"/>
+            <y:Point x="829.0446995820747" y="755.2766222259158"/>
+            <y:Point x="829.0446995820747" y="771.7766222259158"/>
+            <y:Point x="835.0446995820747" y="777.7766222259158"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e34" source="n17" target="n49">
+      <data key="d11" xml:space="preserve"><![CDATA[IL15R->STAT5]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e35" source="n18" target="n17">
+      <data key="d11" xml:space="preserve"><![CDATA[IL15_e->IL15R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e36" source="n18" target="n18">
+      <data key="d11" xml:space="preserve"><![CDATA[IL15_e->IL15_e]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="-15.0" tx="33.5" ty="-7.5">
+            <y:Point x="101.84422765999294" y="920.8438362366325"/>
+            <y:Point x="107.84422765999294" y="914.8438362366325"/>
+            <y:Point x="133.59422765999295" y="914.8438362366325"/>
+            <y:Point x="139.59422765999295" y="920.8438362366325"/>
+            <y:Point x="139.59422765999295" y="937.3438362366325"/>
+            <y:Point x="133.59422765999295" y="943.3438362366325"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e37" source="n20" target="n29">
+      <data key="d11" xml:space="preserve"><![CDATA[IL2->IL2R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e38" source="n20" target="n31">
+      <data key="d11" xml:space="preserve"><![CDATA[IL2->IL2R_2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e39" source="n21" target="n22">
+      <data key="d11" xml:space="preserve"><![CDATA[IL21->IL21R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e40" source="n22" target="n47">
+      <data key="d11" xml:space="preserve"><![CDATA[IL21R->STAT3]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e41" source="n23" target="n22">
+      <data key="d11" xml:space="preserve"><![CDATA[IL21_e->IL21R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e42" source="n23" target="n23">
+      <data key="d11" xml:space="preserve"><![CDATA[IL21_e->IL21_e]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="-15.0" tx="33.5" ty="-7.5">
+            <y:Point x="368.8143977264249" y="44.641958017853014"/>
+            <y:Point x="374.8143977264249" y="38.641958017853014"/>
+            <y:Point x="400.5643977264249" y="38.641958017853014"/>
+            <y:Point x="406.5643977264249" y="44.641958017853014"/>
+            <y:Point x="406.5643977264249" y="61.141958017853014"/>
+            <y:Point x="400.5643977264249" y="67.14195801785301"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e43" source="n24" target="n25">
+      <data key="d11" xml:space="preserve"><![CDATA[IL23->IL23R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e44" source="n25" target="n47">
+      <data key="d11" xml:space="preserve"><![CDATA[IL23R->STAT3]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="-4.612930285910124" tx="0.0" ty="-4.612930285910124"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e45" source="n26" target="n25">
+      <data key="d11" xml:space="preserve"><![CDATA[IL23_e->IL23R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e46" source="n26" target="n26">
+      <data key="d11" xml:space="preserve"><![CDATA[IL23_e->IL23_e]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="-15.0" tx="33.5" ty="-7.5">
+            <y:Point x="43.85304053251792" y="206.32688471038406"/>
+            <y:Point x="49.85304053251792" y="200.32688471038406"/>
+            <y:Point x="75.60304053251792" y="200.32688471038406"/>
+            <y:Point x="81.60304053251792" y="206.32688471038406"/>
+            <y:Point x="81.60304053251792" y="222.82688471038406"/>
+            <y:Point x="75.60304053251792" y="228.82688471038406"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e47" source="n27" target="n46">
+      <data key="d11" xml:space="preserve"><![CDATA[IL27R->STAT1]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e48" source="n27" target="n47">
+      <data key="d11" xml:space="preserve"><![CDATA[IL27R->STAT3]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e49" source="n28" target="n27">
+      <data key="d11" xml:space="preserve"><![CDATA[IL27_e->IL27R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e50" source="n28" target="n28">
+      <data key="d11" xml:space="preserve"><![CDATA[IL27_e->IL27_e]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="-15.0" tx="33.5" ty="-7.5">
+            <y:Point x="644.2988227390482" y="126.35062880053246"/>
+            <y:Point x="650.2988227390482" y="120.35062880053246"/>
+            <y:Point x="676.0488227390482" y="120.35062880053246"/>
+            <y:Point x="682.0488227390482" y="126.35062880053246"/>
+            <y:Point x="682.0488227390482" y="142.85062880053246"/>
+            <y:Point x="676.0488227390482" y="148.85062880053246"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e51" source="n29" target="n29">
+      <data key="d11" xml:space="preserve"><![CDATA[IL2R->IL2R]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="15.0" tx="33.5" ty="7.5">
+            <y:Point x="400.6414851901408" y="1062.1404245522892"/>
+            <y:Point x="406.6414851901408" y="1068.1404245522892"/>
+            <y:Point x="432.3914851901408" y="1068.1404245522892"/>
+            <y:Point x="438.3914851901408" y="1062.1404245522892"/>
+            <y:Point x="438.3914851901408" y="1045.6404245522892"/>
+            <y:Point x="432.3914851901408" y="1039.6404245522892"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e52" source="n29" target="n31">
+      <data key="d11" xml:space="preserve"><![CDATA[IL2R->IL2R_2]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="5.6843418860808015E-14" sy="4.7881945399603865" tx="0.0" ty="4.788194539960159"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e53" source="n29" target="n49">
+      <data key="d11" xml:space="preserve"><![CDATA[IL2R->STAT5]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e54" source="n29" target="n50">
+      <data key="d11" xml:space="preserve"><![CDATA[IL2R->STAT5_2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e55" source="n30" target="n31">
+      <data key="d11" xml:space="preserve"><![CDATA[IL2RA->IL2R_2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e56" source="n31" target="n29">
+      <data key="d11" xml:space="preserve"><![CDATA[IL2R_2->IL2R]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="-4.788194539960273" tx="5.6843418860808015E-14" ty="-4.7881945399603865"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e57" source="n31" target="n50">
+      <data key="d11" xml:space="preserve"><![CDATA[IL2R_2->STAT5_2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e58" source="n32" target="n29">
+      <data key="d11" xml:space="preserve"><![CDATA[IL2_e->IL2R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e59" source="n32" target="n31">
+      <data key="d11" xml:space="preserve"><![CDATA[IL2_e->IL2R_2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e60" source="n32" target="n32">
+      <data key="d11" xml:space="preserve"><![CDATA[IL2_e->IL2_e]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="-16.75" sy="15.0" tx="-33.5" ty="7.5">
+            <y:Point x="279.3923116659541" y="1092.2122414380085"/>
+            <y:Point x="273.3923116659541" y="1098.2122414380085"/>
+            <y:Point x="247.64231166595408" y="1098.2122414380085"/>
+            <y:Point x="241.64231166595408" y="1092.2122414380085"/>
+            <y:Point x="241.64231166595408" y="1075.7122414380085"/>
+            <y:Point x="247.64231166595408" y="1069.7122414380085"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e61" source="n33" target="n34">
+      <data key="d11" xml:space="preserve"><![CDATA[IL4->IL4R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e62" source="n33" target="n36">
+      <data key="d11" xml:space="preserve"><![CDATA[IL4->IL4R_2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e63" source="n34" target="n34">
+      <data key="d11" xml:space="preserve"><![CDATA[IL4R->IL4R]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="-15.0" tx="33.5" ty="-7.5">
+            <y:Point x="667.0068947436689" y="877.9100217067128"/>
+            <y:Point x="673.0068947436689" y="871.9100217067128"/>
+            <y:Point x="698.7568947436689" y="871.9100217067128"/>
+            <y:Point x="704.7568947436689" y="877.9100217067128"/>
+            <y:Point x="704.7568947436689" y="894.4100217067128"/>
+            <y:Point x="698.7568947436689" y="900.4100217067128"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e64" source="n34" target="n36">
+      <data key="d11" xml:space="preserve"><![CDATA[IL4R->IL4R_2]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="5.378242837873472" sy="0.0" tx="5.378242837873358" ty="1.1368683772161603E-13"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e65" source="n34" target="n49">
+      <data key="d11" xml:space="preserve"><![CDATA[IL4R->STAT5]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e66" source="n34" target="n50">
+      <data key="d11" xml:space="preserve"><![CDATA[IL4R->STAT5_2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e67" source="n34" target="n51">
+      <data key="d11" xml:space="preserve"><![CDATA[IL4R->STAT6]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e68" source="n35" target="n36">
+      <data key="d11" xml:space="preserve"><![CDATA[IL4RA_2->IL4R_2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e69" source="n36" target="n34">
+      <data key="d11" xml:space="preserve"><![CDATA[IL4R_2->IL4R]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="-5.378242837873472" sy="0.0" tx="-5.378242837873358" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e70" source="n36" target="n50">
+      <data key="d11" xml:space="preserve"><![CDATA[IL4R_2->STAT5_2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e71" source="n37" target="n34">
+      <data key="d11" xml:space="preserve"><![CDATA[IL4_e->IL4R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e72" source="n37" target="n36">
+      <data key="d11" xml:space="preserve"><![CDATA[IL4_e->IL4R_2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e73" source="n37" target="n37">
+      <data key="d11" xml:space="preserve"><![CDATA[IL4_e->IL4_e]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="-15.0" tx="33.5" ty="-7.5">
+            <y:Point x="719.5586727648107" y="961.4892237504688"/>
+            <y:Point x="725.5586727648107" y="955.4892237504688"/>
+            <y:Point x="751.3086727648107" y="955.4892237504688"/>
+            <y:Point x="757.3086727648107" y="961.4892237504688"/>
+            <y:Point x="757.3086727648107" y="977.9892237504688"/>
+            <y:Point x="751.3086727648107" y="983.9892237504688"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e74" source="n38" target="n47">
+      <data key="d11" xml:space="preserve"><![CDATA[IL6R->STAT3]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e75" source="n39" target="n38">
+      <data key="d11" xml:space="preserve"><![CDATA[IL6_e->IL6R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e76" source="n39" target="n39">
+      <data key="d11" xml:space="preserve"><![CDATA[IL6_e->IL6_e]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="-16.75" sy="-15.0" tx="-33.5" ty="-7.5">
+            <y:Point x="112.88908637414329" y="122.64310034704096"/>
+            <y:Point x="106.88908637414329" y="116.64310034704096"/>
+            <y:Point x="81.13908637414329" y="116.64310034704096"/>
+            <y:Point x="75.13908637414329" y="122.64310034704096"/>
+            <y:Point x="75.13908637414329" y="139.14310034704096"/>
+            <y:Point x="81.13908637414329" y="145.14310034704096"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e77" source="n40" target="n14">
+      <data key="d11" xml:space="preserve"><![CDATA[IRF1->IL12RB1_2]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e78" source="n40" target="n33">
+      <data key="d11" xml:space="preserve"><![CDATA[IRF1->IL4]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e79" source="n41" target="n2">
+      <data key="d11" xml:space="preserve"><![CDATA[NFAT->FOXP3]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e80" source="n41" target="n6">
+      <data key="d11" xml:space="preserve"><![CDATA[NFAT->IFNG]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e81" source="n41" target="n10">
+      <data key="d11" xml:space="preserve"><![CDATA[NFAT->IL10]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e82" source="n41" target="n19">
+      <data key="d11" xml:space="preserve"><![CDATA[NFAT->IL17]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e83" source="n41" target="n20">
+      <data key="d11" xml:space="preserve"><![CDATA[NFAT->IL2]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e84" source="n41" target="n21">
+      <data key="d11" xml:space="preserve"><![CDATA[NFAT->IL21]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e85" source="n41" target="n24">
+      <data key="d11" xml:space="preserve"><![CDATA[NFAT->IL23]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e86" source="n41" target="n30">
+      <data key="d11" xml:space="preserve"><![CDATA[NFAT->IL2RA]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e87" source="n41" target="n33">
+      <data key="d11" xml:space="preserve"><![CDATA[NFAT->IL4]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e88" source="n41" target="n54">
+      <data key="d11" xml:space="preserve"><![CDATA[NFAT->TGFB]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e89" source="n42" target="n19">
+      <data key="d11" xml:space="preserve"><![CDATA[NFKB->IL17]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e90" source="n42" target="n20">
+      <data key="d11" xml:space="preserve"><![CDATA[NFKB->IL2]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e91" source="n42" target="n30">
+      <data key="d11" xml:space="preserve"><![CDATA[NFKB->IL2RA]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e92" source="n43" target="n2">
+      <data key="d11" xml:space="preserve"><![CDATA[RORGT->FOXP3]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e93" source="n43" target="n19">
+      <data key="d11" xml:space="preserve"><![CDATA[RORGT->IL17]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e94" source="n43" target="n25">
+      <data key="d11" xml:space="preserve"><![CDATA[RORGT->IL23R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e95" source="n43" target="n43">
+      <data key="d11" xml:space="preserve"><![CDATA[RORGT->RORGT]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="-15.0" tx="33.5" ty="-7.5">
+            <y:Point x="156.25560376197865" y="384.2428302729162"/>
+            <y:Point x="162.25560376197865" y="378.2428302729162"/>
+            <y:Point x="188.00560376197865" y="378.2428302729162"/>
+            <y:Point x="194.00560376197865" y="384.2428302729162"/>
+            <y:Point x="194.00560376197865" y="400.7428302729162"/>
+            <y:Point x="188.00560376197865" y="406.7428302729162"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e96" source="n44" target="n6">
+      <data key="d11" xml:space="preserve"><![CDATA[RUNX3->IFNG]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e97" source="n44" target="n33">
+      <data key="d11" xml:space="preserve"><![CDATA[RUNX3->IL4]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e98" source="n45" target="n2">
+      <data key="d11" xml:space="preserve"><![CDATA[SMAD3->FOXP3]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e99" source="n45" target="n30">
+      <data key="d11" xml:space="preserve"><![CDATA[SMAD3->IL2RA]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e100" source="n46" target="n2">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT1->FOXP3]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e101" source="n46" target="n19">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT1->IL17]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e102" source="n46" target="n40">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT1->IRF1]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e103" source="n46" target="n52">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT1->TBET]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e104" source="n47" target="n2">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT3->FOXP3]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e105" source="n47" target="n6">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT3->IFNG]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e106" source="n47" target="n10">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT3->IL10]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e107" source="n47" target="n19">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT3->IL17]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e108" source="n47" target="n21">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT3->IL21]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e109" source="n47" target="n24">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT3->IL23]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e110" source="n47" target="n25">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT3->IL23R]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="4.612930285910124" tx="0.0" ty="4.612930285910124"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e111" source="n47" target="n43">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT3->RORGT]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e112" source="n48" target="n6">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT4->IFNG]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e113" source="n49" target="n2">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT5->FOXP3]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e114" source="n49" target="n19">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT5->IL17]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e115" source="n49" target="n20">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT5->IL2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e116" source="n49" target="n30">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT5->IL2RA]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e117" source="n49" target="n35">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT5->IL4RA_2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e118" source="n49" target="n49">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT5->STAT5]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="-16.75" sy="15.0" tx="-33.5" ty="7.5">
+            <y:Point x="318.73548458815384" y="881.1334284456634"/>
+            <y:Point x="312.73548458815384" y="887.1334284456634"/>
+            <y:Point x="286.98548458815384" y="887.1334284456634"/>
+            <y:Point x="280.98548458815384" y="881.1334284456634"/>
+            <y:Point x="280.98548458815384" y="864.6334284456634"/>
+            <y:Point x="286.98548458815384" y="858.6334284456634"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e119" source="n49" target="n50">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT5->STAT5_2]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="8.986364581558007" sy="0.0" tx="8.986364581558234" ty="-1.1368683772161603E-13"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e120" source="n49" target="n57">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT5->proliferation]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e121" source="n50" target="n35">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT5_2->IL4RA_2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e122" source="n50" target="n49">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT5_2->STAT5]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="-8.986364581558405" sy="0.0" tx="-8.986364581558234" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e123" source="n50" target="n57">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT5_2->proliferation]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e124" source="n51" target="n3">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT6->GATA3]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e125" source="n51" target="n15">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT6->IL12RB2]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e126" source="n51" target="n19">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT6->IL17]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e127" source="n51" target="n20">
+      <data key="d11" xml:space="preserve"><![CDATA[STAT6->IL2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e128" source="n52" target="n3">
+      <data key="d11" xml:space="preserve"><![CDATA[TBET->GATA3]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="9.742576499319853" sy="0.0" tx="9.742576499319853" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e129" source="n52" target="n6">
+      <data key="d11" xml:space="preserve"><![CDATA[TBET->IFNG]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e130" source="n52" target="n20">
+      <data key="d11" xml:space="preserve"><![CDATA[TBET->IL2]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e131" source="n52" target="n33">
+      <data key="d11" xml:space="preserve"><![CDATA[TBET->IL4]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e132" source="n52" target="n44">
+      <data key="d11" xml:space="preserve"><![CDATA[TBET->RUNX3]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e133" source="n52" target="n52">
+      <data key="d11" xml:space="preserve"><![CDATA[TBET->TBET]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="-16.75" sy="-15.0" tx="-33.5" ty="-7.5">
+            <y:Point x="591.3750261167414" y="585.918263003744"/>
+            <y:Point x="585.3750261167414" y="579.918263003744"/>
+            <y:Point x="559.6250261167414" y="579.918263003744"/>
+            <y:Point x="553.6250261167414" y="585.918263003744"/>
+            <y:Point x="553.6250261167414" y="602.418263003744"/>
+            <y:Point x="559.6250261167414" y="608.418263003744"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e134" source="n53" target="n9">
+      <data key="d11" xml:space="preserve"><![CDATA[TCR->IKB]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[-1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e135" source="n53" target="n41">
+      <data key="d11" xml:space="preserve"><![CDATA[TCR->NFAT]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e136" source="n54" target="n55">
+      <data key="d11" xml:space="preserve"><![CDATA[TGFB->TGFBR]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e137" source="n55" target="n43">
+      <data key="d11" xml:space="preserve"><![CDATA[TGFBR->RORGT]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e138" source="n55" target="n45">
+      <data key="d11" xml:space="preserve"><![CDATA[TGFBR->SMAD3]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e139" source="n56" target="n55">
+      <data key="d11" xml:space="preserve"><![CDATA[TGFB_e->TGFBR]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[constraint]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e140" source="n56" target="n56">
+      <data key="d11" xml:space="preserve"><![CDATA[TGFB_e->TGFB_e]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="-15.0" tx="33.5" ty="-7.5">
+            <y:Point x="-34.2793473944954" y="355.0548970966517"/>
+            <y:Point x="-28.279347394495403" y="349.0548970966517"/>
+            <y:Point x="-2.529347394495404" y="349.0548970966517"/>
+            <y:Point x="3.470652605504597" y="355.0548970966517"/>
+            <y:Point x="3.470652605504597" y="371.5548970966517"/>
+            <y:Point x="-2.5293473944954026" y="377.5548970966517"/>
+          </y:Path>
+          <y:LineStyle color="#FF0000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e141" source="n57" target="n6">
+      <data key="d11" xml:space="preserve"><![CDATA[proliferation->IFNG]]></data>
+      <data key="d12" xml:space="preserve"><![CDATA[consensus]]></data>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#0000FF" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e142" source="n57" target="n10">
+      <data key="d11" xml:space="preserve"><![CDATA[proliferation->IL10]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e143" source="n57" target="n19">
+      <data key="d11" xml:space="preserve"><![CDATA[proliferation->IL17]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e144" source="n57" target="n21">
+      <data key="d11" xml:space="preserve"><![CDATA[proliferation->IL21]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e145" source="n57" target="n24">
+      <data key="d11" xml:space="preserve"><![CDATA[proliferation->IL23]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e146" source="n57" target="n33">
+      <data key="d11" xml:space="preserve"><![CDATA[proliferation->IL4]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e147" source="n57" target="n54">
+      <data key="d11" xml:space="preserve"><![CDATA[proliferation->TGFB]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e148" source="n57" target="n57">
+      <data key="d11" xml:space="preserve"><![CDATA[proliferation->proliferation]]></data>
+      <data key="d12"/>
+      <data key="d13" xml:space="preserve"><![CDATA[[1]]]></data>
+      <data key="d15"/>
+      <data key="d16">
+        <y:PolyLineEdge>
+          <y:Path sx="16.75" sy="-15.0" tx="33.5" ty="-7.5">
+            <y:Point x="444.3355343083393" y="525.2994630248803"/>
+            <y:Point x="450.3355343083393" y="519.2994630248803"/>
+            <y:Point x="476.0855343083393" y="519.2994630248803"/>
+            <y:Point x="482.0855343083393" y="525.2994630248803"/>
+            <y:Point x="482.0855343083393" y="541.7994630248803"/>
+            <y:Point x="476.0855343083393" y="547.7994630248803"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+  </graph>
+  <data key="d10">
+    <y:Resources/>
+  </data>
+</graphml>

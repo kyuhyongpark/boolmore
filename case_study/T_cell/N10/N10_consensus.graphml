@@ -1,0 +1,632 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d3" for="edge" attr.name="label" attr.type="string" />
+  <key id="d2" for="edge" attr.name="sign" attr.type="float" />
+  <key id="d1" for="edge" attr.name="weight" attr.type="double" />
+  <key id="d0" for="node" attr.name="label" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="APC">
+      <data key="d0">APC</data>
+    </node>
+    <node id="CD28">
+      <data key="d0">CD28</data>
+    </node>
+    <node id="TCR">
+      <data key="d0">TCR</data>
+    </node>
+    <node id="NFAT">
+      <data key="d0">NFAT</data>
+    </node>
+    <node id="FOXP3">
+      <data key="d0">FOXP3</data>
+    </node>
+    <node id="IFNG">
+      <data key="d0">IFNG</data>
+    </node>
+    <node id="IL2RA">
+      <data key="d0">IL2RA</data>
+    </node>
+    <node id="IL4">
+      <data key="d0">IL4</data>
+    </node>
+    <node id="NFKB">
+      <data key="d0">NFKB</data>
+    </node>
+    <node id="GATA3">
+      <data key="d0">GATA3</data>
+    </node>
+    <node id="TBET">
+      <data key="d0">TBET</data>
+    </node>
+    <node id="IFNBR">
+      <data key="d0">IFNBR</data>
+    </node>
+    <node id="STAT1">
+      <data key="d0">STAT1</data>
+    </node>
+    <node id="IFNB_e">
+      <data key="d0">IFNB_e</data>
+    </node>
+    <node id="IFNGR">
+      <data key="d0">IFNGR</data>
+    </node>
+    <node id="IFNG_e">
+      <data key="d0">IFNG_e</data>
+    </node>
+    <node id="IKB">
+      <data key="d0">IKB</data>
+    </node>
+    <node id="IL10">
+      <data key="d0">IL10</data>
+    </node>
+    <node id="IL10R">
+      <data key="d0">IL10R</data>
+    </node>
+    <node id="STAT3">
+      <data key="d0">STAT3</data>
+    </node>
+    <node id="IL10_e">
+      <data key="d0">IL10_e</data>
+    </node>
+    <node id="IL12RB2">
+      <data key="d0">IL12RB2</data>
+    </node>
+    <node id="IL12R">
+      <data key="d0">IL12R</data>
+    </node>
+    <node id="IL12_e">
+      <data key="d0">IL12_e</data>
+    </node>
+    <node id="IL15_e">
+      <data key="d0">IL15_e</data>
+    </node>
+    <node id="IL15R">
+      <data key="d0">IL15R</data>
+    </node>
+    <node id="IL2">
+      <data key="d0">IL2</data>
+    </node>
+    <node id="IL2R">
+      <data key="d0">IL2R</data>
+    </node>
+    <node id="IL21">
+      <data key="d0">IL21</data>
+    </node>
+    <node id="IL21R">
+      <data key="d0">IL21R</data>
+    </node>
+    <node id="IL21_e">
+      <data key="d0">IL21_e</data>
+    </node>
+    <node id="IL23">
+      <data key="d0">IL23</data>
+    </node>
+    <node id="IL23R">
+      <data key="d0">IL23R</data>
+    </node>
+    <node id="IL23_e">
+      <data key="d0">IL23_e</data>
+    </node>
+    <node id="IL27R">
+      <data key="d0">IL27R</data>
+    </node>
+    <node id="IL27_e">
+      <data key="d0">IL27_e</data>
+    </node>
+    <node id="IL2R_2">
+      <data key="d0">IL2R_2</data>
+    </node>
+    <node id="STAT5">
+      <data key="d0">STAT5</data>
+    </node>
+    <node id="IL2_e">
+      <data key="d0">IL2_e</data>
+    </node>
+    <node id="IL4R">
+      <data key="d0">IL4R</data>
+    </node>
+    <node id="IL4R_2">
+      <data key="d0">IL4R_2</data>
+    </node>
+    <node id="STAT6">
+      <data key="d0">STAT6</data>
+    </node>
+    <node id="IL4_e">
+      <data key="d0">IL4_e</data>
+    </node>
+    <node id="IL6R">
+      <data key="d0">IL6R</data>
+    </node>
+    <node id="IL6_e">
+      <data key="d0">IL6_e</data>
+    </node>
+    <node id="IRF1">
+      <data key="d0">IRF1</data>
+    </node>
+    <node id="IL12RB1_2">
+      <data key="d0">IL12RB1_2</data>
+    </node>
+    <node id="RORGT">
+      <data key="d0">RORGT</data>
+    </node>
+    <node id="IL17">
+      <data key="d0">IL17</data>
+    </node>
+    <node id="RUNX3">
+      <data key="d0">RUNX3</data>
+    </node>
+    <node id="SMAD3">
+      <data key="d0">SMAD3</data>
+    </node>
+    <node id="STAT5_2">
+      <data key="d0">STAT5_2</data>
+    </node>
+    <node id="TGFB">
+      <data key="d0">TGFB</data>
+    </node>
+    <node id="TGFBR">
+      <data key="d0">TGFBR</data>
+    </node>
+    <node id="TGFB_e">
+      <data key="d0">TGFB_e</data>
+    </node>
+    <node id="proliferation">
+      <data key="d0">proliferation</data>
+    </node>
+    <edge source="APC" target="APC">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">APC-&gt;APC</data>
+    </edge>
+    <edge source="APC" target="CD28">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">APC-&gt;CD28</data>
+    </edge>
+    <edge source="APC" target="TCR">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">APC-&gt;TCR</data>
+    </edge>
+    <edge source="CD28" target="NFAT">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">CD28-&gt;NFAT</data>
+    </edge>
+    <edge source="TCR" target="IKB">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">TCR-&gt;IKB</data>
+    </edge>
+    <edge source="TCR" target="NFAT">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">TCR-&gt;NFAT</data>
+    </edge>
+    <edge source="NFAT" target="FOXP3">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">NFAT-&gt;FOXP3</data>
+    </edge>
+    <edge source="NFAT" target="IL2">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">NFAT-&gt;IL2</data>
+    </edge>
+    <edge source="NFAT" target="IL2RA">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">NFAT-&gt;IL2RA</data>
+    </edge>
+    <edge source="NFAT" target="IL4">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">NFAT-&gt;IL4</data>
+    </edge>
+    <edge source="FOXP3" target="IFNG">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">FOXP3-&gt;IFNG</data>
+    </edge>
+    <edge source="FOXP3" target="IL2RA">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">FOXP3-&gt;IL2RA</data>
+    </edge>
+    <edge source="FOXP3" target="IL4">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">FOXP3-&gt;IL4</data>
+    </edge>
+    <edge source="FOXP3" target="NFKB">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">FOXP3-&gt;NFKB</data>
+    </edge>
+    <edge source="IFNG" target="IFNGR">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IFNG-&gt;IFNGR</data>
+    </edge>
+    <edge source="IL4" target="IL4R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL4-&gt;IL4R</data>
+    </edge>
+    <edge source="NFKB" target="IL2">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">NFKB-&gt;IL2</data>
+    </edge>
+    <edge source="NFKB" target="IL2RA">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">NFKB-&gt;IL2RA</data>
+    </edge>
+    <edge source="GATA3" target="GATA3">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">GATA3-&gt;GATA3</data>
+    </edge>
+    <edge source="GATA3" target="IL4">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">GATA3-&gt;IL4</data>
+    </edge>
+    <edge source="GATA3" target="TBET">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">GATA3-&gt;TBET</data>
+    </edge>
+    <edge source="TBET" target="IFNG">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">TBET-&gt;IFNG</data>
+    </edge>
+    <edge source="TBET" target="IL4">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">TBET-&gt;IL4</data>
+    </edge>
+    <edge source="TBET" target="RUNX3">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">TBET-&gt;RUNX3</data>
+    </edge>
+    <edge source="TBET" target="TBET">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">TBET-&gt;TBET</data>
+    </edge>
+    <edge source="IFNBR" target="STAT1">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IFNBR-&gt;STAT1</data>
+    </edge>
+    <edge source="STAT1" target="IRF1">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT1-&gt;IRF1</data>
+    </edge>
+    <edge source="STAT1" target="TBET">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT1-&gt;TBET</data>
+    </edge>
+    <edge source="IFNB_e" target="IFNBR">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IFNB_e-&gt;IFNBR</data>
+    </edge>
+    <edge source="IFNB_e" target="IFNB_e">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IFNB_e-&gt;IFNB_e</data>
+    </edge>
+    <edge source="IFNGR" target="STAT1">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IFNGR-&gt;STAT1</data>
+    </edge>
+    <edge source="IFNG_e" target="IFNGR">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IFNG_e-&gt;IFNGR</data>
+    </edge>
+    <edge source="IFNG_e" target="IFNG_e">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IFNG_e-&gt;IFNG_e</data>
+    </edge>
+    <edge source="IKB" target="NFKB">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IKB-&gt;NFKB</data>
+    </edge>
+    <edge source="IL10" target="IL10R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL10-&gt;IL10R</data>
+    </edge>
+    <edge source="IL10R" target="STAT3">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL10R-&gt;STAT3</data>
+    </edge>
+    <edge source="STAT3" target="IFNG">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT3-&gt;IFNG</data>
+    </edge>
+    <edge source="STAT3" target="IL17">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT3-&gt;IL17</data>
+    </edge>
+    <edge source="STAT3" target="IL21">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT3-&gt;IL21</data>
+    </edge>
+    <edge source="STAT3" target="IL23">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT3-&gt;IL23</data>
+    </edge>
+    <edge source="STAT3" target="IL23R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT3-&gt;IL23R</data>
+    </edge>
+    <edge source="STAT3" target="RORGT">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT3-&gt;RORGT</data>
+    </edge>
+    <edge source="IL10_e" target="IL10R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL10_e-&gt;IL10R</data>
+    </edge>
+    <edge source="IL10_e" target="IL10_e">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL10_e-&gt;IL10_e</data>
+    </edge>
+    <edge source="IL12RB2" target="IL12R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL12RB2-&gt;IL12R</data>
+    </edge>
+    <edge source="IL12_e" target="IL12R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL12_e-&gt;IL12R</data>
+    </edge>
+    <edge source="IL12_e" target="IL12_e">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL12_e-&gt;IL12_e</data>
+    </edge>
+    <edge source="IL15_e" target="IL15R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL15_e-&gt;IL15R</data>
+    </edge>
+    <edge source="IL15_e" target="IL15_e">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL15_e-&gt;IL15_e</data>
+    </edge>
+    <edge source="IL2" target="IL2R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL2-&gt;IL2R</data>
+    </edge>
+    <edge source="IL2R" target="IL2R_2">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL2R-&gt;IL2R_2</data>
+    </edge>
+    <edge source="IL2R" target="STAT5">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL2R-&gt;STAT5</data>
+    </edge>
+    <edge source="IL21" target="IL21R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL21-&gt;IL21R</data>
+    </edge>
+    <edge source="IL21_e" target="IL21R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL21_e-&gt;IL21R</data>
+    </edge>
+    <edge source="IL21_e" target="IL21_e">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL21_e-&gt;IL21_e</data>
+    </edge>
+    <edge source="IL23" target="IL23R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL23-&gt;IL23R</data>
+    </edge>
+    <edge source="IL23R" target="STAT3">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL23R-&gt;STAT3</data>
+    </edge>
+    <edge source="IL23_e" target="IL23R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL23_e-&gt;IL23R</data>
+    </edge>
+    <edge source="IL23_e" target="IL23_e">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL23_e-&gt;IL23_e</data>
+    </edge>
+    <edge source="IL27R" target="STAT1">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL27R-&gt;STAT1</data>
+    </edge>
+    <edge source="IL27R" target="STAT3">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL27R-&gt;STAT3</data>
+    </edge>
+    <edge source="IL27_e" target="IL27R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL27_e-&gt;IL27R</data>
+    </edge>
+    <edge source="IL27_e" target="IL27_e">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL27_e-&gt;IL27_e</data>
+    </edge>
+    <edge source="STAT5" target="FOXP3">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT5-&gt;FOXP3</data>
+    </edge>
+    <edge source="STAT5" target="IL17">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT5-&gt;IL17</data>
+    </edge>
+    <edge source="STAT5" target="IL2RA">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT5-&gt;IL2RA</data>
+    </edge>
+    <edge source="STAT5" target="STAT5_2">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT5-&gt;STAT5_2</data>
+    </edge>
+    <edge source="IL2_e" target="IL2R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL2_e-&gt;IL2R</data>
+    </edge>
+    <edge source="IL2_e" target="IL2_e">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL2_e-&gt;IL2_e</data>
+    </edge>
+    <edge source="IL4R" target="IL4R_2">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL4R-&gt;IL4R_2</data>
+    </edge>
+    <edge source="IL4R" target="STAT6">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL4R-&gt;STAT6</data>
+    </edge>
+    <edge source="STAT6" target="GATA3">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT6-&gt;GATA3</data>
+    </edge>
+    <edge source="STAT6" target="IL12RB2">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">STAT6-&gt;IL12RB2</data>
+    </edge>
+    <edge source="IL4_e" target="IL4R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL4_e-&gt;IL4R</data>
+    </edge>
+    <edge source="IL4_e" target="IL4_e">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL4_e-&gt;IL4_e</data>
+    </edge>
+    <edge source="IL6R" target="STAT3">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL6R-&gt;STAT3</data>
+    </edge>
+    <edge source="IL6_e" target="IL6R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL6_e-&gt;IL6R</data>
+    </edge>
+    <edge source="IL6_e" target="IL6_e">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IL6_e-&gt;IL6_e</data>
+    </edge>
+    <edge source="IRF1" target="IL12RB1_2">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IRF1-&gt;IL12RB1_2</data>
+    </edge>
+    <edge source="IRF1" target="IL4">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">IRF1-&gt;IL4</data>
+    </edge>
+    <edge source="RORGT" target="FOXP3">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">RORGT-&gt;FOXP3</data>
+    </edge>
+    <edge source="RORGT" target="IL17">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">RORGT-&gt;IL17</data>
+    </edge>
+    <edge source="RORGT" target="IL23R">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">RORGT-&gt;IL23R</data>
+    </edge>
+    <edge source="RUNX3" target="IFNG">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">RUNX3-&gt;IFNG</data>
+    </edge>
+    <edge source="RUNX3" target="IL4">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">RUNX3-&gt;IL4</data>
+    </edge>
+    <edge source="SMAD3" target="FOXP3">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">SMAD3-&gt;FOXP3</data>
+    </edge>
+    <edge source="TGFB" target="TGFBR">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">TGFB-&gt;TGFBR</data>
+    </edge>
+    <edge source="TGFBR" target="SMAD3">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">TGFBR-&gt;SMAD3</data>
+    </edge>
+    <edge source="TGFB_e" target="TGFBR">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">TGFB_e-&gt;TGFBR</data>
+    </edge>
+    <edge source="TGFB_e" target="TGFB_e">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">TGFB_e-&gt;TGFB_e</data>
+    </edge>
+    <edge source="proliferation" target="IFNG">
+      <data key="d1">1.0</data>
+      <data key="d2">1.0</data>
+      <data key="d3">proliferation-&gt;IFNG</data>
+    </edge>
+  </graph>
+</graphml>

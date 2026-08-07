@@ -8,7 +8,6 @@ GATA3,IL4,regulate,positive,ChatGPT,direct,"GATA3 directly binds IL4/IL5/IL13 lo
 IFNB_e,IFNBR,regulate,positive,N10,direct,
 IFNBR,STAT1,regulate,positive,ChatGPT,direct,Canonical type I IFN signaling.
 IFNG,IFNGR,regulate,positive,N10,direct,
-IFNG_e,IFGNR,regulate,positive,N10,direct,
 IFNG_e,IFNGR,regulate,positive,N10,direct,
 IFNGR,STAT1,regulate,positive,ChatGPT,direct,Canonical IFN-γ signaling pathway. Necessary for IFNγ-induced STAT1 activation. Not globally necessary because IFN-I and IL27 also activate STAT1.
 IKB,NFKB,regulate,negative,N10,direct,
@@ -19,8 +18,6 @@ IL12_e,IL12R,regulate,positive,N10,direct,
 IL12RB2,IL12R,regulate,positive,N10,direct,
 IL15_e,IL15R,regulate,positive,N10,direct,
 IL2,IL2R,regulate,positive,N10,direct,
-IL2,IL2R,regulate,positive,N10,direct,
-IL2_e,IL2R,regulate,positive,N10,direct,
 IL2_e,IL2R,regulate,positive,N10,direct,
 IL21,IL21R,regulate,positive,N10,direct,
 IL21_e,IL21R,regulate,positive,N10,direct,
