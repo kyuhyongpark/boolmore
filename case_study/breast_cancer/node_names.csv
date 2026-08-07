@@ -28,7 +28,7 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 27,,,,,,,,,IGF1,IGF1,IGF1,IGF1,input,
 28,,,,,,,,,INS,INS,INS,INS,input,
 29,,,,,,,,,PG,PG,PG,PG,input,
-30,,,,,,,,,WNT1,WNT1,WNT1,WNT1,input,
+30,,,,,,,,,WNT1,WNT1,WNT1,WNT1,input,WNT1 is not an input in the BBM version of TGEN due to an error.
 31,,,,,,,,,,,,,,
 32,,,,,,,IGF1R_T,IGF1R_T,,,,IGF1R_T,constant 1,
 33,,,,,,,,IGF1R_T_2,,,,IGF1R_T_2,constant 0,
@@ -107,7 +107,7 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 106,,,,,,,cycD_CDK46,cycD_CDK46,CYCLIN_D_c,CYCLIN_D_c,CYCLIN_D_c,CYCLINDc,,complex formed by cyclin D and CDK4 or CDK6
 107,,,,,,,cycD_CDK46_2,cycD_CDK46_2,,,,CYCLINDc_2,,
 108,,,,,,,cycE_CDK2,cycE_CDK2,,,,cycE_CDK2,,
-109,,,,,,,cycE_CDK2_T,cycE_CDK2_T,,,,cycE_CDK2T,,
+109,,,,,,,cycE_CDK2_T,cycE_CDK2_T,,,,cycE_CDK2_T,,
 110,,,,,,,cyclinD_2,cyclinD_2,,,,CyclinD_2,,
 111,,,,,,,mTORC2,mTORC2,MTORC2_c,MTORC2_c,MTORC2_c,mTORC2,,
 112,,,,,,,mTORC2_pm,mTORC2_pm,,,,mTORC2_pm,,
