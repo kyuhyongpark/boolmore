@@ -162,7 +162,7 @@ index,BBM node,Model,Input in original,Our notation,Input in merge
 161,MYC_2,Z17,,MYC_2,
 162,Neratinib,Z17,input,Neratinib,input
 163,PBX1,Z17,input,PBX1,constant 1
-164,PDK1,Z17,input,PDK1,input
+164,PDK1,Z17,input,PDK1_ic,input
 165,PDK1_pm,Z17,,PDK1_pm,
 166,PI3K,Z17,,PI3K,
 167,PI3K_2,Z17,,PI3K_2,
@@ -192,7 +192,7 @@ index,BBM node,Model,Input in original,Our notation,Input in merge
 191,cyclinD,Z17,,CyclinD,
 192,cyclinD_2,Z17,,CyclinD_2,
 193,mTORC1,Z17,,mTORC1,
-194,mTORC2,Z17,,mTORC2,
+194,mTORC2,Z17,,mTORC2_ic,
 195,mTORC2_pm,Z17,,mTORC2_pm,
 196,p21_p27,Z17,,p21_p27,
 197,p21_p27_T,Z17,,p21_p27_T,
@@ -253,7 +253,7 @@ index,BBM node,Model,Input in original,Our notation,Input in merge
 252,Navitoclax,Z21,input,Navitoclax,input
 253,Neratinib,Z21,input,Neratinib,input
 254,PBX1,Z21,input,PBX1,constant 1
-255,PDK1,Z21,input,PDK1,input
+255,PDK1,Z21,input,PDK1_ic,input
 256,PDK1_pm,Z21,,PDK1_pm,
 257,PI3K,Z21,,PI3K,
 258,PI3K_2,Z21,,PI3K_2,
@@ -287,10 +287,10 @@ index,BBM node,Model,Input in original,Our notation,Input in merge
 286,cyclinD,Z21,,CyclinD,
 287,cyclinD_2,Z21,,CyclinD_2,
 288,mTORC1,Z21,,mTORC1,
-289,mTORC2,Z21,,mTORC2,
+289,mTORC2,Z21,,mTORC2_ic,
 290,mTORC2_pm,Z21,,mTORC2_pm,
-291,p21_T,Z21,,p21_T,
-292,p21_T_2,Z21,,p21_T_2,
+291,p21_T,Z21,,p21_T,constant 1
+292,p21_T_2,Z21,,p21_T_2,input
 293,p21_p27,Z21,,p21_p27,
 294,p21_p27_T,Z21,,p21_p27_T,
 295,p27_T,Z21,input,p27_T,input
@@ -332,7 +332,7 @@ index,BBM node,Model,Input in original,Our notation,Input in merge
 331,FASLG,TGEN,,FASLG,
 332,FOXO1,TGEN,,FOXO1,
 333,FOXO3,TGEN,,FOXO3,
-334,FZD3,TGEN,,FZD3,
+334,FZD3,TGEN,,FZD,
 335,GATA3,TGEN,,GATA3,
 336,GRB2,TGEN,,GRB2,
 337,GRB7,TGEN,,GRB7,
@@ -364,7 +364,7 @@ index,BBM node,Model,Input in original,Our notation,Input in merge
 363,MDM2,TGEN,,MDM2,
 364,MEK_i,TGEN,,MEK,
 365,MTORC1_c,TGEN,,mTORC1,
-366,MTORC2_c,TGEN,,mTORC2,
+366,MTORC2_c,TGEN,,mTORC2_pm,
 367,MYC,TGEN,,MYC,
 368,MYOD1,TGEN,,MYOD1,
 369,MYOG,TGEN,,MYOG,
@@ -449,7 +449,7 @@ index,BBM node,Model,Input in original,Our notation,Input in merge
 448,FASLG,MCF7,,FASLG,
 449,FOXO1,MCF7,,FOXO1,
 450,FOXO3,MCF7,,FOXO3,
-451,FZD3,MCF7,,FZD3,
+451,FZD3,MCF7,,FZD,
 452,GATA3,MCF7,,GATA3,
 453,GRB2,MCF7,,GRB2,
 454,GRB7,MCF7,,GRB7,
@@ -481,7 +481,7 @@ index,BBM node,Model,Input in original,Our notation,Input in merge
 480,MDM2,MCF7,,MDM2,
 481,MEK_i,MCF7,,MEK,
 482,MTORC1_c,MCF7,,mTORC1,
-483,MTORC2_c,MCF7,,mTORC2,
+483,MTORC2_c,MCF7,,mTORC2_pm,
 484,MYC,MCF7,,MYC,
 485,MYOD1,MCF7,,MYOD1,
 486,MYOG,MCF7,,MYOG,
@@ -566,7 +566,7 @@ index,BBM node,Model,Input in original,Our notation,Input in merge
 565,FASLG,T47D,,FASLG,
 566,FOXO1,T47D,,FOXO1,
 567,FOXO3,T47D,,FOXO3,
-568,FZD3,T47D,,FZD3,
+568,FZD3,T47D,,FZD,
 569,GATA3,T47D,,GATA3,
 570,GRB2,T47D,,GRB2,
 571,GRB7,T47D,,GRB7,
@@ -598,7 +598,7 @@ index,BBM node,Model,Input in original,Our notation,Input in merge
 597,MDM2,T47D,,MDM2,
 598,MEK_i,T47D,,MEK,
 599,MTORC1_c,T47D,,mTORC1,
-600,MTORC2_c,T47D,,mTORC2,
+600,MTORC2_c,T47D,,mTORC2_pm,
 601,MYC,T47D,,MYC,
 602,MYOD1,T47D,,MYOD1,
 603,MYOG,T47D,,MYOG,

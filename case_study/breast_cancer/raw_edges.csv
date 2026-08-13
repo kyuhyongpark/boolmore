@@ -508,9 +508,9 @@ index,Regulator,Target,Sign,Model
 507,RAS,RAS_3,positive,Z17
 508,RAS_2,RAS_3,positive,Z17
 509,mTORC1,S6K,positive,Z17
-510,PDK1,SGK1,positive,Z17
+510,PDK1_ic,SGK1,positive,Z17
 511,SGK1_T,SGK1,positive,Z17
-512,mTORC2,SGK1,positive,Z17
+512,mTORC2_ic,SGK1,positive,Z17
 513,AKT,TSC2,negative,Z17
 514,MAPK_2,TSC2,negative,Z17
 515,SGK1,TSC2,negative,Z17
@@ -535,8 +535,8 @@ index,Regulator,Target,Sign,Model
 534,Everolimus,mTORC1,negative,Z17
 535,PRAS40,mTORC1,negative,Z17
 536,TSC2,mTORC1,negative,Z17
-537,Everolimus,mTORC2,negative,Z17
-538,mTORC2,mTORC2,positive,Z17
+537,Everolimus,mTORC2_ic,negative,Z17
+538,mTORC2_ic,mTORC2_ic,positive,Z17
 539,Everolimus,mTORC2_pm,negative,Z17
 540,PIP3,mTORC2_pm,positive,Z17
 541,PIP3_2,mTORC2_pm,positive,Z17
@@ -730,9 +730,9 @@ index,Regulator,Target,Sign,Model
 729,RAS,RAS_3,positive,Z21
 730,RAS_2,RAS_3,positive,Z21
 731,mTORC1,S6K,positive,Z21
-732,PDK1,SGK1,positive,Z21
+732,PDK1_ic,SGK1,positive,Z21
 733,SGK1_T,SGK1,positive,Z21
-734,mTORC2,SGK1,positive,Z21
+734,mTORC2_ic,SGK1,positive,Z21
 735,AKT,TSC2,negative,Z21
 736,MAPK_2,TSC2,negative,Z21
 737,SGK1,TSC2,negative,Z21
@@ -756,8 +756,8 @@ index,Regulator,Target,Sign,Model
 755,Everolimus,mTORC1,negative,Z21
 756,PRAS40,mTORC1,negative,Z21
 757,TSC2,mTORC1,negative,Z21
-758,Everolimus,mTORC2,negative,Z21
-759,mTORC2,mTORC2,positive,Z21
+758,Everolimus,mTORC2_ic,negative,Z21
+759,mTORC2_ic,mTORC2_ic,positive,Z21
 760,Everolimus,mTORC2_pm,negative,Z21
 761,PIP3,mTORC2_pm,positive,Z21
 762,PIP3_2,mTORC2_pm,positive,Z21
@@ -789,7 +789,7 @@ index,Regulator,Target,Sign,Model
 788,IGF1,AKT,positive,TGEN
 789,IGF1R,AKT,positive,TGEN
 790,IRS1,AKT,positive,TGEN
-791,mTORC2,AKT,positive,TGEN
+791,mTORC2_pm,AKT,positive,TGEN
 792,NRG1,AKT,positive,TGEN
 793,PDK1_pm,AKT,positive,TGEN
 794,PIP3,AKT,positive,TGEN
@@ -854,7 +854,7 @@ index,Regulator,Target,Sign,Model
 853,BAX,CYCS,positive,TGEN
 854,APC,DC,positive,TGEN
 855,GSK3B,DC,positive,TGEN
-856,FZD3,DVL1,positive,TGEN
+856,FZD,DVL1,positive,TGEN
 857,NF1,DVL1,positive,TGEN
 858,RB,E2F,negative,TGEN
 859,EGF,EGFR,positive,TGEN
@@ -879,8 +879,8 @@ index,Regulator,Target,Sign,Model
 878,AKT,FOXO1,negative,TGEN
 879,SGK1,FOXO1,negative,TGEN
 880,AKT,FOXO3,negative,TGEN
-881,CREB1,FZD3,positive,TGEN
-882,WNT1,FZD3,positive,TGEN
+881,CREB1,FZD,positive,TGEN
+882,WNT1,FZD,positive,TGEN
 883,STAT1,GATA3,negative,TGEN
 884,EGFR,GRB2,positive,TGEN
 885,IRS1,GRB2,positive,TGEN
@@ -945,8 +945,8 @@ index,Regulator,Target,Sign,Model
 944,IGF1,mTORC1,positive,TGEN
 945,NRG1,mTORC1,positive,TGEN
 946,RHEB,mTORC1,positive,TGEN
-947,PIP3,mTORC2,positive,TGEN
-948,S6K,mTORC2,negative,TGEN
+947,PIP3,mTORC2_pm,positive,TGEN
+948,S6K,mTORC2_pm,negative,TGEN
 949,CTNNB1,MYC,positive,TGEN
 950,EIF4,MYC,positive,TGEN
 951,ERK,MYC,positive,TGEN
@@ -1021,7 +1021,7 @@ index,Regulator,Target,Sign,Model
 1020,GRB7,RND1,positive,TGEN
 1021,mTORC1,S6K,positive,TGEN
 1022,mTORC1,SGK1,positive,TGEN
-1023,mTORC2,SGK1,positive,TGEN
+1023,mTORC2_pm,SGK1,positive,TGEN
 1024,PDK1_pm,SGK1,positive,TGEN
 1025,GRB2,SOS1,positive,TGEN
 1026,ABL1,SRC,positive,TGEN
@@ -1058,7 +1058,7 @@ index,Regulator,Target,Sign,Model
 1057,IGF1,AKT,positive,MCF7
 1058,IGF1R,AKT,positive,MCF7
 1059,IRS1,AKT,positive,MCF7
-1060,mTORC2,AKT,positive,MCF7
+1060,mTORC2_pm,AKT,positive,MCF7
 1061,NRG1,AKT,positive,MCF7
 1062,PDK1_pm,AKT,positive,MCF7
 1063,PIP3,AKT,positive,MCF7
@@ -1128,7 +1128,7 @@ index,Regulator,Target,Sign,Model
 1127,BAX,CYCS,positive,MCF7
 1128,APC,DC,positive,MCF7
 1129,GSK3B,DC,positive,MCF7
-1130,FZD3,DVL1,positive,MCF7
+1130,FZD,DVL1,positive,MCF7
 1131,NF1,DVL1,positive,MCF7
 1132,RB,E2F,negative,MCF7
 1133,EGF,EGFR,positive,MCF7
@@ -1153,8 +1153,8 @@ index,Regulator,Target,Sign,Model
 1152,AKT,FOXO1,negative,MCF7
 1153,SGK1,FOXO1,negative,MCF7
 1154,AKT,FOXO3,negative,MCF7
-1155,CREB1,FZD3,positive,MCF7
-1156,WNT1,FZD3,positive,MCF7
+1155,CREB1,FZD,positive,MCF7
+1156,WNT1,FZD,positive,MCF7
 1157,STAT1,GATA3,negative,MCF7
 1158,EGFR,GRB2,positive,MCF7
 1159,IRS1,GRB2,positive,MCF7
@@ -1219,8 +1219,8 @@ index,Regulator,Target,Sign,Model
 1218,NRG1,mTORC1,positive,MCF7
 1219,PIM,mTORC1,positive,MCF7
 1220,RHEB,mTORC1,positive,MCF7
-1221,PIP3,mTORC2,positive,MCF7
-1222,S6K,mTORC2,negative,MCF7
+1221,PIP3,mTORC2_pm,positive,MCF7
+1222,S6K,mTORC2_pm,negative,MCF7
 1223,CTNNB1,MYC,positive,MCF7
 1224,EIF4,MYC,positive,MCF7
 1225,ERK,MYC,positive,MCF7
@@ -1298,7 +1298,7 @@ index,Regulator,Target,Sign,Model
 1297,GRB7,RND1,positive,MCF7
 1298,mTORC1,S6K,positive,MCF7
 1299,mTORC1,SGK1,positive,MCF7
-1300,mTORC2,SGK1,positive,MCF7
+1300,mTORC2_pm,SGK1,positive,MCF7
 1301,PDK1_pm,SGK1,positive,MCF7
 1302,GRB2,SOS1,positive,MCF7
 1303,ABL1,SRC,positive,MCF7
@@ -1332,7 +1332,7 @@ index,Regulator,Target,Sign,Model
 1331,EGFR,AKT,positive,T47D
 1332,IGF1R,AKT,positive,T47D
 1333,IRS1,AKT,positive,T47D
-1334,mTORC2,AKT,positive,T47D
+1334,mTORC2_pm,AKT,positive,T47D
 1335,PDK1_pm,AKT,positive,T47D
 1336,PIP3,AKT,positive,T47D
 1337,AXIN1,APC,positive,T47D
@@ -1397,7 +1397,7 @@ index,Regulator,Target,Sign,Model
 1396,BAX,CYCS,positive,T47D
 1397,APC,DC,positive,T47D
 1398,GSK3B,DC,positive,T47D
-1399,FZD3,DVL1,positive,T47D
+1399,FZD,DVL1,positive,T47D
 1400,YAP1,DVL1,negative,T47D
 1401,RB,E2F,negative,T47D
 1402,EGF,EGFR,positive,T47D
@@ -1423,7 +1423,7 @@ index,Regulator,Target,Sign,Model
 1422,AKT,FOXO1,negative,T47D
 1423,SGK1,FOXO1,negative,T47D
 1424,AKT,FOXO3,negative,T47D
-1425,WNT1,FZD3,positive,T47D
+1425,WNT1,FZD,positive,T47D
 1426,STAT1,GATA3,negative,T47D
 1427,EGFR,GRB2,positive,T47D
 1428,HER2,GRB2,positive,T47D
@@ -1488,8 +1488,8 @@ index,Regulator,Target,Sign,Model
 1487,NRG1,mTORC1,positive,T47D
 1488,PIM,mTORC1,positive,T47D
 1489,RHEB,mTORC1,positive,T47D
-1490,PIP3,mTORC2,positive,T47D
-1491,S6K,mTORC2,negative,T47D
+1490,PIP3,mTORC2_pm,positive,T47D
+1491,S6K,mTORC2_pm,negative,T47D
 1492,CTNNB1,MYC,positive,T47D
 1493,EIF4,MYC,positive,T47D
 1494,ERK,MYC,positive,T47D
@@ -1561,7 +1561,7 @@ index,Regulator,Target,Sign,Model
 1560,ERK,S6K,positive,T47D
 1561,mTORC1,S6K,positive,T47D
 1562,mTORC1,SGK1,positive,T47D
-1563,mTORC2,SGK1,positive,T47D
+1563,mTORC2_pm,SGK1,positive,T47D
 1564,PDK1_pm,SGK1,positive,T47D
 1565,GRB2,SOS1,positive,T47D
 1566,PRKACA,SRC,positive,T47D
