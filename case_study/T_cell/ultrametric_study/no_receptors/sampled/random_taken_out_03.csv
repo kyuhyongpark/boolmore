@@ -1,0 +1,298 @@
+Regulator,Target,Sign,Model,Confidence Rank,Constraint,Direct,is_kept
+APC,CD28,positive,"AJ, N10",1,regulates,direct,KEPT
+APC,TCR,positive,"AJ, N10",1,necessary,direct,KEPT
+BCL6,GATA3,negative,"AJ, MS15",1,regulates,direct,KEPT
+BCL6,IFNG,negative,MS15,1,regulates,direct,KEPT
+BCL6,IFNG_2,negative,MS15,1,regulates,direct,KEPT
+BCL6,IL21,positive,MS15,1,regulates,direct in the network sense,KEPT
+BCL6,TBET,negative,"AJ, MS15",1,regulates,direct,KEPT
+BCL6,TBET_2,negative,"AJ, MS15",1,regulates,direct,KEPT
+CD28,NFAT,positive,"AJ, N10",1,regulates,direct in the network sense,KEPT
+CD4,THPOK,positive,MSM,2,,indirect,KEPT
+CD8,RUNX3,positive,MSM,2,,indirect,KEPT
+CMAF,IL10,positive,AJ,1,regulates,direct,KEPT
+CMAF,IL21,positive,AJ,1,regulates,direct,KEPT
+CMAF,IL22,negative,AJ,1,regulates,direct,KEPT
+CMAF,IL4,positive,AJ,1,regulates,direct,KEPT
+DLL1,NOTCH1,positive,MSM,1,regulates,direct,KEPT
+EOMES,GZMB,positive,MSM,1,regulates,direct,KEPT
+EOMES,IFNG,positive,MSM,1,regulates,direct,KEPT
+EOMES,IFNG_2,positive,MSM,1,regulates,direct,KEPT
+EOMES,PRF1,positive,MSM,1,regulates,direct,KEPT
+FOXP3,GATA3,negative,"MSM, P18",1,regulates,direct,KEPT
+FOXP3,IL2,negative,"AJ, MS15, N10",1,regulates,direct,KEPT
+FOXP3,IL2RA,positive,"AJ, N10",1,regulates,direct,KEPT
+FOXP3,IL35,positive,AJ,2,,indirect,KEPT
+FOXP3,NFAT,negative,P18,1,regulates,direct,KEPT
+FOXP3,NFKB,negative,"AJ, N10, P18",1,regulates,direct,KEPT
+FOXP3,RORGT,negative,"AJ, MS15, MSM, P18",1,regulates,direct,KEPT
+FOXP3,TGFB,positive,"AJ, MS15, MSM, N10",3,,correlation,KEPT
+GATA3,GATA3,positive,"AJ, MS15, MSM, MX, N10, P18",1,regulates,direct,KEPT
+GATA3,IFNG,negative,MS15,1,regulates,direct,KEPT
+GATA3,IFNG_2,negative,MS15,1,regulates,direct,KEPT
+GATA3,IL13,positive,AJ,1,regulates,direct,KEPT
+GATA3,IL25,positive,AJ,4,,assumption,KEPT
+GATA3,IL3,positive,AJ,1,regulates,direct,KEPT
+GATA3,IL4,positive,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct,KEPT
+GATA3,IL5,positive,AJ,1,regulates,direct,KEPT
+GATA3,RORGT,negative,"MS15, MSM, P18",1,regulates,direct in the network sense,KEPT
+GATA3,ST2,positive,AJ,1,regulates,direct,KEPT
+GATA3,STAT4,negative,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+GATA3,TBET,negative,"M06, MS15, MSM, MX, N10",1,regulates,direct,KEPT
+GATA3,TBET_2,negative,"M06, MS15, MSM, MX, N10",1,regulates,direct,KEPT
+GATA3,THPOK,positive,MSM,1,regulates,direct,KEPT
+IFNAR,STAT1,positive,AJ,1,regulates,direct,KEPT
+IFNAR,STAT1_2,positive,AJ,1,regulates,direct,KEPT
+IFNA_e,IFNAR,positive,AJ,1,regulates,direct,KEPT
+IFNBR,STAT1,positive,"M06, MSM, MX, N10",1,regulates,direct,KEPT
+IFNBR,STAT1_2,positive,"MSM, MX, N10",1,regulates,direct,KEPT
+IFNB_e,IFNAR,positive,AJ,1,regulates,direct,KEPT
+IFNB_e,IFNBR,positive,"M06, MSM, MX, N10",1,regulates,direct,KEPT
+IFNG,IFNGR,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+IFNG,IFNGR_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+IFNG,IFNG_2,positive,"M06, MS15",0,necessary,,KEPT
+IFNGR,IFNGR_2,positive,M06,0,necessary,,KEPT
+IFNGR,JAK1,positive,"MSM, MX, P18",1,regulates,direct,KEPT
+IFNGR,STAT1,positive,"AJ, M06, N10",1,regulates,direct,KEPT
+IFNGR,STAT1_2,positive,"AJ, M06, N10",1,regulates,direct,KEPT
+IFNGR_2,JAK1,positive,"MSM, MX, P18",1,regulates,direct,KEPT
+IFNGR_2,STAT1,positive,"AJ, N10",1,regulates,direct,KEPT
+IFNGR_2,STAT1_2,positive,"AJ, M06, N10",1,regulates,direct,KEPT
+IFNG_2,IFNGR,positive,"AJ, MSM, MX, N10, P18",1,regulates,direct,KEPT
+IFNG_2,IFNGR_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+IFNG_e,IFNGR,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+IFNG_e,IFNGR_2,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+IKB,NFKB,negative,"AJ, N10",1,regulates,direct,KEPT
+IL10,IL10R,positive,"AJ, MSM, MX, N10",1,regulates,direct,KEPT
+IL10R,STAT3,positive,"MSM, MX, N10",1,regulates,direct,KEPT
+IL10_e,IL10R,positive,"AJ, N10",1,regulates,direct,KEPT
+IL12R,STAT4,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+IL12RB1_2,IL12R,positive,N10,0,regulates,direct,KEPT
+IL12RB2,IL12R,positive,"AJ, N10",0,necessary,direct,KEPT
+IL12_e,IL12R,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+IL15R,STAT5,positive,"AJ, N10",1,regulates,direct,KEPT
+IL15_e,IL15R,positive,"AJ, N10",1,regulates,direct,KEPT
+IL18R,IFNG,positive,AJ,2,,indirect,KEPT
+IL18R,IFNG_2,positive,AJ,2,,indirect,KEPT
+IL18R,IRAK,positive,"M06, MSM, MX, P18",1,regulates,direct in the network sense,KEPT
+IL18_e,IL18R,positive,"AJ, M06, MSM, MX, P18",1,regulates,direct,KEPT
+IL1R,STAT3,positive,AJ,2,,indirect,KEPT
+IL1R1,IL1R,positive,AJ,0,necessary,direct,KEPT
+IL1_e,IL1R,positive,AJ,1,regulates,direct,KEPT
+IL2,IL2R,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+IL2,IL2R_2,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+IL21,IL21R,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+IL21R,STAT3,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+IL21_e,IL21R,positive,"AJ, N10",1,regulates,direct,KEPT
+IL23,IL23R,positive,N10,1,regulates,direct,KEPT
+IL23R,STAT3,positive,"AJ, MSM, N10, P18",1,regulates,direct,KEPT
+IL23_e,IL23R,positive,"AJ, MSM, N10, P18",1,regulates,direct,KEPT
+IL25,IL25R,positive,AJ,1,regulates,direct,KEPT
+IL25R,GATA3,positive,AJ,2,,indirect,KEPT
+IL25_e,IL25R,positive,AJ,1,regulates,direct,KEPT
+IL27R,STAT1,positive,"AJ, MSM, N10",1,regulates,direct,KEPT
+IL27R,STAT1_2,positive,"AJ, MSM, N10",1,regulates,direct,KEPT
+IL27R,STAT3,positive,"AJ, N10",1,regulates,direct,KEPT
+IL27_e,IL27R,positive,"AJ, MSM, N10",1,regulates,direct,KEPT
+IL29R,GATA3,negative,AJ,2,,indirect,KEPT
+IL29_e,IL29R,positive,AJ,1,regulates,direct,KEPT
+IL2R,IL2R_2,positive,"AJ, N10",0,necessary,,KEPT
+IL2R,STAT5,positive,"AJ, MSM, N10, P18",1,regulates,direct,KEPT
+IL2R,STAT5_2,positive,"AJ, MSM, N10, P18",1,regulates,direct,KEPT
+IL2RA,IL2R_2,positive,"AJ, N10",0,necessary,direct,KEPT
+IL2R_2,STAT5,positive,"MSM, P18",1,regulates,direct,KEPT
+IL2R_2,STAT5_2,positive,"AJ, MSM, N10, P18",1,regulates,direct,KEPT
+IL2_e,IL2R,positive,"AJ, MSM, N10",1,regulates,direct,KEPT
+IL2_e,IL2R_2,positive,"AJ, MSM, N10",1,regulates,direct,KEPT
+IL33R,IL13,positive,AJ,2,,indirect,KEPT
+IL33R,IL5,positive,AJ,2,,indirect,KEPT
+IL33R,IL9,positive,AJ,2,,indirect,KEPT
+IL33_e,IL33R,positive,AJ,1,regulates,direct,KEPT
+IL36R,TBET,positive,AJ,2,,indirect,KEPT
+IL36R,TBET_2,positive,AJ,2,,indirect,KEPT
+IL36_e,IL36R,positive,AJ,1,regulates,direct,KEPT
+IL4,IL4R,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+IL4,IL4R_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+IL4R,IL4R_2,positive,N10,0,necessary,,KEPT
+IL4R,STAT5,positive,N10,1,regulates,direct,KEPT
+IL4R,STAT5_2,positive,N10,1,regulates,direct,KEPT
+IL4R,STAT6,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+IL4RA_2,IL4R_2,positive,N10,0,regulates,direct,KEPT
+IL4R_2,STAT5_2,positive,N10,1,regulates,direct,KEPT
+IL4R_2,STAT6,positive,"AJ, M06, MSM, MX, P18",1,regulates,direct,KEPT
+IL4_e,IL4R,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+IL4_e,IL4R_2,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+IL6,IL6R,positive,"AJ, MSM, P18",1,regulates,direct,KEPT
+IL6R,STAT3,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+IL6_e,IL6R,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+IL7R,STAT5,positive,MSM,1,regulates,direct,KEPT
+IL7R,STAT5_2,positive,MSM,1,regulates,direct,KEPT
+IL7_e,IL7R,positive,MSM,1,regulates,direct,KEPT
+IL9,IFNG,negative,MS15,3,,correlation,KEPT
+IL9,IFNG_2,negative,MS15,3,,correlation,KEPT
+IL9,TBET,negative,MS15,3,,correlation,KEPT
+IL9,TBET_2,negative,MS15,3,,correlation,KEPT
+IRAK,IFNG,positive,"MSM, MX",2,,indirect,KEPT
+IRAK,IFNG_2,positive,"M06, MSM, MX",2,,indirect,KEPT
+IRAK,NFKB,positive,P18,2,,indirect,KEPT
+IRF1,IL10,positive,AJ,1,regulates,direct,KEPT
+IRF1,IL12RB1_2,positive,N10,1,regulates,direct,KEPT
+IRF1,IL4,negative,"AJ, N10",1,regulates,direct,KEPT
+JAK1,STAT1,positive,"MSM, MX, P18",1,regulates,direct,KEPT
+JAK1,STAT1_2,positive,"MSM, MX, P18",1,regulates,direct,KEPT
+JAK3,STAT3,positive,MSM,1,regulates,direct,KEPT
+NFAT,FOXP3,positive,"AJ, N10",1,regulates,direct,KEPT
+NFAT,GATA3,positive,P18,1,regulates,direct,KEPT
+NFAT,IFNG,positive,"AJ, MX, N10, P18",1,regulates,direct,KEPT
+NFAT,IFNG_2,positive,"AJ, MX, N10, P18",1,regulates,direct,KEPT
+NFAT,IL10,positive,"AJ, N10",1,regulates,direct,KEPT
+NFAT,IL13,positive,AJ,1,regulates,direct,KEPT
+NFAT,IL17,positive,"AJ, N10",1,regulates,direct,KEPT
+NFAT,IL2,positive,"AJ, N10, P18",1,necessary,direct,KEPT
+NFAT,IL21,positive,"AJ, N10, P18",1,necessary,direct,KEPT
+NFAT,IL22,positive,AJ,1,regulates,direct,KEPT
+NFAT,IL2RA,positive,"AJ, N10",1,regulates,direct,KEPT
+NFAT,IL3,positive,AJ,1,regulates,direct,KEPT
+NFAT,IL31,positive,AJ,1,regulates,direct,KEPT
+NFAT,IL4,positive,"AJ, N10, P18",1,necessary,direct,KEPT
+NFAT,IL5,positive,AJ,1,regulates,direct,KEPT
+NFAT,IL9,positive,AJ,1,regulates,direct,KEPT
+NFAT,TGFB,positive,"AJ, N10",1,regulates,direct,KEPT
+NFKB,IFNG,positive,P18,1,regulates,direct,KEPT
+NFKB,IFNG_2,positive,P18,1,regulates,direct,KEPT
+NFKB,IL17,positive,"AJ, N10",1,regulates,direct,KEPT
+NFKB,IL2,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+NFKB,IL2RA,positive,"AJ, N10",1,regulates,direct,KEPT
+NFKB,IL9,positive,AJ,1,regulates,direct,KEPT
+NOTCH1,CD4,positive,MSM,2,,indirect,KEPT
+NOTCH1,CD8,positive,MSM,2,,indirect,KEPT
+PU1,GATA3,negative,AJ,1,regulates,direct,KEPT
+PU1,IL9,positive,AJ,1,regulates,direct,KEPT
+RORGT,IL17,positive,"AJ, MSM, N10, P18",1,regulates,direct,KEPT
+RORGT,IL23R,positive,"AJ, N10",1,regulates,direct,KEPT
+RORGT,RORGT,positive,"MSM, N10",1,regulates,direct,KEPT
+RUNX3,CD4,negative,MSM,1,regulates,direct,KEPT
+RUNX3,CD8,positive,MSM,1,regulates,direct,KEPT
+RUNX3,EOMES,positive,MSM,1,regulates,direct,KEPT
+RUNX3,IFNG,positive,"AJ, N10",1,regulates,direct,KEPT
+RUNX3,IFNG_2,positive,"AJ, N10",1,regulates,direct,KEPT
+RUNX3,IL4,negative,"AJ, N10",1,regulates,direct,KEPT
+RUNX3,THPOK,negative,MSM,1,regulates,direct,KEPT
+SMAD2,FOXP3,positive,MSM,1,regulates,direct,KEPT
+SMAD2,RORGT,positive,MSM,1,regulates,direct,KEPT
+SMAD3,FOXP3,positive,"AJ, N10",1,regulates,direct,KEPT
+SMAD3,IL2RA,positive,"AJ, N10",1,regulates,direct,KEPT
+SMAD3,IL9,positive,AJ,1,regulates,direct,KEPT
+SOCS1,JAK1,negative,"MX, P18",1,regulates,direct,KEPT
+SOCS1,STAT5,negative,MSM,1,regulates,direct,KEPT
+SOCS1,STAT5_2,negative,MSM,1,regulates,direct,KEPT
+SOCS1,STAT6,negative,P18,1,regulates,direct,KEPT
+ST2,IL33R,positive,AJ,0,necessary,direct,KEPT
+STAT1,BCL6,positive,AJ,1,regulates,direct,KEPT
+STAT1,IRF1,positive,"AJ, N10",1,regulates,direct,KEPT
+STAT1,SOCS1,positive,"M06, MSM, MX, P18",1,regulates,direct,KEPT
+STAT1,STAT1,positive,M06,1,regulates,direct,KEPT
+STAT1,STAT1_2,positive,M06,0,necessary,,KEPT
+STAT1,TBET,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+STAT1,TBET_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+STAT1_2,BCL6,positive,AJ,1,regulates,direct,KEPT
+STAT1_2,IRF1,positive,"AJ, N10",1,regulates,direct,KEPT
+STAT1_2,SOCS1,positive,"MSM, MX, P18",1,regulates,direct,KEPT
+STAT1_2,TBET,positive,"AJ, MSM, MX, N10, P18",1,regulates,direct,KEPT
+STAT1_2,TBET_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+STAT3,BCL6,positive,AJ,1,regulates,direct,KEPT
+STAT3,CMAF,positive,AJ,1,regulates,direct,KEPT
+STAT3,IL10,positive,"AJ, N10",1,regulates,direct,KEPT
+STAT3,IL17,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+STAT3,IL1R1,positive,AJ,4,,assumption ,KEPT
+STAT3,IL21,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+STAT3,IL22,positive,AJ,1,regulates,direct,KEPT
+STAT3,IL23,positive,N10,1,regulates,direct in the network sense,KEPT
+STAT3,IL23R,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+STAT3,IL6,positive,AJ,1,regulates,direct,KEPT
+STAT3,RORGT,positive,"AJ, MSM, N10, P18",1,regulates,direct,KEPT
+STAT4,BCL6,positive,AJ,1,regulates,direct,KEPT
+STAT4,IFNG,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+STAT4,IFNG_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+STAT4,IL18R,positive,AJ,1,regulates,direct in the network sense,KEPT
+STAT4,IL21,positive,AJ,1,regulates,direct,KEPT
+STAT4,TBET,positive,P18,1,regulates,direct,KEPT
+STAT4,TBET_2,positive,P18,1,regulates,direct,KEPT
+STAT5,BCL6,negative,AJ,1,regulates,direct,KEPT
+STAT5,FOXP3,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+STAT5,GATA3,positive,P18,1,regulates,direct,KEPT
+STAT5,IL17,negative,"AJ, N10, P18",1,regulates,direct,KEPT
+STAT5,IL2RA,positive,"AJ, N10",1,regulates,direct,KEPT
+STAT5,IL4,positive,AJ,1,regulates,direct,KEPT
+STAT5,IL4RA_2,positive,N10,2,,indirect,KEPT
+STAT5,RUNX3,positive,MSM,1,regulates,direct,KEPT
+STAT5,STAT5_2,positive,"AJ, N10",0,necessary,,KEPT
+STAT5,proliferation,positive,"AJ, N10",1,regulates,direct in the network sense,KEPT
+STAT5_2,FOXP3,positive,P18,1,regulates,direct,KEPT
+STAT5_2,GATA3,positive,P18,1,regulates,direct,KEPT
+STAT5_2,IL17,negative,P18,1,regulates,direct,KEPT
+STAT5_2,IL4RA_2,positive,N10,2,,indirect,KEPT
+STAT5_2,RUNX3,positive,MSM,1,regulates,direct,KEPT
+STAT5_2,proliferation,positive,"AJ, N10",1,regulates,direct in the network sense,KEPT
+STAT6,FOXP3,negative,AJ,1,regulates,direct,KEPT
+STAT6,GATA3,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct,KEPT
+STAT6,IL12RB2,negative,"AJ, N10",2,,indirect,KEPT
+STAT6,IL24,positive,AJ,1,regulates,direct,KEPT
+STAT6,IL31,positive,AJ,1,regulates,direct,KEPT
+STAT6,IL9,positive,AJ,1,regulates,direct,KEPT
+TBET,BCL6,negative,"AJ, MS15",1,regulates,direct,KEPT
+TBET,FOXP3,negative,MSM,1,regulates,direct,KEPT
+TBET,GATA3,negative,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct,KEPT
+TBET,IFNG,positive,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct,KEPT
+TBET,IFNG_2,positive,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct,KEPT
+TBET,IL2,negative,"AJ, N10, P18",1,regulates,direct,KEPT
+TBET,IL23R,negative,P18,1,regulates,direct,KEPT
+TBET,IL4,negative,"AJ, MS15, N10",1,regulates,direct,KEPT
+TBET,RORGT,negative,"MS15, MSM, P18",1,regulates,direct in the network sense,KEPT
+TBET,TBET_2,positive,"AJ, M06, MS15, MSM, MX, N10, P18",0,necessary,,KEPT
+TBET_2,BCL6,negative,"AJ, MS15",1,regulates,direct,KEPT
+TBET_2,FOXP3,negative,MSM,1,regulates,direct,KEPT
+TBET_2,GATA3,negative,"AJ, MS15, MSM, MX, N10, P18",1,regulates,direct,KEPT
+TBET_2,IFNG,positive,"AJ, MS15, MSM, MX, N10, P18",1,regulates,direct,KEPT
+TBET_2,IFNG_2,positive,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct,KEPT
+TBET_2,IL2,negative,"AJ, N10, P18",1,regulates,direct,KEPT
+TBET_2,IL23R,negative,P18,1,regulates,direct,KEPT
+TBET_2,IL4,negative,"AJ, MS15, N10",1,regulates,direct,KEPT
+TBET_2,RORGT,negative,"MS15, MSM, P18",1,regulates,direct in the network sense,KEPT
+TCR,IKB,negative,"AJ, N10",1,regulates,direct in the network sense,KEPT
+TCR,IL7R,negative,MSM,1,regulates,direct in the network sense,KEPT
+TCR,NFAT,positive,"AJ, MSM, MX, N10, P18",1,regulates,direct in the network sense,KEPT
+TGFB,BCL6,negative,MS15,1,regulates,direct in the network sense,KEPT
+TGFB,TGFBR,positive,"AJ, MSM, N10",1,regulates,direct,KEPT
+TGFBR,PU1,positive,AJ,2,,indirect,KEPT
+TGFBR,SMAD2,positive,MSM,1,regulates,direct,KEPT
+TGFBR,SMAD3,positive,"AJ, N10",1,regulates,direct,KEPT
+TGFB_e,TGFBR,positive,"AJ, N10, P18",1,regulates,direct,KEPT
+THPOK,CD4,positive,MSM,1,regulates,direct,KEPT
+THPOK,CD8,negative,MSM,1,regulates,direct,KEPT
+THPOK,RUNX3,negative,MSM,1,regulates,direct,KEPT
+THPOK,THPOK,positive,MSM,1,regulates,direct,KEPT
+proliferation,IFNG,positive,"AJ, N10",4,,assumption,KEPT
+proliferation,IFNG_2,positive,"AJ, N10",4,,assumption,KEPT
+proliferation,IL10,positive,"AJ, N10",4,,assumption,KEPT
+proliferation,IL13,positive,AJ,4,,assumption,KEPT
+proliferation,IL17,positive,"AJ, N10",4,,assumption,KEPT
+proliferation,IL21,positive,"AJ, N10",4,,assumption,KEPT
+proliferation,IL22,positive,AJ,4,,assumption,KEPT
+proliferation,IL23,positive,N10,4,,assumption,KEPT
+proliferation,IL24,positive,AJ,4,,assumption,KEPT
+proliferation,IL25,positive,AJ,4,,assumption,KEPT
+proliferation,IL3,positive,AJ,4,,assumption,KEPT
+proliferation,IL31,positive,AJ,4,,assumption,KEPT
+proliferation,IL35,positive,AJ,4,,assumption,KEPT
+proliferation,IL4,positive,"AJ, N10",4,,assumption,KEPT
+proliferation,IL5,positive,AJ,4,,assumption,KEPT
+proliferation,IL6,positive,AJ,4,,assumption,KEPT
+proliferation,IL9,positive,AJ,4,,assumption,KEPT
+proliferation,TGFB,positive,"AJ, N10",4,,assumption,KEPT
+proliferation,proliferation,positive,"AJ, N10",4,,assumption,KEPT
+IL2R_2,IFNG,unknown,Fake,5,,,TAKEN_OUT
+SMAD3,IL2,unknown,Fake,5,,,TAKEN_OUT
+IL18R,NFKB,unknown,Fake,5,,,TAKEN_OUT
+IFNG,STAT5,unknown,Fake,5,,,TAKEN_OUT
+IFNGR,IL9,unknown,Fake,5,,,TAKEN_OUT
