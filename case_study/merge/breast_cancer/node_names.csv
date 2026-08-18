@@ -3,27 +3,27 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 2,pertuzumab,pertuzumab,pertuzumab,pertuzumab,pertuzumab,pertuzumab,,,,,,pertuzumab,input,
 3,trastuzumab,trastuzumab,trastuzumab,trastuzumab,trastuzumab,trastuzumab,,,,,,trastuzumab,input,
 4,EGF,EGF,EGF,,,,,,EGF,EGF,EGF,EGF,input,
-5,HRG,HRG,HRG,,,,,HER3_microenvironment,NRG1,NRG1,NRG1,NRG1,input,"HRG (heregulin) is an established synonim of NRG1 (neuregulin), the ligand of HER3. The official name is NRG1."
-6,,,,stimulus,stimulus,stimulus,,,,,,stimulus,input,"stimuli from the growth medium, assumed to be 1."
-7,,,,,,,Alpelisib,Alpelisib,,,,Alpelisib,input,drug
-8,,,,,,,Everolimus,Everolimus,,,,Everolimus,input,
-9,,,,,,,Fulvestrant,Fulvestrant,,,,Fulvestrant,input,
-10,,,,,,,Ipatasertib,Ipatasertib,,,,Ipatasertib,input,
-11,,,,,,,Neratinib,Neratinib,,,,Neratinib,input,
-12,,,,,,,Palbociclib,Palbociclib,,,,Palbociclib,input,
-13,,,,,,,Trametinib,Trametinib,,,,Trametinib,input,
-14,,,,,,,BCL2_T,BCL2_T,,,,BCL2_T,input,Transcript of BCL2
-15,,,,,,,BIM_T,BIM_T,,,,BIM_T,input,Transcript of BIM
-16,,,,,,,ER,ER,,,,ER,input,"Basal estrogen receptor activity. ER=1 in ER+ breast cancer, i.e. in Z17, Z21, MCF7, T47D, otherwise ER=0."
-17,,,,,,,HER3_T,HER3_T,,,,HER3_T,input,
-18,,,,,,,PDK1,PDK1,,,,PDK1_ic,input,PDK1 pool not in the plasma membrane
-19,,,,,,,SGK1_T,SGK1_T,,,,SGK1_T,input,
-20,,,,,,,,Navitoclax,,,,Navitoclax,input,
-21,,,,,,,,S63845,,,,S63845,input,
+5,HRG,HRG,HRG,,,,,HER3_microenvironment,NRG1,NRG1,NRG1,NRG1,input,"HRG (heregulin) is an established synonim of NRG1 (neuregulin), the ligand of HER3. The official name is NRG1. constant 0 in Z21"
+6,,,,stimulus,stimulus,stimulus,,,,,,stimulus,input,"stimuli from the growth medium, assumed to be 1 in the HL, SL, BL models."
+7,,,,,,,Alpelisib,Alpelisib,,,,Alpelisib,constant 0,
+8,,,,,,,Everolimus,Everolimus,,,,Everolimus,constant 0,
+9,,,,,,,Fulvestrant,Fulvestrant,,,,Fulvestrant,constant 0,
+10,,,,,,,Ipatasertib,Ipatasertib,,,,Ipatasertib,constant 0,
+11,,,,,,,Neratinib,Neratinib,,,,Neratinib,constant 0,
+12,,,,,,,Palbociclib,Palbociclib,,,,Palbociclib,constant 0,
+13,,,,,,,Trametinib,Trametinib,,,,Trametinib,constant 0,
+14,,,,,,,BCL2_T,BCL2_T,,,,BCL2_T,constant 0,
+15,,,,,,,BIM_T,BIM_T,,,,BIM_T,input,
+16,,,,,,,ER,ER,,,,ER,input,"Estrogen receptor status. ER=1 in ER+ breast cancer, i.e. in Z17, Z21, MCF7, T47D, otherwise ER=0."
+17,,,,,,,HER3_T,HER3_T,,,,HER3_T,constant 0,
+18,,,,,,,PDK1,PDK1,,,,PDK1_ic,constant 0,intracellular PDK1 pool
+19,,,,,,,SGK1_T,SGK1_T,,,,SGK1_T,constant 0,
+20,,,,,,,,Navitoclax,,,,Navitoclax,constant 0,
+21,,,,,,,,S63845,,,,S63845,constant 0,
 22,,,,,,,,BCLXL_T,,,,BCLXL_T,input,
-23,,,,,,,,p27_T,,,,p27_T,input,Basal transcript level of p27. Additional transcriptional regulation is included in the p21_p27_T node.
-24,,,,,,,,ER_microenvironment,ES,ES,ES,ES,input,presence of estrogen in the microenvironment
-25,,,,,,,,MCL1_T,,,,MCL1_T,input,Transcript of MCL1
+23,,,,,,,,p27_T,,,,p27_T,constant 1,Basal transcript level of p27. Additional transcriptional regulation is included in the p21_p27_T node.
+24,,,,,,,,ER_microenvironment,ES,ES,ES,ES,input,presence of estrogen in the microenvironment. constant 0 in Z21
+25,,,,,,,,MCL1_T,,,,MCL1_T,constant 1,
 26,,,,,,,,,DLL_i,DLL_i,DLL_i,DLL,input,
 27,,,,,,,,,IGF1,IGF1,IGF1,IGF1,input,
 28,,,,,,,,,INS,INS,INS,INS,input,
@@ -40,13 +40,13 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 39,,,,,,,,,,,,,,
 40,AKT,AKT,AKT,AKT,AKT,AKT,AKT,AKT,AKT_i,AKT_i,AKT_i,AKT,,
 41,ERBB1,ERBB1,ERBB1,ERBB1,ERBB1,ERBB1,,,EGFR,EGFR,EGFR,EGFR,,The official name of ERBB1 is EGFR
-42,ERBB2,ERBB2,ERBB2,ERBB2,ERBB2,ERBB2,HER2,HER2,HER2,HER2,HER2,HER2,,ERBB2 and HER2 are the same protein in two different naming systems. HER2 is an input in Z17.
+42,ERBB2,ERBB2,ERBB2,ERBB2,ERBB2,ERBB2,HER2,HER2,HER2,HER2,HER2,HER2,constant 0,ERBB2 and HER2 are the same protein in two different naming systems. HER2 is an input in Z17.
 43,ERBB3,ERBB3,ERBB3,ERBB3,ERBB3,ERBB3,HER3,HER3,HER3,HER3,HER3,HER3,,ERBB3 and HER3 are the same protein in two different naming systems
 44,ERK1_2,ERK1_2,ERK1_2,ERK1_2,ERK1_2,ERK1_2,,,ERK_i,ERK_i,ERK_i,ERK,,The Z17 and Z21 models don't have ERK because they have a merged MAPK node
 45,MEK1_2,MEK1_2,MEK1_2,,,,,,MEK_i,MEK_i,MEK_i,MEK,,The Z17 and Z21 models don't have MEK because they have a merged MAPK node
 46,mTOR,mTOR,mTOR,,,,mTORC1,mTORC1,MTORC1_c,MTORC1_c,MTORC1_c,mTORC1,,The generic mTOR node is most consistent with the specific mTORC1 complex based on its interactions.
 47,p70S6K,p70S6K,p70S6K,p70S6K,p70S6K,p70S6K,S6K,S6K,S6K1,S6K1,S6K1,S6K,,The current notation of the p70 S6 kinase is S6K
-48,PDK1,PDK1,PDK1,,,, PDK1_pm,PDK1_pm,PDPK1,PDPK1,PDPK1,PDK1_pm,,The protein PDK1 is encoded by the gene PDPK1. Its active form is the plasma membrane-localized one.
+48,PDK1,PDK1,PDK1,,,,PDK1_pm,PDK1_pm,PDPK1,PDPK1,PDPK1,PDK1_pm,,The protein PDK1 is encoded by the gene PDPK1. Its active form is the plasma membrane-localized one.
 49,PKCa,PKCa,PKCa,,,,,,,,,PKCa,,
 50,PLCg,PLCg,PLCg,,,,,,,,,PLCg,,
 51,,,,cJUN,cJUN,cJUN,,,JUN,JUN,JUN,JUN,,JUN is the official gene symbol for cJUN
@@ -60,7 +60,7 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 59,,,,PRAS,PRAS,PRAS,PRAS40,PRAS40,,,,PRAS40,,
 60,,,,PTEN,PTEN,PTEN,PTEN,PTEN,PTEN,PTEN,PTEN,PTEN,,PTEN is an input in Z17
 61,,,,,,,,PTEN_2,,,,PTEN_2,,
-62,,,,RB,RB,RB,,,PRB,PRB,PRB,RB,,unphosphorylated RB protein. The Z17 and Z21 models represent the unphosphorylated RB protein as the state 0 of pRB
+62,,,,RB,RB,RB,,,PRB,PRB,PRB,RB,,unphosphorylated RB protein. The Z17 and Z21 models represent the unphosphorylated RB protein as the state 0 of pRB. Some models have PRB stand for RB protein.
 63,,,,,,,pRb,pRb,,,,pRB,,"phosphorylated RB protein, has the opposite effect as RB"
 64,,,,RPS6,RPS6,RPS6,,,,,,RPS6,,
 65,,,,TSC2,TSC2,TSC2,TSC,TSC,TSC2,TSC2,TSC2,TSC2,,
@@ -72,16 +72,16 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 71,,,,,,,BAD,BAD,BAD,BAD,BAD,BAD,,
 72,,,,,,,BCL2,BCL2,BCL2,BCL2,BCL2,BCL2,,
 73,,,,,,,BIM,BIM,BIM,BIM,BIM,BIM,,
-74,,,,,,,CDK46,CDK46,,,,CDK46,,merged node representative of CDK4 or CDK6
+74,,,,,,,CDK46,CDK46,,,,CDK46,,
 75,,,,,,,E2F,E2F,E2F1,E2F1,E2F1,E2F,,
 76,,,,,,,E2F_2,E2F_2,,,,E2F_2,,
 77,,,,,,,E2F_3,,,,,E2F_3,,
 78,,,,,,,EIF4F,EIF4F,EIF4E,EIF4E,EIF4E,EIF4,,The EIF4F node of Z17 and Z21 also includes EIF4E and EIF4A. We choose to use a generic EIF4 notation.
 79,,,,,,,ER_transcription,ER_transcription,,,,ER_transcription,,
 80,,,,,,,ER_transcription_2,ER_transcription_2,,,,ER_transcription_2,,
-81,,,,,,,ESR1,ESR1,ESR1,ESR1,ESR1,ESR1,,Estrogen receptor
+81,,,,,,,ESR1,ESR1,ESR1,ESR1,ESR1,ESR1,,
 82,,,,,,,ESR1_2,ESR1_2,,,,ESR1_2,,
-83,,,,,,,FOXA1,FOXA1,,,,FOXA1,,FOXA1 is an input in Z21
+83,,,,,,,FOXA1,FOXA1,,,,FOXA1,constant 1,FOXA1 is a constant 1 in Z21
 84,,,,,,,FOXO3,FOXO3,FOXO3,FOXO3,FOXO3,FOXO3,,
 85,,,,,,,FOXO3_Ub,FOXO3_Ub,,,,FOXO3_Ub,,
 86,,,,,,,HER2_3,HER2_3,,,,HER2HER3c,,Complex formed by HER2 and HER3
@@ -104,12 +104,12 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 103,,,,,,,RAS_3,RAS_3,,,,RAS_3,,
 104,,,,,,,SGK1,SGK1,SGK1,SGK1,SGK1,SGK1,,
 105,,,,,,,Translation,Translation,,,,Translation,,
-106,,,,,,,cycD_CDK46,cycD_CDK46,CYCLIN_D_c,CYCLIN_D_c,CYCLIN_D_c,CYCLINDc,,complex formed by cyclin D and CDK4 or CDK6
+106,,,,,,,cycD_CDK46,cycD_CDK46,CYCLIN_D_c,CYCLIN_D_c,CYCLIN_D_c,CYCLINDc,,
 107,,,,,,,cycD_CDK46_2,cycD_CDK46_2,,,,CYCLINDc_2,,
 108,,,,,,,cycE_CDK2,cycE_CDK2,,,,cycE_CDK2,,
 109,,,,,,,cycE_CDK2_T,cycE_CDK2_T,,,,cycE_CDK2_T,,
 110,,,,,,,cyclinD_2,cyclinD_2,,,,CyclinD_2,,
-111,,,,,,,mTORC2,mTORC2,,,,mTORC2_ic,,
+111,,,,,,,mTORC2,mTORC2,,,,mTORC2_ic,constant 0,intracellular mTORC2
 112,,,,,,,mTORC2_pm,mTORC2_pm,MTORC2_c,MTORC2_c,MTORC2_c,mTORC2_pm,,mTORC2 localized in the plasma membrane
 113,,,,,,,p21_p27,p21_p27,,,,p21_p27,,merger of p21 and p27
 114,,,,,,,p21_p27_T,p21_p27_T,,,,p21_p27_T,,
@@ -140,13 +140,13 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 139,,,,,,,,,CREB1,CREB1,CREB1,CREB1,,
 140,,,,,,,,,CTNNB1,CTNNB1,CTNNB1,CTNNB1,,
 141,,,,,,,,,CYCS,CYCS,CYCS,CYCS,,
-142,,,,,,,,,DC,DC,DC,DC,,beta-catenin destruction complex
+142,,,,,,,,,DC,DC,DC,DC,,
 143,,,,,,,,,DVL1,DVL1,DVL1,DVL1,,
 144,,,,,,,,,FADD,FADD,FADD,FADD,,
 145,,,,,,,,,FAS,FAS,FAS,FAS,,
 146,,,,,,,,,FASLG,FASLG,FASLG,FASLG,,
 147,,,,,,,,,FOXO1,FOXO1,FOXO1,FOXO1,,
-148,,,,,,,,,FZD3,FZD3,FZD3,FZD,,"The authors are wrong in using FZD3. We correct it. Frizzled family members, including FZD4,5,8 "
+148,,,,,,,,,FZD3,FZD3,FZD3,FZD,,"The authors are wrong in using FZD3 specifically. We correct it by making this node more generally mean Frizzled family members, including FZD4,5,8."
 149,,,,,,,,,GATA3,GATA3,GATA3,GATA3,,
 150,,,,,,,,,GRB2,GRB2,GRB2,GRB2,,
 151,,,,,,,,,GRB7,GRB7,GRB7,GRB7,,
@@ -180,7 +180,7 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 179,,,,,,,,,PAK2,PAK2,PAK2,PAK2,,
 180,,,,,,,,,PAX7,PAX7,PAX7,PAX7,,
 181,,,,,,,,,PGR,PGR,PGR,PGR,,
-182,,,,,,,PIM,PIM,PIM,PIM,PIM,PIM,,PIM is an input in Z17 and Z21
+182,,,,,,,PIM,PIM,PIM,PIM,PIM,PIM,constant 0,PIM is a constant 0 in Z21
 183,,,,,,,,,PPARG,PPARG,PPARG,PPARG,,
 184,,,,,,,,,PRKAA2,PRKAA2,PRKAA2,PRKAA2,,
 185,,,,,,,,,PRKACA,PRKACA,PRKACA,PRKACA,,
@@ -198,4 +198,4 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 197,,,,,,,,,TEAD1,TEAD1,TEAD1,TEAD1,,
 198,,,,,,,,,TRADD,TRADD,TRADD,TRADD,,
 199,,,,,,,,,TWIST1,TWIST1,TWIST1,TWIST1,,
-200,,,,,,,,,YAP1,YAP1,YAP1,YAP1,,"nuclear, active YAP"
+200,,,,,,,,,YAP1,YAP1,YAP1,YAP1,,
