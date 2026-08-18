@@ -374,7 +374,7 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 373,MAPK_2,BAD,negative,Z17,replaced,,,"The MAPK_2 node refers to a high activity of the pathway of RAF1, MEK, ERK, which are represented as separate nodes in other models. The mechanism behind this edge is that ERK1/2 inhibits BAD via RSK. This edge is replaced by the ERK_2-| BAD edge."
 374,PIM,BAD,negative,Z17,direct,1,regulates,"phosphorylation. PIM kinases phosphorylate BAD. This promotes BAD's sequestration by 14-3-3 proteins, suppressing BAD's pro-apoptotic function."
 375,BCL2_T,BCL2,positive,Z17,direct,1,necessary,protein translation
-376,ER_transcription_2,BCL2,positive,Z17,direct,1,regulates,"regulation of transcription. ERα-containing transcriptional complexes occupy regulatory regions of the BCL2 locus, and estrogen treatment increases BCL2 mRNA/protein in ER-responsive breast-cancer cells."
+376,ER_transcription_2,BCL2,positive,Z17,direct,1,regulates,"regulation of transcription. ERα-containing transcriptional complexes occupy regulatory regions of the BCL2 locus, and estrogen treatment increases BCL2 mRNA/protein in ER-responsive breast-cancer cells. The model assumes that only high level of ER_transcription can affect BCL2."
 377,BIM_T,BIM,positive,Z17,direct,1,regulates,protein translation
 378,FOXO3,BIM,positive,Z17,direct,1,regulates,regulation of transcription. FOXO3 binds conserved forkhead-response elements in the promoter of  BCL2L11 (the gene encoding BIM) and stimulates its transcription.
 379,MAPK_2,BIM,negative,Z17,replaced,,,"The MAPK_2 node refers to a high activity of the pathway of RAF1, MEK, ERK.  Other models have separate RAF1, MEK, ERK nodes. The mechanism behind this edge is that ERK1/2 directly phosphorylates BIM (BCL2L11), which promotes is proteasomal degradation. This edge is replaced by an ERK_2-| BIM edge."
@@ -385,30 +385,30 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 384,E2F,E2F_2,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 385,E2F_3,E2F_2,positive,Z17,unsupported,-,,This edge is an artifact of the Boolean represtentation of a multi-level node.
 386,pRB_2,E2F_2,positive,Z17,indirect,2,,causal effect. Hypophosphorylated RB binds to E2F; phosphorylation of RB changes RB conformation and disrupts that binding. We consider that the confidence ranking is the same as that of the pRB->E2F edge.
-387,E2F,E2F_3,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
+387,E2F,E2F_3,positive,Z17,unsupported,-,,This is already represented by other inter-level edges
 388,E2F_2,E2F_3,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
-389,E2F_3,E2F_3,positive,Z17,direct,1,regulates,"regulation of transcription. The promoters of activator E2Fs (E2F1, E2F2, E2F3) contain functional E2F-binding sites, thus E2F activity can induce further expression of activator E2Fs."
+389,E2F_3,E2F_3,positive,Z17,direct,1,regulates,"regulation of transcription. The promoters of activator E2Fs (E2F1, E2F2, E2F3) contain functional E2F-binding sites, thus E2F activity can induce further expression of activator E2Fs. The model assumes that only the highest level of E2F can induce itself."
 390,pRB_2,E2F_3,positive,Z17,indirect,2,,causal effect. Hypophosphorylated RB binds to E2F; phosphorylation of RB changes RB conformation and disrupts that binding. We consider that the confidence ranking is the same as that of the pRB->E2F edge.
 391,pRB_3,E2F_3,positive,Z17,indirect,2,,causal effect. Hypophosphorylated RB binds to E2F; phosphorylation of RB changes RB conformation and disrupts that binding. We consider that the confidence ranking is the same as that of the pRB->E2F edge.
 392,mTORC1,EIF4,positive,Z17,indirect,2,,causal effect mediated by EIF4EBP1
-393,ER,ER_transcription,positive,Z17,direct,1,regulates,"ER refers to the estrogen receptor status, and ER_transcription is the transcriptional regulatory role of the estrogen receptor. Their relationship is mediated by the ESR1 node."
+393,ER,ER_transcription,positive,Z17,unsupported,-,,"ER=1 refers to the mutation-based activated state of the estrogen receptor ESR1. ER does not directly affect ESR1_transcription, which is the transcriptional regulatory role of ESR1."
 394,ER_transcription_2,ER_transcription,positive,Z17,unsupported,-,,This edge is an artifact of the Boolean representation of multi-level nodes.
-395,ESR1,ER_transcription,positive,Z17,,0,necessary,ESR1 activity is needed for the transcriptional regulatory function of the estrogen receptor.
-396,ESR1_2,ER_transcription,positive,Z17,,0,,ESR1 activity is needed for the transcriptional regulatory function of the estrogen receptor. We consider that the confidence ranking is the same as that of the ESR1-> ER_transcription_2 edge.
-397,ER,ER_transcription_2,positive,Z17,direct,1,regulates,"ER refers to a basal estrogen receptor level, and ER_transcription_2 is the high-level transcriptional regulatory role of the estrogen receptor. Their relationship is mediated by the ESR1 node."
+395,ESR1,ER_transcription,positive,Z17,,0,necessary,ER_transcription is the transcriptional regulatory role of the estrogen receptor ESR1. 
+396,ESR1_2,ER_transcription,positive,Z17,,0,,ER_transcription is the transcriptional regulatory role of the estrogen receptor ESR1.  We consider that the confidence ranking is the same as that of the ESR1-> ER_transcription edge.
+397,ER,ER_transcription_2,positive,Z17,unsupported,-,,"ER=1 refers to the mutation-based activated state of the estrogen receptor ESR1. ER does not directly affect ESR1_transcription, which is the transcriptional regulatory role of ESR1."
 398,ER_transcription,ER_transcription_2,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
-399,ESR1_2,ER_transcription_2,positive,Z17,,0,,ESR1 activity is needed for the transcriptional regulatory function of the estrogen receptor. We consider that the confidence ranking is the same as that of the ESR1-> ER_transcription_2 edge.
-400,FOXA1,ER_transcription_2,positive,Z17,direct,1,regulates,FOXA1 is a pioneer factor that helps the transcriptional regulatory activity of the estrogen receptor. The Z21 model assumes that this effect is only relevant at high regulatory activity.
-401,KMT2D,ER_transcription_2,positive,Z17,direct,1,regulates,KMT2D helps establish chromatin conditions that permit recruitment/occupancy of ERα. KMT2D depletion reduces ERα occupancy at target loci and ER-dependent transcription.
-402,PBX1,ER_transcription_2,positive,Z17,direct,1,regulates,PBX1 is a pioneer factor that helps the transcriptional regulatory activity of the estrogen receptor. The Z21 model assumes that this effect is only relevant to high transcriptional activity.
-403,ER,ESR1,positive,Z17,,0,regulates,ER is one way of activating the estrogen receptor ESR1.
+399,ESR1_2,ER_transcription_2,positive,Z17,,0,,ER_transcription_2 is the high-level transcriptional regulatory role of the estrogen receptor ESR1. We consider that the confidence ranking is the same as that of the ESR1-> ER_transcription_2 edge.
+400,FOXA1,ER_transcription_2,positive,Z17,direct,1,regulates,FOXA1 is a pioneer factor that helps the transcriptional regulatory activity of the estrogen receptor. The Z17 model assumes that this effect is only relevant at high regulatory activity.
+401,KMT2D,ER_transcription_2,positive,Z17,direct,1,regulates,KMT2D helps establish chromatin conditions that permit recruitment/occupancy of ERα. KMT2D depletion reduces ERα occupancy at target loci and ER-dependent transcription. The Z17 model assumes that this effect is only relevant at high regulatory activity.
+402,PBX1,ER_transcription_2,positive,Z17,direct,1,regulates,PBX1 is a pioneer factor that helps the transcriptional regulatory activity of the estrogen receptor. The Z17 model assumes that this effect is only relevant to high transcriptional activity.
+403,ER,ESR1,positive,Z17,,0,regulates,ER=1 refers to the mutation-based activated state of the estrogen receptor ESR1.
 404,ESR1_2,ESR1,positive,Z17,unsupported,-,,This edge is an artifact of the Boolean representation of a multi-level variable
 405,FOXO3,ESR1,positive,Z17,direct,1,regulates,regulation of transcription. FOXO3a directly binds regulatory sites in the ESR1 (ERα) promoter and increases ESR1 transcription
 406,Fulvestrant,ESR1,negative,Z17,direct,1,regulates,Fulvestrant is a selective estrogen receptor degrader/downregulator (SERD). It directly binds ERα (ESR1 protein) with high affinity.
-407,ER,ESR1_2,positive,Z17,,0,necessary,ER is one way of activating the estrogen receptor ESR1.
+407,ER,ESR1_2,positive,Z17,,0,necessary,ER=1 refers to the mutation-based activated state of the estrogen receptor ESR1. The model assumes that ER is necessary for ESR1_2.
 408,ESR1,ESR1_2,positive,Z17,,0,necessary,Reaching a higher level necessitates achieving the lower level first.
 409,FOXO3,ESR1_2,positive,Z17,direct,1,,regulation of transcription. FOXO3a directly binds regulatory sites in the ESR1 (ERα) promoter and increases ESR1 transcription. We assume the classification of the FOXO3->ESR1 edge applies to ESR1_2 as well.
-410,Fulvestrant,ESR1_2,negative,Z17,direct,1,regulates,Fulvestrant is a selective estrogen receptor degrader/downregulator (SERD). It directly binds ERα (ESR1 protein) with high affinity.
+410,Fulvestrant,ESR1_2,negative,Z17,direct,1,,Fulvestrant is a selective estrogen receptor degrader/downregulator (SERD). It directly binds ERα (ESR1 protein) with high affinity.
 411,FOXO3,FOXA1,positive,Z17,correlation,3,,Tumors with predominantly nuclear (active) FOXO3a had significantly higher FOXA1 expression.
 412,AKT,FOXO3,negative,Z17,direct,1,regulates,"phosphorylation. AKT phosphorylates FOXO1 at several regulatory residues. These promote binding to 14-3-3 proteins and retention in the cytoplasm, which decreases FOXO1 transcriptional activity"
 413,FOXO3_Ub,FOXO3,negative,Z17,direct,1,regulates,"The node FOXO3_Ub represents the ubiquitin-tagged FOXO3, which is targeted to degradation. This edge reflects that such degradation depletes FOXO3."
@@ -425,7 +425,7 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 424,HER3,HER2HER3c_2,positive,Z17,,0,,HER2's participation in the HER2HER3c heterodimer complex. We consider that the confidence ranking of the HER2-> HER2HER3c applies to this edge as well.
 425,HER3_2,HER2HER3c_2,positive,Z17,,0,,HER3's participation in the HER2HER3c heterodimer complex. We consider that the confidence ranking of the HER3-> HER2HER3c applies to this edge as well.
 426,MAPK_2,HER2HER3c_2,negative,Z17,replaced,,,"The MAPK_2 node refers to a high activity of the pathway of RAF1, MEK, ERK.  The mechanism behind this edge is that MEK induces feedback mechanisms that suppress HER-family receptor signaling, while MEK inhibition relieves that feedback and causes rebound HER3/HER2 activation. This edge is replaced by the MEK_2-|HER2HER3c_2 edge."
-427,Neratinib,HER2HER3c_2,negative,Z17,direct,1,regulates,Neratinib is an irreversible pan-HER tyrosine kinase inhibitor that covalently binds the kinase domains of HER2 and EGFR. We consider that the confidence rank is the same as the Neratinib-| HER2HER3c edge
+427,Neratinib,HER2HER3c_2,negative,Z17,direct,1,,Neratinib is an irreversible pan-HER tyrosine kinase inhibitor that covalently binds the kinase domains of HER2 and EGFR. We consider that the confidence rank is the same as the Neratinib-| HER2HER3c edge
 428,FOXO3,HER3,positive,Z17,direct,1,regulates,regulation of transcription. FOXO3 binds regulatory regions of ERBB3/HER3 and leads to increased HER3 transcription
 429,HER3_2,HER3,positive,Z17,unsupported,-,,This edge is an artifact of the Boolean representation of multi-level variables.
 430,HER3_T,HER3,positive,Z17,direct,1,regulates,protein translation
@@ -438,7 +438,7 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 437,FOXO3,IGF1R_2,positive,Z17,indirect,2,,"causal effect. Activated FOXO3 increases IGF1R mRNA and protein expression, and FOXO knockdown decreases IGF1R expression. The exact mechanism is not known. We assume that the confidence rank of the FOXO3->IGF1 edge applies to IGF1R_2 as well."
 438,HER2,IGF1R_2,positive,Z17,correlation,3,,This assumed edge is consistent with observed higher IGF1R signaling in trastuzumab-resistant cells
 439,IGF1R,IGF1R_2,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
-440,IGF1R_T,IGF1R_2,positive,Z17,direct,1,regulates,protein translation
+440,IGF1R_T,IGF1R_2,positive,Z17,direct,1,,protein translation
 441,S6K,IGF1R_2,negative,Z17,unsupported,-,,"S6K affects signaling downstream of IGF1R via its inhibition of IRS1, but does not affect IGF1R."
 442,AKT,KMT2D,negative,Z17,direct,1,regulates,phosphorylation. AKT phosphorylates KMT2D at Ser1331; this reduces KMT2D chromatin recruitment/function and consequently suppresses KMT2D-dependent ER transcriptional activity.
 443,MAPK_2,MAPK,positive,Z17,unsupported,-,,This edge is an artifact of the Boolean representation of a multi-level node.
@@ -457,7 +457,7 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 456,Translation,MCL1,positive,Z17,direct,1,regulates,"MCL1 is translated in a cap-dependent manner. Because MCL1 has a short half-life, translation is an important contributor to MCL1 protein abundance."
 457,ER_transcription,MYC,positive,Z17,direct,1,regulates,regulation of transcription. ERα occupies regulatory elements associated with the MYC locus and induces MYC transcription. ER_transcription represents the transcriptional activity of the estrogen receptor.
 458,MYC_2,MYC,positive,Z17,unsupported,-,,This edge is an artifact of the Boolean representation of multi-level nodes.
-459,ER_transcription_2,MYC_2,positive,Z17,direct,1,regulates,regulation of transcription. ERα occupies regulatory elements associated with the MYC locus and induces MYC transcription. ER_transcription_2 represents high transcriptional activity of the estrogen receptor.
+459,ER_transcription_2,MYC_2,positive,Z17,direct,1,,regulation of transcription. ERα occupies regulatory elements associated with the MYC locus and induces MYC transcription. ER_transcription_2 represents high transcriptional activity of the estrogen receptor.
 460,MYC,MYC_2,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 461,PIP3,PDK1_pm,positive,Z17,direct,1,necessary,protein-protein interaction. PIP3 recruits PDK1 to the plasma membrane.
 462,PIP3_2,PDK1_pm,positive,Z17,direct,1,,protein-protein interaction. PIP3 recruits PDK1 to the plasma membrane. We consider that the confidence ranking is the same as that of the PIP3->PDK1_pm edge.
@@ -470,7 +470,7 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 469,RAS,PI3K,positive,Z17,direct,1,regulates,protein-protein interaction. GTP-bound RAS binds the Ras-binding domain of the p110 catalytic subunit of class I PI3K. This interaction promotes PI3K activation.
 470,RAS_2,PI3K,positive,Z17,direct,1,,protein-protein interaction. GTP-bound RAS binds the Ras-binding domain of the p110 catalytic subunit of class I PI3K. This interaction promotes PI3K activation. We consider that the confidence ranking of the RAS->PI3K edge applies.
 471,RAS_3,PI3K,positive,Z17,direct,1,,protein-protein interaction. GTP-bound RAS binds the Ras-binding domain of the p110 catalytic subunit of class I PI3K. This interaction promotes PI3K activation. We consider that the confidence ranking of the RAS->PI3K edge applies.
-472,Alpelisib,PI3K_2,negative,Z17,direct,1,regulates,Alpelisib is a small-molecule inhibitor that directly binds the p110α catalytic subunit (PIK3CA) of PI3Kα and inhibits its lipid-kinase activity. We consider the confidence ranking the same as that of the Alpelisib->PI3K edge.
+472,Alpelisib,PI3K_2,negative,Z17,direct,1,,Alpelisib is a small-molecule inhibitor that directly binds the p110α catalytic subunit (PIK3CA) of PI3Kα and inhibits its lipid-kinase activity. We consider the confidence ranking the same as that of the Alpelisib->PI3K edge.
 473,HER2HER3c_2,PI3K_2,positive,Z17,direct,1,,protein-protein interaction. Phosphorylated HER3 within the HER2–HER3 complex directly recruits PI3K by binding to its p85 subunit. We consider that the confidence ranking of the edge with the lower-level variable applies.
 474,PI3K,PI3K_2,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 475,PI3K,PIP3,positive,Z17,direct,1,regulates,PI3K catalyzes the reaction that produces PIP3.
@@ -505,7 +505,7 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 504,RAS,RAS_2,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 505,RAS_3,RAS_2,positive,Z17,unsupported,-,,This edge is an artifact of the Boolean representation of multi-level nodes.
 506,HER2HER3c_2,RAS_3,positive,Z17,indirect,2,,"causal effect mediated by GRB2, SOS. We consider the confidence level the same as that of the HER2HER3c->RAS edge."
-507,RAS,RAS_3,positive,Z17,,0,,Reaching a higher level necessitates reaching the lower level first.
+507,RAS,RAS_3,positive,Z17,unsupported,-,,This is already represented by other inter-level edges
 508,RAS_2,RAS_3,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 509,mTORC1,S6K,positive,Z17,direct,1,regulates,phosphorylation. mTORC1 phosphorylates S6K. This phosphorylation is essential for efficient S6K1 activation; full activation is done by PDK1.
 510,PDK1_ic,SGK1,positive,Z17,direct,1,necessary,"phosphorylation. Intracellular PDK1 phosphorylates SGK1 at Thr256 in its activation loop, producing full kinase activation after the hydrophobic-motif site (Ser422) has been phosphorylated by mTORC2. "
@@ -520,14 +520,14 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 519,CYCLINDc_2,CYCLINDc,positive,Z17,unsupported,-,,This edge is an artifact of the Boolean representation of a multi-level variable.
 520,CyclinD,CYCLINDc,positive,Z17,,0,necessary,Cyclin D1 is one of two components of the cyclin-CDK complex CYCLINDc
 521,CyclinD_2,CYCLINDc,positive,Z17,,0,,Cyclin D1 is one of two components of the cyclin-CDK complex CYCLINDc. We assign the same rank as that of the CyclinD1->CYCLIND_c edge.
-522,CDK46,CYCLINDc_2,positive,Z17,,0,necessary,CDK4 or CDK6 (denoted CDK46) make up one component of the cyclin-CDK complex CYCLINDc. We consider that the same confidence ranking applies as that of the CDK46->CYCLINDc edge.
+522,CDK46,CYCLINDc_2,positive,Z17,,0,,CDK4 or CDK6 (denoted CDK46) make up one component of the cyclin-CDK complex CYCLINDc. We consider that the same confidence ranking applies as that of the CDK46->CYCLINDc edge.
 523,CYCLINDc,CYCLINDc_2,positive,Z17,,0,necessary,Reaching a higher level necessitates achieving the lower level first.
 524,CyclinD_2,CYCLINDc_2,positive,Z17,,0,,Cyclin D1 is one of two components of the cyclin-CDK complex CYCLINDc. We assign the same rank as that of the CyclinD1->CYCLIND_c edge.
 525,cycE_CDK2_T,cycE_CDK2,positive,Z17,direct,1,necessary,protein translation
 526,p21_p27,cycE_CDK2,negative,Z17,direct,1,regulates,"protein-protein interaction. Both p21 and p27,  members of the CIP/KIP family, bind  Cyclin E–CDK2 complexes. This prevents phosphorylation of substrates required for S-phase entry and progression."
 527,E2F,cycE_CDK2_T,positive,Z17,direct,1,necessary,regulation of transcription. CycE_CDK2_T represents the transcripts of the components underlying the Cyclin E–CDK2 complex. E2F1 binds E2F sites in the CCNE1 promoter and activates Cyclin E transcription. There is also evidence of E2F1 can promote CDK2 transcription.
-528,E2F_2,cycE_CDK2_T,positive,Z17,direct,1,,"regulation of transcription. CycE_CDK2_T represents the transcripts of the components underlying the Cyclin E–CDK2 complex. E2F directly transcriptionally activates Cyclin E genes (CCNE1 and CCNE2) through E2F-responsive regulatory elements, thus upregulating CycE_CDK2_T. We consider that the confidence rank is the same as that of the E2F-> cycE_CDK2_T edge."
-529,E2F_3,cycE_CDK2_T,positive,Z17,indirect,2,,"causal effect. CycE_CDK2_T represents the transcript of the components underlying the Cyclin E–CDK2 complex. E2F directly transcriptionally activates Cyclin E genes (CCNE1 and CCNE2) through E2F-responsive regulatory elements, thus contributing to more CycE_CDK2_T."
+528,E2F_2,cycE_CDK2_T,positive,Z17,direct,1,,"regulation of transcription. CycE_CDK2_T represents the transcripts of the components underlying the Cyclin E–CDK2 complex. E2F directly transcriptionally activates Cyclin E genes (CCNE1 and CCNE2) through E2F-responsive regulatory elements, thus upregulating CycE_CDK2_T. There is also evidence of E2F1 can promote CDK2 transcription as well. We consider that the confidence rank is the same as that of the E2F-> cycE_CDK2_T edge."
+529,E2F_3,cycE_CDK2_T,positive,Z17,direct,1,,"regulation of transcription. CycE_CDK2_T represents the transcript of the components underlying the Cyclin E–CDK2 complex. E2F directly transcriptionally activates Cyclin E genes (CCNE1 and CCNE2) through E2F-responsive regulatory elements, and also regulates the transcription of CDK2.  We consider that the confidence rank is the same as that of the E2F-> cycE_CDK2_T edge."
 530,MYC,CyclinD,positive,Z17,unsupported,-,,"Contrary to this assumption, there is evidence that MYC can bind to  the Cyclin D1 promoter and repress CCND1 transcription."
 531,CyclinD_2,CyclinD,positive,Z17,unsupported,-,,This edge is an artifact of the Boolean representation of a multi-level variable.
 532,MYC_2,CyclinD_2,positive,Z17,unsupported,-,,"Contrary to this assumption, there is evidence that MYC can bind to  the Cyclin D1 promoter and repress CCND1 transcription."
@@ -551,14 +551,14 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 550,cycE_CDK2,pRB,positive,Z17,direct,1,regulates,phosphorylation. Cyclin E–CDK2 directly recognizes and phosphorylates RB.
 551,pRB_2,pRB,positive,Z17,unsupported,-,,This edge is an artifact of the Boolean representation of a multi-level node.
 552,pRB_3,pRB,positive,Z17,unsupported,-,,This edge is an artifact of the Boolean representation of a multi-level node.
-553,CYCLINDc,pRB_2,positive,Z17,direct,1,regulates,"phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
+553,CYCLINDc,pRB_2,positive,Z17,direct,1,,"phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
 554,CYCLINDc_2,pRB_2,positive,Z17,direct,1,,"phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
-555,cycE_CDK2,pRB_2,positive,Z17,direct,1,regulates,phosphorylation. Cyclin E–CDK2 directly recognizes and phosphorylates RB. We consider the confidence ranking of this edge is the same as that of the cycE_CDK2 edge.
+555,cycE_CDK2,pRB_2,positive,Z17,direct,1,,phosphorylation. Cyclin E–CDK2 directly recognizes and phosphorylates RB. We consider the confidence ranking of this edge is the same as that of the cycE_CDK2 edge.
 556,pRB,pRB_2,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 557,pRB_3,pRB_2,positive,Z17,unsupported,-,,This edge is an artifact of the Boolean representation of a multi-level node.
 558,CYCLINDc_2,pRB_3,positive,Z17,direct,1,,"phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
-559,cycE_CDK2,pRB_3,positive,Z17,direct,1,regulates,phosphorylation. Cyclin E–CDK2 directly recognizes and phosphorylates RB. We consider the confidence ranking of this edge is the same as that of the cycE_CDK2 edge.
-560,pRB,pRB_3,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
+559,cycE_CDK2,pRB_3,positive,Z17,direct,1,,phosphorylation. Cyclin E–CDK2 directly recognizes and phosphorylates RB. We consider the confidence ranking of this edge is the same as that of the cycE_CDK2 edge.
+560,pRB,pRB_3,positive,Z17,unsupported,-,,This is already represented by other inter-level edges
 561,pRB_2,pRB_3,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 562,Ipatasertib,AKT,negative,Z21,direct,1,regulates,Ipatasertib is a small-molecule AKT inhibitor that directly binds the kinase domain of AKT1/2/3 and inhibits its catalytic activity
 563,PDK1_pm,AKT,positive,Z21,direct,1,regulates,phosphorylation. Plasma-membrane-bound PDK1 directly phosphorylates AKT at Thr308 in its activation loop.
@@ -594,26 +594,26 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 593,pRB_2,E2F_2,positive,Z21,indirect,2,,causal effect. Hypophosphorylated RB binds to E2F; phosphorylation of RB changes RB conformation and disrupts that binding. We consider that the confidence ranking is the same as that of the pRB->E2F edge.
 594,mTORC1,EIF4,positive,Z21,indirect,2,,causal effect mediated by EIF4EBP1
 595,ER_transcription_2,ER_transcription,positive,Z21,unsupported,-,,This edge is an artifact of the Boolean representation of multi-level nodes.
-596,ESR1,ER_transcription,positive,Z21,,0,necessary,ESR1 activity is needed for the transcriptional regulatory function of the estrogen receptor 
-597,ESR1_2,ER_transcription,positive,Z21,,0,,ESR1 activity is needed for the transcriptional regulatory function of the estrogen receptor. We consider that the confidence ranking is the same as that of the ESR1-> ER_transcription_2 edge.
+596,ESR1,ER_transcription,positive,Z21,,0,necessary,ER_transcription is the transcriptional regulatory role of the estrogen receptor ESR1. 
+597,ESR1_2,ER_transcription,positive,Z21,,0,,ER_transcription is the transcriptional regulatory role of the estrogen receptor ESR1. We consider that the confidence ranking is the same as that of the ESR1-> ER_transcription edge.
 598,ER_transcription,ER_transcription_2,positive,Z21,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
-599,ESR1_2,ER_transcription_2,positive,Z21,,0,,ESR1 activity is needed for the transcriptional regulatory function of the estrogen receptor. We consider that the confidence ranking is the same as that of the ESR1-> ER_transcription_2 edge.
+599,ESR1_2,ER_transcription_2,positive,Z21,,0,,ER_transcription_2 is the high-level transcriptional regulatory role of the estrogen receptor ESR1. We consider that the confidence ranking is the same as that of the ESR1-> ER_transcription edge.
 600,FOXA1,ER_transcription_2,positive,Z21,direct,1,regulates,FOXA1 is a pioneer factor that helps the transcriptional regulatory activity of the estrogen receptor. The Z21 model assumes that this effect is only relevant at high regulatory activity
-601,KMT2D,ER_transcription_2,positive,Z21,direct,1,regulates,KMT2D deposits enhancer-associated H3K4me1/2 and helps establish chromatin conditions that permit recruitment/occupancy of ERα together with pioneer/cofactor proteins such as FOXA1 and PBX1. KMT2D depletion reduces ERα occupancy at target loci and ER-dependent transcription.
+601,KMT2D,ER_transcription_2,positive,Z21,direct,1,regulates,KMT2D deposits enhancer-associated H3K4me1/2 and helps establish chromatin conditions that permit recruitment/occupancy of ERα together with pioneer/cofactor proteins such as FOXA1 and PBX1. KMT2D depletion reduces ERα occupancy at target loci and ER-dependent transcription. The Z21 model assumes that this effect is only relevant at high regulatory activity.
 602,PBX1,ER_transcription_2,positive,Z21,direct,1,regulates,PBX1 is a pioneer factor that helps the transcriptional regulatory activity of the estrogen receptor. The Z21 model assumes that this effect is only relevant to high transcriptional activity.
 603,ER_transcription_2,ER_transcription_feedback_1,positive,Z21,assumption,4,,"This edge is part of an assumed negative feedback loop on the estrogen receptor, which models the transient nature of the Alpelisib-induced upregulation of ESR1."
 604,ER_transcription_feedback_1,ER_transcription_feedback_2,positive,Z21,assumption,4,,"This edge is part of an assumed negative feedback loop on the estrogen receptor, which models the transient nature of the Alpelisib-induced upregulation of ESR1."
 605,ER_transcription_feedback_2,ER_transcription_feedback_2,positive,Z21,assumption,4,,"This edge is part of an assumed negative feedback loop on the estrogen receptor, which models the transient nature of the Alpelisib-induced upregulation of ESR1."
-606,ER,ESR1,positive,Z21,,0,regulates,ER is one way of activating the estrogen receptor ESR1.
+606,ER,ESR1,positive,Z21,,0,regulates,"ER=1 refers to the mutation-based activated state of the estrogen receptor ESR1. The model assumes that ER is sufficient for ESR1  (i.e., ESR1 is active in ER+ breast cancer) and is necessary for ESR1_2."
 607,ESR1_2,ESR1,positive,Z21,unsupported,-,,This edge is an artifact of the Boolean representation of a multi-level variable
 608,FOXO3,ESR1,positive,Z21,direct,1,regulates,regulation of transcription. FOXO3a directly binds regulatory sites in the ESR1 (ERα) promoter and increases ESR1 transcription
 609,Fulvestrant,ESR1,negative,Z21,direct,1,regulates,Fulvestrant is a selective estrogen receptor degrader/downregulator (SERD). It directly binds ERα (ESR1 protein) with high affinity.
-610,ER,ESR1_2,positive,Z21,,0,necessary,ER is one way of activating the estrogen receptor ESR1.
+610,ER,ESR1_2,positive,Z21,,0,necessary,ER=1 refers to the mutation-based activated state of the estrogen receptor ESR1. The model assumes that ER is necessary for ESR1_2.
 611,ES,ESR1_2,positive,Z21,direct,1,,ligand-receptor binding
 612,ER_transcription_feedback_2,ESR1_2,negative,Z21,assumption,4,,"This edge is part of an assumed negative feedback loop on the estrogen receptor, which models the transient nature of the Alpelisib-induced upregulation of ESR1"
 613,ESR1,ESR1_2,positive,Z21,,0,necessary,Reaching a higher level necessitates achieving the lower level first.
 614,FOXO3,ESR1_2,positive,Z21,direct,1,,regulation of transcription. FOXO3a directly binds regulatory sites in the ESR1 (ERα) promoter and increases ESR1 transcription. We assume the classification of the FOXO3->ESR1 edge applies to ESR1_2 as well.
-615,Fulvestrant,ESR1_2,negative,Z21,direct,1,regulates,Fulvestrant is a selective estrogen receptor degrader/downregulator (SERD). It directly binds ERα (ESR1 protein) with high affinity.
+615,Fulvestrant,ESR1_2,negative,Z21,direct,1,,Fulvestrant is a selective estrogen receptor degrader/downregulator (SERD). It directly binds ERα (ESR1 protein) with high affinity.
 616,AKT,FOXO3,negative,Z21,direct,1,regulates,"phosphorylation. AKT phosphorylates FOXO1 at several regulatory residues. These promote binding to 14-3-3 proteins and retention in the cytoplasm, which decreases FOXO1 transcriptional activity"
 617,FOXO3_Ub,FOXO3,negative,Z21,direct,1,regulates,"The node FOXO3_Ub represents the ubiquitin-tagged FOXO3, which is targeted to degradation. This edge reflects that such degradation depletes FOXO3."
 618,PIM,FOXO3,negative,Z21,direct,1,regulates,phosphorylation. PIM kinases phosphorylate FOXO3 (FOXO3a). This phosphorylation suppresses FOXO3 transcriptional activity by promoting its nuclear exclusion and association with 14-3-3 proteins.
@@ -630,7 +630,7 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 629,HER3_2,HER2HER3c_2,positive,Z21,,0,,HER3's participation in the HER2HER3c heterodimer complex. We consider that the confidence ranking of the HER3-> HER2HER3c applies to this edge as well.
 630,NRG1,HER2HER3c_2,positive,Z21,indirect,2,,"causal effect mediated by HER3, PI3K, ERK"
 631,MAPK_2,HER2HER3c_2,negative,Z21,replaced,,,"The MAPK_2 node refers to a high activity of the pathway of RAF1, MEK, ERK.  The mechanism behind this edge is that MEK induces feedback mechanisms that suppress HER-family receptor signaling, while MEK inhibition relieves that feedback and causes rebound HER3/HER2 activation. This edge is replaced by the MEK_2-|HER2HER3c_2 edge."
-632,Neratinib,HER2HER3c_2,negative,Z21,direct,1,regulates,Neratinib is an irreversible pan-HER tyrosine kinase inhibitor that covalently binds the kinase domains of HER2 and EGFR.
+632,Neratinib,HER2HER3c_2,negative,Z21,direct,1,,Neratinib is an irreversible pan-HER tyrosine kinase inhibitor that covalently binds the kinase domains of HER2 and EGFR.
 633,FOXO3,HER3,positive,Z21,direct,1,regulates,regulation of transcription. FOXO3 binds regulatory regions of ERBB3/HER3 and leads to increased HER3 transcription
 634,HER3_2,HER3,positive,Z21,unsupported,-,,This edge is an artifact of the Boolean representation of multi-level variables.
 635,HER3_T,HER3,positive,Z21,direct,1,regulates,protein translation
@@ -667,14 +667,14 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 666,S63845,MCL1,negative,Z21,direct,1,regulates,"S63845 is a selective BH3-mimetic inhibitor of MCL-1. It binds to the BH3-binding groove of MCL-1 with very high affinity and displaces pro-apoptotic partners such as BAX/BAK/BIM, thereby neutralizing MCL-1’s anti-apoptotic function."
 667,ER_transcription,MYC,positive,Z21,direct,1,regulates,regulation of transcription. ERα occupies regulatory elements associated with the MYC locus and induces MYC transcription. ER_transcription represents the transcriptional activity of the estrogen receptor.
 668,MYC_2,MYC,positive,Z21,unsupported,-,,This edge is an artifact of the Boolean representation of multi-level nodes.
-669,ER_transcription_2,MYC_2,positive,Z21,direct,1,regulates,regulation of transcription. ERα occupies regulatory elements associated with the MYC locus and induces MYC transcription. ER_transcription_2 represents the transcriptional activity of the estrogen receptor.
+669,ER_transcription_2,MYC_2,positive,Z21,direct,1,,regulation of transcription. ERα occupies regulatory elements associated with the MYC locus and induces MYC transcription. ER_transcription_2 represents the transcriptional activity of the estrogen receptor.
 670,MYC,MYC_2,positive,Z21,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
-671,MYC_T,MYC_2,positive,Z21,direct,1,regulates,translation of the MYC protein.
+671,MYC_T,MYC_2,positive,Z21,direct,1,,translation of the MYC protein.
 672,MYC,MYC_targets,positive,Z21,direct,1,regulates,regulation of transcription. MYC_targets represents genes regulated both transcriptionally by MYC and translationally by the mTORC1 pathway.
 673,MYC_2,MYC_targets,positive,Z21,direct,1,,regulation of transcription. MYC_targets represents genes regulated both transcriptionally by MYC and translationally by the mTORC1 pathway. We assign the same confidence ranking as that of the MYC->MYC_targets edge.
 674,MYC_targets_2,MYC_targets,positive,Z21,unsupported,-,,This edge is an artifact of the Boolean representation of multi-level nodes.
 675,Translation,MYC_targets,positive,Z21,direct,1,regulates,"MYC_targets represents genes regulated both transcriptionally by MYC and translationally by the mTORC1 pathway, consistent with findings of convergent effects of these two pathways."
-676,MYC,MYC_targets_2,positive,Z21,direct,1,regulates,regulation of transcription. MYC_targets represents genes regulated both transcriptionally by MYC and translationally by the mTORC1 pathway. We assign the same confidence ranking as that of the MYC->MYC_targets edge.
+676,MYC,MYC_targets_2,positive,Z21,direct,1,,regulation of transcription. MYC_targets represents genes regulated both transcriptionally by MYC and translationally by the mTORC1 pathway. We assign the same confidence ranking as that of the MYC->MYC_targets edge.
 677,MYC_2,MYC_targets_2,positive,Z21,direct,1,,regulation of transcription. MYC_targets represents genes regulated both transcriptionally by MYC and translationally by the mTORC1 pathway. We assign the same confidence ranking as that of the MYC->MYC_targets edge.
 678,MYC_targets,MYC_targets_2,positive,Z21,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 679,Translation,MYC_targets_2,positive,Z21,direct,1,,"MYC_targets represents genes regulated both transcriptionally by MYC and translationally by the mTORC1 pathway, consistent with findings of convergent effects of these two pathways."
@@ -689,7 +689,7 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 688,RAS,PI3K,positive,Z21,direct,1,regulates,protein-protein interaction. GTP-bound RAS binds the Ras-binding domain (RBD) of the p110 catalytic subunit of class I PI3K. This interaction promotes PI3K activation.
 689,RAS_2,PI3K,positive,Z21,direct,1,,protein-protein interaction. GTP-bound RAS binds the Ras-binding domain of the p110 catalytic subunit of class I PI3K. This interaction promotes PI3K activation. We consider that the confidence ranking of the RAS->PI3K edge applies.
 690,RAS_3,PI3K,positive,Z21,direct,1,,protein-protein interaction. GTP-bound RAS binds the Ras-binding domain of the p110 catalytic subunit of class I PI3K. This interaction promotes PI3K activation. We consider that the confidence ranking of the RAS->PI3K edge applies.
-691,Alpelisib,PI3K_2,negative,Z21,direct,1,regulates,Alpelisib is a small-molecule inhibitor that directly binds the p110α catalytic subunit (PIK3CA) of PI3Kα and inhibits its lipid-kinase activity. We consider the confidence ranking the same as that of the Alpelisib->PI3K edge.
+691,Alpelisib,PI3K_2,negative,Z21,direct,1,,Alpelisib is a small-molecule inhibitor that directly binds the p110α catalytic subunit (PIK3CA) of PI3Kα and inhibits its lipid-kinase activity. We consider the confidence ranking the same as that of the Alpelisib->PI3K edge.
 692,HER2HER3c_2,PI3K_2,positive,Z21,direct,1,,protein-protein interaction. Phosphorylated HER3 within the HER2–HER3 complex directly recruits PI3K by binding to its p85 subunit. We consider that the confidence ranking of the edge with the lower-level variable applies.
 693,PI3K,PI3K_2,positive,Z21,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 694,PI3K,PIP3,positive,Z21,direct,1,regulates,PI3K catalyzes the reaction that produces PIP3.
@@ -727,7 +727,7 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 726,RAS,RAS_2,positive,Z21,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 727,RAS_3,RAS_2,positive,Z21,unsupported,-,,This edge is an artifact of the Boolean representation of multi-level nodes.
 728,HER2HER3c_2,RAS_3,positive,Z21,indirect,2,,"causal effect mediated by GRB2, SOS. We consider the confidence level the same as that of the HER2HER3c->RAS edge."
-729,RAS,RAS_3,positive,Z21,,0,,Reaching a higher level necessitates reaching the lower level first.
+729,RAS,RAS_3,positive,Z21,unsupported,-,,This is already represented by other inter-level edges
 730,RAS_2,RAS_3,positive,Z21,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 731,mTORC1,S6K,positive,Z21,direct,1,regulates,phosphorylation. mTORC1 phosphorylates S6K. This phosphorylation is essential for efficient S6K1 activation; full activation is done by PDK1.
 732,PDK1_ic,SGK1,positive,Z21,direct,1,necessary,"phosphorylation. Intracellular PDK1 phosphorylates SGK1 at Thr256 in its activation loop, producing full kinase activation after the hydrophobic-motif site (Ser422) has been phosphorylated by mTORC2. "
@@ -742,7 +742,7 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 741,CYCLINDc_2,CYCLINDc,positive,Z21,unsupported,-,,This edge is an artifact of the Boolean representation of a multi-level variable.
 742,CyclinD,CYCLINDc,positive,Z21,,0,necessary,Cyclin D1 is one of two components of the cyclin-CDK complex CYCLINDc
 743,CyclinD_2,CYCLINDc,positive,Z21,,0,,Cyclin D1 is one of two components of the cyclin-CDK complex CYCLINDc. We assign the same rank as that of the CyclinD1->CYCLIND_c edge.
-744,CDK46,CYCLINDc_2,positive,Z21,,0,necessary,CDK4 or CDK6 (denoted CDK46) make up one component of the cyclin-CDK complex CYCLINDc. We consider that the same confidence ranking applies as that of the CDK46->CYCLINDc edge.
+744,CDK46,CYCLINDc_2,positive,Z21,,0,,CDK4 or CDK6 (denoted CDK46) make up one component of the cyclin-CDK complex CYCLINDc. We consider that the same confidence ranking applies as that of the CDK46->CYCLINDc edge.
 745,CYCLINDc,CYCLINDc_2,positive,Z21,,0,necessary,Reaching a higher level necessitates achieving the lower level first.
 746,CyclinD_2,CYCLINDc_2,positive,Z21,,0,,Cyclin D1 is one of two components of the cyclin-CDK complex CYCLINDc. We assign the same rank as that of the CyclinD1->CYCLIND_c edge.
 747,cycE_CDK2_T,cycE_CDK2,positive,Z21,direct,1,necessary,protein translation
@@ -773,15 +773,15 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 772,MYC_2,p21_p27_T,negative,Z21,assumption,4,,The p21_p27_T node refers to the transcripts of p21 and p27. This assumed edge is consistent with the fact that MYC represses the transcription of CDKN1A (p21).
 773,p21_T,p21_p27_T,positive,Z21,,0,regulates,"The p21_p27_T node is a union of the transcripts of p21 and p27. Thus, this edge represents inclusion."
 774,p21_T_2,p21_p27_T,positive,Z21,,0,,The p21_p27_T node unites the transcripts of p21 and p27. We consider that the confidence ranking is the same as that of the p21_T->p21-p27_T edge.
-775,p27_T,p21_p27_T,positive,Z21,,0,necessary,"The p21_p27_T node unites the transcripts of p21 and p27. Thus, this edge represents inclusion."
+775,p27_T,p21_p27_T,positive,Z21,,0,regulates,"The p21_p27_T node unites the transcripts of p21 and p27. Thus, this edge represents inclusion."
 776,Rb_T,pRB,negative,Z21,assumption,4,,This assumption reflects the experimental observation that the loss of Rb_T results in the loss of the inhibitory effect of Rb on E2F family members.
 777,CYCLINDc,pRB,positive,Z21,direct,1,regulates,"phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
 778,CYCLINDc_2,pRB,positive,Z21,direct,1,,"phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
 779,pRB_2,pRB,positive,Z21,unsupported,-,,This edge is an artifact of the Boolean representation of a multi-level node.
 780,Rb_T,pRB_2,negative,Z21,assumption,4,,This assumption reflects the experimental observation that the loss of Rb_T results in the loss of inhibitory effect of Rb on E2F family members.
-781,CYCLINDc,pRB_2,positive,Z21,direct,1,regulates,"phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
+781,CYCLINDc,pRB_2,positive,Z21,direct,1,,"phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
 782,CYCLINDc_2,pRB_2,positive,Z21,direct,1,,"phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
-783,cycE_CDK2,pRB_2,positive,Z21,direct,1,regulates,phosphorylation. Cyclin E–CDK2 directly recognizes and phosphorylates RB. We consider the confidence ranking of this edge is the same as that of the cycE_CDK2 edge.
+783,cycE_CDK2,pRB_2,positive,Z21,direct,1,,phosphorylation. Cyclin E–CDK2 directly recognizes and phosphorylates RB. We consider the confidence ranking of this edge is the same as that of the cycE_CDK2 edge.
 784,pRB,pRB_2,positive,Z21,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 785,GRB2,ABL1,positive,TGEN,assumption,4,,"There is evidence for the other direction: ABL phosphorylates/recruits GRB2, but not for an effect from GRB2 to ABL."
 786,SRC,ABL1,positive,TGEN,direct,1,regulates,"phosphorylation. SRC phosphorylates ABL1, which increases ABL1 kinase activity"
@@ -1625,8 +1625,8 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 1624,ERK,BAD,negative,Z17,direct in the network sense,1,regulates,"Replaces MAPK -| BAD. phosphorylation. ERK1/2 phosphorylate RSK, which phosphorylates BAD, which leads to its sequestration by 14-3-3 proteins, making it unable to inhibit BCLXL, BCL2. RSK is not in the network."
 1625,ERK,ERK_2,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 1626,ERK_2,BAD,negative,Z17,direct in the network sense,1,,"Replaces MAPK_2 -| BAD. ERK1/2 phosphorylate RSK (a node not in the network), which phosphorylates BAD, which leads to its sequestration by 14-3-3 proteins. ERK_2 is a new node that reflects high ERK activity as a consequence of high RAS->RAF1->MEK-> ERK activation."
-1627,ERK_2,BIM,negative,Z17,direct,1,regulates,Replaces MAPK_2 -| BIM. phosphorylation. ERK1/2 directly phosphorylates BIM (BCL2L11) at Ser69. That phosphorylation promotes BIM's ubiquitination/proteasomal degradation. ERK_2 is a new node that reflects high ERK activity as a consequence of high RAS->RAF1->MEK-> ERK activation.
-1628,ERK_2,FOXO3_Ub,positive,Z17,direct,1,regulates,"Replaces MAPK_2 -> FOXO3_Ub. phosphorylation. ERK1/2 phosphorylates FOXO3, which promote interaction of FOXO3 with the E3 ubiquitin ligase MDM2, which then ubiquitinates FOXO3. ERK_2 is a new node that reflects high ERK activity as a consequence of high RAS->RAF1->MEK-> ERK activation."
+1627,ERK_2,BIM,negative,Z17,direct,1,regulates,"Replaces MAPK_2 -| BIM. phosphorylation. ERK1/2 directly phosphorylates BIM (BCL2L11) at Ser69. That phosphorylation promotes BIM's ubiquitination/proteasomal degradation. ERK_2 is a new node that reflects high ERK activity as a consequence of high RAS->RAF1->MEK-> ERK activation. The model assumes that only a high-level activation of MAPK regulates BIM, which translates to the assumption that only ERK_2 regulates BIM."
+1628,ERK_2,FOXO3_Ub,positive,Z17,direct,1,regulates,"Replaces MAPK_2 -> FOXO3_Ub. phosphorylation. ERK1/2 phosphorylates FOXO3, which promote interaction of FOXO3 with the E3 ubiquitin ligase MDM2, which then ubiquitinates FOXO3. ERK_2 is a new node that reflects high ERK activity as a consequence of high RAS->RAF1->MEK-> ERK activation. The model assumes that only a high-level activation of MAPK leads to FOXO3 ubiquitination, which translates to the assumption that only ERK_2 regulates FOXO3_Ub."
 1629,ERK_2,TSC2,negative,Z17,direct in the network sense,1,,"Replaces MAPK_2 -| TSC2. ERK phosphorylates RSK (a node not in the network), which phosphorylates TSC2 at inhibitory sites such as Ser1798. ERK_2 is a new node that reflects high ERK activity as a consequence of high RAS->RAF1->MEK-> ERK activation."
 1630,MEK,MEK_2,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 1631,MEK_2,ERK_2,positive,Z17,direct,1,,"MEK1/2 directly binds and phosphorylates ERK1/2, activating its kinase activity. MEK_2 represents high MEK activity, which cannot be fully overcome by Trametinib. ERK_2 represents high ERK activity."
@@ -1639,16 +1639,16 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 1638,RAF1,RAF1_2,positive,Z17,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 1639,RAF1_2,MEK_2,positive,Z17,direct,1,,RAF1 directly phosphorylates MEK1/2 on their activating serine residues. This activates MEK kinase activity. RAF1_2 represents high RAF1 activity in response to high RAS activity. MEK_2 represents high MEK activity that cannot be completely inhibited by Trametinib.
 1640,RAS,RAF1,positive,Z17,direct,1,regulates,Replaces RAS -> MAPK. protein-protein interaction. RAS-GTP directly binds RAF1 (c-RAF) through RAF1's RAS-binding domain and cysteine-rich domain. This recruits RAF1 to the plasma membrane and is an essential step in RAF1 activation.
-1641,RAS_2,RAF1,positive,Z17,direct,1,regulates,Replaces RAS_2 -> MAPK. protein-protein interaction. RAS-GTP directly binds RAF1 and recruits it to the plasma membrane.
+1641,RAS_2,RAF1,positive,Z17,direct,1,,Replaces RAS_2 -> MAPK. protein-protein interaction. RAS-GTP directly binds RAF1 and recruits it to the plasma membrane.
 1642,RAS_2,RAF1_2,positive,Z17,direct,1,,Replaces RAS_2 -> MAPK_2. protein-protein interaction. RAS-GTP directly binds RAF1 and recruits it to the plasma membrane.
 1643,RAS_3,RAF1,positive,Z17,direct,1,,Replaces RAS_3 -> MAPK. protein-protein interaction. RAS-GTP directly binds RAF1 and recruits it to the plasma membrane.
 1644,RAS_3,RAF1_2,positive,Z17,direct,1,,Replaces RAS_3 -> MAPK_2. protein-protein interaction. RAS-GTP directly binds RAF1 and recruits it to the plasma membrane.
 1645,Trametinib,MEK,negative,Z17,direct,1,regulates,Replaces Trametinib -| MAPK. Trametinib is a highly selective allosteric inhibitor of MEK1 and MEK2.
-1646,Trametinib,MEK_2,negative,Z17,direct,1,regulates,Replaces Trametinib -| MAPK_2. Trametinib is a highly selective allosteric inhibitor of MEK1 and MEK2.
+1646,Trametinib,MEK_2,negative,Z17,direct,1,,Replaces Trametinib -| MAPK_2. Trametinib is a highly selective allosteric inhibitor of MEK1 and MEK2.
 1647,ERK,ERK_2,positive,Z21,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 1648,ERK_2,BAD,negative,Z21,direct in the network sense,1,,"Replaces MAPK_2 -| BAD. ERK1/2 phosphorylate RSK (a node not in the network), which phosphorylates BAD, which leads to its sequestration by 14-3-3 proteins. ERK_2 is a new node that reflects high ERK activity as a consequence of high RAS->RAF1->MEK-> ERK activation."
-1649,ERK_2,BIM,negative,Z21,direct,1,regulates,Replaces MAPK_2 -| BIM. phosphorylation. ERK1/2 directly phosphorylates BIM (BCL2L11) at Ser69. That phosphorylation promotes BIM's ubiquitination/proteasomal degradation. ERK_2 is a new node that reflects high ERK activity as a consequence of high RAS->RAF1->MEK-> ERK activation.
-1650,ERK_2,FOXO3_Ub,positive,Z21,direct,1,regulates,"Replaces MAPK_2 -> FOXO3_Ub. phosphorylation. ERK1/2 phosphorylates FOXO3, which promote interaction of FOXO3 with the E3 ubiquitin ligase MDM2, which then ubiquitinates FOXO3. ERK_2 is a new node that reflects high ERK activity as a consequence of high RAS->RAF1->MEK-> ERK activation."
+1649,ERK_2,BIM,negative,Z21,direct,1,regulates,"Replaces MAPK_2 -| BIM. phosphorylation. ERK1/2 directly phosphorylates BIM (BCL2L11) at Ser69. That phosphorylation promotes BIM's ubiquitination/proteasomal degradation. ERK_2 is a new node that reflects high ERK activity as a consequence of high RAS->RAF1->MEK-> ERK activation. The model assumes that only a high-level activation of MAPK regulates BIM, which translates to the assumption that only ERK_2 regulates BIM."
+1650,ERK_2,FOXO3_Ub,positive,Z21,direct,1,regulates,"Replaces MAPK_2 -> FOXO3_Ub. phosphorylation. ERK1/2 phosphorylates FOXO3, which promote interaction of FOXO3 with the E3 ubiquitin ligase MDM2, which then ubiquitinates FOXO3. ERK_2 is a new node that reflects high ERK activity as a consequence of high RAS->RAF1->MEK-> ERK activation. The model assumes that only a high-level activation of MAPK leads to FOXO3 ubiquitination, which translates to the assumption that only ERK_2 regulates FOXO3_Ub."
 1651,ERK_2,TSC2,negative,Z21,direct in the network sense,1,,"Replaces MAPK_2 -| TSC2. ERK phosphorylates RSK (a node not in the network), which phosphorylates TSC2 at inhibitory sites such as Ser1798. ERK_2 is a new node that reflects high ERK activity as a consequence of high RAS->RAF1->MEK-> ERK activation."
 1652,MEK,MEK_2,positive,Z21,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 1653,MEK_2,ERK_2,positive,Z21,direct,1,,"MEK1/2 directly binds and phosphorylates ERK1/2, activating its kinase activity. MEK_2 represents high MEK activity, which cannot be fully overcome by Trametinib. ERK_2 represents high ERK activity."
@@ -1660,9 +1660,9 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 1659,RAF1,RAF1_2,positive,Z21,,0,necessary,Reaching a higher level necessitates reaching the lower level first.
 1660,RAF1_2,MEK_2,positive,Z21,direct,1,,RAF1 directly phosphorylates MEK1/2 on their activating serine residues. This activates MEK kinase activity. RAF1_2 represents high RAF1 activity in response to high RAS activity. MEK_2 represents high MEK activity that cannot be completely inhibited by Trametinib.
 1661,RAS,RAF1,positive,Z21,direct,1,regulates,Replaces RAS -> MAPK. protein-protein interaction. RAS-GTP directly binds RAF1 (c-RAF) through RAF1's RAS-binding domain and cysteine-rich domain. This recruits RAF1 to the plasma membrane and is an essential step in RAF1 activation.
-1662,RAS_2,RAF1,positive,Z21,direct,1,regulates,Replaces RAS_2 -> MAPK. protein-protein interaction. RAS-GTP directly binds RAF1 and recruits it to the plasma membrane.
+1662,RAS_2,RAF1,positive,Z21,direct,1,,Replaces RAS_2 -> MAPK. protein-protein interaction. RAS-GTP directly binds RAF1 and recruits it to the plasma membrane.
 1663,RAS_2,RAF1_2,positive,Z21,direct,1,,Replaces RAS_2 -> MAPK_2. protein-protein interaction. RAS-GTP directly binds RAF1 and recruits it to the plasma membrane.
 1664,RAS_3,RAF1,positive,Z21,direct,1,,Replaces RAS_3 -> MAPK. protein-protein interaction. RAS-GTP directly binds RAF1 and recruits it to the plasma membrane.
 1665,RAS_3,RAF1_2,positive,Z21,direct,1,,Replaces RAS_3 -> MAPK_2. protein-protein interaction. RAS-GTP directly binds RAF1 and recruits it to the plasma membrane.
 1666,Trametinib,MEK,negative,Z21,direct,1,regulates,Replaces Trametinib -| MAPK. Trametinib is a highly selective allosteric inhibitor of MEK1 and MEK2.
-1667,Trametinib,MEK_2,negative,Z21,direct,1,regulates,Replaces Trametinib -| MAPK_2. Trametinib is a highly selective allosteric inhibitor of MEK1 and MEK2.
+1667,Trametinib,MEK_2,negative,Z21,direct,1,,Replaces Trametinib -| MAPK_2. Trametinib is a highly selective allosteric inhibitor of MEK1 and MEK2.

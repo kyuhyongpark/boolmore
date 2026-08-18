@@ -594,12 +594,12 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 2260,PTEN_2,PIP3_2,negative,Z17,direct,1,,"Duplicated from original edge (PTEN -> PIP3_2, Model=Z17). Original note: PTEN dephosphorylates PIP3"
 2261,PTEN_2,PIP3,negative,Z17,direct,1,,"Duplicated from original edge (PTEN -> PIP3, Model=Z17). Original note: PTEN dephosphorylates PIP3. We consider that the confidence ranking is the same as that of the PTEN-| PIP3 edge."
 2262,PTEN_2,PIP3_2,negative,Z17,direct,1,,"Duplicated from original edge (PTEN -> PIP3_2, Model=Z17). Original note: PTEN dephosphorylates PIP3. We consider that the confidence ranking is the same as that of the PTEN-| PIP3 edge."
-2263,E2F,E2F_3,positive,Z21,,0,necessary,Reaching a higher level necessitates achieving the lower level first.
+2263,E2F,E2F_3,positive,Z21,unsupported,-,,This is already represented by other inter-level edges
 2264,E2F_3,E2F,positive,Z21,unsupported,-,,High-level should not activate low-level.
 2265,pRB_2,E2F_3,positive,Z21,indirect,2,,"Duplicated from original edge (pRB_2 -> E2F_2, Model=Z21). Original note: causal effect. Hypophosphorylated RB binds to E2F; phosphorylation of RB changes RB conformation and disrupts that binding. This can be represented as a pRB-|RB-|E2F path, if pRB-|RB is added to the network."
 2266,pRB_3,E2F_2,positive,Z21,indirect,2,,"Duplicated from original edge (pRB_2 -> E2F_2, Model=Z21). Original note: causal effect. Hypophosphorylated RB binds to E2F; phosphorylation of RB changes RB conformation and disrupts that binding. This can be represented as a pRB-|RB-|E2F path, if pRB-|RB is added to the network."
 2267,pRB_3,E2F_3,positive,Z21,indirect,2,,"Duplicated from original edge (pRB_2 -> E2F_2, Model=Z21). Original note: causal effect. Hypophosphorylated RB binds to E2F; phosphorylation of RB changes RB conformation and disrupts that binding. This can be represented as a pRB-|RB-|E2F path, if pRB-|RB is added to the network."
-2268,E2F,E2F_3,positive,Z21,,0,necessary,Reaching a higher level necessitates achieving the lower level first.
+2268,E2F,E2F_3,positive,Z21,unsupported,-,,This is already represented by other inter-level edges
 2269,E2F_3,E2F,positive,Z21,unsupported,-,,High-level should not activate low-level.
 2270,pRB_2,E2F_3,positive,Z21,indirect,2,,"Duplicated from original edge (pRB_2 -> E2F_2, Model=Z21). Original note: causal effect. Hypophosphorylated RB binds to E2F; phosphorylation of RB changes RB conformation and disrupts that binding. We consider that the confidence ranking is the same as that of the pRB->E2F edge."
 2271,pRB_3,E2F_2,positive,Z21,indirect,2,,"Duplicated from original edge (pRB_2 -> E2F_2, Model=Z21). Original note: causal effect. Hypophosphorylated RB binds to E2F; phosphorylation of RB changes RB conformation and disrupts that binding. We consider that the confidence ranking is the same as that of the pRB->E2F edge."
@@ -633,7 +633,7 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 2299,CYCLINDc_2,pRB_3,positive,Z21,direct,1,,"Duplicated from original edge (CYCLINDc_2 -> pRB_2, Model=Z21). Original note: phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
 2300,CYCLINDc,pRB_3,positive,Z21,direct,1,,"Duplicated from original edge (CYCLINDc -> pRB_2, Model=Z21). Original note: phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
 2301,CYCLINDc_2,pRB_3,positive,Z21,direct,1,,"Duplicated from original edge (CYCLINDc_2 -> pRB_2, Model=Z21). Original note: phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
-2302,pRB,pRB_3,positive,Z21,,0,necessary,Reaching a higher level necessitates achieving the lower level first.
+2302,pRB,pRB_3,positive,Z21,unsupported,-,,This is already represented by other inter-level edges
 2303,pRB_3,pRB,positive,Z21,unsupported,-,,High-level should not activate low-level.
 2304,Rb_T,pRB_3,negative,Z21,assumption,4,,"Duplicated from original edge (Rb_T -> pRB_2, Model=Z21). Original note: This assumption reflects the experimental observation that the loss of Rb_T results in the loss of inhibitory effect of Rb on E2F family members."
 2305,CYCLINDc,pRB_3,positive,Z21,direct,1,,"Duplicated from original edge (CYCLINDc -> pRB_2, Model=Z21). Original note: phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
@@ -641,5 +641,5 @@ index,Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,Note
 2307,CYCLINDc,pRB_3,positive,Z21,direct,1,,"Duplicated from original edge (CYCLINDc -> pRB_2, Model=Z21). Original note: phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
 2308,CYCLINDc_2,pRB_3,positive,Z21,direct,1,,"Duplicated from original edge (CYCLINDc_2 -> pRB_2, Model=Z21). Original note: phosphorylation. The Cyclin D–CDK4/6 complex directly phosphorylates RB, yielding pRB. We consider the confidence ranking the same as that of the CYCLINDc->pRB edge."
 2309,cycE_CDK2,pRB_3,positive,Z21,direct,1,,"Duplicated from original edge (cycE_CDK2 -> pRB_2, Model=Z21). Original note: phosphorylation. Cyclin E–CDK2 directly recognizes and phosphorylates RB. We consider the confidence ranking of this edge is the same as that of the cycE_CDK2 edge."
-2310,pRB,pRB_3,positive,Z21,,0,necessary,Reaching a higher level necessitates achieving the lower level first.
+2310,pRB,pRB_3,positive,Z21,unsupported,-,,This is already represented by other inter-level edges
 2311,pRB_3,pRB,positive,Z21,unsupported,-,,High-level should not activate low-level.
