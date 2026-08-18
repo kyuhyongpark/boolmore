@@ -1,6 +1,6 @@
 Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,is_kept
 ABL1,JAK2,positive,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
-ABL1,MYOD1,negative,"MCF7, TGEN",assumption,4,,TAKEN_OUT
+ABL1,MYOD1,negative,"MCF7, TGEN",assumption,4,,KEPT
 ABL1,SRC,positive,"MCF7, TGEN",assumption,4,,KEPT
 ABL2,CEBPB,positive,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
 AKT,AKT,positive,"BL, BS, HL, HS, SL, SS",indirect,2,,TAKEN_OUT
@@ -526,7 +526,7 @@ PRAS40,mTORC1,negative,"Z17, Z21",direct,1,regulates,KEPT
 PRKAA2,TSC2,positive,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
 PRKACA,CASP9,negative,"MCF7, TGEN",direct,1,regulates,KEPT
 PRKACA,NEDD4L,negative,"MCF7, TGEN",direct,1,regulates,KEPT
-PRKACA,PRKAA2,negative,"MCF7, TGEN",assumption,4,,TAKEN_OUT
+PRKACA,PRKAA2,negative,"MCF7, TGEN",assumption,4,,KEPT
 PRKACA,SRC,positive,"MCF7, T47D, TGEN",assumption,4,,KEPT
 PTEN,AKT,negative,"BL, HL, SL",indirect,2,,TAKEN_OUT
 PTEN,CREB1,negative,"MCF7, TGEN",direct,1,regulates,KEPT
@@ -586,15 +586,15 @@ RHEB,mTORC1,positive,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
 RPS6,CyclinD,positive,BL,indirect,2,,KEPT
 RPS6,CyclinD_2,positive,BL,indirect,2,,KEPT
 RPS6,NFKB,positive,SL,correlation,3,,KEPT
-RPS6,RAF1,positive,SL,assumption,4,,TAKEN_OUT
-RPS6,RAF1_2,positive,SL,assumption,4,,TAKEN_OUT
+RPS6,RAF1,positive,SL,assumption,4,,KEPT
+RPS6,RAF1_2,positive,SL,assumption,4,,KEPT
 Rb_T,pRB,negative,Z21,assumption,4,,KEPT
 Rb_T,pRB_2,negative,Z21,assumption,4,,KEPT
 Rb_T,pRB_3,negative,Z21,assumption,4,,KEPT
 S63845,MCL1,negative,Z21,direct,1,regulates,KEPT
 S6K,CyclinB1,positive,SL,assumption,4,,TAKEN_OUT
-S6K,CyclinD,positive,HL,indirect,2,,TAKEN_OUT
-S6K,CyclinD_2,positive,HL,indirect,2,,TAKEN_OUT
+S6K,CyclinD,positive,HL,indirect,2,,KEPT
+S6K,CyclinD_2,positive,HL,indirect,2,,KEPT
 S6K,IRS1,negative,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
 S6K,NEDD4L,negative,TGEN,assumption,4,,KEPT
 S6K,RPS6,positive,"BL, HL, SL",direct,1,regulates,KEPT
