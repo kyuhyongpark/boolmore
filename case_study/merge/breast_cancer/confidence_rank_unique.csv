@@ -441,7 +441,7 @@ NEDD4L,NF2,positive,"MCF7, T47D, TGEN",direct in the network sense,1,regulates,K
 NF1,CASP8,positive,"MCF7, TGEN",indirect,2,,TAKEN_OUT
 NF1,HRAS,negative,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
 NF2,LATS1,positive,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
-NF2,MYOD1,negative,T47D,assumption,4,,TAKEN_OUT
+NF2,MYOD1,negative,T47D,assumption,4,,KEPT
 NFKB,EGFR,positive,T47D,direct,1,regulates,KEPT
 NFKB,IL1B,positive,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
 NFKB,PIM,positive,T47D,assumption,4,,TAKEN_OUT
@@ -520,7 +520,7 @@ PIP3_2,RAS_2,positive,"MCF7, T47D",assumption,4,,TAKEN_OUT
 PIP3_2,RAS_3,positive,"MCF7, T47D",assumption,4,,TAKEN_OUT
 PIP3_2,mTORC2_pm,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,,KEPT
 PLCg,PKCa,positive,"BS, HS, SS",direct in the network sense,1,regulates,KEPT
-PRAS40,PRAS40,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+PRAS40,PRAS40,positive,"BL, HL, SL",indirect,2,,KEPT
 PRAS40,S6K,negative,"BL, HL, SL",indirect,2,,TAKEN_OUT
 PRAS40,mTORC1,negative,"Z17, Z21",direct,1,regulates,KEPT
 PRKAA2,TSC2,positive,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
@@ -580,12 +580,12 @@ RB,E2F,negative,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
 RB,E2F_2,negative,"MCF7, T47D, TGEN",direct,1,,KEPT
 RB,E2F_3,negative,"MCF7, T47D, TGEN",direct,1,,KEPT
 RB,TSC2,positive,HL,assumption,4,,TAKEN_OUT
-RB,p53,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+RB,p53,positive,"BL, HL, SL",indirect,2,,KEPT
 RB,pRB,negative,merge,,0,regulates,KEPT
 RHEB,mTORC1,positive,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
 RPS6,CyclinD,positive,BL,indirect,2,,KEPT
 RPS6,CyclinD_2,positive,BL,indirect,2,,KEPT
-RPS6,NFKB,positive,SL,correlation,3,,TAKEN_OUT
+RPS6,NFKB,positive,SL,correlation,3,,KEPT
 RPS6,RAF1,positive,SL,assumption,4,,TAKEN_OUT
 RPS6,RAF1_2,positive,SL,assumption,4,,TAKEN_OUT
 Rb_T,pRB,negative,Z21,assumption,4,,KEPT
@@ -598,7 +598,7 @@ S6K,CyclinD_2,positive,HL,indirect,2,,TAKEN_OUT
 S6K,IRS1,negative,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
 S6K,NEDD4L,negative,TGEN,assumption,4,,KEPT
 S6K,RPS6,positive,"BL, HL, SL",direct,1,regulates,KEPT
-S6K,Translation,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+S6K,Translation,positive,"Z17, Z21",indirect,2,,KEPT
 S6K,mTORC2_pm,negative,"MCF7, T47D, TGEN",indirect,2,,TAKEN_OUT
 SGK1,CREB1,positive,T47D,direct,1,regulates,KEPT
 SGK1,FOXO1,negative,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
@@ -631,7 +631,7 @@ STAT5,PIM,positive,"MCF7, TGEN",direct,1,regulates,KEPT
 STK11,PRKAA2,positive,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
 TCF7L2,CYCLINDc,positive,"MCF7, T47D, TGEN",indirect,2,,KEPT
 TCF7L2,CYCLINDc_2,positive,"MCF7, T47D, TGEN",indirect,2,,KEPT
-TCF7L2,PAK1,positive,"MCF7, T47D, TGEN",assumption,4,,TAKEN_OUT
+TCF7L2,PAK1,positive,"MCF7, T47D, TGEN",assumption,4,,KEPT
 TEAD1,CYCLINDc,positive,"MCF7, T47D, TGEN",indirect,2,,KEPT
 TEAD1,CYCLINDc_2,positive,"MCF7, T47D, TGEN",indirect,2,,KEPT
 TRADD,FADD,positive,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
@@ -650,7 +650,7 @@ Translation,Proliferation_3,positive,Z17,assumption,4,,KEPT
 Translation,Proliferation_4,positive,Z17,assumption,4,,KEPT
 WNT1,CTNNB1,positive,"MCF7, T47D, TGEN",indirect,2,,KEPT
 WNT1,PRKACA,positive,"MCF7, T47D, TGEN",assumption,4,,KEPT
-YAP1,CTNNB1,positive,"MCF7, TGEN",correlation,3,,TAKEN_OUT
+YAP1,CTNNB1,positive,"MCF7, TGEN",correlation,3,,KEPT
 YAP1,TEAD1,positive,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
 cycE_CDK2,pRB,positive,Z17,direct,1,regulates,KEPT
 cycE_CDK2,pRB_2,positive,"Z17, Z21",direct,1,,KEPT
@@ -658,8 +658,8 @@ cycE_CDK2,pRB_3,positive,"Z17, Z21",direct,1,,KEPT
 cycE_CDK2_T,cycE_CDK2,positive,"Z17, Z21",direct,1,necessary,KEPT
 erlotinib,EGFR,negative,"BL, BS, HL, HS, SL, SS",direct,1,regulates,KEPT
 erlotinib,HER2,negative,"BL, BS, HL, HS, SL, SS",direct,1,regulates,KEPT
-erlotinib,HER3,negative,"BL, BS, HL, HS, SL, SS",indirect,2,,TAKEN_OUT
-erlotinib,HER3_2,negative,"BL, BS, HL, HS, SL, SS",indirect,2,,TAKEN_OUT
+erlotinib,HER3,negative,"BL, BS, HL, HS, SL, SS",indirect,2,,KEPT
+erlotinib,HER3_2,negative,"BL, BS, HL, HS, SL, SS",indirect,2,,KEPT
 mTORC1,EIF4,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
 mTORC1,EIF4EBP1,negative,"MCF7, T47D, TGEN",direct,1,regulates,KEPT
 mTORC1,S6K,positive,"BS, HS, MCF7, SS, T47D, TGEN, Z17, Z21",direct,1,regulates,KEPT
@@ -699,7 +699,7 @@ pertuzumab,ERK_2,positive,BS,indirect,2,,TAKEN_OUT
 pertuzumab,HER2,negative,"BL, BS, HL, HS, SL, SS",direct,1,regulates,KEPT
 pertuzumab,HER2HER3c,negative,"BL, BS, HL, HS, SL, SS",direct,1,regulates,KEPT
 pertuzumab,HER2HER3c_2,negative,"BL, BS, HL, HS, SL, SS",direct,1,,KEPT
-pertuzumab,mTORC1,positive,BS,indirect,2,,TAKEN_OUT
+pertuzumab,mTORC1,positive,BS,indirect,2,,KEPT
 stimulus,AKT,positive,SL,correlation,3,,KEPT
 stimulus,EGFR,positive,"BL, HL, SL",correlation,3,,KEPT
 stimulus,HER2,positive,"BL, HL, SL",correlation,3,,KEPT
