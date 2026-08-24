@@ -1,10 +1,10 @@
-index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
-1,erlotinib,erlotinib,erlotinib,erlotinib,erlotinib,erlotinib,,,,,,erlotinib,input,
-2,pertuzumab,pertuzumab,pertuzumab,pertuzumab,pertuzumab,pertuzumab,,,,,,pertuzumab,input,
-3,trastuzumab,trastuzumab,trastuzumab,trastuzumab,trastuzumab,trastuzumab,,,,,,trastuzumab,input,
-4,EGF,EGF,EGF,,,,,,EGF,EGF,EGF,EGF,input,
-5,HRG,HRG,HRG,,,,,HER3_microenvironment,NRG1,NRG1,NRG1,NRG1,input,"HRG (heregulin) is an established synonim of NRG1 (neuregulin), the ligand of HER3. The official name is NRG1. constant 0 in Z21"
-6,,,,stimulus,stimulus,stimulus,,,,,,stimulus,input,"stimuli from the growth medium, assumed to be 1 in the HL, SL, BL models."
+index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,TM,TT,Our notation,Input in merge,Notes
+1,erlotinib,erlotinib,erlotinib,erlotinib,erlotinib,erlotinib,,,,,,erlotinib,constant 0,
+2,pertuzumab,pertuzumab,pertuzumab,pertuzumab,pertuzumab,pertuzumab,,,,,,pertuzumab,constant 0,
+3,trastuzumab,trastuzumab,trastuzumab,trastuzumab,trastuzumab,trastuzumab,,,,,,trastuzumab,constant 0,
+4,EGF,EGF,EGF,,,,,,EGF,EGF,EGF,EGF,constant 0,
+5,HRG,HRG,HRG,,,,,HER3_microenvironment,NRG1,NRG1,NRG1,NRG1,constant 0,"HRG (heregulin) is an established synonim of NRG1 (neuregulin), the ligand of HER3. The official name is NRG1. constant 0 in Z21"
+6,,,,stimulus,stimulus,stimulus,,,,,,stimulus,constant 0,"stimuli from the growth medium, assumed to be 1 in the HL, SL, BL models."
 7,,,,,,,Alpelisib,Alpelisib,,,,Alpelisib,constant 0,
 8,,,,,,,Everolimus,Everolimus,,,,Everolimus,constant 0,
 9,,,,,,,Fulvestrant,Fulvestrant,,,,Fulvestrant,constant 0,
@@ -14,25 +14,25 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 13,,,,,,,Trametinib,Trametinib,,,,Trametinib,constant 0,
 14,,,,,,,BCL2_T,BCL2_T,,,,BCL2_T,constant 0,
 15,,,,,,,BIM_T,BIM_T,,,,BIM_T,input,
-16,,,,,,,ER,ER,,,,ER,input,"Estrogen receptor status. ER=1 in ER+ breast cancer, i.e. in Z17, Z21, MCF7, T47D, otherwise ER=0."
-17,,,,,,,HER3_T,HER3_T,,,,HER3_T,constant 0,
+16,,,,,,,ER,ER,,,,ER,input,"Estrogen receptor status. ER=1 in ER+ breast cancer, i.e. in Z17, Z21, BT474, MCF7, T47D, ER=0 in SKBR3, HCC1954."
+17,,,,,,,HER3_T,HER3_T,,,,HER3_T,input,"constant 0 in Z17, Z21"
 18,,,,,,,PDK1,PDK1,,,,PDK1_ic,constant 0,intracellular PDK1 pool
 19,,,,,,,SGK1_T,SGK1_T,,,,SGK1_T,constant 0,
 20,,,,,,,,Navitoclax,,,,Navitoclax,constant 0,
 21,,,,,,,,S63845,,,,S63845,constant 0,
 22,,,,,,,,BCLXL_T,,,,BCLXL_T,input,
 23,,,,,,,,p27_T,,,,p27_T,constant 1,Basal transcript level of p27. Additional transcriptional regulation is included in the p21_p27_T node.
-24,,,,,,,,ER_microenvironment,ES,ES,ES,ES,input,presence of estrogen in the microenvironment. constant 0 in Z21
-25,,,,,,,,MCL1_T,,,,MCL1_T,constant 1,
+24,,,,,,,,ER_microenvironment,ES,ES,ES,ES,constant 1,presence of estrogen in the microenvironment. Usually has 1. constant 0 in Z21
+25,,,,,,,,MCL1_T,,,,MCL1_T,input,constant 1 in Z21
 26,,,,,,,,,DLL_i,DLL_i,DLL_i,DLL,input,
 27,,,,,,,,,IGF1,IGF1,IGF1,IGF1,input,
 28,,,,,,,,,INS,INS,INS,INS,input,
 29,,,,,,,,,PG,PG,PG,PG,input,
 30,,,,,,,,,WNT1,WNT1,WNT1,WNT1,input,"WNT1 is not an input in the BBM version of TGEN due to an error. WNT1 should be an input according to the original model, yet it has an edge from PGR and a self-edge in the BBM version."
 31,,,,,,,,,,,,,,
-32,,,,,,,IGF1R_T,IGF1R_T,,,,IGF1R_T,constant 1,"IGF1R_T and IGF1R_T_2 are constants, but are not source nodes in the BBM model because of the positive cycle that represents their relationship as two levels of the same entity."
-33,,,,,,,,IGF1R_T_2,,,,IGF1R_T_2,constant 0,"IGF1R_T and IGF1R_T_2 are constants, but are not source nodes in the BBM model because of the positive cycle that represents their relationship as two levels of the same entity."
-34,,,,,,,,MYC_T,,,,MYC_T,constant 0,
+32,,,,,,,IGF1R_T,IGF1R_T,,,,IGF1R_T,input,IGF1R_T=1 in Z21
+33,,,,,,,,IGF1R_T_2,,,,IGF1R_T_2,,IGF1R_T_2=0 in Z21
+34,,,,,,,,MYC_T,,,,MYC_T,input,MYC_T=0 in Z21
 35,,,,,,,PBX1,PBX1,,,,PBX1,constant 1,
 36,,,,,,,,PTEN_T,,,,PTEN_T,constant 1,"assumed to be 1. PTEN_T and PTEN_T_2 are constants,  but are not source nodes in the BBM model because of the positive cycle that represents their relationship as two levels of the same entity."
 37,,,,,,,,PTEN_T_2,,,,PTEN_T_2,constant 0,"assumed to be 0. PTEN_T and PTEN_T_2 are constants, but are not source nodes in the BBM model because of the positive cycle that represents their relationship as two levels of the same entity."
@@ -40,7 +40,7 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 39,,,,,,,,,,,,,,
 40,AKT,AKT,AKT,AKT,AKT,AKT,AKT,AKT,AKT_i,AKT_i,AKT_i,AKT,,
 41,ERBB1,ERBB1,ERBB1,ERBB1,ERBB1,ERBB1,,,EGFR,EGFR,EGFR,EGFR,,The official name of ERBB1 is EGFR
-42,ERBB2,ERBB2,ERBB2,ERBB2,ERBB2,ERBB2,HER2,HER2,HER2,HER2,HER2,HER2,constant 0,ERBB2 and HER2 are the same protein in two different naming systems. HER2 is an input in Z17.
+42,ERBB2,ERBB2,ERBB2,ERBB2,ERBB2,ERBB2,HER2,HER2,HER2,HER2,HER2,HER2,,"ERBB2 and HER2 are the same protein in two different naming systems. HER2 is constant 0 in Z17, Z21, MCF7, T474"
 43,ERBB3,ERBB3,ERBB3,ERBB3,ERBB3,ERBB3,HER3,HER3,HER3,HER3,HER3,HER3,,ERBB3 and HER3 are the same protein in two different naming systems
 44,ERK1_2,ERK1_2,ERK1_2,ERK1_2,ERK1_2,ERK1_2,,,ERK_i,ERK_i,ERK_i,ERK,,The Z17 and Z21 models don't have ERK because they have a merged MAPK node
 45,MEK1_2,MEK1_2,MEK1_2,,,,,,MEK_i,MEK_i,MEK_i,MEK,,The Z17 and Z21 models don't have MEK because they have a merged MAPK node
@@ -66,9 +66,9 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 65,,,,TSC2,TSC2,TSC2,TSC,TSC,TSC2,TSC2,TSC2,TSC2,,
 66,,,,Nfkb,,Nfkb,,,NFKB1,NFKB1,NFKB1,NFKB,,
 67,,,,,,BAX,,,BAX,BAX,BAX,BAX,,
-68,,,,,,,Apoptosis,Apoptosis,,,,Apoptosis,,
-69,,,,,,,Apoptosis_2,Apoptosis_2,,,,Apoptosis_2,,
-70,,,,,,,Apoptosis_3,Apoptosis_3,,,,Apoptosis_3,,
+68,,,,,,,Apoptosis,Apoptosis,,,,Apoptosis_X,,This notation reflects the fact that the three Apoptosis nodes represent different assumptions about the mechanism of commitment to programmed cell death. 
+69,,,,,,,Apoptosis_2,Apoptosis_2,,,,Apoptosis_Y,,This notation reflects the fact that the three Apoptosis nodes represent different assumptions about the mechanism of commitment to programmed cell death. 
+70,,,,,,,Apoptosis_3,Apoptosis_3,,,,Apoptosis_Z,,This notation reflects the fact that the three Apoptosis nodes represent different assumptions about the mechanism of commitment to programmed cell death. 
 71,,,,,,,BAD,BAD,BAD,BAD,BAD,BAD,,
 72,,,,,,,BCL2,BCL2,BCL2,BCL2,BCL2,BCL2,,
 73,,,,,,,BIM,BIM,BIM,BIM,BIM,BIM,,
@@ -81,7 +81,7 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 80,,,,,,,ER_transcription_2,ER_transcription_2,,,,ER_transcription_2,,
 81,,,,,,,ESR1,ESR1,ESR1,ESR1,ESR1,ESR1,,
 82,,,,,,,ESR1_2,ESR1_2,,,,ESR1_2,,
-83,,,,,,,FOXA1,FOXA1,,,,FOXA1,constant 1,FOXA1 is a constant 1 in Z21
+83,,,,,,,FOXA1,FOXA1,,,,FOXA1,input,FOXA1 is a constant 1 in Z21
 84,,,,,,,FOXO3,FOXO3,FOXO3,FOXO3,FOXO3,FOXO3,,
 85,,,,,,,FOXO3_Ub,FOXO3_Ub,,,,FOXO3_Ub,,
 86,,,,,,,HER2_3,HER2_3,,,,HER2HER3c,,Complex formed by HER2 and HER3
@@ -109,7 +109,7 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,MCF7,T47D,Our notation,Input in merge,Notes
 108,,,,,,,cycE_CDK2,cycE_CDK2,,,,cycE_CDK2,,
 109,,,,,,,cycE_CDK2_T,cycE_CDK2_T,,,,cycE_CDK2_T,,
 110,,,,,,,cyclinD_2,cyclinD_2,,,,CyclinD_2,,
-111,,,,,,,mTORC2,mTORC2,,,,mTORC2_ic,constant 0,intracellular mTORC2
+111,,,,,,,mTORC2,mTORC2,,,,mTORC2_ic,input,"intracellular mTORC2, it is assumed to be 0 in Z17 and Z21"
 112,,,,,,,mTORC2_pm,mTORC2_pm,MTORC2_c,MTORC2_c,MTORC2_c,mTORC2_pm,,mTORC2 localized in the plasma membrane
 113,,,,,,,p21_p27,p21_p27,,,,p21_p27,,merger of p21 and p27
 114,,,,,,,p21_p27_T,p21_p27_T,,,,p21_p27_T,,

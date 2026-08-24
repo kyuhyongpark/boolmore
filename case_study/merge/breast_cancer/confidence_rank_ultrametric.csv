@@ -1,78 +1,75 @@
 Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint
-ABL1,JAK2,positive,"MCF7, T47D, TGEN",direct,1,regulates
-ABL1,MYOD1,negative,"MCF7, TGEN",assumption,4,
-ABL1,SRC,positive,"MCF7, TGEN",assumption,4,
-ABL2,CEBPB,positive,"MCF7, T47D, TGEN",direct,1,regulates
-AKT,BAD,negative,"MCF7, T47D, TGEN, Z17, Z21",direct,1,regulates
-AKT,CASP9,negative,"MCF7, T47D, TGEN",direct,1,regulates
-AKT,CREB1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-AKT,ESR1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-AKT,ESR1_2,positive,"MCF7, T47D, TGEN",direct,1,
-AKT,FOXO1,negative,"BL, HL, MCF7, SL, T47D, TGEN",direct,1,regulates
-AKT,FOXO3,negative,"BL, HL, MCF7, SL, T47D, TGEN, Z17, Z21",direct,1,regulates
-AKT,GSK3B,negative,"MCF7, T47D, TGEN",direct,1,regulates
-AKT,KMT2D,negative,"MCF7, T47D, TGEN, Z17, Z21",direct,1,regulates
-AKT,MDM2,positive,"MCF7, T47D, TGEN",direct,1,regulates
-AKT,NOS3,positive,"MCF7, T47D, TGEN",direct,1,regulates
+ABL1,JAK2,positive,"TGEN, TM, TT",direct,1,regulates
+ABL1,MYOD1,negative,"TGEN, TM",assumption,4,
+ABL1,SRC,positive,"TGEN, TM",assumption,4,
+ABL2,CEBPB,positive,"TGEN, TM, TT",direct,1,regulates
+AKT,BAD,negative,"TGEN, TM, TT, Z17, Z21",direct,1,regulates
+AKT,CASP9,negative,"TGEN, TM, TT",direct,1,regulates
+AKT,CREB1,positive,"TGEN, TM, TT",direct,1,regulates
+AKT,ESR1,positive,"TGEN, TM, TT",direct,1,regulates
+AKT,ESR1_2,positive,"TGEN, TM, TT",direct,1,
+AKT,FOXO1,negative,"BL, HL, SL, TGEN, TM, TT",direct,1,regulates
+AKT,FOXO3,negative,"BL, HL, SL, TGEN, TM, TT, Z17, Z21",direct,1,regulates
+AKT,GSK3B,negative,"TGEN, TM, TT",direct,1,regulates
+AKT,KMT2D,negative,"TGEN, TM, TT, Z17, Z21",direct,1,regulates
+AKT,MDM2,positive,"TGEN, TM, TT",direct,1,regulates
+AKT,NOS3,positive,"TGEN, TM, TT",direct,1,regulates
 AKT,PRAS40,negative,"BL, HL, SL, Z17, Z21",direct,1,regulates
-AKT,PRKACA,positive,"MCF7, T47D, TGEN",assumption,4,
-AKT,RAC1,negative,"MCF7, T47D, TGEN",direct,1,regulates
-AKT,TSC2,negative,"BL, HL, MCF7, SL, T47D, TGEN, Z17, Z21",direct,1,regulates
-AKT,TWIST1,positive,"MCF7, TGEN",direct,1,regulates
-AKT,p21,negative,"MCF7, T47D, TGEN",direct,1,regulates
+AKT,PRKACA,positive,"TGEN, TM, TT",assumption,4,
+AKT,RAC1,negative,"TGEN, TM, TT",direct,1,regulates
+AKT,TSC2,negative,"BL, HL, SL, TGEN, TM, TT, Z17, Z21",direct,1,regulates
+AKT,TWIST1,positive,"TGEN, TM",direct,1,regulates
+AKT,p21,negative,"TGEN, TM, TT",direct,1,regulates
 AKT,p21_p27,negative,"Z17, Z21",direct,1,regulates
 AKT,p38,positive,"BL, HL, SL",correlation,3,
-APC,DC,positive,"MCF7, T47D, TGEN",,0,necessary
-AXIN1,APC,positive,"MCF7, T47D, TGEN",direct,1,regulates
+APC,DC,positive,"TGEN, TM, TT",,0,necessary
+AXIN1,APC,positive,"TGEN, TM, TT",direct,1,regulates
 Alpelisib,PI3K,negative,"Z17, Z21",direct,1,regulates
 Alpelisib,PI3K_2,negative,"Z17, Z21",direct,1,
-Apoptosis,Apoptosis,positive,"Z17, Z21",assumption,4,
-Apoptosis_2,Apoptosis_2,positive,"Z17, Z21",assumption,4,
-Apoptosis_3,Apoptosis_3,positive,"Z17, Z21",assumption,4,
-BAD,Apoptosis,positive,"Z17, Z21",indirect,2,
-BAD,Apoptosis_2,positive,Z17,indirect,2,
-BAD,Apoptosis_3,positive,Z17,indirect,2,
-BAD,BCL2,negative,"MCF7, T47D, TGEN",direct,1,regulates
-BAD,BCLXL,negative,"MCF7, T47D, TGEN",direct,1,regulates
-BAK1,CYCS,positive,"MCF7, T47D, TGEN",direct in the network sense,1,regulates
+Apoptosis_X,Apoptosis_X,positive,"Z17, Z21",assumption,4,
+Apoptosis_Y,Apoptosis_Y,positive,"Z17, Z21",assumption,4,
+Apoptosis_Z,Apoptosis_Z,positive,"Z17, Z21",assumption,4,
+BAD,Apoptosis_X,positive,"Z17, Z21",assumption,4,
+BAD,Apoptosis_Z,positive,Z17,assumption,4,
+BAD,BCL2,negative,"TGEN, TM, TT",direct,1,regulates
+BAD,BCLXL,negative,"TGEN, TM, TT",direct,1,regulates
+BAK1,CYCS,positive,"TGEN, TM, TT",direct in the network sense,1,regulates
 BAX,BAX,positive,SL,direct,1,regulates
-BAX,CYCS,positive,"MCF7, T47D, TGEN",direct in the network sense,1,regulates
-BCL2,Apoptosis,negative,Z17,indirect,2,
-BCL2,Apoptosis_2,negative,"Z17, Z21",indirect,2,
-BCL2,Apoptosis_3,negative,"Z17, Z21",indirect,2,
-BCL2,BIM,negative,"MCF7, T47D, TGEN",direct,1,regulates
+BAX,CYCS,positive,"TGEN, TM, TT",direct in the network sense,1,regulates
+BCL2,Apoptosis_Y,negative,"Z17, Z21",assumption,4,
+BCL2,Apoptosis_Z,negative,"Z17, Z21",assumption,4,
+BCL2,BIM,negative,"TGEN, TM, TT",direct,1,regulates
 BCL2_T,BCL2,positive,"Z17, Z21",direct,1,necessary
-BCLXL,Apoptosis_2,negative,Z21,indirect,2,
-BCLXL,Apoptosis_3,negative,Z21,indirect,2,
-BCLXL,BIM,negative,"MCF7, T47D, TGEN",direct,1,regulates
+BCLXL,Apoptosis_Y,negative,Z21,assumption,4,
+BCLXL,Apoptosis_Z,negative,Z21,assumption,4,
+BCLXL,BIM,negative,"TGEN, TM, TT",direct,1,regulates
 BCLXL_T,BCLXL,positive,Z21,direct,1,necessary
-BID,BAK1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-BID,BAX,positive,"MCF7, T47D, TGEN",direct,1,regulates
-BIM,Apoptosis,positive,"Z17, Z21",indirect,2,
-BIM,Apoptosis_2,positive,Z17,indirect,2,
-BIM,Apoptosis_3,positive,"Z17, Z21",indirect,2,
-BIM,BAK1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-BIM,BAX,positive,"MCF7, T47D, TGEN",direct,1,regulates
-BIM,BCL2,negative,"MCF7, T47D, TGEN",direct,1,regulates
-BIM,BCLXL,negative,"MCF7, T47D, TGEN",direct,1,regulates
+BID,BAK1,positive,"TGEN, TM, TT",direct,1,regulates
+BID,BAX,positive,"TGEN, TM, TT",direct,1,regulates
+BIM,Apoptosis_X,positive,"Z17, Z21",assumption,4,
+BIM,Apoptosis_Z,positive,"Z17, Z21",assumption,4,
+BIM,BAK1,positive,"TGEN, TM, TT",direct,1,regulates
+BIM,BAX,positive,"TGEN, TM, TT",direct,1,regulates
+BIM,BCL2,negative,"TGEN, TM, TT",direct,1,regulates
+BIM,BCLXL,negative,"TGEN, TM, TT",direct,1,regulates
 BIM_T,BIM,positive,"Z17, Z21",direct,1,regulates
-CASP3,CASP9,positive,"MCF7, T47D, TGEN",direct in the network sense,1,regulates
-CASP8,BID,positive,"MCF7, T47D, TGEN",direct,1,regulates
-CASP8,CASP3,positive,T47D,direct,1,regulates
-CASP9,CASP3,positive,"MCF7, T47D, TGEN",direct,1,regulates
+CASP3,CASP9,positive,"TGEN, TM, TT",direct in the network sense,1,regulates
+CASP8,BID,positive,"TGEN, TM, TT",direct,1,regulates
+CASP8,CASP3,positive,TT,direct,1,regulates
+CASP9,CASP3,positive,"TGEN, TM, TT",direct,1,regulates
 CDK46,CYCLINDc,positive,"Z17, Z21",,0,necessary
 CDK46,CYCLINDc_2,positive,"Z17, Z21",,0,
-CDKN2A,CYCLINDc,negative,"MCF7, T47D, TGEN",direct,1,regulates
-CDKN2A,CYCLINDc_2,negative,"MCF7, T47D, TGEN",direct,1,
-CEBPB,PPARG,positive,"MCF7, T47D, TGEN",direct,1,regulates
-CREB1,BCL2,positive,"MCF7, T47D, TGEN",direct,1,regulates
-CREB1,BCLXL,positive,"MCF7, T47D, TGEN",direct,1,regulates
-CREB1,CEBPB,positive,"MCF7, TGEN",direct,1,regulates
-CREB1,FZD,positive,"MCF7, TGEN",assumption,4,
-CTNNB1,MYC,positive,"MCF7, T47D, TGEN",direct,1,regulates
-CTNNB1,MYC_2,positive,"MCF7, T47D, TGEN",direct,1,
-CTNNB1,NOTCH1,positive,"MCF7, T47D, TGEN",indirect,2,
-CTNNB1,TCF7L2,positive,"MCF7, T47D, TGEN",direct,1,regulates
+CDKN2A,CYCLINDc,negative,"TGEN, TM, TT",direct,1,regulates
+CDKN2A,CYCLINDc_2,negative,"TGEN, TM, TT",direct,1,
+CEBPB,PPARG,positive,"TGEN, TM, TT",direct,1,regulates
+CREB1,BCL2,positive,"TGEN, TM, TT",direct,1,regulates
+CREB1,BCLXL,positive,"TGEN, TM, TT",direct,1,regulates
+CREB1,CEBPB,positive,"TGEN, TM",direct,1,regulates
+CREB1,FZD,positive,"TGEN, TM",assumption,4,
+CTNNB1,MYC,positive,"TGEN, TM, TT",direct,1,regulates
+CTNNB1,MYC_2,positive,"TGEN, TM, TT",direct,1,
+CTNNB1,NOTCH1,positive,"TGEN, TM, TT",indirect,2,
+CTNNB1,TCF7L2,positive,"TGEN, TM, TT",direct,1,regulates
 CYCLINDc,CYCLINDc_2,positive,"Z17, Z21",,0,necessary
 CYCLINDc,pRB,positive,"Z17, Z21",direct,1,regulates
 CYCLINDc,pRB_2,positive,"Z17, Z21",direct,1,
@@ -80,82 +77,82 @@ CYCLINDc,pRB_3,positive,Z21,direct,1,
 CYCLINDc_2,pRB,positive,"Z17, Z21",direct,1,
 CYCLINDc_2,pRB_2,positive,"Z17, Z21",direct,1,
 CYCLINDc_2,pRB_3,positive,"Z17, Z21",direct,1,
-CYCS,CASP9,positive,"MCF7, T47D, TGEN",direct in the network sense,1,regulates
+CYCS,CASP9,positive,"TGEN, TM, TT",direct in the network sense,1,regulates
 CyclinB1,AKT,positive,HL,indirect,2,
 CyclinD,CYCLINDc,positive,"Z17, Z21",,0,necessary
 CyclinD,CyclinD_2,positive,"BL, HL, SL, Z17, Z21",,0,necessary
 CyclinD_2,CYCLINDc,positive,"Z17, Z21",,0,
 CyclinD_2,CYCLINDc_2,positive,"Z17, Z21",,0,
-DC,CTNNB1,negative,"MCF7, T47D, TGEN",direct,1,regulates
-DLL,NOTCH1,positive,"MCF7, T47D, TGEN",direct,1,necessary
-DVL1,AXIN1,negative,"MCF7, T47D, TGEN",direct,1,regulates
-DVL1,RAC1,positive,"MCF7, T47D, TGEN",direct in the network sense,1,regulates
+DC,CTNNB1,negative,"TGEN, TM, TT",direct,1,regulates
+DLL,NOTCH1,positive,"TGEN, TM, TT",direct,1,necessary
+DVL1,AXIN1,negative,"TGEN, TM, TT",direct,1,regulates
+DVL1,RAC1,positive,"TGEN, TM, TT",direct in the network sense,1,regulates
 E2F,E2F_2,positive,"Z17, Z21",,0,necessary
-E2F,Proliferation,positive,"Z17, Z21",indirect,2,
-E2F,Proliferation_3,positive,Z21,indirect,2,
-E2F,Proliferation_4,positive,Z21,indirect,2,
+E2F,Proliferation,positive,"Z17, Z21",assumption,4,
+E2F,Proliferation_3,positive,Z21,assumption,4,
+E2F,Proliferation_4,positive,Z21,assumption,4,
 E2F,cycE_CDK2_T,positive,"Z17, Z21",direct,1,necessary
 E2F_2,E2F_3,positive,Z17,,0,necessary
-E2F_2,Proliferation,positive,Z17,indirect,2,
-E2F_2,Proliferation_2,positive,"Z17, Z21",indirect,2,
-E2F_2,Proliferation_3,positive,"Z17, Z21",indirect,2,
-E2F_2,Proliferation_4,positive,Z21,indirect,2,
+E2F_2,Proliferation,positive,Z17,assumption,4,
+E2F_2,Proliferation_2,positive,"Z17, Z21",assumption,4,
+E2F_2,Proliferation_3,positive,"Z17, Z21",assumption,4,
+E2F_2,Proliferation_4,positive,Z21,assumption,4,
 E2F_2,cycE_CDK2_T,positive,"Z17, Z21",direct,1,
 E2F_3,E2F_3,positive,Z17,direct,1,regulates
-E2F_3,Proliferation,positive,Z17,indirect,2,
-E2F_3,Proliferation_2,positive,"Z17, Z21",indirect,2,
-E2F_3,Proliferation_3,positive,"Z17, Z21",indirect,2,
-E2F_3,Proliferation_4,positive,"Z17, Z21",indirect,2,
+E2F_3,Proliferation,positive,Z17,assumption,4,
+E2F_3,Proliferation_2,positive,"Z17, Z21",assumption,4,
+E2F_3,Proliferation_3,positive,"Z17, Z21",assumption,4,
+E2F_3,Proliferation_4,positive,Z21,assumption,4,
 E2F_3,cycE_CDK2_T,positive,"Z17, Z21",direct,1,
-EGF,EGFR,positive,"BS, HS, MCF7, SS, T47D, TGEN",direct,1,regulates
+EGF,EGFR,positive,"BS, HS, SS, TGEN, TM, TT",direct,1,regulates
 EGFR,EGFR,positive,"BL, BS, HL, HS, SL, SS",direct,1,regulates
-EGFR,GRB2,positive,"MCF7, T47D, TGEN",direct,1,regulates
+EGFR,GRB2,positive,"TGEN, TM, TT",direct,1,regulates
 EGFR,HER2,positive,HS,direct,1,regulates
-EGFR,KRT14,positive,"MCF7, T47D, TGEN",indirect,2,
-EGFR,PI3K,positive,"MCF7, T47D, TGEN",direct,1,regulates
-EGFR,PI3K_2,positive,"MCF7, T47D, TGEN",direct,1,
+EGFR,KRT14,positive,"TGEN, TM, TT",indirect,2,
+EGFR,PI3K,positive,"TGEN, TM, TT",direct,1,regulates
+EGFR,PI3K_2,positive,"TGEN, TM, TT",direct,1,
 EGFR,PLCg,positive,"BS, HS, SS",direct,1,regulates
-EGFR,STAT1,positive,T47D,direct,1,regulates
-EGFR,STAT5,positive,"MCF7, TGEN",direct,1,regulates
-EIF4,CYCLINDc,positive,"MCF7, T47D",indirect,2,
-EIF4,CYCLINDc_2,positive,"MCF7, T47D",indirect,2,
-EIF4,MYC,positive,"MCF7, T47D, TGEN",indirect,2,
-EIF4,MYC_2,positive,"MCF7, T47D, TGEN",indirect,2,
+EGFR,STAT1,positive,TT,direct,1,regulates
+EGFR,STAT5,positive,"TGEN, TM",direct,1,regulates
+EIF4,CYCLINDc,positive,"TM, TT",indirect,2,
+EIF4,CYCLINDc_2,positive,"TM, TT",indirect,2,
+EIF4,MYC,positive,"TGEN, TM, TT",indirect,2,
+EIF4,MYC_2,positive,"TGEN, TM, TT",indirect,2,
 EIF4,Translation,positive,"Z17, Z21",direct in the network sense,1,regulates
-EIF4EBP1,EIF4,negative,"MCF7, T47D, TGEN",direct,1,regulates
+EIF4EBP1,EIF4,negative,"TGEN, TM, TT",direct,1,regulates
 ER,ESR1,positive,"Z17, Z21",,0,regulates
 ER,ESR1_2,positive,"Z17, Z21",,0,necessary
-ERK,BAD,negative,"MCF7, T47D, TGEN, Z17",direct in the network sense,1,regulates
-ERK,BCL2,positive,"MCF7, T47D, TGEN",direct,1,regulates
-ERK,CASP8,negative,"MCF7, T47D, TGEN",direct,1,regulates
-ERK,CASP9,negative,"MCF7, T47D, TGEN",direct,1,regulates
+ERK,BAD,negative,"TGEN, TM, TT, Z17",direct in the network sense,1,regulates
+ERK,BCL2,positive,"TGEN, TM, TT",direct,1,regulates
+ERK,CASP8,negative,"TGEN, TM, TT",direct,1,regulates
+ERK,CASP9,negative,"TGEN, TM, TT",direct,1,regulates
 ERK,ERK_2,positive,"BL, BS, HL, HS, SL, SS, Z17, Z21",,0,necessary
-ERK,GSK3B,negative,"MCF7, T47D, TGEN",direct in the network sense,1,regulates
-ERK,MCL1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-ERK,MYC,positive,"MCF7, T47D, TGEN",direct,1,regulates
-ERK,MYC_2,positive,"MCF7, T47D, TGEN",direct,1,
+ERK,GSK3B,negative,"TGEN, TM, TT",direct in the network sense,1,regulates
+ERK,MCL1,positive,"TGEN, TM, TT",direct,1,regulates
+ERK,MYC,positive,"TGEN, TM, TT",direct,1,regulates
+ERK,MYC_2,positive,"TGEN, TM, TT",direct,1,
 ERK,RAF1,negative,"BL, HL, SL",direct,1,regulates
 ERK,RAF1_2,negative,"BL, HL, SL",direct,1,
-ERK,S6K,positive,"BL, BS, HL, HS, SL, SS, T47D",direct,1,regulates
-ERK,STK11,negative,"MCF7, T47D, TGEN",indirect,2,
-ERK,TSC2,negative,"BL, HL, MCF7, SL, T47D, TGEN",direct in the network sense,1,regulates
-ERK,TWIST1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-ERK_2,BAD,negative,"MCF7, T47D, TGEN, Z17, Z21",direct in the network sense,1,
-ERK_2,BCL2,positive,"MCF7, T47D, TGEN",direct,1,
+ERK,S6K,positive,"BL, BS, HL, HS, SL, SS, TT",direct,1,regulates
+ERK,STK11,negative,"TGEN, TM, TT",indirect,2,
+ERK,TSC2,negative,"BL, HL, SL, TGEN, TM, TT",direct in the network sense,1,regulates
+ERK,TWIST1,positive,"TGEN, TM, TT",direct,1,regulates
+ERK_2,BAD,negative,"TGEN, TM, TT, Z17, Z21",direct in the network sense,1,
+ERK_2,BCL2,positive,"TGEN, TM, TT",direct,1,
 ERK_2,BIM,negative,"Z17, Z21",direct,1,regulates
-ERK_2,CASP8,negative,"MCF7, T47D, TGEN",direct,1,
-ERK_2,CASP9,negative,"MCF7, T47D, TGEN",direct,1,
+ERK_2,CASP8,negative,"TGEN, TM, TT",direct,1,
+ERK_2,CASP9,negative,"TGEN, TM, TT",direct,1,
 ERK_2,FOXO3_Ub,positive,"Z17, Z21",direct,1,regulates
-ERK_2,GSK3B,negative,"MCF7, T47D, TGEN",direct in the network sense,1,
-ERK_2,MCL1,positive,"MCF7, T47D, TGEN",direct,1,
-ERK_2,MYC,positive,"MCF7, T47D, TGEN",direct,1,
-ERK_2,MYC_2,positive,"MCF7, T47D, TGEN",direct,1,
+ERK_2,GSK3B,negative,"TGEN, TM, TT",direct in the network sense,1,
+ERK_2,MCL1,positive,"TGEN, TM, TT",direct,1,
+ERK_2,MYC,positive,"TGEN, TM, TT",direct,1,
+ERK_2,MYC_2,positive,"TGEN, TM, TT",direct,1,
 ERK_2,RAF1,negative,"BL, HL, SL",direct,1,
 ERK_2,RAF1_2,negative,"BL, HL, SL",direct,1,
-ERK_2,S6K,positive,"BL, BS, HL, HS, SL, SS, T47D",direct,1,
-ERK_2,STK11,negative,"MCF7, T47D, TGEN",indirect,2,
-ERK_2,TSC2,negative,"BL, HL, MCF7, SL, T47D, TGEN, Z17, Z21",direct in the network sense,1,
-ERK_2,TWIST1,positive,"MCF7, T47D, TGEN",direct,1,
+ERK_2,S6K,positive,"BL, BS, HL, HS, SL, SS, TT",direct,1,
+ERK_2,STK11,negative,"TGEN, TM, TT",indirect,2,
+ERK_2,TSC2,negative,"BL, HL, SL, TGEN, TM, TT, Z17, Z21",direct in the network sense,1,
+ERK_2,TWIST1,positive,"TGEN, TM, TT",direct,1,
 ER_transcription,ER_transcription_2,positive,"Z17, Z21",,0,necessary
 ER_transcription,MYC,positive,"Z17, Z21",direct,1,regulates
 ER_transcription_2,BCL2,positive,Z17,direct,1,regulates
@@ -164,258 +161,257 @@ ER_transcription_2,MYC_2,positive,"Z17, Z21",direct,1,
 ER_transcription_feedback_1,ER_transcription_feedback_2,positive,Z21,assumption,4,
 ER_transcription_feedback_2,ER_transcription_feedback_2,positive,Z21,assumption,4,
 ER_transcription_feedback_2,ESR1_2,negative,Z21,assumption,4,
-ES,ESR1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-ES,ESR1_2,positive,"MCF7, T47D, TGEN, Z21",direct,1,
+ES,ESR1,positive,"TGEN, TM, TT",direct,1,regulates
+ES,ESR1_2,positive,"TGEN, TM, TT, Z21",direct,1,
 ESR1,ER_transcription,positive,"Z17, Z21",,0,necessary
 ESR1,ESR1_2,positive,"Z17, Z21",,0,necessary
-ESR1,HSP90AA1,positive,T47D,correlation,3,
-ESR1,IGF1R,positive,"MCF7, T47D, TGEN",indirect,2,
-ESR1,IGF1R_2,positive,"MCF7, T47D, TGEN",indirect,2,
-ESR1,PI3K,positive,"MCF7, T47D, TGEN",direct,1,regulates
-ESR1,PI3K_2,positive,"MCF7, T47D, TGEN",direct,1,
+ESR1,HSP90AA1,positive,TT,correlation,3,
+ESR1,IGF1R,positive,"TGEN, TM, TT",indirect,2,
+ESR1,IGF1R_2,positive,"TGEN, TM, TT",indirect,2,
+ESR1,PI3K,positive,"TGEN, TM, TT",direct,1,regulates
+ESR1,PI3K_2,positive,"TGEN, TM, TT",direct,1,
 ESR1_2,ER_transcription,positive,"Z17, Z21",,0,
 ESR1_2,ER_transcription_2,positive,"Z17, Z21",,0,
-ESR1_2,HSP90AA1,positive,T47D,correlation,3,
-ESR1_2,IGF1R,positive,"MCF7, T47D, TGEN",indirect,2,
-ESR1_2,IGF1R_2,positive,"MCF7, T47D, TGEN",indirect,2,
-ESR1_2,PI3K,positive,"MCF7, T47D, TGEN",direct,1,
-ESR1_2,PI3K_2,positive,"MCF7, T47D, TGEN",direct,1,
+ESR1_2,HSP90AA1,positive,TT,correlation,3,
+ESR1_2,IGF1R,positive,"TGEN, TM, TT",indirect,2,
+ESR1_2,IGF1R_2,positive,"TGEN, TM, TT",indirect,2,
+ESR1_2,PI3K,positive,"TGEN, TM, TT",direct,1,
+ESR1_2,PI3K_2,positive,"TGEN, TM, TT",direct,1,
 Everolimus,mTORC1,negative,"Z17, Z21",direct in the network sense,1,regulates
 Everolimus,mTORC2_ic,negative,"Z17, Z21",indirect,2,
-FADD,CASP8,positive,"MCF7, T47D, TGEN",direct,1,regulates
-FAS,FADD,positive,"MCF7, T47D, TGEN",direct,1,regulates
-FASLG,FAS,positive,"MCF7, T47D, TGEN",direct,1,necessary
-FASLG,FASLG,positive,"MCF7, T47D, TGEN",indirect,2,
+FADD,CASP8,positive,"TGEN, TM, TT",direct,1,regulates
+FAS,FADD,positive,"TGEN, TM, TT",direct,1,regulates
+FASLG,FAS,positive,"TGEN, TM, TT",direct,1,necessary
+FASLG,FASLG,positive,"TGEN, TM, TT",indirect,2,
 FOXA1,ER_transcription_2,positive,"Z17, Z21",direct,1,regulates
-FOXO1,BIM,positive,"MCF7, T47D, TGEN",direct,1,regulates
+FOXO1,BIM,positive,"TGEN, TM, TT",direct,1,regulates
 FOXO1,FOXO1FOXO3,positive,merge,,0,regulates
-FOXO3,BIM,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,regulates
-FOXO3,ESR1,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,regulates
-FOXO3,ESR1_2,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,
-FOXO3,FASLG,positive,"MCF7, T47D, TGEN",direct,1,regulates
+FOXO3,BIM,positive,"TGEN, TM, TT, Z17, Z21",direct,1,regulates
+FOXO3,ESR1,positive,"TGEN, TM, TT, Z17, Z21",direct,1,regulates
+FOXO3,ESR1_2,positive,"TGEN, TM, TT, Z17, Z21",direct,1,
+FOXO3,FASLG,positive,"TGEN, TM, TT",direct,1,regulates
 FOXO3,FOXA1,positive,Z17,correlation,3,
 FOXO3,FOXO1FOXO3,positive,merge,,0,regulates
-FOXO3,HER2,positive,T47D,direct,1,regulates
+FOXO3,HER2,positive,TT,direct,1,regulates
 FOXO3,HER3,positive,"Z17, Z21",direct,1,regulates
 FOXO3,HER3_2,positive,"Z17, Z21",direct,1,
-FOXO3,IGF1R,positive,"MCF7, T47D, TGEN, Z17, Z21",indirect,2,
-FOXO3,IGF1R_2,positive,"MCF7, T47D, TGEN, Z17, Z21",indirect,2,
-FOXO3,INSR,positive,"MCF7, T47D, TGEN",indirect,2,
-FOXO3,STK11,positive,T47D,indirect,2,
+FOXO3,IGF1R,positive,"TGEN, TM, TT, Z17, Z21",indirect,2,
+FOXO3,IGF1R_2,positive,"TGEN, TM, TT, Z17, Z21",indirect,2,
+FOXO3,INSR,positive,"TGEN, TM, TT",indirect,2,
+FOXO3,STK11,positive,TT,indirect,2,
 FOXO3,p21_p27_T,positive,"Z17, Z21",direct,1,regulates
 FOXO3_Ub,FOXO3,negative,"Z17, Z21",direct,1,regulates
-FZD,DVL1,positive,"MCF7, T47D, TGEN",direct,1,regulates
+FZD,DVL1,positive,"TGEN, TM, TT",direct,1,regulates
 Fulvestrant,ESR1,negative,"Z17, Z21",direct,1,regulates
 Fulvestrant,ESR1_2,negative,"Z17, Z21",direct,1,
-GATA3,PPARG,negative,"MCF7, T47D, TGEN",direct,1,regulates
-GRB2,SOS1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-GSK3B,AXIN1,positive,"MCF7, T47D, TGEN",direct,1,regulates
+GATA3,PPARG,negative,"TGEN, TM, TT",direct,1,regulates
+GRB2,SOS1,positive,"TGEN, TM, TT",direct,1,regulates
+GSK3B,AXIN1,positive,"TGEN, TM, TT",direct,1,regulates
 GSK3B,CyclinD,negative,"BL, SL",direct,1,regulates
 GSK3B,CyclinD_2,negative,"BL, SL",direct,1,
-GSK3B,DC,positive,"MCF7, T47D, TGEN",,0,necessary
+GSK3B,DC,positive,"TGEN, TM, TT",,0,necessary
 GSK3B,GSK3B,positive,"BL, HL, SL",direct,1,regulates
 GSK3B,JUN,negative,"BL, HL, SL",direct,1,regulates
-GSK3B,MCL1,negative,"MCF7, T47D, TGEN",direct in the network sense,1,regulates
-GSK3B,MYC,negative,"MCF7, T47D, TGEN",direct,1,regulates
-GSK3B,MYC_2,negative,"MCF7, T47D, TGEN",direct,1,
+GSK3B,MCL1,negative,"TGEN, TM, TT",direct in the network sense,1,regulates
+GSK3B,MYC,negative,"TGEN, TM, TT",direct,1,regulates
+GSK3B,MYC_2,negative,"TGEN, TM, TT",direct,1,
 GSK3B,PTEN,negative,"BL, HL, SL",direct,1,regulates
 GSK3B,PTEN_2,negative,"BL, HL, SL",direct,1,
-GSK3B,TSC2,positive,"MCF7, T47D, TGEN",direct,1,regulates
-HER2,EGFR,positive,"MCF7, T47D, TGEN",direct,1,regulates
-HER2,GRB2,positive,T47D,direct,1,regulates
+GSK3B,TSC2,positive,"TGEN, TM, TT",direct,1,regulates
+HER2,EGFR,positive,"TGEN, TM, TT",direct,1,regulates
+HER2,GRB2,positive,TT,direct,1,regulates
 HER2,HER2,positive,"BL, BS, HL, HS, SL, SS",direct,1,regulates
-HER2,HER2HER3c,positive,"MCF7, T47D, TGEN, Z17, Z21",,0,necessary
-HER2,HER2HER3c_2,positive,"MCF7, T47D, TGEN, Z17, Z21",,0,
+HER2,HER2HER3c,positive,"TGEN, TM, TT, Z17, Z21",,0,necessary
+HER2,HER2HER3c_2,positive,"TGEN, TM, TT, Z17, Z21",,0,
 HER2,PLCg,positive,"BS, HS, SS",direct,1,regulates
 HER2HER3c,HER2HER3c_2,positive,"Z17, Z21",,0,necessary
 HER2HER3c,PI3K,positive,"Z17, Z21",direct,1,regulates
 HER2HER3c_2,PI3K,positive,"Z17, Z21",direct,1,
 HER2HER3c_2,PI3K_2,positive,"Z17, Z21",direct,1,
-HER3,EGFR,positive,"HL, MCF7, T47D, TGEN",direct,1,regulates
-HER3,HER2HER3c,positive,"BS, MCF7, T47D, TGEN, Z17, Z21",,0,necessary
-HER3,HER2HER3c_2,positive,"BS, MCF7, T47D, TGEN, Z17, Z21",,0,
+HER3,EGFR,positive,"HL, TGEN, TM, TT",direct,1,regulates
+HER3,HER2HER3c,positive,"BS, TGEN, TM, TT, Z17, Z21",,0,necessary
+HER3,HER2HER3c_2,positive,"BS, TGEN, TM, TT, Z17, Z21",,0,
 HER3,HER3_2,positive,"BL, BS, HL, HS, SL, SS, Z17, Z21",,0,necessary
 HER3,NFKB,positive,SL,indirect,2,
-HER3_2,EGFR,positive,"HL, MCF7, T47D, TGEN",direct,1,
-HER3_2,HER2HER3c,positive,"BS, MCF7, T47D, TGEN, Z17, Z21",,0,
-HER3_2,HER2HER3c_2,positive,"BS, MCF7, T47D, TGEN, Z17, Z21",,0,
+HER3_2,EGFR,positive,"HL, TGEN, TM, TT",direct,1,
+HER3_2,HER2HER3c,positive,"BS, TGEN, TM, TT, Z17, Z21",,0,
+HER3_2,HER2HER3c_2,positive,"BS, TGEN, TM, TT, Z17, Z21",,0,
 HER3_2,NFKB,positive,SL,indirect,2,
 HER3_T,HER3,positive,"Z17, Z21",direct,1,regulates
-HES1,MYOD1,negative,"MCF7, T47D, TGEN",direct,1,regulates
-HEY1,MYOG,negative,"MCF7, T47D, TGEN",direct,1,regulates
-HRAS,RAF1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-HRAS,RAF1_2,positive,"MCF7, T47D, TGEN",direct,1,
-HSP90AA1,NOS3,positive,"MCF7, T47D, TGEN",direct,1,regulates
-IGF1,IGF1R,positive,"MCF7, T47D, TGEN",direct,1,regulates
-IGF1,IGF1R_2,positive,"MCF7, T47D, TGEN",direct,1,
+HES1,MYOD1,negative,"TGEN, TM, TT",direct,1,regulates
+HEY1,MYOG,negative,"TGEN, TM, TT",direct,1,regulates
+HRAS,RAF1,positive,"TGEN, TM, TT",direct,1,regulates
+HRAS,RAF1_2,positive,"TGEN, TM, TT",direct,1,
+HSP90AA1,NOS3,positive,"TGEN, TM, TT",direct,1,regulates
+IGF1,IGF1R,positive,"TGEN, TM, TT",direct,1,regulates
+IGF1,IGF1R_2,positive,"TGEN, TM, TT",direct,1,
 IGF1R,IGF1R_2,positive,"Z17, Z21",,0,necessary
-IGF1R,IRS1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-IGF1R_2,IRS1,positive,"MCF7, T47D, TGEN",direct,1,
+IGF1R,IRS1,positive,"TGEN, TM, TT",direct,1,regulates
+IGF1R_2,IRS1,positive,"TGEN, TM, TT",direct,1,
 IGF1R_T,IGF1R,positive,"Z17, Z21",direct,1,regulates
 IGF1R_T,IGF1R_2,positive,Z17,direct,1,
 IGF1R_T,IGF1R_T_2,positive,Z21,,0,necessary
 IGF1R_T_2,IGF1R,positive,Z17,direct,1,
 IGF1R_T_2,IGF1R_2,positive,"Z17, Z21",direct,1,
-IL1B,IL6,positive,"MCF7, T47D, TGEN",indirect,2,
-IL1B,STAT3,positive,"MCF7, T47D, TGEN",indirect,2,
-IL6,IL6,positive,"MCF7, T47D, TGEN",indirect,2,
-IL6,IL6R,positive,"MCF7, T47D, TGEN",direct,1,necessary
-IL6R,JAK2,positive,"MCF7, T47D, TGEN",direct,1,regulates
-INS,IGF1R,positive,"MCF7, TGEN",direct,1,regulates
-INS,IGF1R_2,positive,"MCF7, TGEN",direct,1,
-INS,INSR,positive,"MCF7, T47D, TGEN",direct,1,regulates
-INSR,GRB7,positive,"MCF7, T47D, TGEN",direct,1,regulates
-INSR,IRS1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-IRS1,GRB2,positive,"MCF7, T47D, TGEN",direct,1,regulates
-IRS1,PI3K,positive,"MCF7, T47D, TGEN",direct,1,regulates
-IRS1,PI3K_2,positive,"MCF7, T47D, TGEN",direct,1,
+IL1B,IL6,positive,"TGEN, TM, TT",indirect,2,
+IL1B,STAT3,positive,"TGEN, TM, TT",indirect,2,
+IL6,IL6,positive,"TGEN, TM, TT",indirect,2,
+IL6,IL6R,positive,"TGEN, TM, TT",direct,1,necessary
+IL6R,JAK2,positive,"TGEN, TM, TT",direct,1,regulates
+INS,IGF1R,positive,"TGEN, TM",direct,1,regulates
+INS,IGF1R_2,positive,"TGEN, TM",direct,1,
+INS,INSR,positive,"TGEN, TM, TT",direct,1,regulates
+INSR,GRB7,positive,"TGEN, TM, TT",direct,1,regulates
+INSR,IRS1,positive,"TGEN, TM, TT",direct,1,regulates
+IRS1,GRB2,positive,"TGEN, TM, TT",direct,1,regulates
+IRS1,PI3K,positive,"TGEN, TM, TT",direct,1,regulates
+IRS1,PI3K_2,positive,"TGEN, TM, TT",direct,1,
 Ipatasertib,AKT,negative,"Z17, Z21",direct,1,regulates
-JAK2,STAT1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-JAK2,STAT3,positive,"MCF7, T47D, TGEN",direct,1,regulates
-JAK2,STAT5,positive,"MCF7, T47D, TGEN",direct,1,regulates
+JAK2,STAT1,positive,"TGEN, TM, TT",direct,1,regulates
+JAK2,STAT3,positive,"TGEN, TM, TT",direct,1,regulates
+JAK2,STAT5,positive,"TGEN, TM, TT",direct,1,regulates
 JUN,CyclinD,positive,"HL, SL",direct,1,regulates
 JUN,CyclinD_2,positive,"HL, SL",direct,1,
 JUN,EGFR,positive,HL,direct,1,regulates
 JUN,JUN,positive,"BL, HL, SL",direct,1,regulates
-JUN,TCF7L2,positive,"MCF7, T47D, TGEN",direct,1,regulates
-KMT2D,CYCLINDc,positive,"MCF7, T47D",indirect,2,
-KMT2D,CYCLINDc_2,positive,"MCF7, T47D",indirect,2,
+JUN,TCF7L2,positive,"TGEN, TM, TT",direct,1,regulates
+KMT2D,CYCLINDc,positive,"TM, TT",indirect,2,
+KMT2D,CYCLINDc_2,positive,"TM, TT",indirect,2,
 KMT2D,ER_transcription_2,positive,"Z17, Z21",direct,1,regulates
-KMT2D,MYC,positive,"MCF7, T47D",indirect,2,
-KRT14,TRADD,negative,"MCF7, T47D, TGEN",direct,1,regulates
-LATS1,YAP1,negative,"MCF7, T47D, TGEN",direct,1,regulates
-LCK,NOTCH1,positive,"MCF7, T47D, TGEN",assumption,4,
+KMT2D,MYC,positive,"TM, TT",indirect,2,
+KRT14,TRADD,negative,"TGEN, TM, TT",direct,1,regulates
+LATS1,YAP1,negative,"TGEN, TM, TT",direct,1,regulates
+LCK,NOTCH1,positive,"TGEN, TM, TT",assumption,4,
 MAPK,MAPK_2,positive,"Z17, Z21",,0,necessary
-MAPK8,JUN,positive,"MCF7, T47D, TGEN",direct,1,regulates
-MCL1,Apoptosis,negative,Z17,indirect,2,
-MCL1,Apoptosis_2,negative,"Z17, Z21",indirect,2,
-MCL1,Apoptosis_3,negative,"Z17, Z21",indirect,2,
-MCL1,BAK1,negative,"MCF7, T47D, TGEN",direct,1,regulates
-MCL1,BAX,negative,"MCF7, T47D, TGEN",direct,1,regulates
+MAPK8,JUN,positive,"TGEN, TM, TT",direct,1,regulates
+MCL1,Apoptosis_Y,negative,"Z17, Z21",assumption,4,
+MCL1,Apoptosis_Z,negative,"Z17, Z21",assumption,4,
+MCL1,BAK1,negative,"TGEN, TM, TT",direct,1,regulates
+MCL1,BAX,negative,"TGEN, TM, TT",direct,1,regulates
 MCL1_T,MCL1,positive,Z21,direct,1,regulates
-MDM2,NOTCH1,positive,"MCF7, TGEN",direct,1,regulates
-MDM2,p53,negative,"MCF7, T47D, TGEN",direct,1,regulates
-MEK,ERK,positive,"BS, HS, MCF7, SS, T47D, TGEN",direct,1,necessary
-MEK,ERK_2,positive,"BS, HS, MCF7, SS, T47D, TGEN",direct,1,
+MDM2,NOTCH1,positive,"TGEN, TM",direct,1,regulates
+MDM2,p53,negative,"TGEN, TM, TT",direct,1,regulates
+MEK,ERK,positive,"BS, HS, SS, TGEN, TM, TT",direct,1,necessary
+MEK,ERK_2,positive,"BS, HS, SS, TGEN, TM, TT",direct,1,
 MEK,MEK_2,positive,"BS, HS, SS, Z17, Z21",,0,necessary
-MEK_2,ERK,positive,"BS, HS, MCF7, SS, T47D, TGEN",direct,1,
-MEK_2,ERK_2,positive,"BS, HS, MCF7, SS, T47D, TGEN, Z17, Z21",direct,1,
-MYC,CDKN2A,negative,"MCF7, T47D, TGEN",indirect,2,
-MYC,CYCLINDc,positive,"MCF7, T47D, TGEN",indirect,2,
-MYC,CYCLINDc_2,positive,"MCF7, T47D, TGEN",indirect,2,
+MEK_2,ERK,positive,"BS, HS, SS, TGEN, TM, TT",direct,1,
+MEK_2,ERK_2,positive,"BS, HS, SS, TGEN, TM, TT, Z17, Z21",direct,1,
+MYC,CDKN2A,negative,"TGEN, TM, TT",indirect,2,
+MYC,CYCLINDc,positive,"TGEN, TM, TT",indirect,2,
+MYC,CYCLINDc_2,positive,"TGEN, TM, TT",indirect,2,
 MYC,MYC_2,positive,"Z17, Z21",,0,necessary
 MYC,MYC_targets,positive,Z21,direct,1,regulates
 MYC,MYC_targets_2,positive,Z21,direct,1,
-MYC,p21,negative,"MCF7, T47D, TGEN",indirect,2,
-MYC_2,CDKN2A,negative,"MCF7, T47D, TGEN",indirect,2,
-MYC_2,CYCLINDc,positive,"MCF7, T47D, TGEN",indirect,2,
-MYC_2,CYCLINDc_2,positive,"MCF7, T47D, TGEN",indirect,2,
+MYC,p21,negative,"TGEN, TM, TT",indirect,2,
+MYC_2,CDKN2A,negative,"TGEN, TM, TT",indirect,2,
+MYC_2,CYCLINDc,positive,"TGEN, TM, TT",indirect,2,
+MYC_2,CYCLINDc_2,positive,"TGEN, TM, TT",indirect,2,
 MYC_2,MYC_targets,positive,Z21,direct,1,
 MYC_2,MYC_targets_2,positive,Z21,direct,1,
-MYC_2,p21,negative,"MCF7, T47D, TGEN",indirect,2,
+MYC_2,p21,negative,"TGEN, TM, TT",indirect,2,
 MYC_T,MYC_2,positive,Z21,direct,1,
 MYC_targets,MYC_targets_2,positive,Z21,,0,necessary
 MYC_targets,Proliferation,positive,Z21,assumption,4,
 MYC_targets_2,Proliferation_3,positive,Z21,assumption,4,
 MYC_targets_2,Proliferation_4,positive,Z21,assumption,4,
-MYOD1,MYOG,positive,"MCF7, T47D, TGEN",direct,1,regulates
-MYOG,PAX7,negative,"MCF7, T47D, TGEN",correlation,3,
-NEDD4L,NF2,positive,"MCF7, T47D, TGEN",direct in the network sense,1,regulates
-NF1,HRAS,negative,"MCF7, T47D, TGEN",direct,1,regulates
-NF2,LATS1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-NF2,MYOD1,negative,T47D,assumption,4,
-NFKB,EGFR,positive,T47D,direct,1,regulates
-NFKB,IL1B,positive,"MCF7, T47D, TGEN",direct,1,regulates
-NFKB,RELA,positive,"MCF7, T47D, TGEN",,0,necessary
-NICD,HES1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-NICD,HEY1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-NOTCH1,NFKB,positive,"MCF7, T47D, TGEN",indirect,2,
-NOTCH1,NICD,positive,"MCF7, T47D, TGEN",direct,1,necessary
-NOTCH1,PAX7,positive,"MCF7, TGEN",indirect,2,
-NRG1,HER3,positive,"BS, HS, MCF7, SS, T47D, TGEN",direct,1,regulates
-NRG1,HER3_2,positive,"BS, HS, MCF7, SS, T47D, TGEN",direct,1,
+MYOD1,MYOG,positive,"TGEN, TM, TT",direct,1,regulates
+MYOG,PAX7,negative,"TGEN, TM, TT",correlation,3,
+NEDD4L,NF2,positive,"TGEN, TM, TT",direct in the network sense,1,regulates
+NF1,HRAS,negative,"TGEN, TM, TT",direct,1,regulates
+NF2,LATS1,positive,"TGEN, TM, TT",direct,1,regulates
+NF2,MYOD1,negative,TT,assumption,4,
+NFKB,EGFR,positive,TT,direct,1,regulates
+NFKB,IL1B,positive,"TGEN, TM, TT",direct,1,regulates
+NFKB,RELA,positive,"TGEN, TM, TT",,0,necessary
+NICD,HES1,positive,"TGEN, TM, TT",direct,1,regulates
+NICD,HEY1,positive,"TGEN, TM, TT",direct,1,regulates
+NOTCH1,NFKB,positive,"TGEN, TM, TT",indirect,2,
+NOTCH1,NICD,positive,"TGEN, TM, TT",direct,1,necessary
+NOTCH1,PAX7,positive,"TGEN, TM",indirect,2,
+NRG1,HER3,positive,"BS, HS, SS, TGEN, TM, TT",direct,1,regulates
+NRG1,HER3_2,positive,"BS, HS, SS, TGEN, TM, TT",direct,1,
 Navitoclax,BCL2,negative,Z21,direct,1,regulates
 Navitoclax,BCLXL,negative,Z21,direct,1,regulates
 Neratinib,HER2,negative,Z17,direct,1,regulates
 Neratinib,HER2HER3c,negative,"Z17, Z21",direct,1,regulates
 Neratinib,HER2HER3c_2,negative,"Z17, Z21",direct,1,
-PAK1,BAD,negative,"MCF7, T47D, TGEN",direct,1,regulates
-PAK2,KRT14,positive,"MCF7, T47D, TGEN",assumption,4,
+PAK1,BAD,negative,"TGEN, TM, TT",direct,1,regulates
+PAK2,KRT14,positive,"TGEN, TM, TT",assumption,4,
 PBX1,ER_transcription_2,positive,"Z17, Z21",direct,1,regulates
-PDK1_ic,PAK1,positive,T47D,direct,1,regulates
-PDK1_ic,SGK1,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,necessary
-PDK1_pm,AKT,positive,"BS, HS, MCF7, SS, T47D, TGEN, Z17, Z21",direct,1,regulates
+PDK1_ic,PAK1,positive,TT,direct,1,regulates
+PDK1_ic,SGK1,positive,"TGEN, TM, TT, Z17, Z21",direct,1,necessary
+PDK1_pm,AKT,positive,"BS, HS, SS, TGEN, TM, TT, Z17, Z21",direct,1,regulates
 PDK1_pm,MEK,positive,HS,direct,1,regulates
 PDK1_pm,MEK_2,positive,HS,direct,1,
-PG,PGR,positive,"MCF7, T47D, TGEN",direct,1,regulates
+PG,PGR,positive,"TGEN, TM, TT",direct,1,regulates
 PI3K,PI3K_2,positive,"Z17, Z21",,0,necessary
-PI3K,PIP3,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,regulates
-PI3K,PIP3_2,positive,"MCF7, T47D, TGEN",direct,1,
-PI3K_2,PIP3,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,
-PI3K_2,PIP3_2,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,
-PIM,BAD,negative,"MCF7, T47D, TGEN, Z17, Z21",direct,1,regulates
+PI3K,PIP3,positive,"TGEN, TM, TT, Z17, Z21",direct,1,regulates
+PI3K,PIP3_2,positive,"TGEN, TM, TT",direct,1,
+PI3K_2,PIP3,positive,"TGEN, TM, TT, Z17, Z21",direct,1,
+PI3K_2,PIP3_2,positive,"TGEN, TM, TT, Z17, Z21",direct,1,
+PIM,BAD,negative,"TGEN, TM, TT, Z17, Z21",direct,1,regulates
 PIM,FOXO3,negative,"Z17, Z21",direct,1,regulates
-PIM,MYC,positive,"MCF7, T47D, TGEN",direct,1,regulates
-PIM,MYC_2,positive,"MCF7, T47D, TGEN",direct,1,
+PIM,MYC,positive,"TGEN, TM, TT",direct,1,regulates
+PIM,MYC_2,positive,"TGEN, TM, TT",direct,1,
 PIM,PRAS40,negative,"Z17, Z21",direct,1,regulates
-PIM,RELA,positive,"MCF7, T47D, TGEN",direct,1,regulates
-PIP3,AKT,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,regulates
-PIP3,PDK1_pm,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,necessary
+PIM,RELA,positive,"TGEN, TM, TT",direct,1,regulates
+PIP3,AKT,positive,"TGEN, TM, TT, Z17, Z21",direct,1,regulates
+PIP3,PDK1_pm,positive,"TGEN, TM, TT, Z17, Z21",direct,1,necessary
 PIP3,PIP3_2,positive,"Z17, Z21",,0,necessary
-PIP3,mTORC2_pm,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,necessary
-PIP3_2,AKT,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,
-PIP3_2,PDK1_pm,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,
-PIP3_2,mTORC2_pm,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,
+PIP3,mTORC2_pm,positive,"TGEN, TM, TT, Z17, Z21",direct,1,necessary
+PIP3_2,AKT,positive,"TGEN, TM, TT, Z17, Z21",direct,1,
+PIP3_2,PDK1_pm,positive,"TGEN, TM, TT, Z17, Z21",direct,1,
+PIP3_2,mTORC2_pm,positive,"TGEN, TM, TT, Z17, Z21",direct,1,
 PLCg,PKCa,positive,"BS, HS, SS",direct in the network sense,1,regulates
 PRAS40,PRAS40,positive,"BL, HL, SL",indirect,2,
 PRAS40,mTORC1,negative,"Z17, Z21",direct,1,regulates
-PRKAA2,TSC2,positive,"MCF7, T47D, TGEN",direct,1,regulates
-PRKACA,CASP9,negative,"MCF7, TGEN",direct,1,regulates
-PRKACA,NEDD4L,negative,"MCF7, TGEN",direct,1,regulates
-PRKACA,PRKAA2,negative,"MCF7, TGEN",assumption,4,
-PRKACA,SRC,positive,"MCF7, T47D, TGEN",assumption,4,
-PTEN,CREB1,negative,"MCF7, TGEN",direct,1,regulates
-PTEN,PIP3,negative,"MCF7, T47D, TGEN, Z17, Z21",direct,1,regulates
-PTEN,PIP3_2,negative,"MCF7, T47D, TGEN, Z17",direct,1,
+PRKAA2,TSC2,positive,"TGEN, TM, TT",direct,1,regulates
+PRKACA,CASP9,negative,"TGEN, TM",direct,1,regulates
+PRKACA,NEDD4L,negative,"TGEN, TM",direct,1,regulates
+PRKACA,PRKAA2,negative,"TGEN, TM",assumption,4,
+PRKACA,SRC,positive,"TGEN, TM, TT",assumption,4,
+PTEN,CREB1,negative,"TGEN, TM",direct,1,regulates
+PTEN,PIP3,negative,"TGEN, TM, TT, Z17, Z21",direct,1,regulates
+PTEN,PIP3_2,negative,"TGEN, TM, TT, Z17",direct,1,
 PTEN,PTEN_2,positive,"BL, HL, SL, Z21",,0,necessary
 PTEN,p53,positive,"BL, SL",direct,1,regulates
-PTEN_2,CREB1,negative,"MCF7, TGEN",direct,1,
-PTEN_2,PIP3,negative,"MCF7, T47D, TGEN, Z17, Z21",direct,1,
-PTEN_2,PIP3_2,negative,"MCF7, T47D, TGEN, Z17, Z21",direct,1,
+PTEN_2,CREB1,negative,"TGEN, TM",direct,1,
+PTEN_2,PIP3,negative,"TGEN, TM, TT, Z17, Z21",direct,1,
+PTEN_2,PIP3_2,negative,"TGEN, TM, TT, Z17, Z21",direct,1,
 PTEN_2,p53,positive,"BL, SL",direct,1,
 PTEN_T,PTEN,positive,Z21,direct,1,necessary
 PTEN_T,PTEN_T_2,positive,Z21,,0,necessary
 PTEN_T_2,PTEN_2,positive,Z21,direct,1,
 Palbociclib,CDK46,negative,"Z17, Z21",direct,1,regulates
-RAC1,MAPK8,positive,"MCF7, T47D, TGEN",indirect,2,
-RAC1,PAK1,positive,T47D,direct,1,regulates
-RAC1,PAK2,positive,"MCF7, T47D, TGEN",direct,1,regulates
-RAF1,MEK,positive,"MCF7, T47D, TGEN",direct,1,necessary
-RAF1,MEK_2,positive,"MCF7, T47D, TGEN",direct,1,
+RAC1,MAPK8,positive,"TGEN, TM, TT",indirect,2,
+RAC1,PAK1,positive,TT,direct,1,regulates
+RAC1,PAK2,positive,"TGEN, TM, TT",direct,1,regulates
+RAF1,MEK,positive,"TGEN, TM, TT",direct,1,necessary
+RAF1,MEK_2,positive,"TGEN, TM, TT",direct,1,
 RAF1,RAF1_2,positive,"BL, HL, SL, Z17, Z21",,0,necessary
-RAF1_2,MEK,positive,"MCF7, T47D, TGEN",direct,1,
-RAF1_2,MEK_2,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,
-RAS,PI3K,positive,"MCF7, TGEN, Z17, Z21",direct,1,regulates
-RAS,PI3K_2,positive,"MCF7, TGEN",direct,1,
-RAS,RAF1,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,regulates
-RAS,RAF1_2,positive,"MCF7, T47D, TGEN",direct,1,
+RAF1_2,MEK,positive,"TGEN, TM, TT",direct,1,
+RAF1_2,MEK_2,positive,"TGEN, TM, TT, Z17, Z21",direct,1,
+RAS,PI3K,positive,"TGEN, TM, Z17, Z21",direct,1,regulates
+RAS,PI3K_2,positive,"TGEN, TM",direct,1,
+RAS,RAF1,positive,"TGEN, TM, TT, Z17, Z21",direct,1,regulates
+RAS,RAF1_2,positive,"TGEN, TM, TT",direct,1,
 RAS,RAS_2,positive,"Z17, Z21",,0,necessary
-RAS_2,PI3K,positive,"MCF7, TGEN, Z17, Z21",direct,1,
-RAS_2,PI3K_2,positive,"MCF7, TGEN",direct,1,
-RAS_2,RAF1,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,
-RAS_2,RAF1_2,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,
+RAS_2,PI3K,positive,"TGEN, TM, Z17, Z21",direct,1,
+RAS_2,PI3K_2,positive,"TGEN, TM",direct,1,
+RAS_2,RAF1,positive,"TGEN, TM, TT, Z17, Z21",direct,1,
+RAS_2,RAF1_2,positive,"TGEN, TM, TT, Z17, Z21",direct,1,
 RAS_2,RAS_3,positive,"Z17, Z21",,0,necessary
-RAS_3,PI3K,positive,"MCF7, TGEN, Z17, Z21",direct,1,
-RAS_3,PI3K_2,positive,"MCF7, TGEN",direct,1,
-RAS_3,RAF1,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,
-RAS_3,RAF1_2,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,
-RB,ABL1,negative,MCF7,direct,1,regulates
-RB,E2F,negative,"MCF7, T47D, TGEN",direct,1,regulates
-RB,E2F_2,negative,"MCF7, T47D, TGEN",direct,1,
-RB,E2F_3,negative,"MCF7, T47D, TGEN",direct,1,
+RAS_3,PI3K,positive,"TGEN, TM, Z17, Z21",direct,1,
+RAS_3,PI3K_2,positive,"TGEN, TM",direct,1,
+RAS_3,RAF1,positive,"TGEN, TM, TT, Z17, Z21",direct,1,
+RAS_3,RAF1_2,positive,"TGEN, TM, TT, Z17, Z21",direct,1,
+RB,ABL1,negative,TM,direct,1,regulates
+RB,E2F,negative,"TGEN, TM, TT",direct,1,regulates
+RB,E2F_2,negative,"TGEN, TM, TT",direct,1,
+RB,E2F_3,negative,"TGEN, TM, TT",direct,1,
 RB,p53,positive,"BL, HL, SL",indirect,2,
 RB,pRB,negative,merge,,0,regulates
-RHEB,mTORC1,positive,"MCF7, T47D, TGEN",direct,1,regulates
+RHEB,mTORC1,positive,"TGEN, TM, TT",direct,1,regulates
 RPS6,CyclinD,positive,BL,indirect,2,
 RPS6,CyclinD_2,positive,BL,indirect,2,
 RPS6,NFKB,positive,SL,correlation,3,
@@ -427,57 +423,53 @@ Rb_T,pRB_3,negative,Z21,assumption,4,
 S63845,MCL1,negative,Z21,direct,1,regulates
 S6K,CyclinD,positive,HL,indirect,2,
 S6K,CyclinD_2,positive,HL,indirect,2,
-S6K,IRS1,negative,"MCF7, T47D, TGEN",direct,1,regulates
+S6K,IRS1,negative,"TGEN, TM, TT",direct,1,regulates
 S6K,NEDD4L,negative,TGEN,assumption,4,
 S6K,RPS6,positive,"BL, HL, SL",direct,1,regulates
 S6K,Translation,positive,"Z17, Z21",indirect,2,
-SGK1,CREB1,positive,T47D,direct,1,regulates
-SGK1,FOXO1,negative,"MCF7, T47D, TGEN",direct,1,regulates
+SGK1,CREB1,positive,TT,direct,1,regulates
+SGK1,FOXO1,negative,"TGEN, TM, TT",direct,1,regulates
 SGK1,FOXO3,negative,"Z17, Z21",direct,1,regulates
-SGK1,NEDD4L,negative,"MCF7, T47D, TGEN",direct,1,regulates
+SGK1,NEDD4L,negative,"TGEN, TM, TT",direct,1,regulates
 SGK1,TSC2,negative,"Z17, Z21",direct,1,regulates
 SGK1_T,SGK1,positive,"Z17, Z21",direct,1,necessary
-SOS1,HRAS,positive,"MCF7, T47D, TGEN",direct,1,regulates
-SOS1,RAS,positive,"MCF7, T47D, TGEN",direct,1,regulates
-SOS1,RAS_2,positive,"MCF7, T47D, TGEN",direct,1,
-SOS1,RAS_3,positive,"MCF7, T47D, TGEN",direct,1,
-SRC,ABL1,positive,"MCF7, TGEN",direct,1,regulates
-SRC,CASP8,negative,"MCF7, T47D, TGEN",direct,1,regulates
-SRC,CTNNB1,positive,"MCF7, TGEN",direct,1,regulates
-SRC,GRB2,positive,"MCF7, T47D, TGEN",direct,1,regulates
-SRC,IGF1R,positive,"MCF7, TGEN",direct,1,regulates
-SRC,IGF1R_2,positive,"MCF7, TGEN",direct,1,
-SRC,STAT1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-SRC,STAT3,positive,"MCF7, T47D, TGEN",direct,1,regulates
-SRC,STAT5,positive,"MCF7, TGEN",direct,1,regulates
-STAT1,GATA3,negative,"MCF7, T47D, TGEN",direct in the network sense,1,regulates
-STAT3,IL6R,positive,T47D,direct,1,regulates
-STAT3,MYC,positive,"MCF7, T47D, TGEN",direct,1,regulates
-STAT3,MYC_2,positive,"MCF7, T47D, TGEN",direct,1,
-STAT5,IL8,positive,"MCF7, T47D, TGEN",direct,1,regulates
-STAT5,PIM,positive,"MCF7, TGEN",direct,1,regulates
-STK11,PRKAA2,positive,"MCF7, T47D, TGEN",direct,1,regulates
-TCF7L2,CYCLINDc,positive,"MCF7, T47D, TGEN",indirect,2,
-TCF7L2,CYCLINDc_2,positive,"MCF7, T47D, TGEN",indirect,2,
-TCF7L2,PAK1,positive,"MCF7, T47D, TGEN",assumption,4,
-TEAD1,CYCLINDc,positive,"MCF7, T47D, TGEN",indirect,2,
-TEAD1,CYCLINDc_2,positive,"MCF7, T47D, TGEN",indirect,2,
-TRADD,FADD,positive,"MCF7, T47D, TGEN",direct,1,regulates
-TSC2,RHEB,negative,"MCF7, T47D, TGEN",direct,1,regulates
-TWIST1,NF1,negative,"MCF7, T47D, TGEN",assumption,4,
+SOS1,HRAS,positive,"TGEN, TM, TT",direct,1,regulates
+SOS1,RAS,positive,"TGEN, TM, TT",direct,1,regulates
+SOS1,RAS_2,positive,"TGEN, TM, TT",direct,1,
+SOS1,RAS_3,positive,"TGEN, TM, TT",direct,1,
+SRC,ABL1,positive,"TGEN, TM",direct,1,regulates
+SRC,CASP8,negative,"TGEN, TM, TT",direct,1,regulates
+SRC,CTNNB1,positive,"TGEN, TM",direct,1,regulates
+SRC,GRB2,positive,"TGEN, TM, TT",direct,1,regulates
+SRC,IGF1R,positive,"TGEN, TM",direct,1,regulates
+SRC,IGF1R_2,positive,"TGEN, TM",direct,1,
+SRC,STAT1,positive,"TGEN, TM, TT",direct,1,regulates
+SRC,STAT3,positive,"TGEN, TM, TT",direct,1,regulates
+SRC,STAT5,positive,"TGEN, TM",direct,1,regulates
+STAT1,GATA3,negative,"TGEN, TM, TT",direct in the network sense,1,regulates
+STAT3,IL6R,positive,TT,direct,1,regulates
+STAT3,MYC,positive,"TGEN, TM, TT",direct,1,regulates
+STAT3,MYC_2,positive,"TGEN, TM, TT",direct,1,
+STAT5,IL8,positive,"TGEN, TM, TT",direct,1,regulates
+STAT5,PIM,positive,"TGEN, TM",direct,1,regulates
+STK11,PRKAA2,positive,"TGEN, TM, TT",direct,1,regulates
+TCF7L2,CYCLINDc,positive,"TGEN, TM, TT",indirect,2,
+TCF7L2,CYCLINDc_2,positive,"TGEN, TM, TT",indirect,2,
+TCF7L2,PAK1,positive,"TGEN, TM, TT",assumption,4,
+TEAD1,CYCLINDc,positive,"TGEN, TM, TT",indirect,2,
+TEAD1,CYCLINDc_2,positive,"TGEN, TM, TT",indirect,2,
+TRADD,FADD,positive,"TGEN, TM, TT",direct,1,regulates
+TSC2,RHEB,negative,"TGEN, TM, TT",direct,1,regulates
+TWIST1,NF1,negative,"TGEN, TM, TT",assumption,4,
 Trametinib,MEK,negative,"Z17, Z21",direct,1,regulates
 Trametinib,MEK_2,negative,"Z17, Z21",direct,1,
 Translation,MCL1,positive,Z17,direct,1,regulates
 Translation,MYC_targets,positive,Z21,direct,1,regulates
 Translation,MYC_targets_2,positive,Z21,direct,1,
-Translation,Proliferation,positive,Z17,assumption,4,
-Translation,Proliferation_2,positive,Z17,assumption,4,
-Translation,Proliferation_3,positive,Z17,assumption,4,
-Translation,Proliferation_4,positive,Z17,assumption,4,
-WNT1,CTNNB1,positive,"MCF7, T47D, TGEN",indirect,2,
-WNT1,PRKACA,positive,"MCF7, T47D, TGEN",assumption,4,
-YAP1,CTNNB1,positive,"MCF7, TGEN",correlation,3,
-YAP1,TEAD1,positive,"MCF7, T47D, TGEN",direct,1,regulates
+WNT1,CTNNB1,positive,"TGEN, TM, TT",indirect,2,
+WNT1,PRKACA,positive,"TGEN, TM, TT",assumption,4,
+YAP1,CTNNB1,positive,"TGEN, TM",correlation,3,
+YAP1,TEAD1,positive,"TGEN, TM, TT",direct,1,regulates
 cycE_CDK2,pRB,positive,Z17,direct,1,regulates
 cycE_CDK2,pRB_2,positive,"Z17, Z21",direct,1,
 cycE_CDK2,pRB_3,positive,"Z17, Z21",direct,1,
@@ -486,10 +478,10 @@ erlotinib,EGFR,negative,"BL, BS, HL, HS, SL, SS",direct,1,regulates
 erlotinib,HER2,negative,"BL, BS, HL, HS, SL, SS",direct,1,regulates
 erlotinib,HER3,negative,"BL, BS, HL, HS, SL, SS",indirect,2,
 erlotinib,HER3_2,negative,"BL, BS, HL, HS, SL, SS",indirect,2,
-mTORC1,EIF4EBP1,negative,"MCF7, T47D, TGEN",direct,1,regulates
-mTORC1,S6K,positive,"BS, HS, MCF7, SS, T47D, TGEN, Z17, Z21",direct,1,regulates
-mTORC2_ic,SGK1,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,necessary
-mTORC2_pm,AKT,positive,"MCF7, T47D, TGEN, Z17, Z21",direct,1,regulates
+mTORC1,EIF4EBP1,negative,"TGEN, TM, TT",direct,1,regulates
+mTORC1,S6K,positive,"BS, HS, SS, TGEN, TM, TT, Z17, Z21",direct,1,regulates
+mTORC2_ic,SGK1,positive,"TGEN, TM, TT, Z17, Z21",direct,1,necessary
+mTORC2_pm,AKT,positive,"TGEN, TM, TT, Z17, Z21",direct,1,regulates
 p21,p21_p27,positive,merge,,0,regulates
 p21_T,p21,positive,merge,direct,1,regulates
 p21_T,p21_T_2,positive,Z21,,0,necessary
@@ -499,13 +491,13 @@ p21_p27,cycE_CDK2,negative,"Z17, Z21",direct,1,regulates
 p21_p27_T,p21_p27,positive,"Z17, Z21",direct,1,regulates
 p27_T,p21_p27_T,positive,Z21,,0,regulates
 p38,p53,positive,"BL, HL",direct,1,regulates
-p53,BAK1,positive,"MCF7, T47D, TGEN",direct,1,regulates
-p53,BAX,positive,"MCF7, T47D, TGEN",direct,1,regulates
+p53,BAK1,positive,"TGEN, TM, TT",direct,1,regulates
+p53,BAX,positive,"TGEN, TM, TT",direct,1,regulates
 p53,CyclinB1,negative,"BL, HL, SL",direct,1,regulates
-p53,FAS,positive,"MCF7, T47D, TGEN",direct,1,regulates
+p53,FAS,positive,"TGEN, TM, TT",direct,1,regulates
 p53,GSK3B,positive,"BL, HL, SL",direct,1,regulates
-p53,MDM2,positive,"MCF7, T47D, TGEN",direct,1,regulates
-p53,NF1,positive,"MCF7, TGEN",indirect,2,
+p53,MDM2,positive,"TGEN, TM, TT",direct,1,regulates
+p53,NF1,positive,"TGEN, TM",indirect,2,
 p53,p53,positive,"BL, HL, SL",direct,1,regulates
 pRB,RB,negative,merge,,0,regulates
 pRB,pRB_2,positive,"Z17, Z21",,0,necessary
