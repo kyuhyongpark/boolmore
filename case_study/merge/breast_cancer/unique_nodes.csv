@@ -38,7 +38,7 @@ index,Node,Corrected models,BBM node,BBM models,Input in BBM,Input in merge
 37,E2F,"TGEN, TM, TT, Z17, Z21","E2F, E2F1","TGEN, TM, TT, Z17, Z21",,
 38,E2F_2,"TGEN, TM, TT, Z17, Z21",E2F_2,"Z17, Z21",,
 39,E2F_3,"TGEN, TM, TT, Z17, Z21",E2F_3,Z17,,
-40,EGF,"BS, HS, SS, TGEN, TM, TT",EGF,"BS, HS, SS, TGEN, TM, TT",input,constant 0
+40,EGF,"BS, HS, SS, TGEN, TM, TT",EGF,"BS, HS, SS, TGEN, TM, TT",input,input
 41,EGFR,"BL, BS, HL, HS, SL, SS, TGEN, TM, TT","EGFR, ERBB1","BL, BS, HL, HS, SL, SS, TGEN, TM, TT",,
 42,EIF4,"TGEN, TM, TT, Z17, Z21","EIF4E, EIF4F","TGEN, TM, TT, Z17, Z21",,
 43,EIF4EBP1,"TGEN, TM, TT",IVEBP1,"TGEN, TM, TT",,
@@ -118,7 +118,7 @@ index,Node,Corrected models,BBM node,BBM models,Input in BBM,Input in merge
 117,NICD,"TGEN, TM, TT",NCID,"TGEN, TM, TT",,
 118,NOS3,"TGEN, TM, TT",NOS3,"TGEN, TM, TT",,
 119,NOTCH1,"TGEN, TM, TT",NOTCH1,"TGEN, TM, TT",,
-120,NRG1,"BS, HS, SS, TGEN, TM, TT, Z21","HER3_microenvironment, HRG, NRG1","BS, HS, SS, TGEN, TM, TT, Z21",input,constant 0
+120,NRG1,"BS, HS, SS, TGEN, TM, TT, Z21","HER3_microenvironment, HRG, NRG1","BS, HS, SS, TGEN, TM, TT, Z21",input,input
 121,Navitoclax,Z21,Navitoclax,Z21,input,constant 0
 122,Neratinib,"Z17, Z21",Neratinib,"Z17, Z21",input,constant 0
 123,PAK1,"TGEN, TM, TT",PAK1,"TGEN, TM, TT",,
@@ -148,7 +148,7 @@ index,Node,Corrected models,BBM node,BBM models,Input in BBM,Input in merge
 147,Proliferation,"Z17, Z21",Proliferation,"Z17, Z21",,
 148,Proliferation_2,"Z17, Z21",Proliferation_2,"Z17, Z21",,
 149,Proliferation_3,"Z17, Z21",Proliferation_3,"Z17, Z21",,
-150,Proliferation_4,Z21,Proliferation_4,Z17,,
+150,Proliferation_4,"Z17, Z21",Proliferation_4,Z17,,
 151,RAC1,"TGEN, TM, TT",RAC1,"TGEN, TM, TT",,
 152,RAF1,"BL, HL, SL, TGEN, TM, TT, Z17, Z21","RAF1, cRAF","BL, HL, SL, TGEN, TM, TT",,
 153,RAF1_2,"BL, HL, SL, TGEN, TM, TT, Z17, Z21",,,,

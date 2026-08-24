@@ -2,8 +2,8 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,TM,TT,Our notation,Input in merge,Notes
 1,erlotinib,erlotinib,erlotinib,erlotinib,erlotinib,erlotinib,,,,,,erlotinib,constant 0,
 2,pertuzumab,pertuzumab,pertuzumab,pertuzumab,pertuzumab,pertuzumab,,,,,,pertuzumab,constant 0,
 3,trastuzumab,trastuzumab,trastuzumab,trastuzumab,trastuzumab,trastuzumab,,,,,,trastuzumab,constant 0,
-4,EGF,EGF,EGF,,,,,,EGF,EGF,EGF,EGF,constant 0,
-5,HRG,HRG,HRG,,,,,HER3_microenvironment,NRG1,NRG1,NRG1,NRG1,constant 0,"HRG (heregulin) is an established synonim of NRG1 (neuregulin), the ligand of HER3. The official name is NRG1. constant 0 in Z21"
+4,EGF,EGF,EGF,,,,,,EGF,EGF,EGF,EGF,input,
+5,HRG,HRG,HRG,,,,,HER3_microenvironment,NRG1,NRG1,NRG1,NRG1,input,"HRG (heregulin) is an established synonim of NRG1 (neuregulin), the ligand of HER3. The official name is NRG1. constant 0 in Z21"
 6,,,,stimulus,stimulus,stimulus,,,,,,stimulus,constant 0,"stimuli from the growth medium, assumed to be 1 in the HL, SL, BL models."
 7,,,,,,,Alpelisib,Alpelisib,,,,Alpelisib,constant 0,
 8,,,,,,,Everolimus,Everolimus,,,,Everolimus,constant 0,
@@ -16,8 +16,8 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,TM,TT,Our notation,Input in merge,Notes
 15,,,,,,,BIM_T,BIM_T,,,,BIM_T,input,
 16,,,,,,,ER,ER,,,,ER,input,"Estrogen receptor status. ER=1 in ER+ breast cancer, i.e. in Z17, Z21, BT474, MCF7, T47D, ER=0 in SKBR3, HCC1954."
 17,,,,,,,HER3_T,HER3_T,,,,HER3_T,input,"constant 0 in Z17, Z21"
-18,,,,,,,PDK1,PDK1,,,,PDK1_ic,constant 0,intracellular PDK1 pool
-19,,,,,,,SGK1_T,SGK1_T,,,,SGK1_T,constant 0,
+18,,,,,,,PDK1,PDK1,,,,PDK1_ic,constant 0,"intracellular PDK1 pool,  not recruited to the plasma membrane. A nonzero value was used in the Z17 model to capture a specific, rare, resistance mechanism."
+19,,,,,,,SGK1_T,SGK1_T,,,,SGK1_T,constant 0,"A nonzero value was used in the Z17 model to capture a specific, rare, resistance mechanism."
 20,,,,,,,,Navitoclax,,,,Navitoclax,constant 0,
 21,,,,,,,,S63845,,,,S63845,constant 0,
 22,,,,,,,,BCLXL_T,,,,BCLXL_T,input,
@@ -125,7 +125,7 @@ index,BS,HS,SS,BL,HL,SL,Z17,Z21,TGEN,TM,TT,Our notation,Input in merge,Notes
 124,,,,,,,,MYC_targets,,,,MYC_targets,,
 125,,,,,,,,MYC_targets_2,,,,MYC_targets_2,,
 126,,,,,,,,p21_T,,,,p21_T,constant 1,Basal transcript level of p21. Additional transcriptional regulation is included in the p21_p27_T and p21 nodes.
-127,,,,,,,,p21_T_2,,,,p21_T_2,input,
+127,,,,,,,,p21_T_2,,,,p21_T_2,input,different in MCF7 and T47D cells
 128,,,,,,,,,ABL1,ABL1,ABL1,ABL1,,
 129,,,,,,,,,ABL2,ABL2,ABL2,ABL2,,
 130,,,,,,,,,APC,APC,APC,APC,,

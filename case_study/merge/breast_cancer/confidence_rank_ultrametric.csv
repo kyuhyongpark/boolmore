@@ -102,7 +102,7 @@ E2F_3,E2F_3,positive,Z17,direct,1,regulates
 E2F_3,Proliferation,positive,Z17,assumption,4,
 E2F_3,Proliferation_2,positive,"Z17, Z21",assumption,4,
 E2F_3,Proliferation_3,positive,"Z17, Z21",assumption,4,
-E2F_3,Proliferation_4,positive,Z21,assumption,4,
+E2F_3,Proliferation_4,positive,"Z17, Z21",assumption,4,
 E2F_3,cycE_CDK2_T,positive,"Z17, Z21",direct,1,
 EGF,EGFR,positive,"BS, HS, SS, TGEN, TM, TT",direct,1,regulates
 EGFR,EGFR,positive,"BL, BS, HL, HS, SL, SS",direct,1,regulates

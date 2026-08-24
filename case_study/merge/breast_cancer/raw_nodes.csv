@@ -47,12 +47,12 @@ index,BBM node,Model,Input in BBM,Our notation,Input in merge
 46,stimulus,HL,input,stimulus,constant 0
 47,trastuzumab,HL,input,trastuzumab,constant 0
 48,AKT,BS,,AKT,
-49,EGF,BS,input,EGF,constant 0
+49,EGF,BS,input,EGF,input
 50,ERBB1,BS,,EGFR,
 51,ERBB2,BS,,HER2,
 52,ERBB3,BS,,HER3,
 53,ERK1_2,BS,,ERK,
-54,HRG,BS,input,NRG1,constant 0
+54,HRG,BS,input,NRG1,input
 55,MEK1_2,BS,,MEK,
 56,PDK1,BS,,PDK1_pm,
 57,PKCa,BS,,PKCa,
@@ -63,12 +63,12 @@ index,BBM node,Model,Input in BBM,Our notation,Input in merge
 62,pertuzumab,BS,input,pertuzumab,constant 0
 63,trastuzumab,BS,input,trastuzumab,constant 0
 64,AKT,HS,,AKT,
-65,EGF,HS,input,EGF,constant 0
+65,EGF,HS,input,EGF,input
 66,ERBB1,HS,,EGFR,
 67,ERBB2,HS,,HER2,
 68,ERBB3,HS,,HER3,
 69,ERK1_2,HS,,ERK,
-70,HRG,HS,input,NRG1,constant 0
+70,HRG,HS,input,NRG1,input
 71,MEK1_2,HS,,MEK,
 72,PDK1,HS,,PDK1_pm,
 73,PKCa,HS,,PKCa,
@@ -79,12 +79,12 @@ index,BBM node,Model,Input in BBM,Our notation,Input in merge
 78,pertuzumab,HS,input,pertuzumab,constant 0
 79,trastuzumab,HS,input,trastuzumab,constant 0
 80,AKT,SS,,AKT,
-81,EGF,SS,input,EGF,constant 0
+81,EGF,SS,input,EGF,input
 82,ERBB1,SS,,EGFR,
 83,ERBB2,SS,,HER2,
 84,ERBB3,SS,,HER3,
 85,ERK1_2,SS,,ERK,
-86,HRG,SS,input,NRG1,constant 0
+86,HRG,SS,input,NRG1,input
 87,MEK1_2,SS,,MEK,
 88,PDK1,SS,,PDK1_pm,
 89,PKCa,SS,,PKCa,
@@ -234,7 +234,7 @@ index,BBM node,Model,Input in BBM,Our notation,Input in merge
 233,HER3,Z21,,HER3,
 234,HER3_2,Z21,,HER3_2,
 235,HER3_T,Z21,input,HER3_T,input
-236,HER3_microenvironment,Z21,input,NRG1,constant 0
+236,HER3_microenvironment,Z21,input,NRG1,input
 237,IGF1R,Z21,,IGF1R,
 238,IGF1R_2,Z21,,IGF1R_2,
 239,IGF1R_T,Z21,,IGF1R_T,input
@@ -321,7 +321,7 @@ index,BBM node,Model,Input in BBM,Our notation,Input in merge
 320,DLL_i,TGEN,input,DLL,input
 321,DVL1,TGEN,,DVL1,
 322,E2F1,TGEN,,E2F,
-323,EGF,TGEN,input,EGF,constant 0
+323,EGF,TGEN,input,EGF,input
 324,EGFR,TGEN,,EGFR,
 325,EIF4E,TGEN,,EIF4,
 326,ERK_i,TGEN,,ERK,
@@ -375,7 +375,7 @@ index,BBM node,Model,Input in BBM,Our notation,Input in merge
 374,NFKB1,TGEN,,NFKB,
 375,NOS3,TGEN,,NOS3,
 376,NOTCH1,TGEN,,NOTCH1,
-377,NRG1,TGEN,input,NRG1,constant 0
+377,NRG1,TGEN,input,NRG1,input
 378,P21,TGEN,,p21,
 379,P53,TGEN,,p53,
 380,PAK1,TGEN,,PAK1,
@@ -438,7 +438,7 @@ index,BBM node,Model,Input in BBM,Our notation,Input in merge
 437,DLL_i,TM,input,DLL,input
 438,DVL1,TM,,DVL1,
 439,E2F1,TM,,E2F,
-440,EGF,TM,input,EGF,constant 0
+440,EGF,TM,input,EGF,input
 441,EGFR,TM,,EGFR,
 442,EIF4E,TM,,EIF4,
 443,ERK_i,TM,,ERK,
@@ -492,7 +492,7 @@ index,BBM node,Model,Input in BBM,Our notation,Input in merge
 491,NFKB1,TM,,NFKB,
 492,NOS3,TM,,NOS3,
 493,NOTCH1,TM,,NOTCH1,
-494,NRG1,TM,input,NRG1,constant 0
+494,NRG1,TM,input,NRG1,input
 495,P21,TM,,p21,
 496,P53,TM,,p53,
 497,PAK1,TM,,PAK1,
@@ -555,7 +555,7 @@ index,BBM node,Model,Input in BBM,Our notation,Input in merge
 554,DLL_i,TT,input,DLL,input
 555,DVL1,TT,,DVL1,
 556,E2F1,TT,,E2F,
-557,EGF,TT,input,EGF,constant 0
+557,EGF,TT,input,EGF,input
 558,EGFR,TT,,EGFR,
 559,EIF4E,TT,,EIF4,
 560,ERK_i,TT,,ERK,
@@ -609,7 +609,7 @@ index,BBM node,Model,Input in BBM,Our notation,Input in merge
 608,NFKB1,TT,,NFKB,
 609,NOS3,TT,,NOS3,
 610,NOTCH1,TT,,NOTCH1,
-611,NRG1,TT,input,NRG1,constant 0
+611,NRG1,TT,input,NRG1,input
 612,P21,TT,,p21,
 613,P53,TT,,p53,
 614,PAK1,TT,,PAK1,
