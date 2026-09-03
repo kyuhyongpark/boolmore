@@ -33,6 +33,15 @@ def export_phenotype_results(
         "found_phenotypes",
     ]
 
+    # Add metadata columns after the standard columns
+    metadata_headers = sorted({
+        key
+        for exp in experiments
+        for key in exp.metadata
+    })
+
+    headers.extend(metadata_headers)
+
     rows = []
 
     for exp in experiments:
@@ -55,6 +64,8 @@ def export_phenotype_results(
             "score": score_item.score,
             "found_phenotypes": pred.found_phenotypes,
         }
+
+        row.update(exp.metadata)
         rows.append(row)
 
     # Print nicely

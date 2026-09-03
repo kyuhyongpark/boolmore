@@ -10,7 +10,7 @@
     "order_by": ["n_self_edges", "n_edges", "n_prime_implicants"]
     },
 
-"data" : "./Tcell_data.csv",
+"data" : "./data.csv",
 
 "base" : "./Tcell_primes_ultrametric.pkl",
 
