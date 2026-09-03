@@ -8,9 +8,9 @@ from boolmore.io.load import import_phenotypes, CSVParseException
 # -------------------------
 
 SAMPLE_CSV = """\
-id,weight,sources,perturbation,phenotype,expected_exists
-1,1.0,A=1;B=0,C=1;D=0,P=1,true
-2,2.0,A=0,,Q=1,false
+id,weight,sources,perturbation,phenotype,expected_exists,model
+1,1.0,A=1;B=0,C=1;D=0,P=1,true,Some_Model
+2,2.0,A=0,,Q=1,false,
 """
 
 
@@ -25,10 +25,18 @@ def test_import_phenotypes_basic(tmp_path):
     assert data[0].id == 1
     assert data[0].sources == (("A", 1), ("B", 0))
     assert data[0].expected_exists is True
+    assert data[0].weight == 1.0
+    assert data[0].perturbation == (("C", 1), ("D", 0))
+    assert data[0].phenotype == (("P", 1),)
+    assert data[0].metadata == {"model": "Some_Model"}
 
     assert data[1].id == 2
     assert data[1].sources == (("A", 0),)
     assert data[1].perturbation == ()
+    assert data[1].phenotype == (("Q", 1),)
+    assert data[1].expected_exists is False
+    assert data[1].weight == 2.0
+    assert data[1].metadata == {"model": ""}
 
 
 # -------------------------

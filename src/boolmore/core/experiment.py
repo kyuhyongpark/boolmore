@@ -1,4 +1,5 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+
 
 Assignment = tuple[tuple[str, int], ...]
 
@@ -12,6 +13,8 @@ class PhenotypeExperiment:
     expected_exists: bool
 
     weight: float = 1.0
+
+    metadata: dict[str, str] = field(default_factory=dict)
 
 @dataclass(frozen=True)
 class NAVExperiment:

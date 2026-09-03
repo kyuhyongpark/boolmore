@@ -305,6 +305,15 @@ def import_phenotypes(location: str) -> list[PhenotypeExperiment]:
     experiments: list[PhenotypeExperiment] = []
     errors: list[ParseError] = []
 
+    REQUIRED_COLUMNS = {
+        "id",
+        "weight",
+        "sources",
+        "perturbation",
+        "phenotype",
+        "expected_exists",
+    }
+
     signatures: dict[Signature, list[int]] = defaultdict(list)
     ids_seen: dict[int, int] = defaultdict(int)
 
@@ -334,6 +343,13 @@ def import_phenotypes(location: str) -> list[PhenotypeExperiment]:
             expected_exists = parse_bool(
                 row.get("expected_exists"), line_num, errors, exp_id, row
             )
+
+            # Collect additional columns as metadata
+            metadata = {
+                key: value
+                for key, value in row.items()
+                if key not in REQUIRED_COLUMNS
+            }
 
             # Check that nodes appear in only one assignment block
             source_nodes = {node for node, _ in sources}
@@ -366,6 +382,7 @@ def import_phenotypes(location: str) -> list[PhenotypeExperiment]:
                     perturbation=perturbation,
                     phenotype=phenotype,
                     expected_exists=expected_exists,
+                    metadata=metadata,
                 )
 
                 experiments.append(exp)
