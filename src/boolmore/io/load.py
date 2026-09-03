@@ -185,11 +185,19 @@ def parse_float(x: str, field: str, line_num: int, errors: list[ParseError], id:
         return None
 
 
-def parse_assignment_block(block: str, field: str, line_num: int, errors: list[ParseError], id: Optional[str], row: dict) -> Assignment:
+def parse_assignment_block(
+        block: str,
+        field: str,
+        line_num: int,
+        errors: list[ParseError],
+        id: Optional[str],
+        row: dict
+    ) -> Assignment:
     if not block or block.strip() == "":
         return tuple()
 
     items: list[tuple[str, int]] = []
+    seen_nodes: set[str] = set()
 
     for part in block.split(";"):
         part = part.strip()
@@ -208,10 +216,15 @@ def parse_assignment_block(block: str, field: str, line_num: int, errors: list[P
             errors.append(ParseError(line_num, id, f"Empty node in '{field}'", row))
             continue
 
+        if node in seen_nodes:
+            errors.append(ParseError(line_num, id, f"Duplicate node '{node}' in '{field}'", row))
+            continue
+
         if value not in {"0", "1"}:
             errors.append(ParseError(line_num, id, f"Invalid value '{value}' for node '{node}'", row))
             continue
 
+        seen_nodes.add(node)
         items.append((node, int(value)))
 
     return tuple(sorted(items, key=lambda x: x[0]))

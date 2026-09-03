@@ -39,7 +39,7 @@ BAD_CSV = """\
 id,weight,sources,perturbation,phenotype,expected_exists
 1,abc,A=1,C:1,P=1,true
 2,2.0,A=1,,P=1,maybe
-x,3.0,A=1;B=,C=1,P=1,false
+x,3.0,A=1;B=;A=0,C=1,P=1,false
 """
 
 
@@ -52,7 +52,7 @@ def test_import_collects_multiple_errors(tmp_path):
 
     errors = e.value.errors
 
-    assert len(errors) == 5
+    assert len(errors) == 6
 
 
 # -------------------------
