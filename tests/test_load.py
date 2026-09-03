@@ -126,6 +126,34 @@ def test_duplicate_id_and_signature(tmp_path):
     assert "Duplicate id" in messages
     assert "Duplicate experiment signature" in messages
 
+# -------------------------
+# duplicate node across fields test
+# -------------------------
+
+DUPLICATE_NODE_CSV = """\
+id,weight,sources,perturbation,phenotype,expected_exists
+1,1.0,A=1;B=0,B=1;C=0,A=0;D=1,true
+"""
+
+
+def test_duplicate_node_across_fields(tmp_path):
+    f = tmp_path / "dup_node.csv"
+    f.write_text(DUPLICATE_NODE_CSV)
+
+    with pytest.raises(CSVParseException) as e:
+        import_phenotypes(str(f))
+
+    errors = e.value.errors
+
+    assert any(
+        "Node 'A' appears in both sources and phenotype" in err.message
+        for err in errors
+    )
+    assert any(
+        "Node 'B' appears in both sources and perturbation" in err.message
+        for err in errors
+    )
+
 
 if __name__ == "__main__":
     import pytest

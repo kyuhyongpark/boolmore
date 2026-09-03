@@ -335,6 +335,28 @@ def import_phenotypes(location: str) -> list[PhenotypeExperiment]:
                 row.get("expected_exists"), line_num, errors, exp_id, row
             )
 
+            # Check that nodes appear in only one assignment block
+            source_nodes = {node for node, _ in sources}
+            perturbation_nodes = {node for node, _ in perturbation}
+            phenotype_nodes = {node for node, _ in phenotype}
+
+            overlaps = (
+                (source_nodes & perturbation_nodes, "sources", "perturbation"),
+                (source_nodes & phenotype_nodes, "sources", "phenotype"),
+                (perturbation_nodes & phenotype_nodes, "perturbation", "phenotype"),
+            )
+
+            for nodes, field1, field2 in overlaps:
+                for node in sorted(nodes):
+                    errors.append(
+                        ParseError(
+                            line=line_num,
+                            id=str(exp_id),
+                            message=f"Node '{node}' appears in both {field1} and {field2}",
+                            row=row,
+                        )
+                    )
+
             # Only construct Experiment if core fields are valid
             if None not in (exp_id, weight, expected_exists):
                 exp = PhenotypeExperiment(
