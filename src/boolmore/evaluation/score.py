@@ -2,8 +2,8 @@ import itertools as it
 from collections.abc import Iterable
 from dataclasses import dataclass
 
-from boolmore.core.experiment import PhenotypeExperiment, NAVExperiment
-from boolmore.core.prediction import PhenotypePrediction
+from boolmore.experiment import PhenotypeExperiment, NAVExperiment
+from boolmore.inference.prediction import PhenotypePrediction
 
 
 FixesType = tuple[tuple[str, int],...]

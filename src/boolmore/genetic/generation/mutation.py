@@ -1,8 +1,8 @@
 import random
 
-import boolmore.core.conversions as conv
-import boolmore.eval.constraint as cons
-import boolmore.algo.constraint_enforcement as ce
+import boolmore.boolean_functions as bf
+import boolmore.evaluation.constraint as cons
+import boolmore.genetic.generation.constraint_enforcement as ce
 
 
 def mutate_rr(rr:str, probability:float) -> str:
@@ -58,9 +58,9 @@ def mutate_rr_bias(rr:str, probability:float, bias:float=0.5) -> str:
     """
     rnd = random.random()
     if rnd < bias:
-        irr = conv.get_max_irr(rr)
+        irr = bf.get_max_irr(rr)
         irr = mutate_rr(irr, probability)
-        mutated_rr = conv.get_max_irr(irr)
+        mutated_rr = bf.get_max_irr(irr)
     else:
         mutated_rr = mutate_rr(rr, probability)
 
@@ -157,7 +157,7 @@ def mutate_rr_constraint(regulators:tuple[str, ...], rr:str, base_rr:str, constr
         # only nodes that were originally a constant node
         # or nodes in possible_constant can become constants
         if cons.check_constant(mutated_rr):
-            max_rr = conv.get_uni_rr(mutated_rr, max = True)
+            max_rr = bf.get_uni_rr(mutated_rr, max = True)
             if node not in constraints['possible_constant'] and len(base_rr) != 1:
                 redo = True
                 # print('redo because', node, 'became a constant')
@@ -172,8 +172,8 @@ def mutate_rr_constraint(regulators:tuple[str, ...], rr:str, base_rr:str, constr
         if redo == True:
             trial += 1
 
-    max_original = conv.get_uni_rr(rr)
-    max_mutated = conv.get_uni_rr(mutated_rr)
+    max_original = bf.get_uni_rr(rr)
+    max_mutated = bf.get_uni_rr(mutated_rr)
     if max_original == max_mutated:
         modified = False
     else:
@@ -211,7 +211,7 @@ def add_regulator(regulators:tuple[str, ...], rr:str, signs:str, new_regulator:s
 
     rnd = random.random()
     if rnd < bias:
-        rr = conv.get_max_irr(rr)
+        rr = bf.get_max_irr(rr)
 
     added_rr = ''
     for bi in rr:
@@ -219,7 +219,7 @@ def add_regulator(regulators:tuple[str, ...], rr:str, signs:str, new_regulator:s
         added_rr += bi
 
     if rnd < bias:
-        added_rr = conv.get_max_irr(added_rr)
+        added_rr = bf.get_max_irr(added_rr)
 
     return added_regulators, added_rr, added_signs
 
@@ -257,7 +257,7 @@ def delete_regulator(regulators:tuple[str, ...], rr:str, signs:str, target_regul
 
     rnd = random.random()
     if rnd < bias:
-        rr = conv.get_max_irr(rr)
+        rr = bf.get_max_irr(rr)
 
     bi = list(rr)
     for i in range(2**k):
@@ -265,6 +265,6 @@ def delete_regulator(regulators:tuple[str, ...], rr:str, signs:str, target_regul
             deleted_rr += bi[i]
 
     if rnd < bias:
-        deleted_rr = conv.get_max_irr(deleted_rr)
+        deleted_rr = bf.get_max_irr(deleted_rr)
 
     return deleted_regulators, deleted_rr, deleted_signs

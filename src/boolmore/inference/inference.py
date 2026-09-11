@@ -4,9 +4,9 @@ from time import perf_counter
 
 from pyboolnet.trap_spaces import compute_trapspaces_within_subspace, compute_trap_spaces
 
-from boolmore.core.experiment import PhenotypeExperiment, NAVExperiment
-from boolmore.core.prediction import PhenotypePrediction
-from boolmore.core.conversions import assignment_to_dict
+from boolmore.experiment import PhenotypeExperiment, NAVExperiment
+from boolmore.inference.prediction import PhenotypePrediction
+from boolmore.boolean_functions import assignment_to_dict
 
 Assignment = tuple[tuple[str, int], ...]
 

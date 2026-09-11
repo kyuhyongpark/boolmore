@@ -1,7 +1,7 @@
 # TODO: enable check_node function to check group contraints
 
 
-import boolmore.core.conversions as conv
+import boolmore.boolean_functions as bf
 
 
 def check_constant(rr:str) -> bool:
@@ -17,7 +17,7 @@ def check_constant(rr:str) -> bool:
     check - True if the rule is constant    :bool
 
     """
-    max_rr = conv.get_uni_rr(rr, max=True)
+    max_rr = bf.get_uni_rr(rr, max=True)
     return not ('0' in max_rr and '1' in max_rr)
 
 
@@ -46,7 +46,7 @@ def check_source(
     k = len(regulators)
     n = regulators.index(node)
 
-    min_rr = conv.get_uni_rr(rr, max=False)
+    min_rr = bf.get_uni_rr(rr, max=False)
 
     add = 0
     for i in range(2**k):
@@ -81,7 +81,7 @@ def check_regulate(
     k = len(regulators)
     n = regulators.index(reg)
 
-    bi = rr if is_min else conv.get_uni_rr(rr, max=False)
+    bi = rr if is_min else bf.get_uni_rr(rr, max=False)
 
     add = 0
     for i in range(2**k):
@@ -205,7 +205,7 @@ def check_node(
 
         # constant checks
         if check_constant(rr):
-            max_rr = conv.get_uni_rr(rr, max=True)
+            max_rr = bf.get_uni_rr(rr, max=True)
 
             if (
                 node not in constraints["possible_constant"]

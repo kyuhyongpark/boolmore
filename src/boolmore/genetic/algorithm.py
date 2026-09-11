@@ -12,11 +12,11 @@ import numpy as np
 from pyboolnet.external.bnet2primes import bnet_file2primes
 from pystablemotifs.format import primes2bnet
 
-from boolmore.core.conversions import prime2bnet
+from boolmore.boolean_functions import prime2bnet
 from boolmore.io.load import import_NAV_exps, import_phenotypes
-from boolmore.core.model import Model, mix_models
-from boolmore.algo.inference import get_NAV_prediction, get_phenotype_prediction
-from boolmore.eval.score import get_NAV_scores, get_phenotype_scores, get_model_score
+from boolmore.model import Model, mix_models
+from boolmore.inference.inference import get_NAV_prediction, get_phenotype_prediction
+from boolmore.evaluation.score import get_NAV_scores, get_phenotype_scores, get_model_score
 
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]

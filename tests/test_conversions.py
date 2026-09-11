@@ -3,7 +3,7 @@ import pytest
 import math
 import itertools as it
 
-from boolmore.core.conversions import get_uni_rr
+from boolmore.boolean_functions import get_uni_rr
 
 
 @pytest.mark.parametrize(

@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Optional
 from collections import defaultdict
 
-from boolmore.core.experiment import PhenotypeExperiment, NAVExperiment
+from boolmore.experiment import PhenotypeExperiment, NAVExperiment
 
 Assignment = tuple[tuple[str, int], ...]
 ExpType = tuple[int, float, Assignment, str, str]

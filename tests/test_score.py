@@ -1,8 +1,8 @@
 import pytest
 
-from boolmore.eval.score import get_phenotype_scores, get_model_score
-from boolmore.core.experiment import PhenotypeExperiment
-from boolmore.core.prediction import PhenotypePrediction
+from boolmore.evaluation.score import get_phenotype_scores, get_model_score
+from boolmore.experiment import PhenotypeExperiment
+from boolmore.inference.prediction import PhenotypePrediction
 
 
 def test_get_phenotype_score_match():

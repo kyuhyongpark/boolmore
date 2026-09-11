@@ -3,9 +3,9 @@ import random
 import os
 import pickle
 
-import boolmore.algo.mutation as m
-import boolmore.core.conversions as conv
-import boolmore.eval.constraint as cons
+import boolmore.genetic.generation.mutation as m
+import boolmore.boolean_functions as bf
+import boolmore.evaluation.constraint as cons
 
 PrimeType = list[list[dict[str, int]]]
 FixesType = tuple[tuple[str, int]]
@@ -121,7 +121,7 @@ class Model():
         
         for node in x.primes:
             # find current regulators and signs
-            regulators, rr, signs = conv.prime2rr(x.primes[node])
+            regulators, rr, signs = bf.prime2rr(x.primes[node])
 
             # check the extra edges (TODO: check signs)
             for edge in x.edge_pool:
@@ -144,7 +144,7 @@ class Model():
 
                 regulators = tuple(regulators)
 
-                rr = conv.prime2rr(primes[node], regulators=regulators, signs=signs)[1] # type: ignore
+                rr = bf.prime2rr(primes[node], regulators=regulators, signs=signs)[1] # type: ignore
                 x.regulators_dict[node] = regulators
                 x.rr_dict[node] = rr
                 x.signs_dict[node] = signs
@@ -247,7 +247,7 @@ class Model():
             mutated_model.regulators_dict[new_edge_node] = modified_regulators
             mutated_model.rr_dict[new_edge_node] = modified_rr
             mutated_model.signs_dict[new_edge_node] = modified_signs
-            prime1 = conv.rr2prime(modified_regulators, modified_rr, modified_signs, inverted = False)
+            prime1 = bf.rr2prime(modified_regulators, modified_rr, modified_signs, inverted = False)
             mutated_model.primes[new_edge_node] = prime1
 
         for node in mutated_model.rr_dict:
@@ -262,7 +262,7 @@ class Model():
             # get primes from the mutated_rr
             # if the representations are equivalent, take the old prime
             if modified:
-                prime1 = conv.rr2prime(mutated_model.regulators_dict[node], mutated_rr, mutated_model.signs_dict[node], inverted = False)
+                prime1 = bf.rr2prime(mutated_model.regulators_dict[node], mutated_rr, mutated_model.signs_dict[node], inverted = False)
                 mutated_model.primes[node] = prime1
                 # irr = get_max_irr(mutated_model.rr_dict[node])
                 # prime2 = rr2prime(mutated_model.regulators_dict[node], irr, mutated_model.signs_dict[node], inverted = True)
@@ -319,7 +319,7 @@ class Model():
         fp.write("targets,\tfactors\n")
         primes = {k:self.primes[k] for k in sorted(self.primes)}
         for k in primes:
-            s = conv.prime2bnet(k, primes[k])
+            s = bf.prime2bnet(k, primes[k])
             fp.write(s + "\n")
         fp.close()
         

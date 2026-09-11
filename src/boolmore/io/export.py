@@ -1,9 +1,9 @@
 import csv
 
-from boolmore.core.experiment import PhenotypeExperiment
-from boolmore.core.prediction import PhenotypePrediction
-from boolmore.eval.score import EvaluationItemScore
-from boolmore.core.conversions import assignment_to_dict
+from boolmore.experiment import PhenotypeExperiment
+from boolmore.inference.prediction import PhenotypePrediction
+from boolmore.evaluation.score import EvaluationItemScore
+from boolmore.boolean_functions import assignment_to_dict
 
 
 def export_phenotype_results(
