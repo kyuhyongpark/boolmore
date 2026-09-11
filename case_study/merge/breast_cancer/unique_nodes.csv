@@ -1,0 +1,202 @@
+index,Node,Corrected models,BBM node,BBM models,Input in BBM,Input in merge
+1,ABL1,"TGEN, TM, TT",ABL1,"TGEN, TM, TT",,
+2,ABL2,"TGEN, TM, TT",ABL2,"TGEN, TM, TT",,
+3,AKT,"BL, BS, HL, HS, SL, SS, TGEN, TM, TT, Z17, Z21","AKT, AKT_i","BL, BS, HL, HS, SL, SS, TGEN, TM, TT, Z17, Z21",,
+4,APC,"TGEN, TM, TT",APC,"TGEN, TM, TT",,
+5,AXIN1,"TGEN, TM, TT",AXIN1,"TGEN, TM, TT",,
+6,Alpelisib,"Z17, Z21",Alpelisib,"Z17, Z21",input,constant 0
+7,Apoptosis_X,"Z17, Z21",Apoptosis,"Z17, Z21",,
+8,Apoptosis_Y,"Z17, Z21",Apoptosis_2,"Z17, Z21",,
+9,Apoptosis_Z,"Z17, Z21",Apoptosis_3,"Z17, Z21",,
+10,BAD,"TGEN, TM, TT, Z17, Z21",BAD,"TGEN, TM, TT, Z17, Z21",,
+11,BAK1,"TGEN, TM, TT",BAK1,"TGEN, TM, TT",,
+12,BAX,"SL, TGEN, TM, TT",BAX,"SL, TGEN, TM, TT",,
+13,BCL2,"TGEN, TM, TT, Z17, Z21",BCL2,"TGEN, TM, TT, Z17, Z21",,
+14,BCL2_T,"Z17, Z21",BCL2_T,"Z17, Z21",input,constant 0
+15,BCLXL,"TGEN, TM, TT, Z21",BCLXL,"TGEN, TM, TT, Z21",,
+16,BCLXL_T,Z21,BCLXL_T,Z21,input,input
+17,BID,"TGEN, TM, TT",BID,"TGEN, TM, TT",,
+18,BIM,"TGEN, TM, TT, Z17, Z21",BIM,"TGEN, TM, TT, Z17, Z21",,
+19,BIM_T,"Z17, Z21",BIM_T,"Z17, Z21",input,input
+20,CASP3,"TGEN, TM, TT",CASP3,"TGEN, TM, TT",,
+21,CASP8,"TGEN, TM, TT",CASP8,"TGEN, TM, TT",,
+22,CASP9,"TGEN, TM, TT",CASP9,"TGEN, TM, TT",,
+23,CDK46,"Z17, Z21",CDK46,"Z17, Z21",,
+24,CDKN2A,"TGEN, TM, TT",CDKN2A,"TGEN, TM, TT",,
+25,CEBPB,"TGEN, TM, TT",CEBPB,"TGEN, TM, TT",,
+26,CREB1,"TGEN, TM, TT",CREB1,"TGEN, TM, TT",,
+27,CTNNB1,"TGEN, TM, TT",CTNNB1,"TGEN, TM, TT",,
+28,CYCLINDc,"TGEN, TM, TT, Z17, Z21","CYCLIN_D_c, cycD_CDK46","TGEN, TM, TT, Z17, Z21",,
+29,CYCLINDc_2,"TGEN, TM, TT, Z17, Z21",cycD_CDK46_2,"Z17, Z21",,
+30,CYCS,"TGEN, TM, TT",CYCS,"TGEN, TM, TT",,
+31,CyclinB1,"BL, HL, SL",CyclinB1,"BL, HL, SL",,
+32,CyclinD,"BL, HL, SL, Z17, Z21","CyclinD1, cyclinD","BL, HL, SL, Z17, Z21",,
+33,CyclinD_2,"BL, HL, SL, Z17, Z21",cyclinD_2,"Z17, Z21",,
+34,DC,"TGEN, TM, TT",DC,"TGEN, TM, TT",,
+35,DLL,"TGEN, TM, TT",DLL_i,"TGEN, TM, TT",input,input
+36,DVL1,"TGEN, TM, TT",DVL1,"TGEN, TM, TT",,
+37,E2F,"TGEN, TM, TT, Z17, Z21","E2F, E2F1","TGEN, TM, TT, Z17, Z21",,
+38,E2F_2,"TGEN, TM, TT, Z17, Z21",E2F_2,"Z17, Z21",,
+39,E2F_3,"TGEN, TM, TT, Z17, Z21",E2F_3,Z17,,
+40,EGF,"BS, HS, SS, TGEN, TM, TT",EGF,"BS, HS, SS, TGEN, TM, TT",input,input
+41,EGFR,"BL, BS, HL, HS, SL, SS, TGEN, TM, TT","EGFR, ERBB1","BL, BS, HL, HS, SL, SS, TGEN, TM, TT",,
+42,EIF4,"TGEN, TM, TT, Z17, Z21","EIF4E, EIF4F","TGEN, TM, TT, Z17, Z21",,
+43,EIF4EBP1,"TGEN, TM, TT",IVEBP1,"TGEN, TM, TT",,
+44,ER,"Z17, Z21",ER,"Z17, Z21",input,input
+45,ERK,"BL, BS, HL, HS, SL, SS, TGEN, TM, TT, Z17, Z21","ERK1_2, ERK_i","BL, BS, HL, HS, SL, SS, TGEN, TM, TT",,
+46,ERK_2,"BL, BS, HL, HS, SL, SS, TGEN, TM, TT, Z17, Z21",,,,
+47,ER_transcription,"Z17, Z21",ER_transcription,"Z17, Z21",,
+48,ER_transcription_2,"Z17, Z21",ER_transcription_2,"Z17, Z21",,
+49,ER_transcription_feedback_1,Z21,ER_transcription_feedback_1,Z21,,
+50,ER_transcription_feedback_2,Z21,ER_transcription_feedback_2,Z21,,
+51,ES,"TGEN, TM, TT, Z21","ER_microenvironment, ES","TGEN, TM, TT, Z21",input,constant 1
+52,ESR1,"TGEN, TM, TT, Z17, Z21",ESR1,"TGEN, TM, TT, Z17, Z21",,
+53,ESR1_2,"TGEN, TM, TT, Z17, Z21",ESR1_2,"Z17, Z21",,
+54,Everolimus,"Z17, Z21",Everolimus,"Z17, Z21",input,constant 0
+55,FADD,"TGEN, TM, TT",FADD,"TGEN, TM, TT",,
+56,FAS,"TGEN, TM, TT",FAS,"TGEN, TM, TT",,
+57,FASLG,"TGEN, TM, TT",FASLG,"TGEN, TM, TT",,
+58,FOXA1,"Z17, Z21",FOXA1,"Z17, Z21",input,input
+59,FOXO1,"BL, HL, SL, TGEN, TM, TT, merge",FOXO1,"TGEN, TM, TT",,
+60,FOXO1FOXO3,merge,"FOXO1_3a, FoxO1_3a","BL, HL, SL",,
+61,FOXO3,"BL, HL, SL, TGEN, TM, TT, Z17, Z21, merge",FOXO3,"TGEN, TM, TT, Z17, Z21",,
+62,FOXO3_Ub,"Z17, Z21",FOXO3_Ub,"Z17, Z21",,
+63,FZD,"TGEN, TM, TT",FZD3,"TGEN, TM, TT",,
+64,Fulvestrant,"Z17, Z21",Fulvestrant,"Z17, Z21",input,constant 0
+65,GATA3,"TGEN, TM, TT",GATA3,"TGEN, TM, TT",,
+66,GRB2,"TGEN, TM, TT",GRB2,"TGEN, TM, TT",,
+67,GRB7,"TGEN, TM, TT",GRB7,"TGEN, TM, TT",,
+68,GSK3B,"BL, HL, SL, TGEN, TM, TT","GSK3B, GSK3a_b, GSKa_b","BL, HL, SL, TGEN, TM, TT",,
+69,HER2,"BL, BS, HL, HS, SL, SS, TGEN, TM, TT, Z17, Z21","ERBB2, HER2","BL, BS, HL, HS, SL, SS, TGEN, TM, TT, Z17, Z21",input,
+70,HER2HER3c,"BL, BS, HL, HS, SL, SS, TGEN, TM, TT, Z17, Z21",HER2_3,"Z17, Z21",,
+71,HER2HER3c_2,"BL, BS, HL, HS, SL, SS, TGEN, TM, TT, Z17, Z21",HER2_3_2,"Z17, Z21",,
+72,HER3,"BL, BS, HL, HS, SL, SS, TGEN, TM, TT, Z17, Z21","ERBB3, HER3","BL, BS, HL, HS, SL, SS, TGEN, TM, TT, Z17, Z21",,
+73,HER3_2,"BL, BS, HL, HS, SL, SS, TGEN, TM, TT, Z17, Z21",HER3_2,"Z17, Z21",,
+74,HER3_T,"Z17, Z21",HER3_T,"Z17, Z21",input,input
+75,HES1,"TGEN, TM, TT",HES1,"TGEN, TM, TT",,
+76,HEY1,"TGEN, TM, TT",HEY1,"TGEN, TM, TT",,
+77,HRAS,"TGEN, TM, TT",HRAS,"TGEN, TM, TT",,
+78,HSP90AA1,"TGEN, TM, TT",HSP90AA1,"TGEN, TM, TT",,
+79,IGF1,"TGEN, TM, TT",IGF1,"TGEN, TM, TT",input,input
+80,IGF1R,"TGEN, TM, TT, Z17, Z21",IGF1R,"TGEN, TM, TT, Z17, Z21",,
+81,IGF1R_2,"TGEN, TM, TT, Z17, Z21",IGF1R_2,"Z17, Z21",,
+82,IGF1R_T,"Z17, Z21",IGF1R_T,"Z17, Z21",input,input
+83,IGF1R_T_2,"Z17, Z21",IGF1R_T_2,Z21,,
+84,IL1B,"TGEN, TM, TT",IL1B,"TGEN, TM, TT",,
+85,IL6,"TGEN, TM, TT",IL6,"TGEN, TM, TT",,
+86,IL6R,"TGEN, TM, TT",IL6R,"TGEN, TM, TT",,
+87,IL8,"TGEN, TM, TT",IL8,"TGEN, TM, TT",,
+88,INS,"TGEN, TM, TT",INS,"TGEN, TM, TT",input,input
+89,INSR,"TGEN, TM, TT",INSR,"TGEN, TM, TT",,
+90,IRS1,"TGEN, TM, TT",IRS1,"TGEN, TM, TT",,
+91,Ipatasertib,"Z17, Z21",Ipatasertib,"Z17, Z21",input,constant 0
+92,JAK2,"TGEN, TM, TT",JAK2,"TGEN, TM, TT",,
+93,JUN,"BL, HL, SL, TGEN, TM, TT","JUN, cJUN","BL, HL, SL, TGEN, TM, TT",,
+94,KMT2D,"TGEN, TM, TT, Z17, Z21",KMT2D,"TGEN, TM, TT, Z17, Z21",,
+95,KRT14,"TGEN, TM, TT",KRT14,"TGEN, TM, TT",,
+96,LATS1,"TGEN, TM, TT",LATS1,"TGEN, TM, TT",,
+97,LCK,"TGEN, TM, TT",LCK,"TGEN, TM, TT",,
+98,MAPK,"Z17, Z21",MAPK,"Z17, Z21",,
+99,MAPK8,"TGEN, TM, TT",MAPK8,"TGEN, TM, TT",,
+100,MAPK_2,"Z17, Z21",MAPK_2,"Z17, Z21",,
+101,MCL1,"TGEN, TM, TT, Z17, Z21",MCL1,"TGEN, TM, TT, Z17, Z21",,
+102,MCL1_T,Z21,MCL1_T,Z21,input,input
+103,MDM2,"TGEN, TM, TT",MDM2,"TGEN, TM, TT",,
+104,MEK,"BS, HS, SS, TGEN, TM, TT, Z17, Z21","MEK1_2, MEK_i","BS, HS, SS, TGEN, TM, TT",,
+105,MEK_2,"BS, HS, SS, TGEN, TM, TT, Z17, Z21",,,,
+106,MYC,"TGEN, TM, TT, Z17, Z21",MYC,"TGEN, TM, TT, Z17, Z21",,
+107,MYC_2,"TGEN, TM, TT, Z17, Z21",MYC_2,"Z17, Z21",,
+108,MYC_T,Z21,MYC_T,Z21,input,input
+109,MYC_targets,Z21,MYC_targets,Z21,,
+110,MYC_targets_2,Z21,MYC_targets_2,Z21,,
+111,MYOD1,"TGEN, TM, TT",MYOD1,"TGEN, TM, TT",,
+112,MYOG,"TGEN, TM, TT",MYOG,"TGEN, TM, TT",,
+113,NEDD4L,"TGEN, TM, TT",NEDD4L,"TGEN, TM, TT",,
+114,NF1,"TGEN, TM, TT",NF1,"TGEN, TM, TT",,
+115,NF2,"TGEN, TM, TT",NF2,"TGEN, TM, TT",,
+116,NFKB,"SL, TGEN, TM, TT","NFKB1, Nfkb","BL, SL, TGEN, TM, TT",input,
+117,NICD,"TGEN, TM, TT",NCID,"TGEN, TM, TT",,
+118,NOS3,"TGEN, TM, TT",NOS3,"TGEN, TM, TT",,
+119,NOTCH1,"TGEN, TM, TT",NOTCH1,"TGEN, TM, TT",,
+120,NRG1,"BS, HS, SS, TGEN, TM, TT, Z21","HER3_microenvironment, HRG, NRG1","BS, HS, SS, TGEN, TM, TT, Z21",input,input
+121,Navitoclax,Z21,Navitoclax,Z21,input,constant 0
+122,Neratinib,"Z17, Z21",Neratinib,"Z17, Z21",input,constant 0
+123,PAK1,"TGEN, TM, TT",PAK1,"TGEN, TM, TT",,
+124,PAK2,"TGEN, TM, TT",PAK2,"TGEN, TM, TT",,
+125,PAX7,"TGEN, TM, TT",PAX7,"TGEN, TM, TT",,
+126,PBX1,"Z17, Z21",PBX1,"Z17, Z21",input,constant 1
+127,PDK1_ic,"TGEN, TM, TT, Z17, Z21",PDK1,"Z17, Z21",input,constant 0
+128,PDK1_pm,"BS, HS, SS, TGEN, TM, TT, Z17, Z21","PDK1, PDK1_pm, PDPK1","BS, HS, SS, TGEN, TM, TT, Z17, Z21",,
+129,PG,"TGEN, TM, TT",PG,"TGEN, TM, TT",input,input
+130,PGR,"TGEN, TM, TT",PGR,"TGEN, TM, TT",,
+131,PI3K,"TGEN, TM, TT, Z17, Z21","PI3K, PI3K_c","TGEN, TM, TT, Z17, Z21",,
+132,PI3K_2,"TGEN, TM, TT, Z17, Z21",PI3K_2,"Z17, Z21",,
+133,PIM,"TGEN, TM, TT, Z17, Z21",PIM,"TGEN, TM, TT, Z17, Z21",input,constant 0
+134,PIP3,"TGEN, TM, TT, Z17, Z21",PIP3,"TGEN, TM, TT, Z17, Z21",,
+135,PIP3_2,"TGEN, TM, TT, Z17, Z21",PIP3_2,"Z17, Z21",,
+136,PKCa,"BS, HS, SS",PKCa,"BS, HS, SS",,
+137,PLCg,"BS, HS, SS",PLCg,"BS, HS, SS",,
+138,PPARG,"TGEN, TM, TT",PPARG,"TGEN, TM, TT",,
+139,PRAS40,"BL, HL, SL, Z17, Z21","PRAS, PRAS40","BL, HL, SL, Z17, Z21",,
+140,PRKAA2,"TGEN, TM, TT",PRKAA2,"TGEN, TM, TT",,
+141,PRKACA,"TGEN, TM, TT",PRKACA,"TGEN, TM, TT",,
+142,PTEN,"BL, HL, SL, TGEN, TM, TT, Z17, Z21",PTEN,"BL, HL, SL, TGEN, TM, TT, Z17, Z21",input,
+143,PTEN_2,"BL, HL, SL, TGEN, TM, TT, Z17, Z21",PTEN_2,Z21,,
+144,PTEN_T,Z21,PTEN_T,Z21,,constant 1
+145,PTEN_T_2,Z21,PTEN_T_2,Z21,,constant 0
+146,Palbociclib,"Z17, Z21",Palbociclib,"Z17, Z21",input,constant 0
+147,Proliferation,"Z17, Z21",Proliferation,"Z17, Z21",,
+148,Proliferation_2,"Z17, Z21",Proliferation_2,"Z17, Z21",,
+149,Proliferation_3,"Z17, Z21",Proliferation_3,"Z17, Z21",,
+150,Proliferation_4,"Z17, Z21",Proliferation_4,Z17,,
+151,RAC1,"TGEN, TM, TT",RAC1,"TGEN, TM, TT",,
+152,RAF1,"BL, HL, SL, TGEN, TM, TT, Z17, Z21","RAF1, cRAF","BL, HL, SL, TGEN, TM, TT",,
+153,RAF1_2,"BL, HL, SL, TGEN, TM, TT, Z17, Z21",,,,
+154,RAS,"TGEN, TM, TT, Z17, Z21","RAS, RAS_i","TGEN, TM, TT, Z17, Z21",,
+155,RAS_2,"TGEN, TM, TT, Z17, Z21",RAS_2,"Z17, Z21",,
+156,RAS_3,"TGEN, TM, TT, Z17, Z21",RAS_3,"Z17, Z21",,
+157,RB,"BL, HL, SL, TGEN, TM, TT, merge","PRB, RB","BL, HL, SL, TGEN, TM, TT",,
+158,RELA,"TGEN, TM, TT",RELA,"TGEN, TM, TT",,
+159,RHEB,"TGEN, TM, TT",RHEB,"TGEN, TM, TT",,
+160,RPS6,"BL, HL, SL",RPS6,"BL, HL, SL",,
+161,Rb_T,Z21,Rb_T,Z21,input,constant 1
+162,S63845,Z21,S63845,Z21,input,constant 0
+163,S6K,"BL, BS, HL, HS, SL, SS, TGEN, TM, TT, Z17, Z21","S6K, S6K1, p70S6K","BL, BS, HL, HS, SL, SS, TGEN, TM, TT, Z17, Z21",,
+164,SGK1,"TGEN, TM, TT, Z17, Z21",SGK1,"TGEN, TM, TT, Z17, Z21",,
+165,SGK1_T,"Z17, Z21",SGK1_T,"Z17, Z21",input,constant 0
+166,SOS1,"TGEN, TM, TT",SOS1,"TGEN, TM, TT",,
+167,SRC,"TGEN, TM, TT",SRC,"TGEN, TM, TT",,
+168,STAT1,"TGEN, TM, TT",STAT1,"TGEN, TM, TT",,
+169,STAT3,"TGEN, TM, TT",STAT3,"TGEN, TM, TT",,
+170,STAT5,"TGEN, TM, TT",STAT5,"TGEN, TM, TT",,
+171,STK11,"TGEN, TM, TT",STK11,"TGEN, TM, TT",,
+172,TCF7L2,"TGEN, TM, TT",TCF4,"TGEN, TM, TT",,
+173,TEAD1,"TGEN, TM, TT",TEAD1,"TGEN, TM, TT",,
+174,TRADD,"TGEN, TM, TT",TRADD,"TGEN, TM, TT",,
+175,TSC2,"BL, HL, SL, TGEN, TM, TT, Z17, Z21","TSC, TSC2","BL, HL, SL, TGEN, TM, TT, Z17, Z21",,
+176,TWIST1,"TGEN, TM, TT",TWIST1,"TGEN, TM, TT",,
+177,Trametinib,"Z17, Z21",Trametinib,"Z17, Z21",input,constant 0
+178,Translation,"Z17, Z21",Translation,"Z17, Z21",,
+179,WNT1,"TGEN, TM, TT",WNT1,"TGEN, TM, TT",input,input
+180,YAP1,"TGEN, TM, TT",YAP1,"TGEN, TM, TT",,
+181,cycE_CDK2,"Z17, Z21",cycE_CDK2,"Z17, Z21",,
+182,cycE_CDK2_T,"Z17, Z21",cycE_CDK2_T,"Z17, Z21",,
+183,erlotinib,"BL, BS, HL, HS, SL, SS",erlotinib,"BL, BS, HL, HS, SL, SS",input,constant 0
+184,mTORC1,"BS, HS, SS, TGEN, TM, TT, Z17, Z21","MTORC1_c, mTOR, mTORC1","BS, HS, SS, TGEN, TM, TT, Z17, Z21",,
+185,mTORC2_ic,"TGEN, TM, TT, Z17, Z21",mTORC2,"Z17, Z21",,input
+186,mTORC2_pm,"TGEN, TM, TT, Z17, Z21","MTORC2_c, mTORC2_pm","TGEN, TM, TT, Z17, Z21",,
+187,p21,"TGEN, TM, TT, merge",P21,"TGEN, TM, TT",,
+188,p21_T,"Z21, merge",p21_T,Z21,,constant 1
+189,p21_T_2,Z21,p21_T_2,Z21,,input
+190,p21_p27,"Z17, Z21, merge",p21_p27,"Z17, Z21",,
+191,p21_p27_T,"Z17, Z21",p21_p27_T,"Z17, Z21",,
+192,p27_T,Z21,p27_T,Z21,input,constant 1
+193,p38,"BL, HL, SL",p38,"BL, HL, SL",,
+194,p53,"BL, HL, SL, TGEN, TM, TT","P53, p53","BL, HL, SL, TGEN, TM, TT",,
+195,pRB,"Z17, Z21, merge",pRb,"Z17, Z21",,
+196,pRB_2,"Z17, Z21",pRb_2,"Z17, Z21",,
+197,pRB_3,"Z17, Z21",pRb_3,Z17,,
+198,pertuzumab,"BL, BS, HL, HS, SL, SS",pertuzumab,"BL, BS, HL, HS, SL, SS",input,constant 0
+199,stimulus,"BL, HL, SL",stimulus,"BL, HL, SL",input,constant 0
+200,trastuzumab,"BL, BS, HL, HS, SL, SS",trastuzumab,"BL, BS, HL, HS, SL, SS",input,constant 0
+201,,,RND1,"TGEN, TM, TT",,

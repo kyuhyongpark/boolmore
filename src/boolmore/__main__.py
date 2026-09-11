@@ -1,5 +1,5 @@
 def main():
-    import boolmore.genetic_algorithm as ga
+    import boolmore.algo.genetic_algorithm as ga
     from sys import argv
     """
     python -m boolmore <parameters file> <starting model>

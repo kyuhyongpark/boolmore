@@ -1,0 +1,14 @@
+# id: 53
+# generation: 8
+# extra edges: []
+# following constraints: True
+# number of edges: 13
+# number of self edges: 1
+# number of prime implicants: 15
+
+targets,	factors
+Coup_fti,	!Fgf8 & !Sp8
+Emx2,	Coup_fti & !Fgf8 & !Pax6 | Coup_fti & !Pax6 & !Sp8
+Fgf8,	!Emx2 & Fgf8 & Sp8
+Pax6,	!Coup_fti & Sp8
+Sp8,	!Emx2 & Fgf8

@@ -1,15 +1,13 @@
 {
 "parameters" : {
-    "starting_id": 1,           
-    "starting_gen": 1,
+    "starting_gen": 0,
     "total_iterations": 10,
     "per_iteration": 10,
     "keep": 2,
     "mix":2,
-    "export_top": 0,
-    "export_threshold": 0.0,
     "prob": 0.2,
-    "edge_prob": 0.0
+    "edge_prob": 0.0,
+    "order_by": ["n_extra_edges", "n_prime_implicants"]
     },
 
 "data" : "./CAD_data.tsv",

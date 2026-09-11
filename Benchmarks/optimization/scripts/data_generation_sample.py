@@ -3,7 +3,7 @@
 
 from pyboolnet.external.bnet2primes import bnet_file2primes
 
-from boolmore.model import Model
+from boolmore.core.model import Model
 from boolmore.benchmark import generate_experiments
 
 base_directory = "../../models"

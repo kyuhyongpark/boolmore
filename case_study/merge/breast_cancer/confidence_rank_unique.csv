@@ -1,0 +1,701 @@
+Regulator,Target,Sign,Model,Classification,Confidence rank,Constraint,is_kept
+ABL1,JAK2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+ABL1,MYOD1,negative,"TGEN, TM",assumption,4,,KEPT
+ABL1,SRC,positive,"TGEN, TM",assumption,4,,KEPT
+ABL2,CEBPB,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+AKT,AKT,positive,"BL, BS, HL, HS, SL, SS",indirect,2,,TAKEN_OUT
+AKT,BAD,negative,"TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+AKT,CASP9,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+AKT,CREB1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+AKT,CyclinD,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+AKT,CyclinD_2,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+AKT,ESR1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+AKT,ESR1_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+AKT,FAS,negative,"TGEN, TM, TT",assumption,4,,TAKEN_OUT
+AKT,FOXO1,negative,"BL, HL, SL, TGEN, TM, TT",direct,1,regulates,KEPT
+AKT,FOXO3,negative,"BL, HL, SL, TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+AKT,GSK3B,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+AKT,HER3,negative,SL,indirect,2,,TAKEN_OUT
+AKT,HER3_2,negative,SL,indirect,2,,TAKEN_OUT
+AKT,KMT2D,negative,"TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+AKT,MDM2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+AKT,NOS3,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+AKT,PRAS40,negative,"BL, HL, SL, Z17, Z21",direct,1,regulates,KEPT
+AKT,PRKACA,positive,"TGEN, TM, TT",assumption,4,,KEPT
+AKT,RAC1,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+AKT,S6K,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+AKT,TSC2,negative,"BL, HL, SL, TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+AKT,TWIST1,positive,"TGEN, TM",direct,1,regulates,KEPT
+AKT,mTORC1,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+AKT,p21,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+AKT,p21_p27,negative,"Z17, Z21",direct,1,regulates,KEPT
+AKT,p38,positive,"BL, HL, SL",correlation,3,,KEPT
+APC,DC,positive,"TGEN, TM, TT",,0,necessary,KEPT
+AXIN1,APC,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+Alpelisib,PI3K,negative,"Z17, Z21",direct,1,regulates,KEPT
+Alpelisib,PI3K_2,negative,"Z17, Z21",direct,1,,KEPT
+Apoptosis_X,Apoptosis_X,positive,"Z17, Z21",assumption,4,,KEPT
+Apoptosis_Y,Apoptosis_Y,positive,"Z17, Z21",assumption,4,,KEPT
+Apoptosis_Z,Apoptosis_Z,positive,"Z17, Z21",assumption,4,,KEPT
+BAD,Apoptosis_X,positive,"Z17, Z21",assumption,4,,KEPT
+BAD,Apoptosis_Z,positive,Z17,assumption,4,,KEPT
+BAD,BCL2,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+BAD,BCLXL,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+BAK1,CYCS,positive,"TGEN, TM, TT",direct in the network sense,1,regulates,KEPT
+BAX,BAX,positive,SL,direct,1,regulates,KEPT
+BAX,CYCS,positive,"TGEN, TM, TT",direct in the network sense,1,regulates,KEPT
+BCL2,Apoptosis_Y,negative,"Z17, Z21",assumption,4,,KEPT
+BCL2,Apoptosis_Z,negative,"Z17, Z21",assumption,4,,KEPT
+BCL2,BIM,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+BCL2_T,BCL2,positive,"Z17, Z21",direct,1,necessary,KEPT
+BCLXL,Apoptosis_Y,negative,Z21,assumption,4,,KEPT
+BCLXL,Apoptosis_Z,negative,Z21,assumption,4,,KEPT
+BCLXL,BIM,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+BCLXL,CASP9,negative,"TGEN, TM",indirect,2,,TAKEN_OUT
+BCLXL_T,BCLXL,positive,Z21,direct,1,necessary,KEPT
+BID,BAK1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+BID,BAX,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+BIM,Apoptosis_X,positive,"Z17, Z21",assumption,4,,KEPT
+BIM,Apoptosis_Z,positive,"Z17, Z21",assumption,4,,KEPT
+BIM,BAK1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+BIM,BAX,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+BIM,BCL2,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+BIM,BCLXL,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+BIM_T,BIM,positive,"Z17, Z21",direct,1,regulates,KEPT
+CASP3,CASP9,positive,"TGEN, TM, TT",direct in the network sense,1,regulates,KEPT
+CASP8,BID,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+CASP8,CASP3,positive,TT,direct,1,regulates,KEPT
+CASP8,CASP9,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+CASP9,CASP3,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+CDK46,CYCLINDc,positive,"Z17, Z21",,0,necessary,KEPT
+CDK46,CYCLINDc_2,positive,"Z17, Z21",,0,,KEPT
+CDKN2A,CYCLINDc,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+CDKN2A,CYCLINDc_2,negative,"TGEN, TM, TT",direct,1,,KEPT
+CEBPB,PPARG,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+CREB1,BCL2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+CREB1,BCLXL,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+CREB1,CEBPB,positive,"TGEN, TM",direct,1,regulates,KEPT
+CREB1,FZD,positive,"TGEN, TM",assumption,4,,KEPT
+CTNNB1,MYC,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+CTNNB1,MYC_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+CTNNB1,NOTCH1,positive,"TGEN, TM, TT",indirect,2,,KEPT
+CTNNB1,TCF7L2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+CYCLINDc,CYCLINDc_2,positive,"Z17, Z21",,0,necessary,KEPT
+CYCLINDc,RB,negative,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+CYCLINDc,pRB,positive,"Z17, Z21",direct,1,regulates,KEPT
+CYCLINDc,pRB_2,positive,"Z17, Z21",direct,1,,KEPT
+CYCLINDc,pRB_3,positive,Z21,direct,1,,KEPT
+CYCLINDc_2,RB,negative,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+CYCLINDc_2,pRB,positive,"Z17, Z21",direct,1,,KEPT
+CYCLINDc_2,pRB_2,positive,"Z17, Z21",direct,1,,KEPT
+CYCLINDc_2,pRB_3,positive,"Z17, Z21",direct,1,,KEPT
+CYCS,CASP9,positive,"TGEN, TM, TT",direct in the network sense,1,regulates,KEPT
+CyclinB1,AKT,positive,HL,indirect,2,,KEPT
+CyclinD,CYCLINDc,positive,"Z17, Z21",,0,necessary,KEPT
+CyclinD,CyclinD_2,positive,"BL, HL, SL, Z17, Z21",,0,necessary,KEPT
+CyclinD,RB,negative,"BL, SL",indirect,2,,TAKEN_OUT
+CyclinD_2,CYCLINDc,positive,"Z17, Z21",,0,,KEPT
+CyclinD_2,CYCLINDc_2,positive,"Z17, Z21",,0,,KEPT
+CyclinD_2,RB,negative,"BL, SL",indirect,2,,TAKEN_OUT
+DC,CTNNB1,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+DLL,NOTCH1,positive,"TGEN, TM, TT",direct,1,necessary,KEPT
+DVL1,AXIN1,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+DVL1,RAC1,positive,"TGEN, TM, TT",direct in the network sense,1,regulates,KEPT
+E2F,E2F_2,positive,"Z17, Z21",,0,necessary,KEPT
+E2F,Proliferation,positive,"Z17, Z21",assumption,4,,KEPT
+E2F,Proliferation_3,positive,Z21,assumption,4,,KEPT
+E2F,Proliferation_4,positive,Z21,assumption,4,,KEPT
+E2F,cycE_CDK2_T,positive,"Z17, Z21",direct,1,necessary,KEPT
+E2F_2,E2F_3,positive,Z17,,0,necessary,KEPT
+E2F_2,Proliferation,positive,Z17,assumption,4,,KEPT
+E2F_2,Proliferation_2,positive,"Z17, Z21",assumption,4,,KEPT
+E2F_2,Proliferation_3,positive,"Z17, Z21",assumption,4,,KEPT
+E2F_2,Proliferation_4,positive,Z21,assumption,4,,KEPT
+E2F_2,cycE_CDK2_T,positive,"Z17, Z21",direct,1,,KEPT
+E2F_3,E2F_3,positive,Z17,direct,1,regulates,KEPT
+E2F_3,Proliferation,positive,Z17,assumption,4,,KEPT
+E2F_3,Proliferation_2,positive,"Z17, Z21",assumption,4,,KEPT
+E2F_3,Proliferation_3,positive,"Z17, Z21",assumption,4,,KEPT
+E2F_3,Proliferation_4,positive,"Z17, Z21",assumption,4,,KEPT
+E2F_3,cycE_CDK2_T,positive,"Z17, Z21",direct,1,,KEPT
+EGF,AKT,positive,TT,indirect,2,,TAKEN_OUT
+EGF,EGFR,positive,"BS, HS, SS, TGEN, TM, TT",direct,1,regulates,KEPT
+EGF,ERK,positive,BS,indirect,2,,TAKEN_OUT
+EGF,ERK_2,positive,BS,indirect,2,,TAKEN_OUT
+EGF,HER2,positive,"BS, TGEN, TM",indirect,2,,TAKEN_OUT
+EGF,PLCg,positive,BS,indirect,2,,TAKEN_OUT
+EGFR,AKT,positive,"BL, HL, SL, TT",indirect,2,,TAKEN_OUT
+EGFR,CyclinB1,positive,BL,indirect,2,,TAKEN_OUT
+EGFR,EGFR,positive,"BL, BS, HL, HS, SL, SS",direct,1,regulates,KEPT
+EGFR,ERK,positive,"HL, SL",indirect,2,,TAKEN_OUT
+EGFR,ERK_2,positive,"HL, SL",indirect,2,,TAKEN_OUT
+EGFR,GRB2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+EGFR,HER2,positive,HS,direct,1,regulates,KEPT
+EGFR,KRT14,positive,"TGEN, TM, TT",indirect,2,,KEPT
+EGFR,MEK,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+EGFR,MEK_2,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+EGFR,PDK1_pm,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+EGFR,PI3K,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+EGFR,PI3K_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+EGFR,PLCg,positive,"BS, HS, SS",direct,1,regulates,KEPT
+EGFR,RAF1,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+EGFR,RAF1_2,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+EGFR,STAT1,positive,TT,direct,1,regulates,KEPT
+EGFR,STAT5,positive,"TGEN, TM",direct,1,regulates,KEPT
+EIF4,CYCLINDc,positive,"TM, TT",indirect,2,,KEPT
+EIF4,CYCLINDc_2,positive,"TM, TT",indirect,2,,KEPT
+EIF4,MYC,positive,"TGEN, TM, TT",indirect,2,,KEPT
+EIF4,MYC_2,positive,"TGEN, TM, TT",indirect,2,,KEPT
+EIF4,Translation,positive,"Z17, Z21",direct in the network sense,1,regulates,KEPT
+EIF4EBP1,EIF4,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+ER,ESR1,positive,"Z17, Z21",,0,regulates,KEPT
+ER,ESR1_2,positive,"Z17, Z21",,0,necessary,KEPT
+ERK,BAD,negative,"TGEN, TM, TT, Z17",direct in the network sense,1,regulates,KEPT
+ERK,BCL2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+ERK,CASP8,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+ERK,CASP9,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+ERK,CYCLINDc,positive,TT,indirect,2,,TAKEN_OUT
+ERK,CYCLINDc_2,positive,TT,indirect,2,,TAKEN_OUT
+ERK,CyclinD,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+ERK,CyclinD_2,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+ERK,ERK_2,positive,"BL, BS, HL, HS, SL, SS, Z17, Z21",,0,necessary,KEPT
+ERK,GSK3B,negative,"TGEN, TM, TT",direct in the network sense,1,regulates,KEPT
+ERK,JUN,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+ERK,MCL1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+ERK,MYC,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+ERK,MYC_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+ERK,RAF1,negative,"BL, HL, SL",direct,1,regulates,KEPT
+ERK,RAF1_2,negative,"BL, HL, SL",direct,1,,KEPT
+ERK,S6K,positive,"BL, BS, HL, HS, SL, SS, TT",direct,1,regulates,KEPT
+ERK,STK11,negative,"TGEN, TM, TT",indirect,2,,KEPT
+ERK,TSC2,negative,"BL, HL, SL, TGEN, TM, TT",direct in the network sense,1,regulates,KEPT
+ERK,TWIST1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+ERK,p21,negative,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+ERK_2,BAD,negative,"TGEN, TM, TT, Z17, Z21",direct in the network sense,1,,KEPT
+ERK_2,BCL2,positive,"TGEN, TM, TT",direct,1,,KEPT
+ERK_2,BIM,negative,"Z17, Z21",direct,1,regulates,KEPT
+ERK_2,CASP8,negative,"TGEN, TM, TT",direct,1,,KEPT
+ERK_2,CASP9,negative,"TGEN, TM, TT",direct,1,,KEPT
+ERK_2,CYCLINDc,positive,TT,indirect,2,,TAKEN_OUT
+ERK_2,CYCLINDc_2,positive,TT,indirect,2,,TAKEN_OUT
+ERK_2,CyclinD,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+ERK_2,CyclinD_2,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+ERK_2,FOXO3_Ub,positive,"Z17, Z21",direct,1,regulates,KEPT
+ERK_2,GSK3B,negative,"TGEN, TM, TT",direct in the network sense,1,,KEPT
+ERK_2,JUN,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+ERK_2,MCL1,positive,"TGEN, TM, TT",direct,1,,KEPT
+ERK_2,MYC,positive,"TGEN, TM, TT",direct,1,,KEPT
+ERK_2,MYC_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+ERK_2,RAF1,negative,"BL, HL, SL",direct,1,,KEPT
+ERK_2,RAF1_2,negative,"BL, HL, SL",direct,1,,KEPT
+ERK_2,S6K,positive,"BL, BS, HL, HS, SL, SS, TT",direct,1,,KEPT
+ERK_2,STK11,negative,"TGEN, TM, TT",indirect,2,,KEPT
+ERK_2,TSC2,negative,"BL, HL, SL, TGEN, TM, TT, Z17, Z21",direct in the network sense,1,,KEPT
+ERK_2,TWIST1,positive,"TGEN, TM, TT",direct,1,,KEPT
+ERK_2,p21,negative,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+ER_transcription,ER_transcription_2,positive,"Z17, Z21",,0,necessary,KEPT
+ER_transcription,MYC,positive,"Z17, Z21",direct,1,regulates,KEPT
+ER_transcription_2,BCL2,positive,Z17,direct,1,regulates,KEPT
+ER_transcription_2,ER_transcription_feedback_1,positive,Z21,assumption,4,,KEPT
+ER_transcription_2,MYC_2,positive,"Z17, Z21",direct,1,,KEPT
+ER_transcription_feedback_1,ER_transcription_feedback_2,positive,Z21,assumption,4,,KEPT
+ER_transcription_feedback_2,ER_transcription_feedback_2,positive,Z21,assumption,4,,KEPT
+ER_transcription_feedback_2,ESR1_2,negative,Z21,assumption,4,,KEPT
+ES,ESR1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+ES,ESR1_2,positive,"TGEN, TM, TT, Z21",direct,1,,KEPT
+ESR1,CYCLINDc,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+ESR1,CYCLINDc_2,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+ESR1,ER_transcription,positive,"Z17, Z21",,0,necessary,KEPT
+ESR1,ESR1_2,positive,"Z17, Z21",,0,necessary,KEPT
+ESR1,HSP90AA1,positive,TT,correlation,3,,KEPT
+ESR1,IGF1R,positive,"TGEN, TM, TT",indirect,2,,KEPT
+ESR1,IGF1R_2,positive,"TGEN, TM, TT",indirect,2,,KEPT
+ESR1,MYC,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+ESR1,MYC_2,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+ESR1,PI3K,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+ESR1,PI3K_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+ESR1_2,CYCLINDc,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+ESR1_2,CYCLINDc_2,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+ESR1_2,ER_transcription,positive,"Z17, Z21",,0,,KEPT
+ESR1_2,ER_transcription_2,positive,"Z17, Z21",,0,,KEPT
+ESR1_2,HSP90AA1,positive,TT,correlation,3,,KEPT
+ESR1_2,IGF1R,positive,"TGEN, TM, TT",indirect,2,,KEPT
+ESR1_2,IGF1R_2,positive,"TGEN, TM, TT",indirect,2,,KEPT
+ESR1_2,MYC,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+ESR1_2,MYC_2,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+ESR1_2,PI3K,positive,"TGEN, TM, TT",direct,1,,KEPT
+ESR1_2,PI3K_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+Everolimus,mTORC1,negative,"Z17, Z21",direct in the network sense,1,regulates,KEPT
+Everolimus,mTORC2_ic,negative,"Z17, Z21",indirect,2,,KEPT
+Everolimus,mTORC2_pm,negative,"Z17, Z21",indirect,2,,TAKEN_OUT
+FADD,CASP8,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+FAS,FADD,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+FASLG,FAS,positive,"TGEN, TM, TT",direct,1,necessary,KEPT
+FASLG,FASLG,positive,"TGEN, TM, TT",indirect,2,,KEPT
+FOXA1,ER_transcription_2,positive,"Z17, Z21",direct,1,regulates,KEPT
+FOXO1,BIM,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+FOXO1,FOXO1FOXO3,positive,merge,,0,regulates,KEPT
+FOXO3,BIM,positive,"TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+FOXO3,ESR1,positive,"TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+FOXO3,ESR1_2,positive,"TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+FOXO3,FASLG,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+FOXO3,FOXA1,positive,Z17,correlation,3,,KEPT
+FOXO3,FOXO1FOXO3,positive,merge,,0,regulates,KEPT
+FOXO3,HER2,positive,TT,direct,1,regulates,KEPT
+FOXO3,HER3,positive,"Z17, Z21",direct,1,regulates,KEPT
+FOXO3,HER3_2,positive,"Z17, Z21",direct,1,,KEPT
+FOXO3,IGF1R,positive,"TGEN, TM, TT, Z17, Z21",indirect,2,,KEPT
+FOXO3,IGF1R_2,positive,"TGEN, TM, TT, Z17, Z21",indirect,2,,KEPT
+FOXO3,INSR,positive,"TGEN, TM, TT",indirect,2,,KEPT
+FOXO3,STK11,positive,TT,indirect,2,,KEPT
+FOXO3,p21_p27_T,positive,"Z17, Z21",direct,1,regulates,KEPT
+FOXO3_Ub,FOXO3,negative,"Z17, Z21",direct,1,regulates,KEPT
+FZD,DVL1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+Fulvestrant,ESR1,negative,"Z17, Z21",direct,1,regulates,KEPT
+Fulvestrant,ESR1_2,negative,"Z17, Z21",direct,1,,KEPT
+GATA3,PPARG,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+GRB2,ABL1,positive,"TGEN, TM, TT",assumption,4,,TAKEN_OUT
+GRB2,SOS1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+GSK3B,AXIN1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+GSK3B,CYCLINDc,negative,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+GSK3B,CYCLINDc_2,negative,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+GSK3B,CyclinD,negative,"BL, SL",direct,1,regulates,KEPT
+GSK3B,CyclinD_2,negative,"BL, SL",direct,1,,KEPT
+GSK3B,DC,positive,"TGEN, TM, TT",,0,necessary,KEPT
+GSK3B,GSK3B,positive,"BL, HL, SL",direct,1,regulates,KEPT
+GSK3B,JUN,negative,"BL, HL, SL",direct,1,regulates,KEPT
+GSK3B,MCL1,negative,"TGEN, TM, TT",direct in the network sense,1,regulates,KEPT
+GSK3B,MYC,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+GSK3B,MYC_2,negative,"TGEN, TM, TT",direct,1,,KEPT
+GSK3B,PTEN,negative,"BL, HL, SL",direct,1,regulates,KEPT
+GSK3B,PTEN_2,negative,"BL, HL, SL",direct,1,,KEPT
+GSK3B,TSC2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+HER2,AKT,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+HER2,EGFR,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+HER2,GRB2,positive,TT,direct,1,regulates,KEPT
+HER2,HER2,positive,"BL, BS, HL, HS, SL, SS",direct,1,regulates,KEPT
+HER2,HER2HER3c,positive,"TGEN, TM, TT, Z17, Z21",,0,necessary,KEPT
+HER2,HER2HER3c_2,positive,"TGEN, TM, TT, Z17, Z21",,0,,KEPT
+HER2,IGF1R,positive,"Z17, Z21",correlation,3,,TAKEN_OUT
+HER2,IGF1R_2,positive,"Z17, Z21",correlation,3,,TAKEN_OUT
+HER2,MEK,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+HER2,MEK_2,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+HER2,PDK1_pm,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+HER2,PLCg,positive,"BS, HS, SS",direct,1,regulates,KEPT
+HER2,RAF1,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+HER2,RAF1_2,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+HER2,S6K,positive,SL,indirect,2,,TAKEN_OUT
+HER2,TSC2,positive,SL,indirect,2,,TAKEN_OUT
+HER2HER3c,HER2HER3c_2,positive,"Z17, Z21",,0,necessary,KEPT
+HER2HER3c,PI3K,positive,"Z17, Z21",direct,1,regulates,KEPT
+HER2HER3c,RAS,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+HER2HER3c,RAS_2,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+HER2HER3c_2,PI3K,positive,"Z17, Z21",direct,1,,KEPT
+HER2HER3c_2,PI3K_2,positive,"Z17, Z21",direct,1,,KEPT
+HER2HER3c_2,RAS,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+HER2HER3c_2,RAS_2,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+HER2HER3c_2,RAS_3,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+HER3,AKT,positive,"BL, BS, HL, HS, SL, SS",indirect,2,,TAKEN_OUT
+HER3,CyclinB1,positive,BL,indirect,2,,TAKEN_OUT
+HER3,EGFR,positive,"HL, TGEN, TM, TT",direct,1,regulates,KEPT
+HER3,ERK,positive,SS,indirect,2,,TAKEN_OUT
+HER3,ERK_2,positive,SS,indirect,2,,TAKEN_OUT
+HER3,HER2HER3c,positive,"BS, TGEN, TM, TT, Z17, Z21",,0,necessary,KEPT
+HER3,HER2HER3c_2,positive,"BS, TGEN, TM, TT, Z17, Z21",,0,,KEPT
+HER3,HER3_2,positive,"BL, BS, HL, HS, SL, SS, Z17, Z21",,0,necessary,KEPT
+HER3,MEK,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+HER3,MEK_2,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+HER3,NFKB,positive,SL,indirect,2,,KEPT
+HER3,PDK1_pm,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+HER3,PLCg,positive,"BS, HS, SS",assumption,4,,TAKEN_OUT
+HER3_2,AKT,positive,"BL, BS, HL, HS, SL, SS",indirect,2,,TAKEN_OUT
+HER3_2,CyclinB1,positive,BL,indirect,2,,TAKEN_OUT
+HER3_2,EGFR,positive,"HL, TGEN, TM, TT",direct,1,,KEPT
+HER3_2,ERK,positive,SS,indirect,2,,TAKEN_OUT
+HER3_2,ERK_2,positive,SS,indirect,2,,TAKEN_OUT
+HER3_2,HER2HER3c,positive,"BS, TGEN, TM, TT, Z17, Z21",,0,,KEPT
+HER3_2,HER2HER3c_2,positive,"BS, TGEN, TM, TT, Z17, Z21",,0,,KEPT
+HER3_2,MEK,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+HER3_2,MEK_2,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+HER3_2,NFKB,positive,SL,indirect,2,,KEPT
+HER3_2,PDK1_pm,positive,"BS, HS, SS",indirect,2,,TAKEN_OUT
+HER3_2,PLCg,positive,"BS, HS, SS",assumption,4,,TAKEN_OUT
+HER3_T,HER3,positive,"Z17, Z21",direct,1,regulates,KEPT
+HES1,MYOD1,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+HEY1,MYOG,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+HRAS,RAF1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+HRAS,RAF1_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+HSP90AA1,NOS3,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+IGF1,AKT,positive,"TGEN, TM",indirect,2,,TAKEN_OUT
+IGF1,CYCLINDc,positive,"TM, TT",indirect,2,,TAKEN_OUT
+IGF1,CYCLINDc_2,positive,"TM, TT",indirect,2,,TAKEN_OUT
+IGF1,HRAS,positive,"TGEN, TM",indirect,2,,TAKEN_OUT
+IGF1,IGF1R,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+IGF1,IGF1R_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+IGF1,MYC,positive,"TM, TT",indirect,2,,TAKEN_OUT
+IGF1,MYC_2,positive,"TM, TT",indirect,2,,TAKEN_OUT
+IGF1,RAS,positive,"TGEN, TM",indirect,2,,TAKEN_OUT
+IGF1,RAS_2,positive,"TGEN, TM",indirect,2,,TAKEN_OUT
+IGF1,RAS_3,positive,"TGEN, TM",indirect,2,,TAKEN_OUT
+IGF1,mTORC1,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+IGF1R,AKT,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+IGF1R,IGF1R_2,positive,"Z17, Z21",,0,necessary,KEPT
+IGF1R,IRS1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+IGF1R,PDK1_pm,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+IGF1R,PI3K,positive,"TGEN, TM, TT, Z17, Z21",indirect,2,,TAKEN_OUT
+IGF1R,PI3K_2,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+IGF1R,RAS,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+IGF1R_2,AKT,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+IGF1R_2,IRS1,positive,"TGEN, TM, TT",direct,1,,KEPT
+IGF1R_2,PDK1_pm,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+IGF1R_2,PI3K,positive,"TGEN, TM, TT, Z17, Z21",indirect,2,,TAKEN_OUT
+IGF1R_2,PI3K_2,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+IGF1R_2,RAS,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+IGF1R_T,IGF1R,positive,"Z17, Z21",direct,1,regulates,KEPT
+IGF1R_T,IGF1R_2,positive,Z17,direct,1,,KEPT
+IGF1R_T,IGF1R_T_2,positive,Z21,,0,necessary,KEPT
+IGF1R_T_2,IGF1R,positive,Z17,direct,1,,KEPT
+IGF1R_T_2,IGF1R_2,positive,"Z17, Z21",direct,1,,KEPT
+IL1B,IL6,positive,"TGEN, TM, TT",indirect,2,,KEPT
+IL1B,STAT3,positive,"TGEN, TM, TT",indirect,2,,KEPT
+IL6,IL6,positive,"TGEN, TM, TT",indirect,2,,KEPT
+IL6,IL6R,positive,"TGEN, TM, TT",direct,1,necessary,KEPT
+IL6R,JAK2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+INS,IGF1R,positive,"TGEN, TM",direct,1,regulates,KEPT
+INS,IGF1R_2,positive,"TGEN, TM",direct,1,,KEPT
+INS,INSR,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+INSR,GRB7,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+INSR,IRS1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+INSR,PI3K,positive,"TGEN, TM",indirect,2,,TAKEN_OUT
+INSR,PI3K_2,positive,"TGEN, TM",indirect,2,,TAKEN_OUT
+IRS1,AKT,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+IRS1,GRB2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+IRS1,JAK2,positive,"TGEN, TM, TT",assumption,4,,TAKEN_OUT
+IRS1,PI3K,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+IRS1,PI3K_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+Ipatasertib,AKT,negative,"Z17, Z21",direct,1,regulates,KEPT
+JAK2,MYC,positive,TT,indirect,2,,TAKEN_OUT
+JAK2,MYC_2,positive,TT,indirect,2,,TAKEN_OUT
+JAK2,STAT1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+JAK2,STAT3,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+JAK2,STAT5,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+JUN,CyclinD,positive,"HL, SL",direct,1,regulates,KEPT
+JUN,CyclinD_2,positive,"HL, SL",direct,1,,KEPT
+JUN,EGFR,positive,HL,direct,1,regulates,KEPT
+JUN,JUN,positive,"BL, HL, SL",direct,1,regulates,KEPT
+JUN,PRAS40,positive,HL,indirect,2,,TAKEN_OUT
+JUN,TCF7L2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+KMT2D,CYCLINDc,positive,"TM, TT",indirect,2,,KEPT
+KMT2D,CYCLINDc_2,positive,"TM, TT",indirect,2,,KEPT
+KMT2D,ER_transcription_2,positive,"Z17, Z21",direct,1,regulates,KEPT
+KMT2D,MYC,positive,"TM, TT",indirect,2,,KEPT
+KMT2D,MYC_2,positive,"TM, TT",indirect,2,,TAKEN_OUT
+KRT14,TRADD,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+LATS1,YAP1,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+LCK,NOTCH1,positive,"TGEN, TM, TT",assumption,4,,KEPT
+MAPK,MAPK_2,positive,"Z17, Z21",,0,necessary,KEPT
+MAPK8,JUN,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+MAPK8,TWIST1,positive,"TGEN, TM",indirect,2,,TAKEN_OUT
+MCL1,Apoptosis_Y,negative,"Z17, Z21",assumption,4,,KEPT
+MCL1,Apoptosis_Z,negative,"Z17, Z21",assumption,4,,KEPT
+MCL1,BAK1,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+MCL1,BAX,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+MCL1_T,MCL1,positive,Z21,direct,1,regulates,KEPT
+MDM2,NOTCH1,positive,"TGEN, TM",direct,1,regulates,KEPT
+MDM2,p53,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+MEK,EGFR,negative,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+MEK,ERK,positive,"BS, HS, SS, TGEN, TM, TT",direct,1,necessary,KEPT
+MEK,ERK_2,positive,"BS, HS, SS, TGEN, TM, TT",direct,1,,KEPT
+MEK,MEK_2,positive,"BS, HS, SS, Z17, Z21",,0,necessary,KEPT
+MEK_2,EGFR,negative,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+MEK_2,ERK,positive,"BS, HS, SS, TGEN, TM, TT",direct,1,,KEPT
+MEK_2,ERK_2,positive,"BS, HS, SS, TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+MEK_2,HER2HER3c_2,negative,"Z17, Z21",indirect,2,,TAKEN_OUT
+MYC,CDKN2A,negative,"TGEN, TM, TT",indirect,2,,KEPT
+MYC,CYCLINDc,positive,"TGEN, TM, TT",indirect,2,,KEPT
+MYC,CYCLINDc_2,positive,"TGEN, TM, TT",indirect,2,,KEPT
+MYC,MYC_2,positive,"Z17, Z21",,0,necessary,KEPT
+MYC,MYC_targets,positive,Z21,direct,1,regulates,KEPT
+MYC,MYC_targets_2,positive,Z21,direct,1,,KEPT
+MYC,p21,negative,"TGEN, TM, TT",indirect,2,,KEPT
+MYC,p21_p27_T,negative,"Z17, Z21",assumption,4,,TAKEN_OUT
+MYC_2,CDKN2A,negative,"TGEN, TM, TT",indirect,2,,KEPT
+MYC_2,CYCLINDc,positive,"TGEN, TM, TT",indirect,2,,KEPT
+MYC_2,CYCLINDc_2,positive,"TGEN, TM, TT",indirect,2,,KEPT
+MYC_2,MYC_targets,positive,Z21,direct,1,,KEPT
+MYC_2,MYC_targets_2,positive,Z21,direct,1,,KEPT
+MYC_2,p21,negative,"TGEN, TM, TT",indirect,2,,KEPT
+MYC_2,p21_p27_T,negative,"Z17, Z21",assumption,4,,TAKEN_OUT
+MYC_T,MYC_2,positive,Z21,direct,1,,KEPT
+MYC_targets,MYC_targets_2,positive,Z21,,0,necessary,KEPT
+MYC_targets,Proliferation,positive,Z21,assumption,4,,KEPT
+MYC_targets_2,Proliferation_3,positive,Z21,assumption,4,,KEPT
+MYC_targets_2,Proliferation_4,positive,Z21,assumption,4,,KEPT
+MYOD1,MYOG,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+MYOG,PAX7,negative,"TGEN, TM, TT",correlation,3,,KEPT
+NEDD4L,NF2,positive,"TGEN, TM, TT",direct in the network sense,1,regulates,KEPT
+NF1,CASP8,positive,"TGEN, TM",indirect,2,,TAKEN_OUT
+NF1,HRAS,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+NF2,LATS1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+NF2,MYOD1,negative,TT,assumption,4,,KEPT
+NFKB,EGFR,positive,TT,direct,1,regulates,KEPT
+NFKB,IL1B,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+NFKB,PIM,positive,TT,assumption,4,,TAKEN_OUT
+NFKB,RELA,positive,"TGEN, TM, TT",,0,necessary,KEPT
+NICD,HES1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+NICD,HEY1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+NOTCH1,NFKB,positive,"TGEN, TM, TT",indirect,2,,KEPT
+NOTCH1,NICD,positive,"TGEN, TM, TT",direct,1,necessary,KEPT
+NOTCH1,PAX7,positive,"TGEN, TM",indirect,2,,KEPT
+NRG1,AKT,positive,"TGEN, TM",indirect,2,,TAKEN_OUT
+NRG1,CYCLINDc,positive,"TM, TT",indirect,2,,TAKEN_OUT
+NRG1,CYCLINDc_2,positive,"TM, TT",indirect,2,,TAKEN_OUT
+NRG1,HER2HER3c_2,positive,Z21,indirect,2,,TAKEN_OUT
+NRG1,HER3,positive,"BS, HS, SS, TGEN, TM, TT",direct,1,regulates,KEPT
+NRG1,HER3_2,positive,"BS, HS, SS, TGEN, TM, TT",direct,1,,KEPT
+NRG1,MYC,positive,"TM, TT",indirect,2,,TAKEN_OUT
+NRG1,MYC_2,positive,"TM, TT",indirect,2,,TAKEN_OUT
+NRG1,mTORC1,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+Navitoclax,BCL2,negative,Z21,direct,1,regulates,KEPT
+Navitoclax,BCLXL,negative,Z21,direct,1,regulates,KEPT
+Neratinib,HER2,negative,Z17,direct,1,regulates,KEPT
+Neratinib,HER2HER3c,negative,"Z17, Z21",direct,1,regulates,KEPT
+Neratinib,HER2HER3c_2,negative,"Z17, Z21",direct,1,,KEPT
+PAK1,BAD,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+PAK2,KRT14,positive,"TGEN, TM, TT",assumption,4,,KEPT
+PBX1,ER_transcription_2,positive,"Z17, Z21",direct,1,regulates,KEPT
+PDK1_ic,PAK1,positive,TT,direct,1,regulates,KEPT
+PDK1_ic,SGK1,positive,"TGEN, TM, TT, Z17, Z21",direct,1,necessary,KEPT
+PDK1_pm,AKT,positive,"BS, HS, SS, TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+PDK1_pm,ERK,positive,SS,indirect,2,,TAKEN_OUT
+PDK1_pm,ERK_2,positive,SS,indirect,2,,TAKEN_OUT
+PDK1_pm,HER2,positive,HS,correlation,3,,TAKEN_OUT
+PDK1_pm,MEK,positive,HS,direct,1,regulates,KEPT
+PDK1_pm,MEK_2,positive,HS,direct,1,,KEPT
+PG,PGR,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+PI3K,HRAS,positive,TGEN,indirect,2,,TAKEN_OUT
+PI3K,PI3K_2,positive,"Z17, Z21",,0,necessary,KEPT
+PI3K,PIP3,positive,"TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+PI3K,PIP3_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+PI3K,RAC1,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+PI3K,RAS,positive,TGEN,indirect,2,,TAKEN_OUT
+PI3K,RAS_2,positive,TGEN,indirect,2,,TAKEN_OUT
+PI3K,RAS_3,positive,TGEN,indirect,2,,TAKEN_OUT
+PI3K_2,HRAS,positive,TGEN,indirect,2,,TAKEN_OUT
+PI3K_2,PIP3,positive,"TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+PI3K_2,PIP3_2,positive,"TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+PI3K_2,RAC1,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+PI3K_2,RAS,positive,TGEN,indirect,2,,TAKEN_OUT
+PI3K_2,RAS_2,positive,TGEN,indirect,2,,TAKEN_OUT
+PI3K_2,RAS_3,positive,TGEN,indirect,2,,TAKEN_OUT
+PIM,BAD,negative,"TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+PIM,FOXO3,negative,"Z17, Z21",direct,1,regulates,KEPT
+PIM,MYC,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+PIM,MYC_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+PIM,PRAS40,negative,"Z17, Z21",direct,1,regulates,KEPT
+PIM,RELA,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+PIM,mTORC1,positive,"TM, TT",indirect,2,,TAKEN_OUT
+PIM,p21_p27,negative,"Z17, Z21",assumption,4,,TAKEN_OUT
+PIP3,AKT,positive,"TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+PIP3,HRAS,positive,"TM, TT",indirect,2,,TAKEN_OUT
+PIP3,PDK1_pm,positive,"TGEN, TM, TT, Z17, Z21",direct,1,necessary,KEPT
+PIP3,PIP3_2,positive,"Z17, Z21",,0,necessary,KEPT
+PIP3,RAF1,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+PIP3,RAF1_2,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+PIP3,RAS,positive,"TM, TT",assumption,4,,TAKEN_OUT
+PIP3,RAS_2,positive,"TM, TT",assumption,4,,TAKEN_OUT
+PIP3,RAS_3,positive,"TM, TT",assumption,4,,TAKEN_OUT
+PIP3,mTORC2_pm,positive,"TGEN, TM, TT, Z17, Z21",direct,1,necessary,KEPT
+PIP3_2,AKT,positive,"TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+PIP3_2,HRAS,positive,"TM, TT",indirect,2,,TAKEN_OUT
+PIP3_2,PDK1_pm,positive,"TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+PIP3_2,RAF1,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+PIP3_2,RAF1_2,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+PIP3_2,RAS,positive,"TM, TT",assumption,4,,TAKEN_OUT
+PIP3_2,RAS_2,positive,"TM, TT",assumption,4,,TAKEN_OUT
+PIP3_2,RAS_3,positive,"TM, TT",assumption,4,,TAKEN_OUT
+PIP3_2,mTORC2_pm,positive,"TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+PLCg,PKCa,positive,"BS, HS, SS",direct in the network sense,1,regulates,KEPT
+PRAS40,PRAS40,positive,"BL, HL, SL",indirect,2,,KEPT
+PRAS40,S6K,negative,"BL, HL, SL",indirect,2,,TAKEN_OUT
+PRAS40,mTORC1,negative,"Z17, Z21",direct,1,regulates,KEPT
+PRKAA2,TSC2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+PRKACA,CASP9,negative,"TGEN, TM",direct,1,regulates,KEPT
+PRKACA,NEDD4L,negative,"TGEN, TM",direct,1,regulates,KEPT
+PRKACA,PRKAA2,negative,"TGEN, TM",assumption,4,,KEPT
+PRKACA,SRC,positive,"TGEN, TM, TT",assumption,4,,KEPT
+PTEN,AKT,negative,"BL, HL, SL",indirect,2,,TAKEN_OUT
+PTEN,CREB1,negative,"TGEN, TM",direct,1,regulates,KEPT
+PTEN,HER3,negative,BL,indirect,2,,TAKEN_OUT
+PTEN,HER3_2,negative,BL,indirect,2,,TAKEN_OUT
+PTEN,PIP3,negative,"TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+PTEN,PIP3_2,negative,"TGEN, TM, TT, Z17",direct,1,,KEPT
+PTEN,PTEN,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+PTEN,PTEN_2,positive,"BL, HL, SL, Z21",,0,necessary,KEPT
+PTEN,p53,positive,"BL, SL",direct,1,regulates,KEPT
+PTEN_2,AKT,negative,"BL, HL, SL",indirect,2,,TAKEN_OUT
+PTEN_2,CREB1,negative,"TGEN, TM",direct,1,,KEPT
+PTEN_2,HER3,negative,BL,indirect,2,,TAKEN_OUT
+PTEN_2,HER3_2,negative,BL,indirect,2,,TAKEN_OUT
+PTEN_2,PIP3,negative,"TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+PTEN_2,PIP3_2,negative,"TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+PTEN_2,PTEN_2,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+PTEN_2,p53,positive,"BL, SL",direct,1,,KEPT
+PTEN_T,PTEN,positive,Z21,direct,1,necessary,KEPT
+PTEN_T,PTEN_T_2,positive,Z21,,0,necessary,KEPT
+PTEN_T_2,PTEN_2,positive,Z21,direct,1,,KEPT
+Palbociclib,CDK46,negative,"Z17, Z21",direct,1,regulates,KEPT
+RAC1,MAPK8,positive,"TGEN, TM, TT",indirect,2,,KEPT
+RAC1,PAK1,positive,TT,direct,1,regulates,KEPT
+RAC1,PAK2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+RAF1,ERK,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+RAF1,ERK_2,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+RAF1,MEK,positive,"TGEN, TM, TT",direct,1,necessary,KEPT
+RAF1,MEK_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+RAF1,RAF1_2,positive,"BL, HL, SL, Z17, Z21",,0,necessary,KEPT
+RAF1_2,ERK,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+RAF1_2,ERK_2,positive,"BL, HL, SL",indirect,2,,TAKEN_OUT
+RAF1_2,MEK,positive,"TGEN, TM, TT",direct,1,,KEPT
+RAF1_2,MEK_2,positive,"TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+RAS,PI3K,positive,"TGEN, TM, Z17, Z21",direct,1,regulates,KEPT
+RAS,PI3K_2,positive,"TGEN, TM",direct,1,,KEPT
+RAS,RAF1,positive,"TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+RAS,RAF1_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+RAS,RAS_2,positive,"Z17, Z21",,0,necessary,KEPT
+RAS_2,PI3K,positive,"TGEN, TM, Z17, Z21",direct,1,,KEPT
+RAS_2,PI3K_2,positive,"TGEN, TM",direct,1,,KEPT
+RAS_2,RAF1,positive,"TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+RAS_2,RAF1_2,positive,"TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+RAS_2,RAS_3,positive,"Z17, Z21",,0,necessary,KEPT
+RAS_3,PI3K,positive,"TGEN, TM, Z17, Z21",direct,1,,KEPT
+RAS_3,PI3K_2,positive,"TGEN, TM",direct,1,,KEPT
+RAS_3,RAF1,positive,"TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+RAS_3,RAF1_2,positive,"TGEN, TM, TT, Z17, Z21",direct,1,,KEPT
+RB,ABL1,negative,TM,direct,1,regulates,KEPT
+RB,E2F,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+RB,E2F_2,negative,"TGEN, TM, TT",direct,1,,KEPT
+RB,E2F_3,negative,"TGEN, TM, TT",direct,1,,KEPT
+RB,TSC2,positive,HL,assumption,4,,TAKEN_OUT
+RB,p53,positive,"BL, HL, SL",indirect,2,,KEPT
+RB,pRB,negative,merge,,0,regulates,KEPT
+RHEB,mTORC1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+RPS6,CyclinD,positive,BL,indirect,2,,KEPT
+RPS6,CyclinD_2,positive,BL,indirect,2,,KEPT
+RPS6,NFKB,positive,SL,correlation,3,,KEPT
+RPS6,RAF1,positive,SL,assumption,4,,KEPT
+RPS6,RAF1_2,positive,SL,assumption,4,,KEPT
+Rb_T,pRB,negative,Z21,assumption,4,,KEPT
+Rb_T,pRB_2,negative,Z21,assumption,4,,KEPT
+Rb_T,pRB_3,negative,Z21,assumption,4,,KEPT
+S63845,MCL1,negative,Z21,direct,1,regulates,KEPT
+S6K,CyclinB1,positive,SL,assumption,4,,TAKEN_OUT
+S6K,CyclinD,positive,HL,indirect,2,,KEPT
+S6K,CyclinD_2,positive,HL,indirect,2,,KEPT
+S6K,IRS1,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+S6K,NEDD4L,negative,TGEN,assumption,4,,KEPT
+S6K,RPS6,positive,"BL, HL, SL",direct,1,regulates,KEPT
+S6K,Translation,positive,"Z17, Z21",indirect,2,,KEPT
+S6K,mTORC2_pm,negative,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+SGK1,CREB1,positive,TT,direct,1,regulates,KEPT
+SGK1,FOXO1,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+SGK1,FOXO3,negative,"Z17, Z21",direct,1,regulates,KEPT
+SGK1,NEDD4L,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+SGK1,TSC2,negative,"Z17, Z21",direct,1,regulates,KEPT
+SGK1_T,SGK1,positive,"Z17, Z21",direct,1,necessary,KEPT
+SOS1,HRAS,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+SOS1,RAS,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+SOS1,RAS_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+SOS1,RAS_3,positive,"TGEN, TM, TT",direct,1,,KEPT
+SRC,ABL1,positive,"TGEN, TM",direct,1,regulates,KEPT
+SRC,CASP8,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+SRC,CTNNB1,positive,"TGEN, TM",direct,1,regulates,KEPT
+SRC,GRB2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+SRC,IGF1R,positive,"TGEN, TM",direct,1,regulates,KEPT
+SRC,IGF1R_2,positive,"TGEN, TM",direct,1,,KEPT
+SRC,PAK2,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+SRC,PTEN,negative,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+SRC,PTEN_2,negative,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+SRC,STAT1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+SRC,STAT3,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+SRC,STAT5,positive,"TGEN, TM",direct,1,regulates,KEPT
+STAT1,GATA3,negative,"TGEN, TM, TT",direct in the network sense,1,regulates,KEPT
+STAT3,IL6R,positive,TT,direct,1,regulates,KEPT
+STAT3,MYC,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+STAT3,MYC_2,positive,"TGEN, TM, TT",direct,1,,KEPT
+STAT5,IL8,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+STAT5,PIM,positive,"TGEN, TM",direct,1,regulates,KEPT
+STK11,PRKAA2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+TCF7L2,CYCLINDc,positive,"TGEN, TM, TT",indirect,2,,KEPT
+TCF7L2,CYCLINDc_2,positive,"TGEN, TM, TT",indirect,2,,KEPT
+TCF7L2,PAK1,positive,"TGEN, TM, TT",assumption,4,,KEPT
+TEAD1,CYCLINDc,positive,"TGEN, TM, TT",indirect,2,,KEPT
+TEAD1,CYCLINDc_2,positive,"TGEN, TM, TT",indirect,2,,KEPT
+TRADD,FADD,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+TSC2,RHEB,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+TSC2,S6K,negative,"BL, HL, SL",indirect,2,,TAKEN_OUT
+TSC2,mTORC1,negative,"Z17, Z21",indirect,2,,TAKEN_OUT
+TWIST1,NF1,negative,"TGEN, TM, TT",assumption,4,,KEPT
+Trametinib,MEK,negative,"Z17, Z21",direct,1,regulates,KEPT
+Trametinib,MEK_2,negative,"Z17, Z21",direct,1,,KEPT
+Translation,MCL1,positive,Z17,direct,1,regulates,KEPT
+Translation,MYC_targets,positive,Z21,direct,1,regulates,KEPT
+Translation,MYC_targets_2,positive,Z21,direct,1,,KEPT
+WNT1,CTNNB1,positive,"TGEN, TM, TT",indirect,2,,KEPT
+WNT1,PRKACA,positive,"TGEN, TM, TT",assumption,4,,KEPT
+YAP1,CTNNB1,positive,"TGEN, TM",correlation,3,,KEPT
+YAP1,TEAD1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+cycE_CDK2,pRB,positive,Z17,direct,1,regulates,KEPT
+cycE_CDK2,pRB_2,positive,"Z17, Z21",direct,1,,KEPT
+cycE_CDK2,pRB_3,positive,"Z17, Z21",direct,1,,KEPT
+cycE_CDK2_T,cycE_CDK2,positive,"Z17, Z21",direct,1,necessary,KEPT
+erlotinib,EGFR,negative,"BL, BS, HL, HS, SL, SS",direct,1,regulates,KEPT
+erlotinib,HER2,negative,"BL, BS, HL, HS, SL, SS",direct,1,regulates,KEPT
+erlotinib,HER3,negative,"BL, BS, HL, HS, SL, SS",indirect,2,,KEPT
+erlotinib,HER3_2,negative,"BL, BS, HL, HS, SL, SS",indirect,2,,KEPT
+mTORC1,EIF4,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+mTORC1,EIF4EBP1,negative,"TGEN, TM, TT",direct,1,regulates,KEPT
+mTORC1,S6K,positive,"BS, HS, SS, TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+mTORC2_ic,SGK1,positive,"TGEN, TM, TT, Z17, Z21",direct,1,necessary,KEPT
+mTORC2_pm,AKT,positive,"TGEN, TM, TT, Z17, Z21",direct,1,regulates,KEPT
+p21,p21_p27,positive,merge,,0,regulates,KEPT
+p21_T,p21,positive,merge,direct,1,regulates,KEPT
+p21_T,p21_T_2,positive,Z21,,0,necessary,KEPT
+p21_T,p21_p27_T,positive,Z21,,0,regulates,KEPT
+p21_T_2,p21_p27_T,positive,Z21,,0,,KEPT
+p21_p27,cycE_CDK2,negative,"Z17, Z21",direct,1,regulates,KEPT
+p21_p27_T,p21_p27,positive,"Z17, Z21",direct,1,regulates,KEPT
+p27_T,p21_p27_T,positive,Z21,,0,regulates,KEPT
+p38,p38,positive,"BL, HL, SL",assumption,4,,TAKEN_OUT
+p38,p53,positive,"BL, HL",direct,1,regulates,KEPT
+p53,BAK1,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+p53,BAX,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+p53,CyclinB1,negative,"BL, HL, SL",direct,1,regulates,KEPT
+p53,FAS,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+p53,FASLG,positive,"TGEN, TM, TT",indirect,2,,TAKEN_OUT
+p53,GSK3B,positive,"BL, HL, SL",direct,1,regulates,KEPT
+p53,MDM2,positive,"TGEN, TM, TT",direct,1,regulates,KEPT
+p53,NF1,positive,"TGEN, TM",indirect,2,,KEPT
+p53,RB,positive,HL,indirect,2,,TAKEN_OUT
+p53,p53,positive,"BL, HL, SL",direct,1,regulates,KEPT
+pRB,E2F,positive,"Z17, Z21",indirect,2,,TAKEN_OUT
+pRB,RB,negative,merge,,0,regulates,KEPT
+pRB,pRB_2,positive,"Z17, Z21",,0,necessary,KEPT
+pRB_2,E2F_2,positive,"Z17, Z21",indirect,2,,KEPT
+pRB_2,E2F_3,positive,"Z17, Z21",indirect,2,,KEPT
+pRB_2,pRB_3,positive,Z17,,0,necessary,KEPT
+pRB_3,E2F_2,positive,Z21,indirect,2,,KEPT
+pRB_3,E2F_3,positive,"Z17, Z21",indirect,2,,KEPT
+pertuzumab,EGFR,negative,"BL, BS, HL, HS, SL, SS",indirect,2,,TAKEN_OUT
+pertuzumab,ERK,positive,BS,indirect,2,,TAKEN_OUT
+pertuzumab,ERK_2,positive,BS,indirect,2,,TAKEN_OUT
+pertuzumab,HER2,negative,"BL, BS, HL, HS, SL, SS",direct,1,regulates,KEPT
+pertuzumab,HER2HER3c,negative,"BL, BS, HL, HS, SL, SS",direct,1,regulates,KEPT
+pertuzumab,HER2HER3c_2,negative,"BL, BS, HL, HS, SL, SS",direct,1,,KEPT
+pertuzumab,mTORC1,positive,BS,indirect,2,,KEPT
+stimulus,AKT,positive,SL,correlation,3,,KEPT
+stimulus,EGFR,positive,"BL, HL, SL",correlation,3,,KEPT
+stimulus,HER2,positive,"BL, HL, SL",correlation,3,,KEPT
+stimulus,HER3,positive,"BL, HL, SL",correlation,3,,KEPT
+stimulus,HER3_2,positive,"BL, HL, SL",correlation,3,,KEPT
+stimulus,p53,positive,BL,assumption,4,,TAKEN_OUT
+trastuzumab,HER2,negative,"BL, BS, HL, HS, SL, SS",direct,1,regulates,KEPT

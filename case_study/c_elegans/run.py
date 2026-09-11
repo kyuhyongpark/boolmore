@@ -3,7 +3,7 @@
 
 import datetime
 
-from boolmore.genetic_algorithm import run_ga
+from boolmore.algo.genetic_algorithm import run_ga
 
 JSON = "./data/config.json"
 START_MODEL = "./data/start.bnet"

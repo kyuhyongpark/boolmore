@@ -1,0 +1,62 @@
+BCL6, (!TBET & !STAT1 & !STAT3 & STAT4 & !STAT5) | (!TBET & !STAT1 & STAT3 & !STAT4 & !STAT5) | (!TBET & !STAT1 & STAT3 & STAT4) | (!TBET & STAT1 & !STAT3 & !STAT5) | (!TBET & STAT1 & STAT3 & !STAT4 & !STAT5) | (!TBET & STAT1 & STAT3 & STAT4)
+CD28, APC
+FOXP3, (!RORGT & !FOXP3 & !STAT1 & STAT5 & !STAT6 & SMAD3 & NFAT) | (!RORGT & FOXP3 & STAT5 & !STAT6 & NFAT) | (RORGT & !FOXP3 & !STAT1 & !STAT3 & STAT5 & !STAT6 & SMAD3 & NFAT) | (RORGT & FOXP3 & STAT5 & !STAT6 & NFAT)
+GATA3, (!IL29R & !IL25R & !TBET & !GATA3 & !BCL6 & STAT6 & !PU1) | (!IL29R & !IL25R & !TBET & GATA3 & !BCL6 & !PU1) | (!IL29R & !IL25R & TBET & GATA3 & !BCL6 & !PU1) | (!IL29R & IL25R & !TBET & !BCL6 & !PU1) | (!IL29R & IL25R & TBET & GATA3 & !BCL6 & !PU1)
+IFNAR, (!IFNB_e & IFNA_e) | IFNB_e 
+IFNG, (!IL18R & !TBET & !FOXP3 & STAT4 & proliferation & NFAT) | (!IL18R & TBET & !FOXP3 & !STAT4 & RUNX3 & proliferation & NFAT) | (!IL18R & TBET & !FOXP3 & STAT4 & proliferation & NFAT) | (IL18R & !FOXP3 & proliferation & NFAT)
+IFNGR, (!IFNG_e & IFNG) | IFNG_e 
+IKB, !TCR
+IL10, (!IL18R & !IL33R & !GATA3 & !STAT3 & !STAT4 & !CMAF & IRF1 & proliferation & NFAT) | (!IL18R & !IL33R & !GATA3 & !STAT3 & !STAT4 & CMAF & proliferation & NFAT) | (!IL18R & !IL33R & !GATA3 & !STAT3 & STAT4 & proliferation & NFAT) | (!IL18R & !IL33R & !GATA3 & STAT3 & proliferation & NFAT) | (!IL18R & !IL33R & GATA3 & proliferation & NFAT)
+IL10R, (!IL10_e & IL10) | IL10_e 
+IL12R, IL12_e & IL12RB2
+IL12RB2, !STAT6
+IL13, (!IL33R & !GATA3 & !FOXP3 & CMAF & proliferation & NFAT) | (!IL33R & GATA3 & !FOXP3 & proliferation & NFAT) | (IL33R & !FOXP3 & proliferation & NFAT)
+IL15R, IL15_e
+IL17, (RORGT & !FOXP3 & STAT3 & proliferation & NFKB & NFAT) | (RORGT & FOXP3 & !STAT1 & STAT3 & proliferation & NFKB & NFAT) | (RORGT & FOXP3 & STAT1 & STAT3 & !STAT5 & proliferation & NFKB & NFAT) | (RORGT & FOXP3 & STAT1 & STAT3 & STAT5 & !STAT6 & proliferation & NFKB & NFAT)
+IL18R, IL18_e  & STAT4
+IL1R, IL1_e & IL1R1
+IL1R1, STAT3
+IL2, (!TBET & !FOXP3 & !STAT5 & !NFKB & NFAT) | (!TBET & !FOXP3 & !STAT5 & NFKB) | (!TBET & !FOXP3 & STAT5 & !STAT6 & !NFKB & NFAT) | (!TBET & !FOXP3 & STAT5 & !STAT6 & NFKB) | (TBET & !FOXP3 & !STAT5 & NFAT) | (TBET & !FOXP3 & STAT5 & !STAT6 & NFAT)
+IL21, (!STAT3 & !STAT4 & CMAF & proliferation & NFAT) | (!STAT3 & STAT4 & proliferation & NFAT) | (STAT3 & proliferation & NFAT)
+IL21R, (!IL21_e & IL21) | IL21_e  
+IL22, (!STAT1 & STAT3 & !CMAF & proliferation & NFAT) | (STAT1 & !CMAF & proliferation & NFAT)
+IL23R, IL23_e & RORGT & STAT3
+IL24, STAT6 & proliferation & NFAT
+IL25, GATA3 & proliferation & NFAT
+IL25R, (!IL25_e & IL25) | IL25_e
+IL27R, IL27_e
+IL29R, IL29_e 
+IL2RA, (!FOXP3 & !STAT5 & !SMAD3 & NFKB & NFAT) | (!FOXP3 & !STAT5 & SMAD3 & NFAT) | (!FOXP3 & STAT5 & NFAT) | (FOXP3 & NFAT)
+IL2R, (!IL2_e & !IL2R & IL2) | (!IL2_e & IL2R & !IL2R_2 & IL2) | (!IL2_e & IL2R & IL2R_2) | (IL2_e & !IL2R) | (IL2_e & IL2R & !IL2R_2 ) | (IL2_e & IL2R & IL2R_2)
+IL2R_2, (!IL2_e & IL2R & IL2RA & IL2) | (IL2_e & IL2R & IL2RA)
+IL3, GATA3 & proliferation & NFAT
+IL31, STAT6 & proliferation & NFAT
+IL33R, IL33_e & ST2
+IL35, FOXP3 & proliferation & NFAT
+IL36R, IL36_e 
+IL4, (!TBET & GATA3 & !FOXP3 & !STAT5 & CMAF & !IRF1 & proliferation & NFAT) | (!TBET & GATA3 & !FOXP3 & STAT5 & !IRF1 & proliferation & NFAT) | (TBET & GATA3 & !FOXP3 & !STAT5 & CMAF & !IRF1 & !RUNX3 & proliferation & NFAT) | (TBET & GATA3 & !FOXP3 & STAT5 & !IRF1 & !RUNX3 & proliferation & NFAT)
+IL4R, (!IL4_e & IL4) | IL4_e 
+IL5, (!IL33R & !GATA3 & !FOXP3 & CMAF & proliferation & NFAT) | (!IL33R & GATA3 & !FOXP3 & proliferation & NFAT) | (IL33R & !FOXP3 & proliferation & NFAT)
+IL6, STAT3 & proliferation & NFAT
+IL6R, (!IL6_e & IL6) | IL6_e 
+IL9, (!IL33R & STAT6 & !PU1 & SMAD3 & proliferation & !NFKB & NFAT) | (!IL33R & STAT6 & !PU1 & SMAD3 & proliferation & NFKB) | (!IL33R & STAT6 & PU1 & proliferation & !NFKB & NFAT) | (!IL33R & STAT6 & PU1 & proliferation & NFKB) | (IL33R & STAT6 & proliferation & !NFKB & NFAT) | (IL33R & STAT6 & proliferation & NFKB)
+IRF1, STAT1
+NFAT, TCR & CD28
+NFKB, !FOXP3 & !IKB
+PU1, TGFBR
+RORGT, TGFBR & !FOXP3 & !BCL6 & STAT3
+RUNX3, TBET
+SMAD3, TGFBR
+ST2, GATA3
+STAT1, (!IFNGR & !IL27R & IFNAR) | (!IFNGR & IL27R) | IFNGR
+STAT3, (!IL1R & !IL6R & !IL21R & !IL23R & IL27R) | (!IL1R & !IL6R & !IL21R & IL23R) | (!IL1R & !IL6R & IL21R) | (!IL1R & IL6R) | IL1R
+STAT4, IL12R & !GATA3
+STAT5, (!IL2R & !IL15R & STAT5 & STAT5_2) | (!IL2R & IL15R) | IL2R
+STAT5_2, IL2R & IL2R_2 & STAT5
+STAT6, IL4R
+TBET, (!IL36R & !TBET & !RORGT & !BCL6 & STAT1) | (!IL36R & TBET & !RORGT & !BCL6) | (IL36R & !RORGT & !BCL6)
+TCR, APC
+TGFB, FOXP3 & proliferation & NFAT
+TGFBR, (!TGFB_e & TGFB) | TGFB_e
+CMAF, TGFBR & STAT3
+proliferation, (!STAT5 & proliferation) | (STAT5 & !STAT5_2 & proliferation) | (STAT5 & STAT5_2)

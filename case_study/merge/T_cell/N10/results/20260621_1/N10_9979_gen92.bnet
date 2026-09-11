@@ -1,0 +1,67 @@
+# id: 9979
+# generation: 92
+# extra edges: []
+# following constraints: True
+# number of edges: 114
+# number of self edges: 18
+# number of prime implicants: 136
+
+targets,	factors
+APC,	APC
+CD28,	APC
+FOXP3,	FOXP3 & NFAT & !RORGT & !STAT1 & !STAT3 | FOXP3 & STAT5 | NFAT & !RORGT & SMAD3 | SMAD3 & STAT5 | !STAT1 & STAT5 | !STAT3 & STAT5
+GATA3,	GATA3 | STAT6 & !TBET
+IFNBR,	IFNB_e
+IFNB_e,	IFNB_e
+IFNG,	!FOXP3 & proliferation | NFAT & RUNX3 & !STAT3 & TBET
+IFNGR,	IFNG_e | IFNG
+IFNG_e,	IFNG_e
+IKB,	!TCR
+IL10,	NFAT & proliferation
+IL10R,	IL10_e | IL10
+IL10_e,	IL10_e
+IL12R,	IL12RB2 & IL12_e
+IL12RB1_2,	IRF1
+IL12RB2,	!STAT6
+IL12_e,	IL12_e
+IL15R,	IL15_e
+IL15_e,	IL15_e
+IL17,	!FOXP3 & NFAT & NFKB & RORGT & STAT3 & !STAT5 | NFAT & NFKB & RORGT & STAT3 & !STAT5 & proliferation
+IL2,	!FOXP3 & NFAT & NFKB & !STAT6 | NFAT & !STAT6 & !TBET
+IL21,	STAT3
+IL21R,	IL21_e | IL21
+IL21_e,	IL21_e
+IL23,	STAT3 & proliferation
+IL23R,	IL23 & RORGT & STAT3 | IL23_e & STAT3
+IL23_e,	IL23_e
+IL27R,	IL27_e
+IL27_e,	IL27_e
+IL2R,	IL2 | IL2_e
+IL2RA,	FOXP3 & NFAT & STAT5 | NFKB | SMAD3
+IL2R_2,	IL2R
+IL2_e,	IL2_e
+IL4,	!FOXP3 & !IRF1 & NFAT | GATA3 & !IRF1 & NFAT & !TBET | !IRF1 & NFAT & !RUNX3
+IL4R,	IL4 | IL4_e
+IL4RA_2,	STAT5
+IL4R_2,	IL4R
+IL4_e,	IL4_e
+IL6R,	IL6_e
+IL6_e,	IL6_e
+IRF1,	STAT1
+NFAT,	CD28 & TCR
+NFKB,	!FOXP3 & !IKB
+RORGT,	RORGT & STAT3
+RUNX3,	TBET
+SMAD3,	TGFBR
+STAT1,	IL27R | IFNGR | IFNBR
+STAT3,	IL10R | IL23R | IL27R | IL6R
+STAT4,	!GATA3
+STAT5,	IL2R
+STAT5_2,	STAT5
+STAT6,	IL4R
+TBET,	!GATA3 & TBET | !GATA3 & STAT1
+TCR,	APC
+TGFB,	proliferation
+TGFBR,	TGFB_e | TGFB
+TGFB_e,	TGFB_e
+proliferation,	STAT5 | STAT5_2 & proliferation

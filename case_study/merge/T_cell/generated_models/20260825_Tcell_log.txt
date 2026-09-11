@@ -1,0 +1,237 @@
+# DATA: /home/troonmel/Boolmore/boolmore/case_study/T_cell/Tcell_data.csv
+# DEFAULT_SOURCES={}
+# CONSTRAINTS={'fixed': [], 'regulate': {'BCL6': ['STAT1', 'STAT1_2', 'STAT3', 'STAT4', 'STAT5', 'TBET', 'TBET_2', 'TGFB'], 'CD28': ['APC'], 'CD4': ['RUNX3', 'THPOK'], 'CD8': ['RUNX3', 'THPOK'], 'CMAF': ['STAT3'], 'EOMES': ['RUNX3'], 'FOXP3': ['NFAT', 'SMAD2', 'SMAD3', 'STAT5', 'STAT5_2', 'STAT6', 'TBET', 'TBET_2'], 'GATA3': ['BCL6', 'FOXP3', 'GATA3', 'NFAT', 'PU1', 'STAT5', 'STAT5_2', 'STAT6', 'TBET', 'TBET_2'], 'GZMB': ['EOMES'], 'IFNAR': ['IFNA_e', 'IFNB_e'], 'IFNBR': ['IFNB_e'], 'IFNG': ['BCL6', 'EOMES', 'GATA3', 'NFAT', 'NFKB', 'RUNX3', 'STAT4', 'TBET', 'TBET_2'], 'IFNGR': ['IFNG', 'IFNG_2', 'IFNG_e'], 'IFNGR_2': ['IFNG', 'IFNG_2', 'IFNG_e'], 'IFNG_2': ['BCL6', 'EOMES', 'GATA3', 'NFAT', 'NFKB', 'RUNX3', 'STAT4', 'TBET', 'TBET_2'], 'IKB': ['TCR'], 'IL10': ['CMAF', 'IRF1', 'NFAT', 'STAT3'], 'IL10R': ['IL10', 'IL10_e'], 'IL12R': ['IL12RB1_2', 'IL12_e'], 'IL12RB1_2': ['IRF1'], 'IL13': ['GATA3', 'NFAT'], 'IL15R': ['IL15_e'], 'IL17': ['NFAT', 'NFKB', 'RORGT', 'STAT3', 'STAT5', 'STAT5_2'], 'IL18R': ['IL18_e', 'STAT4'], 'IL1R': ['IL1_e'], 'IL2': ['FOXP3', 'NFKB', 'TBET', 'TBET_2'], 'IL21': ['BCL6', 'CMAF', 'STAT3', 'STAT4'], 'IL21R': ['IL21', 'IL21_e'], 'IL22': ['CMAF', 'NFAT', 'STAT3'], 'IL23': ['STAT3'], 'IL23R': ['IL23', 'IL23_e', 'RORGT', 'STAT3', 'TBET', 'TBET_2'], 'IL24': ['STAT6'], 'IL25R': ['IL25', 'IL25_e'], 'IL27R': ['IL27_e'], 'IL29R': ['IL29_e'], 'IL2R': ['IL2', 'IL2_e'], 'IL2RA': ['FOXP3', 'NFAT', 'NFKB', 'SMAD3', 'STAT5'], 'IL2R_2': ['IL2', 'IL2_e'], 'IL3': ['GATA3', 'NFAT'], 'IL31': ['NFAT', 'STAT6'], 'IL33R': ['IL33_e'], 'IL36R': ['IL36_e'], 'IL4': ['CMAF', 'GATA3', 'IRF1', 'RUNX3', 'STAT5', 'TBET', 'TBET_2'], 'IL4R': ['IL4', 'IL4_e'], 'IL4R_2': ['IL4', 'IL4RA_2', 'IL4_e'], 'IL5': ['GATA3', 'NFAT'], 'IL6': ['STAT3'], 'IL6R': ['IL6', 'IL6_e'], 'IL7R': ['IL7_e', 'TCR'], 'IL9': ['NFAT', 'NFKB', 'PU1', 'SMAD3', 'STAT6'], 'IRAK': ['IL18R'], 'IRF1': ['STAT1', 'STAT1_2'], 'JAK1': ['IFNGR', 'IFNGR_2', 'SOCS1'], 'NFAT': ['CD28', 'FOXP3', 'TCR'], 'NFKB': ['FOXP3', 'IKB'], 'NOTCH1': ['DLL1'], 'PRF1': ['EOMES'], 'RORGT': ['FOXP3', 'GATA3', 'RORGT', 'SMAD2', 'STAT3', 'TBET', 'TBET_2'], 'RUNX3': ['STAT5', 'STAT5_2', 'THPOK'], 'SMAD2': ['TGFBR'], 'SMAD3': ['TGFBR'], 'SOCS1': ['STAT1', 'STAT1_2'], 'ST2': ['GATA3'], 'STAT1': ['IFNAR', 'IFNBR', 'IFNGR', 'IFNGR_2', 'IL27R', 'JAK1', 'STAT1'], 'STAT1_2': ['IFNAR', 'IFNBR', 'IFNGR', 'IFNGR_2', 'IL27R', 'JAK1'], 'STAT3': ['IL10R', 'IL21R', 'IL23R', 'IL27R', 'IL6R', 'JAK3'], 'STAT4': ['GATA3', 'IL12R'], 'STAT5': ['IL15R', 'IL2R', 'IL2R_2', 'IL4R', 'IL7R', 'SOCS1'], 'STAT5_2': ['IL2R', 'IL2R_2', 'IL4R', 'IL4R_2', 'IL7R', 'SOCS1'], 'STAT6': ['IL4R', 'IL4R_2', 'SOCS1'], 'TBET': ['BCL6', 'GATA3', 'STAT1', 'STAT1_2', 'STAT4'], 'TBET_2': ['BCL6', 'GATA3', 'STAT1', 'STAT1_2', 'STAT4'], 'TGFB': ['NFAT'], 'TGFBR': ['TGFB', 'TGFB_e'], 'THPOK': ['GATA3', 'RUNX3', 'THPOK'], 'proliferation': ['STAT5', 'STAT5_2']}, 'necessary': {'IFNGR_2': ['IFNGR'], 'IFNG_2': ['IFNG'], 'IL12R': ['IL12RB2'], 'IL1R': ['IL1R1'], 'IL2': ['NFAT'], 'IL21': ['NFAT'], 'IL2R_2': ['IL2R', 'IL2RA'], 'IL33R': ['ST2'], 'IL4': ['NFAT'], 'IL4R_2': ['IL4R'], 'STAT1_2': ['STAT1'], 'STAT5_2': ['STAT5'], 'TBET_2': ['TBET'], 'TCR': ['APC']}, 'group': {}, 'possible_constant': []}
+# EDGE_POOL=[]
+
+# TOTAL_ITERATIONS=100
+# PER_ITERATION=100
+# KEEP=20
+# MIX=20
+# PROB={'1': 0.5, '11': 0.01}
+# EDGE_PROB=0.0
+# ORDER_BY=['n_self_edges', 'n_edges', 'n_prime_implicants']
+
+# stop_if_max=True
+# core=3
+# seed=0
+
+# BASE: /home/troonmel/Boolmore/boolmore/case_study/T_cell/Tcell_primes_ultrametric.pkl
+# extra edges: []
+# score: 27.0 / 80.0 (33.75%)
+# targets,	factors
+# APC,            APC
+# BCL6,           STAT1&STAT1_2&STAT3&STAT4&!STAT5&!TBET&!TBET_2&!TGFB
+# CD28,           APC
+# CD4,            NOTCH1&!RUNX3&THPOK
+# CD8,            NOTCH1&RUNX3&!THPOK
+# CMAF,           STAT3
+# DLL1,           DLL1
+# EOMES,          RUNX3
+# FOXP3,          NFAT&SMAD2&SMAD3&STAT5&STAT5_2&!STAT6&!TBET&!TBET_2
+# GATA3,          !BCL6&!FOXP3&GATA3&IL25R&!IL29R&NFAT&!PU1&STAT5&STAT5_2&STAT6&!TBET&!TBET_2
+# GZMB,           EOMES
+# IFNAR,          IFNA_e&IFNB_e
+# IFNA_e,         IFNA_e
+# IFNBR,          IFNB_e
+# IFNB_e,         IFNB_e
+# IFNG,           !BCL6&EOMES&!GATA3&IL18R&!IL9&IRAK&NFAT&NFKB&RUNX3&STAT4&TBET&TBET_2&proliferation
+# IFNGR,          IFNG&IFNG_2&IFNG_e
+# IFNGR_2,        IFNG&IFNGR&IFNG_2&IFNG_e
+# IFNG_2,         !BCL6&EOMES&!GATA3&IFNG&IL18R&!IL9&IRAK&NFAT&NFKB&RUNX3&STAT4&TBET&TBET_2&proliferation
+# IFNG_e,         IFNG_e
+# IKB,            !TCR
+# IL10,           CMAF&IRF1&NFAT&STAT3&proliferation
+# IL10R,          IL10&IL10_e
+# IL10_e,         IL10_e
+# IL12R,          IL12RB1_2&IL12RB2&IL12_e
+# IL12RB1_2,      IRF1
+# IL12RB2,        !STAT6
+# IL12_e,         IL12_e
+# IL13,           GATA3&IL33R&NFAT&proliferation
+# IL15R,          IL15_e
+# IL15_e,         IL15_e
+# IL17,           NFAT&NFKB&RORGT&STAT3&!STAT5&!STAT5_2&proliferation
+# IL18R,          IL18_e&STAT4
+# IL18_e,         IL18_e
+# IL1R,           IL1R1&IL1_e
+# IL1R1,          STAT3
+# IL1_e,          IL1_e
+# IL2,            !FOXP3&NFAT&NFKB&!TBET&!TBET_2
+# IL21,           BCL6&CMAF&NFAT&STAT3&STAT4&proliferation
+# IL21R,          IL21&IL21_e
+# IL21_e,         IL21_e
+# IL22,           !CMAF&NFAT&STAT3&proliferation
+# IL23,           STAT3&proliferation
+# IL23R,          IL23&IL23_e&RORGT&STAT3&!TBET&!TBET_2
+# IL23_e,         IL23_e
+# IL24,           STAT6&proliferation
+# IL25,           GATA3&proliferation
+# IL25R,          IL25&IL25_e
+# IL25_e,         IL25_e
+# IL27R,          IL27_e
+# IL27_e,         IL27_e
+# IL29R,          IL29_e
+# IL29_e,         IL29_e
+# IL2R,           IL2&IL2_e
+# IL2RA,          FOXP3&NFAT&NFKB&SMAD3&STAT5
+# IL2R_2,         IL2&IL2R&IL2RA&IL2_e
+# IL2_e,          IL2_e
+# IL3,            GATA3&NFAT&proliferation
+# IL31,           NFAT&STAT6&proliferation
+# IL33R,          IL33_e&ST2
+# IL33_e,         IL33_e
+# IL35,           FOXP3&proliferation
+# IL36R,          IL36_e
+# IL36_e,         IL36_e
+# IL4,            CMAF&GATA3&!IRF1&NFAT&!RUNX3&STAT5&!TBET&!TBET_2&proliferation
+# IL4R,           IL4&IL4_e
+# IL4RA_2,        STAT5&STAT5_2
+# IL4R_2,         IL4&IL4R&IL4RA_2&IL4_e
+# IL4_e,          IL4_e
+# IL5,            GATA3&IL33R&NFAT&proliferation
+# IL6,            STAT3&proliferation
+# IL6R,           IL6&IL6_e
+# IL6_e,          IL6_e
+# IL7R,           IL7_e&!TCR
+# IL7_e,          IL7_e
+# IL9,            IL33R&NFAT&NFKB&PU1&SMAD3&STAT6&proliferation
+# IRAK,           IL18R
+# IRF1,           STAT1&STAT1_2
+# JAK1,           IFNGR&IFNGR_2&!SOCS1
+# JAK3,           JAK3
+# NFAT,           CD28&!FOXP3&TCR
+# NFKB,           !FOXP3&!IKB&IRAK
+# NOTCH1,         DLL1
+# PRF1,           EOMES
+# PU1,            TGFBR
+# RORGT,          !FOXP3&!GATA3&RORGT&SMAD2&STAT3&!TBET&!TBET_2
+# RUNX3,          CD8&STAT5&STAT5_2&!THPOK
+# SMAD2,          TGFBR
+# SMAD3,          TGFBR
+# SOCS1,          STAT1&STAT1_2
+# ST2,            GATA3
+# STAT1,          IFNAR&IFNBR&IFNGR&IFNGR_2&IL27R&JAK1&STAT1
+# STAT1_2,        IFNAR&IFNBR&IFNGR&IFNGR_2&IL27R&JAK1&STAT1
+# STAT3,          IL10R&IL1R&IL21R&IL23R&IL27R&IL6R&JAK3
+# STAT4,          !GATA3&IL12R
+# STAT5,          IL15R&IL2R&IL2R_2&IL4R&IL7R&!SOCS1
+# STAT5_2,        IL2R&IL2R_2&IL4R&IL4R_2&IL7R&!SOCS1&STAT5
+# STAT6,          IL4R&IL4R_2&!SOCS1
+# TBET,           !BCL6&!GATA3&IL36R&!IL9&STAT1&STAT1_2&STAT4
+# TBET_2,         !BCL6&!GATA3&IL36R&!IL9&STAT1&STAT1_2&STAT4&TBET
+# TCR,            APC
+# TGFB,           FOXP3&NFAT&proliferation
+# TGFBR,          TGFB&TGFB_e
+# TGFB_e,         TGFB_e
+# THPOK,          CD4&GATA3&!RUNX3&THPOK
+# proliferation,  STAT5&STAT5_2&proliferation
+# 
+
+
+# START MODEL: /home/troonmel/Boolmore/boolmore/case_study/T_cell/Tcell_primes_ultrametric.pkl
+
+# start_time=datetime.datetime(2026, 8, 8, 2, 54, 13, 782443)
+# end_time=datetime.datetime(2026, 8, 8, 7, 25, 37, 113415)
+# elapsed time: 4:31:23.330972
+
+iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model
+1,27.0,"[]",309,27,526,"100_gen1"
+2,31.0,"[]",311,28,676,"132_gen1"
+3,32.0,"[]",311,27,562,"211_gen2"
+4,32.0,"[]",311,27,562,"211_gen2"
+5,32.0,"[]",311,27,543,"417_gen4"
+6,34.0,"[]",310,27,542,"513_gen6"
+7,35.0,"[]",311,27,549,"606_gen6"
+8,42.0,"[]",309,28,559,"706_gen7"
+9,42.0,"[]",309,28,559,"706_gen7"
+10,42.0,"[]",309,28,559,"706_gen7"
+11,43.0,"[]",310,28,1391,"1069_gen12"
+12,45.0,"[]",310,28,1087,"1138_gen10"
+13,47.0,"[]",312,28,689,"1201_gen13"
+14,50.0,"[]",310,28,1999,"1378_gen15"
+15,50.0,"[]",308,28,1791,"1401_gen15"
+16,51.0,"[]",312,28,2397,"1512_gen18"
+17,53.0,"[]",311,28,925,"1610_gen17"
+18,54.0,"[]",310,28,1584,"1715_gen20"
+19,56.0,"[]",311,28,2599,"1815_gen20"
+20,56.0,"[]",310,28,2601,"1997_gen25"
+21,56.0,"[]",310,28,1753,"2003_gen24"
+22,56.0,"[]",310,28,1753,"2003_gen24"
+23,59.0,"[]",310,28,2081,"2218_gen27"
+24,59.0,"[]",310,28,2081,"2218_gen27"
+25,59.0,"[]",309,28,2084,"2409_gen29"
+26,59.0,"[]",309,28,2059,"2508_gen30"
+27,60.0,"[]",309,28,2634,"2675_gen32"
+28,60.0,"[]",309,28,2605,"2705_gen33"
+29,60.0,"[]",309,28,2064,"2815_gen33"
+30,60.0,"[]",309,28,2063,"2919_gen34"
+31,60.0,"[]",309,28,1884,"3010_gen36"
+32,61.0,"[]",309,28,1870,"3113_gen37"
+33,61.0,"[]",309,28,1870,"3113_gen37"
+34,61.0,"[]",308,28,1742,"3303_gen39"
+35,61.0,"[]",308,28,1742,"3303_gen39"
+36,61.0,"[]",308,28,1665,"3507_gen42"
+37,61.0,"[]",308,28,1636,"3608_gen42"
+38,61.0,"[]",308,28,1632,"3705_gen43"
+39,61.0,"[]",308,28,1621,"3811_gen44"
+40,61.0,"[]",308,28,903,"3969_gen46"
+41,61.0,"[]",308,28,885,"4001_gen47"
+42,61.0,"[]",308,28,868,"4118_gen48"
+43,61.0,"[]",308,28,864,"4213_gen49"
+44,61.0,"[]",308,28,864,"4213_gen49"
+45,61.0,"[]",308,28,864,"4213_gen49"
+46,61.0,"[]",308,28,864,"4213_gen49"
+47,61.0,"[]",308,28,863,"4602_gen53"
+48,61.0,"[]",308,28,861,"4703_gen54"
+49,61.0,"[]",308,28,861,"4703_gen54"
+50,61.0,"[]",308,28,861,"4703_gen54"
+51,61.0,"[]",308,28,861,"4703_gen54"
+52,61.0,"[]",308,28,861,"4703_gen54"
+53,61.0,"[]",308,28,861,"4703_gen54"
+54,61.0,"[]",308,28,861,"4703_gen54"
+55,61.0,"[]",308,28,861,"4703_gen54"
+56,62.0,"[]",308,28,1545,"5575_gen55"
+57,62.0,"[]",308,28,889,"5608_gen57"
+58,62.0,"[]",308,28,889,"5608_gen57"
+59,62.0,"[]",308,28,873,"5816_gen59"
+60,62.0,"[]",308,28,873,"5816_gen59"
+61,62.0,"[]",307,28,1901,"6058_gen61"
+62,62.0,"[]",307,28,872,"6107_gen62"
+63,62.0,"[]",307,28,862,"6220_gen63"
+64,62.0,"[]",307,28,852,"6307_gen64"
+65,62.0,"[]",307,28,852,"6307_gen64"
+66,62.0,"[]",307,28,849,"6513_gen66"
+67,62.0,"[]",307,28,844,"6606_gen67"
+68,62.0,"[]",307,28,844,"6606_gen67"
+69,62.0,"[]",307,28,844,"6606_gen67"
+70,62.0,"[]",307,28,844,"6606_gen67"
+71,62.0,"[]",307,28,844,"6606_gen67"
+72,62.0,"[]",307,28,844,"6606_gen67"
+73,62.0,"[]",306,28,1926,"7234_gen68"
+74,62.0,"[]",306,28,892,"7304_gen69"
+75,62.0,"[]",306,28,843,"7410_gen70"
+76,62.0,"[]",306,28,843,"7410_gen70"
+77,62.0,"[]",305,28,1741,"7667_gen73"
+78,62.0,"[]",305,28,1712,"7717_gen74"
+79,62.0,"[]",305,28,1429,"7805_gen75"
+80,62.0,"[]",305,28,855,"7919_gen76"
+81,62.0,"[]",305,28,855,"7919_gen76"
+82,62.0,"[]",305,28,824,"8106_gen78"
+83,62.0,"[]",305,28,820,"8207_gen79"
+84,62.0,"[]",305,28,820,"8207_gen79"
+85,62.0,"[]",304,28,1453,"8489_gen82"
+86,62.0,"[]",304,28,1444,"8519_gen83"
+87,62.0,"[]",304,28,823,"8616_gen84"
+88,62.0,"[]",303,28,1457,"8705_gen85"
+89,62.0,"[]",303,28,776,"8804_gen86"
+90,62.0,"[]",303,28,776,"8804_gen86"
+91,62.0,"[]",303,28,770,"9004_gen87"
+92,62.0,"[]",303,28,769,"9104_gen88"
+93,62.0,"[]",303,28,769,"9104_gen88"
+94,62.0,"[]",302,28,1945,"9376_gen89"
+95,62.0,"[]",302,28,784,"9414_gen90"
+96,62.0,"[]",302,28,766,"9516_gen91"
+97,62.0,"[]",302,28,766,"9516_gen91"
+98,62.0,"[]",302,28,766,"9516_gen91"
+99,62.0,"[]",302,28,764,"9820_gen94"
+100,62.0,"[]",302,28,764,"9820_gen94"

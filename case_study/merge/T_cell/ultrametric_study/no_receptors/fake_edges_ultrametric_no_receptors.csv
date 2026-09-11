@@ -1,0 +1,1013 @@
+Regulator,Target,Sign,Model,Confidence Rank,Constraint,Direct
+APC,CD28,positive,"AJ, N10",1,regulates,direct
+APC,TCR,positive,"AJ, N10",1,necessary,direct
+BCL6,GATA3,negative,"AJ, MS15",1,regulates,direct
+BCL6,IFNG,negative,MS15,1,regulates,direct
+BCL6,IFNG_2,negative,MS15,1,regulates,direct
+BCL6,IL21,positive,MS15,1,regulates,direct in the network sense
+BCL6,TBET,negative,"AJ, MS15",1,regulates,direct
+BCL6,TBET_2,negative,"AJ, MS15",1,regulates,direct
+CD28,NFAT,positive,"AJ, N10",1,regulates,direct in the network sense
+CD4,THPOK,positive,MSM,2,,indirect
+CD8,RUNX3,positive,MSM,2,,indirect
+CMAF,IL10,positive,AJ,1,regulates,direct
+CMAF,IL21,positive,AJ,1,regulates,direct
+CMAF,IL22,negative,AJ,1,regulates,direct
+CMAF,IL4,positive,AJ,1,regulates,direct
+DLL1,NOTCH1,positive,MSM,1,regulates,direct
+EOMES,GZMB,positive,MSM,1,regulates,direct
+EOMES,IFNG,positive,MSM,1,regulates,direct
+EOMES,IFNG_2,positive,MSM,1,regulates,direct
+EOMES,PRF1,positive,MSM,1,regulates,direct
+FOXP3,GATA3,negative,"MSM, P18",1,regulates,direct
+FOXP3,IL2,negative,"AJ, MS15, N10",1,regulates,direct
+FOXP3,IL2RA,positive,"AJ, N10",1,regulates,direct
+FOXP3,IL35,positive,AJ,2,,indirect
+FOXP3,NFAT,negative,P18,1,regulates,direct
+FOXP3,NFKB,negative,"AJ, N10, P18",1,regulates,direct
+FOXP3,RORGT,negative,"AJ, MS15, MSM, P18",1,regulates,direct
+FOXP3,TGFB,positive,"AJ, MS15, MSM, N10",3,,correlation
+GATA3,GATA3,positive,"AJ, MS15, MSM, MX, N10, P18",1,regulates,direct
+GATA3,IFNG,negative,MS15,1,regulates,direct
+GATA3,IFNG_2,negative,MS15,1,regulates,direct
+GATA3,IL13,positive,AJ,1,regulates,direct
+GATA3,IL25,positive,AJ,4,,assumption
+GATA3,IL3,positive,AJ,1,regulates,direct
+GATA3,IL4,positive,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct
+GATA3,IL5,positive,AJ,1,regulates,direct
+GATA3,RORGT,negative,"MS15, MSM, P18",1,regulates,direct in the network sense
+GATA3,ST2,positive,AJ,1,regulates,direct
+GATA3,STAT4,negative,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+GATA3,TBET,negative,"M06, MS15, MSM, MX, N10",1,regulates,direct
+GATA3,TBET_2,negative,"M06, MS15, MSM, MX, N10",1,regulates,direct
+GATA3,THPOK,positive,MSM,1,regulates,direct
+IFNAR,STAT1,positive,AJ,1,regulates,direct
+IFNAR,STAT1_2,positive,AJ,1,regulates,direct
+IFNA_e,IFNAR,positive,AJ,1,regulates,direct
+IFNBR,STAT1,positive,"M06, MSM, MX, N10",1,regulates,direct
+IFNBR,STAT1_2,positive,"MSM, MX, N10",1,regulates,direct
+IFNB_e,IFNAR,positive,AJ,1,regulates,direct
+IFNB_e,IFNBR,positive,"M06, MSM, MX, N10",1,regulates,direct
+IFNG,IFNGR,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IFNG,IFNGR_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IFNG,IFNG_2,positive,"M06, MS15",0,necessary,
+IFNGR,IFNGR_2,positive,M06,0,necessary,
+IFNGR,JAK1,positive,"MSM, MX, P18",1,regulates,direct
+IFNGR,STAT1,positive,"AJ, M06, N10",1,regulates,direct
+IFNGR,STAT1_2,positive,"AJ, M06, N10",1,regulates,direct
+IFNGR_2,JAK1,positive,"MSM, MX, P18",1,regulates,direct
+IFNGR_2,STAT1,positive,"AJ, N10",1,regulates,direct
+IFNGR_2,STAT1_2,positive,"AJ, M06, N10",1,regulates,direct
+IFNG_2,IFNGR,positive,"AJ, MSM, MX, N10, P18",1,regulates,direct
+IFNG_2,IFNGR_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IFNG_e,IFNGR,positive,"AJ, N10, P18",1,regulates,direct
+IFNG_e,IFNGR_2,positive,"AJ, N10, P18",1,regulates,direct
+IKB,NFKB,negative,"AJ, N10",1,regulates,direct
+IL10,IL10R,positive,"AJ, MSM, MX, N10",1,regulates,direct
+IL10R,STAT3,positive,"MSM, MX, N10",1,regulates,direct
+IL10_e,IL10R,positive,"AJ, N10",1,regulates,direct
+IL12R,STAT4,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IL12RB1_2,IL12R,positive,N10,0,regulates,direct
+IL12RB2,IL12R,positive,"AJ, N10",0,necessary,direct
+IL12_e,IL12R,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IL15R,STAT5,positive,"AJ, N10",1,regulates,direct
+IL15_e,IL15R,positive,"AJ, N10",1,regulates,direct
+IL18R,IFNG,positive,AJ,2,,indirect
+IL18R,IFNG_2,positive,AJ,2,,indirect
+IL18R,IRAK,positive,"M06, MSM, MX, P18",1,regulates,direct in the network sense
+IL18_e,IL18R,positive,"AJ, M06, MSM, MX, P18",1,regulates,direct
+IL1R,STAT3,positive,AJ,2,,indirect
+IL1R1,IL1R,positive,AJ,0,necessary,direct
+IL1_e,IL1R,positive,AJ,1,regulates,direct
+IL2,IL2R,positive,"AJ, N10, P18",1,regulates,direct
+IL2,IL2R_2,positive,"AJ, N10, P18",1,regulates,direct
+IL21,IL21R,positive,"AJ, N10, P18",1,regulates,direct
+IL21R,STAT3,positive,"AJ, N10, P18",1,regulates,direct
+IL21_e,IL21R,positive,"AJ, N10",1,regulates,direct
+IL23,IL23R,positive,N10,1,regulates,direct
+IL23R,STAT3,positive,"AJ, MSM, N10, P18",1,regulates,direct
+IL23_e,IL23R,positive,"AJ, MSM, N10, P18",1,regulates,direct
+IL25,IL25R,positive,AJ,1,regulates,direct
+IL25R,GATA3,positive,AJ,2,,indirect
+IL25_e,IL25R,positive,AJ,1,regulates,direct
+IL27R,STAT1,positive,"AJ, MSM, N10",1,regulates,direct
+IL27R,STAT1_2,positive,"AJ, MSM, N10",1,regulates,direct
+IL27R,STAT3,positive,"AJ, N10",1,regulates,direct
+IL27_e,IL27R,positive,"AJ, MSM, N10",1,regulates,direct
+IL29R,GATA3,negative,AJ,2,,indirect
+IL29_e,IL29R,positive,AJ,1,regulates,direct
+IL2R,IL2R_2,positive,"AJ, N10",0,necessary,
+IL2R,STAT5,positive,"AJ, MSM, N10, P18",1,regulates,direct
+IL2R,STAT5_2,positive,"AJ, MSM, N10, P18",1,regulates,direct
+IL2RA,IL2R_2,positive,"AJ, N10",0,necessary,direct
+IL2R_2,STAT5,positive,"MSM, P18",1,regulates,direct
+IL2R_2,STAT5_2,positive,"AJ, MSM, N10, P18",1,regulates,direct
+IL2_e,IL2R,positive,"AJ, MSM, N10",1,regulates,direct
+IL2_e,IL2R_2,positive,"AJ, MSM, N10",1,regulates,direct
+IL33R,IL13,positive,AJ,2,,indirect
+IL33R,IL5,positive,AJ,2,,indirect
+IL33R,IL9,positive,AJ,2,,indirect
+IL33_e,IL33R,positive,AJ,1,regulates,direct
+IL36R,TBET,positive,AJ,2,,indirect
+IL36R,TBET_2,positive,AJ,2,,indirect
+IL36_e,IL36R,positive,AJ,1,regulates,direct
+IL4,IL4R,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IL4,IL4R_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IL4R,IL4R_2,positive,N10,0,necessary,
+IL4R,STAT5,positive,N10,1,regulates,direct
+IL4R,STAT5_2,positive,N10,1,regulates,direct
+IL4R,STAT6,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+IL4RA_2,IL4R_2,positive,N10,0,regulates,direct
+IL4R_2,STAT5_2,positive,N10,1,regulates,direct
+IL4R_2,STAT6,positive,"AJ, M06, MSM, MX, P18",1,regulates,direct
+IL4_e,IL4R,positive,"AJ, N10, P18",1,regulates,direct
+IL4_e,IL4R_2,positive,"AJ, N10, P18",1,regulates,direct
+IL6,IL6R,positive,"AJ, MSM, P18",1,regulates,direct
+IL6R,STAT3,positive,"AJ, N10, P18",1,regulates,direct
+IL6_e,IL6R,positive,"AJ, N10, P18",1,regulates,direct
+IL7R,STAT5,positive,MSM,1,regulates,direct
+IL7R,STAT5_2,positive,MSM,1,regulates,direct
+IL7_e,IL7R,positive,MSM,1,regulates,direct
+IL9,IFNG,negative,MS15,3,,correlation
+IL9,IFNG_2,negative,MS15,3,,correlation
+IL9,TBET,negative,MS15,3,,correlation
+IL9,TBET_2,negative,MS15,3,,correlation
+IRAK,IFNG,positive,"MSM, MX",2,,indirect
+IRAK,IFNG_2,positive,"M06, MSM, MX",2,,indirect
+IRAK,NFKB,positive,P18,2,,indirect
+IRF1,IL10,positive,AJ,1,regulates,direct
+IRF1,IL12RB1_2,positive,N10,1,regulates,direct
+IRF1,IL4,negative,"AJ, N10",1,regulates,direct
+JAK1,STAT1,positive,"MSM, MX, P18",1,regulates,direct
+JAK1,STAT1_2,positive,"MSM, MX, P18",1,regulates,direct
+JAK3,STAT3,positive,MSM,1,regulates,direct
+NFAT,FOXP3,positive,"AJ, N10",1,regulates,direct
+NFAT,GATA3,positive,P18,1,regulates,direct
+NFAT,IFNG,positive,"AJ, MX, N10, P18",1,regulates,direct
+NFAT,IFNG_2,positive,"AJ, MX, N10, P18",1,regulates,direct
+NFAT,IL10,positive,"AJ, N10",1,regulates,direct
+NFAT,IL13,positive,AJ,1,regulates,direct
+NFAT,IL17,positive,"AJ, N10",1,regulates,direct
+NFAT,IL2,positive,"AJ, N10, P18",1,necessary,direct
+NFAT,IL21,positive,"AJ, N10, P18",1,necessary,direct
+NFAT,IL22,positive,AJ,1,regulates,direct
+NFAT,IL2RA,positive,"AJ, N10",1,regulates,direct
+NFAT,IL3,positive,AJ,1,regulates,direct
+NFAT,IL31,positive,AJ,1,regulates,direct
+NFAT,IL4,positive,"AJ, N10, P18",1,necessary,direct
+NFAT,IL5,positive,AJ,1,regulates,direct
+NFAT,IL9,positive,AJ,1,regulates,direct
+NFAT,TGFB,positive,"AJ, N10",1,regulates,direct
+NFKB,IFNG,positive,P18,1,regulates,direct
+NFKB,IFNG_2,positive,P18,1,regulates,direct
+NFKB,IL17,positive,"AJ, N10",1,regulates,direct
+NFKB,IL2,positive,"AJ, N10, P18",1,regulates,direct
+NFKB,IL2RA,positive,"AJ, N10",1,regulates,direct
+NFKB,IL9,positive,AJ,1,regulates,direct
+NOTCH1,CD4,positive,MSM,2,,indirect
+NOTCH1,CD8,positive,MSM,2,,indirect
+PU1,GATA3,negative,AJ,1,regulates,direct
+PU1,IL9,positive,AJ,1,regulates,direct
+RORGT,IL17,positive,"AJ, MSM, N10, P18",1,regulates,direct
+RORGT,IL23R,positive,"AJ, N10",1,regulates,direct
+RORGT,RORGT,positive,"MSM, N10",1,regulates,direct
+RUNX3,CD4,negative,MSM,1,regulates,direct
+RUNX3,CD8,positive,MSM,1,regulates,direct
+RUNX3,EOMES,positive,MSM,1,regulates,direct
+RUNX3,IFNG,positive,"AJ, N10",1,regulates,direct
+RUNX3,IFNG_2,positive,"AJ, N10",1,regulates,direct
+RUNX3,IL4,negative,"AJ, N10",1,regulates,direct
+RUNX3,THPOK,negative,MSM,1,regulates,direct
+SMAD2,FOXP3,positive,MSM,1,regulates,direct
+SMAD2,RORGT,positive,MSM,1,regulates,direct
+SMAD3,FOXP3,positive,"AJ, N10",1,regulates,direct
+SMAD3,IL2RA,positive,"AJ, N10",1,regulates,direct
+SMAD3,IL9,positive,AJ,1,regulates,direct
+SOCS1,JAK1,negative,"MX, P18",1,regulates,direct
+SOCS1,STAT5,negative,MSM,1,regulates,direct
+SOCS1,STAT5_2,negative,MSM,1,regulates,direct
+SOCS1,STAT6,negative,P18,1,regulates,direct
+ST2,IL33R,positive,AJ,0,necessary,direct
+STAT1,BCL6,positive,AJ,1,regulates,direct
+STAT1,IRF1,positive,"AJ, N10",1,regulates,direct
+STAT1,SOCS1,positive,"M06, MSM, MX, P18",1,regulates,direct
+STAT1,STAT1,positive,M06,1,regulates,direct
+STAT1,STAT1_2,positive,M06,0,necessary,
+STAT1,TBET,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+STAT1,TBET_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+STAT1_2,BCL6,positive,AJ,1,regulates,direct
+STAT1_2,IRF1,positive,"AJ, N10",1,regulates,direct
+STAT1_2,SOCS1,positive,"MSM, MX, P18",1,regulates,direct
+STAT1_2,TBET,positive,"AJ, MSM, MX, N10, P18",1,regulates,direct
+STAT1_2,TBET_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+STAT3,BCL6,positive,AJ,1,regulates,direct
+STAT3,CMAF,positive,AJ,1,regulates,direct
+STAT3,IL10,positive,"AJ, N10",1,regulates,direct
+STAT3,IL17,positive,"AJ, N10, P18",1,regulates,direct
+STAT3,IL1R1,positive,AJ,4,,assumption 
+STAT3,IL21,positive,"AJ, N10, P18",1,regulates,direct
+STAT3,IL22,positive,AJ,1,regulates,direct
+STAT3,IL23,positive,N10,1,regulates,direct in the network sense
+STAT3,IL23R,positive,"AJ, N10, P18",1,regulates,direct
+STAT3,IL6,positive,AJ,1,regulates,direct
+STAT3,RORGT,positive,"AJ, MSM, N10, P18",1,regulates,direct
+STAT4,BCL6,positive,AJ,1,regulates,direct
+STAT4,IFNG,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+STAT4,IFNG_2,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+STAT4,IL18R,positive,AJ,1,regulates,direct in the network sense
+STAT4,IL21,positive,AJ,1,regulates,direct
+STAT4,TBET,positive,P18,1,regulates,direct
+STAT4,TBET_2,positive,P18,1,regulates,direct
+STAT5,BCL6,negative,AJ,1,regulates,direct
+STAT5,FOXP3,positive,"AJ, N10, P18",1,regulates,direct
+STAT5,GATA3,positive,P18,1,regulates,direct
+STAT5,IL17,negative,"AJ, N10, P18",1,regulates,direct
+STAT5,IL2RA,positive,"AJ, N10",1,regulates,direct
+STAT5,IL4,positive,AJ,1,regulates,direct
+STAT5,IL4RA_2,positive,N10,2,,indirect
+STAT5,RUNX3,positive,MSM,1,regulates,direct
+STAT5,STAT5_2,positive,"AJ, N10",0,necessary,
+STAT5,proliferation,positive,"AJ, N10",1,regulates,direct in the network sense
+STAT5_2,FOXP3,positive,P18,1,regulates,direct
+STAT5_2,GATA3,positive,P18,1,regulates,direct
+STAT5_2,IL17,negative,P18,1,regulates,direct
+STAT5_2,IL4RA_2,positive,N10,2,,indirect
+STAT5_2,RUNX3,positive,MSM,1,regulates,direct
+STAT5_2,proliferation,positive,"AJ, N10",1,regulates,direct in the network sense
+STAT6,FOXP3,negative,AJ,1,regulates,direct
+STAT6,GATA3,positive,"AJ, M06, MSM, MX, N10, P18",1,regulates,direct
+STAT6,IL12RB2,negative,"AJ, N10",2,,indirect
+STAT6,IL24,positive,AJ,1,regulates,direct
+STAT6,IL31,positive,AJ,1,regulates,direct
+STAT6,IL9,positive,AJ,1,regulates,direct
+TBET,BCL6,negative,"AJ, MS15",1,regulates,direct
+TBET,FOXP3,negative,MSM,1,regulates,direct
+TBET,GATA3,negative,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct
+TBET,IFNG,positive,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct
+TBET,IFNG_2,positive,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct
+TBET,IL2,negative,"AJ, N10, P18",1,regulates,direct
+TBET,IL23R,negative,P18,1,regulates,direct
+TBET,IL4,negative,"AJ, MS15, N10",1,regulates,direct
+TBET,RORGT,negative,"MS15, MSM, P18",1,regulates,direct in the network sense
+TBET,TBET_2,positive,"AJ, M06, MS15, MSM, MX, N10, P18",0,necessary,
+TBET_2,BCL6,negative,"AJ, MS15",1,regulates,direct
+TBET_2,FOXP3,negative,MSM,1,regulates,direct
+TBET_2,GATA3,negative,"AJ, MS15, MSM, MX, N10, P18",1,regulates,direct
+TBET_2,IFNG,positive,"AJ, MS15, MSM, MX, N10, P18",1,regulates,direct
+TBET_2,IFNG_2,positive,"AJ, M06, MS15, MSM, MX, N10, P18",1,regulates,direct
+TBET_2,IL2,negative,"AJ, N10, P18",1,regulates,direct
+TBET_2,IL23R,negative,P18,1,regulates,direct
+TBET_2,IL4,negative,"AJ, MS15, N10",1,regulates,direct
+TBET_2,RORGT,negative,"MS15, MSM, P18",1,regulates,direct in the network sense
+TCR,IKB,negative,"AJ, N10",1,regulates,direct in the network sense
+TCR,IL7R,negative,MSM,1,regulates,direct in the network sense
+TCR,NFAT,positive,"AJ, MSM, MX, N10, P18",1,regulates,direct in the network sense
+TGFB,BCL6,negative,MS15,1,regulates,direct in the network sense
+TGFB,TGFBR,positive,"AJ, MSM, N10",1,regulates,direct
+TGFBR,PU1,positive,AJ,2,,indirect
+TGFBR,SMAD2,positive,MSM,1,regulates,direct
+TGFBR,SMAD3,positive,"AJ, N10",1,regulates,direct
+TGFB_e,TGFBR,positive,"AJ, N10, P18",1,regulates,direct
+THPOK,CD4,positive,MSM,1,regulates,direct
+THPOK,CD8,negative,MSM,1,regulates,direct
+THPOK,RUNX3,negative,MSM,1,regulates,direct
+THPOK,THPOK,positive,MSM,1,regulates,direct
+proliferation,IFNG,positive,"AJ, N10",4,,assumption
+proliferation,IFNG_2,positive,"AJ, N10",4,,assumption
+proliferation,IL10,positive,"AJ, N10",4,,assumption
+proliferation,IL13,positive,AJ,4,,assumption
+proliferation,IL17,positive,"AJ, N10",4,,assumption
+proliferation,IL21,positive,"AJ, N10",4,,assumption
+proliferation,IL22,positive,AJ,4,,assumption
+proliferation,IL23,positive,N10,4,,assumption
+proliferation,IL24,positive,AJ,4,,assumption
+proliferation,IL25,positive,AJ,4,,assumption
+proliferation,IL3,positive,AJ,4,,assumption
+proliferation,IL31,positive,AJ,4,,assumption
+proliferation,IL35,positive,AJ,4,,assumption
+proliferation,IL4,positive,"AJ, N10",4,,assumption
+proliferation,IL5,positive,AJ,4,,assumption
+proliferation,IL6,positive,AJ,4,,assumption
+proliferation,IL9,positive,AJ,4,,assumption
+proliferation,TGFB,positive,"AJ, N10",4,,assumption
+proliferation,proliferation,positive,"AJ, N10",4,,assumption
+IL5,IL21R,unknown,Fake,6,,
+IL5,IL12R,unknown,Fake,6,,
+IL5,IL18R,unknown,Fake,6,,
+IL5,IL12RB2,unknown,Fake,6,,
+IL5,JAK1,unknown,Fake,6,,
+IL5,IL21,unknown,Fake,6,,
+IL5,IL23,unknown,Fake,6,,
+IL5,TBET,unknown,Fake,6,,
+IL5,THPOK,unknown,Fake,6,,
+IL5,IL4RA_2,unknown,Fake,6,,
+IL5,STAT1,unknown,Fake,6,,
+IL5,IL33R,unknown,Fake,6,,
+IL5,IL22,unknown,Fake,6,,
+IL5,IFNGR_2,unknown,Fake,6,,
+IL5,IRF1,unknown,Fake,6,,
+IL5,STAT4,unknown,Fake,6,,
+IL5,IFNGR,unknown,Fake,6,,
+IL5,PU1,unknown,Fake,6,,
+IL5,EOMES,unknown,Fake,6,,
+IL5,CD8,unknown,Fake,6,,
+IL5,TBET_2,unknown,Fake,6,,
+IL5,NFKB,unknown,Fake,6,,
+IL5,STAT6,unknown,Fake,6,,
+IL5,SMAD3,unknown,Fake,6,,
+IL5,STAT1_2,unknown,Fake,6,,
+IL5,IL4,unknown,Fake,6,,
+IL5,STAT3,unknown,Fake,6,,
+IL5,IL25,unknown,Fake,6,,
+IL5,IL9,unknown,Fake,6,,
+IL5,TGFBR,unknown,Fake,6,,
+IL5,IL5,unknown,Fake,6,,
+IL5,IL1R,unknown,Fake,6,,
+IL5,IL6,unknown,Fake,6,,
+IL5,IL12RB1_2,unknown,Fake,6,,
+IL5,RUNX3,unknown,Fake,6,,
+IL5,IL17,unknown,Fake,6,,
+IL5,IL4R,unknown,Fake,6,,
+IL5,CD4,unknown,Fake,6,,
+IL5,SMAD2,unknown,Fake,6,,
+IL5,proliferation,unknown,Fake,6,,
+IL5,NFAT,unknown,Fake,6,,
+IL5,STAT5_2,unknown,Fake,6,,
+IL5,IRAK,unknown,Fake,6,,
+IL5,IL2,unknown,Fake,6,,
+IL5,IL2RA,unknown,Fake,6,,
+IL5,IL13,unknown,Fake,6,,
+IL5,FOXP3,unknown,Fake,6,,
+IL5,IL31,unknown,Fake,6,,
+IL5,PRF1,unknown,Fake,6,,
+IL5,ST2,unknown,Fake,6,,
+IL5,GZMB,unknown,Fake,6,,
+IL5,SOCS1,unknown,Fake,6,,
+IL5,STAT5,unknown,Fake,6,,
+IL5,TGFB,unknown,Fake,6,,
+IL5,IL4R_2,unknown,Fake,6,,
+IL5,IL2R_2,unknown,Fake,6,,
+IL5,IL3,unknown,Fake,6,,
+IL5,IL24,unknown,Fake,6,,
+IL5,IFNG_2,unknown,Fake,6,,
+IL5,GATA3,unknown,Fake,6,,
+IL5,RORGT,unknown,Fake,6,,
+IL5,IL10,unknown,Fake,6,,
+IL5,IL23R,unknown,Fake,6,,
+IL5,BCL6,unknown,Fake,6,,
+IL5,IL6R,unknown,Fake,6,,
+IL5,IL35,unknown,Fake,6,,
+IL5,IL25R,unknown,Fake,6,,
+IL5,IL2R,unknown,Fake,6,,
+IL5,CMAF,unknown,Fake,6,,
+IL5,IFNG,unknown,Fake,6,,
+IL5,IL1R1,unknown,Fake,6,,
+IL5,IL10R,unknown,Fake,6,,
+IL31,IL21R,unknown,Fake,6,,
+IL31,IL12R,unknown,Fake,6,,
+IL31,IL18R,unknown,Fake,6,,
+IL31,IL12RB2,unknown,Fake,6,,
+IL31,JAK1,unknown,Fake,6,,
+IL31,IL21,unknown,Fake,6,,
+IL31,IL23,unknown,Fake,6,,
+IL31,TBET,unknown,Fake,6,,
+IL31,THPOK,unknown,Fake,6,,
+IL31,IL4RA_2,unknown,Fake,6,,
+IL31,STAT1,unknown,Fake,6,,
+IL31,IL33R,unknown,Fake,6,,
+IL31,IL22,unknown,Fake,6,,
+IL31,IFNGR_2,unknown,Fake,6,,
+IL31,IRF1,unknown,Fake,6,,
+IL31,STAT4,unknown,Fake,6,,
+IL31,IFNGR,unknown,Fake,6,,
+IL31,PU1,unknown,Fake,6,,
+IL31,EOMES,unknown,Fake,6,,
+IL31,CD8,unknown,Fake,6,,
+IL31,TBET_2,unknown,Fake,6,,
+IL31,NFKB,unknown,Fake,6,,
+IL31,STAT6,unknown,Fake,6,,
+IL31,SMAD3,unknown,Fake,6,,
+IL31,STAT1_2,unknown,Fake,6,,
+IL31,IL4,unknown,Fake,6,,
+IL31,STAT3,unknown,Fake,6,,
+IL31,IL25,unknown,Fake,6,,
+IL31,IL9,unknown,Fake,6,,
+IL31,TGFBR,unknown,Fake,6,,
+IL31,IL5,unknown,Fake,6,,
+IL31,IL1R,unknown,Fake,6,,
+IL31,IL6,unknown,Fake,6,,
+IL31,IL12RB1_2,unknown,Fake,6,,
+IL31,RUNX3,unknown,Fake,6,,
+IL31,IL17,unknown,Fake,6,,
+IL31,IL4R,unknown,Fake,6,,
+IL31,CD4,unknown,Fake,6,,
+IL31,SMAD2,unknown,Fake,6,,
+IL31,proliferation,unknown,Fake,6,,
+IL31,NFAT,unknown,Fake,6,,
+IL31,STAT5_2,unknown,Fake,6,,
+IL31,IRAK,unknown,Fake,6,,
+IL31,IL2,unknown,Fake,6,,
+IL31,IL2RA,unknown,Fake,6,,
+IL31,IL13,unknown,Fake,6,,
+IL31,FOXP3,unknown,Fake,6,,
+IL31,IL31,unknown,Fake,6,,
+IL31,PRF1,unknown,Fake,6,,
+IL31,ST2,unknown,Fake,6,,
+IL31,GZMB,unknown,Fake,6,,
+IL31,SOCS1,unknown,Fake,6,,
+IL31,STAT5,unknown,Fake,6,,
+IL31,TGFB,unknown,Fake,6,,
+IL31,IL4R_2,unknown,Fake,6,,
+IL31,IL2R_2,unknown,Fake,6,,
+IL31,IL3,unknown,Fake,6,,
+IL31,IL24,unknown,Fake,6,,
+IL31,IFNG_2,unknown,Fake,6,,
+IL31,GATA3,unknown,Fake,6,,
+IL31,RORGT,unknown,Fake,6,,
+IL31,IL10,unknown,Fake,6,,
+IL31,IL23R,unknown,Fake,6,,
+IL31,BCL6,unknown,Fake,6,,
+IL31,IL6R,unknown,Fake,6,,
+IL31,IL35,unknown,Fake,6,,
+IL31,IL25R,unknown,Fake,6,,
+IL31,IL2R,unknown,Fake,6,,
+IL31,CMAF,unknown,Fake,6,,
+IL31,IFNG,unknown,Fake,6,,
+IL31,IL1R1,unknown,Fake,6,,
+IL31,IL10R,unknown,Fake,6,,
+IL24,IL21R,unknown,Fake,6,,
+IL24,IL12R,unknown,Fake,6,,
+IL24,IL18R,unknown,Fake,6,,
+IL24,IL12RB2,unknown,Fake,6,,
+IL24,JAK1,unknown,Fake,6,,
+IL24,IL21,unknown,Fake,6,,
+IL24,IL23,unknown,Fake,6,,
+IL24,TBET,unknown,Fake,6,,
+IL24,THPOK,unknown,Fake,6,,
+IL24,IL4RA_2,unknown,Fake,6,,
+IL24,STAT1,unknown,Fake,6,,
+IL24,IL33R,unknown,Fake,6,,
+IL24,IL22,unknown,Fake,6,,
+IL24,IFNGR_2,unknown,Fake,6,,
+IL24,IRF1,unknown,Fake,6,,
+IL24,STAT4,unknown,Fake,6,,
+IL24,IFNGR,unknown,Fake,6,,
+IL24,PU1,unknown,Fake,6,,
+IL24,EOMES,unknown,Fake,6,,
+IL24,CD8,unknown,Fake,6,,
+IL24,TBET_2,unknown,Fake,6,,
+IL24,NFKB,unknown,Fake,6,,
+IL24,STAT6,unknown,Fake,6,,
+IL24,SMAD3,unknown,Fake,6,,
+IL24,STAT1_2,unknown,Fake,6,,
+IL24,IL4,unknown,Fake,6,,
+IL24,STAT3,unknown,Fake,6,,
+IL24,IL25,unknown,Fake,6,,
+IL24,IL9,unknown,Fake,6,,
+IL24,TGFBR,unknown,Fake,6,,
+IL24,IL5,unknown,Fake,6,,
+IL24,IL1R,unknown,Fake,6,,
+IL24,IL6,unknown,Fake,6,,
+IL24,IL12RB1_2,unknown,Fake,6,,
+IL24,RUNX3,unknown,Fake,6,,
+IL24,IL17,unknown,Fake,6,,
+IL24,IL4R,unknown,Fake,6,,
+IL24,CD4,unknown,Fake,6,,
+IL24,SMAD2,unknown,Fake,6,,
+IL24,proliferation,unknown,Fake,6,,
+IL24,NFAT,unknown,Fake,6,,
+IL24,STAT5_2,unknown,Fake,6,,
+IL24,IRAK,unknown,Fake,6,,
+IL24,IL2,unknown,Fake,6,,
+IL24,IL2RA,unknown,Fake,6,,
+IL24,IL13,unknown,Fake,6,,
+IL24,FOXP3,unknown,Fake,6,,
+IL24,IL31,unknown,Fake,6,,
+IL24,PRF1,unknown,Fake,6,,
+IL24,ST2,unknown,Fake,6,,
+IL24,GZMB,unknown,Fake,6,,
+IL24,SOCS1,unknown,Fake,6,,
+IL24,STAT5,unknown,Fake,6,,
+IL24,TGFB,unknown,Fake,6,,
+IL24,IL4R_2,unknown,Fake,6,,
+IL24,IL2R_2,unknown,Fake,6,,
+IL24,IL3,unknown,Fake,6,,
+IL24,IL24,unknown,Fake,6,,
+IL24,IFNG_2,unknown,Fake,6,,
+IL24,GATA3,unknown,Fake,6,,
+IL24,RORGT,unknown,Fake,6,,
+IL24,IL10,unknown,Fake,6,,
+IL24,IL23R,unknown,Fake,6,,
+IL24,BCL6,unknown,Fake,6,,
+IL24,IL6R,unknown,Fake,6,,
+IL24,IL35,unknown,Fake,6,,
+IL24,IL25R,unknown,Fake,6,,
+IL24,IL2R,unknown,Fake,6,,
+IL24,CMAF,unknown,Fake,6,,
+IL24,IFNG,unknown,Fake,6,,
+IL24,IL1R1,unknown,Fake,6,,
+IL24,IL10R,unknown,Fake,6,,
+IL22,IL21R,unknown,Fake,6,,
+IL22,IL12R,unknown,Fake,6,,
+IL22,IL18R,unknown,Fake,6,,
+IL22,IL12RB2,unknown,Fake,6,,
+IL22,JAK1,unknown,Fake,6,,
+IL22,IL21,unknown,Fake,6,,
+IL22,IL23,unknown,Fake,6,,
+IL22,TBET,unknown,Fake,6,,
+IL22,THPOK,unknown,Fake,6,,
+IL22,IL4RA_2,unknown,Fake,6,,
+IL22,STAT1,unknown,Fake,6,,
+IL22,IL33R,unknown,Fake,6,,
+IL22,IL22,unknown,Fake,6,,
+IL22,IFNGR_2,unknown,Fake,6,,
+IL22,IRF1,unknown,Fake,6,,
+IL22,STAT4,unknown,Fake,6,,
+IL22,IFNGR,unknown,Fake,6,,
+IL22,PU1,unknown,Fake,6,,
+IL22,EOMES,unknown,Fake,6,,
+IL22,CD8,unknown,Fake,6,,
+IL22,TBET_2,unknown,Fake,6,,
+IL22,NFKB,unknown,Fake,6,,
+IL22,STAT6,unknown,Fake,6,,
+IL22,SMAD3,unknown,Fake,6,,
+IL22,STAT1_2,unknown,Fake,6,,
+IL22,IL4,unknown,Fake,6,,
+IL22,STAT3,unknown,Fake,6,,
+IL22,IL25,unknown,Fake,6,,
+IL22,IL9,unknown,Fake,6,,
+IL22,TGFBR,unknown,Fake,6,,
+IL22,IL5,unknown,Fake,6,,
+IL22,IL1R,unknown,Fake,6,,
+IL22,IL6,unknown,Fake,6,,
+IL22,IL12RB1_2,unknown,Fake,6,,
+IL22,RUNX3,unknown,Fake,6,,
+IL22,IL17,unknown,Fake,6,,
+IL22,IL4R,unknown,Fake,6,,
+IL22,CD4,unknown,Fake,6,,
+IL22,SMAD2,unknown,Fake,6,,
+IL22,proliferation,unknown,Fake,6,,
+IL22,NFAT,unknown,Fake,6,,
+IL22,STAT5_2,unknown,Fake,6,,
+IL22,IRAK,unknown,Fake,6,,
+IL22,IL2,unknown,Fake,6,,
+IL22,IL2RA,unknown,Fake,6,,
+IL22,IL13,unknown,Fake,6,,
+IL22,FOXP3,unknown,Fake,6,,
+IL22,IL31,unknown,Fake,6,,
+IL22,PRF1,unknown,Fake,6,,
+IL22,ST2,unknown,Fake,6,,
+IL22,GZMB,unknown,Fake,6,,
+IL22,SOCS1,unknown,Fake,6,,
+IL22,STAT5,unknown,Fake,6,,
+IL22,TGFB,unknown,Fake,6,,
+IL22,IL4R_2,unknown,Fake,6,,
+IL22,IL2R_2,unknown,Fake,6,,
+IL22,IL3,unknown,Fake,6,,
+IL22,IL24,unknown,Fake,6,,
+IL22,IFNG_2,unknown,Fake,6,,
+IL22,GATA3,unknown,Fake,6,,
+IL22,RORGT,unknown,Fake,6,,
+IL22,IL10,unknown,Fake,6,,
+IL22,IL23R,unknown,Fake,6,,
+IL22,BCL6,unknown,Fake,6,,
+IL22,IL6R,unknown,Fake,6,,
+IL22,IL35,unknown,Fake,6,,
+IL22,IL25R,unknown,Fake,6,,
+IL22,IL2R,unknown,Fake,6,,
+IL22,CMAF,unknown,Fake,6,,
+IL22,IFNG,unknown,Fake,6,,
+IL22,IL1R1,unknown,Fake,6,,
+IL22,IL10R,unknown,Fake,6,,
+IL17,IL21R,unknown,Fake,6,,
+IL17,IL12R,unknown,Fake,6,,
+IL17,IL18R,unknown,Fake,6,,
+IL17,IL12RB2,unknown,Fake,6,,
+IL17,JAK1,unknown,Fake,6,,
+IL17,IL21,unknown,Fake,6,,
+IL17,IL23,unknown,Fake,6,,
+IL17,TBET,unknown,Fake,6,,
+IL17,THPOK,unknown,Fake,6,,
+IL17,IL4RA_2,unknown,Fake,6,,
+IL17,STAT1,unknown,Fake,6,,
+IL17,IL33R,unknown,Fake,6,,
+IL17,IL22,unknown,Fake,6,,
+IL17,IFNGR_2,unknown,Fake,6,,
+IL17,IRF1,unknown,Fake,6,,
+IL17,STAT4,unknown,Fake,6,,
+IL17,IFNGR,unknown,Fake,6,,
+IL17,PU1,unknown,Fake,6,,
+IL17,EOMES,unknown,Fake,6,,
+IL17,CD8,unknown,Fake,6,,
+IL17,TBET_2,unknown,Fake,6,,
+IL17,NFKB,unknown,Fake,6,,
+IL17,STAT6,unknown,Fake,6,,
+IL17,SMAD3,unknown,Fake,6,,
+IL17,STAT1_2,unknown,Fake,6,,
+IL17,IL4,unknown,Fake,6,,
+IL17,STAT3,unknown,Fake,6,,
+IL17,IL25,unknown,Fake,6,,
+IL17,IL9,unknown,Fake,6,,
+IL17,TGFBR,unknown,Fake,6,,
+IL17,IL5,unknown,Fake,6,,
+IL17,IL1R,unknown,Fake,6,,
+IL17,IL6,unknown,Fake,6,,
+IL17,IL12RB1_2,unknown,Fake,6,,
+IL17,RUNX3,unknown,Fake,6,,
+IL17,IL17,unknown,Fake,6,,
+IL17,IL4R,unknown,Fake,6,,
+IL17,CD4,unknown,Fake,6,,
+IL17,SMAD2,unknown,Fake,6,,
+IL17,proliferation,unknown,Fake,6,,
+IL17,NFAT,unknown,Fake,6,,
+IL17,STAT5_2,unknown,Fake,6,,
+IL17,IRAK,unknown,Fake,6,,
+IL17,IL2,unknown,Fake,6,,
+IL17,IL2RA,unknown,Fake,6,,
+IL17,IL13,unknown,Fake,6,,
+IL17,FOXP3,unknown,Fake,6,,
+IL17,IL31,unknown,Fake,6,,
+IL17,PRF1,unknown,Fake,6,,
+IL17,ST2,unknown,Fake,6,,
+IL17,GZMB,unknown,Fake,6,,
+IL17,SOCS1,unknown,Fake,6,,
+IL17,STAT5,unknown,Fake,6,,
+IL17,TGFB,unknown,Fake,6,,
+IL17,IL4R_2,unknown,Fake,6,,
+IL17,IL2R_2,unknown,Fake,6,,
+IL17,IL3,unknown,Fake,6,,
+IL17,IL24,unknown,Fake,6,,
+IL17,IFNG_2,unknown,Fake,6,,
+IL17,GATA3,unknown,Fake,6,,
+IL17,RORGT,unknown,Fake,6,,
+IL17,IL10,unknown,Fake,6,,
+IL17,IL23R,unknown,Fake,6,,
+IL17,BCL6,unknown,Fake,6,,
+IL17,IL6R,unknown,Fake,6,,
+IL17,IL35,unknown,Fake,6,,
+IL17,IL25R,unknown,Fake,6,,
+IL17,IL2R,unknown,Fake,6,,
+IL17,CMAF,unknown,Fake,6,,
+IL17,IFNG,unknown,Fake,6,,
+IL17,IL1R1,unknown,Fake,6,,
+IL17,IL10R,unknown,Fake,6,,
+IL13,IL21R,unknown,Fake,6,,
+IL13,IL12R,unknown,Fake,6,,
+IL13,IL18R,unknown,Fake,6,,
+IL13,IL12RB2,unknown,Fake,6,,
+IL13,JAK1,unknown,Fake,6,,
+IL13,IL21,unknown,Fake,6,,
+IL13,IL23,unknown,Fake,6,,
+IL13,TBET,unknown,Fake,6,,
+IL13,THPOK,unknown,Fake,6,,
+IL13,IL4RA_2,unknown,Fake,6,,
+IL13,STAT1,unknown,Fake,6,,
+IL13,IL33R,unknown,Fake,6,,
+IL13,IL22,unknown,Fake,6,,
+IL13,IFNGR_2,unknown,Fake,6,,
+IL13,IRF1,unknown,Fake,6,,
+IL13,STAT4,unknown,Fake,6,,
+IL13,IFNGR,unknown,Fake,6,,
+IL13,PU1,unknown,Fake,6,,
+IL13,EOMES,unknown,Fake,6,,
+IL13,CD8,unknown,Fake,6,,
+IL13,TBET_2,unknown,Fake,6,,
+IL13,NFKB,unknown,Fake,6,,
+IL13,STAT6,unknown,Fake,6,,
+IL13,SMAD3,unknown,Fake,6,,
+IL13,STAT1_2,unknown,Fake,6,,
+IL13,IL4,unknown,Fake,6,,
+IL13,STAT3,unknown,Fake,6,,
+IL13,IL25,unknown,Fake,6,,
+IL13,IL9,unknown,Fake,6,,
+IL13,TGFBR,unknown,Fake,6,,
+IL13,IL5,unknown,Fake,6,,
+IL13,IL1R,unknown,Fake,6,,
+IL13,IL6,unknown,Fake,6,,
+IL13,IL12RB1_2,unknown,Fake,6,,
+IL13,RUNX3,unknown,Fake,6,,
+IL13,IL17,unknown,Fake,6,,
+IL13,IL4R,unknown,Fake,6,,
+IL13,CD4,unknown,Fake,6,,
+IL13,SMAD2,unknown,Fake,6,,
+IL13,proliferation,unknown,Fake,6,,
+IL13,NFAT,unknown,Fake,6,,
+IL13,STAT5_2,unknown,Fake,6,,
+IL13,IRAK,unknown,Fake,6,,
+IL13,IL2,unknown,Fake,6,,
+IL13,IL2RA,unknown,Fake,6,,
+IL13,IL13,unknown,Fake,6,,
+IL13,FOXP3,unknown,Fake,6,,
+IL13,IL31,unknown,Fake,6,,
+IL13,PRF1,unknown,Fake,6,,
+IL13,ST2,unknown,Fake,6,,
+IL13,GZMB,unknown,Fake,6,,
+IL13,SOCS1,unknown,Fake,6,,
+IL13,STAT5,unknown,Fake,6,,
+IL13,TGFB,unknown,Fake,6,,
+IL13,IL4R_2,unknown,Fake,6,,
+IL13,IL2R_2,unknown,Fake,6,,
+IL13,IL3,unknown,Fake,6,,
+IL13,IL24,unknown,Fake,6,,
+IL13,IFNG_2,unknown,Fake,6,,
+IL13,GATA3,unknown,Fake,6,,
+IL13,RORGT,unknown,Fake,6,,
+IL13,IL10,unknown,Fake,6,,
+IL13,IL23R,unknown,Fake,6,,
+IL13,BCL6,unknown,Fake,6,,
+IL13,IL6R,unknown,Fake,6,,
+IL13,IL35,unknown,Fake,6,,
+IL13,IL25R,unknown,Fake,6,,
+IL13,IL2R,unknown,Fake,6,,
+IL13,CMAF,unknown,Fake,6,,
+IL13,IFNG,unknown,Fake,6,,
+IL13,IL1R1,unknown,Fake,6,,
+IL13,IL10R,unknown,Fake,6,,
+PRF1,IL21R,unknown,Fake,6,,
+PRF1,IL12R,unknown,Fake,6,,
+PRF1,IL18R,unknown,Fake,6,,
+PRF1,IL12RB2,unknown,Fake,6,,
+PRF1,JAK1,unknown,Fake,6,,
+PRF1,IL21,unknown,Fake,6,,
+PRF1,IL23,unknown,Fake,6,,
+PRF1,TBET,unknown,Fake,6,,
+PRF1,THPOK,unknown,Fake,6,,
+PRF1,IL4RA_2,unknown,Fake,6,,
+PRF1,STAT1,unknown,Fake,6,,
+PRF1,IL33R,unknown,Fake,6,,
+PRF1,IL22,unknown,Fake,6,,
+PRF1,IFNGR_2,unknown,Fake,6,,
+PRF1,IRF1,unknown,Fake,6,,
+PRF1,STAT4,unknown,Fake,6,,
+PRF1,IFNGR,unknown,Fake,6,,
+PRF1,PU1,unknown,Fake,6,,
+PRF1,EOMES,unknown,Fake,6,,
+PRF1,CD8,unknown,Fake,6,,
+PRF1,TBET_2,unknown,Fake,6,,
+PRF1,NFKB,unknown,Fake,6,,
+PRF1,STAT6,unknown,Fake,6,,
+PRF1,SMAD3,unknown,Fake,6,,
+PRF1,STAT1_2,unknown,Fake,6,,
+PRF1,IL4,unknown,Fake,6,,
+PRF1,STAT3,unknown,Fake,6,,
+PRF1,IL25,unknown,Fake,6,,
+PRF1,IL9,unknown,Fake,6,,
+PRF1,TGFBR,unknown,Fake,6,,
+PRF1,IL5,unknown,Fake,6,,
+PRF1,IL1R,unknown,Fake,6,,
+PRF1,IL6,unknown,Fake,6,,
+PRF1,IL12RB1_2,unknown,Fake,6,,
+PRF1,RUNX3,unknown,Fake,6,,
+PRF1,IL17,unknown,Fake,6,,
+PRF1,IL4R,unknown,Fake,6,,
+PRF1,CD4,unknown,Fake,6,,
+PRF1,SMAD2,unknown,Fake,6,,
+PRF1,proliferation,unknown,Fake,6,,
+PRF1,NFAT,unknown,Fake,6,,
+PRF1,STAT5_2,unknown,Fake,6,,
+PRF1,IRAK,unknown,Fake,6,,
+PRF1,IL2,unknown,Fake,6,,
+PRF1,IL2RA,unknown,Fake,6,,
+PRF1,IL13,unknown,Fake,6,,
+PRF1,FOXP3,unknown,Fake,6,,
+PRF1,IL31,unknown,Fake,6,,
+PRF1,PRF1,unknown,Fake,6,,
+PRF1,ST2,unknown,Fake,6,,
+PRF1,GZMB,unknown,Fake,6,,
+PRF1,SOCS1,unknown,Fake,6,,
+PRF1,STAT5,unknown,Fake,6,,
+PRF1,TGFB,unknown,Fake,6,,
+PRF1,IL4R_2,unknown,Fake,6,,
+PRF1,IL2R_2,unknown,Fake,6,,
+PRF1,IL3,unknown,Fake,6,,
+PRF1,IL24,unknown,Fake,6,,
+PRF1,IFNG_2,unknown,Fake,6,,
+PRF1,GATA3,unknown,Fake,6,,
+PRF1,RORGT,unknown,Fake,6,,
+PRF1,IL10,unknown,Fake,6,,
+PRF1,IL23R,unknown,Fake,6,,
+PRF1,BCL6,unknown,Fake,6,,
+PRF1,IL6R,unknown,Fake,6,,
+PRF1,IL35,unknown,Fake,6,,
+PRF1,IL25R,unknown,Fake,6,,
+PRF1,IL2R,unknown,Fake,6,,
+PRF1,CMAF,unknown,Fake,6,,
+PRF1,IFNG,unknown,Fake,6,,
+PRF1,IL1R1,unknown,Fake,6,,
+PRF1,IL10R,unknown,Fake,6,,
+GZMB,IL21R,unknown,Fake,6,,
+GZMB,IL12R,unknown,Fake,6,,
+GZMB,IL18R,unknown,Fake,6,,
+GZMB,IL12RB2,unknown,Fake,6,,
+GZMB,JAK1,unknown,Fake,6,,
+GZMB,IL21,unknown,Fake,6,,
+GZMB,IL23,unknown,Fake,6,,
+GZMB,TBET,unknown,Fake,6,,
+GZMB,THPOK,unknown,Fake,6,,
+GZMB,IL4RA_2,unknown,Fake,6,,
+GZMB,STAT1,unknown,Fake,6,,
+GZMB,IL33R,unknown,Fake,6,,
+GZMB,IL22,unknown,Fake,6,,
+GZMB,IFNGR_2,unknown,Fake,6,,
+GZMB,IRF1,unknown,Fake,6,,
+GZMB,STAT4,unknown,Fake,6,,
+GZMB,IFNGR,unknown,Fake,6,,
+GZMB,PU1,unknown,Fake,6,,
+GZMB,EOMES,unknown,Fake,6,,
+GZMB,CD8,unknown,Fake,6,,
+GZMB,TBET_2,unknown,Fake,6,,
+GZMB,NFKB,unknown,Fake,6,,
+GZMB,STAT6,unknown,Fake,6,,
+GZMB,SMAD3,unknown,Fake,6,,
+GZMB,STAT1_2,unknown,Fake,6,,
+GZMB,IL4,unknown,Fake,6,,
+GZMB,STAT3,unknown,Fake,6,,
+GZMB,IL25,unknown,Fake,6,,
+GZMB,IL9,unknown,Fake,6,,
+GZMB,TGFBR,unknown,Fake,6,,
+GZMB,IL5,unknown,Fake,6,,
+GZMB,IL1R,unknown,Fake,6,,
+GZMB,IL6,unknown,Fake,6,,
+GZMB,IL12RB1_2,unknown,Fake,6,,
+GZMB,RUNX3,unknown,Fake,6,,
+GZMB,IL17,unknown,Fake,6,,
+GZMB,IL4R,unknown,Fake,6,,
+GZMB,CD4,unknown,Fake,6,,
+GZMB,SMAD2,unknown,Fake,6,,
+GZMB,proliferation,unknown,Fake,6,,
+GZMB,NFAT,unknown,Fake,6,,
+GZMB,STAT5_2,unknown,Fake,6,,
+GZMB,IRAK,unknown,Fake,6,,
+GZMB,IL2,unknown,Fake,6,,
+GZMB,IL2RA,unknown,Fake,6,,
+GZMB,IL13,unknown,Fake,6,,
+GZMB,FOXP3,unknown,Fake,6,,
+GZMB,IL31,unknown,Fake,6,,
+GZMB,PRF1,unknown,Fake,6,,
+GZMB,ST2,unknown,Fake,6,,
+GZMB,GZMB,unknown,Fake,6,,
+GZMB,SOCS1,unknown,Fake,6,,
+GZMB,STAT5,unknown,Fake,6,,
+GZMB,TGFB,unknown,Fake,6,,
+GZMB,IL4R_2,unknown,Fake,6,,
+GZMB,IL2R_2,unknown,Fake,6,,
+GZMB,IL3,unknown,Fake,6,,
+GZMB,IL24,unknown,Fake,6,,
+GZMB,IFNG_2,unknown,Fake,6,,
+GZMB,GATA3,unknown,Fake,6,,
+GZMB,RORGT,unknown,Fake,6,,
+GZMB,IL10,unknown,Fake,6,,
+GZMB,IL23R,unknown,Fake,6,,
+GZMB,BCL6,unknown,Fake,6,,
+GZMB,IL6R,unknown,Fake,6,,
+GZMB,IL35,unknown,Fake,6,,
+GZMB,IL25R,unknown,Fake,6,,
+GZMB,IL2R,unknown,Fake,6,,
+GZMB,CMAF,unknown,Fake,6,,
+GZMB,IFNG,unknown,Fake,6,,
+GZMB,IL1R1,unknown,Fake,6,,
+GZMB,IL10R,unknown,Fake,6,,
+IL3,IL21R,unknown,Fake,6,,
+IL3,IL12R,unknown,Fake,6,,
+IL3,IL18R,unknown,Fake,6,,
+IL3,IL12RB2,unknown,Fake,6,,
+IL3,JAK1,unknown,Fake,6,,
+IL3,IL21,unknown,Fake,6,,
+IL3,IL23,unknown,Fake,6,,
+IL3,TBET,unknown,Fake,6,,
+IL3,THPOK,unknown,Fake,6,,
+IL3,IL4RA_2,unknown,Fake,6,,
+IL3,STAT1,unknown,Fake,6,,
+IL3,IL33R,unknown,Fake,6,,
+IL3,IL22,unknown,Fake,6,,
+IL3,IFNGR_2,unknown,Fake,6,,
+IL3,IRF1,unknown,Fake,6,,
+IL3,STAT4,unknown,Fake,6,,
+IL3,IFNGR,unknown,Fake,6,,
+IL3,PU1,unknown,Fake,6,,
+IL3,EOMES,unknown,Fake,6,,
+IL3,CD8,unknown,Fake,6,,
+IL3,TBET_2,unknown,Fake,6,,
+IL3,NFKB,unknown,Fake,6,,
+IL3,STAT6,unknown,Fake,6,,
+IL3,SMAD3,unknown,Fake,6,,
+IL3,STAT1_2,unknown,Fake,6,,
+IL3,IL4,unknown,Fake,6,,
+IL3,STAT3,unknown,Fake,6,,
+IL3,IL25,unknown,Fake,6,,
+IL3,IL9,unknown,Fake,6,,
+IL3,TGFBR,unknown,Fake,6,,
+IL3,IL5,unknown,Fake,6,,
+IL3,IL1R,unknown,Fake,6,,
+IL3,IL6,unknown,Fake,6,,
+IL3,IL12RB1_2,unknown,Fake,6,,
+IL3,RUNX3,unknown,Fake,6,,
+IL3,IL17,unknown,Fake,6,,
+IL3,IL4R,unknown,Fake,6,,
+IL3,CD4,unknown,Fake,6,,
+IL3,SMAD2,unknown,Fake,6,,
+IL3,proliferation,unknown,Fake,6,,
+IL3,NFAT,unknown,Fake,6,,
+IL3,STAT5_2,unknown,Fake,6,,
+IL3,IRAK,unknown,Fake,6,,
+IL3,IL2,unknown,Fake,6,,
+IL3,IL2RA,unknown,Fake,6,,
+IL3,IL13,unknown,Fake,6,,
+IL3,FOXP3,unknown,Fake,6,,
+IL3,IL31,unknown,Fake,6,,
+IL3,PRF1,unknown,Fake,6,,
+IL3,ST2,unknown,Fake,6,,
+IL3,GZMB,unknown,Fake,6,,
+IL3,SOCS1,unknown,Fake,6,,
+IL3,STAT5,unknown,Fake,6,,
+IL3,TGFB,unknown,Fake,6,,
+IL3,IL4R_2,unknown,Fake,6,,
+IL3,IL2R_2,unknown,Fake,6,,
+IL3,IL3,unknown,Fake,6,,
+IL3,IL24,unknown,Fake,6,,
+IL3,IFNG_2,unknown,Fake,6,,
+IL3,GATA3,unknown,Fake,6,,
+IL3,RORGT,unknown,Fake,6,,
+IL3,IL10,unknown,Fake,6,,
+IL3,IL23R,unknown,Fake,6,,
+IL3,BCL6,unknown,Fake,6,,
+IL3,IL6R,unknown,Fake,6,,
+IL3,IL35,unknown,Fake,6,,
+IL3,IL25R,unknown,Fake,6,,
+IL3,IL2R,unknown,Fake,6,,
+IL3,CMAF,unknown,Fake,6,,
+IL3,IFNG,unknown,Fake,6,,
+IL3,IL1R1,unknown,Fake,6,,
+IL3,IL10R,unknown,Fake,6,,
+IL35,IL21R,unknown,Fake,6,,
+IL35,IL12R,unknown,Fake,6,,
+IL35,IL18R,unknown,Fake,6,,
+IL35,IL12RB2,unknown,Fake,6,,
+IL35,JAK1,unknown,Fake,6,,
+IL35,IL21,unknown,Fake,6,,
+IL35,IL23,unknown,Fake,6,,
+IL35,TBET,unknown,Fake,6,,
+IL35,THPOK,unknown,Fake,6,,
+IL35,IL4RA_2,unknown,Fake,6,,
+IL35,STAT1,unknown,Fake,6,,
+IL35,IL33R,unknown,Fake,6,,
+IL35,IL22,unknown,Fake,6,,
+IL35,IFNGR_2,unknown,Fake,6,,
+IL35,IRF1,unknown,Fake,6,,
+IL35,STAT4,unknown,Fake,6,,
+IL35,IFNGR,unknown,Fake,6,,
+IL35,PU1,unknown,Fake,6,,
+IL35,EOMES,unknown,Fake,6,,
+IL35,CD8,unknown,Fake,6,,
+IL35,TBET_2,unknown,Fake,6,,
+IL35,NFKB,unknown,Fake,6,,
+IL35,STAT6,unknown,Fake,6,,
+IL35,SMAD3,unknown,Fake,6,,
+IL35,STAT1_2,unknown,Fake,6,,
+IL35,IL4,unknown,Fake,6,,
+IL35,STAT3,unknown,Fake,6,,
+IL35,IL25,unknown,Fake,6,,
+IL35,IL9,unknown,Fake,6,,
+IL35,TGFBR,unknown,Fake,6,,
+IL35,IL5,unknown,Fake,6,,
+IL35,IL1R,unknown,Fake,6,,
+IL35,IL6,unknown,Fake,6,,
+IL35,IL12RB1_2,unknown,Fake,6,,
+IL35,RUNX3,unknown,Fake,6,,
+IL35,IL17,unknown,Fake,6,,
+IL35,IL4R,unknown,Fake,6,,
+IL35,CD4,unknown,Fake,6,,
+IL35,SMAD2,unknown,Fake,6,,
+IL35,proliferation,unknown,Fake,6,,
+IL35,NFAT,unknown,Fake,6,,
+IL35,STAT5_2,unknown,Fake,6,,
+IL35,IRAK,unknown,Fake,6,,
+IL35,IL2,unknown,Fake,6,,
+IL35,IL2RA,unknown,Fake,6,,
+IL35,IL13,unknown,Fake,6,,
+IL35,FOXP3,unknown,Fake,6,,
+IL35,IL31,unknown,Fake,6,,
+IL35,PRF1,unknown,Fake,6,,
+IL35,ST2,unknown,Fake,6,,
+IL35,GZMB,unknown,Fake,6,,
+IL35,SOCS1,unknown,Fake,6,,
+IL35,STAT5,unknown,Fake,6,,
+IL35,TGFB,unknown,Fake,6,,
+IL35,IL4R_2,unknown,Fake,6,,
+IL35,IL2R_2,unknown,Fake,6,,
+IL35,IL3,unknown,Fake,6,,
+IL35,IL24,unknown,Fake,6,,
+IL35,IFNG_2,unknown,Fake,6,,
+IL35,GATA3,unknown,Fake,6,,
+IL35,RORGT,unknown,Fake,6,,
+IL35,IL10,unknown,Fake,6,,
+IL35,IL23R,unknown,Fake,6,,
+IL35,BCL6,unknown,Fake,6,,
+IL35,IL6R,unknown,Fake,6,,
+IL35,IL35,unknown,Fake,6,,
+IL35,IL25R,unknown,Fake,6,,
+IL35,IL2R,unknown,Fake,6,,
+IL35,CMAF,unknown,Fake,6,,
+IL35,IFNG,unknown,Fake,6,,
+IL35,IL1R1,unknown,Fake,6,,
+IL35,IL10R,unknown,Fake,6,,
