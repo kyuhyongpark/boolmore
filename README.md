@@ -4,8 +4,23 @@ Boolean Model Refiner
 The algorithm takes an existing Boolean model and refines it to fit better with the given experimental results. Hundreds or thousands of Boolean models are explored in the process, each being consistent with the interaction graph of the starting model and any mechanistic constraints given (such as a documented enzyme-substrate pair). The score (or fitness) of each model is determined by comparing its attractors with the experimental data for every perturbation (fixed node state, such as gene KO).  
 We showcase the strength of our algorithm by a case study on a plant signaling model. After several hours of automatic refinement, the fittest models recapture and surpass the accuracy gain achieved over 10 years of manual revision and provide new, testable predictions. See our manuscript at [bioRxiv](https://www.biorxiv.org/content/10.1101/2023.11.14.567002v2).
 
-## Install
+## Cite
+
+This repository contains the code associated with the following publication:
+
+> Park, K. H., Rozum, J. C., & Albert, R. (2025). *Automated model refinement using perturbation-observation pairs*. npj Systems Biology and Applications, 11(1), 65.
+
+The version associated with the publication is **v0.1.2**, identified by the Git tag `v0.1.2`.
+
+To install this specific version:
+
+```bash
+pip install git+https://github.com/kyuhyongpark/boolmore.git@v0.1.2
 ```
+
+
+## Install
+```bash
 pip install git+https://github.com/kyuhyongpark/boolmore
 ```
 <details>
