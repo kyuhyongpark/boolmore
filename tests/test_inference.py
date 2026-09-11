@@ -3,7 +3,7 @@ import unittest
 from pyboolnet.external.bnet2primes import bnet_text2primes
 
 from boolmore.experiment import PhenotypeExperiment
-from boolmore.inference.inference import get_phenotype_prediction
+from boolmore.inference.prediction import get_phenotype_prediction
 
 
 class TestGetPhenotypePrediction(unittest.TestCase):

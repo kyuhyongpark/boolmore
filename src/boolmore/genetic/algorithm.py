@@ -17,7 +17,7 @@ from boolmore.io.load import import_NAV_exps, import_phenotypes
 from boolmore.model import Model
 from boolmore.genetic.population import Candidate, sort_population
 from boolmore.evaluation.score import Evaluator, EvalResult
-from boolmore.inference.inference import get_NAV_prediction, get_phenotype_prediction
+from boolmore.inference.prediction import get_NAV_prediction, get_phenotype_prediction
 from boolmore.evaluation.score import get_NAV_scores, get_phenotype_scores, get_model_score
 from boolmore.genetic.selection import Reproducer, Selector
 
