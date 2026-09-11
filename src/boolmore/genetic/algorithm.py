@@ -14,7 +14,8 @@ from pystablemotifs.format import primes2bnet
 
 from boolmore.boolean_functions import prime2bnet
 from boolmore.io.load import import_NAV_exps, import_phenotypes
-from boolmore.model import Model, mix_models
+from boolmore.model import Model
+from boolmore.genetic.generation.crossover import mix_models
 from boolmore.inference.inference import get_NAV_prediction, get_phenotype_prediction
 from boolmore.evaluation.score import get_NAV_scores, get_phenotype_scores, get_model_score
 
