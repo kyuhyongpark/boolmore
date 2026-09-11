@@ -15,127 +15,15 @@ from pystablemotifs.format import primes2bnet
 from boolmore.boolean_functions import prime2bnet
 from boolmore.io.load import import_NAV_exps, import_phenotypes
 from boolmore.model import Model
-from boolmore.genetic.generation.crossover import mix_models
+from boolmore.genetic.population import Candidate, sort_population
+from boolmore.evaluation.score import Evaluator, EvalResult
 from boolmore.inference.inference import get_NAV_prediction, get_phenotype_prediction
 from boolmore.evaluation.score import get_NAV_scores, get_phenotype_scores, get_model_score
+from boolmore.genetic.selection import Reproducer, Selector
 
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
 PredictType = dict[FixesType, dict]
-
-
-@dataclass
-class EvalResult:
-    model_id: int
-    max_score: float
-    score: float
-    details: any
-
-class Evaluator:
-    def __init__(self, exps, prediction_fn, score_fn):
-        """
-        exps : list of experiment dataclasses
-        """
-        self.exps = exps
-        self.prediction_fn = prediction_fn
-        self.score_fn = score_fn
-
-    def evaluate(self, model:Model):
-        predictions = self.prediction_fn(model.primes, self.exps)
-        score_items = self.score_fn(self.exps, predictions)
-        max_score, score = get_model_score(score_items)
-        result = EvalResult(model_id=model.id,
-                            max_score=max_score,
-                            score=score,
-                            details=[predictions, score_items])
-        return result
-
-@dataclass
-class Candidate:
-    model:Model
-    eval_result:EvalResult
-
-def sort_population(
-    population: list[Candidate],
-    order_by: list[str] | None = None,
-) -> list[Candidate]:
-    """
-    Sort by:
-        1. score (highest first)
-        2. tie-breakers in order_by (lowest first)
-
-    Example:
-        sort_population(pop, ["n_edges"])
-        sort_population(pop, ["n_self_edges", "n_prime_implicants"])
-    """
-    if order_by is None:
-        order_by = []
-
-    for attr in reversed(order_by):
-        population = sorted(
-            population,
-            key=lambda x: getattr(x.model, attr),
-        )
-
-    population = sorted(
-        population,
-        key=lambda x: x.eval_result.score,
-        reverse=True,
-    )
-
-    return population
-
-class Selector:
-    def __init__(self, config:GAConfig):
-        self.keep = config.keep
-        self.order_by = config.order_by
-    def select_survivors(self, population:list[Candidate]):
-        population = sort_population(population, self.order_by)
-        return population[:self.keep]
-
-def reproduction_bias(population: list[Candidate]):
-    weights = list(range(1, len(population)+1))
-    weights.reverse()
-    p = np.array(weights)/np.sum(np.array(weights))
-    return p
-
-class Reproducer:
-    def __init__(self, config:GAConfig):
-        self.per_iter = config.per_iter
-        self.keep = config.keep
-        self.mix = config.mix
-        self.order_by = config.order_by
-        self._id_gen = count(start=1)
-
-    def get_next_id(self):
-        return next(self._id_gen)
-
-    def asexual(self, population: list[Candidate], prob, edge_prob)->list[Model]:
-        population = sort_population(population, self.order_by)
-        p = reproduction_bias(population)
-        # number of offsprings to generate
-        # total population should be keep + per_iter
-        n = self.keep + self.per_iter - len(population)
-        # generate (per_iter) new models
-        offsprings = []
-        targets = random.choices(population, weights=p, k=n)
-        for target in targets:
-            new_model = target.model.mutate(self.get_next_id(), prob, edge_prob)
-            offsprings.append(new_model)    
-        return offsprings
-
-    def sexual(self, population: list[Candidate])->list[Model]:
-        population = sort_population(population, self.order_by)
-        p = reproduction_bias(population)
-        parents_lst = []
-        for j in range(self.mix):
-            model_choice = np.random.choice(population, size = 2, replace = False, p=p)
-            parents_lst.append(model_choice)
-        mixed_offsprings = []
-        for parents in parents_lst:
-            mixed_model = mix_models(self.get_next_id(), parents[0].model, parents[1].model)
-            mixed_offsprings.append(mixed_model)
-        return mixed_offsprings
 
 
 @dataclass
@@ -468,8 +356,8 @@ def run_ga(run_type:str,
     config = GAConfig(total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                       prob=PROB, edge_prob=EDGE_PROB, order_by=ORDER_BY,
                       stop_if_max=stop_if_max, core=core, seed=seed)
-    selector = Selector(config)
-    reproducer = Reproducer(config)
+    selector = Selector(keep=config.keep, order_by=config.order_by)
+    reproducer = Reproducer(per_iter=config.per_iter, keep=config.keep, mix=config.mix, order_by=config.order_by)
     final, log = ga_main(start, evaluator, selector, reproducer, config,
                          export_top=export_top, export_thresh=export_thresh, export_name=export_name, export_same=export_same)
     end_time = datetime.datetime.now()

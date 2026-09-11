@@ -2,6 +2,7 @@ import itertools as it
 from collections.abc import Iterable
 from dataclasses import dataclass
 
+from boolmore.model import Model
 from boolmore.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.inference.prediction import PhenotypePrediction
 
@@ -10,6 +11,32 @@ FixesType = tuple[tuple[str, int],...]
 ExpType = tuple[int, float, FixesType, str, str]
 PredictType = dict[FixesType, dict[str, float]]
 AgreeType = dict[str, dict[FixesType, tuple[int, float, str, float, float]]]
+
+@dataclass
+class EvalResult:
+    model_id: int
+    max_score: float
+    score: float
+    details: any
+
+class Evaluator:
+    def __init__(self, exps, prediction_fn, score_fn):
+        """
+        exps : list of experiment dataclasses
+        """
+        self.exps = exps
+        self.prediction_fn = prediction_fn
+        self.score_fn = score_fn
+
+    def evaluate(self, model:Model):
+        predictions = self.prediction_fn(model.primes, self.exps)
+        score_items = self.score_fn(self.exps, predictions)
+        max_score, score = get_model_score(score_items)
+        result = EvalResult(model_id=model.id,
+                            max_score=max_score,
+                            score=score,
+                            details=[predictions, score_items])
+        return result
 
 @dataclass(frozen=True)
 class EvaluationItemScore:
