@@ -1,11 +1,7 @@
-from __future__ import annotations
-import random
 import os
 import pickle
 
-import boolmore.genetic.generation.mutation as m
 import boolmore.boolean_functions as bf
-import boolmore.evaluation.constraint as cons
 
 PrimeType = list[list[dict[str, int]]]
 FixesType = tuple[tuple[str, int]]
@@ -154,26 +150,7 @@ class Model():
 
         x.get_complexity()
 
-        x.check_constraint()
-
         return x
-
-    def check_constraint(self) -> bool:
-        """
-        Checks if the model follows the constraints.
-        It does not check group constraints yet.
-        TODO: implement group constraint check
-
-        Returns
-        -------
-        check - True if the model follows constraints       :bool
-
-        """
-        check = True
-        for node in self.primes:
-            check = cons.check_node(self.regulators_dict[node], self.rr_dict[node], self.base.rr_dict[node], # type: ignore
-                                    self.constraints, node) and check
-        return check
 
     def get_complexity(self):
         self.n_edges = 0
@@ -191,86 +168,7 @@ class Model():
             if node in regulators_set:
                 self.n_self_edges += 1
 
-    def mutate(self, model_id:int, probability:float, edge_prob:float, bias:float=0.5, seed:int|None=None) -> Model:
-        """
-        Returns a mutated model.
 
-        Parameters
-        ----------
-        probability - probability that each binary is mutated               :float between 0 and 1
-        edge_prob   - probability to add or delete an edge from the pool    :float between 0 and 1
-        bias        - probability to invert rr when mutating                :float between 0 and 1
-        seed        - random seed                                           :int|None
-
-        Returns
-        -------
-        mutated_model - a new model with mutated functions  :Model class
-
-        """
-        mutated_model = Model()
-        mutated_model.id = model_id
-        mutated_model.generation = self.generation + 1
-
-        mutated_model.base = self.base
-        mutated_model.constraints = self.constraints
-        mutated_model.edge_pool = self.edge_pool
-        mutated_model.name = self.name
-
-        mutated_model.primes = self.primes.copy()
-        mutated_model.regulators_dict = self.regulators_dict.copy()
-        mutated_model.signs_dict = self.signs_dict.copy()        
-        mutated_model.rr_dict = self.rr_dict.copy()
-        mutated_model.extra_edges = self.extra_edges.copy()
-
-        if seed != None:
-            random.seed(seed)
-
-        rnd = random.random()
-        if rnd < edge_prob and len(mutated_model.edge_pool)>0:
-            new_edge = random.choice(self.edge_pool)
-
-            new_edge_node = new_edge[1]
-            new_regulator = new_edge[0]
-            new_sign = new_edge[2]
-
-            regulators = mutated_model.regulators_dict[new_edge_node]
-            rr = mutated_model.rr_dict[new_edge_node]
-            signs = mutated_model.signs_dict[new_edge_node]
-
-            if new_regulator not in regulators:
-                mutated_model.extra_edges.append(new_edge)
-                modified_regulators, modified_rr, modified_signs = m.add_regulator(regulators, rr, signs, new_regulator, new_sign)
-            else:
-                mutated_model.extra_edges.remove(new_edge)
-                modified_regulators, modified_rr, modified_signs = m.delete_regulator(regulators, rr, signs, new_regulator)
-
-            mutated_model.regulators_dict[new_edge_node] = modified_regulators
-            mutated_model.rr_dict[new_edge_node] = modified_rr
-            mutated_model.signs_dict[new_edge_node] = modified_signs
-            prime1 = bf.rr2prime(modified_regulators, modified_rr, modified_signs, inverted = False)
-            mutated_model.primes[new_edge_node] = prime1
-
-        for node in mutated_model.rr_dict:
-            # get mutated_rr from rr
-            mutated_rr, modified = m.mutate_rr_constraint(mutated_model.regulators_dict[node],
-                                                          mutated_model.rr_dict[node],
-                                                          mutated_model.base.rr_dict[node], # type: ignore
-                                                          mutated_model.constraints,
-                                                          node, probability, bias)
-            mutated_model.rr_dict[node] = mutated_rr
-
-            # get primes from the mutated_rr
-            # if the representations are equivalent, take the old prime
-            if modified:
-                prime1 = bf.rr2prime(mutated_model.regulators_dict[node], mutated_rr, mutated_model.signs_dict[node], inverted = False)
-                mutated_model.primes[node] = prime1
-                # irr = get_max_irr(mutated_model.rr_dict[node])
-                # prime2 = rr2prime(mutated_model.regulators_dict[node], irr, mutated_model.signs_dict[node], inverted = True)
-                # assert prime1 == prime2, "rr and irr lead to different result!"
-            
-        mutated_model.get_complexity()       
-
-        return mutated_model
 
     def info(self):
         """
@@ -279,7 +177,7 @@ class Model():
         print("id: ", self.id)
         print("generation: ", self.generation)
         print("extra edges: ", self.extra_edges)
-        print("following constraints:", self.check_constraint())
+        # print("following constraints:", self.check_constraint())
         print("number of edges: ", self.n_edges)
         print("number of self edges: ", self.n_self_edges)
         print("number of prime implicants: ", self.n_prime_implicants)
@@ -311,7 +209,7 @@ class Model():
             fp.write("# generation: " + str(self.generation) + "\n")
             fp.write("# extra edges: " + str(self.extra_edges) + "\n")
             # fp.write("# score: " + str(self.score) + " / " + str(self.max_score) + "\n")
-            fp.write("# following constraints: " + str(self.check_constraint()) + "\n")
+            # fp.write("# following constraints: " + str(self.check_constraint()) + "\n")
             fp.write("# number of edges: " + str(self.n_edges) + "\n")
             fp.write("# number of self edges: " + str(self.n_self_edges) + "\n")
             fp.write("# number of prime implicants: " + str(self.n_prime_implicants) + "\n\n")

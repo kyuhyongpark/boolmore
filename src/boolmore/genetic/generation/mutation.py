@@ -1,6 +1,7 @@
 import random
 
 import boolmore.boolean_functions as bf
+from boolmore.model import Model
 import boolmore.evaluation.constraint as cons
 import boolmore.genetic.generation.constraint_enforcement as ce
 
@@ -268,3 +269,85 @@ def delete_regulator(regulators:tuple[str, ...], rr:str, signs:str, target_regul
         deleted_rr = bf.get_max_irr(deleted_rr)
 
     return deleted_regulators, deleted_rr, deleted_signs
+
+
+def mutate_model(model:Model, model_id:int, probability:float, edge_prob:float, bias:float=0.5, seed:int|None=None) -> Model:
+    """
+    Returns a mutated model.
+
+    Parameters
+    ----------
+    probability - probability that each binary is mutated               :float between 0 and 1
+    edge_prob   - probability to add or delete an edge from the pool    :float between 0 and 1
+    bias        - probability to invert rr when mutating                :float between 0 and 1
+    seed        - random seed                                           :int|None
+
+    Returns
+    -------
+    mutated_model - a new model with mutated functions  :Model class
+
+    """
+    mutated_model = Model()
+    mutated_model.id = model_id
+    mutated_model.generation = model.generation + 1
+
+    mutated_model.base = model.base
+    mutated_model.constraints = model.constraints
+    mutated_model.edge_pool = model.edge_pool
+    mutated_model.name = model.name
+
+    mutated_model.primes = model.primes.copy()
+    mutated_model.regulators_dict = model.regulators_dict.copy()
+    mutated_model.signs_dict = model.signs_dict.copy()        
+    mutated_model.rr_dict = model.rr_dict.copy()
+    mutated_model.extra_edges = model.extra_edges.copy()
+
+    if seed != None:
+        random.seed(seed)
+
+    rnd = random.random()
+    if rnd < edge_prob and len(mutated_model.edge_pool)>0:
+        new_edge = random.choice(mutated_model.edge_pool)
+
+        new_edge_node = new_edge[1]
+        new_regulator = new_edge[0]
+        new_sign = new_edge[2]
+
+        regulators = mutated_model.regulators_dict[new_edge_node]
+        rr = mutated_model.rr_dict[new_edge_node]
+        signs = mutated_model.signs_dict[new_edge_node]
+
+        if new_regulator not in regulators:
+            mutated_model.extra_edges.append(new_edge)
+            modified_regulators, modified_rr, modified_signs = add_regulator(regulators, rr, signs, new_regulator, new_sign)
+        else:
+            mutated_model.extra_edges.remove(new_edge)
+            modified_regulators, modified_rr, modified_signs = delete_regulator(regulators, rr, signs, new_regulator)
+
+        mutated_model.regulators_dict[new_edge_node] = modified_regulators
+        mutated_model.rr_dict[new_edge_node] = modified_rr
+        mutated_model.signs_dict[new_edge_node] = modified_signs
+        prime1 = bf.rr2prime(modified_regulators, modified_rr, modified_signs, inverted = False)
+        mutated_model.primes[new_edge_node] = prime1
+
+    for node in mutated_model.rr_dict:
+        # get mutated_rr from rr
+        mutated_rr, modified = mutate_rr_constraint(mutated_model.regulators_dict[node],
+                                                    mutated_model.rr_dict[node],
+                                                    mutated_model.base.rr_dict[node],
+                                                    mutated_model.constraints,
+                                                    node, probability, bias)
+        mutated_model.rr_dict[node] = mutated_rr
+
+        # get primes from the mutated_rr
+        # if the representations are equivalent, take the old prime
+        if modified:
+            prime1 = bf.rr2prime(mutated_model.regulators_dict[node], mutated_rr, mutated_model.signs_dict[node], inverted = False)
+            mutated_model.primes[node] = prime1
+            # irr = get_max_irr(mutated_model.rr_dict[node])
+            # prime2 = rr2prime(mutated_model.regulators_dict[node], irr, mutated_model.signs_dict[node], inverted = True)
+            # assert prime1 == prime2, "rr and irr lead to different result!"
+        
+    mutated_model.get_complexity()       
+
+    return mutated_model

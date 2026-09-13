@@ -5,6 +5,7 @@ import numpy as np
 
 from boolmore.model import Model
 from boolmore.genetic.population import Candidate, sort_population
+from boolmore.genetic.generation.mutation import mutate_model
 from boolmore.genetic.generation.crossover import mix_models
 
 
@@ -43,7 +44,7 @@ class Reproducer:
         offsprings = []
         targets = random.choices(population, weights=p, k=n)
         for target in targets:
-            new_model = target.model.mutate(self.get_next_id(), prob, edge_prob)
+            new_model = mutate_model(target.model, self.get_next_id(), prob, edge_prob)
             offsprings.append(new_model)    
         return offsprings
 

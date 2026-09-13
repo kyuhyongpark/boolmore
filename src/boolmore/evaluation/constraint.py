@@ -2,6 +2,7 @@
 
 
 import boolmore.boolean_functions as bf
+from boolmore.model import Model
 
 
 def check_constant(rr:str) -> bool:
@@ -226,7 +227,24 @@ def check_node(
 
     return True
 
+def check_model_constraints(model:Model) -> bool:
+    """
+    Checks if the model follows the constraints.
+    It does not check group constraints yet.
+    TODO: implement group constraint check
 
+    Returns
+    -------
+    check - True if the model follows constraints       :bool
+
+    """
+    check = True
+    for node in model.primes:
+        check = check_node(model.regulators_dict[node],
+                           model.rr_dict[node],
+                           model.base.rr_dict[node],
+                           model.constraints, node) and check
+    return check
 
 
 

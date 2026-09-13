@@ -5,7 +5,6 @@ import random
 import pickle
 from dataclasses import dataclass
 from functools import partial
-from itertools import count
 from joblib import Parallel, delayed
 
 import numpy as np
@@ -13,12 +12,17 @@ from pyboolnet.external.bnet2primes import bnet_file2primes
 from pystablemotifs.format import primes2bnet
 
 from boolmore.boolean_functions import prime2bnet
-from boolmore.io.load import import_NAV_exps, import_phenotypes
 from boolmore.model import Model
-from boolmore.genetic.population import Candidate, sort_population
-from boolmore.evaluation.score import Evaluator, EvalResult
+
+from boolmore.evaluation.score import (
+    Evaluator, EvalResult,
+    get_NAV_scores, get_phenotype_scores, get_model_score
+)
+from boolmore.evaluation.constraint import check_model_constraints
 from boolmore.inference.prediction import get_NAV_prediction, get_phenotype_prediction
-from boolmore.evaluation.score import get_NAV_scores, get_phenotype_scores, get_model_score
+from boolmore.io.load import import_NAV_exps, import_phenotypes
+
+from boolmore.genetic.population import Candidate, sort_population
 from boolmore.genetic.selection import Reproducer, Selector
 
 FixesType = tuple[tuple[str, int]]
@@ -475,7 +479,7 @@ def ga_main(start:Candidate,
           f"n edges {final.model.n_edges}, ",
           f"n self edges {final.model.n_self_edges}, ",
           f"n prime implicants {final.model.n_prime_implicants}")
-    if not final.model.check_constraint():
+    if not check_model_constraints(final.model):
         print("ERROR: model does not follow constraints")
     
     final_info = str(final.model.id) + "_gen" + str(final.model.generation)
@@ -515,7 +519,7 @@ def ga_main(start:Candidate,
               f"n edges {final.model.n_edges}, ",
               f"n self edges {final.model.n_self_edges}, ",
               f"n prime implicants {final.model.n_prime_implicants}")
-        if not final.model.check_constraint():
+        if not check_model_constraints(final.model):
             print("ERROR: model does not follow constraints")
         
         final_info = str(final.model.id) + "_gen" + str(final.model.generation)
