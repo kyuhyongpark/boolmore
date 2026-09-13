@@ -2,11 +2,33 @@ from dataclasses import dataclass
 
 from boolmore.model import Model
 from boolmore.evaluation.score import EvalResult
+from boolmore.evaluation.constraint import check_model_constraints
+
 
 @dataclass
 class Candidate:
     model:Model
     eval_result:EvalResult
+
+
+def describe_candidate(candidate: Candidate) -> str:
+    result = candidate.eval_result
+    model = candidate.model
+
+    description = (
+        f"score {round(result.score, 1)}/{result.max_score} "
+        f"({round(result.score / result.max_score * 100, 1)}%), "
+        f"extra edges {model.extra_edges}, "
+        f"n edges {result.n_edges}, "
+        f"n self edges {result.n_self_edges}, "
+        f"n prime implicants {result.n_prime_implicants}"
+    )
+
+    if not check_model_constraints(model):
+        description += "\nERROR: model does not follow constraints"
+
+    return description
+
 
 def sort_population(
     population: list[Candidate],
@@ -27,7 +49,7 @@ def sort_population(
     for attr in reversed(order_by):
         population = sorted(
             population,
-            key=lambda x: getattr(x.model, attr),
+            key=lambda x: getattr(x.eval_result, attr),
         )
 
     population = sorted(

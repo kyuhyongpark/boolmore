@@ -38,6 +38,4 @@ def mix_models(model_id:int, model1:Model, model2:Model) -> Model:
             if edge[1] == node:
                 mixed_model.extra_edges.append(edge)
 
-    mixed_model.get_complexity()
-
     return mixed_model

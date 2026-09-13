@@ -5,6 +5,8 @@ from dataclasses import dataclass
 from boolmore.model import Model
 from boolmore.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.inference.prediction import PhenotypePrediction
+from boolmore.evaluation.agreement import get_agreements
+from boolmore.evaluation.complexity import get_model_complexity
 
 
 FixesType = tuple[tuple[str, int],...]
@@ -17,7 +19,12 @@ class EvalResult:
     model_id: int
     max_score: float
     score: float
+    n_edges: int
+    n_self_edges: int
+    n_prime_implicants: int
+    n_extra_edges: int
     details: any
+
 
 class Evaluator:
     def __init__(self, exps, prediction_fn, score_fn):
@@ -30,13 +37,19 @@ class Evaluator:
 
     def evaluate(self, model:Model):
         predictions = self.prediction_fn(model.primes, self.exps)
-        score_items = self.score_fn(self.exps, predictions)
+        score_items:list[EvaluationItemScore] = self.score_fn(self.exps, predictions)
         max_score, score = get_model_score(score_items)
+        complexity = get_model_complexity(model)
         result = EvalResult(model_id=model.id,
                             max_score=max_score,
                             score=score,
+                            n_edges=complexity["n_edges"],
+                            n_self_edges=complexity["n_self_edges"],
+                            n_prime_implicants=complexity["n_prime_implicants"],
+                            n_extra_edges=model.n_extra_edges,
                             details=[predictions, score_items])
         return result
+
 
 @dataclass(frozen=True)
 class EvaluationItemScore:
@@ -45,118 +58,6 @@ class EvaluationItemScore:
     agreement:float
     score:float
 
-def line(input:float, start:tuple[float, float], end:tuple[float, float]) -> float:
-    """
-    Takes the input as the x value and returns the y value
-    on a straight line from the start to the end.
-    Any value outside the region returns 0.
-    
-    Parameters
-    ----------
-    input   - x value   :float
-    start   - (x1,y1)   :tuple[float, float]
-    end     - (x2,y2)   :tuple[float, float]
-
-    Returns
-    -------
-    output  - y value   :float
-
-    """
-    if not start[0] <= input <= end[0]:
-        return 0
-
-    slope = (end[1]-start[1])/(end[0]-start[0])
-    output = start[1] + slope * (input - start[0])
-
-    return output
-
-
-def powerset(iterable:Iterable) -> it.chain:
-    """
-    powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)
-
-    """
-    s = list(iterable)
-
-    return it.chain.from_iterable(it.combinations(s, r) for r in range(len(s)+1))
-
-
-def get_agreements(exps:list[NAVExperiment], predictions:PredictType) -> tuple[AgreeType, float]:
-    """
-    Returns attractor agreements when given experimental outcomes and model predictions.
-    agreements are categorized by observed node,
-    so that it is easier to find all the interventions for that observed node.
-    Also returns non-hierarchy score.
-
-    Parameters
-    ----------
-    exps : list[NAVExperiment]
-
-    predictions : PredictType
-        average attractor values for all fixes
-        keys : FixesType
-        values : dict[str, float]
-            average values of nodes - {observed_node: predict_value}
-    
-    Returns
-    -------
-    agreements : AgreeType
-        collection of all data
-        key : str
-            observed_node
-        value : dict[FixesType, tuple]
-            data for the node
-            key : FixesType
-            value : tuple[int, float, str, float, float]
-                data for given fixes - (id, max_score, outcome_value, predict_value, agreement)
-
-    """
-    agreements = {}
-    for exp in exps:
-        id = exp.id
-        max_score = exp.weight
-        fixes = exp.fixes
-        observed_node = exp.observed
-        outcome_value = exp.outcome
-
-        predict_value = predictions[fixes][observed_node]
-
-        # experiment showed (ON)
-        if outcome_value == 'ON':
-            agreement = max(line(predict_value,(0,0),(1,1)),
-                            line(predict_value,(1,1),(1.0001,1)))
-        # experiment showed (Some/ON)
-        elif outcome_value == 'Some/ON':
-            agreement = max(line(predict_value,(0,0),(0.5,1)),
-                            line(predict_value,(0.5,1),(1,1)),
-                            line(predict_value,(1,1),(1.0001,1)))
-        # experiment showed (Some)
-        elif outcome_value == 'Some':
-            agreement = max(line(predict_value,(0,0),(0.25,1)),
-                            line(predict_value,(0.25,1),(0.75,1)),
-                            line(predict_value,(0.75,1),(1,0)))
-        # experiment showed (OFF/Some)
-        elif outcome_value == 'OFF/Some':
-            agreement = max(line(predict_value,(-0.0001,1),(0,1)),
-                            line(predict_value,(0,1),(0.5,1)),
-                            line(predict_value,(0.5,1),(1,0)))
-        # experiment showed (OFF)
-        elif outcome_value == 'OFF':
-            agreement = max(line(predict_value,(-0.0001,1),(0,1)),
-                            line(predict_value,(0,1),(1,0)))
-        else:
-            print("Unexpected input", outcome_value)
-            raise Exception("Unexpected experiment input")
-
-        if observed_node not in agreements:
-            agreements[observed_node] = {}
-        elif fixes in agreements[observed_node]:
-            print(f'{agreements[observed_node][fixes][0]} and {id} are duplicates')
-            raise Exception("Duplicate experimental entry")
-        
-        agreements[observed_node][fixes] = id, max_score, outcome_value, predict_value, agreement
-
-    return agreements
 
 def get_non_hierarchy_scores(
     agreements: AgreeType,
@@ -318,6 +219,39 @@ def get_hierarchy_scores(
     return results
 
 
+def get_NAV_scores(
+    exps:list[NAVExperiment],
+    predictions,
+    default_sources:dict={},
+    hierarchy:bool=True,
+    report:bool=False,
+    file:str="score_report.tsv"):
+    """
+    Returns score when given experiments.
+    Requires predictions to be calculated beforehand.
+
+    Can be modified to meet the desired criteria.
+    
+    Returns
+    -------
+    max_score : float
+        max possible score of the model
+
+    score : float
+        how well the model agrees with experimental results
+        one point in score means agreement to one perturbation
+    
+    """
+    agreements = get_agreements(exps, predictions)
+
+    if hierarchy:
+        scores = get_hierarchy_scores(agreements, default_sources, report=report, file=file)
+    else:
+        scores = get_non_hierarchy_scores(agreements)
+
+    return scores
+
+
 def get_phenotype_scores(
     experiments: list[PhenotypeExperiment],
     predictions: list[PhenotypePrediction],
@@ -385,35 +319,3 @@ def get_model_score(
 
     return max_score, total_score
 
-
-def get_NAV_scores(
-    exps:list[NAVExperiment],
-    predictions,
-    default_sources:dict={},
-    hierarchy:bool=True,
-    report:bool=False,
-    file:str="score_report.tsv"):
-    """
-    Returns score when given experiments.
-    Requires predictions to be calculated beforehand.
-
-    Can be modified to meet the desired criteria.
-    
-    Returns
-    -------
-    max_score : float
-        max possible score of the model
-
-    score : float
-        how well the model agrees with experimental results
-        one point in score means agreement to one perturbation
-    
-    """
-    agreements = get_agreements(exps, predictions)
-
-    if hierarchy:
-        scores = get_hierarchy_scores(agreements, default_sources, report=report, file=file)
-    else:
-        scores = get_non_hierarchy_scores(agreements)
-
-    return scores

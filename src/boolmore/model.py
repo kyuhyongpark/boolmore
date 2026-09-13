@@ -39,10 +39,7 @@ class Model():
         extra_edges     - edges from the pool that are present in the model         :list[list[str]]
                           [[regulator, target, sign], ...]
 
-        n_edges         - number of edges in the model                              :int
         n_extra_edges   - number of extra edges in the model                        :int
-        n_self_edges    - number of self-edges in the model                         :int
-        n_prime_implicants - number of prime implicants in the model                 :int
 
         """
         self.id = 0
@@ -59,10 +56,7 @@ class Model():
         self.signs_dict = {}
         self.rr_dict = {}
         self.extra_edges = []
-        self.n_edges = 0
         self.n_extra_edges = 0
-        self.n_self_edges = 0
-        self.n_prime_implicants = 0
 
     @classmethod
     def import_model(cls, primes:dict[str, PrimeType], id:int=-1, generation:int=0,
@@ -145,29 +139,12 @@ class Model():
                 x.rr_dict[node] = rr
                 x.signs_dict[node] = signs
 
+        x.n_extra_edges = len(x.extra_edges)
+
         if base == None:
             x.base = x
 
-        x.get_complexity()
-
         return x
-
-    def get_complexity(self):
-        self.n_edges = 0
-        self.n_self_edges = 0
-        self.n_prime_implicants = 0
-        
-        for node in self.primes:
-            regulators_set = set()
-            for prime_implicant in self.primes[node][1]:
-                self.n_prime_implicants += len(prime_implicant)
-
-                for reg in prime_implicant:
-                    regulators_set.add(reg)
-            self.n_edges += len(regulators_set)
-            if node in regulators_set:
-                self.n_self_edges += 1
-
 
 
     def info(self):
@@ -177,10 +154,7 @@ class Model():
         print("id: ", self.id)
         print("generation: ", self.generation)
         print("extra edges: ", self.extra_edges)
-        # print("following constraints:", self.check_constraint())
-        print("number of edges: ", self.n_edges)
-        print("number of self edges: ", self.n_self_edges)
-        print("number of prime implicants: ", self.n_prime_implicants)
+        print("number of extra edges: ", self.n_extra_edges)
 
     def export(self, file_name:str|None=None, details:bool=True):
         """
@@ -208,12 +182,7 @@ class Model():
             fp.write("# id: " + str(self.id) + "\n")
             fp.write("# generation: " + str(self.generation) + "\n")
             fp.write("# extra edges: " + str(self.extra_edges) + "\n")
-            # fp.write("# score: " + str(self.score) + " / " + str(self.max_score) + "\n")
-            # fp.write("# following constraints: " + str(self.check_constraint()) + "\n")
-            fp.write("# number of edges: " + str(self.n_edges) + "\n")
-            fp.write("# number of self edges: " + str(self.n_self_edges) + "\n")
-            fp.write("# number of prime implicants: " + str(self.n_prime_implicants) + "\n\n")
-
+            fp.write("# number of extra edges: " + str(self.n_extra_edges) + "\n")
         fp.write("targets,\tfactors\n")
         primes = {k:self.primes[k] for k in sorted(self.primes)}
         for k in primes:

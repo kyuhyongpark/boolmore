@@ -348,6 +348,4 @@ def mutate_model(model:Model, model_id:int, probability:float, edge_prob:float, 
             # prime2 = rr2prime(mutated_model.regulators_dict[node], irr, mutated_model.signs_dict[node], inverted = True)
             # assert prime1 == prime2, "rr and irr lead to different result!"
         
-    mutated_model.get_complexity()       
-
     return mutated_model
