@@ -96,8 +96,6 @@ class GAConfig:
 class GAState:
     iteration: int
     population: list[Candidate]
-    best: Candidate | None = None
-    best_score: float = 0
     generated: int = 0
 
 class GeneticAlgorithm:
@@ -163,8 +161,6 @@ class GeneticAlgorithm:
         return GAState(
             iteration=iteration,
             population=population,
-            best=best,
-            best_score=best.eval_result.score,
             generated=generated
             )
 
@@ -487,13 +483,12 @@ def ga_main(
         )
 
     # Initialize the starting population
-    state = GAState(iteration=0, population=[])
-    state.population = ga.initialize_population(state.population, start)
-    state.best = start
-    state.best_score = start.eval_result.score
+    state = GAState(
+        iteration=0,
+        population=ga.initialize_population([], start)
+        )
 
     states = [state]
-    
     for _ in range(config.total_iter):
         state = ga.next_state(states[-1])
         states.append(state)
@@ -501,7 +496,7 @@ def ga_main(
         print(
             f"iteration {state.iteration}, "
             f"generated {state.generated}, "
-            f"{describe_candidate(state.best)}"
+            f"{describe_candidate(state.population[0])}"
             )
         
         # Export models that exceed the threshold score
@@ -513,7 +508,7 @@ def ga_main(
         # Stop iteration if max score is reached
         if (
             config.stop_if_max
-            and state.best.eval_result.score == state.best.eval_result.max_score
+            and state.population[0].eval_result.score == state.population[0].eval_result.max_score
             ):
             print("max score reached")
             break
@@ -521,20 +516,20 @@ def ga_main(
     log = [
         [
             state.iteration,
-            state.best_score,
-            state.best.model.extra_edges,
-            state.best.eval_result.n_edges,
-            state.best.eval_result.n_self_edges,
-            state.best.eval_result.n_prime_implicants,
-            f"{state.best.model.id}_gen{state.best.model.generation}",
+            state.population[0].eval_result.score,
+            state.population[0].model.extra_edges,
+            state.population[0].eval_result.n_edges,
+            state.population[0].eval_result.n_self_edges,
+            state.population[0].eval_result.n_prime_implicants,
+            f"{state.population[0].model.id}_gen{state.population[0].model.generation}",
         ]
         for state in states[1:]
     ]
 
     if export_same:
         for candidate in state.population:
-            if candidate.eval_result.score == best.eval_result.score:
+            if candidate.eval_result.score == state.population[0].eval_result.score:
                 candidate.model.name = export_name
                 candidate.model.export()
 
-    return states[-1].best, log
+    return states[-1].population[0], log
