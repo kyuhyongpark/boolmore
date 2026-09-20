@@ -102,22 +102,28 @@ class GAState:
     generated: int = 0
 
 class GeneticAlgorithm:
-    def __init__(self, config:GAConfig):
-        self.per_iter = config.per_iter
-        self.keep = config.keep
-        self.mix = config.mix
-        self.core = config.core
+    def __init__(
+            self,
+            config:GAConfig,
+            evaluator:Evaluator,
+            selector:Selector,
+            reproducer:Reproducer
+            ):
+        self.config = config
+        self.evaluator = evaluator
+        self.selector = selector
+        self.reproducer = reproducer
     
     def initialize_population(self, population: list[Candidate], start:Candidate):
         # this ensures that models worse than the start are not carried on.
         # also ensures that same number of models are generated in the first iteration as in the other iterations.
-        for i in range(self.keep):
+        for i in range(self.config.keep):
             population.append(start)
         return population
 
     def new_candidates(self, offsprings:list[Model], evaluator:Evaluator)-> list[EvalResult]:
-        if self.core > 1:
-            results = Parallel(n_jobs=self.core)(delayed(evaluator.evaluate)(new_model) for new_model in offsprings)
+        if self.config.core > 1:
+            results = Parallel(n_jobs=self.config.core)(delayed(evaluator.evaluate)(new_model) for new_model in offsprings)
             new_candidates = []
             for result in results:
                 for model in offsprings:
@@ -133,6 +139,39 @@ class GeneticAlgorithm:
                 new_candidate = Candidate(new_model, result)
                 new_candidates.append(new_candidate)
             return new_candidates
+
+    def next_state(self, state: GAState) -> GAState:
+        state.iteration += 1
+        # select the survivors
+        state.population = self.selector.select_survivors(state.population)
+
+        if state.iteration > 1:
+            # mix the good ones
+            mixed_offsprings = self.reproducer.sexual(state.population)
+            new_candidates = self.new_candidates(mixed_offsprings, self.evaluator)
+            state.population.extend(new_candidates)
+            state.generated += len(new_candidates)
+    
+        offsprings = self.reproducer.asexual(state.population, prob=self.config.prob_list[state.iteration-1], edge_prob=self.config.edge_prob)
+        new_candidates = self.new_candidates(offsprings, self.evaluator)
+        state.population.extend(new_candidates)
+        state.generated += len(new_candidates)
+
+        # Rank the population
+        state.population = sort_population(state.population, self.config.order_by)
+        best = state.population[0]
+
+        state.log.append([
+            state.iteration,
+            best.eval_result.score,
+            best.model.extra_edges,
+            best.eval_result.n_edges,
+            best.eval_result.n_self_edges,
+            best.eval_result.n_prime_implicants,
+            f"{best.model.id}_gen{best.model.generation}",
+            ])
+
+        return state
 
 
 def run_ga(run_type:str,
@@ -243,7 +282,7 @@ def run_ga(run_type:str,
     else:
         START_MODEL = BASE
 
-    if run_name == None:
+    if run_name is None:
         run_name = START_MODEL.split("/")[-1][:-5]
     LOG = run_name + "_log.txt"
 
@@ -407,7 +446,7 @@ def ga_main(
         export_thresh:float=0.0,
         export_name:str|None=None,
         export_same:bool=False
-        ) -> tuple[Model, list]:
+        ) -> tuple[Candidate, list]:
     """
     Main part of the genetic algorithm.
 
@@ -439,11 +478,8 @@ def ga_main(
 
     """
     total_iter = config.total_iter
-    edge_prob = config.edge_prob
     stop_if_max = config.stop_if_max
     seed = config.seed
-    prob_list = config.prob_list
-    order_by = config.order_by
 
     if export_name == None:
         export_name = start.model.name
@@ -453,49 +489,27 @@ def ga_main(
         np.random.seed(seed)
 
     state = GAState(population=[], iteration=0, log=[])
-    ga = GeneticAlgorithm(config)
+    ga = GeneticAlgorithm(
+        config,
+        evaluator,
+        selector,
+        reproducer
+        )
 
     # Initialize the starting population
     state.population = ga.initialize_population(state.population, start)
     
-    for i in range(1, total_iter + 1):
-        state.iteration = i
+    for _ in range(total_iter):
+        state = ga.next_state(state)
 
-        # select the survivors
-        state.population = selector.select_survivors(state.population)
-
-        if i > 1:
-            # mix the good ones
-            mixed_offsprings = reproducer.sexual(state.population)
-            new_candidates = ga.new_candidates(mixed_offsprings, evaluator)
-            state.population.extend(new_candidates)
-            state.generated += len(new_candidates)
-    
-        offsprings = reproducer.asexual(state.population, prob=prob_list[i-1], edge_prob=edge_prob)
-        new_candidates = ga.new_candidates(offsprings, evaluator)
-        state.population.extend(new_candidates)
-        state.generated += len(new_candidates)
-
-        # Rank the population
-        state.population = sort_population(state.population, order_by)
         best = state.population[0]
 
         print(
-            f"iteration {i}, "
+            f"iteration {state.iteration}, "
             f"generated {state.generated}, "
             f"{describe_candidate(best)}"
             )
         
-        state.log.append([
-            i,
-            best.eval_result.score,
-            best.model.extra_edges,
-            best.eval_result.n_edges,
-            best.eval_result.n_self_edges,
-            best.eval_result.n_prime_implicants,
-            f"{best.model.id}_gen{best.model.generation}",
-            ])
-
         # Export models that exceed the threshold score
         for j in range(export_top):
             if state.population[j].eval_result.score > export_thresh:
