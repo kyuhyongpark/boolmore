@@ -397,13 +397,17 @@ def run_ga(run_type:str,
     return base, start, final, log
 
 
-def ga_main(start:Candidate,
-            evaluator:Evaluator,
-            selector:Selector,
-            reproducer:Reproducer,
-            config:GAConfig,
-            export_top:int=0, export_thresh:float=0.0, export_name:str|None=None, export_same:bool=False
-            ) -> tuple[Model, list]:
+def ga_main(
+        start:Candidate,
+        evaluator:Evaluator,
+        selector:Selector,
+        reproducer:Reproducer,
+        config:GAConfig,
+        export_top:int=0,
+        export_thresh:float=0.0,
+        export_name:str|None=None,
+        export_same:bool=False
+        ) -> tuple[Model, list]:
     """
     Main part of the genetic algorithm.
 
@@ -444,78 +448,53 @@ def ga_main(start:Candidate,
     if export_name == None:
         export_name = start.model.name
 
-    if seed != None:
+    if seed is not None:
         random.seed(seed)
         np.random.seed(seed)
 
     state = GAState(population=[], iteration=0, log=[])
     ga = GeneticAlgorithm(config)
 
-    ### First iteration ###
-    state.iteration = 1
+    # Initialize the starting population
     state.population = ga.initialize_population(state.population, start)
-
-    # generate (per_iter) new models
-    offsprings = reproducer.asexual(state.population, prob=prob_list[0], edge_prob=edge_prob)
-    new_candidates = ga.new_candidates(offsprings, evaluator)
-    state.population.extend(new_candidates)
-    state.generated += len(new_candidates)
-
-    state.population = sort_population(state.population, order_by)
-    best = state.population[0]
-    print(
-        f"iteration {1}, "
-        f"generated {state.generated}, "
-        f"{describe_candidate(best)}"
-    )
     
-    state.log.append([1,
-                      best.eval_result.score,
-                      best.model.extra_edges,
-                      best.eval_result.n_edges,
-                      best.eval_result.n_self_edges,
-                      best.eval_result.n_prime_implicants,
-                      str(best.model.id)+"_gen"+str(best.model.generation)])
-
-    # Export models that exceed the threshold score
-    for i in range(export_top):
-        if state.population[i].eval_result.score > export_thresh:
-            state.population[i].model.name = export_name
-            state.population[i].model.export()
-    
-    ### Second to last iterations ###
-    for i in range(2,total_iter+1):
+    for i in range(1, total_iter + 1):
         state.iteration = i
 
         # select the survivors
         state.population = selector.select_survivors(state.population)
-    
-        # mix the good ones
-        mixed_offsprings = reproducer.sexual(state.population)
-        new_candidates = ga.new_candidates(mixed_offsprings, evaluator)
-        state.population.extend(new_candidates)
-        state.generated += len(new_candidates)
+
+        if i > 1:
+            # mix the good ones
+            mixed_offsprings = reproducer.sexual(state.population)
+            new_candidates = ga.new_candidates(mixed_offsprings, evaluator)
+            state.population.extend(new_candidates)
+            state.generated += len(new_candidates)
     
         offsprings = reproducer.asexual(state.population, prob=prob_list[i-1], edge_prob=edge_prob)
         new_candidates = ga.new_candidates(offsprings, evaluator)
         state.population.extend(new_candidates)
         state.generated += len(new_candidates)
 
+        # Rank the population
         state.population = sort_population(state.population, order_by)
         best = state.population[0]
+
         print(
             f"iteration {i}, "
             f"generated {state.generated}, "
             f"{describe_candidate(best)}"
-        )
+            )
         
-        state.log.append([i,
-                        best.eval_result.score,
-                        best.model.extra_edges,
-                        best.eval_result.n_edges,
-                        best.eval_result.n_self_edges,
-                        best.eval_result.n_prime_implicants,
-                        str(best.model.id)+"_gen"+str(best.model.generation)])
+        state.log.append([
+            i,
+            best.eval_result.score,
+            best.model.extra_edges,
+            best.eval_result.n_edges,
+            best.eval_result.n_self_edges,
+            best.eval_result.n_prime_implicants,
+            f"{best.model.id}_gen{best.model.generation}",
+            ])
 
         # Export models that exceed the threshold score
         for j in range(export_top):
@@ -524,7 +503,10 @@ def ga_main(start:Candidate,
                 state.population[j].model.export()
 
         # Stop iteration if max score is reached
-        if stop_if_max and state.population[0].eval_result.score == state.population[0].eval_result.max_score:
+        if (
+            stop_if_max
+            and best.eval_result.score == best.eval_result.max_score
+            ):
             print("max score reached")
             break
 
