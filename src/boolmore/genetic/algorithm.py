@@ -22,7 +22,8 @@ from boolmore.inference.prediction import get_NAV_prediction, get_phenotype_pred
 from boolmore.io.load import import_NAV_exps, import_phenotypes
 
 from boolmore.genetic.population import Candidate, describe_candidate, sort_population
-from boolmore.genetic.selection import Reproducer, Selector
+from boolmore.genetic.generation.reproduction import Reproducer
+from boolmore.genetic.selection import Selector
 
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
@@ -144,12 +145,17 @@ class GeneticAlgorithm:
 
         if iteration > 1:
             # mix the good ones
-            mixed_offsprings = self.reproducer.sexual(population)
+            mixed_offsprings = self.reproducer.sexual(population, self.config.mix)
             candidates = self.new_candidates(mixed_offsprings, self.evaluator)
             population.extend(candidates)
             generated += len(candidates)
-    
-        offsprings = self.reproducer.asexual(population, prob=self.config.prob_list[iteration-1], edge_prob=self.config.edge_prob)
+
+        # total population should be keep + per_iter
+        offsprings = self.reproducer.asexual(
+            population=population,
+            prob=self.config.prob_list[iteration-1],
+            edge_prob=self.config.edge_prob,
+            n = self.config.keep + self.config.per_iter - len(population))
         candidates = self.new_candidates(offsprings, self.evaluator)
         population.extend(candidates)
         generated += len(candidates)
@@ -378,13 +384,15 @@ def run_ga(run_type:str,
     fp.close()
 
     start_time = datetime.datetime.now()
+
     config = GAConfig(total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
                       prob=PROB, edge_prob=EDGE_PROB, order_by=ORDER_BY,
                       stop_if_max=stop_if_max, core=core, seed=seed)
     selector = Selector(keep=config.keep, order_by=config.order_by)
-    reproducer = Reproducer(per_iter=config.per_iter, keep=config.keep, mix=config.mix, order_by=config.order_by)
+    reproducer = Reproducer(selector=selector)
     final, log = ga_main(start, evaluator, selector, reproducer, config,
                          export_top=export_top, export_thresh=export_thresh, export_name=export_name, export_same=export_same)
+
     end_time = datetime.datetime.now()
 
     fp = open(LOG, "a")
@@ -443,12 +451,14 @@ def ga_main(
 
     Parameters
     ----------
-    base: Candidate
-        the base model and its evaluation
     start : Candidate
         the starting model and its evaluation
     evaluator : Evaluator
         evaluator to get predictions and scores
+    selector : Selector
+        selector to select survivors
+    reproducer : Reproducer
+        reproducer to generate offsprings
     config : GAConfig
 
     export_top : int
@@ -483,12 +493,12 @@ def ga_main(
         )
 
     # Initialize the starting population
-    state = GAState(
+    initial_state = GAState(
         iteration=0,
         population=ga.initialize_population([], start)
         )
-
-    states = [state]
+    states = [initial_state]
+    
     for _ in range(config.total_iter):
         state = ga.next_state(states[-1])
         states.append(state)
