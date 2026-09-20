@@ -141,28 +141,37 @@ class GeneticAlgorithm:
             return new_candidates
 
     def next_state(self, state: GAState) -> GAState:
-        state.iteration += 1
-        # select the survivors
-        state.population = self.selector.select_survivors(state.population)
+        iteration = state.iteration + 1
+        population = self.selector.select_survivors(state.population)
+        generated = state.generated
 
-        if state.iteration > 1:
+        if iteration > 1:
             # mix the good ones
-            mixed_offsprings = self.reproducer.sexual(state.population)
-            new_candidates = self.new_candidates(mixed_offsprings, self.evaluator)
-            state.population.extend(new_candidates)
-            state.generated += len(new_candidates)
+            mixed_offsprings = self.reproducer.sexual(population)
+            candidates = self.new_candidates(mixed_offsprings, self.evaluator)
+            population.extend(candidates)
+            generated += len(candidates)
     
-        offsprings = self.reproducer.asexual(state.population, prob=self.config.prob_list[state.iteration-1], edge_prob=self.config.edge_prob)
-        new_candidates = self.new_candidates(offsprings, self.evaluator)
-        state.population.extend(new_candidates)
-        state.generated += len(new_candidates)
+        offsprings = self.reproducer.asexual(population, prob=self.config.prob_list[iteration-1], edge_prob=self.config.edge_prob)
+        candidates = self.new_candidates(offsprings, self.evaluator)
+        population.extend(candidates)
+        generated += len(candidates)
 
         # Rank the population
-        state.population = sort_population(state.population, self.config.order_by)
-        best = state.population[0]
+        population = sort_population(population, self.config.order_by)
+        best = population[0]
+
+        next_state = GAState(
+            iteration=iteration,
+            population=population,
+            log=state.log,
+            best=best,
+            best_score=best.eval_result.score,
+            generated=generated
+            )
 
         state.log.append([
-            state.iteration,
+            iteration,
             best.eval_result.score,
             best.model.extra_edges,
             best.eval_result.n_edges,
@@ -171,7 +180,7 @@ class GeneticAlgorithm:
             f"{best.model.id}_gen{best.model.generation}",
             ])
 
-        return state
+        return next_state
 
 
 def run_ga(run_type:str,
@@ -477,16 +486,12 @@ def ga_main(
         [[iteration #, top score, extra_edges, n_edges, n_self_edges, n_prime_implicants, best_model], ...]
 
     """
-    total_iter = config.total_iter
-    stop_if_max = config.stop_if_max
-    seed = config.seed
-
     if export_name == None:
         export_name = start.model.name
 
-    if seed is not None:
-        random.seed(seed)
-        np.random.seed(seed)
+    if config.seed is not None:
+        random.seed(config.seed)
+        np.random.seed(config.seed)
 
     state = GAState(population=[], iteration=0, log=[])
     ga = GeneticAlgorithm(
@@ -499,7 +504,7 @@ def ga_main(
     # Initialize the starting population
     state.population = ga.initialize_population(state.population, start)
     
-    for _ in range(total_iter):
+    for _ in range(config.total_iter):
         state = ga.next_state(state)
 
         best = state.population[0]
@@ -518,7 +523,7 @@ def ga_main(
 
         # Stop iteration if max score is reached
         if (
-            stop_if_max
+            config.stop_if_max
             and best.eval_result.score == best.eval_result.max_score
             ):
             print("max score reached")
