@@ -7,13 +7,15 @@ from boolmore.boolean_functions import prime2bnet, prime2rr
 # seed for the random number generator
 SEED = 0
 
-base, start, final, log = run_ga(
+base, start, states = run_ga(
     run_type="NAV",
     json_file="CAD_config.json",
     start_model="CAD_start.bnet",
     run_name="demo",
     stop_if_max=True,
     seed=SEED)
+
+final = states[-1].population[0]
 
 print("\n-----comparing with the baseline functions-----")
 modified = 0

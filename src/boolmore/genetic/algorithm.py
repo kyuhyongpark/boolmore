@@ -171,6 +171,69 @@ class GeneticAlgorithm:
             )
 
 
+def ga_main(
+        start:Candidate,
+        evaluator:Evaluator,
+        selector:Selector,
+        reproducer:Reproducer,
+        config:GAConfig,
+        ) -> list[GAState]:
+    """
+    Main part of the genetic algorithm.
+
+    Parameters
+    ----------
+    start : Candidate
+        the starting model and its evaluation
+    evaluator : Evaluator
+        evaluator to get predictions and scores
+    selector : Selector
+        selector to select survivors
+    reproducer : Reproducer
+        reproducer to generate offsprings
+    config : GAConfig
+
+    Returns
+    -------
+    list[GAState]
+    """
+    if config.seed is not None:
+        random.seed(config.seed)
+        np.random.seed(config.seed)
+
+    ga = GeneticAlgorithm(
+        config,
+        evaluator,
+        selector,
+        reproducer
+        )
+
+    initial_state = GAState(
+        iteration=0,
+        population=ga.initialize_population([], start)
+        )
+    states = [initial_state]
+    
+    for _ in range(config.total_iter):
+        state = ga.next_state(states[-1])
+        states.append(state)
+
+        print(
+            f"iteration {state.iteration}, "
+            f"generated {state.generated}, "
+            f"{describe_candidate(state.population[0])}"
+            )
+        
+        if (
+            config.stop_if_max
+            and state.population[0].eval_result.score == state.population[0].eval_result.max_score
+            ):
+            print("max score reached")
+            break
+
+    return states
+
+
 def log_condition(
     fp,
     run_type,
@@ -215,6 +278,35 @@ def log_candidate(fp, candidate, label, path):
     bnet = primes2bnet(candidate.model.primes)
     for line in bnet.splitlines():
         fp.write("# " + line + "\n")
+
+
+def export_models(
+        states: list[GAState],
+        export_name: str,
+        export_top: int = 0,
+        export_thresh: float = 0.0,
+        export_same: bool = False,
+        ):
+    final = states[-1].population[0]
+
+    # Always export the final best model
+    final.model.name = export_name
+    final.model.export()
+
+    # Export top models from each generation
+    if export_top:
+        for state in states[1:]:
+            for candidate in state.population[:export_top]:
+                if candidate.eval_result.score > export_thresh:
+                    candidate.model.name = export_name
+                    candidate.model.export()
+
+    # Export all models tied with the best model in the final generation
+    if export_same:
+        for candidate in states[-1].population:
+            if candidate.eval_result.score == final.eval_result.score:
+                candidate.model.name = export_name
+                candidate.model.export()
 
 
 def run_ga(run_type:str,
@@ -401,7 +493,24 @@ def run_ga(run_type:str,
     print(f"score: {round(start.eval_result.score,2)} / {start.eval_result.max_score} ({round(start.eval_result.score/start.eval_result.max_score*100,1)}%)")
     print()
 
-    # ---------- Initialize log ----------
+    # ---------- Run genetic algorithm ----------
+    start_time = datetime.datetime.now()
+
+    config = GAConfig(total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
+                      prob=PROB, edge_prob=EDGE_PROB, order_by=ORDER_BY,
+                      stop_if_max=stop_if_max, core=core, seed=seed)
+    selector = Selector(keep=config.keep, order_by=config.order_by)
+    reproducer = Reproducer(selector=selector)
+    states = ga_main(start, evaluator, selector, reproducer, config)
+
+    end_time = datetime.datetime.now()
+
+    export_models(states, export_name, export_top, export_thresh, export_same)
+
+    final = states[-1].population[0]
+
+    # ---------- Write log ----------
+    print("Writing log...")
     with open(LOG, "w") as fp:
         log_condition(
             fp=fp,
@@ -417,32 +526,22 @@ def run_ga(run_type:str,
         log_candidate(fp, base, "BASE", BASE)
         log_candidate(fp, start, "START", START_MODEL)
 
-    # ---------- Run genetic algorithm ----------
-    start_time = datetime.datetime.now()
-
-    config = GAConfig(total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
-                      prob=PROB, edge_prob=EDGE_PROB, order_by=ORDER_BY,
-                      stop_if_max=stop_if_max, core=core, seed=seed)
-    selector = Selector(keep=config.keep, order_by=config.order_by)
-    reproducer = Reproducer(selector=selector)
-    final, log = ga_main(start, evaluator, selector, reproducer, config,
-                         export_top=export_top, export_thresh=export_thresh, export_name=export_name, export_same=export_same)
-
-    end_time = datetime.datetime.now()
-
-    print()
-    final.model.export()
-    final.model.info()
-
-    # ---------- Finalize log ----------
-    with open(LOG, "a") as fp:
         fp.write(f"\n# {start_time=}\n")
         fp.write(f"# {end_time=}\n")
         fp.write(f"# elapsed time: {end_time-start_time}\n\n")
 
         fp.write("iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model\n")
-        for iter in log:
-            fp.write(f"{iter[0]},{iter[1]},\"{iter[2]}\",{iter[3]},{iter[4]},{iter[5]},\"{iter[6]}\"\n")
+        for state in states[1:]:
+            candidate = state.population[0]
+            fp.write(
+                f"{state.iteration},"
+                f"{candidate.eval_result.score},"
+                f"\"{candidate.model.extra_edges}\","
+                f"{candidate.eval_result.n_edges},"
+                f"{candidate.eval_result.n_self_edges},"
+                f"{candidate.eval_result.n_prime_implicants},"
+                f"\"{candidate.model.id}_gen{candidate.model.generation}\"\n"
+                )
 
         log_candidate(fp, final, "FINAL", f"{export_name}_{final.model.id}_gen{final.model.generation}.bnet")
 
@@ -457,8 +556,8 @@ def run_ga(run_type:str,
     mutated = sorted(list(mutated))
 
     print(f"""
-        The algorithm ran for {log[-1][0]} iterations,
-        generating {log[-1][0]*PER_ITERATION} models.
+        The algorithm ran for {len(states)-1} iterations,
+        generating {states[-1].generated} models.
         Mutated {len(mutated)} functions, 
         and increased score from {round(start.eval_result.score,2)} / {start.eval_result.max_score} ({round(start.eval_result.score/start.eval_result.max_score*100,1)}%)
         to {round(final.eval_result.score,2)} / {final.eval_result.max_score} ({round(final.eval_result.score/final.eval_result.max_score*100,1)}%).\n
@@ -470,111 +569,4 @@ def run_ga(run_type:str,
         print("start:" + prime2bnet(node, start.model.primes[node]))
         print("final:" + prime2bnet(node, final.model.primes[node]))
 
-    return base, start, final, log
-
-
-def ga_main(
-        start:Candidate,
-        evaluator:Evaluator,
-        selector:Selector,
-        reproducer:Reproducer,
-        config:GAConfig,
-        export_name:str,
-        export_top:int=0,
-        export_thresh:float=0.0,
-        export_same:bool=False
-        ) -> tuple[Candidate, list]:
-    """
-    Main part of the genetic algorithm.
-
-    Parameters
-    ----------
-    start : Candidate
-        the starting model and its evaluation
-    evaluator : Evaluator
-        evaluator to get predictions and scores
-    selector : Selector
-        selector to select survivors
-    reproducer : Reproducer
-        reproducer to generate offsprings
-    config : GAConfig
-
-    export_top : int
-        number of models to export at each iteration, default 0
-    export_thresh : float
-        only models with scores above this threshold are exported, default 0.0
-    export_name : str
-        models are exported as (export_name)_id_gen.txt
-        if None, use the start model name
-
-
-    Returns
-    -------
-    final : Candidate
-        the final model and its evaluation
-    log : list[list[]]
-        [[iteration #, top score, extra_edges, n_edges, n_self_edges, n_prime_implicants, best_model], ...]
-
-    """
-    if config.seed is not None:
-        random.seed(config.seed)
-        np.random.seed(config.seed)
-
-    ga = GeneticAlgorithm(
-        config,
-        evaluator,
-        selector,
-        reproducer
-        )
-
-    # Initialize the starting population
-    initial_state = GAState(
-        iteration=0,
-        population=ga.initialize_population([], start)
-        )
-    states = [initial_state]
-    
-    for _ in range(config.total_iter):
-        state = ga.next_state(states[-1])
-        states.append(state)
-
-        print(
-            f"iteration {state.iteration}, "
-            f"generated {state.generated}, "
-            f"{describe_candidate(state.population[0])}"
-            )
-        
-        # Export models that exceed the threshold score
-        for j in range(export_top):
-            if state.population[j].eval_result.score > export_thresh:
-                state.population[j].model.name = export_name
-                state.population[j].model.export()
-
-        # Stop iteration if max score is reached
-        if (
-            config.stop_if_max
-            and state.population[0].eval_result.score == state.population[0].eval_result.max_score
-            ):
-            print("max score reached")
-            break
-
-    log = [
-        [
-            state.iteration,
-            state.population[0].eval_result.score,
-            state.population[0].model.extra_edges,
-            state.population[0].eval_result.n_edges,
-            state.population[0].eval_result.n_self_edges,
-            state.population[0].eval_result.n_prime_implicants,
-            f"{state.population[0].model.id}_gen{state.population[0].model.generation}",
-        ]
-        for state in states[1:]
-    ]
-
-    if export_same:
-        for candidate in state.population:
-            if candidate.eval_result.score == state.population[0].eval_result.score:
-                candidate.model.name = export_name
-                candidate.model.export()
-
-    return states[-1].population[0], log
+    return base, start, states

@@ -37,9 +37,9 @@
 # Pax6,      !Coup_fti&Sp8 | !Emx2
 # Sp8,       Fgf8
 
-# start_time=datetime.datetime(2026, 9, 22, 14, 48, 9, 451586)
-# end_time=datetime.datetime(2026, 9, 22, 14, 48, 14, 311304)
-# elapsed time: 0:00:04.859718
+# start_time=datetime.datetime(2026, 9, 22, 15, 26, 33, 947766)
+# end_time=datetime.datetime(2026, 9, 22, 15, 26, 38, 703278)
+# elapsed time: 0:00:04.755512
 
 iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model
 1,41.0,"[]",9,1,10,"8_gen1"
