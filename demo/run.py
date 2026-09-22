@@ -6,14 +6,14 @@ from boolmore.boolean_functions import prime2bnet, prime2rr
 
 # seed for the random number generator
 SEED = 0
+CORE = 2
 
 base, start, states = run_ga(
-    run_type="NAV",
     json_file="CAD_config.json",
-    start_model="CAD_start.bnet",
+    seed=SEED,
     run_name="demo",
-    stop_if_max=True,
-    seed=SEED)
+    core=CORE
+    )
 
 final = states[-1].population[0]
 

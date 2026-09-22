@@ -1,20 +1,23 @@
-# run_type='NAV'
+# RUN_TYPE='NAV'
 # DATA: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_data.tsv
+# HIERARCHY=True
 # DEFAULT_SOURCES={}
+# GENERATE_DEFAULTS=False
 # CONSTRAINTS={'fixed': [], 'regulate': {}, 'necessary': {}, 'group': {}, 'possible_constant': []}
 # EDGE_POOL=[]
 
-# total_iterations: 10
-# per_iteration: 10
+# seed: 0
+# stop if max: True
+# starting gen: 0
+# total iterations: 10
+# per iteration: 10
 # keep: 2
 # mix: 2
 # prob: 0.2
-# edge_prob: 0.0
-# order_by: ['n_extra_edges', 'n_prime_implicants']
+# edge prob: 0.0
+# order by: ['n_extra_edges', 'n_prime_implicants']
 
-# stop_if_max=True
 # core=2
-# seed=0
 
 
 # BASE: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD.bnet
@@ -37,9 +40,9 @@
 # Pax6,      !Coup_fti&Sp8 | !Emx2
 # Sp8,       Fgf8
 
-# start_time=datetime.datetime(2026, 9, 22, 15, 37, 48, 930975)
-# end_time=datetime.datetime(2026, 9, 22, 15, 37, 53, 883486)
-# elapsed time: 0:00:04.952511
+# start_time=datetime.datetime(2026, 9, 22, 17, 55, 24, 345567)
+# end_time=datetime.datetime(2026, 9, 22, 17, 55, 29, 70716)
+# elapsed time: 0:00:04.725149
 
 iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model
 1,41.0,"[]",9,1,10,"8_gen1"

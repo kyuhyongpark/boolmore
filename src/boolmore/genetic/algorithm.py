@@ -33,6 +33,9 @@ PredictType = dict[FixesType, dict]
 @dataclass
 class GAConfig:
     """
+    stop_if_max : bool
+        if True, stop if the maximum score is reached
+
     total_iter : int
         total number of iterations
     per_iter : int
@@ -51,13 +54,13 @@ class GAConfig:
     order_by : list[str]
         list of attributes to sort by
 
-    stop_if_max : bool
-        if True, stop when the max score is reached. default True
-    core : int
-        if larger than 1, model evaluation is done in parallel      :int
     seed : int | None
-        random seed for reproducibility
+        seed for the random number generator
+    core : int
+        number of cores to use
     """
+    stop_if_max: bool
+
     total_iter: int
     per_iter: int
     keep: int
@@ -67,10 +70,9 @@ class GAConfig:
     edge_prob: float
 
     order_by: list[str]
-    
-    stop_if_max: bool
-    core: int
+
     seed: int | None
+    core: int
 
     def __post_init__(self):
         if type(self.prob) == float:
@@ -105,7 +107,7 @@ class GeneticAlgorithm:
             config:GAConfig,
             evaluator:Evaluator,
             selector:Selector,
-            reproducer:Reproducer
+            reproducer:Reproducer,
             ):
         self.config = config
         self.evaluator = evaluator
@@ -192,6 +194,9 @@ def ga_main(
     reproducer : Reproducer
         reproducer to generate offsprings
     config : GAConfig
+        configuration
+    core : int, optional
+        number of cores to use, by default 1
 
     Returns
     -------
@@ -205,7 +210,7 @@ def ga_main(
         config,
         evaluator,
         selector,
-        reproducer
+        reproducer,
         )
 
     initial_state = GAState(
@@ -278,13 +283,22 @@ def export_models(
                 candidate.model.export()
 
 
-def run_ga(run_type:str,
-        json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
-           data_file:str|None=None, base_file:str|None=None, parameter_dict:dict|None=None,
-           export_top:int=0, export_thresh:float=0.0, export_name:str|None=None, export_same:bool=False,
-           stop_if_max:bool=True, core:int=2, seed:int|None = None,
-           hierarchy:bool=True,
-           )-> tuple[Model, Model, Model, list]:
+def run_ga(
+        json_file:str|None=None,
+        run_type:str|None=None,
+        data_file:str|None=None,
+        base_file:str|None=None,
+        start_file:str|None=None,
+        stop_if_max:bool|None=None,
+        hierarchy:bool|None=None,
+        seed:int|None=None,
+        run_name:str|None=None,
+        export_top:int=0,
+        export_thresh:float=0.0,
+        export_name:str|None=None,
+        export_same:bool=False,
+        core:int=1,
+        )-> tuple[Model, Model, list[GAState]]:
     """
     Imports parameters, experiments, base model in the json file.
     Runs genetic algorithm and exports refined models.
@@ -294,35 +308,43 @@ def run_ga(run_type:str,
 
     Parameters
     ----------
-    run_type : str
-        "Phenotype" or "NAV"
     json_file : str | None
         location of the json file containing parameters
     
     Optional
     --------
-    start_model : str | None
-        location of the bnet file of the starting model
-        if None, base_model is the starting model
-    run_name : str | None
-        models are exported as (run_name)_id_gen.bnet
-        log is exported as (run_name)_log.txt
-        if None, takes the start_model name
+    run_type : str | None
+        "Phenotype" or "NAV"
     data_file : str | None
         location of the data file that overrides the json file.
         Must be given if json_file is not given.
     base_file : str | None
         location of the base file that overrides the json file.
         Must be given if json_file is not given.
-    parameter_dict : dict | None
-        If given, overwrites any parameters.
-
+    start_file : str | None
+        location of the bnet file of the starting model
+        if None, base_model is the starting model
     stop_if_max : bool
         if True, stop when the max score is reached
-    core : int
-        if larger than 1, model evaluation is done in parallel
+    hierarchy : bool
+        if True, hierarchy scoring is used
+
     seed : int | None
         random seed for reproducibility
+    run_name : str | None
+        models are exported as (run_name)_id_gen.bnet
+        log is exported as (run_name)_log.txt
+        if None, takes the start_model name
+    export_top : int
+        export top models from each generation
+    export_thresh : float
+        export models with scores higher than this
+    export_name : str | None
+        name of the exported models
+    export_same : bool
+        if True, export models with the same score for the final generation
+    core : int
+        if larger than 1, model evaluation is done in parallel
 
     Returns
     -------
@@ -330,86 +352,74 @@ def run_ga(run_type:str,
         the base model and its evaluation
     start : Candidate
         the starting model and its evaluation
-    final : Candidate
-        the final model and its evaluation
-    log : list
-        the log
+    states : list[GAState]
+        the states of the genetic algorithm
 
     """
     # ---------- Load run configuration ----------
-    # load json file if given
-    if json_file != None:
-        f = open(json_file)
-        json_dict = json.load(f)
+    if json_file is not None:
+        if any(x is not None for x in [run_type, data_file, base_file, start_file, stop_if_max, hierarchy]):
+            raise ValueError("If json file is given, other parameters should not be given.")
 
-        parameters = json_dict["parameters"]
-
-        # take model specific data from the json file
-        DATA:str = json_dict["data"]
-        BASE:str = json_dict["base"]
-        DEFAULT_SOURCES = json_dict["default_sources"]
-        generate_default_sources = False
-        CONSTRAINTS = json_dict["constraints"]
-        EDGE_POOL = json_dict["edge_pool"]
+        with open(json_file) as f:
+            input = json.load(f)
 
     else:
-        assert data_file != None and base_file != None, "either json or the data and base files should be provided"
-        
-        parameters = {"starting_gen" : 0,
-                      "total_iterations" : 10,
-                      "per_iteration" : 10,
-                      "keep" : 2,
-                      "mix" : 0,
-                      "prob" : 0.1,
-                      "edge_prob" : 0.5,
-                      "order_by" : ["n_extra_edges", "n_prime_implicants"]}
+        if any(x is None for x in [run_type, data_file, base_file]):
+            raise ValueError("If json file is not given, run_type, data_file and base_file must be given.")
 
-        # all source nodes being 0 is considered the default
-        DEFAULT_SOURCES = {}
-        generate_default_sources = True
-        # no constraint is assumed
-        CONSTRAINTS = {"fixed": [], "regulate": {}, "necessary" : {},
-                            "group": {}, "possible_constant": []}
-        # no extra edge is assumed
-        EDGE_POOL = []
+        input = {
+            "run_type": run_type,
+            "data": data_file,
+            "base": base_file,
+            "start": start_file if start_file is not None else base_file,
+            "hierarchy": hierarchy if hierarchy is not None else True,
+            "default_sources": {},
+            "generate_defaults": True,
+            "constraints": {
+                "fixed": [],
+                "regulate": {},
+                "necessary" : {},
+                "group": {},
+                "possible_constant": []
+                },
+            "edge_pool": [],
+            "parameters" : {
+                "stop_if_max": stop_if_max if stop_if_max is not None else True,
+                "starting_gen": 0,
+                "total_iter": 10,
+                "per_iter" : 10,
+                "keep" : 2,
+                "mix" : 0,
+                "prob" : 0.1,
+                "edge_prob" : 0.5,
+                "order_by" : ["n_extra_edges", "n_prime_implicants"]
+                }
+            }
 
-    # ---------- Resolve input files and parameters ----------
-    # if data file is given, overwrite DATA
-    if data_file != None:
-        DATA = data_file
+    RUN_TYPE = input["run_type"]
+    DATA = input["data"]
+    BASE = input["base"]
+    START = input["start"]
+    HIERARCHY = input["hierarchy"]
+    DEFAULT_SOURCES = input["default_sources"]
+    GENERATE_DEFAULTS = input["generate_defaults"]
+    CONSTRAINTS = input["constraints"]
+    EDGE_POOL = input["edge_pool"]
+    parameters = input["parameters"].copy()
 
-    # if base file is given, overwrite BASE
-    if base_file != None:
-        BASE = base_file
-
-    # if starting model is not given, take the base as the start
-    if start_model != None:
-        START_MODEL = start_model
-    else:
-        START_MODEL = BASE
+    STARTING_GEN = parameters.pop("starting_gen")
+    config = GAConfig(**parameters, seed=seed, core=core)
 
     if run_name is None:
-        run_name = START_MODEL.split("/")[-1][:-5]
+        run_name = START.split("/")[-1][:-5]
+    
     LOG = run_name + "_log.txt"
 
     if export_name is None:
         export_name = run_name
 
-    # if parameter_dict is given, overwrite parameters
-    if parameter_dict != None:
-        parameters.update(parameter_dict)
-
-    # take parameters
-    STARTING_GEN = parameters["starting_gen"]
-    TOTAL_ITERATIONS = parameters["total_iterations"]
-    PER_ITERATION = parameters["per_iteration"]
-    KEEP = parameters["keep"]
-    MIX = parameters["mix"]
-    PROB = parameters["prob"]
-    EDGE_PROB = parameters["edge_prob"]
-    ORDER_BY = parameters["order_by"]
-
-    # ---------- Load base model ----------
+    # ---------- Load base and starting model ----------
     print(f"Loading base model from {os.path.abspath(BASE)}")
     if BASE.endswith(".bnet"):
         base_primes = bnet_file2primes(BASE)
@@ -420,18 +430,27 @@ def run_ga(run_type:str,
                               edge_pool=EDGE_POOL)
     print("Base model loaded.")
 
+    if START == BASE:
+        start_primes = base_primes
+    else:
+        print(f"Loading starting model from {os.path.abspath(START)}")
+        start_primes = bnet_file2primes(START)
+    start_model = Model.import_model(start_primes, id=0, generation=STARTING_GEN, base=base_model)
+    start_model.name = run_name
+    print("Starting model loaded.")
+
     # ---------- Load experimental data ----------
     print(f"Loading experimental data from {os.path.abspath(DATA)}")
-    if run_type == "NAV":
-        if generate_default_sources:
+    if RUN_TYPE == "NAV":
+        if GENERATE_DEFAULTS:
             for node in base_primes:
                 if base_primes[node] == [[{node:0}], [{node:1}]]:
                     DEFAULT_SOURCES[node] = 0
 
         exps = import_NAV_exps(DATA)
         prediction_fn = get_NAV_prediction
-        score_fn = partial(get_NAV_scores, default_sources=DEFAULT_SOURCES, hierarchy=hierarchy)
-    elif run_type == "Phenotype":
+        score_fn = partial(get_NAV_scores, default_sources=DEFAULT_SOURCES, hierarchy=HIERARCHY)
+    elif RUN_TYPE == "Phenotype":
         exps = import_phenotypes(DATA)
         prediction_fn = get_phenotype_prediction
         score_fn = get_phenotype_scores
@@ -446,17 +465,9 @@ def run_ga(run_type:str,
     print(f"score: {round(base.eval_result.score,2)} / {base.eval_result.max_score} ({round(base.eval_result.score/base.eval_result.max_score*100,1)}%)")
     print(f"""
           Elapsed time for single evaluation: {end_single-start_single}
-          Estimated total run time: {(end_single-start_single)*TOTAL_ITERATIONS*PER_ITERATION}""")
+          Estimated total run time: {(end_single-start_single)*config.total_iter*config.per_iter}""")
     print()
 
-    if START_MODEL == BASE:
-        start_primes = base_primes
-    else:
-        print(f"Loading starting model from {os.path.abspath(START_MODEL)}")
-        start_primes = bnet_file2primes(START_MODEL)
-    start_model = Model.import_model(start_primes, id=0, generation=STARTING_GEN, base=base.model)
-    print("Starting model loaded.")
-    start_model.name = run_name
     start = Candidate(start_model, evaluator.evaluate(start_model))
     start.model.info()
     print(f"score: {round(start.eval_result.score,2)} / {start.eval_result.max_score} ({round(start.eval_result.score/start.eval_result.max_score*100,1)}%)")
@@ -465,42 +476,42 @@ def run_ga(run_type:str,
     # ---------- Run genetic algorithm ----------
     start_time = datetime.datetime.now()
 
-    config = GAConfig(total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
-                      prob=PROB, edge_prob=EDGE_PROB, order_by=ORDER_BY,
-                      stop_if_max=stop_if_max, core=core, seed=seed)
     selector = Selector(keep=config.keep, order_by=config.order_by)
     reproducer = Reproducer(selector=selector)
     states = ga_main(start, evaluator, selector, reproducer, config)
 
     end_time = datetime.datetime.now()
 
+    print()
     export_models(states, export_name, export_top, export_thresh, export_same)
 
     final = states[-1].population[0]
 
     # ---------- Write log ----------
-    print("Writing log...")
     with open(LOG, "w") as fp:
-        fp.write(f"# {run_type=}\n")
+        fp.write(f"# {RUN_TYPE=}\n")
         fp.write(f"# DATA: {os.path.abspath(DATA)}\n")
+        fp.write(f"# {HIERARCHY=}\n")
         fp.write(f"# {DEFAULT_SOURCES=}\n")
+        fp.write(f"# {GENERATE_DEFAULTS=}\n")
         fp.write(f"# {CONSTRAINTS=}\n")
         fp.write(f"# {EDGE_POOL=}\n\n")
 
-        fp.write(f"# total_iterations: {parameters['total_iterations']}\n")
-        fp.write(f"# per_iteration: {parameters['per_iteration']}\n")
-        fp.write(f"# keep: {parameters['keep']}\n")
-        fp.write(f"# mix: {parameters['mix']}\n")
-        fp.write(f"# prob: {parameters['prob']}\n")
-        fp.write(f"# edge_prob: {parameters['edge_prob']}\n")
-        fp.write(f"# order_by: {parameters['order_by']}\n\n")
+        fp.write(f"# seed: {config.seed}\n")
+        fp.write(f"# stop if max: {config.stop_if_max}\n")
+        fp.write(f"# starting gen: {STARTING_GEN}\n")
+        fp.write(f"# total iterations: {config.total_iter}\n")
+        fp.write(f"# per iteration: {config.per_iter}\n")
+        fp.write(f"# keep: {config.keep}\n")
+        fp.write(f"# mix: {config.mix}\n")
+        fp.write(f"# prob: {config.prob}\n")
+        fp.write(f"# edge prob: {config.edge_prob}\n")
+        fp.write(f"# order by: {config.order_by}\n\n")
 
-        fp.write(f"# {stop_if_max=}\n")
-        fp.write(f"# {core=}\n")
-        fp.write(f"# {seed=}\n\n")
+        fp.write(f"# {core=}\n\n")
 
         log_candidate(fp, base, "BASE", BASE)
-        log_candidate(fp, start, "START", START_MODEL)
+        log_candidate(fp, start, "START", START)
 
         fp.write(f"\n# {start_time=}\n")
         fp.write(f"# {end_time=}\n")
