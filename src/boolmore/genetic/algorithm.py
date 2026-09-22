@@ -171,6 +171,52 @@ class GeneticAlgorithm:
             )
 
 
+def log_condition(
+    fp,
+    run_type,
+    data,
+    default_sources,
+    constraints,
+    edge_pool,
+    parameters,
+    stop_if_max,
+    core,
+    seed,
+):
+    fp.write(f"# {run_type=}\n")
+    fp.write(f"# DATA: {os.path.abspath(data)}\n")
+    fp.write(f"# {default_sources=}\n")
+    fp.write(f"# {constraints=}\n")
+    fp.write(f"# {edge_pool=}\n\n")
+
+    fp.write(f"# total_iterations: {parameters['total_iterations']}\n")
+    fp.write(f"# per_iteration: {parameters['per_iteration']}\n")
+    fp.write(f"# keep: {parameters['keep']}\n")
+    fp.write(f"# mix: {parameters['mix']}\n")
+    fp.write(f"# prob: {parameters['prob']}\n")
+    fp.write(f"# edge_prob: {parameters['edge_prob']}\n")
+    fp.write(f"# order_by: {parameters['order_by']}\n\n")
+
+    fp.write(f"# {stop_if_max=}\n")
+    fp.write(f"# {core=}\n")
+    fp.write(f"# {seed=}\n\n")
+
+
+def log_candidate(fp, candidate, label, path):
+    fp.write(f"\n# {label}: {os.path.abspath(path)}\n")
+    fp.write(
+        f"# score: {candidate.eval_result.score} / "
+        f"{candidate.eval_result.max_score} "
+        f"({candidate.eval_result.score / candidate.eval_result.max_score * 100}%)\n"
+    )
+    fp.write(f"# extra edges: {candidate.model.extra_edges}\n")
+    fp.write("# targets,\tfactors\n")
+
+    bnet = primes2bnet(candidate.model.primes)
+    for line in bnet.splitlines():
+        fp.write("# " + line + "\n")
+
+
 def run_ga(run_type:str,
         json_file:str|None=None, start_model:str|None=None, run_name:str|None=None,
            data_file:str|None=None, base_file:str|None=None, parameter_dict:dict|None=None,
@@ -198,7 +244,7 @@ def run_ga(run_type:str,
         location of the bnet file of the starting model
         if None, base_model is the starting model
     run_name : str | None
-        models are exported as (run_name)_id_gen.bent
+        models are exported as (run_name)_id_gen.bnet
         log is exported as (run_name)_log.txt
         if None, takes the start_model name
     data_file : str | None
@@ -229,6 +275,7 @@ def run_ga(run_type:str,
         the log
 
     """
+    # ---------- Load run configuration ----------
     # load json file if given
     if json_file != None:
         f = open(json_file)
@@ -265,6 +312,7 @@ def run_ga(run_type:str,
         # no extra edge is assumed
         EDGE_POOL = []
 
+    # ---------- Resolve input files and parameters ----------
     # if data file is given, overwrite DATA
     if data_file != None:
         DATA = data_file
@@ -283,6 +331,9 @@ def run_ga(run_type:str,
         run_name = START_MODEL.split("/")[-1][:-5]
     LOG = run_name + "_log.txt"
 
+    if export_name is None:
+        export_name = run_name
+
     # if parameter_dict is given, overwrite parameters
     if parameter_dict != None:
         parameters.update(parameter_dict)
@@ -297,6 +348,7 @@ def run_ga(run_type:str,
     EDGE_PROB = parameters["edge_prob"]
     ORDER_BY = parameters["order_by"]
 
+    # ---------- Load base model ----------
     print(f"Loading base model from {os.path.abspath(BASE)}")
     if BASE.endswith(".bnet"):
         base_primes = bnet_file2primes(BASE)
@@ -307,6 +359,7 @@ def run_ga(run_type:str,
                               edge_pool=EDGE_POOL)
     print("Base model loaded.")
 
+    # ---------- Load experimental data ----------
     print(f"Loading experimental data from {os.path.abspath(DATA)}")
     if run_type == "NAV":
         if generate_default_sources:
@@ -324,6 +377,7 @@ def run_ga(run_type:str,
     evaluator = Evaluator(exps=exps, prediction_fn=prediction_fn, score_fn=score_fn)
     print("Experimental data loaded.\n")
 
+    # ---------- Evaluate base and start models ----------
     start_single = datetime.datetime.now()
     base = Candidate(base_model, evaluator.evaluate(base_model))    
     end_single = datetime.datetime.now()
@@ -347,42 +401,23 @@ def run_ga(run_type:str,
     print(f"score: {round(start.eval_result.score,2)} / {start.eval_result.max_score} ({round(start.eval_result.score/start.eval_result.max_score*100,1)}%)")
     print()
 
-    fp = open(LOG, "w")
+    # ---------- Initialize log ----------
+    with open(LOG, "w") as fp:
+        log_condition(
+            fp=fp,
+            run_type=run_type,
+            data=DATA,
+            default_sources=DEFAULT_SOURCES,
+            constraints=CONSTRAINTS,
+            edge_pool=EDGE_POOL,
+            parameters=parameters,
+            stop_if_max=stop_if_max,
+            core=core,
+            seed=seed)
+        log_candidate(fp, base, "BASE", BASE)
+        log_candidate(fp, start, "START", START_MODEL)
 
-    fp.write(f"# DATA: {os.path.abspath(DATA)}\n")
-    fp.write(f"# {DEFAULT_SOURCES=}\n")
-    fp.write(f"# {CONSTRAINTS=}\n")
-    fp.write(f"# {EDGE_POOL=}\n\n")
-
-    fp.write(f"# {TOTAL_ITERATIONS=}\n")
-    fp.write(f"# {PER_ITERATION=}\n")
-    fp.write(f"# {KEEP=}\n")
-    fp.write(f"# {MIX=}\n")
-    fp.write(f"# {PROB=}\n")
-    fp.write(f"# {EDGE_PROB=}\n")
-    fp.write(f"# {ORDER_BY=}\n\n")
-
-    fp.write(f"# {stop_if_max=}\n")
-    fp.write(f"# {core=}\n")
-    fp.write(f"# {seed=}\n\n")
-
-    fp.write(f"# BASE: {os.path.abspath(BASE)}\n")
-    fp.write(f"# extra edges: {base.model.extra_edges}\n")
-    fp.write(f"# score: {base.eval_result.score} / {base.eval_result.max_score} ({base.eval_result.score/base.eval_result.max_score*100}%)\n")
-    fp.write("# targets,\tfactors\n")
-    base_bnet = primes2bnet(base.model.primes)
-    for line in base_bnet.split("\n"):
-        fp.write("# " + line + "\n")
-    fp.write(f"\n\n# START MODEL: {os.path.abspath(START_MODEL)}\n")
-    if BASE != START_MODEL:
-        fp.write(f"# score: {start.eval_result.score} / {start.eval_result.max_score} ({start.eval_result.score/start.eval_result.max_score*100}%)\n")
-        fp.write(f"# extra edges: {start.model.extra_edges}\n")
-        fp.write("# targets,\tfactors\n")
-        start_bnet = primes2bnet(start.model.primes)
-        for line in start_bnet.split("\n"):
-            fp.write("# " + line + "\n")
-    fp.close()
-
+    # ---------- Run genetic algorithm ----------
     start_time = datetime.datetime.now()
 
     config = GAConfig(total_iter=TOTAL_ITERATIONS, per_iter=PER_ITERATION, keep=KEEP, mix=MIX,
@@ -395,16 +430,23 @@ def run_ga(run_type:str,
 
     end_time = datetime.datetime.now()
 
-    fp = open(LOG, "a")
+    print()
+    final.model.export()
+    final.model.info()
 
-    fp.write(f"\n# {start_time=}\n")
-    fp.write(f"# {end_time=}\n")
-    fp.write(f"# elapsed time: {end_time-start_time}\n\n")
+    # ---------- Finalize log ----------
+    with open(LOG, "a") as fp:
+        fp.write(f"\n# {start_time=}\n")
+        fp.write(f"# {end_time=}\n")
+        fp.write(f"# elapsed time: {end_time-start_time}\n\n")
 
-    fp.write("iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model\n")
-    for iter in log:
-        fp.write(f"{iter[0]},{iter[1]},\"{iter[2]}\",{iter[3]},{iter[4]},{iter[5]},\"{iter[6]}\"\n")
+        fp.write("iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model\n")
+        for iter in log:
+            fp.write(f"{iter[0]},{iter[1]},\"{iter[2]}\",{iter[3]},{iter[4]},{iter[5]},\"{iter[6]}\"\n")
 
+        log_candidate(fp, final, "FINAL", f"{export_name}_{final.model.id}_gen{final.model.generation}.bnet")
+
+    # ---------- Analyze and report results ----------
     mutated = set()
     for node in start.model.primes:
         for value in [0, 1]:
@@ -423,10 +465,6 @@ def run_ga(run_type:str,
         Total elapsed time: {end_time-start_time}""")
     print()
 
-    final.model.export()
-    final.model.info()
-    print()
-
     print("-----modified functions-----")
     for node in mutated:
         print("start:" + prime2bnet(node, start.model.primes[node]))
@@ -441,9 +479,9 @@ def ga_main(
         selector:Selector,
         reproducer:Reproducer,
         config:GAConfig,
+        export_name:str,
         export_top:int=0,
         export_thresh:float=0.0,
-        export_name:str|None=None,
         export_same:bool=False
         ) -> tuple[Candidate, list]:
     """
@@ -478,9 +516,6 @@ def ga_main(
         [[iteration #, top score, extra_edges, n_edges, n_self_edges, n_prime_implicants, best_model], ...]
 
     """
-    if export_name == None:
-        export_name = start.model.name
-
     if config.seed is not None:
         random.seed(config.seed)
         np.random.seed(config.seed)

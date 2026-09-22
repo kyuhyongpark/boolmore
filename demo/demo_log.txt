@@ -1,33 +1,33 @@
+# run_type='NAV'
 # DATA: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_data.tsv
-# DEFAULT_SOURCES={}
-# CONSTRAINTS={'fixed': [], 'regulate': {}, 'necessary': {}, 'group': {}, 'possible_constant': []}
-# EDGE_POOL=[]
+# default_sources={}
+# constraints={'fixed': [], 'regulate': {}, 'necessary': {}, 'group': {}, 'possible_constant': []}
+# edge_pool=[]
 
-# TOTAL_ITERATIONS=10
-# PER_ITERATION=10
-# KEEP=2
-# MIX=2
-# PROB=0.2
-# EDGE_PROB=0.0
-# ORDER_BY=['n_extra_edges', 'n_prime_implicants']
+# total_iterations: 10
+# per_iteration: 10
+# keep: 2
+# mix: 2
+# prob: 0.2
+# edge_prob: 0.0
+# order_by: ['n_extra_edges', 'n_prime_implicants']
 
 # stop_if_max=True
 # core=2
 # seed=0
 
+
 # BASE: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD.bnet
-# extra edges: []
 # score: 50.0 / 50.0 (100.0%)
+# extra edges: []
 # targets,	factors
 # Coup_fti,  !Fgf8&!Sp8
 # Emx2,      Coup_fti&!Fgf8&!Pax6&!Sp8
 # Fgf8,      !Emx2&Fgf8&Sp8
 # Pax6,      !Coup_fti&!Emx2&Sp8
 # Sp8,       !Emx2&Fgf8
-# 
 
-
-# START MODEL: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_start.bnet
+# START: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_start.bnet
 # score: 33.958333333333336 / 50.0 (67.91666666666667%)
 # extra edges: []
 # targets,	factors
@@ -36,11 +36,10 @@
 # Fgf8,      Sp8 | !Emx2
 # Pax6,      !Coup_fti&Sp8 | !Emx2
 # Sp8,       Fgf8
-# 
 
-# start_time=datetime.datetime(2026, 9, 20, 16, 7, 20, 855735)
-# end_time=datetime.datetime(2026, 9, 20, 16, 7, 25, 951284)
-# elapsed time: 0:00:05.095549
+# start_time=datetime.datetime(2026, 9, 22, 14, 48, 9, 451586)
+# end_time=datetime.datetime(2026, 9, 22, 14, 48, 14, 311304)
+# elapsed time: 0:00:04.859718
 
 iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model
 1,41.0,"[]",9,1,10,"8_gen1"
@@ -53,3 +52,13 @@ iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_mod
 8,49.0,"[]",10,1,10,"80_gen11"
 9,49.0,"[]",10,1,10,"80_gen11"
 10,49.0,"[]",10,1,10,"80_gen11"
+
+# FINAL: /home/kyuhyongpark/Boolmore/boolmore/demo/demo_80_gen11.bnet
+# score: 49.0 / 50.0 (98.0%)
+# extra edges: []
+# targets,	factors
+# Coup_fti,  !Sp8
+# Emx2,      Coup_fti&!Fgf8&!Sp8
+# Fgf8,      !Emx2&Fgf8&Sp8
+# Pax6,      !Coup_fti&Sp8
+# Sp8,       Fgf8
