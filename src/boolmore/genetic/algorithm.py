@@ -234,37 +234,6 @@ def ga_main(
     return states
 
 
-def log_condition(
-    fp,
-    run_type,
-    data,
-    default_sources,
-    constraints,
-    edge_pool,
-    parameters,
-    stop_if_max,
-    core,
-    seed,
-):
-    fp.write(f"# {run_type=}\n")
-    fp.write(f"# DATA: {os.path.abspath(data)}\n")
-    fp.write(f"# {default_sources=}\n")
-    fp.write(f"# {constraints=}\n")
-    fp.write(f"# {edge_pool=}\n\n")
-
-    fp.write(f"# total_iterations: {parameters['total_iterations']}\n")
-    fp.write(f"# per_iteration: {parameters['per_iteration']}\n")
-    fp.write(f"# keep: {parameters['keep']}\n")
-    fp.write(f"# mix: {parameters['mix']}\n")
-    fp.write(f"# prob: {parameters['prob']}\n")
-    fp.write(f"# edge_prob: {parameters['edge_prob']}\n")
-    fp.write(f"# order_by: {parameters['order_by']}\n\n")
-
-    fp.write(f"# {stop_if_max=}\n")
-    fp.write(f"# {core=}\n")
-    fp.write(f"# {seed=}\n\n")
-
-
 def log_candidate(fp, candidate, label, path):
     fp.write(f"\n# {label}: {os.path.abspath(path)}\n")
     fp.write(
@@ -512,17 +481,24 @@ def run_ga(run_type:str,
     # ---------- Write log ----------
     print("Writing log...")
     with open(LOG, "w") as fp:
-        log_condition(
-            fp=fp,
-            run_type=run_type,
-            data=DATA,
-            default_sources=DEFAULT_SOURCES,
-            constraints=CONSTRAINTS,
-            edge_pool=EDGE_POOL,
-            parameters=parameters,
-            stop_if_max=stop_if_max,
-            core=core,
-            seed=seed)
+        fp.write(f"# {run_type=}\n")
+        fp.write(f"# DATA: {os.path.abspath(DATA)}\n")
+        fp.write(f"# {DEFAULT_SOURCES=}\n")
+        fp.write(f"# {CONSTRAINTS=}\n")
+        fp.write(f"# {EDGE_POOL=}\n\n")
+
+        fp.write(f"# total_iterations: {parameters['total_iterations']}\n")
+        fp.write(f"# per_iteration: {parameters['per_iteration']}\n")
+        fp.write(f"# keep: {parameters['keep']}\n")
+        fp.write(f"# mix: {parameters['mix']}\n")
+        fp.write(f"# prob: {parameters['prob']}\n")
+        fp.write(f"# edge_prob: {parameters['edge_prob']}\n")
+        fp.write(f"# order_by: {parameters['order_by']}\n\n")
+
+        fp.write(f"# {stop_if_max=}\n")
+        fp.write(f"# {core=}\n")
+        fp.write(f"# {seed=}\n\n")
+
         log_candidate(fp, base, "BASE", BASE)
         log_candidate(fp, start, "START", START_MODEL)
 

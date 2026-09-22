@@ -1,8 +1,8 @@
 # run_type='NAV'
 # DATA: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_data.tsv
-# default_sources={}
-# constraints={'fixed': [], 'regulate': {}, 'necessary': {}, 'group': {}, 'possible_constant': []}
-# edge_pool=[]
+# DEFAULT_SOURCES={}
+# CONSTRAINTS={'fixed': [], 'regulate': {}, 'necessary': {}, 'group': {}, 'possible_constant': []}
+# EDGE_POOL=[]
 
 # total_iterations: 10
 # per_iteration: 10
@@ -37,9 +37,9 @@
 # Pax6,      !Coup_fti&Sp8 | !Emx2
 # Sp8,       Fgf8
 
-# start_time=datetime.datetime(2026, 9, 22, 15, 26, 33, 947766)
-# end_time=datetime.datetime(2026, 9, 22, 15, 26, 38, 703278)
-# elapsed time: 0:00:04.755512
+# start_time=datetime.datetime(2026, 9, 22, 15, 37, 48, 930975)
+# end_time=datetime.datetime(2026, 9, 22, 15, 37, 53, 883486)
+# elapsed time: 0:00:04.952511
 
 iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model
 1,41.0,"[]",9,1,10,"8_gen1"
