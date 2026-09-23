@@ -265,7 +265,6 @@ def export_models(
     final = states[-1].population[0]
 
     # Always export the final best model
-    final.model.name = export_name
     final.model.export(file_name=f"{export_name}_{final.id}_gen{final.generation}")
 
     # Export top models from each generation
@@ -273,14 +272,12 @@ def export_models(
         for state in states[1:]:
             for candidate in state.population[:export_top]:
                 if candidate.eval_result.score > export_thresh:
-                    candidate.model.name = export_name
                     candidate.model.export(file_name=f"{export_name}_{candidate.id}_gen{candidate.generation}")
 
     # Export all models tied with the best model in the final generation
     if export_same:
         for candidate in states[-1].population:
             if candidate.eval_result.score == final.eval_result.score:
-                candidate.model.name = export_name
                 candidate.model.export(filename=f"{export_name}_{candidate.id}_gen{candidate.generation}")
 
 
@@ -438,7 +435,6 @@ def run_ga(
         print(f"Loading starting model from {os.path.abspath(START)}")
         start_primes = bnet_file2primes(START)
     start_model = Model.import_model(start_primes, base=base_model)
-    start_model.name = run_name
     print("Starting model loaded.")
 
     # ---------- Load experimental data ----------

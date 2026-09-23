@@ -13,9 +13,7 @@ class Model():
     def __init__(self):
         """
         Attributes
-        ----------
-        name            - name of the model                                         :str
-        
+        ----------        
         base            - the base model (not the neccesarily the starting model)   :Model class
                           from which the regulators, fixed functions, constants,
                           extra edges, etc. are decided.
@@ -24,24 +22,26 @@ class Model():
 
         primes          - pyboolnet primes dictionary                               :length N dict[str, PrimeType]
                           {node: prime}                          
+
         regulators_dict - dictionary of the regulating nodes                        :length N dict[str, tuple[str]]
         signs_dict      - dictionary of the signs of regulators                     :length N dict[str, str]
         rr_dict         - dictionary of the binary rule representations             :length N dict[str, str]
+        
         extra_edges     - edges from the pool that are present in the model         :list[list[str]]
                           [[regulator, target, sign], ...]
-
         n_extra_edges   - number of extra edges in the model                        :int
 
         """
-        self.name = ""
 
         self.base = None
         self.edge_pool = []
         
         self.primes:dict[str, PrimeType] = {}
+
         self.regulators_dict = {}
         self.signs_dict = {}
         self.rr_dict = {}
+
         self.extra_edges = []
         self.n_extra_edges = 0
 
@@ -85,7 +85,6 @@ class Model():
         else:
             x.base = base
             x.edge_pool.extend(base.edge_pool)
-            x.name = base.name
         
         for node in x.primes:
             # find current regulators and signs

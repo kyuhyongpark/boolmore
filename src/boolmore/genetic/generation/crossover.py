@@ -18,7 +18,6 @@ def mix_models(model1:Model, model2:Model) -> Model:
 
     mixed_model.base = model1.base
     mixed_model.edge_pool = model1.edge_pool
-    mixed_model.name = model1.name
 
     for node in model1.rr_dict:
         # get mutated_rr from rr

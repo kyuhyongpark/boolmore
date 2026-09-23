@@ -298,12 +298,13 @@ def mutate_model(
 
     mutated_model.base = model.base
     mutated_model.edge_pool = model.edge_pool
-    mutated_model.name = model.name
 
     mutated_model.primes = model.primes.copy()
+
     mutated_model.regulators_dict = model.regulators_dict.copy()
     mutated_model.signs_dict = model.signs_dict.copy()        
     mutated_model.rr_dict = model.rr_dict.copy()
+
     mutated_model.extra_edges = model.extra_edges.copy()
 
     if seed != None:
