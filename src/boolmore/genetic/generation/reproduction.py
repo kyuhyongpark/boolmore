@@ -15,18 +15,24 @@ class Reproducer:
     def _next_id(self):
         return next(self._id_gen)
 
-    def asexual(self, population: list[Candidate], prob, edge_prob, n)->list[Model]:
+    def asexual(self, population: list[Candidate], prob, edge_prob, n)->list[Candidate]:
         offsprings = []
         for _ in range(n):
             target = self.selector.select_single_parent(population)
-            new_model = mutate_model(target.model, self._next_id(), prob, edge_prob)
-            offsprings.append(new_model)    
+            new_model = mutate_model(target.model, prob, edge_prob)
+            offsprings.append(
+                Candidate(new_model, self._next_id(), target.generation + 1,)
+                )    
         return offsprings
 
-    def sexual(self, population: list[Candidate], n)->list[Model]:
+    def sexual(self, population: list[Candidate], n)->list[Candidate]:
         mixed_offsprings = []
         for _ in range(n):
             parents = self.selector.select_parents(population)
-            mixed_model = mix_models(self._next_id(), parents[0].model, parents[1].model)
-            mixed_offsprings.append(mixed_model)
+            mixed_model = mix_models(parents[0].model, parents[1].model)
+            mixed_offsprings.append(
+                Candidate(mixed_model,
+                          self._next_id(),
+                          max(parents[0].generation, parents[1].generation) + 1)
+                )
         return mixed_offsprings

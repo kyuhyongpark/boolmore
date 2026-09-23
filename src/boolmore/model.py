@@ -14,9 +14,6 @@ class Model():
         """
         Attributes
         ----------
-        id              - unique id for a model in a single run                     :int
-        generation      - starting model considered as 0th gen                      :int
-                          first mutated models are 1st gen
         name            - name of the model                                         :str
         
         base            - the base model (not the neccesarily the starting model)   :Model class
@@ -42,8 +39,6 @@ class Model():
         n_extra_edges   - number of extra edges in the model                        :int
 
         """
-        self.id = 0
-        self.generation = 0
         self.name = ""
 
         self.base = None
@@ -59,7 +54,7 @@ class Model():
         self.n_extra_edges = 0
 
     @classmethod
-    def import_model(cls, primes:dict[str, PrimeType], id:int=-1, generation:int=0,
+    def import_model(cls, primes:dict[str, PrimeType],
                      base:Model|None=None, constraints:dict={}, edge_pool:list[list[str]]=[],
         ) -> Model:
         """
@@ -72,9 +67,6 @@ class Model():
 
         primes          - pyboolnet primes dictionary                               :length N dict[str, PrimeType]
                           {node: prime}
-        id              - unique id for a model in a single run                     :int
-        generation      - starting model considered as 0th gen                      :int
-                          first mutated models are 1st gen
                           
         base            - the base model (not the neccesarily the starting model)   :Model class
                           from which the regulators, fixed functions, constants,
@@ -94,8 +86,6 @@ class Model():
         """
         x = cls()
 
-        x.id = id
-        x.generation = generation
         x.primes = primes
 
         # get constraints, edge pool
@@ -151,12 +141,10 @@ class Model():
         """
         prints out a brief summary of the model info
         """
-        print("id: ", self.id)
-        print("generation: ", self.generation)
         print("extra edges: ", self.extra_edges)
         print("number of extra edges: ", self.n_extra_edges)
 
-    def export(self, file_name:str|None=None, details:bool=True):
+    def export(self, file_name:str, details:bool=True):
         """
         Exports the model rules.
 
@@ -169,8 +157,6 @@ class Model():
             whether to print out the details of the model as comments
             
         """
-        if file_name == None:
-            file_name = self.name + "_" + str(self.id) + "_gen" + str(self.generation)
         bnet_file_name = file_name + ".bnet"
         pkl_file_name = file_name + ".pkl"
 
@@ -179,8 +165,6 @@ class Model():
         fp = open(bnet_file_name, "w")
 
         if details:
-            fp.write("# id: " + str(self.id) + "\n")
-            fp.write("# generation: " + str(self.generation) + "\n")
             fp.write("# extra edges: " + str(self.extra_edges) + "\n")
             fp.write("# number of extra edges: " + str(self.n_extra_edges) + "\n")
         fp.write("targets,\tfactors\n")

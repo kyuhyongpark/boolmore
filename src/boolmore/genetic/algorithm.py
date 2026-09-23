@@ -122,23 +122,23 @@ class GeneticAlgorithm:
             population.append(start)
         return population
 
-    def new_candidates(self, offsprings:list[Model], evaluator:Evaluator)-> list[EvalResult]:
+    def new_candidates(self, offsprings:list[Candidate], evaluator:Evaluator)-> list[Candidate]:
         if self.config.core > 1:
-            results = Parallel(n_jobs=self.config.core)(delayed(evaluator.evaluate)(new_model) for new_model in offsprings)
+            results = Parallel(n_jobs=self.config.core)(delayed(evaluator.evaluate)(candidate.model, candidate.id) for candidate in offsprings)
             new_candidates = []
             for result in results:
-                for model in offsprings:
-                    if model.id == result.model_id:
-                        new_candidate = Candidate(model, result)
-                        new_candidates.append(new_candidate)
+                for candidate in offsprings:
+                    if candidate.id == result.model_id:
+                        candidate.eval_result = result
+                        new_candidates.append(candidate)
             return new_candidates
         else:
             # single core
             new_candidates = []
-            for new_model in offsprings:
-                result = evaluator.evaluate(new_model)
-                new_candidate = Candidate(new_model, result)
-                new_candidates.append(new_candidate)
+            for candidate in offsprings:
+                result = evaluator.evaluate(candidate.model, candidate.id)
+                candidate.eval_result = result
+                new_candidates.append(candidate)
             return new_candidates
 
     def next_state(self, state: GAState) -> GAState:
@@ -266,7 +266,7 @@ def export_models(
 
     # Always export the final best model
     final.model.name = export_name
-    final.model.export()
+    final.model.export(file_name=f"{export_name}_{final.id}_gen{final.generation}")
 
     # Export top models from each generation
     if export_top:
@@ -274,14 +274,14 @@ def export_models(
             for candidate in state.population[:export_top]:
                 if candidate.eval_result.score > export_thresh:
                     candidate.model.name = export_name
-                    candidate.model.export()
+                    candidate.model.export(file_name=f"{export_name}_{candidate.id}_gen{candidate.generation}")
 
     # Export all models tied with the best model in the final generation
     if export_same:
         for candidate in states[-1].population:
             if candidate.eval_result.score == final.eval_result.score:
                 candidate.model.name = export_name
-                candidate.model.export()
+                candidate.model.export(filename=f"{export_name}_{candidate.id}_gen{candidate.generation}")
 
 
 def run_ga(
@@ -438,7 +438,7 @@ def run_ga(
     else:
         print(f"Loading starting model from {os.path.abspath(START)}")
         start_primes = bnet_file2primes(START)
-    start_model = Model.import_model(start_primes, id=0, generation=STARTING_GEN, base=base_model)
+    start_model = Model.import_model(start_primes, base=base_model)
     start_model.name = run_name
     print("Starting model loaded.")
 
@@ -464,7 +464,7 @@ def run_ga(
 
     # ---------- Evaluate base and start models ----------
     start_single = datetime.datetime.now()
-    base = Candidate(base_model, evaluator.evaluate(base_model))    
+    base = Candidate(model=base_model, eval_result=evaluator.evaluate(base_model))    
     end_single = datetime.datetime.now()
     base.model.info()
     print(f"score: {round(base.eval_result.score,2)} / {base.eval_result.max_score} ({round(base.eval_result.score/base.eval_result.max_score*100,1)}%)")
@@ -473,7 +473,7 @@ def run_ga(
           Estimated GA evaluation time: {(end_single-start_single)*config.total_iter*config.per_iter}""")
     print()
 
-    start = Candidate(start_model, evaluator.evaluate(start_model))
+    start = Candidate(start_model, 0, STARTING_GEN, evaluator.evaluate(start_model, 0))
     start.model.info()
     print(f"score: {round(start.eval_result.score,2)} / {start.eval_result.max_score} ({round(start.eval_result.score/start.eval_result.max_score*100,1)}%)")
     print()
@@ -532,10 +532,10 @@ def run_ga(
                 f"{candidate.eval_result.n_edges},"
                 f"{candidate.eval_result.n_self_edges},"
                 f"{candidate.eval_result.n_prime_implicants},"
-                f"\"{candidate.model.id}_gen{candidate.model.generation}\"\n"
+                f"\"{candidate.id}_gen{candidate.generation}\"\n"
                 )
 
-        log_candidate(fp, final, "FINAL", f"{export_name}_{final.model.id}_gen{final.model.generation}.bnet")
+        log_candidate(fp, final, "FINAL", f"{export_name}_{final.id}_gen{final.generation}.bnet")
 
     # ---------- Analyze and report results ----------
     differences = compare_model_functions(start.model, final.model)

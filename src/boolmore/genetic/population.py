@@ -8,7 +8,9 @@ from boolmore.evaluation.constraint import check_model_constraints
 @dataclass
 class Candidate:
     model:Model
-    eval_result:EvalResult
+    id:int = -1
+    generation:int = 0
+    eval_result:EvalResult | None = None
 
 
 def describe_candidate(candidate: Candidate) -> str:
@@ -16,6 +18,8 @@ def describe_candidate(candidate: Candidate) -> str:
     model = candidate.model
 
     description = (
+        f"id {candidate.id}, "
+        f"generation {candidate.generation}, "
         f"score {round(result.score, 1)}/{result.max_score} "
         f"({round(result.score / result.max_score * 100, 1)}%), "
         f"extra edges {model.extra_edges}, "

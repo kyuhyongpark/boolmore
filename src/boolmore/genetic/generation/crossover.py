@@ -2,7 +2,7 @@ import random
 
 from boolmore.model import Model
 
-def mix_models(model_id:int, model1:Model, model2:Model) -> Model:
+def mix_models(model1:Model, model2:Model) -> Model:
     """
     For each node, take the rule from one of the parent model randomly.
 
@@ -15,8 +15,6 @@ def mix_models(model_id:int, model1:Model, model2:Model) -> Model:
     mixed_model - model that takes functions from the parents   :Model class
     """
     mixed_model = Model()
-    mixed_model.id = model_id
-    mixed_model.generation = max(model1.generation,model2.generation) + 1
 
     mixed_model.base = model1.base
     mixed_model.constraints = model1.constraints

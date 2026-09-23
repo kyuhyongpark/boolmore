@@ -1,5 +1,3 @@
-import itertools as it
-from collections.abc import Iterable
 from dataclasses import dataclass
 
 from boolmore.model import Model
@@ -35,12 +33,12 @@ class Evaluator:
         self.prediction_fn = prediction_fn
         self.score_fn = score_fn
 
-    def evaluate(self, model:Model):
+    def evaluate(self, model:Model, id:int=-1)->EvalResult:
         predictions = self.prediction_fn(model.primes, self.exps)
         score_items:list[EvaluationItemScore] = self.score_fn(self.exps, predictions)
         max_score, score = get_model_score(score_items)
         complexity = get_model_complexity(model)
-        result = EvalResult(model_id=model.id,
+        result = EvalResult(model_id=id,
                             max_score=max_score,
                             score=score,
                             n_edges=complexity["n_edges"],

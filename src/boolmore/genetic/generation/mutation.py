@@ -271,7 +271,7 @@ def delete_regulator(regulators:tuple[str, ...], rr:str, signs:str, target_regul
     return deleted_regulators, deleted_rr, deleted_signs
 
 
-def mutate_model(model:Model, model_id:int, probability:float, edge_prob:float, bias:float=0.5, seed:int|None=None) -> Model:
+def mutate_model(model:Model, probability:float, edge_prob:float, bias:float=0.5, seed:int|None=None) -> Model:
     """
     Returns a mutated model.
 
@@ -288,8 +288,6 @@ def mutate_model(model:Model, model_id:int, probability:float, edge_prob:float, 
 
     """
     mutated_model = Model()
-    mutated_model.id = model_id
-    mutated_model.generation = model.generation + 1
 
     mutated_model.base = model.base
     mutated_model.constraints = model.constraints
