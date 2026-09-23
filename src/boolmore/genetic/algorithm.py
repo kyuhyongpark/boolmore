@@ -18,6 +18,7 @@ from boolmore.evaluation.score import (
     Evaluator, EvalResult,
     get_NAV_scores, get_phenotype_scores
 )
+from boolmore.evaluation.compare import compare_model_functions
 from boolmore.inference.prediction import get_NAV_prediction, get_phenotype_prediction
 from boolmore.io.load import import_NAV_exps, import_phenotypes
 
@@ -537,27 +538,20 @@ def run_ga(
         log_candidate(fp, final, "FINAL", f"{export_name}_{final.model.id}_gen{final.model.generation}.bnet")
 
     # ---------- Analyze and report results ----------
-    mutated = set()
-    for node in start.model.primes:
-        for value in (0, 1):
-            start_primes = sorted([sorted(d.items()) for d in start.model.primes[node][value]])
-            final_primes = sorted([sorted(d.items()) for d in final.model.primes[node][value]])
-            if start_primes != final_primes:
-                mutated.add(node)
-    mutated = sorted(mutated)
+    differences = compare_model_functions(start.model, final.model)
 
     print(f"""
         The algorithm ran for {len(states)-1} iterations,
         generating {states[-1].generated} models.
-        Mutated {len(mutated)} functions, 
+        Mutated {len(differences)} functions, 
         and increased score from {round(start.eval_result.score,2)} / {start.eval_result.max_score} ({round(start.eval_result.score/start.eval_result.max_score*100,1)}%)
         to {round(final.eval_result.score,2)} / {final.eval_result.max_score} ({round(final.eval_result.score/final.eval_result.max_score*100,1)}%).\n
         Total elapsed time: {end_time-start_time}""")
     print()
 
     print("-----modified functions-----")
-    for node in mutated:
-        print("start:" + prime2bnet(node, start.model.primes[node]))
-        print("final:" + prime2bnet(node, final.model.primes[node]))
+    for node, (prime1, prime2) in differences.items():
+        print("start:" + prime2bnet(node, prime1))
+        print("final:" + prime2bnet(node, prime2))
 
     return base, start, states
