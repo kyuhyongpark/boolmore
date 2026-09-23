@@ -426,7 +426,7 @@ def run_ga(
             base_primes = pickle.load(f)
     else:
         raise ValueError(f"Unsupported base file format: {BASE}")
-    base_model = Model.import_model(base_primes, edge_pool=EDGE_POOL)
+    base_model = Model.from_primes(base_primes, edge_pool=EDGE_POOL)
     print("Base model loaded.")
 
     if os.path.abspath(START) == os.path.abspath(BASE):
@@ -434,7 +434,7 @@ def run_ga(
     else:
         print(f"Loading starting model from {os.path.abspath(START)}")
         start_primes = bnet_file2primes(START)
-    start_model = Model.import_model(start_primes, base=base_model)
+    start_model = Model.from_primes(start_primes, base=base_model)
     print("Starting model loaded.")
 
     # ---------- Load experimental data ----------
