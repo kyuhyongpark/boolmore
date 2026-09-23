@@ -298,7 +298,7 @@ def run_ga(
         export_name:str|None=None,
         export_same:bool=False,
         core:int=1,
-        )-> tuple[Model, Model, list[GAState]]:
+        )-> tuple[Candidate, Candidate, list[GAState]]:
     """
     Imports parameters, experiments, base model in the json file.
     Runs genetic algorithm and exports refined models.
@@ -362,13 +362,13 @@ def run_ga(
             raise ValueError("If json file is given, other parameters should not be given.")
 
         with open(json_file) as f:
-            input = json.load(f)
+            config_dict = json.load(f)
 
     else:
         if any(x is None for x in [run_type, data_file, base_file]):
             raise ValueError("If json file is not given, run_type, data_file and base_file must be given.")
 
-        input = {
+        config_dict = {
             "run_type": run_type,
             "data": data_file,
             "base": base_file,
@@ -397,16 +397,16 @@ def run_ga(
                 }
             }
 
-    RUN_TYPE = input["run_type"]
-    DATA = input["data"]
-    BASE = input["base"]
-    START = input["start"]
-    HIERARCHY = input["hierarchy"]
-    DEFAULT_SOURCES = input["default_sources"]
-    GENERATE_DEFAULTS = input["generate_defaults"]
-    CONSTRAINTS = input["constraints"]
-    EDGE_POOL = input["edge_pool"]
-    parameters = input["parameters"].copy()
+    RUN_TYPE = config_dict["run_type"]
+    DATA = config_dict["data"]
+    BASE = config_dict["base"]
+    START = config_dict["start"]
+    HIERARCHY = config_dict["hierarchy"]
+    DEFAULT_SOURCES = config_dict["default_sources"]
+    GENERATE_DEFAULTS = config_dict["generate_defaults"]
+    CONSTRAINTS = config_dict["constraints"]
+    EDGE_POOL = config_dict["edge_pool"]
+    parameters = config_dict["parameters"].copy()
 
     STARTING_GEN = parameters.pop("starting_gen")
     config = GAConfig(**parameters, seed=seed, core=core)
@@ -426,11 +426,13 @@ def run_ga(
     elif BASE.endswith(".pkl"):
         with open(BASE, "rb") as f:
             base_primes = pickle.load(f)
+    else:
+        raise ValueError(f"Unsupported base file format: {BASE}")
     base_model = Model.import_model(base_primes, constraints=CONSTRAINTS,
                               edge_pool=EDGE_POOL)
     print("Base model loaded.")
 
-    if START == BASE:
+    if os.path.abspath(START) == os.path.abspath(BASE):
         start_primes = base_primes
     else:
         print(f"Loading starting model from {os.path.abspath(START)}")
@@ -454,6 +456,8 @@ def run_ga(
         exps = import_phenotypes(DATA)
         prediction_fn = get_phenotype_prediction
         score_fn = get_phenotype_scores
+    else:
+        raise ValueError(f"Unsupported run type: {RUN_TYPE}")
     evaluator = Evaluator(exps=exps, prediction_fn=prediction_fn, score_fn=score_fn)
     print("Experimental data loaded.\n")
 
@@ -465,7 +469,7 @@ def run_ga(
     print(f"score: {round(base.eval_result.score,2)} / {base.eval_result.max_score} ({round(base.eval_result.score/base.eval_result.max_score*100,1)}%)")
     print(f"""
           Elapsed time for single evaluation: {end_single-start_single}
-          Estimated total run time: {(end_single-start_single)*config.total_iter*config.per_iter}""")
+          Estimated GA evaluation time: {(end_single-start_single)*config.total_iter*config.per_iter}""")
     print()
 
     start = Candidate(start_model, evaluator.evaluate(start_model))
@@ -535,12 +539,12 @@ def run_ga(
     # ---------- Analyze and report results ----------
     mutated = set()
     for node in start.model.primes:
-        for value in [0, 1]:
-            sorted_primes1 = sorted([sorted(d.items()) for d in start.model.primes[node][value]])
-            sorted_primes2 = sorted([sorted(d.items()) for d in final.model.primes[node][value]])
-            if sorted_primes1 != sorted_primes2:
+        for value in (0, 1):
+            start_primes = sorted([sorted(d.items()) for d in start.model.primes[node][value]])
+            final_primes = sorted([sorted(d.items()) for d in final.model.primes[node][value]])
+            if start_primes != final_primes:
                 mutated.add(node)
-    mutated = sorted(list(mutated))
+    mutated = sorted(mutated)
 
     print(f"""
         The algorithm ran for {len(states)-1} iterations,
