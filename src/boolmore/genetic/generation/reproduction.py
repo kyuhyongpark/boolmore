@@ -8,8 +8,9 @@ from boolmore.genetic.generation.crossover import mix_models
 
 
 class Reproducer:
-    def __init__(self, selector: Selector):
+    def __init__(self, selector:Selector, constraints:dict):
         self.selector = selector
+        self.constraints = constraints
         self._id_gen = count(start=1)
 
     def _next_id(self):
@@ -19,7 +20,7 @@ class Reproducer:
         offsprings = []
         for _ in range(n):
             target = self.selector.select_single_parent(population)
-            new_model = mutate_model(target.model, prob, edge_prob)
+            new_model = mutate_model(target.model, prob, edge_prob, self.constraints)
             offsprings.append(
                 Candidate(new_model, self._next_id(), target.generation + 1,)
                 )    

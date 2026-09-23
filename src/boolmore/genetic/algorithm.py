@@ -15,7 +15,7 @@ from boolmore.boolean_functions import prime2bnet
 from boolmore.model import Model
 
 from boolmore.evaluation.score import (
-    Evaluator, EvalResult,
+    Evaluator,
     get_NAV_scores, get_phenotype_scores
 )
 from boolmore.evaluation.compare import compare_model_functions
@@ -429,8 +429,7 @@ def run_ga(
             base_primes = pickle.load(f)
     else:
         raise ValueError(f"Unsupported base file format: {BASE}")
-    base_model = Model.import_model(base_primes, constraints=CONSTRAINTS,
-                              edge_pool=EDGE_POOL)
+    base_model = Model.import_model(base_primes, edge_pool=EDGE_POOL)
     print("Base model loaded.")
 
     if os.path.abspath(START) == os.path.abspath(BASE):
@@ -459,7 +458,7 @@ def run_ga(
         score_fn = get_phenotype_scores
     else:
         raise ValueError(f"Unsupported run type: {RUN_TYPE}")
-    evaluator = Evaluator(exps=exps, prediction_fn=prediction_fn, score_fn=score_fn)
+    evaluator = Evaluator(exps=exps, prediction_fn=prediction_fn, score_fn=score_fn, constraints=CONSTRAINTS)
     print("Experimental data loaded.\n")
 
     # ---------- Evaluate base and start models ----------
@@ -482,7 +481,7 @@ def run_ga(
     start_time = datetime.datetime.now()
 
     selector = Selector(keep=config.keep, order_by=config.order_by)
-    reproducer = Reproducer(selector=selector)
+    reproducer = Reproducer(selector=selector, constraints=CONSTRAINTS)
     states = ga_main(start, evaluator, selector, reproducer, config)
 
     end_time = datetime.datetime.now()

@@ -19,14 +19,8 @@ class Model():
         base            - the base model (not the neccesarily the starting model)   :Model class
                           from which the regulators, fixed functions, constants,
                           extra edges, etc. are decided.
-        constraints     - represents 5 types of constraints                         :dict[str, list or dict]
-                          (fixed, regulate, necessary, group, possible_constant)
         edge_pool       - the pool of edges. 0 is negative, 1 is positive           :list[list[str]]
                           [[regulator, target, sign], ...]
-        default_sources - Shows the default settings for the source nodes,          :dict[str, int]
-                          which is considered the top of the hierarchy
-                          These source nodes must have a defined value in
-                          every experiments
 
         primes          - pyboolnet primes dictionary                               :length N dict[str, PrimeType]
                           {node: prime}                          
@@ -42,8 +36,6 @@ class Model():
         self.name = ""
 
         self.base = None
-        self.constraints = {"fixed": [], "regulate": {}, "necessary" : {},
-                            "group": {}, "possible_constant": []}
         self.edge_pool = []
         
         self.primes:dict[str, PrimeType] = {}
@@ -55,7 +47,7 @@ class Model():
 
     @classmethod
     def import_model(cls, primes:dict[str, PrimeType],
-                     base:Model|None=None, constraints:dict={}, edge_pool:list[list[str]]=[],
+                     base:Model|None=None, edge_pool:list[list[str]]=[],
         ) -> Model:
         """
         Import a model.
@@ -74,8 +66,6 @@ class Model():
                           if None, the output model is considered the base
 
         # if base is given, below parameters take the value of the base
-        constraints     - represents 5 types of constraints                         :dict[str, list or dict]
-                          (fixed, regulate, necessary, group, possible_constant)
         edge_pool       - the pool of edges. 0 is negative, 1 is positive           :list[list[str]]
                           [[regulator, target, sign], ...]
 
@@ -88,14 +78,12 @@ class Model():
 
         x.primes = primes
 
-        # get constraints, edge pool
+        # get edge pool
         if base == None:
-            x.constraints.update(constraints)
             x.edge_pool.extend(edge_pool)
 
         else:
             x.base = base
-            x.constraints.update(base.constraints)
             x.edge_pool.extend(base.edge_pool)
             x.name = base.name
         

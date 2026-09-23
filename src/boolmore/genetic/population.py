@@ -2,7 +2,6 @@ from dataclasses import dataclass
 
 from boolmore.model import Model
 from boolmore.evaluation.score import EvalResult
-from boolmore.evaluation.constraint import check_model_constraints
 
 
 @dataclass
@@ -25,11 +24,9 @@ def describe_candidate(candidate: Candidate) -> str:
         f"extra edges {model.extra_edges}, "
         f"n edges {result.n_edges}, "
         f"n self edges {result.n_self_edges}, "
-        f"n prime implicants {result.n_prime_implicants}"
+        f"n prime implicants {result.n_prime_implicants}, "
+        f"following constraints {result.following_constraints}"
     )
-
-    if not check_model_constraints(model):
-        description += "\nERROR: model does not follow constraints"
 
     return description
 

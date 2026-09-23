@@ -5,6 +5,7 @@ from boolmore.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.inference.prediction import PhenotypePrediction
 from boolmore.evaluation.agreement import get_agreements
 from boolmore.evaluation.complexity import get_model_complexity
+from boolmore.evaluation.constraint import check_model_constraints
 
 
 FixesType = tuple[tuple[str, int],...]
@@ -21,23 +22,26 @@ class EvalResult:
     n_self_edges: int
     n_prime_implicants: int
     n_extra_edges: int
+    following_constraints: bool
     details: any
 
 
 class Evaluator:
-    def __init__(self, exps, prediction_fn, score_fn):
+    def __init__(self, exps, prediction_fn, score_fn, constraints):
         """
         exps : list of experiment dataclasses
         """
         self.exps = exps
         self.prediction_fn = prediction_fn
         self.score_fn = score_fn
+        self.constraints = constraints
 
     def evaluate(self, model:Model, id:int=-1)->EvalResult:
         predictions = self.prediction_fn(model.primes, self.exps)
         score_items:list[EvaluationItemScore] = self.score_fn(self.exps, predictions)
         max_score, score = get_model_score(score_items)
         complexity = get_model_complexity(model)
+        following_constraints = check_model_constraints(model, self.constraints)
         result = EvalResult(model_id=id,
                             max_score=max_score,
                             score=score,
@@ -45,7 +49,12 @@ class Evaluator:
                             n_self_edges=complexity["n_self_edges"],
                             n_prime_implicants=complexity["n_prime_implicants"],
                             n_extra_edges=model.n_extra_edges,
+                            following_constraints=following_constraints,
                             details=[predictions, score_items])
+
+        if not following_constraints:
+            print("ERROR: model does not follow constraints")
+        
         return result
 
 

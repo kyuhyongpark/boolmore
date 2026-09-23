@@ -227,7 +227,7 @@ def check_node(
 
     return True
 
-def check_model_constraints(model:Model) -> bool:
+def check_model_constraints(model:Model, constraints:dict={}) -> bool:
     """
     Checks if the model follows the constraints.
     It does not check group constraints yet.
@@ -240,10 +240,12 @@ def check_model_constraints(model:Model) -> bool:
     """
     check = True
     for node in model.primes:
-        check = check_node(model.regulators_dict[node],
-                           model.rr_dict[node],
-                           model.base.rr_dict[node],
-                           model.constraints, node) and check
+        check = check_node(
+            model.regulators_dict[node],
+            model.rr_dict[node],
+            model.base.rr_dict[node],
+            constraints,
+            node) and check
     return check
 
 
