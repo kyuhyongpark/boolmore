@@ -298,6 +298,13 @@ class Model():
     def nodes(self):
         return list(self.primes.keys())
 
+    @property
+    def bnet(self):
+        item = []
+        for node in self.primes:
+            item.append(f"{bf.prime2bnet(node, self.primes[node])}")
+        return "\n".join(item)
+
     def info(self):
         """
         Return a brief summary of the model information.

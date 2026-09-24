@@ -246,7 +246,7 @@ def log_candidate(fp, candidate: Candidate, label, path):
     fp.write(candidate.info() + "\n")
     fp.write("# targets,\tfactors\n")
 
-    bnet = primes2bnet(candidate.model.primes)
+    bnet = candidate.model.bnet
     for line in bnet.splitlines():
         fp.write("# " + line + "\n")
 

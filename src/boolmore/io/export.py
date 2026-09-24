@@ -107,9 +107,7 @@ def export_model(model:Model, file_name: str, details: bool = True):
 
         fp.write("targets,\tfactors\n")
 
-        primes = {k: model.primes[k] for k in sorted(model.primes)}
-        for k in primes:
-            fp.write(bf.prime2bnet(k, primes[k]) + "\n")
+        fp.write(model.bnet)
 
     with open(pkl_file_name, "wb") as f:
         pickle.dump(model.primes, f)
