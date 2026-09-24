@@ -305,8 +305,6 @@ def mutate_model(
     mutated_model.signs_dict = model.signs_dict.copy()        
     mutated_model.rr_dict = model.rr_dict.copy()
 
-    mutated_model.extra_edges = model.extra_edges.copy()
-
     if seed != None:
         random.seed(seed)
 
@@ -323,10 +321,8 @@ def mutate_model(
         signs = mutated_model.signs_dict[new_edge_node]
 
         if new_regulator not in regulators:
-            mutated_model.extra_edges.append(new_edge)
             modified_regulators, modified_rr, modified_signs = add_regulator(regulators, rr, signs, new_regulator, new_sign)
         else:
-            mutated_model.extra_edges.remove(new_edge)
             modified_regulators, modified_rr, modified_signs = delete_regulator(regulators, rr, signs, new_regulator)
 
         mutated_model.regulators_dict[new_edge_node] = modified_regulators
@@ -355,5 +351,7 @@ def mutate_model(
             # irr = get_max_irr(mutated_model.rr_dict[node])
             # prime2 = rr2prime(mutated_model.regulators_dict[node], irr, mutated_model.signs_dict[node], inverted = True)
             # assert prime1 == prime2, "rr and irr lead to different result!"
-        
+    
+    mutated_model.edges = mutated_model._construct_edges()
+
     return mutated_model

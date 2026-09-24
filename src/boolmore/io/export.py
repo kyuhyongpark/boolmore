@@ -104,8 +104,8 @@ def export_model(model:Model, file_name: str, details: bool = True):
 
     with open(bnet_file_name, "w") as fp:
         if details:
-            fp.write(f"# extra edges: {model.extra_edges}\n")
-            fp.write(f"# number of extra edges: {model.n_extra_edges}\n")
+            fp.write(f"# extra edges: {model.get_edges(source='edge_pool')}\n")
+            fp.write(f"# number of extra edges: {len(model.get_edges(source='edge_pool'))}\n")
 
         fp.write("targets,\tfactors\n")
 

@@ -21,8 +21,29 @@ def test_from_primes_creates_base_model(base_primes):
     assert model.regulators_dict == {"A": ("A",), "B": ("A","B")}
     assert model.signs_dict == {"A": "1", "B": "01"}
     assert model.rr_dict == {"A": "10", "B": "1000"}
-    assert model.extra_edges == []
-    assert model.n_extra_edges == 0
+    assert model.edges == [
+        {
+            "regulator": "A",
+            "target": "A",
+            "sign": "1",
+            "source": "base",
+            "effective": True,
+        },
+        {
+            "regulator": "A",
+            "target": "B",
+            "sign": "0",
+            "source": "base",
+            "effective": True,
+        },
+        {
+            "regulator": "B",
+            "target": "B",
+            "sign": "1",
+            "source": "base",
+            "effective": True,
+        },
+    ]
 
 
 def test_from_primes_uses_base_model(base_primes):
@@ -31,7 +52,7 @@ def test_from_primes_uses_base_model(base_primes):
 
     primes = {
         "A": [[{"A": 0}, {"B": 0}],[{"A": 1, "B": 1}]],
-        "B": [[{"A": 1}, {"B": 0}],[{"A": 0, "B": 1}]],
+        "B": base_primes["B"],
     }
 
     model = Model.from_primes(primes,base=base)
@@ -42,8 +63,7 @@ def test_from_primes_uses_base_model(base_primes):
     assert model.regulators_dict == {"A": ("A","B"), "B": ("A","B")}
     assert model.signs_dict == {"A": "11", "B": "01"}
     assert model.rr_dict == {"A": "1000", "B": "1000"}
-    assert model.extra_edges == edge_pool
-    assert model.n_extra_edges == len(edge_pool)
+    assert len(model.get_edges(source="edge_pool")) == len(edge_pool)
 
 
 def test_from_primes_rejects_sign_mismatch(base_primes):
@@ -65,8 +85,7 @@ def test_from_primes_ignores_irrelevant_edge(base_primes):
 
     model = Model.from_primes(base_primes, edge_pool=edge_pool)
 
-    assert model.extra_edges == []
-    assert model.n_extra_edges == 0
+    assert len(model.get_edges(source="edge_pool")) == 0
 
 
 def test_validate_edge_pool_rejects_invalid_edge(base_primes):
@@ -157,9 +176,11 @@ def test_construct_edges(base_primes):
     ]
 
 def test_construct_edges_BASE(base_primes):
+    edge_pool = [("C", "B", "1")]
+
     base = Model.from_primes(
         base_primes,
-        edge_pool=[("C", "B", "1")],
+        edge_pool=edge_pool,
     )
 
     model = Model.from_primes(
@@ -192,3 +213,22 @@ def test_construct_edges_BASE(base_primes):
             "effective": True,
         },
     ]
+    assert model.get_edges(source="base") == edges
+    assert model.get_edges(source="edge_pool") == []
+    assert model.get_edges(regulator="A") == [
+        {
+            "regulator": "A",
+            "target": "A",
+            "sign": "1",
+            "source": "base",
+            "effective": True,
+        },
+        {
+            "regulator": "A",
+            "target": "B",
+            "sign": "0",
+            "source": "base",
+            "effective": True,
+        },
+    ]
+    assert model.unadded_edges == edge_pool

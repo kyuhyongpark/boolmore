@@ -1,6 +1,3 @@
-import os
-import pickle
-
 import boolmore.boolean_functions as bf
 
 PrimeType = list[list[dict[str, int]]]
@@ -13,24 +10,32 @@ class Model():
     def __init__(self):
         """
         Attributes
-        ----------        
-        base            - the base model (not the neccesarily the starting model)   :Model class
-                          from which the regulators, fixed functions, constants,
-                          extra edges, etc. are decided.
-        edge_pool       - the pool of edges. 0 is negative, 1 is positive           :list[list[str]]
-                          [[regulator, target, sign], ...]
+        ----------
+        base : Model or None
+            The base model (not necessarily the starting model) from which the
+            regulators, fixed functions, constants, and other model properties
+            are determined.
 
-        primes          - pyboolnet primes dictionary                               :length N dict[str, PrimeType]
-                          {node: prime}                          
+        edge_pool : list[tuple[str, str, str]]
+            Pool of candidate edges. Each edge is represented as
+            ``(regulator, target, sign)``, where sign is ``"0"`` for negative
+            and ``"1"`` for positive.
 
-        regulators_dict - dictionary of the regulating nodes                        :length N dict[str, tuple[str]]
-        signs_dict      - dictionary of the signs of regulators                     :length N dict[str, str]
-        rr_dict         - dictionary of the binary rule representations             :length N dict[str, str]
-        
-        extra_edges     - edges from the pool that are present in the model         :list[list[str]]
-                          [[regulator, target, sign], ...]
-        n_extra_edges   - number of extra edges in the model                        :int
+        primes : dict[str, PrimeType]
+            PyBoolNet primes dictionary mapping node names to prime implicants.
 
+        regulators_dict : dict[str, tuple[str]]
+            Dictionary mapping each node to its regulating nodes.
+
+        signs_dict : dict[str, str]
+            Dictionary mapping each node to the signs of its regulators.
+
+        rr_dict : dict[str, str]
+            Dictionary mapping each node to its binary rule representation.
+
+        edges : list[dict[str, str | bool]]
+            List of edges currently present in the model. Each edge contains
+            ``regulator``, ``target``, ``sign``, ``source``, and ``effective``.
         """
 
         self.base = None
@@ -43,8 +48,6 @@ class Model():
         self.rr_dict = {}
 
         self.edges = []
-        self.extra_edges = []
-        self.n_extra_edges = 0
 
     @classmethod
     def from_primes(
@@ -98,6 +101,7 @@ class Model():
 
             x.base = x
             x.validate_edge_pool()
+            x.edges = x._construct_edges()
 
             return x
 
@@ -108,25 +112,19 @@ class Model():
         x.edge_pool = base.edge_pool
         x.validate_edge_pool()
         x.validate_primes()
+        x.edges = x._construct_edges()
 
         for node in x.primes:
-            # find current regulators and signs
-            _regulators, _rr, _signs = bf.prime2rr(x.primes[node])
-
-            # check the extra edges
-            for edge in x.edge_pool:
-                if edge[1] == node and edge[0] in _regulators:
-                    x.extra_edges.append(edge)
+            extra_edges = x.get_edges(target=node, source="edge_pool")
 
             base_regulators = list(base.regulators_dict[node])
             base_signs = base.signs_dict[node]
 
             regulators = base_regulators.copy()
             signs = base_signs
-            for edge in x.extra_edges:
-                if edge[1] == node:
-                    regulators.append(edge[0])
-                    signs += edge[2]
+            for edge in extra_edges:
+                regulators.append(edge["regulator"])
+                signs += edge["sign"]
 
             regulators = tuple(regulators)
 
@@ -134,9 +132,6 @@ class Model():
             x.regulators_dict[node] = regulators
             x.rr_dict[node] = rr
             x.signs_dict[node] = signs
-
-        x.n_extra_edges = len(x.extra_edges)
-        x.edges = x._construct_edges()
 
         return x
 
@@ -215,12 +210,12 @@ class Model():
 
         for target in self.primes:
 
-            regulators, _, signs = bf.prime2rr(self.primes[target])
+            _regulators, _, _signs = bf.prime2rr(self.primes[target])
             base_regulators, _, base_signs = bf.prime2rr(self.base.primes[target])
-
-            for regulator, sign in zip(regulators, signs):
+            
+            for _regulator, _sign in zip(_regulators, _signs):
                 # Is this edge one of the candidate edge-pool edges?
-                if (regulator, target, sign) in self.edge_pool:
+                if (_regulator, target, _sign) in self.edge_pool:
                     source = "edge_pool"
                 else:
                     source = "base"
@@ -228,20 +223,20 @@ class Model():
                 # Determine whether this edge is effective
                 effective = False
                 for implicant in self.primes[target][1]:
-                    if regulator in implicant:
+                    if _regulator in implicant:
                         effective = True
                         break
 
                 edges.append({
-                    "regulator": regulator,
+                    "regulator": _regulator,
                     "target": target,
-                    "sign": sign,
+                    "sign": _sign,
                     "source": source,
                     "effective": effective
                 })
 
             for base_regulator in base_regulators:
-                if base_regulator not in regulators:
+                if base_regulator not in _regulators:
                     edges.append({
                         "regulator": base_regulator,
                         "target": target,
@@ -260,9 +255,52 @@ class Model():
 
         return edges
 
+    def get_edges(
+        self,
+        regulator: str | None = None,
+        target: str | None = None,
+        sign: str | None = None,
+        source: str | None = None,
+        effective: bool | None = None,
+    ):
+        edges = self.edges
+
+        if regulator is not None:
+            edges = [edge for edge in edges if edge["regulator"] == regulator]
+
+        if target is not None:
+            edges = [edge for edge in edges if edge["target"] == target]
+
+        if sign is not None:
+            edges = [edge for edge in edges if edge["sign"] == sign]
+
+        if source is not None:
+            edges = [edge for edge in edges if edge["source"] == source]
+
+        if effective is not None:
+            edges = [edge for edge in edges if edge["effective"] == effective]
+
+        return edges
+
+    @property
+    def unadded_edges(self):
+        added_edges = {
+            (edge["regulator"], edge["target"], edge["sign"])
+            for edge in self.get_edges(source="edge_pool")
+        }
+
+        return [
+            edge for edge in self.edge_pool
+            if tuple(edge) not in added_edges
+        ]
+
+    @property
+    def nodes(self):
+        return list(self.primes.keys())
+
     def info(self):
         """
         prints out a brief summary of the model info
         """
-        print("extra edges: ", self.extra_edges)
-        print("number of extra edges: ", self.n_extra_edges)
+        print("extra edges: ", self.get_edges(source="edge_pool"))
+        print("number of extra edges: ", len(self.get_edges(source="edge_pool")))

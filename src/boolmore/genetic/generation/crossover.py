@@ -30,8 +30,14 @@ def mix_models(model1:Model, model2:Model) -> Model:
         mixed_model.regulators_dict[node] = get.regulators_dict[node]
         mixed_model.signs_dict[node] = get.signs_dict[node]
         mixed_model.rr_dict[node] = get.rr_dict[node]
-        for edge in get.extra_edges:
-            if edge[1] == node:
-                mixed_model.extra_edges.append(edge)
+        mixed_model.edges.extend(get.get_edges(target=node))
 
+    mixed_model.edges.sort(
+        key=lambda edge: (
+            edge["regulator"],
+            edge["target"],
+            edge["sign"],
+            )
+    )
+    
     return mixed_model

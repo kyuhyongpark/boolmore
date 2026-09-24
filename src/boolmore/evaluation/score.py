@@ -48,7 +48,7 @@ class Evaluator:
                             n_edges=complexity["n_edges"],
                             n_self_edges=complexity["n_self_edges"],
                             n_prime_implicants=complexity["n_prime_implicants"],
-                            n_extra_edges=model.n_extra_edges,
+                            n_extra_edges=complexity["n_extra_edges"],
                             following_constraints=following_constraints,
                             details=[predictions, score_items])
 

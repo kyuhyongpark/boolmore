@@ -248,7 +248,7 @@ def log_candidate(fp, candidate, label, path):
         f"{candidate.eval_result.max_score} "
         f"({candidate.eval_result.score / candidate.eval_result.max_score * 100}%)\n"
     )
-    fp.write(f"# extra edges: {candidate.model.extra_edges}\n")
+    fp.write(f"# extra edges: {candidate.model.get_edges(source='edge_pool')}\n")
     fp.write("# targets,\tfactors\n")
 
     bnet = primes2bnet(candidate.model.primes)
@@ -527,7 +527,7 @@ def run_ga(
             fp.write(
                 f"{state.iteration},"
                 f"{candidate.eval_result.score},"
-                f"\"{candidate.model.extra_edges}\","
+                f"\"{candidate.model.get_edges(source='edge_pool')}\","
                 f"{candidate.eval_result.n_edges},"
                 f"{candidate.eval_result.n_self_edges},"
                 f"{candidate.eval_result.n_prime_implicants},"
