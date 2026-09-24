@@ -1,4 +1,5 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
+from pprint import pformat
 
 from boolmore.model import Model
 from boolmore.evaluation.score import EvalResult
@@ -11,24 +12,49 @@ class Candidate:
     generation:int = 0
     eval_result:EvalResult | None = None
 
+    def info(self, detailed:bool=False) -> str:
 
-def describe_candidate(candidate: Candidate) -> str:
-    result = candidate.eval_result
-    model = candidate.model
+        result = self.eval_result
 
-    description = (
-        f"id {candidate.id}, "
-        f"generation {candidate.generation}, "
-        f"score {round(result.score, 1)}/{result.max_score} "
-        f"({round(result.score / result.max_score * 100, 1)}%), "
-        f"extra edges {model.get_edges(source='edge_pool')}, "
-        f"eff edges {result.n_edges}, "
-        f"eff self edges {result.n_self_edges}, "
-        f"n prime implicants {result.n_prime_implicants}, "
-        f"following constraints {result.following_constraints}"
-    )
+        lines = [
+            f"# id: {self.id}",
+            f"# generation: {self.generation}",
+        ]
 
-    return description
+        if result is not None:
+            for field in fields(result):
+                if field.name == "details":
+                    continue
+                lines.append(f"# {field.name}: {getattr(result, field.name)}")
+
+        info = "\n".join(lines)
+
+        info += "\n" + self.model.info()
+
+        if detailed and result is not None:
+            details = pformat(result.details)
+            details = "\n".join(f"# {line}" for line in details.splitlines())
+            info += f"\n# details:\n{details}"
+
+        return info
+
+    def summary(self, order_by: list[str]) -> str:
+        result = self.eval_result
+
+        if result is None:
+            raise Exception("Candidate has no evaluation result")
+
+        items = [
+            f"id {self.id}",
+            f"generation {self.generation}",
+            f"score {round(result.score, 1)}/{result.max_score} "
+            f"({round(result.score / result.max_score * 100, 1)}%)"
+        ]
+
+        for attr in order_by:
+            items.append(f"{attr} {getattr(result, attr)}")
+
+        return ", ".join(items)
 
 
 def sort_population(

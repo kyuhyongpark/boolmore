@@ -23,7 +23,7 @@ from boolmore.inference.prediction import get_NAV_prediction, get_phenotype_pred
 from boolmore.io.load import import_NAV_exps, import_phenotypes
 from boolmore.io.export import export_model
 
-from boolmore.genetic.population import Candidate, describe_candidate, sort_population
+from boolmore.genetic.population import Candidate, sort_population
 from boolmore.genetic.generation.reproduction import Reproducer
 from boolmore.genetic.selection import Selector
 
@@ -228,7 +228,7 @@ def ga_main(
         print(
             f"iteration {state.iteration}, "
             f"generated {state.generated}, "
-            f"{describe_candidate(state.population[0])}"
+            f"{state.population[0].summary(config.order_by)}"
             )
         
         if (
@@ -241,15 +241,9 @@ def ga_main(
     return states
 
 
-def log_candidate(fp, candidate, label, path):
+def log_candidate(fp, candidate: Candidate, label, path):
     fp.write(f"\n# {label}: {os.path.abspath(path)}\n")
-    fp.write(candidate.model.info() + "\n")
-    fp.write(
-        f"# score: {candidate.eval_result.score} / "
-        f"{candidate.eval_result.max_score} "
-        f"({candidate.eval_result.score / candidate.eval_result.max_score * 100}%)\n"
-    )
-    fp.write(f"# extra edges: {candidate.model.get_edges(source='edge_pool')}\n")
+    fp.write(candidate.info() + "\n")
     fp.write("# targets,\tfactors\n")
 
     bnet = primes2bnet(candidate.model.primes)
@@ -522,19 +516,9 @@ def run_ga(
         fp.write(f"# {end_time=}\n")
         fp.write(f"# elapsed time: {end_time-start_time}\n\n")
 
-        fp.write("iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model\n")
         for state in states[1:]:
             candidate = state.population[0]
-            fp.write(
-                f"{state.iteration},"
-                f"{candidate.eval_result.score},"
-                f"\"{candidate.model.get_edges(source='edge_pool')}\","
-                f"{candidate.eval_result.n_edges},"
-                f"{candidate.eval_result.n_self_edges},"
-                f"{candidate.eval_result.n_prime_implicants},"
-                f"\"{candidate.id}_gen{candidate.generation}\"\n"
-                )
-
+            fp.write(candidate.summary(config.order_by) + "\n")
         log_candidate(fp, final, "FINAL", f"{export_name}_{final.id}_gen{final.generation}.bnet")
 
     # ---------- Analyze and report results ----------

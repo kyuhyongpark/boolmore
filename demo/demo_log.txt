@@ -21,6 +21,16 @@
 
 
 # BASE: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD.bnet
+# id: -1
+# generation: 0
+# model_id: -1
+# max_score: 50.0
+# score: 50.0
+# n_edges: 14
+# n_self_edges: 1
+# n_prime_implicants: 14
+# n_extra_edges: 0
+# following_constraints: True
 # number of nodes: 5
 # number of edges: 14
 # number of effective base edges: 14
@@ -30,8 +40,6 @@
 # number of effective extra edges: 0
 # number of ineffective extra edges: 0
 # number of unadded edges: 0
-# score: 50.0 / 50.0 (100.0%)
-# extra edges: []
 # targets,	factors
 # Coup_fti,  !Fgf8&!Sp8
 # Emx2,      Coup_fti&!Fgf8&!Pax6&!Sp8
@@ -40,6 +48,16 @@
 # Sp8,       !Emx2&Fgf8
 
 # START: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_start.bnet
+# id: 0
+# generation: 0
+# model_id: 0
+# max_score: 50.0
+# score: 33.958333333333336
+# n_edges: 11
+# n_self_edges: 0
+# n_prime_implicants: 11
+# n_extra_edges: 0
+# following_constraints: True
 # number of nodes: 5
 # number of edges: 14
 # number of effective base edges: 11
@@ -49,8 +67,6 @@
 # number of effective extra edges: 0
 # number of ineffective extra edges: 0
 # number of unadded edges: 0
-# score: 33.958333333333336 / 50.0 (67.91666666666667%)
-# extra edges: []
 # targets,	factors
 # Coup_fti,  !Fgf8
 # Emx2,      Coup_fti&!Fgf8 | !Sp8 | !Pax6
@@ -58,23 +74,32 @@
 # Pax6,      !Coup_fti&Sp8 | !Emx2
 # Sp8,       Fgf8
 
-# start_time=datetime.datetime(2026, 9, 24, 15, 50, 5, 212289)
-# end_time=datetime.datetime(2026, 9, 24, 15, 50, 10, 123972)
-# elapsed time: 0:00:04.911683
+# start_time=datetime.datetime(2026, 9, 24, 16, 43, 16, 324744)
+# end_time=datetime.datetime(2026, 9, 24, 16, 43, 21, 706797)
+# elapsed time: 0:00:05.382053
 
-iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_model
-1,41.0,"[]",9,1,10,"8_gen1"
-2,41.75,"[]",11,1,13,"11_gen2"
-3,45.0,"[]",13,1,15,"23_gen4"
-4,45.0,"[]",9,1,10,"33_gen5"
-5,45.75,"[]",10,1,11,"42_gen6"
-6,47.25,"[]",11,1,13,"52_gen7"
-7,48.0,"[]",11,1,16,"70_gen9"
-8,49.0,"[]",10,1,10,"80_gen11"
-9,49.0,"[]",10,1,10,"80_gen11"
-10,49.0,"[]",10,1,10,"80_gen11"
+id 8, generation 1, score 41.0/50.0 (82.0%), n_extra_edges 0, n_prime_implicants 10
+id 11, generation 2, score 41.8/50.0 (83.5%), n_extra_edges 0, n_prime_implicants 13
+id 23, generation 4, score 45.0/50.0 (90.0%), n_extra_edges 0, n_prime_implicants 15
+id 33, generation 5, score 45.0/50.0 (90.0%), n_extra_edges 0, n_prime_implicants 10
+id 42, generation 6, score 45.8/50.0 (91.5%), n_extra_edges 0, n_prime_implicants 11
+id 52, generation 7, score 47.2/50.0 (94.5%), n_extra_edges 0, n_prime_implicants 13
+id 70, generation 9, score 48.0/50.0 (96.0%), n_extra_edges 0, n_prime_implicants 16
+id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
+id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
+id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
 
 # FINAL: /home/kyuhyongpark/Boolmore/boolmore/demo/demo_80_gen11.bnet
+# id: 80
+# generation: 11
+# model_id: 80
+# max_score: 50.0
+# score: 49.0
+# n_edges: 10
+# n_self_edges: 1
+# n_prime_implicants: 10
+# n_extra_edges: 0
+# following_constraints: True
 # number of nodes: 5
 # number of edges: 14
 # number of effective base edges: 10
@@ -84,8 +109,6 @@ iteration,top score,extra edges,n_edges,n_self_edges,n_prime_implicants,best_mod
 # number of effective extra edges: 0
 # number of ineffective extra edges: 0
 # number of unadded edges: 0
-# score: 49.0 / 50.0 (98.0%)
-# extra edges: []
 # targets,	factors
 # Coup_fti,  !Sp8
 # Emx2,      Coup_fti&!Fgf8&!Sp8
