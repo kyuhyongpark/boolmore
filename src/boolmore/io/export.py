@@ -1,5 +1,9 @@
 import csv
+import os
+import pickle
 
+from boolmore import boolean_functions as bf
+from boolmore.model import Model
 from boolmore.experiment import PhenotypeExperiment
 from boolmore.inference.prediction import PhenotypePrediction
 from boolmore.evaluation.score import EvaluationItemScore
@@ -90,3 +94,27 @@ def export_phenotype_results(
         writer = csv.DictWriter(f, fieldnames=headers)
         writer.writeheader()
         writer.writerows(rows)
+
+
+def export_model(model:Model, file_name: str, details: bool = True):
+    """Export a model as a .bnet file and pickle its primes."""
+
+    bnet_file_name = file_name + ".bnet"
+    pkl_file_name = file_name + ".pkl"
+
+    with open(bnet_file_name, "w") as fp:
+        if details:
+            fp.write(f"# extra edges: {model.extra_edges}\n")
+            fp.write(f"# number of extra edges: {model.n_extra_edges}\n")
+
+        fp.write("targets,\tfactors\n")
+
+        primes = {k: model.primes[k] for k in sorted(model.primes)}
+        for k in primes:
+            fp.write(bf.prime2bnet(k, primes[k]) + "\n")
+
+    with open(pkl_file_name, "wb") as f:
+        pickle.dump(model.primes, f)
+
+    print("Exported generated model to", os.path.abspath(bnet_file_name))
+    print("Pickled primes to", os.path.abspath(pkl_file_name))

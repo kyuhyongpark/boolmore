@@ -21,6 +21,7 @@ from boolmore.evaluation.score import (
 from boolmore.evaluation.compare import compare_model_functions
 from boolmore.inference.prediction import get_NAV_prediction, get_phenotype_prediction
 from boolmore.io.load import import_NAV_exps, import_phenotypes
+from boolmore.io.export import export_model
 
 from boolmore.genetic.population import Candidate, describe_candidate, sort_population
 from boolmore.genetic.generation.reproduction import Reproducer
@@ -265,20 +266,20 @@ def export_models(
     final = states[-1].population[0]
 
     # Always export the final best model
-    final.model.export(file_name=f"{export_name}_{final.id}_gen{final.generation}")
+    export_model(final.model, file_name=f"{export_name}_{final.id}_gen{final.generation}")
 
     # Export top models from each generation
     if export_top:
         for state in states[1:]:
             for candidate in state.population[:export_top]:
                 if candidate.eval_result.score > export_thresh:
-                    candidate.model.export(file_name=f"{export_name}_{candidate.id}_gen{candidate.generation}")
+                    export_model(candidate.model, file_name=f"{export_name}_{candidate.id}_gen{candidate.generation}")
 
     # Export all models tied with the best model in the final generation
     if export_same:
         for candidate in states[-1].population:
             if candidate.eval_result.score == final.eval_result.score:
-                candidate.model.export(filename=f"{export_name}_{candidate.id}_gen{candidate.generation}")
+                export_model(candidate.model, filename=f"{export_name}_{candidate.id}_gen{candidate.generation}")
 
 
 def run_ga(
@@ -462,11 +463,14 @@ def run_ga(
     base = Candidate(model=base_model, eval_result=evaluator.evaluate(base_model))    
     end_single = datetime.datetime.now()
     base.model.info()
-    print(f"score: {round(base.eval_result.score,2)} / {base.eval_result.max_score} ({round(base.eval_result.score/base.eval_result.max_score*100,1)}%)")
-    print(f"""
-          Elapsed time for single evaluation: {end_single-start_single}
-          Estimated GA evaluation time: {(end_single-start_single)*config.total_iter*config.per_iter}""")
-    print()
+    print(
+        f"score: {round(base.eval_result.score,2)}"
+        f" / {base.eval_result.max_score}"
+        f" ({round(base.eval_result.score/base.eval_result.max_score*100,1)}%)\n")
+    print(
+        f"\tElapsed time for single evaluation: {end_single-start_single}\n"
+        f"\tEstimated GA evaluation time: {(end_single-start_single)*config.total_iter*config.per_iter/core}\n"
+        )
 
     start = Candidate(start_model, 0, STARTING_GEN, evaluator.evaluate(start_model, 0))
     start.model.info()

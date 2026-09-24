@@ -10,8 +10,8 @@ CORE = 2
 
 base, start, states = run_ga(
     json_file="CAD_config.json",
-    seed=SEED,
     run_name="demo",
+    seed=SEED,
     core=CORE
     )
 
