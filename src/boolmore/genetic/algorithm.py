@@ -243,6 +243,7 @@ def ga_main(
 
 def log_candidate(fp, candidate, label, path):
     fp.write(f"\n# {label}: {os.path.abspath(path)}\n")
+    fp.write(candidate.model.info() + "\n")
     fp.write(
         f"# score: {candidate.eval_result.score} / "
         f"{candidate.eval_result.max_score} "
@@ -462,7 +463,7 @@ def run_ga(
     start_single = datetime.datetime.now()
     base = Candidate(model=base_model, eval_result=evaluator.evaluate(base_model))    
     end_single = datetime.datetime.now()
-    base.model.info()
+    print(base.model.info())
     print(
         f"score: {round(base.eval_result.score,2)}"
         f" / {base.eval_result.max_score}"
@@ -473,7 +474,7 @@ def run_ga(
         )
 
     start = Candidate(start_model, 0, STARTING_GEN, evaluator.evaluate(start_model, 0))
-    start.model.info()
+    print(start.model.info())
     print(f"score: {round(start.eval_result.score,2)} / {start.eval_result.max_score} ({round(start.eval_result.score/start.eval_result.max_score*100,1)}%)")
     print()
 

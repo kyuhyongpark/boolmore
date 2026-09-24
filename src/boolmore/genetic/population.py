@@ -22,8 +22,8 @@ def describe_candidate(candidate: Candidate) -> str:
         f"score {round(result.score, 1)}/{result.max_score} "
         f"({round(result.score / result.max_score * 100, 1)}%), "
         f"extra edges {model.get_edges(source='edge_pool')}, "
-        f"n edges {result.n_edges}, "
-        f"n self edges {result.n_self_edges}, "
+        f"eff edges {result.n_edges}, "
+        f"eff self edges {result.n_self_edges}, "
         f"n prime implicants {result.n_prime_implicants}, "
         f"following constraints {result.following_constraints}"
     )

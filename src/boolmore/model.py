@@ -300,7 +300,24 @@ class Model():
 
     def info(self):
         """
-        prints out a brief summary of the model info
+        Return a brief summary of the model information.
         """
-        print("extra edges: ", self.get_edges(source="edge_pool"))
-        print("number of extra edges: ", len(self.get_edges(source="edge_pool")))
+        lines = [
+            f"# number of nodes: {len(self.primes)}",
+            f"# number of edges: {len(self.edges)}",
+            f"# number of effective base edges: "
+            f"{len(self.get_edges(source='base', effective=True))}",
+            f"# number of ineffective base edges: "
+            f"{len(self.get_edges(source='base', effective=False))}",
+            f"# extra edges: {self.get_edges(source='edge_pool')}",
+            f"# number of extra edges: "
+            f"{len(self.get_edges(source='edge_pool'))}",
+            f"# number of effective extra edges: "
+            f"{len(self.get_edges(source='edge_pool', effective=True))}",
+            f"# number of ineffective extra edges: "
+            f"{len(self.get_edges(source='edge_pool', effective=False))}",
+            f"# number of unadded edges: "
+            f"{len(self.unadded_edges)}",
+        ]
+
+        return "\n".join(lines)

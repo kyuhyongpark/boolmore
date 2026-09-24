@@ -1,5 +1,12 @@
+# number of nodes: 5
+# number of edges: 14
+# number of effective base edges: 10
+# number of ineffective base edges: 4
 # extra edges: []
 # number of extra edges: 0
+# number of effective extra edges: 0
+# number of ineffective extra edges: 0
+# number of unadded edges: 0
 targets,	factors
 Coup_fti,	!Sp8
 Emx2,	Coup_fti & !Fgf8 & !Sp8

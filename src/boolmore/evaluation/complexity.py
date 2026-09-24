@@ -19,8 +19,8 @@ def get_model_complexity(model:Model)->dict[str, int]:
             n_self_edges += 1
 
     return {
-        "n_edges": len(model.get_edges(effective=True)),
-        "n_self_edges": n_self_edges,
+        "n_eff_edges": len(model.get_edges(effective=True)),
+        "n_eff_self_edges": n_self_edges,
         "n_prime_implicants": n_prime_implicants,
         "n_extra_edges": len(model.get_edges(source="extra_edges"))
     }
