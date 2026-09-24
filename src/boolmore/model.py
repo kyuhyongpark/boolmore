@@ -42,6 +42,7 @@ class Model():
         self.signs_dict = {}
         self.rr_dict = {}
 
+        self.edges = []
         self.extra_edges = []
         self.n_extra_edges = 0
 
@@ -135,6 +136,7 @@ class Model():
             x.signs_dict[node] = signs
 
         x.n_extra_edges = len(x.extra_edges)
+        x.edges = x._construct_edges()
 
         return x
 
@@ -207,6 +209,56 @@ class Model():
                                 raise ValueError(
                                     f"Sign mismatch for {regulator} -> {node}"
                                 )
+
+    def _construct_edges(self):
+        edges = []
+
+        for target in self.primes:
+
+            regulators, _, signs = bf.prime2rr(self.primes[target])
+            base_regulators, _, base_signs = bf.prime2rr(self.base.primes[target])
+
+            for regulator, sign in zip(regulators, signs):
+                # Is this edge one of the candidate edge-pool edges?
+                if (regulator, target, sign) in self.edge_pool:
+                    source = "edge_pool"
+                else:
+                    source = "base"
+
+                # Determine whether this edge is effective
+                effective = False
+                for implicant in self.primes[target][1]:
+                    if regulator in implicant:
+                        effective = True
+                        break
+
+                edges.append({
+                    "regulator": regulator,
+                    "target": target,
+                    "sign": sign,
+                    "source": source,
+                    "effective": effective
+                })
+
+            for base_regulator in base_regulators:
+                if base_regulator not in regulators:
+                    edges.append({
+                        "regulator": base_regulator,
+                        "target": target,
+                        "sign": base_signs[base_regulators.index(base_regulator)],
+                        "source": "base",
+                        "effective": False
+                    })
+
+        edges.sort(
+            key=lambda edge: (
+                edge["regulator"],
+                edge["target"],
+                edge["sign"],
+            )
+        )
+
+        return edges
 
     def info(self):
         """

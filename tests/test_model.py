@@ -107,3 +107,88 @@ def test_from_primes_allows_removed_base_regulator(base_primes):
     model = Model.from_primes(primes, base=base)
 
     assert model.regulators_dict["B"] == ("A", "B")
+
+
+def test_construct_edges(base_primes):
+    base = Model.from_primes(
+        base_primes,
+        edge_pool=[("C", "B", "1")],
+    )
+
+    model = Model.from_primes(
+        {
+            "A": base_primes["A"],
+            "B": [[{"A": 1}, {"C": 0}], [{"A": 0, "C": 1}]],
+        },
+        base=base,
+    )
+
+    edges = model._construct_edges()
+
+    assert edges == [
+        {
+            "regulator": "A",
+            "target": "A",
+            "sign": "1",
+            "source": "base",
+            "effective": True,
+        },
+        {
+            "regulator": "A",
+            "target": "B",
+            "sign": "0",
+            "source": "base",
+            "effective": True,
+        },
+        {
+            "regulator": "B",
+            "target": "B",
+            "sign": "1",
+            "source": "base",
+            "effective": False,
+        },
+        {
+            "regulator": "C",
+            "target": "B",
+            "sign": "1",
+            "source": "edge_pool",
+            "effective": True,
+        },
+    ]
+
+def test_construct_edges_BASE(base_primes):
+    base = Model.from_primes(
+        base_primes,
+        edge_pool=[("C", "B", "1")],
+    )
+
+    model = Model.from_primes(
+        base_primes,
+        base=base,
+    )
+
+    edges = model._construct_edges()
+
+    assert edges == [
+        {
+            "regulator": "A",
+            "target": "A",
+            "sign": "1",
+            "source": "base",
+            "effective": True,
+        },
+        {
+            "regulator": "A",
+            "target": "B",
+            "sign": "0",
+            "source": "base",
+            "effective": True,
+        },
+        {
+            "regulator": "B",
+            "target": "B",
+            "sign": "1",
+            "source": "base",
+            "effective": True,
+        },
+    ]
