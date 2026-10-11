@@ -1,5 +1,4 @@
-# run with the location of the script as the working directory
-
+from pathlib import Path
 
 from boolmore.genetic.runner import run_ga
 from boolmore.boolean_functions import prime2bnet, prime2rr
@@ -8,12 +7,14 @@ from boolmore.boolean_functions import prime2bnet, prime2rr
 SEED = 0
 CORE = 2
 
+DEMO_DIR = Path(__file__).resolve().parent
+
 base, start, states = run_ga(
-    json_file="CAD_config.json",
+    json_file=str(DEMO_DIR / "CAD_config.json"),
     run_name="demo",
     seed=SEED,
-    core=CORE
-    )
+    core=CORE,
+)
 
 final = states[-1].population[0]
 
