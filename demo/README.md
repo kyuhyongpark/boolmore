@@ -35,21 +35,20 @@ The final model will be stored as "demo_id_gen.bnet"
 
 ## Evaluate a model
 
-Score a `.bnet` with the same fitness pipeline as the genetic algorithm (no GA run). Paths are resolved from the project root (`pyproject.toml`), so the working directory does not matter.
+Score a `.bnet` with the same fitness pipeline as the genetic algorithm (no GA run).
+
+Edit the paths at the top of `scripts/evaluate_model.py`, then run:
 
 ```bash
-# evaluate the demo start model
-python boolmore/scripts/evaluate_model.py --demo
-
-# evaluate the baseline or another model in demo/
-python boolmore/scripts/evaluate_model.py --demo CAD.bnet
-python boolmore/scripts/evaluate_model.py --demo demo_80_gen11.bnet --report
-
-# evaluate with an arbitrary config
-python boolmore/scripts/evaluate_model.py --config path/to/config.json path/to/model.bnet
+python boolmore/scripts/evaluate_model.py
 ```
 
-`--report` writes a per-experiment NAV score TSV (`{model_stem}_score.tsv`) in the current directory.
+```python
+# change these to evaluate a different model
+CONFIG = DEMO_DIR / "CAD_config.json"
+MODEL = DEMO_DIR / "CAD_start.bnet"
+REPORT = False  # set True to write a per-experiment NAV score TSV
+```
 
 ## Generate your own benchmark
 Use `create_your_own_benchmark.ipynb` to generate different artificial experiment datasets and starting models, using different seeds.
