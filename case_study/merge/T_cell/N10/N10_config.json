@@ -10,9 +10,9 @@
     "order_by": ["n_self_edges", "n_edges", "n_prime_implicants"]
     },
 
-"data" : "./N10_data.csv",
+"data" : "case_study/merge/T_cell/N10/N10_data.csv",
 
-"base" : "../target_models/N10_BBM155.bnet",
+"base" : "case_study/merge/T_cell/target_models/N10_BBM155.bnet",
 
 "default_sources": {},
 

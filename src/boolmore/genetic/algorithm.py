@@ -16,6 +16,9 @@ class GAConfig:
     stop_if_max : bool
         if True, stop if the maximum score is reached
 
+    starting_gen : int
+        generation number assigned to the starting model
+
     total_iter : int
         total number of iterations
     per_iter : int
@@ -40,6 +43,8 @@ class GAConfig:
         number of cores to use
     """
     stop_if_max: bool
+
+    starting_gen: int
 
     total_iter: int
     per_iter: int

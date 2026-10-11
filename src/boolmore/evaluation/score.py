@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
+from pathlib import Path
 
 from boolmore.model import Model
 from boolmore.experiment import PhenotypeExperiment, NAVExperiment
@@ -23,34 +26,52 @@ class EvalResult:
 
 
 class Evaluator:
-    def __init__(self, exps, prediction_fn, score_fn, constraints):
-        """
-        exps : list of experiment dataclasses
-        """
+    """Full model evaluation: experiments, base model, and scoring context."""
+
+    def __init__(
+        self,
+        *,
+        base: Model,
+        exps,
+        prediction_fn,
+        score_fn,
+        constraints: dict,
+        run_type: str,
+        hierarchy: bool = True,
+        default_sources: dict[str, int] | None = None,
+        generate_defaults: bool = False,
+    ):
+        self.base = base
         self.exps = exps
         self.prediction_fn = prediction_fn
         self.score_fn = score_fn
         self.constraints = constraints
+        self.run_type = run_type
+        self.hierarchy = hierarchy
+        self.default_sources = dict(default_sources) if default_sources is not None else {}
+        self.generate_defaults = generate_defaults
 
-    def evaluate(self, model:Model, id:int=-1)->EvalResult:
+    def evaluate(self, model: Model, id: int = -1) -> EvalResult:
         predictions = self.prediction_fn(model.primes, self.exps)
-        score_items:list[EvaluationItemScore] = self.score_fn(self.exps, predictions)
+        score_items: list[EvaluationItemScore] = self.score_fn(self.exps, predictions)
         max_score, score = get_model_score(score_items)
         complexity = get_model_complexity(model)
         following_constraints = check_model_constraints(model, self.constraints)
-        result = EvalResult(model_id=id,
-                            max_score=max_score,
-                            score=score,
-                            n_edges=complexity["n_eff_edges"],
-                            n_self_edges=complexity["n_eff_self_edges"],
-                            n_prime_implicants=complexity["n_prime_implicants"],
-                            n_extra_edges=complexity["n_extra_edges"],
-                            following_constraints=following_constraints,
-                            details=[predictions, score_items])
+        result = EvalResult(
+            model_id=id,
+            max_score=max_score,
+            score=score,
+            n_edges=complexity["n_eff_edges"],
+            n_self_edges=complexity["n_eff_self_edges"],
+            n_prime_implicants=complexity["n_prime_implicants"],
+            n_extra_edges=complexity["n_extra_edges"],
+            following_constraints=following_constraints,
+            details=[predictions, score_items],
+        )
 
         if not following_constraints:
             print("ERROR: model does not follow constraints")
-        
+
         return result
 
 
@@ -61,6 +82,64 @@ def format_score(result: EvalResult) -> str:
         f"score: {round(result.score, 2)} / {result.max_score} "
         f"({round(pct, 1)}%)"
     )
+
+
+def write_nav_report(
+    result: EvalResult,
+    evaluator: Evaluator,
+    file: str | Path,
+) -> Path:
+    """Write a per-experiment NAV score TSV from an existing ``EvalResult``."""
+    if evaluator.run_type != "NAV":
+        raise ValueError("Detailed report is only supported for NAV run_type.")
+
+    predictions = result.details[0]
+    score_by_id = {item.id: item for item in result.details[1]}
+    agreements = get_agreements(evaluator.exps, predictions)
+    default_sources = evaluator.default_sources
+
+    ID = 0
+    OUTCOME_VALUE = 2
+    PREDICT_VALUE = 3
+    AGREEMENT = 4
+
+    report_path = Path(file)
+    with open(report_path, "w") as fp:
+        fp.write("id\thierarchy\tfixes\tobserved_node\texperimental_outcome\t")
+        fp.write("predict_value\tattractor_agreement\tscore\n")
+
+        for observed_node in agreements:
+            for fixes in agreements[observed_node]:
+                fixes_dict = {key: value for (key, value) in fixes}
+
+                hierarchy = 0
+                for node in fixes_dict:
+                    if node in default_sources:
+                        if fixes_dict[node] != default_sources[node]:
+                            hierarchy += 1
+                    else:
+                        hierarchy += 1
+
+                exp_id = agreements[observed_node][fixes][ID]
+                item = score_by_id[exp_id]
+
+                fp.write(str(exp_id) + "\t")
+                fp.write(str(hierarchy) + "\t")
+                for fix in fixes:
+                    fp.write(str(fix[0]) + "=" + str(fix[1]) + ",")
+                fp.write("\t")
+                fp.write(str(observed_node) + "\t")
+                fp.write(str(agreements[observed_node][fixes][OUTCOME_VALUE]) + "\t")
+                fp.write(str(round(agreements[observed_node][fixes][PREDICT_VALUE], 3)) + "\t")
+                fp.write(str(round(agreements[observed_node][fixes][AGREEMENT], 3)) + "\t")
+                fp.write(str(round(item.score, 3)) + "\n")
+
+        fp.write("total\t" + str(result.score) + "\n")
+        fp.write("max\t" + str(result.max_score) + "\n")
+        pct = result.score / result.max_score * 100 if result.max_score else 0.0
+        fp.write("per\t" + str(pct) + "%\n")
+
+    return report_path.resolve()
 
 
 @dataclass(frozen=True)
@@ -104,12 +183,9 @@ def get_non_hierarchy_scores(
 def get_hierarchy_scores(
     agreements: AgreeType,
     default_sources: dict[str, int],
-    report: bool = False,
-    file: str = 'score_report.tsv'
 ) -> list[EvaluationItemScore]:
     """
-    Returns model score
-    when given attractor agreements
+    Returns per-experiment scores when given attractor agreements.
 
     Parameters
     ----------
@@ -122,50 +198,26 @@ def get_hierarchy_scores(
             key : FixesType
             value : tuple[int, float, str, float, float]
                 data for given fixes - (id, max_score, outcome_value, predict_value, agreement)
-    
+
     default_sources : dict[str, int]
         Shows the default settings for the source nodes, which is considered the top of the hierarchy
         These source nodes must have a defined value in every experiments.
 
-    report : bool
-        if True, make a csv file with detailed report
-    
-    file : str
-        the location and name of the detailed report file
-
     Returns
     -------
-    score : float
-        how well the model agrees with experimental results
-        one point in score means agreement to one perturbation
-
+    list[EvaluationItemScore]
+        per-experiment weights, agreements, and hierarchy-adjusted scores
     """
 
     ID = 0
     MAX_SCORE = 1
-    OUTCOME_VALUE = 2
-    PREDICT_VALUE = 3
     AGREEMENT = 4
 
-    if report:
-        fp = open(file, 'w')
-        fp.write('id\thierarchy\tfixes\tobserved_node\texperimental_outcome\t')
-        fp.write('predict_value\tattractor_agreement\tscore\n')
-
-    model_max_score = 0.0
     results: list[EvaluationItemScore] = []
 
     for observed_node in agreements:
         for fixes in agreements[observed_node]:
             fixes_dict = {key: value for (key, value) in fixes}
-
-            hierarchy = 0
-            for node in fixes_dict:
-                if node in default_sources:
-                    if fixes_dict[node] != default_sources[node]:
-                        hierarchy += 1
-                else:
-                    hierarchy += 1
 
             subset_fixes_set = set()
             for other_fixes in agreements[observed_node]:
@@ -209,59 +261,28 @@ def get_hierarchy_scores(
                 )
             )
 
-            if report:
-                fp.write(str(agreements[observed_node][fixes][ID]) + '\t')
-                fp.write(str(hierarchy) + '\t')
-                for fix in fixes:
-                    fp.write(str(fix[0]) + '=' + str(fix[1]) + ',')
-                fp.write('\t')
-                fp.write(str(observed_node) + '\t')
-                fp.write(str(agreements[observed_node][fixes][OUTCOME_VALUE]) + '\t')
-                fp.write(str(round(agreements[observed_node][fixes][PREDICT_VALUE], 3)) + '\t')
-                fp.write(str(round(agreements[observed_node][fixes][AGREEMENT], 3)) + '\t')
-                fp.write(str(round(current_score, 3)) + '\n')
-
-    if report:
-        total_score = sum(r.score for r in results)
-        model_max_score = sum(r.weight for r in results)
-        fp.write('total\t' + str(total_score) + '\n')
-        fp.write('max\t' + str(model_max_score) + '\n')
-        fp.write('per\t' + str(total_score / model_max_score * 100) + '%\n')
-
     return results
 
 
 def get_NAV_scores(
-    exps:list[NAVExperiment],
+    exps: list[NAVExperiment],
     predictions,
-    default_sources:dict={},
-    hierarchy:bool=True,
-    report:bool=False,
-    file:str="score_report.tsv"):
+    default_sources: dict | None = None,
+    hierarchy: bool = True,
+) -> list[EvaluationItemScore]:
     """
-    Returns score when given experiments.
-    Requires predictions to be calculated beforehand.
+    Returns per-experiment scores when given experiments and predictions.
 
     Can be modified to meet the desired criteria.
-    
-    Returns
-    -------
-    max_score : float
-        max possible score of the model
-
-    score : float
-        how well the model agrees with experimental results
-        one point in score means agreement to one perturbation
-    
     """
+    if default_sources is None:
+        default_sources = {}
+
     agreements = get_agreements(exps, predictions)
 
     if hierarchy:
-        scores = get_hierarchy_scores(agreements, default_sources, report=report, file=file)
-    else:
-        scores = get_non_hierarchy_scores(agreements)
-
-    return scores
+        return get_hierarchy_scores(agreements, default_sources)
+    return get_non_hierarchy_scores(agreements)
 
 
 def get_phenotype_scores(

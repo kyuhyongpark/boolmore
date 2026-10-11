@@ -12,9 +12,9 @@
     "edge_prob": 0.5
     },
 
-"data": "./data/data_2019_Maheshwari.tsv",
+"data": "case_study/ABA/data/data_2019_Maheshwari.tsv",
 
-"base": "./baseline_models/ABA_2019_Maheshwari.bnet",
+"base": "case_study/ABA/baseline_models/ABA_2019_Maheshwari.bnet",
 
 "default_sources": {"ABA":0},
 

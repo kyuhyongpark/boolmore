@@ -12,9 +12,9 @@
     "edge_prob": 0.5
     },
 
-"data": "./data/data_B.tsv",
+"data": "case_study/ABA/data/data_B.tsv",
 
-"base": "./baseline_models/ABA_GA_base_B.bnet",
+"base": "case_study/ABA/baseline_models/ABA_GA_base_B.bnet",
 
 "default_sources": {"ABA":0},
 

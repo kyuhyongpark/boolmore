@@ -1,11 +1,11 @@
 {
 "run_type" : "NAV",
 
-"data" : "./CAD_data.tsv",
+"data" : "demo/CAD_data.tsv",
 
-"base" : "./CAD.bnet",
+"base" : "demo/CAD.bnet",
 
-"start" : "./CAD_start.bnet",
+"start" : "demo/CAD_start.bnet",
 
 "hierarchy" : true,
 
