@@ -5,10 +5,6 @@ import csv
 from boolmore.experiment import NAVExperiment
 
 
-def comment_removal(line: str) -> bool:
-    return not line.startswith("#") and not line.isspace()
-
-
 def import_NAV_exps(location: str) -> list[NAVExperiment]:
     """
     Reads a tsv file and returns experiments and interventions.
@@ -42,7 +38,7 @@ def import_NAV_exps(location: str) -> list[NAVExperiment]:
     ID, SCORE, SOURCE, PERT, NODE, VALUE = 0, 1, 2, 3, 4, 5
     
     file = open(location, "r")
-    lines = filter(comment_removal, file)
+    lines = (line for line in file if not line.startswith("#") and not line.isspace())
     data = csv.reader(lines, delimiter="\t")
 
     # skip the first row

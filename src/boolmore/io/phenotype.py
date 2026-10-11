@@ -8,7 +8,7 @@ from typing import Optional
 from boolmore.experiment import PhenotypeExperiment
 from boolmore.types import Assignment
 
-Signature = tuple[Assignment, Assignment, Assignment]  # sources, perturbation, phenotype
+_Signature = tuple[Assignment, Assignment, Assignment]  # sources, perturbation, phenotype
 
 
 @dataclass
@@ -34,7 +34,7 @@ class CSVParseException(Exception):
         return "\n".join(lines)
 
 
-def valid_lines(file):
+def _valid_lines(file):
     for line in file:
         line = line.strip()
         if not line:
@@ -44,7 +44,7 @@ def valid_lines(file):
         yield line
 
 
-def parse_id(x: str, line_num: int, errors: list[ParseError], row: dict) -> Optional[int]:
+def _parse_id(x: str, line_num: int, errors: list[ParseError], row: dict) -> Optional[int]:
     if x is None or x.strip() == "":
         errors.append(ParseError(line_num, None, "Missing id", row))
         return None
@@ -56,7 +56,7 @@ def parse_id(x: str, line_num: int, errors: list[ParseError], row: dict) -> Opti
         return None
 
 
-def parse_bool(x: str, line_num: int, errors: list[ParseError], id: Optional[str], row: dict) -> Optional[bool]:
+def _parse_bool(x: str, line_num: int, errors: list[ParseError], id: Optional[str], row: dict) -> Optional[bool]:
     if x is None:
         errors.append(ParseError(line_num, id, "Missing expected_exists", row))
         return None
@@ -72,7 +72,7 @@ def parse_bool(x: str, line_num: int, errors: list[ParseError], id: Optional[str
     return None
 
 
-def parse_float(x: str, field: str, line_num: int, errors: list[ParseError], id: Optional[str], row: dict) -> Optional[float]:
+def _parse_float(x: str, field: str, line_num: int, errors: list[ParseError], id: Optional[str], row: dict) -> Optional[float]:
     if x is None or x.strip() == "":
         errors.append(ParseError(line_num, id, f"Missing field '{field}'", row))
         return None
@@ -84,7 +84,7 @@ def parse_float(x: str, field: str, line_num: int, errors: list[ParseError], id:
         return None
 
 
-def parse_assignment_block(
+def _parse_assignment_block(
         block: str,
         field: str,
         line_num: int,
@@ -209,33 +209,33 @@ def import_phenotypes(location: str) -> list[PhenotypeExperiment]:
         "expected_exists",
     }
 
-    signatures: dict[Signature, list[int]] = defaultdict(list)
+    signatures: dict[_Signature, list[int]] = defaultdict(list)
     ids_seen: dict[int, int] = defaultdict(int)
 
     with open(location, newline="") as file:
-        reader = csv.DictReader(valid_lines(file))
+        reader = csv.DictReader(_valid_lines(file))
 
         for line_num, row in enumerate(reader, start=2):
 
-            exp_id = parse_id(row.get("id"), line_num, errors, row)
+            exp_id = _parse_id(row.get("id"), line_num, errors, row)
 
-            sources = parse_assignment_block(
+            sources = _parse_assignment_block(
                 row.get("sources", ""), "sources", line_num, errors, exp_id, row
             )
 
-            perturbation = parse_assignment_block(
+            perturbation = _parse_assignment_block(
                 row.get("perturbation", ""), "perturbation", line_num, errors, exp_id, row
             )
 
-            phenotype = parse_assignment_block(
+            phenotype = _parse_assignment_block(
                 row.get("phenotype", ""), "phenotype", line_num, errors, exp_id, row
             )
 
-            weight = parse_float(
+            weight = _parse_float(
                 row.get("weight"), "weight", line_num, errors, exp_id, row
             )
 
-            expected_exists = parse_bool(
+            expected_exists = _parse_bool(
                 row.get("expected_exists"), line_num, errors, exp_id, row
             )
 

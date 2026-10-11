@@ -9,7 +9,7 @@ DEMO_DIR = Path(__file__).resolve().parent.parent / "demo"
 # change these to evaluate a different model
 CONFIG = DEMO_DIR / "CAD_config.json"
 MODEL = DEMO_DIR / "CAD_start.bnet"
-REPORT = False  # set True to write a per-experiment NAV score TSV
+REPORT = True  # set True to write a per-experiment NAV score TSV
 
 evaluator = build_evaluator(CONFIG, verbose=True)
 
