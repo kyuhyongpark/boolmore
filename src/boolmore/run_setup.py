@@ -1,7 +1,5 @@
 """Config → Evaluator / GAConfig wiring shared by ``run_ga`` and eval scripts."""
 
-from __future__ import annotations
-
 from functools import partial
 from pathlib import Path
 
@@ -10,7 +8,6 @@ from boolmore.genetic.algorithm import GAConfig
 from boolmore.inference.prediction import get_NAV_prediction, get_phenotype_prediction
 from boolmore.io.load import import_NAV_exps, import_phenotypes, load_json_config, load_model
 from boolmore.io.paths import project_root
-from boolmore.model import Model
 
 
 def build_run_config(
@@ -140,22 +137,3 @@ def build_ga_config(
     parameters = dict(config["parameters"])
     return GAConfig(**parameters, seed=seed, core=core)
 
-
-def load_start_model(
-    evaluator: Evaluator,
-    start: str | Path,
-    *,
-    base: str | Path | None = None,
-    verbose: bool = False,
-) -> Model:
-    """Load the GA starting model, reusing ``evaluator.base`` when paths match."""
-    start_path = (project_root() / start).resolve()
-    if base is not None and start_path == (project_root() / base).resolve():
-        return evaluator.base
-
-    if verbose:
-        print(f"Loading starting model from {start_path}")
-    start_model = load_model(start_path, base=evaluator.base)
-    if verbose:
-        print("Starting model loaded.")
-    return start_model

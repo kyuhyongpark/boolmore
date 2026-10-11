@@ -1,7 +1,5 @@
 """Path helpers that do not depend on the current working directory."""
 
-from __future__ import annotations
-
 from pathlib import Path
 
 

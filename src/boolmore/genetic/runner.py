@@ -12,11 +12,11 @@ from boolmore.genetic.algorithm import GAState, ga_main
 from boolmore.genetic.population import Candidate
 from boolmore.genetic.operators.reproduction import Reproducer
 from boolmore.genetic.selection import Selector
+from boolmore.io.load import load_model
 from boolmore.run_setup import (
     build_evaluator,
     build_ga_config,
     build_run_config,
-    load_start_model,
 )
 
 
@@ -156,12 +156,12 @@ def run_ga(
         export_name = run_name
 
     # ---------- Load starting model ----------
-    start_model = load_start_model(
-        evaluator,
-        config_dict["start"],
-        base=config_dict["base"],
-        verbose=True,
-    )
+    if start_path == base_path:
+        start_model = evaluator.base
+    else:
+        print(f"Loading starting model from {start_path}")
+        start_model = load_model(start_path, base=evaluator.base)
+        print("Starting model loaded.")
 
     # ---------- Evaluate base and start models ----------
     start_single = datetime.datetime.now()
