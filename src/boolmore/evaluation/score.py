@@ -58,6 +58,15 @@ class Evaluator:
         return result
 
 
+def format_score(result: EvalResult) -> str:
+    """Format score the same way as GA console output."""
+    pct = result.score / result.max_score * 100 if result.max_score else 0.0
+    return (
+        f"score: {round(result.score, 2)} / {result.max_score} "
+        f"({round(pct, 1)}%)"
+    )
+
+
 @dataclass(frozen=True)
 class EvaluationItemScore:
     id:int

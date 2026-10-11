@@ -1,31 +1,24 @@
 import datetime
-import json
 import os
 import random
-import pickle
 from dataclasses import dataclass
-from functools import partial
+from pathlib import Path
 from joblib import Parallel, delayed
 
 import numpy as np
-from pyboolnet.external.bnet2primes import bnet_file2primes
 from pystablemotifs.format import primes2bnet
 
 from boolmore.boolean_functions import prime2bnet
-from boolmore.model import Model
 
-from boolmore.evaluation.score import (
-    Evaluator,
-    get_NAV_scores, get_phenotype_scores
-)
 from boolmore.evaluation.compare import compare_model_functions
-from boolmore.inference.prediction import get_NAV_prediction, get_phenotype_prediction
-from boolmore.io.load import import_NAV_exps, import_phenotypes
+from boolmore.evaluation.score import Evaluator, format_score
+from boolmore.io.load import load_config, load_model
 from boolmore.io.export import export_model
 
 from boolmore.genetic.population import Candidate, sort_population
 from boolmore.genetic.generation.reproduction import Reproducer
 from boolmore.genetic.selection import Selector
+from boolmore.genetic.setup import build_run_setup
 
 FixesType = tuple[tuple[str, int]]
 ExpType = tuple[int, float, FixesType, str, str]
@@ -355,13 +348,15 @@ def run_ga(
         if any(x is not None for x in [run_type, data_file, base_file, start_file, stop_if_max, hierarchy]):
             raise ValueError("If json file is given, other parameters should not be given.")
 
-        with open(json_file) as f:
-            config_dict = json.load(f)
-
+        config_path = Path(json_file).resolve()
+        config_dict = load_config(config_path)
+        config_dir = config_path.parent
     else:
         if any(x is None for x in [run_type, data_file, base_file]):
             raise ValueError("If json file is not given, run_type, data_file and base_file must be given.")
 
+        config_path = None
+        config_dir = Path.cwd()
         config_dict = {
             "run_type": run_type,
             "data": data_file,
@@ -391,93 +386,57 @@ def run_ga(
                 }
             }
 
-    RUN_TYPE = config_dict["run_type"]
-    DATA = config_dict["data"]
-    BASE = config_dict["base"]
-    START = config_dict["start"]
-    HIERARCHY = config_dict["hierarchy"]
-    DEFAULT_SOURCES = config_dict["default_sources"]
-    GENERATE_DEFAULTS = config_dict["generate_defaults"]
-    CONSTRAINTS = config_dict["constraints"]
-    EDGE_POOL = config_dict["edge_pool"]
-    parameters = config_dict["parameters"].copy()
+    setup = build_run_setup(
+        config_dict,
+        config_dir=config_dir,
+        config_path=config_path,
+        verbose=True,
+    )
 
+    parameters = (setup.parameters or config_dict["parameters"]).copy()
     STARTING_GEN = parameters.pop("starting_gen")
     config = GAConfig(**parameters, seed=seed, core=core)
 
     if run_name is None:
-        run_name = START.split("/")[-1][:-5]
-    
+        run_name = setup.start_path.stem
+
     LOG = run_name + "_log.txt"
 
     if export_name is None:
         export_name = run_name
 
-    # ---------- Load base and starting model ----------
-    print(f"Loading base model from {os.path.abspath(BASE)}")
-    if BASE.endswith(".bnet"):
-        base_primes = bnet_file2primes(BASE)
-    elif BASE.endswith(".pkl"):
-        with open(BASE, "rb") as f:
-            base_primes = pickle.load(f)
+    # ---------- Load starting model ----------
+    if setup.start_path.resolve() == setup.base_path.resolve():
+        start_model = setup.base_model
     else:
-        raise ValueError(f"Unsupported base file format: {BASE}")
-    base_model = Model.from_primes(base_primes, edge_pool=EDGE_POOL)
-    print("Base model loaded.")
-
-    if os.path.abspath(START) == os.path.abspath(BASE):
-        start_primes = base_primes
-    else:
-        print(f"Loading starting model from {os.path.abspath(START)}")
-        start_primes = bnet_file2primes(START)
-    start_model = Model.from_primes(start_primes, base=base_model)
-    print("Starting model loaded.")
-
-    # ---------- Load experimental data ----------
-    print(f"Loading experimental data from {os.path.abspath(DATA)}")
-    if RUN_TYPE == "NAV":
-        if GENERATE_DEFAULTS:
-            for node in base_primes:
-                if base_primes[node] == [[{node:0}], [{node:1}]]:
-                    DEFAULT_SOURCES[node] = 0
-
-        exps = import_NAV_exps(DATA)
-        prediction_fn = get_NAV_prediction
-        score_fn = partial(get_NAV_scores, default_sources=DEFAULT_SOURCES, hierarchy=HIERARCHY)
-    elif RUN_TYPE == "Phenotype":
-        exps = import_phenotypes(DATA)
-        prediction_fn = get_phenotype_prediction
-        score_fn = get_phenotype_scores
-    else:
-        raise ValueError(f"Unsupported run type: {RUN_TYPE}")
-    evaluator = Evaluator(exps=exps, prediction_fn=prediction_fn, score_fn=score_fn, constraints=CONSTRAINTS)
-    print("Experimental data loaded.\n")
+        print(f"Loading starting model from {setup.start_path}")
+        start_model = load_model(setup.start_path, base=setup.base_model)
+        print("Starting model loaded.")
 
     # ---------- Evaluate base and start models ----------
     start_single = datetime.datetime.now()
-    base = Candidate(model=base_model, eval_result=evaluator.evaluate(base_model))    
+    _, base_result = setup.evaluate(setup.base_model)
+    base = Candidate(model=setup.base_model, eval_result=base_result)
     end_single = datetime.datetime.now()
     print(base.model.info())
-    print(
-        f"score: {round(base.eval_result.score,2)}"
-        f" / {base.eval_result.max_score}"
-        f" ({round(base.eval_result.score/base.eval_result.max_score*100,1)}%)\n")
+    print(f"{format_score(base.eval_result)}\n")
     print(
         f"\tElapsed time for single evaluation: {end_single-start_single}\n"
         f"\tEstimated GA evaluation time: {(end_single-start_single)*config.total_iter*config.per_iter/core}\n"
         )
 
-    start = Candidate(start_model, 0, STARTING_GEN, evaluator.evaluate(start_model, 0))
+    _, start_result = setup.evaluate(start_model, id=0)
+    start = Candidate(start_model, 0, STARTING_GEN, start_result)
     print(start.model.info())
-    print(f"score: {round(start.eval_result.score,2)} / {start.eval_result.max_score} ({round(start.eval_result.score/start.eval_result.max_score*100,1)}%)")
+    print(format_score(start.eval_result))
     print()
 
     # ---------- Run genetic algorithm ----------
     start_time = datetime.datetime.now()
 
     selector = Selector(keep=config.keep, order_by=config.order_by)
-    reproducer = Reproducer(selector=selector, constraints=CONSTRAINTS)
-    states = ga_main(start, evaluator, selector, reproducer, config)
+    reproducer = Reproducer(selector=selector, constraints=setup.constraints)
+    states = ga_main(start, setup.evaluator, selector, reproducer, config)
 
     end_time = datetime.datetime.now()
 
@@ -488,13 +447,13 @@ def run_ga(
 
     # ---------- Write log ----------
     with open(LOG, "w") as fp:
-        fp.write(f"# {RUN_TYPE=}\n")
-        fp.write(f"# DATA: {os.path.abspath(DATA)}\n")
-        fp.write(f"# {HIERARCHY=}\n")
-        fp.write(f"# {DEFAULT_SOURCES=}\n")
-        fp.write(f"# {GENERATE_DEFAULTS=}\n")
-        fp.write(f"# {CONSTRAINTS=}\n")
-        fp.write(f"# {EDGE_POOL=}\n\n")
+        fp.write(f"# RUN_TYPE={setup.run_type!r}\n")
+        fp.write(f"# DATA: {setup.data_path}\n")
+        fp.write(f"# HIERARCHY={setup.hierarchy}\n")
+        fp.write(f"# DEFAULT_SOURCES={setup.default_sources}\n")
+        fp.write(f"# GENERATE_DEFAULTS={setup.generate_defaults}\n")
+        fp.write(f"# CONSTRAINTS={setup.constraints}\n")
+        fp.write(f"# EDGE_POOL={setup.edge_pool}\n\n")
 
         fp.write(f"# seed: {config.seed}\n")
         fp.write(f"# stop if max: {config.stop_if_max}\n")
@@ -509,8 +468,8 @@ def run_ga(
 
         fp.write(f"# {core=}\n\n")
 
-        log_candidate(fp, base, "BASE", BASE)
-        log_candidate(fp, start, "START", START)
+        log_candidate(fp, base, "BASE", str(setup.base_path))
+        log_candidate(fp, start, "START", str(setup.start_path))
 
         fp.write(f"\n# {start_time=}\n")
         fp.write(f"# {end_time=}\n")
