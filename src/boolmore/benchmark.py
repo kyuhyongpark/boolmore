@@ -4,11 +4,7 @@ import os
 from pyboolnet.interaction_graphs import primes2igraph
 
 from boolmore.model import Model
-
-
-PrimeType = list[list[dict[str, int]]]
-FixesType = tuple[tuple[str, int]]
-ExpType = tuple[int, float, FixesType, str, str]
+from boolmore.types import ExpType, FixesType, PrimeType
 
 
 def generate_experiments(primes:dict[str, PrimeType], n_exps:int|None=None,

@@ -1,8 +1,6 @@
 from boolmore.experiment import NAVExperiment
+from boolmore.types import AgreeType, FixesType, PredictType
 
-FixesType = tuple[tuple[str, int],...]
-PredictType = dict[FixesType, dict[str, float]]
-AgreeType = dict[str, dict[FixesType, tuple[int, float, str, float, float]]]
 
 def line(input:float, start:tuple[float, float], end:tuple[float, float]) -> float:
     """

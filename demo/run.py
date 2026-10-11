@@ -1,7 +1,7 @@
 # run with the location of the script as the working directory
 
 
-from boolmore.genetic.algorithm import run_ga
+from boolmore.genetic.runner import run_ga
 from boolmore.boolean_functions import prime2bnet, prime2rr
 
 # seed for the random number generator

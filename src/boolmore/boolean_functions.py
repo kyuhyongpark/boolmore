@@ -1,5 +1,4 @@
-PrimeType = list[list[dict[str, int]]]
-Assignment = tuple[tuple[str, int], ...]
+from boolmore.types import Assignment, PrimeType
 
 
 def prime2rr(prime:PrimeType,

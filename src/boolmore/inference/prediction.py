@@ -7,8 +7,8 @@ from pyboolnet.trap_spaces import compute_trapspaces_within_subspace, compute_tr
 
 from boolmore.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.boolean_functions import assignment_to_dict
+from boolmore.types import Assignment
 
-Assignment = tuple[tuple[str, int], ...]
 
 @dataclass(frozen=True)
 class PhenotypePrediction:

@@ -1,9 +1,9 @@
 import random
 
 import boolmore.boolean_functions as bf
+from boolmore.evaluation import constraint as cons
+from boolmore.genetic.operators import constraint_enforcement as ce
 from boolmore.model import Model
-import boolmore.evaluation.constraint as cons
-import boolmore.genetic.generation.constraint_enforcement as ce
 
 
 def mutate_rr(rr:str, probability:float) -> str:

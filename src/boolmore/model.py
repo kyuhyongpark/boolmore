@@ -1,9 +1,5 @@
 import boolmore.boolean_functions as bf
-
-PrimeType = list[list[dict[str, int]]]
-FixesType = tuple[tuple[str, int]]
-ExpType = tuple[int, float, FixesType, str, str]
-PredictType = dict[FixesType, dict]
+from boolmore.types import ExpType, FixesType, PredictType, PrimeType
 
 
 class Model():

@@ -1,6 +1,6 @@
 import unittest
 
-from boolmore.inference.mask import (
+from boolmore.phenotype_tools.mask import (
     generate_source_masks,
     mask_to_sources,
     mask_to_str,

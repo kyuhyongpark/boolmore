@@ -1,5 +1,5 @@
 def main():
-    import boolmore.genetic.algorithm as ga
+    from boolmore.genetic.runner import run_ga
     from sys import argv
     """
     python -m boolmore <parameters file> <starting model>
@@ -27,7 +27,7 @@ def main():
     else:
         model = None
 
-    ga.run_ga(config_json, model)
+    run_ga(json_file=config_json, start_file=model)
 
 if __name__=='__main__':
     main()

@@ -3,8 +3,8 @@ from itertools import count
 from boolmore.model import Model
 from boolmore.genetic.population import Candidate
 from boolmore.genetic.selection import Selector
-from boolmore.genetic.generation.mutation import mutate_model
-from boolmore.genetic.generation.crossover import mix_models
+from boolmore.genetic.operators.mutation import mutate_model
+from boolmore.genetic.operators.crossover import mix_models
 
 
 class Reproducer:

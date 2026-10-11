@@ -1,5 +1,5 @@
 from boolmore.model import Model
-from boolmore.evaluation.complexity import get_model_complexity
+from boolmore.evaluation.metrics import get_model_complexity
 
 
 def test_get_model_complexity():

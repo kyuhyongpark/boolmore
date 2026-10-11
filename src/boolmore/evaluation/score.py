@@ -4,14 +4,10 @@ from boolmore.model import Model
 from boolmore.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.inference.prediction import PhenotypePrediction
 from boolmore.evaluation.agreement import get_agreements
-from boolmore.evaluation.complexity import get_model_complexity
+from boolmore.evaluation.metrics import get_model_complexity
 from boolmore.evaluation.constraint import check_model_constraints
+from boolmore.types import AgreeType, ExpType, FixesType, PredictType
 
-
-FixesType = tuple[tuple[str, int],...]
-ExpType = tuple[int, float, FixesType, str, str]
-PredictType = dict[FixesType, dict[str, float]]
-AgreeType = dict[str, dict[FixesType, tuple[int, float, str, float, float]]]
 
 @dataclass
 class EvalResult:

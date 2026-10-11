@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 
+from boolmore.types import Assignment
 
-Assignment = tuple[tuple[str, int], ...]
 
 @dataclass(frozen=True)
 class PhenotypeExperiment:

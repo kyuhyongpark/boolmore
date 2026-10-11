@@ -7,7 +7,7 @@ import argparse
 from pathlib import Path
 
 from boolmore.evaluation.score import format_score
-from boolmore.genetic.setup import load_run_setup
+from boolmore.run_setup import load_run_setup
 from boolmore.io.paths import find_project_root, resolve_existing_path
 
 

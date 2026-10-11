@@ -2,13 +2,13 @@ import unittest
 
 from pyboolnet.external.bnet2primes import bnet_text2primes
 
-from boolmore.inference.mask import (
+from boolmore.phenotype_tools.mask import (
     generate_source_masks,
     mask_to_sources,
     mask_to_str,
-    )
+)
 
-from boolmore.inference.phenotypes import (
+from boolmore.phenotype_tools.phenotypes import (
     get_mintr_for_source_comb,
 )
 

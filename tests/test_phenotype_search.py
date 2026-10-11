@@ -1,6 +1,6 @@
 import unittest
 
-from boolmore.inference.phenotypes import find_matching_phenotype
+from boolmore.phenotype_tools.phenotypes import find_matching_phenotype
 
 
 class TestFindMatchingPhenotype(unittest.TestCase):
