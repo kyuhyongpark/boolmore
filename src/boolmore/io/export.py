@@ -11,8 +11,39 @@ import pandas as pd
 from boolmore.boolean_functions import assignment_to_dict
 from boolmore.evaluation.score import EvaluationItemScore, EvaluationResult
 from boolmore.experiment import PhenotypeExperiment
+from boolmore.genetic.population import Candidate
 from boolmore.inference.prediction import PhenotypePrediction
 from boolmore.model import Model
+
+
+def export_item_scores_report(result: EvaluationResult, path: str | Path) -> Path:
+    """Write a generic per-experiment score CSV from an :class:`EvaluationResult`.
+
+    Columns are ``id``, ``weight``, ``agreement``, and ``score``.
+
+    Parameters
+    ----------
+    result : EvaluationResult
+    path : str or Path
+        Output CSV path.
+
+    Returns
+    -------
+    Path
+        Absolute path of the written file.
+    """
+    rows = [
+        {
+            "id": item.id,
+            "weight": item.weight,
+            "agreement": item.agreement,
+            "score": item.score,
+        }
+        for item in result.item_scores
+    ]
+    output = Path(path)
+    pd.DataFrame(rows).to_csv(output, index=False)
+    return output.resolve()
 
 
 def export_nav_report(result: EvaluationResult, path: str | Path) -> Path:
@@ -114,7 +145,12 @@ def export_phenotype_report(
     return output.resolve()
 
 
-def export_model(model: Model, file_name: str) -> None:
+def export_model(
+    model: Model,
+    file_name: str,
+    *,
+    header: str | None = None,
+) -> Path:
     """Export a model as a ``.bnet`` file and pickle its primes.
 
     Parameters
@@ -123,12 +159,24 @@ def export_model(model: Model, file_name: str) -> None:
         Model to export.
     file_name : str
         Output path stem (without ``.bnet`` / ``.pkl`` extension).
+    header : str or None, optional
+        Comment header written before the ``targets, factors`` line.
+        Defaults to ``model.info()``.
+
+    Returns
+    -------
+    Path
+        Absolute path of the written ``.bnet`` file.
     """
-    bnet_file_name = file_name + ".bnet"
-    pkl_file_name = file_name + ".pkl"
+    stem = str(file_name)
+    bnet_file_name = stem + ".bnet"
+    pkl_file_name = stem + ".pkl"
+
+    if header is None:
+        header = model.info()
 
     with open(bnet_file_name, "w") as fp:
-        fp.write(model.info() + "\n")
+        fp.write(header + "\n")
         fp.write("targets,\tfactors\n")
         fp.write(model.bnet)
 
@@ -137,3 +185,47 @@ def export_model(model: Model, file_name: str) -> None:
 
     print("Exported generated model to", os.path.abspath(bnet_file_name))
     print("Pickled primes to", os.path.abspath(pkl_file_name))
+    return Path(bnet_file_name).resolve()
+
+
+def export_candidate(candidate: Candidate, export_name: str) -> Path:
+    """Export a GA candidate model and its evaluation score report.
+
+    Writes:
+
+    - ``{export_name}_{id}_gen{generation}.bnet`` with ``candidate.info()`` as header
+    - ``{export_name}_{id}_gen{generation}.pkl`` with pickled primes
+    - ``{export_name}_{id}_gen{generation}_score.csv`` with per-experiment scores
+      (NAV report when NAV fields are present; otherwise a generic item-scores CSV)
+
+    Parameters
+    ----------
+    candidate : Candidate
+        Candidate with a non-``None`` ``eval_result``.
+    export_name : str
+        Prefix for output file names.
+
+    Returns
+    -------
+    Path
+        Absolute path of the output stem (without extension).
+
+    Raises
+    ------
+    ValueError
+        If ``candidate.eval_result`` is ``None``.
+    """
+    if candidate.eval_result is None:
+        raise ValueError("export_candidate requires candidate.eval_result")
+
+    stem = f"{export_name}_{candidate.id}_gen{candidate.generation}"
+    export_model(candidate.model, stem, header=candidate.info())
+
+    result = candidate.eval_result
+    score_path = f"{stem}_score.csv"
+    if result.item_scores and any(item.fixes is not None for item in result.item_scores):
+        export_nav_report(result, score_path)
+    else:
+        export_item_scores_report(result, score_path)
+
+    return Path(stem).resolve()

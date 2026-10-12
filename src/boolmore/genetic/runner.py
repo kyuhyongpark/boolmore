@@ -6,7 +6,7 @@ import os
 from boolmore.boolean_functions import prime2bnet
 from boolmore.evaluation.metrics import compare_model_functions
 from boolmore.evaluation.score import format_score
-from boolmore.io.export import export_model
+from boolmore.io.export import export_candidate
 from boolmore.io.paths import project_root
 from boolmore.genetic.algorithm import GAState, ga_main
 from boolmore.genetic.population import Candidate
@@ -40,20 +40,20 @@ def export_models(
     final = states[-1].population[0]
 
     # Always export the final best model
-    export_model(final.model, file_name=f"{export_name}_{final.id}_gen{final.generation}")
+    export_candidate(final, export_name)
 
     # Export top models from each generation
     if export_top:
         for state in states[1:]:
             for candidate in state.population[:export_top]:
                 if candidate.eval_result.score > export_thresh:
-                    export_model(candidate.model, file_name=f"{export_name}_{candidate.id}_gen{candidate.generation}")
+                    export_candidate(candidate, export_name)
 
     # Export all models tied with the best model in the final generation
     if export_same:
         for candidate in states[-1].population:
             if candidate.eval_result.score == final.eval_result.score:
-                export_model(candidate.model, file_name=f"{export_name}_{candidate.id}_gen{candidate.generation}")
+                export_candidate(candidate, export_name)
 
 
 def run_ga(
