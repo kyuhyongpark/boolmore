@@ -47,7 +47,7 @@ python boolmore/scripts/evaluate_model.py
 # change these to evaluate a different model
 CONFIG = DEMO_DIR / "CAD_config.json"
 MODEL = DEMO_DIR / "CAD_start.bnet"
-REPORT = False  # set True to write a per-experiment NAV score TSV
+REPORT = False  # set True to write a per-experiment NAV score CSV
 ```
 
 ## Generate your own benchmark

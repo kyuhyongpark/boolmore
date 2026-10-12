@@ -23,7 +23,7 @@ class Candidate:
 
         if result is not None:
             for field in fields(result):
-                if field.name == "details":
+                if field.name == "outcomes":
                     continue
                 lines.append(f"# {field.name}: {getattr(result, field.name)}")
 
@@ -32,9 +32,9 @@ class Candidate:
         info += "\n" + self.model.info()
 
         if detailed and result is not None:
-            details = pformat(result.details)
-            details = "\n".join(f"# {line}" for line in details.splitlines())
-            info += f"\n# details:\n{details}"
+            outcomes = pformat(result.outcomes)
+            outcomes = "\n".join(f"# {line}" for line in outcomes.splitlines())
+            info += f"\n# outcomes:\n{outcomes}"
 
         return info
 

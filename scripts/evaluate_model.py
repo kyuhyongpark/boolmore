@@ -9,7 +9,7 @@ DEMO_DIR = Path(__file__).resolve().parent.parent / "demo"
 # change these to evaluate a different model
 CONFIG = DEMO_DIR / "CAD_config.json"
 MODEL = DEMO_DIR / "CAD_start.bnet"
-REPORT = True  # set True to write a per-experiment NAV score TSV
+REPORT = True  # set True to write a per-experiment NAV score CSV
 
 evaluator = build_evaluator(CONFIG, verbose=True)
 
@@ -26,6 +26,6 @@ print(format_score(result))
 
 if REPORT:
     report_path = write_nav_report(
-        result, evaluator, Path.cwd() / f"{Path(MODEL).stem}_score.tsv"
+        result, Path.cwd() / f"{Path(MODEL).stem}_score.csv"
     )
     print(f"Wrote detailed report to {report_path}")

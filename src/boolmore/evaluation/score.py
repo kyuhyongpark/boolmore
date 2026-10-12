@@ -1,13 +1,29 @@
 from dataclasses import dataclass
 from pathlib import Path
 
+import pandas as pd
+
 from boolmore.model import Model
 from boolmore.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.inference.prediction import PhenotypePrediction
 from boolmore.evaluation.agreement import get_agreements
 from boolmore.evaluation.metrics import get_model_complexity
 from boolmore.evaluation.constraint import check_model_constraints
-from boolmore.types import AgreeType, ExpType, FixesType, PredictType
+from boolmore.types import AgreeType, Assignment
+
+
+@dataclass(frozen=True)
+class EvaluationItemScore:
+    id: int
+    weight: float
+    agreement: float
+    score: float
+    # NAV-only (None for phenotype)
+    hierarchy: int | None = None
+    fixes: Assignment | None = None
+    observed: str | None = None
+    outcome: str | None = None
+    predict_value: float | None = None
 
 
 @dataclass
@@ -20,7 +36,7 @@ class EvalResult:
     n_prime_implicants: int
     n_extra_edges: int
     following_constraints: bool
-    details: any
+    outcomes: list[EvaluationItemScore]
 
 
 class Evaluator:
@@ -64,7 +80,7 @@ class Evaluator:
             n_prime_implicants=complexity["n_prime_implicants"],
             n_extra_edges=complexity["n_extra_edges"],
             following_constraints=following_constraints,
-            details=[predictions, score_items],
+            outcomes=score_items,
         )
 
         if not following_constraints:
@@ -82,96 +98,77 @@ def format_score(result: EvalResult) -> str:
     )
 
 
-def write_nav_report(
-    result: EvalResult,
-    evaluator: Evaluator,
-    file: str | Path,
-) -> Path:
-    """Write a per-experiment NAV score TSV from an existing ``EvalResult``."""
-    if evaluator.run_type != "NAV":
-        raise ValueError("Detailed report is only supported for NAV run_type.")
-
-    predictions = result.details[0]
-    score_by_id = {item.id: item for item in result.details[1]}
-    agreements = get_agreements(evaluator.exps, predictions)
-    default_sources = evaluator.default_sources
-
-    ID = 0
-    OUTCOME_VALUE = 2
-    PREDICT_VALUE = 3
-    AGREEMENT = 4
-
-    report_path = Path(file)
-    with open(report_path, "w") as fp:
-        fp.write("id\thierarchy\tfixes\tobserved_node\texperimental_outcome\t")
-        fp.write("predict_value\tattractor_agreement\tscore\n")
-
-        for observed_node in agreements:
-            for fixes in agreements[observed_node]:
-                fixes_dict = {key: value for (key, value) in fixes}
-
-                hierarchy = 0
-                for node in fixes_dict:
-                    if node in default_sources:
-                        if fixes_dict[node] != default_sources[node]:
-                            hierarchy += 1
-                    else:
-                        hierarchy += 1
-
-                exp_id = agreements[observed_node][fixes][ID]
-                item = score_by_id[exp_id]
-
-                fp.write(str(exp_id) + "\t")
-                fp.write(str(hierarchy) + "\t")
-                for fix in fixes:
-                    fp.write(str(fix[0]) + "=" + str(fix[1]) + ",")
-                fp.write("\t")
-                fp.write(str(observed_node) + "\t")
-                fp.write(str(agreements[observed_node][fixes][OUTCOME_VALUE]) + "\t")
-                fp.write(str(round(agreements[observed_node][fixes][PREDICT_VALUE], 3)) + "\t")
-                fp.write(str(round(agreements[observed_node][fixes][AGREEMENT], 3)) + "\t")
-                fp.write(str(round(item.score, 3)) + "\n")
-
-        fp.write("total\t" + str(result.score) + "\n")
-        fp.write("max\t" + str(result.max_score) + "\n")
-        pct = result.score / result.max_score * 100 if result.max_score else 0.0
-        fp.write("per\t" + str(pct) + "%\n")
-
-    return report_path.resolve()
+def write_nav_report(result: EvalResult, file: str | Path) -> Path:
+    """Write a per-experiment NAV score CSV from an existing ``EvalResult``."""
+    rows = []
+    for item in result.outcomes:
+        if item.fixes is None:
+            raise ValueError("write_nav_report requires NAV outcomes")
+        rows.append({
+            "id": item.id,
+            "hierarchy": item.hierarchy,
+            "fixes": ",".join(f"{n}={v}" for n, v in item.fixes),
+            "observed_node": item.observed,
+            "experimental_outcome": item.outcome,
+            "predict_value": item.predict_value,
+            "attractor_agreement": item.agreement,
+            "score": item.score,
+        })
+    path = Path(file)
+    pd.DataFrame(rows).to_csv(path, index=False)
+    return path.resolve()
 
 
-@dataclass(frozen=True)
-class EvaluationItemScore:
-    id:int
-    weight:float
-    agreement:float
-    score:float
+def intervention_hierarchy(
+    fixes: Assignment,
+    default_sources: dict[str, int],
+) -> int:
+    """Count interventions that differ from default source settings."""
+    hierarchy = 0
+    for node, value in fixes:
+        if node in default_sources:
+            if value != default_sources[node]:
+                hierarchy += 1
+        else:
+            hierarchy += 1
+    return hierarchy
 
 
 def get_non_hierarchy_scores(
     agreements: AgreeType,
+    default_sources: dict[str, int] | None = None,
 ) -> list[EvaluationItemScore]:
+    if default_sources is None:
+        default_sources = {}
+
     ID = 0
     MAX_SCORE = 1
+    OUTCOME_VALUE = 2
+    PREDICT_VALUE = 3
     AGREEMENT = 4
 
     results: list[EvaluationItemScore] = []
 
     for observed_node in agreements:
         for fixes in agreements[observed_node]:
-
-            base_weight = agreements[observed_node][fixes][MAX_SCORE]
-            agreement = agreements[observed_node][fixes][AGREEMENT]
+            data = agreements[observed_node][fixes]
+            base_weight = data[MAX_SCORE]
+            agreement = data[AGREEMENT]
 
             # no hierarchy / subset effects
             score = base_weight * agreement
 
             results.append(
                 EvaluationItemScore(
-                    id=agreements[observed_node][fixes][ID],
+                    id=data[ID],
                     weight=base_weight,
                     agreement=agreement,
                     score=score,
+                    hierarchy=intervention_hierarchy(fixes, default_sources),
+                    fixes=fixes,
+                    observed=observed_node,
+                    outcome=data[OUTCOME_VALUE],
+                    predict_value=data[PREDICT_VALUE],
                 )
             )
 
@@ -209,6 +206,8 @@ def get_hierarchy_scores(
 
     ID = 0
     MAX_SCORE = 1
+    OUTCOME_VALUE = 2
+    PREDICT_VALUE = 3
     AGREEMENT = 4
 
     results: list[EvaluationItemScore] = []
@@ -244,7 +243,8 @@ def get_hierarchy_scores(
                 if is_subset:
                     subset_fixes_set.add(other_fixes)
 
-            base_weight = agreements[observed_node][fixes][MAX_SCORE]
+            data = agreements[observed_node][fixes]
+            base_weight = data[MAX_SCORE]
 
             current_score = base_weight
             for subset_fixes in subset_fixes_set:
@@ -252,10 +252,15 @@ def get_hierarchy_scores(
 
             results.append(
                 EvaluationItemScore(
-                    id=agreements[observed_node][fixes][ID],
+                    id=data[ID],
                     weight=base_weight,
-                    agreement=agreements[observed_node][fixes][AGREEMENT],
+                    agreement=data[AGREEMENT],
                     score=current_score,
+                    hierarchy=intervention_hierarchy(fixes, default_sources),
+                    fixes=fixes,
+                    observed=observed_node,
+                    outcome=data[OUTCOME_VALUE],
+                    predict_value=data[PREDICT_VALUE],
                 )
             )
 
@@ -280,7 +285,7 @@ def get_NAV_scores(
 
     if hierarchy:
         return get_hierarchy_scores(agreements, default_sources)
-    return get_non_hierarchy_scores(agreements)
+    return get_non_hierarchy_scores(agreements, default_sources)
 
 
 def get_phenotype_scores(
@@ -349,4 +354,3 @@ def get_model_score(
     total_score = sum(s.score for s in scores)
 
     return max_score, total_score
-
