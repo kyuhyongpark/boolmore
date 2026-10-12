@@ -92,146 +92,25 @@ class EvaluationResult:
     item_scores: list[EvaluationItemScore]
 
 
-class Evaluator:
-    """Evaluate models against experiments using prediction and scoring functions.
+def get_model_score(
+    item_scores: list[EvaluationItemScore],
+) -> tuple[float, float]:
+    """Aggregate per-experiment scores into ``(max_score, score)``.
 
     Parameters
     ----------
-    base : Model
-        Base / reference model (also exposed for GA setup and comparison).
-    experiments : list
-        Experiments to evaluate against (NAV or phenotype).
-    prediction_fn : callable
-        ``prediction_fn(primes, experiments) -> predictions``.
-    score_fn : callable
-        ``score_fn(experiments, predictions) -> list[EvaluationItemScore]``.
-    constraints : dict
-        Constraint specification passed to :func:`check_model_constraints`.
-    run_type : str
-        Experiment modality, e.g. ``"NAV"`` or ``"Phenotype"``.
-    hierarchy : bool, default True
-        Whether NAV scoring applies intervention hierarchy.
-    default_sources : dict of str to int, optional
-        Default source-node settings defining the top of the hierarchy.
-    generate_defaults : bool, default False
-        Whether default sources were (or should be) inferred from the base model.
-    """
-
-    def __init__(
-        self,
-        *,
-        base: Model,
-        experiments,
-        prediction_fn: Callable[..., Any],
-        score_fn: Callable[..., list[EvaluationItemScore]],
-        constraints: dict,
-        run_type: str,
-        hierarchy: bool = True,
-        default_sources: dict[str, int] | None = None,
-        generate_defaults: bool = False,
-    ):
-        self.base = base
-        self.experiments = experiments
-        self.prediction_fn = prediction_fn
-        self.score_fn = score_fn
-        self.constraints = constraints
-        self.run_type = run_type
-        self.hierarchy = hierarchy
-        self.default_sources = dict(default_sources) if default_sources is not None else {}
-        self.generate_defaults = generate_defaults
-
-    def evaluate(self, model: Model, model_id: int = -1) -> EvaluationResult:
-        """Score ``model`` and return an aggregated :class:`EvaluationResult`.
-
-        Parameters
-        ----------
-        model : Model
-            Model to evaluate.
-        model_id : int, default -1
-            Identifier stored on the result (e.g. GA candidate id).
-
-        Returns
-        -------
-        EvaluationResult
-        """
-        predictions = self.prediction_fn(model.primes, self.experiments)
-        item_scores = self.score_fn(self.experiments, predictions)
-        max_score, score = get_model_score(item_scores)
-        complexity = get_model_complexity(model)
-        satisfies_constraints = check_model_constraints(model, self.constraints)
-
-        if not satisfies_constraints:
-            print("ERROR: model does not follow constraints")
-
-        return EvaluationResult(
-            model_id=model_id,
-            max_score=max_score,
-            score=score,
-            n_edges=complexity["n_eff_edges"],
-            n_self_edges=complexity["n_eff_self_edges"],
-            n_prime_implicants=complexity["n_prime_implicants"],
-            n_extra_edges=complexity["n_extra_edges"],
-            satisfies_constraints=satisfies_constraints,
-            item_scores=item_scores,
-        )
-
-
-def format_score(result: EvaluationResult) -> str:
-    """Format a result score like GA console output.
-
-    Parameters
-    ----------
-    result : EvaluationResult
+    item_scores : list of EvaluationItemScore
 
     Returns
     -------
-    str
-        e.g. ``"score: 12.5 / 20 (62.5%)"``.
+    max_score : float
+        Sum of experiment weights.
+    score : float
+        Sum of per-experiment scores.
     """
-    pct = result.score / result.max_score * 100 if result.max_score else 0.0
-    return (
-        f"score: {round(result.score, 2)} / {result.max_score} "
-        f"({round(pct, 1)}%)"
-    )
-
-
-def write_nav_report(result: EvaluationResult, path: str | Path) -> Path:
-    """Write a per-experiment NAV score CSV from an :class:`EvaluationResult`.
-
-    Parameters
-    ----------
-    result : EvaluationResult
-        Must contain NAV ``item_scores`` (with ``fixes`` set).
-    path : str or Path
-        Output CSV path.
-
-    Returns
-    -------
-    Path
-        Absolute path of the written file.
-
-    Raises
-    ------
-    ValueError
-        If any item score is missing NAV fields.
-    """
-    rows = []
-    for item in result.item_scores:
-        if item.fixes is None:
-            raise ValueError("write_nav_report requires NAV item scores")
-        rows.append({
-            "id": item.id,
-            "hierarchy": item.hierarchy,
-            "fixes": ",".join(f"{n}={v}" for n, v in item.fixes),
-            "observed_node": item.observed,
-            "experimental_outcome": item.outcome,
-            "predict_value": item.predict_value,
-            "attractor_agreement": item.agreement,
-            "score": item.score,
-        })
-    output = Path(path)
-    pd.DataFrame(rows).to_csv(output, index=False)
-    return output.resolve()
+    max_score = sum(item.weight for item in item_scores)
+    total_score = sum(item.score for item in item_scores)
+    return max_score, total_score
 
 
 def intervention_hierarchy(
@@ -471,22 +350,143 @@ def get_phenotype_scores(
     return scores
 
 
-def get_model_score(
-    item_scores: list[EvaluationItemScore],
-) -> tuple[float, float]:
-    """Aggregate per-experiment scores into ``(max_score, score)``.
+class Evaluator:
+    """Evaluate models against experiments using prediction and scoring functions.
 
     Parameters
     ----------
-    item_scores : list of EvaluationItemScore
+    base : Model
+        Base / reference model (also exposed for GA setup and comparison).
+    experiments : list
+        Experiments to evaluate against (NAV or phenotype).
+    prediction_fn : callable
+        ``prediction_fn(primes, experiments) -> predictions``.
+    score_fn : callable
+        ``score_fn(experiments, predictions) -> list[EvaluationItemScore]``.
+    constraints : dict
+        Constraint specification passed to :func:`check_model_constraints`.
+    run_type : str
+        Experiment modality, e.g. ``"NAV"`` or ``"Phenotype"``.
+    hierarchy : bool, default True
+        Whether NAV scoring applies intervention hierarchy.
+    default_sources : dict of str to int, optional
+        Default source-node settings defining the top of the hierarchy.
+    generate_defaults : bool, default False
+        Whether default sources were (or should be) inferred from the base model.
+    """
+
+    def __init__(
+        self,
+        *,
+        base: Model,
+        experiments,
+        prediction_fn: Callable[..., Any],
+        score_fn: Callable[..., list[EvaluationItemScore]],
+        constraints: dict,
+        run_type: str,
+        hierarchy: bool = True,
+        default_sources: dict[str, int] | None = None,
+        generate_defaults: bool = False,
+    ):
+        self.base = base
+        self.experiments = experiments
+        self.prediction_fn = prediction_fn
+        self.score_fn = score_fn
+        self.constraints = constraints
+        self.run_type = run_type
+        self.hierarchy = hierarchy
+        self.default_sources = dict(default_sources) if default_sources is not None else {}
+        self.generate_defaults = generate_defaults
+
+    def evaluate(self, model: Model, model_id: int = -1) -> EvaluationResult:
+        """Score ``model`` and return an aggregated :class:`EvaluationResult`.
+
+        Parameters
+        ----------
+        model : Model
+            Model to evaluate.
+        model_id : int, default -1
+            Identifier stored on the result (e.g. GA candidate id).
+
+        Returns
+        -------
+        EvaluationResult
+        """
+        predictions = self.prediction_fn(model.primes, self.experiments)
+        item_scores = self.score_fn(self.experiments, predictions)
+        max_score, score = get_model_score(item_scores)
+        complexity = get_model_complexity(model)
+        satisfies_constraints = check_model_constraints(model, self.constraints)
+
+        if not satisfies_constraints:
+            print("ERROR: model does not follow constraints")
+
+        return EvaluationResult(
+            model_id=model_id,
+            max_score=max_score,
+            score=score,
+            n_edges=complexity["n_eff_edges"],
+            n_self_edges=complexity["n_eff_self_edges"],
+            n_prime_implicants=complexity["n_prime_implicants"],
+            n_extra_edges=complexity["n_extra_edges"],
+            satisfies_constraints=satisfies_constraints,
+            item_scores=item_scores,
+        )
+
+
+def format_score(result: EvaluationResult) -> str:
+    """Format a result score like GA console output.
+
+    Parameters
+    ----------
+    result : EvaluationResult
 
     Returns
     -------
-    max_score : float
-        Sum of experiment weights.
-    score : float
-        Sum of per-experiment scores.
+    str
+        e.g. ``"score: 12.5 / 20 (62.5%)"``.
     """
-    max_score = sum(item.weight for item in item_scores)
-    total_score = sum(item.score for item in item_scores)
-    return max_score, total_score
+    pct = result.score / result.max_score * 100 if result.max_score else 0.0
+    return (
+        f"score: {round(result.score, 2)} / {result.max_score} "
+        f"({round(pct, 1)}%)"
+    )
+
+
+def write_nav_report(result: EvaluationResult, path: str | Path) -> Path:
+    """Write a per-experiment NAV score CSV from an :class:`EvaluationResult`.
+
+    Parameters
+    ----------
+    result : EvaluationResult
+        Must contain NAV ``item_scores`` (with ``fixes`` set).
+    path : str or Path
+        Output CSV path.
+
+    Returns
+    -------
+    Path
+        Absolute path of the written file.
+
+    Raises
+    ------
+    ValueError
+        If any item score is missing NAV fields.
+    """
+    rows = []
+    for item in result.item_scores:
+        if item.fixes is None:
+            raise ValueError("write_nav_report requires NAV item scores")
+        rows.append({
+            "id": item.id,
+            "hierarchy": item.hierarchy,
+            "fixes": ",".join(f"{n}={v}" for n, v in item.fixes),
+            "observed_node": item.observed,
+            "experimental_outcome": item.outcome,
+            "predict_value": item.predict_value,
+            "attractor_agreement": item.agreement,
+            "score": item.score,
+        })
+    output = Path(path)
+    pd.DataFrame(rows).to_csv(output, index=False)
+    return output.resolve()
