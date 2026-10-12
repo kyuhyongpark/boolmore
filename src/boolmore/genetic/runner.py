@@ -53,7 +53,7 @@ def export_models(
     if export_same:
         for candidate in states[-1].population:
             if candidate.eval_result.score == final.eval_result.score:
-                export_model(candidate.model, filename=f"{export_name}_{candidate.id}_gen{candidate.generation}")
+                export_model(candidate.model, file_name=f"{export_name}_{candidate.id}_gen{candidate.generation}")
 
 
 def run_ga(

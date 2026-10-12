@@ -1,6 +1,7 @@
 from pathlib import Path
 
-from boolmore.evaluation.score import format_score, write_nav_report
+from boolmore.evaluation.score import format_score
+from boolmore.io.export import export_nav_report
 from boolmore.io.load import load_model
 from boolmore.run_setup import build_evaluator
 
@@ -25,7 +26,7 @@ print(model.info())
 print(format_score(result))
 
 if REPORT:
-    report_path = write_nav_report(
+    report_path = export_nav_report(
         result, Path.cwd() / f"{Path(MODEL).stem}_score.csv"
     )
     print(f"Wrote detailed report to {report_path}")

@@ -1,13 +1,10 @@
-"""Model evaluation: result types, aggregation, Evaluator, and reporting."""
+"""Model evaluation: result types, aggregation, and Evaluator."""
 
 from __future__ import annotations
 
 from collections.abc import Callable
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Any
-
-import pandas as pd
 
 from boolmore.model import Model
 from boolmore.evaluation.metrics import get_model_complexity
@@ -211,42 +208,3 @@ def format_score(result: EvaluationResult) -> str:
         f"score: {round(result.score, 2)} / {result.max_score} "
         f"({round(pct, 1)}%)"
     )
-
-
-def write_nav_report(result: EvaluationResult, path: str | Path) -> Path:
-    """Write a per-experiment NAV score CSV from an :class:`EvaluationResult`.
-
-    Parameters
-    ----------
-    result : EvaluationResult
-        Must contain NAV ``item_scores`` (with ``fixes`` set).
-    path : str or Path
-        Output CSV path.
-
-    Returns
-    -------
-    Path
-        Absolute path of the written file.
-
-    Raises
-    ------
-    ValueError
-        If any item score is missing NAV fields.
-    """
-    rows = []
-    for item in result.item_scores:
-        if item.fixes is None:
-            raise ValueError("write_nav_report requires NAV item scores")
-        rows.append({
-            "id": item.id,
-            "hierarchy": item.hierarchy,
-            "fixes": ",".join(f"{n}={v}" for n, v in item.fixes),
-            "observed_node": item.observed,
-            "experimental_outcome": item.outcome,
-            "predict_value": item.predict_value,
-            "attractor_agreement": item.agreement,
-            "score": item.score,
-        })
-    output = Path(path)
-    pd.DataFrame(rows).to_csv(output, index=False)
-    return output.resolve()

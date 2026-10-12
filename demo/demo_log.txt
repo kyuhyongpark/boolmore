@@ -74,9 +74,9 @@
 # Pax6,	!Coup_fti & Sp8 | !Emx2
 # Sp8,	Fgf8
 
-# start_time=datetime.datetime(2026, 10, 12, 11, 24, 16, 705180)
-# end_time=datetime.datetime(2026, 10, 12, 11, 24, 21, 749114)
-# elapsed time: 0:00:05.043934
+# start_time=datetime.datetime(2026, 10, 12, 11, 44, 34, 650208)
+# end_time=datetime.datetime(2026, 10, 12, 11, 44, 39, 253195)
+# elapsed time: 0:00:04.602987
 
 id 8, generation 1, score 41.0/50.0 (82.0%), n_extra_edges 0, n_prime_implicants 10
 id 11, generation 2, score 41.8/50.0 (83.5%), n_extra_edges 0, n_prime_implicants 13
