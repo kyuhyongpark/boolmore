@@ -7,7 +7,7 @@ from boolmore.boolean_functions import prime2bnet, prime2rr
 SEED = 0
 CORE = 2
 
-DEMO_DIR = Path(__file__).resolve().parent
+DEMO_DIR = Path(__file__).resolve().parent.parent / "demo"
 
 base, start, states = run_ga(
     json_file=str(DEMO_DIR / "CAD_config.json"),
