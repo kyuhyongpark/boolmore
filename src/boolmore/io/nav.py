@@ -220,9 +220,11 @@ def import_NAV_exps(
 
     Notes
     -----
-    When ``location`` is a ``.tsv`` file and ``{stem}.csv`` does not already
-    exist, a CSV with the same headers is written beside it. Fixes cells are
-    rewritten to ``name=value`` form; other columns are unchanged.
+    Raises ``ValueError`` on duplicate experiment ids, or when the observed
+    node also appears in that row's fixes. When ``location`` is a ``.tsv``
+    file and ``{stem}.csv`` does not already exist, a CSV with the same
+    headers is written beside it. Fixes cells are rewritten to
+    ``name=value`` form; other columns are unchanged.
     """
     path = Path(location)
     delimiter = _delimiter_for_path(path)
@@ -246,6 +248,7 @@ def import_NAV_exps(
         raw_rows: list[list[str]] = []
         exps: list[NAVExperiment] = []
         interventions: list[tuple] = []
+        seen_ids: set[int] = set()
 
         for row in reader:
             if len(row) < len(headers):
@@ -256,14 +259,27 @@ def import_NAV_exps(
                 return row[header_index[name]].strip()
 
             row_id_str = cell(id_header)
+            exp_id = int(row_id_str)
+            if exp_id in seen_ids:
+                raise ValueError(f"Duplicate id {exp_id}")
+            seen_ids.add(exp_id)
+
             fixes = _merge_fixes(
                 [cell(h) for h in fixes_headers],
                 row_id=row_id_str or None,
             )
+            observed = cell(observed_header)
+            fixed_nodes = {node for node, _ in fixes}
+            if observed in fixed_nodes:
+                raise ValueError(
+                    f"Node '{observed}' appears in both fixes and observed "
+                    f"(row id={exp_id})"
+                )
+
             exp = NAVExperiment(
-                id=int(row_id_str),
+                id=exp_id,
                 fixes=fixes,
-                observed=cell(observed_header),
+                observed=observed,
                 outcome=cell(outcome_header),
                 weight=float(cell(weight_header)),
             )

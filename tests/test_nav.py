@@ -130,6 +130,32 @@ def test_duplicate_node_in_fixes_raises(tmp_path: Path):
         import_NAV_exps(csv_path, fixes_cols=("Source", "Signals"))
 
 
+def test_duplicate_id_raises(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization\n"
+        "1,1.0,A=1,,B,ON\n"
+        "1,0.5,C=0,,D,OFF\n",
+    )
+
+    with pytest.raises(ValueError, match="Duplicate id 1"):
+        import_NAV_exps(csv_path)
+
+
+def test_observed_in_fixes_raises(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization\n"
+        "1,1.0,A=1,B=0,A,ON\n",
+    )
+
+    with pytest.raises(
+        ValueError,
+        match="Node 'A' appears in both fixes and observed",
+    ):
+        import_NAV_exps(csv_path)
+
+
 def test_inconsistent_node_in_fixes_raises(tmp_path: Path):
     csv_path = _write(
         tmp_path / "data.csv",
