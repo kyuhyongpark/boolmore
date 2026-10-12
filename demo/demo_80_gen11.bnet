@@ -1,13 +1,11 @@
 # id: 80
 # generation: 11
-# model_id: 80
-# max_score: 50.0
-# score: 49.0
-# n_edges: 10
-# n_self_edges: 1
+# score: 49.0 / 50.0 (98.0%)
+# satisfies_constraints: True
+# n_eff_edges: 10
+# n_eff_self_edges: 1
 # n_prime_implicants: 10
 # n_extra_edges: 0
-# satisfies_constraints: True
 # number of nodes: 5
 # number of edges: 14
 # number of effective base edges: 10

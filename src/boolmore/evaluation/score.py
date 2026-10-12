@@ -61,9 +61,9 @@ class EvaluationResult:
         Sum of experiment weights.
     score : float
         Sum of per-experiment scores.
-    n_edges : int
-        Number of effective edges.
-    n_self_edges : int
+    n_eff_edges : int
+        Number of effective edges (effective base + effective extra).
+    n_eff_self_edges : int
         Number of effective self-edges.
     n_prime_implicants : int
         Total number of prime-implicant literals.
@@ -78,8 +78,8 @@ class EvaluationResult:
     model_id: int
     max_score: float
     score: float
-    n_edges: int
-    n_self_edges: int
+    n_eff_edges: int
+    n_eff_self_edges: int
     n_prime_implicants: int
     n_extra_edges: int
     satisfies_constraints: bool
@@ -182,8 +182,8 @@ class Evaluator:
             model_id=model_id,
             max_score=max_score,
             score=score,
-            n_edges=complexity["n_eff_edges"],
-            n_self_edges=complexity["n_eff_self_edges"],
+            n_eff_edges=complexity["n_eff_edges"],
+            n_eff_self_edges=complexity["n_eff_self_edges"],
             n_prime_implicants=complexity["n_prime_implicants"],
             n_extra_edges=complexity["n_extra_edges"],
             satisfies_constraints=satisfies_constraints,

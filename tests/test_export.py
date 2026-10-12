@@ -26,8 +26,8 @@ def _nav_result() -> EvaluationResult:
         model_id=3,
         max_score=1.0,
         score=1.0,
-        n_edges=1,
-        n_self_edges=1,
+        n_eff_edges=1,
+        n_eff_self_edges=1,
         n_prime_implicants=1,
         n_extra_edges=0,
         satisfies_constraints=True,
@@ -52,8 +52,8 @@ def _phenotype_result() -> EvaluationResult:
         model_id=5,
         max_score=2.0,
         score=2.0,
-        n_edges=1,
-        n_self_edges=1,
+        n_eff_edges=1,
+        n_eff_self_edges=1,
         n_prime_implicants=1,
         n_extra_edges=0,
         satisfies_constraints=True,
@@ -119,8 +119,8 @@ def test_export_nav_report(tmp_path):
         model_id=0,
         max_score=1.0,
         score=1.0,
-        n_edges=0,
-        n_self_edges=0,
+        n_eff_edges=0,
+        n_eff_self_edges=0,
         n_prime_implicants=0,
         n_extra_edges=0,
         satisfies_constraints=True,
@@ -160,8 +160,8 @@ def test_export_nav_report_requires_nav_fields(tmp_path):
         model_id=0,
         max_score=1.0,
         score=1.0,
-        n_edges=0,
-        n_self_edges=0,
+        n_eff_edges=0,
+        n_eff_self_edges=0,
         n_prime_implicants=0,
         n_extra_edges=0,
         satisfies_constraints=True,
@@ -202,7 +202,10 @@ def test_export_candidate_nav(tmp_path):
     bnet_text = bnet_path.read_text()
     assert "# id: 3" in bnet_text
     assert "# generation: 2" in bnet_text
-    assert "# score: 1.0" in bnet_text
+    assert "# score: 1.0 / 1.0 (100.0%)" in bnet_text
+    assert "# n_eff_edges: 1" in bnet_text
+    assert "# n_eff_self_edges: 1" in bnet_text
+    assert "# model_id:" not in bnet_text
     assert "targets,\tfactors" in bnet_text
 
     with open(score_path, newline="") as f:

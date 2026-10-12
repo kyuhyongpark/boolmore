@@ -1,7 +1,7 @@
-from dataclasses import dataclass, fields
+from dataclasses import dataclass
 
 from boolmore.model import Model
-from boolmore.evaluation.score import EvaluationResult
+from boolmore.evaluation.score import EvaluationResult, format_score
 
 
 @dataclass
@@ -21,10 +21,14 @@ class Candidate:
         ]
 
         if result is not None:
-            for field in fields(result):
-                if field.name == "item_scores":
-                    continue
-                lines.append(f"# {field.name}: {getattr(result, field.name)}")
+            lines.extend([
+                f"# {format_score(result)}",
+                f"# satisfies_constraints: {result.satisfies_constraints}",
+                f"# n_eff_edges: {result.n_eff_edges}",
+                f"# n_eff_self_edges: {result.n_eff_self_edges}",
+                f"# n_prime_implicants: {result.n_prime_implicants}",
+                f"# n_extra_edges: {result.n_extra_edges}",
+            ])
 
         info = "\n".join(lines)
 
@@ -61,8 +65,8 @@ def sort_population(
         2. tie-breakers in order_by (lowest first)
 
     Example:
-        sort_population(pop, ["n_edges"])
-        sort_population(pop, ["n_self_edges", "n_prime_implicants"])
+        sort_population(pop, ["n_eff_edges"])
+        sort_population(pop, ["n_eff_self_edges", "n_prime_implicants"])
     """
     if order_by is None:
         order_by = []
