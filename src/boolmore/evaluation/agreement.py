@@ -1,5 +1,6 @@
 from boolmore.experiment import NAVExperiment
-from boolmore.types import AgreeType, FixesType, PredictType
+from boolmore.inference.prediction import NAVPrediction
+from boolmore.types import AgreeType, Assignment
 
 
 def line(input:float, start:tuple[float, float], end:tuple[float, float]) -> float:
@@ -27,23 +28,22 @@ def line(input:float, start:tuple[float, float], end:tuple[float, float]) -> flo
 
     return output
 
-def get_agreements(exps:list[NAVExperiment], predictions:PredictType) -> tuple[AgreeType, float]:
+def get_agreements(
+    experiments: list[NAVExperiment],
+    predictions: dict[Assignment, NAVPrediction],
+) -> AgreeType:
     """
     Returns attractor agreements when given experimental outcomes and model predictions.
     agreements are categorized by observed node,
     so that it is easier to find all the interventions for that observed node.
-    Also returns non-hierarchy score.
 
     Parameters
     ----------
-    exps : list[NAVExperiment]
+    experiments : list of NAVExperiment
+    predictions : dict of Assignment to NAVPrediction
+        Predictions keyed by intervention assignment. Average node values
+        are read from ``NAVPrediction.average_values``.
 
-    predictions : PredictType
-        average attractor values for all fixes
-        keys : FixesType
-        values : dict[str, float]
-            average values of nodes - {observed_node: predict_value}
-    
     Returns
     -------
     agreements : AgreeType
@@ -58,14 +58,14 @@ def get_agreements(exps:list[NAVExperiment], predictions:PredictType) -> tuple[A
 
     """
     agreements = {}
-    for exp in exps:
+    for exp in experiments:
         id = exp.id
         max_score = exp.weight
         fixes = exp.fixes
         observed_node = exp.observed
         outcome_value = exp.outcome
 
-        predict_value = predictions[fixes][observed_node]
+        predict_value = predictions[fixes].average_values[observed_node]
 
         # experiment showed (ON)
         if outcome_value == 'ON':

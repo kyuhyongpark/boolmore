@@ -21,7 +21,7 @@ def test_export_phenotype_results(tmp_path):
         perturbation=(("A", 1),),
         sources=(("S", 1),),
         phenotype=(("P", 1),),
-        found_phenotypes=[],
+        maximal_trap_spaces=[],
         predicted_exists=True,
     )
 

@@ -6,6 +6,7 @@ from boolmore.evaluation.nav_score import (
     intervention_hierarchy,
 )
 from boolmore.experiment import NAVExperiment
+from boolmore.inference.prediction import NAVPrediction
 
 
 # --- intervention_hierarchy ---
@@ -190,7 +191,10 @@ def test_get_NAV_scores_flat():
         ),
     ]
     predictions = {
-        (("S", 0),): {"A": 1.0},
+        (("S", 0),): NAVPrediction(
+            fixes=(("S", 0),),
+            average_values={"A": 1.0},
+        ),
     }
 
     scores = get_NAV_scores(
@@ -224,8 +228,14 @@ def test_get_NAV_scores_hierarchy_default():
         ),
     ]
     predictions = {
-        (("S", 0),): {"A": 0.0},
-        (("S", 0), ("X", 1)): {"A": 1.0},
+        (("S", 0),): NAVPrediction(
+            fixes=(("S", 0),),
+            average_values={"A": 0.0},
+        ),
+        (("S", 0), ("X", 1)): NAVPrediction(
+            fixes=(("S", 0), ("X", 1)),
+            average_values={"A": 1.0},
+        ),
     }
 
     scores = get_NAV_scores(
@@ -260,8 +270,14 @@ def test_get_NAV_scores_hierarchy_all_agree():
         ),
     ]
     predictions = {
-        (("S", 0),): {"A": 0.0},
-        (("S", 0), ("X", 1)): {"A": 1.0},
+        (("S", 0),): NAVPrediction(
+            fixes=(("S", 0),),
+            average_values={"A": 0.0},
+        ),
+        (("S", 0), ("X", 1)): NAVPrediction(
+            fixes=(("S", 0), ("X", 1)),
+            average_values={"A": 1.0},
+        ),
     }
 
     scores = get_NAV_scores(

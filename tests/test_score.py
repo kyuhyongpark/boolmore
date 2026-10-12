@@ -21,7 +21,7 @@ def test_get_phenotype_score_match():
         perturbation=(),
         sources=(),
         phenotype=(),
-        found_phenotypes=[],
+        maximal_trap_spaces=[],
         predicted_exists=True,
     )
 
@@ -49,7 +49,7 @@ def test_get_phenotype_score_mismatch():
         perturbation=(),
         sources=(),
         phenotype=(),
-        found_phenotypes=[],
+        maximal_trap_spaces=[],
         predicted_exists=True,
     )
 
@@ -77,7 +77,7 @@ def test_get_phenotype_score_missing_id():
         perturbation=(),
         sources=(),
         phenotype=(),
-        found_phenotypes=[],
+        maximal_trap_spaces=[],
         predicted_exists=True,
     )
 

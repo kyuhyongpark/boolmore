@@ -34,7 +34,7 @@ def export_phenotype_results(
         "agreement",
         "weight",
         "score",
-        "found_phenotypes",
+        "maximal_trap_spaces",
     ]
 
     # Add metadata columns after the standard columns
@@ -66,7 +66,7 @@ def export_phenotype_results(
             "agreement": score_item.agreement,
             "weight": exp.weight,
             "score": score_item.score,
-            "found_phenotypes": pred.found_phenotypes,
+            "maximal_trap_spaces": pred.maximal_trap_spaces,
         }
 
         row.update(exp.metadata)

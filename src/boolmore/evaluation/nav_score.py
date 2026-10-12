@@ -5,6 +5,7 @@ from __future__ import annotations
 from boolmore.experiment import NAVExperiment
 from boolmore.evaluation.agreement import get_agreements
 from boolmore.evaluation.score import EvaluationItemScore
+from boolmore.inference.prediction import NAVPrediction
 from boolmore.types import AgreeType, Assignment
 
 
@@ -163,7 +164,7 @@ def get_hierarchy_scores(
 
 def get_NAV_scores(
     experiments: list[NAVExperiment],
-    predictions,
+    predictions: dict[Assignment, NAVPrediction],
     default_sources: dict[str, int] | None = None,
     hierarchy: bool = True,
 ) -> list[EvaluationItemScore]:
@@ -172,8 +173,8 @@ def get_NAV_scores(
     Parameters
     ----------
     experiments : list of NAVExperiment
-    predictions
-        Average attractor values keyed by intervention assignment.
+    predictions : dict of Assignment to NAVPrediction
+        Predictions keyed by intervention assignment.
     default_sources : dict of str to int, optional
         Default source settings for hierarchy scoring.
     hierarchy : bool, default True

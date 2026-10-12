@@ -12,24 +12,88 @@ from boolmore.types import Assignment
 
 @dataclass(frozen=True)
 class PhenotypePrediction:
+    """Prediction for a single phenotype experiment.
+
+    Attributes
+    ----------
+    id : int
+        Experiment identifier.
+    perturbation : Assignment
+        Fixed node interventions for the experiment.
+    sources : Assignment
+        Source-node assignments.
+    phenotype : Assignment
+        Target phenotype assignment.
+    maximal_trap_spaces : list of dict of str to int
+        Maximal trap spaces compatible with the phenotype constraints.
+    predicted_exists : bool
+        Whether a compatible maximal trap space was found.
+    """
+
     id: int
 
     perturbation: Assignment
     sources: Assignment
     phenotype: Assignment
-    
-    found_phenotypes: list[dict[str, int]]
+
+    maximal_trap_spaces: list[dict[str, int]]
     predicted_exists: bool
+
+
+@dataclass(frozen=True)
+class NAVPrediction:
+    """Prediction for a unique NAV intervention.
+
+    Attributes
+    ----------
+    fixes : Assignment
+        Intervention assignment ``((node, value), ...)``.
+    average_values : dict of str to float
+        Average attractor value of each node in ``[0, 1]``.
+    """
+
+    fixes: Assignment
+    average_values: dict[str, float]
+
+
+def _percolate_primes(primes: dict, fixed: dict[str, int]) -> dict:
+    """Return a copy of ``primes`` with fixed nodes set to constant functions.
+
+    Parameters
+    ----------
+    primes
+        Prime implicants of the Boolean network.
+    fixed : dict of str to int
+        Nodes to fix and their constant values (0 or 1).
+
+    Returns
+    -------
+    dict
+        Percolated prime implicants.
+
+    Raises
+    ------
+    ValueError
+        If a fixed node is not present in the model.
+    """
+    perc_primes = primes.copy()
+    for node, value in fixed.items():
+        if node not in primes:
+            raise ValueError(f"{node} is not in the model")
+
+        if int(value) == 0:
+            perc_primes[node] = [[{}], []]
+        else:
+            perc_primes[node] = [[], [{}]]
+    return perc_primes
 
 
 def get_phenotype_prediction(
     primes,
     experiments: list[PhenotypeExperiment],
     debug: bool = False,
-)-> list[PhenotypePrediction]:
-    """
-    Predict whether each experiment's phenotype is compatible with the
-    Boolean network under its perturbation and source assignments.
+) -> list[PhenotypePrediction]:
+    """Predict phenotype compatibility for each experiment.
 
     For each experiment, the function first checks whether a previously
     computed maximal trap space for the same perturbation already satisfies
@@ -49,16 +113,17 @@ def get_phenotype_prediction(
     primes
         Prime implicants of the Boolean network in the format expected by
         PyBoolNet.
-    experiments : list[Experiment]
+    experiments : list of PhenotypeExperiment
         Experiments to evaluate. Each experiment must define
         ``perturbation``, ``sources``, and ``phenotype`` assignments.
+    debug : bool, default False
+        If True, print per-experiment timing information.
 
     Returns
     -------
-    list[Prediction]
-        One ``Prediction`` object for each experiment, containing whether a
-        compatible trap space was found and, if so, the matching maximal
-        trap spaces.
+    list of PhenotypePrediction
+        One prediction per experiment, containing whether a compatible
+        trap space was found and, if so, the matching maximal trap spaces.
 
     Raises
     ------
@@ -75,7 +140,7 @@ def get_phenotype_prediction(
         if debug:
             print(f"\nExperiment {exp.id}")
 
-        found_phenotypes = []
+        maximal_trap_spaces: list[dict[str, int]] = []
         predicted_exists = False
 
         # check cache
@@ -101,7 +166,7 @@ def get_phenotype_prediction(
                         for node in phenotype
                     )
                 ):
-                    found_phenotypes.append(max_trap)
+                    maximal_trap_spaces.append(max_trap)
                     predicted_exists = True
                     break
 
@@ -113,17 +178,17 @@ def get_phenotype_prediction(
 
         if predicted_exists:
             if debug:
-                print("  cache hit (found_phenotypes)")
+                print("  cache hit (maximal_trap_spaces)")
 
             result = PhenotypePrediction(
                 id=exp.id,
                 perturbation=exp.perturbation,
                 sources=exp.sources,
                 phenotype=exp.phenotype,
-                found_phenotypes=found_phenotypes,
+                maximal_trap_spaces=maximal_trap_spaces,
                 predicted_exists=predicted_exists,
             )
-            
+
             results.append(result)
             continue
 
@@ -137,15 +202,7 @@ def get_phenotype_prediction(
             if debug:
                 print("  cache hit (perc_primes)")
         else:
-            perc_primes = primes.copy()
-            for node in perturbation:
-                if node not in primes:
-                    raise ValueError(f"{node} is not in the model")
-
-                if perturbation[node] == 0:
-                    perc_primes[node] = [[{}],[]]
-                else:
-                    perc_primes[node] = [[],[{}]]
+            perc_primes = _percolate_primes(primes, perturbation)
             primes_cache[exp.perturbation] = perc_primes
 
         if debug:
@@ -180,7 +237,7 @@ def get_phenotype_prediction(
             )
 
         if max_traps:
-            found_phenotypes += max_traps
+            maximal_trap_spaces += max_traps
             predicted_exists = True
             traps_cache[exp.perturbation] += max_traps
 
@@ -189,7 +246,7 @@ def get_phenotype_prediction(
             perturbation=exp.perturbation,
             sources=exp.sources,
             phenotype=exp.phenotype,
-            found_phenotypes=found_phenotypes,
+            maximal_trap_spaces=maximal_trap_spaces,
             predicted_exists=predicted_exists,
         )
 
@@ -197,74 +254,66 @@ def get_phenotype_prediction(
 
     return results
 
+
 def get_NAV_prediction(
     primes,
-    exps: list[NAVExperiment],
-):
-    """
-    Returns predictions when given interventions
+    experiments: list[NAVExperiment],
+) -> dict[Assignment, NAVPrediction]:
+    """Predict average attractor values for each unique NAV intervention.
+
+    Collects the distinct ``fixes`` assignments across experiments, percolates
+    the network under each intervention, computes minimal trap spaces, and
+    returns the average node values over those trap spaces.
 
     Parameters
     ----------
     primes
         Prime implicants of the Boolean network in the format expected by
         PyBoolNet.
+    experiments : list of NAVExperiment
+        NAV experiments whose ``fixes`` interventions are evaluated.
 
-    interventions - summarized list of fixes for convenience    :list[Assignment]
-        fixes     - ((nodeA, value1),(nodeB, value2), ...)
-                
     Returns
     -------
-    predictions : PredictType
-        average attractor values for all fixes
-        key : Assignment
-            fixes - ((node A, value1), (node B, value2), ...)
-        value : dict[str, float]
-            average value of a node in the attractors - {observed_node: predict_value}
+    dict of Assignment to NAVPrediction
+        One prediction per unique intervention, keyed by ``fixes``.
+        ``average_values`` maps each node name to its average attractor
+        value in ``[0, 1]`` (fixed 1 → 1.0, fixed 0 → 0.0, free ``?`` → 0.5).
 
+    Raises
+    ------
+    ValueError
+        If a fixed node is not present in the model.
     """
+    interventions = sorted({exp.fixes for exp in experiments})
 
-    interventions = set()
-    for exp in exps:
-        interventions.add(exp.fixes)
-
-    interventions = sorted(interventions)
-
-    predictions = {}
+    predictions: dict[Assignment, NAVPrediction] = {}
     for fixes in interventions:
-        perturbation = {}
-        for fix in fixes:
-            perturbation[fix[0]] = fix[1]
-        # print("- - - - - - - - - -")
-        # print("fixed: ", perturbation)
-
-        new_primes = primes.copy()
-        for node in perturbation.keys():
-            assert node in new_primes.keys(), f"{node} is not in the model"
-            if int(perturbation[node]) == 0:
-                new_primes[node] = [[{}],[]]
-            else:
-                new_primes[node] = [[],[{}]]
+        perturbation = assignment_to_dict(fixes)
+        new_primes = _percolate_primes(primes, perturbation)
 
         tr = compute_trap_spaces(new_primes, "min")
 
-        for i in tr:
+        for trap in tr:
             for node in primes:
-                if node not in i: # type: ignore
-                    i[node] = "?" # type: ignore
+                if node not in trap:  # type: ignore
+                    trap[node] = "?"  # type: ignore
                 else:
-                    i[node] = str(i[node]) # type: ignore
+                    trap[node] = str(trap[node])  # type: ignore
 
-        result = {}
-        for i in tr:
+        average_values: dict[str, float] = {}
+        for trap in tr:
             for node in primes:
-                if node not in result:
-                    result[node] = 0.0
-                if i[node] == "1": # type: ignore
-                    result[node] += (1.0/len(tr))
-                elif i[node] == "?": # type: ignore
-                    result[node] += (0.5/len(tr))
+                if node not in average_values:
+                    average_values[node] = 0.0
+                if trap[node] == "1":  # type: ignore
+                    average_values[node] += 1.0 / len(tr)
+                elif trap[node] == "?":  # type: ignore
+                    average_values[node] += 0.5 / len(tr)
 
-        predictions[fixes] = result
+        predictions[fixes] = NAVPrediction(
+            fixes=fixes,
+            average_values=average_values,
+        )
 
     return predictions
