@@ -119,6 +119,19 @@ def test_custom_fixes_cols_merge(tmp_path: Path):
     assert exps[0].fixes == (("A", 1), ("B", 0))
 
 
+def test_dash_only_fixes_cell_is_empty(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization\n"
+        "1,1.0,-,B=1,C,ON\n"
+        "2,1.0,A=0,-,D,OFF\n",
+    )
+
+    exps = import_NAV_exps(csv_path)
+    assert exps[0].fixes == (("B", 1),)
+    assert exps[1].fixes == (("A", 0),)
+
+
 def test_duplicate_node_in_fixes_raises(tmp_path: Path):
     csv_path = _write(
         tmp_path / "data.csv",

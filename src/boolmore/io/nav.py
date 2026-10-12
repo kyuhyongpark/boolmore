@@ -10,7 +10,7 @@ from pathlib import Path
 from boolmore.experiment import NAVExperiment
 
 _DEFAULT_ID_COL: tuple[str, ...] = ("ID",)
-_DEFAULT_WEIGHT_COL: tuple[str, ...] = ("Score",)
+_DEFAULT_WEIGHT_COL: tuple[str, ...] = ("Score", "Weight")
 _DEFAULT_OBSERVED_COL: tuple[str, ...] = ("Observed node",)
 _DEFAULT_OUTCOME_COL: tuple[str, ...] = ("Categorization", "Value")
 _DEFAULT_FIXES_COLS: tuple[str, ...] = ("Source", "Perturbation", "Intervention")
@@ -126,11 +126,15 @@ def _parse_fix_token(token: str) -> tuple[str, int]:
 
 
 def _parse_fixes_cell(cell: str) -> list[tuple[str, int]]:
-    """Parse a comma-separated fixes cell into ``(node, value)`` pairs."""
-    if not cell or not cell.strip():
+    """Parse a comma-separated fixes cell into ``(node, value)`` pairs.
+
+    A blank cell, or a cell that is only ``-``, is treated as empty.
+    """
+    text = cell.strip() if cell else ""
+    if not text or text == "-":
         return []
     items: list[tuple[str, int]] = []
-    for part in cell.split(","):
+    for part in text.split(","):
         part = part.strip()
         if not part:
             continue
@@ -163,9 +167,14 @@ def _merge_fixes(
 
 
 def _reformat_fixes_cell(cell: str) -> str:
-    """Rewrite a fixes cell to standard ``name=value`` tokens."""
+    """Rewrite a fixes cell to standard ``name=value`` tokens.
+
+    A cell that is only ``-`` is rewritten as empty.
+    """
     if not cell or not cell.strip():
         return cell
+    if cell.strip() == "-":
+        return ""
     tokens: list[str] = []
     for part in cell.split(","):
         part = part.strip()
@@ -216,7 +225,7 @@ def import_NAV_exps(
     fixes_cols :
         Columns whose cells are concatenated into ``NAVExperiment.fixes``.
         Absent names are skipped. Tokens may be ``Node=0|1`` or legacy
-        ``Node KO|CA``.
+        ``Node KO|CA``. A cell that is only ``-`` is treated as empty.
 
     Notes
     -----
