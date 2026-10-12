@@ -11,7 +11,7 @@ Demonstration of `boolmore` on the Cortical Area Development (CAD) model.
 2. Download these 4 files from the `demo` directory  
    `CAD.bnet` : This is the baseline model  
    `CAD_start.bnet` : This is the scrambled starting model  
-   `CAD_data.tsv` : This file contains the artificial experiments generated as in the benchmarks  
+   `CAD_data.csv` : This file contains the artificial experiments generated as in the benchmarks  
    `CAD_config.json` : This file contains the path to the above files and other constraints
        
 3. Run the python script such as

@@ -1,92 +1,300 @@
-"""Import NAV-style experiments from TSV files."""
+"""Import NAV-style experiments from TSV or CSV files."""
+
+from __future__ import annotations
 
 import csv
+import re
+from collections.abc import Sequence
+from pathlib import Path
 
 from boolmore.experiment import NAVExperiment
 
+_DEFAULT_ID_COL: tuple[str, ...] = ("ID",)
+_DEFAULT_WEIGHT_COL: tuple[str, ...] = ("Score",)
+_DEFAULT_OBSERVED_COL: tuple[str, ...] = ("Observed node",)
+_DEFAULT_OUTCOME_COL: tuple[str, ...] = ("Categorization", "Value")
+_DEFAULT_FIXES_COLS: tuple[str, ...] = ("Source", "Perturbation", "Intervention")
 
-def import_NAV_exps(location: str) -> list[NAVExperiment]:
+
+def _normalize_header(name: str) -> str:
+    """Normalize a column name for matching."""
+    text = name.strip().lower()
+    text = re.sub(r"[\s\-]+", "_", text)
+    text = re.sub(r"_+", "_", text)
+    return text.strip("_")
+
+
+def _as_alias_list(value: str | Sequence[str]) -> list[str]:
+    if isinstance(value, str):
+        return [value]
+    return list(value)
+
+
+def _resolve_single_column(
+    headers: list[str],
+    aliases: str | Sequence[str],
+    role: str,
+) -> str:
+    """Return the unique original header matching one of ``aliases``.
+
+    Raises
+    ------
+    ValueError
+        If zero or more than one header matches.
     """
-    Reads a tsv file and returns experiments and interventions.
-    
-    Note:
-    All source nodes that have a default source value specified in `default_sources`
-    should be specified for every experiment.
+    alias_norms = {_normalize_header(a) for a in _as_alias_list(aliases)}
+    matches = [h for h in headers if _normalize_header(h) in alias_norms]
+    if not matches:
+        raise ValueError(
+            f"No column found for '{role}'. "
+            f"Looked for aliases {_as_alias_list(aliases)!r} among headers {headers!r}"
+        )
+    if len(matches) > 1:
+        raise ValueError(
+            f"Ambiguous columns for '{role}': {matches!r} "
+            f"(aliases {_as_alias_list(aliases)!r})"
+        )
+    return matches[0]
 
-    By default, `default_sources` has all source nodes set to 0,
-    and hence all source nodes should be specified.
-    If `default_sources` is given manually,
-    source nodes that are not in the `default_sources` can be omitted in the experiements.
-    
-    The tsv file should have 6 columns
-    ID    - e.g. 1
-    SCORE - e.g. 1.0
-    SOURCE - e.g. A=1
-    PERT - e.g. B KO, C KO, D CA
-    NODE  - the observed node
-    VALUE - one of OFF, OFF/Some, Some, Some/ON, ON
+
+def _resolve_fixes_columns(
+    headers: list[str],
+    fixes_cols: Sequence[str],
+) -> list[str]:
+    """Return original headers that match ``fixes_cols``, skipping absent names.
+
+    Raises
+    ------
+    ValueError
+        If a listed name matches more than one header.
+    """
+    header_by_norm: dict[str, list[str]] = {}
+    for h in headers:
+        header_by_norm.setdefault(_normalize_header(h), []).append(h)
+
+    resolved: list[str] = []
+    seen: set[str] = set()
+    for name in fixes_cols:
+        norm = _normalize_header(name)
+        candidates = header_by_norm.get(norm, [])
+        if not candidates:
+            continue
+        if len(candidates) > 1:
+            raise ValueError(
+                f"Ambiguous columns for fixes name {name!r}: {candidates!r}"
+            )
+        header = candidates[0]
+        if header not in seen:
+            resolved.append(header)
+            seen.add(header)
+    return resolved
+
+
+def _parse_fix_token(token: str) -> tuple[str, int]:
+    """Parse one assignment token as ``Node=0|1`` or legacy ``Node KO|CA``."""
+    token = token.strip()
+    if not token:
+        raise ValueError("Empty assignment token")
+
+    if "=" in token:
+        node, value_str = token.split("=", 1)
+        node = node.strip()
+        value_str = value_str.strip()
+        if not node:
+            raise ValueError(f"Empty node in assignment '{token}'")
+        if value_str not in {"0", "1"}:
+            raise ValueError(f"Invalid value '{value_str}' in assignment '{token}'")
+        return node, int(value_str)
+
+    parts = token.split()
+    if len(parts) != 2:
+        raise ValueError(
+            f"Invalid assignment '{token}'. "
+            "Expected 'Node=0|1' or legacy 'Node KO|CA'"
+        )
+    node, value_str = parts[0].strip(), parts[1].strip().upper()
+    if not node:
+        raise ValueError(f"Empty node in assignment '{token}'")
+    if value_str == "KO":
+        return node, 0
+    if value_str == "CA":
+        return node, 1
+    raise ValueError(
+        f"Invalid assignment '{token}'. "
+        "Expected 'Node=0|1' or legacy 'Node KO|CA'"
+    )
+
+
+def _parse_fixes_cell(cell: str) -> list[tuple[str, int]]:
+    """Parse a comma-separated fixes cell into ``(node, value)`` pairs."""
+    if not cell or not cell.strip():
+        return []
+    items: list[tuple[str, int]] = []
+    for part in cell.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        items.append(_parse_fix_token(part))
+    return items
+
+
+def _merge_fixes(
+    cells: Sequence[str],
+    *,
+    row_id: str | None = None,
+) -> tuple[tuple[str, int], ...]:
+    """Merge fixes cells; raise if any node name appears more than once."""
+    merged: list[tuple[str, int]] = []
+    seen: dict[str, int] = {}
+    for cell in cells:
+        for node, value in _parse_fixes_cell(cell):
+            if node in seen:
+                prev = seen[node]
+                where = f" (row id={row_id})" if row_id is not None else ""
+                if prev != value:
+                    raise ValueError(
+                        f"Inconsistent fixes for node '{node}'{where}: "
+                        f"{prev} vs {value}"
+                    )
+                raise ValueError(f"Duplicate node '{node}' in fixes{where}")
+            seen[node] = value
+            merged.append((node, value))
+    return tuple(sorted(merged, key=lambda x: x[0]))
+
+
+def _reformat_fixes_cell(cell: str) -> str:
+    """Rewrite a fixes cell to standard ``name=value`` tokens."""
+    if not cell or not cell.strip():
+        return cell
+    tokens: list[str] = []
+    for part in cell.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        node, value = _parse_fix_token(part)
+        tokens.append(f"{node}={value}")
+    return ",".join(tokens)
+
+
+def _delimiter_for_path(path: Path) -> str:
+    suffix = path.suffix.lower()
+    if suffix == ".tsv":
+        return "\t"
+    if suffix == ".csv":
+        return ","
+    raise ValueError(f"Unsupported NAV data format: {path} (expected .tsv or .csv)")
+
+
+def _valid_lines(file):
+    for line in file:
+        if line.startswith("#") or line.isspace():
+            continue
+        yield line
+
+
+def import_NAV_exps(
+    location: str | Path,
+    *,
+    id_col: str | Sequence[str] = _DEFAULT_ID_COL,
+    weight_col: str | Sequence[str] = _DEFAULT_WEIGHT_COL,
+    observed_col: str | Sequence[str] = _DEFAULT_OBSERVED_COL,
+    outcome_col: str | Sequence[str] = _DEFAULT_OUTCOME_COL,
+    fixes_cols: Sequence[str] = _DEFAULT_FIXES_COLS,
+) -> list[NAVExperiment]:
+    """Import NAV experiments from a ``.tsv`` or ``.csv`` file.
+
+    Columns are resolved by normalized header name (case-insensitive; spaces and
+    hyphens become underscores), not by position.
 
     Parameters
     ----------
-    location - data location    :str
+    location : str or Path
+        Path to a ``.tsv`` or ``.csv`` file.
+    id_col, weight_col, observed_col, outcome_col :
+        Alias or aliases for each required single-column role. Exactly one
+        header must match.
+    fixes_cols :
+        Columns whose cells are concatenated into ``NAVExperiment.fixes``.
+        Absent names are skipped. Tokens may be ``Node=0|1`` or legacy
+        ``Node KO|CA``.
 
-    Returns
-    -------
-    experiments - list[NAVExperiment]
-
+    Notes
+    -----
+    When ``location`` is a ``.tsv`` file and ``{stem}.csv`` does not already
+    exist, a CSV with the same headers is written beside it. Fixes cells are
+    rewritten to ``name=value`` form; other columns are unchanged.
     """
-    ID, SCORE, SOURCE, PERT, NODE, VALUE = 0, 1, 2, 3, 4, 5
-    
-    file = open(location, "r")
-    lines = (line for line in file if not line.startswith("#") and not line.isspace())
-    data = csv.reader(lines, delimiter="\t")
+    path = Path(location)
+    delimiter = _delimiter_for_path(path)
 
-    # skip the first row
-    next(data)
+    with path.open("r", newline="") as file:
+        reader = csv.reader(_valid_lines(file), delimiter=delimiter)
+        try:
+            headers = next(reader)
+        except StopIteration as exc:
+            raise ValueError(f"Empty NAV data file: {path}") from exc
 
-    exps = []
-    interventions = []
-    for row in data:
+        headers = [h.strip() for h in headers]
+        id_header = _resolve_single_column(headers, id_col, "id")
+        weight_header = _resolve_single_column(headers, weight_col, "weight")
+        observed_header = _resolve_single_column(headers, observed_col, "observed")
+        outcome_header = _resolve_single_column(headers, outcome_col, "outcome")
+        fixes_headers = _resolve_fixes_columns(headers, fixes_cols)
 
-        fixes_list = []
-        if row[SOURCE] != "":
-            # add source node values to the fixes
-            source_str = row[SOURCE].split(",")
-            for sth in source_str:
-                node, value = sth.strip().split("=")
-                fix = tuple([node, int(value)])
-                fixes_list.append(fix)
-        
-        if row[PERT] != "":
-            # add other perturbations to the fixes
-            pert_str = row[PERT].split(",")
-            for sth in pert_str:
-                node, value_str = sth.strip().split(" ")
-                if value_str == "KO":
-                    value = 0
-                elif value_str == "CA":
-                    value = 1
-                else:
-                    raise Exception("Perturbation should be KO or CA")
-                fix = tuple([node, int(value)])
-                fixes_list.append(fix)
-        # fixes should be sorted so that they do not depend on the order of user input
-        fixes = tuple(sorted(fixes_list, key= lambda x:x[0]))
+        header_index = {name: i for i, name in enumerate(headers)}
 
-        exp = NAVExperiment(id =int(row[ID]),
-                            fixes = fixes,
-                            observed = row[NODE],
-                            outcome = row[VALUE],
-                            weight = float(row[SCORE]))
+        raw_rows: list[list[str]] = []
+        exps: list[NAVExperiment] = []
+        interventions: list[tuple] = []
 
-        if fixes not in interventions:
-            interventions.append(fixes)
-        else:
-            for other_exp in exps:
-                if fixes == other_exp.fixes:
-                    assert exp.observed != other_exp.observed, f"{other_exp.id} and {exp.id} are duplicates" 
+        for row in reader:
+            if len(row) < len(headers):
+                row = row + [""] * (len(headers) - len(row))
+            raw_rows.append(list(row))
 
-        # add the entry
-        exps.append(exp)
+            def cell(name: str) -> str:
+                return row[header_index[name]].strip()
+
+            row_id_str = cell(id_header)
+            fixes = _merge_fixes(
+                [cell(h) for h in fixes_headers],
+                row_id=row_id_str or None,
+            )
+            exp = NAVExperiment(
+                id=int(row_id_str),
+                fixes=fixes,
+                observed=cell(observed_header),
+                outcome=cell(outcome_header),
+                weight=float(cell(weight_header)),
+            )
+
+            if fixes not in interventions:
+                interventions.append(fixes)
+            else:
+                for other_exp in exps:
+                    if fixes == other_exp.fixes:
+                        assert exp.observed != other_exp.observed, (
+                            f"{other_exp.id} and {exp.id} are duplicates"
+                        )
+
+            exps.append(exp)
+
+    if path.suffix.lower() == ".tsv":
+        csv_path = path.with_suffix(".csv")
+        if not csv_path.exists():
+            fixes_indices = {header_index[h] for h in fixes_headers}
+            rewritten_rows: list[list[str]] = []
+            for row in raw_rows:
+                new_row = list(row[: len(headers)])
+                if len(new_row) < len(headers):
+                    new_row = new_row + [""] * (len(headers) - len(new_row))
+                for idx in fixes_indices:
+                    new_row[idx] = _reformat_fixes_cell(new_row[idx])
+                rewritten_rows.append(new_row)
+
+            with csv_path.open("w", newline="") as out:
+                writer = csv.writer(out)
+                writer.writerow(headers)
+                writer.writerows(rewritten_rows)
 
     return exps
