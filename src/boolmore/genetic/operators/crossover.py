@@ -1,0 +1,43 @@
+import random
+
+from boolmore.model import Model
+
+def mix_models(model1:Model, model2:Model) -> Model:
+    """
+    For each node, take the rule from one of the parent model randomly.
+
+    Parameters
+    ----------
+    model1, model2 - parent models                              :Model class
+    
+    Returns
+    -------
+    mixed_model - model that takes functions from the parents   :Model class
+    """
+    mixed_model = Model()
+
+    mixed_model.base = model1.base
+    mixed_model.edge_pool = model1.edge_pool
+
+    for node in model1.rr_dict:
+        # get mutated_rr from rr
+        rnd = random.random()
+        if rnd < 0.5:
+            get = model1
+        else:
+            get = model2
+        mixed_model.primes[node] = get.primes[node]
+        mixed_model.regulators_dict[node] = get.regulators_dict[node]
+        mixed_model.signs_dict[node] = get.signs_dict[node]
+        mixed_model.rr_dict[node] = get.rr_dict[node]
+        mixed_model.edges.extend(get.get_edges(target=node))
+
+    mixed_model.edges.sort(
+        key=lambda edge: (
+            edge["regulator"],
+            edge["target"],
+            edge["sign"],
+            )
+    )
+    
+    return mixed_model

@@ -66,9 +66,9 @@ pip install git+https://github.com/kyuhyongpark/boolmore
 5. run python script such as
 
    ```python
-   import boolmore.genetic_algorithm
+   from boolmore.genetic.runner import run_ga
 
-   boolmore.genetic_algorithm.run_ga("your_path/CAD_config.json", "your_path/CAD_start.bnet")
+   run_ga("your_path/CAD_config.json", start_file="your_path/CAD_start.bnet")
    ```
 
 ## Details for configuring input files

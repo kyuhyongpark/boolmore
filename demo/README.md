@@ -8,17 +8,15 @@ Demonstration of `boolmore` on the Cortical Area Development (CAD) model.
     ```
     pip install git+https://github.com/kyuhyongpark/boolmore
     ```
-2. Download these 5 files from the `demo` directory  
+2. Download these 4 files from the `demo` directory  
    `CAD.bnet` : This is the baseline model  
    `CAD_start.bnet` : This is the scrambled starting model  
-   `CAD_data.tsv` : This file contains the artificial experiments generated as in the benchmarks  
-   `CAD_config.json` : This file contains the path to the above files and other constraints  
-   `run.py` : This is the run file
+   `CAD_data.csv` : This file contains the artificial experiments generated as in the benchmarks  
+   `CAD_config.json` : This file contains the path to the above files and other constraints
        
 3. Run the python script such as
     ```
-    cd boolmore/demo
-    python run.py
+    python boolmore/scripts/run.py
     ```
 
 ## Description
@@ -32,6 +30,23 @@ The parameters are adjusted for the small model size (5 nodes)
 
 The log will be stored as "demo_log.txt"
 The final model will be stored as "demo_id_gen.bnet"
+
+## Evaluate a model
+
+Score a `.bnet` with the same fitness pipeline as the genetic algorithm (no GA run).
+
+Edit the paths at the top of `scripts/evaluate_model.py`, then run:
+
+```bash
+python boolmore/scripts/evaluate_model.py
+```
+
+```python
+# change these to evaluate a different model
+CONFIG = DEMO_DIR / "CAD_config.json"
+MODEL = DEMO_DIR / "CAD_start.bnet"
+REPORT = False  # set True to write a per-experiment NAV score CSV
+```
 
 ## Generate your own benchmark
 Use `create_your_own_benchmark.ipynb` to generate different artificial experiment datasets and starting models, using different seeds.

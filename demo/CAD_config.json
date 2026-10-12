@@ -1,26 +1,37 @@
 {
+"run_type" : "NAV",
+
+"data" : "demo/CAD_data.csv",
+
+"base" : "demo/CAD.bnet",
+
+"start" : "demo/CAD_start.bnet",
+
+"hierarchy" : true,
+
+"default_sources": {},
+
+"generate_defaults": false,
+
+"constraints": {
+    "fixed": [],
+    "regulate": {},
+    "necessary" : {},
+    "group": {},
+    "possible_constant": []
+    },
+
+"edge_pool": [],
+
 "parameters" : {
+    "stop_if_max": true,
     "starting_gen": 0,
-    "total_iterations": 10,
-    "per_iteration": 10,
+    "total_iter": 10,
+    "per_iter": 10,
     "keep": 2,
     "mix":2,
     "prob": 0.2,
     "edge_prob": 0.0,
     "order_by": ["n_extra_edges", "n_prime_implicants"]
-    },
-
-"data" : "./CAD_data.tsv",
-
-"base" : "./CAD.bnet",
-
-"default_sources": {},
-
-"constraints": {"fixed": [],
-                "regulate": {},
-                "necessary" : {},
-                "group": {},
-                "possible_constant": []},
-
-"edge_pool": []
+    }
 }

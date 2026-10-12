@@ -1,0 +1,374 @@
+"""Import phenotype experiments from CSV files."""
+
+import csv
+from collections import defaultdict
+from dataclasses import dataclass
+from typing import Optional
+
+from boolmore.experiment import PhenotypeExperiment
+from boolmore.types import Assignment
+
+_Signature = tuple[Assignment, Assignment, Assignment]  # sources, perturbation, phenotype
+
+
+@dataclass
+class ParseError:
+    line: int
+    id: Optional[str]
+    message: str
+    row: dict
+
+
+class CSVParseException(Exception):
+    def __init__(self, errors: list[ParseError]):
+        self.errors = errors
+        super().__init__(self._format())
+
+    def _format(self) -> str:
+        lines = ["Multiple errors occurred while parsing CSV:\n"]
+        for e in self.errors:
+            lines.append(
+                f"- line {e.line}, id={e.id}: {e.message}\n"
+                f"  row={e.row}\n"
+            )
+        return "\n".join(lines)
+
+
+def _valid_lines(file):
+    for line in file:
+        line = line.strip()
+        if not line:
+            continue
+        if line.startswith("#"):
+            continue
+        yield line
+
+
+def _parse_id(x: str, line_num: int, errors: list[ParseError], row: dict) -> Optional[int]:
+    if x is None or x.strip() == "":
+        errors.append(ParseError(line_num, None, "Missing id", row))
+        return None
+
+    try:
+        return int(x)
+    except ValueError:
+        errors.append(ParseError(line_num, x, f"Invalid id '{x}'", row))
+        return None
+
+
+def _parse_bool(x: str, line_num: int, errors: list[ParseError], id: Optional[str], row: dict) -> Optional[bool]:
+    if x is None:
+        errors.append(ParseError(line_num, id, "Missing expected_exists", row))
+        return None
+
+    x = x.strip().lower()
+
+    if x == "true":
+        return True
+    if x == "false":
+        return False
+
+    errors.append(ParseError(line_num, id, f"Invalid expected_exists '{x}'", row))
+    return None
+
+
+def _parse_float(x: str, field: str, line_num: int, errors: list[ParseError], id: Optional[str], row: dict) -> Optional[float]:
+    if x is None or x.strip() == "":
+        errors.append(ParseError(line_num, id, f"Missing field '{field}'", row))
+        return None
+
+    try:
+        return float(x)
+    except ValueError:
+        errors.append(ParseError(line_num, id, f"Invalid float '{x}' in '{field}'", row))
+        return None
+
+
+def _parse_assignment_block(
+        block: str,
+        field: str,
+        line_num: int,
+        errors: list[ParseError],
+        id: Optional[str],
+        row: dict
+    ) -> Assignment:
+    if not block or block.strip() == "":
+        return tuple()
+
+    items: list[tuple[str, int]] = []
+    seen_nodes: set[str] = set()
+
+    for part in block.split(";"):
+        part = part.strip()
+        if not part:
+            continue
+
+        if "=" not in part:
+            errors.append(ParseError(line_num, id, f"Invalid assignment '{part}' (missing '=')", row))
+            continue
+
+        node, value = part.split("=", 1)
+        node = node.strip()
+        value = value.strip()
+
+        if not node:
+            errors.append(ParseError(line_num, id, f"Empty node in '{field}'", row))
+            continue
+
+        if node in seen_nodes:
+            errors.append(ParseError(line_num, id, f"Duplicate node '{node}' in '{field}'", row))
+            continue
+
+        if value not in {"0", "1"}:
+            errors.append(ParseError(line_num, id, f"Invalid value '{value}' for node '{node}'", row))
+            continue
+
+        seen_nodes.add(node)
+        items.append((node, int(value)))
+
+    return tuple(sorted(items, key=lambda x: x[0]))
+
+
+def import_phenotypes(location: str) -> list[PhenotypeExperiment]:
+    """
+    Import phenotype-based experiments from a csv file.
+
+    Each row in the file corresponds to a single Experiment. All structured
+    fields are encoded as strings and must follow a strict assignment format.
+
+    The function parses each row and converts it into an Experiment object.
+
+    ------------------------------------------------------------------------
+    REQUIRED COLUMN HEADERS
+    ------------------------------------------------------------------------
+
+    id : str or int
+        Unique identifier of the experiment.
+
+    sources : str
+        Assignment of source node states.
+        Format:
+            "node1=value1; node2=value2;..."
+        Example:
+            "A=1; B=0; C=1"
+
+    perturbation : str
+        Assignment of perturbation conditions.
+        Same format as sources
+
+    phenotype : str
+        Observed phenotype assignment.
+        Same format as sources
+
+    expected_exists : int or bool
+        Whether the phenotype is expected to exist under the given conditions.
+        Allowed values:
+            true / false
+
+    weight : float
+        Importance weight of this experiment in scoring/benchmarking.
+        Must be a valid floating point number (e.g. 1.0, 0.5, 2.3).
+
+    ------------------------------------------------------------------------
+    CELL ENCODING RULES
+    ------------------------------------------------------------------------
+
+    - Node names are strings without commas or parentheses.
+    - Whitespace is ignored
+    - # comments are ignored
+    - Order of nodes does NOT matter; internally they are normalized.
+
+    ------------------------------------------------------------------------
+    RETURNS
+    ------------------------------------------------------------------------
+
+    list[Experiment]
+        Parsed experiments as immutable Experiment dataclass instances.
+
+    ------------------------------------------------------------------------
+    ERRORS
+    ------------------------------------------------------------------------
+
+    Raises:
+        ValueError:
+            - Missing required columns
+            - Malformed assignment strings
+            - invalid values in fields
+            - Duplicate experiment ids
+            - Duplicate signatures (sources, perturbation, phenotype)
+    """
+    experiments: list[PhenotypeExperiment] = []
+    errors: list[ParseError] = []
+
+    REQUIRED_COLUMNS = {
+        "id",
+        "weight",
+        "sources",
+        "perturbation",
+        "phenotype",
+        "expected_exists",
+    }
+
+    signatures: dict[_Signature, list[int]] = defaultdict(list)
+    ids_seen: dict[int, int] = defaultdict(int)
+
+    with open(location, newline="") as file:
+        reader = csv.DictReader(_valid_lines(file))
+
+        for line_num, row in enumerate(reader, start=2):
+
+            exp_id = _parse_id(row.get("id"), line_num, errors, row)
+
+            sources = _parse_assignment_block(
+                row.get("sources", ""), "sources", line_num, errors, exp_id, row
+            )
+
+            perturbation = _parse_assignment_block(
+                row.get("perturbation", ""), "perturbation", line_num, errors, exp_id, row
+            )
+
+            phenotype = _parse_assignment_block(
+                row.get("phenotype", ""), "phenotype", line_num, errors, exp_id, row
+            )
+
+            weight = _parse_float(
+                row.get("weight"), "weight", line_num, errors, exp_id, row
+            )
+
+            expected_exists = _parse_bool(
+                row.get("expected_exists"), line_num, errors, exp_id, row
+            )
+
+            # Collect additional columns as metadata
+            metadata = {
+                key: value
+                for key, value in row.items()
+                if key not in REQUIRED_COLUMNS
+            }
+
+            # Check that nodes appear in only one assignment block
+            source_nodes = {node for node, _ in sources}
+            perturbation_nodes = {node for node, _ in perturbation}
+            phenotype_nodes = {node for node, _ in phenotype}
+
+            overlaps = (
+                (source_nodes & perturbation_nodes, "sources", "perturbation"),
+                (source_nodes & phenotype_nodes, "sources", "phenotype"),
+                (perturbation_nodes & phenotype_nodes, "perturbation", "phenotype"),
+            )
+
+            for nodes, field1, field2 in overlaps:
+                for node in sorted(nodes):
+                    errors.append(
+                        ParseError(
+                            line=line_num,
+                            id=str(exp_id),
+                            message=f"Node '{node}' appears in both {field1} and {field2}",
+                            row=row,
+                        )
+                    )
+
+            # Only construct Experiment if core fields are valid
+            if None not in (exp_id, weight, expected_exists):
+                exp = PhenotypeExperiment(
+                    id=exp_id,
+                    weight=weight,
+                    sources=sources,
+                    perturbation=perturbation,
+                    phenotype=phenotype,
+                    expected_exists=expected_exists,
+                    metadata=metadata,
+                )
+
+                experiments.append(exp)
+
+                # -------------------------
+                # Track duplicates (id)
+                # -------------------------
+                ids_seen[exp_id] += 1
+
+                # -------------------------
+                # Track structural signature
+                # -------------------------
+                sig = (sources, perturbation, phenotype)
+                signatures[sig].append(exp_id)
+
+    # -------------------------
+    # Post-pass validation
+    # -------------------------
+
+    # 1. Duplicate IDs
+    for exp_id, count in ids_seen.items():
+        if count > 1:
+            errors.append(
+                ParseError(
+                    line=0,
+                    id=str(exp_id),
+                    message=f"Duplicate id {exp_id} appears {count} times",
+                    row={}
+                )
+            )
+
+    # 2. Duplicate structural signatures
+    for sig, ids in signatures.items():
+        if len(ids) > 1:
+            errors.append(
+                ParseError(
+                    line=0,
+                    id=",".join(map(str, ids)),
+                    message="Duplicate experiment signature (sources, perturbation, phenotype)",
+                    row={
+                        "sources": sig[0],
+                        "perturbation": sig[1],
+                        "phenotype": sig[2],
+                    }
+                )
+            )
+
+    # -------------------------
+    # Final check
+    # -------------------------
+    if errors:
+        raise CSVParseException(errors)
+
+    return experiments
+
+
+def check_phenotypes(primes: dict, experiments: list[PhenotypeExperiment]) -> None:
+    """
+    Verify that every node appearing in the experiments exists in `primes`.
+
+    Checks the nodes appearing in
+    - sources
+    - perturbation
+    - phenotype
+
+    Collects all errors before raising a CSVParseException.
+    """
+    errors: list[ParseError] = []
+
+    valid_nodes = set(primes.keys())
+
+    for exp in experiments:
+        for field_name, assignment in (
+            ("sources", exp.sources),
+            ("perturbation", exp.perturbation),
+            ("phenotype", exp.phenotype),
+        ):
+            for node, _ in assignment:
+                if node not in valid_nodes:
+                    errors.append(
+                        ParseError(
+                            line=0,
+                            id=str(exp.id),
+                            message=f"Unknown node '{node}' in {field_name}",
+                            row={
+                                "sources": exp.sources,
+                                "perturbation": exp.perturbation,
+                                "phenotype": exp.phenotype,
+                            },
+                        )
+                    )
+
+    if errors:
+        raise CSVParseException(errors)
