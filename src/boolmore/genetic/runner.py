@@ -175,7 +175,7 @@ def run_ga(
         f"\tEstimated GA evaluation time: {(end_single-start_single)*ga.total_iter*ga.per_iter/core}\n"
         )
 
-    start_result = evaluator.evaluate(start_model, id=0)
+    start_result = evaluator.evaluate(start_model, model_id=0)
     start = Candidate(start_model, 0, ga.starting_gen, start_result)
     print(start.model.info())
     print(format_score(start.eval_result))

@@ -2,7 +2,7 @@ from dataclasses import dataclass, fields
 from pprint import pformat
 
 from boolmore.model import Model
-from boolmore.evaluation.score import EvalResult
+from boolmore.evaluation.score import EvaluationResult
 
 
 @dataclass
@@ -10,7 +10,7 @@ class Candidate:
     model:Model
     id:int = -1
     generation:int = 0
-    eval_result:EvalResult | None = None
+    eval_result:EvaluationResult | None = None
 
     def info(self, detailed:bool=False) -> str:
 
@@ -23,7 +23,7 @@ class Candidate:
 
         if result is not None:
             for field in fields(result):
-                if field.name == "outcomes":
+                if field.name == "item_scores":
                     continue
                 lines.append(f"# {field.name}: {getattr(result, field.name)}")
 
@@ -32,9 +32,9 @@ class Candidate:
         info += "\n" + self.model.info()
 
         if detailed and result is not None:
-            outcomes = pformat(result.outcomes)
-            outcomes = "\n".join(f"# {line}" for line in outcomes.splitlines())
-            info += f"\n# outcomes:\n{outcomes}"
+            item_scores = pformat(result.item_scores)
+            item_scores = "\n".join(f"# {line}" for line in item_scores.splitlines())
+            info += f"\n# item_scores:\n{item_scores}"
 
         return info
 

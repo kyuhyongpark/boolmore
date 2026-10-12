@@ -116,7 +116,7 @@ def build_evaluator(
 
     return Evaluator(
         base=base_model,
-        exps=exps,
+        experiments=exps,
         prediction_fn=prediction_fn,
         score_fn=score_fn,
         constraints=constraints,
