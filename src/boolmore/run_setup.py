@@ -3,7 +3,9 @@
 from functools import partial
 from pathlib import Path
 
-from boolmore.evaluation.score import Evaluator, get_NAV_scores, get_phenotype_scores
+from boolmore.evaluation.score import Evaluator
+from boolmore.evaluation.nav_score import get_NAV_scores
+from boolmore.evaluation.phenotype_score import get_phenotype_scores
 from boolmore.genetic.algorithm import GAConfig
 from boolmore.inference.prediction import get_NAV_prediction, get_phenotype_prediction
 from boolmore.io.load import import_NAV_exps, import_phenotypes, load_json_config, load_model

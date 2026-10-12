@@ -1,6 +1,7 @@
 import pytest
 
-from boolmore.evaluation.score import get_phenotype_scores, get_model_score
+from boolmore.evaluation.score import get_model_score
+from boolmore.evaluation.phenotype_score import get_phenotype_scores
 from boolmore.experiment import PhenotypeExperiment
 from boolmore.inference.prediction import PhenotypePrediction
 
