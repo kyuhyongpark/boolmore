@@ -6,7 +6,7 @@ from pyboolnet.external.bnet2primes import bnet_text2primes
 
 from boolmore.experiment import NAVExperiment, PhenotypeExperiment
 from boolmore.inference.prediction import (
-    _percolate_primes,
+    _fix_constants,
     get_NAV_prediction,
     get_phenotype_prediction,
 )
@@ -17,24 +17,24 @@ DEMO_DIR = Path(__file__).resolve().parents[1] / "demo"
 GOLDEN_PATH = Path(__file__).resolve().parent / "data" / "cad_nav_predictions.json"
 
 
-class TestPercolatePrimes(unittest.TestCase):
+class TestFixConstants(unittest.TestCase):
 
     def setUp(self):
         self.primes = bnet_text2primes("A, !A\nB, A\n")
 
     def test_fix_to_zero(self):
-        result = _percolate_primes(self.primes, {"A": 0})
+        result = _fix_constants(self.primes, {"A": 0})
         self.assertEqual(result["A"], [[{}], []])
         self.assertEqual(result["B"], self.primes["B"])
 
     def test_fix_to_one(self):
-        result = _percolate_primes(self.primes, {"A": 1})
+        result = _fix_constants(self.primes, {"A": 1})
         self.assertEqual(result["A"], [[], [{}]])
         self.assertEqual(result["B"], self.primes["B"])
 
     def test_missing_node_raises(self):
         with self.assertRaises(ValueError):
-            _percolate_primes(self.primes, {"Z": 1})
+            _fix_constants(self.primes, {"Z": 1})
 
 
 class TestGetPhenotypePrediction(unittest.TestCase):

@@ -56,8 +56,11 @@ class NAVPrediction:
     average_values: dict[str, float]
 
 
-def _percolate_primes(primes: dict, fixed: dict[str, int]) -> dict:
+def _fix_constants(primes: dict, fixed: dict[str, int]) -> dict:
     """Return a copy of ``primes`` with fixed nodes set to constant functions.
+
+    This only replaces each fixed node's update rule with a constant; it does
+    not percolate those constants through the rest of the network.
 
     Parameters
     ----------
@@ -69,23 +72,23 @@ def _percolate_primes(primes: dict, fixed: dict[str, int]) -> dict:
     Returns
     -------
     dict
-        Percolated prime implicants.
+        Prime implicants with the specified nodes forced to constants.
 
     Raises
     ------
     ValueError
         If a fixed node is not present in the model.
     """
-    perc_primes = primes.copy()
+    fixed_primes = primes.copy()
     for node, value in fixed.items():
         if node not in primes:
             raise ValueError(f"{node} is not in the model")
 
         if int(value) == 0:
-            perc_primes[node] = [[{}], []]
+            fixed_primes[node] = [[{}], []]
         else:
-            perc_primes[node] = [[], [{}]]
-    return perc_primes
+            fixed_primes[node] = [[], [{}]]
+    return fixed_primes
 
 
 def get_phenotype_prediction(
@@ -99,14 +102,14 @@ def get_phenotype_prediction(
     computed maximal trap space for the same perturbation already satisfies
     the required sources and phenotype. If so, that cached result is reused.
 
-    Otherwise, the network is percolated according to the perturbation, and
-    maximal trap spaces contained within the combined source and phenotype
-    subspace are searched. If such a trap space exists, the experiment is
-    predicted to be feasible.
+    Otherwise, the perturbed nodes are fixed to constant update functions,
+    and maximal trap spaces contained within the combined source and
+    phenotype subspace are searched. If such a trap space exists, the
+    experiment is predicted to be feasible.
 
-    Percolated prime implicants are cached by perturbation, and discovered
-    maximal trap spaces are also cached for reuse by later experiments with
-    the same perturbation.
+    Prime implicants with fixed constants are cached by perturbation, and
+    discovered maximal trap spaces are also cached for reuse by later
+    experiments with the same perturbation.
 
     Parameters
     ----------
@@ -194,20 +197,20 @@ def get_phenotype_prediction(
 
         perturbation = assignment_to_dict(exp.perturbation)
 
-        # get percolated primes
+        # fix perturbation nodes as constants
         t0 = perf_counter()
 
         if exp.perturbation in primes_cache:
-            perc_primes = primes_cache[exp.perturbation]
+            fixed_primes = primes_cache[exp.perturbation]
             if debug:
-                print("  cache hit (perc_primes)")
+                print("  cache hit (fixed_primes)")
         else:
-            perc_primes = _percolate_primes(primes, perturbation)
-            primes_cache[exp.perturbation] = perc_primes
+            fixed_primes = _fix_constants(primes, perturbation)
+            primes_cache[exp.perturbation] = fixed_primes
 
         if debug:
             print(
-                f"  get perc_primes: "
+                f"  get fixed_primes: "
                 f"{perf_counter() - t0:.6f} s"
             )
 
@@ -215,7 +218,7 @@ def get_phenotype_prediction(
         subspace.update(phenotype)
 
         for node in subspace:
-            if node not in perc_primes:
+            if node not in fixed_primes:
                 raise ValueError(f"{node} not in the model.")
 
         # compute max traps
@@ -223,7 +226,7 @@ def get_phenotype_prediction(
 
         logging.disable(logging.CRITICAL)
         max_traps = compute_trapspaces_within_subspace(
-            perc_primes,
+            fixed_primes,
             subspace=subspace,
             type_="max",
             max_output=1,
@@ -261,9 +264,9 @@ def get_NAV_prediction(
 ) -> dict[Assignment, NAVPrediction]:
     """Predict average attractor values for each unique NAV intervention.
 
-    Collects the distinct ``fixes`` assignments across experiments, percolates
-    the network under each intervention, computes minimal trap spaces, and
-    returns the average node values over those trap spaces.
+    Collects the distinct ``fixes`` assignments across experiments, fixes
+    intervened nodes to constant update functions, computes minimal trap
+    spaces, and returns the average node values over those trap spaces.
 
     Parameters
     ----------
@@ -290,7 +293,7 @@ def get_NAV_prediction(
     predictions: dict[Assignment, NAVPrediction] = {}
     for fixes in interventions:
         perturbation = assignment_to_dict(fixes)
-        new_primes = _percolate_primes(primes, perturbation)
+        new_primes = _fix_constants(primes, perturbation)
 
         tr = compute_trap_spaces(new_primes, "min")
 
