@@ -334,20 +334,9 @@ def format_iteration_summary(
     return " | ".join(parts)
 
 
-def __getattr__(name: str):
-    """Lazy re-exports so ``from boolmore.genetic.algorithm import run_ga`` still works."""
-    if name in ("run_ga", "export_models", "log_candidate"):
-        from boolmore.genetic import runner
-        return getattr(runner, name)
-    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
-
-
 __all__ = [
     "GAConfig",
     "GAState",
     "GeneticAlgorithm",
     "ga_main",
-    "export_models",
-    "log_candidate",
-    "run_ga",
 ]

@@ -10,7 +10,7 @@ import datetime
 import json
 from pathlib import Path
 
-from boolmore.genetic.runner import run_ga
+from boolmore.runner import run_ga
 from boolmore.io.paths import project_root
 
 HERE = Path(__file__).resolve().parent
