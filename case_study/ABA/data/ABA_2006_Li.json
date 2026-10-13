@@ -1,28 +1,39 @@
 {
-"parameters" : {
-    "starting_id": 1,           
-    "starting_gen": 1,
-    "total_iterations": 100,
-    "per_iteration": 100,
-    "keep": 20,
-    "mix":20,
-    "export_top": 1,
-    "export_threshold": 430,
-    "prob": 0.01,
-    "edge_prob": 0.5
+"run_type" : "NAV",
+
+"data" : "case_study/ABA/data/data_2006_Li.tsv",
+
+"base" : "case_study/ABA/baseline_models/ABA_2006_Li.bnet",
+
+"start" : "case_study/ABA/baseline_models/ABA_2006_Li.bnet",
+
+"hierarchy" : true,
+
+"nav_method" : "min_traps",
+
+"default_sources": {"ABA": 0},
+
+"generate_defaults": false,
+
+"constraints": {
+    "fixed": [],
+    "regulate": {},
+    "necessary": {},
+    "group": {},
+    "possible_constant": []
     },
 
-"data": "case_study/ABA/data/data_2006_Li.tsv",
+"edge_pool": [],
 
-"base": "case_study/ABA/baseline_models/ABA_2006_Li.bnet",
-
-"default_sources": {"ABA":0},
-
-"constraints": {"fixed": [],
-                "regulate": {},
-                "necessary" : {},
-                "group": {},
-                "possible_constant": []},
-
-"edge_pool": []
+"parameters" : {
+    "stop_if_max": true,
+    "starting_gen": 1,
+    "total_iter": 100,
+    "per_iter": 100,
+    "keep": 20,
+    "mix": 20,
+    "prob": 0.01,
+    "edge_prob": 0.5,
+    "order_by": ["n_extra_edges", "n_prime_implicants"]
+    }
 }

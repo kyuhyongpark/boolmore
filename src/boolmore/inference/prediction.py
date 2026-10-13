@@ -300,7 +300,12 @@ def _nav_from_ldoi(
     primes,
     perturbation: dict[str, int],
 ) -> dict[str, float]:
-    """Approximate NAV from LDOI (forced 0/1, else 0.5)."""
+    """Approximate NAV from LDOI (forced 0/1, else 0.5).
+
+    This approximation is only credible when the model does not rely
+    heavily on oscillatory behavior: free nodes are scored as 0.5 and
+    cyclic attractors are not resolved.
+    """
     constants = logical_domain_of_influence(primes, perturbation)
     return {
         node: float(constants[node]) if node in constants else 0.5
@@ -334,6 +339,8 @@ def get_NAV_prediction(
           fixed 0 → 0.0, free ``?`` → 0.5).
         - ``"ldoi"``: coarser approximation via logical domain of influence;
           forced constants map to 0.0/1.0 and all other nodes to 0.5.
+          Only credible when the model does not rely heavily on
+          oscillatory behavior (free nodes → 0.5; oscillations unresolved).
 
     Returns
     -------
@@ -349,6 +356,12 @@ def get_NAV_prediction(
     RuntimeError
         If ``method="min_traps"`` and PyBoolNet's ASP backend
         (gringo/clasp) fails the probe check.
+
+    Notes
+    -----
+    ``method="ldoi"`` NAV scores should be interpreted with care for models
+    whose phenotype depends on oscillations or complex cyclic attractors;
+    prefer ``"min_traps"`` in those cases.
     """
     if method not in NAV_METHODS:
         raise ValueError(
