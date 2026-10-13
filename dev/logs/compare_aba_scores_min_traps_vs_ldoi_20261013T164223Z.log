@@ -1,0 +1,167 @@
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi_20261013T164223Z.log
+started (UTC): 2026-10-13T16:42:23.218723+00:00
+
+config: case_study/ABA/data/ABA_B.json
+data:   case_study/ABA/data/data_B.tsv
+default_sources: {'ABA': 0}
+hierarchy: True
+experiments: 505
+bnet files: 29
+  baseline_models/ABA_2006_Li.bnet
+  baseline_models/ABA_2017_Albert.bnet
+  baseline_models/ABA_2017_VA-KEV_del.bnet
+  baseline_models/ABA_2018_Waidyarathne.bnet
+  baseline_models/ABA_2019_Maheshwari.bnet
+  baseline_models/ABA_GA_base_A.bnet
+  baseline_models/ABA_GA_base_B.bnet
+  generated_models/GA0_A.bnet
+  generated_models/GA0_B.bnet
+  generated_models/GA1_A.bnet
+  generated_models/GA1_B.bnet
+  generated_models/GA2_A.bnet
+  generated_models/GA2_B.bnet
+  generated_models/GA_VA-KEV_del.bnet
+  generated_models/repetitions/20241007143135_9306_gen124.bnet
+  generated_models/repetitions/20241009072111_9984_gen68.bnet
+  generated_models/repetitions/20241009211257_9880_gen154.bnet
+  generated_models/repetitions/20241010082016_9453_gen140.bnet
+  generated_models/repetitions/20241011222037_9848_gen50.bnet
+  generated_models/repetitions/20241014130450_9902_gen56.bnet
+  generated_models/repetitions/rep_20230917_7545_gen112.bnet
+  generated_models/repetitions/rep_20230918_7560_gen105.bnet
+  generated_models/repetitions/rep_20230919_8030_gen113.bnet
+  generated_models/repetitions/rep_20230920_7788_gen121.bnet
+  generated_models/repetitions/rep_20230921_7687_gen104.bnet
+  generated_models/repetitions/rep_20230922_8036_gen125.bnet
+  generated_models/repetitions/rep_20230923_8025_gen141.bnet
+  generated_models/repetitions/rep_20230924_8037_gen129.bnet
+  generated_models/repetitions/rep_20230925_7821_gen113.bnet
+
+[1/29] baseline_models/ABA_2006_Li.bnet
+  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model
+[2/29] baseline_models/ABA_2017_Albert.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[3/29] baseline_models/ABA_2017_VA-KEV_del.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[4/29] baseline_models/ABA_2018_Waidyarathne.bnet
+  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model
+[5/29] baseline_models/ABA_2019_Maheshwari.bnet
+  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model
+[6/29] baseline_models/ABA_GA_base_A.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[7/29] baseline_models/ABA_GA_base_B.bnet
+  OK    min_traps=184.20/505.0 (2.99s)  ldoi=152.61/505.0 (0.19s)  diff=-31.59
+[8/29] generated_models/GA0_A.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[9/29] generated_models/GA0_B.bnet
+  OK    min_traps=384.62/505.0 (2.47s)  ldoi=315.91/505.0 (0.15s)  diff=-68.72
+[10/29] generated_models/GA1_A.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[11/29] generated_models/GA1_B.bnet
+  OK    min_traps=407.92/505.0 (2.69s)  ldoi=407.75/505.0 (0.16s)  diff=-0.17
+[12/29] generated_models/GA2_A.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[13/29] generated_models/GA2_B.bnet
+  OK    min_traps=412.75/505.0 (2.65s)  ldoi=412.75/505.0 (0.17s)  diff=+0.00
+[14/29] generated_models/GA_VA-KEV_del.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[15/29] generated_models/repetitions/20241007143135_9306_gen124.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[16/29] generated_models/repetitions/20241009072111_9984_gen68.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[17/29] generated_models/repetitions/20241009211257_9880_gen154.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[18/29] generated_models/repetitions/20241010082016_9453_gen140.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[19/29] generated_models/repetitions/20241011222037_9848_gen50.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[20/29] generated_models/repetitions/20241014130450_9902_gen56.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[21/29] generated_models/repetitions/rep_20230917_7545_gen112.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[22/29] generated_models/repetitions/rep_20230918_7560_gen105.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[23/29] generated_models/repetitions/rep_20230919_8030_gen113.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[24/29] generated_models/repetitions/rep_20230920_7788_gen121.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[25/29] generated_models/repetitions/rep_20230921_7687_gen104.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[26/29] generated_models/repetitions/rep_20230922_8036_gen125.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[27/29] generated_models/repetitions/rep_20230923_8025_gen141.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[28/29] generated_models/repetitions/rep_20230924_8037_gen129.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+[29/29] generated_models/repetitions/rep_20230925_7821_gen113.bnet
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+
+failed: 25 / 29
+  baseline_models/ABA_2006_Li.bnet: min_traps: ValueError: 8-nitro-cGMP is not in the model
+  baseline_models/ABA_2017_Albert.bnet: min_traps: ValueError: Ca2osc is not in the model
+  baseline_models/ABA_2017_VA-KEV_del.bnet: min_traps: ValueError: Ca2osc is not in the model
+  baseline_models/ABA_2018_Waidyarathne.bnet: min_traps: ValueError: 8-nitro-cGMP is not in the model
+  baseline_models/ABA_2019_Maheshwari.bnet: min_traps: ValueError: 8-nitro-cGMP is not in the model
+  baseline_models/ABA_GA_base_A.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/GA0_A.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/GA1_A.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/GA2_A.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/GA_VA-KEV_del.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/20241007143135_9306_gen124.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/20241009072111_9984_gen68.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/20241009211257_9880_gen154.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/20241010082016_9453_gen140.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/20241011222037_9848_gen50.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/20241014130450_9902_gen56.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/rep_20230917_7545_gen112.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/rep_20230918_7560_gen105.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/rep_20230919_8030_gen113.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/rep_20230920_7788_gen121.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/rep_20230921_7687_gen104.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/rep_20230922_8036_gen125.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/rep_20230923_8025_gen141.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/rep_20230924_8037_gen129.bnet: min_traps: ValueError: Ca2osc is not in the model
+  generated_models/repetitions/rep_20230925_7821_gen113.bnet: min_traps: ValueError: Ca2osc is not in the model
+
+succeeded (both methods): 4 / 29
+
+model                                                    min_traps       ldoi     diff  rank_m  rank_l
+----------------------------------------------------------------------------------------------------
+generated_models/GA2_B.bnet                                 412.75     412.75    +0.00     1.0     1.0
+generated_models/GA1_B.bnet                                 407.92     407.75    -0.17     2.0     2.0
+generated_models/GA0_B.bnet                                 384.62     315.91   -68.72     3.0     3.0
+baseline_models/ABA_GA_base_B.bnet                          184.20     152.61   -31.59     4.0     4.0
+----------------------------------------------------------------------------------------------------
+
+Correlation / rank agreement
+  Pearson r:              0.9654
+  Spearman rho:           1.0000
+  Pairwise order agree:   1.0000 (6/6 pairs)
+  Mean |rank_min - rank_ldoi|: 0.000
+  Score diff (ldoi - min): mean=-25.119  std=32.641  min=-68.719  max=+0.000
+  Top-1 set overlap:     1.000
+  Top-3 set overlap:     1.000
+
+Scatter pairs (min_traps, ldoi)
+  (412.75, 412.75)  generated_models/GA2_B.bnet
+  (407.92, 407.75)  generated_models/GA1_B.bnet
+  (384.62, 315.91)  generated_models/GA0_B.bnet
+  (184.20, 152.61)  baseline_models/ABA_GA_base_B.bnet
+
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_scatter_20261013T164223Z.png
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_ranks_scatter_20261013T164223Z.png
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_score_diff_20261013T164223Z.png
+
+Summary
+  bnets scanned:     29
+  both methods OK:   4
+  failed:            25
+  Pearson r:         0.9654
+  Spearman rho:      1.0000
+  pairwise order:    1.0000
+  mean |Δrank|:      0.000
+  Log written to:    /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi_20261013T164223Z.log
+  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_scatter_20261013T164223Z.png
+  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_ranks_scatter_20261013T164223Z.png
+  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_score_diff_20261013T164223Z.png
+finished (UTC): 2026-10-13T16:43:14.515860+00:00
