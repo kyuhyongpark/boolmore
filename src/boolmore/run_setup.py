@@ -57,6 +57,7 @@ def build_run_config(
         "start": start_file if start_file is not None else base_file,
         "hierarchy": hierarchy if hierarchy is not None else True,
         "nav_method": nav_method if nav_method is not None else "min_traps",
+        "ldoi_prune": True,
         "default_sources": {},
         "generate_defaults": True,
         "constraints": {
@@ -99,6 +100,7 @@ def build_evaluator(
         raise ValueError(
             f"Unknown nav_method {nav_method!r}; expected one of {NAV_METHODS}"
         )
+    ldoi_prune = config.get("ldoi_prune", True)
     default_sources = dict(config["default_sources"])
     generate_defaults = config["generate_defaults"]
     constraints = config["constraints"]
@@ -133,7 +135,16 @@ def build_evaluator(
         raise ValueError(f"Unsupported run type: {run_type}")
 
     if verbose:
-        print("Experimental data loaded.\n")
+        print("Experimental data loaded.")
+        print(f"experiments: {len(exps)}")
+        print(f"total weight: {sum(exp.weight for exp in exps)}")
+        if run_type == "NAV":
+            print(f"distinct interventions: {len({exp.fixes for exp in exps})}")
+            outcomes: dict[str, int] = {}
+            for exp in exps:
+                outcomes[exp.outcome] = outcomes.get(exp.outcome, 0) + 1
+            print(f"outcomes: {outcomes}")
+        print()
 
     return Evaluator(
         base=base_model,
@@ -144,6 +155,7 @@ def build_evaluator(
         run_type=run_type,
         hierarchy=hierarchy,
         nav_method=nav_method,
+        ldoi_prune=ldoi_prune,
         default_sources=default_sources,
         generate_defaults=generate_defaults,
     )

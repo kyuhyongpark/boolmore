@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from boolmore.genetic.runner import run_ga
+from boolmore.runner import run_ga
 from boolmore.boolean_functions import prime2bnet, prime2rr
 
 # seed for the random number generator

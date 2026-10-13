@@ -1,5 +1,5 @@
 def main():
-    from boolmore.genetic.runner import run_ga
+    from boolmore.runner import run_ga
     from sys import argv
     """
     python -m boolmore <parameters file> <starting model>

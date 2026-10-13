@@ -1,0 +1,112 @@
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/bench_nav_min_traps_ldoi_prune_20261013T181525Z.log
+started (UTC): 2026-10-13T18:15:25.432473+00:00
+
+config: demo/CAD_config.json
+data:   demo/CAD_data.csv
+base:   demo/CAD.bnet
+start:  demo/CAD_start.bnet
+run_type: NAV
+nav_method: min_traps
+hierarchy: True
+GA params: total_iter=10, per_iter=10, keep=2, mix=2, prob=0.2
+seed: 0, core: 1
+
+========================================================================
+Run: nav_method=min_traps, ldoi_prune=True
+========================================================================
+Loading base model from /home/kyuhyongpark/Boolmore/boolmore/demo/CAD.bnet
+Base model loaded.
+Loading experimental data from /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_data.csv
+Experimental data loaded.
+
+Loading starting model from /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_start.bnet
+Starting model loaded.
+# number of nodes: 5
+# number of edges: 14
+# number of effective base edges: 11
+# number of ineffective base edges: 3
+# extra edges: []
+# number of extra edges: 0
+# number of effective extra edges: 0
+# number of ineffective extra edges: 0
+# number of unadded edges: 0
+score: 33.96 / 50.0 (67.9%)
+
+iteration 1, generated 10, id 8, generation 1, score 41.0/50.0 (82.0%), n_extra_edges 0, n_prime_implicants 10
+iteration 2, generated 20, id 11, generation 2, score 41.8/50.0 (83.5%), n_extra_edges 0, n_prime_implicants 13
+iteration 3, generated 30, id 23, generation 4, score 45.0/50.0 (90.0%), n_extra_edges 0, n_prime_implicants 15
+iteration 4, generated 40, id 33, generation 5, score 45.0/50.0 (90.0%), n_extra_edges 0, n_prime_implicants 10
+iteration 5, generated 50, id 42, generation 6, score 45.8/50.0 (91.5%), n_extra_edges 0, n_prime_implicants 11
+iteration 6, generated 60, id 52, generation 7, score 47.2/50.0 (94.5%), n_extra_edges 0, n_prime_implicants 13
+iteration 7, generated 70, id 70, generation 9, score 48.0/50.0 (96.0%), n_extra_edges 0, n_prime_implicants 16
+iteration 8, generated 80, id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
+iteration 9, generated 90, id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
+iteration 10, generated 100, id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
+
+  GA wall time: 5.7756s
+  evals=101, pruned=31 (30.7%), with_threshold=100
+  eval time sum: 5.8329s
+  iterations=10, generated=100
+  start score: 33.96 / 50.0
+  final score: 49.00 / 50.0
+
+========================================================================
+Run: nav_method=min_traps, ldoi_prune=False
+========================================================================
+Loading base model from /home/kyuhyongpark/Boolmore/boolmore/demo/CAD.bnet
+Base model loaded.
+Loading experimental data from /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_data.csv
+Experimental data loaded.
+
+Loading starting model from /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_start.bnet
+Starting model loaded.
+# number of nodes: 5
+# number of edges: 14
+# number of effective base edges: 11
+# number of ineffective base edges: 3
+# extra edges: []
+# number of extra edges: 0
+# number of effective extra edges: 0
+# number of ineffective extra edges: 0
+# number of unadded edges: 0
+score: 33.96 / 50.0 (67.9%)
+
+iteration 1, generated 10, id 8, generation 1, score 41.0/50.0 (82.0%), n_extra_edges 0, n_prime_implicants 10
+iteration 2, generated 20, id 11, generation 2, score 41.8/50.0 (83.5%), n_extra_edges 0, n_prime_implicants 13
+iteration 3, generated 30, id 23, generation 4, score 45.0/50.0 (90.0%), n_extra_edges 0, n_prime_implicants 15
+iteration 4, generated 40, id 33, generation 5, score 45.0/50.0 (90.0%), n_extra_edges 0, n_prime_implicants 10
+iteration 5, generated 50, id 42, generation 6, score 45.8/50.0 (91.5%), n_extra_edges 0, n_prime_implicants 11
+iteration 6, generated 60, id 52, generation 7, score 47.2/50.0 (94.5%), n_extra_edges 0, n_prime_implicants 13
+iteration 7, generated 70, id 70, generation 9, score 48.0/50.0 (96.0%), n_extra_edges 0, n_prime_implicants 16
+iteration 8, generated 80, id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
+iteration 9, generated 90, id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
+iteration 10, generated 100, id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
+
+  GA wall time: 7.7053s
+  evals=101, pruned=0 (0.0%), with_threshold=0
+  eval time sum: 7.7551s
+  iterations=10, generated=100
+  start score: 33.96 / 50.0
+  final score: 49.00 / 50.0
+
+Summary: min_traps NAV GA, LDOI prune on vs off (CAD demo)
+------------------------------------------------------------------------
+metric                             prune=ON      prune=OFF
+------------------------------------------------------------------------
+GA wall time (s)                     5.7756         7.7053
+eval time sum (s)                    5.8329         7.7551
+#evaluate calls                         101            101
+#pruned (is_upper_bound)                 31              0
+#calls with threshold                   100              0
+prune rate (%)                         30.7            0.0
+iterations                               10             10
+models generated                        100            100
+start score                     33.96/50       33.96/50   
+final score                     49.00/50       49.00/50   
+final %                               98.0%          98.0%
+------------------------------------------------------------------------
+prune=ON faster by 1.33x (saved 1.9297s)
+
+Note: prune=OFF should report 0 pruned; prune=ON may still prune 0 models if no offspring UB falls below the survivor threshold.
+Log written to: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/bench_nav_min_traps_ldoi_prune_20261013T181525Z.log
+finished (UTC): 2026-10-13T18:15:39.165132+00:00

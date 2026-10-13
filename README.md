@@ -95,7 +95,7 @@ Boolmore probes this on the first trap-space call (prediction / phenotype helper
 5. run python script such as
 
    ```python
-   from boolmore.genetic.runner import run_ga
+   from boolmore.runner import run_ga
 
    run_ga("your_path/CAD_config.json", start_file="your_path/CAD_start.bnet")
    ```
