@@ -1,27 +1,38 @@
-# RUN_TYPE='NAV'
-# DATA: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_data.csv
-# HIERARCHY=True
-# NAV_METHOD='min_traps'
-# DEFAULT_SOURCES={}
-# GENERATE_DEFAULTS=False
-# CONSTRAINTS={'fixed': [], 'regulate': {}, 'necessary': {}, 'group': {}, 'possible_constant': []}
-# EDGE_POOL=[]
+RUN_TYPE='NAV'
+DATA: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_data.csv
+BASE: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD.bnet
+START: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_start.bnet
+HIERARCHY=True
+NAV_METHOD='min_traps'
+LDOI_PRUNE=True
+DEFAULT_SOURCES={}
+GENERATE_DEFAULTS=False
+CONSTRAINTS={'fixed': [], 'regulate': {}, 'necessary': {}, 'group': {}, 'possible_constant': []}
+EDGE_POOL=[]
 
-# seed: 0
-# stop if max: True
-# starting gen: 0
-# total iterations: 10
-# per iteration: 10
-# keep: 2
-# mix: 2
-# prob: 0.2
-# edge prob: 0.0
-# order by: ['n_extra_edges', 'n_prime_implicants']
+seed: 0
+stop if max: True
+starting gen: 0
+total iterations: 10
+per iteration: 10
+keep: 2
+mix: 2
+prob: 0.2
+edge prob: 0.0
+order by: ['n_extra_edges', 'n_prime_implicants']
+core=2
 
-# core=2
+Loading base model from /home/kyuhyongpark/Boolmore/boolmore/demo/CAD.bnet
+Base model loaded.
+Loading experimental data from /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_data.csv
+Experimental data loaded.
+experiments: 50
+total weight: 50.0
+distinct interventions: 24
+outcomes: {'Some': 23, 'OFF': 21, 'ON': 6}
 
 
-# BASE: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD.bnet
+BASE: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD.bnet
 # id: -1
 # generation: 0
 # score: 50.0 / 50.0 (100.0%)
@@ -39,14 +50,19 @@
 # number of effective extra edges: 0
 # number of ineffective extra edges: 0
 # number of unadded edges: 0
-# targets,	factors
-# Coup_fti,	!Fgf8 & !Sp8
-# Emx2,	Coup_fti & !Fgf8 & !Pax6 & !Sp8
-# Fgf8,	!Emx2 & Fgf8 & Sp8
-# Pax6,	!Coup_fti & !Emx2 & Sp8
-# Sp8,	!Emx2 & Fgf8
+targets,	factors
+Coup_fti,	!Fgf8 & !Sp8
+Emx2,	Coup_fti & !Fgf8 & !Pax6 & !Sp8
+Fgf8,	!Emx2 & Fgf8 & Sp8
+Pax6,	!Coup_fti & !Emx2 & Sp8
+Sp8,	!Emx2 & Fgf8
+Elapsed time for single evaluation: 0:00:00.101784
+Estimated GA evaluation time: 0:00:05.089200
 
-# START: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_start.bnet
+Loading starting model from /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_start.bnet
+Starting model loaded.
+
+START: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_start.bnet
 # id: 0
 # generation: 0
 # score: 33.96 / 50.0 (67.9%)
@@ -64,29 +80,100 @@
 # number of effective extra edges: 0
 # number of ineffective extra edges: 0
 # number of unadded edges: 0
-# targets,	factors
-# Coup_fti,	!Fgf8
-# Emx2,	Coup_fti & !Fgf8 | !Sp8 | !Pax6
-# Fgf8,	Sp8 | !Emx2
-# Pax6,	!Coup_fti & Sp8 | !Emx2
-# Sp8,	Fgf8
+targets,	factors
+Coup_fti,	!Fgf8
+Emx2,	Coup_fti & !Fgf8 | !Sp8 | !Pax6
+Fgf8,	Sp8 | !Emx2
+Pax6,	!Coup_fti & Sp8 | !Emx2
+Sp8,	Fgf8
 
-# start_time=datetime.datetime(2026, 10, 13, 16, 29, 25, 102920)
-# end_time=datetime.datetime(2026, 10, 13, 16, 29, 29, 921906)
-# elapsed time: 0:00:04.818986
+start_time: 2026-10-13 20:42:12.553416
 
-id 8, generation 1, score 41.0/50.0 (82.0%), n_extra_edges 0, n_prime_implicants 10
-id 11, generation 2, score 41.8/50.0 (83.5%), n_extra_edges 0, n_prime_implicants 13
-id 23, generation 4, score 45.0/50.0 (90.0%), n_extra_edges 0, n_prime_implicants 15
-id 33, generation 5, score 45.0/50.0 (90.0%), n_extra_edges 0, n_prime_implicants 10
-id 42, generation 6, score 45.8/50.0 (91.5%), n_extra_edges 0, n_prime_implicants 11
-id 52, generation 7, score 47.2/50.0 (94.5%), n_extra_edges 0, n_prime_implicants 13
-id 70, generation 9, score 48.0/50.0 (96.0%), n_extra_edges 0, n_prime_implicants 16
-id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
-id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
-id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
+iteration 1, generated 10, pruned 0/10 (threshold=33.958333333333336), id 8, generation 1, score 41.0/50.0 (82.0%), n_extra_edges 0, n_prime_implicants 10
+	pruned_ids=[]
+	score: n=12 min=28.38 median=33.96 mean=33.9 max=41
+	n_eff_edges: n=12 min=8 median=10 mean=10.17 max=13
+	n_eff_self_edges: n=12 min=0 median=0 mean=0.4167 max=1
+	n_prime_implicants: n=12 min=8 median=10.5 mean=10.67 max=16
+	n_extra_edges: n=12 min=0 median=0 mean=0 max=0
 
-# FINAL: /home/kyuhyongpark/Boolmore/boolmore/demo/demo_80_gen11.bnet
+iteration 2, generated 20, pruned 1/10 (threshold=40.75), id 11, generation 2, score 41.8/50.0 (83.5%), n_extra_edges 0, n_prime_implicants 13
+	pruned_ids=[18]
+	score: n=12 min=33.33 median=39.69 mean=38.73 max=41.75
+	n_eff_edges: n=12 min=8 median=11 mean=10.75 max=13
+	n_eff_self_edges: n=12 min=1 median=1 mean=1 max=1
+	n_prime_implicants: n=12 min=8 median=12.5 mean=12.83 max=20
+	n_extra_edges: n=12 min=0 median=0 mean=0 max=0
+
+iteration 3, generated 30, pruned 0/10 (threshold=41.75), id 23, generation 4, score 45.0/50.0 (90.0%), n_extra_edges 0, n_prime_implicants 15
+	pruned_ids=[]
+	score: n=12 min=33.58 median=41.75 mean=40.76 max=45
+	n_eff_edges: n=12 min=11 median=11.5 mean=11.75 max=13
+	n_eff_self_edges: n=12 min=1 median=1 mean=1 max=1
+	n_prime_implicants: n=12 min=11 median=13 mean=13.92 max=19
+	n_extra_edges: n=12 min=0 median=0 mean=0 max=0
+
+iteration 4, generated 40, pruned 3/10 (threshold=44.0), id 33, generation 5, score 45.0/50.0 (90.0%), n_extra_edges 0, n_prime_implicants 10
+	pruned_ids=[34, 39, 40]
+	score: n=12 min=32 median=42.83 mean=41.85 max=45
+	n_eff_edges: n=12 min=7 median=11 mean=10.42 max=13
+	n_eff_self_edges: n=12 min=1 median=1 mean=1 max=1
+	n_prime_implicants: n=12 min=7 median=11 mean=11.17 max=16
+	n_extra_edges: n=12 min=0 median=0 mean=0 max=0
+
+iteration 5, generated 50, pruned 3/10 (threshold=45.0), id 42, generation 6, score 45.8/50.0 (91.5%), n_extra_edges 0, n_prime_implicants 11
+	pruned_ids=[45, 47, 50]
+	score: n=12 min=35 median=44.08 mean=42.96 max=45.75
+	n_eff_edges: n=12 min=9 median=11 mean=11.17 max=14
+	n_eff_self_edges: n=12 min=0 median=1 mean=0.8333 max=1
+	n_prime_implicants: n=12 min=10 median=12 mean=12.75 max=19
+	n_extra_edges: n=12 min=0 median=0 mean=0 max=0
+
+iteration 6, generated 60, pruned 3/10 (threshold=45.75), id 52, generation 7, score 47.2/50.0 (94.5%), n_extra_edges 0, n_prime_implicants 13
+	pruned_ids=[53, 57, 60]
+	score: n=12 min=34 median=43.83 mean=43.35 max=47.25
+	n_eff_edges: n=12 min=9 median=10.5 mean=10.58 max=12
+	n_eff_self_edges: n=12 min=0 median=1 mean=0.8333 max=1
+	n_prime_implicants: n=12 min=10 median=12 mean=12.42 max=18
+	n_extra_edges: n=12 min=0 median=0 mean=0 max=0
+
+iteration 7, generated 70, pruned 1/10 (threshold=45.75), id 70, generation 9, score 48.0/50.0 (96.0%), n_extra_edges 0, n_prime_implicants 16
+	pruned_ids=[64]
+	score: n=12 min=40 median=45.69 mean=45.08 max=48
+	n_eff_edges: n=12 min=7 median=11.5 mean=11.5 max=13
+	n_eff_self_edges: n=12 min=0 median=1 mean=0.9167 max=1
+	n_prime_implicants: n=12 min=7 median=14 mean=13.75 max=18
+	n_extra_edges: n=12 min=0 median=0 mean=0 max=0
+
+iteration 8, generated 80, pruned 6/10 (threshold=47.75), id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
+	pruned_ids=[73, 74, 75, 76, 77, 78]
+	score: n=12 min=40 median=46.56 mean=45.66 max=49
+	n_eff_edges: n=12 min=10 median=11.5 mean=11.5 max=13
+	n_eff_self_edges: n=12 min=0 median=1 mean=0.9167 max=1
+	n_prime_implicants: n=12 min=10 median=15 mean=14 max=17
+	n_extra_edges: n=12 min=0 median=0 mean=0 max=0
+
+iteration 9, generated 90, pruned 6/10 (threshold=49.0), id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
+	pruned_ids=[83, 84, 85, 86, 88, 89]
+	score: n=12 min=31 median=47.5 mean=44.67 max=49
+	n_eff_edges: n=12 min=8 median=10 mean=10.58 max=14
+	n_eff_self_edges: n=12 min=0 median=1 mean=0.8333 max=1
+	n_prime_implicants: n=12 min=8 median=10.5 mean=11.42 max=16
+	n_extra_edges: n=12 min=0 median=0 mean=0 max=0
+
+iteration 10, generated 100, pruned 8/10 (threshold=49.0), id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implicants 10
+	pruned_ids=[93, 94, 95, 96, 97, 98, 99, 100]
+	score: n=12 min=31 median=46 mean=43.75 max=49
+	n_eff_edges: n=12 min=10 median=10 mean=10.25 max=11
+	n_eff_self_edges: n=12 min=0 median=1 mean=0.75 max=1
+	n_prime_implicants: n=12 min=10 median=11 mean=11.25 max=15
+	n_extra_edges: n=12 min=0 median=0 mean=0 max=0
+
+
+Exported generated model to /home/kyuhyongpark/Boolmore/boolmore/demo/demo_80_gen11.bnet
+Pickled primes to /home/kyuhyongpark/Boolmore/boolmore/demo/demo_80_gen11.pkl
+
+FINAL: /home/kyuhyongpark/Boolmore/boolmore/demo/demo_80_gen11.bnet
 # id: 80
 # generation: 11
 # score: 49.0 / 50.0 (98.0%)
@@ -104,9 +191,20 @@ id 80, generation 11, score 49.0/50.0 (98.0%), n_extra_edges 0, n_prime_implican
 # number of effective extra edges: 0
 # number of ineffective extra edges: 0
 # number of unadded edges: 0
-# targets,	factors
-# Coup_fti,	!Sp8
-# Emx2,	Coup_fti & !Fgf8 & !Sp8
-# Fgf8,	!Emx2 & Fgf8 & Sp8
-# Pax6,	!Coup_fti & Sp8
-# Sp8,	Fgf8
+targets,	factors
+Coup_fti,	!Sp8
+Emx2,	Coup_fti & !Fgf8 & !Sp8
+Fgf8,	!Emx2 & Fgf8 & Sp8
+Pax6,	!Coup_fti & Sp8
+Sp8,	Fgf8
+Ran 10 iterations, generated 100 models, mutated 4 functions. Elapsed: 0:00:05.160897
+
+-----modified functions-----
+start:Coup_fti,	!Fgf8
+final:Coup_fti,	!Sp8
+start:Emx2,	Coup_fti & !Fgf8 | !Sp8 | !Pax6
+final:Emx2,	Coup_fti & !Fgf8 & !Sp8
+start:Fgf8,	Sp8 | !Emx2
+final:Fgf8,	!Emx2 & Fgf8 & Sp8
+start:Pax6,	!Coup_fti & Sp8 | !Emx2
+final:Pax6,	!Coup_fti & Sp8

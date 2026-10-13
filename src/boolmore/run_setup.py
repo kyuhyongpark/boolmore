@@ -135,7 +135,16 @@ def build_evaluator(
         raise ValueError(f"Unsupported run type: {run_type}")
 
     if verbose:
-        print("Experimental data loaded.\n")
+        print("Experimental data loaded.")
+        print(f"experiments: {len(exps)}")
+        print(f"total weight: {sum(exp.weight for exp in exps)}")
+        if run_type == "NAV":
+            print(f"distinct interventions: {len({exp.fixes for exp in exps})}")
+            outcomes: dict[str, int] = {}
+            for exp in exps:
+                outcomes[exp.outcome] = outcomes.get(exp.outcome, 0) + 1
+            print(f"outcomes: {outcomes}")
+        print()
 
     return Evaluator(
         base=base_model,

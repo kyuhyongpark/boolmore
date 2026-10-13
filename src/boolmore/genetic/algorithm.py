@@ -1,5 +1,6 @@
 import random
-from dataclasses import dataclass
+from collections.abc import Callable
+from dataclasses import dataclass, field
 
 from joblib import Parallel, delayed
 import numpy as np
@@ -85,6 +86,9 @@ class GAState:
     iteration: int
     population: list[Candidate]
     generated: int = 0
+    score_threshold: float | None = None
+    pruned_ids: list[int] = field(default_factory=list)
+    n_evaluated: int = 0
 
 class GeneticAlgorithm:
     def __init__(
@@ -141,6 +145,8 @@ class GeneticAlgorithm:
         iteration = state.iteration + 1
         population = self.selector.select_survivors(state.population)
         generated = state.generated
+        pruned_ids: list[int] = []
+        n_evaluated = 0
 
         score_threshold = None
         if (
@@ -164,6 +170,12 @@ class GeneticAlgorithm:
             )
             population.extend(candidates)
             generated += len(candidates)
+            n_evaluated += len(candidates)
+            pruned_ids.extend(
+                c.id
+                for c in candidates
+                if c.eval_result is not None and c.eval_result.is_upper_bound
+            )
 
         # total population should be keep + per_iter
         offsprings = self.reproducer.asexual(
@@ -176,15 +188,23 @@ class GeneticAlgorithm:
         )
         population.extend(candidates)
         generated += len(candidates)
+        n_evaluated += len(candidates)
+        pruned_ids.extend(
+            c.id
+            for c in candidates
+            if c.eval_result is not None and c.eval_result.is_upper_bound
+        )
 
         # Rank the population
         population = sort_population(population, self.config.order_by)
-        best = population[0]
 
         return GAState(
             iteration=iteration,
             population=population,
-            generated=generated
+            generated=generated,
+            score_threshold=score_threshold,
+            pruned_ids=pruned_ids,
+            n_evaluated=n_evaluated,
             )
 
 
@@ -194,6 +214,7 @@ def ga_main(
         selector:Selector,
         reproducer:Reproducer,
         config:GAConfig,
+        on_generation: Callable[[GAState], None] | None = None,
         ) -> list[GAState]:
     """
     Main part of the genetic algorithm.
@@ -210,8 +231,8 @@ def ga_main(
         reproducer to generate offsprings
     config : GAConfig
         configuration
-    core : int, optional
-        number of cores to use, by default 1
+    on_generation : callable, optional
+        called after each iteration with the new ``GAState`` (e.g. for logging)
 
     Returns
     -------
@@ -238,12 +259,21 @@ def ga_main(
         state = ga.next_state(states[-1])
         states.append(state)
 
-        print(
-            f"iteration {state.iteration}, "
-            f"generated {state.generated}, "
-            f"{state.population[0].summary(config.order_by)}"
+        parts = [
+            f"iteration {state.iteration}",
+            f"generated {state.generated}",
+        ]
+        if state.score_threshold is not None or state.pruned_ids:
+            parts.append(
+                f"pruned {len(state.pruned_ids)}/{state.n_evaluated} "
+                f"(threshold={state.score_threshold})"
             )
-        
+        parts.append(state.population[0].summary(config.order_by))
+        print(", ".join(parts))
+
+        if on_generation is not None:
+            on_generation(state)
+
         if (
             config.stop_if_max
             and state.population[0].eval_result.score == state.population[0].eval_result.max_score

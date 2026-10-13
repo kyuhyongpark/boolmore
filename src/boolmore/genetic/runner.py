@@ -1,11 +1,15 @@
 """GA orchestration: config bootstrap, logging, and model export."""
 
+from __future__ import annotations
+
 import datetime
 import os
+import statistics
+import sys
+from typing import TextIO
 
 from boolmore.boolean_functions import prime2bnet
 from boolmore.evaluation.metrics import compare_model_functions
-from boolmore.evaluation.score import format_score
 from boolmore.io.export import export_candidate
 from boolmore.io.paths import project_root
 from boolmore.genetic.algorithm import GAState, ga_main
@@ -19,15 +23,79 @@ from boolmore.run_setup import (
     build_run_config,
 )
 
+_DISTRIBUTION_ATTRS = (
+    "score",
+    "n_eff_edges",
+    "n_eff_self_edges",
+    "n_prime_implicants",
+    "n_extra_edges",
+)
 
-def log_candidate(fp, candidate: Candidate, label, path):
-    fp.write(f"\n# {label}: {os.path.abspath(path)}\n")
-    fp.write(candidate.info() + "\n")
-    fp.write("# targets,\tfactors\n")
 
-    bnet = candidate.model.bnet
-    for line in bnet.splitlines():
-        fp.write("# " + line + "\n")
+class RunLogger:
+    """Mirror every stdout write to a log file."""
+
+    def __init__(self, path: str):
+        self.path = path
+        self._fp: TextIO = open(path, "w", encoding="utf-8")
+        self._stdout = sys.stdout
+        sys.stdout = self  # type: ignore[assignment]
+
+    def write(self, data: str) -> int:
+        self._stdout.write(data)
+        self._fp.write(data)
+        self._fp.flush()
+        return len(data)
+
+    def flush(self) -> None:
+        self._stdout.flush()
+        self._fp.flush()
+
+    def isatty(self) -> bool:
+        return self._stdout.isatty()
+
+    def close(self) -> None:
+        if sys.stdout is self:
+            sys.stdout = self._stdout
+        self._fp.close()
+
+
+def _fmt_num(value: float | int) -> str:
+    if isinstance(value, float):
+        return f"{value:.4g}"
+    return str(value)
+
+
+def log_candidate(candidate: Candidate, label: str, path: str) -> None:
+    """Print candidate path, eval/model summary, and bnet rules."""
+    print(f"\n{label}: {os.path.abspath(path)}")
+    print(candidate.info())
+    print("targets,\tfactors")
+    print(candidate.model.bnet)
+
+
+def _format_dist(values: list[float | int]) -> str:
+    if not values:
+        return "n=0"
+    return (
+        f"n={len(values)} "
+        f"min={_fmt_num(min(values))} "
+        f"median={_fmt_num(statistics.median(values))} "
+        f"mean={_fmt_num(statistics.mean(values))} "
+        f"max={_fmt_num(max(values))}"
+    )
+
+
+def format_generation_stats(state: GAState, *, indent: str = "\t") -> str:
+    """Pruned ids + score/complexity distributions (no item_scores)."""
+    lines = [f"pruned_ids={state.pruned_ids}"]
+    results = [
+        c.eval_result for c in state.population if c.eval_result is not None
+    ]
+    for attr in _DISTRIBUTION_ATTRS:
+        values = [getattr(r, attr) for r in results]
+        lines.append(f"{attr}: {_format_dist(values)}")
+    return "\n".join(indent + line for line in lines)
 
 
 def export_models(
@@ -144,9 +212,6 @@ def run_ga(
         nav_method=nav_method,
     )
 
-    evaluator = build_evaluator(config_dict, verbose=True)
-    ga = build_ga_config(config_dict, seed=seed, core=core)
-
     data_path = (project_root() / config_dict["data"]).resolve()
     base_path = (project_root() / config_dict["base"]).resolve()
     start_path = (project_root() / config_dict["start"]).resolve()
@@ -159,98 +224,106 @@ def run_ga(
     if export_name is None:
         export_name = run_name
 
-    # ---------- Load starting model ----------
-    if start_path == base_path:
-        start_model = evaluator.base
-    else:
-        print(f"Loading starting model from {start_path}")
-        start_model = load_model(start_path, base=evaluator.base)
-        print("Starting model loaded.")
+    logger = RunLogger(LOG)
+    try:
+        ga = build_ga_config(config_dict, seed=seed, core=core)
 
-    # ---------- Evaluate base and start models ----------
-    start_single = datetime.datetime.now()
-    base_result = evaluator.evaluate(evaluator.base)
-    base = Candidate(model=evaluator.base, eval_result=base_result)
-    end_single = datetime.datetime.now()
-    print(base.model.info())
-    print(f"{format_score(base.eval_result)}\n")
-    print(
-        f"\tElapsed time for single evaluation: {end_single-start_single}\n"
-        f"\tEstimated GA evaluation time: {(end_single-start_single)*ga.total_iter*ga.per_iter/core}\n"
+        # ---------- General setup (before any loading) ----------
+        print(f"RUN_TYPE={config_dict['run_type']!r}")
+        print(f"DATA: {data_path}")
+        print(f"BASE: {base_path}")
+        print(f"START: {start_path}")
+        print(f"HIERARCHY={config_dict['hierarchy']}")
+        print(f"NAV_METHOD={config_dict.get('nav_method', 'min_traps')!r}")
+        print(f"LDOI_PRUNE={config_dict.get('ldoi_prune', True)}")
+        print(f"DEFAULT_SOURCES={config_dict.get('default_sources', {})}")
+        print(f"GENERATE_DEFAULTS={config_dict.get('generate_defaults', True)}")
+        print(f"CONSTRAINTS={config_dict.get('constraints')}")
+        print(f"EDGE_POOL={config_dict.get('edge_pool')}")
+        print()
+        print(f"seed: {ga.seed}")
+        print(f"stop if max: {ga.stop_if_max}")
+        print(f"starting gen: {ga.starting_gen}")
+        print(f"total iterations: {ga.total_iter}")
+        print(f"per iteration: {ga.per_iter}")
+        print(f"keep: {ga.keep}")
+        print(f"mix: {ga.mix}")
+        print(f"prob: {ga.prob}")
+        print(f"edge prob: {ga.edge_prob}")
+        print(f"order by: {ga.order_by}")
+        print(f"{core=}")
+        print()
+
+        # Loads base then experimental data (prints load messages + data stats)
+        evaluator = build_evaluator(config_dict, verbose=True)
+
+        # ---------- Evaluate and print base (same detail as START/FINAL) ----------
+        start_single = datetime.datetime.now()
+        base_result = evaluator.evaluate(evaluator.base)
+        base = Candidate(model=evaluator.base, eval_result=base_result)
+        end_single = datetime.datetime.now()
+        log_candidate(base, "BASE", str(base_path))
+        print(
+            f"Elapsed time for single evaluation: {end_single-start_single}\n"
+            f"Estimated GA evaluation time: "
+            f"{(end_single-start_single)*ga.total_iter*ga.per_iter/core}\n"
         )
 
-    start_result = evaluator.evaluate(start_model, model_id=0)
-    start = Candidate(start_model, 0, ga.starting_gen, start_result)
-    print(start.model.info())
-    print(format_score(start.eval_result))
-    print()
+        # ---------- Load and evaluate starting model ----------
+        if start_path == base_path:
+            print("Starting model is the base model.")
+            start_model = evaluator.base
+        else:
+            print(f"Loading starting model from {start_path}")
+            start_model = load_model(start_path, base=evaluator.base)
+            print("Starting model loaded.")
 
-    # ---------- Run genetic algorithm ----------
-    start_time = datetime.datetime.now()
+        start_result = evaluator.evaluate(start_model, model_id=0)
+        start = Candidate(start_model, 0, ga.starting_gen, start_result)
+        log_candidate(start, "START", str(start_path))
+        print()
 
-    selector = Selector(keep=ga.keep, order_by=ga.order_by)
-    reproducer = Reproducer(selector=selector, constraints=evaluator.constraints)
-    states = ga_main(start, evaluator, selector, reproducer, ga)
+        # ---------- Run genetic algorithm ----------
+        start_time = datetime.datetime.now()
+        print(f"start_time: {start_time}\n")
 
-    end_time = datetime.datetime.now()
+        def on_generation(state: GAState) -> None:
+            print(format_generation_stats(state))
+            print()
 
-    print()
-    export_models(states, export_name, export_top, export_thresh, export_same)
+        selector = Selector(keep=ga.keep, order_by=ga.order_by)
+        reproducer = Reproducer(selector=selector, constraints=evaluator.constraints)
+        states = ga_main(
+            start, evaluator, selector, reproducer, ga, on_generation=on_generation
+        )
 
-    final = states[-1].population[0]
+        end_time = datetime.datetime.now()
 
-    # ---------- Write log ----------
-    with open(LOG, "w") as fp:
-        fp.write(f"# RUN_TYPE={evaluator.run_type!r}\n")
-        fp.write(f"# DATA: {data_path}\n")
-        fp.write(f"# HIERARCHY={evaluator.hierarchy}\n")
-        fp.write(f"# NAV_METHOD={evaluator.nav_method!r}\n")
-        fp.write(f"# LDOI_PRUNE={evaluator.ldoi_prune}\n")
-        fp.write(f"# DEFAULT_SOURCES={evaluator.default_sources}\n")
-        fp.write(f"# GENERATE_DEFAULTS={evaluator.generate_defaults}\n")
-        fp.write(f"# CONSTRAINTS={evaluator.constraints}\n")
-        fp.write(f"# EDGE_POOL={evaluator.base.edge_pool}\n\n")
+        print()
+        export_models(states, export_name, export_top, export_thresh, export_same)
 
-        fp.write(f"# seed: {ga.seed}\n")
-        fp.write(f"# stop if max: {ga.stop_if_max}\n")
-        fp.write(f"# starting gen: {ga.starting_gen}\n")
-        fp.write(f"# total iterations: {ga.total_iter}\n")
-        fp.write(f"# per iteration: {ga.per_iter}\n")
-        fp.write(f"# keep: {ga.keep}\n")
-        fp.write(f"# mix: {ga.mix}\n")
-        fp.write(f"# prob: {ga.prob}\n")
-        fp.write(f"# edge prob: {ga.edge_prob}\n")
-        fp.write(f"# order by: {ga.order_by}\n\n")
+        final = states[-1].population[0]
+        log_candidate(
+            final,
+            "FINAL",
+            f"{export_name}_{final.id}_gen{final.generation}.bnet",
+        )
 
-        fp.write(f"# {core=}\n\n")
+        # ---------- Analyze and report results ----------
+        differences = compare_model_functions(start.model, final.model)
 
-        log_candidate(fp, base, "BASE", str(base_path))
-        log_candidate(fp, start, "START", str(start_path))
+        print(
+            f"Ran {len(states)-1} iterations, generated {states[-1].generated} models, "
+            f"mutated {len(differences)} functions. "
+            f"Elapsed: {end_time-start_time}"
+        )
+        print()
 
-        fp.write(f"\n# {start_time=}\n")
-        fp.write(f"# {end_time=}\n")
-        fp.write(f"# elapsed time: {end_time-start_time}\n\n")
+        print("-----modified functions-----")
+        for node, (prime1, prime2) in differences.items():
+            print("start:" + prime2bnet(node, prime1))
+            print("final:" + prime2bnet(node, prime2))
 
-        for state in states[1:]:
-            candidate = state.population[0]
-            fp.write(candidate.summary(ga.order_by) + "\n")
-        log_candidate(fp, final, "FINAL", f"{export_name}_{final.id}_gen{final.generation}.bnet")
-
-    # ---------- Analyze and report results ----------
-    differences = compare_model_functions(start.model, final.model)
-
-    print(f"""
-        The algorithm ran for {len(states)-1} iterations,
-        generating {states[-1].generated} models.
-        Mutated {len(differences)} functions, 
-        and increased score from {round(start.eval_result.score,2)} / {start.eval_result.max_score} ({round(start.eval_result.score/start.eval_result.max_score*100,1)}%)
-        to {round(final.eval_result.score,2)} / {final.eval_result.max_score} ({round(final.eval_result.score/final.eval_result.max_score*100,1)}%).\n
-        Total elapsed time: {end_time-start_time}""")
-    print()
-
-    print("-----modified functions-----")
-    for node, (prime1, prime2) in differences.items():
-        print("start:" + prime2bnet(node, prime1))
-        print("final:" + prime2bnet(node, prime2))
-
-    return base, start, states
+        return base, start, states
+    finally:
+        logger.close()
