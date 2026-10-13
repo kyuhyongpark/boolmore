@@ -205,6 +205,7 @@ def run_ga(
         fp.write(f"# DATA: {data_path}\n")
         fp.write(f"# HIERARCHY={evaluator.hierarchy}\n")
         fp.write(f"# NAV_METHOD={evaluator.nav_method!r}\n")
+        fp.write(f"# LDOI_PRUNE={evaluator.ldoi_prune}\n")
         fp.write(f"# DEFAULT_SOURCES={evaluator.default_sources}\n")
         fp.write(f"# GENERATE_DEFAULTS={evaluator.generate_defaults}\n")
         fp.write(f"# CONSTRAINTS={evaluator.constraints}\n")

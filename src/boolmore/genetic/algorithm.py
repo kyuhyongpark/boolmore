@@ -106,9 +106,19 @@ class GeneticAlgorithm:
             population.append(start)
         return population
 
-    def new_candidates(self, offsprings:list[Candidate], evaluator:Evaluator)-> list[Candidate]:
+    def new_candidates(
+        self,
+        offsprings: list[Candidate],
+        evaluator: Evaluator,
+        score_threshold: float | None = None,
+    ) -> list[Candidate]:
         if self.config.core > 1:
-            results = Parallel(n_jobs=self.config.core)(delayed(evaluator.evaluate)(candidate.model, candidate.id) for candidate in offsprings)
+            results = Parallel(n_jobs=self.config.core)(
+                delayed(evaluator.evaluate)(
+                    candidate.model, candidate.id, score_threshold
+                )
+                for candidate in offsprings
+            )
             new_candidates = []
             for result in results:
                 for candidate in offsprings:
@@ -120,7 +130,9 @@ class GeneticAlgorithm:
             # single core
             new_candidates = []
             for candidate in offsprings:
-                result = evaluator.evaluate(candidate.model, candidate.id)
+                result = evaluator.evaluate(
+                    candidate.model, candidate.id, score_threshold
+                )
                 candidate.eval_result = result
                 new_candidates.append(candidate)
             return new_candidates
@@ -130,10 +142,26 @@ class GeneticAlgorithm:
         population = self.selector.select_survivors(state.population)
         generated = state.generated
 
+        score_threshold = None
+        if (
+            self.evaluator.ldoi_prune
+            and self.evaluator.nav_method == "min_traps"
+            and population
+        ):
+            survivor_scores = [
+                c.eval_result.score
+                for c in population
+                if c.eval_result is not None
+            ]
+            if survivor_scores:
+                score_threshold = min(survivor_scores)
+
         if iteration > 1:
             # mix the good ones
             mixed_offsprings = self.reproducer.sexual(population, self.config.mix)
-            candidates = self.new_candidates(mixed_offsprings, self.evaluator)
+            candidates = self.new_candidates(
+                mixed_offsprings, self.evaluator, score_threshold
+            )
             population.extend(candidates)
             generated += len(candidates)
 
@@ -143,7 +171,9 @@ class GeneticAlgorithm:
             prob=self.config.prob_list[iteration-1],
             edge_prob=self.config.edge_prob,
             n = self.config.keep + self.config.per_iter - len(population))
-        candidates = self.new_candidates(offsprings, self.evaluator)
+        candidates = self.new_candidates(
+            offsprings, self.evaluator, score_threshold
+        )
         population.extend(candidates)
         generated += len(candidates)
 

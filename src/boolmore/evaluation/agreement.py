@@ -53,8 +53,11 @@ def get_agreements(
         value : dict[FixesType, tuple]
             data for the node
             key : FixesType
-            value : tuple[int, float, str, float, float]
-                data for given fixes - (id, max_score, outcome_value, predict_value, agreement)
+            value : tuple[int, float, str, float | None, float]
+                data for given fixes - (id, max_score, outcome_value,
+                predict_value, agreement). ``predict_value`` may be
+                ``None`` (``?``) for LDOI upper-bound scoring; then
+                ``agreement`` is ``1.0``.
 
     """
     agreements = {}
@@ -67,8 +70,12 @@ def get_agreements(
 
         predict_value = predictions[fixes].average_values[observed_node]
 
+        # Unknown / free prediction (``?``): optimistic full agreement for
+        # upper-bound scoring. Forced floats use the usual agreement curves.
+        if predict_value is None:
+            agreement = 1.0
         # experiment showed (ON)
-        if outcome_value == 'ON':
+        elif outcome_value == 'ON':
             agreement = max(line(predict_value,(0,0),(1,1)),
                             line(predict_value,(1,1),(1.0001,1)))
         # experiment showed (Some/ON)

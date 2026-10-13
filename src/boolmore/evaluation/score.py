@@ -9,6 +9,7 @@ from typing import Any
 from boolmore.model import Model
 from boolmore.evaluation.metrics import get_model_complexity
 from boolmore.evaluation.constraint import check_model_constraints
+from boolmore.inference.prediction import get_NAV_upper_bound_prediction
 from boolmore.types import Assignment
 
 
@@ -73,6 +74,9 @@ class EvaluationResult:
         Whether the model satisfies all configured constraints.
     item_scores : list of EvaluationItemScore
         Per-experiment score details.
+    is_upper_bound : bool
+        True when ``score`` is an LDOI optimistic upper bound and full
+        ``min_traps`` evaluation was skipped.
     """
 
     model_id: int
@@ -84,6 +88,7 @@ class EvaluationResult:
     n_extra_edges: int
     satisfies_constraints: bool
     item_scores: list[EvaluationItemScore]
+    is_upper_bound: bool = False
 
 
 def get_model_score(
@@ -128,6 +133,10 @@ class Evaluator:
         Whether NAV scoring applies intervention hierarchy.
     nav_method : str, default "min_traps"
         NAV prediction method (``"min_traps"`` or ``"ldoi"``).
+    ldoi_prune : bool, default True
+        When True and ``nav_method="min_traps"``, optionally skip full
+        trap-space scoring if an LDOI optimistic upper bound is already
+        below ``score_threshold``.
     default_sources : dict of str to int, optional
         Default source-node settings defining the top of the hierarchy.
     generate_defaults : bool, default False
@@ -145,6 +154,7 @@ class Evaluator:
         run_type: str,
         hierarchy: bool = True,
         nav_method: str = "min_traps",
+        ldoi_prune: bool = True,
         default_sources: dict[str, int] | None = None,
         generate_defaults: bool = False,
     ):
@@ -156,10 +166,16 @@ class Evaluator:
         self.run_type = run_type
         self.hierarchy = hierarchy
         self.nav_method = nav_method
+        self.ldoi_prune = ldoi_prune
         self.default_sources = dict(default_sources) if default_sources is not None else {}
         self.generate_defaults = generate_defaults
 
-    def evaluate(self, model: Model, model_id: int = -1) -> EvaluationResult:
+    def evaluate(
+        self,
+        model: Model,
+        model_id: int = -1,
+        score_threshold: float | None = None,
+    ) -> EvaluationResult:
         """Score ``model`` and return an aggregated :class:`EvaluationResult`.
 
         Parameters
@@ -168,19 +184,50 @@ class Evaluator:
             Model to evaluate.
         model_id : int, default -1
             Identifier stored on the result (e.g. GA candidate id).
+        score_threshold : float or None, default None
+            When set, ``nav_method`` is ``"min_traps"``, and
+            ``ldoi_prune`` is True, compute an LDOI optimistic upper
+            bound first. If that bound is strictly below the threshold,
+            skip full ``min_traps`` evaluation and return the bound.
 
         Returns
         -------
         EvaluationResult
         """
-        predictions = self.prediction_fn(model.primes, self.experiments)
-        item_scores = self.score_fn(self.experiments, predictions)
-        max_score, score = get_model_score(item_scores)
         complexity = get_model_complexity(model)
         satisfies_constraints = check_model_constraints(model, self.constraints)
 
         if not satisfies_constraints:
             print("ERROR: model does not follow constraints")
+
+        if (
+            self.ldoi_prune
+            and self.nav_method == "min_traps"
+            and score_threshold is not None
+        ):
+            ub_predictions = get_NAV_upper_bound_prediction(
+                model.primes, self.experiments
+            )
+            ub_item_scores = self.score_fn(self.experiments, ub_predictions)
+            max_score, upper_bound = get_model_score(ub_item_scores)
+
+            if upper_bound < score_threshold:
+                return EvaluationResult(
+                    model_id=model_id,
+                    max_score=max_score,
+                    score=upper_bound,
+                    n_eff_edges=complexity["n_eff_edges"],
+                    n_eff_self_edges=complexity["n_eff_self_edges"],
+                    n_prime_implicants=complexity["n_prime_implicants"],
+                    n_extra_edges=complexity["n_extra_edges"],
+                    satisfies_constraints=satisfies_constraints,
+                    item_scores=ub_item_scores,
+                    is_upper_bound=True,
+                )
+
+        predictions = self.prediction_fn(model.primes, self.experiments)
+        item_scores = self.score_fn(self.experiments, predictions)
+        max_score, score = get_model_score(item_scores)
 
         return EvaluationResult(
             model_id=model_id,
@@ -192,6 +239,7 @@ class Evaluator:
             n_extra_edges=complexity["n_extra_edges"],
             satisfies_constraints=satisfies_constraints,
             item_scores=item_scores,
+            is_upper_bound=False,
         )
 
 

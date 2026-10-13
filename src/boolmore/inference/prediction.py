@@ -52,12 +52,14 @@ class NAVPrediction:
     ----------
     fixes : Assignment
         Intervention assignment ``((node, value), ...)``.
-    average_values : dict of str to float
+    average_values : dict of str to float or None
         Average attractor value of each node in ``[0, 1]``.
+        ``None`` means unknown / free (``?``), used only by the LDOI
+        upper-bound path.
     """
 
     fixes: Assignment
-    average_values: dict[str, float]
+    average_values: dict[str, float | None]
 
 
 def _fix_constants(primes: dict, fixed: dict[str, int]) -> dict:
@@ -311,6 +313,45 @@ def _nav_from_ldoi(
         node: float(constants[node]) if node in constants else 0.5
         for node in primes
     }
+
+
+def _nav_from_ldoi_partial(
+    primes,
+    perturbation: dict[str, int],
+) -> dict[str, float | None]:
+    """LDOI prediction with free nodes left as ``None`` (``?``).
+
+    Forced nodes map to ``0.0`` / ``1.0``; nodes outside the LDOI are
+    ``None`` so an optimistic upper-bound score can treat them as a
+    perfect match.
+    """
+    constants = logical_domain_of_influence(primes, perturbation)
+    return {
+        node: float(constants[node]) if node in constants else None
+        for node in primes
+    }
+
+
+def get_NAV_upper_bound_prediction(
+    primes,
+    experiments: list[NAVExperiment],
+) -> dict[Assignment, NAVPrediction]:
+    """LDOI-based partial predictions for optimistic upper-bound scoring.
+
+    Same unique-intervention loop as :func:`get_NAV_prediction`, but free
+    (non-LDOI) nodes are ``None`` instead of ``0.5``.
+    """
+    interventions = sorted({exp.fixes for exp in experiments})
+
+    predictions: dict[Assignment, NAVPrediction] = {}
+    for fixes in interventions:
+        perturbation = assignment_to_dict(fixes)
+        predictions[fixes] = NAVPrediction(
+            fixes=fixes,
+            average_values=_nav_from_ldoi_partial(primes, perturbation),
+        )
+
+    return predictions
 
 
 def get_NAV_prediction(
