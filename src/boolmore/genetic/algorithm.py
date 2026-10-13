@@ -259,17 +259,15 @@ def ga_main(
         state = ga.next_state(states[-1])
         states.append(state)
 
-        parts = [
-            f"iteration {state.iteration}",
-            f"generated {state.generated}",
-        ]
-        if state.score_threshold is not None or state.pruned_ids:
-            parts.append(
-                f"pruned {len(state.pruned_ids)}/{state.n_evaluated} "
-                f"(threshold={state.score_threshold})"
+        print(
+            format_iteration_summary(
+                state,
+                config.order_by,
+                total_iter=config.total_iter,
+                per_iter=config.per_iter,
+                starting_gen=config.starting_gen,
             )
-        parts.append(state.population[0].summary(config.order_by))
-        print(", ".join(parts))
+        )
 
         if on_generation is not None:
             on_generation(state)
@@ -282,6 +280,58 @@ def ga_main(
             break
 
     return states
+
+
+def format_iteration_summary(
+    state: GAState,
+    order_by: list[str],
+    *,
+    total_iter: int,
+    per_iter: int,
+    starting_gen: int = 0,
+) -> str:
+    """One-line console summary for a finished GA iteration."""
+    best = state.population[0]
+    result = best.eval_result
+    if result is None:
+        raise ValueError("best candidate has no evaluation result")
+
+    # ~per_iter new models each iteration; ids are 1..generated.
+    max_generated = total_iter * per_iter
+    # Up to +1 (asexual) on iter 1, then up to +2/iter (sexual then asexual).
+    max_gen = starting_gen + max(1, 2 * total_iter - 1)
+
+    iter_w = len(str(total_iter))
+    gen_w = len(str(max_generated))
+    id_w = len(str(max_generated))
+    generation_w = len(str(max_gen))
+    prune_w = len(str(per_iter))
+
+    parts = [
+        f"iter {state.iteration:>{iter_w}}/{total_iter}",
+        f"generated {state.generated:>{gen_w}}",
+    ]
+
+    if state.score_threshold is not None or state.pruned_ids:
+        if state.score_threshold is None:
+            thresh = "n/a"
+        else:
+            thresh = f"{state.score_threshold:.2f}"
+        parts.append(
+            f"pruned {len(state.pruned_ids):>{prune_w}}/{state.n_evaluated:<{prune_w}} "
+            f"(thresh {thresh})"
+        )
+
+    pct = round(result.score / result.max_score * 100, 1) if result.max_score else 0.0
+    parts.extend([
+        f"best id {best.id:>{id_w}}",
+        f"gen {best.generation:>{generation_w}}",
+        f"score {round(result.score, 1)}/{result.max_score:g} ({pct}%)",
+    ])
+    for attr in order_by:
+        parts.append(f"{attr} {getattr(result, attr)}")
+
+    return " | ".join(parts)
 
 
 def __getattr__(name: str):

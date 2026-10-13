@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
+import csv
 import datetime
 import os
-import statistics
 import sys
 from typing import TextIO
 
@@ -23,12 +23,18 @@ from boolmore.run_setup import (
     build_run_config,
 )
 
-_DISTRIBUTION_ATTRS = (
+_EVAL_CSV_FIELDS = (
+    "iteration",
+    "id",
+    "generation",
     "score",
+    "max_score",
+    "is_upper_bound",
+    "n_prime_implicants",
     "n_eff_edges",
     "n_eff_self_edges",
-    "n_prime_implicants",
     "n_extra_edges",
+    "satisfies_constraints",
 )
 
 
@@ -60,12 +66,6 @@ class RunLogger:
         self._fp.close()
 
 
-def _fmt_num(value: float | int) -> str:
-    if isinstance(value, float):
-        return f"{value:.4g}"
-    return str(value)
-
-
 def log_candidate(candidate: Candidate, label: str, path: str) -> None:
     """Print candidate path, eval/model summary, and bnet rules."""
     print(f"\n{label}: {os.path.abspath(path)}")
@@ -74,28 +74,36 @@ def log_candidate(candidate: Candidate, label: str, path: str) -> None:
     print(candidate.model.bnet)
 
 
-def _format_dist(values: list[float | int]) -> str:
-    if not values:
-        return "n=0"
-    return (
-        f"n={len(values)} "
-        f"min={_fmt_num(min(values))} "
-        f"median={_fmt_num(statistics.median(values))} "
-        f"mean={_fmt_num(statistics.mean(values))} "
-        f"max={_fmt_num(max(values))}"
-    )
+def init_eval_csv(path: str) -> None:
+    """Create/overwrite the per-model eval CSV with a header row."""
+    with open(path, "w", newline="", encoding="utf-8") as fp:
+        csv.DictWriter(fp, fieldnames=_EVAL_CSV_FIELDS).writeheader()
 
 
-def format_generation_stats(state: GAState, *, indent: str = "\t") -> str:
-    """Pruned ids + score/complexity distributions (no item_scores)."""
-    lines = [f"pruned_ids={state.pruned_ids}"]
-    results = [
-        c.eval_result for c in state.population if c.eval_result is not None
-    ]
-    for attr in _DISTRIBUTION_ATTRS:
-        values = [getattr(r, attr) for r in results]
-        lines.append(f"{attr}: {_format_dist(values)}")
-    return "\n".join(indent + line for line in lines)
+def append_generation_evals(path: str, state: GAState) -> None:
+    """Append one summary row per model in ``state.population`` (no item_scores)."""
+    rows = []
+    for candidate in state.population:
+        result = candidate.eval_result
+        if result is None:
+            continue
+        rows.append({
+            "iteration": state.iteration,
+            "id": candidate.id,
+            "generation": candidate.generation,
+            "score": result.score,
+            "max_score": result.max_score,
+            "is_upper_bound": result.is_upper_bound,
+            "n_prime_implicants": result.n_prime_implicants,
+            "n_eff_edges": result.n_eff_edges,
+            "n_eff_self_edges": result.n_eff_self_edges,
+            "n_extra_edges": result.n_extra_edges,
+            "satisfies_constraints": result.satisfies_constraints,
+        })
+    if not rows:
+        return
+    with open(path, "a", newline="", encoding="utf-8") as fp:
+        csv.DictWriter(fp, fieldnames=_EVAL_CSV_FIELDS).writerows(rows)
 
 
 def export_models(
@@ -178,6 +186,7 @@ def run_ga(
     run_name : str | None
         models are exported as (run_name)_id_gen.bnet
         log is exported as (run_name)_log.txt
+        per-model eval summaries are exported as (run_name)_evals.csv
         if None, takes the start_model name
     export_top : int
         export top models from each generation
@@ -220,6 +229,7 @@ def run_ga(
         run_name = start_path.stem
 
     LOG = run_name + "_log.txt"
+    EVAL_CSV = run_name + "_evals.csv"
 
     if export_name is None:
         export_name = run_name
@@ -227,6 +237,7 @@ def run_ga(
     logger = RunLogger(LOG)
     try:
         ga = build_ga_config(config_dict, seed=seed, core=core)
+        init_eval_csv(EVAL_CSV)
 
         # ---------- General setup (before any loading) ----------
         print(f"RUN_TYPE={config_dict['run_type']!r}")
@@ -288,14 +299,14 @@ def run_ga(
         print(f"start_time: {start_time}\n")
 
         def on_generation(state: GAState) -> None:
-            print(format_generation_stats(state))
-            print()
+            append_generation_evals(EVAL_CSV, state)
 
         selector = Selector(keep=ga.keep, order_by=ga.order_by)
         reproducer = Reproducer(selector=selector, constraints=evaluator.constraints)
         states = ga_main(
             start, evaluator, selector, reproducer, ga, on_generation=on_generation
         )
+        print(f"Eval summaries: {os.path.abspath(EVAL_CSV)}")
 
         end_time = datetime.datetime.now()
 
