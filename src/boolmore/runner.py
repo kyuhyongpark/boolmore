@@ -108,7 +108,7 @@ def append_generation_evals(path: str, state: GAState) -> None:
 
 def export_models(
         states: list[GAState],
-        export_name: str,
+        run_name: str,
         export_top: int = 0,
         export_thresh: float = 0.0,
         export_same: bool = False,
@@ -116,20 +116,20 @@ def export_models(
     final = states[-1].population[0]
 
     # Always export the final best model
-    export_candidate(final, export_name)
+    export_candidate(final, run_name)
 
     # Export top models from each generation
     if export_top:
         for state in states[1:]:
             for candidate in state.population[:export_top]:
                 if candidate.eval_result.score > export_thresh:
-                    export_candidate(candidate, export_name)
+                    export_candidate(candidate, run_name)
 
     # Export all models tied with the best model in the final generation
     if export_same:
         for candidate in states[-1].population:
             if candidate.eval_result.score == final.eval_result.score:
-                export_candidate(candidate, export_name)
+                export_candidate(candidate, run_name)
 
 
 def run_ga(
@@ -145,7 +145,6 @@ def run_ga(
         run_name:str|None=None,
         export_top:int=0,
         export_thresh:float=0.0,
-        export_name:str|None=None,
         export_same:bool=False,
         core:int=1,
         )-> tuple[Candidate, Candidate, list[GAState]]:
@@ -184,16 +183,16 @@ def run_ga(
     seed : int | None
         random seed for reproducibility
     run_name : str | None
-        models are exported as (run_name)_id_gen.bnet
-        log is exported as (run_name)_log.txt
-        per-model eval summaries are exported as (run_name)_evals.csv
-        if None, takes the start_model name
+        Prefix for all run outputs: ``(run_name)_log.txt``,
+        ``(run_name)_evals.csv``, and exported ``.bnet`` / ``.pkl`` /
+        ``_score.csv`` files. If None, defaults to
+        ``{start_stem}_{YYYYMMDD_HHMMSS}`` so successive runs do not
+        overwrite each other. Pass an explicit name (e.g. ``"demo"``)
+        to overwrite a fixed set of files.
     export_top : int
         export top models from each generation
     export_thresh : float
         export models with scores higher than this
-    export_name : str | None
-        name of the exported models
     export_same : bool
         if True, export models with the same score for the final generation
     core : int
@@ -226,13 +225,11 @@ def run_ga(
     start_path = (project_root() / config_dict["start"]).resolve()
 
     if run_name is None:
-        run_name = start_path.stem
+        stamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        run_name = f"{start_path.stem}_{stamp}"
 
     LOG = run_name + "_log.txt"
     EVAL_CSV = run_name + "_evals.csv"
-
-    if export_name is None:
-        export_name = run_name
 
     logger = RunLogger(LOG)
     try:
@@ -311,13 +308,13 @@ def run_ga(
         end_time = datetime.datetime.now()
 
         print()
-        export_models(states, export_name, export_top, export_thresh, export_same)
+        export_models(states, run_name, export_top, export_thresh, export_same)
 
         final = states[-1].population[0]
         log_candidate(
             final,
             "FINAL",
-            f"{export_name}_{final.id}_gen{final.generation}.bnet",
+            f"{run_name}_{final.id}_gen{final.generation}.bnet",
         )
 
         # ---------- Analyze and report results ----------
