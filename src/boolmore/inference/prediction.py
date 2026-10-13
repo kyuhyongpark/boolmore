@@ -8,7 +8,10 @@ from pyboolnet.trap_spaces import compute_trapspaces_within_subspace, compute_tr
 from boolmore.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.boolean_functions import assignment_to_dict
 from boolmore.inference.asp_backend import ensure_asp_backend
+from boolmore.inference.ldoi import logical_domain_of_influence
 from boolmore.types import Assignment
+
+NAV_METHODS = ("min_traps", "ldoi")
 
 
 @dataclass(frozen=True)
@@ -263,15 +266,58 @@ def get_phenotype_prediction(
     return results
 
 
+def _nav_from_min_traps(
+    primes,
+    perturbation: dict[str, int],
+) -> dict[str, float]:
+    """Average node values over minimal trap spaces after fixing interventions."""
+    ensure_asp_backend()
+    new_primes = _fix_constants(primes, perturbation)
+
+    tr = compute_trap_spaces(new_primes, "min")
+
+    for trap in tr:
+        for node in primes:
+            if node not in trap:  # type: ignore
+                trap[node] = "?"  # type: ignore
+            else:
+                trap[node] = str(trap[node])  # type: ignore
+
+    average_values: dict[str, float] = {}
+    for trap in tr:
+        for node in primes:
+            if node not in average_values:
+                average_values[node] = 0.0
+            if trap[node] == "1":  # type: ignore
+                average_values[node] += 1.0 / len(tr)
+            elif trap[node] == "?":  # type: ignore
+                average_values[node] += 0.5 / len(tr)
+
+    return average_values
+
+
+def _nav_from_ldoi(
+    primes,
+    perturbation: dict[str, int],
+) -> dict[str, float]:
+    """Approximate NAV from LDOI percolation (forced 0/1, else 0.5)."""
+    constants = logical_domain_of_influence(primes, perturbation)
+    return {
+        node: float(constants[node]) if node in constants else 0.5
+        for node in primes
+    }
+
+
 def get_NAV_prediction(
     primes,
     experiments: list[NAVExperiment],
+    *,
+    method: str = "min_traps",
 ) -> dict[Assignment, NAVPrediction]:
     """Predict average attractor values for each unique NAV intervention.
 
-    Collects the distinct ``fixes`` assignments across experiments, fixes
-    intervened nodes to constant update functions, computes minimal trap
-    spaces, and returns the average node values over those trap spaces.
+    Collects the distinct ``fixes`` assignments across experiments and
+    returns node average values for each unique intervention.
 
     Parameters
     ----------
@@ -280,52 +326,49 @@ def get_NAV_prediction(
         PyBoolNet.
     experiments : list of NAVExperiment
         NAV experiments whose ``fixes`` interventions are evaluated.
+    method : {"min_traps", "ldoi"}, default "min_traps"
+        How to compute ``average_values``:
+
+        - ``"min_traps"``: fix interventions, compute minimal trap spaces,
+          and average node values over those trap spaces (fixed 1 → 1.0,
+          fixed 0 → 0.0, free ``?`` → 0.5).
+        - ``"ldoi"``: coarser approximation via logical domain of influence;
+          percolated constants map to 0.0/1.0 and all other nodes to 0.5.
 
     Returns
     -------
     dict of Assignment to NAVPrediction
         One prediction per unique intervention, keyed by ``fixes``.
-        ``average_values`` maps each node name to its average attractor
-        value in ``[0, 1]`` (fixed 1 → 1.0, fixed 0 → 0.0, free ``?`` → 0.5).
+        ``average_values`` maps each node name to a value in ``[0, 1]``.
 
     Raises
     ------
     ValueError
-        If a fixed node is not present in the model.
+        If a fixed node is not present in the model, or ``method`` is
+        not recognized.
     RuntimeError
-        If PyBoolNet's ASP backend (gringo/clasp) fails the probe check.
+        If ``method="min_traps"`` and PyBoolNet's ASP backend
+        (gringo/clasp) fails the probe check.
     """
-    ensure_asp_backend()
+    if method not in NAV_METHODS:
+        raise ValueError(
+            f"Unknown NAV prediction method {method!r}; "
+            f"expected one of {NAV_METHODS}"
+        )
+
+    if method == "min_traps":
+        compute_average = _nav_from_min_traps
+    else:
+        compute_average = _nav_from_ldoi
 
     interventions = sorted({exp.fixes for exp in experiments})
 
     predictions: dict[Assignment, NAVPrediction] = {}
     for fixes in interventions:
         perturbation = assignment_to_dict(fixes)
-        new_primes = _fix_constants(primes, perturbation)
-
-        tr = compute_trap_spaces(new_primes, "min")
-
-        for trap in tr:
-            for node in primes:
-                if node not in trap:  # type: ignore
-                    trap[node] = "?"  # type: ignore
-                else:
-                    trap[node] = str(trap[node])  # type: ignore
-
-        average_values: dict[str, float] = {}
-        for trap in tr:
-            for node in primes:
-                if node not in average_values:
-                    average_values[node] = 0.0
-                if trap[node] == "1":  # type: ignore
-                    average_values[node] += 1.0 / len(tr)
-                elif trap[node] == "?":  # type: ignore
-                    average_values[node] += 0.5 / len(tr)
-
         predictions[fixes] = NAVPrediction(
             fixes=fixes,
-            average_values=average_values,
+            average_values=compute_average(primes, perturbation),
         )
 
     return predictions

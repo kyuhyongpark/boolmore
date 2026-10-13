@@ -212,6 +212,45 @@ class TestGetNAVPrediction(unittest.TestCase):
         with self.assertRaises(ValueError):
             get_NAV_prediction(self.primes, experiments)
 
+    def test_ldoi_average_values(self):
+        experiments = [
+            NAVExperiment(id=1, fixes=(), observed="A", outcome="Some", weight=1.0),
+            NAVExperiment(id=2, fixes=(("A", 1),), observed="B", outcome="ON", weight=1.0),
+            NAVExperiment(id=3, fixes=(("A", 0),), observed="B", outcome="OFF", weight=1.0),
+        ]
+
+        preds = get_NAV_prediction(self.primes, experiments, method="ldoi")
+
+        self.assertEqual(preds[()].average_values, {"A": 0.5, "B": 0.5})
+        self.assertEqual(
+            preds[(("A", 1),)].average_values,
+            {"A": 1.0, "B": 1.0},
+        )
+        self.assertEqual(
+            preds[(("A", 0),)].average_values,
+            {"A": 0.0, "B": 0.0},
+        )
+
+    def test_ldoi_matches_min_traps_when_traps_agree(self):
+        experiments = [
+            NAVExperiment(id=1, fixes=(), observed="A", outcome="Some", weight=1.0),
+            NAVExperiment(id=2, fixes=(("A", 1),), observed="B", outcome="ON", weight=1.0),
+            NAVExperiment(id=3, fixes=(("A", 0),), observed="B", outcome="OFF", weight=1.0),
+        ]
+
+        traps = get_NAV_prediction(self.primes, experiments, method="min_traps")
+        ldoi = get_NAV_prediction(self.primes, experiments, method="ldoi")
+
+        for fixes in traps:
+            self.assertEqual(traps[fixes].average_values, ldoi[fixes].average_values)
+
+    def test_unknown_method_raises(self):
+        experiments = [
+            NAVExperiment(id=1, fixes=(), observed="A", outcome="Some", weight=1.0),
+        ]
+        with self.assertRaises(ValueError):
+            get_NAV_prediction(self.primes, experiments, method="unknown")
+
 
 def _serialize_nav_predictions(preds) -> list[dict]:
     out = []
