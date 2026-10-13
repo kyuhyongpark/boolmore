@@ -23,26 +23,55 @@ pip install git+https://github.com/kyuhyongpark/boolmore.git@v0.1.2
 ```bash
 pip install git+https://github.com/kyuhyongpark/boolmore
 ```
+
+Installation of boolmore also installs [PyBoolNet](https://github.com/hklarner/pyboolnet).
+Prediction, scoring, and trap-space features call PyBoolNet's ASP solvers (`gringo` + `clasp`), which ship as binaries under `pyboolnet/binaries/`.
+They are separate from the Python `clingo` package; installing `pip install clingo` does not configure PyBoolNet.
+
+After install, verify that trap-space computation works:
+
+```bash
+python -c "from pyboolnet.external.bnet2primes import bnet_text2primes; from pyboolnet.trap_spaces import compute_trap_spaces; print(compute_trap_spaces(bnet_text2primes('A, A\nB, A\n'), 'min'))"
+```
+
+Expected output includes `{'A': 0, 'B': 0}` and `{'A': 1, 'B': 1}`.
+If you get `[]` with no error, the ASP binaries are present but not running (common in restricted/sandboxed environments, and on some Mac setups).
+Boolmore probes this on the first trap-space call (prediction / phenotype helpers) and raises `RuntimeError` instead of silently returning empty predictions; see Troubleshooting below.
+
 <details>
-   <summary>Trouble shooting for Mac users</summary>
+   <summary>Troubleshooting: PyBoolNet gringo / clasp</summary>
    <br>
-   Installation of boolmore automatically installs PyBoolNet.<br>
-   For Mac Users, PyBoolNet may not properly install gringo, one of PyBoolNet's requisites.<br>
-   <br>
-   If the below example does not run properly,<br>
-   ones on a mac should use homebrew to install 
+   <b>macOS</b><br>
+   PyBoolNet may not ship a working <code>gringo</code> binary. Install Potassco tools with Homebrew:
 
    ```
    brew install clingo
    ```
 
-   then one may need to overwrite the libraries for pyboolnet to work. For example,
+   then point PyBoolNet at the Homebrew <code>gringo</code>, for example:
 
    ```
-   ln -s /usr/local/bin/gringo /Users/.../python3.11/site-packages/pyboolnet/binaries/gringo-4.4.0/gringo_mac64
+   ln -sf "$(brew --prefix)/bin/gringo" .../site-packages/pyboolnet/binaries/gringo-4.4.0/gringo_mac64
    ```
-   Here /usr/local/bin/gringo is where the new gringo is installed.<br>
-   .../pyboolnet/binaries/gringo-4.4.0/gringo_mac64 is where the PyBoolNet looks for gringo.<br>
+
+   Replace <code>.../site-packages</code> with your environment's path (see <code>python -c "import pyboolnet; print(pyboolnet.__file__)"</code>).
+
+   <br>
+   <b>Linux / WSL</b><br>
+   Bundled Linux binaries are 32-bit and usually work when run outside restricted sandboxes.
+   If the verification command above returns <code>[]</code>, check that the binaries themselves print a version:
+
+   ```
+   python -c "from pyboolnet import find_command; import subprocess; g=find_command('gringo'); print(subprocess.run([g,'--version'], capture_output=True, text=True))"
+   ```
+
+   If <code>stdout</code> is empty or the process exits with a negative code (e.g. <code>-31</code> / SIGSYS), install system Potassco tools and symlink them over PyBoolNet's copies, similar to the Mac steps:
+
+   ```
+   sudo apt install gringo clasp
+   # then ln -sf $(which gringo) .../pyboolnet/binaries/gringo-4.4.0/gringo
+   # and ln -sf $(which clasp)  .../pyboolnet/binaries/clasp-3.1.1/clasp-3.1.1-x86-linux
+   ```
 </details>
 
 ## Quickstart with an example run

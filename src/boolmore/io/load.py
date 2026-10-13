@@ -40,9 +40,21 @@ def load_primes(path: str | Path) -> dict[str, PrimeType]:
 
 
 def load_json_config(path: str | Path) -> dict:
-    """Load a GA / evaluation JSON config file."""
+    """Load a GA / evaluation JSON config file.
+
+    Coerces ``edge_pool`` entries from JSON lists to ``(regulator, target, sign)``
+    tuples expected by ``Model``.
+    """
     with open(path) as f:
-        return json.load(f)
+        config = json.load(f)
+
+    if "edge_pool" in config:
+        config["edge_pool"] = [
+            tuple(edge) if not isinstance(edge, tuple) else edge
+            for edge in config["edge_pool"]
+        ]
+
+    return config
 
 
 def load_model(

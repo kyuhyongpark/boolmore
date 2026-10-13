@@ -7,7 +7,11 @@ from pyboolnet.trap_spaces import compute_trapspaces_within_subspace, compute_tr
 
 from boolmore.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.boolean_functions import assignment_to_dict
+from boolmore.inference.asp_backend import ensure_asp_backend
+from boolmore.inference.ldoi import logical_domain_of_influence
 from boolmore.types import Assignment
+
+NAV_METHODS = ("min_traps", "ldoi")
 
 
 @dataclass(frozen=True)
@@ -56,8 +60,11 @@ class NAVPrediction:
     average_values: dict[str, float]
 
 
-def _percolate_primes(primes: dict, fixed: dict[str, int]) -> dict:
+def _fix_constants(primes: dict, fixed: dict[str, int]) -> dict:
     """Return a copy of ``primes`` with fixed nodes set to constant functions.
+
+    This only replaces each fixed node's update rule with a constant; it does
+    not percolate those constants through the rest of the network.
 
     Parameters
     ----------
@@ -69,23 +76,23 @@ def _percolate_primes(primes: dict, fixed: dict[str, int]) -> dict:
     Returns
     -------
     dict
-        Percolated prime implicants.
+        Prime implicants with the specified nodes forced to constants.
 
     Raises
     ------
     ValueError
         If a fixed node is not present in the model.
     """
-    perc_primes = primes.copy()
+    fixed_primes = primes.copy()
     for node, value in fixed.items():
         if node not in primes:
             raise ValueError(f"{node} is not in the model")
 
         if int(value) == 0:
-            perc_primes[node] = [[{}], []]
+            fixed_primes[node] = [[{}], []]
         else:
-            perc_primes[node] = [[], [{}]]
-    return perc_primes
+            fixed_primes[node] = [[], [{}]]
+    return fixed_primes
 
 
 def get_phenotype_prediction(
@@ -99,14 +106,14 @@ def get_phenotype_prediction(
     computed maximal trap space for the same perturbation already satisfies
     the required sources and phenotype. If so, that cached result is reused.
 
-    Otherwise, the network is percolated according to the perturbation, and
-    maximal trap spaces contained within the combined source and phenotype
-    subspace are searched. If such a trap space exists, the experiment is
-    predicted to be feasible.
+    Otherwise, the perturbed nodes are fixed to constant update functions,
+    and maximal trap spaces contained within the combined source and
+    phenotype subspace are searched. If such a trap space exists, the
+    experiment is predicted to be feasible.
 
-    Percolated prime implicants are cached by perturbation, and discovered
-    maximal trap spaces are also cached for reuse by later experiments with
-    the same perturbation.
+    Prime implicants with fixed constants are cached by perturbation, and
+    discovered maximal trap spaces are also cached for reuse by later
+    experiments with the same perturbation.
 
     Parameters
     ----------
@@ -130,7 +137,11 @@ def get_phenotype_prediction(
     ValueError
         If a node appearing in a perturbation, source assignment, or
         phenotype assignment is not present in the model.
+    RuntimeError
+        If PyBoolNet's ASP backend (gringo/clasp) fails the probe check.
     """
+    ensure_asp_backend()
+
     results = []
     traps_cache = defaultdict(list)
     primes_cache = defaultdict(list)
@@ -194,20 +205,20 @@ def get_phenotype_prediction(
 
         perturbation = assignment_to_dict(exp.perturbation)
 
-        # get percolated primes
+        # fix perturbation nodes as constants
         t0 = perf_counter()
 
         if exp.perturbation in primes_cache:
-            perc_primes = primes_cache[exp.perturbation]
+            fixed_primes = primes_cache[exp.perturbation]
             if debug:
-                print("  cache hit (perc_primes)")
+                print("  cache hit (fixed_primes)")
         else:
-            perc_primes = _percolate_primes(primes, perturbation)
-            primes_cache[exp.perturbation] = perc_primes
+            fixed_primes = _fix_constants(primes, perturbation)
+            primes_cache[exp.perturbation] = fixed_primes
 
         if debug:
             print(
-                f"  get perc_primes: "
+                f"  get fixed_primes: "
                 f"{perf_counter() - t0:.6f} s"
             )
 
@@ -215,7 +226,7 @@ def get_phenotype_prediction(
         subspace.update(phenotype)
 
         for node in subspace:
-            if node not in perc_primes:
+            if node not in fixed_primes:
                 raise ValueError(f"{node} not in the model.")
 
         # compute max traps
@@ -223,7 +234,7 @@ def get_phenotype_prediction(
 
         logging.disable(logging.CRITICAL)
         max_traps = compute_trapspaces_within_subspace(
-            perc_primes,
+            fixed_primes,
             subspace=subspace,
             type_="max",
             max_output=1,
@@ -255,15 +266,63 @@ def get_phenotype_prediction(
     return results
 
 
+def _nav_from_min_traps(
+    primes,
+    perturbation: dict[str, int],
+) -> dict[str, float]:
+    """Average node values over minimal trap spaces after fixing interventions."""
+    ensure_asp_backend()
+    new_primes = _fix_constants(primes, perturbation)
+
+    tr = compute_trap_spaces(new_primes, "min")
+
+    for trap in tr:
+        for node in primes:
+            if node not in trap:  # type: ignore
+                trap[node] = "?"  # type: ignore
+            else:
+                trap[node] = str(trap[node])  # type: ignore
+
+    average_values: dict[str, float] = {}
+    for trap in tr:
+        for node in primes:
+            if node not in average_values:
+                average_values[node] = 0.0
+            if trap[node] == "1":  # type: ignore
+                average_values[node] += 1.0 / len(tr)
+            elif trap[node] == "?":  # type: ignore
+                average_values[node] += 0.5 / len(tr)
+
+    return average_values
+
+
+def _nav_from_ldoi(
+    primes,
+    perturbation: dict[str, int],
+) -> dict[str, float]:
+    """Approximate NAV from LDOI (forced 0/1, else 0.5).
+
+    This approximation is only credible when the model does not rely
+    heavily on oscillatory behavior: free nodes are scored as 0.5 and
+    cyclic attractors are not resolved.
+    """
+    constants = logical_domain_of_influence(primes, perturbation)
+    return {
+        node: float(constants[node]) if node in constants else 0.5
+        for node in primes
+    }
+
+
 def get_NAV_prediction(
     primes,
     experiments: list[NAVExperiment],
+    *,
+    method: str = "min_traps",
 ) -> dict[Assignment, NAVPrediction]:
     """Predict average attractor values for each unique NAV intervention.
 
-    Collects the distinct ``fixes`` assignments across experiments, percolates
-    the network under each intervention, computes minimal trap spaces, and
-    returns the average node values over those trap spaces.
+    Collects the distinct ``fixes`` assignments across experiments and
+    returns node average values for each unique intervention.
 
     Parameters
     ----------
@@ -272,48 +331,57 @@ def get_NAV_prediction(
         PyBoolNet.
     experiments : list of NAVExperiment
         NAV experiments whose ``fixes`` interventions are evaluated.
+    method : {"min_traps", "ldoi"}, default "min_traps"
+        How to compute ``average_values``:
+
+        - ``"min_traps"``: fix interventions, compute minimal trap spaces,
+          and average node values over those trap spaces (fixed 1 → 1.0,
+          fixed 0 → 0.0, free ``?`` → 0.5).
+        - ``"ldoi"``: coarser approximation via logical domain of influence;
+          forced constants map to 0.0/1.0 and all other nodes to 0.5.
+          Only credible when the model does not rely heavily on
+          oscillatory behavior (free nodes → 0.5; oscillations unresolved).
 
     Returns
     -------
     dict of Assignment to NAVPrediction
         One prediction per unique intervention, keyed by ``fixes``.
-        ``average_values`` maps each node name to its average attractor
-        value in ``[0, 1]`` (fixed 1 → 1.0, fixed 0 → 0.0, free ``?`` → 0.5).
+        ``average_values`` maps each node name to a value in ``[0, 1]``.
 
     Raises
     ------
     ValueError
-        If a fixed node is not present in the model.
+        If a fixed node is not present in the model, or ``method`` is
+        not recognized.
+    RuntimeError
+        If ``method="min_traps"`` and PyBoolNet's ASP backend
+        (gringo/clasp) fails the probe check.
+
+    Notes
+    -----
+    ``method="ldoi"`` NAV scores should be interpreted with care for models
+    whose phenotype depends on oscillations or complex cyclic attractors;
+    prefer ``"min_traps"`` in those cases.
     """
+    if method not in NAV_METHODS:
+        raise ValueError(
+            f"Unknown NAV prediction method {method!r}; "
+            f"expected one of {NAV_METHODS}"
+        )
+
+    if method == "min_traps":
+        compute_average = _nav_from_min_traps
+    else:
+        compute_average = _nav_from_ldoi
+
     interventions = sorted({exp.fixes for exp in experiments})
 
     predictions: dict[Assignment, NAVPrediction] = {}
     for fixes in interventions:
         perturbation = assignment_to_dict(fixes)
-        new_primes = _percolate_primes(primes, perturbation)
-
-        tr = compute_trap_spaces(new_primes, "min")
-
-        for trap in tr:
-            for node in primes:
-                if node not in trap:  # type: ignore
-                    trap[node] = "?"  # type: ignore
-                else:
-                    trap[node] = str(trap[node])  # type: ignore
-
-        average_values: dict[str, float] = {}
-        for trap in tr:
-            for node in primes:
-                if node not in average_values:
-                    average_values[node] = 0.0
-                if trap[node] == "1":  # type: ignore
-                    average_values[node] += 1.0 / len(tr)
-                elif trap[node] == "?":  # type: ignore
-                    average_values[node] += 0.5 / len(tr)
-
         predictions[fixes] = NAVPrediction(
             fixes=fixes,
-            average_values=average_values,
+            average_values=compute_average(primes, perturbation),
         )
 
     return predictions

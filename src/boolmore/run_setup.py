@@ -7,7 +7,11 @@ from boolmore.evaluation.score import Evaluator
 from boolmore.evaluation.nav_score import get_NAV_scores
 from boolmore.evaluation.phenotype_score import get_phenotype_scores
 from boolmore.genetic.algorithm import GAConfig
-from boolmore.inference.prediction import get_NAV_prediction, get_phenotype_prediction
+from boolmore.inference.prediction import (
+    NAV_METHODS,
+    get_NAV_prediction,
+    get_phenotype_prediction,
+)
 from boolmore.io.load import import_NAV_exps, import_phenotypes, load_json_config, load_model
 from boolmore.io.paths import project_root
 
@@ -21,12 +25,21 @@ def build_run_config(
     start_file: str | None = None,
     stop_if_max: bool | None = None,
     hierarchy: bool | None = None,
+    nav_method: str | None = None,
 ) -> dict:
     """Build a run config dict from JSON or inline args."""
     if json_file is not None:
         if any(
             x is not None
-            for x in [run_type, data_file, base_file, start_file, stop_if_max, hierarchy]
+            for x in [
+                run_type,
+                data_file,
+                base_file,
+                start_file,
+                stop_if_max,
+                hierarchy,
+                nav_method,
+            ]
         ):
             raise ValueError("If json file is given, other parameters should not be given.")
 
@@ -43,6 +56,7 @@ def build_run_config(
         "base": base_file,
         "start": start_file if start_file is not None else base_file,
         "hierarchy": hierarchy if hierarchy is not None else True,
+        "nav_method": nav_method if nav_method is not None else "min_traps",
         "default_sources": {},
         "generate_defaults": True,
         "constraints": {
@@ -80,6 +94,11 @@ def build_evaluator(
     data_path = (project_root() / config["data"]).resolve()
     base_path = (project_root() / config["base"]).resolve()
     hierarchy = config["hierarchy"]
+    nav_method = config.get("nav_method", "min_traps")
+    if nav_method not in NAV_METHODS:
+        raise ValueError(
+            f"Unknown nav_method {nav_method!r}; expected one of {NAV_METHODS}"
+        )
     default_sources = dict(config["default_sources"])
     generate_defaults = config["generate_defaults"]
     constraints = config["constraints"]
@@ -100,7 +119,7 @@ def build_evaluator(
                     default_sources[node] = 0
 
         exps = import_NAV_exps(str(data_path))
-        prediction_fn = get_NAV_prediction
+        prediction_fn = partial(get_NAV_prediction, method=nav_method)
         score_fn = partial(
             get_NAV_scores,
             default_sources=default_sources,
@@ -124,6 +143,7 @@ def build_evaluator(
         constraints=constraints,
         run_type=run_type,
         hierarchy=hierarchy,
+        nav_method=nav_method,
         default_sources=default_sources,
         generate_defaults=generate_defaults,
     )

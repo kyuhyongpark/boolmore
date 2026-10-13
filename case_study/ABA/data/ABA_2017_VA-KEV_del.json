@@ -1,38 +1,37 @@
 {
-"parameters" : {
-    "starting_id": 1,           
-    "starting_gen": 1,
-    "total_iterations": 100,
-    "per_iteration": 100,
-    "keep": 20,
-    "mix":20,
-    "export_top": 1,
-    "export_threshold": 430,
-    "prob": 0.01,
-    "edge_prob": 0.5
+"run_type" : "NAV",
+
+"data" : "case_study/ABA/data/data_A.csv",
+
+"base" : "case_study/ABA/baseline_models/ABA_2017_VA-KEV_del.bnet",
+
+"start" : "case_study/ABA/baseline_models/ABA_2017_VA-KEV_del.bnet",
+
+"hierarchy" : true,
+
+"nav_method" : "min_traps",
+
+"default_sources": {"ABA": 0},
+
+"generate_defaults": false,
+
+"constraints": {
+    "fixed": ["Ca2_ATPase", "Ca2c", "Closure", "DAG", "H2O_Efflux", "InsP3", "InsP6", "NO", "PtdIns3_5P2", "PtdIns4_5P2", "RCARs", "cADPR", "cGMP"],
+    "regulate": {"ABI1": ["RCARs"],
+                 "ABI2": ["RCARs"],
+                 "HAB1": ["RCARs"],
+                 "PP2CA": ["RCARs"],
+                 "K_efflux": ["KEV", "KOUT"],
+                 "OST1": ["ABI1", "ABI2"],
+                 "Depolarization": ["AnionEM"]},
+    "necessary": {"8-nitro-cGMP": ["cGMP"],
+                  "KOUT": ["Depolarization"],
+                  "Malate": ["PEPC", "AnionEM"],
+                  "ROS": ["NADPH", "RBOH"]},
+    "group": {"PA": [["PC", "PLDalpha"], ["PC", "PLDdelta"], ["DAG", "DAGK"]],
+              "S1P_PhytoS1P": [["SPHK1_2", "Sph"]]},
+    "possible_constant": []
     },
-
-"data": "case_study/ABA/data/data_A.tsv",
-
-"base": "case_study/ABA/baseline_models/ABA_2017_VA-KEV_del.bnet",
-
-"default_sources": {"ABA":0},
-
-"constraints": {"fixed": ["Ca2_ATPase", "Ca2c", "Closure", "DAG", "H2O_Efflux", "InsP3", "InsP6", "NO", "PtdIns3_5P2", "PtdIns4_5P2", "RCARs", "cADPR", "cGMP"],
-                "regulate": {"ABI1":["RCARs"],
-                             "ABI2":["RCARs"],
-                             "HAB1":["RCARs"],
-                             "PP2CA":["RCARs"],
-                             "K_efflux":["KEV","KOUT"],
-                             "OST1":["ABI1","ABI2"],
-                             "Depolarization":["AnionEM"]},
-                "necessary" : {"8-nitro-cGMP":["cGMP"],
-                               "KOUT":["Depolarization"],
-                               "Malate":["PEPC", "AnionEM"],
-                               "ROS":["NADPH", "RBOH"]},
-                "group": {"PA":[["PC","PLDalpha"],["PC","PLDdelta"],["DAG","DAGK"]],
-                          "S1P_PhytoS1P":[["SPHK1_2","Sph"]]},
-                "possible_constant": []},
 
 "edge_pool": [["Ca2c", "ABI2", "0"],
               ["Ca2c", "HAB1", "0"],
@@ -46,5 +45,17 @@
               ["pHc", "Vacuolar_Acidification", "1"],
               ["ABI1", "GEF1_4_10", "1"],
               ["GHR1", "CPK3_21", "1"],
-              ["PA", "Microtubule_Depolymerization", "1"]]
+              ["PA", "Microtubule_Depolymerization", "1"]],
+
+"parameters" : {
+    "stop_if_max": true,
+    "starting_gen": 1,
+    "total_iter": 100,
+    "per_iter": 100,
+    "keep": 20,
+    "mix": 20,
+    "prob": 0.01,
+    "edge_prob": 0.5,
+    "order_by": ["n_extra_edges", "n_prime_implicants"]
+    }
 }

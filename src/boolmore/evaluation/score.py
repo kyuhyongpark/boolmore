@@ -126,6 +126,8 @@ class Evaluator:
         Experiment modality, e.g. ``"NAV"`` or ``"Phenotype"``.
     hierarchy : bool, default True
         Whether NAV scoring applies intervention hierarchy.
+    nav_method : str, default "min_traps"
+        NAV prediction method (``"min_traps"`` or ``"ldoi"``).
     default_sources : dict of str to int, optional
         Default source-node settings defining the top of the hierarchy.
     generate_defaults : bool, default False
@@ -142,6 +144,7 @@ class Evaluator:
         constraints: dict,
         run_type: str,
         hierarchy: bool = True,
+        nav_method: str = "min_traps",
         default_sources: dict[str, int] | None = None,
         generate_defaults: bool = False,
     ):
@@ -152,6 +155,7 @@ class Evaluator:
         self.constraints = constraints
         self.run_type = run_type
         self.hierarchy = hierarchy
+        self.nav_method = nav_method
         self.default_sources = dict(default_sources) if default_sources is not None else {}
         self.generate_defaults = generate_defaults
 

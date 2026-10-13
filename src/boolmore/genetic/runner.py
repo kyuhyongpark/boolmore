@@ -64,6 +64,7 @@ def run_ga(
         start_file:str|None=None,
         stop_if_max:bool|None=None,
         hierarchy:bool|None=None,
+        nav_method:str|None=None,
         seed:int|None=None,
         run_name:str|None=None,
         export_top:int=0,
@@ -101,6 +102,8 @@ def run_ga(
         if True, stop when the max score is reached
     hierarchy : bool
         if True, hierarchy scoring is used
+    nav_method : str | None
+        NAV prediction method ("min_traps" or "ldoi"); default min_traps
 
     seed : int | None
         random seed for reproducibility
@@ -138,6 +141,7 @@ def run_ga(
         start_file=start_file,
         stop_if_max=stop_if_max,
         hierarchy=hierarchy,
+        nav_method=nav_method,
     )
 
     evaluator = build_evaluator(config_dict, verbose=True)
@@ -200,6 +204,7 @@ def run_ga(
         fp.write(f"# RUN_TYPE={evaluator.run_type!r}\n")
         fp.write(f"# DATA: {data_path}\n")
         fp.write(f"# HIERARCHY={evaluator.hierarchy}\n")
+        fp.write(f"# NAV_METHOD={evaluator.nav_method!r}\n")
         fp.write(f"# DEFAULT_SOURCES={evaluator.default_sources}\n")
         fp.write(f"# GENERATE_DEFAULTS={evaluator.generate_defaults}\n")
         fp.write(f"# CONSTRAINTS={evaluator.constraints}\n")

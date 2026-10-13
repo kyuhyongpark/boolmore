@@ -9,6 +9,8 @@
 
 "hierarchy" : true,
 
+"nav_method" : "min_traps",
+
 "default_sources": {},
 
 "generate_defaults": false,

@@ -1,5 +1,8 @@
 from pyboolnet.trap_spaces import compute_trap_spaces
 
+from boolmore.inference.asp_backend import ensure_asp_backend
+
+
 def get_mintr_for_source_comb(primes, source_comb, DEBUG=False):
     """
     Fixes source node values in a Boolean network and computes minimal trap spaces.
@@ -27,6 +30,8 @@ def get_mintr_for_source_comb(primes, source_comb, DEBUG=False):
         - If a node in `source_comb` is not present in `primes`.
         - If `DEBUG=True` and some source nodes are missing
           from `source_comb`.
+    RuntimeError
+        If PyBoolNet's ASP backend (gringo/clasp) fails the probe check.
 
     Notes
     -----
@@ -49,6 +54,7 @@ def get_mintr_for_source_comb(primes, source_comb, DEBUG=False):
     >>> {"A": 1, "B": 0} in result
     True
     """
+    ensure_asp_backend()
 
     if DEBUG:
         for node in primes:
