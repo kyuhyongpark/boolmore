@@ -7,15 +7,19 @@
 # (`ABA_GA_base_A.bnet` + `data_A.tsv`).
 #
 # - **min_traps**: fix interventions → minimal trap spaces (ASP) → average node values
-# - **ldoi**: logical domain of influence (percolation) → 0/1/0.5 approximation
+# - **ldoi**: logical domain of influence (prime-implicant LDOI) → 0/1/0.5 approximation
 #
 # Reports wall time for full prediction calls and per unique intervention.
+#
+# Prints to stdout and writes a timestamped log under `dev/logs/`.
 
 # %%
 from __future__ import annotations
 
 import statistics
+import sys
 from collections import defaultdict
+from datetime import datetime, timezone
 from pathlib import Path
 from time import perf_counter
 
@@ -38,9 +42,45 @@ REPO = Path(__file__).resolve().parents[1]
 ABA = REPO / "case_study" / "ABA"
 BNET = ABA / "baseline_models" / "ABA_GA_base_A.bnet"
 DATA = ABA / "data" / "data_A.tsv"
+LOG_DIR = Path(__file__).resolve().parent / "logs"
 
 N_WARMUP = 1
 N_REPEATS = 3
+
+# %% [markdown]
+# ## Logging
+
+
+# %%
+class Tee:
+    """Write to stdout and a log file."""
+
+    def __init__(self, *streams):
+        self.streams = streams
+
+    def write(self, data: str) -> int:
+        for stream in self.streams:
+            stream.write(data)
+            stream.flush()
+        return len(data)
+
+    def flush(self) -> None:
+        for stream in self.streams:
+            stream.flush()
+
+
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+LOG_PATH = LOG_DIR / (
+    f"bench_nav_min_traps_vs_ldoi_"
+    f"{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.log"
+)
+_log_file = LOG_PATH.open("w", encoding="utf-8")
+_stdout = sys.stdout
+sys.stdout = Tee(_stdout, _log_file)
+
+print(f"log file: {LOG_PATH}")
+print(f"started (UTC): {datetime.now(timezone.utc).isoformat()}")
+print()
 
 # %% [markdown]
 # ## Load model and experiments
@@ -51,8 +91,10 @@ experiments = import_NAV_exps(DATA)
 interventions = sorted({exp.fixes for exp in experiments})
 
 print(f"model: {BNET.name} ({len(primes)} nodes)")
+print(f"data:  {DATA.name}")
 print(f"experiments: {len(experiments)}")
 print(f"unique interventions: {len(interventions)}")
+print()
 
 # ASP probe once up front so min_traps warmup is not the first failure point
 ensure_asp_backend()
@@ -201,3 +243,10 @@ print(
     f"{format_fixes(max(rows, key=lambda r: r['t_ldoi'])['fixes'])} "
     f"({max(r['t_ldoi'] for r in rows):.4f}s)"
 )
+print(f"  Log written to: {LOG_PATH}")
+print(f"finished (UTC): {datetime.now(timezone.utc).isoformat()}")
+
+# restore stdout and close log
+sys.stdout = _stdout
+_log_file.close()
+print(f"log saved: {LOG_PATH}")

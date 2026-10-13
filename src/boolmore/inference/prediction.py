@@ -300,7 +300,7 @@ def _nav_from_ldoi(
     primes,
     perturbation: dict[str, int],
 ) -> dict[str, float]:
-    """Approximate NAV from LDOI percolation (forced 0/1, else 0.5)."""
+    """Approximate NAV from LDOI (forced 0/1, else 0.5)."""
     constants = logical_domain_of_influence(primes, perturbation)
     return {
         node: float(constants[node]) if node in constants else 0.5
@@ -333,7 +333,7 @@ def get_NAV_prediction(
           and average node values over those trap spaces (fixed 1 → 1.0,
           fixed 0 → 0.0, free ``?`` → 0.5).
         - ``"ldoi"``: coarser approximation via logical domain of influence;
-          percolated constants map to 0.0/1.0 and all other nodes to 0.5.
+          forced constants map to 0.0/1.0 and all other nodes to 0.5.
 
     Returns
     -------

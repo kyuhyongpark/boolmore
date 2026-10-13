@@ -101,7 +101,7 @@ def format_state(state: dict[str, int]) -> str:
 
 
 def ldoi_boolmore(primes: dict, seed: dict[str, int]) -> dict[str, int]:
-    """Boolmore LDOI: create_constants → percolate → find_constants."""
+    """Boolmore LDOI: Yang/pystablemotifs prime-implicant closure → seed ∪ LDOI."""
     return boolmore_logical_domain_of_influence(primes, seed)
 
 
