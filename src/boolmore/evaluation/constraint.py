@@ -139,6 +139,11 @@ def check_node(
     Checks if the model follows fixed, regulate, necessary, possible_constant constraints.
     Also checks if a non-source became a source, or if a non-constant became a constant.
 
+    Base-constant nodes (no regulators) and pure source nodes must keep their baseline
+    rule. If they gain regulators from the edge pool, they are checked like ordinary
+    nodes: former constants may stay/become the same constant value, and former sources
+    may leave the identity rule.
+
     Checking group constraints are not implemented yet.
 
     Parameters
@@ -159,13 +164,13 @@ def check_node(
 
     errors: list[str] = []
 
-    # a constant node should not be mutated
-    if len(base_rr) == 1:
+    # a constant node with no regulators should not be mutated
+    if len(base_rr) == 1 and len(regulators) == 0:
         if rr != base_rr:
             errors.append(f"Constant node {node} was mutated")
 
-    # a source node should not be mutated
-    elif len(base_rr) == 2 and regulators[0] == node:
+    # a pure source node should not be mutated
+    elif len(base_rr) == 2 and len(regulators) == 1 and regulators[0] == node:
         if rr != base_rr:
             errors.append(f"Source node {node} was mutated")
 

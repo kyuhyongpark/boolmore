@@ -30,7 +30,7 @@ PARAMETER_OVERRIDES = {
     "mix": 2,
 }
 
-SEEDS = range(3, 30)
+SEEDS = [11]
 CORE = 6
 
 
