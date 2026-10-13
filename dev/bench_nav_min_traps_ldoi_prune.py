@@ -19,13 +19,14 @@ from __future__ import annotations
 
 import copy
 import sys
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from time import perf_counter
 
 from boolmore.evaluation.score import format_score
-from boolmore.genetic.algorithm import ga_main
+from boolmore.genetic.algorithm import GeneticAlgorithm, ga_main
 from boolmore.genetic.operators.reproduction import Reproducer
 from boolmore.genetic.population import Candidate
 from boolmore.genetic.selection import Selector
@@ -43,7 +44,7 @@ CONFIG_REL = "demo/CAD_config.json"
 LOG_DIR = Path(__file__).resolve().parent / "logs"
 
 SEED = 0
-CORE = 1
+CORE = 2
 
 # %% [markdown]
 # ## Logging
@@ -130,28 +131,40 @@ class RunResult:
     stats: EvalStats = field(default_factory=EvalStats)
 
 
-def instrument_evaluator(evaluator) -> EvalStats:
-    """Wrap ``evaluator.evaluate`` to count prune hits and eval time."""
+def instrument_new_candidates() -> tuple[EvalStats, Callable[[], None]]:
+    """Patch ``GeneticAlgorithm.new_candidates`` to tally eval stats in-process.
+
+    Avoids wrapping ``evaluator.evaluate``, which breaks joblib pickling when
+    ``core > 1``. Stats are collected in the parent after Parallel returns.
+    """
     stats = EvalStats()
-    original = evaluator.evaluate
+    original = GeneticAlgorithm.new_candidates
 
     def wrapped(
-        model,
-        model_id: int = -1,
+        self,
+        offsprings: list[Candidate],
+        evaluator,
         score_threshold: float | None = None,
-    ):
+    ) -> list[Candidate]:
         if score_threshold is not None:
-            stats.n_with_threshold += 1
+            stats.n_with_threshold += len(offsprings)
         t0 = perf_counter()
-        result = original(model, model_id, score_threshold)
+        candidates = original(self, offsprings, evaluator, score_threshold)
         stats.eval_seconds += perf_counter() - t0
-        stats.n_eval += 1
-        if result.is_upper_bound:
-            stats.n_pruned += 1
-        return result
+        stats.n_eval += len(candidates)
+        stats.n_pruned += sum(
+            1
+            for c in candidates
+            if c.eval_result is not None and c.eval_result.is_upper_bound
+        )
+        return candidates
 
-    evaluator.evaluate = wrapped  # type: ignore[method-assign]
-    return stats
+    GeneticAlgorithm.new_candidates = wrapped  # type: ignore[method-assign]
+
+    def restore() -> None:
+        GeneticAlgorithm.new_candidates = original  # type: ignore[method-assign]
+
+    return stats, restore
 
 
 def run_ga_bench(ldoi_prune: bool) -> RunResult:
@@ -166,69 +179,75 @@ def run_ga_bench(ldoi_prune: bool) -> RunResult:
 
     evaluator = build_evaluator(config, verbose=True)
     ga = build_ga_config(config, seed=SEED, core=CORE)
-    stats = instrument_evaluator(evaluator)
+    stats, restore = instrument_new_candidates()
 
-    start_path = (project_root() / config["start"]).resolve()
-    base_path = (project_root() / config["base"]).resolve()
-    if start_path == base_path:
-        start_model = evaluator.base
-    else:
-        print(f"Loading starting model from {start_path}")
-        start_model = load_model(start_path, base=evaluator.base)
-        print("Starting model loaded.")
+    try:
+        start_path = (project_root() / config["start"]).resolve()
+        base_path = (project_root() / config["base"]).resolve()
+        if start_path == base_path:
+            start_model = evaluator.base
+        else:
+            print(f"Loading starting model from {start_path}")
+            start_model = load_model(start_path, base=evaluator.base)
+            print("Starting model loaded.")
 
-    # Start evaluation has no threshold → never pruned (even if ldoi_prune).
-    start_result = evaluator.evaluate(start_model, model_id=0)
-    start = Candidate(start_model, 0, ga.starting_gen, start_result)
-    print(start.model.info())
-    print(format_score(start.eval_result))
-    print()
+        # Start evaluation has no threshold → never pruned (even if ldoi_prune).
+        t0 = perf_counter()
+        start_result = evaluator.evaluate(start_model, model_id=0)
+        stats.eval_seconds += perf_counter() - t0
+        stats.n_eval += 1
+        start = Candidate(start_model, 0, ga.starting_gen, start_result)
+        print(start.model.info())
+        print(format_score(start.eval_result))
+        print()
 
-    selector = Selector(keep=ga.keep, order_by=ga.order_by)
-    reproducer = Reproducer(selector=selector, constraints=evaluator.constraints)
+        selector = Selector(keep=ga.keep, order_by=ga.order_by)
+        reproducer = Reproducer(selector=selector, constraints=evaluator.constraints)
 
-    t0 = perf_counter()
-    states = ga_main(start, evaluator, selector, reproducer, ga)
-    wall = perf_counter() - t0
+        t0 = perf_counter()
+        states = ga_main(start, evaluator, selector, reproducer, ga)
+        wall = perf_counter() - t0
 
-    final = states[-1].population[0]
-    assert start.eval_result is not None
-    assert final.eval_result is not None
+        final = states[-1].population[0]
+        assert start.eval_result is not None
+        assert final.eval_result is not None
 
-    result = RunResult(
-        ldoi_prune=ldoi_prune,
-        wall_seconds=wall,
-        n_iterations=len(states) - 1,
-        n_generated=states[-1].generated,
-        start_score=start.eval_result.score,
-        start_max=start.eval_result.max_score,
-        final_score=final.eval_result.score,
-        final_max=final.eval_result.max_score,
-        stats=stats,
-    )
+        result = RunResult(
+            ldoi_prune=ldoi_prune,
+            wall_seconds=wall,
+            n_iterations=len(states) - 1,
+            n_generated=states[-1].generated,
+            start_score=start.eval_result.score,
+            start_max=start.eval_result.max_score,
+            final_score=final.eval_result.score,
+            final_max=final.eval_result.max_score,
+            stats=stats,
+        )
 
-    prune_pct = (
-        100.0 * stats.n_pruned / stats.n_eval if stats.n_eval else 0.0
-    )
-    print()
-    print(f"  GA wall time: {wall:.4f}s")
-    print(
-        f"  evals={stats.n_eval}, pruned={stats.n_pruned} "
-        f"({prune_pct:.1f}%), with_threshold={stats.n_with_threshold}"
-    )
-    print(f"  eval time sum: {stats.eval_seconds:.4f}s")
-    print(
-        f"  iterations={result.n_iterations}, "
-        f"generated={result.n_generated}"
-    )
-    print(
-        f"  start score: {result.start_score:.2f} / {result.start_max}"
-    )
-    print(
-        f"  final score: {result.final_score:.2f} / {result.final_max}"
-    )
-    print()
-    return result
+        prune_pct = (
+            100.0 * stats.n_pruned / stats.n_eval if stats.n_eval else 0.0
+        )
+        print()
+        print(f"  GA wall time: {wall:.4f}s")
+        print(
+            f"  evals={stats.n_eval}, pruned={stats.n_pruned} "
+            f"({prune_pct:.1f}%), with_threshold={stats.n_with_threshold}"
+        )
+        print(f"  eval time sum: {stats.eval_seconds:.4f}s")
+        print(
+            f"  iterations={result.n_iterations}, "
+            f"generated={result.n_generated}"
+        )
+        print(
+            f"  start score: {result.start_score:.2f} / {result.start_max}"
+        )
+        print(
+            f"  final score: {result.final_score:.2f} / {result.final_max}"
+        )
+        print()
+        return result
+    finally:
+        restore()
 
 # %% [markdown]
 # ## Run GA: `ldoi_prune=True` vs `False`
