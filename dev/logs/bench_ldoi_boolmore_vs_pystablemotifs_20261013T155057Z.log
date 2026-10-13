@@ -1,0 +1,78 @@
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/bench_ldoi_boolmore_vs_pystablemotifs_20261013T155057Z.log
+started (UTC): 2026-10-13T15:50:57.307440+00:00
+
+model: CAD.bnet (5 nodes)
+data:  CAD_data.csv
+experiments: 50
+unique interventions: 24
+
+fixes                                    match contra  exp ids
+------------------------------------------------------------------------------------------
+(none)                                    True  False  [1, 2, 3, 4, 5]
+{Coup_fti=0}                              True  False  [6, 7, 8]
+{Coup_fti=0, Emx2=0}                      True  False  [36]
+{Coup_fti=0, Pax6=1}                      True  False  [27, 28]
+{Coup_fti=0, Sp8=0}                       True   True  [49, 50]
+{Coup_fti=1}                              True  False  [21, 23, 24]
+{Coup_fti=1, Fgf8=0}                      True  False  [51]
+{Coup_fti=1, Fgf8=0, Sp8=1}               True   True  [37]
+{Coup_fti=1, Pax6=0, Sp8=1}               True   True  [44]
+{Emx2=0}                                  True  False  [9, 10, 11, 12]
+{Emx2=0, Pax6=1}                          True  False  [48]
+{Emx2=1}                                  True  False  [25, 26]
+{Emx2=1, Fgf8=0}                          True  False  [29, 30]
+{Emx2=1, Sp8=1}                           True   True  [46, 47]
+{Fgf8=0}                                  True  False  [40, 41, 42]
+{Fgf8=0, Pax6=1, Sp8=0}                   True   True  [31]
+{Fgf8=0, Sp8=0}                           True  False  [16]
+{Fgf8=1}                                  True  False  [35]
+{Fgf8=1, Sp8=0}                           True   True  [43]
+{Pax6=0}                                  True  False  [38, 39]
+{Pax6=1}                                  True  False  [17, 18, 19, 20]
+{Pax6=1, Sp8=0}                           True   True  [45]
+{Sp8=0}                                   True  False  [32, 33, 34]
+{Sp8=1}                                   True  False  [13, 14, 15]
+------------------------------------------------------------------------------------------
+matches: 24/24; mismatches: 0; with nonempty psm contradiction: 7
+All unique interventions: boolmore LDOI == seed ∪ psm implied.
+
+Full pass over all unique interventions
+  boolmore LDOI:           mean=0.085642s  stdev=0.013924s  min=0.065160s  max=0.108519s  (n=10)
+  pystablemotifs wrapped:  mean=0.000327s  stdev=0.000057s  min=0.000269s  max=0.000437s  (n=10)
+  pystablemotifs faster by 262.2x
+
+fixes                                      boolmore   psm_wrap   bm/psm  exp ids
+-----------------------------------------------------------------------------------------------
+{Coup_fti=0}                               0.011523   0.000022   535.09x  [6, 7, 8]
+{Coup_fti=0, Emx2=0}                       0.007695   0.000016   470.91x  [36]
+{Emx2=0}                                   0.007267   0.000008   862.74x  [9, 10, 11, 12]
+{Fgf8=0}                                   0.006446   0.000017   387.63x  [40, 41, 42]
+{Coup_fti=0, Pax6=1}                       0.005309   0.000018   302.17x  [27, 28]
+{Coup_fti=1, Pax6=0, Sp8=1}                0.005145   0.000017   300.09x  [44]
+{Sp8=1}                                    0.004377   0.000013   329.53x  [13, 14, 15]
+{Emx2=0, Pax6=1}                           0.004230   0.000015   279.87x  [48]
+{Pax6=1}                                   0.004174   0.000019   221.99x  [17, 18, 19, 20]
+{Coup_fti=1}                               0.002740   0.000014   197.48x  [21, 23, 24]
+{Pax6=0}                                   0.002645   0.000007   373.35x  [38, 39]
+{Emx2=1, Fgf8=0}                           0.002620   0.000019   140.83x  [29, 30]
+{Coup_fti=1, Fgf8=0}                       0.002426   0.000013   180.03x  [51]
+{Sp8=0}                                    0.002259   0.000012   194.43x  [32, 33, 34]
+{Fgf8=0, Sp8=0}                            0.002238   0.000010   218.39x  [16]
+{Emx2=1}                                   0.001956   0.000011   170.56x  [25, 26]
+{Fgf8=1}                                   0.000063   0.000013     5.00x  [35]
+{Coup_fti=0, Sp8=0}                        0.000051   0.000010     5.27x  [49, 50]
+{Emx2=1, Sp8=1}                            0.000046   0.000007     6.58x  [46, 47]
+{Coup_fti=1, Fgf8=0, Sp8=1}                0.000045   0.000007     6.31x  [37]
+{Pax6=1, Sp8=0}                            0.000037   0.000008     4.86x  [45]
+{Fgf8=1, Sp8=0}                            0.000036   0.000007     5.27x  [43]
+{Fgf8=0, Pax6=1, Sp8=0}                    0.000034   0.000007     4.85x  [31]
+(none)                                     0.000018   0.000007     2.42x  [1, 2, 3, 4, 5]
+-----------------------------------------------------------------------------------------------
+TOTAL (sum of means)                       0.073379   0.000296   247.52x
+
+Summary
+  Correctness: 24/24 match (boolmore == seed ∪ psm implied); psm contradiction nonempty on 7 seeds
+  Full-pass mean: boolmore=0.085642s, pystablemotifs=0.000327s
+  Per-intervention sum of means: boolmore=0.073379s, pystablemotifs=0.000296s
+  Log written to: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/bench_ldoi_boolmore_vs_pystablemotifs_20261013T155057Z.log
+finished (UTC): 2026-10-13T15:50:59.111285+00:00
