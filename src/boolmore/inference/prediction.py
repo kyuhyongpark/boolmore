@@ -7,6 +7,7 @@ from pyboolnet.trap_spaces import compute_trapspaces_within_subspace, compute_tr
 
 from boolmore.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.boolean_functions import assignment_to_dict
+from boolmore.inference.asp_backend import ensure_asp_backend
 from boolmore.types import Assignment
 
 
@@ -133,7 +134,11 @@ def get_phenotype_prediction(
     ValueError
         If a node appearing in a perturbation, source assignment, or
         phenotype assignment is not present in the model.
+    RuntimeError
+        If PyBoolNet's ASP backend (gringo/clasp) fails the probe check.
     """
+    ensure_asp_backend()
+
     results = []
     traps_cache = defaultdict(list)
     primes_cache = defaultdict(list)
@@ -287,7 +292,11 @@ def get_NAV_prediction(
     ------
     ValueError
         If a fixed node is not present in the model.
+    RuntimeError
+        If PyBoolNet's ASP backend (gringo/clasp) fails the probe check.
     """
+    ensure_asp_backend()
+
     interventions = sorted({exp.fixes for exp in experiments})
 
     predictions: dict[Assignment, NAVPrediction] = {}
