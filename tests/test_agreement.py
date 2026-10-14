@@ -31,7 +31,10 @@ def test_line_decreasing_segment():
 # --- _agreement_score: None / unknown prediction ---
 
 
-@pytest.mark.parametrize("outcome", ["ON", "Some/ON", "Some", "OFF/Some", "OFF"])
+@pytest.mark.parametrize(
+    "outcome",
+    ["ON", "Some/ON", "Some", "OFF/Some", "OFF", (0.3, 0.4)],
+)
 def test_none_predict_scores_full_agreement(outcome):
     assert _agreement_score(outcome, None) == 1.0
 
@@ -142,6 +145,56 @@ def test_agreement_unknown_outcome_raises():
         _agreement_score("MAYBE", 0.5)
 
 
+# --- _agreement_score: tuple ranges equivalent to string labels ---
+
+
+@pytest.mark.parametrize(
+    "label, rng",
+    [
+        ("ON", (1.0, 1.0)),
+        ("Some/ON", (0.5, 1.0)),
+        ("Some", (0.25, 0.75)),
+        ("OFF/Some", (0.0, 0.5)),
+        ("OFF", (0.0, 0.0)),
+    ],
+)
+@pytest.mark.parametrize("predict", [0.0, 0.25, 0.5, 0.75, 1.0])
+def test_tuple_range_matches_label(label, rng, predict):
+    assert _agreement_score(rng, predict) == pytest.approx(
+        _agreement_score(label, predict)
+    )
+
+
+@pytest.mark.parametrize(
+    "predict, expected",
+    [
+        (0.0, 0.0),
+        (0.15, 0.5),  # midpoint of left shoulder [0, 0.3]
+        (0.3, 1.0),
+        (0.35, 1.0),
+        (0.4, 1.0),
+        (0.7, 0.5),  # midpoint of right shoulder [0.4, 1.0]
+        (1.0, 0.0),
+    ],
+)
+def test_agreement_custom_range(predict, expected):
+    assert _agreement_score((0.3, 0.4), predict) == pytest.approx(expected)
+
+
+@pytest.mark.parametrize(
+    "outcome",
+    [
+        (0.6, 0.4),
+        (-0.1, 0.5),
+        (0.0, 1.1),
+        (1.5, 2.0),
+    ],
+)
+def test_agreement_invalid_range_raises(outcome):
+    with pytest.raises(ValueError, match="Outcome range must satisfy"):
+        _agreement_score(outcome, 0.5)
+
+
 # --- get_agreements ---
 
 
@@ -229,3 +282,17 @@ def test_get_agreements_unexpected_outcome_raises():
 
 def test_get_agreements_empty():
     assert get_agreements([], {}) == {}
+
+
+def test_get_agreements_tuple_outcome():
+    experiments = [
+        NAVExperiment(
+            id=1, fixes=(), observed="A", outcome=(0.5, 1.0), weight=1.0
+        ),
+    ]
+    predictions = _prediction((), {"A": 0.75})
+
+    agreements = get_agreements(experiments, predictions)
+    exp_id, weight, outcome, predict, agreement = agreements["A"][()]
+    assert (exp_id, weight, outcome, predict) == (1, 1.0, (0.5, 1.0), 0.75)
+    assert agreement == pytest.approx(1.0)

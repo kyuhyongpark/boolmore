@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from boolmore.types import Assignment
+from boolmore.types import Assignment, OutcomeType
 
 
 @dataclass(frozen=True)
@@ -22,6 +22,6 @@ class NAVExperiment:
 
     fixes: Assignment
     observed: str
-    outcome: str
+    outcome: OutcomeType
 
     weight: float = 1.0

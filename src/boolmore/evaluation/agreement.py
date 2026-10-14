@@ -4,7 +4,15 @@ from __future__ import annotations
 
 from boolmore.experiment import NAVExperiment
 from boolmore.inference.prediction import NAVPrediction
-from boolmore.types import AgreeType, Assignment
+from boolmore.types import AgreeType, Assignment, OutcomeType
+
+_OUTCOME_RANGES: dict[str, tuple[float, float]] = {
+    "ON": (1.0, 1.0),
+    "Some/ON": (0.5, 1.0),
+    "Some": (0.25, 0.75),
+    "OFF/Some": (0.0, 0.5),
+    "OFF": (0.0, 0.0),
+}
 
 
 def line(x: float, start: tuple[float, float], end: tuple[float, float]) -> float:
@@ -33,41 +41,58 @@ def line(x: float, start: tuple[float, float], end: tuple[float, float]) -> floa
     return start[1] + slope * (x - start[0])
 
 
-def _agreement_score(outcome: str, predict_value: float | None) -> float:
+def _resolve_range(outcome: OutcomeType) -> tuple[float, float]:
+    """Resolve an outcome label or float range to ``(lo, hi)`` in ``[0, 1]``."""
+    if isinstance(outcome, tuple):
+        if len(outcome) != 2:
+            raise ValueError(f"Unexpected experiment outcome: {outcome!r}")
+        lo, hi = float(outcome[0]), float(outcome[1])
+        if not (0.0 <= lo <= hi <= 1.0):
+            raise ValueError(
+                f"Outcome range must satisfy 0 <= lo <= hi <= 1; got {outcome!r}"
+            )
+        return lo, hi
+
+    if isinstance(outcome, str):
+        try:
+            return _OUTCOME_RANGES[outcome]
+        except KeyError:
+            raise ValueError(f"Unexpected experiment outcome: {outcome!r}") from None
+
+    raise ValueError(f"Unexpected experiment outcome: {outcome!r}")
+
+
+def _score_range(x: float, lo: float, hi: float) -> float:
+    """Score ``x`` against plateau ``[lo, hi]`` with linear shoulders to 0."""
+    parts: list[float] = []
+    if lo > 0.0:
+        parts.append(line(x, (0.0, 0.0), (lo, 1.0)))
+    if lo < hi:
+        parts.append(line(x, (lo, 1.0), (hi, 1.0)))
+    if hi < 1.0:
+        parts.append(line(x, (hi, 1.0), (1.0, 0.0)))
+    if not parts:
+        return 1.0
+    return max(parts)
+
+
+def _agreement_score(outcome: OutcomeType, predict_value: float | None) -> float:
     """Score agreement of a predicted average value against an observed outcome.
+
+    Outcomes are float ranges ``(lo, hi)``, or string labels that map to
+    those ranges. Agreement is ``1.0`` inside the range and drops linearly
+    to ``0`` outside (shoulders from ``0`` and/or to ``1``).
 
     Unknown predictions (``None`` / ``?``) score ``1.0`` for optimistic
     upper-bound scoring. Forced floats are clamped to ``[0, 1]`` (so tiny
-    FP overshoots do not fall off the curves) then scored with the
-    piecewise-linear curves for each outcome label.
+    FP overshoots do not fall off the curves).
     """
     if predict_value is None:
         return 1.0
 
     x = min(1.0, max(0.0, predict_value))
-
-    if outcome == "ON":
-        return line(x, (0, 0), (1, 1))
-    if outcome == "Some/ON":
-        return max(
-            line(x, (0, 0), (0.5, 1)),
-            line(x, (0.5, 1), (1, 1)),
-        )
-    if outcome == "Some":
-        return max(
-            line(x, (0, 0), (0.25, 1)),
-            line(x, (0.25, 1), (0.75, 1)),
-            line(x, (0.75, 1), (1, 0)),
-        )
-    if outcome == "OFF/Some":
-        return max(
-            line(x, (0, 1), (0.5, 1)),
-            line(x, (0.5, 1), (1, 0)),
-        )
-    if outcome == "OFF":
-        return line(x, (0, 1), (1, 0))
-
-    raise ValueError(f"Unexpected experiment outcome: {outcome!r}")
+    lo, hi = _resolve_range(outcome)
+    return _score_range(x, lo, hi)
 
 
 def get_agreements(
@@ -97,8 +122,8 @@ def get_agreements(
     Raises
     ------
     ValueError
-        If an outcome label is unknown, or if two experiments share the
-        same observed node and intervention assignment.
+        If an outcome label or range is invalid, or if two experiments
+        share the same observed node and intervention assignment.
     """
     agreements: AgreeType = {}
     for exp in experiments:
