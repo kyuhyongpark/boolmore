@@ -2,7 +2,13 @@
 
 import pytest
 
-from boolmore.evaluation.agreement import _agreement_score, get_agreements, line
+from boolmore.evaluation.agreement import (
+    _agreement_score,
+    _average_related_values,
+    _related_node_names,
+    get_agreements,
+    line,
+)
 from boolmore.experiment import NAVExperiment
 from boolmore.inference.prediction import NAVPrediction
 from boolmore.outcome import ComparativeOutcome
@@ -366,19 +372,51 @@ def test_get_agreements_tuple_outcome():
     assert agreement == pytest.approx(1.0)
 
 
-def test_get_agreements_avg_observed_uses_stored_key():
+def test_get_agreements_avg_observed_means_siblings():
     experiments = [
         NAVExperiment(id=1, fixes=(), observed="A_avg", outcome="Some", weight=1.0),
     ]
-    predictions = _prediction(
-        (),
-        {"A": 0.0, "A_2": 1.0, "A_avg": 0.5},
-    )
+    predictions = _prediction((), {"A": 0.0, "A_2": 1.0})
 
     agreements = get_agreements(experiments, predictions)
     exp_id, weight, outcome, predict, agreement = agreements["A_avg"][()]
     assert (exp_id, weight, outcome, predict) == (1, 1.0, "Some", 0.5)
     assert agreement == pytest.approx(1.0)
+
+
+def test_related_node_names_includes_alphabet_siblings_excludes_unrelated():
+    values = {
+        "A": 0.0,
+        "A_X": 1.0,
+        "A_Y": 0.5,
+        "A_iT": 0.25,
+        "A_2b": 0.75,
+        "AB": 1.0,
+    }
+    assert sorted(_related_node_names("A", values)) == ["A", "A_X", "A_Y"]
+    assert _average_related_values(values, "A_avg") == pytest.approx(0.5)
+
+
+def test_get_agreements_avg_none_when_any_sibling_none():
+    experiments = [
+        NAVExperiment(id=1, fixes=(), observed="A_avg", outcome="Some", weight=1.0),
+    ]
+    predictions = _prediction((), {"A": None, "A_2": None})
+
+    agreements = get_agreements(experiments, predictions)
+    _, _, _, predict, agreement = agreements["A_avg"][()]
+    assert predict is None
+    assert agreement == pytest.approx(1.0)
+
+
+def test_get_agreements_avg_no_siblings_raises():
+    experiments = [
+        NAVExperiment(id=1, fixes=(), observed="A_avg", outcome="Some", weight=1.0),
+    ]
+    predictions = _prediction((), {"B": 0.5})
+
+    with pytest.raises(ValueError, match="No related nodes"):
+        get_agreements(experiments, predictions)
 
 
 # --- get_agreements: comparative outcomes ---
