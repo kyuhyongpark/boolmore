@@ -10,7 +10,7 @@ from pathlib import Path
 from boolmore.experiment import NAVExperiment
 from boolmore.outcome import (
     format_outcome_range,
-    parse_outcome_cell,
+    parse_outcome,
     resolve_outcome_range,
 )
 
@@ -322,7 +322,7 @@ def import_NAV_exps(
                 )
 
             raw_outcome = cell(outcome_header)
-            outcome = parse_outcome_cell(raw_outcome)
+            outcome = parse_outcome(raw_outcome)
             lo, hi = resolve_outcome_range(outcome)
             range_str = format_outcome_range(lo, hi)
             outcome_range_strings.append(range_str)
@@ -334,7 +334,7 @@ def import_NAV_exps(
                         f"Empty Outcome range (row id={exp_id})"
                     )
                 try:
-                    provided = parse_outcome_cell(raw_range)
+                    provided = parse_outcome(raw_range)
                     provided_lo, provided_hi = resolve_outcome_range(provided)
                 except ValueError as exc:
                     raise ValueError(

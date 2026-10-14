@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from boolmore.types import OutcomeType
 
-OUTCOME_RANGES: dict[str, tuple[float, float]] = {
+_OUTCOME_LABEL_RANGES: dict[str, tuple[float, float]] = {
     "ON": (1.0, 1.0),
     "Some/ON": (0.5, 1.0),
     "Some": (0.25, 0.75),
@@ -38,7 +38,7 @@ def resolve_outcome_range(outcome: OutcomeType) -> tuple[float, float]:
 
     if isinstance(outcome, str):
         try:
-            return OUTCOME_RANGES[outcome]
+            return _OUTCOME_LABEL_RANGES[outcome]
         except KeyError:
             raise ValueError(f"Unexpected experiment outcome: {outcome!r}") from None
 
@@ -55,8 +55,8 @@ def resolve_outcome_range(outcome: OutcomeType) -> tuple[float, float]:
     raise ValueError(f"Unexpected experiment outcome: {outcome!r}")
 
 
-def parse_outcome_cell(text: str) -> OutcomeType:
-    """Parse a CSV/TSV outcome cell into an ``OutcomeType``.
+def parse_outcome(text: str) -> OutcomeType:
+    """Parse an outcome string into an ``OutcomeType``.
 
     Accepts known labels, ``lo,hi`` range strings, or a scalar float string.
     """
@@ -64,7 +64,7 @@ def parse_outcome_cell(text: str) -> OutcomeType:
     if not value:
         raise ValueError("Empty outcome cell")
 
-    if value in OUTCOME_RANGES:
+    if value in _OUTCOME_LABEL_RANGES:
         return value
 
     if "," in value:
