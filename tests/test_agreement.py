@@ -296,13 +296,13 @@ def test_get_agreements_groups_by_observed_node():
     assert set(agreements["A"]) == {fixes_a, ()}
     assert set(agreements["B"]) == {fixes_b}
 
-    exp_id, weight, outcome, predict, agreement = agreements["A"][fixes_a]
+    exp_id, weight, outcome, predict, agreement = agreements["A"][fixes_a][0]
     assert (exp_id, weight, outcome, predict, agreement) == (1, 2.0, "ON", 1.0, 1.0)
 
-    exp_id, weight, outcome, predict, agreement = agreements["B"][fixes_b]
+    exp_id, weight, outcome, predict, agreement = agreements["B"][fixes_b][0]
     assert (exp_id, weight, outcome, predict, agreement) == (2, 3.0, "OFF", 0.0, 1.0)
 
-    exp_id, weight, outcome, predict, agreement = agreements["A"][()]
+    exp_id, weight, outcome, predict, agreement = agreements["A"][()][0]
     assert (exp_id, weight, outcome, predict) == (3, 1.0, "Some", 0.5)
     assert agreement == pytest.approx(1.0)
 
@@ -314,12 +314,12 @@ def test_get_agreements_none_predict_is_optimistic():
     predictions = _prediction((), {"A": None})
 
     agreements = get_agreements(experiments, predictions)
-    _id, _w, _out, predict, agreement = agreements["A"][()]
+    _id, _w, _out, predict, agreement = agreements["A"][()][0]
     assert predict is None
     assert agreement == 1.0
 
 
-def test_get_agreements_duplicate_fixes_raises():
+def test_get_agreements_duplicate_absolute_raises():
     fixes = (("X", 1),)
     experiments = [
         NAVExperiment(id=1, fixes=fixes, observed="A", outcome="ON", weight=1.0),
@@ -327,8 +327,78 @@ def test_get_agreements_duplicate_fixes_raises():
     ]
     predictions = _prediction(fixes, {"A": 0.5})
 
-    with pytest.raises(ValueError, match="Duplicate experimental entry"):
+    with pytest.raises(ValueError, match="non-comparative outcomes"):
         get_agreements(experiments, predictions)
+
+
+def test_get_agreements_duplicate_comparative_other_id_raises():
+    fixes = (("X", 1),)
+    outcome = ComparativeOutcome(relation="higher", other_id=3)
+    experiments = [
+        NAVExperiment(id=1, fixes=fixes, observed="A", outcome=outcome, weight=1.0),
+        NAVExperiment(id=2, fixes=fixes, observed="A", outcome=outcome, weight=1.0),
+        NAVExperiment(id=3, fixes=(), observed="A", outcome="OFF", weight=1.0),
+    ]
+    predictions = {
+        **_prediction(fixes, {"A": 1.0}),
+        **_prediction((), {"A": 0.0}),
+    }
+
+    with pytest.raises(ValueError, match="comparative other_id=3"):
+        get_agreements(experiments, predictions)
+
+
+def test_get_agreements_absolute_plus_comparative_ok():
+    fixes = (("X", 1),)
+    comparative = ComparativeOutcome(relation="higher", other_id=2)
+    experiments = [
+        NAVExperiment(id=1, fixes=fixes, observed="A", outcome="ON", weight=1.0),
+        NAVExperiment(
+            id=3, fixes=fixes, observed="A", outcome=comparative, weight=1.0
+        ),
+        NAVExperiment(id=2, fixes=(), observed="A", outcome="OFF", weight=1.0),
+    ]
+    predictions = {
+        **_prediction(fixes, {"A": 1.0}),
+        **_prediction((), {"A": 0.0}),
+    }
+
+    agreements = get_agreements(experiments, predictions)
+    entries = agreements["A"][fixes]
+    assert len(entries) == 2
+    assert {e[0] for e in entries} == {1, 3}
+
+
+def test_get_agreements_two_comparatives_different_other_ids_ok():
+    fixes = (("X", 1),)
+    experiments = [
+        NAVExperiment(
+            id=1,
+            fixes=fixes,
+            observed="A",
+            outcome=ComparativeOutcome(relation="higher", other_id=3),
+            weight=1.0,
+        ),
+        NAVExperiment(
+            id=2,
+            fixes=fixes,
+            observed="A",
+            outcome=ComparativeOutcome(relation="same", other_id=4),
+            weight=1.0,
+        ),
+        NAVExperiment(id=3, fixes=(), observed="A", outcome="OFF", weight=1.0),
+        NAVExperiment(
+            id=4, fixes=(("Y", 1),), observed="A", outcome="Some", weight=1.0
+        ),
+    ]
+    predictions = {
+        **_prediction(fixes, {"A": 1.0}),
+        **_prediction((), {"A": 0.0}),
+        **_prediction((("Y", 1),), {"A": 1.0}),
+    }
+
+    agreements = get_agreements(experiments, predictions)
+    assert {e[0] for e in agreements["A"][fixes]} == {1, 2}
 
 
 def test_get_agreements_same_fixes_different_observed_ok():
@@ -340,8 +410,8 @@ def test_get_agreements_same_fixes_different_observed_ok():
     predictions = _prediction(fixes, {"A": 1.0, "B": 0.0})
 
     agreements = get_agreements(experiments, predictions)
-    assert agreements["A"][fixes][0] == 1
-    assert agreements["B"][fixes][0] == 2
+    assert agreements["A"][fixes][0][0] == 1
+    assert agreements["B"][fixes][0][0] == 2
 
 
 def test_get_agreements_unexpected_outcome_raises():
@@ -367,7 +437,7 @@ def test_get_agreements_tuple_outcome():
     predictions = _prediction((), {"A": 0.75})
 
     agreements = get_agreements(experiments, predictions)
-    exp_id, weight, outcome, predict, agreement = agreements["A"][()]
+    exp_id, weight, outcome, predict, agreement = agreements["A"][()][0]
     assert (exp_id, weight, outcome, predict) == (1, 1.0, (0.5, 1.0), 0.75)
     assert agreement == pytest.approx(1.0)
 
@@ -379,7 +449,7 @@ def test_get_agreements_avg_observed_means_siblings():
     predictions = _prediction((), {"A": 0.0, "A_2": 1.0})
 
     agreements = get_agreements(experiments, predictions)
-    exp_id, weight, outcome, predict, agreement = agreements["A_avg"][()]
+    exp_id, weight, outcome, predict, agreement = agreements["A_avg"][()][0]
     assert (exp_id, weight, outcome, predict) == (1, 1.0, "Some", 0.5)
     assert agreement == pytest.approx(1.0)
 
@@ -404,7 +474,7 @@ def test_get_agreements_avg_none_when_any_sibling_none():
     predictions = _prediction((), {"A": None, "A_2": None})
 
     agreements = get_agreements(experiments, predictions)
-    _, _, _, predict, agreement = agreements["A_avg"][()]
+    _, _, _, predict, agreement = agreements["A_avg"][()][0]
     assert predict is None
     assert agreement == pytest.approx(1.0)
 
@@ -436,7 +506,7 @@ def test_get_agreements_higher_than():
     }
 
     agreements = get_agreements(experiments, predictions)
-    exp_id, weight, out, predict, agreement = agreements["A"][fixes_a]
+    exp_id, weight, out, predict, agreement = agreements["A"][fixes_a][0]
     assert exp_id == 1
     assert weight == 1.0
     assert out == outcome
@@ -458,7 +528,7 @@ def test_get_agreements_lower_than():
     }
 
     agreements = get_agreements(experiments, predictions)
-    _id, _w, _out, predict, agreement = agreements["A"][fixes_a]
+    _id, _w, _out, predict, agreement = agreements["A"][fixes_a][0]
     assert predict == pytest.approx(1.0)
     assert agreement == pytest.approx(1.0)
 
@@ -477,7 +547,7 @@ def test_get_agreements_higher_than_wrong_direction_scores_zero():
     }
 
     agreements = get_agreements(experiments, predictions)
-    _id, _w, _out, predict, agreement = agreements["A"][fixes_a]
+    _id, _w, _out, predict, agreement = agreements["A"][fixes_a][0]
     assert predict == pytest.approx(-1.0)
     assert agreement == pytest.approx(0.0)
 
@@ -496,7 +566,7 @@ def test_get_agreements_same_as():
     }
 
     agreements = get_agreements(experiments, predictions)
-    _id, _w, _out, predict, agreement = agreements["A"][fixes_a]
+    _id, _w, _out, predict, agreement = agreements["A"][fixes_a][0]
     assert predict == pytest.approx(0.0)
     assert agreement == pytest.approx(1.0)
 
@@ -515,7 +585,7 @@ def test_get_agreements_same_as_large_diff_scores_zero():
     }
 
     agreements = get_agreements(experiments, predictions)
-    _id, _w, _out, predict, agreement = agreements["A"][fixes_a]
+    _id, _w, _out, predict, agreement = agreements["A"][fixes_a][0]
     assert predict == pytest.approx(1.0)
     assert agreement == pytest.approx(0.0)
 
@@ -534,7 +604,7 @@ def test_get_agreements_comparative_none_is_optimistic():
     }
 
     agreements = get_agreements(experiments, predictions)
-    _id, _w, _out, predict, agreement = agreements["A"][fixes_a]
+    _id, _w, _out, predict, agreement = agreements["A"][fixes_a][0]
     assert predict is None
     assert agreement == 1.0
 
@@ -569,6 +639,6 @@ def test_get_agreements_comparative_uses_each_observed():
     }
 
     agreements = get_agreements(experiments, predictions)
-    _id, _w, _out, predict, agreement = agreements["A"][fixes_a]
+    _id, _w, _out, predict, agreement = agreements["A"][fixes_a][0]
     assert predict == pytest.approx(0.5)
     assert agreement == pytest.approx(0.5)

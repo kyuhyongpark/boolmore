@@ -142,6 +142,45 @@ def _predict_value_for_observed(
     return average_values[observed]
 
 
+def check_co_located_outcomes(
+    existing: Iterable[tuple[int, OutcomeType]],
+    exp_id: int,
+    outcome_value: OutcomeType,
+    observed_node: str,
+    fixes: Assignment,
+) -> None:
+    """Reject redundant absolute or same-``other_id`` comparative entries.
+
+    Multiple experiments may share ``(observed_node, fixes)`` when at most
+    one outcome is non-comparative and every comparative outcome targets a
+    distinct ``other_id``.
+
+    Raises
+    ------
+    ValueError
+        If ``outcome_value`` conflicts with an existing co-located outcome.
+    """
+    new_is_comparative = isinstance(outcome_value, ComparativeOutcome)
+    for other_id, other_outcome in existing:
+        other_is_comparative = isinstance(other_outcome, ComparativeOutcome)
+        if not new_is_comparative and not other_is_comparative:
+            raise ValueError(
+                f"Duplicate experimental entry: {other_id} and {exp_id} "
+                f"share observed={observed_node!r} fixes={fixes!r} "
+                f"with non-comparative outcomes"
+            )
+        if (
+            new_is_comparative
+            and other_is_comparative
+            and outcome_value.other_id == other_outcome.other_id
+        ):
+            raise ValueError(
+                f"Duplicate experimental entry: {other_id} and {exp_id} "
+                f"share observed={observed_node!r} fixes={fixes!r} "
+                f"and comparative other_id={outcome_value.other_id}"
+            )
+
+
 def get_agreements(
     experiments: list[NAVExperiment],
     predictions: dict[Assignment, NAVPrediction],
@@ -164,12 +203,14 @@ def get_agreements(
     Returns
     -------
     AgreeType
-        Nested mapping ``observed_node -> fixes -> (id, max_score,
-        outcome_value, predict_value, agreement)``. ``predict_value`` may
-        be ``None`` (``?``) for LDOI upper-bound scoring; then
-        ``agreement`` is ``1.0``. For comparative outcomes, ``predict_value``
-        is the oriented or absolute difference of the two experiments'
-        absolute averages.
+        Nested mapping ``observed_node -> fixes -> list of (id, max_score,
+        outcome_value, predict_value, agreement)``. Multiple experiments may
+        share the same ``(observed, fixes)`` when at most one outcome is
+        non-comparative and comparative outcomes use distinct ``other_id``
+        values. ``predict_value`` may be ``None`` (``?``) for LDOI
+        upper-bound scoring; then ``agreement`` is ``1.0``. For comparative
+        outcomes, ``predict_value`` is the oriented or absolute difference
+        of the two experiments' absolute averages.
 
     Raises
     ------
@@ -177,7 +218,8 @@ def get_agreements(
         If an outcome label or range is invalid, a comparative reference id
         is missing, an ``*_avg`` observed name has no related siblings, or
         if two experiments share the same observed node and intervention
-        assignment.
+        assignment with conflicting outcomes (two non-comparative outcomes,
+        or two comparatives with the same ``other_id``).
     """
     experiments_by_id = {exp.id: exp for exp in experiments}
     agreements: AgreeType = {}
@@ -213,19 +255,22 @@ def get_agreements(
         agreement = _agreement_score(outcome_value, predict_value)
 
         by_fixes = agreements.setdefault(observed_node, {})
-        if fixes in by_fixes:
-            other_id = by_fixes[fixes][0]
-            raise ValueError(
-                f"Duplicate experimental entry: {other_id} and {exp_id} "
-                f"share observed={observed_node!r} fixes={fixes!r}"
-            )
-
-        by_fixes[fixes] = (
+        entries = by_fixes.setdefault(fixes, [])
+        check_co_located_outcomes(
+            ((other_id, other_outcome) for other_id, _, other_outcome, _, _ in entries),
             exp_id,
-            max_score,
             outcome_value,
-            predict_value,
-            agreement,
+            observed_node,
+            fixes,
+        )
+        entries.append(
+            (
+                exp_id,
+                max_score,
+                outcome_value,
+                predict_value,
+                agreement,
+            )
         )
 
     return agreements

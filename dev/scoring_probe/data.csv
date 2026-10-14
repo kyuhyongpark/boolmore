@@ -1,0 +1,6 @@
+ID,Score,Source,Perturbation,Observed node,Categorization
+1,1.0,,,A_avg,Some
+2,1.0,,Inhib1=1,A_avg,lower than 3
+3,1.0,,Inhib2=1,A_avg,higher than 2
+4,1.0,,,A_avg,same as 5
+5,1.0,,Inhib2=1,A_avg,same as 4

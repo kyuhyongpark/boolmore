@@ -7,6 +7,7 @@ import re
 from collections.abc import Sequence
 from pathlib import Path
 
+from boolmore.evaluation.agreement import check_co_located_outcomes
 from boolmore.experiment import NAVExperiment
 from boolmore.outcome import (
     ComparativeOutcome,
@@ -293,7 +294,6 @@ def import_NAV_exps(
         raw_rows: list[list[str]] = []
         outcome_range_strings: list[str] = []
         exps: list[NAVExperiment] = []
-        interventions: list[tuple] = []
         seen_ids: set[int] = set()
         needs_fixes_rewrite = False
         needs_outcome_ranges = False
@@ -367,14 +367,14 @@ def import_NAV_exps(
                 weight=float(cell(weight_header)),
             )
 
-            if fixes not in interventions:
-                interventions.append(fixes)
-            else:
-                for other_exp in exps:
-                    if fixes == other_exp.fixes:
-                        assert exp.observed != other_exp.observed, (
-                            f"{other_exp.id} and {exp.id} are duplicates"
-                        )
+            co_located = [
+                (other_exp.id, other_exp.outcome)
+                for other_exp in exps
+                if other_exp.fixes == fixes and other_exp.observed == observed
+            ]
+            check_co_located_outcomes(
+                co_located, exp_id, outcome, observed, fixes
+            )
 
             exps.append(exp)
 

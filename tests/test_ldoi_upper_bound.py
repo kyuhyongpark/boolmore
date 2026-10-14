@@ -58,7 +58,7 @@ def test_none_predict_gives_full_agreement_for_all_outcomes():
             (): NAVPrediction(fixes=(), average_values={"A": None}),
         }
         agreements = get_agreements(experiments, predictions)
-        _id, weight, _out, predict_value, agreement = agreements["A"][()]
+        _id, weight, _out, predict_value, agreement = agreements["A"][()][0]
         assert predict_value is None
         assert agreement == 1.0
         assert weight == 2.0

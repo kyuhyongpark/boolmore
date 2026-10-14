@@ -295,6 +295,36 @@ def test_invalid_outcome_raises_at_import(tmp_path: Path):
         import_NAV_exps(csv_path)
 
 
+def test_import_absolute_plus_comparative_same_fixes_ok(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization\n"
+        "1,1.0,,,B,Some\n"
+        "2,1.0,A=1,,B,higher than 3\n"
+        "3,1.0,,,B,lower than 2\n"
+        "4,1.0,,,B,same as 5\n"
+        "5,1.0,A=1,,B,same as 4\n",
+    )
+
+    exps = import_NAV_exps(csv_path)
+    assert len(exps) == 5
+    assert exps[0].outcome == "Some"
+    assert exps[3].outcome == ComparativeOutcome(relation="same", other_id=5)
+    assert exps[4].outcome == ComparativeOutcome(relation="same", other_id=4)
+
+
+def test_import_duplicate_absolute_same_fixes_raises(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization\n"
+        "1,1.0,,,B,ON\n"
+        "2,1.0,,,B,OFF\n",
+    )
+
+    with pytest.raises(ValueError, match="non-comparative outcomes"):
+        import_NAV_exps(csv_path)
+
+
 def test_import_comparative_outcomes(tmp_path: Path):
     csv_path = _write(
         tmp_path / "data.csv",
