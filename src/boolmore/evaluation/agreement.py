@@ -1,41 +1,88 @@
+"""Agreement between NAV experiment outcomes and model predictions."""
+
+from __future__ import annotations
+
 from boolmore.experiment import NAVExperiment
 from boolmore.inference.prediction import NAVPrediction
 from boolmore.types import AgreeType, Assignment
 
 
-def line(input:float, start:tuple[float, float], end:tuple[float, float]) -> float:
-    """
-    Takes the input as the x value and returns the y value
-    on a straight line from the start to the end.
-    Any value outside the region returns 0.
-    
+def line(x: float, start: tuple[float, float], end: tuple[float, float]) -> float:
+    """Linearly interpolate ``y`` for ``x`` on the segment from ``start`` to ``end``.
+
+    Returns ``0.0`` when ``x`` lies outside ``[start[0], end[0]]``.
+
     Parameters
     ----------
-    input   - x value   :float
-    start   - (x1,y1)   :tuple[float, float]
-    end     - (x2,y2)   :tuple[float, float]
+    x : float
+        Horizontal coordinate.
+    start : tuple[float, float]
+        Segment start ``(x1, y1)``.
+    end : tuple[float, float]
+        Segment end ``(x2, y2)``.
 
     Returns
     -------
-    output  - y value   :float
-
+    float
+        Interpolated ``y``, or ``0.0`` outside the segment.
     """
-    if not start[0] <= input <= end[0]:
-        return 0
+    if not start[0] <= x <= end[0]:
+        return 0.0
 
-    slope = (end[1]-start[1])/(end[0]-start[0])
-    output = start[1] + slope * (input - start[0])
+    slope = (end[1] - start[1]) / (end[0] - start[0])
+    return start[1] + slope * (x - start[0])
 
-    return output
+
+def _agreement_score(outcome: str, predict_value: float | None) -> float:
+    """Score agreement of a predicted average value against an observed outcome.
+
+    Unknown predictions (``None`` / ``?``) score ``1.0`` for optimistic
+    upper-bound scoring. Forced floats use the piecewise-linear curves
+    for each outcome label.
+    """
+    if predict_value is None:
+        return 1.0
+
+    if outcome == "ON":
+        return max(
+            line(predict_value, (0, 0), (1, 1)),
+            line(predict_value, (1, 1), (1.0001, 1)),
+        )
+    if outcome == "Some/ON":
+        return max(
+            line(predict_value, (0, 0), (0.5, 1)),
+            line(predict_value, (0.5, 1), (1, 1)),
+            line(predict_value, (1, 1), (1.0001, 1)),
+        )
+    if outcome == "Some":
+        return max(
+            line(predict_value, (0, 0), (0.25, 1)),
+            line(predict_value, (0.25, 1), (0.75, 1)),
+            line(predict_value, (0.75, 1), (1, 0)),
+        )
+    if outcome == "OFF/Some":
+        return max(
+            line(predict_value, (-0.0001, 1), (0, 1)),
+            line(predict_value, (0, 1), (0.5, 1)),
+            line(predict_value, (0.5, 1), (1, 0)),
+        )
+    if outcome == "OFF":
+        return max(
+            line(predict_value, (-0.0001, 1), (0, 1)),
+            line(predict_value, (0, 1), (1, 0)),
+        )
+
+    raise ValueError(f"Unexpected experiment outcome: {outcome!r}")
+
 
 def get_agreements(
     experiments: list[NAVExperiment],
     predictions: dict[Assignment, NAVPrediction],
 ) -> AgreeType:
-    """
-    Returns attractor agreements when given experimental outcomes and model predictions.
-    agreements are categorized by observed node,
-    so that it is easier to find all the interventions for that observed node.
+    """Return attractor agreements for experimental outcomes vs model predictions.
+
+    Agreements are keyed by observed node so interventions for that node
+    are easy to find.
 
     Parameters
     ----------
@@ -46,67 +93,43 @@ def get_agreements(
 
     Returns
     -------
-    agreements : AgreeType
-        collection of all data
-        key : str
-            observed_node
-        value : dict[FixesType, tuple]
-            data for the node
-            key : FixesType
-            value : tuple[int, float, str, float | None, float]
-                data for given fixes - (id, max_score, outcome_value,
-                predict_value, agreement). ``predict_value`` may be
-                ``None`` (``?``) for LDOI upper-bound scoring; then
-                ``agreement`` is ``1.0``.
+    AgreeType
+        Nested mapping ``observed_node -> fixes -> (id, max_score,
+        outcome_value, predict_value, agreement)``. ``predict_value`` may
+        be ``None`` (``?``) for LDOI upper-bound scoring; then
+        ``agreement`` is ``1.0``.
 
+    Raises
+    ------
+    ValueError
+        If an outcome label is unknown, or if two experiments share the
+        same observed node and intervention assignment.
     """
-    agreements = {}
+    agreements: AgreeType = {}
     for exp in experiments:
-        id = exp.id
+        exp_id = exp.id
         max_score = exp.weight
         fixes = exp.fixes
         observed_node = exp.observed
         outcome_value = exp.outcome
 
         predict_value = predictions[fixes].average_values[observed_node]
+        agreement = _agreement_score(outcome_value, predict_value)
 
-        # Unknown / free prediction (``?``): optimistic full agreement for
-        # upper-bound scoring. Forced floats use the usual agreement curves.
-        if predict_value is None:
-            agreement = 1.0
-        # experiment showed (ON)
-        elif outcome_value == 'ON':
-            agreement = max(line(predict_value,(0,0),(1,1)),
-                            line(predict_value,(1,1),(1.0001,1)))
-        # experiment showed (Some/ON)
-        elif outcome_value == 'Some/ON':
-            agreement = max(line(predict_value,(0,0),(0.5,1)),
-                            line(predict_value,(0.5,1),(1,1)),
-                            line(predict_value,(1,1),(1.0001,1)))
-        # experiment showed (Some)
-        elif outcome_value == 'Some':
-            agreement = max(line(predict_value,(0,0),(0.25,1)),
-                            line(predict_value,(0.25,1),(0.75,1)),
-                            line(predict_value,(0.75,1),(1,0)))
-        # experiment showed (OFF/Some)
-        elif outcome_value == 'OFF/Some':
-            agreement = max(line(predict_value,(-0.0001,1),(0,1)),
-                            line(predict_value,(0,1),(0.5,1)),
-                            line(predict_value,(0.5,1),(1,0)))
-        # experiment showed (OFF)
-        elif outcome_value == 'OFF':
-            agreement = max(line(predict_value,(-0.0001,1),(0,1)),
-                            line(predict_value,(0,1),(1,0)))
-        else:
-            print("Unexpected input", outcome_value)
-            raise Exception("Unexpected experiment input")
+        by_fixes = agreements.setdefault(observed_node, {})
+        if fixes in by_fixes:
+            other_id = by_fixes[fixes][0]
+            raise ValueError(
+                f"Duplicate experimental entry: {other_id} and {exp_id} "
+                f"share observed={observed_node!r} fixes={fixes!r}"
+            )
 
-        if observed_node not in agreements:
-            agreements[observed_node] = {}
-        elif fixes in agreements[observed_node]:
-            print(f'{agreements[observed_node][fixes][0]} and {id} are duplicates')
-            raise Exception("Duplicate experimental entry")
-        
-        agreements[observed_node][fixes] = id, max_score, outcome_value, predict_value, agreement
+        by_fixes[fixes] = (
+            exp_id,
+            max_score,
+            outcome_value,
+            predict_value,
+            agreement,
+        )
 
     return agreements
