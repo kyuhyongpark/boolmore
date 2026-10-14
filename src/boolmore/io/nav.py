@@ -9,6 +9,7 @@ from pathlib import Path
 
 from boolmore.experiment import NAVExperiment
 from boolmore.outcome import (
+    ComparativeOutcome,
     format_outcome_range,
     parse_outcome,
     resolve_outcome_range,
@@ -250,8 +251,9 @@ def import_NAV_exps(
     Notes
     -----
     Raises ``ValueError`` on duplicate experiment ids, invalid outcomes, an
-    inconsistent or empty ``Outcome range`` column, or when the observed node
-    also appears in that row's fixes.
+    inconsistent or empty ``Outcome range`` column, a comparative outcome
+    that references a missing experiment id, or when the observed node also
+    appears in that row's fixes.
 
     When an ``Outcome range`` column is present, each row is checked against
     the range resolved from the outcome column; matching ranges are treated as
@@ -368,6 +370,16 @@ def import_NAV_exps(
                         )
 
             exps.append(exp)
+
+    seen_ids_final = {exp.id for exp in exps}
+    for exp in exps:
+        if isinstance(exp.outcome, ComparativeOutcome):
+            other_id = exp.outcome.other_id
+            if other_id not in seen_ids_final:
+                raise ValueError(
+                    f"Comparative outcome for experiment {exp.id} references "
+                    f"missing id {other_id}"
+                )
 
     skip_write = path.stem.endswith("_preprocessed")
     needs_write = (needs_fixes_rewrite or needs_outcome_ranges) and not skip_write
