@@ -1,5 +1,7 @@
 import logging
+import re
 from collections import defaultdict
+from collections.abc import Iterable
 from time import perf_counter
 from dataclasses import dataclass
 
@@ -12,6 +14,7 @@ from boolmore.inference.ldoi import logical_domain_of_influence
 from boolmore.types import Assignment
 
 NAV_METHODS = ("min_traps", "ldoi")
+_AVG_SUFFIX = "_avg"
 
 
 @dataclass(frozen=True)
@@ -55,11 +58,75 @@ class NAVPrediction:
     average_values : dict of str to float or None
         Average attractor value of each node in ``[0, 1]``.
         ``None`` means unknown / free (``?``), used only by the LDOI
-        upper-bound path.
+        upper-bound path. May also include synthetic ``*_avg`` keys
+        requested by experiments, equal to the mean of related sibling
+        nodes (or ``None`` if any sibling is unknown).
     """
 
     fixes: Assignment
     average_values: dict[str, float | None]
+
+
+def _related_node_names(base: str, node_names: Iterable[str]) -> list[str]:
+    """Return names matching ``base``, ``base_<int>``, or ``base_<A-Z>``."""
+    pattern = re.compile(rf"^(?:{re.escape(base)}|{re.escape(base)}_(?:\d+|[A-Z]))$")
+    return [name for name in node_names if pattern.fullmatch(name)]
+
+
+def _average_related_values(
+    average_values: dict[str, float | None],
+    observed_avg: str,
+) -> float | None:
+    """Mean of sibling node values for an ``*_avg`` observed name.
+
+    Raises
+    ------
+    ValueError
+        If ``observed_avg`` does not end with ``_avg``, the base is empty,
+        or no related sibling nodes are present in ``average_values``.
+    """
+    if not observed_avg.endswith(_AVG_SUFFIX):
+        raise ValueError(f"Expected observed name ending with {_AVG_SUFFIX!r}: {observed_avg!r}")
+    base = observed_avg[: -len(_AVG_SUFFIX)]
+    if not base:
+        raise ValueError(f"Empty base for average observed node {observed_avg!r}")
+
+    related = _related_node_names(base, average_values)
+    if not related:
+        raise ValueError(
+            f"No related nodes found for {observed_avg!r} "
+            f"(looked for {base!r}, {base}_<int>, or {base}_<A-Z>)"
+        )
+
+    floats: list[float] = []
+    for name in related:
+        value = average_values[name]
+        if value is None:
+            return None
+        floats.append(value)
+    return sum(floats) / len(floats)
+
+
+def _inject_avg_values(
+    average_values: dict[str, float | None],
+    avg_observed: set[str],
+) -> dict[str, float | None]:
+    """Return a copy of ``average_values`` with synthetic ``*_avg`` keys filled."""
+    if not avg_observed:
+        return average_values
+    result = dict(average_values)
+    for observed_avg in sorted(avg_observed):
+        result[observed_avg] = _average_related_values(average_values, observed_avg)
+    return result
+
+
+def _avg_observed_from_experiments(experiments: list[NAVExperiment]) -> set[str]:
+    """Collect unique observed names ending with ``_avg``."""
+    return {
+        exp.observed
+        for exp in experiments
+        if exp.observed.endswith(_AVG_SUFFIX)
+    }
 
 
 def _fix_constants(primes: dict, fixed: dict[str, int]) -> dict:
@@ -339,16 +406,23 @@ def get_NAV_upper_bound_prediction(
     """LDOI-based partial predictions for optimistic upper-bound scoring.
 
     Same unique-intervention loop as :func:`get_NAV_prediction`, but free
-    (non-LDOI) nodes are ``None`` instead of ``0.5``.
+    (non-LDOI) nodes are ``None`` instead of ``0.5``. Observed names ending
+    in ``_avg`` are stored as the mean of related sibling nodes (or
+    ``None`` if any sibling is free).
     """
+    avg_observed = _avg_observed_from_experiments(experiments)
     interventions = sorted({exp.fixes for exp in experiments})
 
     predictions: dict[Assignment, NAVPrediction] = {}
     for fixes in interventions:
         perturbation = assignment_to_dict(fixes)
+        average_values = _inject_avg_values(
+            _nav_from_ldoi_partial(primes, perturbation),
+            avg_observed,
+        )
         predictions[fixes] = NAVPrediction(
             fixes=fixes,
-            average_values=_nav_from_ldoi_partial(primes, perturbation),
+            average_values=average_values,
         )
 
     return predictions
@@ -372,6 +446,9 @@ def get_NAV_prediction(
         PyBoolNet.
     experiments : list of NAVExperiment
         NAV experiments whose ``fixes`` interventions are evaluated.
+        Observed names ending in ``_avg`` request a synthetic key equal
+        to the mean of related sibling nodes (``base``, ``base_<int>``,
+        or ``base_<A-Z>``).
     method : {"min_traps", "ldoi"}, default "min_traps"
         How to compute ``average_values``:
 
@@ -387,13 +464,14 @@ def get_NAV_prediction(
     -------
     dict of Assignment to NAVPrediction
         One prediction per unique intervention, keyed by ``fixes``.
-        ``average_values`` maps each node name to a value in ``[0, 1]``.
+        ``average_values`` maps each model node (and any requested
+        ``*_avg`` keys) to a value in ``[0, 1]``.
 
     Raises
     ------
     ValueError
-        If a fixed node is not present in the model, or ``method`` is
-        not recognized.
+        If a fixed node is not present in the model, ``method`` is not
+        recognized, or an ``*_avg`` observed name has no related siblings.
     RuntimeError
         If ``method="min_traps"`` and PyBoolNet's ASP backend
         (gringo/clasp) fails the probe check.
@@ -415,14 +493,19 @@ def get_NAV_prediction(
     else:
         compute_average = _nav_from_ldoi
 
+    avg_observed = _avg_observed_from_experiments(experiments)
     interventions = sorted({exp.fixes for exp in experiments})
 
     predictions: dict[Assignment, NAVPrediction] = {}
     for fixes in interventions:
         perturbation = assignment_to_dict(fixes)
+        average_values = _inject_avg_values(
+            compute_average(primes, perturbation),
+            avg_observed,
+        )
         predictions[fixes] = NAVPrediction(
             fixes=fixes,
-            average_values=compute_average(primes, perturbation),
+            average_values=average_values,
         )
 
     return predictions

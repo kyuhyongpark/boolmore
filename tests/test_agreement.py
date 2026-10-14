@@ -363,3 +363,18 @@ def test_get_agreements_tuple_outcome():
     exp_id, weight, outcome, predict, agreement = agreements["A"][()]
     assert (exp_id, weight, outcome, predict) == (1, 1.0, (0.5, 1.0), 0.75)
     assert agreement == pytest.approx(1.0)
+
+
+def test_get_agreements_avg_observed_uses_stored_key():
+    experiments = [
+        NAVExperiment(id=1, fixes=(), observed="A_avg", outcome="Some", weight=1.0),
+    ]
+    predictions = _prediction(
+        (),
+        {"A": 0.0, "A_2": 1.0, "A_avg": 0.5},
+    )
+
+    agreements = get_agreements(experiments, predictions)
+    exp_id, weight, outcome, predict, agreement = agreements["A_avg"][()]
+    assert (exp_id, weight, outcome, predict) == (1, 1.0, "Some", 0.5)
+    assert agreement == pytest.approx(1.0)

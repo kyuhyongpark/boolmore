@@ -6,8 +6,12 @@ from pyboolnet.external.bnet2primes import bnet_text2primes
 
 from boolmore.experiment import NAVExperiment, PhenotypeExperiment
 from boolmore.inference.prediction import (
+    _average_related_values,
     _fix_constants,
+    _inject_avg_values,
+    _related_node_names,
     get_NAV_prediction,
+    get_NAV_upper_bound_prediction,
     get_phenotype_prediction,
 )
 from boolmore.io.load import load_primes
@@ -250,6 +254,64 @@ class TestGetNAVPrediction(unittest.TestCase):
         ]
         with self.assertRaises(ValueError):
             get_NAV_prediction(self.primes, experiments, method="unknown")
+
+    def test_avg_observed_mean_of_siblings(self):
+        primes = bnet_text2primes("A, A\nA_2, A_2\nA_3, A_3\n")
+        experiments = [
+            NAVExperiment(id=1, fixes=(), observed="A_avg", outcome="Some", weight=1.0),
+        ]
+        preds = get_NAV_prediction(primes, experiments, method="ldoi")
+        values = preds[()].average_values
+        self.assertEqual(values["A"], 0.5)
+        self.assertEqual(values["A_2"], 0.5)
+        self.assertEqual(values["A_3"], 0.5)
+        self.assertEqual(values["A_avg"], 0.5)
+
+    def test_avg_includes_alphabet_siblings_excludes_unrelated(self):
+        values = {
+            "A": 0.0,
+            "A_X": 1.0,
+            "A_Y": 0.5,
+            "A_iT": 0.25,
+            "A_2b": 0.75,
+            "AB": 1.0,
+        }
+        self.assertEqual(
+            sorted(_related_node_names("A", values)),
+            ["A", "A_X", "A_Y"],
+        )
+        self.assertEqual(_average_related_values(values, "A_avg"), 0.5)
+
+    def test_avg_none_when_any_sibling_none(self):
+        primes = bnet_text2primes("A, !A\nA_2, A\n")
+        experiments = [
+            NAVExperiment(id=1, fixes=(), observed="A_avg", outcome="Some", weight=1.0),
+        ]
+        preds = get_NAV_upper_bound_prediction(primes, experiments)
+        values = preds[()].average_values
+        self.assertIsNone(values["A"])
+        self.assertIsNone(values["A_2"])
+        self.assertIsNone(values["A_avg"])
+
+    def test_avg_no_siblings_raises(self):
+        primes = bnet_text2primes("B, B\n")
+        experiments = [
+            NAVExperiment(id=1, fixes=(), observed="A_avg", outcome="Some", weight=1.0),
+        ]
+        with self.assertRaises(ValueError):
+            get_NAV_prediction(primes, experiments, method="ldoi")
+
+    def test_no_avg_observed_adds_no_synthetic_keys(self):
+        experiments = [
+            NAVExperiment(id=1, fixes=(), observed="A", outcome="Some", weight=1.0),
+        ]
+        preds = get_NAV_prediction(self.primes, experiments, method="ldoi")
+        self.assertEqual(preds[()].average_values, {"A": 0.5, "B": 0.5})
+        self.assertNotIn("A_avg", preds[()].average_values)
+
+    def test_inject_avg_values_empty_is_noop(self):
+        values = {"A": 1.0}
+        self.assertIs(_inject_avg_values(values, set()), values)
 
 
 def _serialize_nav_predictions(preds) -> list[dict]:
