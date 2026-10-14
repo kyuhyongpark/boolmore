@@ -12,3 +12,6 @@ boolmore.egg-info/
 
 # Obsolete files
 .obsolete/
+
+# Derived NAV import audit files
+*_preprocessed.csv

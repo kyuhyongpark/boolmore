@@ -10,7 +10,7 @@ from boolmore.model import Model
 from boolmore.evaluation.metrics import get_model_complexity
 from boolmore.evaluation.constraint import check_model_constraints
 from boolmore.inference.prediction import get_NAV_upper_bound_prediction
-from boolmore.types import Assignment
+from boolmore.types import Assignment, OutcomeType
 
 
 @dataclass(frozen=True)
@@ -33,8 +33,8 @@ class EvaluationItemScore:
         Intervention assignment (NAV only).
     observed : str or None
         Observed node name (NAV only).
-    outcome : str or None
-        Experimental outcome label (NAV only).
+    outcome : OutcomeType or None
+        Experimental outcome label or float range (NAV only).
     predict_value : float or None
         Predicted average value of the observed node (NAV only).
     """
@@ -46,7 +46,7 @@ class EvaluationItemScore:
     hierarchy: int | None = None
     fixes: Assignment | None = None
     observed: str | None = None
-    outcome: str | None = None
+    outcome: OutcomeType | None = None
     predict_value: float | None = None
 
 

@@ -3,8 +3,9 @@
 PrimeType = list[list[dict[str, int]]]
 Assignment = tuple[tuple[str, int], ...]
 FixesType = Assignment  # historical alias for Assignment
-ExpType = tuple[int, float, Assignment, str, str]
+OutcomeType = str | float | tuple[float, float]
+ExpType = tuple[int, float, Assignment, str, OutcomeType]
 PredictType = dict[Assignment, dict[str, float]]
 AgreeType = dict[
-    str, dict[Assignment, tuple[int, float, str, float | None, float]]
+    str, dict[Assignment, tuple[int, float, OutcomeType, float | None, float]]
 ]

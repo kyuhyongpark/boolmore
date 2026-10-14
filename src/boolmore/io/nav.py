@@ -8,12 +8,18 @@ from collections.abc import Sequence
 from pathlib import Path
 
 from boolmore.experiment import NAVExperiment
+from boolmore.outcome import (
+    format_outcome_range,
+    parse_outcome,
+    resolve_outcome_range,
+)
 
 _DEFAULT_ID_COL: tuple[str, ...] = ("ID",)
 _DEFAULT_WEIGHT_COL: tuple[str, ...] = ("Score", "Weight")
 _DEFAULT_OBSERVED_COL: tuple[str, ...] = ("Observed node",)
 _DEFAULT_OUTCOME_COL: tuple[str, ...] = ("Categorization", "Value")
 _DEFAULT_FIXES_COLS: tuple[str, ...] = ("Source", "Perturbation", "Intervention")
+_OUTCOME_RANGE_HEADER = "Outcome range"
 
 
 def _normalize_header(name: str) -> str:
@@ -185,6 +191,20 @@ def _reformat_fixes_cell(cell: str) -> str:
     return ",".join(tokens)
 
 
+def _fixes_cell_needs_rewrite(cell: str) -> bool:
+    """Return True when a fixes cell is not already in canonical form."""
+    return _reformat_fixes_cell(cell) != cell
+
+
+def _outcome_range_header_index(headers: Sequence[str]) -> int | None:
+    """Return the index of an existing Outcome range column, if any."""
+    target = _normalize_header(_OUTCOME_RANGE_HEADER)
+    for i, header in enumerate(headers):
+        if _normalize_header(header) == target:
+            return i
+    return None
+
+
 def _delimiter_for_path(path: Path) -> str:
     suffix = path.suffix.lower()
     if suffix == ".tsv":
@@ -229,11 +249,17 @@ def import_NAV_exps(
 
     Notes
     -----
-    Raises ``ValueError`` on duplicate experiment ids, or when the observed
-    node also appears in that row's fixes. When ``location`` is a ``.tsv``
-    file and ``{stem}.csv`` does not already exist, a CSV with the same
-    headers is written beside it. Fixes cells are rewritten to
-    ``name=value`` form; other columns are unchanged.
+    Raises ``ValueError`` on duplicate experiment ids, invalid outcomes, an
+    inconsistent or empty ``Outcome range`` column, or when the observed node
+    also appears in that row's fixes.
+
+    When an ``Outcome range`` column is present, each row is checked against
+    the range resolved from the outcome column; matching ranges are treated as
+    already audited (no rewrite of outcomes). When the column is absent and
+    outcomes are not already ``lo,hi`` strings, or when fixes need normalizing,
+    a ``{stem}_preprocessed.csv`` is written beside the input (always
+    overwritten). No file is written when preprocessing is unnecessary, or
+    when the input stem already ends with ``_preprocessed``.
     """
     path = Path(location)
     delimiter = _delimiter_for_path(path)
@@ -253,11 +279,15 @@ def import_NAV_exps(
         fixes_headers = _resolve_fixes_columns(headers, fixes_cols)
 
         header_index = {name: i for i, name in enumerate(headers)}
+        existing_range_idx = _outcome_range_header_index(headers)
 
         raw_rows: list[list[str]] = []
+        outcome_range_strings: list[str] = []
         exps: list[NAVExperiment] = []
         interventions: list[tuple] = []
         seen_ids: set[int] = set()
+        needs_fixes_rewrite = False
+        needs_outcome_ranges = False
 
         for row in reader:
             if len(row) < len(headers):
@@ -273,8 +303,14 @@ def import_NAV_exps(
                 raise ValueError(f"Duplicate id {exp_id}")
             seen_ids.add(exp_id)
 
+            fixes_cells = [cell(h) for h in fixes_headers]
+            for header in fixes_headers:
+                if _fixes_cell_needs_rewrite(row[header_index[header]]):
+                    needs_fixes_rewrite = True
+                    break
+
             fixes = _merge_fixes(
-                [cell(h) for h in fixes_headers],
+                fixes_cells,
                 row_id=row_id_str or None,
             )
             observed = cell(observed_header)
@@ -285,11 +321,40 @@ def import_NAV_exps(
                     f"(row id={exp_id})"
                 )
 
+            raw_outcome = cell(outcome_header)
+            outcome = parse_outcome(raw_outcome)
+            lo, hi = resolve_outcome_range(outcome)
+            range_str = format_outcome_range(lo, hi)
+            outcome_range_strings.append(range_str)
+
+            if existing_range_idx is not None:
+                raw_range = row[existing_range_idx].strip()
+                if not raw_range:
+                    raise ValueError(
+                        f"Empty Outcome range (row id={exp_id})"
+                    )
+                try:
+                    provided = parse_outcome(raw_range)
+                    provided_lo, provided_hi = resolve_outcome_range(provided)
+                except ValueError as exc:
+                    raise ValueError(
+                        f"Invalid Outcome range {raw_range!r} (row id={exp_id})"
+                    ) from exc
+                provided_str = format_outcome_range(provided_lo, provided_hi)
+                if provided_str != range_str:
+                    raise ValueError(
+                        f"Inconsistent Outcome range (row id={exp_id}): "
+                        f"outcome {raw_outcome!r} resolves to {range_str!r}, "
+                        f"but Outcome range is {provided_str!r}"
+                    )
+            elif raw_outcome != range_str:
+                needs_outcome_ranges = True
+
             exp = NAVExperiment(
                 id=exp_id,
                 fixes=fixes,
                 observed=observed,
-                outcome=cell(outcome_header),
+                outcome=outcome,
                 weight=float(cell(weight_header)),
             )
 
@@ -304,22 +369,31 @@ def import_NAV_exps(
 
             exps.append(exp)
 
-    if path.suffix.lower() == ".tsv":
-        csv_path = path.with_suffix(".csv")
-        if not csv_path.exists():
-            fixes_indices = {header_index[h] for h in fixes_headers}
-            rewritten_rows: list[list[str]] = []
-            for row in raw_rows:
-                new_row = list(row[: len(headers)])
-                if len(new_row) < len(headers):
-                    new_row = new_row + [""] * (len(headers) - len(new_row))
-                for idx in fixes_indices:
-                    new_row[idx] = _reformat_fixes_cell(new_row[idx])
-                rewritten_rows.append(new_row)
+    skip_write = path.stem.endswith("_preprocessed")
+    needs_write = (needs_fixes_rewrite or needs_outcome_ranges) and not skip_write
+    if needs_write:
+        out_headers = list(headers)
+        if existing_range_idx is None:
+            out_headers.append(_OUTCOME_RANGE_HEADER)
 
-            with csv_path.open("w", newline="") as out:
-                writer = csv.writer(out)
-                writer.writerow(headers)
-                writer.writerows(rewritten_rows)
+        fixes_indices = {header_index[h] for h in fixes_headers}
+        rewritten_rows: list[list[str]] = []
+        for row, range_str in zip(raw_rows, outcome_range_strings, strict=True):
+            new_row = list(row[: len(headers)])
+            if len(new_row) < len(headers):
+                new_row = new_row + [""] * (len(headers) - len(new_row))
+            for idx in fixes_indices:
+                new_row[idx] = _reformat_fixes_cell(new_row[idx])
+            if existing_range_idx is None:
+                new_row.append(range_str)
+            else:
+                new_row[existing_range_idx] = range_str
+            rewritten_rows.append(new_row)
+
+        preprocessed_path = path.with_name(f"{path.stem}_preprocessed.csv")
+        with preprocessed_path.open("w", newline="") as out:
+            writer = csv.writer(out)
+            writer.writerow(out_headers)
+            writer.writerows(rewritten_rows)
 
     return exps

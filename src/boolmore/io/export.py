@@ -14,6 +14,7 @@ from boolmore.experiment import PhenotypeExperiment
 from boolmore.genetic.population import Candidate
 from boolmore.inference.prediction import PhenotypePrediction
 from boolmore.model import Model
+from boolmore.outcome import format_outcome_range, resolve_outcome_range
 
 
 def export_item_scores_report(result: EvaluationResult, path: str | Path) -> Path:
@@ -70,12 +71,16 @@ def export_nav_report(result: EvaluationResult, path: str | Path) -> Path:
     for item in result.item_scores:
         if item.fixes is None:
             raise ValueError("export_nav_report requires NAV item scores")
+        if item.outcome is None:
+            raise ValueError("export_nav_report requires NAV item scores with outcome")
+        lo, hi = resolve_outcome_range(item.outcome)
         rows.append({
             "id": item.id,
             "hierarchy": item.hierarchy,
             "fixes": ",".join(f"{n}={v}" for n, v in item.fixes),
             "observed_node": item.observed,
             "experimental_outcome": item.outcome,
+            "outcome_range": format_outcome_range(lo, hi),
             "predict_value": item.predict_value,
             "attractor_agreement": item.agreement,
             "score": item.score,
