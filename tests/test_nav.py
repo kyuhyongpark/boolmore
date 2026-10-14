@@ -301,13 +301,15 @@ def test_import_comparative_outcomes(tmp_path: Path):
         "ID,Score,Source,Perturbation,Observed node,Categorization\n"
         "1,1.0,A=1,,B,higher than 2\n"
         "2,1.0,,,B,lower than 1\n"
-        "3,0.5,A=0,,C,same as 2\n",
+        "3,0.5,A=0,,C,same as 4\n"
+        "4,0.5,,,C,same as 3\n",
     )
 
     exps = import_NAV_exps(csv_path)
     assert exps[0].outcome == ComparativeOutcome(relation="higher", other_id=2)
     assert exps[1].outcome == ComparativeOutcome(relation="lower", other_id=1)
-    assert exps[2].outcome == ComparativeOutcome(relation="same", other_id=2)
+    assert exps[2].outcome == ComparativeOutcome(relation="same", other_id=4)
+    assert exps[3].outcome == ComparativeOutcome(relation="same", other_id=3)
 
     preprocessed = tmp_path / "data_preprocessed.csv"
     assert preprocessed.exists()
@@ -316,8 +318,10 @@ def test_import_comparative_outcomes(tmp_path: Path):
     assert rows[1][5] == "higher than 2"
     assert rows[1][6] == "1.0,1.0"
     assert rows[2][6] == "1.0,1.0"
-    assert rows[3][5] == "same as 2"
+    assert rows[3][5] == "same as 4"
     assert rows[3][6] == "0.0,0.0"
+    assert rows[4][5] == "same as 3"
+    assert rows[4][6] == "0.0,0.0"
 
 
 def test_comparative_consistent_outcome_range(tmp_path: Path):
@@ -326,11 +330,13 @@ def test_comparative_consistent_outcome_range(tmp_path: Path):
         "ID,Score,Source,Perturbation,Observed node,Categorization,Outcome range\n"
         '1,1.0,A=1,,B,higher than 2,"1.0,1.0"\n'
         '2,1.0,,,B,lower than 1,"1.0,1.0"\n'
-        '3,1.0,,,C,same as 1,"0.0,0.0"\n',
+        '3,1.0,A=0,,C_avg,same as 4,"0.0,0.0"\n'
+        '4,1.0,,,C_avg,same as 3,"0.0,0.0"\n',
     )
 
     exps = import_NAV_exps(csv_path)
     assert exps[0].outcome == ComparativeOutcome(relation="higher", other_id=2)
+    assert exps[2].outcome == ComparativeOutcome(relation="same", other_id=4)
     assert not (tmp_path / "data_preprocessed.csv").exists()
 
 
@@ -339,7 +345,7 @@ def test_comparative_mismatched_outcome_range_raises(tmp_path: Path):
         tmp_path / "data.csv",
         "ID,Score,Source,Perturbation,Observed node,Categorization,Outcome range\n"
         '1,1.0,A=1,,B,higher than 2,"0.0,0.0"\n'
-        '2,1.0,,,B,OFF,"0.0,0.0"\n',
+        '2,1.0,,,B,lower than 1,"1.0,1.0"\n',
     )
 
     with pytest.raises(ValueError, match=r"Inconsistent Outcome range \(row id=1\)"):
@@ -354,4 +360,46 @@ def test_comparative_missing_other_id_raises(tmp_path: Path):
     )
 
     with pytest.raises(ValueError, match="missing id 99"):
+        import_NAV_exps(csv_path)
+
+
+def test_comparative_different_observed_raises(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization\n"
+        "1,1.0,A=1,,B,higher than 2\n"
+        "2,1.0,,,C,lower than 1\n",
+    )
+
+    with pytest.raises(ValueError, match=r"different observed \('B' vs 'C'\)"):
+        import_NAV_exps(csv_path)
+
+
+def test_comparative_missing_reciprocal_higher_raises(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization\n"
+        "1,1.0,A=1,,B,higher than 2\n"
+        "2,1.0,,,B,OFF\n",
+    )
+
+    with pytest.raises(
+        ValueError,
+        match=r"expects reciprocal 'lower than 1' on experiment 2",
+    ):
+        import_NAV_exps(csv_path)
+
+
+def test_comparative_missing_reciprocal_same_raises(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization\n"
+        "1,1.0,A=1,,B,same as 2\n"
+        "2,1.0,,,B,OFF\n",
+    )
+
+    with pytest.raises(
+        ValueError,
+        match=r"expects reciprocal 'same as 1' on experiment 2",
+    ):
         import_NAV_exps(csv_path)
