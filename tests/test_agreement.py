@@ -33,7 +33,7 @@ def test_line_decreasing_segment():
 
 @pytest.mark.parametrize(
     "outcome",
-    ["ON", "Some/ON", "Some", "OFF/Some", "OFF", (0.3, 0.4)],
+    ["ON", "Some/ON", "Some", "OFF/Some", "OFF", (0.3, 0.4), 0.5],
 )
 def test_none_predict_scores_full_agreement(outcome):
     assert _agreement_score(outcome, None) == 1.0
@@ -192,6 +192,73 @@ def test_agreement_custom_range(predict, expected):
 )
 def test_agreement_invalid_range_raises(outcome):
     with pytest.raises(ValueError, match="Outcome range must satisfy"):
+        _agreement_score(outcome, 0.5)
+
+
+# --- _agreement_score: scalar float outcomes (±0.1 band) ---
+
+
+@pytest.mark.parametrize("predict", [0.0, 0.25, 0.5, 0.75, 1.0])
+def test_float_zero_matches_off(predict):
+    assert _agreement_score(0.0, predict) == pytest.approx(
+        _agreement_score("OFF", predict)
+    )
+
+
+@pytest.mark.parametrize("predict", [0.0, 0.25, 0.5, 0.75, 1.0])
+def test_float_one_matches_on(predict):
+    assert _agreement_score(1.0, predict) == pytest.approx(
+        _agreement_score("ON", predict)
+    )
+
+
+@pytest.mark.parametrize(
+    "predict, expected",
+    [
+        (0.0, 0.0),
+        (0.2, 0.5),  # midpoint of left shoulder [0, 0.4]
+        (0.4, 1.0),
+        (0.5, 1.0),
+        (0.6, 1.0),
+        (0.8, 0.5),  # midpoint of right shoulder [0.6, 1.0]
+        (1.0, 0.0),
+    ],
+)
+def test_agreement_float_mid(predict, expected):
+    assert _agreement_score(0.5, predict) == pytest.approx(expected)
+
+
+@pytest.mark.parametrize(
+    "predict, expected",
+    [
+        (0.0, 1.0),
+        (0.075, 1.0),
+        (0.15, 1.0),
+        (0.575, 0.5),  # midpoint of right shoulder [0.15, 1.0]
+        (1.0, 0.0),
+    ],
+)
+def test_agreement_float_near_zero_clamps(predict, expected):
+    assert _agreement_score(0.05, predict) == pytest.approx(expected)
+
+
+@pytest.mark.parametrize(
+    "predict, expected",
+    [
+        (0.0, 0.0),
+        (0.425, 0.5),  # midpoint of left shoulder [0, 0.85]
+        (0.85, 1.0),
+        (0.95, 1.0),
+        (1.0, 1.0),
+    ],
+)
+def test_agreement_float_near_one_clamps(predict, expected):
+    assert _agreement_score(0.95, predict) == pytest.approx(expected)
+
+
+@pytest.mark.parametrize("outcome", [-0.1, 1.1, 2.0])
+def test_agreement_invalid_float_raises(outcome):
+    with pytest.raises(ValueError, match="Outcome float must satisfy"):
         _agreement_score(outcome, 0.5)
 
 

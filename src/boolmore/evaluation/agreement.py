@@ -13,6 +13,7 @@ _OUTCOME_RANGES: dict[str, tuple[float, float]] = {
     "OFF/Some": (0.0, 0.5),
     "OFF": (0.0, 0.0),
 }
+_DEFAULT_FLOAT_HALF_WIDTH = 0.1
 
 
 def line(x: float, start: tuple[float, float], end: tuple[float, float]) -> float:
@@ -42,7 +43,12 @@ def line(x: float, start: tuple[float, float], end: tuple[float, float]) -> floa
 
 
 def _resolve_range(outcome: OutcomeType) -> tuple[float, float]:
-    """Resolve an outcome label or float range to ``(lo, hi)`` in ``[0, 1]``."""
+    """Resolve an outcome label, scalar float, or float range to ``(lo, hi)`` in ``[0, 1]``.
+
+    Scalar floats in ``(0, 1)`` expand to a band of half-width
+    ``_DEFAULT_FLOAT_HALF_WIDTH`` clamped to ``[0, 1]``. Exact ``0.0`` and
+    ``1.0`` stay point ranges.
+    """
     if isinstance(outcome, tuple):
         if len(outcome) != 2:
             raise ValueError(f"Unexpected experiment outcome: {outcome!r}")
@@ -58,6 +64,16 @@ def _resolve_range(outcome: OutcomeType) -> tuple[float, float]:
             return _OUTCOME_RANGES[outcome]
         except KeyError:
             raise ValueError(f"Unexpected experiment outcome: {outcome!r}") from None
+
+    if isinstance(outcome, float):
+        if not (0.0 <= outcome <= 1.0):
+            raise ValueError(
+                f"Outcome float must satisfy 0 <= x <= 1; got {outcome!r}"
+            )
+        if outcome == 0.0 or outcome == 1.0:
+            return outcome, outcome
+        half = _DEFAULT_FLOAT_HALF_WIDTH
+        return max(0.0, outcome - half), min(1.0, outcome + half)
 
     raise ValueError(f"Unexpected experiment outcome: {outcome!r}")
 
@@ -79,9 +95,10 @@ def _score_range(x: float, lo: float, hi: float) -> float:
 def _agreement_score(outcome: OutcomeType, predict_value: float | None) -> float:
     """Score agreement of a predicted average value against an observed outcome.
 
-    Outcomes are float ranges ``(lo, hi)``, or string labels that map to
-    those ranges. Agreement is ``1.0`` inside the range and drops linearly
-    to ``0`` outside (shoulders from ``0`` and/or to ``1``).
+    Outcomes are float ranges ``(lo, hi)``, scalar floats (expanded to a
+    ±0.1 band, or point ranges at ``0.0`` / ``1.0``), or string labels that
+    map to those ranges. Agreement is ``1.0`` inside the range and drops
+    linearly to ``0`` outside (shoulders from ``0`` and/or to ``1``).
 
     Unknown predictions (``None`` / ``?``) score ``1.0`` for optimistic
     upper-bound scoring. Forced floats are clamped to ``[0, 1]`` (so tiny
