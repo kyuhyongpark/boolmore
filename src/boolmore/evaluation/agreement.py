@@ -4,16 +4,8 @@ from __future__ import annotations
 
 from boolmore.experiment import NAVExperiment
 from boolmore.inference.prediction import NAVPrediction
+from boolmore.outcome import resolve_outcome_range
 from boolmore.types import AgreeType, Assignment, OutcomeType
-
-_OUTCOME_RANGES: dict[str, tuple[float, float]] = {
-    "ON": (1.0, 1.0),
-    "Some/ON": (0.5, 1.0),
-    "Some": (0.25, 0.75),
-    "OFF/Some": (0.0, 0.5),
-    "OFF": (0.0, 0.0),
-}
-_DEFAULT_FLOAT_HALF_WIDTH = 0.1
 
 
 def line(x: float, start: tuple[float, float], end: tuple[float, float]) -> float:
@@ -40,42 +32,6 @@ def line(x: float, start: tuple[float, float], end: tuple[float, float]) -> floa
 
     slope = (end[1] - start[1]) / (end[0] - start[0])
     return start[1] + slope * (x - start[0])
-
-
-def _resolve_range(outcome: OutcomeType) -> tuple[float, float]:
-    """Resolve an outcome label, scalar float, or float range to ``(lo, hi)`` in ``[0, 1]``.
-
-    Scalar floats in ``(0, 1)`` expand to a band of half-width
-    ``_DEFAULT_FLOAT_HALF_WIDTH`` clamped to ``[0, 1]``. Exact ``0.0`` and
-    ``1.0`` stay point ranges.
-    """
-    if isinstance(outcome, tuple):
-        if len(outcome) != 2:
-            raise ValueError(f"Unexpected experiment outcome: {outcome!r}")
-        lo, hi = float(outcome[0]), float(outcome[1])
-        if not (0.0 <= lo <= hi <= 1.0):
-            raise ValueError(
-                f"Outcome range must satisfy 0 <= lo <= hi <= 1; got {outcome!r}"
-            )
-        return lo, hi
-
-    if isinstance(outcome, str):
-        try:
-            return _OUTCOME_RANGES[outcome]
-        except KeyError:
-            raise ValueError(f"Unexpected experiment outcome: {outcome!r}") from None
-
-    if isinstance(outcome, float):
-        if not (0.0 <= outcome <= 1.0):
-            raise ValueError(
-                f"Outcome float must satisfy 0 <= x <= 1; got {outcome!r}"
-            )
-        if outcome == 0.0 or outcome == 1.0:
-            return outcome, outcome
-        half = _DEFAULT_FLOAT_HALF_WIDTH
-        return max(0.0, outcome - half), min(1.0, outcome + half)
-
-    raise ValueError(f"Unexpected experiment outcome: {outcome!r}")
 
 
 def _score_range(x: float, lo: float, hi: float) -> float:
@@ -108,7 +64,7 @@ def _agreement_score(outcome: OutcomeType, predict_value: float | None) -> float
         return 1.0
 
     x = min(1.0, max(0.0, predict_value))
-    lo, hi = _resolve_range(outcome)
+    lo, hi = resolve_outcome_range(outcome)
     return _score_range(x, lo, hi)
 
 

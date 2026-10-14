@@ -44,19 +44,20 @@ def test_import_tsv_default_mapping(tmp_path: Path):
     ]
 
 
-def test_tsv_writes_csv_when_missing_and_round_trips(tmp_path: Path):
+def test_import_writes_preprocessed_csv(tmp_path: Path):
     tsv = _write(
         tmp_path / "data.tsv",
         "ID\tScore\tSource\tPerturbation\tObserved node\tCategorization\n"
         "1\t1.0\tA=1\tB KO, C CA\tD\tSome\n",
     )
-    csv_path = tmp_path / "data.csv"
-    assert not csv_path.exists()
+    preprocessed = tmp_path / "data_preprocessed.csv"
+    assert not preprocessed.exists()
 
     from_tsv = import_NAV_exps(tsv)
-    assert csv_path.exists()
+    assert preprocessed.exists()
+    assert from_tsv[0].outcome == "Some"
 
-    with csv_path.open(newline="") as f:
+    with preprocessed.open(newline="") as f:
         rows = list(csv.reader(f))
     assert rows[0] == [
         "ID",
@@ -65,25 +66,92 @@ def test_tsv_writes_csv_when_missing_and_round_trips(tmp_path: Path):
         "Perturbation",
         "Observed node",
         "Categorization",
+        "Outcome range",
     ]
     assert rows[1][2] == "A=1"
     assert rows[1][3] == "B=0,C=1"
+    assert rows[1][5] == "Some"
+    assert rows[1][6] == "0.25,0.75"
 
-    from_csv = import_NAV_exps(csv_path)
-    assert from_csv == from_tsv
+    from_pre = import_NAV_exps(preprocessed)
+    assert from_pre == from_tsv
+    assert not (tmp_path / "data_preprocessed_preprocessed.csv").exists()
 
 
-def test_tsv_does_not_overwrite_existing_csv(tmp_path: Path):
+def test_preprocessed_csv_always_overwritten(tmp_path: Path):
     tsv = _write(
         tmp_path / "data.tsv",
         "ID\tScore\tSource\tPerturbation\tObserved node\tCategorization\n"
         "1\t1.0\t\tX KO\tY\tOFF\n",
     )
-    csv_path = _write(tmp_path / "data.csv", "sentinel\n")
+    preprocessed = _write(tmp_path / "data_preprocessed.csv", "sentinel\n")
 
     import_NAV_exps(tsv)
 
-    assert csv_path.read_text(encoding="utf-8") == "sentinel\n"
+    text = preprocessed.read_text(encoding="utf-8")
+    assert "sentinel" not in text
+    assert "Outcome range" in text
+    assert "0.0,0.0" in text
+
+
+def test_canonical_input_skips_preprocessed_write(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization\n"
+        '1,1.0,,B=0,C,"0.0,0.0"\n',
+    )
+
+    exps = import_NAV_exps(csv_path)
+    assert exps[0].outcome == (0.0, 0.0)
+    assert not (tmp_path / "data_preprocessed.csv").exists()
+
+
+def test_range_string_outcome_parses_to_tuple(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization\n"
+        '1,1.0,A=1,,B,"0.5,1.0"\n',
+    )
+
+    exps = import_NAV_exps(csv_path)
+    assert exps[0].outcome == (0.5, 1.0)
+    assert not (tmp_path / "data_preprocessed.csv").exists()
+
+
+def test_consistent_outcome_range_column_skips_write(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization,Outcome range\n"
+        '1,1.0,,B=0,C,OFF,"0.0,0.0"\n'
+        '2,1.0,A=1,,D,Some,"0.25,0.75"\n',
+    )
+
+    exps = import_NAV_exps(csv_path)
+    assert exps[0].outcome == "OFF"
+    assert exps[1].outcome == "Some"
+    assert not (tmp_path / "data_preprocessed.csv").exists()
+
+
+def test_mismatched_outcome_range_raises(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization,Outcome range\n"
+        '1,1.0,,B=0,C,ON,"0.0,0.0"\n',
+    )
+
+    with pytest.raises(ValueError, match=r"Inconsistent Outcome range \(row id=1\)"):
+        import_NAV_exps(csv_path)
+
+
+def test_empty_outcome_range_raises(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization,Outcome range\n"
+        "1,1.0,,B=0,C,ON,\n",
+    )
+
+    with pytest.raises(ValueError, match=r"Empty Outcome range \(row id=1\)"):
+        import_NAV_exps(csv_path)
 
 
 def test_normalized_header_aliases(tmp_path: Path):
@@ -213,3 +281,14 @@ def test_intervention_alias_in_default_fixes(tmp_path: Path):
     assert exps[0].fixes == (("Foo", 0),)
     assert exps[0].observed == "Bar"
     assert exps[0].outcome == "OFF"
+
+
+def test_invalid_outcome_raises_at_import(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization\n"
+        "1,1.0,,,N,MAYBE\n",
+    )
+
+    with pytest.raises(ValueError, match="Unexpected experiment outcome"):
+        import_NAV_exps(csv_path)

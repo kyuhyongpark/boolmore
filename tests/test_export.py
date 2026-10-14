@@ -152,7 +152,20 @@ def test_export_nav_report(tmp_path):
     assert rows[0]["id"] == "1"
     assert rows[0]["fixes"] == "S=1"
     assert rows[0]["observed_node"] == "A"
+    assert rows[0]["experimental_outcome"] == "ON"
+    assert rows[0]["outcome_range"] == "1.0,1.0"
     assert rows[0]["score"] == "1.0"
+    assert list(rows[0].keys()) == [
+        "id",
+        "hierarchy",
+        "fixes",
+        "observed_node",
+        "experimental_outcome",
+        "outcome_range",
+        "predict_value",
+        "attractor_agreement",
+        "score",
+    ]
 
 
 def test_export_nav_report_requires_nav_fields(tmp_path):

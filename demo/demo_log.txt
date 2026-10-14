@@ -56,8 +56,8 @@ Emx2,	Coup_fti & !Fgf8 & !Pax6 & !Sp8
 Fgf8,	!Emx2 & Fgf8 & Sp8
 Pax6,	!Coup_fti & !Emx2 & Sp8
 Sp8,	!Emx2 & Fgf8
-Elapsed time for single evaluation: 0:00:00.103748
-Estimated GA evaluation time: 0:00:05.187400
+Elapsed time for single evaluation: 0:00:00.133765
+Estimated GA evaluation time: 0:00:06.688250
 
 Loading starting model from /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_start.bnet
 Starting model loaded.
@@ -87,7 +87,7 @@ Fgf8,	Sp8 | !Emx2
 Pax6,	!Coup_fti & Sp8 | !Emx2
 Sp8,	Fgf8
 
-start_time: 2026-10-13 21:31:50.020863
+start_time: 2026-10-14 12:53:26.800526
 
 iter  1/10 | generated  10 | pruned  0/10 (thresh 33.96) | best id   8 | gen  1 | score 41.0/50 (82.0%) | n_extra_edges 0 | n_prime_implicants 10
 iter  2/10 | generated  20 | pruned  1/10 (thresh 40.75) | best id  11 | gen  2 | score 41.8/50 (83.5%) | n_extra_edges 0 | n_prime_implicants 13
@@ -128,7 +128,7 @@ Emx2,	Coup_fti & !Fgf8 & !Sp8
 Fgf8,	!Emx2 & Fgf8 & Sp8
 Pax6,	!Coup_fti & Sp8
 Sp8,	Fgf8
-Ran 10 iterations, generated 100 models, mutated 4 functions. Elapsed: 0:00:03.965244
+Ran 10 iterations, generated 100 models, mutated 4 functions. Elapsed: 0:00:04.050428
 
 -----modified functions-----
 start:Coup_fti,	!Fgf8
