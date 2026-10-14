@@ -37,40 +37,35 @@ def _agreement_score(outcome: str, predict_value: float | None) -> float:
     """Score agreement of a predicted average value against an observed outcome.
 
     Unknown predictions (``None`` / ``?``) score ``1.0`` for optimistic
-    upper-bound scoring. Forced floats use the piecewise-linear curves
-    for each outcome label.
+    upper-bound scoring. Forced floats are clamped to ``[0, 1]`` (so tiny
+    FP overshoots do not fall off the curves) then scored with the
+    piecewise-linear curves for each outcome label.
     """
     if predict_value is None:
         return 1.0
 
+    x = min(1.0, max(0.0, predict_value))
+
     if outcome == "ON":
-        return max(
-            line(predict_value, (0, 0), (1, 1)),
-            line(predict_value, (1, 1), (1.0001, 1)),
-        )
+        return line(x, (0, 0), (1, 1))
     if outcome == "Some/ON":
         return max(
-            line(predict_value, (0, 0), (0.5, 1)),
-            line(predict_value, (0.5, 1), (1, 1)),
-            line(predict_value, (1, 1), (1.0001, 1)),
+            line(x, (0, 0), (0.5, 1)),
+            line(x, (0.5, 1), (1, 1)),
         )
     if outcome == "Some":
         return max(
-            line(predict_value, (0, 0), (0.25, 1)),
-            line(predict_value, (0.25, 1), (0.75, 1)),
-            line(predict_value, (0.75, 1), (1, 0)),
+            line(x, (0, 0), (0.25, 1)),
+            line(x, (0.25, 1), (0.75, 1)),
+            line(x, (0.75, 1), (1, 0)),
         )
     if outcome == "OFF/Some":
         return max(
-            line(predict_value, (-0.0001, 1), (0, 1)),
-            line(predict_value, (0, 1), (0.5, 1)),
-            line(predict_value, (0.5, 1), (1, 0)),
+            line(x, (0, 1), (0.5, 1)),
+            line(x, (0.5, 1), (1, 0)),
         )
     if outcome == "OFF":
-        return max(
-            line(predict_value, (-0.0001, 1), (0, 1)),
-            line(predict_value, (0, 1), (1, 0)),
-        )
+        return line(x, (0, 1), (1, 0))
 
     raise ValueError(f"Unexpected experiment outcome: {outcome!r}")
 

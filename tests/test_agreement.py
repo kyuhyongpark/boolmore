@@ -119,6 +119,24 @@ def test_agreement_off(predict, expected):
     assert _agreement_score("OFF", predict) == pytest.approx(expected)
 
 
+# --- _agreement_score: clamp FP noise at [0, 1] ---
+
+
+@pytest.mark.parametrize(
+    "outcome, predict, expected",
+    [
+        ("ON", 1.0 + 1e-12, 1.0),
+        ("Some/ON", 1.0 + 1e-12, 1.0),
+        ("OFF", -1e-12, 1.0),
+        ("OFF/Some", -1e-12, 1.0),
+        ("Some", 1.0 + 1e-12, 0.0),
+        ("Some", -1e-12, 0.0),
+    ],
+)
+def test_agreement_clamps_fp_overshoot(outcome, predict, expected):
+    assert _agreement_score(outcome, predict) == pytest.approx(expected)
+
+
 def test_agreement_unknown_outcome_raises():
     with pytest.raises(ValueError, match="Unexpected experiment outcome"):
         _agreement_score("MAYBE", 0.5)
