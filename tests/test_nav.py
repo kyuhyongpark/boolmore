@@ -346,8 +346,8 @@ def test_import_comparative_outcomes(tmp_path: Path):
     with preprocessed.open(newline="") as f:
         rows = list(csv.reader(f))
     assert rows[1][5] == "higher than 2"
-    assert rows[1][6] == "1.0,1.0"
-    assert rows[2][6] == "1.0,1.0"
+    assert rows[1][6] == "0.5,1.0"
+    assert rows[2][6] == "0.5,1.0"
     assert rows[3][5] == "same as 4"
     assert rows[3][6] == "0.0,0.0"
     assert rows[4][5] == "same as 3"
@@ -358,8 +358,8 @@ def test_comparative_consistent_outcome_range(tmp_path: Path):
     csv_path = _write(
         tmp_path / "data.csv",
         "ID,Score,Source,Perturbation,Observed node,Categorization,Outcome range\n"
-        '1,1.0,A=1,,B,higher than 2,"1.0,1.0"\n'
-        '2,1.0,,,B,lower than 1,"1.0,1.0"\n'
+        '1,1.0,A=1,,B,higher than 2,"0.5,1.0"\n'
+        '2,1.0,,,B,lower than 1,"0.5,1.0"\n'
         '3,1.0,A=0,,C_avg,same as 4,"0.0,0.0"\n'
         '4,1.0,,,C_avg,same as 3,"0.0,0.0"\n',
     )

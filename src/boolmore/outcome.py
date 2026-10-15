@@ -57,12 +57,13 @@ def resolve_outcome_range(outcome: OutcomeType) -> tuple[float, float]:
     Scalar floats in ``(0, 1)`` expand to a band of half-width
     ``_DEFAULT_FLOAT_HALF_WIDTH`` clamped to ``[0, 1]``. Exact ``0.0`` and
     ``1.0`` stay point ranges. Comparative ``higher`` / ``lower`` map to
-    ``(1.0, 1.0)``; ``same`` maps to ``(0.0, 0.0)``.
+    ``(0.5, 1.0)`` so a difference of ``0.5`` still scores full agreement;
+    ``same`` maps to ``(0.0, 0.0)``.
     """
     if isinstance(outcome, ComparativeOutcome):
         if outcome.relation == "same":
             return 0.0, 0.0
-        return 1.0, 1.0
+        return 0.5, 1.0
 
     if isinstance(outcome, tuple):
         if len(outcome) != 2:

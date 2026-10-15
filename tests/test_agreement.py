@@ -641,4 +641,4 @@ def test_get_agreements_comparative_uses_each_observed():
     agreements = get_agreements(experiments, predictions)
     _id, _w, _out, predict, agreement = agreements["A"][fixes_a][0]
     assert predict == pytest.approx(0.5)
-    assert agreement == pytest.approx(0.5)
+    assert agreement == pytest.approx(1.0)

@@ -58,9 +58,10 @@ def _agreement_score(outcome: OutcomeType, predict_value: float | None) -> float
 
     Outcomes are float ranges ``(lo, hi)``, scalar floats (expanded to a
     ±0.1 band, or point ranges at ``0.0`` / ``1.0``), string labels that
-    map to those ranges, or comparative outcomes (resolved to ``(1, 1)`` or
-    ``(0, 0)``). Agreement is ``1.0`` inside the range and drops linearly
-    to ``0`` outside (shoulders from ``0`` and/or to ``1``).
+    map to those ranges, or comparative outcomes (resolved to ``(0.5, 1)``
+    for higher/lower or ``(0, 0)`` for same). Agreement is ``1.0`` inside
+    the range and drops linearly to ``0`` outside (shoulders from ``0``
+    and/or to ``1``).
 
     Unknown predictions (``None`` / ``?``) score ``1.0`` for optimistic
     upper-bound scoring. Forced floats are clamped to ``[0, 1]`` (so tiny
