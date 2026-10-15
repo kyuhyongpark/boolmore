@@ -78,7 +78,7 @@ def test_get_flat_scores_basic():
     fixes = (("S", 0), ("X", 1))
     agreements = {
         "A": {
-            fixes: (1, 2.0, "ON", 1.0, 0.5),
+            fixes: [(1, 2.0, "ON", 1.0, 0.5)],
         }
     }
     scores = get_flat_scores(agreements, {"S": 0})
@@ -100,13 +100,29 @@ def test_get_flat_scores_empty_default_sources():
     fixes = (("X", 1),)
     agreements = {
         "A": {
-            fixes: (1, 1.0, "OFF", 0.0, 1.0),
+            fixes: [(1, 1.0, "OFF", 0.0, 1.0)],
         }
     }
     scores = get_flat_scores(agreements)
 
     assert scores[0].score == 1.0
     assert scores[0].hierarchy == 1
+
+
+def test_get_flat_scores_multiple_entries_same_fixes():
+    fixes = (("X", 1),)
+    agreements = {
+        "A": {
+            fixes: [
+                (1, 1.0, "ON", 1.0, 1.0),
+                (2, 2.0, "ON", 0.5, 0.5),
+            ],
+        }
+    }
+    scores = {item.id: item for item in get_flat_scores(agreements)}
+
+    assert scores[1].score == 1.0
+    assert scores[2].score == 1.0
 
 
 def test_get_flat_scores_empty_agreements():
@@ -123,8 +139,8 @@ def test_get_hierarchy_scores_propagates_general_disagreement():
     specific = (("S", 0), ("X", 1))
     agreements = {
         "A": {
-            general: (1, 1.0, "ON", 0.0, 0.0),
-            specific: (2, 2.0, "ON", 1.0, 1.0),
+            general: [(1, 1.0, "ON", 0.0, 0.0)],
+            specific: [(2, 2.0, "ON", 1.0, 1.0)],
         }
     }
 
@@ -143,8 +159,8 @@ def test_get_hierarchy_scores_multiplies_subset_agreements():
     specific = (("S", 0), ("X", 1))
     agreements = {
         "A": {
-            general: (1, 1.0, "ON", 1.0, 1.0),
-            specific: (2, 2.0, "ON", 0.5, 0.5),
+            general: [(1, 1.0, "ON", 1.0, 1.0)],
+            specific: [(2, 2.0, "ON", 0.5, 0.5)],
         }
     }
 
@@ -155,16 +171,36 @@ def test_get_hierarchy_scores_multiplies_subset_agreements():
     assert scores[2].score == 1.0
 
 
+def test_get_hierarchy_scores_multiplies_co_located_agreements():
+    default_sources = {"S": 0}
+    general = (("S", 0),)
+    specific = (("S", 0), ("X", 1))
+    agreements = {
+        "A": {
+            general: [
+                (1, 1.0, "ON", 1.0, 1.0),
+                (3, 1.0, "ON", 0.5, 0.5),
+            ],
+            specific: [(2, 2.0, "ON", 1.0, 1.0)],
+        }
+    }
+
+    scores = {item.id: item for item in get_hierarchy_scores(agreements, default_sources)}
+
+    # weight * both general agreements * specific = 2.0 * 1.0 * 0.5 * 1.0
+    assert scores[2].score == 1.0
+
+
 def test_get_hierarchy_scores_independent_observed_nodes():
     """Hierarchy subsets are scoped per observed node."""
     default_sources = {"S": 0}
     shared_fixes = (("S", 0),)
     agreements = {
         "A": {
-            shared_fixes: (1, 1.0, "ON", 1.0, 1.0),
+            shared_fixes: [(1, 1.0, "ON", 1.0, 1.0)],
         },
         "B": {
-            shared_fixes: (2, 3.0, "OFF", 0.0, 1.0),
+            shared_fixes: [(2, 3.0, "OFF", 0.0, 1.0)],
         },
     }
 

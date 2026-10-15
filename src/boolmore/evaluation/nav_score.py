@@ -70,8 +70,8 @@ def get_flat_scores(
     Parameters
     ----------
     agreements : AgreeType
-        Nested map ``observed_node -> fixes -> (id, weight, outcome,
-        predict_value, agreement)``.
+        Nested map ``observed_node -> fixes -> list of (id, weight,
+        outcome, predict_value, agreement)``.
     default_sources : dict of str to int, optional
         Default source settings used only to compute hierarchy depth.
 
@@ -85,21 +85,21 @@ def get_flat_scores(
     results: list[EvaluationItemScore] = []
 
     for observed_node, by_fixes in agreements.items():
-        for fixes, data in by_fixes.items():
-            exp_id, weight, outcome, predict_value, agreement = data
-            results.append(
-                EvaluationItemScore(
-                    id=exp_id,
-                    weight=weight,
-                    agreement=agreement,
-                    score=weight * agreement,
-                    hierarchy=intervention_hierarchy(fixes, default_sources),
-                    fixes=fixes,
-                    observed=observed_node,
-                    outcome=outcome,
-                    predict_value=predict_value,
+        for fixes, entries in by_fixes.items():
+            for exp_id, weight, outcome, predict_value, agreement in entries:
+                results.append(
+                    EvaluationItemScore(
+                        id=exp_id,
+                        weight=weight,
+                        agreement=agreement,
+                        score=weight * agreement,
+                        hierarchy=intervention_hierarchy(fixes, default_sources),
+                        fixes=fixes,
+                        observed=observed_node,
+                        outcome=outcome,
+                        predict_value=predict_value,
+                    )
                 )
-            )
 
     return results
 
@@ -111,15 +111,16 @@ def get_hierarchy_scores(
     """Compute per-experiment scores with intervention hierarchy.
 
     For each experiment, the score is the experiment weight multiplied by
-    the agreement of every hierarchical subset intervention (including
-    itself). Models must agree with more general (fewer) interventions
-    before receiving credit for more specific ones.
+    every agreement at every hierarchical subset intervention (including
+    itself). When several experiments share a subset intervention, all of
+    their agreements multiply in. Models must agree with more general
+    (fewer) interventions before receiving credit for more specific ones.
 
     Parameters
     ----------
     agreements : AgreeType
-        Nested map ``observed_node -> fixes -> (id, weight, outcome,
-        predict_value, agreement)``.
+        Nested map ``observed_node -> fixes -> list of (id, weight,
+        outcome, predict_value, agreement)``.
     default_sources : dict of str to int
         Default source settings defining the top of the hierarchy. These
         sources should have a defined value in every experiment.
@@ -131,7 +132,7 @@ def get_hierarchy_scores(
     results: list[EvaluationItemScore] = []
 
     for observed_node, by_fixes in agreements.items():
-        for fixes, data in by_fixes.items():
+        for fixes, entries in by_fixes.items():
             fixes_dict = dict(fixes)
             subset_fixes = [
                 other
@@ -139,25 +140,25 @@ def get_hierarchy_scores(
                 if _is_intervention_subset(dict(other), fixes_dict, default_sources)
             ]
 
-            exp_id, weight, outcome, predict_value, agreement = data
-            score = weight
-            for other in subset_fixes:
-                *_, other_agreement = by_fixes[other]
-                score *= other_agreement
+            for exp_id, weight, outcome, predict_value, agreement in entries:
+                score = weight
+                for other in subset_fixes:
+                    for *_, other_agreement in by_fixes[other]:
+                        score *= other_agreement
 
-            results.append(
-                EvaluationItemScore(
-                    id=exp_id,
-                    weight=weight,
-                    agreement=agreement,
-                    score=score,
-                    hierarchy=intervention_hierarchy(fixes, default_sources),
-                    fixes=fixes,
-                    observed=observed_node,
-                    outcome=outcome,
-                    predict_value=predict_value,
+                results.append(
+                    EvaluationItemScore(
+                        id=exp_id,
+                        weight=weight,
+                        agreement=agreement,
+                        score=score,
+                        hierarchy=intervention_hierarchy(fixes, default_sources),
+                        fixes=fixes,
+                        observed=observed_node,
+                        outcome=outcome,
+                        predict_value=predict_value,
+                    )
                 )
-            )
 
     return results
 

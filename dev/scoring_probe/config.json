@@ -1,0 +1,32 @@
+{
+  "run_type": "NAV",
+  "data": "dev/scoring_probe/data.csv",
+  "base": "dev/scoring_probe/cascade.bnet",
+  "start": "dev/scoring_probe/cascade.bnet",
+  "hierarchy": false,
+  "nav_method": "min_traps",
+  "default_sources": {},
+  "generate_defaults": false,
+  "constraints": {
+    "fixed": [],
+    "regulate": {},
+    "necessary": {},
+    "group": {},
+    "possible_constant": []
+  },
+  "edge_pool": [],
+  "parameters": {
+    "stop_if_max": true,
+    "starting_gen": 0,
+    "total_iter": 1,
+    "per_iter": 1,
+    "keep": 1,
+    "mix": 0,
+    "prob": 0.0,
+    "edge_prob": 0.0,
+    "order_by": [
+      "n_extra_edges",
+      "n_prime_implicants"
+    ]
+  }
+}

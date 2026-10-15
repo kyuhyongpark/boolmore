@@ -251,6 +251,16 @@ class TestGetNAVPrediction(unittest.TestCase):
         with self.assertRaises(ValueError):
             get_NAV_prediction(self.primes, experiments, method="unknown")
 
+    def test_avg_observed_does_not_inject_synthetic_keys(self):
+        primes = bnet_text2primes("A, A\nA_2, A_2\nA_3, A_3\n")
+        experiments = [
+            NAVExperiment(id=1, fixes=(), observed="A_avg", outcome="Some", weight=1.0),
+        ]
+        preds = get_NAV_prediction(primes, experiments, method="ldoi")
+        values = preds[()].average_values
+        self.assertEqual(values, {"A": 0.5, "A_2": 0.5, "A_3": 0.5})
+        self.assertNotIn("A_avg", values)
+
 
 def _serialize_nav_predictions(preds) -> list[dict]:
     out = []

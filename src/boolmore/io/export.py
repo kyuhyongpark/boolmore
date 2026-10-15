@@ -14,7 +14,7 @@ from boolmore.experiment import PhenotypeExperiment
 from boolmore.genetic.population import Candidate
 from boolmore.inference.prediction import PhenotypePrediction
 from boolmore.model import Model
-from boolmore.outcome import format_outcome_range, resolve_outcome_range
+from boolmore.outcome import format_outcome, format_outcome_range, resolve_outcome_range
 
 
 def export_item_scores_report(result: EvaluationResult, path: str | Path) -> Path:
@@ -79,7 +79,7 @@ def export_nav_report(result: EvaluationResult, path: str | Path) -> Path:
             "hierarchy": item.hierarchy,
             "fixes": ",".join(f"{n}={v}" for n, v in item.fixes),
             "observed_node": item.observed,
-            "experimental_outcome": item.outcome,
+            "experimental_outcome": format_outcome(item.outcome),
             "outcome_range": format_outcome_range(lo, hi),
             "predict_value": item.predict_value,
             "attractor_agreement": item.agreement,
