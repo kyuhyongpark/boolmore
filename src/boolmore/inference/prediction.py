@@ -269,13 +269,39 @@ def get_phenotype_prediction(
     return results
 
 
+def _source_nodes(primes: dict) -> list[str]:
+    """Return sorted names of syntactic source nodes (self-loop inputs)."""
+    return sorted(
+        node
+        for node in primes
+        if primes[node] == [[{node: 0}], [{node: 1}]]
+    )
+
+
+def _trap_node_value(trap: dict, node: str) -> float:
+    """Map a trap-space entry to a numeric contribution (1 / 0 / 0.5)."""
+    value = trap[node]
+    if value == "1":
+        return 1.0
+    if value == "?":
+        return 0.5
+    return 0.0
+
+
 def _nav_from_min_traps(
     primes,
     perturbation: dict[str, int],
 ) -> dict[str, float]:
-    """Average node values over minimal trap spaces after fixing interventions."""
+    """Average node values over minimal trap spaces after fixing interventions.
+
+    Unfixed source nodes in the intervened network define groups: traps that
+    share the same source assignment are averaged first, then those group
+    averages are averaged with equal weight. This prevents source combinations
+    that yield many minimal traps from dominating the NAV vector.
+    """
     ensure_asp_backend()
     new_primes = _fix_constants(primes, perturbation)
+    sources = _source_nodes(new_primes)
 
     tr = compute_trap_spaces(new_primes, "min")
 
@@ -286,15 +312,20 @@ def _nav_from_min_traps(
             else:
                 trap[node] = str(trap[node])  # type: ignore
 
-    average_values: dict[str, float] = {}
+    by_source: dict[tuple, list] = defaultdict(list)
     for trap in tr:
+        key = tuple(trap[node] for node in sources)  # type: ignore
+        by_source[key].append(trap)
+
+    n_groups = len(by_source)
+    average_values: dict[str, float] = {node: 0.0 for node in primes}
+    for group in by_source.values():
+        n_traps = len(group)
         for node in primes:
-            if node not in average_values:
-                average_values[node] = 0.0
-            if trap[node] == "1":  # type: ignore
-                average_values[node] += 1.0 / len(tr)
-            elif trap[node] == "?":  # type: ignore
-                average_values[node] += 0.5 / len(tr)
+            group_avg = sum(
+                _trap_node_value(trap, node) for trap in group
+            ) / n_traps
+            average_values[node] += group_avg / n_groups
 
     return average_values
 
@@ -377,8 +408,9 @@ def get_NAV_prediction(
         How to compute ``average_values``:
 
         - ``"min_traps"``: fix interventions, compute minimal trap spaces,
-          and average node values over those trap spaces (fixed 1 → 1.0,
-          fixed 0 → 0.0, free ``?`` → 0.5).
+          group them by unfixed source-node assignment, average within each
+          group, then average groups equally (fixed 1 → 1.0, fixed 0 → 0.0,
+          free ``?`` → 0.5).
         - ``"ldoi"``: coarser approximation via logical domain of influence;
           forced constants map to 0.0/1.0 and all other nodes to 0.5.
           Only credible when the model does not rely heavily on

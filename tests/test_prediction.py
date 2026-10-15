@@ -7,6 +7,7 @@ from pyboolnet.external.bnet2primes import bnet_text2primes
 from boolmore.experiment import NAVExperiment, PhenotypeExperiment
 from boolmore.inference.prediction import (
     _fix_constants,
+    _nav_from_min_traps,
     get_NAV_prediction,
     get_phenotype_prediction,
 )
@@ -250,6 +251,27 @@ class TestGetNAVPrediction(unittest.TestCase):
         ]
         with self.assertRaises(ValueError):
             get_NAV_prediction(self.primes, experiments, method="unknown")
+
+    def test_min_traps_averages_equally_over_source_combinations(self):
+        # S=0 leaves A free (4 traps with C); S=1 forces A=0 (2 traps).
+        # Flat trap average would give B=1/3; source-grouped average gives 0.25.
+        primes = bnet_text2primes("S, S\nA, A & !S\nB, A\nC, C\n")
+        experiments = [
+            NAVExperiment(id=1, fixes=(), observed="B", outcome="Some", weight=1.0),
+        ]
+
+        preds = get_NAV_prediction(primes, experiments, method="min_traps")
+        values = preds[()].average_values
+
+        self.assertEqual(values["S"], 0.5)
+        self.assertEqual(values["A"], 0.25)
+        self.assertEqual(values["B"], 0.25)
+        self.assertEqual(values["C"], 0.5)
+        # All sources fixed: single group, same as averaging the two traps.
+        self.assertEqual(
+            _nav_from_min_traps(primes, {"S": 1, "C": 0}),
+            {"S": 1.0, "A": 0.0, "B": 0.0, "C": 0.0},
+        )
 
     def test_avg_observed_does_not_inject_synthetic_keys(self):
         primes = bnet_text2primes("A, A\nA_2, A_2\nA_3, A_3\n")
