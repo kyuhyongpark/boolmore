@@ -4,9 +4,8 @@
 # Probe whether a NAV-style CSV/TSV can be loaded with
 # `boolmore.io.nav.import_NAV_exps`.
 #
-# Edit the config cell below to point at another dataset. Column overrides
-# (e.g. one fixes column winning over another on shared nodes) are applied
-# here only — not in `nav.py`.
+# Edit the config cell below to point at another dataset. Set `FIXES_COLS`
+# when the file uses non-default fixes headers (e.g. breast cancer).
 
 # %%
 from __future__ import annotations
@@ -28,7 +27,7 @@ from boolmore.io.nav import (
     _DEFAULT_WEIGHT_COL,
     _merge_fixes,
     _normalize_header,
-    _parse_fixes_cell,
+    _resolve_single_column,
     import_NAV_exps,
 )
 from boolmore.outcome import ComparativeOutcome, OutcomeType, parse_outcome
@@ -36,51 +35,21 @@ from boolmore.outcome import ComparativeOutcome, OutcomeType, parse_outcome
 # %% [markdown]
 # ## Config
 #
-# Change these for another dataset. `FIXES_OVERRIDES` entries are
-# `(override_col, overridden_col)`: when both assign the same node, keep the
-# override column and drop that node from the overridden column.
+# Change `DATA` / `FIXES_COLS` for another dataset. Leave `FIXES_COLS` as
+# ``None`` to use ``import_NAV_exps`` defaults.
 
 # %%
 REPO = Path(__file__).resolve().parents[1]
 DATA = REPO / "case_study" / "breast_cancer" / "breast_cancer_data.csv"
 
-ID_COL = "id"
-WEIGHT_COL = "Weight"  # typo in the breast-cancer source CSV header
-OBSERVED_COL = "Observed node"
-OUTCOME_COL = "Value"
-FIXES_COLS = (
+FIXES_COLS: Sequence[str] | None = (
     "Signals",
     "Drug treatment/intervention",
     "Cell line characteristic profile",
     "Additional features of the cell population",
 )
-# Additional features wins over Cell line characteristic profile.
-FIXES_OVERRIDES: tuple[tuple[str, str], ...] = (
-    (
-        "Additional features of the cell population",
-        "Cell line characteristic profile",
-    ),
-)
 
 # %%
-@dataclass(frozen=True)
-class OverrideEvent:
-    """One node taken from an override column instead of the overridden column."""
-
-    row_id: str
-    node: str
-    overridden_col: str
-    overridden_value: int
-    override_col: str
-    override_value: int
-
-    @property
-    def kind(self) -> str:
-        if self.overridden_value == self.override_value:
-            return "duplicate"
-        return "inconsistent"
-
-
 @dataclass(frozen=True)
 class ParsedRow:
     """One row that passed per-row fixes / outcome / weight checks."""
@@ -186,67 +155,6 @@ def _filter_co_located_and_comparative(
     return accepted, co_located_errors, comparative_errors
 
 
-def _format_fixes(pairs: Sequence[tuple[str, int]]) -> str:
-    return ", ".join(f"{node}={value}" for node, value in pairs)
-
-
-def apply_fixes_overrides(
-    rows: list[dict[str, str]],
-    overrides: Sequence[tuple[str, str]],
-    *,
-    id_col: str = "id",
-) -> list[OverrideEvent]:
-    """Apply column overrides in place; return where they took effect.
-
-    For each ``(override_col, overridden_col)`` pair, any node present in both
-    columns is kept only from ``override_col``. The node is removed from the
-    overridden column cell, so later ``_merge_fixes`` / ``import_NAV_exps``
-    neither see duplicates nor inconsistencies for that node.
-    """
-    events: list[OverrideEvent] = []
-    for override_col, overridden_col in overrides:
-        for row in rows:
-            rid = (row.get(id_col) or "").strip()
-            override_cell = (row.get(override_col) or "").strip()
-            overridden_cell = (row.get(overridden_col) or "").strip()
-            if not override_cell or not overridden_cell:
-                continue
-            try:
-                override_map = dict(_parse_fixes_cell(override_cell))
-                overridden_pairs = _parse_fixes_cell(overridden_cell)
-            except ValueError:
-                # Leave unparsable cells for the diagnostic pass.
-                continue
-            if not override_map:
-                continue
-
-            kept: list[tuple[str, int]] = []
-            for node, value in overridden_pairs:
-                if node in override_map:
-                    events.append(
-                        OverrideEvent(
-                            row_id=rid,
-                            node=node,
-                            overridden_col=overridden_col,
-                            overridden_value=value,
-                            override_col=override_col,
-                            override_value=override_map[node],
-                        )
-                    )
-                else:
-                    kept.append((node, value))
-            row[overridden_col] = _format_fixes(kept)
-    return events
-
-
-def clean_weight(cell: str) -> tuple[str, bool]:
-    """Fill empty / ``?`` weights with ``1``. Return ``(cleaned, changed)``."""
-    cell = (cell or "").strip()
-    if not cell or cell == "?":
-        return "1", True
-    return cell, False
-
-
 def _format_co_located_error(msg: str) -> str:
     """Rewrite co-located errors to lead with the duplicate ids."""
     match = re.fullmatch(
@@ -296,32 +204,6 @@ def _report_grouped(
         print(f"        ids: {', '.join(ids)}")
 
 
-def _report_overrides(events: Sequence[OverrideEvent]) -> None:
-    print(f"\nfixes column overrides applied: {len(events)}")
-    if not events:
-        return
-    by_kind = Counter(e.kind for e in events)
-    for kind, n in sorted(by_kind.items()):
-        print(f"  {kind}: {n}")
-
-    grouped: dict[str, list[str]] = {}
-    for e in events:
-        key = (
-            f"{e.kind}  node={e.node!r}  "
-            f"{e.overridden_col!r}={e.overridden_value} "
-            f"-> kept {e.override_col!r}={e.override_value}"
-        )
-        grouped.setdefault(key, []).append(e.row_id)
-    print("  where applied:")
-    for key, ids in sorted(grouped.items(), key=lambda kv: (-len(kv[1]), kv[0])):
-        print(f"    {len(ids):4d}  {key}")
-        print(f"          ids: {', '.join(ids)}")
-
-
-def _report_weight_cleanups(n_rows: int) -> None:
-    print(f"weight cleanups applied (empty/? -> 1): {n_rows}")
-
-
 # %% [markdown]
 # ## 1. Inspect headers vs `import_NAV_exps` defaults
 
@@ -330,6 +212,12 @@ with DATA.open(newline="", encoding="utf-8") as f:
     reader = csv.DictReader(f)
     headers = list(reader.fieldnames or [])
     rows = list(reader)
+
+ID_COL = _resolve_single_column(headers, _DEFAULT_ID_COL, "id")
+WEIGHT_COL = _resolve_single_column(headers, _DEFAULT_WEIGHT_COL, "weight")
+OBSERVED_COL = _resolve_single_column(headers, _DEFAULT_OBSERVED_COL, "observed")
+OUTCOME_COL = _resolve_single_column(headers, _DEFAULT_OUTCOME_COL, "outcome")
+active_fixes = list(FIXES_COLS) if FIXES_COLS is not None else list(_DEFAULT_FIXES_COLS)
 
 print(f"file: {DATA}")
 print(f"rows: {len(rows)}")
@@ -354,15 +242,10 @@ print(f"  id={ID_COL!r}")
 print(f"  weight={WEIGHT_COL!r}")
 print(f"  observed={OBSERVED_COL!r}")
 print(f"  outcome={OUTCOME_COL!r}")
-print(f"  fixes={list(FIXES_COLS)!r}")
-if FIXES_OVERRIDES:
-    for override_col, overridden_col in FIXES_OVERRIDES:
-        print(f"  override: {override_col!r} overrides {overridden_col!r}")
-else:
-    print("  override: (none)")
+print(f"  fixes={active_fixes!r}")
 
 # %% [markdown]
-# ## 2. Default import (expected to fail on mismatched columns)
+# ## 2. Default import (expected to fail on mismatched fixes columns)
 
 # %%
 try:
@@ -372,59 +255,29 @@ except Exception as exc:
     print(f"default import FAILED: {type(exc).__name__}: {exc}")
 
 # %% [markdown]
-# ## 3. Custom column mapping (raw file, no cleanup / override)
+# ## 3. Import with custom fixes columns (if configured)
 
 # %%
+nav_kwargs: dict = {}
+if FIXES_COLS is not None:
+    nav_kwargs["fixes_cols"] = FIXES_COLS
+
 try:
-    exps = import_NAV_exps(
-        DATA,
-        weight_col=WEIGHT_COL,
-        observed_col=OBSERVED_COL,
-        outcome_col=OUTCOME_COL,
-        fixes_cols=FIXES_COLS,
-    )
-    print(f"custom-mapping import OK: {len(exps)} experiments")
+    exps = import_NAV_exps(DATA, **nav_kwargs)
+    print(f"import OK: {len(exps)} experiments")
     print("first:", exps[0])
 except Exception as exc:
-    print(f"custom-mapping import FAILED: {type(exc).__name__}: {exc}")
+    print(f"import FAILED: {type(exc).__name__}: {exc}")
 
 # %% [markdown]
-# ## 4. Light cleanup + column overrides
-#
-# Mechanical fixes (dataset-specific, not in `nav.py`):
-# - fill empty / `?` weights with `1`
-#
-# Then apply `FIXES_OVERRIDES` so shared nodes keep the override column.
-# (`-` as empty intervention is already handled in `nav.py`.)
-
-# %%
-cleaned_rows: list[dict[str, str]] = []
-n_weight_cleanups = 0
-for r in rows:
-    nr = dict(r)
-    cleaned_w, changed = clean_weight(nr.get(WEIGHT_COL, ""))
-    nr[WEIGHT_COL] = cleaned_w
-    if changed:
-        n_weight_cleanups += 1
-    cleaned_rows.append(nr)
-
-override_events = apply_fixes_overrides(
-    cleaned_rows,
-    FIXES_OVERRIDES,
-    id_col=ID_COL,
-)
-_report_overrides(override_events)
-_report_weight_cleanups(n_weight_cleanups)
-
-# %% [markdown]
-# ## 5. Row-level + comparative diagnostics (after cleanup / override)
+# ## 4. Row-level + comparative diagnostics
 #
 # Mirrors ``import_NAV_exps`` checks: fixes parse/merge, observed-in-fixes,
 # weights, outcome parse, co-located outcomes, and comparative pairs
 # (missing other id, different observed, missing/wrong reciprocal).
 
 # %%
-weight_counts = Counter((r.get(WEIGHT_COL) or "").strip() for r in cleaned_rows)
+weight_counts = Counter((r.get(WEIGHT_COL) or "").strip() for r in rows)
 print("Weight value counts:", weight_counts.most_common())
 
 parse_errors: list[tuple[str, str, str, str]] = []
@@ -437,11 +290,11 @@ duplicate_id_errors: list[tuple[str, str]] = []
 parsed_rows: list[ParsedRow] = []
 seen_exp_ids: set[int] = set()
 
-for r in cleaned_rows:
+for r in rows:
     rid = (r.get(ID_COL) or "").strip()
     cells: list[str] = []
     row_parse_ok = True
-    for col in FIXES_COLS:
+    for col in active_fixes:
         cell = (r.get(col) or "").strip()
         if not cell:
             continue
@@ -543,7 +396,7 @@ _report_grouped(
 )
 
 # %% [markdown]
-# ## 6. Example problematic cells
+# ## 5. Example problematic cells
 
 # %%
 print("parse failures (one example cell per message):")
@@ -567,10 +420,10 @@ for rid, msg in merge_errors:
         continue
     seen_merge.add(key)
     ids = [r for r, m in merge_errors if _norm_msg(m) == key]
-    r = next(x for x in cleaned_rows if (x.get(ID_COL) or "").strip() == rid)
+    r = next(x for x in rows if (x.get(ID_COL) or "").strip() == rid)
     print(f"  ids={', '.join(ids)}")
     print(f"    example id={rid}: {msg}")
-    for col in FIXES_COLS:
+    for col in active_fixes:
         print(f"      {col}: {(r.get(col) or '')[:120]!r}")
 
 print("\ncomparative failures (one example row per message):")
@@ -597,7 +450,7 @@ for rid, msg in comparative_errors:
                 )
 
 # %% [markdown]
-# ## 7. Import trial
+# ## 6. Import trial
 #
 # Rows that still violate NAV constraints (including comparative pairs and
 # co-located outcomes) are dropped for this trial.
@@ -621,14 +474,14 @@ for rid, msg in (
 ):
     per_row_drop_msgs.setdefault(rid, msg)
 
-for r in cleaned_rows:
+for r in rows:
     rid = (r.get(ID_COL) or "").strip()
     if rid in accepted_ids:
         kept.append(r)
     else:
         dropped.append((rid, per_row_drop_msgs.get(rid, "failed NAV checks")))
 
-print(f"kept after cleanup/override/comparative: {len(kept)} / {len(rows)}")
+print(f"kept after diagnostics: {len(kept)} / {len(rows)}")
 _report_grouped("dropped", dropped)
 
 trial_path = DATA.with_name(f"{DATA.stem}_trial{DATA.suffix or '.csv'}")
@@ -636,17 +489,11 @@ with trial_path.open("w", newline="", encoding="utf-8") as f:
     writer = csv.DictWriter(f, fieldnames=headers, extrasaction="ignore")
     writer.writeheader()
     writer.writerows(kept)
-print(f"\nwrote cleaned trial CSV: {trial_path}  ({len(kept)} rows)")
+print(f"\nwrote trial CSV: {trial_path}  ({len(kept)} rows)")
 
 try:
-    exps = import_NAV_exps(
-        trial_path,
-        weight_col=WEIGHT_COL,
-        observed_col=OBSERVED_COL,
-        outcome_col=OUTCOME_COL,
-        fixes_cols=FIXES_COLS,
-    )
-    print(f"\ncleaned trial import OK: {len(exps)} experiments")
+    exps = import_NAV_exps(trial_path, **nav_kwargs)
+    print(f"\ntrial import OK: {len(exps)} experiments")
     print("first:", exps[0])
     print(f"n fixes (first): {len(exps[0].fixes)}")
     n_comp = sum(
@@ -654,4 +501,4 @@ try:
     )
     print(f"comparative outcomes kept: {n_comp}")
 except Exception as exc:
-    print(f"\ncleaned trial import FAILED: {type(exc).__name__}: {exc}")
+    print(f"\ntrial import FAILED: {type(exc).__name__}: {exc}")

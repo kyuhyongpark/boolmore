@@ -9,15 +9,10 @@ from boolmore.run_setup import build_evaluator
 
 # --- edit these to evaluate a different model ---
 CONFIG = "case_study/breast_cancer/BreastCancer_config.json"
-MODEL = "case_study/breast_cancer/BreastCancer_primes_parsimonious.pkl"  # e.g. demo/CAD.bnet
+MODEL = "case_study/breast_cancer/20261015_164622/BreastCancer_primes_parsimonious_20261015_164622_2404_gen57.pkl"  # e.g. demo/CAD.bnet
 REPORT = True  # set True to write a per-experiment NAV score CSV
 
-# NAV CSV column names (same knobs as check_nav_import.py).
-# Set any of these to None to use import_NAV_exps defaults.
-ID_COL = "id"
-WEIGHT_COL = "Weight"  # typo in the breast-cancer source CSV header
-OBSERVED_COL = "Observed node"
-OUTCOME_COL = "Value"
+# Breast-cancer NAV fixes columns (None → import_NAV_exps defaults).
 FIXES_COLS = (
     "Signals",
     "Drug treatment/intervention",
@@ -33,10 +28,6 @@ model_path = root / MODEL
 evaluator = build_evaluator(
     config_path,
     verbose=True,
-    id_col=ID_COL,
-    weight_col=WEIGHT_COL,
-    observed_col=OBSERVED_COL,
-    outcome_col=OUTCOME_COL,
     fixes_cols=FIXES_COLS,
 )
 
