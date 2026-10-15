@@ -6,6 +6,7 @@ import csv
 import datetime
 import os
 import sys
+from collections.abc import Sequence
 from typing import TextIO
 
 from boolmore.boolean_functions import prime2bnet
@@ -147,6 +148,11 @@ def run_ga(
         export_thresh:float=0.0,
         export_same:bool=False,
         core:int=1,
+        id_col: str | Sequence[str] | None = None,
+        weight_col: str | Sequence[str] | None = None,
+        observed_col: str | Sequence[str] | None = None,
+        outcome_col: str | Sequence[str] | None = None,
+        fixes_cols: Sequence[str] | None = None,
         )-> tuple[Candidate, Candidate, list[GAState]]:
     """
     Imports parameters, experiments, base model in the json file.
@@ -197,6 +203,9 @@ def run_ga(
         if True, export models with the same score for the final generation
     core : int
         if larger than 1, model evaluation is done in parallel
+    id_col, weight_col, observed_col, outcome_col, fixes_cols
+        Optional NAV CSV column names forwarded to ``build_evaluator`` /
+        ``import_NAV_exps``. Leave as ``None`` to use import defaults.
 
     Returns
     -------
@@ -263,7 +272,15 @@ def run_ga(
         print()
 
         # Loads base then experimental data (prints load messages + data stats)
-        evaluator = build_evaluator(config_dict, verbose=True)
+        evaluator = build_evaluator(
+            config_dict,
+            verbose=True,
+            id_col=id_col,
+            weight_col=weight_col,
+            observed_col=observed_col,
+            outcome_col=outcome_col,
+            fixes_cols=fixes_cols,
+        )
 
         # ---------- Evaluate and print base (same detail as START/FINAL) ----------
         start_single = datetime.datetime.now()

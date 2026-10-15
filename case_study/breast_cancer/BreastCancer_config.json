@@ -650,14 +650,16 @@
     "parameters": {
         "stop_if_max": true,
         "starting_gen": 0,
-        "total_iter": 100,
-        "per_iter": 100,
-        "keep": 20,
-        "mix": 20,
-        "prob": 0.01,
+        "total_iter": 50,
+        "per_iter": 50,
+        "keep": 10,
+        "mix": 10,
+        "prob": {"1": 0.5, "11": 0.01},
         "edge_prob": 0.0,
         "order_by": [
             "n_extra_edges",
+            "n_eff_self_edges",
+            "n_eff_edges",
             "n_prime_implicants"
         ]
     }
