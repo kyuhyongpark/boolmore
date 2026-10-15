@@ -1,5 +1,6 @@
 """Config → Evaluator / GAConfig wiring shared by ``run_ga`` and eval scripts."""
 
+from collections.abc import Sequence
 from functools import partial
 from pathlib import Path
 
@@ -86,8 +87,18 @@ def build_evaluator(
     config: dict | str | Path,
     *,
     verbose: bool = False,
+    id_col: str | Sequence[str] | None = None,
+    weight_col: str | Sequence[str] | None = None,
+    observed_col: str | Sequence[str] | None = None,
+    outcome_col: str | Sequence[str] | None = None,
+    fixes_cols: Sequence[str] | None = None,
 ) -> Evaluator:
-    """Build a ready ``Evaluator`` from a config dict or JSON path."""
+    """Build a ready ``Evaluator`` from a config dict or JSON path.
+
+    Optional ``id_col`` / ``weight_col`` / ``observed_col`` / ``outcome_col`` /
+    ``fixes_cols`` are forwarded to ``import_NAV_exps`` (NAV runs only).
+    Leave them as ``None`` to use that function's defaults.
+    """
     if not isinstance(config, dict):
         config = load_json_config((project_root() / config).resolve())
 
@@ -120,7 +131,19 @@ def build_evaluator(
                 if primes == [[{node: 0}], [{node: 1}]]:
                     default_sources[node] = 0
 
-        exps = import_NAV_exps(str(data_path))
+        nav_kwargs: dict = {}
+        if id_col is not None:
+            nav_kwargs["id_col"] = id_col
+        if weight_col is not None:
+            nav_kwargs["weight_col"] = weight_col
+        if observed_col is not None:
+            nav_kwargs["observed_col"] = observed_col
+        if outcome_col is not None:
+            nav_kwargs["outcome_col"] = outcome_col
+        if fixes_cols is not None:
+            nav_kwargs["fixes_cols"] = fixes_cols
+
+        exps = import_NAV_exps(str(data_path), **nav_kwargs)
         prediction_fn = partial(get_NAV_prediction, method=nav_method)
         score_fn = partial(
             get_NAV_scores,
