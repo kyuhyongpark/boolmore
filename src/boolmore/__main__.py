@@ -1,33 +1,99 @@
-def main():
-    from boolmore.runner import run_ga
-    from sys import argv
-    """
-    python -m boolmore <parameters file> <starting model>
+"""Module CLI: ``python -m boolmore run CONFIG [options]``."""
 
-    <parameters file> is the path to the parameters json, e.g. "CAD_config.json"
-    <starting model> is the path to a starting model file, e.g. "CAD_start.txt"
-    if <starting mdoel> is not provided, the base model will be the starting model.
+from __future__ import annotations
 
-    This will run the algorithm and export the models with the top score.
+import argparse
+import sys
 
-    Example Usage:
-    cd boolmore/demo
-    python -m boolmore "CAD_config.json" "CAD_start.txt"
-    """
+from boolmore.runner import run_batch, run_ga
 
-    print("""
-    This function is for demonstration. It runs the boolmore Boolean model refinement
-    routine and exports the model with the top score. Default function parameters are
-    used. See ReadMe for instructions regarding typical use cases.
-    """)
 
-    config_json = argv[1]
-    if len(argv) == 3:
-        model = argv[2]
-    else:
-        model = None
+def _parse_seeds(text: str) -> list[int]:
+    return [int(part.strip()) for part in text.split(",") if part.strip()]
 
-    run_ga(json_file=config_json, start_file=model)
 
-if __name__=='__main__':
+def _add_run_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "config",
+        help="Config path relative to the project root (or absolute).",
+    )
+    parser.add_argument(
+        "--seeds",
+        default="0",
+        help="Comma-separated seeds (default: 0). Single seed = single-run batch.",
+    )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=None,
+        help="Single seed (overrides --seeds).",
+    )
+    parser.add_argument("--core", type=int, default=1, help="Parallel cores.")
+    parser.add_argument(
+        "--name",
+        default=None,
+        help="Batch folder name (default: UTC stamp). Overwrites if set.",
+    )
+    parser.add_argument(
+        "--runs-root",
+        default="runs",
+        help="Parent directory for batch folders (default: runs).",
+    )
+    parser.add_argument(
+        "--single",
+        action="store_true",
+        help=(
+            "Call run_ga once without batch folder layout "
+            "(uses --seed or first of --seeds; --name is the run prefix)."
+        ),
+    )
+
+
+def main(argv: list[str] | None = None) -> None:
+    argv = list(sys.argv[1:] if argv is None else argv)
+
+    parser = argparse.ArgumentParser(
+        prog="python -m boolmore",
+        description="boolmore Boolean model refinement",
+    )
+    sub = parser.add_subparsers(dest="command")
+
+    run_parser = sub.add_parser(
+        "run",
+        help="Run GA from a study config (batch layout by default).",
+    )
+    _add_run_arguments(run_parser)
+
+    # Backward-compatible: ``python -m boolmore CONFIG`` → run batch
+    if argv and not argv[0].startswith("-") and argv[0] != "run":
+        argv = ["run", *argv]
+
+    args = parser.parse_args(argv)
+    if args.command != "run":
+        parser.print_help()
+        raise SystemExit(2)
+
+    seeds = [args.seed] if args.seed is not None else _parse_seeds(args.seeds)
+    if not seeds:
+        raise SystemExit("At least one seed is required.")
+
+    if args.single:
+        run_ga(
+            json_file=args.config,
+            seed=seeds[0],
+            core=args.core,
+            run_name=args.name,
+        )
+        return
+
+    run_batch(
+        args.config,
+        seeds=seeds,
+        core=args.core,
+        run_name=args.name,
+        runs_root=args.runs_root,
+    )
+
+
+if __name__ == "__main__":
     main()

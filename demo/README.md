@@ -14,9 +14,14 @@ Demonstration of `boolmore` on the Cortical Area Development (CAD) model.
    `CAD_data.csv` : This file contains the artificial experiments generated as in the benchmarks  
    `CAD_config.json` : This file contains the path to the above files and other constraints
        
-3. Run the python script such as
+3. Run the demo entrypoint (edit seeds/core at the top of `demo/run.py` if needed):
     ```
-    python boolmore/scripts/run.py
+    python boolmore/demo/run.py
+    ```
+
+    Or via the module CLI:
+    ```
+    python -m boolmore run demo/CAD_config.json --seeds 0,1,2 --name demo --core 4
     ```
 
 ## Description
@@ -28,12 +33,12 @@ The parameters are adjusted for the small model size (5 nodes)
 4. models to keep per iteration: 2 (compared to 20 for the validation benchmarks)  
 5. models to mix per iteration: 2 (compared to 20 for the validation benchmarks)
 
-With the default knobs (`RUN_NAME = "demo"`, `RUNS_ROOT = "runs"`, `SEEDS = [0]`), outputs go under `runs/demo/`:
+With the default knobs (`RUN_NAME = "test"`, `RUNS_ROOT = "demo/runs"`, `SEEDS = range(3)`), outputs go under `demo/runs/test/`:
 
-- `runs/demo/config.json` — effective config snapshot
-- `runs/demo/batch.log` — batch summary
-- `runs/demo/seed_000/seed_000_log.txt` — per-seed log
-- `runs/demo/seed_000/seed_000_*_gen*.bnet` — exported models
+- `demo/runs/test/config.json` — effective config snapshot
+- `demo/runs/test/batch.log` — batch summary
+- `demo/runs/test/seed_000/seed_000_log.txt` — per-seed log
+- `demo/runs/test/seed_000/seed_000_*_gen*.bnet` — exported models
 
 Re-running with the same `RUN_NAME` overwrites that batch folder.
 
@@ -49,8 +54,8 @@ python boolmore/scripts/evaluate_model.py
 
 ```python
 # change these to evaluate a different model
-CONFIG = DEMO_DIR / "CAD_config.json"
-MODEL = DEMO_DIR / "CAD_start.bnet"
+CONFIG = "demo/CAD_config.json"
+MODEL = "demo/CAD_start.bnet"
 REPORT = False  # set True to write a per-experiment NAV score CSV
 ```
 

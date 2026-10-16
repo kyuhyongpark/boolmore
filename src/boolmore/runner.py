@@ -4,10 +4,13 @@ from __future__ import annotations
 
 import csv
 import datetime
+import json
 import os
+import shutil
 import sys
 from collections.abc import Sequence
 from datetime import timezone
+from pathlib import Path
 from typing import TextIO
 
 from boolmore.boolean_functions import prime2bnet
@@ -149,6 +152,158 @@ def export_models(
                 export_candidate(candidate, run_name)
 
 
+def _utc_now() -> datetime.datetime:
+    return datetime.datetime.now(timezone.utc)
+
+
+def _utc_stamp() -> str:
+    return _utc_now().strftime("%Y%m%dT%H%M%SZ")
+
+
+def _resolve_under_root(path: str | Path) -> Path:
+    """Resolve ``path`` under ``project_root()`` unless it is already absolute."""
+    p = Path(path)
+    if p.is_absolute():
+        return p.resolve()
+    return (project_root() / p).resolve()
+
+
+def _last_iter_line(seed_log: str | Path) -> str | None:
+    """Return the last GA progress line (``iter N/M | …``) from a seed log."""
+    last = None
+    with open(seed_log, encoding="utf-8") as fp:
+        for line in fp:
+            if line.startswith("iter "):
+                last = line.rstrip("\n")
+    return last
+
+
+def run_batch(
+    config: str | Path,
+    *,
+    seeds: Sequence[int],
+    core: int = 1,
+    run_name: str | None = None,
+    runs_root: str | Path = "runs",
+    config_overrides: dict | None = None,
+    parameter_overrides: dict | None = None,
+    export_top: int = 0,
+    export_thresh: float = 0.0,
+    export_same: bool = False,
+) -> Path:
+    """Run GA for one or more seeds under ``{runs_root}/{batch_name}/``.
+
+    Creates a batch folder with a config snapshot, ``batch.log``, and per-seed
+    subdirectories ``seed_NNN/``. Named ``run_name`` folders are overwritten;
+    ``run_name=None`` uses a UTC stamp folder.
+
+    Parameters
+    ----------
+    config :
+        Path to the study JSON (relative to project root, or absolute).
+    seeds :
+        Random seeds to run (one folder each). A single-element sequence is a
+        single-seed batch with the same layout.
+    core :
+        Parallel evaluation cores forwarded to each ``run_ga`` call.
+    run_name :
+        Batch folder name, or ``None`` for a UTC stamp.
+    runs_root :
+        Parent directory for batch folders (relative to project root, or absolute).
+    config_overrides, parameter_overrides :
+        Optional dicts applied on top of the source JSON / its ``parameters``.
+    export_top, export_thresh, export_same :
+        Forwarded to each ``run_ga`` call.
+
+    Returns
+    -------
+    Path
+        Absolute path to the batch directory.
+    """
+    source_config = _resolve_under_root(config)
+    runs_root_path = _resolve_under_root(runs_root)
+    runs_root_path.mkdir(parents=True, exist_ok=True)
+
+    overrides = dict(config_overrides or {})
+    param_overrides = dict(parameter_overrides or {})
+
+    named = run_name is not None
+    batch_name = run_name if named else _utc_stamp()
+    batch_dir = runs_root_path / batch_name
+
+    if named:
+        if batch_dir.exists():
+            shutil.rmtree(batch_dir)
+        batch_dir.mkdir(parents=True)
+    else:
+        batch_dir.mkdir(parents=True, exist_ok=False)
+
+    with open(source_config, encoding="utf-8") as fp:
+        config_dict = json.load(fp)
+    config_dict.update(overrides)
+    if param_overrides:
+        config_dict.setdefault("parameters", {}).update(param_overrides)
+
+    config_path = batch_dir / "config.json"
+    with open(config_path, "w", encoding="utf-8") as fp:
+        json.dump(config_dict, fp, indent=2)
+        fp.write("\n")
+
+    batch_log = batch_dir / "batch.log"
+    summaries: list[tuple[int, str, str]] = []
+
+    with open(batch_log, "w", encoding="utf-8") as log:
+        log.write(f"batch_dir={batch_dir}\n")
+        log.write(f"source_config={source_config}\n")
+        log.write(f"config_overrides={overrides}\n")
+        log.write(f"parameter_overrides={param_overrides}\n")
+        log.write(f"seeds={list(seeds)}\n")
+        log.write(f"core={core}\n\n")
+        log.flush()
+
+        for seed in seeds:
+            seed_dir = batch_dir / f"seed_{seed:03d}"
+            seed_dir.mkdir()
+            run_prefix = seed_dir / f"seed_{seed:03d}"
+            seed_log_path = f"{run_prefix}_log.txt"
+
+            started = _utc_now()
+            log.write(f"[{started.isoformat()}] start seed={seed} dir={seed_dir}\n")
+            log.flush()
+            print(f"\n=== seed={seed} → {seed_dir} ===\n")
+
+            run_ga(
+                json_file=str(config_path),
+                run_name=str(run_prefix),
+                seed=seed,
+                core=core,
+                export_top=export_top,
+                export_thresh=export_thresh,
+                export_same=export_same,
+            )
+
+            finished = _utc_now()
+            elapsed = finished - started
+            iter_line = _last_iter_line(seed_log_path) or "(no iter line found)"
+            summaries.append((seed, str(elapsed), iter_line))
+
+            log.write(
+                f"[{finished.isoformat()}] done  seed={seed} "
+                f"elapsed={elapsed}\n"
+            )
+            log.write(f"  {iter_line}\n")
+            log.flush()
+
+        log.write("\n--- summary ---\n")
+        for seed, elapsed, iter_line in summaries:
+            log.write(f"seed={seed}  elapsed={elapsed}\n")
+            log.write(f"  {iter_line}\n")
+        log.flush()
+
+    print(f"\nAll runs finished. Outputs in {batch_dir}")
+    return batch_dir
+
+
 def run_ga(
         json_file:str|None=None,
         run_type:str|None=None,
@@ -220,8 +375,9 @@ def run_ga(
     core : int
         if larger than 1, model evaluation is done in parallel
     id_col, weight_col, observed_col, outcome_col, fixes_cols
-        Optional NAV CSV column names forwarded to ``build_evaluator`` /
-        ``import_NAV_exps``. Leave as ``None`` to use import defaults.
+        Optional NAV CSV column names that override ``nav_columns`` in the
+        JSON config. Leave as ``None`` to use the config block, or
+        ``import_NAV_exps`` defaults when the block is absent.
 
     Returns
     -------

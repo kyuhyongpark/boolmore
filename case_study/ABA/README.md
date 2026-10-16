@@ -5,11 +5,11 @@ See the manuscript for details ([bioRxiv](https://www.biorxiv.org/content/10.110
 
 ## Running refinement
 
-Use the shared batch runner [`scripts/run.py`](../../scripts/run.py). Edit the knobs at the top, for example:
+Use the study entrypoint [`run.py`](run.py). Edit the knobs at the top if needed, for example:
 
 ```python
 CONFIG = "case_study/ABA/data/ABA_B.json"
-RUN_NAME = None          # or "aba_B" to overwrite runs/aba_B/
+RUN_NAME = "aba_B"       # or None for a UTC stamp folder
 RUNS_ROOT = "case_study/ABA/runs"
 SEEDS = [11]
 CORE = 6
@@ -20,7 +20,13 @@ PARAMETER_OVERRIDES = {"total_iter": 10, "per_iter": 10, "keep": 2, "mix": 2}
 Then:
 
 ```bash
-python boolmore/scripts/run.py
+python boolmore/case_study/ABA/run.py
+```
+
+Or via the module CLI:
+
+```bash
+python -m boolmore run case_study/ABA/data/ABA_B.json --seed 11 --name aba_B --runs-root case_study/ABA/runs --core 6
 ```
 
 Outputs go under `{RUNS_ROOT}/{batch_name}/` with `config.json`, `batch.log`, and per-seed folders (`seed_011/`, …).

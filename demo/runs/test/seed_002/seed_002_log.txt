@@ -10,7 +10,7 @@ GENERATE_DEFAULTS=False
 CONSTRAINTS={'fixed': [], 'regulate': {}, 'necessary': {}, 'group': {}, 'possible_constant': []}
 EDGE_POOL=[]
 
-seed: 1
+seed: 2
 stop if max: True
 starting gen: 0
 total iterations: 10
@@ -56,8 +56,8 @@ Emx2,	Coup_fti & !Fgf8 & !Pax6 & !Sp8
 Fgf8,	!Emx2 & Fgf8 & Sp8
 Pax6,	!Coup_fti & !Emx2 & Sp8
 Sp8,	!Emx2 & Fgf8
-Elapsed time for single evaluation: 0:00:00.094502
-Estimated GA evaluation time: 0:00:02.362550
+Elapsed time for single evaluation: 0:00:00.075387
+Estimated GA evaluation time: 0:00:01.884675
 
 Loading starting model from /home/kyuhyongpark/Boolmore/boolmore/demo/CAD_start.bnet
 Starting model loaded.
@@ -87,36 +87,36 @@ Fgf8,	Sp8 | !Emx2
 Pax6,	!Coup_fti & Sp8 | !Emx2
 Sp8,	Fgf8
 
-start_time: 2026-10-16 12:33:53.881107
+start_time: 2026-10-16 15:59:57.884698
 
-iter  1/10 | generated  10 | pruned  0/10 (thresh 33.96) | best id   3 | gen  1 | score 42.2/50 (84.5%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 8 | n_prime_implicants 8
-iter  2/10 | generated  20 | pruned  1/10 (thresh 38.35) | best id   3 | gen  1 | score 42.2/50 (84.5%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 8 | n_prime_implicants 8
-iter  3/10 | generated  30 | pruned  2/10 (thresh 41.58) | best id  24 | gen  2 | score 46.6/50 (93.2%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 12
-iter  4/10 | generated  40 | pruned  2/10 (thresh 44.08) | best id  24 | gen  2 | score 46.6/50 (93.2%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 12
-iter  5/10 | generated  50 | pruned  2/10 (thresh 44.92) | best id  50 | gen  3 | score 46.8/50 (93.5%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 11
-iter  6/10 | generated  60 | pruned  5/10 (thresh 46.58) | best id  50 | gen  3 | score 46.8/50 (93.5%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 11
-iter  7/10 | generated  70 | pruned  2/10 (thresh 46.75) | best id  50 | gen  3 | score 46.8/50 (93.5%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 11
-iter  8/10 | generated  80 | pruned  4/10 (thresh 46.75) | best id  50 | gen  3 | score 46.8/50 (93.5%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 11
-iter  9/10 | generated  90 | pruned  4/10 (thresh 46.75) | best id  50 | gen  3 | score 46.8/50 (93.5%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 11
-iter 10/10 | generated 100 | pruned  5/10 (thresh 46.75) | best id  50 | gen  3 | score 46.8/50 (93.5%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 11
-Eval summaries: /home/kyuhyongpark/Boolmore/boolmore/runs/demo/seed_001/seed_001_evals.csv
+iter  1/10 | generated  10 | pruned  1/10 (thresh 33.96) | best id   4 | gen  1 | score 40.8/50 (81.5%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 13
+iter  2/10 | generated  20 | pruned  0/10 (thresh 37.62) | best id  13 | gen  3 | score 41.8/50 (83.5%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 8 | n_prime_implicants 9
+iter  3/10 | generated  30 | pruned  2/10 (thresh 40.75) | best id  23 | gen  4 | score 43.1/50 (86.2%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 7 | n_prime_implicants 7
+iter  4/10 | generated  40 | pruned  2/10 (thresh 42.00) | best id  23 | gen  4 | score 43.1/50 (86.2%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 7 | n_prime_implicants 7
+iter  5/10 | generated  50 | pruned  0/10 (thresh 43.12) | best id  50 | gen  7 | score 44.6/50 (89.2%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 9 | n_prime_implicants 9
+iter  6/10 | generated  60 | pruned  1/10 (thresh 43.12) | best id  51 | gen  8 | score 44.6/50 (89.2%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 8 | n_prime_implicants 8
+iter  7/10 | generated  70 | pruned  5/10 (thresh 44.62) | best id  66 | gen  9 | score 45.6/50 (91.2%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 12 | n_prime_implicants 13
+iter  8/10 | generated  80 | pruned  3/10 (thresh 44.62) | best id  66 | gen  9 | score 45.6/50 (91.2%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 12 | n_prime_implicants 13
+iter  9/10 | generated  90 | pruned  4/10 (thresh 45.62) | best id  66 | gen  9 | score 45.6/50 (91.2%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 12 | n_prime_implicants 13
+iter 10/10 | generated 100 | pruned  3/10 (thresh 45.62) | best id  66 | gen  9 | score 45.6/50 (91.2%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 12 | n_prime_implicants 13
+Eval summaries: /home/kyuhyongpark/Boolmore/boolmore/demo/runs/test/seed_002/seed_002_evals.csv
 
-Exported generated model to /home/kyuhyongpark/Boolmore/boolmore/runs/demo/seed_001/seed_001_50_gen3.bnet
-Pickled primes to /home/kyuhyongpark/Boolmore/boolmore/runs/demo/seed_001/seed_001_50_gen3.pkl
+Exported generated model to /home/kyuhyongpark/Boolmore/boolmore/demo/runs/test/seed_002/seed_002_66_gen9.bnet
+Pickled primes to /home/kyuhyongpark/Boolmore/boolmore/demo/runs/test/seed_002/seed_002_66_gen9.pkl
 
-FINAL: /home/kyuhyongpark/Boolmore/boolmore/runs/demo/seed_001/seed_001_50_gen3.bnet
-# id: 50
-# generation: 3
-# score: 46.75 / 50.0 (93.5%)
+FINAL: /home/kyuhyongpark/Boolmore/boolmore/demo/runs/test/seed_002/seed_002_66_gen9.bnet
+# id: 66
+# generation: 9
+# score: 45.62 / 50.0 (91.2%)
 # satisfies_constraints: True
-# n_eff_edges: 11
+# n_eff_edges: 12
 # n_eff_self_edges: 1
-# n_prime_implicants: 11
+# n_prime_implicants: 13
 # n_extra_edges: 0
 # number of nodes: 5
 # number of edges: 14
-# number of effective base edges: 11
-# number of ineffective base edges: 3
+# number of effective base edges: 12
+# number of ineffective base edges: 2
 # extra edges: []
 # number of extra edges: 0
 # number of effective extra edges: 0
@@ -124,11 +124,11 @@ FINAL: /home/kyuhyongpark/Boolmore/boolmore/runs/demo/seed_001/seed_001_50_gen3.
 # number of unadded edges: 0
 targets,	factors
 Coup_fti,	!Fgf8 & !Sp8
-Emx2,	!Fgf8 & !Pax6
-Fgf8,	!Emx2 & Fgf8 & Sp8
-Pax6,	!Coup_fti | !Emx2 & Sp8
-Sp8,	Fgf8
-Ran 10 iterations, generated 100 models, mutated 4 functions. Elapsed: 0:00:03.177256
+Emx2,	!Fgf8 & !Sp8 | !Pax6 & !Sp8
+Fgf8,	!Emx2 & Fgf8
+Pax6,	!Coup_fti & !Emx2 & Sp8
+Sp8,	!Emx2 & Fgf8
+Ran 10 iterations, generated 100 models, mutated 5 functions. Elapsed: 0:00:03.018872
 
 -----modified functions-----
 
@@ -140,21 +140,21 @@ Ran 10 iterations, generated 100 models, mutated 4 functions. Elapsed: 0:00:03.1
   Emx2
     base:  Coup_fti & !Fgf8 & !Pax6 & !Sp8
     start: Coup_fti & !Fgf8 | !Sp8 | !Pax6
-    final: !Fgf8 & !Pax6
+    final: !Fgf8 & !Sp8 | !Pax6 & !Sp8
 
   Fgf8
     base:  !Emx2 & Fgf8 & Sp8
     start: Sp8 | !Emx2
-    final: (same as base)
+    final: !Emx2 & Fgf8
 
   Pax6
     base:  !Coup_fti & !Emx2 & Sp8
     start: !Coup_fti & Sp8 | !Emx2
-    final: !Coup_fti | !Emx2 & Sp8
+    final: (same as base)
 
   Sp8
     base:  !Emx2 & Fgf8
     start: Fgf8
-    final: (same as start)
+    final: (same as base)
 
 5 out of 5 functions differ among base, start, and final

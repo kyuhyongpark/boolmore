@@ -92,12 +92,19 @@ Boolmore probes this on the first trap-space call (prediction / phenotype helper
    "base": "your_path/CAD_data.tsv"
    ```
 
-5. run python script such as
+5. run the demo (or point a study config at your files):
+
+   ```bash
+   python boolmore/demo/run.py
+   # or: python -m boolmore run demo/CAD_config.json --seeds 0,1,2 --name demo
+   ```
+
+   For a single seed without the batch folder layout:
 
    ```python
    from boolmore.runner import run_ga
 
-   run_ga("your_path/CAD_config.json", start_file="your_path/CAD_start.bnet")
+   run_ga(json_file="demo/CAD_config.json", seed=0, core=1)
    ```
 
 ## Details for configuring input files

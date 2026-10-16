@@ -647,6 +647,18 @@
         "possible_constant": []
     },
     "edge_pool": [],
+    "nav_columns": {
+        "id": "id",
+        "weight": "Weight",
+        "observed": "Observed node",
+        "outcome": "Value",
+        "fixes": [
+            "Signals",
+            "Drug treatment/intervention",
+            "Cell line characteristic profile",
+            "Additional features of the cell population"
+        ]
+    },
     "parameters": {
         "stop_if_max": true,
         "starting_gen": 0,

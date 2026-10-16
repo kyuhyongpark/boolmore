@@ -30,9 +30,7 @@ from matplotlib.lines import Line2D
 
 # %%
 DEMO_DIR = Path(__file__).resolve().parent.parent / "demo"
-EVALS_CSV = DEMO_DIR / "demo_evals.csv"
-# Override for another run, e.g.:
-# EVALS_CSV = Path("/path/to/my_run_evals.csv")
+EVALS_CSV = DEMO_DIR / "runs" / "test" / "seed_000" / "seed_000_evals.csv"
 
 FIG_DIR = EVALS_CSV.parent / f"{EVALS_CSV.stem}_figures"
 FIG_DIR.mkdir(parents=True, exist_ok=True)

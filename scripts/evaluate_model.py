@@ -1,3 +1,12 @@
+"""Score a ``.bnet`` / ``.pkl`` with the same fitness pipeline as the GA.
+
+Edit the knobs below, then::
+
+    python boolmore/scripts/evaluate_model.py
+
+NAV CSV columns come from ``nav_columns`` in the config JSON when present.
+"""
+
 from pathlib import Path
 from time import perf_counter
 
@@ -9,27 +18,15 @@ from boolmore.run_setup import build_evaluator
 
 # --- edit these to evaluate a different model ---
 CONFIG = "case_study/breast_cancer/BreastCancer_config.json"
-MODEL = "case_study/breast_cancer/20261015_164622/BreastCancer_primes_parsimonious_20261015_164622_2404_gen57.pkl"  # e.g. demo/CAD.bnet
+MODEL = "case_study/breast_cancer/20261015_164622/BreastCancer_primes_parsimonious_20261015_164622_2404_gen57.pkl"
 REPORT = True  # set True to write a per-experiment NAV score CSV
-
-# Breast-cancer NAV fixes columns (None → import_NAV_exps defaults).
-FIXES_COLS = (
-    "Signals",
-    "Drug treatment/intervention",
-    "Cell line characteristic profile",
-    "Additional features of the cell population",
-)
 # ------------------------------------------------
 
 root = project_root()
 config_path = root / CONFIG
 model_path = root / MODEL
 
-evaluator = build_evaluator(
-    config_path,
-    verbose=True,
-    fixes_cols=FIXES_COLS,
-)
+evaluator = build_evaluator(config_path, verbose=True)
 
 base_result = evaluator.evaluate(evaluator.base)
 print(evaluator.base.info())

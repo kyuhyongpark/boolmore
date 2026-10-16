@@ -44,7 +44,10 @@ def build_run_config(
         ):
             raise ValueError("If json file is given, other parameters should not be given.")
 
-        return load_json_config((project_root() / json_file).resolve())
+        path = Path(json_file)
+        if not path.is_absolute():
+            path = project_root() / path
+        return load_json_config(path.resolve())
 
     if any(x is None for x in [run_type, data_file, base_file]):
         raise ValueError(
@@ -83,6 +86,39 @@ def build_run_config(
     }
 
 
+def _nav_column_kwargs(
+    config: dict,
+    *,
+    id_col: str | Sequence[str] | None = None,
+    weight_col: str | Sequence[str] | None = None,
+    observed_col: str | Sequence[str] | None = None,
+    outcome_col: str | Sequence[str] | None = None,
+    fixes_cols: Sequence[str] | None = None,
+) -> dict:
+    """Resolve NAV CSV column kwargs from config ``nav_columns`` and overrides.
+
+    Explicit keyword arguments take precedence over ``config["nav_columns"]``.
+    Keys in ``nav_columns`` are ``id``, ``weight``, ``observed``, ``outcome``,
+    and ``fixes``. Omitted keys fall through to ``import_NAV_exps`` defaults.
+    """
+    nav_cols = config.get("nav_columns") or {}
+    if not isinstance(nav_cols, dict):
+        raise ValueError("config['nav_columns'] must be a dict when present")
+
+    resolved = {
+        "id_col": id_col if id_col is not None else nav_cols.get("id"),
+        "weight_col": weight_col if weight_col is not None else nav_cols.get("weight"),
+        "observed_col": (
+            observed_col if observed_col is not None else nav_cols.get("observed")
+        ),
+        "outcome_col": (
+            outcome_col if outcome_col is not None else nav_cols.get("outcome")
+        ),
+        "fixes_cols": fixes_cols if fixes_cols is not None else nav_cols.get("fixes"),
+    }
+    return {key: value for key, value in resolved.items() if value is not None}
+
+
 def build_evaluator(
     config: dict | str | Path,
     *,
@@ -96,11 +132,15 @@ def build_evaluator(
     """Build a ready ``Evaluator`` from a config dict or JSON path.
 
     Optional ``id_col`` / ``weight_col`` / ``observed_col`` / ``outcome_col`` /
-    ``fixes_cols`` are forwarded to ``import_NAV_exps`` (NAV runs only).
-    Leave them as ``None`` to use that function's defaults.
+    ``fixes_cols`` override ``config["nav_columns"]`` when set. Otherwise
+    ``nav_columns`` (keys ``id``, ``weight``, ``observed``, ``outcome``,
+    ``fixes``) is used. If neither is set, ``import_NAV_exps`` defaults apply.
     """
     if not isinstance(config, dict):
-        config = load_json_config((project_root() / config).resolve())
+        path = Path(config)
+        if not path.is_absolute():
+            path = project_root() / path
+        config = load_json_config(path.resolve())
 
     run_type = config["run_type"]
     data_path = (project_root() / config["data"]).resolve()
@@ -131,17 +171,14 @@ def build_evaluator(
                 if primes == [[{node: 0}], [{node: 1}]]:
                     default_sources[node] = 0
 
-        nav_kwargs: dict = {}
-        if id_col is not None:
-            nav_kwargs["id_col"] = id_col
-        if weight_col is not None:
-            nav_kwargs["weight_col"] = weight_col
-        if observed_col is not None:
-            nav_kwargs["observed_col"] = observed_col
-        if outcome_col is not None:
-            nav_kwargs["outcome_col"] = outcome_col
-        if fixes_cols is not None:
-            nav_kwargs["fixes_cols"] = fixes_cols
+        nav_kwargs = _nav_column_kwargs(
+            config,
+            id_col=id_col,
+            weight_col=weight_col,
+            observed_col=observed_col,
+            outcome_col=outcome_col,
+            fixes_cols=fixes_cols,
+        )
 
         exps = import_NAV_exps(str(data_path), **nav_kwargs)
         prediction_fn = partial(get_NAV_prediction, method=nav_method)
