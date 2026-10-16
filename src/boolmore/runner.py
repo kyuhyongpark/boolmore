@@ -75,6 +75,21 @@ def log_candidate(candidate: Candidate, label: str, path: str) -> None:
     print(candidate.model.bnet)
 
 
+def _rule_rhs(node: str, primes) -> str:
+    """Boolean rule body for ``node`` (without the ``node,\\t`` prefix)."""
+    line = prime2bnet(node, primes)
+    _, _, rhs = line.partition(",\t")
+    return rhs if rhs else line
+
+
+def _print_function_block(node: str, rows: list[tuple[str, str]]) -> None:
+    """Print one node's compared rules with aligned labels."""
+    print(f"\n  {node}")
+    width = max(len(label) for label, _ in rows) + 1  # include ':'
+    for label, text in rows:
+        print(f"    {(label + ':'):<{width}} {text}")
+
+
 def init_eval_csv(path: str) -> None:
     """Create/overwrite the per-model eval CSV with a header row."""
     with open(path, "w", newline="", encoding="utf-8") as fp:
@@ -335,19 +350,48 @@ def run_ga(
         )
 
         # ---------- Analyze and report results ----------
-        differences = compare_model_functions(start.model, final.model)
+        start_vs_final = compare_model_functions(start.model, final.model)
 
         print(
             f"Ran {len(states)-1} iterations, generated {states[-1].generated} models, "
-            f"mutated {len(differences)} functions. "
+            f"mutated {len(start_vs_final)} functions. "
             f"Elapsed: {end_time-start_time}"
         )
         print()
 
         print("-----modified functions-----")
-        for node, (prime1, prime2) in differences.items():
-            print("start:" + prime2bnet(node, prime1))
-            print("final:" + prime2bnet(node, prime2))
+        if start_path == base_path:
+            for node, (start_prime, final_prime) in start_vs_final.items():
+                _print_function_block(node, [
+                    ("start", _rule_rhs(node, start_prime)),
+                    ("final", _rule_rhs(node, final_prime)),
+                ])
+        else:
+            base_vs_start = compare_model_functions(base.model, start.model)
+            base_vs_final = compare_model_functions(base.model, final.model)
+            differing_nodes = set(base_vs_start) | set(start_vs_final) | set(base_vs_final)
+            for node in base.model.primes:
+                if node not in differing_nodes:
+                    continue
+                if node not in base_vs_start:
+                    start_text = "(same as base)"
+                else:
+                    start_text = _rule_rhs(node, start.model.primes[node])
+                if node not in base_vs_final:
+                    final_text = "(same as base)"
+                elif node not in start_vs_final:
+                    final_text = "(same as start)"
+                else:
+                    final_text = _rule_rhs(node, final.model.primes[node])
+                _print_function_block(node, [
+                    ("base", _rule_rhs(node, base.model.primes[node])),
+                    ("start", start_text),
+                    ("final", final_text),
+                ])
+            print(
+                f"\n{len(differing_nodes)} out of {len(base.model.primes)} "
+                f"functions differ among base, start, and final"
+            )
 
         return base, start, states
     finally:
