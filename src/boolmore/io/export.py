@@ -15,36 +15,6 @@ from boolmore.model import Model
 from boolmore.outcome import format_outcome, format_outcome_range, resolve_outcome_range
 
 
-def export_item_scores_report(result: EvaluationResult, path: str | Path) -> Path:
-    """Write a generic per-experiment score CSV from an :class:`EvaluationResult`.
-
-    Columns are ``id``, ``weight``, ``agreement``, and ``score``.
-
-    Parameters
-    ----------
-    result : EvaluationResult
-    path : str or Path
-        Output CSV path.
-
-    Returns
-    -------
-    Path
-        Absolute path of the written file.
-    """
-    rows = [
-        {
-            "id": item.id,
-            "weight": item.weight,
-            "agreement": item.agreement,
-            "score": item.score,
-        }
-        for item in result.item_scores
-    ]
-    output = Path(path)
-    pd.DataFrame(rows).to_csv(output, index=False)
-    return output.resolve()
-
-
 def export_nav_report(result: EvaluationResult, path: str | Path) -> Path:
     """Write a per-experiment NAV score CSV from an :class:`EvaluationResult`.
 
@@ -74,13 +44,14 @@ def export_nav_report(result: EvaluationResult, path: str | Path) -> Path:
         lo, hi = resolve_outcome_range(item.outcome)
         rows.append({
             "id": item.id,
+            "weight": item.weight,
             "hierarchy": item.hierarchy,
             "fixes": ",".join(f"{n}={v}" for n, v in item.fixes),
-            "observed_node": item.observed,
-            "experimental_outcome": format_outcome(item.outcome),
+            "observed": item.observed,
+            "outcome": format_outcome(item.outcome),
             "outcome_range": format_outcome_range(lo, hi),
             "predict_value": item.predict_value,
-            "attractor_agreement": item.agreement,
+            "agreement": item.agreement,
             "score": item.score,
         })
     output = Path(path)
@@ -193,8 +164,7 @@ def export_candidate(candidate: Candidate, export_name: str) -> Path:
     - ``{export_name}_{id}_gen{generation}.bnet`` with ``candidate.info()`` as header
     - ``{export_name}_{id}_gen{generation}.pkl`` with pickled primes
     - ``{export_name}_{id}_gen{generation}_score.csv`` with per-experiment scores
-      (NAV or phenotype report from ``eval_result.kind``; otherwise a generic
-      item-scores CSV for ``"Mixed"`` or untyped results)
+      (NAV or phenotype report from ``eval_result.kind``)
 
     Parameters
     ----------
@@ -211,7 +181,8 @@ def export_candidate(candidate: Candidate, export_name: str) -> Path:
     Raises
     ------
     ValueError
-        If ``candidate.eval_result`` is ``None``.
+        If ``candidate.eval_result`` is ``None``, or ``kind`` is not
+        ``"NAV"`` or ``"Phenotype"``.
     """
     if candidate.eval_result is None:
         raise ValueError("export_candidate requires candidate.eval_result")
@@ -226,6 +197,8 @@ def export_candidate(candidate: Candidate, export_name: str) -> Path:
     elif result.kind == "Phenotype":
         export_phenotype_report(result, score_path)
     else:
-        export_item_scores_report(result, score_path)
+        raise ValueError(
+            f"export_candidate requires NAV or Phenotype result, got {result.kind!r}"
+        )
 
     return Path(stem).resolve()

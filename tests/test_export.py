@@ -166,19 +166,21 @@ def test_export_nav_report(tmp_path):
     assert len(rows) == 1
     assert rows[0]["id"] == "1"
     assert rows[0]["fixes"] == "S=1"
-    assert rows[0]["observed_node"] == "A"
-    assert rows[0]["experimental_outcome"] == "ON"
+    assert rows[0]["observed"] == "A"
+    assert rows[0]["outcome"] == "ON"
     assert rows[0]["outcome_range"] == "1.0,1.0"
     assert rows[0]["score"] == "1.0"
+    assert rows[0]["weight"] == "1.0"
     assert list(rows[0].keys()) == [
         "id",
+        "weight",
         "hierarchy",
         "fixes",
-        "observed_node",
-        "experimental_outcome",
+        "observed",
+        "outcome",
         "outcome_range",
         "predict_value",
-        "attractor_agreement",
+        "agreement",
         "score",
     ]
 
@@ -225,7 +227,7 @@ def test_export_candidate_nav(tmp_path):
     assert len(rows) == 1
     assert rows[0]["id"] == "1"
     assert rows[0]["fixes"] == "S=1"
-    assert rows[0]["observed_node"] == "A"
+    assert rows[0]["observed"] == "A"
     assert rows[0]["score"] == "1.0"
 
 
@@ -253,7 +255,7 @@ def test_export_candidate_phenotype(tmp_path):
     assert "maximal_trap_spaces" in rows[0]
 
 
-def test_export_candidate_generic_scores(tmp_path):
+def test_export_candidate_rejects_mixed(tmp_path):
     result = _generic_result()
     assert result.kind == "Mixed"
     candidate = Candidate(
@@ -263,17 +265,8 @@ def test_export_candidate_generic_scores(tmp_path):
         eval_result=result,
     )
 
-    export_candidate(candidate, str(tmp_path / "generic"))
-    score_path = tmp_path / "generic_7_gen0_score.csv"
-    assert score_path.exists()
-
-    with open(score_path, newline="") as f:
-        rows = list(csv.DictReader(f))
-
-    assert list(rows[0].keys()) == ["id", "weight", "agreement", "score"]
-    assert rows[0]["id"] == "1"
-    assert rows[0]["weight"] == "2.0"
-    assert rows[0]["score"] == "2.0"
+    with pytest.raises(ValueError, match="NAV or Phenotype"):
+        export_candidate(candidate, str(tmp_path / "generic"))
 
 
 def test_export_candidate_requires_eval_result(tmp_path):
