@@ -1,8 +1,8 @@
 {
   "run_type": "NAV",
-  "data": "demo/CAD_data.csv",
-  "base": "demo/CAD.bnet",
-  "start": "demo/CAD_start.bnet",
+  "data": "demo/runs/test/data.csv",
+  "base": "demo/runs/test/base.bnet",
+  "start": "demo/runs/test/start.bnet",
   "hierarchy": true,
   "nav_method": "min_traps",
   "default_sources": {},

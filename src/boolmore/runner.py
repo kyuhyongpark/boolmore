@@ -6,6 +6,7 @@ import csv
 import datetime
 import json
 import os
+import pickle
 import shutil
 import sys
 from collections.abc import Sequence
@@ -21,8 +22,10 @@ from boolmore.genetic.algorithm import GAState, ga_main
 from boolmore.genetic.population import Candidate
 from boolmore.genetic.operators.reproduction import Reproducer
 from boolmore.genetic.selection import Selector
-from boolmore.io.load import load_model
+from boolmore.io.load import import_NAV_exps, load_model, load_primes
+from boolmore.model import Model
 from boolmore.run_setup import (
+    _nav_column_kwargs,
     build_evaluator,
     build_ga_config,
     build_run_config,
@@ -178,6 +181,77 @@ def _last_iter_line(seed_log: str | Path) -> str | None:
     return last
 
 
+def _path_for_config(path: Path) -> str:
+    """Prefer a project-root-relative POSIX path for JSON config fields."""
+    try:
+        return path.resolve().relative_to(project_root()).as_posix()
+    except ValueError:
+        return str(path.resolve())
+
+
+def _write_model_snapshot(src: Path, stem: Path) -> Path:
+    """Write ``{stem}.bnet`` and ``{stem}.pkl`` from ``src``; return the ``.bnet`` path."""
+    primes = load_primes(src)
+    model = Model.from_primes(primes)
+    bnet_path = stem.with_suffix(".bnet")
+    pkl_path = stem.with_suffix(".pkl")
+    with open(bnet_path, "w", encoding="utf-8") as fp:
+        fp.write("targets,\tfactors\n")
+        fp.write(model.bnet)
+        if not model.bnet.endswith("\n"):
+            fp.write("\n")
+    with open(pkl_path, "wb") as fp:
+        pickle.dump(primes, fp)
+    return bnet_path
+
+
+def _write_data_csv(src: Path, dest: Path) -> None:
+    """Copy ``src`` to ``dest`` as CSV (re-delimiter if the source is TSV)."""
+    if src.suffix.lower() == ".csv":
+        shutil.copy2(src, dest)
+        return
+    delimiter = "\t" if src.suffix.lower() == ".tsv" else ","
+    with open(src, encoding="utf-8", newline="") as inp, open(
+        dest, "w", encoding="utf-8", newline=""
+    ) as out:
+        reader = csv.reader(inp, delimiter=delimiter)
+        writer = csv.writer(out)
+        writer.writerows(reader)
+
+
+def _snapshot_batch_assets(batch_dir: Path, config_dict: dict) -> dict[str, Path]:
+    """Store fixed-name snapshots in ``batch_dir``: ``data.csv``, ``base.*``, ``start.*``.
+
+    NAV data is materialized in preprocessed CSV form (via ``import_NAV_exps``).
+    Phenotype data is copied/converted to ``data.csv``. Models are written as
+    both ``.bnet`` and ``.pkl``; the returned paths point at the ``.bnet`` files
+    for ``config.json``.
+    """
+    data_src = (project_root() / config_dict["data"]).resolve()
+    base_src = (project_root() / config_dict["base"]).resolve()
+    start_src = (project_root() / config_dict["start"]).resolve()
+
+    base_dest = _write_model_snapshot(base_src, batch_dir / "base")
+    start_dest = _write_model_snapshot(start_src, batch_dir / "start")
+
+    data_dest = batch_dir / "data.csv"
+    if config_dict["run_type"] == "NAV":
+        staging = batch_dir / f"_data_src{data_src.suffix}"
+        shutil.copy2(data_src, staging)
+        import_NAV_exps(str(staging), **_nav_column_kwargs(config_dict))
+        preprocessed = staging.with_name(f"{staging.stem}_preprocessed.csv")
+        if preprocessed.exists():
+            preprocessed.replace(data_dest)
+        else:
+            _write_data_csv(staging, data_dest)
+        staging.unlink(missing_ok=True)
+        preprocessed.unlink(missing_ok=True)
+    else:
+        _write_data_csv(data_src, data_dest)
+
+    return {"data": data_dest, "base": base_dest, "start": start_dest}
+
+
 def run_batch(
     config: str | Path,
     *,
@@ -193,9 +267,10 @@ def run_batch(
 ) -> Path:
     """Run GA for one or more seeds under ``{runs_root}/{batch_name}/``.
 
-    Creates a batch folder with a config snapshot, ``batch.log``, and per-seed
-    subdirectories ``seed_NNN/``. Named ``run_name`` folders are overwritten;
-    ``run_name=None`` uses a UTC stamp folder.
+    Creates a batch folder with ``config.json``, ``batch.log``, fixed-name
+    snapshots (``data.csv``, ``base.bnet``/``.pkl``, ``start.bnet``/``.pkl``),
+    and per-seed subdirectories ``seed_NNN/``. Named ``run_name`` folders are
+    overwritten; ``run_name=None`` uses a UTC stamp folder.
 
     Parameters
     ----------
@@ -244,6 +319,11 @@ def run_batch(
     if param_overrides:
         config_dict.setdefault("parameters", {}).update(param_overrides)
 
+    snapshots = _snapshot_batch_assets(batch_dir, config_dict)
+    config_dict["data"] = _path_for_config(snapshots["data"])
+    config_dict["base"] = _path_for_config(snapshots["base"])
+    config_dict["start"] = _path_for_config(snapshots["start"])
+
     config_path = batch_dir / "config.json"
     with open(config_path, "w", encoding="utf-8") as fp:
         json.dump(config_dict, fp, indent=2)
@@ -255,6 +335,9 @@ def run_batch(
     with open(batch_log, "w", encoding="utf-8") as log:
         log.write(f"batch_dir={batch_dir}\n")
         log.write(f"source_config={source_config}\n")
+        log.write(f"data={snapshots['data']}\n")
+        log.write(f"base={snapshots['base']}\n")
+        log.write(f"start={snapshots['start']}\n")
         log.write(f"config_overrides={overrides}\n")
         log.write(f"parameter_overrides={param_overrides}\n")
         log.write(f"seeds={list(seeds)}\n")
