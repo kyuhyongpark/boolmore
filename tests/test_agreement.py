@@ -459,12 +459,14 @@ def test_related_node_names_includes_alphabet_siblings_excludes_unrelated():
         "A": 0.0,
         "A_X": 1.0,
         "A_Y": 0.5,
+        "A_Z": 0.0,
+        "A_T": 0.9,  # distinct entity (transcript), not a sibling
         "A_iT": 0.25,
         "A_2b": 0.75,
         "AB": 1.0,
     }
-    assert sorted(_related_node_names("A", values)) == ["A", "A_X", "A_Y"]
-    assert _average_related_values(values, "A_avg") == pytest.approx(0.5)
+    assert sorted(_related_node_names("A", values)) == ["A", "A_X", "A_Y", "A_Z"]
+    assert _average_related_values(values, "A_avg") == pytest.approx(0.375)
 
 
 def test_get_agreements_avg_none_when_any_sibling_none():

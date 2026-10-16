@@ -94,8 +94,8 @@ def _comparative_predict_value(
 
 
 def _related_node_names(base: str, node_names: Iterable[str]) -> list[str]:
-    """Return names matching ``base``, ``base_<int>``, or ``base_<A-Z>``."""
-    pattern = re.compile(rf"^(?:{re.escape(base)}|{re.escape(base)}_(?:\d+|[A-Z]))$")
+    """Return names matching ``base``, ``base_<int>``, or ``base_<X-Z>``."""
+    pattern = re.compile(rf"^(?:{re.escape(base)}|{re.escape(base)}_(?:\d+|[X-Z]))$")
     return [name for name in node_names if pattern.fullmatch(name)]
 
 
@@ -121,7 +121,7 @@ def _average_related_values(
     if not related:
         raise ValueError(
             f"No related nodes found for {observed_avg!r} "
-            f"(looked for {base!r}, {base}_<int>, or {base}_<A-Z>)"
+            f"(looked for {base!r}, {base}_<int>, or {base}_<X-Z>)"
         )
 
     floats: list[float] = []
@@ -198,7 +198,7 @@ def get_agreements(
         Predictions keyed by intervention assignment. Average node values
         are read from ``NAVPrediction.average_values``. Observed names
         ending in ``*_avg`` are scored as the mean of related sibling
-        nodes (``base``, ``base_<int>``, or ``base_<A-Z>``), or ``None``
+        nodes (``base``, ``base_<int>``, or ``base_<X-Z>``), or ``None``
         if any sibling is unknown.
 
     Returns
