@@ -13,7 +13,7 @@ _OUTCOME_LABEL_RANGES: dict[str, tuple[float, float]] = {
     "OFF/Some": (0.0, 0.5),
     "OFF": (0.0, 0.0),
 }
-_DEFAULT_FLOAT_HALF_WIDTH = 0.1
+_DEFAULT_FLOAT_HALF_WIDTH = 0.25
 _COMPARATIVE_THAN_RE = re.compile(r"^(higher|lower) than (\d+)$")
 _COMPARATIVE_SAME_RE = re.compile(r"^same as (\d+)$")
 
