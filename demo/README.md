@@ -28,8 +28,14 @@ The parameters are adjusted for the small model size (5 nodes)
 4. models to keep per iteration: 2 (compared to 20 for the validation benchmarks)  
 5. models to mix per iteration: 2 (compared to 20 for the validation benchmarks)
 
-The log will be stored as "demo_log.txt"
-The final model will be stored as "demo_id_gen.bnet"
+With the default knobs (`RUN_NAME = "demo"`, `RUNS_ROOT = "runs"`, `SEEDS = [0]`), outputs go under `runs/demo/`:
+
+- `runs/demo/config.json` — effective config snapshot
+- `runs/demo/batch.log` — batch summary
+- `runs/demo/seed_000/seed_000_log.txt` — per-seed log
+- `runs/demo/seed_000/seed_000_*_gen*.bnet` — exported models
+
+Re-running with the same `RUN_NAME` overwrites that batch folder.
 
 ## Evaluate a model
 

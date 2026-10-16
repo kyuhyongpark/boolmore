@@ -3,9 +3,29 @@
 Here we demonstrate using `boolmore` to refine the ABA-induced stomatal closure model.
 See the manuscript for details ([bioRxiv](https://www.biorxiv.org/content/10.1101/2023.11.14.567002v2)).
 
-## File Descriptions
+## Running refinement
 
-- `run.py` runs the model refinement process and saves the log and the final model.
+Use the shared batch runner [`scripts/run.py`](../../scripts/run.py). Edit the knobs at the top, for example:
+
+```python
+CONFIG = "case_study/ABA/data/ABA_B.json"
+RUN_NAME = None          # or "aba_B" to overwrite runs/aba_B/
+RUNS_ROOT = "case_study/ABA/runs"
+SEEDS = [11]
+CORE = 6
+CONFIG_OVERRIDES = {"nav_method": "ldoi"}
+PARAMETER_OVERRIDES = {"total_iter": 10, "per_iter": 10, "keep": 2, "mix": 2}
+```
+
+Then:
+
+```bash
+python boolmore/scripts/run.py
+```
+
+Outputs go under `{RUNS_ROOT}/{batch_name}/` with `config.json`, `batch.log`, and per-seed folders (`seed_011/`, …).
+
+## File Descriptions
 
 - `detailed_report.py` saves tsv files containing the detailed reports of model agreement with the experiments. It also compares the starting model with the final model and analyzes the dynamics of the final model.
 

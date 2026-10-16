@@ -7,6 +7,7 @@ import datetime
 import os
 import sys
 from collections.abc import Sequence
+from datetime import timezone
 from typing import TextIO
 
 from boolmore.boolean_functions import prime2bnet
@@ -207,8 +208,8 @@ def run_ga(
         Prefix for all run outputs: ``(run_name)_log.txt``,
         ``(run_name)_evals.csv``, and exported ``.bnet`` / ``.pkl`` /
         ``_score.csv`` files. If None, defaults to
-        ``{start_stem}_{YYYYMMDD_HHMMSS}`` so successive runs do not
-        overwrite each other. Pass an explicit name (e.g. ``"demo"``)
+        ``{start_stem}_{YYYYMMDDTHHMMSSZ}`` (UTC) so successive runs do
+        not overwrite each other. Pass an explicit name (e.g. ``"demo"``)
         to overwrite a fixed set of files.
     export_top : int
         export top models from each generation
@@ -249,7 +250,7 @@ def run_ga(
     start_path = (project_root() / config_dict["start"]).resolve()
 
     if run_name is None:
-        stamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        stamp = datetime.datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
         run_name = f"{start_path.stem}_{stamp}"
 
     LOG = run_name + "_log.txt"
