@@ -48,6 +48,14 @@ def get_phenotype_scores(
                 weight=exp.weight,
                 agreement=agreement,
                 score=exp.weight * agreement,
+                kind="Phenotype",
+                perturbation=exp.perturbation,
+                sources=exp.sources,
+                phenotype=exp.phenotype,
+                expected_exists=exp.expected_exists,
+                predicted_exists=pred.predicted_exists,
+                maximal_trap_spaces=pred.maximal_trap_spaces,
+                metadata=dict(exp.metadata),
             )
         )
 

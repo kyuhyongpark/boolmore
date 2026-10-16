@@ -9,10 +9,8 @@ from pathlib import Path
 import pandas as pd
 
 from boolmore.boolean_functions import assignment_to_dict
-from boolmore.evaluation.score import EvaluationItemScore, EvaluationResult
-from boolmore.experiment import PhenotypeExperiment
+from boolmore.evaluation.score import EvaluationResult
 from boolmore.genetic.population import Candidate
-from boolmore.inference.prediction import PhenotypePrediction
 from boolmore.model import Model
 from boolmore.outcome import format_outcome, format_outcome_range, resolve_outcome_range
 
@@ -90,21 +88,13 @@ def export_nav_report(result: EvaluationResult, path: str | Path) -> Path:
     return output.resolve()
 
 
-def export_phenotype_report(
-    experiments: list[PhenotypeExperiment],
-    predictions: list[PhenotypePrediction],
-    score_items: list[EvaluationItemScore],
-    path: str | Path,
-) -> Path:
-    """Write a per-experiment phenotype score CSV.
-
-    Experiments, predictions, and score items are matched by ``id``.
+def export_phenotype_report(result: EvaluationResult, path: str | Path) -> Path:
+    """Write a per-experiment phenotype score CSV from an :class:`EvaluationResult`.
 
     Parameters
     ----------
-    experiments : list of PhenotypeExperiment
-    predictions : list of PhenotypePrediction
-    score_items : list of EvaluationItemScore
+    result : EvaluationResult
+        Must contain phenotype ``item_scores`` (with ``predicted_exists`` set).
     path : str or Path
         Output CSV path.
 
@@ -116,33 +106,35 @@ def export_phenotype_report(
     Raises
     ------
     ValueError
-        If a prediction or score item is missing for an experiment id.
+        If any item score is missing phenotype fields.
     """
-    pred_by_id = {pred.id: pred for pred in predictions}
-    score_by_id = {score_item.id: score_item for score_item in score_items}
-
     rows = []
-    for exp in experiments:
-        pred = pred_by_id.get(exp.id)
-        score_item = score_by_id.get(exp.id)
-        if pred is None:
-            raise ValueError(f"No Prediction found for Experiment id={exp.id}")
-        if score_item is None:
-            raise ValueError(f"No Score found for Experiment id={exp.id}")
+    for item in result.item_scores:
+        if item.predicted_exists is None:
+            raise ValueError("export_phenotype_report requires phenotype item scores")
+        if (
+            item.perturbation is None
+            or item.sources is None
+            or item.phenotype is None
+            or item.expected_exists is None
+            or item.maximal_trap_spaces is None
+        ):
+            raise ValueError("export_phenotype_report requires phenotype item scores")
 
         row = {
-            "id": exp.id,
-            "perturbation": assignment_to_dict(exp.perturbation),
-            "sources": assignment_to_dict(exp.sources),
-            "phenotype": assignment_to_dict(exp.phenotype),
-            "expected_exists": exp.expected_exists,
-            "predicted_exists": pred.predicted_exists,
-            "agreement": score_item.agreement,
-            "weight": exp.weight,
-            "score": score_item.score,
-            "maximal_trap_spaces": pred.maximal_trap_spaces,
+            "id": item.id,
+            "perturbation": assignment_to_dict(item.perturbation),
+            "sources": assignment_to_dict(item.sources),
+            "phenotype": assignment_to_dict(item.phenotype),
+            "expected_exists": item.expected_exists,
+            "predicted_exists": item.predicted_exists,
+            "agreement": item.agreement,
+            "weight": item.weight,
+            "score": item.score,
+            "maximal_trap_spaces": item.maximal_trap_spaces,
         }
-        row.update(exp.metadata)
+        if item.metadata:
+            row.update(item.metadata)
         rows.append(row)
 
     output = Path(path)
@@ -201,7 +193,8 @@ def export_candidate(candidate: Candidate, export_name: str) -> Path:
     - ``{export_name}_{id}_gen{generation}.bnet`` with ``candidate.info()`` as header
     - ``{export_name}_{id}_gen{generation}.pkl`` with pickled primes
     - ``{export_name}_{id}_gen{generation}_score.csv`` with per-experiment scores
-      (NAV report when NAV fields are present; otherwise a generic item-scores CSV)
+      (NAV or phenotype report from ``eval_result.kind``; otherwise a generic
+      item-scores CSV for ``"Mixed"`` or untyped results)
 
     Parameters
     ----------
@@ -228,8 +221,10 @@ def export_candidate(candidate: Candidate, export_name: str) -> Path:
 
     result = candidate.eval_result
     score_path = f"{stem}_score.csv"
-    if result.item_scores and any(item.fixes is not None for item in result.item_scores):
+    if result.kind == "NAV":
         export_nav_report(result, score_path)
+    elif result.kind == "Phenotype":
+        export_phenotype_report(result, score_path)
     else:
         export_item_scores_report(result, score_path)
 

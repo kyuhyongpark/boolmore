@@ -3,14 +3,17 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from dataclasses import dataclass
-from typing import Any
+from dataclasses import dataclass, field
+from typing import Any, Literal
 
 from boolmore.model import Model
 from boolmore.evaluation.metrics import get_model_complexity
 from boolmore.evaluation.constraint import check_model_constraints
 from boolmore.inference.prediction import get_NAV_upper_bound_prediction
 from boolmore.types import Assignment, OutcomeType
+
+ItemKind = Literal["NAV", "Phenotype"]
+ResultKind = Literal["NAV", "Phenotype", "Mixed"]
 
 
 @dataclass(frozen=True)
@@ -27,6 +30,8 @@ class EvaluationItemScore:
         Agreement between prediction and observation in ``[0, 1]``.
     score : float
         Contribution to the model score (may be hierarchy-adjusted for NAV).
+    kind : ``"NAV"`` or ``"Phenotype"`` or None
+        Evaluation modality for this item.
     hierarchy : int or None
         Number of non-default interventions (NAV only).
     fixes : Assignment or None
@@ -37,17 +42,53 @@ class EvaluationItemScore:
         Experimental outcome label or float range (NAV only).
     predict_value : float or None
         Predicted average value of the observed node (NAV only).
+    perturbation : Assignment or None
+        Fixed node interventions (phenotype only).
+    sources : Assignment or None
+        Source-node assignments (phenotype only).
+    phenotype : Assignment or None
+        Target phenotype assignment (phenotype only).
+    expected_exists : bool or None
+        Whether the phenotype is expected to exist (phenotype only).
+    predicted_exists : bool or None
+        Whether a compatible maximal trap space was found (phenotype only).
+    maximal_trap_spaces : list of dict of str to int, or None
+        Maximal trap spaces compatible with the phenotype (phenotype only).
+    metadata : dict of str to str, or None
+        Extra experiment metadata columns (phenotype only).
     """
 
     id: int
     weight: float
     agreement: float
     score: float
+    kind: ItemKind | None = None
     hierarchy: int | None = None
     fixes: Assignment | None = None
     observed: str | None = None
     outcome: OutcomeType | None = None
     predict_value: float | None = None
+    perturbation: Assignment | None = None
+    sources: Assignment | None = None
+    phenotype: Assignment | None = None
+    expected_exists: bool | None = None
+    predicted_exists: bool | None = None
+    maximal_trap_spaces: list[dict[str, int]] | None = None
+    metadata: dict[str, str] | None = None
+
+
+def get_result_kind(item_scores: list[EvaluationItemScore]) -> ResultKind:
+    """Derive an :class:`EvaluationResult` kind from per-item kinds.
+
+    Returns ``"NAV"`` or ``"Phenotype"`` when every typed item shares that
+    kind; otherwise ``"Mixed"`` (including empty lists and untyped items).
+    """
+    kinds = {item.kind for item in item_scores if item.kind is not None}
+    if kinds == {"NAV"}:
+        return "NAV"
+    if kinds == {"Phenotype"}:
+        return "Phenotype"
+    return "Mixed"
 
 
 @dataclass
@@ -77,6 +118,8 @@ class EvaluationResult:
     is_upper_bound : bool
         True when ``score`` is an LDOI optimistic upper bound and full
         ``min_traps`` evaluation was skipped.
+    kind : ``"NAV"``, ``"Phenotype"``, or ``"Mixed"``
+        Aggregate modality derived from ``item_scores`` kinds.
     """
 
     model_id: int
@@ -89,6 +132,10 @@ class EvaluationResult:
     satisfies_constraints: bool
     item_scores: list[EvaluationItemScore]
     is_upper_bound: bool = False
+    kind: ResultKind = field(init=False)
+
+    def __post_init__(self) -> None:
+        self.kind = get_result_kind(self.item_scores)
 
 
 def get_model_score(
