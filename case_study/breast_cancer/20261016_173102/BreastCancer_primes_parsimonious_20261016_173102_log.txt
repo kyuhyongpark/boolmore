@@ -1,0 +1,964 @@
+RUN_TYPE='NAV'
+DATA: /home/troonmel/Boolmore/boolmore/case_study/breast_cancer/breast_cancer_data_trial.csv
+BASE: /home/troonmel/Boolmore/boolmore/case_study/breast_cancer/BreastCancer_primes_parsimonious.pkl
+START: /home/troonmel/Boolmore/boolmore/case_study/breast_cancer/BreastCancer_primes_parsimonious.pkl
+HIERARCHY=True
+NAV_METHOD='ldoi'
+LDOI_PRUNE=True
+DEFAULT_SOURCES={}
+GENERATE_DEFAULTS=False
+CONSTRAINTS={'fixed': [], 'regulate': {'ABL1': ['RB', 'SRC'], 'AKT': ['Ipatasertib', 'PDK1_pm', 'PIP3', 'mTORC2_pm'], 'APC': ['AXIN1'], 'AXIN1': ['DVL1', 'GSK3B'], 'BAD': ['ERK', 'PAK1'], 'BAK1': ['BID', 'BIM', 'MCL1', 'p53'], 'BAX': ['BAX', 'BID', 'BIM', 'p53'], 'BCL2': ['BAD', 'BIM', 'CREB1', 'ERK', 'ER_transcription_2'], 'BCLXL': ['BAD', 'BIM', 'CREB1'], 'BID': ['CASP8'], 'BIM': ['BCL2', 'BCLXL', 'BIM_T', 'ERK_2', 'FOXO1', 'FOXO3'], 'CASP3': ['CASP8', 'CASP9'], 'CASP8': ['ERK', 'FADD', 'SRC'], 'CASP9': ['CASP3', 'CYCS', 'PRKACA'], 'CEBPB': ['ABL2', 'CREB1'], 'CREB1': ['AKT', 'PTEN', 'SGK1'], 'CTNNB1': ['SRC'], 'CYCS': ['BAK1', 'BAX'], 'CyclinB1': ['p53'], 'CyclinD': ['GSK3B', 'JUN'], 'DVL1': ['FZD'], 'E2F_3': ['E2F_3'], 'EGFR': ['JUN', 'NFKB'], 'EGFRHER3c': ['NRG1', 'erlotinib'], 'EGFRc': ['Neratinib', 'erlotinib'], 'EIF4': ['EIF4EBP1'], 'ER_transcription_2': ['FOXA1', 'KMT2D', 'PBX1'], 'ESR1': ['AKT', 'ER', 'ES', 'FOXO3', 'Fulvestrant'], 'FADD': ['FAS', 'TRADD'], 'FAS': ['p53'], 'FASLG': ['FOXO3'], 'FOXO3': ['PIM'], 'FOXO3_Ub': ['ERK_2'], 'GRB2': ['EGFRHER3c', 'EGFRc', 'HER2HER2c', 'HER2HER3c', 'HER2HER3c_2', 'IRS1', 'SRC'], 'GRB7': ['INSR'], 'GSK3B': ['AKT', 'ERK', 'GSK3B', 'p53'], 'HER2HER2c': ['Neratinib', 'erlotinib'], 'HER2HER3c': ['Neratinib', 'erlotinib', 'trastuzumab'], 'HER2HER3c_2': ['NRG1', 'pertuzumab'], 'HER3': ['FOXO3', 'HER3_iT'], 'HER3_2': ['FOXO3'], 'HES1': ['NICD'], 'HEY1': ['NICD'], 'HRAS': ['SOS1'], 'IGF1R': ['IGF1', 'IGF1R_iT', 'INS', 'SRC'], 'IL1B': ['NFKB'], 'IL6R': ['STAT3'], 'IL8': ['STAT5'], 'INSR': ['INS'], 'IRS1': ['IGF1R', 'INSR', 'S6K'], 'JAK2': ['ABL1', 'IL6R'], 'JUN': ['GSK3B', 'JUN', 'MAPK8'], 'LATS1': ['NF2'], 'MCL1': ['ERK', 'GSK3B', 'MCL1_T', 'Translation'], 'MDM2': ['AKT', 'p53'], 'MEK': ['PDK1_pm', 'Trametinib'], 'MYC': ['CTNNB1', 'ERK', 'ER_transcription', 'GSK3B', 'PIM', 'STAT3'], 'MYC_targets': ['MYC', 'Translation'], 'MYOD1': ['HES1'], 'MYOG': ['HEY1', 'MYOD1'], 'NEDD4L': ['PRKACA', 'SGK1'], 'NF2': ['NEDD4L'], 'NFKB': ['PIM'], 'NOS3': ['AKT', 'HSP90AA1'], 'NOTCH1': ['MDM2'], 'PAK1': ['PDK1_ic', 'RAC1'], 'PAK2': ['RAC1'], 'PGR': ['PG'], 'PI3K': ['Alpelisib', 'EGFRHER3c', 'ESR1', 'HER2HER3c', 'IRS1', 'RAS'], 'PIM': ['STAT5'], 'PIP3': ['PI3K', 'PTEN'], 'PKCa': ['PLCg'], 'PLCg': ['EGFRc', 'HER2HER2c'], 'PPARG': ['CEBPB', 'GATA3'], 'PRAS40': ['AKT', 'PIM'], 'PRKAA2': ['STK11'], 'PTEN': ['GSK3B'], 'RAC1': ['AKT', 'DVL1'], 'RAF1': ['HRAS', 'RAS'], 'RAS': ['SOS1'], 'RB': ['pRB'], 'RPS6': ['S6K'], 'S6K': ['ERK'], 'SOS1': ['GRB2'], 'STAT1': ['EGFRc', 'JAK2', 'SRC'], 'STAT3': ['JAK2', 'SRC'], 'STAT5': ['EGFRc', 'JAK2', 'SRC'], 'STK11': ['ERK', 'FOXO3'], 'TCF7L2': ['JUN'], 'TEAD1': ['YAP1'], 'TRADD': ['KRT14'], 'TSC2': ['GSK3B', 'PRKAA2'], 'TWIST1': ['AKT', 'ERK'], 'Translation': ['EIF4'], 'mTORC1': ['Everolimus', 'PRAS40', 'RHEB'], 'p21': ['p21_iT'], 'p21_p27': ['p21_p27_T'], 'p21_p27_T': ['FOXO3', 'p21_iT', 'p27_iT'], 'p53': ['PTEN', 'p38', 'p53'], 'pRB': ['CYCLINDc', 'RB', 'cycE_CDK2']}, 'necessary': {'BAD': ['AKT', 'PIM'], 'BCL2': ['BCL2_T', 'Navitoclax'], 'BCLXL': ['BCLXL_T', 'Navitoclax'], 'CASP9': ['AKT', 'ERK'], 'CDK46': ['Palbociclib'], 'CTNNB1': ['DC'], 'CYCLINDc': ['CDK46', 'CDKN2A', 'CyclinD'], 'CYCLINDc_2': ['CYCLINDc'], 'CyclinD_2': ['CyclinD'], 'DC': ['APC', 'GSK3B'], 'E2F': ['RB'], 'E2F_2': ['E2F'], 'E2F_3': ['E2F_2'], 'EGFRHER3c': ['EGF', 'EGFR', 'HER3'], 'EGFRc': ['EGF', 'EGFR'], 'EIF4EBP1': ['mTORC1'], 'ERK': ['MEK'], 'ERK_2': ['ERK'], 'ER_transcription': ['ESR1'], 'ER_transcription_2': ['ER_transcription'], 'ER_transcription_feedback_2': ['ER_transcription_feedback'], 'ESR1_2': ['ER', 'ESR1', 'Fulvestrant'], 'FAS': ['FASLG'], 'FOXO1': ['AKT', 'SGK1'], 'FOXO3': ['AKT', 'FOXO3_Ub', 'SGK1'], 'HER2HER2c': ['HER2'], 'HER2HER3c': ['HER2', 'HER3'], 'HER2HER3c_2': ['HER2HER3c'], 'HER3_2': ['HER3'], 'HRAS': ['NF1'], 'IGF1R_2': ['IGF1R'], 'IGF1R_iT_2': ['IGF1R_iT'], 'IL6R': ['IL6'], 'KMT2D': ['AKT'], 'MAPK_2': ['MAPK'], 'MCL1': ['S63845'], 'MEK': ['RAF1'], 'MEK_2': ['MEK'], 'MYC_2': ['MYC'], 'MYC_targets_2': ['MYC_targets'], 'NICD': ['NOTCH1'], 'NOTCH1': ['DLL'], 'PDK1_pm': ['PIP3'], 'PI3K_2': ['Alpelisib', 'PI3K'], 'PIP3_2': ['PIP3'], 'PTEN': ['PTEN_T'], 'PTEN_2': ['PTEN'], 'PTEN_T_2': ['PTEN_T'], 'RAF1_2': ['RAF1'], 'RAS_2': ['RAS'], 'RAS_3': ['RAS_2'], 'RELA': ['NFKB'], 'RHEB': ['TSC2'], 'S6K': ['mTORC1'], 'SGK1': ['PDK1_ic', 'SGK1_T', 'mTORC2_ic'], 'TCF7L2': ['CTNNB1'], 'TSC2': ['AKT', 'ERK', 'SGK1'], 'YAP1': ['LATS1'], 'cycE_CDK2': ['cycE_CDK2_T', 'p21_p27'], 'cycE_CDK2_T': ['E2F'], 'mTORC2_pm': ['PIP3'], 'p21': ['AKT'], 'p21_iT_2': ['p21_iT'], 'p21_p27': ['AKT'], 'p53': ['MDM2'], 'pRB_2': ['pRB'], 'pRB_3': ['pRB_2']}, 'group': {}, 'possible_constant': []}
+EDGE_POOL=[]
+
+seed: 0
+stop if max: True
+starting gen: 0
+total iterations: 100
+per iteration: 100
+keep: 20
+mix: 20
+prob: {1: 0.5, 11: 0.01}
+edge prob: 0.0
+order by: ['n_extra_edges', 'n_eff_self_edges', 'n_eff_edges', 'n_prime_implicants']
+core=4
+
+Loading base model from /home/troonmel/Boolmore/boolmore/case_study/breast_cancer/BreastCancer_primes_parsimonious.pkl
+Base model loaded.
+Loading experimental data from /home/troonmel/Boolmore/boolmore/case_study/breast_cancer/breast_cancer_data_trial.csv
+Experimental data loaded.
+experiments: 697
+total weight: 469.0
+distinct interventions: 172
+outcomes: {1.0: 151, 0.0: 108, 0.7: 6, 0.5: 9, 0.25: 8, 0.38: 8, 0.83: 2, 0.73: 2, 0.1: 1, 0.75: 1, 0.8: 3, 0.05: 2, 0.2: 1, 0.6: 1, 0.36: 1, 0.02: 4, 0.3: 1, 0.97: 1, 0.34: 1, 0.56: 1, 0.9: 1, 0.41: 1, 0.4: 1, 0.33: 1, 0.23: 1, 0.44: 1, 0.86: 1, 0.55: 2, 0.09: 1, 0.42: 1, 0.06: 1, 0.28: 1, 0.62: 1, 0.04: 1, ComparativeOutcome(relation='higher', other_id=1002): 1, ComparativeOutcome(relation='lower', other_id=1001): 1, ComparativeOutcome(relation='higher', other_id=1004): 1, ComparativeOutcome(relation='lower', other_id=1003): 1, ComparativeOutcome(relation='lower', other_id=1006): 1, ComparativeOutcome(relation='higher', other_id=1005): 1, ComparativeOutcome(relation='higher', other_id=1008): 1, ComparativeOutcome(relation='lower', other_id=1007): 1, ComparativeOutcome(relation='lower', other_id=1010): 1, ComparativeOutcome(relation='higher', other_id=1009): 1, ComparativeOutcome(relation='higher', other_id=1012): 1, ComparativeOutcome(relation='lower', other_id=1011): 1, ComparativeOutcome(relation='lower', other_id=1014): 1, ComparativeOutcome(relation='higher', other_id=1013): 1, ComparativeOutcome(relation='higher', other_id=1016): 1, ComparativeOutcome(relation='lower', other_id=1015): 1, ComparativeOutcome(relation='higher', other_id=1018): 1, ComparativeOutcome(relation='lower', other_id=1017): 1, ComparativeOutcome(relation='higher', other_id=1020): 1, ComparativeOutcome(relation='lower', other_id=1019): 1, ComparativeOutcome(relation='lower', other_id=1022): 1, ComparativeOutcome(relation='higher', other_id=1021): 1, ComparativeOutcome(relation='lower', other_id=1024): 1, ComparativeOutcome(relation='higher', other_id=1023): 1, ComparativeOutcome(relation='lower', other_id=1026): 1, ComparativeOutcome(relation='higher', other_id=1025): 1, ComparativeOutcome(relation='higher', other_id=1028): 1, ComparativeOutcome(relation='lower', other_id=1027): 1, ComparativeOutcome(relation='higher', other_id=1030): 1, ComparativeOutcome(relation='lower', other_id=1029): 1, ComparativeOutcome(relation='higher', other_id=1032): 1, ComparativeOutcome(relation='lower', other_id=1031): 1, ComparativeOutcome(relation='lower', other_id=1034): 1, ComparativeOutcome(relation='higher', other_id=1033): 1, ComparativeOutcome(relation='lower', other_id=1036): 1, ComparativeOutcome(relation='higher', other_id=1035): 1, ComparativeOutcome(relation='lower', other_id=1038): 1, ComparativeOutcome(relation='higher', other_id=1037): 1, ComparativeOutcome(relation='lower', other_id=1040): 1, ComparativeOutcome(relation='higher', other_id=1039): 1, ComparativeOutcome(relation='higher', other_id=1042): 1, ComparativeOutcome(relation='lower', other_id=1041): 1, ComparativeOutcome(relation='lower', other_id=1044): 1, ComparativeOutcome(relation='higher', other_id=1043): 1, ComparativeOutcome(relation='lower', other_id=1046): 1, ComparativeOutcome(relation='higher', other_id=1045): 1, ComparativeOutcome(relation='higher', other_id=1048): 1, ComparativeOutcome(relation='lower', other_id=1047): 1, ComparativeOutcome(relation='lower', other_id=1050): 1, ComparativeOutcome(relation='higher', other_id=1049): 1, ComparativeOutcome(relation='lower', other_id=1052): 1, ComparativeOutcome(relation='higher', other_id=1051): 1, ComparativeOutcome(relation='lower', other_id=1054): 1, ComparativeOutcome(relation='higher', other_id=1053): 1, ComparativeOutcome(relation='higher', other_id=1056): 1, ComparativeOutcome(relation='lower', other_id=1055): 1, ComparativeOutcome(relation='lower', other_id=1058): 1, ComparativeOutcome(relation='higher', other_id=1057): 1, ComparativeOutcome(relation='lower', other_id=1060): 1, ComparativeOutcome(relation='higher', other_id=1059): 1, ComparativeOutcome(relation='higher', other_id=1062): 1, ComparativeOutcome(relation='lower', other_id=1061): 1, ComparativeOutcome(relation='higher', other_id=1064): 1, ComparativeOutcome(relation='lower', other_id=1063): 1, ComparativeOutcome(relation='lower', other_id=1066): 1, ComparativeOutcome(relation='higher', other_id=1065): 1, ComparativeOutcome(relation='lower', other_id=1068): 1, ComparativeOutcome(relation='higher', other_id=1067): 1, ComparativeOutcome(relation='lower', other_id=1070): 1, ComparativeOutcome(relation='higher', other_id=1069): 1, ComparativeOutcome(relation='lower', other_id=1072): 1, ComparativeOutcome(relation='higher', other_id=1071): 1, ComparativeOutcome(relation='higher', other_id=1225): 1, ComparativeOutcome(relation='lower', other_id=1224): 1, ComparativeOutcome(relation='higher', other_id=1227): 1, ComparativeOutcome(relation='lower', other_id=1226): 1, ComparativeOutcome(relation='higher', other_id=1231): 1, ComparativeOutcome(relation='lower', other_id=1230): 1, ComparativeOutcome(relation='higher', other_id=1243): 1, ComparativeOutcome(relation='lower', other_id=1242): 1, ComparativeOutcome(relation='higher', other_id=1245): 1, ComparativeOutcome(relation='lower', other_id=1244): 1, ComparativeOutcome(relation='higher', other_id=1247): 1, ComparativeOutcome(relation='lower', other_id=1246): 1, ComparativeOutcome(relation='same', other_id=1249): 1, ComparativeOutcome(relation='same', other_id=1248): 1, ComparativeOutcome(relation='same', other_id=1251): 1, ComparativeOutcome(relation='same', other_id=1250): 1, ComparativeOutcome(relation='lower', other_id=2002): 1, ComparativeOutcome(relation='higher', other_id=2001): 1, ComparativeOutcome(relation='same', other_id=2004): 1, ComparativeOutcome(relation='same', other_id=2003): 1, ComparativeOutcome(relation='same', other_id=2006): 1, ComparativeOutcome(relation='same', other_id=2005): 1, ComparativeOutcome(relation='higher', other_id=2008): 1, ComparativeOutcome(relation='lower', other_id=2007): 1, ComparativeOutcome(relation='higher', other_id=2010): 1, ComparativeOutcome(relation='lower', other_id=2009): 1, ComparativeOutcome(relation='lower', other_id=2012): 1, ComparativeOutcome(relation='higher', other_id=2011): 1, ComparativeOutcome(relation='lower', other_id=2014): 1, ComparativeOutcome(relation='higher', other_id=2013): 1, ComparativeOutcome(relation='higher', other_id=2016): 1, ComparativeOutcome(relation='lower', other_id=2015): 1, ComparativeOutcome(relation='higher', other_id=2018): 1, ComparativeOutcome(relation='lower', other_id=2017): 1, ComparativeOutcome(relation='lower', other_id=2020): 1, ComparativeOutcome(relation='higher', other_id=2019): 1, ComparativeOutcome(relation='higher', other_id=2022): 1, ComparativeOutcome(relation='lower', other_id=2021): 1, ComparativeOutcome(relation='higher', other_id=2024): 1, ComparativeOutcome(relation='lower', other_id=2023): 1, ComparativeOutcome(relation='lower', other_id=2026): 1, ComparativeOutcome(relation='higher', other_id=2025): 1, ComparativeOutcome(relation='lower', other_id=2028): 1, ComparativeOutcome(relation='higher', other_id=2027): 1, ComparativeOutcome(relation='lower', other_id=2030): 1, ComparativeOutcome(relation='higher', other_id=2029): 1, ComparativeOutcome(relation='same', other_id=2032): 1, ComparativeOutcome(relation='same', other_id=2031): 1, ComparativeOutcome(relation='same', other_id=2034): 1, ComparativeOutcome(relation='same', other_id=2033): 1, ComparativeOutcome(relation='higher', other_id=2070): 1, ComparativeOutcome(relation='lower', other_id=2069): 1, ComparativeOutcome(relation='higher', other_id=2072): 1, ComparativeOutcome(relation='lower', other_id=2071): 1, ComparativeOutcome(relation='lower', other_id=2074): 1, ComparativeOutcome(relation='higher', other_id=2073): 1, ComparativeOutcome(relation='higher', other_id=2076): 1, ComparativeOutcome(relation='lower', other_id=2075): 1, ComparativeOutcome(relation='same', other_id=2078): 1, ComparativeOutcome(relation='same', other_id=2077): 1, ComparativeOutcome(relation='same', other_id=2080): 1, ComparativeOutcome(relation='same', other_id=2079): 1, ComparativeOutcome(relation='same', other_id=2082): 1, ComparativeOutcome(relation='same', other_id=2081): 1, ComparativeOutcome(relation='same', other_id=2084): 1, ComparativeOutcome(relation='same', other_id=2083): 1, ComparativeOutcome(relation='higher', other_id=2086): 1, ComparativeOutcome(relation='lower', other_id=2085): 1, ComparativeOutcome(relation='higher', other_id=2088): 1, ComparativeOutcome(relation='lower', other_id=2087): 1, ComparativeOutcome(relation='lower', other_id=2090): 1, ComparativeOutcome(relation='higher', other_id=2089): 1, ComparativeOutcome(relation='lower', other_id=2092): 1, ComparativeOutcome(relation='higher', other_id=2091): 1, ComparativeOutcome(relation='higher', other_id=2094): 1, ComparativeOutcome(relation='lower', other_id=2093): 1, ComparativeOutcome(relation='higher', other_id=2096): 1, ComparativeOutcome(relation='lower', other_id=2095): 1, ComparativeOutcome(relation='lower', other_id=2098): 1, ComparativeOutcome(relation='higher', other_id=2097): 1, ComparativeOutcome(relation='lower', other_id=2100): 1, ComparativeOutcome(relation='higher', other_id=2099): 1, ComparativeOutcome(relation='higher', other_id=2102): 1, ComparativeOutcome(relation='lower', other_id=2101): 1, ComparativeOutcome(relation='higher', other_id=2104): 1, ComparativeOutcome(relation='lower', other_id=2103): 1, ComparativeOutcome(relation='higher', other_id=2106): 1, ComparativeOutcome(relation='lower', other_id=2105): 1, ComparativeOutcome(relation='higher', other_id=2108): 1, ComparativeOutcome(relation='lower', other_id=2107): 1, ComparativeOutcome(relation='lower', other_id=2110): 1, ComparativeOutcome(relation='higher', other_id=2109): 1, ComparativeOutcome(relation='lower', other_id=2112): 1, ComparativeOutcome(relation='higher', other_id=2111): 1, ComparativeOutcome(relation='higher', other_id=2114): 1, ComparativeOutcome(relation='lower', other_id=2113): 1, ComparativeOutcome(relation='higher', other_id=2116): 1, ComparativeOutcome(relation='lower', other_id=2115): 1, ComparativeOutcome(relation='higher', other_id=2118): 1, ComparativeOutcome(relation='lower', other_id=2117): 1, ComparativeOutcome(relation='higher', other_id=2120): 1, ComparativeOutcome(relation='lower', other_id=2119): 1, ComparativeOutcome(relation='lower', other_id=2122): 1, ComparativeOutcome(relation='higher', other_id=2121): 1, ComparativeOutcome(relation='lower', other_id=2124): 1, ComparativeOutcome(relation='higher', other_id=2123): 1, ComparativeOutcome(relation='lower', other_id=2126): 1, ComparativeOutcome(relation='higher', other_id=2125): 1, ComparativeOutcome(relation='lower', other_id=2128): 1, ComparativeOutcome(relation='higher', other_id=2127): 1, ComparativeOutcome(relation='lower', other_id=2130): 1, ComparativeOutcome(relation='higher', other_id=2129): 1, ComparativeOutcome(relation='lower', other_id=2132): 1, ComparativeOutcome(relation='higher', other_id=2131): 1, ComparativeOutcome(relation='lower', other_id=2134): 1, ComparativeOutcome(relation='higher', other_id=2133): 1, ComparativeOutcome(relation='lower', other_id=2136): 1, ComparativeOutcome(relation='higher', other_id=2135): 1, ComparativeOutcome(relation='lower', other_id=3002): 1, ComparativeOutcome(relation='higher', other_id=3001): 1, ComparativeOutcome(relation='same', other_id=3004): 1, ComparativeOutcome(relation='same', other_id=3003): 1, ComparativeOutcome(relation='higher', other_id=3006): 1, ComparativeOutcome(relation='lower', other_id=3005): 1, ComparativeOutcome(relation='higher', other_id=3008): 1, ComparativeOutcome(relation='lower', other_id=3007): 1, ComparativeOutcome(relation='lower', other_id=3010): 1, ComparativeOutcome(relation='higher', other_id=3009): 1, ComparativeOutcome(relation='higher', other_id=3012): 1, ComparativeOutcome(relation='lower', other_id=3011): 1, ComparativeOutcome(relation='higher', other_id=3014): 1, ComparativeOutcome(relation='lower', other_id=3013): 1, ComparativeOutcome(relation='lower', other_id=3016): 1, ComparativeOutcome(relation='higher', other_id=3015): 1, ComparativeOutcome(relation='higher', other_id=3018): 1, ComparativeOutcome(relation='lower', other_id=3017): 1, ComparativeOutcome(relation='higher', other_id=3020): 1, ComparativeOutcome(relation='lower', other_id=3019): 1, ComparativeOutcome(relation='lower', other_id=3022): 1, ComparativeOutcome(relation='higher', other_id=3021): 1, ComparativeOutcome(relation='lower', other_id=3024): 1, ComparativeOutcome(relation='higher', other_id=3023): 1, ComparativeOutcome(relation='higher', other_id=3026): 1, ComparativeOutcome(relation='lower', other_id=3025): 1, ComparativeOutcome(relation='higher', other_id=3028): 1, ComparativeOutcome(relation='lower', other_id=3027): 1, ComparativeOutcome(relation='lower', other_id=3030): 1, ComparativeOutcome(relation='higher', other_id=3029): 1, ComparativeOutcome(relation='higher', other_id=3032): 1, ComparativeOutcome(relation='lower', other_id=3031): 1, ComparativeOutcome(relation='higher', other_id=3034): 1, ComparativeOutcome(relation='lower', other_id=3033): 1, ComparativeOutcome(relation='lower', other_id=3036): 1, ComparativeOutcome(relation='higher', other_id=3035): 1, ComparativeOutcome(relation='higher', other_id=3038): 1, ComparativeOutcome(relation='lower', other_id=3037): 1, ComparativeOutcome(relation='higher', other_id=3040): 1, ComparativeOutcome(relation='lower', other_id=3039): 1, ComparativeOutcome(relation='higher', other_id=3042): 1, ComparativeOutcome(relation='lower', other_id=3041): 1, ComparativeOutcome(relation='lower', other_id=3044): 1, ComparativeOutcome(relation='higher', other_id=3043): 1, ComparativeOutcome(relation='same', other_id=3046): 1, ComparativeOutcome(relation='same', other_id=3045): 1, ComparativeOutcome(relation='same', other_id=3048): 1, ComparativeOutcome(relation='same', other_id=3047): 1, ComparativeOutcome(relation='higher', other_id=3050): 1, ComparativeOutcome(relation='lower', other_id=3049): 1, ComparativeOutcome(relation='higher', other_id=3052): 1, ComparativeOutcome(relation='lower', other_id=3051): 1, ComparativeOutcome(relation='higher', other_id=3054): 1, ComparativeOutcome(relation='lower', other_id=3053): 1, ComparativeOutcome(relation='higher', other_id=3056): 1, ComparativeOutcome(relation='lower', other_id=3055): 1, ComparativeOutcome(relation='lower', other_id=3058): 1, ComparativeOutcome(relation='higher', other_id=3057): 1, ComparativeOutcome(relation='lower', other_id=3060): 1, ComparativeOutcome(relation='higher', other_id=3059): 1, ComparativeOutcome(relation='higher', other_id=3062): 1, ComparativeOutcome(relation='lower', other_id=3061): 1, ComparativeOutcome(relation='higher', other_id=3064): 1, ComparativeOutcome(relation='lower', other_id=3063): 1, ComparativeOutcome(relation='higher', other_id=3066): 1, ComparativeOutcome(relation='lower', other_id=3065): 1, ComparativeOutcome(relation='higher', other_id=3068): 1, ComparativeOutcome(relation='lower', other_id=3067): 1, ComparativeOutcome(relation='lower', other_id=3070): 1, ComparativeOutcome(relation='higher', other_id=3069): 1, ComparativeOutcome(relation='lower', other_id=3072): 1, ComparativeOutcome(relation='higher', other_id=3071): 1, ComparativeOutcome(relation='higher', other_id=3074): 1, ComparativeOutcome(relation='lower', other_id=3073): 1, ComparativeOutcome(relation='higher', other_id=3076): 1, ComparativeOutcome(relation='lower', other_id=3075): 1, ComparativeOutcome(relation='higher', other_id=3078): 1, ComparativeOutcome(relation='lower', other_id=3077): 1, ComparativeOutcome(relation='higher', other_id=3080): 1, ComparativeOutcome(relation='lower', other_id=3079): 1, ComparativeOutcome(relation='lower', other_id=3082): 1, ComparativeOutcome(relation='higher', other_id=3081): 1, ComparativeOutcome(relation='lower', other_id=3084): 1, ComparativeOutcome(relation='higher', other_id=3083): 1, ComparativeOutcome(relation='higher', other_id=3086): 1, ComparativeOutcome(relation='lower', other_id=3085): 1, ComparativeOutcome(relation='higher', other_id=3088): 1, ComparativeOutcome(relation='lower', other_id=3087): 1, ComparativeOutcome(relation='higher', other_id=3090): 1, ComparativeOutcome(relation='lower', other_id=3089): 1, ComparativeOutcome(relation='higher', other_id=3092): 1, ComparativeOutcome(relation='lower', other_id=3091): 1, ComparativeOutcome(relation='lower', other_id=3094): 1, ComparativeOutcome(relation='higher', other_id=3093): 1, ComparativeOutcome(relation='lower', other_id=3096): 1, ComparativeOutcome(relation='higher', other_id=3095): 1, ComparativeOutcome(relation='higher', other_id=4002): 1, ComparativeOutcome(relation='lower', other_id=4001): 1, ComparativeOutcome(relation='higher', other_id=4004): 1, ComparativeOutcome(relation='lower', other_id=4003): 1, ComparativeOutcome(relation='higher', other_id=4006): 1, ComparativeOutcome(relation='lower', other_id=4005): 1, ComparativeOutcome(relation='higher', other_id=4008): 1, ComparativeOutcome(relation='lower', other_id=4007): 1, ComparativeOutcome(relation='lower', other_id=4010): 1, ComparativeOutcome(relation='higher', other_id=4009): 1, ComparativeOutcome(relation='lower', other_id=4012): 1, ComparativeOutcome(relation='higher', other_id=4011): 1, ComparativeOutcome(relation='higher', other_id=4014): 1, ComparativeOutcome(relation='lower', other_id=4013): 1, ComparativeOutcome(relation='higher', other_id=4016): 1, ComparativeOutcome(relation='lower', other_id=4015): 1, ComparativeOutcome(relation='lower', other_id=4018): 1, ComparativeOutcome(relation='higher', other_id=4017): 1, ComparativeOutcome(relation='lower', other_id=4020): 1, ComparativeOutcome(relation='higher', other_id=4019): 1, ComparativeOutcome(relation='lower', other_id=4022): 1, ComparativeOutcome(relation='higher', other_id=4021): 1, ComparativeOutcome(relation='higher', other_id=4024): 1, ComparativeOutcome(relation='lower', other_id=4023): 1, ComparativeOutcome(relation='lower', other_id=4026): 1, ComparativeOutcome(relation='higher', other_id=4025): 1, ComparativeOutcome(relation='lower', other_id=4028): 1, ComparativeOutcome(relation='higher', other_id=4027): 1, ComparativeOutcome(relation='higher', other_id=5002): 1, ComparativeOutcome(relation='lower', other_id=5001): 1, ComparativeOutcome(relation='higher', other_id=5004): 1, ComparativeOutcome(relation='lower', other_id=5003): 1, ComparativeOutcome(relation='higher', other_id=5006): 1, ComparativeOutcome(relation='lower', other_id=5005): 1, ComparativeOutcome(relation='higher', other_id=5008): 1, ComparativeOutcome(relation='lower', other_id=5007): 1, ComparativeOutcome(relation='higher', other_id=5010): 1, ComparativeOutcome(relation='lower', other_id=5009): 1, ComparativeOutcome(relation='higher', other_id=5012): 1, ComparativeOutcome(relation='lower', other_id=5011): 1, ComparativeOutcome(relation='lower', other_id=5014): 1, ComparativeOutcome(relation='higher', other_id=5013): 1, ComparativeOutcome(relation='lower', other_id=5016): 1, ComparativeOutcome(relation='higher', other_id=5015): 1, ComparativeOutcome(relation='lower', other_id=5018): 1, ComparativeOutcome(relation='higher', other_id=5017): 1, ComparativeOutcome(relation='lower', other_id=5020): 1, ComparativeOutcome(relation='higher', other_id=5019): 1, ComparativeOutcome(relation='lower', other_id=5022): 1, ComparativeOutcome(relation='higher', other_id=5021): 1, ComparativeOutcome(relation='lower', other_id=5024): 1, ComparativeOutcome(relation='higher', other_id=5023): 1, ComparativeOutcome(relation='lower', other_id=5026): 1, ComparativeOutcome(relation='higher', other_id=5025): 1, ComparativeOutcome(relation='lower', other_id=5028): 1, ComparativeOutcome(relation='higher', other_id=5027): 1, ComparativeOutcome(relation='higher', other_id=5030): 1, ComparativeOutcome(relation='lower', other_id=5029): 1, ComparativeOutcome(relation='higher', other_id=5032): 1, ComparativeOutcome(relation='lower', other_id=5031): 1, ComparativeOutcome(relation='higher', other_id=5034): 1, ComparativeOutcome(relation='lower', other_id=5033): 1, ComparativeOutcome(relation='higher', other_id=5036): 1, ComparativeOutcome(relation='lower', other_id=5035): 1, ComparativeOutcome(relation='higher', other_id=5038): 1, ComparativeOutcome(relation='lower', other_id=5037): 1, ComparativeOutcome(relation='higher', other_id=5040): 1, ComparativeOutcome(relation='lower', other_id=5039): 1, ComparativeOutcome(relation='lower', other_id=5042): 1, ComparativeOutcome(relation='higher', other_id=5041): 1, ComparativeOutcome(relation='lower', other_id=5044): 1, ComparativeOutcome(relation='higher', other_id=5043): 1, ComparativeOutcome(relation='lower', other_id=5046): 1, ComparativeOutcome(relation='higher', other_id=5045): 1, ComparativeOutcome(relation='lower', other_id=5048): 1, ComparativeOutcome(relation='higher', other_id=5047): 1, ComparativeOutcome(relation='lower', other_id=5050): 1, ComparativeOutcome(relation='higher', other_id=5049): 1, ComparativeOutcome(relation='lower', other_id=5052): 1, ComparativeOutcome(relation='higher', other_id=5051): 1, ComparativeOutcome(relation='lower', other_id=5054): 1, ComparativeOutcome(relation='higher', other_id=5053): 1, ComparativeOutcome(relation='lower', other_id=5056): 1, ComparativeOutcome(relation='higher', other_id=5055): 1}
+
+
+BASE: /home/troonmel/Boolmore/boolmore/case_study/breast_cancer/BreastCancer_primes_parsimonious.pkl
+# id: -1
+# generation: 0
+# score: 65.65 / 469.0 (14.0%)
+# satisfies_constraints: True
+# n_eff_edges: 538
+# n_eff_self_edges: 40
+# n_prime_implicants: 538
+# n_extra_edges: 0
+# number of nodes: 191
+# number of edges: 538
+# number of effective base edges: 538
+# number of ineffective base edges: 0
+# extra edges: []
+# number of extra edges: 0
+# number of effective extra edges: 0
+# number of ineffective extra edges: 0
+# number of unadded edges: 0
+targets,	factors
+ABL1,	!RB & SRC
+ABL2,	ABL2
+AKT,	AKT & CyclinB1 & !Ipatasertib & PDK1_pm & PIP3 & PIP3_2 & mTORC2_pm
+APC,	AXIN1
+AXIN1,	!DVL1 & GSK3B
+Alpelisib,	0
+Apoptosis_X,	Apoptosis_X & BAD & BIM
+Apoptosis_Y,	Apoptosis_Y & !BCL2 & !BCLXL & !MCL1
+Apoptosis_Z,	Apoptosis_Z & BAD & !BCL2 & !BCLXL & BIM & !MCL1
+BAD,	!AKT & !ERK & !ERK_2 & !PAK1 & !PIM
+BAK1,	BID & BIM & !MCL1 & p53
+BAX,	BAX & BID & BIM & !MCL1 & p53
+BCL2,	!BAD & BCL2_T & !BIM & CREB1 & ERK & ERK_2 & ER_transcription_2 & !Navitoclax
+BCL2_T,	BCL2_T
+BCLXL,	!BAD & BCLXL_T & !BIM & CREB1 & !Navitoclax
+BCLXL_T,	BCLXL_T
+BID,	CASP8
+BIM,	!BCL2 & !BCLXL & BIM_T & !ERK_2 & FOXO1 & FOXO3
+BIM_T,	BIM_T
+CASP3,	CASP8 & CASP9
+CASP8,	!ERK & !ERK_2 & FADD & !SRC
+CASP9,	!AKT & CASP3 & CYCS & !ERK & !ERK_2 & !PRKACA
+CDK46,	!Palbociclib
+CDKN2A,	!MYC & !MYC_2
+CEBPB,	ABL2 & CREB1
+CREB1,	AKT & !PTEN & !PTEN_2 & SGK1
+CTNNB1,	!DC & SRC & WNT1 & YAP1
+CYCLINDc,	CDK46 & !CDKN2A & CyclinD & CyclinD_2 & EIF4 & KMT2D & MYC & TCF7L2 & TEAD1
+CYCLINDc_2,	CDK46 & !CDKN2A & CYCLINDc & CyclinD_2 & TCF7L2 & TEAD1
+CYCS,	BAK1 & BAX
+CyclinB1,	!p53
+CyclinD,	!GSK3B & JUN & RPS6 & S6K
+CyclinD_2,	CyclinD & !GSK3B & JUN & RPS6
+DC,	APC & GSK3B
+DLL,	DLL
+DVL1,	FZD
+E2F,	!RB
+E2F_2,	E2F & !RB
+E2F_3,	E2F_2 & E2F_3 & !RB
+EGF,	EGF
+EGFR,	JUN & NFKB
+EGFRHER3c,	EGF & EGFR & HER3 & HER3_2 & NRG1 & !erlotinib
+EGFRc,	EGF & EGFR & HER2 & !Neratinib & !erlotinib
+EIF4,	!EIF4EBP1
+EIF4EBP1,	!mTORC1
+ER,	ER
+ERK,	MEK & MEK_2
+ERK_2,	ERK & MEK & MEK_2
+ER_transcription,	ESR1 & ESR1_2
+ER_transcription_2,	ER_transcription & ESR1_2 & FOXA1 & KMT2D & PBX1
+ER_transcription_feedback,	ER_transcription & ER_transcription_2 & ER_transcription_feedback
+ER_transcription_feedback_1,	ER_transcription_2
+ER_transcription_feedback_2,	ER_transcription_feedback & ER_transcription_feedback_1 & ER_transcription_feedback_2
+ES,	ES
+ESR1,	AKT & ER & !ER_transcription_feedback & ES & FOXO3 & !Fulvestrant
+ESR1_2,	ER & !ER_transcription_feedback & !ER_transcription_feedback_2 & ES & ESR1 & FOXO3 & !Fulvestrant
+Everolimus,	0
+FADD,	FAS & TRADD
+FAS,	FASLG & p53
+FASLG,	FASLG & FOXO3
+FOXA1,	FOXO3
+FOXO1,	!AKT & !SGK1
+FOXO3,	!AKT & !FOXO3_Ub & !PIM & !SGK1
+FOXO3_Ub,	ERK & ERK_2
+FZD,	CREB1
+Fulvestrant,	0
+GATA3,	!STAT1
+GRB2,	EGFRHER3c & EGFRc & HER2HER2c & HER2HER3c & HER2HER3c_2 & IRS1 & SRC
+GSK3B,	!AKT & !ERK & !ERK_2 & GSK3B & p53
+HER2,	FOXO3
+HER2HER2c,	HER2 & !Neratinib & !erlotinib
+HER2HER3c,	HER2 & HER3 & HER3_2 & !MEK & !MEK_2 & !Neratinib & !erlotinib & !pertuzumab & !trastuzumab
+HER2HER3c_2,	HER2 & HER2HER3c & HER3 & HER3_2 & !MEK & !MEK_2 & NRG1 & !Neratinib & !erlotinib & !pertuzumab & !trastuzumab
+HER3,	FOXO3 & HER3_iT & !PTEN
+HER3_2,	FOXO3 & HER3
+HER3_iT,	HER3_iT
+HES1,	NICD
+HEY1,	NICD
+HRAS,	!NF1 & PI3K & PI3K_2 & PIP3 & PIP3_2 & SOS1
+IGF1,	IGF1
+IGF1R,	ESR1 & FOXO3 & IGF1 & IGF1R_iT & INS & SRC
+IGF1R_2,	FOXO3 & HER2 & IGF1 & IGF1R & IGF1R_iT & IGF1R_iT_2 & INS & SRC
+IGF1R_iT,	IGF1R_iT
+IGF1R_iT_2,	IGF1R_iT
+IL1B,	NFKB
+IL6,	IL1B & IL6
+IL6R,	IL6 & STAT3
+IL8,	STAT5
+INS,	INS
+INSR,	FOXO3 & INS
+IRS1,	IGF1R & IGF1R_2 & INSR & !S6K
+Ipatasertib,	0
+JAK2,	ABL1 & IL6R
+JUN,	!GSK3B & JUN & MAPK8
+KMT2D,	!AKT
+KRT14,	EGFR & PAK2
+LATS1,	NF2
+LCK,	LCK
+MAPK8,	RAC1
+MCL1,	ERK & ERK_2 & !GSK3B & MCL1_T & !S63845 & Translation
+MCL1_T,	MCL1_T
+MDM2,	AKT & p53
+MEK,	PDK1_pm & RAF1 & RAF1_2 & !Trametinib
+MEK_2,	MEK & PDK1_pm & RAF1 & RAF1_2 & !Trametinib
+MYC,	CTNNB1 & EIF4 & ERK & ERK_2 & ER_transcription & !GSK3B & KMT2D & PIM & STAT3
+MYC_2,	CTNNB1 & ERK & ERK_2 & ER_transcription_2 & !GSK3B & MYC & MYC_T & STAT3
+MYC_T,	MYC_T
+MYC_targets,	MYC & MYC_2 & Translation
+MYC_targets_2,	MYC & MYC_2 & MYC_targets & Translation
+MYOD1,	!ABL1 & !HES1 & !NF2
+MYOG,	!HEY1 & MYOD1
+NEDD4L,	!PRKACA & !S6K & !SGK1
+NF1,	!TWIST1 & p53
+NF2,	NEDD4L
+NFKB,	HER3 & HER3_2 & NOTCH1 & PIM
+NICD,	NOTCH1
+NOTCH1,	CTNNB1 & DLL & LCK & MDM2
+NRG1,	NRG1
+Navitoclax,	0
+Neratinib,	0
+PAK1,	PDK1_ic & RAC1 & TCF7L2
+PAK2,	RAC1 & SRC
+PAX7,	!MYOG & NOTCH1
+PBX1,	PBX1
+PDK1_ic,	PDK1_ic
+PDK1_pm,	PIP3 & PIP3_2
+PI3K,	!Alpelisib & EGFRHER3c & ESR1 & HER2HER3c & HER2HER3c_2 & IRS1 & RAS & RAS_2 & RAS_3
+PI3K_2,	!Alpelisib & EGFRHER3c & EGFRc & HER2HER3c_2 & IRS1 & PI3K
+PIM,	STAT5
+PIP3,	PI3K & PI3K_2 & !PTEN & !PTEN_2
+PIP3_2,	PI3K_2 & PIP3 & !PTEN & !PTEN_2
+PPARG,	CEBPB & !GATA3
+PRAS40,	!AKT & !PIM & PRAS40
+PRKAA2,	!PRKACA & STK11
+PRKACA,	AKT & WNT1
+PTEN,	!GSK3B & PTEN & PTEN_T & !SRC
+PTEN_2,	!GSK3B & PTEN & PTEN_T_2 & !SRC
+PTEN_T,	PTEN_T
+PTEN_T_2,	PTEN_T
+Palbociclib,	0
+Proliferation,	E2F & E2F_2 & E2F_3 & MYC_targets
+Proliferation_2,	E2F_2 & E2F_3
+Proliferation_3,	E2F & E2F_2 & E2F_3 & MYC_targets_2
+RAC1,	!AKT & DVL1 & PI3K & PI3K_2
+RAF1,	!ERK & !ERK_2 & HRAS & PIP3 & PIP3_2 & RAS & RAS_2 & RAS_3 & RPS6
+RAF1_2,	!ERK & !ERK_2 & HRAS & PIP3 & PIP3_2 & RAF1 & RAS & RAS_2 & RAS_3 & RPS6
+RAS,	PI3K & PIP3 & SOS1
+RAS_2,	RAS & SOS1
+RAS_3,	RAS_2 & SOS1
+RB,	!pRB & !pRB_2 & !pRB_3
+RHEB,	!TSC2
+RPS6,	S6K
+Rb_T,	Rb_T
+S63845,	0
+S6K,	ERK & ERK_2 & mTORC1
+SGK1,	PDK1_ic & SGK1_T & mTORC2_ic
+SGK1_T,	SGK1_T
+SOS1,	GRB2
+SRC,	ABL1 & PRKACA
+STAT1,	EGFRc & JAK2 & SRC
+STAT3,	IL1B & JAK2 & SRC
+STAT5,	EGFRc & JAK2 & SRC
+STK11,	!ERK & !ERK_2 & FOXO3
+TCF7L2,	CTNNB1 & JUN
+TEAD1,	YAP1
+TRADD,	!KRT14
+TSC2,	!AKT & !ERK & !ERK_2 & GSK3B & HER2 & PRKAA2 & !SGK1
+TWIST1,	AKT & ERK & ERK_2
+Trametinib,	0
+Translation,	EIF4 & S6K
+WNT1,	WNT1
+YAP1,	!LATS1
+cycE_CDK2,	cycE_CDK2_T & !p21_p27
+cycE_CDK2_T,	E2F & E2F_2 & E2F_3
+erlotinib,	0
+mTORC1,	!Everolimus & !PRAS40 & RHEB
+mTORC2_ic,	!Everolimus
+mTORC2_pm,	!Everolimus & PIP3 & PIP3_2
+p21,	!AKT & !MYC & !MYC_2 & p21_iT & p21_iT_2
+p21_iT,	p21_iT
+p21_iT_2,	p21_iT
+p21_p27,	!AKT & !PIM & p21 & p21_p27_T
+p21_p27_T,	FOXO3 & p21_iT & p21_iT_2 & p27_iT
+p27_iT,	p27_iT
+p38,	AKT & p38
+p53,	!MDM2 & PTEN & PTEN_2 & RB & p38 & p53
+pRB,	CYCLINDc & CYCLINDc_2 & !RB & !Rb_T & cycE_CDK2
+pRB_2,	CYCLINDc & CYCLINDc_2 & !RB & !Rb_T & cycE_CDK2 & pRB
+pRB_3,	CYCLINDc_2 & !RB & !Rb_T & cycE_CDK2 & pRB_2
+pertuzumab,	0
+trastuzumab,	0
+Elapsed time for single evaluation: 0:00:00.241155
+Estimated GA evaluation time: 0:10:02.887500
+
+Starting model is the base model.
+
+START: /home/troonmel/Boolmore/boolmore/case_study/breast_cancer/BreastCancer_primes_parsimonious.pkl
+# id: 0
+# generation: 0
+# score: 65.65 / 469.0 (14.0%)
+# satisfies_constraints: True
+# n_eff_edges: 538
+# n_eff_self_edges: 40
+# n_prime_implicants: 538
+# n_extra_edges: 0
+# number of nodes: 191
+# number of edges: 538
+# number of effective base edges: 538
+# number of ineffective base edges: 0
+# extra edges: []
+# number of extra edges: 0
+# number of effective extra edges: 0
+# number of ineffective extra edges: 0
+# number of unadded edges: 0
+targets,	factors
+ABL1,	!RB & SRC
+ABL2,	ABL2
+AKT,	AKT & CyclinB1 & !Ipatasertib & PDK1_pm & PIP3 & PIP3_2 & mTORC2_pm
+APC,	AXIN1
+AXIN1,	!DVL1 & GSK3B
+Alpelisib,	0
+Apoptosis_X,	Apoptosis_X & BAD & BIM
+Apoptosis_Y,	Apoptosis_Y & !BCL2 & !BCLXL & !MCL1
+Apoptosis_Z,	Apoptosis_Z & BAD & !BCL2 & !BCLXL & BIM & !MCL1
+BAD,	!AKT & !ERK & !ERK_2 & !PAK1 & !PIM
+BAK1,	BID & BIM & !MCL1 & p53
+BAX,	BAX & BID & BIM & !MCL1 & p53
+BCL2,	!BAD & BCL2_T & !BIM & CREB1 & ERK & ERK_2 & ER_transcription_2 & !Navitoclax
+BCL2_T,	BCL2_T
+BCLXL,	!BAD & BCLXL_T & !BIM & CREB1 & !Navitoclax
+BCLXL_T,	BCLXL_T
+BID,	CASP8
+BIM,	!BCL2 & !BCLXL & BIM_T & !ERK_2 & FOXO1 & FOXO3
+BIM_T,	BIM_T
+CASP3,	CASP8 & CASP9
+CASP8,	!ERK & !ERK_2 & FADD & !SRC
+CASP9,	!AKT & CASP3 & CYCS & !ERK & !ERK_2 & !PRKACA
+CDK46,	!Palbociclib
+CDKN2A,	!MYC & !MYC_2
+CEBPB,	ABL2 & CREB1
+CREB1,	AKT & !PTEN & !PTEN_2 & SGK1
+CTNNB1,	!DC & SRC & WNT1 & YAP1
+CYCLINDc,	CDK46 & !CDKN2A & CyclinD & CyclinD_2 & EIF4 & KMT2D & MYC & TCF7L2 & TEAD1
+CYCLINDc_2,	CDK46 & !CDKN2A & CYCLINDc & CyclinD_2 & TCF7L2 & TEAD1
+CYCS,	BAK1 & BAX
+CyclinB1,	!p53
+CyclinD,	!GSK3B & JUN & RPS6 & S6K
+CyclinD_2,	CyclinD & !GSK3B & JUN & RPS6
+DC,	APC & GSK3B
+DLL,	DLL
+DVL1,	FZD
+E2F,	!RB
+E2F_2,	E2F & !RB
+E2F_3,	E2F_2 & E2F_3 & !RB
+EGF,	EGF
+EGFR,	JUN & NFKB
+EGFRHER3c,	EGF & EGFR & HER3 & HER3_2 & NRG1 & !erlotinib
+EGFRc,	EGF & EGFR & HER2 & !Neratinib & !erlotinib
+EIF4,	!EIF4EBP1
+EIF4EBP1,	!mTORC1
+ER,	ER
+ERK,	MEK & MEK_2
+ERK_2,	ERK & MEK & MEK_2
+ER_transcription,	ESR1 & ESR1_2
+ER_transcription_2,	ER_transcription & ESR1_2 & FOXA1 & KMT2D & PBX1
+ER_transcription_feedback,	ER_transcription & ER_transcription_2 & ER_transcription_feedback
+ER_transcription_feedback_1,	ER_transcription_2
+ER_transcription_feedback_2,	ER_transcription_feedback & ER_transcription_feedback_1 & ER_transcription_feedback_2
+ES,	ES
+ESR1,	AKT & ER & !ER_transcription_feedback & ES & FOXO3 & !Fulvestrant
+ESR1_2,	ER & !ER_transcription_feedback & !ER_transcription_feedback_2 & ES & ESR1 & FOXO3 & !Fulvestrant
+Everolimus,	0
+FADD,	FAS & TRADD
+FAS,	FASLG & p53
+FASLG,	FASLG & FOXO3
+FOXA1,	FOXO3
+FOXO1,	!AKT & !SGK1
+FOXO3,	!AKT & !FOXO3_Ub & !PIM & !SGK1
+FOXO3_Ub,	ERK & ERK_2
+FZD,	CREB1
+Fulvestrant,	0
+GATA3,	!STAT1
+GRB2,	EGFRHER3c & EGFRc & HER2HER2c & HER2HER3c & HER2HER3c_2 & IRS1 & SRC
+GSK3B,	!AKT & !ERK & !ERK_2 & GSK3B & p53
+HER2,	FOXO3
+HER2HER2c,	HER2 & !Neratinib & !erlotinib
+HER2HER3c,	HER2 & HER3 & HER3_2 & !MEK & !MEK_2 & !Neratinib & !erlotinib & !pertuzumab & !trastuzumab
+HER2HER3c_2,	HER2 & HER2HER3c & HER3 & HER3_2 & !MEK & !MEK_2 & NRG1 & !Neratinib & !erlotinib & !pertuzumab & !trastuzumab
+HER3,	FOXO3 & HER3_iT & !PTEN
+HER3_2,	FOXO3 & HER3
+HER3_iT,	HER3_iT
+HES1,	NICD
+HEY1,	NICD
+HRAS,	!NF1 & PI3K & PI3K_2 & PIP3 & PIP3_2 & SOS1
+IGF1,	IGF1
+IGF1R,	ESR1 & FOXO3 & IGF1 & IGF1R_iT & INS & SRC
+IGF1R_2,	FOXO3 & HER2 & IGF1 & IGF1R & IGF1R_iT & IGF1R_iT_2 & INS & SRC
+IGF1R_iT,	IGF1R_iT
+IGF1R_iT_2,	IGF1R_iT
+IL1B,	NFKB
+IL6,	IL1B & IL6
+IL6R,	IL6 & STAT3
+IL8,	STAT5
+INS,	INS
+INSR,	FOXO3 & INS
+IRS1,	IGF1R & IGF1R_2 & INSR & !S6K
+Ipatasertib,	0
+JAK2,	ABL1 & IL6R
+JUN,	!GSK3B & JUN & MAPK8
+KMT2D,	!AKT
+KRT14,	EGFR & PAK2
+LATS1,	NF2
+LCK,	LCK
+MAPK8,	RAC1
+MCL1,	ERK & ERK_2 & !GSK3B & MCL1_T & !S63845 & Translation
+MCL1_T,	MCL1_T
+MDM2,	AKT & p53
+MEK,	PDK1_pm & RAF1 & RAF1_2 & !Trametinib
+MEK_2,	MEK & PDK1_pm & RAF1 & RAF1_2 & !Trametinib
+MYC,	CTNNB1 & EIF4 & ERK & ERK_2 & ER_transcription & !GSK3B & KMT2D & PIM & STAT3
+MYC_2,	CTNNB1 & ERK & ERK_2 & ER_transcription_2 & !GSK3B & MYC & MYC_T & STAT3
+MYC_T,	MYC_T
+MYC_targets,	MYC & MYC_2 & Translation
+MYC_targets_2,	MYC & MYC_2 & MYC_targets & Translation
+MYOD1,	!ABL1 & !HES1 & !NF2
+MYOG,	!HEY1 & MYOD1
+NEDD4L,	!PRKACA & !S6K & !SGK1
+NF1,	!TWIST1 & p53
+NF2,	NEDD4L
+NFKB,	HER3 & HER3_2 & NOTCH1 & PIM
+NICD,	NOTCH1
+NOTCH1,	CTNNB1 & DLL & LCK & MDM2
+NRG1,	NRG1
+Navitoclax,	0
+Neratinib,	0
+PAK1,	PDK1_ic & RAC1 & TCF7L2
+PAK2,	RAC1 & SRC
+PAX7,	!MYOG & NOTCH1
+PBX1,	PBX1
+PDK1_ic,	PDK1_ic
+PDK1_pm,	PIP3 & PIP3_2
+PI3K,	!Alpelisib & EGFRHER3c & ESR1 & HER2HER3c & HER2HER3c_2 & IRS1 & RAS & RAS_2 & RAS_3
+PI3K_2,	!Alpelisib & EGFRHER3c & EGFRc & HER2HER3c_2 & IRS1 & PI3K
+PIM,	STAT5
+PIP3,	PI3K & PI3K_2 & !PTEN & !PTEN_2
+PIP3_2,	PI3K_2 & PIP3 & !PTEN & !PTEN_2
+PPARG,	CEBPB & !GATA3
+PRAS40,	!AKT & !PIM & PRAS40
+PRKAA2,	!PRKACA & STK11
+PRKACA,	AKT & WNT1
+PTEN,	!GSK3B & PTEN & PTEN_T & !SRC
+PTEN_2,	!GSK3B & PTEN & PTEN_T_2 & !SRC
+PTEN_T,	PTEN_T
+PTEN_T_2,	PTEN_T
+Palbociclib,	0
+Proliferation,	E2F & E2F_2 & E2F_3 & MYC_targets
+Proliferation_2,	E2F_2 & E2F_3
+Proliferation_3,	E2F & E2F_2 & E2F_3 & MYC_targets_2
+RAC1,	!AKT & DVL1 & PI3K & PI3K_2
+RAF1,	!ERK & !ERK_2 & HRAS & PIP3 & PIP3_2 & RAS & RAS_2 & RAS_3 & RPS6
+RAF1_2,	!ERK & !ERK_2 & HRAS & PIP3 & PIP3_2 & RAF1 & RAS & RAS_2 & RAS_3 & RPS6
+RAS,	PI3K & PIP3 & SOS1
+RAS_2,	RAS & SOS1
+RAS_3,	RAS_2 & SOS1
+RB,	!pRB & !pRB_2 & !pRB_3
+RHEB,	!TSC2
+RPS6,	S6K
+Rb_T,	Rb_T
+S63845,	0
+S6K,	ERK & ERK_2 & mTORC1
+SGK1,	PDK1_ic & SGK1_T & mTORC2_ic
+SGK1_T,	SGK1_T
+SOS1,	GRB2
+SRC,	ABL1 & PRKACA
+STAT1,	EGFRc & JAK2 & SRC
+STAT3,	IL1B & JAK2 & SRC
+STAT5,	EGFRc & JAK2 & SRC
+STK11,	!ERK & !ERK_2 & FOXO3
+TCF7L2,	CTNNB1 & JUN
+TEAD1,	YAP1
+TRADD,	!KRT14
+TSC2,	!AKT & !ERK & !ERK_2 & GSK3B & HER2 & PRKAA2 & !SGK1
+TWIST1,	AKT & ERK & ERK_2
+Trametinib,	0
+Translation,	EIF4 & S6K
+WNT1,	WNT1
+YAP1,	!LATS1
+cycE_CDK2,	cycE_CDK2_T & !p21_p27
+cycE_CDK2_T,	E2F & E2F_2 & E2F_3
+erlotinib,	0
+mTORC1,	!Everolimus & !PRAS40 & RHEB
+mTORC2_ic,	!Everolimus
+mTORC2_pm,	!Everolimus & PIP3 & PIP3_2
+p21,	!AKT & !MYC & !MYC_2 & p21_iT & p21_iT_2
+p21_iT,	p21_iT
+p21_iT_2,	p21_iT
+p21_p27,	!AKT & !PIM & p21 & p21_p27_T
+p21_p27_T,	FOXO3 & p21_iT & p21_iT_2 & p27_iT
+p27_iT,	p27_iT
+p38,	AKT & p38
+p53,	!MDM2 & PTEN & PTEN_2 & RB & p38 & p53
+pRB,	CYCLINDc & CYCLINDc_2 & !RB & !Rb_T & cycE_CDK2
+pRB_2,	CYCLINDc & CYCLINDc_2 & !RB & !Rb_T & cycE_CDK2 & pRB
+pRB_3,	CYCLINDc_2 & !RB & !Rb_T & cycE_CDK2 & pRB_2
+pertuzumab,	0
+trastuzumab,	0
+
+start_time: 2026-10-16 17:31:02.620208
+
+iter   1/100 | generated   100 | best id    27 | gen   1 | score 174.4/469 (37.2%) | n_extra_edges 0 | n_eff_self_edges 38 | n_eff_edges 473 | n_prime_implicants 664
+iter   2/100 | generated   200 | best id   108 | gen   2 | score 188.0/469 (40.1%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 480 | n_prime_implicants 681
+iter   3/100 | generated   300 | best id   201 | gen   3 | score 192.5/469 (41.0%) | n_extra_edges 0 | n_eff_self_edges 38 | n_eff_edges 475 | n_prime_implicants 683
+iter   4/100 | generated   400 | best id   307 | gen   4 | score 196.9/469 (42.0%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 472 | n_prime_implicants 685
+iter   5/100 | generated   500 | best id   405 | gen   4 | score 197.6/469 (42.1%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 476 | n_prime_implicants 681
+iter   6/100 | generated   600 | best id   405 | gen   4 | score 197.6/469 (42.1%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 476 | n_prime_implicants 681
+iter   7/100 | generated   700 | best id   605 | gen   6 | score 199.8/469 (42.6%) | n_extra_edges 0 | n_eff_self_edges 39 | n_eff_edges 481 | n_prime_implicants 705
+iter   8/100 | generated   800 | best id   605 | gen   6 | score 199.8/469 (42.6%) | n_extra_edges 0 | n_eff_self_edges 39 | n_eff_edges 481 | n_prime_implicants 705
+iter   9/100 | generated   900 | best id   812 | gen   7 | score 200.3/469 (42.7%) | n_extra_edges 0 | n_eff_self_edges 38 | n_eff_edges 472 | n_prime_implicants 680
+iter  10/100 | generated  1000 | best id   910 | gen   9 | score 202.9/469 (43.3%) | n_extra_edges 0 | n_eff_self_edges 38 | n_eff_edges 470 | n_prime_implicants 675
+iter  11/100 | generated  1100 | best id  1085 | gen  11 | score 207.0/469 (44.1%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 476 | n_prime_implicants 761
+iter  12/100 | generated  1200 | best id  1107 | gen  12 | score 211.4/469 (45.1%) | n_extra_edges 0 | n_eff_self_edges 36 | n_eff_edges 476 | n_prime_implicants 695
+iter  13/100 | generated  1300 | best id  1267 | gen  14 | score 212.5/469 (45.3%) | n_extra_edges 0 | n_eff_self_edges 38 | n_eff_edges 477 | n_prime_implicants 811
+iter  14/100 | generated  1400 | best id  1306 | gen  15 | score 213.3/469 (45.5%) | n_extra_edges 0 | n_eff_self_edges 38 | n_eff_edges 480 | n_prime_implicants 798
+iter  15/100 | generated  1500 | best id  1420 | gen  17 | score 213.5/469 (45.5%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 478 | n_prime_implicants 791
+iter  16/100 | generated  1600 | best id  1547 | gen  18 | score 214.2/469 (45.7%) | n_extra_edges 0 | n_eff_self_edges 38 | n_eff_edges 484 | n_prime_implicants 822
+iter  17/100 | generated  1700 | best id  1603 | gen  19 | score 214.7/469 (45.8%) | n_extra_edges 0 | n_eff_self_edges 38 | n_eff_edges 478 | n_prime_implicants 906
+iter  18/100 | generated  1800 | best id  1764 | gen  20 | score 215.1/469 (45.9%) | n_extra_edges 0 | n_eff_self_edges 38 | n_eff_edges 478 | n_prime_implicants 1003
+iter  19/100 | generated  1900 | best id  1889 | gen  21 | score 215.6/469 (46.0%) | n_extra_edges 0 | n_eff_self_edges 36 | n_eff_edges 487 | n_prime_implicants 905
+iter  20/100 | generated  2000 | best id  1889 | gen  21 | score 215.6/469 (46.0%) | n_extra_edges 0 | n_eff_self_edges 36 | n_eff_edges 487 | n_prime_implicants 905
+iter  21/100 | generated  2100 | best id  2087 | gen  23 | score 216.1/469 (46.1%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 480 | n_prime_implicants 931
+iter  22/100 | generated  2200 | best id  2117 | gen  23 | score 216.6/469 (46.2%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 480 | n_prime_implicants 1081
+iter  23/100 | generated  2300 | best id  2205 | gen  26 | score 217.3/469 (46.3%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 481 | n_prime_implicants 932
+iter  24/100 | generated  2400 | best id  2314 | gen  27 | score 217.3/469 (46.3%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 479 | n_prime_implicants 916
+iter  25/100 | generated  2500 | best id  2405 | gen  28 | score 217.3/469 (46.3%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 477 | n_prime_implicants 890
+iter  26/100 | generated  2600 | best id  2529 | gen  30 | score 217.6/469 (46.4%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 488 | n_prime_implicants 944
+iter  27/100 | generated  2700 | best id  2613 | gen  31 | score 217.6/469 (46.4%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 481 | n_prime_implicants 909
+iter  28/100 | generated  2800 | best id  2773 | gen  32 | score 219.2/469 (46.7%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 488 | n_prime_implicants 1012
+iter  29/100 | generated  2900 | best id  2816 | gen  33 | score 219.2/469 (46.7%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 487 | n_prime_implicants 943
+iter  30/100 | generated  3000 | best id  2976 | gen  33 | score 220.1/469 (46.9%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 492 | n_prime_implicants 1201
+iter  31/100 | generated  3100 | best id  3043 | gen  36 | score 220.1/469 (46.9%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 485 | n_prime_implicants 905
+iter  32/100 | generated  3200 | best id  3116 | gen  36 | score 220.1/469 (46.9%) | n_extra_edges 0 | n_eff_self_edges 36 | n_eff_edges 488 | n_prime_implicants 1041
+iter  33/100 | generated  3300 | best id  3286 | gen  39 | score 220.1/469 (46.9%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 490 | n_prime_implicants 1101
+iter  34/100 | generated  3400 | best id  3389 | gen  41 | score 220.3/469 (47.0%) | n_extra_edges 0 | n_eff_self_edges 38 | n_eff_edges 488 | n_prime_implicants 1098
+iter  35/100 | generated  3500 | best id  3495 | gen  43 | score 221.7/469 (47.3%) | n_extra_edges 0 | n_eff_self_edges 38 | n_eff_edges 489 | n_prime_implicants 1009
+iter  36/100 | generated  3600 | best id  3495 | gen  43 | score 221.7/469 (47.3%) | n_extra_edges 0 | n_eff_self_edges 38 | n_eff_edges 489 | n_prime_implicants 1009
+iter  37/100 | generated  3700 | best id  3613 | gen  45 | score 221.7/469 (47.3%) | n_extra_edges 0 | n_eff_self_edges 37 | n_eff_edges 490 | n_prime_implicants 1095
+iter  38/100 | generated  3800 | best id  3701 | gen  46 | score 221.9/469 (47.3%) | n_extra_edges 0 | n_eff_self_edges 36 | n_eff_edges 478 | n_prime_implicants 1160
+iter  39/100 | generated  3900 | best id  3812 | gen  47 | score 221.9/469 (47.3%) | n_extra_edges 0 | n_eff_self_edges 36 | n_eff_edges 478 | n_prime_implicants 1100
+iter  40/100 | generated  4000 | best id  3986 | gen  50 | score 221.9/469 (47.3%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 485 | n_prime_implicants 1086
+iter  41/100 | generated  4100 | best id  4009 | gen  51 | score 221.9/469 (47.3%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 479 | n_prime_implicants 1068
+iter  42/100 | generated  4200 | best id  4119 | gen  52 | score 221.9/469 (47.3%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 475 | n_prime_implicants 1053
+iter  43/100 | generated  4300 | best id  4119 | gen  52 | score 221.9/469 (47.3%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 475 | n_prime_implicants 1053
+iter  44/100 | generated  4400 | best id  4119 | gen  52 | score 221.9/469 (47.3%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 475 | n_prime_implicants 1053
+iter  45/100 | generated  4500 | best id  4473 | gen  57 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 479 | n_prime_implicants 1098
+iter  46/100 | generated  4600 | best id  4473 | gen  57 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 479 | n_prime_implicants 1098
+iter  47/100 | generated  4700 | best id  4619 | gen  58 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 477 | n_prime_implicants 1093
+iter  48/100 | generated  4800 | best id  4717 | gen  59 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 474 | n_prime_implicants 1116
+iter  49/100 | generated  4900 | best id  4808 | gen  59 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 472 | n_prime_implicants 1157
+iter  50/100 | generated  5000 | best id  4905 | gen  61 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 472 | n_prime_implicants 1086
+iter  51/100 | generated  5100 | best id  5002 | gen  62 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 471 | n_prime_implicants 1085
+iter  52/100 | generated  5200 | best id  5176 | gen  65 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 35 | n_eff_edges 469 | n_prime_implicants 1113
+iter  53/100 | generated  5300 | best id  5269 | gen  63 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 34 | n_eff_edges 474 | n_prime_implicants 1046
+iter  54/100 | generated  5400 | best id  5312 | gen  66 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 34 | n_eff_edges 470 | n_prime_implicants 1064
+iter  55/100 | generated  5500 | best id  5404 | gen  67 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 34 | n_eff_edges 468 | n_prime_implicants 1081
+iter  56/100 | generated  5600 | best id  5579 | gen  69 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 34 | n_eff_edges 466 | n_prime_implicants 1079
+iter  57/100 | generated  5700 | best id  5579 | gen  69 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 34 | n_eff_edges 466 | n_prime_implicants 1079
+iter  58/100 | generated  5800 | best id  5774 | gen  68 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 33 | n_eff_edges 466 | n_prime_implicants 1110
+iter  59/100 | generated  5900 | best id  5774 | gen  68 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 33 | n_eff_edges 466 | n_prime_implicants 1110
+iter  60/100 | generated  6000 | best id  5915 | gen  73 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 33 | n_eff_edges 464 | n_prime_implicants 1063
+iter  61/100 | generated  6100 | best id  6020 | gen  75 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 467 | n_prime_implicants 1051
+iter  62/100 | generated  6200 | best id  6108 | gen  76 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 464 | n_prime_implicants 1074
+iter  63/100 | generated  6300 | best id  6220 | gen  77 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 457 | n_prime_implicants 1021
+iter  64/100 | generated  6400 | best id  6308 | gen  78 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 457 | n_prime_implicants 1004
+iter  65/100 | generated  6500 | best id  6308 | gen  78 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 457 | n_prime_implicants 1004
+iter  66/100 | generated  6600 | best id  6504 | gen  81 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 457 | n_prime_implicants 1002
+iter  67/100 | generated  6700 | best id  6504 | gen  81 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 457 | n_prime_implicants 1002
+iter  68/100 | generated  6800 | best id  6760 | gen  84 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 455 | n_prime_implicants 985
+iter  69/100 | generated  6900 | best id  6817 | gen  85 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 455 | n_prime_implicants 967
+iter  70/100 | generated  7000 | best id  6817 | gen  85 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 455 | n_prime_implicants 967
+iter  71/100 | generated  7100 | best id  7085 | gen  88 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 459 | n_prime_implicants 1023
+iter  72/100 | generated  7200 | best id  7108 | gen  89 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 456 | n_prime_implicants 962
+iter  73/100 | generated  7300 | best id  7213 | gen  90 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 455 | n_prime_implicants 1000
+iter  74/100 | generated  7400 | best id  7314 | gen  90 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 454 | n_prime_implicants 946
+iter  75/100 | generated  7500 | best id  7314 | gen  90 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 454 | n_prime_implicants 946
+iter  76/100 | generated  7600 | best id  7517 | gen  93 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 454 | n_prime_implicants 944
+iter  77/100 | generated  7700 | best id  7606 | gen  94 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 454 | n_prime_implicants 936
+iter  78/100 | generated  7800 | best id  7606 | gen  94 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 454 | n_prime_implicants 936
+iter  79/100 | generated  7900 | best id  7606 | gen  94 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 454 | n_prime_implicants 936
+iter  80/100 | generated  8000 | best id  7606 | gen  94 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 454 | n_prime_implicants 936
+iter  81/100 | generated  8100 | best id  8009 | gen  97 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 454 | n_prime_implicants 931
+iter  82/100 | generated  8200 | best id  8180 | gen  97 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 1018
+iter  83/100 | generated  8300 | best id  8180 | gen  97 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 1018
+iter  84/100 | generated  8400 | best id  8180 | gen  97 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 1018
+iter  85/100 | generated  8500 | best id  8413 | gen 100 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 921
+iter  86/100 | generated  8600 | best id  8413 | gen 100 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 921
+iter  87/100 | generated  8700 | best id  8614 | gen 101 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 916
+iter  88/100 | generated  8800 | best id  8716 | gen 102 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 912
+iter  89/100 | generated  8900 | best id  8716 | gen 102 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 912
+iter  90/100 | generated  9000 | best id  8910 | gen 104 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 909
+iter  91/100 | generated  9100 | best id  8910 | gen 104 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 909
+iter  92/100 | generated  9200 | best id  8910 | gen 104 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 909
+iter  93/100 | generated  9300 | best id  8910 | gen 104 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 909
+iter  94/100 | generated  9400 | best id  8910 | gen 104 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 909
+iter  95/100 | generated  9500 | best id  8910 | gen 104 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 909
+iter  96/100 | generated  9600 | best id  8910 | gen 104 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 909
+iter  97/100 | generated  9700 | best id  8910 | gen 104 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 909
+iter  98/100 | generated  9800 | best id  8910 | gen 104 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 450 | n_prime_implicants 909
+iter  99/100 | generated  9900 | best id  9856 | gen 107 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 443 | n_prime_implicants 929
+iter 100/100 | generated 10000 | best id  9916 | gen 108 | score 222.3/469 (47.4%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 441 | n_prime_implicants 879
+Eval summaries: /home/troonmel/Boolmore/BreastCancer_primes_parsimonious_20261016_173102_evals.csv
+
+Exported generated model to /home/troonmel/Boolmore/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.bnet
+Pickled primes to /home/troonmel/Boolmore/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.pkl
+
+FINAL: /home/troonmel/Boolmore/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.bnet
+# id: 9916
+# generation: 108
+# score: 222.3 / 469.0 (47.4%)
+# satisfies_constraints: True
+# n_eff_edges: 441
+# n_eff_self_edges: 31
+# n_prime_implicants: 879
+# n_extra_edges: 0
+# number of nodes: 191
+# number of edges: 538
+# number of effective base edges: 441
+# number of ineffective base edges: 97
+# extra edges: []
+# number of extra edges: 0
+# number of effective extra edges: 0
+# number of ineffective extra edges: 0
+# number of unadded edges: 0
+targets,	factors
+ABL1,	!RB & SRC
+ABL2,	ABL2
+AKT,	CyclinB1 & !Ipatasertib & PIP3_2 | CyclinB1 & PDK1_pm & PIP3_2 | !Ipatasertib & mTORC2_pm | PDK1_pm & PIP3 & PIP3_2 | PDK1_pm & mTORC2_pm | PIP3 & mTORC2_pm
+APC,	AXIN1
+AXIN1,	!DVL1 & GSK3B
+Alpelisib,	0
+Apoptosis_X,	BAD & BIM
+Apoptosis_Y,	!BCL2 | !BCLXL & !MCL1
+Apoptosis_Z,	!BCLXL & !MCL1
+BAD,	!AKT & !ERK & !PIM | !AKT & !ERK_2 & !PAK1 & !PIM
+BAK1,	BID | BIM & p53 | !MCL1
+BAX,	BAX & BIM | BID | BIM & p53
+BCL2,	!BAD & BCL2_T & !BIM & !Navitoclax | !BAD & BCL2_T & CREB1 & ER_transcription_2 & !Navitoclax | !BAD & BCL2_T & ERK & !Navitoclax | !BAD & BCL2_T & ERK_2 & !Navitoclax | BCL2_T & !BIM & ERK & !Navitoclax | BCL2_T & !BIM & ER_transcription_2 & !Navitoclax | BCL2_T & CREB1 & ERK & !Navitoclax | BCL2_T & ERK & ERK_2 & !Navitoclax | BCL2_T & ERK_2 & ER_transcription_2 & !Navitoclax
+BCL2_T,	BCL2_T
+BCLXL,	!BAD & BCLXL_T & !BIM & !Navitoclax | BCLXL_T & CREB1 & !Navitoclax
+BCLXL_T,	BCLXL_T
+BID,	CASP8
+BIM,	!BCL2 & FOXO3 | !BCLXL | BIM_T & FOXO1 | !ERK_2 & FOXO1 | !ERK_2 & FOXO3
+BIM_T,	BIM_T
+CASP3,	CASP8 | CASP9
+CASP8,	!ERK & FADD | !ERK & !SRC | !ERK_2
+CASP9,	!AKT & CASP3 & !ERK | !AKT & CYCS & !ERK | !AKT & !ERK & !ERK_2 & !PRKACA
+CDK46,	!Palbociclib
+CDKN2A,	!MYC | !MYC_2
+CEBPB,	ABL2 & CREB1
+CREB1,	AKT & !PTEN & SGK1 | !PTEN & !PTEN_2 & SGK1
+CTNNB1,	!DC & SRC & YAP1 | !DC & WNT1 & YAP1
+CYCLINDc,	CDK46 & !CDKN2A & CyclinD & CyclinD_2 & MYC | CDK46 & !CDKN2A & CyclinD & EIF4
+CYCLINDc_2,	CDK46 & CYCLINDc & CyclinD_2 & TEAD1
+CYCS,	BAK1 & BAX
+CyclinB1,	!p53
+CyclinD,	!GSK3B | JUN
+CyclinD_2,	CyclinD & !GSK3B | CyclinD & RPS6
+DC,	APC & GSK3B
+DLL,	DLL
+DVL1,	FZD
+E2F,	!RB
+E2F_2,	E2F & !RB
+E2F_3,	E2F_2 & E2F_3 | E2F_2 & !RB
+EGF,	EGF
+EGFR,	JUN & NFKB
+EGFRHER3c,	EGF & EGFR & HER3 & NRG1 & !erlotinib
+EGFRc,	EGF & EGFR & !Neratinib | EGF & EGFR & !erlotinib
+EIF4,	!EIF4EBP1
+EIF4EBP1,	!mTORC1
+ER,	ER
+ERK,	MEK
+ERK_2,	ERK
+ER_transcription,	ESR1 & ESR1_2
+ER_transcription_2,	ER_transcription & ESR1_2 & KMT2D | ER_transcription & ESR1_2 & PBX1 | ER_transcription & FOXA1
+ER_transcription_feedback,	ER_transcription & ER_transcription_2 | ER_transcription & ER_transcription_feedback | ER_transcription_2 & ER_transcription_feedback
+ER_transcription_feedback_1,	ER_transcription_2
+ER_transcription_feedback_2,	ER_transcription_feedback & ER_transcription_feedback_1
+ES,	ES
+ESR1,	AKT & ES & FOXO3 & !Fulvestrant | ER & !ER_transcription_feedback & ES & FOXO3 & !Fulvestrant
+ESR1_2,	ER & ESR1 & !Fulvestrant
+Everolimus,	0
+FADD,	FAS & TRADD
+FAS,	FASLG & p53
+FASLG,	FOXO3
+FOXA1,	FOXO3
+FOXO1,	!AKT & !SGK1
+FOXO3,	!AKT & !FOXO3_Ub & !PIM & !SGK1
+FOXO3_Ub,	ERK | ERK_2
+FZD,	CREB1
+Fulvestrant,	0
+GATA3,	!STAT1
+GRB2,	EGFRHER3c & EGFRc & HER2HER3c & IRS1 | EGFRHER3c & EGFRc & IRS1 & SRC | EGFRHER3c & HER2HER2c & HER2HER3c & SRC | EGFRHER3c & HER2HER3c_2 | EGFRc & HER2HER2c & HER2HER3c_2 & IRS1 & SRC | HER2HER2c & HER2HER3c & HER2HER3c_2 & IRS1 | HER2HER2c & HER2HER3c & IRS1 & SRC | HER2HER3c & HER2HER3c_2 & IRS1 & SRC
+GSK3B,	!AKT & !ERK & GSK3B & p53 | !AKT & !ERK_2 & GSK3B & p53
+HER2,	FOXO3
+HER2HER2c,	HER2 & !Neratinib | HER2 & !erlotinib
+HER2HER3c,	HER2 & HER3 & HER3_2 & !MEK_2 & !Neratinib | HER2 & HER3 & HER3_2 & !Neratinib & !pertuzumab | HER2 & HER3 & HER3_2 & !Neratinib & !trastuzumab | HER2 & HER3 & !MEK & !MEK_2 & !erlotinib | HER2 & HER3 & !MEK & !MEK_2 & !trastuzumab | HER2 & HER3 & !MEK & !Neratinib & !trastuzumab | HER2 & HER3 & !MEK & !erlotinib & !trastuzumab | HER2 & HER3 & !MEK_2 & !Neratinib & !trastuzumab | HER2 & HER3 & !MEK_2 & !erlotinib & !trastuzumab | HER2 & HER3 & !Neratinib & !erlotinib | HER2 & HER3 & !Neratinib & !pertuzumab & !trastuzumab | HER2 & HER3 & !erlotinib & !pertuzumab & !trastuzumab
+HER2HER3c_2,	HER2 & HER2HER3c & HER3 & HER3_2 | HER2 & HER2HER3c & HER3 & !MEK | HER2 & HER2HER3c & HER3 & !MEK_2 & !Neratinib | HER2 & HER2HER3c & HER3 & !Neratinib & !trastuzumab | HER2 & HER2HER3c & HER3_2 & !MEK_2 & !pertuzumab | HER2 & HER2HER3c & !MEK & !pertuzumab | HER2 & HER2HER3c & !MEK_2 & !Neratinib & !erlotinib | HER2 & HER2HER3c & !Neratinib & !pertuzumab | HER2 & HER2HER3c & !erlotinib & !pertuzumab | HER2HER3c & HER3 & HER3_2 & NRG1 | HER2HER3c & HER3 & HER3_2 & !pertuzumab | HER2HER3c & HER3 & !MEK & NRG1 | HER2HER3c & HER3 & !MEK & !pertuzumab | HER2HER3c & HER3 & !MEK_2 & NRG1 | HER2HER3c & HER3 & !MEK_2 & !pertuzumab & !trastuzumab | HER2HER3c & HER3 & NRG1 & !pertuzumab | HER2HER3c & HER3 & NRG1 & !trastuzumab | HER2HER3c & HER3 & !Neratinib & !pertuzumab | HER2HER3c & HER3 & !erlotinib | HER2HER3c & HER3_2 & !MEK & NRG1 & !pertuzumab | HER2HER3c & HER3_2 & !MEK & !pertuzumab & !trastuzumab | HER2HER3c & HER3_2 & !MEK_2 & NRG1 & !pertuzumab | HER2HER3c & HER3_2 & !MEK_2 & !pertuzumab & !trastuzumab | HER2HER3c & HER3_2 & !Neratinib & !pertuzumab | HER2HER3c & HER3_2 & !erlotinib & !pertuzumab | HER2HER3c & !MEK & !MEK_2 & !pertuzumab | HER2HER3c & !MEK & NRG1 & !erlotinib & !pertuzumab | HER2HER3c & !MEK & NRG1 & !trastuzumab | HER2HER3c & !MEK & !Neratinib & !erlotinib & !pertuzumab | HER2HER3c & !MEK_2 & NRG1 & !pertuzumab & !trastuzumab | HER2HER3c & !MEK_2 & !Neratinib & !pertuzumab | HER2HER3c & !MEK_2 & !erlotinib & !trastuzumab | HER2HER3c & NRG1 & !Neratinib & !pertuzumab | HER2HER3c & NRG1 & !erlotinib & !pertuzumab & !trastuzumab | HER2HER3c & !Neratinib & !pertuzumab & !trastuzumab
+HER3,	FOXO3 | HER3_iT
+HER3_2,	FOXO3 & HER3
+HER3_iT,	HER3_iT
+HES1,	NICD
+HEY1,	NICD
+HRAS,	!NF1 & PI3K & PI3K_2 & PIP3 & SOS1
+IGF1,	IGF1
+IGF1R,	ESR1 & IGF1 & INS & SRC | FOXO3 | IGF1R_iT & INS
+IGF1R_2,	IGF1R
+IGF1R_iT,	IGF1R_iT
+IGF1R_iT_2,	IGF1R_iT
+IL1B,	NFKB
+IL6,	IL1B & IL6
+IL6R,	IL6 & STAT3
+IL8,	STAT5
+INS,	INS
+INSR,	FOXO3 & INS
+IRS1,	IGF1R & IGF1R_2 & INSR & !S6K
+Ipatasertib,	0
+JAK2,	ABL1 | IL6R
+JUN,	!GSK3B & JUN & MAPK8
+KMT2D,	!AKT
+KRT14,	EGFR & PAK2
+LATS1,	NF2
+LCK,	LCK
+MAPK8,	RAC1
+MCL1,	ERK & ERK_2 & !GSK3B & !S63845 & Translation | ERK & !GSK3B & MCL1_T & !S63845 & Translation
+MCL1_T,	MCL1_T
+MDM2,	AKT | p53
+MEK,	PDK1_pm & RAF1 & !Trametinib | RAF1 & RAF1_2
+MEK_2,	MEK & RAF1_2 | MEK & !Trametinib
+MYC,	CTNNB1 & EIF4 & ERK & KMT2D | CTNNB1 & EIF4 & !GSK3B & PIM | CTNNB1 & ERK_2 & PIM | EIF4 & ERK & ER_transcription | EIF4 & ERK & !GSK3B | EIF4 & ER_transcription & !GSK3B | EIF4 & ER_transcription & KMT2D & PIM | EIF4 & ER_transcription & PIM & STAT3 | EIF4 & !GSK3B & KMT2D | EIF4 & KMT2D & PIM & STAT3 | ERK & ERK_2 | ERK & ER_transcription & !GSK3B & KMT2D | ERK & !GSK3B & KMT2D & PIM | ERK & STAT3 | ERK_2 & ER_transcription | ERK_2 & KMT2D | ER_transcription & !GSK3B & PIM
+MYC_2,	ERK & ERK_2 & MYC
+MYC_T,	MYC_T
+MYC_targets,	MYC | Translation
+MYC_targets_2,	MYC_targets & Translation
+MYOD1,	!HES1
+MYOG,	!HEY1 & MYOD1
+NEDD4L,	!PRKACA & !S6K | !PRKACA & !SGK1 | !S6K & !SGK1
+NF1,	!TWIST1
+NF2,	NEDD4L
+NFKB,	HER3_2 & PIM
+NICD,	NOTCH1
+NOTCH1,	DLL & LCK & MDM2
+NRG1,	NRG1
+Navitoclax,	0
+Neratinib,	0
+PAK1,	PDK1_ic & RAC1 & TCF7L2
+PAK2,	RAC1 | SRC
+PAX7,	NOTCH1
+PBX1,	PBX1
+PDK1_ic,	PDK1_ic
+PDK1_pm,	PIP3
+PI3K,	!Alpelisib | EGFRHER3c & RAS | EGFRHER3c & RAS_2 | ESR1 & RAS | ESR1 & RAS_2 | HER2HER3c & RAS | HER2HER3c & RAS_2 | HER2HER3c_2 | IRS1 & RAS | IRS1 & RAS_2 | RAS_2 & RAS_3
+PI3K_2,	!Alpelisib & IRS1 & PI3K
+PIM,	STAT5
+PIP3,	PI3K | PI3K_2 & !PTEN_2 | !PTEN & !PTEN_2
+PIP3_2,	PI3K_2 & PIP3 | PIP3 & !PTEN | PIP3 & !PTEN_2
+PPARG,	CEBPB & !GATA3
+PRAS40,	!AKT & !PIM
+PRKAA2,	!PRKACA | STK11
+PRKACA,	AKT & WNT1
+PTEN,	!GSK3B & PTEN_T
+PTEN_2,	PTEN
+PTEN_T,	PTEN_T
+PTEN_T_2,	PTEN_T
+Palbociclib,	0
+Proliferation,	E2F_2 & MYC_targets
+Proliferation_2,	E2F_3
+Proliferation_3,	E2F & E2F_2 & MYC_targets_2 | E2F_2 & E2F_3 & MYC_targets_2
+RAC1,	!AKT & DVL1 & PI3K_2
+RAF1,	!ERK & !ERK_2 & PIP3_2 & RAS_2 | !ERK & !ERK_2 & PIP3_2 & RAS_3 & RPS6 | !ERK & HRAS & PIP3_2 | !ERK & PIP3_2 & RAS & RAS_2 | !ERK & PIP3_2 & RAS_2 & RAS_3 | !ERK & PIP3_2 & RAS_2 & RPS6 | !ERK & RAS & RPS6 | !ERK_2 & HRAS | !ERK_2 & PIP3_2 & RAS & RAS_2 | !ERK_2 & PIP3_2 & RAS & RAS_3 | HRAS & PIP3_2 & RAS | HRAS & PIP3_2 & RAS_2 | HRAS & RAS_3 | PIP3 & PIP3_2 | PIP3 & RAS | PIP3 & RPS6 | PIP3_2 & RAS & RAS_2 & RAS_3 | PIP3_2 & RAS & RPS6
+RAF1_2,	RAF1
+RAS,	PI3K | SOS1
+RAS_2,	RAS
+RAS_3,	RAS_2 & SOS1
+RB,	!pRB & !pRB_2 | !pRB_2 & !pRB_3
+RHEB,	!TSC2
+RPS6,	S6K
+Rb_T,	Rb_T
+S63845,	0
+S6K,	ERK & mTORC1
+SGK1,	PDK1_ic & SGK1_T & mTORC2_ic
+SGK1_T,	SGK1_T
+SOS1,	GRB2
+SRC,	PRKACA
+STAT1,	EGFRc & SRC | JAK2 & SRC
+STAT3,	IL1B & JAK2 | SRC
+STAT5,	EGFRc & JAK2 & SRC
+STK11,	!ERK | FOXO3
+TCF7L2,	CTNNB1 & JUN
+TEAD1,	YAP1
+TRADD,	!KRT14
+TSC2,	!AKT & !ERK & GSK3B & !SGK1 | !AKT & !ERK & PRKAA2 & !SGK1
+TWIST1,	AKT & ERK & ERK_2
+Trametinib,	0
+Translation,	EIF4
+WNT1,	WNT1
+YAP1,	!LATS1
+cycE_CDK2,	cycE_CDK2_T & !p21_p27
+cycE_CDK2_T,	E2F & E2F_2
+erlotinib,	0
+mTORC1,	!Everolimus | !PRAS40 | RHEB
+mTORC2_ic,	!Everolimus
+mTORC2_pm,	!Everolimus & PIP3
+p21,	!AKT & !MYC & !MYC_2 | !AKT & !MYC & p21_iT_2 | !AKT & !MYC_2 & p21_iT | !AKT & !MYC_2 & p21_iT_2 | !AKT & p21_iT & p21_iT_2
+p21_iT,	p21_iT
+p21_iT_2,	p21_iT
+p21_p27,	!AKT & !PIM & p21 & p21_p27_T
+p21_p27_T,	FOXO3 & p21_iT_2 | FOXO3 & p27_iT | p21_iT | p21_iT_2 & p27_iT
+p27_iT,	p27_iT
+p38,	AKT
+p53,	!MDM2 & PTEN & p38 | !MDM2 & PTEN_2 & p38 | !MDM2 & p38 & p53
+pRB,	CYCLINDc & !RB & cycE_CDK2 | CYCLINDc & !Rb_T | CYCLINDc_2 & cycE_CDK2 | !RB & !Rb_T | !Rb_T & cycE_CDK2
+pRB_2,	pRB
+pRB_3,	pRB_2
+pertuzumab,	0
+trastuzumab,	0
+Ran 100 iterations, generated 10000 models, mutated 92 functions. Elapsed: 0:24:52.805439
+
+-----modified functions-----
+start:AKT,	AKT & CyclinB1 & !Ipatasertib & PDK1_pm & PIP3 & PIP3_2 & mTORC2_pm
+final:AKT,	CyclinB1 & !Ipatasertib & PIP3_2 | CyclinB1 & PDK1_pm & PIP3_2 | !Ipatasertib & mTORC2_pm | PDK1_pm & PIP3 & PIP3_2 | PDK1_pm & mTORC2_pm | PIP3 & mTORC2_pm
+start:Apoptosis_X,	Apoptosis_X & BAD & BIM
+final:Apoptosis_X,	BAD & BIM
+start:Apoptosis_Y,	Apoptosis_Y & !BCL2 & !BCLXL & !MCL1
+final:Apoptosis_Y,	!BCL2 | !BCLXL & !MCL1
+start:Apoptosis_Z,	Apoptosis_Z & BAD & !BCL2 & !BCLXL & BIM & !MCL1
+final:Apoptosis_Z,	!BCLXL & !MCL1
+start:BAD,	!AKT & !ERK & !ERK_2 & !PAK1 & !PIM
+final:BAD,	!AKT & !ERK & !PIM | !AKT & !ERK_2 & !PAK1 & !PIM
+start:BAK1,	BID & BIM & !MCL1 & p53
+final:BAK1,	BID | BIM & p53 | !MCL1
+start:BAX,	BAX & BID & BIM & !MCL1 & p53
+final:BAX,	BAX & BIM | BID | BIM & p53
+start:BCL2,	!BAD & BCL2_T & !BIM & CREB1 & ERK & ERK_2 & ER_transcription_2 & !Navitoclax
+final:BCL2,	!BAD & BCL2_T & !BIM & !Navitoclax | !BAD & BCL2_T & CREB1 & ER_transcription_2 & !Navitoclax | !BAD & BCL2_T & ERK & !Navitoclax | !BAD & BCL2_T & ERK_2 & !Navitoclax | BCL2_T & !BIM & ERK & !Navitoclax | BCL2_T & !BIM & ER_transcription_2 & !Navitoclax | BCL2_T & CREB1 & ERK & !Navitoclax | BCL2_T & ERK & ERK_2 & !Navitoclax | BCL2_T & ERK_2 & ER_transcription_2 & !Navitoclax
+start:BCLXL,	!BAD & BCLXL_T & !BIM & CREB1 & !Navitoclax
+final:BCLXL,	!BAD & BCLXL_T & !BIM & !Navitoclax | BCLXL_T & CREB1 & !Navitoclax
+start:BIM,	!BCL2 & !BCLXL & BIM_T & !ERK_2 & FOXO1 & FOXO3
+final:BIM,	!BCL2 & FOXO3 | !BCLXL | BIM_T & FOXO1 | !ERK_2 & FOXO1 | !ERK_2 & FOXO3
+start:CASP3,	CASP8 & CASP9
+final:CASP3,	CASP8 | CASP9
+start:CASP8,	!ERK & !ERK_2 & FADD & !SRC
+final:CASP8,	!ERK & FADD | !ERK & !SRC | !ERK_2
+start:CASP9,	!AKT & CASP3 & CYCS & !ERK & !ERK_2 & !PRKACA
+final:CASP9,	!AKT & CASP3 & !ERK | !AKT & CYCS & !ERK | !AKT & !ERK & !ERK_2 & !PRKACA
+start:CDKN2A,	!MYC & !MYC_2
+final:CDKN2A,	!MYC | !MYC_2
+start:CREB1,	AKT & !PTEN & !PTEN_2 & SGK1
+final:CREB1,	AKT & !PTEN & SGK1 | !PTEN & !PTEN_2 & SGK1
+start:CTNNB1,	!DC & SRC & WNT1 & YAP1
+final:CTNNB1,	!DC & SRC & YAP1 | !DC & WNT1 & YAP1
+start:CYCLINDc,	CDK46 & !CDKN2A & CyclinD & CyclinD_2 & EIF4 & KMT2D & MYC & TCF7L2 & TEAD1
+final:CYCLINDc,	CDK46 & !CDKN2A & CyclinD & CyclinD_2 & MYC | CDK46 & !CDKN2A & CyclinD & EIF4
+start:CYCLINDc_2,	CDK46 & !CDKN2A & CYCLINDc & CyclinD_2 & TCF7L2 & TEAD1
+final:CYCLINDc_2,	CDK46 & CYCLINDc & CyclinD_2 & TEAD1
+start:CyclinD,	!GSK3B & JUN & RPS6 & S6K
+final:CyclinD,	!GSK3B | JUN
+start:CyclinD_2,	CyclinD & !GSK3B & JUN & RPS6
+final:CyclinD_2,	CyclinD & !GSK3B | CyclinD & RPS6
+start:E2F_3,	E2F_2 & E2F_3 & !RB
+final:E2F_3,	E2F_2 & E2F_3 | E2F_2 & !RB
+start:EGFRHER3c,	EGF & EGFR & HER3 & HER3_2 & NRG1 & !erlotinib
+final:EGFRHER3c,	EGF & EGFR & HER3 & NRG1 & !erlotinib
+start:EGFRc,	EGF & EGFR & HER2 & !Neratinib & !erlotinib
+final:EGFRc,	EGF & EGFR & !Neratinib | EGF & EGFR & !erlotinib
+start:ERK,	MEK & MEK_2
+final:ERK,	MEK
+start:ERK_2,	ERK & MEK & MEK_2
+final:ERK_2,	ERK
+start:ER_transcription_2,	ER_transcription & ESR1_2 & FOXA1 & KMT2D & PBX1
+final:ER_transcription_2,	ER_transcription & ESR1_2 & KMT2D | ER_transcription & ESR1_2 & PBX1 | ER_transcription & FOXA1
+start:ER_transcription_feedback,	ER_transcription & ER_transcription_2 & ER_transcription_feedback
+final:ER_transcription_feedback,	ER_transcription & ER_transcription_2 | ER_transcription & ER_transcription_feedback | ER_transcription_2 & ER_transcription_feedback
+start:ER_transcription_feedback_2,	ER_transcription_feedback & ER_transcription_feedback_1 & ER_transcription_feedback_2
+final:ER_transcription_feedback_2,	ER_transcription_feedback & ER_transcription_feedback_1
+start:ESR1,	AKT & ER & !ER_transcription_feedback & ES & FOXO3 & !Fulvestrant
+final:ESR1,	AKT & ES & FOXO3 & !Fulvestrant | ER & !ER_transcription_feedback & ES & FOXO3 & !Fulvestrant
+start:ESR1_2,	ER & !ER_transcription_feedback & !ER_transcription_feedback_2 & ES & ESR1 & FOXO3 & !Fulvestrant
+final:ESR1_2,	ER & ESR1 & !Fulvestrant
+start:FASLG,	FASLG & FOXO3
+final:FASLG,	FOXO3
+start:FOXO3_Ub,	ERK & ERK_2
+final:FOXO3_Ub,	ERK | ERK_2
+start:GRB2,	EGFRHER3c & EGFRc & HER2HER2c & HER2HER3c & HER2HER3c_2 & IRS1 & SRC
+final:GRB2,	EGFRHER3c & EGFRc & HER2HER3c & IRS1 | EGFRHER3c & EGFRc & IRS1 & SRC | EGFRHER3c & HER2HER2c & HER2HER3c & SRC | EGFRHER3c & HER2HER3c_2 | EGFRc & HER2HER2c & HER2HER3c_2 & IRS1 & SRC | HER2HER2c & HER2HER3c & HER2HER3c_2 & IRS1 | HER2HER2c & HER2HER3c & IRS1 & SRC | HER2HER3c & HER2HER3c_2 & IRS1 & SRC
+start:GSK3B,	!AKT & !ERK & !ERK_2 & GSK3B & p53
+final:GSK3B,	!AKT & !ERK & GSK3B & p53 | !AKT & !ERK_2 & GSK3B & p53
+start:HER2HER2c,	HER2 & !Neratinib & !erlotinib
+final:HER2HER2c,	HER2 & !Neratinib | HER2 & !erlotinib
+start:HER2HER3c,	HER2 & HER3 & HER3_2 & !MEK & !MEK_2 & !Neratinib & !erlotinib & !pertuzumab & !trastuzumab
+final:HER2HER3c,	HER2 & HER3 & HER3_2 & !MEK_2 & !Neratinib | HER2 & HER3 & HER3_2 & !Neratinib & !pertuzumab | HER2 & HER3 & HER3_2 & !Neratinib & !trastuzumab | HER2 & HER3 & !MEK & !MEK_2 & !erlotinib | HER2 & HER3 & !MEK & !MEK_2 & !trastuzumab | HER2 & HER3 & !MEK & !Neratinib & !trastuzumab | HER2 & HER3 & !MEK & !erlotinib & !trastuzumab | HER2 & HER3 & !MEK_2 & !Neratinib & !trastuzumab | HER2 & HER3 & !MEK_2 & !erlotinib & !trastuzumab | HER2 & HER3 & !Neratinib & !erlotinib | HER2 & HER3 & !Neratinib & !pertuzumab & !trastuzumab | HER2 & HER3 & !erlotinib & !pertuzumab & !trastuzumab
+start:HER2HER3c_2,	HER2 & HER2HER3c & HER3 & HER3_2 & !MEK & !MEK_2 & NRG1 & !Neratinib & !erlotinib & !pertuzumab & !trastuzumab
+final:HER2HER3c_2,	HER2 & HER2HER3c & HER3 & HER3_2 | HER2 & HER2HER3c & HER3 & !MEK | HER2 & HER2HER3c & HER3 & !MEK_2 & !Neratinib | HER2 & HER2HER3c & HER3 & !Neratinib & !trastuzumab | HER2 & HER2HER3c & HER3_2 & !MEK_2 & !pertuzumab | HER2 & HER2HER3c & !MEK & !pertuzumab | HER2 & HER2HER3c & !MEK_2 & !Neratinib & !erlotinib | HER2 & HER2HER3c & !Neratinib & !pertuzumab | HER2 & HER2HER3c & !erlotinib & !pertuzumab | HER2HER3c & HER3 & HER3_2 & NRG1 | HER2HER3c & HER3 & HER3_2 & !pertuzumab | HER2HER3c & HER3 & !MEK & NRG1 | HER2HER3c & HER3 & !MEK & !pertuzumab | HER2HER3c & HER3 & !MEK_2 & NRG1 | HER2HER3c & HER3 & !MEK_2 & !pertuzumab & !trastuzumab | HER2HER3c & HER3 & NRG1 & !pertuzumab | HER2HER3c & HER3 & NRG1 & !trastuzumab | HER2HER3c & HER3 & !Neratinib & !pertuzumab | HER2HER3c & HER3 & !erlotinib | HER2HER3c & HER3_2 & !MEK & NRG1 & !pertuzumab | HER2HER3c & HER3_2 & !MEK & !pertuzumab & !trastuzumab | HER2HER3c & HER3_2 & !MEK_2 & NRG1 & !pertuzumab | HER2HER3c & HER3_2 & !MEK_2 & !pertuzumab & !trastuzumab | HER2HER3c & HER3_2 & !Neratinib & !pertuzumab | HER2HER3c & HER3_2 & !erlotinib & !pertuzumab | HER2HER3c & !MEK & !MEK_2 & !pertuzumab | HER2HER3c & !MEK & NRG1 & !erlotinib & !pertuzumab | HER2HER3c & !MEK & NRG1 & !trastuzumab | HER2HER3c & !MEK & !Neratinib & !erlotinib & !pertuzumab | HER2HER3c & !MEK_2 & NRG1 & !pertuzumab & !trastuzumab | HER2HER3c & !MEK_2 & !Neratinib & !pertuzumab | HER2HER3c & !MEK_2 & !erlotinib & !trastuzumab | HER2HER3c & NRG1 & !Neratinib & !pertuzumab | HER2HER3c & NRG1 & !erlotinib & !pertuzumab & !trastuzumab | HER2HER3c & !Neratinib & !pertuzumab & !trastuzumab
+start:HER3,	FOXO3 & HER3_iT & !PTEN
+final:HER3,	FOXO3 | HER3_iT
+start:HRAS,	!NF1 & PI3K & PI3K_2 & PIP3 & PIP3_2 & SOS1
+final:HRAS,	!NF1 & PI3K & PI3K_2 & PIP3 & SOS1
+start:IGF1R,	ESR1 & FOXO3 & IGF1 & IGF1R_iT & INS & SRC
+final:IGF1R,	ESR1 & IGF1 & INS & SRC | FOXO3 | IGF1R_iT & INS
+start:IGF1R_2,	FOXO3 & HER2 & IGF1 & IGF1R & IGF1R_iT & IGF1R_iT_2 & INS & SRC
+final:IGF1R_2,	IGF1R
+start:JAK2,	ABL1 & IL6R
+final:JAK2,	ABL1 | IL6R
+start:MCL1,	ERK & ERK_2 & !GSK3B & MCL1_T & !S63845 & Translation
+final:MCL1,	ERK & ERK_2 & !GSK3B & !S63845 & Translation | ERK & !GSK3B & MCL1_T & !S63845 & Translation
+start:MDM2,	AKT & p53
+final:MDM2,	AKT | p53
+start:MEK,	PDK1_pm & RAF1 & RAF1_2 & !Trametinib
+final:MEK,	PDK1_pm & RAF1 & !Trametinib | RAF1 & RAF1_2
+start:MEK_2,	MEK & PDK1_pm & RAF1 & RAF1_2 & !Trametinib
+final:MEK_2,	MEK & RAF1_2 | MEK & !Trametinib
+start:MYC,	CTNNB1 & EIF4 & ERK & ERK_2 & ER_transcription & !GSK3B & KMT2D & PIM & STAT3
+final:MYC,	CTNNB1 & EIF4 & ERK & KMT2D | CTNNB1 & EIF4 & !GSK3B & PIM | CTNNB1 & ERK_2 & PIM | EIF4 & ERK & ER_transcription | EIF4 & ERK & !GSK3B | EIF4 & ER_transcription & !GSK3B | EIF4 & ER_transcription & KMT2D & PIM | EIF4 & ER_transcription & PIM & STAT3 | EIF4 & !GSK3B & KMT2D | EIF4 & KMT2D & PIM & STAT3 | ERK & ERK_2 | ERK & ER_transcription & !GSK3B & KMT2D | ERK & !GSK3B & KMT2D & PIM | ERK & STAT3 | ERK_2 & ER_transcription | ERK_2 & KMT2D | ER_transcription & !GSK3B & PIM
+start:MYC_2,	CTNNB1 & ERK & ERK_2 & ER_transcription_2 & !GSK3B & MYC & MYC_T & STAT3
+final:MYC_2,	ERK & ERK_2 & MYC
+start:MYC_targets,	MYC & MYC_2 & Translation
+final:MYC_targets,	MYC | Translation
+start:MYC_targets_2,	MYC & MYC_2 & MYC_targets & Translation
+final:MYC_targets_2,	MYC_targets & Translation
+start:MYOD1,	!ABL1 & !HES1 & !NF2
+final:MYOD1,	!HES1
+start:NEDD4L,	!PRKACA & !S6K & !SGK1
+final:NEDD4L,	!PRKACA & !S6K | !PRKACA & !SGK1 | !S6K & !SGK1
+start:NF1,	!TWIST1 & p53
+final:NF1,	!TWIST1
+start:NFKB,	HER3 & HER3_2 & NOTCH1 & PIM
+final:NFKB,	HER3_2 & PIM
+start:NOTCH1,	CTNNB1 & DLL & LCK & MDM2
+final:NOTCH1,	DLL & LCK & MDM2
+start:PAK2,	RAC1 & SRC
+final:PAK2,	RAC1 | SRC
+start:PAX7,	!MYOG & NOTCH1
+final:PAX7,	NOTCH1
+start:PDK1_pm,	PIP3 & PIP3_2
+final:PDK1_pm,	PIP3
+start:PI3K,	!Alpelisib & EGFRHER3c & ESR1 & HER2HER3c & HER2HER3c_2 & IRS1 & RAS & RAS_2 & RAS_3
+final:PI3K,	!Alpelisib | EGFRHER3c & RAS | EGFRHER3c & RAS_2 | ESR1 & RAS | ESR1 & RAS_2 | HER2HER3c & RAS | HER2HER3c & RAS_2 | HER2HER3c_2 | IRS1 & RAS | IRS1 & RAS_2 | RAS_2 & RAS_3
+start:PI3K_2,	!Alpelisib & EGFRHER3c & EGFRc & HER2HER3c_2 & IRS1 & PI3K
+final:PI3K_2,	!Alpelisib & IRS1 & PI3K
+start:PIP3,	PI3K & PI3K_2 & !PTEN & !PTEN_2
+final:PIP3,	PI3K | PI3K_2 & !PTEN_2 | !PTEN & !PTEN_2
+start:PIP3_2,	PI3K_2 & PIP3 & !PTEN & !PTEN_2
+final:PIP3_2,	PI3K_2 & PIP3 | PIP3 & !PTEN | PIP3 & !PTEN_2
+start:PRAS40,	!AKT & !PIM & PRAS40
+final:PRAS40,	!AKT & !PIM
+start:PRKAA2,	!PRKACA & STK11
+final:PRKAA2,	!PRKACA | STK11
+start:PTEN,	!GSK3B & PTEN & PTEN_T & !SRC
+final:PTEN,	!GSK3B & PTEN_T
+start:PTEN_2,	!GSK3B & PTEN & PTEN_T_2 & !SRC
+final:PTEN_2,	PTEN
+start:Proliferation,	E2F & E2F_2 & E2F_3 & MYC_targets
+final:Proliferation,	E2F_2 & MYC_targets
+start:Proliferation_2,	E2F_2 & E2F_3
+final:Proliferation_2,	E2F_3
+start:Proliferation_3,	E2F & E2F_2 & E2F_3 & MYC_targets_2
+final:Proliferation_3,	E2F & E2F_2 & MYC_targets_2 | E2F_2 & E2F_3 & MYC_targets_2
+start:RAC1,	!AKT & DVL1 & PI3K & PI3K_2
+final:RAC1,	!AKT & DVL1 & PI3K_2
+start:RAF1,	!ERK & !ERK_2 & HRAS & PIP3 & PIP3_2 & RAS & RAS_2 & RAS_3 & RPS6
+final:RAF1,	!ERK & !ERK_2 & PIP3_2 & RAS_2 | !ERK & !ERK_2 & PIP3_2 & RAS_3 & RPS6 | !ERK & HRAS & PIP3_2 | !ERK & PIP3_2 & RAS & RAS_2 | !ERK & PIP3_2 & RAS_2 & RAS_3 | !ERK & PIP3_2 & RAS_2 & RPS6 | !ERK & RAS & RPS6 | !ERK_2 & HRAS | !ERK_2 & PIP3_2 & RAS & RAS_2 | !ERK_2 & PIP3_2 & RAS & RAS_3 | HRAS & PIP3_2 & RAS | HRAS & PIP3_2 & RAS_2 | HRAS & RAS_3 | PIP3 & PIP3_2 | PIP3 & RAS | PIP3 & RPS6 | PIP3_2 & RAS & RAS_2 & RAS_3 | PIP3_2 & RAS & RPS6
+start:RAF1_2,	!ERK & !ERK_2 & HRAS & PIP3 & PIP3_2 & RAF1 & RAS & RAS_2 & RAS_3 & RPS6
+final:RAF1_2,	RAF1
+start:RAS,	PI3K & PIP3 & SOS1
+final:RAS,	PI3K | SOS1
+start:RAS_2,	RAS & SOS1
+final:RAS_2,	RAS
+start:RB,	!pRB & !pRB_2 & !pRB_3
+final:RB,	!pRB & !pRB_2 | !pRB_2 & !pRB_3
+start:S6K,	ERK & ERK_2 & mTORC1
+final:S6K,	ERK & mTORC1
+start:SRC,	ABL1 & PRKACA
+final:SRC,	PRKACA
+start:STAT1,	EGFRc & JAK2 & SRC
+final:STAT1,	EGFRc & SRC | JAK2 & SRC
+start:STAT3,	IL1B & JAK2 & SRC
+final:STAT3,	IL1B & JAK2 | SRC
+start:STK11,	!ERK & !ERK_2 & FOXO3
+final:STK11,	!ERK | FOXO3
+start:TSC2,	!AKT & !ERK & !ERK_2 & GSK3B & HER2 & PRKAA2 & !SGK1
+final:TSC2,	!AKT & !ERK & GSK3B & !SGK1 | !AKT & !ERK & PRKAA2 & !SGK1
+start:Translation,	EIF4 & S6K
+final:Translation,	EIF4
+start:cycE_CDK2_T,	E2F & E2F_2 & E2F_3
+final:cycE_CDK2_T,	E2F & E2F_2
+start:mTORC1,	!Everolimus & !PRAS40 & RHEB
+final:mTORC1,	!Everolimus | !PRAS40 | RHEB
+start:mTORC2_pm,	!Everolimus & PIP3 & PIP3_2
+final:mTORC2_pm,	!Everolimus & PIP3
+start:p21,	!AKT & !MYC & !MYC_2 & p21_iT & p21_iT_2
+final:p21,	!AKT & !MYC & !MYC_2 | !AKT & !MYC & p21_iT_2 | !AKT & !MYC_2 & p21_iT | !AKT & !MYC_2 & p21_iT_2 | !AKT & p21_iT & p21_iT_2
+start:p21_p27_T,	FOXO3 & p21_iT & p21_iT_2 & p27_iT
+final:p21_p27_T,	FOXO3 & p21_iT_2 | FOXO3 & p27_iT | p21_iT | p21_iT_2 & p27_iT
+start:p38,	AKT & p38
+final:p38,	AKT
+start:p53,	!MDM2 & PTEN & PTEN_2 & RB & p38 & p53
+final:p53,	!MDM2 & PTEN & p38 | !MDM2 & PTEN_2 & p38 | !MDM2 & p38 & p53
+start:pRB,	CYCLINDc & CYCLINDc_2 & !RB & !Rb_T & cycE_CDK2
+final:pRB,	CYCLINDc & !RB & cycE_CDK2 | CYCLINDc & !Rb_T | CYCLINDc_2 & cycE_CDK2 | !RB & !Rb_T | !Rb_T & cycE_CDK2
+start:pRB_2,	CYCLINDc & CYCLINDc_2 & !RB & !Rb_T & cycE_CDK2 & pRB
+final:pRB_2,	pRB
+start:pRB_3,	CYCLINDc_2 & !RB & !Rb_T & cycE_CDK2 & pRB_2
+final:pRB_3,	pRB_2

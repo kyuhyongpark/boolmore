@@ -8,7 +8,7 @@ CONFIG = "case_study/breast_cancer/BreastCancer_config.json"
 # RUN_NAME = "demo"
 RUN_NAME = None    # None → auto {start_stem}_{timestamp}
 SEED = 0
-CORE = 2
+CORE = 4
 
 # NAV CSV column names (same knobs as evaluate_model.py).
 # Set any of these to None to use import_NAV_exps defaults.
