@@ -121,7 +121,7 @@ N_SAMPLES_M3 = 1024
 N_TIME_STEPS: int | None = None  # None → 55*N + 6000
 T_WINDOW: int | None = None  # None → max(1000, T // 4)
 # Small GPUs (e.g. MX150) hit CUDA_ERROR_LAUNCH_OUT_OF_RESOURCES at (32, 32).
-THREADS_PER_BLOCK: tuple[int, int] = (8, 8)
+THREADS_PER_BLOCK: tuple[int, int] = (16, 16)
 
 SEED = 0
 MAX_FIXES: int | None = None
