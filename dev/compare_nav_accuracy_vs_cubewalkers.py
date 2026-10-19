@@ -682,7 +682,12 @@ def _print_pooled_delta_stats(
 ) -> tuple[pd.DataFrame, dict]:
     per_item = pooled_delta_entity_stats(cloud)
     df = pd.DataFrame({item_name: keys, **per_item})
-    df = df.sort_values("median_abs", ascending=False).reset_index(drop=True)
+    # Primary: median |Δ|; ties → mean |Δ|, max |Δ|, rmse; then name.
+    df = df.sort_values(
+        by=["median_abs", "mean_abs", "max_abs", "rmse", item_name],
+        ascending=[False, False, False, False, True],
+        kind="mergesort",
+    ).reset_index(drop=True)
     glob = summarize_across_entities(per_item)
     glob["n_items"] = len(keys)
     glob["n_pool_points"] = int(cloud.shape[1])
