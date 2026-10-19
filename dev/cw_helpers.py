@@ -2,7 +2,7 @@
 
 Not part of the installed ``boolmore`` package. Import from sibling scripts via::
 
-    from cw_helpers import require_cubewalkers, bootstrap_se, ...
+    from cw_helpers import require_cubewalkers, simulate_mean_nav, bootstrap_se, ...
 
 or, if the kernel cwd is not ``dev/``::
 
@@ -16,9 +16,10 @@ or, if the kernel cwd is not ``dev/``::
 
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Iterable, Sequence
 from pathlib import Path
 from time import perf_counter
+from typing import Any
 
 import numpy as np
 
@@ -115,16 +116,59 @@ def make_model_namer() -> Callable[[str], str]:
     return next_name
 
 
+def clamps_to_experiment(
+    clamps: Sequence[tuple[str, int]] | Iterable[tuple[str, int]] | None,
+) -> Any:
+    """Build a cubewalkers ``Experiment`` that permanently clamps each fix.
+
+    ``clamps`` is an iterable of ``(node, value)`` pairs (e.g. a boolmore
+    ``Assignment``). Empty / ``None`` → no experiment (``None``).
+    """
+    if not clamps:
+        return None
+    import cubewalkers as cw
+
+    lines = [f"{node},0,inf,{int(value)}" for node, value in clamps]
+    return cw.Experiment("\n".join(lines))
+
+
+def _build_model(
+    rules: str,
+    *,
+    n_time_steps: int,
+    n_walkers: int,
+    experiment: Any = None,
+    model_name: str | None = None,
+):
+    """Construct a ``cw.Model`` with optional permanent clamps."""
+    import cubewalkers as cw
+
+    model_kwargs: dict = {
+        "n_time_steps": n_time_steps,
+        "n_walkers": n_walkers,
+    }
+    if model_name is not None:
+        model_kwargs["model_name"] = model_name
+    return cw.Model(rules, experiment=experiment, **model_kwargs)
+
+
 def simulate_walker_nav(
     rules: str,
     *,
     n_time_steps: int,
     t_window: int,
     n_walkers: int,
+    clamps: Sequence[tuple[str, int]] | Iterable[tuple[str, int]] | None = None,
     threads_per_block: tuple[int, int] = DEFAULT_THREADS_PER_BLOCK,
     model_name: str | None = None,
 ) -> tuple[np.ndarray, list[str], dict[str, float]]:
-    """Run an empty-clamp ensemble; return per-walker NAV and split timings.
+    """Run an ensemble; return per-walker NAV and split timings.
+
+    Parameters
+    ----------
+    clamps
+        Optional permanent interventions ``(node, value)``. ``None`` / empty
+        → unclamped ensemble.
 
     Returns
     -------
@@ -145,14 +189,16 @@ def simulate_walker_nav(
     if t_window > n_time_steps or t_window < 1:
         raise ValueError(f"T_WINDOW={t_window} must be in [1, T={n_time_steps}]")
 
+    experiment = clamps_to_experiment(clamps)
+
     t0 = perf_counter()
-    model_kwargs: dict = {
-        "n_time_steps": n_time_steps,
-        "n_walkers": n_walkers,
-    }
-    if model_name is not None:
-        model_kwargs["model_name"] = model_name
-    model = cw.Model(rules, experiment=None, **model_kwargs)
+    model = _build_model(
+        rules,
+        n_time_steps=n_time_steps,
+        n_walkers=n_walkers,
+        experiment=experiment,
+        model_name=model_name,
+    )
     cp.cuda.Device().synchronize()
     t_setup = perf_counter() - t0
 
@@ -183,6 +229,76 @@ def simulate_walker_nav(
         "t_total": float(t_setup + t_simulate + t_reduce),
     }
     return walker_nav, varnames, timings
+
+
+def simulate_mean_nav(
+    rules: str,
+    *,
+    n_time_steps: int,
+    t_window: int,
+    n_walkers: int,
+    clamps: Sequence[tuple[str, int]] | Iterable[tuple[str, int]] | None = None,
+    threads_per_block: tuple[int, int] = DEFAULT_THREADS_PER_BLOCK,
+    model_name: str | None = None,
+) -> tuple[dict[str, float], dict[str, float]]:
+    """Run an ensemble with ``averages_only``; return mean NAV dict + timings.
+
+    Same clamping / horizon conventions as :func:`simulate_walker_nav`, but
+    keeps only the walker-averaged trajectories (cheap enough for many
+    intervention loops).
+
+    Returns
+    -------
+    nav : dict[str, float]
+        Time-window mean activity per node (cubewalkers varname order).
+    timings : dict with t_setup, t_simulate, t_reduce, t_total
+    """
+    import cubewalkers as cw
+    import cupy as cp
+
+    if t_window > n_time_steps or t_window < 1:
+        raise ValueError(f"T_WINDOW={t_window} must be in [1, T={n_time_steps}]")
+
+    experiment = clamps_to_experiment(clamps)
+
+    t0 = perf_counter()
+    model = _build_model(
+        rules,
+        n_time_steps=n_time_steps,
+        n_walkers=n_walkers,
+        experiment=experiment,
+        model_name=model_name,
+    )
+    cp.cuda.Device().synchronize()
+    t_setup = perf_counter() - t0
+
+    t0 = perf_counter()
+    model.simulate_ensemble(
+        T_window=t_window,
+        averages_only=True,
+        maskfunction=cw.update_schemes.asynchronous,
+        threads_per_block=threads_per_block,
+    )
+    cp.cuda.Device().synchronize()
+    t_simulate = perf_counter() - t0
+
+    t0 = perf_counter()
+    traj = model.trajectories  # (T_window, N)
+    means_gpu = traj.mean(axis=0)
+    means = cp.asnumpy(means_gpu).astype(np.float64, copy=False)
+    nav = {name: float(means[i]) for i, name in enumerate(model.varnames)}
+    del traj, means_gpu, model
+    cp.get_default_memory_pool().free_all_blocks()
+    cp.cuda.Device().synchronize()
+    t_reduce = perf_counter() - t0
+
+    timings = {
+        "t_setup": float(t_setup),
+        "t_simulate": float(t_simulate),
+        "t_reduce": float(t_reduce),
+        "t_total": float(t_setup + t_simulate + t_reduce),
+    }
+    return nav, timings
 
 
 def bootstrap_se(
@@ -261,7 +377,7 @@ def diff_summary(diff: np.ndarray, se: np.ndarray) -> dict[str, float]:
 
 
 def format_timings(timings: dict[str, float]) -> str:
-    """Format split wall-time dict from :func:`simulate_walker_nav`."""
+    """Format split wall-time dict from simulate_* helpers."""
     return (
         f"setup={timings['t_setup']:.3f}s  "
         f"simulate={timings['t_simulate']:.3f}s  "

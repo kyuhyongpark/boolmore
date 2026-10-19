@@ -26,26 +26,13 @@
 #
 # ## WSL CUDA setup (required for method 1)
 #
-# Cubewalkers needs an NVIDIA GPU visible inside WSL2, plus CuPy.
+# 1. Windows: NVIDIA driver with WSL2 GPU support (`nvidia-smi` in PowerShell)
+# 2. WSL: CUDA toolkit matching the driver major version
+# 3. `pip install cupy-cuda12x` (or `cupy-cuda11x`) and
+#    `pip install git+https://github.com/jcrozum/cubewalkers`
 #
-# 1. **Windows host**: install a current NVIDIA Game Ready / Studio driver with
-#    WSL2 GPU support. Confirm `nvidia-smi` works in PowerShell.
-# 2. **WSL2 Ubuntu**: install a CUDA toolkit that matches the driver major
-#    version (NVIDIA's WSL CUDA packages are fine). Example for CUDA 12:
-#    follow https://docs.nvidia.com/cuda/wsl-user-guide/
-# 3. **Python env** (same env as boolmore):
-#    ```bash
-#    pip install cupy-cuda12x   # or cupy-cuda11x — match your CUDA major
-#    pip install git+https://github.com/jcrozum/cubewalkers
-#    ```
-# 4. **Sanity check** in WSL:
-#    ```bash
-#    nvidia-smi
-#    python -c "import cupy as cp; print(cp.cuda.runtime.getDeviceCount())"
-#    python -c "import cubewalkers as cw; m=cw.Model('A, !A\nB, A'); m.n_walkers=8; m.n_time_steps=5; m.simulate_ensemble(); print(m.trajectories.shape)"
-#    ```
-#
-# This notebook **fails fast** if CuPy / cubewalkers / a CUDA device is missing.
+# This notebook **fails fast** if CuPy / cubewalkers / a CUDA device is missing
+# (see ``cw_helpers.require_cubewalkers``).
 
 # %%
 from __future__ import annotations
@@ -86,6 +73,18 @@ from boolmore.io.nav import import_NAV_exps
 from boolmore.io.paths import project_root
 from boolmore.types import Assignment
 
+# Sibling helpers are not on the editable install; keep ``dev/`` importable.
+_DEV = Path(__file__).resolve().parent
+if str(_DEV) not in sys.path:
+    sys.path.insert(0, str(_DEV))
+
+from cw_helpers import (
+    DEFAULT_THREADS_PER_BLOCK,
+    bnet_rules_for_cubewalkers,
+    require_cubewalkers,
+    simulate_mean_nav,
+)
+
 # %% [markdown]
 # ## Config
 
@@ -121,7 +120,7 @@ N_SAMPLES_M3 = 1024
 N_TIME_STEPS: int | None = None  # None → 55*N + 6000
 T_WINDOW: int | None = None  # None → max(1000, T // 4)
 # Small GPUs (e.g. MX150) hit CUDA_ERROR_LAUNCH_OUT_OF_RESOURCES at (32, 32).
-THREADS_PER_BLOCK: tuple[int, int] = (16, 16)
+THREADS_PER_BLOCK: tuple[int, int] = DEFAULT_THREADS_PER_BLOCK
 
 SEED = 0
 MAX_FIXES: int | None = None
@@ -140,63 +139,6 @@ if os.environ.get("SMOKE") == "1":
 # ## CUDA / cubewalkers gate (fail-fast)
 
 # %%
-_CUDA_HELP = """
-Cubewalkers ground truth requires CUDA + CuPy inside WSL2.
-
-Setup checklist:
-  1. Windows: NVIDIA driver with WSL2 GPU support (`nvidia-smi` in PowerShell)
-  2. WSL: CUDA toolkit matching the driver major version
-  3. pip install cupy-cuda12x   # or cupy-cuda11x
-  4. pip install git+https://github.com/jcrozum/cubewalkers
-  5. Re-run nvidia-smi / cupy device count / tiny cubewalkers smoke test
-""".strip()
-
-
-def require_cubewalkers():
-    """Import cubewalkers and verify a CUDA device is available."""
-    try:
-        import cupy as cp
-    except ImportError as exc:
-        raise SystemExit(
-            f"CuPy is not installed.\n\n{_CUDA_HELP}\n\nOriginal error: {exc}"
-        ) from exc
-
-    try:
-        n_dev = int(cp.cuda.runtime.getDeviceCount())
-    except Exception as exc:  # noqa: BLE001 — surface any CUDA init failure
-        raise SystemExit(
-            f"CUDA runtime failed.\n\n{_CUDA_HELP}\n\nOriginal error: {exc}"
-        ) from exc
-
-    if n_dev < 1:
-        raise SystemExit(f"No CUDA devices visible (count={n_dev}).\n\n{_CUDA_HELP}")
-
-    try:
-        import cubewalkers as cw
-    except ImportError as exc:
-        raise SystemExit(
-            "cubewalkers is not installed.\n"
-            "  pip install git+https://github.com/jcrozum/cubewalkers\n\n"
-            f"{_CUDA_HELP}\n\nOriginal error: {exc}"
-        ) from exc
-
-    # Tiny kernel compile + simulate to catch broken installs early.
-    try:
-        probe = cw.Model("A, !A\nB, A", n_time_steps=2, n_walkers=4)
-        probe.simulate_ensemble(
-            T_window=1,
-            averages_only=True,
-            maskfunction=cw.update_schemes.asynchronous,
-        )
-    except Exception as exc:  # noqa: BLE001
-        raise SystemExit(
-            f"cubewalkers smoke simulation failed.\n\n{_CUDA_HELP}\n\n"
-            f"Original error: {exc}"
-        ) from exc
-
-    return cw, cp
-
-
 cw, cp = require_cubewalkers()
 print(f"CUDA devices: {cp.cuda.runtime.getDeviceCount()}")
 print(f"cubewalkers: {getattr(cw, '__file__', cw)}")
@@ -247,33 +189,7 @@ print()
 
 # %%
 primes = load_primes(PKL)
-
-
-def _bnet_rules_for_cubewalkers(path: Path) -> str:
-    """Load a BoolNet ``.bnet``, dropping the ``targets, factors`` header row.
-
-    Cubewalkers would otherwise treat ``targets`` as a node whose rule is
-    the undefined identifier ``factors``.
-    """
-    lines: list[str] = []
-    for line in path.read_text(encoding="utf-8").splitlines():
-        stripped = line.strip()
-        if not stripped:
-            continue
-        if stripped.lower().replace("\t", " ").replace(" ", "") in {
-            "targets,factors",
-            "targets,factors,",
-        }:
-            continue
-        # Also match "targets,\tfactors" style loosely
-        left = stripped.split(",", 1)[0].strip().lower()
-        if left == "targets":
-            continue
-        lines.append(line)
-    return "\n".join(lines) + "\n"
-
-
-BNET_RULES = _bnet_rules_for_cubewalkers(BNET)
+BNET_RULES = bnet_rules_for_cubewalkers(BNET)
 experiments = import_NAV_exps(
     DATA,
     id_col=ID_COL,
@@ -435,46 +351,6 @@ def timed(fn, *args, **kwargs):
     return result, perf_counter() - t0
 
 
-def fixes_to_experiment(fixes: Assignment):
-    """Build a cubewalkers Experiment that permanently clamps each fix."""
-    if not fixes:
-        return None
-    lines = [f"{node},0,inf,{int(value)}" for node, value in fixes]
-    return cw.Experiment("\n".join(lines))
-
-
-def nav_from_cubewalkers(
-    rules: str,
-    fixes: Assignment,
-    *,
-    n_time_steps: int,
-    t_window: int,
-    n_walkers: int,
-    threads_per_block: tuple[int, int] = THREADS_PER_BLOCK,
-) -> dict[str, float]:
-    """Simulate ensemble NAV under clamped interventions."""
-    experiment = fixes_to_experiment(fixes)
-    model = cw.Model(
-        rules,
-        experiment=experiment,
-        n_time_steps=n_time_steps,
-        n_walkers=n_walkers,
-    )
-    model.simulate_ensemble(
-        T_window=t_window,
-        averages_only=True,
-        maskfunction=cw.update_schemes.asynchronous,
-        threads_per_block=threads_per_block,
-    )
-    traj = model.trajectories
-    # averages_only → shape (T_window, n_variables); mean over time window
-    if hasattr(traj, "get"):
-        traj = traj.get()
-    traj = np.asarray(traj, dtype=float)
-    means = traj.mean(axis=0)
-    return {name: float(means[i]) for i, name in enumerate(model.varnames)}
-
-
 def discover_entity_bases(node_names: list[str], experiments) -> list[str]:
     """Bases with ≥2 siblings, plus bases behind observed ``*_avg`` names."""
     bases: set[str] = set()
@@ -566,21 +442,21 @@ times_m1: dict[Assignment, float] = {}
 
 print(f"Running method 1 (cubewalkers) on {len(unique_fixes)} fixes...")
 for i, fixes in enumerate(unique_fixes, 1):
-    nav, dt = timed(
-        nav_from_cubewalkers,
+    nav, timings = simulate_mean_nav(
         BNET_RULES,
-        fixes,
+        clamps=fixes,
         n_time_steps=N_TIME_STEPS,
         t_window=T_WINDOW,
         n_walkers=N_WALKERS,
+        threads_per_block=THREADS_PER_BLOCK,
     )
     # Align keys to primes node set (cubewalkers varname order may differ)
     preds_m1[fixes] = {n: float(nav[n]) for n in node_names}
-    times_m1[fixes] = dt
+    times_m1[fixes] = timings["t_total"]
     x = meta_by_fixes[fixes]["n_unfixed_sources"]
     print(
         f"  [{i}/{len(unique_fixes)}] x={x}  "
-        f"t={dt:.3f}s  {format_fixes(fixes)}"
+        f"t={timings['t_total']:.3f}s  {format_fixes(fixes)}"
     )
 
 print(
