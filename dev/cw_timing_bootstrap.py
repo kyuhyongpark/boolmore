@@ -69,17 +69,17 @@ PLOT_DIR.mkdir(parents=True, exist_ok=True)
 # Practical baseline / sweep base (paper-scale is optional — see RUN_PAPER_BASELINE).
 # Full traj is (T_window, N, W) bools; paper defaults can be ~1–2 GB on device.
 N_WALKERS = 2048
-N_TIME_STEPS = 10000
-T_WINDOW = 2000
+N_TIME_STEPS = 16505
+T_WINDOW = 4126
 
 # Sweep base (held fixed while varying one axis).
-SWEEP_WALKERS = 512
-SWEEP_T = 5000
-SWEEP_WINDOW = 500
+SWEEP_WALKERS = 2048
+SWEEP_T = 16505
+SWEEP_WINDOW = 4126
 
 WALKERS_GRID = [64, 128, 256, 512, 1024, 2048]
-T_GRID = [2000, 4000, 6000, 8000, 10000]
-WINDOW_GRID = [50, 100, 250, 500, 1000, 2000]
+T_GRID = [2000, 4000, 6000, 8000, 10000, 12000, 14000, 16505]
+WINDOW_GRID = [50, 100, 250, 500, 1000, 2000, 4126]
 
 THREADS_PER_BLOCK: tuple[int, int] = (16, 16)
 SEED = 0
