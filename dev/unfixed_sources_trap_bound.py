@@ -10,12 +10,20 @@
 # %%
 from __future__ import annotations
 
+import sys
 from collections import Counter
+from pathlib import Path
 
 import pandas as pd
 
 from boolmore.io.load import import_NAV_exps, load_primes
 from boolmore.io.paths import project_root
+
+_DEV = Path(__file__).resolve().parent
+if str(_DEV) not in sys.path:
+    sys.path.insert(0, str(_DEV))
+
+from nav_helpers import analyze_fixes, source_nodes_from_primes
 
 # %%
 ROOT = project_root()
@@ -49,9 +57,7 @@ primes_bnet = load_primes(BNET)
 assert primes_pkl == primes_bnet, "pkl and bnet primes differ"
 primes = primes_pkl
 
-source_nodes = sorted(
-    node for node in primes if primes[node] == [[{node: 0}], [{node: 1}]]
-)
+source_nodes = source_nodes_from_primes(primes)
 source_set = set(source_nodes)
 
 print(f"Model nodes : {len(primes)}")
@@ -76,22 +82,6 @@ print(f"Distinct fixes  : {len(unique_fixes)}")
 # ## Per-fix source coverage and `2**x` lower bound
 
 # %%
-def analyze_fixes(fixes, source_set: set[str]) -> dict:
-    fixed_nodes = {node for node, _ in fixes}
-    fixed_sources = sorted(fixed_nodes & source_set)
-    unfixed_sources = sorted(source_set - fixed_nodes)
-    x = len(unfixed_sources)
-    return {
-        "n_fixes": len(fixes),
-        "n_fixed_sources": len(fixed_sources),
-        "n_unfixed_sources": x,
-        "min_trap_lower_bound": 2**x,
-        "fixed_sources": fixed_sources,
-        "unfixed_sources": unfixed_sources,
-        "fixes": fixes,
-    }
-
-
 rows = [analyze_fixes(fixes, source_set) for fixes in unique_fixes]
 df = pd.DataFrame(rows)
 

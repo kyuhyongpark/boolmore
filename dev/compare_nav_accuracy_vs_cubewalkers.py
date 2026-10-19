@@ -40,7 +40,6 @@ from __future__ import annotations
 import math
 import os
 import random
-import re
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
@@ -55,19 +54,10 @@ import numpy as np
 import pandas as pd
 
 from boolmore.boolean_functions import assignment_to_dict
-from boolmore.evaluation.agreement import (
-    _AVG_SUFFIX,
-    _average_related_values,
-    _related_node_names,
-)
 from boolmore.evaluation.nav_score import get_NAV_scores
 from boolmore.evaluation.score import get_model_score
 from boolmore.inference.asp_backend import ensure_asp_backend
-from boolmore.inference.prediction import (
-    NAVPrediction,
-    _nav_from_ldoi,
-    _nav_from_min_traps,
-)
+from boolmore.inference.prediction import _nav_from_ldoi
 from boolmore.io.load import load_primes
 from boolmore.io.nav import import_NAV_exps
 from boolmore.io.paths import project_root
@@ -83,6 +73,21 @@ from cw_helpers import (
     bnet_rules_for_cubewalkers,
     require_cubewalkers,
     simulate_mean_nav,
+)
+from nav_helpers import (
+    Tee,
+    analyze_fixes,
+    discover_entity_bases,
+    entity_average_nav,
+    format_fixes,
+    nav_from_sampled_sources,
+    nav_vector_metrics,
+    n_unfixed_sources,
+    sample_source_indices,
+    source_nodes_from_primes,
+    timed,
+    timing_summary_line,
+    to_nav_predictions,
 )
 
 # %% [markdown]
@@ -147,23 +152,6 @@ print(f"cubewalkers: {getattr(cw, '__file__', cw)}")
 # ## Logging
 
 # %%
-class Tee:
-    """Write to stdout and a log file."""
-
-    def __init__(self, *streams):
-        self.streams = streams
-
-    def write(self, data: str) -> int:
-        for stream in self.streams:
-            stream.write(data)
-            stream.flush()
-        return len(data)
-
-    def flush(self) -> None:
-        for stream in self.streams:
-            stream.flush()
-
-
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 LOG_PATH = LOG_DIR / f"compare_nav_accuracy_vs_cw_{RUN_ID}.log"
 PLOT_TIME = LOG_DIR / f"compare_nav_accuracy_vs_cw_timing_{RUN_ID}.png"
@@ -199,9 +187,7 @@ experiments = import_NAV_exps(
     fixes_cols=FIXES_COLS,
 )
 
-source_nodes = sorted(
-    node for node in primes if primes[node] == [[{node: 0}], [{node: 1}]]
-)
+source_nodes = source_nodes_from_primes(primes)
 source_set = set(source_nodes)
 node_names = sorted(primes)
 
@@ -213,13 +199,10 @@ if T_WINDOW is None:
 assert T_WINDOW <= N_TIME_STEPS
 
 _all_unique = list({exp.fixes for exp in experiments})
-
-
-def _n_unfixed(fixes: Assignment) -> int:
-    return len(source_set - {node for node, _ in fixes})
-
-
-unique_fixes = sorted(_all_unique, key=lambda f: (_n_unfixed(f), len(f), f))
+unique_fixes = sorted(
+    _all_unique,
+    key=lambda f: (n_unfixed_sources(f, source_set), len(f), f),
+)
 if MAX_FIXES is not None:
     unique_fixes = unique_fixes[:MAX_FIXES]
 
@@ -239,165 +222,6 @@ print(f"cubewalkers T={N_TIME_STEPS}  T_WINDOW={T_WINDOW}  walkers={N_WALKERS}")
 print()
 
 ensure_asp_backend()
-
-# %% [markdown]
-# ## Helpers
-
-# %%
-def analyze_fixes(fixes: Assignment, source_set: set[str]) -> dict:
-    fixed_nodes = {node for node, _ in fixes}
-    fixed_sources = sorted(fixed_nodes & source_set)
-    unfixed_sources = sorted(source_set - fixed_nodes)
-    x = len(unfixed_sources)
-    return {
-        "fixes": fixes,
-        "n_fixes": len(fixes),
-        "n_fixed_sources": len(fixed_sources),
-        "n_unfixed_sources": x,
-        "min_trap_lower_bound": 2**x,
-        "fixed_sources": fixed_sources,
-        "unfixed_sources": unfixed_sources,
-    }
-
-
-def format_fixes(fixes: Assignment, max_len: int = 60) -> str:
-    if not fixes:
-        s = "(none)"
-    else:
-        s = "{" + ", ".join(f"{n}={v}" for n, v in fixes) + "}"
-    if len(s) > max_len:
-        return s[: max_len - 3] + "..."
-    return s
-
-
-def decode_source_index(
-    index: int,
-    unfixed: list[str],
-    fixed_sources: dict[str, int],
-) -> dict[str, int]:
-    """Map an integer in ``[0, 2**x)`` to a full source assignment."""
-    assignment = dict(fixed_sources)
-    x = len(unfixed)
-    for j, name in enumerate(unfixed):
-        bit = (index >> (x - 1 - j)) & 1
-        assignment[name] = bit
-    return assignment
-
-
-def sample_source_indices(x: int, n_samples: int, rng: random.Random) -> list[int]:
-    """Without-replacement sample of source-combination indices."""
-    total = 2**x
-    n = min(n_samples, total)
-    return rng.sample(range(total), n)
-
-
-def merge_perturbation(
-    fixes: Assignment,
-    source_assignment: dict[str, int],
-) -> dict[str, int]:
-    """Intervention dict plus full source assignment (sources override)."""
-    pert = assignment_to_dict(fixes)
-    pert.update(source_assignment)
-    return pert
-
-
-def average_nav_dicts(navs: list[dict[str, float]]) -> dict[str, float]:
-    if not navs:
-        raise ValueError("no NAV dicts to average")
-    nodes = navs[0].keys()
-    n = len(navs)
-    return {node: sum(d[node] for d in navs) / n for node in nodes}
-
-
-def nav_from_sampled_sources(
-    primes: dict,
-    fixes: Assignment,
-    unfixed: list[str],
-    fixed_sources: dict[str, int],
-    indices: list[int],
-    method: str,
-) -> dict[str, float]:
-    """Average NAV over source combinations (method: 'min_traps' | 'ldoi')."""
-    nav_fn = _nav_from_min_traps if method == "min_traps" else _nav_from_ldoi
-    navs: list[dict[str, float]] = []
-    for idx in indices:
-        sources = decode_source_index(idx, unfixed, fixed_sources)
-        pert = merge_perturbation(fixes, sources)
-        navs.append(nav_fn(primes, pert))
-    return average_nav_dicts(navs)
-
-
-def nav_vector_metrics(
-    a: dict[str, float],
-    b: dict[str, float],
-    nodes: list[str] | None = None,
-) -> dict[str, float]:
-    if nodes is None:
-        nodes = sorted(a.keys())
-    diffs = [abs(a[n] - b[n]) for n in nodes]
-    if not diffs:
-        return {"mae": 0.0, "rmse": 0.0, "max_abs": 0.0}
-    arr = np.asarray(diffs, dtype=float)
-    return {
-        "mae": float(arr.mean()),
-        "rmse": float(np.sqrt(np.mean(arr**2))),
-        "max_abs": float(arr.max()),
-    }
-
-
-def timed(fn, *args, **kwargs):
-    t0 = perf_counter()
-    result = fn(*args, **kwargs)
-    return result, perf_counter() - t0
-
-
-def discover_entity_bases(node_names: list[str], experiments) -> list[str]:
-    """Bases with ≥2 siblings, plus bases behind observed ``*_avg`` names."""
-    bases: set[str] = set()
-    for exp in experiments:
-        obs = exp.observed
-        if obs.endswith(_AVG_SUFFIX):
-            base = obs[: -len(_AVG_SUFFIX)]
-            if base and _related_node_names(base, node_names):
-                bases.add(base)
-
-    # Also any multi-sibling group in the model (Base / Base_2 / …)
-    suffix_re = re.compile(r"^(.+?)_(?:\d+|[X-Z])$")
-    candidates: set[str] = set(node_names)
-    for name in node_names:
-        m = suffix_re.match(name)
-        if m:
-            candidates.add(m.group(1))
-    for base in candidates:
-        related = _related_node_names(base, node_names)
-        if len(related) >= 2:
-            bases.add(base)
-
-    return sorted(bases)
-
-
-def entity_average_nav(
-    nav: dict[str, float],
-    bases: list[str],
-) -> dict[str, float]:
-    """Map each entity base → mean of sibling node NAVs."""
-    out: dict[str, float] = {}
-    for base in bases:
-        avg_name = f"{base}{_AVG_SUFFIX}"
-        val = _average_related_values(nav, avg_name)
-        if val is None:
-            raise ValueError(f"entity average for {base!r} hit a None sibling NAV")
-        out[base] = float(val)
-    return out
-
-
-def to_nav_predictions(
-    preds: dict[Assignment, dict[str, float]],
-) -> dict[Assignment, NAVPrediction]:
-    return {
-        fixes: NAVPrediction(fixes=fixes, average_values=avg)
-        for fixes, avg in preds.items()
-    }
 
 # %% [markdown]
 # ## Unfixed-source analysis
@@ -596,19 +420,9 @@ for fixes in unique_fixes:
 cmp_df = pd.DataFrame(cmp_rows)
 
 
-def _timing_line(label: str, vals: list[float]) -> str:
-    if not vals:
-        return f"  {label}: skipped / empty"
-    return (
-        f"  {label}: n={len(vals)}  total={sum(vals):.3f}s  "
-        f"mean={np.mean(vals):.4f}s  median={np.median(vals):.4f}s  "
-        f"max={max(vals):.3f}s"
-    )
-
-
 print("=== Timing summary ===")
 for label, tdict in method_times.items():
-    print(_timing_line(label, list(tdict.values())))
+    print(timing_summary_line(label, list(tdict.values())))
 print()
 
 print("=== Metric 1: per-node NAV vs m1 (mean over fixes) ===")

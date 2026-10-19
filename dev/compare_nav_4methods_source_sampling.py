@@ -39,15 +39,31 @@ from boolmore.boolean_functions import assignment_to_dict
 from boolmore.evaluation.nav_score import get_NAV_scores
 from boolmore.evaluation.score import get_model_score
 from boolmore.inference.asp_backend import ensure_asp_backend
-from boolmore.inference.prediction import (
-    NAVPrediction,
-    _nav_from_ldoi,
-    _nav_from_min_traps,
-)
+from boolmore.inference.prediction import _nav_from_ldoi, _nav_from_min_traps
 from boolmore.io.nav import import_NAV_exps
 from boolmore.io.load import load_primes
 from boolmore.io.paths import project_root
 from boolmore.types import Assignment
+
+# Sibling helpers are not on the editable install; keep ``dev/`` importable.
+_DEV = Path(__file__).resolve().parent
+if str(_DEV) not in sys.path:
+    sys.path.insert(0, str(_DEV))
+
+from nav_helpers import (
+    Tee,
+    analyze_fixes,
+    format_fixes,
+    nav_from_sampled_sources,
+    nav_vector_metrics,
+    n_unfixed_sources,
+    sample_size_grid,
+    sample_source_indices,
+    source_nodes_from_primes,
+    timed,
+    timing_summary_line,
+    to_nav_predictions,
+)
 
 # %% [markdown]
 # ## Config
@@ -117,25 +133,7 @@ if os.environ.get("SMOKE") == "1":
 # %% [markdown]
 # ## Logging
 
-
 # %%
-class Tee:
-    """Write to stdout and a log file."""
-
-    def __init__(self, *streams):
-        self.streams = streams
-
-    def write(self, data: str) -> int:
-        for stream in self.streams:
-            stream.write(data)
-            stream.flush()
-        return len(data)
-
-    def flush(self) -> None:
-        for stream in self.streams:
-            stream.flush()
-
-
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 LOG_PATH = LOG_DIR / f"compare_nav_4methods_{RUN_ID}.log"
 PLOT_CONV = LOG_DIR / f"compare_nav_4methods_convergence_{RUN_ID}.png"
@@ -175,20 +173,15 @@ experiments = import_NAV_exps(
     fixes_cols=FIXES_COLS,
 )
 
-source_nodes = sorted(
-    node for node in primes if primes[node] == [[{node: 0}], [{node: 1}]]
-)
+source_nodes = source_nodes_from_primes(primes)
 source_set = set(source_nodes)
 
 _all_unique = list({exp.fixes for exp in experiments})
-
-
-def _n_unfixed(fixes: Assignment) -> int:
-    return len(source_set - {node for node, _ in fixes})
-
-
 # Prefer fewer free sources first (method 1 cheaper / more likely eligible).
-unique_fixes = sorted(_all_unique, key=lambda f: (_n_unfixed(f), len(f), f))
+unique_fixes = sorted(
+    _all_unique,
+    key=lambda f: (n_unfixed_sources(f, source_set), len(f), f),
+)
 if MAX_FIXES is not None:
     unique_fixes = unique_fixes[:MAX_FIXES]
 
@@ -209,143 +202,13 @@ print()
 ensure_asp_backend()
 
 # %% [markdown]
-# ## Helpers
-
-
-# %%
-def analyze_fixes(fixes: Assignment, source_set: set[str]) -> dict:
-    fixed_nodes = {node for node, _ in fixes}
-    fixed_sources = sorted(fixed_nodes & source_set)
-    unfixed_sources = sorted(source_set - fixed_nodes)
-    x = len(unfixed_sources)
-    return {
-        "fixes": fixes,
-        "n_fixes": len(fixes),
-        "n_fixed_sources": len(fixed_sources),
-        "n_unfixed_sources": x,
-        "min_trap_lower_bound": 2**x,
-        "fixed_sources": fixed_sources,
-        "unfixed_sources": unfixed_sources,
-        "run_method1": x <= MAX_UNFIXED_M1,
-    }
-
-
-def format_fixes(fixes: Assignment, max_len: int = 60) -> str:
-    if not fixes:
-        s = "(none)"
-    else:
-        s = "{" + ", ".join(f"{n}={v}" for n, v in fixes) + "}"
-    if len(s) > max_len:
-        return s[: max_len - 3] + "..."
-    return s
-
-
-def decode_source_index(
-    index: int,
-    unfixed: list[str],
-    fixed_sources: dict[str, int],
-) -> dict[str, int]:
-    """Map an integer in ``[0, 2**x)`` to a full source assignment."""
-    assignment = dict(fixed_sources)
-    x = len(unfixed)
-    for j, name in enumerate(unfixed):
-        bit = (index >> (x - 1 - j)) & 1
-        assignment[name] = bit
-    return assignment
-
-
-def sample_source_indices(x: int, n_samples: int, rng: random.Random) -> list[int]:
-    """Without-replacement sample of source-combination indices.
-
-    Always shuffled (including full enumeration). Sequential ``0 .. 2**x-1``
-    order would keep high-order source bits constant on nested prefixes, so
-    Δprev would hit 0.5 artifactually on every power-of-two doubling.
-    """
-    total = 2**x
-    n = min(n_samples, total)
-    return rng.sample(range(total), n)
-
-
-def sample_size_grid(requested: list[int], x: int) -> list[int]:
-    """Stability sample sizes for a fix with ``x`` free sources.
-
-    Keeps requested sizes in ``[1, 2**x]``. If the grid's maximum is at least
-    ``2**x``, also include ``2**x`` so full enumeration is the last grid point
-    (no separate full-enum parameter).
-    """
-    if not requested:
-        return []
-    total = 2**x
-    sizes = {s for s in requested if 1 <= s <= total}
-    if total <= max(requested):
-        sizes.add(total)
-    return sorted(sizes)
-
-
-def merge_perturbation(
-    fixes: Assignment,
-    source_assignment: dict[str, int],
-) -> dict[str, int]:
-    """Intervention dict plus full source assignment (sources override)."""
-    pert = assignment_to_dict(fixes)
-    pert.update(source_assignment)
-    return pert
-
-
-def average_nav_dicts(navs: list[dict[str, float]]) -> dict[str, float]:
-    if not navs:
-        raise ValueError("no NAV dicts to average")
-    nodes = navs[0].keys()
-    n = len(navs)
-    return {node: sum(d[node] for d in navs) / n for node in nodes}
-
-
-def nav_from_sampled_sources(
-    primes: dict,
-    fixes: Assignment,
-    unfixed: list[str],
-    fixed_sources: dict[str, int],
-    indices: list[int],
-    method: str,
-) -> dict[str, float]:
-    """Average NAV over source combinations (method: 'min_traps' | 'ldoi')."""
-    nav_fn = _nav_from_min_traps if method == "min_traps" else _nav_from_ldoi
-    navs: list[dict[str, float]] = []
-    for idx in indices:
-        sources = decode_source_index(idx, unfixed, fixed_sources)
-        pert = merge_perturbation(fixes, sources)
-        navs.append(nav_fn(primes, pert))
-    return average_nav_dicts(navs)
-
-
-def nav_vector_metrics(
-    a: dict[str, float],
-    b: dict[str, float],
-    nodes: list[str] | None = None,
-) -> dict[str, float]:
-    if nodes is None:
-        nodes = sorted(a.keys())
-    diffs = [abs(a[n] - b[n]) for n in nodes]
-    if not diffs:
-        return {"mae": 0.0, "rmse": 0.0, "max_abs": 0.0}
-    arr = np.asarray(diffs, dtype=float)
-    return {
-        "mae": float(arr.mean()),
-        "rmse": float(np.sqrt(np.mean(arr**2))),
-        "max_abs": float(arr.max()),
-    }
-
-
-def timed(fn, *args, **kwargs):
-    t0 = perf_counter()
-    result = fn(*args, **kwargs)
-    return result, perf_counter() - t0
-
-# %% [markdown]
 # ## Unfixed-source analysis and method-1 eligibility
 
 # %%
-meta_rows = [analyze_fixes(fixes, source_set) for fixes in unique_fixes]
+meta_rows = [
+    analyze_fixes(fixes, source_set, max_unfixed_m1=MAX_UNFIXED_M1)
+    for fixes in unique_fixes
+]
 meta_df = pd.DataFrame(meta_rows)
 meta_df["exp_ids"] = [ids_by_fixes[f] for f in meta_df["fixes"]]
 meta_df["n_exps"] = meta_df["exp_ids"].map(len)
@@ -802,19 +665,9 @@ for fixes in unique_fixes:
 
 cmp_df = pd.DataFrame(cmp_rows)
 
-def _timing_line(label: str, vals: list[float]) -> str:
-    if not vals:
-        return f"  {label}: skipped / empty"
-    return (
-        f"  {label}: n={len(vals)}  total={sum(vals):.3f}s  "
-        f"mean={np.mean(vals):.4f}s  median={np.median(vals):.4f}s  "
-        f"max={max(vals):.3f}s"
-    )
-
-
 print("=== Timing summary (all unique fixes where each method ran) ===")
 for label, tdict in method_times.items():
-    print(_timing_line(label, list(tdict.values())))
+    print(timing_summary_line(label, list(tdict.values())))
 print()
 
 # Apples-to-apples: only the fixes where method 1 succeeded
@@ -824,7 +677,7 @@ print(
 )
 for label, tdict in method_times.items():
     vals = [tdict[f] for f in m1_fixes if f in tdict]
-    print(_timing_line(label, vals))
+    print(timing_summary_line(label, vals))
 if m1_fixes and times_m1:
     t1 = sum(times_m1[f] for f in m1_fixes)
     t2 = sum(times_m2[f] for f in m1_fixes)
@@ -937,15 +790,6 @@ print()
 # Method 1 only if every fix was eligible. Skipped when `MAX_FIXES` truncates.
 
 # %%
-def to_nav_predictions(
-    preds: dict[Assignment, dict[str, float]],
-) -> dict[Assignment, NAVPrediction]:
-    return {
-        fixes: NAVPrediction(fixes=fixes, average_values=avg)
-        for fixes, avg in preds.items()
-    }
-
-
 all_data_fixes = {exp.fixes for exp in experiments}
 can_score = MAX_FIXES is None and set(unique_fixes) == all_data_fixes
 
