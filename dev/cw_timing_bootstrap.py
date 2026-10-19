@@ -376,6 +376,21 @@ def _format_timings(timings: dict[str, float]) -> str:
     )
 
 
+_NAV_GUIDES = (0.0, 0.25, 0.5, 0.75, 1.0)
+
+
+def _draw_nav_guidelines(ax) -> None:
+    """Light vertical guides at common NAV reference values."""
+    for x in _NAV_GUIDES:
+        ax.axvline(
+            x,
+            color="#B0B0B0",
+            linestyle=":",
+            linewidth=0.8,
+            zorder=0,
+        )
+
+
 # %% [markdown]
 # ## Warm-up (discarded)
 #
@@ -451,6 +466,7 @@ if RUN_PAPER_BASELINE:
 plot_df = baseline_df.sort_values("mean")
 fig, ax = plt.subplots(figsize=(10, max(4, 0.12 * len(plot_df))))
 y = np.arange(len(plot_df))
+_draw_nav_guidelines(ax)
 ax.errorbar(
     plot_df["mean"],
     y,
@@ -461,6 +477,7 @@ ax.errorbar(
     capsize=1.5,
     color="#2C5F7C",
     ecolor="#7A9EAD",
+    zorder=2,
 )
 ax.set_yticks(y)
 ax.set_yticklabels(plot_df["node"], fontsize=6)
@@ -752,6 +769,7 @@ def _plot_sweep_nav_overlay(
     y = np.arange(len(varnames))
 
     fig, ax = plt.subplots(figsize=(10, max(4, 0.12 * len(varnames))))
+    _draw_nav_guidelines(ax)
     n = len(points)
     # Small vertical jitter so overlapping settings remain visible.
     jitter = np.zeros(1) if n == 1 else 0.55 * np.linspace(-0.5, 0.5, n)
@@ -771,6 +789,7 @@ def _plot_sweep_nav_overlay(
             ecolor=color,
             alpha=0.85,
             label=pt["label"],
+            zorder=2,
         )
     ax.set_yticks(y)
     ax.set_yticklabels(varnames, fontsize=6)
