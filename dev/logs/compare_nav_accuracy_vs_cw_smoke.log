@@ -1,0 +1,192 @@
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_nav_accuracy_vs_cw_smoke.log
+started (UTC): 2026-10-19T14:29:15.544185+00:00
+model pkl:  /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/20261016_173102/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.pkl
+model bnet: /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/20261016_173102/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.bnet
+data:       /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/breast_cancer_data_trial.csv
+N_WALKERS=64  N_SAMPLES_M2=4  N_SAMPLES_M3=8
+N_BOOT=40  BOOT_CHUNK=20
+THREADS_PER_BLOCK=(16, 16)
+SEED=0  MAX_FIXES=2  HIERARCHY=True  SMOKE=True
+
+Model nodes : 191
+Source nodes: 24
+  ['ABL2', 'BCL2_T', 'BCLXL_T', 'BIM_T', 'DLL', 'EGF', 'ER', 'ES', 'HER3_iT', 'IGF1', 'IGF1R_iT', 'INS', 'LCK', 'MCL1_T', 'MYC_T', 'NRG1', 'PBX1', 'PDK1_ic', 'PTEN_T', 'Rb_T', 'SGK1_T', 'WNT1', 'p21_iT', 'p27_iT']
+Experiments : 697
+Unique fixes: 2 (capped by MAX_FIXES)
+cubewalkers T=200  T_WINDOW=50  walkers=64
+
+Unfixed source histogram:
+ n_unfixed_sources (x)  n_distinct_fixes  min_trap_lower_bound (2**x)
+                     6                 2                           64
+Unfixed sources — min 6, median 6, max 6
+
+Entities (161): 24 merged + 137 singletons
+  merged bases: ['Apoptosis', 'CYCLINDc', 'CyclinD', 'E2F', 'ERK', 'ER_transcription', 'ER_transcription_feedback', 'ESR1', 'HER2HER3c', 'HER3', 'IGF1R', 'IGF1R_iT', 'MEK', 'MYC', 'MYC_targets', 'PI3K', 'PIP3', 'PTEN', 'PTEN_T', 'Proliferation', 'RAF1', 'RAS', 'p21_iT', 'pRB']
+
+Running m1–m4 + bootstrap on 2 fixes (N_BOOT=40, BOOT_CHUNK=20)...
+  [2/2] x=6  cum m1=14.3s  m2=0.8s  m3=0.1s  m4=0.0s  {ABL2=0, Alpelisib=1, BCLXL_T=0, BIM_T=1, DLL=1, ER=1, ES...
+Methods done: m1=14.321s  m2=0.773s  m3=0.054s  m4=0.006s
+
+=== Timing summary ===
+  m1: n=2  total=14.321s  mean=7.1607s  median=7.1607s  max=7.760s
+  m2: n=2  total=0.773s  mean=0.3867s  median=0.3867s  max=0.402s
+  m3: n=2  total=0.054s  mean=0.0271s  median=0.0271s  max=0.028s
+  m4: n=2  total=0.006s  mean=0.0029s  median=0.0029s  max=0.003s
+
+=== Metric 1: per-node NAV vs m1 (mean over fixes) ===
+  m2: RMSE=0.3859  MAE=0.3324  max|Δ|=0.7802
+  m3: RMSE=0.2037  MAE=0.1550  max|Δ|=0.6559
+  m4: RMSE=0.1916  MAE=0.1456  max|Δ|=0.5766
+
+=== Metric 1 by unfixed-source bin ===
+  nav_m2_rmse:
+        count      mean    median
+x_bin                            
+(0, 8]      2  0.385884  0.385884
+
+  nav_m3_rmse:
+        count      mean    median
+x_bin                            
+(0, 8]      2  0.203746  0.203746
+
+  nav_m4_rmse:
+        count      mean    median
+x_bin                            
+(0, 8]      2  0.191642  0.191642
+
+=== Metric 2: full-entity NAV vs m1 (mean over fixes) ===
+  entities (161): 24 merged + 137 singletons
+  m2: RMSE=0.3794  MAE=0.3268  max|Δ|=0.7802
+  m3: RMSE=0.2077  MAE=0.1585  max|Δ|=0.6559
+  m4: RMSE=0.1924  MAE=0.1454  max|Δ|=0.5692
+
+=== Bootstrap SE (over entities, then mean over fixes) ===
+  median_se_m1: mean=0.05524  median=0.05524
+  mean_se_m1: mean=0.04803  median=0.04803
+  median_se_m2: mean=0.00000  median=0.00000
+  mean_se_m2: mean=0.00555  median=0.00555
+  median_se_m3: mean=0.00000  median=0.00000
+  mean_se_m3: mean=0.00939  median=0.00939
+  median_se_m4: mean=0.00000  median=0.00000
+  mean_se_m4: mean=0.00000  median=0.00000
+  median_se_delta_m2: mean=0.05535  median=0.05535
+  mean_se_delta_m2: mean=0.05241  median=0.05241
+  median_se_delta_m3: mean=0.05565  median=0.05565
+  mean_se_delta_m3: mean=0.05351  median=0.05351
+  median_se_delta_m4: mean=0.05524  median=0.05524
+  mean_se_delta_m4: mean=0.04803  median=0.04803
+
+Skipping hierarchy scores (need all fixes; MAX_FIXES=2, predicted=2, data=172)
+
+=== Pooled (fix × boot) node Δ = method − m1 ===
+  m2 vs m1 (nodes)  (n_pool=80 per node):
+    per-node median_|Δ|: mean=0.3331  median=0.3464  max=0.7594
+    per-node mean_|Δ|:   mean=0.3347  median=0.3531  max=0.7554
+    per-node max_|Δ|:    mean=0.4830  median=0.5147  max=0.8812
+    per-node rmse:      mean=0.3422  median=0.3577  max=0.7576
+    per-node mean_signed Δ: mean=-0.0666  median=-0.1835
+    top-5 nodes by median_|Δ|:
+      FOXO3: median_|Δ|=0.7594  mean_|Δ|=0.7554  max_|Δ|=0.8712  rmse=0.7576
+      MYOG: median_|Δ|=0.7253  mean_|Δ|=0.6998  max_|Δ|=0.8812  rmse=0.7072
+      TSC2: median_|Δ|=0.7156  mean_|Δ|=0.7003  max_|Δ|=0.8137  rmse=0.7029
+      p21_p27: median_|Δ|=0.7083  mean_|Δ|=0.7011  max_|Δ|=0.8438  rmse=0.7059
+      PI3K: median_|Δ|=0.6827  mean_|Δ|=0.6802  max_|Δ|=0.7834  rmse=0.6820
+
+  m3 vs m1 (nodes)  (n_pool=80 per node):
+    per-node median_|Δ|: mean=0.1586  median=0.1456  max=0.5755
+    per-node mean_|Δ|:   mean=0.1629  median=0.1512  max=0.5660
+    per-node max_|Δ|:    mean=0.3104  median=0.3006  max=0.8575
+    per-node rmse:      mean=0.1763  median=0.1681  max=0.5691
+    per-node mean_signed Δ: mean=-0.0196  median=+0.0000
+    top-5 nodes by median_|Δ|:
+      MYC_targets_2: median_|Δ|=0.5755  mean_|Δ|=0.5660  max_|Δ|=0.6747  rmse=0.5691
+      EIF4: median_|Δ|=0.5625  mean_|Δ|=0.5572  max_|Δ|=0.7456  rmse=0.5611
+      TRADD: median_|Δ|=0.5450  mean_|Δ|=0.5507  max_|Δ|=0.7344  rmse=0.5570
+      MYOG: median_|Δ|=0.4939  mean_|Δ|=0.4850  max_|Δ|=0.8575  rmse=0.5471
+      Translation: median_|Δ|=0.4925  mean_|Δ|=0.4911  max_|Δ|=0.6359  rmse=0.4951
+
+  m4 vs m1 (nodes)  (n_pool=80 per node):
+    per-node median_|Δ|: mean=0.1484  median=0.1252  max=0.5755
+    per-node mean_|Δ|:   mean=0.1517  median=0.1345  max=0.5660
+    per-node max_|Δ|:    mean=0.2847  median=0.2875  max=0.7456
+    per-node rmse:      mean=0.1627  median=0.1506  max=0.5691
+    per-node mean_signed Δ: mean=-0.0155  median=+0.0000
+    top-5 nodes by median_|Δ|:
+      MYC_targets_2: median_|Δ|=0.5755  mean_|Δ|=0.5660  max_|Δ|=0.6747  rmse=0.5691
+      EIF4: median_|Δ|=0.5625  mean_|Δ|=0.5572  max_|Δ|=0.7456  rmse=0.5611
+      TRADD: median_|Δ|=0.5450  mean_|Δ|=0.5507  max_|Δ|=0.7344  rmse=0.5570
+      Translation: median_|Δ|=0.4925  mean_|Δ|=0.4911  max_|Δ|=0.6359  rmse=0.4951
+      CDK46: median_|Δ|=0.4650  mean_|Δ|=0.4729  max_|Δ|=0.6600  rmse=0.4770
+
+=== Pooled (fix × boot) entity Δ = method − m1 ===
+  m2 vs m1 (entities)  (n_pool=80 per entity):
+    per-entity median_|Δ|: mean=0.3280  median=0.3464  max=0.7594
+    per-entity mean_|Δ|:   mean=0.3297  median=0.3504  max=0.7554
+    per-entity max_|Δ|:    mean=0.4744  median=0.5134  max=0.8812
+    per-entity rmse:      mean=0.3369  median=0.3550  max=0.7576
+    per-entity mean_signed Δ: mean=-0.0622  median=-0.1845
+    top-5 entities by median_|Δ|:
+      FOXO3: median_|Δ|=0.7594  mean_|Δ|=0.7554  max_|Δ|=0.8712  rmse=0.7576
+      MYOG: median_|Δ|=0.7253  mean_|Δ|=0.6998  max_|Δ|=0.8812  rmse=0.7072
+      TSC2: median_|Δ|=0.7156  mean_|Δ|=0.7003  max_|Δ|=0.8137  rmse=0.7029
+      p21_p27: median_|Δ|=0.7083  mean_|Δ|=0.7011  max_|Δ|=0.8438  rmse=0.7059
+      CASP9: median_|Δ|=0.6763  mean_|Δ|=0.6539  max_|Δ|=0.8228  rmse=0.6585
+
+  m3 vs m1 (entities)  (n_pool=80 per entity):
+    per-entity median_|Δ|: mean=0.1621  median=0.1502  max=0.5625
+    per-entity mean_|Δ|:   mean=0.1660  median=0.1523  max=0.5572
+    per-entity max_|Δ|:    mean=0.3124  median=0.3116  max=0.8575
+    per-entity rmse:      mean=0.1792  median=0.1631  max=0.5611
+    per-entity mean_signed Δ: mean=-0.0305  median=+0.0000
+    top-5 entities by median_|Δ|:
+      EIF4: median_|Δ|=0.5625  mean_|Δ|=0.5572  max_|Δ|=0.7456  rmse=0.5611
+      TRADD: median_|Δ|=0.5450  mean_|Δ|=0.5507  max_|Δ|=0.7344  rmse=0.5570
+      MYOG: median_|Δ|=0.4939  mean_|Δ|=0.4850  max_|Δ|=0.8575  rmse=0.5471
+      Translation: median_|Δ|=0.4925  mean_|Δ|=0.4911  max_|Δ|=0.6359  rmse=0.4951
+      MYC_targets: median_|Δ|=0.4651  mean_|Δ|=0.4687  max_|Δ|=0.5845  rmse=0.4717
+
+  m4 vs m1 (entities)  (n_pool=80 per entity):
+    per-entity median_|Δ|: mean=0.1483  median=0.1250  max=0.5625
+    per-entity mean_|Δ|:   mean=0.1512  median=0.1309  max=0.5572
+    per-entity max_|Δ|:    mean=0.2806  median=0.2822  max=0.7456
+    per-entity rmse:      mean=0.1618  median=0.1506  max=0.5611
+    per-entity mean_signed Δ: mean=-0.0244  median=+0.0000
+    top-5 entities by median_|Δ|:
+      EIF4: median_|Δ|=0.5625  mean_|Δ|=0.5572  max_|Δ|=0.7456  rmse=0.5611
+      TRADD: median_|Δ|=0.5450  mean_|Δ|=0.5507  max_|Δ|=0.7344  rmse=0.5570
+      Translation: median_|Δ|=0.4925  mean_|Δ|=0.4911  max_|Δ|=0.6359  rmse=0.4951
+      MYC_targets: median_|Δ|=0.4651  mean_|Δ|=0.4687  max_|Δ|=0.5845  rmse=0.4717
+      CDK46: median_|Δ|=0.4650  mean_|Δ|=0.4729  max_|Δ|=0.6600  rmse=0.4770
+
+Wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_nav_accuracy_vs_cw_timing_smoke.png
+Wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_nav_accuracy_vs_cw_rmse_smoke.png
+Wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_nav_accuracy_vs_cw_delta_box_node_m2_smoke.png
+Wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_nav_accuracy_vs_cw_delta_box_entity_m2_smoke.png
+Wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_nav_accuracy_vs_cw_delta_box_node_m3_smoke.png
+Wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_nav_accuracy_vs_cw_delta_box_entity_m3_smoke.png
+Wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_nav_accuracy_vs_cw_delta_box_node_m4_smoke.png
+Wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_nav_accuracy_vs_cw_delta_box_entity_m4_smoke.png
+
+=== Summary ===
+  Unique fixes: 2
+  Entities: 161 (24 merged)
+  m1 cubewalkers: walkers=64  T=200  window=50
+  m2 min_traps+sample: N_SAMPLES_M2=4
+  m3 ldoi+sample: N_SAMPLES_M3=8
+  bootstrap: N_BOOT=40  BOOT_CHUNK=20
+  m4 ldoi: all fixes
+  Total times (s): m1=14.32  m2=0.77  m3=0.05  m4=0.01
+  Mean NAV RMSE m2 vs m1: 0.3859
+  Mean entity RMSE m2 vs m1: 0.3794
+  Pooled node Δ m2: mean(median_|Δ|)=0.3331  mean(rmse)=0.3422  max(max_|Δ|)=0.8812
+  Pooled entity Δ m2: mean(median_|Δ|)=0.3280  mean(rmse)=0.3369  max(max_|Δ|)=0.8812
+  Mean NAV RMSE m3 vs m1: 0.2037
+  Mean entity RMSE m3 vs m1: 0.2077
+  Pooled node Δ m3: mean(median_|Δ|)=0.1586  mean(rmse)=0.1763  max(max_|Δ|)=0.8575
+  Pooled entity Δ m3: mean(median_|Δ|)=0.1621  mean(rmse)=0.1792  max(max_|Δ|)=0.8575
+  Mean NAV RMSE m4 vs m1: 0.1916
+  Mean entity RMSE m4 vs m1: 0.1924
+  Pooled node Δ m4: mean(median_|Δ|)=0.1484  mean(rmse)=0.1627  max(max_|Δ|)=0.7456
+  Pooled entity Δ m4: mean(median_|Δ|)=0.1483  mean(rmse)=0.1618  max(max_|Δ|)=0.7456
+  Log: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_nav_accuracy_vs_cw_smoke.log
+finished (UTC): 2026-10-19T14:31:45.671191+00:00

@@ -301,6 +301,20 @@ def simulate_mean_nav(
     return nav, timings
 
 
+def align_walker_nav(
+    walker_nav: np.ndarray,
+    varnames: Sequence[str],
+    node_names: Sequence[str],
+) -> np.ndarray:
+    """Reorder ``(n_nodes, n_walkers)`` rows from ``varnames`` to ``node_names``."""
+    index = {name: i for i, name in enumerate(varnames)}
+    try:
+        rows = [index[n] for n in node_names]
+    except KeyError as exc:
+        raise KeyError(f"node {exc.args[0]!r} missing from cubewalkers varnames") from exc
+    return walker_nav[rows, :]
+
+
 def bootstrap_se(
     walker_nav: np.ndarray,
     *,

@@ -6,7 +6,7 @@
 #
 # **Methods** (per unique intervention `fixes`):
 #
-# 1. **m1 — cubewalkers GT** — clamp interventions, sample 2000 initial states,
+# 1. **m1 — cubewalkers GT** — clamp interventions, sample walkers,
 #    async ensemble, average node values over a late time window
 # 2. **m2 — min_traps + sample sources** — sample up to 32 free-source
 #    combinations → minimal trap spaces NAV → equal-weight average
@@ -14,13 +14,25 @@
 #    combinations → LDOI NAV → equal-weight average
 # 4. **m4 — ldoi** — LDOI on interventions only (no source sampling)
 #
+# **Bootstrap** (per fix, then discarded — peak memory stays per-fix):
+#
+# - m1: walker resample → SE and boot replicates
+# - m2 / m3: resample over drawn source-sample NAVs
+# - m4: deterministic (SE = 0; SE(Δ) = SE(m1))
+# - Δ = method − m1 via independent two-sample bootstrap
+#   (`std(boot_method − boot_m1)`)
+#
 # **Accuracy metrics** (m2 / m3 / m4 vs m1):
 #
 # 1. Per-node NAV (RMSE / MAE / max|Δ| over all model nodes)
-# 2. Entity-averaged NAV (sibling means, e.g. Proliferation / `_2` / `_3`)
+# 2. Full-entity NAV (merged sibling means + singleton nodes)
 # 3. Hierarchy score closeness to m1 (`Δscore`, `Δ(score/max)`)
+# 4. Pooled (fix × bootstrap) Δ clouds → separate node-by-node and
+#    entity-by-entity box plots + per-item / global |Δ| / RMSE / bias stats
 #
-# Prints to stdout and writes a timestamped log (+ plots) under `dev/logs/`.
+# Prints to stdout and writes a log (+ plots) under `dev/logs/` (overwritten
+# each full run). ``SMOKE=1`` writes separate ``*_smoke`` artifacts so it does
+# not clobber full-run outputs.
 #
 # ---
 #
@@ -69,22 +81,31 @@ if str(_DEV) not in sys.path:
     sys.path.insert(0, str(_DEV))
 
 from cw_helpers import (
+    DEFAULT_BOOT_CHUNK,
+    DEFAULT_N_BOOT,
     DEFAULT_THREADS_PER_BLOCK,
+    align_walker_nav,
     bnet_rules_for_cubewalkers,
+    bootstrap_se,
+    diff_from_boot,
     require_cubewalkers,
-    simulate_mean_nav,
+    simulate_walker_nav,
 )
 from nav_helpers import (
     Tee,
     analyze_fixes,
-    discover_entity_bases,
-    entity_average_nav,
+    bootstrap_sample_mean,
+    discover_full_entities,
+    entity_from_node_array,
+    entity_nav_dict,
     format_fixes,
-    nav_from_sampled_sources,
+    nav_samples_from_sources,
     nav_vector_metrics,
     n_unfixed_sources,
+    pooled_delta_entity_stats,
     sample_source_indices,
     source_nodes_from_primes,
+    summarize_across_entities,
     timed,
     timing_summary_line,
     to_nav_predictions,
@@ -105,7 +126,6 @@ PKL = MODEL_STEM.with_suffix(".pkl")
 BNET = MODEL_STEM.with_suffix(".bnet")
 DATA = CASE / "breast_cancer_data_trial.csv"
 LOG_DIR = Path(__file__).resolve().parent / "logs"
-RUN_ID = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
 ID_COL = "id"
 WEIGHT_COL = "Weight"
@@ -118,7 +138,7 @@ FIXES_COLS = (
     "Additional features of the cell population",
 )
 
-N_WALKERS = 2000
+N_WALKERS = 2048
 N_SAMPLES_M2 = 32
 N_SAMPLES_M3 = 1024
 # Paper-style horizon; set explicitly below after N is known, or override here.
@@ -127,18 +147,25 @@ T_WINDOW: int | None = None  # None → max(1000, T // 4)
 # Small GPUs (e.g. MX150) hit CUDA_ERROR_LAUNCH_OUT_OF_RESOURCES at (32, 32).
 THREADS_PER_BLOCK: tuple[int, int] = DEFAULT_THREADS_PER_BLOCK
 
+N_BOOT = DEFAULT_N_BOOT
+BOOT_CHUNK = DEFAULT_BOOT_CHUNK
+
 SEED = 0
 MAX_FIXES: int | None = None
 HIERARCHY = True
 
-# Optional: `SMOKE=1` for a tiny end-to-end check.
-if os.environ.get("SMOKE") == "1":
+# Optional: `SMOKE=1` for a tiny end-to-end check (separate output filenames).
+SMOKE = os.environ.get("SMOKE") == "1"
+OUT_TAG = "_smoke" if SMOKE else ""
+if SMOKE:
     MAX_FIXES = 2
     N_WALKERS = 64
     N_SAMPLES_M2 = 4
     N_SAMPLES_M3 = 8
     N_TIME_STEPS = 200
     T_WINDOW = 50
+    N_BOOT = 40
+    BOOT_CHUNK = 20
 
 # %% [markdown]
 # ## CUDA / cubewalkers gate (fail-fast)
@@ -153,10 +180,18 @@ print(f"cubewalkers: {getattr(cw, '__file__', cw)}")
 
 # %%
 LOG_DIR.mkdir(parents=True, exist_ok=True)
-LOG_PATH = LOG_DIR / f"compare_nav_accuracy_vs_cw_{RUN_ID}.log"
-PLOT_TIME = LOG_DIR / f"compare_nav_accuracy_vs_cw_timing_{RUN_ID}.png"
-PLOT_RMSE = LOG_DIR / f"compare_nav_accuracy_vs_cw_rmse_{RUN_ID}.png"
-PLOT_SCORE = LOG_DIR / f"compare_nav_accuracy_vs_cw_score_gap_{RUN_ID}.png"
+LOG_PATH = LOG_DIR / f"compare_nav_accuracy_vs_cw{OUT_TAG}.log"
+PLOT_TIME = LOG_DIR / f"compare_nav_accuracy_vs_cw_timing{OUT_TAG}.png"
+PLOT_RMSE = LOG_DIR / f"compare_nav_accuracy_vs_cw_rmse{OUT_TAG}.png"
+PLOT_SCORE = LOG_DIR / f"compare_nav_accuracy_vs_cw_score_gap{OUT_TAG}.png"
+PLOT_DELTA_NODE = {
+    lab: LOG_DIR / f"compare_nav_accuracy_vs_cw_delta_box_node_{lab}{OUT_TAG}.png"
+    for lab in ("m2", "m3", "m4")
+}
+PLOT_DELTA_ENTITY = {
+    lab: LOG_DIR / f"compare_nav_accuracy_vs_cw_delta_box_entity_{lab}{OUT_TAG}.png"
+    for lab in ("m2", "m3", "m4")
+}
 
 _log_file = LOG_PATH.open("w", encoding="utf-8")
 _stdout = sys.stdout
@@ -168,8 +203,9 @@ print(f"model pkl:  {PKL}")
 print(f"model bnet: {BNET}")
 print(f"data:       {DATA}")
 print(f"N_WALKERS={N_WALKERS}  N_SAMPLES_M2={N_SAMPLES_M2}  N_SAMPLES_M3={N_SAMPLES_M3}")
+print(f"N_BOOT={N_BOOT}  BOOT_CHUNK={BOOT_CHUNK}")
 print(f"THREADS_PER_BLOCK={THREADS_PER_BLOCK}")
-print(f"SEED={SEED}  MAX_FIXES={MAX_FIXES}  HIERARCHY={HIERARCHY}")
+print(f"SEED={SEED}  MAX_FIXES={MAX_FIXES}  HIERARCHY={HIERARCHY}  SMOKE={SMOKE}")
 print()
 
 # %% [markdown]
@@ -224,7 +260,7 @@ print()
 ensure_asp_backend()
 
 # %% [markdown]
-# ## Unfixed-source analysis
+# ## Unfixed-source analysis + entities
 
 # %%
 meta_rows = [analyze_fixes(fixes, source_set) for fixes in unique_fixes]
@@ -253,82 +289,45 @@ print(
 )
 print()
 
-ENTITY_BASES = discover_entity_bases(node_names, experiments)
-print(f"Entity bases ({len(ENTITY_BASES)}): {ENTITY_BASES}")
+MERGED_BASES, ENTITY_KEYS = discover_full_entities(node_names, experiments)
+MERGED_SET = set(MERGED_BASES)
+print(
+    f"Entities ({len(ENTITY_KEYS)}): "
+    f"{len(MERGED_BASES)} merged + "
+    f"{len(ENTITY_KEYS) - len(MERGED_BASES)} singletons"
+)
+print(f"  merged bases: {MERGED_BASES}")
 print()
 
 # %% [markdown]
-# ## Method 1 — cubewalkers ground truth
+# ## Per-fix methods + bootstrap (m1 / m2 / m3 / m4)
+#
+# One loop keeps peak memory per-fix: walker arrays and source-sample
+# matrices are discarded after each intervention's Δ cloud block is stored.
 
 # %%
+rng_sources = random.Random(SEED)
+rng_boot = np.random.default_rng(SEED + 1)
+
 preds_m1: dict[Assignment, dict[str, float]] = {}
-times_m1: dict[Assignment, float] = {}
-
-print(f"Running method 1 (cubewalkers) on {len(unique_fixes)} fixes...")
-for i, fixes in enumerate(unique_fixes, 1):
-    nav, timings = simulate_mean_nav(
-        BNET_RULES,
-        clamps=fixes,
-        n_time_steps=N_TIME_STEPS,
-        t_window=T_WINDOW,
-        n_walkers=N_WALKERS,
-        threads_per_block=THREADS_PER_BLOCK,
-    )
-    # Align keys to primes node set (cubewalkers varname order may differ)
-    preds_m1[fixes] = {n: float(nav[n]) for n in node_names}
-    times_m1[fixes] = timings["t_total"]
-    x = meta_by_fixes[fixes]["n_unfixed_sources"]
-    print(
-        f"  [{i}/{len(unique_fixes)}] x={x}  "
-        f"t={timings['t_total']:.3f}s  {format_fixes(fixes)}"
-    )
-
-print(
-    f"Method 1 done: n={len(preds_m1)}, "
-    f"total={sum(times_m1.values()):.3f}s, "
-    f"mean={np.mean(list(times_m1.values())):.3f}s"
-)
-print()
-
-# %% [markdown]
-# ## Method 4 — plain LDOI
-
-# %%
-preds_m4: dict[Assignment, dict[str, float]] = {}
-times_m4: dict[Assignment, float] = {}
-
-print(f"Running method 4 (LDOI) on {len(unique_fixes)} fixes...")
-for i, fixes in enumerate(unique_fixes, 1):
-    pert = assignment_to_dict(fixes)
-    nav, dt = timed(_nav_from_ldoi, primes, pert)
-    preds_m4[fixes] = nav
-    times_m4[fixes] = dt
-    if i % 25 == 0 or i == len(unique_fixes):
-        print(f"  [{i}/{len(unique_fixes)}] cumulative={sum(times_m4.values()):.3f}s")
-
-print(
-    f"Method 4 done: n={len(preds_m4)}, "
-    f"total={sum(times_m4.values()):.3f}s, "
-    f"mean={np.mean(list(times_m4.values())):.4f}s"
-)
-print()
-
-# %% [markdown]
-# ## Methods 2 and 3 — sampled sources
-
-# %%
-rng_final = random.Random(SEED)
 preds_m2: dict[Assignment, dict[str, float]] = {}
 preds_m3: dict[Assignment, dict[str, float]] = {}
+preds_m4: dict[Assignment, dict[str, float]] = {}
+times_m1: dict[Assignment, float] = {}
 times_m2: dict[Assignment, float] = {}
 times_m3: dict[Assignment, float] = {}
+times_m4: dict[Assignment, float] = {}
 n_used_m2: dict[Assignment, int] = {}
 n_used_m3: dict[Assignment, int] = {}
 
+approx_methods = ("m2", "m3", "m4")
+delta_blocks_node: dict[str, list[np.ndarray]] = {lab: [] for lab in approx_methods}
+delta_blocks_ent: dict[str, list[np.ndarray]] = {lab: [] for lab in approx_methods}
+se_rows: list[dict] = []
+
 print(
-    f"Running methods 2 & 3 on {len(unique_fixes)} fixes "
-    f"(m2: min({N_SAMPLES_M2}, 2**x); "
-    f"m3: min({N_SAMPLES_M3}, 2**x))..."
+    f"Running m1–m4 + bootstrap on {len(unique_fixes)} fixes "
+    f"(N_BOOT={N_BOOT}, BOOT_CHUNK={BOOT_CHUNK})..."
 )
 for i, fixes in enumerate(unique_fixes, 1):
     m = meta_by_fixes[fixes]
@@ -337,43 +336,171 @@ for i, fixes in enumerate(unique_fixes, 1):
     fixed_src = {
         n: v for n, v in assignment_to_dict(fixes).items() if n in source_set
     }
+
+    # --- m1: cubewalkers walkers + bootstrap ---
+    walker_nav, varnames, timings_m1 = simulate_walker_nav(
+        BNET_RULES,
+        clamps=fixes,
+        n_time_steps=N_TIME_STEPS,
+        t_window=T_WINDOW,
+        n_walkers=N_WALKERS,
+        threads_per_block=THREADS_PER_BLOCK,
+    )
+    walker_nav = align_walker_nav(walker_nav, varnames, node_names)
+    means_m1, _se_m1, boot_m1, t_boot_m1 = bootstrap_se(
+        walker_nav, n_boot=N_BOOT, chunk=BOOT_CHUNK, rng=rng_boot
+    )
+    del walker_nav
+    preds_m1[fixes] = {n: float(means_m1[j]) for j, n in enumerate(node_names)}
+    times_m1[fixes] = timings_m1["t_total"] + t_boot_m1
+
+    means_m1_ent = entity_from_node_array(
+        means_m1, node_names, ENTITY_KEYS, MERGED_SET
+    )
+    boot_m1_ent = entity_from_node_array(
+        boot_m1, node_names, ENTITY_KEYS, MERGED_SET
+    )
+    se_m1_ent = boot_m1_ent.std(axis=1, ddof=1)
+
+    # --- m2 / m3: source samples + bootstrap ---
     n2 = min(N_SAMPLES_M2, 2**x)
     n3 = min(N_SAMPLES_M3, 2**x)
     n_max = max(n2, n3)
-    idxs_max = sample_source_indices(x, n_max, rng_final)
+    idxs_max = sample_source_indices(x, n_max, rng_sources)
     idxs2 = idxs_max[:n2]
     idxs3 = idxs_max[:n3]
     n_used_m2[fixes] = len(idxs2)
     n_used_m3[fixes] = len(idxs3)
 
     t0 = perf_counter()
-    preds_m2[fixes] = nav_from_sampled_sources(
-        primes, fixes, unfixed, fixed_src, idxs2, "min_traps"
+    samples_m2 = nav_samples_from_sources(
+        primes, fixes, unfixed, fixed_src, idxs2, "min_traps", node_names
     )
+    means_m2, _se_m2, boot_m2, _t_boot_m2 = bootstrap_sample_mean(
+        samples_m2, n_boot=N_BOOT, chunk=BOOT_CHUNK, rng=rng_boot
+    )
+    del samples_m2
     times_m2[fixes] = perf_counter() - t0
+    preds_m2[fixes] = {n: float(means_m2[j]) for j, n in enumerate(node_names)}
+    means_m2_ent = entity_from_node_array(
+        means_m2, node_names, ENTITY_KEYS, MERGED_SET
+    )
+    boot_m2_ent = entity_from_node_array(
+        boot_m2, node_names, ENTITY_KEYS, MERGED_SET
+    )
 
     t0 = perf_counter()
-    preds_m3[fixes] = nav_from_sampled_sources(
-        primes, fixes, unfixed, fixed_src, idxs3, "ldoi"
+    samples_m3 = nav_samples_from_sources(
+        primes, fixes, unfixed, fixed_src, idxs3, "ldoi", node_names
     )
+    means_m3, _se_m3, boot_m3, _t_boot_m3 = bootstrap_sample_mean(
+        samples_m3, n_boot=N_BOOT, chunk=BOOT_CHUNK, rng=rng_boot
+    )
+    del samples_m3
     times_m3[fixes] = perf_counter() - t0
+    preds_m3[fixes] = {n: float(means_m3[j]) for j, n in enumerate(node_names)}
+    means_m3_ent = entity_from_node_array(
+        means_m3, node_names, ENTITY_KEYS, MERGED_SET
+    )
+    boot_m3_ent = entity_from_node_array(
+        boot_m3, node_names, ENTITY_KEYS, MERGED_SET
+    )
+
+    # --- m4: deterministic LDOI ---
+    pert = assignment_to_dict(fixes)
+    nav_m4, dt_m4 = timed(_nav_from_ldoi, primes, pert)
+    times_m4[fixes] = dt_m4
+    preds_m4[fixes] = {n: float(nav_m4[n]) for n in node_names}
+    means_m4 = np.asarray([preds_m4[fixes][n] for n in node_names], dtype=np.float64)
+    boot_m4 = np.broadcast_to(means_m4[:, None], (len(node_names), N_BOOT)).copy()
+    means_m4_ent = entity_from_node_array(
+        means_m4, node_names, ENTITY_KEYS, MERGED_SET
+    )
+    boot_m4_ent = entity_from_node_array(
+        boot_m4, node_names, ENTITY_KEYS, MERGED_SET
+    )
+
+    method_node = {
+        "m2": (means_m2, boot_m2),
+        "m3": (means_m3, boot_m3),
+        "m4": (means_m4, boot_m4),
+    }
+    method_ent = {
+        "m2": (means_m2_ent, boot_m2_ent),
+        "m3": (means_m3_ent, boot_m3_ent),
+        "m4": (means_m4_ent, boot_m4_ent),
+    }
+    se_row: dict = {
+        "fixes": fixes,
+        "n_unfixed": x,
+        "median_se_m1": float(np.median(se_m1_ent)),
+        "mean_se_m1": float(se_m1_ent.mean()),
+    }
+    for lab in approx_methods:
+        means_n, boot_n = method_node[lab]
+        means_e, boot_e = method_ent[lab]
+        delta_blocks_node[lab].append(boot_n - boot_m1)
+        delta_blocks_ent[lab].append(boot_e - boot_m1_ent)
+        diff, se_diff = diff_from_boot(
+            means_m1_ent, boot_m1_ent, means_e, boot_e
+        )
+        se_k = boot_e.std(axis=1, ddof=1)
+        se_row[f"median_se_{lab}"] = float(np.median(se_k))
+        se_row[f"mean_se_{lab}"] = float(se_k.mean())
+        se_row[f"median_se_delta_{lab}"] = float(np.median(se_diff))
+        se_row[f"mean_se_delta_{lab}"] = float(se_diff.mean())
+        se_row[f"mean_abs_delta_{lab}"] = float(np.mean(np.abs(diff)))
+    se_rows.append(se_row)
+
+    del (
+        means_m1,
+        boot_m1,
+        means_m1_ent,
+        boot_m1_ent,
+        se_m1_ent,
+        means_m2,
+        boot_m2,
+        means_m2_ent,
+        boot_m2_ent,
+        means_m3,
+        boot_m3,
+        means_m3_ent,
+        boot_m3_ent,
+        means_m4,
+        boot_m4,
+        means_m4_ent,
+        boot_m4_ent,
+        method_node,
+        method_ent,
+    )
 
     if i % 10 == 0 or i == len(unique_fixes):
         print(
-            f"  [{i}/{len(unique_fixes)}] "
-            f"cum m2={sum(times_m2.values()):.1f}s  "
-            f"m3={sum(times_m3.values()):.1f}s"
+            f"  [{i}/{len(unique_fixes)}] x={x}  "
+            f"cum m1={sum(times_m1.values()):.1f}s  "
+            f"m2={sum(times_m2.values()):.1f}s  "
+            f"m3={sum(times_m3.values()):.1f}s  "
+            f"m4={sum(times_m4.values()):.1f}s  "
+            f"{format_fixes(fixes)}"
         )
 
 print(
-    f"Method 2 done: total={sum(times_m2.values()):.3f}s  "
-    f"mean={np.mean(list(times_m2.values())):.3f}s"
-)
-print(
-    f"Method 3 done: total={sum(times_m3.values()):.3f}s  "
-    f"mean={np.mean(list(times_m3.values())):.4f}s"
+    f"Methods done: "
+    f"m1={sum(times_m1.values()):.3f}s  "
+    f"m2={sum(times_m2.values()):.3f}s  "
+    f"m3={sum(times_m3.values()):.3f}s  "
+    f"m4={sum(times_m4.values()):.3f}s"
 )
 print()
+
+delta_cloud_node: dict[str, np.ndarray] = {
+    lab: np.concatenate(blocks, axis=1) for lab, blocks in delta_blocks_node.items()
+}
+delta_cloud_ent: dict[str, np.ndarray] = {
+    lab: np.concatenate(blocks, axis=1) for lab, blocks in delta_blocks_ent.items()
+}
+del delta_blocks_node, delta_blocks_ent
+se_df = pd.DataFrame(se_rows)
 
 # %% [markdown]
 # ## Metric 1 — per-node NAV vs m1
@@ -391,7 +518,6 @@ method_times = {
     "m3": times_m3,
     "m4": times_m4,
 }
-approx_methods = ("m2", "m3", "m4")
 
 cmp_rows: list[dict] = []
 for fixes in unique_fixes:
@@ -411,14 +537,13 @@ for fixes in unique_fixes:
         metrics = nav_vector_metrics(gt, method_preds[lab][fixes], nodes=node_names)
         row.update({f"nav_{lab}_{k}": v for k, v in metrics.items()})
 
-        ent_gt = entity_average_nav(gt, ENTITY_BASES)
-        ent_pred = entity_average_nav(method_preds[lab][fixes], ENTITY_BASES)
-        em = nav_vector_metrics(ent_gt, ent_pred, nodes=ENTITY_BASES)
+        ent_gt = entity_nav_dict(gt, ENTITY_KEYS, MERGED_SET)
+        ent_pred = entity_nav_dict(method_preds[lab][fixes], ENTITY_KEYS, MERGED_SET)
+        em = nav_vector_metrics(ent_gt, ent_pred, nodes=ENTITY_KEYS)
         row.update({f"entity_{lab}_{k}": v for k, v in em.items()})
     cmp_rows.append(row)
 
 cmp_df = pd.DataFrame(cmp_rows)
-
 
 print("=== Timing summary ===")
 for label, tdict in method_times.items():
@@ -449,11 +574,15 @@ for lab in approx_methods:
     print()
 
 # %% [markdown]
-# ## Metric 2 — entity-averaged NAV vs m1
+# ## Metric 2 — full-entity NAV vs m1
 
 # %%
-print("=== Metric 2: entity-averaged NAV vs m1 (mean over fixes) ===")
-print(f"  entities ({len(ENTITY_BASES)}): {ENTITY_BASES}")
+print("=== Metric 2: full-entity NAV vs m1 (mean over fixes) ===")
+print(
+    f"  entities ({len(ENTITY_KEYS)}): "
+    f"{len(MERGED_BASES)} merged + "
+    f"{len(ENTITY_KEYS) - len(MERGED_BASES)} singletons"
+)
 for lab in approx_methods:
     print(
         f"  {lab}: "
@@ -461,6 +590,24 @@ for lab in approx_methods:
         f"MAE={cmp_df[f'entity_{lab}_mae'].mean():.4f}  "
         f"max|Δ|={cmp_df[f'entity_{lab}_max_abs'].mean():.4f}"
     )
+print()
+
+print("=== Bootstrap SE (over entities, then mean over fixes) ===")
+for lab in ("m1",) + approx_methods:
+    for kind in ("median_se", "mean_se"):
+        col = f"{kind}_{lab}"
+        if col in se_df.columns:
+            print(
+                f"  {col}: mean={se_df[col].mean():.5f}  "
+                f"median={se_df[col].median():.5f}"
+            )
+for lab in approx_methods:
+    for kind in ("median_se_delta", "mean_se_delta"):
+        col = f"{kind}_{lab}"
+        print(
+            f"  {col}: mean={se_df[col].mean():.5f}  "
+            f"median={se_df[col].median():.5f}"
+        )
 print()
 
 # %% [markdown]
@@ -523,6 +670,100 @@ print()
 score_df = pd.DataFrame(score_rows)
 
 # %% [markdown]
+# ## Bootstrap Δ clouds — per-node / per-entity + global stats
+
+# %%
+def _print_pooled_delta_stats(
+    *,
+    label: str,
+    item_name: str,
+    cloud: np.ndarray,
+    keys: list[str],
+) -> tuple[pd.DataFrame, dict]:
+    per_item = pooled_delta_entity_stats(cloud)
+    df = pd.DataFrame({item_name: keys, **per_item})
+    df = df.sort_values("median_abs", ascending=False).reset_index(drop=True)
+    glob = summarize_across_entities(per_item)
+    glob["n_items"] = len(keys)
+    glob["n_pool_points"] = int(cloud.shape[1])
+
+    print(f"  {label}  (n_pool={cloud.shape[1]} per {item_name}):")
+    print(
+        f"    per-{item_name} median_|Δ|: "
+        f"mean={glob['median_abs_mean']:.4f}  "
+        f"median={glob['median_abs_median']:.4f}  "
+        f"max={glob['median_abs_max']:.4f}"
+    )
+    print(
+        f"    per-{item_name} mean_|Δ|:   "
+        f"mean={glob['mean_abs_mean']:.4f}  "
+        f"median={glob['mean_abs_median']:.4f}  "
+        f"max={glob['mean_abs_max']:.4f}"
+    )
+    print(
+        f"    per-{item_name} max_|Δ|:    "
+        f"mean={glob['max_abs_mean']:.4f}  "
+        f"median={glob['max_abs_median']:.4f}  "
+        f"max={glob['max_abs_max']:.4f}"
+    )
+    print(
+        f"    per-{item_name} rmse:      "
+        f"mean={glob['rmse_mean']:.4f}  "
+        f"median={glob['rmse_median']:.4f}  "
+        f"max={glob['rmse_max']:.4f}"
+    )
+    print(
+        f"    per-{item_name} mean_signed Δ: "
+        f"mean={glob['mean_signed_mean']:+.4f}  "
+        f"median={glob['mean_signed_median']:+.4f}"
+    )
+    plural = "entities" if item_name == "entity" else f"{item_name}s"
+    print(f"    top-5 {plural} by median_|Δ|:")
+    for _, r in df.head(5).iterrows():
+        print(
+            f"      {r[item_name]}: "
+            f"median_|Δ|={r['median_abs']:.4f}  "
+            f"mean_|Δ|={r['mean_abs']:.4f}  "
+            f"max_|Δ|={r['max_abs']:.4f}  "
+            f"rmse={r['rmse']:.4f}"
+        )
+    print()
+    return df, glob
+
+
+node_stat_dfs: dict[str, pd.DataFrame] = {}
+entity_stat_dfs: dict[str, pd.DataFrame] = {}
+global_node_rows: list[dict] = []
+global_ent_rows: list[dict] = []
+
+print("=== Pooled (fix × boot) node Δ = method − m1 ===")
+for lab in approx_methods:
+    ndf, nglob = _print_pooled_delta_stats(
+        label=f"{lab} vs m1 (nodes)",
+        item_name="node",
+        cloud=delta_cloud_node[lab],
+        keys=list(node_names),
+    )
+    node_stat_dfs[lab] = ndf
+    nglob["method"] = lab
+    global_node_rows.append(nglob)
+
+print("=== Pooled (fix × boot) entity Δ = method − m1 ===")
+for lab in approx_methods:
+    edf, eglob = _print_pooled_delta_stats(
+        label=f"{lab} vs m1 (entities)",
+        item_name="entity",
+        cloud=delta_cloud_ent[lab],
+        keys=list(ENTITY_KEYS),
+    )
+    entity_stat_dfs[lab] = edf
+    eglob["method"] = lab
+    global_ent_rows.append(eglob)
+
+global_node_df = pd.DataFrame(global_node_rows)
+global_ent_df = pd.DataFrame(global_ent_rows)
+
+# %% [markdown]
 # ## Plots
 
 # %%
@@ -549,7 +790,7 @@ axes[0].set_ylabel("Mean RMSE vs m1")
 axes[0].set_title("Per-node NAV")
 axes[1].bar(labels, ent_rmse, color=colors[1:])
 axes[1].set_ylabel("Mean RMSE vs m1")
-axes[1].set_title("Entity-averaged NAV")
+axes[1].set_title("Full-entity NAV")
 fig.suptitle("Accuracy vs cubewalkers GT")
 fig.tight_layout()
 fig.savefig(PLOT_RMSE, dpi=120)
@@ -570,6 +811,68 @@ if not score_df.empty:
     fig.savefig(PLOT_SCORE, dpi=120)
     plt.close(fig)
     print(f"Wrote {PLOT_SCORE}")
+
+
+def _plot_delta_boxes(
+    cloud: np.ndarray,
+    keys: list[str],
+    order_by_median_abs: pd.DataFrame,
+    key_col: str,
+    title: str,
+    out_path: Path,
+) -> None:
+    """Side-by-side horizontal boxplots: signed Δ and |Δ|, sorted by median |Δ|."""
+    order = list(order_by_median_abs[key_col])
+    key_to_i = {k: i for i, k in enumerate(keys)}
+    signed = [cloud[key_to_i[k]] for k in order]
+    absolute = [np.abs(v) for v in signed]
+    n_items = len(order)
+    fig_h = max(6.0, 0.18 * n_items + 1.5)
+    fig, axes = plt.subplots(1, 2, figsize=(12, fig_h), sharey=True)
+    for ax, data, xlabel, panel in (
+        (axes[0], signed, "Δ NAV (method − m1)", "signed Δ"),
+        (axes[1], absolute, "|Δ| NAV (method − m1)", "|Δ|"),
+    ):
+        ax.boxplot(
+            data,
+            vert=False,
+            tick_labels=order,
+            showfliers=False,
+            whis=(5, 95),
+            widths=0.7,
+        )
+        ax.axvline(0.0, color="gray", lw=0.8)
+        ax.set_xlabel(xlabel)
+        ax.set_title(panel)
+        ax.tick_params(axis="y", labelsize=6)
+    fig.suptitle(title)
+    fig.tight_layout()
+    fig.savefig(out_path, dpi=120)
+    plt.close(fig)
+
+
+for lab in approx_methods:
+    path_n = PLOT_DELTA_NODE[lab]
+    _plot_delta_boxes(
+        delta_cloud_node[lab],
+        list(node_names),
+        node_stat_dfs[lab],
+        "node",
+        title=f"{lab} − m1 node Δ (pooled fixes × boots)",
+        out_path=path_n,
+    )
+    print(f"Wrote {path_n}")
+
+    path_e = PLOT_DELTA_ENTITY[lab]
+    _plot_delta_boxes(
+        delta_cloud_ent[lab],
+        list(ENTITY_KEYS),
+        entity_stat_dfs[lab],
+        "entity",
+        title=f"{lab} − m1 entity Δ (pooled fixes × boots)",
+        out_path=path_e,
+    )
+    print(f"Wrote {path_e}")
 print()
 
 # %% [markdown]
@@ -578,9 +881,11 @@ print()
 # %%
 print("=== Summary ===")
 print(f"  Unique fixes: {len(unique_fixes)}")
+print(f"  Entities: {len(ENTITY_KEYS)} ({len(MERGED_BASES)} merged)")
 print(f"  m1 cubewalkers: walkers={N_WALKERS}  T={N_TIME_STEPS}  window={T_WINDOW}")
 print(f"  m2 min_traps+sample: N_SAMPLES_M2={N_SAMPLES_M2}")
 print(f"  m3 ldoi+sample: N_SAMPLES_M3={N_SAMPLES_M3}")
+print(f"  bootstrap: N_BOOT={N_BOOT}  BOOT_CHUNK={BOOT_CHUNK}")
 print("  m4 ldoi: all fixes")
 print(
     f"  Total times (s): "
@@ -595,6 +900,18 @@ for lab in approx_methods:
     )
     print(
         f"  Mean entity RMSE {lab} vs m1: {cmp_df[f'entity_{lab}_rmse'].mean():.4f}"
+    )
+    gn = global_node_df.loc[global_node_df["method"] == lab].iloc[0]
+    ge = global_ent_df.loc[global_ent_df["method"] == lab].iloc[0]
+    print(
+        f"  Pooled node Δ {lab}: mean(median_|Δ|)={gn['median_abs_mean']:.4f}  "
+        f"mean(rmse)={gn['rmse_mean']:.4f}  "
+        f"max(max_|Δ|)={gn['max_abs_max']:.4f}"
+    )
+    print(
+        f"  Pooled entity Δ {lab}: mean(median_|Δ|)={ge['median_abs_mean']:.4f}  "
+        f"mean(rmse)={ge['rmse_mean']:.4f}  "
+        f"max(max_|Δ|)={ge['max_abs_max']:.4f}"
     )
 if not score_df.empty:
     for _, r in score_df.iterrows():

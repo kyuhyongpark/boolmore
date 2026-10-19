@@ -169,6 +169,36 @@ def average_nav_dicts(navs: Sequence[Mapping[str, float]]) -> dict[str, float]:
     return {node: sum(d[node] for d in navs) / n for node in nodes}
 
 
+def _nav_fn_for_method(method: str) -> Callable[..., dict[str, float]]:
+    if method == "min_traps":
+        return _nav_from_min_traps
+    if method == "ldoi":
+        return _nav_from_ldoi
+    raise ValueError(f"unknown method {method!r}; expected 'min_traps' or 'ldoi'")
+
+
+def nav_samples_from_sources(
+    primes: Mapping[str, Any],
+    fixes: Assignment,
+    unfixed: Sequence[str],
+    fixed_sources: Mapping[str, int],
+    indices: Sequence[int],
+    method: str,
+    node_names: Sequence[str],
+) -> np.ndarray:
+    """Per-sample NAV matrix ``(n_nodes, n_samples)`` aligned to ``node_names``."""
+    nav_fn = _nav_fn_for_method(method)
+    n_nodes = len(node_names)
+    n_samples = len(indices)
+    out = np.empty((n_nodes, n_samples), dtype=np.float64)
+    for j, idx in enumerate(indices):
+        sources = decode_source_index(idx, unfixed, fixed_sources)
+        pert = merge_perturbation(fixes, sources)
+        nav = nav_fn(primes, pert)
+        out[:, j] = [float(nav[n]) for n in node_names]
+    return out
+
+
 def nav_from_sampled_sources(
     primes: Mapping[str, Any],
     fixes: Assignment,
@@ -178,18 +208,52 @@ def nav_from_sampled_sources(
     method: str,
 ) -> dict[str, float]:
     """Average NAV over source combinations (``method``: ``min_traps`` | ``ldoi``)."""
-    if method == "min_traps":
-        nav_fn = _nav_from_min_traps
-    elif method == "ldoi":
-        nav_fn = _nav_from_ldoi
-    else:
-        raise ValueError(f"unknown method {method!r}; expected 'min_traps' or 'ldoi'")
+    nav_fn = _nav_fn_for_method(method)
     navs: list[dict[str, float]] = []
     for idx in indices:
         sources = decode_source_index(idx, unfixed, fixed_sources)
         pert = merge_perturbation(fixes, sources)
         navs.append(nav_fn(primes, pert))
     return average_nav_dicts(navs)
+
+
+def bootstrap_sample_mean(
+    sample_nav: np.ndarray,
+    *,
+    n_boot: int = 1000,
+    chunk: int = 50,
+    seed: int = 0,
+    rng: np.random.Generator | None = None,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, float]:
+    """Bootstrap SE of the equal-weight mean over the sample axis.
+
+    Parameters
+    ----------
+    sample_nav : (n_nodes, n_samples)
+
+    Returns
+    -------
+    means, se, boot_means ``(n_nodes,)`` / ``(n_nodes, n_boot)``, t_boot
+    """
+    if rng is None:
+        rng = np.random.default_rng(seed)
+    n_nodes, n_samples = sample_nav.shape
+    if n_samples < 1:
+        raise ValueError("sample_nav must have at least one sample")
+    t0 = perf_counter()
+    means = sample_nav.mean(axis=1)
+    boot_means = np.empty((n_nodes, n_boot), dtype=np.float64)
+    if n_samples == 1:
+        boot_means[:] = means[:, None]
+        se = np.zeros(n_nodes, dtype=np.float64)
+        return means, se, boot_means, float(perf_counter() - t0)
+    for start in range(0, n_boot, chunk):
+        end = min(start + chunk, n_boot)
+        k = end - start
+        idx = rng.integers(0, n_samples, size=(k, n_samples))
+        boot_means[:, start:end] = sample_nav[:, idx].mean(axis=2)
+    se = boot_means.std(axis=1, ddof=1)
+    return means, se, boot_means, float(perf_counter() - t0)
 
 
 def nav_vector_metrics(
@@ -279,4 +343,103 @@ def entity_average_nav(
         if val is None:
             raise ValueError(f"entity average for {base!r} hit a None sibling NAV")
         out[base] = float(val)
+    return out
+
+
+def discover_full_entities(
+    node_names: Sequence[str],
+    experiments: Iterable[Any],
+) -> tuple[list[str], list[str]]:
+    """Merged multi-sibling bases plus singleton nodes as their own entities.
+
+    Returns
+    -------
+    merged_bases
+        Bases that average ≥2 related nodes (same as ``discover_entity_bases``).
+    entity_keys
+        ``merged_bases`` followed by sorted singletons (nodes not covered by
+        any merged base's related set).
+    """
+    names = list(node_names)
+    merged_bases = discover_entity_bases(names, experiments)
+    covered: set[str] = set()
+    for base in merged_bases:
+        covered.update(_related_node_names(base, names))
+    singletons = sorted(n for n in names if n not in covered)
+    return merged_bases, list(merged_bases) + singletons
+
+
+def entity_nav_dict(
+    nav: Mapping[str, float],
+    entity_keys: Sequence[str],
+    merged_bases: Sequence[str] | set[str],
+) -> dict[str, float]:
+    """Entity NAV: sibling mean for merged bases, identity for singletons."""
+    merged = set(merged_bases)
+    out: dict[str, float] = {}
+    for key in entity_keys:
+        if key in merged:
+            val = _average_related_values(nav, f"{key}{_AVG_SUFFIX}")
+            if val is None:
+                raise ValueError(f"entity average for {key!r} hit a None sibling NAV")
+            out[key] = float(val)
+        else:
+            out[key] = float(nav[key])
+    return out
+
+
+def entity_from_node_array(
+    node_arr: np.ndarray,
+    node_names: Sequence[str],
+    entity_keys: Sequence[str],
+    merged_bases: Sequence[str] | set[str],
+) -> np.ndarray:
+    """Map node-aligned array to entities (sibling mean / identity).
+
+    ``node_arr`` is ``(n_nodes,)`` or ``(n_nodes, ...)``; output matches the
+    trailing dimensions with leading axis ``len(entity_keys)``.
+    """
+    if node_arr.shape[0] != len(node_names):
+        raise ValueError(
+            f"node_arr leading dim {node_arr.shape[0]} != len(node_names) "
+            f"{len(node_names)}"
+        )
+    name_to_i = {n: i for i, n in enumerate(node_names)}
+    merged = set(merged_bases)
+    trailing = node_arr.shape[1:]
+    out = np.empty((len(entity_keys),) + trailing, dtype=np.float64)
+    for e, key in enumerate(entity_keys):
+        if key in merged:
+            related = _related_node_names(key, node_names)
+            if not related:
+                raise ValueError(f"no related nodes for merged entity {key!r}")
+            idxs = [name_to_i[n] for n in related]
+            out[e] = node_arr[idxs].mean(axis=0)
+        else:
+            out[e] = node_arr[name_to_i[key]]
+    return out
+
+
+def pooled_delta_entity_stats(cloud: np.ndarray) -> dict[str, np.ndarray]:
+    """Per-entity stats over a pooled signed-Δ cloud ``(n_entities, n_points)``."""
+    if cloud.ndim != 2:
+        raise ValueError(f"cloud must be 2d, got shape {cloud.shape}")
+    abs_c = np.abs(cloud)
+    return {
+        "median_abs": np.median(abs_c, axis=1),
+        "mean_abs": abs_c.mean(axis=1),
+        "max_abs": abs_c.max(axis=1),
+        "rmse": np.sqrt(np.mean(cloud**2, axis=1)),
+        "mean_signed": cloud.mean(axis=1),
+    }
+
+
+def summarize_across_entities(per_entity: Mapping[str, np.ndarray]) -> dict[str, float]:
+    """Mean / median / max of each per-entity statistic across entities."""
+    out: dict[str, float] = {}
+    for name, arr in per_entity.items():
+        a = np.asarray(arr, dtype=float)
+        out[f"{name}_mean"] = float(a.mean()) if a.size else float("nan")
+        out[f"{name}_median"] = float(np.median(a)) if a.size else float("nan")
+        out[f"{name}_max"] = float(a.max()) if a.size else float("nan")
     return out
