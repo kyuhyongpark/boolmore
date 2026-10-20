@@ -335,12 +335,18 @@ def _build_cmp_df(
     df["changed"] = (df[enh_cols].sub(df["ldoi"], axis=0).abs() > 1e-12).any(
         axis=1
     )
-    # Best (lowest |Δ|) among LDOI + all enhanced cutoffs
+    # Best (lowest |Δ|) among LDOI + all enhanced cutoffs.
+    # Ties are shared: every method at the min is listed (idxmin would only
+    # credit the leftmost column and under-count later cutoffs).
     abs_cols = [ABS_COL_SHORT[m] for m in METHOD_ORDER]
-    df["best_method"] = df[abs_cols].idxmin(axis=1).map(
-        {ABS_COL_SHORT[m]: m for m in METHOD_ORDER}
+    short_to_method = {ABS_COL_SHORT[m]: m for m in METHOD_ORDER}
+    best_vals = df[abs_cols].min(axis=1)
+    df["abs_delta_best"] = best_vals
+    tied = df[abs_cols].sub(best_vals, axis=0).abs() <= 1e-12
+    df["best_method"] = tied.apply(
+        lambda row: "|".join(short_to_method[c] for c in abs_cols if row[c]),
+        axis=1,
     )
-    df["abs_delta_best"] = df[abs_cols].min(axis=1)
     return df.sort_values(
         ABS_COL_SHORT[METHOD_LDOI], ascending=False
     ).reset_index(drop=True)
@@ -391,11 +397,27 @@ for c in ENHANCED_CUTOFFS:
     )
 print()
 
-best_counts = node_cmp_df["best_method"].value_counts().reindex(
-    METHOD_ORDER, fill_value=0
+print(
+    "Nodes where each method has the lowest |Δ| vs CW "
+    "(ties counted for every tied method):"
 )
-print("Nodes where each method has the lowest |Δ| vs CW:")
-print(best_counts.to_string())
+_best_rows = []
+for m in METHOD_ORDER:
+    among = node_cmp_df["best_method"].str.split("|").apply(lambda ms: m in ms)
+    n_among = int(among.sum())
+    n_sole = int(
+        (
+            among & (node_cmp_df["best_method"] == m)
+        ).sum()
+    )
+    _best_rows.append(
+        {"method": m, "sole": n_sole, "tied": n_among - n_sole, "total": n_among}
+    )
+best_counts_df = pd.DataFrame(_best_rows)
+print(best_counts_df.to_string(index=False))
+print(
+    f"  (n={_n_nodes} nodes; total can exceed n when methods tie)"
+)
 print()
 
 changed_df = node_cmp_df[node_cmp_df["changed"]].sort_values(

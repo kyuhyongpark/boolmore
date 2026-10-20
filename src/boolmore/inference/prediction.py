@@ -492,39 +492,46 @@ def _enhanced_nav_from_forcers(
 
     ``forcers_by_component[component][state] = forced_value`` where
     ``component`` is a sorted node tuple and ``state`` holds values in the
-    same order. Process by increasing component size; within a size,
-    lexicographic component order. A size-``k`` forcer with ``x`` present
-    states consumes mass ``x / 2^k`` of remaining (each state gets
-    ``remaining / 2^k``). Unknown remainder contributes ``0.5``.
+    same order.
+
+    Enumerate the uniform measure over the ``2^k`` assignments to the
+    ``k`` distinct nodes appearing in any forcer. Each assignment takes
+    the forced value of every matching forcer (raises if they disagree);
+    unmatched assignments contribute ``0.5``.
     """
     if not forcers_by_component:
         return 0.5
 
-    by_size: dict[int, list[tuple[tuple[str, ...], dict[tuple[int, ...], int]]]] = (
-        defaultdict(list)
-    )
+    nodes = sorted({node for component in forcers_by_component for node in component})
+    if not nodes:
+        return 0.5
+
+    index = {node: i for i, node in enumerate(nodes)}
+    # Flattened matchers: (node_indices, state_tuple, forced_value)
+    matchers: list[tuple[tuple[int, ...], tuple[int, ...], int]] = []
     for component, states in forcers_by_component.items():
-        by_size[len(component)].append((component, states))
+        idxs = tuple(index[node] for node in component)
+        for state, value in states.items():
+            matchers.append((idxs, state, int(value)))
 
-    remaining = 1.0
-    expected = 0.0
+    if not matchers:
+        return 0.5
 
-    for k in sorted(by_size):
-        for _component, states in sorted(by_size[k], key=lambda item: item[0]):
-            if remaining <= 0:
-                break
-            x = len(states)
-            if x == 0:
-                continue
-            mass_per_state = remaining / (1 << k)
-            for state in sorted(states):
-                expected += mass_per_state * float(states[state])
-            remaining *= 1.0 - x / (1 << k)
+    total = 0.0
+    for assignment in product((0, 1), repeat=len(nodes)):
+        forced: int | None = None
+        for idxs, state, value in matchers:
+            if all(assignment[i] == bit for i, bit in zip(idxs, state, strict=True)):
+                if forced is not None and forced != value:
+                    raise ValueError(
+                        f"conflicting forcers on assignment "
+                        f"{dict(zip(nodes, assignment, strict=True))}: "
+                        f"{forced} vs {value}"
+                    )
+                forced = value
+        total += float(forced) if forced is not None else 0.5
 
-    if remaining > 0:
-        expected += remaining * 0.5
-
-    return float(expected)
+    return total / (1 << len(nodes))
 
 
 def _nav_from_ldoi_enhanced(

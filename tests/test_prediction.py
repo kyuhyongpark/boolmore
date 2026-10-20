@@ -292,17 +292,17 @@ class TestLdoiEnhanced(unittest.TestCase):
 
     def test_enhanced_nav_from_forcers_mass_allocation(self):
         self.assertEqual(_enhanced_nav_from_forcers({}), 0.5)
-        # Both states of one size-1 ancestor: full remaining mass 50/50.
+        # Both states of one size-1 ancestor: full measure 50/50.
         self.assertEqual(
             _enhanced_nav_from_forcers({("A",): {(0,): 0, (1,): 1}}),
             0.5,
         )
-        # One-sided: half mass at forced value, half unknown → 0.75.
+        # One-sided: half measure at forced value, half unknown → 0.75.
         self.assertEqual(
             _enhanced_nav_from_forcers({("A",): {(1,): 1}}),
             0.75,
         )
-        # Two independent one-sided forcers forcing 0: 0.5 then 0.25 mass at 0.
+        # A=0 ∪ B=0 covers 3/4 at 0, remainder 1/4 at 0.5 → 0.125.
         self.assertEqual(
             _enhanced_nav_from_forcers(
                 {("A",): {(0,): 0}, ("B",): {(0,): 0}}
@@ -329,7 +329,7 @@ class TestLdoiEnhanced(unittest.TestCase):
             ),
             0.125,
         )
-        # All 4 states: consume all remaining equally.
+        # All 4 states: average of forced values.
         self.assertEqual(
             _enhanced_nav_from_forcers(
                 {
@@ -343,6 +343,21 @@ class TestLdoiEnhanced(unittest.TestCase):
             ),
             0.5,
         )
+
+    def test_enhanced_nav_from_forcers_shared_node_exact(self):
+        # A=0 (half) and (A,B)=(1,1) (quarter) are disjoint; union is 3/4 at 1.
+        self.assertEqual(
+            _enhanced_nav_from_forcers(
+                {("A",): {(0,): 1}, ("A", "B"): {(1, 1): 1}}
+            ),
+            0.875,
+        )
+
+    def test_enhanced_nav_from_forcers_conflict(self):
+        with self.assertRaises(ValueError):
+            _enhanced_nav_from_forcers(
+                {("A",): {(0,): 0}, ("B",): {(0,): 1}}
+            )
 
     def test_nav_from_ldoi_enhanced_one_sided_forcer(self):
         # A=0 self-sustains (and forces C=0); A=1 does not without B.
