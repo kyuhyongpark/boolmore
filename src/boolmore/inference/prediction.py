@@ -14,7 +14,7 @@ from boolmore.inference.ldoi import _implicant_implied_by, logical_domain_of_inf
 from boolmore.types import Assignment
 
 NAV_METHODS = ("min_traps", "ldoi", "ldoi_enhanced")
-LDOI_ENHANCED_CUTOFF_MAX = 4
+LDOI_ENHANCED_CUTOFF_MAX = 3
 
 
 @dataclass(frozen=True)
@@ -384,15 +384,77 @@ def _interaction_digraph(primes: dict) -> nx.DiGraph:
     return digraph
 
 
+def _triple_strongly_connected(
+    succ: dict[str, set[str]],
+    a: str,
+    b: str,
+    c: str,
+) -> bool:
+    """True iff the induced digraph on ``{a,b,c}`` is strongly connected.
+
+    Uses Floyd–Warshall on the three nodes with successor sets restricted
+    to the ambient graph (edges leaving ``{a,b,c}`` are ignored).
+    """
+    nodes = (a, b, c)
+    idx = {a: 0, b: 1, c: 2}
+    reach = [[i == j for j in range(3)] for i in range(3)]
+    for u in nodes:
+        ui = idx[u]
+        for v in succ[u]:
+            if v in idx:
+                reach[ui][idx[v]] = True
+    for k in range(3):
+        for i in range(3):
+            if not reach[i][k]:
+                continue
+            for j in range(3):
+                if reach[k][j]:
+                    reach[i][j] = True
+    return all(reach[i][j] for i in range(3) for j in range(3))
+
+
+def _sc_triples_in_scc(
+    digraph: nx.DiGraph,
+    scc: list[str],
+) -> list[tuple[str, ...]]:
+    """Strongly connected 3-subsets inside one SCC.
+
+    Every SC triple is weakly connected, so it has a hub of undirected
+    degree 2 inside the triple. Enumerate hub + two undirected neighbors
+    (``O(Σ deg²)``) and test directed strong connectivity with a 3-node
+    Floyd check — far cheaper than ``C(|SCC|, 3)`` NetworkX subgraph tests.
+    """
+    scc_set = set(scc)
+    succ = {
+        u: {v for v in digraph.successors(u) if v in scc_set}
+        for u in scc
+    }
+    undirected = {
+        u: succ[u] | {v for v in digraph.predecessors(u) if v in scc_set}
+        for u in scc
+    }
+    found: set[tuple[str, ...]] = set()
+    for hub in scc:
+        nbrs = sorted(undirected[hub])
+        for i, b in enumerate(nbrs):
+            for c in nbrs[i + 1 :]:
+                triple = tuple(sorted((hub, b, c)))
+                if triple in found:
+                    continue
+                if _triple_strongly_connected(succ, *triple):
+                    found.add(triple)
+    return sorted(found)
+
+
 def _sc_subsets_by_size(
     primes: dict,
     cutoff: int,
 ) -> dict[int, list[tuple[str, ...]]]:
     """Strongly connected subsets of size ``1..cutoff``, keyed by size.
 
-    Size 1: nodes with a self-loop in the primes. Size ``k≥2``: every
-    ``k``-set whose induced interaction digraph is strongly connected
-    (including nested cycles inside larger SCCs).
+    Size 1: self-loop nodes. Size 2: mutual edge pairs. Size 3: SC triples
+    inside each SCC (hub + neighbor enumeration; see
+    :func:`_sc_triples_in_scc`).
     """
     if not 1 <= cutoff <= LDOI_ENHANCED_CUTOFF_MAX:
         raise ValueError(
@@ -401,25 +463,24 @@ def _sc_subsets_by_size(
 
     digraph = _interaction_digraph(primes)
     nodes = sorted(primes)
-    by_size: dict[int, list[tuple[str, ...]]] = {}
-
-    by_size[1] = [
-        (node,) for node in nodes if _node_has_self_loop(primes, node)
-    ]
+    by_size: dict[int, list[tuple[str, ...]]] = {
+        1: [(node,) for node in nodes if _node_has_self_loop(primes, node)],
+    }
 
     if cutoff >= 2:
-        pairs: list[tuple[str, ...]] = []
-        for a, b in combinations(nodes, 2):
-            if digraph.has_edge(a, b) and digraph.has_edge(b, a):
-                pairs.append((a, b))
-        by_size[2] = pairs
+        by_size[2] = [
+            (a, b)
+            for a, b in combinations(nodes, 2)
+            if digraph.has_edge(a, b) and digraph.has_edge(b, a)
+        ]
 
-    for k in range(3, cutoff + 1):
-        subsets: list[tuple[str, ...]] = []
-        for combo in combinations(nodes, k):
-            if nx.is_strongly_connected(digraph.subgraph(combo)):
-                subsets.append(combo)
-        by_size[k] = subsets
+    if cutoff >= 3:
+        triples: list[tuple[str, ...]] = []
+        for component in nx.strongly_connected_components(digraph):
+            if len(component) < 3:
+                continue
+            triples.extend(_sc_triples_in_scc(digraph, sorted(component)))
+        by_size[3] = triples
 
     return by_size
 
@@ -484,7 +545,7 @@ def _nav_from_ldoi_enhanced(
     Parameters
     ----------
     cutoff : int, default 1
-        Maximum SC-subset size to probe (``1..4``). ``1`` is self-loops only.
+        Maximum SC-subset size to probe (``1..3``). ``1`` is self-loops only.
     sc_subsets : optional
         Precomputed output of :func:`_sc_subsets_by_size`; computed from
         ``primes`` when omitted.
@@ -617,7 +678,7 @@ def get_NAV_prediction(
           from free strongly connected subsets of size ``1..cutoff`` that
           self-sustain (opt-in; default remains ``"min_traps"``).
     cutoff : int, default 1
-        Maximum SC-subset size for ``method="ldoi_enhanced"`` (``1..4``).
+        Maximum SC-subset size for ``method="ldoi_enhanced"`` (``1..3``).
         Ignored for other methods.
 
     Returns

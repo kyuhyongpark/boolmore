@@ -391,11 +391,11 @@ class TestLdoiEnhanced(unittest.TestCase):
         with self.assertRaises(ValueError):
             _nav_from_ldoi_enhanced(primes, {}, cutoff=0)
         with self.assertRaises(ValueError):
-            _nav_from_ldoi_enhanced(primes, {}, cutoff=5)
+            _nav_from_ldoi_enhanced(primes, {}, cutoff=4)
         with self.assertRaises(ValueError):
             _sc_subsets_by_size(primes, cutoff=0)
         with self.assertRaises(ValueError):
-            _sc_subsets_by_size(primes, cutoff=5)
+            _sc_subsets_by_size(primes, cutoff=4)
 
 
 def _serialize_nav_predictions(preds) -> list[dict]:
