@@ -438,7 +438,8 @@ def run_ga(
     hierarchy : bool
         if True, hierarchy scoring is used
     nav_method : str | None
-        NAV prediction method ("min_traps" or "ldoi"); default min_traps
+        NAV prediction method ("min_traps", "ldoi", or "ldoi_enhanced");
+        default min_traps
 
     seed : int | None
         random seed for reproducibility

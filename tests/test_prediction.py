@@ -6,7 +6,10 @@ from pyboolnet.external.bnet2primes import bnet_text2primes
 
 from boolmore.experiment import NAVExperiment, PhenotypeExperiment
 from boolmore.inference.prediction import (
+    _enhanced_nav_from_forcers,
     _fix_constants,
+    _nav_from_ldoi,
+    _nav_from_ldoi_enhanced,
     _nav_from_min_traps,
     get_NAV_prediction,
     get_phenotype_prediction,
@@ -282,6 +285,49 @@ class TestGetNAVPrediction(unittest.TestCase):
         values = preds[()].average_values
         self.assertEqual(values, {"A": 0.5, "A_2": 0.5, "A_3": 0.5})
         self.assertNotIn("A_avg", values)
+
+
+class TestLdoiEnhanced(unittest.TestCase):
+
+    def test_enhanced_nav_from_forcers_mass_allocation(self):
+        self.assertEqual(_enhanced_nav_from_forcers({}), 0.5)
+        # Both states of one ancestor: full remaining mass 50/50.
+        self.assertEqual(
+            _enhanced_nav_from_forcers({"A": {0: 0, 1: 1}}),
+            0.5,
+        )
+        # One-sided: half mass at forced value, half unknown → 0.5.
+        self.assertEqual(
+            _enhanced_nav_from_forcers({"A": {1: 1}}),
+            0.75,
+        )
+        # Two independent one-sided forcers forcing 0: 0.5 then 0.25 mass at 0.
+        self.assertEqual(
+            _enhanced_nav_from_forcers({"A": {0: 0}, "B": {0: 0}}),
+            0.125,
+        )
+
+    def test_nav_from_ldoi_enhanced_one_sided_forcer(self):
+        # A=0 self-sustains (and forces C=0); A=1 does not without B.
+        # B=0 also forces C=0; B sustains both ways → B NAV stays 0.5.
+        primes = bnet_text2primes("A, A & B\nB, B\nC, A\n")
+
+        plain = _nav_from_ldoi(primes, {})
+        enhanced = _nav_from_ldoi_enhanced(primes, {})
+
+        self.assertEqual(plain, {"A": 0.5, "B": 0.5, "C": 0.5})
+        self.assertEqual(enhanced["B"], 0.5)
+        # Forcers for C: A=0 and B=0 → expected 0.125
+        self.assertEqual(enhanced["C"], 0.125)
+        self.assertEqual(enhanced["A"], 0.125)
+
+    def test_get_NAV_prediction_ldoi_enhanced(self):
+        primes = bnet_text2primes("A, A & B\nB, B\nC, A\n")
+        experiments = [
+            NAVExperiment(id=1, fixes=(), observed="C", outcome="Some", weight=1.0),
+        ]
+        preds = get_NAV_prediction(primes, experiments, method="ldoi_enhanced")
+        self.assertEqual(preds[()].average_values["C"], 0.125)
 
 
 def _serialize_nav_predictions(preds) -> list[dict]:

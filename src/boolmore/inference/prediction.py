@@ -8,10 +8,10 @@ from pyboolnet.trap_spaces import compute_trapspaces_within_subspace, compute_tr
 from boolmore.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.boolean_functions import assignment_to_dict
 from boolmore.inference.asp_backend import ensure_asp_backend
-from boolmore.inference.ldoi import logical_domain_of_influence
+from boolmore.inference.ldoi import _implicant_implied_by, logical_domain_of_influence
 from boolmore.types import Assignment
 
-NAV_METHODS = ("min_traps", "ldoi")
+NAV_METHODS = ("min_traps", "ldoi", "ldoi_enhanced")
 
 
 @dataclass(frozen=True)
@@ -347,6 +347,126 @@ def _nav_from_ldoi(
     }
 
 
+def _node_has_self_loop(primes: dict, node: str) -> bool:
+    """Return True iff ``node`` appears as a literal in its own update rule."""
+    for value in (0, 1):
+        for implicant in primes[node][value]:
+            if node in implicant:
+                return True
+    return False
+
+
+def _is_self_sustaining(
+    primes: dict,
+    closure: dict[str, int],
+    node: str,
+    value: int,
+) -> bool:
+    """Return True iff some implicant of ``node`` at ``value`` is covered by ``closure``."""
+    return any(
+        _implicant_implied_by(closure, implicant)
+        for implicant in primes[node][value]
+    )
+
+
+def _enhanced_nav_from_forcers(
+    forcers_by_ancestor: dict[str, dict[int, int]],
+) -> float:
+    """Expected NAV from self-sustaining self-loop forcers of one free node.
+
+    ``forcers_by_ancestor[A][v] = forced_value_of_node`` for qualifying
+    states. Ancestors that cover both values consume all remaining mass
+    first (50/50 over ``A=0`` and ``A=1``); one-sided ancestors then each
+    take half of what is left. Unknown remainder contributes ``0.5``.
+    """
+    if not forcers_by_ancestor:
+        return 0.5
+
+    both = sorted(
+        (A, d) for A, d in forcers_by_ancestor.items() if 0 in d and 1 in d
+    )
+    one = sorted(
+        (A, d) for A, d in forcers_by_ancestor.items() if len(d) == 1
+    )
+
+    remaining = 1.0
+    expected = 0.0
+
+    for _A, d in both:
+        if remaining <= 0:
+            break
+        for v in (0, 1):
+            mass = remaining * 0.5
+            expected += mass * float(d[v])
+        remaining = 0.0
+
+    for _A, d in one:
+        if remaining <= 0:
+            break
+        _v, val = next(iter(d.items()))
+        mass = remaining * 0.5
+        expected += mass * float(val)
+        remaining *= 0.5
+
+    if remaining > 0:
+        expected += remaining * 0.5
+
+    return float(expected)
+
+
+def _nav_from_ldoi_enhanced(
+    primes,
+    perturbation: dict[str, int],
+) -> dict[str, float]:
+    """LDOI NAV refined by self-loop + self-sustaining free-node forcers.
+
+    Starts from plain LDOI (forced → 0/1, else 0.5). Free nodes with a
+    self-loop are probed at 0 and 1 (combined with ``perturbation``); those
+    states that self-sustain contribute probability mass that can move
+    downstream free-node NAV away from 0.5.
+    """
+    fixed = logical_domain_of_influence(primes, perturbation)
+    nav = {
+        node: float(fixed[node]) if node in fixed else 0.5
+        for node in primes
+    }
+
+    free = [node for node in primes if node not in fixed]
+    if not free:
+        return nav
+
+    candidates = [node for node in free if _node_has_self_loop(primes, node)]
+    if not candidates:
+        return nav
+
+    # forcers_for_node[N] = list of (A, v, forced_value)
+    forcers_for_node: dict[str, list[tuple[str, int, int]]] = defaultdict(list)
+    for A in candidates:
+        for v in (0, 1):
+            seed = dict(perturbation)
+            seed[A] = v
+            closure = logical_domain_of_influence(primes, seed)
+            if not _is_self_sustaining(primes, closure, A, v):
+                continue
+            for n, val in closure.items():
+                if n not in free:
+                    continue
+                forcers_for_node[n].append((A, v, int(val)))
+
+    for N, forcers in forcers_for_node.items():
+        by_anc: dict[str, dict[int, int]] = defaultdict(dict)
+        for A, v, val in forcers:
+            if v in by_anc[A] and by_anc[A][v] != val:
+                raise ValueError(
+                    f"{N}: same state {A}={v} claimed both "
+                    f"{by_anc[A][v]} and {val}"
+                )
+            by_anc[A][v] = val
+        nav[N] = _enhanced_nav_from_forcers(dict(by_anc))
+
+    return nav
+
+
 def _nav_from_ldoi_partial(
     primes,
     perturbation: dict[str, int],
@@ -404,7 +524,7 @@ def get_NAV_prediction(
         PyBoolNet.
     experiments : list of NAVExperiment
         NAV experiments whose ``fixes`` interventions are evaluated.
-    method : {"min_traps", "ldoi"}, default "min_traps"
+    method : {"min_traps", "ldoi", "ldoi_enhanced"}, default "min_traps"
         How to compute ``average_values``:
 
         - ``"min_traps"``: fix interventions, compute minimal trap spaces,
@@ -415,6 +535,9 @@ def get_NAV_prediction(
           forced constants map to 0.0/1.0 and all other nodes to 0.5.
           Only credible when the model does not rely heavily on
           oscillatory behavior (free nodes → 0.5; oscillations unresolved).
+        - ``"ldoi_enhanced"``: plain LDOI plus probability-mass refinement
+          from free nodes that have a self-loop and self-sustain at 0
+          and/or 1 (opt-in; default remains ``"min_traps"``).
 
     Returns
     -------
@@ -435,9 +558,9 @@ def get_NAV_prediction(
 
     Notes
     -----
-    ``method="ldoi"`` NAV scores should be interpreted with care for models
-    whose phenotype depends on oscillations or complex cyclic attractors;
-    prefer ``"min_traps"`` in those cases.
+    ``method="ldoi"`` / ``"ldoi_enhanced"`` NAV scores should be interpreted
+    with care for models whose phenotype depends on oscillations or complex
+    cyclic attractors; prefer ``"min_traps"`` in those cases.
     """
     if method not in NAV_METHODS:
         raise ValueError(
@@ -447,6 +570,8 @@ def get_NAV_prediction(
 
     if method == "min_traps":
         compute_average = _nav_from_min_traps
+    elif method == "ldoi_enhanced":
+        compute_average = _nav_from_ldoi_enhanced
     else:
         compute_average = _nav_from_ldoi
 

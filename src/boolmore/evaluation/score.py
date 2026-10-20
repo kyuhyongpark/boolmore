@@ -179,7 +179,8 @@ class Evaluator:
     hierarchy : bool, default True
         Whether NAV scoring applies intervention hierarchy.
     nav_method : str, default "min_traps"
-        NAV prediction method (``"min_traps"`` or ``"ldoi"``).
+        NAV prediction method (``"min_traps"``, ``"ldoi"``, or
+        ``"ldoi_enhanced"``).
     ldoi_prune : bool, default True
         When True and ``nav_method="min_traps"``, optionally skip full
         trap-space scoring if an LDOI optimistic upper bound is already
