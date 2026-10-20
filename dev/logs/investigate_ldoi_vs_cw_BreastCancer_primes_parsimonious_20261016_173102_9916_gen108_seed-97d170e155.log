@@ -1,0 +1,254 @@
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-97d170e155.log
+cache:    /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-97d170e155.pkl
+started (UTC): 2026-10-20T11:39:43.237591+00:00
+model pkl:  /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/20261016_173102/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.pkl
+model bnet: /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/20261016_173102/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.bnet
+SEED={}
+ENTITY_OF_INTEREST='Proliferation'  EOI_MODE='manual'
+FORCE_RECOMPUTE=False  SMOKE=False
+
+cache hit — skipping cubewalkers gate (investigate_ldoi_vs_cw_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-97d170e155.pkl)
+
+Model nodes : 191
+Entities    : 161 (24 merged)
+cubewalkers T=16505  T_WINDOW=4126  walkers=2048
+
+loaded cache from /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-97d170e155.pkl
+LDOI fixed nodes: 111 / 191
+  AKT=1, APC=0, AXIN1=0, Alpelisib=0, Apoptosis_X=0, Apoptosis_Z=0, BAD=0, BAK1=0, BID=0, CASP3=0, CASP8=0, CASP9=0, CDK46=1, CDKN2A=0, CYCLINDc=1, CYCS=0, CyclinB1=1, CyclinD=1, CyclinD_2=1, DC=0, EGFR=0, EGFRHER3c=0, EGFRc=0, EIF4=1, EIF4EBP1=0, ERK=1, ERK_2=1, ER_transcription=0, ER_transcription_2=0, ER_transcription_feedback=0, ER_transcription_feedback_1=0, ER_transcription_feedback_2=0, ESR1=0, ESR1_2=0, Everolimus=0, FADD=0, FAS=0, FASLG=0, FOXA1=0, FOXO1=0, FOXO3=0, FOXO3_Ub=1, Fulvestrant=0, GRB2=0, GSK3B=0, HER2=0, HER2HER2c=0, HER2HER3c=0, HER2HER3c_2=0, HER3_2=0, HRAS=0, IL1B=0, IL6=0, IL6R=0, IL8=0, INSR=0, IRS1=0, Ipatasertib=0, JUN=0, KMT2D=0, KRT14=0, MAPK8=0, MCL1=1, MDM2=1, MEK=1, MEK_2=1, MYC=1, MYC_2=1, MYC_targets=1, MYC_targets_2=1, NF1=0, NFKB=0, Navitoclax=0, Neratinib=0, PAK1=0, PDK1_pm=1, PI3K=1, PI3K_2=0, PIM=0, PIP3=1, PRAS40=0, Palbociclib=0, RAC1=0, RAF1=1, RAF1_2=1, RAS=1, RAS_2=1, RAS_3=0, RHEB=1, RPS6=1, S63845=0, S6K=1, SOS1=0, STAT5=0, STK11=0, TCF7L2=0, TRADD=1, TSC2=0, TWIST1=1, Trametinib=0, Translation=1, erlotinib=0, mTORC1=1, mTORC2_ic=1, mTORC2_pm=1, p21=0, p21_p27=0, p38=1, p53=0, pertuzumab=0, trastuzumab=0
+CW timings: total=132.017s  setup=0.212s  sim=131.607s
+
+Top node |Δ| (cw − ldoi):
+   node  ldoi       cw  delta_cw_minus_ldoi  abs_delta
+  PPARG   0.5 0.017578            -0.482422   0.482422
+  CEBPB   0.5 0.062012            -0.437988   0.437988
+  CREB1   0.5 0.119629            -0.380371   0.380371
+    FZD   0.5 0.119629            -0.380371   0.380371
+   DVL1   0.5 0.119629            -0.380371   0.380371
+    BIM   0.5 0.825684             0.325684   0.325684
+  BCLXL   0.5 0.174316            -0.325684   0.325684
+   PAX7   0.5 0.230469            -0.269531   0.269531
+  MYOD1   0.5 0.769531             0.269531   0.269531
+   NICD   0.5 0.230469            -0.269531   0.269531
+ NOTCH1   0.5 0.230469            -0.269531   0.269531
+   HEY1   0.5 0.230469            -0.269531   0.269531
+   HES1   0.5 0.230469            -0.269531   0.269531
+   MYOG   0.5 0.769531             0.269531   0.269531
+   SGK1   0.5 0.240723            -0.259277   0.259277
+  GATA3   0.5 0.755371             0.255371   0.255371
+   JAK2   0.5 0.244629            -0.255371   0.255371
+   ABL1   0.5 0.244629            -0.255371   0.255371
+  STAT1   0.5 0.244629            -0.255371   0.255371
+IGF1R_2   0.5 0.250977            -0.249023   0.249023
+
+Top entity |Δ| (cw − ldoi):
+entity  ldoi       cw  delta_cw_minus_ldoi  abs_delta
+ PPARG   0.5 0.017578            -0.482422   0.482422
+ CEBPB   0.5 0.062012            -0.437988   0.437988
+  DVL1   0.5 0.119629            -0.380371   0.380371
+ CREB1   0.5 0.119629            -0.380371   0.380371
+   FZD   0.5 0.119629            -0.380371   0.380371
+   BIM   0.5 0.825684             0.325684   0.325684
+ BCLXL   0.5 0.174316            -0.325684   0.325684
+  HEY1   0.5 0.230469            -0.269531   0.269531
+  MYOG   0.5 0.769531             0.269531   0.269531
+  PAX7   0.5 0.230469            -0.269531   0.269531
+  NICD   0.5 0.230469            -0.269531   0.269531
+  HES1   0.5 0.230469            -0.269531   0.269531
+ MYOD1   0.5 0.769531             0.269531   0.269531
+NOTCH1   0.5 0.230469            -0.269531   0.269531
+  SGK1   0.5 0.240723            -0.259277   0.259277
+ GATA3   0.5 0.755371             0.255371   0.255371
+ STAT1   0.5 0.244629            -0.255371   0.255371
+  JAK2   0.5 0.244629            -0.255371   0.255371
+  ABL1   0.5 0.244629            -0.255371   0.255371
+ IGF1R   0.5 0.250977            -0.249023   0.249023
+
+cache unchanged → /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-97d170e155.pkl
+
+Percolated free nodes: 80 (removed 111)
+IG: 80 nodes, 109 edges
+
+EOI_MODE=manual → 'Proliferation'
+EOI siblings: ['Proliferation', 'Proliferation_2', 'Proliferation_3']
+  free (in percolated): ['Proliferation', 'Proliferation_2', 'Proliferation_3']
+  already fixed:        []
+  entity NAV — ldoi=0.5000  cw=0.5186  Δ=+0.0186
+
+Ancestors of EOI free nodes (21):
+  CYCLINDc_2  (no self-loop)
+  E2F  (no self-loop)
+  E2F_2  (no self-loop)
+  E2F_3  (self-loop)
+  LATS1  (no self-loop)
+  NEDD4L  (no self-loop)
+  NF2  (no self-loop)
+  PDK1_ic  (self-loop)
+  PRKACA  (no self-loop)
+  RB  (no self-loop)
+  Rb_T  (self-loop)
+  SGK1  (no self-loop)
+  SGK1_T  (self-loop)
+  TEAD1  (no self-loop)
+  WNT1  (self-loop)
+  YAP1  (no self-loop)
+  cycE_CDK2  (no self-loop)
+  cycE_CDK2_T  (no self-loop)
+  pRB  (no self-loop)
+  pRB_2  (no self-loop)
+  pRB_3  (no self-loop)
+  → 5/21 ancestors have a self-loop
+Cone subgraph: 24 nodes, 37 edges
+wrote ancestor plot → /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_ancestors_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-97d170e155.png
+
+All ancestor probes:
+          A  v  self_loop  self_sustaining  eoi_fixed                                                       eoi_values  n_forced
+ CYCLINDc_2  0      False            False      False                                                             None         1
+ CYCLINDc_2  1      False            False      False                                                             None         1
+        E2F  0      False            False       True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}         8
+        E2F  1      False            False      False                                                             None         1
+      E2F_2  0      False            False       True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}         7
+      E2F_2  1      False            False      False                                             {'Proliferation': 1}         2
+      E2F_3  0       True            False      False                                           {'Proliferation_2': 0}         2
+      E2F_3  1       True            False      False                                           {'Proliferation_2': 1}         2
+      LATS1  0      False            False      False                                                             None         4
+      LATS1  1      False            False      False                                                             None         5
+     NEDD4L  0      False            False      False                                                             None         6
+     NEDD4L  1      False            False      False                                                             None         7
+        NF2  0      False            False      False                                                             None         5
+        NF2  1      False            False      False                                                             None         6
+    PDK1_ic  0       True             True      False                                                             None         7
+    PDK1_ic  1       True             True      False                                                             None         1
+     PRKACA  0      False            False      False                                                             None        10
+     PRKACA  1      False            False      False                                                             None        12
+         RB  0      False             True       True {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}        12
+         RB  1      False            False       True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}        14
+       Rb_T  0       True             True       True {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}        13
+       Rb_T  1       True             True      False                                                             None         1
+       SGK1  0      False            False      False                                                             None         6
+       SGK1  1      False            False      False                                                             None         7
+     SGK1_T  0       True             True      False                                                             None         7
+     SGK1_T  1       True             True      False                                                             None         1
+      TEAD1  0      False            False      False                                                             None         2
+      TEAD1  1      False            False      False                                                             None         2
+       WNT1  0       True             True      False                                                             None        12
+       WNT1  1       True             True      False                                                             None        13
+       YAP1  0      False            False      False                                                             None         4
+       YAP1  1      False            False      False                                                             None         3
+  cycE_CDK2  0      False            False      False                                                             None         1
+  cycE_CDK2  1      False            False      False                                                             None         1
+cycE_CDK2_T  0      False            False      False                                                             None         2
+cycE_CDK2_T  1      False            False      False                                                             None         2
+        pRB  0      False            False       True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}        17
+        pRB  1      False             True       True {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}        12
+      pRB_2  0      False            False       True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}        16
+      pRB_2  1      False             True       True {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}        12
+      pRB_3  0      False            False      False                                                             None         1
+      pRB_3  1      False            False      False                                                             None         1
+
+Self-sustaining node states: 11
+      A  v  self_loop  eoi_fixed                                                       eoi_values  n_forced
+PDK1_ic  0       True      False                                                             None         7
+PDK1_ic  1       True      False                                                             None         1
+     RB  0      False       True {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}        12
+   Rb_T  0       True       True {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}        13
+   Rb_T  1       True      False                                                             None         1
+ SGK1_T  0       True      False                                                             None         7
+ SGK1_T  1       True      False                                                             None         1
+   WNT1  0       True      False                                                             None        12
+   WNT1  1       True      False                                                             None        13
+    pRB  1      False       True {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}        12
+  pRB_2  1      False       True {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}        12
+
+Self-sustaining states that also fix EOI 'Proliferation': 4
+    A  v  self_loop                                                       eoi_values  n_forced
+   RB  0      False {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}        12
+ Rb_T  0       True {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}        13
+  pRB  1      False {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}        12
+pRB_2  1      False {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}        12
+Strict forcers: 8 states (self-sustaining∩self-loop; 11 self-sustaining total)
+
+Refining 3 EOI free siblings (+ 35 other free nodes forced by those states)
+
+Proliferation: LDOI 0.5000 → enhanced 0.7500
+  Rb_T=0 → Proliferation=1  mass=0.5000  (one_state)
+  unknown mass=0.5000 → value 0.5
+Proliferation_2: LDOI 0.5000 → enhanced 0.7500
+  Rb_T=0 → Proliferation_2=1  mass=0.5000  (one_state)
+  unknown mass=0.5000 → value 0.5
+Proliferation_3: LDOI 0.5000 → enhanced 0.7500
+  Rb_T=0 → Proliferation_3=1  mass=0.5000  (one_state)
+  unknown mass=0.5000 → value 0.5
+
+EOI sibling node comparison (cw − method):
+           node  ldoi  enhanced       cw  abs_delta_ldoi  abs_delta_enhanced  improved
+  Proliferation   0.5      0.75 0.518555        0.018555            0.231445     False
+Proliferation_2   0.5      0.75 0.518555        0.018555            0.231445     False
+Proliferation_3   0.5      0.75 0.518555        0.018555            0.231445     False
+siblings improved: 0/3
+
+Entity 'Proliferation' comparison:
+  ldoi=0.5000  enhanced=0.7500  cw=0.5186
+  |Δ| ldoi=0.0186  |Δ| enhanced=0.2314  improved=False
+
+Entities changed by enhancement (22):
+       entity  ldoi  enhanced       cw  abs_delta_ldoi  abs_delta_enhanced  improved
+        PPARG  0.50    0.0625 0.017578        0.482422            0.044922      True
+        CEBPB  0.50    0.1250 0.062012        0.437988            0.062988      True
+         DVL1  0.50    0.1250 0.119629        0.380371            0.005371      True
+          FZD  0.50    0.1250 0.119629        0.380371            0.005371      True
+        CREB1  0.50    0.1250 0.119629        0.380371            0.005371      True
+         SGK1  0.50    0.1250 0.240723        0.259277            0.115723      True
+         ABL1  0.50    0.2500 0.244629        0.255371            0.005371      True
+        STAT1  0.50    0.2500 0.244629        0.255371            0.005371      True
+         JAK2  0.50    0.2500 0.244629        0.255371            0.005371      True
+        GATA3  0.50    0.7500 0.755371        0.255371            0.005371      True
+          NF2  0.50    0.2500 0.393555        0.106445            0.143555     False
+       NEDD4L  0.50    0.2500 0.393555        0.106445            0.143555     False
+        LATS1  0.50    0.2500 0.393555        0.106445            0.143555     False
+        TEAD1  0.50    0.7500 0.606445        0.106445            0.143555     False
+         YAP1  0.50    0.7500 0.606445        0.106445            0.143555     False
+     CYCLINDc  0.75    0.8750 0.803223        0.053223            0.071777     False
+          E2F  0.50    0.7500 0.518555        0.018555            0.231445     False
+          pRB  0.50    0.7500 0.518555        0.018555            0.231445     False
+Proliferation  0.50    0.7500 0.518555        0.018555            0.231445     False
+           RB  0.50    0.2500 0.481445        0.018555            0.231445     False
+    cycE_CDK2  0.50    0.7500 0.518555        0.018555            0.231445     False
+  cycE_CDK2_T  0.50    0.7500 0.518555        0.018555            0.231445     False
+entities improved: 10/22
+
+All refined free nodes (38) vs CW:
+           node  ldoi  enhanced       cw  abs_delta_ldoi  abs_delta_enhanced  improved
+          PPARG   0.5    0.0625 0.017578        0.482422            0.044922      True
+          CEBPB   0.5    0.1250 0.062012        0.437988            0.062988      True
+           DVL1   0.5    0.1250 0.119629        0.380371            0.005371      True
+          CREB1   0.5    0.1250 0.119629        0.380371            0.005371      True
+            FZD   0.5    0.1250 0.119629        0.380371            0.005371      True
+           SGK1   0.5    0.1250 0.240723        0.259277            0.115723      True
+          STAT1   0.5    0.2500 0.244629        0.255371            0.005371      True
+          GATA3   0.5    0.7500 0.755371        0.255371            0.005371      True
+           ABL1   0.5    0.2500 0.244629        0.255371            0.005371      True
+           JAK2   0.5    0.2500 0.244629        0.255371            0.005371      True
+          TEAD1   0.5    0.7500 0.606445        0.106445            0.143555     False
+     CYCLINDc_2   0.5    0.7500 0.606445        0.106445            0.143555     False
+         NEDD4L   0.5    0.2500 0.393555        0.106445            0.143555     False
+          LATS1   0.5    0.2500 0.393555        0.106445            0.143555     False
+            NF2   0.5    0.2500 0.393555        0.106445            0.143555     False
+           YAP1   0.5    0.7500 0.606445        0.106445            0.143555     False
+          pRB_2   0.5    0.7500 0.518555        0.018555            0.231445     False
+Proliferation_2   0.5    0.7500 0.518555        0.018555            0.231445     False
+          E2F_2   0.5    0.7500 0.518555        0.018555            0.231445     False
+            E2F   0.5    0.7500 0.518555        0.018555            0.231445     False
+  Proliferation   0.5    0.7500 0.518555        0.018555            0.231445     False
+          E2F_3   0.5    0.7500 0.518555        0.018555            0.231445     False
+    cycE_CDK2_T   0.5    0.7500 0.518555        0.018555            0.231445     False
+            pRB   0.5    0.7500 0.518555        0.018555            0.231445     False
+          pRB_3   0.5    0.7500 0.518555        0.018555            0.231445     False
+Proliferation_3   0.5    0.7500 0.518555        0.018555            0.231445     False
+             RB   0.5    0.2500 0.481445        0.018555            0.231445     False
+      cycE_CDK2   0.5    0.7500 0.518555        0.018555            0.231445     False
+         CTNNB1   0.5    0.5000 0.482422        0.017578            0.017578     False
+         PRKACA   0.5    0.5000 0.482422        0.017578            0.017578     False
+refined nodes improved: 10/38  mean |Δ| ldoi=0.1147  enhanced=0.1067
+
+finished (UTC): 2026-10-20T11:39:44.357169+00:00
