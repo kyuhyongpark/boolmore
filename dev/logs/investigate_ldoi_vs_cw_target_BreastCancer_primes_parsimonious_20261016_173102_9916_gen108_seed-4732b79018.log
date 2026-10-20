@@ -1,0 +1,516 @@
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_target_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018.log
+CW cache: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/cw_walker_nav_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_w2048_T16505_tw4126.pkl
+started (UTC): 2026-10-20T13:35:47.735329+00:00
+model pkl:  /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/20261016_173102/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.pkl
+model bnet: /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/20261016_173102/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.bnet
+SEED={'Alpelisib': 1, 'ER': 1, 'ES': 1, 'HER2': 0, 'PBX1': 1, 'PIM': 1, 'PTEN_T_2': 0, 'Rb_T': 1}
+TARGET_ENTITY='Proliferation'  TARGET_MODE='manual'
+FORCE_RECOMPUTE=False  SMOKE=False
+
+Model nodes : 191
+Entities    : 161 (24 merged)
+cubewalkers T=16505  T_WINDOW=4126  walkers=2048
+
+cache hit — skipping cubewalkers gate (cw_walker_nav_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_w2048_T16505_tw4126.pkl)
+
+loaded CW walker_nav from /home/kyuhyongpark/Boolmore/boolmore/dev/logs/cw_walker_nav_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_w2048_T16505_tw4126.pkl
+  shape=(191, 2048)
+LDOI fixed nodes: 73 / 191
+  Alpelisib=1, Apoptosis_X=0, BAD=0, CDK46=1, EGFR=0, EGFRHER3c=0, EGFRc=0, EIF4=1, EIF4EBP1=0, ER=1, ER_transcription=0, ER_transcription_2=0, ER_transcription_feedback=0, ER_transcription_feedback_1=0, ER_transcription_feedback_2=0, ES=1, ESR1=0, ESR1_2=0, Everolimus=0, FADD=0, FAS=0, FASLG=0, FOXA1=0, FOXO3=0, Fulvestrant=0, GRB2=0, HER2=0, HER2HER2c=0, HER2HER3c=0, HER2HER3c_2=0, HER3_2=0, HRAS=0, IL1B=0, IL6=0, IL6R=0, IL8=0, INSR=0, IRS1=0, Ipatasertib=0, JUN=0, KRT14=0, MAPK8=0, MYC_targets=1, MYC_targets_2=1, NFKB=0, Navitoclax=0, Neratinib=0, PAK1=0, PBX1=1, PI3K=0, PI3K_2=0, PIM=1, PRAS40=0, PTEN_T_2=0, Palbociclib=0, RAC1=0, RAS=0, RAS_2=0, RAS_3=0, Rb_T=1, S63845=0, SOS1=0, STAT5=0, TCF7L2=0, TRADD=1, Trametinib=0, Translation=1, erlotinib=0, mTORC1=1, mTORC2_ic=1, p21_p27=0, pertuzumab=0, trastuzumab=0
+CW timings: total=168.124s  setup=0.199s  sim=167.495s
+
+Top node |Δ| (cw − ldoi):
+         node  ldoi       cw  delta_cw_minus_ldoi  abs_delta
+          APC   0.5 0.000000            -0.500000   0.500000
+        AXIN1   0.5 0.000000            -0.500000   0.500000
+     CyclinB1   0.5 1.000000             0.500000   0.500000
+    CyclinD_2   0.5 1.000000             0.500000   0.500000
+           DC   0.5 0.000000            -0.500000   0.500000
+      CyclinD   0.5 1.000000             0.500000   0.500000
+        GSK3B   0.5 0.000000            -0.500000   0.500000
+          MYC   0.5 1.000000             0.500000   0.500000
+          p53   0.5 0.000000            -0.500000   0.500000
+        PPARG   0.5 0.000977            -0.499023   0.499023
+         JAK2   0.5 0.013672            -0.486328   0.486328
+        STAT1   0.5 0.013672            -0.486328   0.486328
+        GATA3   0.5 0.986328             0.486328   0.486328
+         ABL1   0.5 0.013672            -0.486328   0.486328
+          E2F   0.5 0.025879            -0.474121   0.474121
+  cycE_CDK2_T   0.5 0.025879            -0.474121   0.474121
+        pRB_2   0.5 0.025879            -0.474121   0.474121
+          pRB   0.5 0.025879            -0.474121   0.474121
+Proliferation   0.5 0.025879            -0.474121   0.474121
+           RB   0.5 0.974121             0.474121   0.474121
+
+Top entity |Δ| (cw − ldoi):
+       entity  ldoi       cw  delta_cw_minus_ldoi  abs_delta
+      CyclinD   0.5 1.000000             0.500000   0.500000
+        AXIN1   0.5 0.000000            -0.500000   0.500000
+          APC   0.5 0.000000            -0.500000   0.500000
+     CyclinB1   0.5 1.000000             0.500000   0.500000
+           DC   0.5 0.000000            -0.500000   0.500000
+          p53   0.5 0.000000            -0.500000   0.500000
+        GSK3B   0.5 0.000000            -0.500000   0.500000
+        PPARG   0.5 0.000977            -0.499023   0.499023
+         ABL1   0.5 0.013672            -0.486328   0.486328
+        GATA3   0.5 0.986328             0.486328   0.486328
+         JAK2   0.5 0.013672            -0.486328   0.486328
+        STAT1   0.5 0.013672            -0.486328   0.486328
+Proliferation   0.5 0.025879            -0.474121   0.474121
+          pRB   0.5 0.025879            -0.474121   0.474121
+          E2F   0.5 0.025879            -0.474121   0.474121
+    cycE_CDK2   0.5 0.025879            -0.474121   0.474121
+           RB   0.5 0.974121             0.474121   0.474121
+  cycE_CDK2_T   0.5 0.025879            -0.474121   0.474121
+        CEBPB   0.5 0.058105            -0.441895   0.441895
+        CREB1   0.5 0.121582            -0.378418   0.378418
+
+Percolated free nodes: 118 (removed 73)
+IG: 118 nodes, 227 edges
+
+Original bnet:
+Alpelisib,                     0
+Everolimus,                    0
+Fulvestrant,                   0
+Ipatasertib,                   0
+Navitoclax,                    0
+Neratinib,                     0
+Palbociclib,                   0
+S63845,                        0
+Trametinib,                    0
+erlotinib,                     0
+pertuzumab,                    0
+trastuzumab,                   0
+
+ABL2,                          ABL2
+BCL2_T,                        BCL2_T
+BCLXL_T,                       BCLXL_T
+BIM_T,                         BIM_T
+DLL,                           DLL
+EGF,                           EGF
+ER,                            ER
+ES,                            ES
+HER3_iT,                       HER3_iT
+IGF1,                          IGF1
+IGF1R_iT,                      IGF1R_iT
+INS,                           INS
+LCK,                           LCK
+MCL1_T,                        MCL1_T
+MYC_T,                         MYC_T
+NRG1,                          NRG1
+PBX1,                          PBX1
+PDK1_ic,                       PDK1_ic
+PTEN_T,                        PTEN_T
+Rb_T,                          Rb_T
+SGK1_T,                        SGK1_T
+WNT1,                          WNT1
+p21_iT,                        p21_iT
+p27_iT,                        p27_iT
+
+ABL1,                          SRC&!RB
+AKT,                           PIP3_2&!Ipatasertib&CyclinB1 | PIP3_2&PDK1_pm&CyclinB1 | mTORC2_pm&!Ipatasertib | PIP3_2&PIP3&PDK1_pm | mTORC2_pm&PDK1_pm | mTORC2_pm&PIP3
+APC,                           AXIN1
+AXIN1,                         GSK3B&!DVL1
+BAD,                           !PIM&!ERK&!AKT | !PIM&!PAK1&!ERK_2&!AKT
+BAK1,                          BID | p53&BIM | !MCL1
+BAX,                           BIM&BAX | BID | p53&BIM
+BCL2,                          !Navitoclax&!BIM&BCL2_T&!BAD | !Navitoclax&ER_transcription_2&CREB1&BCL2_T&!BAD | !Navitoclax&ERK&BCL2_T&!BAD | !Navitoclax&ERK_2&BCL2_T&!BAD | !Navitoclax&ERK&!BIM&BCL2_T | !Navitoclax&ER_transcription_2&!BIM&BCL2_T | !Navitoclax&ERK&CREB1&BCL2_T | !Navitoclax&ERK_2&ERK&BCL2_T | !Navitoclax&ER_transcription_2&ERK_2&BCL2_T
+BCLXL,                         !Navitoclax&!BIM&BCLXL_T&!BAD | !Navitoclax&CREB1&BCLXL_T
+BID,                           CASP8
+BIM,                           FOXO3&!BCL2 | !BCLXL | FOXO1&BIM_T | FOXO1&!ERK_2 | FOXO3&!ERK_2
+CASP3,                         CASP8 | CASP9
+CASP8,                         FADD&!ERK | !SRC&!ERK | !ERK_2
+CASP9,                         !ERK&CASP3&!AKT | !ERK&CYCS&!AKT | !PRKACA&!ERK_2&!ERK&!AKT
+CDK46,                         !Palbociclib
+CDKN2A,                        !MYC | !MYC_2
+CREB1,                         SGK1&!PTEN&AKT | SGK1&!PTEN_2&!PTEN
+CTNNB1,                        YAP1&SRC&!DC | YAP1&WNT1&!DC
+CYCLINDc,                      MYC&CyclinD_2&CyclinD&!CDKN2A&CDK46 | EIF4&CyclinD&!CDKN2A&CDK46
+CYCLINDc_2,                    TEAD1&CyclinD_2&CYCLINDc&CDK46
+CYCS,                          BAX&BAK1
+CyclinB1,                      !p53
+CyclinD,                       !GSK3B | JUN
+CyclinD_2,                     !GSK3B&CyclinD | RPS6&CyclinD
+DC,                            GSK3B&APC
+DVL1,                          FZD
+E2F,                           !RB
+E2F_2,                         !RB&E2F
+E2F_3,                         E2F_3&E2F_2 | !RB&E2F_2
+EGFR,                          NFKB&JUN
+EGFRHER3c,                     !erlotinib&NRG1&HER3&EGFR&EGF
+EGFRc,                         !Neratinib&EGFR&EGF | !erlotinib&EGFR&EGF
+EIF4,                          !EIF4EBP1
+EIF4EBP1,                      !mTORC1
+ERK,                           MEK
+ERK_2,                         ERK
+ER_transcription,              ESR1_2&ESR1
+ER_transcription_2,            KMT2D&ESR1_2&ER_transcription | PBX1&ESR1_2&ER_transcription | FOXA1&ER_transcription
+ER_transcription_feedback,     ER_transcription_2&ER_transcription | ER_transcription_feedback&ER_transcription | ER_transcription_feedback&ER_transcription_2
+ESR1,                          !Fulvestrant&FOXO3&ES&AKT | !Fulvestrant&FOXO3&ES&!ER_transcription_feedback&ER
+ESR1_2,                        !Fulvestrant&ESR1&ER
+FADD,                          TRADD&FAS
+FAS,                           p53&FASLG
+FASLG,                         FOXO3
+FOXA1,                         FOXO3
+FOXO1,                         !SGK1&!AKT
+FOXO3,                         !SGK1&!PIM&!FOXO3_Ub&!AKT
+FOXO3_Ub,                      ERK | ERK_2
+FZD,                           CREB1
+GRB2,                          IRS1&HER2HER3c&EGFRc&EGFRHER3c | SRC&IRS1&EGFRc&EGFRHER3c | SRC&HER2HER3c&HER2HER2c&EGFRHER3c | HER2HER3c_2&EGFRHER3c | SRC&IRS1&HER2HER3c_2&HER2HER2c&EGFRc | IRS1&HER2HER3c_2&HER2HER3c&HER2HER2c | SRC&IRS1&HER2HER3c&HER2HER2c | SRC&IRS1&HER2HER3c_2&HER2HER3c
+GSK3B,                         p53&GSK3B&!ERK&!AKT | p53&GSK3B&!ERK_2&!AKT
+HER2,                          FOXO3
+HER2HER2c,                     !Neratinib&HER2 | !erlotinib&HER2
+HER2HER3c,                     !Neratinib&!MEK_2&HER3_2&HER3&HER2 | !pertuzumab&!Neratinib&HER3_2&HER3&HER2 | !trastuzumab&!Neratinib&HER3_2&HER3&HER2 | !erlotinib&!MEK_2&!MEK&HER3&HER2 | !trastuzumab&!MEK_2&!MEK&HER3&HER2 | !trastuzumab&!Neratinib&!MEK&HER3&HER2 | !trastuzumab&!erlotinib&!MEK&HER3&HER2 | !trastuzumab&!Neratinib&!MEK_2&HER3&HER2 | !trastuzumab&!erlotinib&!MEK_2&HER3&HER2 | !erlotinib&!Neratinib&HER3&HER2 | !trastuzumab&!pertuzumab&!Neratinib&HER3&HER2 | !trastuzumab&!pertuzumab&!erlotinib&HER3&HER2
+HER2HER3c_2,                   HER3_2&HER3&HER2HER3c&HER2 | !MEK&HER3&HER2HER3c&HER2 | !Neratinib&!MEK_2&HER3&HER2HER3c&HER2 | !trastuzumab&!Neratinib&HER3&HER2HER3c&HER2 | !pertuzumab&!MEK_2&HER3_2&HER2HER3c&HER2 | !pertuzumab&!MEK&HER2HER3c&HER2 | !erlotinib&!Neratinib&!MEK_2&HER2HER3c&HER2 | !pertuzumab&!Neratinib&HER2HER3c&HER2 | !pertuzumab&!erlotinib&HER2HER3c&HER2 | NRG1&HER3_2&HER3&HER2HER3c | !pertuzumab&HER3_2&HER3&HER2HER3c | NRG1&!MEK&HER3&HER2HER3c | !pertuzumab&!MEK&HER3&HER2HER3c | NRG1&!MEK_2&HER3&HER2HER3c | !trastuzumab&!pertuzumab&!MEK_2&HER3&HER2HER3c | !pertuzumab&NRG1&HER3&HER2HER3c | !trastuzumab&NRG1&HER3&HER2HER3c | !pertuzumab&!Neratinib&HER3&HER2HER3c | !erlotinib&HER3&HER2HER3c | !pertuzumab&NRG1&!MEK&HER3_2&HER2HER3c | !trastuzumab&!pertuzumab&!MEK&HER3_2&HER2HER3c | !pertuzumab&NRG1&!MEK_2&HER3_2&HER2HER3c | !trastuzumab&!pertuzumab&!MEK_2&HER3_2&HER2HER3c | !pertuzumab&!Neratinib&HER3_2&HER2HER3c | !pertuzumab&!erlotinib&HER3_2&HER2HER3c | !pertuzumab&!MEK_2&!MEK&HER2HER3c | !pertuzumab&!erlotinib&NRG1&!MEK&HER2HER3c | !trastuzumab&NRG1&!MEK&HER2HER3c | !pertuzumab&!erlotinib&!Neratinib&!MEK&HER2HER3c | !trastuzumab&!pertuzumab&NRG1&!MEK_2&HER2HER3c | !pertuzumab&!Neratinib&!MEK_2&HER2HER3c | !trastuzumab&!erlotinib&!MEK_2&HER2HER3c | !pertuzumab&!Neratinib&NRG1&HER2HER3c | !trastuzumab&!pertuzumab&!erlotinib&NRG1&HER2HER3c | !trastuzumab&!pertuzumab&!Neratinib&HER2HER3c
+HER3,                          FOXO3 | HER3_iT
+HER3_2,                        HER3&FOXO3
+HRAS,                          SOS1&PIP3&PI3K_2&PI3K&!NF1
+IGF1R,                         SRC&INS&IGF1&ESR1 | FOXO3 | INS&IGF1R_iT
+IGF1R_2,                       IGF1R
+IL1B,                          NFKB
+IL6,                           IL6&IL1B
+IL6R,                          STAT3&IL6
+INSR,                          INS&FOXO3
+IRS1,                          !S6K&INSR&IGF1R_2&IGF1R
+JAK2,                          ABL1 | IL6R
+JUN,                           MAPK8&JUN&!GSK3B
+KMT2D,                         !AKT
+KRT14,                         PAK2&EGFR
+LATS1,                         NF2
+MAPK8,                         RAC1
+MCL1,                          Translation&!S63845&!GSK3B&ERK_2&ERK | Translation&!S63845&MCL1_T&!GSK3B&ERK
+MDM2,                          AKT | p53
+MEK,                           !Trametinib&RAF1&PDK1_pm | RAF1_2&RAF1
+MEK_2,                         RAF1_2&MEK | !Trametinib&MEK
+MYC,                           KMT2D&ERK&EIF4&CTNNB1 | PIM&!GSK3B&EIF4&CTNNB1 | PIM&ERK_2&CTNNB1 | ER_transcription&ERK&EIF4 | !GSK3B&ERK&EIF4 | !GSK3B&ER_transcription&EIF4 | PIM&KMT2D&ER_transcription&EIF4 | STAT3&PIM&ER_transcription&EIF4 | KMT2D&!GSK3B&EIF4 | STAT3&PIM&KMT2D&EIF4 | ERK_2&ERK | KMT2D&!GSK3B&ER_transcription&ERK | PIM&KMT2D&!GSK3B&ERK | STAT3&ERK | ER_transcription&ERK_2 | KMT2D&ERK_2 | PIM&!GSK3B&ER_transcription
+MYC_2,                         MYC&ERK_2&ERK
+NEDD4L,                        !S6K&!PRKACA | !SGK1&!PRKACA | !SGK1&!S6K
+NF1,                           !TWIST1
+NF2,                           NEDD4L
+NFKB,                          PIM&HER3_2
+PAK1,                          TCF7L2&RAC1&PDK1_ic
+PAK2,                          RAC1 | SRC
+PDK1_pm,                       PIP3
+PI3K,                          !Alpelisib | RAS&EGFRHER3c | RAS_2&EGFRHER3c | RAS&ESR1 | RAS_2&ESR1 | RAS&HER2HER3c | RAS_2&HER2HER3c | HER2HER3c_2 | RAS&IRS1 | RAS_2&IRS1 | RAS_3&RAS_2
+PI3K_2,                        PI3K&IRS1&!Alpelisib
+PIM,                           STAT5
+PIP3,                          PI3K | !PTEN_2&PI3K_2 | !PTEN_2&!PTEN
+PIP3_2,                        PIP3&PI3K_2 | !PTEN&PIP3 | !PTEN_2&PIP3
+PRAS40,                        !PIM&!AKT
+PRKAA2,                        !PRKACA | STK11
+PRKACA,                        WNT1&AKT
+PTEN,                          PTEN_T&!GSK3B
+PTEN_2,                        PTEN
+RAC1,                          PI3K_2&DVL1&!AKT
+RAF1,                          RAS_2&PIP3_2&!ERK_2&!ERK | RPS6&RAS_3&PIP3_2&!ERK_2&!ERK | PIP3_2&HRAS&!ERK | RAS_2&RAS&PIP3_2&!ERK | RAS_3&RAS_2&PIP3_2&!ERK | RPS6&RAS_2&PIP3_2&!ERK | RPS6&RAS&!ERK | HRAS&!ERK_2 | RAS_2&RAS&PIP3_2&!ERK_2 | RAS_3&RAS&PIP3_2&!ERK_2 | RAS&PIP3_2&HRAS | RAS_2&PIP3_2&HRAS | RAS_3&HRAS | PIP3_2&PIP3 | RAS&PIP3 | RPS6&PIP3 | RAS_3&RAS_2&RAS&PIP3_2 | RPS6&RAS&PIP3_2
+RAF1_2,                        RAF1
+RAS,                           PI3K | SOS1
+RAS_2,                         RAS
+RAS_3,                         SOS1&RAS_2
+RB,                            !pRB_2&!pRB | !pRB_3&!pRB_2
+RHEB,                          !TSC2
+RPS6,                          S6K
+S6K,                           mTORC1&ERK
+SGK1,                          mTORC2_ic&SGK1_T&PDK1_ic
+SOS1,                          GRB2
+SRC,                           PRKACA
+STAT3,                         JAK2&IL1B | SRC
+STAT5,                         SRC&JAK2&EGFRc
+STK11,                         !ERK | FOXO3
+TCF7L2,                        JUN&CTNNB1
+TEAD1,                         YAP1
+TRADD,                         !KRT14
+TSC2,                          !SGK1&GSK3B&!ERK&!AKT | !SGK1&PRKAA2&!ERK&!AKT
+TWIST1,                        ERK_2&ERK&AKT
+Translation,                   EIF4
+YAP1,                          !LATS1
+cycE_CDK2,                     !p21_p27&cycE_CDK2_T
+cycE_CDK2_T,                   E2F_2&E2F
+mTORC1,                        !Everolimus | !PRAS40 | RHEB
+mTORC2_ic,                     !Everolimus
+mTORC2_pm,                     PIP3&!Everolimus
+p21,                           !MYC_2&!MYC&!AKT | p21_iT_2&!MYC&!AKT | p21_iT&!MYC_2&!AKT | p21_iT_2&!MYC_2&!AKT | p21_iT_2&p21_iT&!AKT
+p21_iT_2,                      p21_iT
+p21_p27,                       p21_p27_T&p21&!PIM&!AKT
+p21_p27_T,                     p21_iT_2&FOXO3 | p27_iT&FOXO3 | p21_iT | p27_iT&p21_iT_2
+p38,                           AKT
+p53,                           p38&PTEN&!MDM2 | p38&PTEN_2&!MDM2 | p53&p38&!MDM2
+pRB,                           cycE_CDK2&!RB&CYCLINDc | !Rb_T&CYCLINDc | cycE_CDK2&CYCLINDc_2 | !Rb_T&!RB | cycE_CDK2&!Rb_T
+pRB_2,                         pRB
+pRB_3,                         pRB_2
+
+Apoptosis_X,                   BIM&BAD
+Apoptosis_Y,                   !BCL2 | !MCL1&!BCLXL
+Apoptosis_Z,                   !MCL1&!BCLXL
+CEBPB,                         CREB1&ABL2
+ER_transcription_feedback_1,   ER_transcription_2
+ER_transcription_feedback_2,   ER_transcription_feedback_1&ER_transcription_feedback
+GATA3,                         !STAT1
+HES1,                          NICD
+HEY1,                          NICD
+IGF1R_iT_2,                    IGF1R_iT
+IL8,                           STAT5
+MYC_targets,                   MYC | Translation
+MYC_targets_2,                 Translation&MYC_targets
+MYOD1,                         !HES1
+MYOG,                          MYOD1&!HEY1
+NICD,                          NOTCH1
+NOTCH1,                        MDM2&LCK&DLL
+PAX7,                          NOTCH1
+PPARG,                         !GATA3&CEBPB
+PTEN_T_2,                      PTEN_T
+Proliferation,                 MYC_targets&E2F_2
+Proliferation_2,               E2F_3
+Proliferation_3,               MYC_targets_2&E2F_2&E2F | MYC_targets_2&E2F_3&E2F_2
+STAT1,                         SRC&EGFRc | SRC&JAK2
+
+
+Reduced (percolated) bnet:
+ABL2,              ABL2
+BCL2_T,            BCL2_T
+BCLXL_T,           BCLXL_T
+BIM_T,             BIM_T
+DLL,               DLL
+EGF,               EGF
+HER3_iT,           HER3_iT
+IGF1,              IGF1
+IGF1R_iT,          IGF1R_iT
+INS,               INS
+LCK,               LCK
+MCL1_T,            MCL1_T
+MYC_T,             MYC_T
+NRG1,              NRG1
+PDK1_ic,           PDK1_ic
+PTEN_T,            PTEN_T
+SGK1_T,            SGK1_T
+WNT1,              WNT1
+p21_iT,            p21_iT
+p27_iT,            p27_iT
+
+AKT,               PIP3_2&PIP3&PDK1_pm | PIP3_2&CyclinB1 | mTORC2_pm
+APC,               AXIN1
+AXIN1,             GSK3B&!DVL1
+BAK1,              BID | p53&BIM | !MCL1
+BAX,               BIM&BAX | BID | p53&BIM
+BCLXL,             CREB1&BCLXL_T | !BIM&BCLXL_T
+BID,               CASP8
+BIM,               FOXO1&!ERK_2 | FOXO1&BIM_T | !BCLXL
+CASP3,             CASP8 | CASP9
+CASP8,             !SRC&!ERK | !ERK_2
+CASP9,             !ERK&CASP3&!AKT | !ERK&CYCS&!AKT | !PRKACA&!ERK_2&!ERK&!AKT
+CDKN2A,            !MYC | !MYC_2
+CREB1,             SGK1&!PTEN&AKT | SGK1&!PTEN_2&!PTEN
+CTNNB1,            YAP1&SRC&!DC | YAP1&WNT1&!DC
+CYCLINDc,          CyclinD&!CDKN2A
+CYCLINDc_2,        TEAD1&CyclinD_2&CYCLINDc
+CYCS,              BAX&BAK1
+CyclinB1,          !p53
+CyclinD,           !GSK3B
+CyclinD_2,         !GSK3B&CyclinD | RPS6&CyclinD
+DC,                GSK3B&APC
+DVL1,              FZD
+E2F,               !RB
+E2F_2,             !RB&E2F
+E2F_3,             E2F_3&E2F_2 | !RB&E2F_2
+ERK,               MEK
+ERK_2,             ERK
+FOXO1,             !SGK1&!AKT
+FZD,               CREB1
+GSK3B,             p53&GSK3B&!ERK&!AKT | p53&GSK3B&!ERK_2&!AKT
+KMT2D,             !AKT
+LATS1,             NF2
+MCL1,              MCL1_T&!GSK3B&ERK | !GSK3B&ERK_2&ERK
+MDM2,              AKT | p53
+MEK,               RAF1_2&RAF1 | RAF1&PDK1_pm
+MYC,               KMT2D&ERK&CTNNB1 | STAT3&KMT2D | KMT2D&!GSK3B | KMT2D&ERK_2 | STAT3&ERK | !GSK3B&ERK | ERK_2&ERK | !GSK3B&CTNNB1 | ERK_2&CTNNB1
+MYC_2,             MYC&ERK_2&ERK
+NEDD4L,            !S6K&!PRKACA | !SGK1&!PRKACA | !SGK1&!S6K
+NF2,               NEDD4L
+PDK1_pm,           PIP3
+PIP3,              !PTEN_2&!PTEN
+PIP3_2,            !PTEN_2&PIP3 | !PTEN&PIP3
+PRKACA,            WNT1&AKT
+PTEN,              PTEN_T&!GSK3B
+PTEN_2,            PTEN
+RAF1,              RPS6&PIP3 | PIP3_2&PIP3
+RAF1_2,            RAF1
+RB,                !pRB_2&!pRB | !pRB_3&!pRB_2
+RPS6,              S6K
+S6K,               ERK
+SGK1,              SGK1_T&PDK1_ic
+SRC,               PRKACA
+STAT3,             SRC
+TEAD1,             YAP1
+YAP1,              !LATS1
+cycE_CDK2,         cycE_CDK2_T
+cycE_CDK2_T,       E2F_2&E2F
+mTORC2_pm,         PIP3
+p38,               AKT
+p53,               p38&PTEN&!MDM2 | p38&PTEN_2&!MDM2 | p53&p38&!MDM2
+pRB,               cycE_CDK2&!RB&CYCLINDc | cycE_CDK2&CYCLINDc_2
+pRB_2,             pRB
+pRB_3,             pRB_2
+
+ABL1,              SRC&!RB
+Apoptosis_Y,       !BCL2 | !MCL1&!BCLXL
+Apoptosis_Z,       !MCL1&!BCLXL
+BCL2,              ERK_2&BCL2_T | ERK&BCL2_T | !BIM&BCL2_T
+CEBPB,             CREB1&ABL2
+FOXO3_Ub,          ERK | ERK_2
+GATA3,             !STAT1
+HER3,              HER3_iT
+HES1,              NICD
+HEY1,              NICD
+IGF1R,             INS&IGF1R_iT
+IGF1R_2,           IGF1R
+IGF1R_iT_2,        IGF1R_iT
+JAK2,              ABL1
+MEK_2,             MEK
+MYOD1,             !HES1
+MYOG,              MYOD1&!HEY1
+NF1,               !TWIST1
+NICD,              NOTCH1
+NOTCH1,            MDM2&LCK&DLL
+PAK2,              SRC
+PAX7,              NOTCH1
+PPARG,             !GATA3&CEBPB
+PRKAA2,            !PRKACA | STK11
+Proliferation,     E2F_2
+Proliferation_2,   E2F_3
+Proliferation_3,   E2F_3&E2F_2 | E2F_2&E2F
+RHEB,              !TSC2
+STAT1,             SRC&JAK2
+STK11,             !ERK
+TSC2,              !SGK1&GSK3B&!ERK&!AKT | !SGK1&PRKAA2&!ERK&!AKT
+TWIST1,            ERK_2&ERK&AKT
+p21,               !MYC_2&!MYC&!AKT | p21_iT_2&!MYC&!AKT | p21_iT&!MYC_2&!AKT | p21_iT_2&!MYC_2&!AKT | p21_iT_2&p21_iT&!AKT
+p21_iT_2,          p21_iT
+p21_p27_T,         p27_iT&p21_iT_2 | p21_iT
+
+
+TARGET_MODE=manual → 'Proliferation'
+Target nodes: ['Proliferation', 'Proliferation_2', 'Proliferation_3']
+  free (in percolated): ['Proliferation', 'Proliferation_2', 'Proliferation_3']
+  already fixed:        []
+  entity NAV — ldoi=0.5000  cw=0.0259  Δ=-0.4741
+
+Cone subgraph: 59 nodes, 116 edges (56 ancestors)
+wrote ancestor plot → /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_target_ancestors_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018.png
+
+All ancestor probes:
+   ancestor  value  self_loop  self_sustaining  target_fixed                                                    target_values  n_ldoi_fixed
+        AKT      0      False            False         False                                                             None            32
+        AKT      1      False            False         False                                                             None            17
+        APC      0      False            False         False                                                             None             2
+        APC      1      False            False         False                                                             None             1
+      AXIN1      0      False            False         False                                                             None             3
+      AXIN1      1      False            False         False                                                             None             2
+     CDKN2A      0      False            False         False                                                             None             1
+     CDKN2A      1      False            False          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            20
+      CREB1      0      False            False         False                                                             None             5
+      CREB1      1      False            False         False                                                             None             6
+     CTNNB1      0      False            False         False                                                             None             1
+     CTNNB1      1      False            False         False                                                             None             1
+   CYCLINDc      0      False            False          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            19
+   CYCLINDc      1      False            False         False                                                             None             1
+ CYCLINDc_2      0      False            False         False                                                             None             1
+ CYCLINDc_2      1      False            False         False                                                             None             1
+   CyclinB1      0      False            False         False                                                             None             1
+   CyclinB1      1      False            False         False                                                             None             1
+    CyclinD      0      False            False          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            21
+    CyclinD      1      False            False         False                                                             None             1
+  CyclinD_2      0      False            False         False                                                             None             2
+  CyclinD_2      1      False            False         False                                                             None             1
+         DC      0      False            False         False                                                             None             1
+         DC      1      False            False         False                                                             None             2
+       DVL1      0      False            False         False                                                             None             1
+       DVL1      1      False            False         False                                                             None             4
+        E2F      0      False             True          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            17
+        E2F      1      False            False         False                                                             None             1
+      E2F_2      0      False             True          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            17
+      E2F_2      1      False            False         False                                             {'Proliferation': 1}             2
+      E2F_3      0       True            False         False                                           {'Proliferation_2': 0}             2
+      E2F_3      1       True            False         False                                           {'Proliferation_2': 1}             2
+        ERK      0      False            False          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            37
+        ERK      1      False            False         False                                                             None            24
+      ERK_2      0      False            False          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            30
+      ERK_2      1      False            False         False                                                             None             2
+        FZD      0      False            False         False                                                             None             2
+        FZD      1      False            False         False                                                             None             5
+      GSK3B      0       True             True         False                                                             None             6
+      GSK3B      1       True            False          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            59
+      KMT2D      0      False            False         False                                                             None             1
+      KMT2D      1      False            False         False                                                             None             1
+      LATS1      0      False            False         False                                                             None             3
+      LATS1      1      False            False         False                                                             None             5
+       MDM2      0      False            False         False                                                             None             8
+       MDM2      1      False            False         False                                                             None             9
+        MEK      0      False            False          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            39
+        MEK      1      False            False         False                                                             None            26
+        MYC      0      False            False          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            22
+        MYC      1      False            False         False                                                             None             1
+      MYC_2      0      False            False          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            21
+      MYC_2      1      False            False         False                                                             None             1
+     NEDD4L      0      False            False         False                                                             None             5
+     NEDD4L      1      False            False         False                                                             None             7
+        NF2      0      False            False         False                                                             None             4
+        NF2      1      False            False         False                                                             None             6
+    PDK1_ic      0       True             True         False                                                             None             7
+    PDK1_ic      1       True             True         False                                                             None             1
+    PDK1_pm      0      False            False         False                                                             None             1
+    PDK1_pm      1      False            False         False                                                             None             1
+       PIP3      0      False            False          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            76
+       PIP3      1      False            False         False                                                             None            20
+     PIP3_2      0      False            False         False                                                             None             1
+     PIP3_2      1      False            False         False                                                             None             1
+     PRKACA      0      False            False         False                                                             None            10
+     PRKACA      1      False            False         False                                                             None             4
+       PTEN      0      False            False         False                                                             None            46
+       PTEN      1      False            False          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            82
+     PTEN_2      0      False            False         False                                                             None             1
+     PTEN_2      1      False            False          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            81
+     PTEN_T      0       True             True         False                                                             None            47
+     PTEN_T      1       True             True         False                                                             None             1
+       RAF1      0      False            False          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            41
+       RAF1      1      False            False         False                                                             None            28
+     RAF1_2      0      False            False         False                                                             None             1
+     RAF1_2      1      False            False         False                                                             None             1
+         RB      0      False            False          True {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}             9
+         RB      1      False             True          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            17
+       RPS6      0      False            False         False                                                             None             1
+       RPS6      1      False            False         False                                                             None             1
+        S6K      0      False            False         False                                                             None             2
+        S6K      1      False            False         False                                                             None             2
+       SGK1      0      False            False         False                                                             None             6
+       SGK1      1      False            False         False                                                             None             4
+     SGK1_T      0       True             True         False                                                             None             7
+     SGK1_T      1       True             True         False                                                             None             1
+        SRC      0      False            False         False                                                             None             8
+        SRC      1      False            False         False                                                             None             3
+      STAT3      0      False            False         False                                                             None             1
+      STAT3      1      False            False         False                                                             None             1
+      TEAD1      0      False            False         False                                                             None             2
+      TEAD1      1      False            False         False                                                             None             1
+       WNT1      0       True             True         False                                                             None            12
+       WNT1      1       True             True         False                                                             None             1
+       YAP1      0      False            False         False                                                             None             4
+       YAP1      1      False            False         False                                                             None             2
+  cycE_CDK2      0      False             True          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            17
+  cycE_CDK2      1      False            False         False                                                             None             1
+cycE_CDK2_T      0      False             True          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            17
+cycE_CDK2_T      1      False            False         False                                                             None             2
+  mTORC2_pm      0      False            False         False                                                             None             1
+  mTORC2_pm      1      False            False         False                                                             None            18
+        p38      0      False            False         False                                                             None             9
+        p38      1      False            False         False                                                             None             1
+        p53      0       True            False         False                                                             None             8
+        p53      1       True            False         False                                                             None             3
+        pRB      0      False             True          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            17
+        pRB      1      False            False          True {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}            12
+      pRB_2      0      False             True          True {'Proliferation': 0, 'Proliferation_2': 0, 'Proliferation_3': 0}            17
+      pRB_2      1      False            False          True {'Proliferation': 1, 'Proliferation_2': 1, 'Proliferation_3': 1}            11
+      pRB_3      0      False            False         False                                                             None             1
+      pRB_3      1      False            False         False                                                             None             1
+
+
+finished (UTC): 2026-10-20T13:35:50.934367+00:00

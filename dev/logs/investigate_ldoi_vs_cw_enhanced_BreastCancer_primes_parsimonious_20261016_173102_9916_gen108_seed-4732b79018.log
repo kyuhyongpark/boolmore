@@ -1,0 +1,196 @@
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018.log
+CW cache: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/cw_walker_nav_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_w2048_T16505_tw4126.pkl
+started (UTC): 2026-10-20T13:42:11.727026+00:00
+model pkl:  /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/20261016_173102/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.pkl
+model bnet: /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/20261016_173102/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.bnet
+SEED={'Alpelisib': 1, 'ER': 1, 'ES': 1, 'HER2': 0, 'PBX1': 1, 'PIM': 1, 'PTEN_T_2': 0, 'Rb_T': 1}
+FORCE_RECOMPUTE=False  SMOKE=False
+
+Model nodes : 191
+Entities    : 161 (24 merged)
+cubewalkers T=16505  T_WINDOW=4126  walkers=2048
+
+cache hit — skipping cubewalkers gate (cw_walker_nav_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_w2048_T16505_tw4126.pkl)
+
+loaded CW walker_nav from /home/kyuhyongpark/Boolmore/boolmore/dev/logs/cw_walker_nav_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_w2048_T16505_tw4126.pkl
+  shape=(191, 2048)
+LDOI fixed nodes: 73 / 191
+  Alpelisib=1, Apoptosis_X=0, BAD=0, CDK46=1, EGFR=0, EGFRHER3c=0, EGFRc=0, EIF4=1, EIF4EBP1=0, ER=1, ER_transcription=0, ER_transcription_2=0, ER_transcription_feedback=0, ER_transcription_feedback_1=0, ER_transcription_feedback_2=0, ES=1, ESR1=0, ESR1_2=0, Everolimus=0, FADD=0, FAS=0, FASLG=0, FOXA1=0, FOXO3=0, Fulvestrant=0, GRB2=0, HER2=0, HER2HER2c=0, HER2HER3c=0, HER2HER3c_2=0, HER3_2=0, HRAS=0, IL1B=0, IL6=0, IL6R=0, IL8=0, INSR=0, IRS1=0, Ipatasertib=0, JUN=0, KRT14=0, MAPK8=0, MYC_targets=1, MYC_targets_2=1, NFKB=0, Navitoclax=0, Neratinib=0, PAK1=0, PBX1=1, PI3K=0, PI3K_2=0, PIM=1, PRAS40=0, PTEN_T_2=0, Palbociclib=0, RAC1=0, RAS=0, RAS_2=0, RAS_3=0, Rb_T=1, S63845=0, SOS1=0, STAT5=0, TCF7L2=0, TRADD=1, Trametinib=0, Translation=1, erlotinib=0, mTORC1=1, mTORC2_ic=1, p21_p27=0, pertuzumab=0, trastuzumab=0
+CW timings: total=168.124s  setup=0.199s  sim=167.495s
+Nodes changed by ldoi_enhanced: 75 / 191
+
+Top node |Δ| vs CW (sorted by plain LDOI error):
+           node  ldoi  enhanced       cw  abs_delta_ldoi  abs_delta_enhanced  improved
+            APC   0.5   0.12500 0.000000        0.500000            0.125000      True
+          AXIN1   0.5   0.12500 0.000000        0.500000            0.125000      True
+       CyclinB1   0.5   0.75000 1.000000        0.500000            0.250000      True
+      CyclinD_2   0.5   0.87500 1.000000        0.500000            0.125000      True
+             DC   0.5   0.12500 0.000000        0.500000            0.125000      True
+        CyclinD   0.5   0.87500 1.000000        0.500000            0.125000      True
+          GSK3B   0.5   0.12500 0.000000        0.500000            0.125000      True
+            MYC   0.5   0.75000 1.000000        0.500000            0.250000      True
+            p53   0.5   0.25000 0.000000        0.500000            0.250000      True
+          PPARG   0.5   0.03125 0.000977        0.499023            0.030273      True
+           JAK2   0.5   0.25000 0.013672        0.486328            0.236328      True
+          STAT1   0.5   0.25000 0.013672        0.486328            0.236328      True
+          GATA3   0.5   0.75000 0.986328        0.486328            0.236328      True
+           ABL1   0.5   0.25000 0.013672        0.486328            0.236328      True
+            E2F   0.5   0.50000 0.025879        0.474121            0.474121     False
+    cycE_CDK2_T   0.5   0.50000 0.025879        0.474121            0.474121     False
+          pRB_2   0.5   0.50000 0.025879        0.474121            0.474121     False
+            pRB   0.5   0.50000 0.025879        0.474121            0.474121     False
+  Proliferation   0.5   0.50000 0.025879        0.474121            0.474121     False
+             RB   0.5   0.50000 0.974121        0.474121            0.474121     False
+      cycE_CDK2   0.5   0.50000 0.025879        0.474121            0.474121     False
+Proliferation_3   0.5   0.50000 0.025879        0.474121            0.474121     False
+Proliferation_2   0.5   0.50000 0.025879        0.474121            0.474121     False
+          pRB_3   0.5   0.50000 0.025879        0.474121            0.474121     False
+          E2F_3   0.5   0.50000 0.025879        0.474121            0.474121     False
+          E2F_2   0.5   0.50000 0.025879        0.474121            0.474121     False
+          CEBPB   0.5   0.06250 0.058105        0.441895            0.004395      True
+          CREB1   0.5   0.12500 0.121582        0.378418            0.003418      True
+           DVL1   0.5   0.12500 0.121582        0.378418            0.003418      True
+            FZD   0.5   0.12500 0.121582        0.378418            0.003418      True
+
+All nodes vs CW: improved=39  worsened=36  unchanged_error=116  (of 191)
+mean |Δ| ldoi=0.1193  enhanced=0.0998
+median |Δ| ldoi=0.0034  enhanced=0.0049
+
+Nodes changed by enhancement (75):
+       node  ldoi  enhanced       cw  abs_delta_ldoi  abs_delta_enhanced  improved
+        APC   0.5   0.12500 0.000000        0.500000            0.125000      True
+      AXIN1   0.5   0.12500 0.000000        0.500000            0.125000      True
+   CyclinB1   0.5   0.75000 1.000000        0.500000            0.250000      True
+  CyclinD_2   0.5   0.87500 1.000000        0.500000            0.125000      True
+         DC   0.5   0.12500 0.000000        0.500000            0.125000      True
+    CyclinD   0.5   0.87500 1.000000        0.500000            0.125000      True
+      GSK3B   0.5   0.12500 0.000000        0.500000            0.125000      True
+        MYC   0.5   0.75000 1.000000        0.500000            0.250000      True
+        p53   0.5   0.25000 0.000000        0.500000            0.250000      True
+      PPARG   0.5   0.03125 0.000977        0.499023            0.030273      True
+       JAK2   0.5   0.25000 0.013672        0.486328            0.236328      True
+      STAT1   0.5   0.25000 0.013672        0.486328            0.236328      True
+      GATA3   0.5   0.75000 0.986328        0.486328            0.236328      True
+       ABL1   0.5   0.25000 0.013672        0.486328            0.236328      True
+      CEBPB   0.5   0.06250 0.058105        0.441895            0.004395      True
+      CREB1   0.5   0.12500 0.121582        0.378418            0.003418      True
+       DVL1   0.5   0.12500 0.121582        0.378418            0.003418      True
+        FZD   0.5   0.12500 0.121582        0.378418            0.003418      True
+      MYOD1   0.5   0.87500 0.873047        0.373047            0.001953      True
+       HEY1   0.5   0.12500 0.126953        0.373047            0.001953      True
+       MYOG   0.5   0.87500 0.873047        0.373047            0.001953      True
+       HES1   0.5   0.12500 0.126953        0.373047            0.001953      True
+     NOTCH1   0.5   0.12500 0.126953        0.373047            0.001953      True
+       NICD   0.5   0.12500 0.126953        0.373047            0.001953      True
+       PAX7   0.5   0.12500 0.126953        0.373047            0.001953      True
+        BIM   0.5   0.75000 0.863281        0.363281            0.113281      True
+      BCLXL   0.5   0.25000 0.136719        0.363281            0.113281      True
+        p21   0.5   0.25000 0.230957        0.269043            0.019043      True
+       SGK1   0.5   0.12500 0.241699        0.258301            0.116699      True
+      IGF1R   0.5   0.12500 0.245605        0.254395            0.120605      True
+    IGF1R_2   0.5   0.12500 0.245605        0.254395            0.120605      True
+       PAK2   0.5   0.25000 0.247070        0.252930            0.002930      True
+     PRKACA   0.5   0.25000 0.247070        0.252930            0.002930      True
+     PRKAA2   0.5   0.75000 0.752930        0.252930            0.002930      True
+        SRC   0.5   0.25000 0.247070        0.252930            0.002930      True
+     CTNNB1   0.5   0.25000 0.247070        0.252930            0.002930      True
+      STAT3   0.5   0.25000 0.247070        0.252930            0.002930      True
+Apoptosis_Y   0.5   0.75000 0.731934        0.231934            0.018066      True
+       BCL2   0.5   0.25000 0.268066        0.231934            0.018066      True
+       RHEB   0.5   0.75000 0.623535        0.123535            0.126465     False
+changed nodes: improved=39/75  mean |Δ| ldoi=0.2051  enhanced=0.1554
+
+Top entity |Δ| vs CW (sorted by plain LDOI error):
+       entity  ldoi  enhanced       cw  abs_delta_ldoi  abs_delta_enhanced  improved
+      CyclinD   0.5   0.87500 1.000000        0.500000            0.125000      True
+        AXIN1   0.5   0.12500 0.000000        0.500000            0.125000      True
+          APC   0.5   0.12500 0.000000        0.500000            0.125000      True
+     CyclinB1   0.5   0.75000 1.000000        0.500000            0.250000      True
+           DC   0.5   0.12500 0.000000        0.500000            0.125000      True
+          p53   0.5   0.25000 0.000000        0.500000            0.250000      True
+        GSK3B   0.5   0.12500 0.000000        0.500000            0.125000      True
+        PPARG   0.5   0.03125 0.000977        0.499023            0.030273      True
+         ABL1   0.5   0.25000 0.013672        0.486328            0.236328      True
+        GATA3   0.5   0.75000 0.986328        0.486328            0.236328      True
+         JAK2   0.5   0.25000 0.013672        0.486328            0.236328      True
+        STAT1   0.5   0.25000 0.013672        0.486328            0.236328      True
+Proliferation   0.5   0.50000 0.025879        0.474121            0.474121     False
+          pRB   0.5   0.50000 0.025879        0.474121            0.474121     False
+          E2F   0.5   0.50000 0.025879        0.474121            0.474121     False
+    cycE_CDK2   0.5   0.50000 0.025879        0.474121            0.474121     False
+           RB   0.5   0.50000 0.974121        0.474121            0.474121     False
+  cycE_CDK2_T   0.5   0.50000 0.025879        0.474121            0.474121     False
+        CEBPB   0.5   0.06250 0.058105        0.441895            0.004395      True
+        CREB1   0.5   0.12500 0.121582        0.378418            0.003418      True
+
+Entities: mean |Δ| ldoi=0.1155  enhanced=0.0858  improved=36/161
+
+Entities changed by enhancement (65):
+   entity  ldoi  enhanced       cw  abs_delta_ldoi  abs_delta_enhanced  improved
+  CyclinD   0.5   0.87500 1.000000        0.500000            0.125000      True
+    AXIN1   0.5   0.12500 0.000000        0.500000            0.125000      True
+      APC   0.5   0.12500 0.000000        0.500000            0.125000      True
+ CyclinB1   0.5   0.75000 1.000000        0.500000            0.250000      True
+       DC   0.5   0.12500 0.000000        0.500000            0.125000      True
+      p53   0.5   0.25000 0.000000        0.500000            0.250000      True
+    GSK3B   0.5   0.12500 0.000000        0.500000            0.125000      True
+    PPARG   0.5   0.03125 0.000977        0.499023            0.030273      True
+     ABL1   0.5   0.25000 0.013672        0.486328            0.236328      True
+    GATA3   0.5   0.75000 0.986328        0.486328            0.236328      True
+     JAK2   0.5   0.25000 0.013672        0.486328            0.236328      True
+    STAT1   0.5   0.25000 0.013672        0.486328            0.236328      True
+    CEBPB   0.5   0.06250 0.058105        0.441895            0.004395      True
+    CREB1   0.5   0.12500 0.121582        0.378418            0.003418      True
+      FZD   0.5   0.12500 0.121582        0.378418            0.003418      True
+     DVL1   0.5   0.12500 0.121582        0.378418            0.003418      True
+     HEY1   0.5   0.12500 0.126953        0.373047            0.001953      True
+    MYOD1   0.5   0.87500 0.873047        0.373047            0.001953      True
+     MYOG   0.5   0.87500 0.873047        0.373047            0.001953      True
+   NOTCH1   0.5   0.12500 0.126953        0.373047            0.001953      True
+     HES1   0.5   0.12500 0.126953        0.373047            0.001953      True
+     NICD   0.5   0.12500 0.126953        0.373047            0.001953      True
+     PAX7   0.5   0.12500 0.126953        0.373047            0.001953      True
+    BCLXL   0.5   0.25000 0.136719        0.363281            0.113281      True
+      BIM   0.5   0.75000 0.863281        0.363281            0.113281      True
+      p21   0.5   0.25000 0.230957        0.269043            0.019043      True
+     SGK1   0.5   0.12500 0.241699        0.258301            0.116699      True
+    IGF1R   0.5   0.12500 0.245605        0.254395            0.120605      True
+   PRKACA   0.5   0.25000 0.247070        0.252930            0.002930      True
+   PRKAA2   0.5   0.75000 0.752930        0.252930            0.002930      True
+     PAK2   0.5   0.25000 0.247070        0.252930            0.002930      True
+   CTNNB1   0.5   0.25000 0.247070        0.252930            0.002930      True
+      SRC   0.5   0.25000 0.247070        0.252930            0.002930      True
+    STAT3   0.5   0.25000 0.247070        0.252930            0.002930      True
+      MYC   0.5   0.75000 0.751709        0.251709            0.001709      True
+     BCL2   0.5   0.25000 0.268066        0.231934            0.018066      True
+    FOXO1   0.5   0.25000 0.376465        0.123535            0.126465     False
+     TSC2   0.5   0.25000 0.376465        0.123535            0.126465     False
+     RHEB   0.5   0.75000 0.623535        0.123535            0.126465     False
+ CYCLINDc   0.5   0.62500 0.406006        0.093994            0.218994     False
+mTORC2_pm   0.5   0.75000 0.503418        0.003418            0.246582     False
+      p38   0.5   0.75000 0.503418        0.003418            0.246582     False
+      S6K   0.5   0.75000 0.503418        0.003418            0.246582     False
+     MDM2   0.5   0.75000 0.503418        0.003418            0.246582     False
+      NF1   0.5   0.25000 0.496582        0.003418            0.246582     False
+    CASP9   0.5   0.25000 0.496582        0.003418            0.246582     False
+     PIP3   0.5   0.75000 0.503418        0.003418            0.246582     False
+     PTEN   0.5   0.25000 0.496582        0.003418            0.246582     False
+     RAF1   0.5   0.75000 0.503418        0.003418            0.246582     False
+     BAK1   0.5   0.25000 0.496582        0.003418            0.246582     False
+      AKT   0.5   0.75000 0.503418        0.003418            0.246582     False
+      ERK   0.5   0.75000 0.503418        0.003418            0.246582     False
+      MEK   0.5   0.75000 0.503418        0.003418            0.246582     False
+    STK11   0.5   0.25000 0.496582        0.003418            0.246582     False
+  PDK1_pm   0.5   0.75000 0.503418        0.003418            0.246582     False
+     RPS6   0.5   0.75000 0.503418        0.003418            0.246582     False
+   TWIST1   0.5   0.75000 0.503418        0.003418            0.246582     False
+    KMT2D   0.5   0.25000 0.496582        0.003418            0.246582     False
+   CDKN2A   0.5   0.25000 0.496582        0.003418            0.246582     False
+     CYCS   0.5   0.25000 0.496582        0.003418            0.246582     False
+    CASP3   0.5   0.25000 0.496582        0.003418            0.246582     False
+     MCL1   0.5   0.75000 0.503418        0.003418            0.246582     False
+ FOXO3_Ub   0.5   0.75000 0.503418        0.003418            0.246582     False
+      BID   0.5   0.25000 0.496582        0.003418            0.246582     False
+    CASP8   0.5   0.25000 0.496582        0.003418            0.246582     False
+
+finished (UTC): 2026-10-20T13:42:11.995596+00:00
