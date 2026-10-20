@@ -1,8 +1,10 @@
 import logging
 from collections import defaultdict
+from itertools import combinations, product
 from time import perf_counter
 from dataclasses import dataclass
 
+import networkx as nx
 from pyboolnet.trap_spaces import compute_trapspaces_within_subspace, compute_trap_spaces
 
 from boolmore.experiment import PhenotypeExperiment, NAVExperiment
@@ -12,6 +14,7 @@ from boolmore.inference.ldoi import _implicant_implied_by, logical_domain_of_inf
 from boolmore.types import Assignment
 
 NAV_METHODS = ("min_traps", "ldoi", "ldoi_enhanced")
+LDOI_ENHANCED_CUTOFF_MAX = 4
 
 
 @dataclass(frozen=True)
@@ -369,44 +372,93 @@ def _is_self_sustaining(
     )
 
 
-def _enhanced_nav_from_forcers(
-    forcers_by_ancestor: dict[str, dict[int, int]],
-) -> float:
-    """Expected NAV from self-sustaining self-loop forcers of one free node.
+def _interaction_digraph(primes: dict) -> nx.DiGraph:
+    """Regulatory digraph: edge ``u→v`` if ``u`` appears in any implicant of ``v``."""
+    digraph = nx.DiGraph()
+    digraph.add_nodes_from(primes)
+    for target, prime in primes.items():
+        for value in (0, 1):
+            for implicant in prime[value]:
+                for regulator in implicant:
+                    digraph.add_edge(regulator, target)
+    return digraph
 
-    ``forcers_by_ancestor[A][v] = forced_value_of_node`` for qualifying
-    states. Ancestors that cover both values consume all remaining mass
-    first (50/50 over ``A=0`` and ``A=1``); one-sided ancestors then each
-    take half of what is left. Unknown remainder contributes ``0.5``.
+
+def _sc_subsets_by_size(
+    primes: dict,
+    cutoff: int,
+) -> dict[int, list[tuple[str, ...]]]:
+    """Strongly connected subsets of size ``1..cutoff``, keyed by size.
+
+    Size 1: nodes with a self-loop in the primes. Size ``k≥2``: every
+    ``k``-set whose induced interaction digraph is strongly connected
+    (including nested cycles inside larger SCCs).
     """
-    if not forcers_by_ancestor:
+    if not 1 <= cutoff <= LDOI_ENHANCED_CUTOFF_MAX:
+        raise ValueError(
+            f"cutoff must be in 1..{LDOI_ENHANCED_CUTOFF_MAX}, got {cutoff}"
+        )
+
+    digraph = _interaction_digraph(primes)
+    nodes = sorted(primes)
+    by_size: dict[int, list[tuple[str, ...]]] = {}
+
+    by_size[1] = [
+        (node,) for node in nodes if _node_has_self_loop(primes, node)
+    ]
+
+    if cutoff >= 2:
+        pairs: list[tuple[str, ...]] = []
+        for a, b in combinations(nodes, 2):
+            if digraph.has_edge(a, b) and digraph.has_edge(b, a):
+                pairs.append((a, b))
+        by_size[2] = pairs
+
+    for k in range(3, cutoff + 1):
+        subsets: list[tuple[str, ...]] = []
+        for combo in combinations(nodes, k):
+            if nx.is_strongly_connected(digraph.subgraph(combo)):
+                subsets.append(combo)
+        by_size[k] = subsets
+
+    return by_size
+
+
+def _enhanced_nav_from_forcers(
+    forcers_by_component: dict[tuple[str, ...], dict[tuple[int, ...], int]],
+) -> float:
+    """Expected NAV from self-sustaining SC-subset forcers of one free node.
+
+    ``forcers_by_component[component][state] = forced_value`` where
+    ``component`` is a sorted node tuple and ``state`` holds values in the
+    same order. Process by increasing component size; within a size,
+    lexicographic component order. A size-``k`` forcer with ``x`` present
+    states consumes mass ``x / 2^k`` of remaining (each state gets
+    ``remaining / 2^k``). Unknown remainder contributes ``0.5``.
+    """
+    if not forcers_by_component:
         return 0.5
 
-    both = sorted(
-        (A, d) for A, d in forcers_by_ancestor.items() if 0 in d and 1 in d
+    by_size: dict[int, list[tuple[tuple[str, ...], dict[tuple[int, ...], int]]]] = (
+        defaultdict(list)
     )
-    one = sorted(
-        (A, d) for A, d in forcers_by_ancestor.items() if len(d) == 1
-    )
+    for component, states in forcers_by_component.items():
+        by_size[len(component)].append((component, states))
 
     remaining = 1.0
     expected = 0.0
 
-    for _A, d in both:
-        if remaining <= 0:
-            break
-        for v in (0, 1):
-            mass = remaining * 0.5
-            expected += mass * float(d[v])
-        remaining = 0.0
-
-    for _A, d in one:
-        if remaining <= 0:
-            break
-        _v, val = next(iter(d.items()))
-        mass = remaining * 0.5
-        expected += mass * float(val)
-        remaining *= 0.5
+    for k in sorted(by_size):
+        for _component, states in sorted(by_size[k], key=lambda item: item[0]):
+            if remaining <= 0:
+                break
+            x = len(states)
+            if x == 0:
+                continue
+            mass_per_state = remaining / (1 << k)
+            for state in sorted(states):
+                expected += mass_per_state * float(states[state])
+            remaining *= 1.0 - x / (1 << k)
 
     if remaining > 0:
         expected += remaining * 0.5
@@ -417,52 +469,77 @@ def _enhanced_nav_from_forcers(
 def _nav_from_ldoi_enhanced(
     primes,
     perturbation: dict[str, int],
+    *,
+    cutoff: int = 1,
+    sc_subsets: dict[int, list[tuple[str, ...]]] | None = None,
 ) -> dict[str, float]:
-    """LDOI NAV refined by self-loop + self-sustaining free-node forcers.
+    """LDOI NAV refined by self-sustaining SC-subset forcers.
 
-    Starts from plain LDOI (forced → 0/1, else 0.5). Free nodes with a
-    self-loop are probed at 0 and 1 (combined with ``perturbation``); those
-    states that self-sustain contribute probability mass that can move
-    downstream free-node NAV away from 0.5.
+    Starts from plain LDOI (forced → 0/1, else 0.5). Free strongly
+    connected subsets of size ``1..cutoff`` are probed over all ``2^k``
+    joint assignments (combined with ``perturbation``); assignments that
+    self-sustain for every member contribute probability mass that can
+    move downstream free-node NAV away from 0.5.
+
+    Parameters
+    ----------
+    cutoff : int, default 1
+        Maximum SC-subset size to probe (``1..4``). ``1`` is self-loops only.
+    sc_subsets : optional
+        Precomputed output of :func:`_sc_subsets_by_size`; computed from
+        ``primes`` when omitted.
     """
+    if not 1 <= cutoff <= LDOI_ENHANCED_CUTOFF_MAX:
+        raise ValueError(
+            f"cutoff must be in 1..{LDOI_ENHANCED_CUTOFF_MAX}, got {cutoff}"
+        )
+
     fixed = logical_domain_of_influence(primes, perturbation)
     nav = {
         node: float(fixed[node]) if node in fixed else 0.5
         for node in primes
     }
 
-    free = [node for node in primes if node not in fixed]
-    if not free:
+    free_set = {node for node in primes if node not in fixed}
+    if not free_set:
         return nav
 
-    candidates = [node for node in free if _node_has_self_loop(primes, node)]
-    if not candidates:
-        return nav
+    if sc_subsets is None:
+        sc_subsets = _sc_subsets_by_size(primes, cutoff)
 
-    # forcers_for_node[N] = list of (A, v, forced_value)
-    forcers_for_node: dict[str, list[tuple[str, int, int]]] = defaultdict(list)
-    for A in candidates:
-        for v in (0, 1):
-            seed = dict(perturbation)
-            seed[A] = v
-            closure = logical_domain_of_influence(primes, seed)
-            if not _is_self_sustaining(primes, closure, A, v):
+    # forcers_for_node[N][component][state] = forced_value
+    forcers_for_node: dict[
+        str, dict[tuple[str, ...], dict[tuple[int, ...], int]]
+    ] = defaultdict(lambda: defaultdict(dict))
+
+    for k in range(1, cutoff + 1):
+        for component in sc_subsets.get(k, ()):
+            if not free_set.issuperset(component):
                 continue
-            for n, val in closure.items():
-                if n not in free:
+            for state in product((0, 1), repeat=k):
+                seed = dict(perturbation)
+                seed.update(zip(component, state, strict=True))
+                closure = logical_domain_of_influence(primes, seed)
+                if not all(
+                    _is_self_sustaining(primes, closure, node, value)
+                    for node, value in zip(component, state, strict=True)
+                ):
                     continue
-                forcers_for_node[n].append((A, v, int(val)))
+                for n, val in closure.items():
+                    if n not in free_set:
+                        continue
+                    prev = forcers_for_node[n][component].get(state)
+                    if prev is not None and prev != int(val):
+                        raise ValueError(
+                            f"{n}: same state {component}={state} claimed both "
+                            f"{prev} and {val}"
+                        )
+                    forcers_for_node[n][component][state] = int(val)
 
-    for N, forcers in forcers_for_node.items():
-        by_anc: dict[str, dict[int, int]] = defaultdict(dict)
-        for A, v, val in forcers:
-            if v in by_anc[A] and by_anc[A][v] != val:
-                raise ValueError(
-                    f"{N}: same state {A}={v} claimed both "
-                    f"{by_anc[A][v]} and {val}"
-                )
-            by_anc[A][v] = val
-        nav[N] = _enhanced_nav_from_forcers(dict(by_anc))
+    for N, by_component in forcers_for_node.items():
+        nav[N] = _enhanced_nav_from_forcers(
+            {comp: dict(states) for comp, states in by_component.items()}
+        )
 
     return nav
 
@@ -511,6 +588,7 @@ def get_NAV_prediction(
     experiments: list[NAVExperiment],
     *,
     method: str = "min_traps",
+    cutoff: int = 1,
 ) -> dict[Assignment, NAVPrediction]:
     """Predict average attractor values for each unique NAV intervention.
 
@@ -536,8 +614,11 @@ def get_NAV_prediction(
           Only credible when the model does not rely heavily on
           oscillatory behavior (free nodes → 0.5; oscillations unresolved).
         - ``"ldoi_enhanced"``: plain LDOI plus probability-mass refinement
-          from free nodes that have a self-loop and self-sustain at 0
-          and/or 1 (opt-in; default remains ``"min_traps"``).
+          from free strongly connected subsets of size ``1..cutoff`` that
+          self-sustain (opt-in; default remains ``"min_traps"``).
+    cutoff : int, default 1
+        Maximum SC-subset size for ``method="ldoi_enhanced"`` (``1..4``).
+        Ignored for other methods.
 
     Returns
     -------
@@ -568,21 +649,35 @@ def get_NAV_prediction(
             f"expected one of {NAV_METHODS}"
         )
 
-    if method == "min_traps":
-        compute_average = _nav_from_min_traps
-    elif method == "ldoi_enhanced":
-        compute_average = _nav_from_ldoi_enhanced
-    else:
-        compute_average = _nav_from_ldoi
-
     interventions = sorted({exp.fixes for exp in experiments})
 
     predictions: dict[Assignment, NAVPrediction] = {}
-    for fixes in interventions:
-        perturbation = assignment_to_dict(fixes)
-        predictions[fixes] = NAVPrediction(
-            fixes=fixes,
-            average_values=compute_average(primes, perturbation),
-        )
+    if method == "min_traps":
+        for fixes in interventions:
+            perturbation = assignment_to_dict(fixes)
+            predictions[fixes] = NAVPrediction(
+                fixes=fixes,
+                average_values=_nav_from_min_traps(primes, perturbation),
+            )
+    elif method == "ldoi_enhanced":
+        sc_subsets = _sc_subsets_by_size(primes, cutoff)
+        for fixes in interventions:
+            perturbation = assignment_to_dict(fixes)
+            predictions[fixes] = NAVPrediction(
+                fixes=fixes,
+                average_values=_nav_from_ldoi_enhanced(
+                    primes,
+                    perturbation,
+                    cutoff=cutoff,
+                    sc_subsets=sc_subsets,
+                ),
+            )
+    else:
+        for fixes in interventions:
+            perturbation = assignment_to_dict(fixes)
+            predictions[fixes] = NAVPrediction(
+                fixes=fixes,
+                average_values=_nav_from_ldoi(primes, perturbation),
+            )
 
     return predictions

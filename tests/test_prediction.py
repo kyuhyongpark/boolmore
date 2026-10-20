@@ -11,6 +11,7 @@ from boolmore.inference.prediction import (
     _nav_from_ldoi,
     _nav_from_ldoi_enhanced,
     _nav_from_min_traps,
+    _sc_subsets_by_size,
     get_NAV_prediction,
     get_phenotype_prediction,
 )
@@ -291,20 +292,56 @@ class TestLdoiEnhanced(unittest.TestCase):
 
     def test_enhanced_nav_from_forcers_mass_allocation(self):
         self.assertEqual(_enhanced_nav_from_forcers({}), 0.5)
-        # Both states of one ancestor: full remaining mass 50/50.
+        # Both states of one size-1 ancestor: full remaining mass 50/50.
         self.assertEqual(
-            _enhanced_nav_from_forcers({"A": {0: 0, 1: 1}}),
+            _enhanced_nav_from_forcers({("A",): {(0,): 0, (1,): 1}}),
             0.5,
         )
-        # One-sided: half mass at forced value, half unknown → 0.5.
+        # One-sided: half mass at forced value, half unknown → 0.75.
         self.assertEqual(
-            _enhanced_nav_from_forcers({"A": {1: 1}}),
+            _enhanced_nav_from_forcers({("A",): {(1,): 1}}),
             0.75,
         )
         # Two independent one-sided forcers forcing 0: 0.5 then 0.25 mass at 0.
         self.assertEqual(
-            _enhanced_nav_from_forcers({"A": {0: 0}, "B": {0: 0}}),
+            _enhanced_nav_from_forcers(
+                {("A",): {(0,): 0}, ("B",): {(0,): 0}}
+            ),
             0.125,
+        )
+
+    def test_enhanced_nav_from_forcers_size_two_mass(self):
+        # 1 of 4 states forcing 1: mass 1/4 at 1, remainder 0.5 → 0.625.
+        self.assertEqual(
+            _enhanced_nav_from_forcers({("A", "B"): {(0, 1): 1}}),
+            0.625,
+        )
+        # 3 of 4 states forcing 0: mass 3/4 at 0, remainder 0.5 → 0.125.
+        self.assertEqual(
+            _enhanced_nav_from_forcers(
+                {
+                    ("A", "B"): {
+                        (0, 0): 0,
+                        (0, 1): 0,
+                        (1, 0): 0,
+                    }
+                }
+            ),
+            0.125,
+        )
+        # All 4 states: consume all remaining equally.
+        self.assertEqual(
+            _enhanced_nav_from_forcers(
+                {
+                    ("A", "B"): {
+                        (0, 0): 0,
+                        (0, 1): 0,
+                        (1, 0): 1,
+                        (1, 1): 1,
+                    }
+                }
+            ),
+            0.5,
         )
 
     def test_nav_from_ldoi_enhanced_one_sided_forcer(self):
@@ -328,6 +365,37 @@ class TestLdoiEnhanced(unittest.TestCase):
         ]
         preds = get_NAV_prediction(primes, experiments, method="ldoi_enhanced")
         self.assertEqual(preds[()].average_values["C"], 0.125)
+
+    def test_sc_subsets_nested_two_cycle(self):
+        # A↔B nested in the larger SCC {A,B,C}.
+        primes = bnet_text2primes("A, B\nB, A | C\nC, A\n")
+        subsets = _sc_subsets_by_size(primes, cutoff=2)
+        self.assertEqual(subsets[1], [])
+        self.assertIn(("A", "B"), subsets[2])
+
+    def test_nav_from_ldoi_enhanced_cutoff_two_mutual_cycle(self):
+        # A↔B needs free Z for ON, so only (A,B)=(0,0) self-sustains and
+        # forces C=0. No self-loops → cutoff=1 matches plain LDOI.
+        primes = bnet_text2primes("A, B & Z\nB, A & Z\nC, A\nZ, !X\nX, !Z\n")
+        plain = _nav_from_ldoi(primes, {})
+        cut1 = _nav_from_ldoi_enhanced(primes, {}, cutoff=1)
+        cut2 = _nav_from_ldoi_enhanced(primes, {}, cutoff=2)
+
+        self.assertEqual(cut1, plain)
+        self.assertEqual(cut1["C"], 0.5)
+        self.assertLess(cut2["C"], cut1["C"])
+        self.assertEqual(cut2["C"], cut2["A"])
+
+    def test_ldoi_enhanced_cutoff_validation(self):
+        primes = bnet_text2primes("A, A\n")
+        with self.assertRaises(ValueError):
+            _nav_from_ldoi_enhanced(primes, {}, cutoff=0)
+        with self.assertRaises(ValueError):
+            _nav_from_ldoi_enhanced(primes, {}, cutoff=5)
+        with self.assertRaises(ValueError):
+            _sc_subsets_by_size(primes, cutoff=0)
+        with self.assertRaises(ValueError):
+            _sc_subsets_by_size(primes, cutoff=5)
 
 
 def _serialize_nav_predictions(preds) -> list[dict]:
