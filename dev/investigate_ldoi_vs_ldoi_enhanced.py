@@ -5,7 +5,9 @@
 #
 # 1. Load or compute per-walker cubewalkers NAV (pickled for reuse / bootstrap)
 # 2. Compute plain ``_nav_from_ldoi`` and ``_nav_from_ldoi_enhanced`` for
-#    cutoffs ``1..3`` (SC subsets built once at max cutoff, shared across calls)
+#    cutoffs ``1..3`` (SC subsets built once at max cutoff, shared across calls).
+#    With ``USE_JOINT_SELF_LOOPS``, also run enhanced with ``joint_self_loops=True``
+#    (joint probes over already sustaining SC states) side-by-side.
 # 3. Compare overall node average values vs CW means and plot |Δ| distributions
 #    plus wall-clock compute time per method (LDOI / enhanced / CW)
 #
@@ -88,6 +90,8 @@ SEED: dict[str, int] = {
 
 # ldoi_enhanced SC-subset size cutoffs to compare against plain LDOI / CW.
 ENHANCED_CUTOFFS: tuple[int, ...] = (1, 2, 3)
+# Also run enhanced with joint_self_loops=True (side-by-side columns).
+USE_JOINT_SELF_LOOPS = True
 
 N_WALKERS = 2048
 N_TIME_STEPS: int | None = None  # None → 55*N + 6000
@@ -113,12 +117,19 @@ SEED_HASH = _seed_hash(SEED)
 
 METHOD_LDOI = "ldoi"
 METHOD_ENH = {c: f"enhanced(c={c})" for c in ENHANCED_CUTOFFS}
+METHOD_ENHJ = {c: f"enhanced+j(c={c})" for c in ENHANCED_CUTOFFS}
 METHOD_ORDER = [METHOD_LDOI] + [METHOD_ENH[c] for c in ENHANCED_CUTOFFS]
+if USE_JOINT_SELF_LOOPS:
+    METHOD_ORDER = METHOD_ORDER + [METHOD_ENHJ[c] for c in ENHANCED_CUTOFFS]
 # Shorter column keys for tables / CSV
 ABS_COL_SHORT = {
     METHOD_LDOI: "abs_delta_ldoi",
     **{METHOD_ENH[c]: f"abs_delta_enh_c{c}" for c in ENHANCED_CUTOFFS},
 }
+if USE_JOINT_SELF_LOOPS:
+    ABS_COL_SHORT.update(
+        {METHOD_ENHJ[c]: f"abs_delta_enhj_c{c}" for c in ENHANCED_CUTOFFS}
+    )
 
 METHOD_CW = "cubewalkers"
 
@@ -130,6 +141,14 @@ METHOD_COLORS = {
     METHOD_ENH[3]: "#d62728",
     METHOD_CW: "#7f7f7f",
 }
+if USE_JOINT_SELF_LOOPS:
+    METHOD_COLORS.update(
+        {
+            METHOD_ENHJ[1]: "#17becf",
+            METHOD_ENHJ[2]: "#bcbd22",
+            METHOD_ENHJ[3]: "#e377c2",
+        }
+    )
 
 # Timing bars: LDOI methods + CW total (when available).
 TIMING_METHOD_ORDER = METHOD_ORDER + [METHOD_CW]
@@ -182,6 +201,7 @@ print(f"model pkl:  {PKL}")
 print(f"model bnet: {BNET}")
 print(f"SEED={SEED}")
 print(f"ENHANCED_CUTOFFS={ENHANCED_CUTOFFS}")
+print(f"USE_JOINT_SELF_LOOPS={USE_JOINT_SELF_LOOPS}")
 print(f"FORCE_RECOMPUTE={FORCE_RECOMPUTE}  SMOKE={SMOKE}")
 print()
 print(f"Model nodes : {_n_nodes}")
@@ -288,6 +308,36 @@ for c in ENHANCED_CUTOFFS:
     )
     print(f"  enhanced(c={c}) done in {t_enhanced[c]:.3f}s")
 
+nav_enhj_nodes: dict[int, dict[str, float]] = {}
+nav_enhj_entities: dict[int, dict[str, float]] = {}
+t_enhj: dict[int, float] = {}
+joint_stats_by_cutoff: dict[int, dict] = {}
+if USE_JOINT_SELF_LOOPS:
+    for c in ENHANCED_CUTOFFS:
+        print(f"Computing ldoi_enhanced+j (cutoff={c}, joint_self_loops)…")
+        _stats: dict = {}
+        _t0 = time.perf_counter()
+        nav_enhj_nodes[c] = _nav_from_ldoi_enhanced(
+            primes,
+            SEED,
+            cutoff=c,
+            sc_subsets=sc_subsets,
+            joint_self_loops=True,
+            joint_stats=_stats,
+        )
+        t_enhj[c] = time.perf_counter() - _t0
+        joint_stats_by_cutoff[c] = dict(_stats)
+        nav_enhj_entities[c] = entity_nav_dict(
+            nav_enhj_nodes[c], entity_keys, merged_bases
+        )
+        print(
+            f"  enhanced+j(c={c}) done in {t_enhj[c]:.3f}s  "
+            f"sustaining_size1={_stats.get('n_sustaining_size1', 0)}  "
+            f"sustaining_size2={_stats.get('n_sustaining_size2', 0)}  "
+            f"joint_probed={_stats.get('n_joint_probed', 0)}  "
+            f"joint_kept={_stats.get('n_joint_kept', 0)}"
+        )
+
 print(f"LDOI fixed nodes: {len(fixed)} / {_n_nodes}")
 if fixed:
     print("  " + ", ".join(f"{n}={v}" for n, v in sorted(fixed.items())))
@@ -304,6 +354,9 @@ print("LDOI / enhanced compute times (excludes SC-subset prep):")
 print(f"  ldoi              {t_ldoi:.3f}s")
 for c in ENHANCED_CUTOFFS:
     print(f"  enhanced(c={c})     {t_enhanced[c]:.3f}s")
+if USE_JOINT_SELF_LOOPS:
+    for c in ENHANCED_CUTOFFS:
+        print(f"  enhanced+j(c={c})   {t_enhj[c]:.3f}s")
 
 for c in ENHANCED_CUTOFFS:
     n_changed = sum(
@@ -312,6 +365,22 @@ for c in ENHANCED_CUTOFFS:
         if abs(nav_enhanced_nodes[c][n] - nav_ldoi_nodes[n]) > 1e-12
     )
     print(f"Nodes changed by ldoi_enhanced(c={c}): {n_changed} / {_n_nodes}")
+if USE_JOINT_SELF_LOOPS:
+    for c in ENHANCED_CUTOFFS:
+        n_changed = sum(
+            1
+            for n in node_names
+            if abs(nav_enhj_nodes[c][n] - nav_ldoi_nodes[n]) > 1e-12
+        )
+        n_vs_enh = sum(
+            1
+            for n in node_names
+            if abs(nav_enhj_nodes[c][n] - nav_enhanced_nodes[c][n]) > 1e-12
+        )
+        print(
+            f"Nodes changed by ldoi_enhanced+j(c={c}): {n_changed} / {_n_nodes}  "
+            f"(vs enhanced: {n_vs_enh})"
+        )
 print()
 
 # %% [markdown]
@@ -325,6 +394,7 @@ def _build_cmp_df(
     nav_ldoi: dict[str, float],
     nav_enh: dict[int, dict[str, float]],
     nav_cw: dict[str, float],
+    nav_enhj: dict[int, dict[str, float]] | None = None,
 ) -> pd.DataFrame:
     rows = []
     for k in keys:
@@ -337,10 +407,18 @@ def _build_cmp_df(
         for c in ENHANCED_CUTOFFS:
             row[f"enh_c{c}"] = nav_enh[c][k]
             row[ABS_COL_SHORT[METHOD_ENH[c]]] = abs(nav_cw[k] - nav_enh[c][k])
+        if nav_enhj is not None:
+            for c in ENHANCED_CUTOFFS:
+                row[f"enhj_c{c}"] = nav_enhj[c][k]
+                row[ABS_COL_SHORT[METHOD_ENHJ[c]]] = abs(
+                    nav_cw[k] - nav_enhj[c][k]
+                )
         rows.append(row)
     df = pd.DataFrame(rows)
-    # vs plain LDOI: did any enhanced cutoff move NAV?
+    # vs plain LDOI: did any enhanced (+joint) cutoff move NAV?
     enh_cols = [f"enh_c{c}" for c in ENHANCED_CUTOFFS]
+    if nav_enhj is not None:
+        enh_cols = enh_cols + [f"enhj_c{c}" for c in ENHANCED_CUTOFFS]
     df["changed"] = (df[enh_cols].sub(df["ldoi"], axis=0).abs() > 1e-12).any(
         axis=1
     )
@@ -362,14 +440,25 @@ def _build_cmp_df(
 
 
 node_cmp_df = _build_cmp_df(
-    node_names, "node", nav_ldoi_nodes, nav_enhanced_nodes, nav_cw_nodes
+    node_names,
+    "node",
+    nav_ldoi_nodes,
+    nav_enhanced_nodes,
+    nav_cw_nodes,
+    nav_enhj_nodes if USE_JOINT_SELF_LOOPS else None,
 )
 
 _show_cols = (
     ["node", "ldoi"]
     + [f"enh_c{c}" for c in ENHANCED_CUTOFFS]
+    + ([f"enhj_c{c}" for c in ENHANCED_CUTOFFS] if USE_JOINT_SELF_LOOPS else [])
     + ["cw", ABS_COL_SHORT[METHOD_LDOI]]
     + [ABS_COL_SHORT[METHOD_ENH[c]] for c in ENHANCED_CUTOFFS]
+    + (
+        [ABS_COL_SHORT[METHOD_ENHJ[c]] for c in ENHANCED_CUTOFFS]
+        if USE_JOINT_SELF_LOOPS
+        else []
+    )
 )
 print("Top node |Δ| vs CW (sorted by plain LDOI error):")
 print(node_cmp_df[_show_cols].head(30).to_string(index=False))
@@ -404,6 +493,17 @@ for c in ENHANCED_CUTOFFS:
         f"enhanced(c={c}) vs ldoi: improved={n_imp}  worsened={n_wors}  "
         f"unchanged_error={n_same}  (of {_n_nodes})"
     )
+if USE_JOINT_SELF_LOOPS:
+    for c in ENHANCED_CUTOFFS:
+        col = ABS_COL_SHORT[METHOD_ENHJ[c]]
+        base = ABS_COL_SHORT[METHOD_LDOI]
+        n_imp = int((node_cmp_df[col] < node_cmp_df[base] - 1e-12).sum())
+        n_wors = int((node_cmp_df[col] > node_cmp_df[base] + 1e-12).sum())
+        n_same = _n_nodes - n_imp - n_wors
+        print(
+            f"enhanced+j(c={c}) vs ldoi: improved={n_imp}  worsened={n_wors}  "
+            f"unchanged_error={n_same}  (of {_n_nodes})"
+        )
 print()
 
 print(
@@ -457,13 +557,20 @@ ent_cmp_df = _build_cmp_df(
     nav_ldoi_entities,
     nav_enhanced_entities,
     nav_cw_entities,
+    nav_enhj_entities if USE_JOINT_SELF_LOOPS else None,
 )
 
 _ent_show = (
     ["entity", "ldoi"]
     + [f"enh_c{c}" for c in ENHANCED_CUTOFFS]
+    + ([f"enhj_c{c}" for c in ENHANCED_CUTOFFS] if USE_JOINT_SELF_LOOPS else [])
     + ["cw", ABS_COL_SHORT[METHOD_LDOI]]
     + [ABS_COL_SHORT[METHOD_ENH[c]] for c in ENHANCED_CUTOFFS]
+    + (
+        [ABS_COL_SHORT[METHOD_ENHJ[c]] for c in ENHANCED_CUTOFFS]
+        if USE_JOINT_SELF_LOOPS
+        else []
+    )
 )
 print("Top entity |Δ| vs CW (sorted by plain LDOI error):")
 print(ent_cmp_df[_ent_show].head(20).to_string(index=False))
@@ -498,6 +605,18 @@ for c in ENHANCED_CUTOFFS:
         f"worsened={n_wors}  unchanged_error={n_same}  "
         f"(of {len(ent_cmp_df)})"
     )
+if USE_JOINT_SELF_LOOPS:
+    for c in ENHANCED_CUTOFFS:
+        col = ABS_COL_SHORT[METHOD_ENHJ[c]]
+        base = ABS_COL_SHORT[METHOD_LDOI]
+        n_imp = int((ent_cmp_df[col] < ent_cmp_df[base] - 1e-12).sum())
+        n_wors = int((ent_cmp_df[col] > ent_cmp_df[base] + 1e-12).sum())
+        n_same = len(ent_cmp_df) - n_imp - n_wors
+        print(
+            f"Entities enhanced+j(c={c}) vs ldoi: improved={n_imp}  "
+            f"worsened={n_wors}  unchanged_error={n_same}  "
+            f"(of {len(ent_cmp_df)})"
+        )
 
 ent_changed = ent_cmp_df[ent_cmp_df["changed"]]
 if not ent_changed.empty:
@@ -515,6 +634,9 @@ def _method_timings_s() -> dict[str, float]:
     out: dict[str, float] = {METHOD_LDOI: float(t_ldoi)}
     for c in ENHANCED_CUTOFFS:
         out[METHOD_ENH[c]] = float(t_enhanced[c])
+    if USE_JOINT_SELF_LOOPS:
+        for c in ENHANCED_CUTOFFS:
+            out[METHOD_ENHJ[c]] = float(t_enhj[c])
     t_cw = cw_timings.get("t_total")
     if t_cw is not None and np.isfinite(t_cw):
         out[METHOD_CW] = float(t_cw)
@@ -529,7 +651,8 @@ def _plot_method_timings(out_dir: Path) -> Path | None:
         return None
     vals = [timings[m] for m in methods]
 
-    fig, ax = plt.subplots(figsize=(8.0, 4.2))
+    fig_w = max(8.0, 1.1 * len(methods) + 2.0)
+    fig, ax = plt.subplots(figsize=(fig_w, 4.2))
     x = np.arange(len(methods))
     bars = ax.bar(
         x,

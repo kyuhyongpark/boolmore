@@ -11,6 +11,7 @@ from boolmore.inference.prediction import (
     _nav_from_ldoi,
     _nav_from_ldoi_enhanced,
     _nav_from_min_traps,
+    _prune_subsumed_forcers,
     _sc_subsets_by_size,
     get_NAV_prediction,
     get_phenotype_prediction,
@@ -359,6 +360,41 @@ class TestLdoiEnhanced(unittest.TestCase):
                 {("A",): {(0,): 0}, ("B",): {(0,): 1}}
             )
 
+    def test_prune_subsumed_forcers_drops_extensions(self):
+        # A=1 already covers (A,B)=(1,*); keep only the size-1 forcer.
+        pruned = _prune_subsumed_forcers(
+            {
+                ("A",): {(1,): 1},
+                ("A", "B"): {(1, 0): 1, (1, 1): 1},
+            }
+        )
+        self.assertEqual(pruned, {("A",): {(1,): 1}})
+
+    def test_prune_subsumed_forcers_keeps_incomparable(self):
+        # A=0 and (A,B)=(1,1) do not nest — both kept.
+        forcers = {("A",): {(0,): 1}, ("A", "B"): {(1, 1): 1}}
+        self.assertEqual(_prune_subsumed_forcers(forcers), forcers)
+
+    def test_prune_subsumed_forcers_nested_conflict_raises(self):
+        with self.assertRaises(ValueError) as ctx:
+            _prune_subsumed_forcers(
+                {("A",): {(1,): 1}, ("A", "B"): {(1, 0): 0}}
+            )
+        self.assertIn("conflicting nested forcers", str(ctx.exception))
+
+    def test_enhanced_nav_from_forcers_subsumed_pair_same_nav(self):
+        # Redundant (A,B) extensions must not change NAV vs A=1 alone.
+        alone = _enhanced_nav_from_forcers({("A",): {(1,): 1}})
+        with_pairs = _enhanced_nav_from_forcers(
+            {
+                ("A",): {(1,): 1},
+                ("A", "B"): {(1, 0): 1, (1, 1): 1},
+                ("A", "C"): {(1, 1): 1},
+            }
+        )
+        self.assertEqual(alone, 0.75)
+        self.assertEqual(with_pairs, alone)
+
     def test_enhanced_nav_from_forcers_impossible_renormalize(self):
         # A=0 forces 0; A=1 impossible → full mass at 0.
         self.assertEqual(
@@ -461,6 +497,71 @@ class TestLdoiEnhanced(unittest.TestCase):
             _sc_subsets_by_size(primes, cutoff=0)
         with self.assertRaises(ValueError):
             _sc_subsets_by_size(primes, cutoff=4)
+
+    def test_nav_from_ldoi_enhanced_joint_self_loops_cutoff_two(self):
+        # Two independent self-loops; C=A&B. Size-1 forcers A=0 / B=0 move C
+        # toward 0 (NAV 0.125). Joint of sustaining states also records
+        # (A,B)=(1,1)→C=1, raising C. No A↔B edge → SC cutoff 2 == cutoff 1.
+        primes = bnet_text2primes("A, A\nB, B\nC, A & B\n")
+        cut2 = _nav_from_ldoi_enhanced(primes, {}, cutoff=2)
+        stats: dict = {}
+        joint = _nav_from_ldoi_enhanced(
+            primes,
+            {},
+            cutoff=2,
+            joint_self_loops=True,
+            joint_stats=stats,
+        )
+
+        self.assertEqual(cut2["C"], 0.125)
+        self.assertEqual(joint["C"], 0.25)
+        self.assertGreater(stats["n_sustaining_size1"], 0)
+        self.assertGreater(stats["n_joint_probed"], 0)
+        self.assertGreater(stats["n_joint_kept"], 0)
+        # Joint probes specific sustaining-state pairs, not all 2^2 per node pair.
+        # 2 nodes × 2 values = 4 size-1 sustaining states → C(4,2) with same-node
+        # pairs dropped → 4 cross-node pairs (not 4 node-pair × 4 assignments).
+        self.assertEqual(stats["n_joint_probed"], 4)
+
+    def test_nav_from_ldoi_enhanced_joint_self_loops_cutoff_three(self):
+        # Self-loop A + mutual B↔C; T=A&B. SC probes alone give T NAV 0.125
+        # (A=0 and (B,C)=(0,0)). Joint A=1 with (B,C)=(1,1) adds a T=1 forcer.
+        primes = bnet_text2primes("A, A\nB, C\nC, B\nT, A & B\n")
+        sc_only = _nav_from_ldoi_enhanced(primes, {}, cutoff=3)
+        stats: dict = {}
+        joint = _nav_from_ldoi_enhanced(
+            primes,
+            {},
+            cutoff=3,
+            joint_self_loops=True,
+            joint_stats=stats,
+        )
+        self.assertEqual(sc_only["T"], 0.125)
+        self.assertEqual(joint["T"], 0.25)
+        self.assertGreaterEqual(stats["n_sustaining_size2"], 1)
+        self.assertGreater(stats["n_joint_probed"], 0)
+
+    def test_nav_from_ldoi_enhanced_joint_default_matches_sc_only(self):
+        primes = bnet_text2primes("A, A\nB, B\nC, A & B\n")
+        a = _nav_from_ldoi_enhanced(primes, {}, cutoff=2)
+        b = _nav_from_ldoi_enhanced(
+            primes, {}, cutoff=2, joint_self_loops=False
+        )
+        self.assertEqual(a, b)
+
+    def test_get_NAV_prediction_ldoi_enhanced_joint_self_loops(self):
+        primes = bnet_text2primes("A, A\nB, B\nC, A & B\n")
+        experiments = [
+            NAVExperiment(id=1, fixes=(), observed="C", outcome="Some", weight=1.0),
+        ]
+        preds = get_NAV_prediction(
+            primes,
+            experiments,
+            method="ldoi_enhanced",
+            cutoff=2,
+            joint_self_loops=True,
+        )
+        self.assertEqual(preds[()].average_values["C"], 0.25)
 
 
 def _serialize_nav_predictions(preds) -> list[dict]:

@@ -498,6 +498,66 @@ def _sc_subsets_by_size(
     return by_size
 
 
+def _forcer_state_extends(
+    small_component: tuple[str, ...],
+    small_state: tuple[int, ...],
+    big_component: tuple[str, ...],
+    big_state: tuple[int, ...],
+) -> bool:
+    """True iff ``big`` agrees with ``small`` on every node of ``small``.
+
+    Requires ``set(small_component) ⊆ set(big_component)``.
+    """
+    if not set(small_component) <= set(big_component):
+        return False
+    idx_big = {node: i for i, node in enumerate(big_component)}
+    return all(
+        big_state[idx_big[node]] == bit
+        for node, bit in zip(small_component, small_state, strict=True)
+    )
+
+
+def _prune_subsumed_forcers(
+    forcers_by_component: dict[tuple[str, ...], dict[tuple[int, ...], int]],
+) -> dict[tuple[str, ...], dict[tuple[int, ...], int]]:
+    """Drop forcers implied by a strictly smaller forcer with the same value.
+
+    ``(C1, S1) → V`` subsumes ``(C2, S2) → V`` when ``C1`` is a proper subset
+    of ``C2`` and ``S2`` extends ``S1``. Subsumed forcers do not change the
+    expected NAV but would enlarge the joint ``2^k`` node set. If a smaller
+    forcer extends onto a larger one with a *different* forced value, raise
+    ``ValueError`` (those assignments would conflict under the joint measure).
+    """
+    flat: list[tuple[tuple[str, ...], tuple[int, ...], int]] = []
+    for component, states in forcers_by_component.items():
+        for state, value in states.items():
+            flat.append((component, state, int(value)))
+
+    keep = [True] * len(flat)
+    for i, (c1, s1, v1) in enumerate(flat):
+        set1 = set(c1)
+        for j, (c2, s2, v2) in enumerate(flat):
+            if i == j or not keep[j]:
+                continue
+            set2 = set(c2)
+            if not (set1 < set2):
+                continue
+            if not _forcer_state_extends(c1, s1, c2, s2):
+                continue
+            if v1 != v2:
+                raise ValueError(
+                    f"conflicting nested forcers: {dict(zip(c1, s1, strict=True))} "
+                    f"→ {v1} vs {dict(zip(c2, s2, strict=True))} → {v2}"
+                )
+            keep[j] = False
+
+    pruned: dict[tuple[str, ...], dict[tuple[int, ...], int]] = defaultdict(dict)
+    for (component, state, value), kept in zip(flat, keep, strict=True):
+        if kept:
+            pruned[component][state] = value
+    return {comp: dict(states) for comp, states in pruned.items()}
+
+
 def _enhanced_nav_from_forcers(
     forcers_by_component: dict[tuple[str, ...], dict[tuple[int, ...], int]],
     impossible_by_component: (
@@ -512,9 +572,12 @@ def _enhanced_nav_from_forcers(
     states that are dropped from the uniform measure (renormalize over the
     rest).
 
-    Enumerate the uniform measure over the ``2^k`` assignments to the
-    ``k`` distinct nodes appearing in any forcer. Matching impossible
-    states whose component is covered by those nodes are skipped;
+    Before enumerating, forcers that are proper extensions of a smaller
+    forcer with the same forced value are dropped (see
+    :func:`_prune_subsumed_forcers`) so they do not inflate the joint node
+    set. Then enumerate the uniform measure over the ``2^k`` assignments to
+    the ``k`` distinct nodes appearing in any remaining forcer. Matching
+    impossible states whose component is covered by those nodes are skipped;
     remaining assignments take the forced value of every matching forcer
     (raises if they disagree); unmatched assignments contribute ``0.5``.
     Impossible components that mention nodes outside the forcer set are
@@ -524,6 +587,10 @@ def _enhanced_nav_from_forcers(
     if impossible_by_component is None:
         impossible_by_component = {}
 
+    if not forcers_by_component:
+        return 0.5
+
+    forcers_by_component = _prune_subsumed_forcers(forcers_by_component)
     if not forcers_by_component:
         return 0.5
 
@@ -583,6 +650,8 @@ def _nav_from_ldoi_enhanced(
     *,
     cutoff: int = 1,
     sc_subsets: dict[int, list[tuple[str, ...]]] | None = None,
+    joint_self_loops: bool = False,
+    joint_stats: dict | None = None,
 ) -> dict[str, float]:
     """LDOI NAV refined by self-sustaining / self-negating SC-subset probes.
 
@@ -597,6 +666,15 @@ def _nav_from_ldoi_enhanced(
     member that both self-sustains and self-negates under the same
     closure raises ``ValueError``.
 
+    When ``joint_self_loops`` is True and ``cutoff >= 2``, also jointly
+    probe combinations of **already self-sustaining** SC states collected
+    during the ordinary pass (not all ``2^k`` assignments over free
+    self-loop nodes): pairs of distinct size-1 sustaining states at
+    cutoff ≥ 2; at cutoff ≥ 3 also triples of size-1 sustaining states
+    and each size-1 sustaining state with a sustaining size-2 cycle
+    state (disjoint nodes). A joint seed is kept as a forcer only if
+    every member still self-sustains under the joint closure.
+
     Parameters
     ----------
     cutoff : int, default 1
@@ -604,6 +682,13 @@ def _nav_from_ldoi_enhanced(
     sc_subsets : optional
         Precomputed output of :func:`_sc_subsets_by_size`; computed from
         ``primes`` when omitted.
+    joint_self_loops : bool, default False
+        If True, add joint probes over already sustaining SC states as
+        described above.
+    joint_stats : dict, optional
+        If provided, cleared and filled with counts
+        (``n_sustaining_size1``, ``n_sustaining_size2``, ``n_joint_probed``,
+        ``n_joint_kept``) when ``joint_self_loops`` is True.
     """
     if not 1 <= cutoff <= LDOI_ENHANCED_CUTOFF_MAX:
         raise ValueError(
@@ -630,6 +715,71 @@ def _nav_from_ldoi_enhanced(
     impossible_by_component: dict[
         tuple[str, ...], set[tuple[int, ...]]
     ] = defaultdict(set)
+    # (component, state) already handled in the SC pass (forcer or impossible).
+    probed_sc: set[tuple[tuple[str, ...], tuple[int, ...]]] = set()
+    sustaining_size1: list[tuple[str, int]] = []
+    sustaining_size2: list[
+        tuple[tuple[str, str], tuple[int, int]]
+    ] = []
+
+    def _probe_assignment(
+        component: tuple[str, ...],
+        state: tuple[int, ...],
+        *,
+        record_sustaining: bool,
+    ) -> bool:
+        """Probe one seed; return True iff every member self-sustains.
+
+        Records impossible / forcer side effects. When
+        ``record_sustaining`` and the assignment fully sustains, appends
+        to ``sustaining_size1`` / ``sustaining_size2``.
+        """
+        seed = dict(fixed)
+        seed.update(zip(component, state, strict=True))
+        closure = logical_domain_of_influence(primes, seed)
+        members = list(zip(component, state, strict=True))
+        sustains = [
+            _is_self_sustaining(primes, closure, node, value)
+            for node, value in members
+        ]
+        negates = [
+            _is_self_negating(primes, closure, node, value)
+            for node, value in members
+        ]
+        for (node, value), sust, neg in zip(
+            members, sustains, negates, strict=True
+        ):
+            if sust and neg:
+                raise ValueError(
+                    f"{node}={value} both self-sustains and "
+                    f"self-negates under LDOI of "
+                    f"{dict(zip(component, state, strict=True))} "
+                    f"(component {component})"
+                )
+        if any(negates):
+            impossible_by_component[component].add(state)
+            return False
+        if not all(sustains):
+            return False
+        for n, val in closure.items():
+            if n not in free_set:
+                continue
+            prev = forcers_for_node[n][component].get(state)
+            if prev is not None and prev != int(val):
+                raise ValueError(
+                    f"{n}: same state {component}={state} claimed both "
+                    f"{prev} and {val}"
+                )
+            forcers_for_node[n][component][state] = int(val)
+        if record_sustaining:
+            k = len(component)
+            if k == 1:
+                sustaining_size1.append((component[0], state[0]))
+            elif k == 2:
+                sustaining_size2.append(
+                    ((component[0], component[1]), (state[0], state[1]))
+                )
+        return True
 
     for k in range(1, cutoff + 1):
         for component in sc_subsets.get(k, ()):
@@ -637,43 +787,74 @@ def _nav_from_ldoi_enhanced(
                 continue
             for state in product((0, 1), repeat=k):
                 # Warm-start from plain LDOI: LDOI(fixed ∪ S) == LDOI(pert ∪ S).
-                seed = dict(fixed)
-                seed.update(zip(component, state, strict=True))
-                closure = logical_domain_of_influence(primes, seed)
-                members = list(zip(component, state, strict=True))
-                sustains = [
-                    _is_self_sustaining(primes, closure, node, value)
-                    for node, value in members
-                ]
-                negates = [
-                    _is_self_negating(primes, closure, node, value)
-                    for node, value in members
-                ]
-                for (node, value), sust, neg in zip(
-                    members, sustains, negates, strict=True
-                ):
-                    if sust and neg:
-                        raise ValueError(
-                            f"{node}={value} both self-sustains and "
-                            f"self-negates under LDOI of "
-                            f"{dict(zip(component, state, strict=True))} "
-                            f"(component {component})"
-                        )
-                if any(negates):
-                    impossible_by_component[component].add(state)
+                _probe_assignment(
+                    component, state, record_sustaining=True
+                )
+                probed_sc.add((component, state))
+
+    n_joint_probed = 0
+    n_joint_kept = 0
+    if joint_self_loops and cutoff >= 2:
+
+        def _maybe_joint(
+            members: list[tuple[str, int]],
+        ) -> None:
+            nonlocal n_joint_probed, n_joint_kept
+            nodes = [n for n, _ in members]
+            if len(set(nodes)) != len(nodes):
+                return
+            order = sorted(range(len(nodes)), key=lambda i: nodes[i])
+            component = tuple(nodes[i] for i in order)
+            state = tuple(members[i][1] for i in order)
+            key = (component, state)
+            # Skip if this SC subset + state was already probed.
+            if key in probed_sc:
+                return
+            n_joint_probed += 1
+            if _probe_assignment(
+                component, state, record_sustaining=False
+            ):
+                n_joint_kept += 1
+            probed_sc.add(key)
+
+        for i, left in enumerate(sustaining_size1):
+            for right in sustaining_size1[i + 1 :]:
+                if left[0] == right[0]:
                     continue
-                if not all(sustains):
-                    continue
-                for n, val in closure.items():
-                    if n not in free_set:
+                _maybe_joint([left, right])
+
+        if cutoff >= 3:
+            for i, a in enumerate(sustaining_size1):
+                for j, b in enumerate(sustaining_size1[i + 1 :], start=i + 1):
+                    if a[0] == b[0]:
                         continue
-                    prev = forcers_for_node[n][component].get(state)
-                    if prev is not None and prev != int(val):
-                        raise ValueError(
-                            f"{n}: same state {component}={state} claimed both "
-                            f"{prev} and {val}"
-                        )
-                    forcers_for_node[n][component][state] = int(val)
+                    for c in sustaining_size1[j + 1 :]:
+                        if c[0] in (a[0], b[0]):
+                            continue
+                        _maybe_joint([a, b, c])
+
+            for (node, value) in sustaining_size1:
+                for (pair, pair_state) in sustaining_size2:
+                    if node in pair:
+                        continue
+                    _maybe_joint(
+                        [
+                            (node, value),
+                            (pair[0], pair_state[0]),
+                            (pair[1], pair_state[1]),
+                        ]
+                    )
+
+    if joint_stats is not None:
+        joint_stats.clear()
+        joint_stats.update(
+            {
+                "n_sustaining_size1": len(sustaining_size1),
+                "n_sustaining_size2": len(sustaining_size2),
+                "n_joint_probed": n_joint_probed,
+                "n_joint_kept": n_joint_kept,
+            }
+        )
 
     impossible = {
         comp: set(states) for comp, states in impossible_by_component.items()
@@ -732,6 +913,7 @@ def get_NAV_prediction(
     *,
     method: str = "min_traps",
     cutoff: int = 1,
+    joint_self_loops: bool = False,
 ) -> dict[Assignment, NAVPrediction]:
     """Predict average attractor values for each unique NAV intervention.
 
@@ -760,9 +942,14 @@ def get_NAV_prediction(
           from free strongly connected subsets of size ``1..cutoff`` that
           self-sustain; self-negating assignments are dropped and the
           measure is renormalized (opt-in; default remains ``"min_traps"``).
+          With ``joint_self_loops=True``, also jointly probe combinations of
+          already sustaining SC states (see :func:`_nav_from_ldoi_enhanced`).
     cutoff : int, default 1
         Maximum SC-subset size for ``method="ldoi_enhanced"`` (``1..3``).
         Ignored for other methods.
+    joint_self_loops : bool, default False
+        Passed to :func:`_nav_from_ldoi_enhanced` when
+        ``method="ldoi_enhanced"``; ignored otherwise.
 
     Returns
     -------
@@ -815,6 +1002,7 @@ def get_NAV_prediction(
                     perturbation,
                     cutoff=cutoff,
                     sc_subsets=sc_subsets,
+                    joint_self_loops=joint_self_loops,
                 ),
             )
     else:
