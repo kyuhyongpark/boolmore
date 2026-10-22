@@ -372,6 +372,19 @@ def _is_self_sustaining(
     )
 
 
+def _is_self_negating(
+    primes: dict,
+    closure: dict[str, int],
+    node: str,
+    value: int,
+) -> bool:
+    """Return True iff some implicant of ``node`` at ``1 - value`` is covered by ``closure``."""
+    return any(
+        _implicant_implied_by(closure, implicant)
+        for implicant in primes[node][1 - value]
+    )
+
+
 def _interaction_digraph(primes: dict) -> nx.DiGraph:
     """Regulatory digraph: edge ``u→v`` if ``u`` appears in any implicant of ``v``."""
     digraph = nx.DiGraph()
@@ -487,21 +500,34 @@ def _sc_subsets_by_size(
 
 def _enhanced_nav_from_forcers(
     forcers_by_component: dict[tuple[str, ...], dict[tuple[int, ...], int]],
+    impossible_by_component: (
+        dict[tuple[str, ...], set[tuple[int, ...]]] | None
+    ) = None,
 ) -> float:
     """Expected NAV from self-sustaining SC-subset forcers of one free node.
 
     ``forcers_by_component[component][state] = forced_value`` where
     ``component`` is a sorted node tuple and ``state`` holds values in the
-    same order.
+    same order. ``impossible_by_component[component]`` holds self-negating
+    states that are dropped from the uniform measure (renormalize over the
+    rest).
 
     Enumerate the uniform measure over the ``2^k`` assignments to the
-    ``k`` distinct nodes appearing in any forcer. Each assignment takes
-    the forced value of every matching forcer (raises if they disagree);
-    unmatched assignments contribute ``0.5``.
+    ``k`` distinct nodes appearing in any forcer. Matching impossible
+    states whose component is covered by those nodes are skipped;
+    remaining assignments take the forced value of every matching forcer
+    (raises if they disagree); unmatched assignments contribute ``0.5``.
+    Impossible components that mention nodes outside the forcer set are
+    ignored (they would otherwise enlarge the joint measure with unrelated
+    SC-subset nodes). If every assignment is impossible, return ``0.5``.
     """
+    if impossible_by_component is None:
+        impossible_by_component = {}
+
     if not forcers_by_component:
         return 0.5
 
+    # Forcer nodes only — do not union in global impossible components.
     nodes = sorted({node for component in forcers_by_component for node in component})
     if not nodes:
         return 0.5
@@ -517,8 +543,22 @@ def _enhanced_nav_from_forcers(
     if not matchers:
         return 0.5
 
+    impossible_matchers: list[tuple[tuple[int, ...], tuple[int, ...]]] = []
+    for component, states in impossible_by_component.items():
+        if any(node not in index for node in component):
+            continue
+        idxs = tuple(index[node] for node in component)
+        for state in states:
+            impossible_matchers.append((idxs, state))
+
     total = 0.0
+    kept = 0
     for assignment in product((0, 1), repeat=len(nodes)):
+        if any(
+            all(assignment[i] == bit for i, bit in zip(idxs, state, strict=True))
+            for idxs, state in impossible_matchers
+        ):
+            continue
         forced: int | None = None
         for idxs, state, value in matchers:
             if all(assignment[i] == bit for i, bit in zip(idxs, state, strict=True)):
@@ -530,8 +570,11 @@ def _enhanced_nav_from_forcers(
                     )
                 forced = value
         total += float(forced) if forced is not None else 0.5
+        kept += 1
 
-    return total / (1 << len(nodes))
+    if kept == 0:
+        return 0.5
+    return total / kept
 
 
 def _nav_from_ldoi_enhanced(
@@ -541,13 +584,16 @@ def _nav_from_ldoi_enhanced(
     cutoff: int = 1,
     sc_subsets: dict[int, list[tuple[str, ...]]] | None = None,
 ) -> dict[str, float]:
-    """LDOI NAV refined by self-sustaining SC-subset forcers.
+    """LDOI NAV refined by self-sustaining / self-negating SC-subset probes.
 
     Starts from plain LDOI (forced → 0/1, else 0.5). Free strongly
     connected subsets of size ``1..cutoff`` are probed over all ``2^k``
-    joint assignments (combined with ``perturbation``); assignments that
+    joint assignments (combined with ``perturbation``). Assignments that
     self-sustain for every member contribute probability mass that can
-    move downstream free-node NAV away from 0.5.
+    move downstream free-node NAV away from 0.5. Assignments where any
+    member self-negates are treated as impossible and dropped from the
+    uniform measure (renormalize). A member that both self-sustains and
+    self-negates under the same closure raises ``ValueError``.
 
     Parameters
     ----------
@@ -579,6 +625,9 @@ def _nav_from_ldoi_enhanced(
     forcers_for_node: dict[
         str, dict[tuple[str, ...], dict[tuple[int, ...], int]]
     ] = defaultdict(lambda: defaultdict(dict))
+    impossible_by_component: dict[
+        tuple[str, ...], set[tuple[int, ...]]
+    ] = defaultdict(set)
 
     for k in range(1, cutoff + 1):
         for component in sc_subsets.get(k, ()):
@@ -588,10 +637,29 @@ def _nav_from_ldoi_enhanced(
                 seed = dict(perturbation)
                 seed.update(zip(component, state, strict=True))
                 closure = logical_domain_of_influence(primes, seed)
-                if not all(
+                members = list(zip(component, state, strict=True))
+                sustains = [
                     _is_self_sustaining(primes, closure, node, value)
-                    for node, value in zip(component, state, strict=True)
+                    for node, value in members
+                ]
+                negates = [
+                    _is_self_negating(primes, closure, node, value)
+                    for node, value in members
+                ]
+                for (node, value), sust, neg in zip(
+                    members, sustains, negates, strict=True
                 ):
+                    if sust and neg:
+                        raise ValueError(
+                            f"{node}={value} both self-sustains and "
+                            f"self-negates under LDOI of "
+                            f"{dict(zip(component, state, strict=True))} "
+                            f"(component {component})"
+                        )
+                if any(negates):
+                    impossible_by_component[component].add(state)
+                    continue
+                if not all(sustains):
                     continue
                 for n, val in closure.items():
                     if n not in free_set:
@@ -604,9 +672,13 @@ def _nav_from_ldoi_enhanced(
                         )
                     forcers_for_node[n][component][state] = int(val)
 
+    impossible = {
+        comp: set(states) for comp, states in impossible_by_component.items()
+    }
     for N, by_component in forcers_for_node.items():
         nav[N] = _enhanced_nav_from_forcers(
-            {comp: dict(states) for comp, states in by_component.items()}
+            {comp: dict(states) for comp, states in by_component.items()},
+            impossible,
         )
 
     return nav
@@ -683,7 +755,8 @@ def get_NAV_prediction(
           oscillatory behavior (free nodes → 0.5; oscillations unresolved).
         - ``"ldoi_enhanced"``: plain LDOI plus probability-mass refinement
           from free strongly connected subsets of size ``1..cutoff`` that
-          self-sustain (opt-in; default remains ``"min_traps"``).
+          self-sustain; self-negating assignments are dropped and the
+          measure is renormalized (opt-in; default remains ``"min_traps"``).
     cutoff : int, default 1
         Maximum SC-subset size for ``method="ldoi_enhanced"`` (``1..3``).
         Ignored for other methods.
@@ -699,8 +772,9 @@ def get_NAV_prediction(
     Raises
     ------
     ValueError
-        If a fixed node is not present in the model or ``method`` is not
-        recognized.
+        If a fixed node is not present in the model, ``method`` is not
+        recognized, or (for ``ldoi_enhanced``) a probed SC-subset member
+        both self-sustains and self-negates under the same LDOI closure.
     RuntimeError
         If ``method="min_traps"`` and PyBoolNet's ASP backend
         (gringo/clasp) fails the probe check.

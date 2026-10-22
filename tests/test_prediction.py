@@ -359,6 +359,40 @@ class TestLdoiEnhanced(unittest.TestCase):
                 {("A",): {(0,): 0}, ("B",): {(0,): 1}}
             )
 
+    def test_enhanced_nav_from_forcers_impossible_renormalize(self):
+        # A=0 forces 0; A=1 impossible → full mass at 0.
+        self.assertEqual(
+            _enhanced_nav_from_forcers(
+                {("A",): {(0,): 0}},
+                {("A",): {(1,)}},
+            ),
+            0.0,
+        )
+        # A=0 forces 1; A=1 impossible → full mass at 1.
+        self.assertEqual(
+            _enhanced_nav_from_forcers(
+                {("A",): {(0,): 1}},
+                {("A",): {(1,)}},
+            ),
+            1.0,
+        )
+        # All assignments impossible → fallback 0.5.
+        self.assertEqual(
+            _enhanced_nav_from_forcers(
+                {("A",): {(0,): 0}},
+                {("A",): {(0,), (1,)}},
+            ),
+            0.5,
+        )
+        # Unrelated impossible components must not enlarge the measure.
+        self.assertEqual(
+            _enhanced_nav_from_forcers(
+                {("A",): {(0,): 0}},
+                {("Z",): {(1,)}, ("X", "Y"): {(0, 1)}},
+            ),
+            0.25,
+        )
+
     def test_nav_from_ldoi_enhanced_one_sided_forcer(self):
         # A=0 self-sustains (and forces C=0); A=1 does not without B.
         # B=0 also forces C=0; B sustains both ways → B NAV stays 0.5.
@@ -372,6 +406,22 @@ class TestLdoiEnhanced(unittest.TestCase):
         # Forcers for C: A=0 and B=0 → expected 0.125
         self.assertEqual(enhanced["C"], 0.125)
         self.assertEqual(enhanced["A"], 0.125)
+
+    def test_nav_from_ldoi_enhanced_self_negating_complement(self):
+        # A=0 self-sustains and forces C=0; A=1 self-negates (B=!A → B=0
+        # covers an A→0 implicant). Full mass on A=0 → C=A=0.
+        primes = bnet_text2primes("A, A & B\nB, !A\nC, A\n")
+        enhanced = _nav_from_ldoi_enhanced(primes, {})
+        self.assertEqual(enhanced["A"], 0.0)
+        self.assertEqual(enhanced["C"], 0.0)
+        self.assertEqual(enhanced["B"], 1.0)
+
+    def test_nav_from_ldoi_enhanced_both_sustain_and_negate_raises(self):
+        # Malformed primes: A=0 covers implicants for both values.
+        primes = {"A": [[{"A": 0}], [{"A": 0}]]}
+        with self.assertRaises(ValueError) as ctx:
+            _nav_from_ldoi_enhanced(primes, {})
+        self.assertIn("both self-sustains and self-negates", str(ctx.exception))
 
     def test_get_NAV_prediction_ldoi_enhanced(self):
         primes = bnet_text2primes("A, A & B\nB, B\nC, A\n")
