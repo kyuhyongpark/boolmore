@@ -7,6 +7,7 @@
 # 2. Compute plain ``_nav_from_ldoi`` and ``_nav_from_ldoi_enhanced`` for
 #    cutoffs ``1..3`` (SC subsets built once at max cutoff, shared across calls)
 # 3. Compare overall node average values vs CW means and plot |Δ| distributions
+#    plus wall-clock compute time per method (LDOI / enhanced / CW)
 #
 # Cubewalkers requires CUDA + CuPy in WSL2 (see ``cw_helpers.require_cubewalkers``).
 # ``SMOKE=1`` uses a tiny horizon so the notebook can be checked end-to-end.
@@ -119,13 +120,19 @@ ABS_COL_SHORT = {
     **{METHOD_ENH[c]: f"abs_delta_enh_c{c}" for c in ENHANCED_CUTOFFS},
 }
 
+METHOD_CW = "cubewalkers"
+
 # Distinct, readable colors (avoid default purple-bias cluster).
 METHOD_COLORS = {
     METHOD_LDOI: "#2c3e50",
     METHOD_ENH[1]: "#1f77b4",
     METHOD_ENH[2]: "#2ca02c",
     METHOD_ENH[3]: "#d62728",
+    METHOD_CW: "#7f7f7f",
 }
+
+# Timing bars: LDOI methods + CW total (when available).
+TIMING_METHOD_ORDER = METHOD_ORDER + [METHOD_CW]
 
 # %% [markdown]
 # ## Load model
@@ -499,10 +506,75 @@ if not ent_changed.empty:
     print(ent_changed[_ent_show].to_string(index=False))
 
 # %% [markdown]
-# ## Plots: |Δ| vs CW distributions across methods
+# ## Plots: |Δ| vs CW distributions + method compute times
 
 
 # %%
+def _method_timings_s() -> dict[str, float]:
+    """Wall times (s) for LDOI / enhanced / CW total. Missing CW → omit."""
+    out: dict[str, float] = {METHOD_LDOI: float(t_ldoi)}
+    for c in ENHANCED_CUTOFFS:
+        out[METHOD_ENH[c]] = float(t_enhanced[c])
+    t_cw = cw_timings.get("t_total")
+    if t_cw is not None and np.isfinite(t_cw):
+        out[METHOD_CW] = float(t_cw)
+    return out
+
+
+def _plot_method_timings(out_dir: Path) -> Path | None:
+    """Bar chart of wall-clock compute time per method."""
+    timings = _method_timings_s()
+    methods = [m for m in TIMING_METHOD_ORDER if m in timings]
+    if not methods:
+        return None
+    vals = [timings[m] for m in methods]
+
+    fig, ax = plt.subplots(figsize=(8.0, 4.2))
+    x = np.arange(len(methods))
+    bars = ax.bar(
+        x,
+        vals,
+        color=[METHOD_COLORS[m] for m in methods],
+        alpha=0.85,
+        edgecolor="white",
+        linewidth=0.5,
+        width=0.65,
+    )
+    ax.set_xticks(x)
+    ax.set_xticklabels(methods, rotation=15)
+    ax.set_ylabel("Wall time (s)")
+    ax.set_title("Compute time by method")
+    ax.set_yscale("log")
+    ax.grid(axis="y", alpha=0.3, which="both")
+    for bar, val in zip(bars, vals):
+        label = f"{val:.2f}s" if val < 100 else f"{val:.1f}s"
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            bar.get_height(),
+            label,
+            ha="center",
+            va="bottom",
+            fontsize=8,
+        )
+    note = "LDOI / enhanced exclude SC-subset prep"
+    if METHOD_CW in timings:
+        note += "; cubewalkers = t_total"
+    ax.text(
+        0.01,
+        0.98,
+        note,
+        transform=ax.transAxes,
+        fontsize=7,
+        color="#555555",
+        va="top",
+    )
+    fig.tight_layout()
+    path = out_dir / "method_compute_times.png"
+    fig.savefig(path, dpi=140)
+    plt.close(fig)
+    return path
+
+
 def _abs_series_by_method(df: pd.DataFrame) -> dict[str, np.ndarray]:
     return {
         m: df[ABS_COL_SHORT[m]].to_numpy(dtype=np.float64) for m in METHOD_ORDER
@@ -750,13 +822,26 @@ ent_plots = _plot_abs_delta_distributions(
 for p in node_plots + ent_plots:
     print(f"  wrote {p}")
 
-# Persist comparison tables for later inspection.
+print("Writing method compute-time plot…")
+timing_plot = _plot_method_timings(RUN_DIR)
+if timing_plot is not None:
+    print(f"  wrote {timing_plot}")
+else:
+    print("  (skipped — no timings available)")
+
+# Persist comparison tables + timings for later inspection.
 node_csv = RUN_DIR / "node_cmp.csv"
 ent_csv = RUN_DIR / "entity_cmp.csv"
+timings_csv = RUN_DIR / "method_timings.csv"
 node_cmp_df.to_csv(node_csv, index=False)
 ent_cmp_df.to_csv(ent_csv, index=False)
+_timings = _method_timings_s()
+pd.DataFrame(
+    [{"method": m, "seconds": _timings[m]} for m in TIMING_METHOD_ORDER if m in _timings]
+).to_csv(timings_csv, index=False)
 print(f"  wrote {node_csv}")
 print(f"  wrote {ent_csv}")
+print(f"  wrote {timings_csv}")
 
 print()
 print(f"finished (UTC): {datetime.now(timezone.utc).isoformat()}")
