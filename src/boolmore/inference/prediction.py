@@ -588,12 +588,14 @@ def _nav_from_ldoi_enhanced(
 
     Starts from plain LDOI (forced → 0/1, else 0.5). Free strongly
     connected subsets of size ``1..cutoff`` are probed over all ``2^k``
-    joint assignments (combined with ``perturbation``). Assignments that
-    self-sustain for every member contribute probability mass that can
-    move downstream free-node NAV away from 0.5. Assignments where any
-    member self-negates are treated as impossible and dropped from the
-    uniform measure (renormalize). A member that both self-sustains and
-    self-negates under the same closure raises ``ValueError``.
+    joint assignments. Probe LDOIs are seeded with the plain-LDOI fixed
+    set (equivalent to ``perturbation``, but skips rediscovering those
+    implications). Assignments that self-sustain for every member
+    contribute probability mass that can move downstream free-node NAV
+    away from 0.5. Assignments where any member self-negates are treated
+    as impossible and dropped from the uniform measure (renormalize). A
+    member that both self-sustains and self-negates under the same
+    closure raises ``ValueError``.
 
     Parameters
     ----------
@@ -634,7 +636,8 @@ def _nav_from_ldoi_enhanced(
             if not free_set.issuperset(component):
                 continue
             for state in product((0, 1), repeat=k):
-                seed = dict(perturbation)
+                # Warm-start from plain LDOI: LDOI(fixed ∪ S) == LDOI(pert ∪ S).
+                seed = dict(fixed)
                 seed.update(zip(component, state, strict=True))
                 closure = logical_domain_of_influence(primes, seed)
                 members = list(zip(component, state, strict=True))
