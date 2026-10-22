@@ -98,7 +98,7 @@ N_TIME_STEPS: int | None = None  # None → 55*N + 6000
 T_WINDOW: int | None = None  # None → max(1000, T // 4)
 THREADS_PER_BLOCK: tuple[int, int] = DEFAULT_THREADS_PER_BLOCK
 
-FORCE_RECOMPUTE = False
+FORCE_RECOMPUTE = True
 
 SMOKE = os.environ.get("SMOKE") == "1"
 OUT_TAG = "_smoke" if SMOKE else ""
