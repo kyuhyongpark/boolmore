@@ -68,7 +68,10 @@ MODEL_STEM = (
 )
 PKL = MODEL_STEM.with_suffix(".pkl")
 BNET = MODEL_STEM.with_suffix(".bnet")
-LOG_DIR = Path(__file__).resolve().parent / "logs"
+# Shared CW cache + sibling-script artifacts stay under logs/; this script's
+# run outputs go in logs/investigate_ldoi_vs_ldoi_enhanced/{model}/seed-{hash}/.
+LOGS_ROOT = Path(__file__).resolve().parent / "logs"
+SCRIPT_NAME = Path(__file__).stem  # investigate_ldoi_vs_ldoi_enhanced
 
 # Intervention seed; empty → preexisting constants only.
 SEED: dict[str, int] = {
@@ -128,11 +131,16 @@ METHOD_COLORS = {
 # ## Load model
 
 # %%
-LOG_DIR.mkdir(parents=True, exist_ok=True)
+RUN_DIR = (
+    LOGS_ROOT
+    / SCRIPT_NAME
+    / MODEL_STEM.name
+    / f"seed-{SEED_HASH}{OUT_TAG}"
+)
+RUN_DIR.mkdir(parents=True, exist_ok=True)
 LOG_PATH = (
-    LOG_DIR
-    / f"investigate_ldoi_vs_cw_enhanced_{MODEL_STEM.name}"
-    f"_seed-{SEED_HASH}{OUT_TAG}.log"
+    RUN_DIR
+    / f"{SCRIPT_NAME}_{MODEL_STEM.name}_seed-{SEED_HASH}{OUT_TAG}.log"
 )
 _log_file = LOG_PATH.open("w", encoding="utf-8")
 _stdout = sys.stdout
@@ -150,24 +158,18 @@ assert T_WINDOW <= N_TIME_STEPS
 # Shared reusable CW cache (per-walker NAV; not LDOI). Same path as
 # investigate_ldoi_vs_cw_target.py so either script can populate it.
 CW_CACHE_PATH = (
-    LOG_DIR
+    LOGS_ROOT
     / (
         f"cw_walker_nav_{MODEL_STEM.name}_seed-{SEED_HASH}"
         f"_w{N_WALKERS}_T{N_TIME_STEPS}_tw{T_WINDOW}{OUT_TAG}.pkl"
     )
 )
 
-PLOT_PREFIX = (
-    LOG_DIR
-    / f"investigate_ldoi_vs_cw_enhanced_{MODEL_STEM.name}"
-    f"_seed-{SEED_HASH}{OUT_TAG}"
-)
-
 merged_bases, entity_keys = discover_full_entities(node_names, [])
 
+print(f"run dir: {RUN_DIR}")
 print(f"log file: {LOG_PATH}")
 print(f"CW cache: {CW_CACHE_PATH}")
-print(f"plot prefix: {PLOT_PREFIX}")
 print(f"started (UTC): {datetime.now(timezone.utc).isoformat()}")
 print(f"model pkl:  {PKL}")
 print(f"model bnet: {BNET}")
@@ -222,7 +224,7 @@ else:
         n_walkers=N_WALKERS,
         clamps=clamps,
         threads_per_block=THREADS_PER_BLOCK,
-        model_name="investigate_ldoi_vs_cw_enhanced",
+        model_name=SCRIPT_NAME,
     )
     walker_nav = align_walker_nav(walker_nav, varnames, node_names)
     cache = {
@@ -511,7 +513,7 @@ def _plot_abs_delta_distributions(
     df: pd.DataFrame,
     *,
     scope: str,
-    out_prefix: Path,
+    out_dir: Path,
 ) -> list[Path]:
     """Boxplot + overlaid hist + ECDF + mean/median bars for |Δ| vs CW."""
     series = _abs_series_by_method(df)
@@ -559,7 +561,7 @@ def _plot_abs_delta_distributions(
         if handles:
             ax.legend(handles[:1], labels[:1], loc="upper right", frameon=False)
     fig.tight_layout()
-    path = Path(f"{out_prefix}_{scope}_abs_delta_box.png")
+    path = out_dir / f"{scope}_abs_delta_box.png"
     fig.savefig(path, dpi=140)
     plt.close(fig)
     written.append(path)
@@ -592,7 +594,7 @@ def _plot_abs_delta_distributions(
     ax.set_xlim(0.0, xmax * 1.02)
     ax.grid(axis="y", alpha=0.3)
     fig.tight_layout()
-    path = Path(f"{out_prefix}_{scope}_abs_delta_hist.png")
+    path = out_dir / f"{scope}_abs_delta_hist.png"
     fig.savefig(path, dpi=140)
     plt.close(fig)
     written.append(path)
@@ -620,7 +622,7 @@ def _plot_abs_delta_distributions(
     ax.set_ylim(0.0, 1.02)
     ax.grid(alpha=0.3)
     fig.tight_layout()
-    path = Path(f"{out_prefix}_{scope}_abs_delta_ecdf.png")
+    path = out_dir / f"{scope}_abs_delta_ecdf.png"
     fig.savefig(path, dpi=140)
     plt.close(fig)
     written.append(path)
@@ -678,7 +680,7 @@ def _plot_abs_delta_distributions(
             color="#444444",
         )
     fig.tight_layout()
-    path = Path(f"{out_prefix}_{scope}_abs_delta_summary.png")
+    path = out_dir / f"{scope}_abs_delta_summary.png"
     fig.savefig(path, dpi=140)
     plt.close(fig)
     written.append(path)
@@ -729,7 +731,7 @@ def _plot_abs_delta_distributions(
         ax.grid(alpha=0.3)
 
         fig.tight_layout()
-        path = Path(f"{out_prefix}_{scope}_abs_delta_changed.png")
+        path = out_dir / f"{scope}_abs_delta_changed.png"
         fig.savefig(path, dpi=140)
         plt.close(fig)
         written.append(path)
@@ -740,17 +742,17 @@ def _plot_abs_delta_distributions(
 print()
 print("Writing |Δ| distribution plots…")
 node_plots = _plot_abs_delta_distributions(
-    node_cmp_df, scope="nodes", out_prefix=PLOT_PREFIX
+    node_cmp_df, scope="nodes", out_dir=RUN_DIR
 )
 ent_plots = _plot_abs_delta_distributions(
-    ent_cmp_df, scope="entities", out_prefix=PLOT_PREFIX
+    ent_cmp_df, scope="entities", out_dir=RUN_DIR
 )
 for p in node_plots + ent_plots:
     print(f"  wrote {p}")
 
 # Persist comparison tables for later inspection.
-node_csv = Path(f"{PLOT_PREFIX}_node_cmp.csv")
-ent_csv = Path(f"{PLOT_PREFIX}_entity_cmp.csv")
+node_csv = RUN_DIR / "node_cmp.csv"
+ent_csv = RUN_DIR / "entity_cmp.csv"
 node_cmp_df.to_csv(node_csv, index=False)
 ent_cmp_df.to_csv(ent_csv, index=False)
 print(f"  wrote {node_csv}")
@@ -765,4 +767,4 @@ sys.stdout = _stdout
 _log_file.close()
 print(f"log written: {LOG_PATH}")
 print(f"CW cache: {CW_CACHE_PATH}")
-print(f"plots under: {PLOT_PREFIX}_*")
+print(f"outputs under: {RUN_DIR}")

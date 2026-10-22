@@ -1,7 +1,7 @@
-log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018.log
+run dir: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018/investigate_ldoi_vs_ldoi_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018.log
 CW cache: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/cw_walker_nav_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_w2048_T16505_tw4126.pkl
-plot prefix: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018
-started (UTC): 2026-10-20T19:04:20.792453+00:00
+started (UTC): 2026-10-22T19:06:02.960360+00:00
 model pkl:  /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/20261016_173102/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.pkl
 model bnet: /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/20261016_173102/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.bnet
 SEED={'Alpelisib': 1, 'ER': 1, 'ES': 1, 'HER2': 0, 'PBX1': 1, 'PIM': 1, 'PTEN_T_2': 0, 'Rb_T': 1}
@@ -20,21 +20,21 @@ SC subsets size 1: 31
 SC subsets size 2: 6
 SC subsets size 3: 7
 Computing ldoi…
-  ldoi done in 0.006s
+  ldoi done in 0.004s
 Computing ldoi_enhanced (cutoff=1)…
-  enhanced(c=1) done in 0.329s
+  enhanced(c=1) done in 0.136s
 Computing ldoi_enhanced (cutoff=2)…
-  enhanced(c=2) done in 0.192s
+  enhanced(c=2) done in 0.139s
 Computing ldoi_enhanced (cutoff=3)…
-  enhanced(c=3) done in 0.217s
+  enhanced(c=3) done in 0.200s
 LDOI fixed nodes: 73 / 191
   Alpelisib=1, Apoptosis_X=0, BAD=0, CDK46=1, EGFR=0, EGFRHER3c=0, EGFRc=0, EIF4=1, EIF4EBP1=0, ER=1, ER_transcription=0, ER_transcription_2=0, ER_transcription_feedback=0, ER_transcription_feedback_1=0, ER_transcription_feedback_2=0, ES=1, ESR1=0, ESR1_2=0, Everolimus=0, FADD=0, FAS=0, FASLG=0, FOXA1=0, FOXO3=0, Fulvestrant=0, GRB2=0, HER2=0, HER2HER2c=0, HER2HER3c=0, HER2HER3c_2=0, HER3_2=0, HRAS=0, IL1B=0, IL6=0, IL6R=0, IL8=0, INSR=0, IRS1=0, Ipatasertib=0, JUN=0, KRT14=0, MAPK8=0, MYC_targets=1, MYC_targets_2=1, NFKB=0, Navitoclax=0, Neratinib=0, PAK1=0, PBX1=1, PI3K=0, PI3K_2=0, PIM=1, PRAS40=0, PTEN_T_2=0, Palbociclib=0, RAC1=0, RAS=0, RAS_2=0, RAS_3=0, Rb_T=1, S63845=0, SOS1=0, STAT5=0, TCF7L2=0, TRADD=1, Trametinib=0, Translation=1, erlotinib=0, mTORC1=1, mTORC2_ic=1, p21_p27=0, pertuzumab=0, trastuzumab=0
 CW timings: total=168.124s  setup=0.199s  sim=167.495s
 LDOI / enhanced compute times (excludes SC-subset prep):
-  ldoi              0.006s
-  enhanced(c=1)     0.329s
-  enhanced(c=2)     0.192s
-  enhanced(c=3)     0.217s
+  ldoi              0.004s
+  enhanced(c=1)     0.136s
+  enhanced(c=2)     0.139s
+  enhanced(c=3)     0.200s
 Nodes changed by ldoi_enhanced(c=1): 75 / 191
 Nodes changed by ldoi_enhanced(c=2): 87 / 191
 Nodes changed by ldoi_enhanced(c=3): 87 / 191
@@ -249,17 +249,17 @@ Proliferation   0.5 0.50000 0.375000 0.375000 0.025879        0.474121          
         CASP8   0.5 0.25000 0.250000 0.250000 0.496582        0.003418          0.246582          0.246582          0.246582
 
 Writing |Δ| distribution plots…
-  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_nodes_abs_delta_box.png
-  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_nodes_abs_delta_hist.png
-  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_nodes_abs_delta_ecdf.png
-  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_nodes_abs_delta_summary.png
-  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_nodes_abs_delta_changed.png
-  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_entities_abs_delta_box.png
-  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_entities_abs_delta_hist.png
-  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_entities_abs_delta_ecdf.png
-  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_entities_abs_delta_summary.png
-  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_entities_abs_delta_changed.png
-  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_node_cmp.csv
-  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_cw_enhanced_BreastCancer_primes_parsimonious_20261016_173102_9916_gen108_seed-4732b79018_entity_cmp.csv
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018/nodes_abs_delta_box.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018/nodes_abs_delta_hist.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018/nodes_abs_delta_ecdf.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018/nodes_abs_delta_summary.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018/nodes_abs_delta_changed.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018/entities_abs_delta_box.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018/entities_abs_delta_hist.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018/entities_abs_delta_ecdf.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018/entities_abs_delta_summary.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018/entities_abs_delta_changed.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018/node_cmp.csv
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_vs_ldoi_enhanced/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108/seed-4732b79018/entity_cmp.csv
 
-finished (UTC): 2026-10-20T19:04:24.564743+00:00
+finished (UTC): 2026-10-22T19:06:06.301088+00:00
