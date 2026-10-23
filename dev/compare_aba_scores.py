@@ -1,27 +1,27 @@
 # %% [markdown]
-# ABA scores: `min_traps` vs LDOI family vs cubewalkers
+# ABA scores: cubewalkers (GT) vs `min_traps` + LDOI family
 #
 # Score every `.bnet` under `case_study/ABA` against the experiments from
 # `ABA_{A|B}.json` (`data_{A|B}`, `default_sources`) using NAV prediction
 # methods from `boolmore.inference.prediction`, plus cubewalkers simulation:
 #
-# - **min_traps**: minimal trap spaces → average node values (reference)
+# - **cubewalkers** (ground truth): `asynchronous_set` ensemble → mean NAV
+#   → score (W=2048, T=600, T_window=120); only after min_traps + LDOI succeed
+# - **min_traps**: minimal trap spaces → average node values
 # - **ldoi**: plain logical domain of influence
 # - **ldoi_enhanced** with `cutoff=1`
 # - **ldoi_enhanced** with `cutoff=2`
 # - **ldoi_enhanced** with `cutoff=2` and `joint_self_loops=True`
-# - **cubewalkers**: `asynchronous_set` ensemble → mean NAV → score
-#   (W=2048, T=600, T_window=120); only run if min_traps + all LDOI succeed
 #
 # Switch dataset with `DATA_SET` below (`"A"` or `"B"`). Models that fail
 # (missing nodes, ASP errors, etc.) are logged and skipped. For successes,
-# compare each LDOI / cubewalkers method to `min_traps`: Pearson/Spearman,
-# pairwise order preservation, and rank agreement. Also records per-method
-# wall times.
+# compare each approximate method to cubewalkers: Pearson/Spearman, pairwise
+# order preservation, and rank agreement. Also records per-method wall times.
 #
 # `min_traps` and cubewalkers scores + wall times are cached under the log
-# dir (JSON) so re-runs can skip those expensive steps; set
-# `FORCE_RECOMPUTE_MIN_TRAPS` / `FORCE_RECOMPUTE_CW` to refresh.
+# dir (JSON); LDOI always runs fresh. Re-runs with warm caches only redo
+# LDOI + figures. Set `FORCE_RECOMPUTE_MIN_TRAPS` / `FORCE_RECOMPUTE_CW`
+# to refresh those caches.
 #
 # Outputs are overwritten under
 # `dev/logs/compare_aba_scores/{A|B}/` (stable names, no
@@ -112,7 +112,8 @@ LOG_DIR = (
 HIERARCHY = True
 STARTED_UTC = datetime.now(timezone.utc)
 
-# LDOI-family variants compared against min_traps (key, plot/table label, kwargs).
+# Approximate methods compared against cubewalkers GT.
+MIN_TRAPS_KEY = "min_traps"
 LDOI_VARIANTS: list[tuple[str, str, dict]] = [
     ("ldoi", "ldoi", {"method": "ldoi"}),
     (
@@ -135,20 +136,21 @@ LDOI_KEYS = [k for k, _, _ in LDOI_VARIANTS]
 LDOI_LABEL = {k: lab for k, lab, _ in LDOI_VARIANTS}
 CW_KEY = "cw"
 CW_LABEL = "cubewalkers"
-# Methods compared against min_traps (LDOI family + cubewalkers).
-COMPARE_KEYS = [*LDOI_KEYS, CW_KEY]
-COMPARE_LABEL = {**LDOI_LABEL, CW_KEY: CW_LABEL}
+REF_KEY = CW_KEY
+REF_LABEL = CW_LABEL
+COMPARE_KEYS = [MIN_TRAPS_KEY, *LDOI_KEYS]
+COMPARE_LABEL = {MIN_TRAPS_KEY: "min_traps", **LDOI_LABEL}
 METHOD_COLORS = {
-    "min_traps": "#7f7f7f",
+    CW_KEY: "#d62728",
+    MIN_TRAPS_KEY: "#7f7f7f",
     "ldoi": "#2c3e50",
     "enh_c1": "#1f77b4",
     "enh_c2": "#2ca02c",
     "enh_c2_j": "#bcbd22",
-    CW_KEY: "#d62728",
 }
-ALL_METHOD_KEYS = ["min_traps", *COMPARE_KEYS]
+ALL_METHOD_KEYS = [CW_KEY, *COMPARE_KEYS]
 ALL_METHOD_LABELS = {
-    "min_traps": "min_traps",
+    CW_KEY: CW_LABEL,
     **COMPARE_LABEL,
 }
 
@@ -215,9 +217,10 @@ print(f"hierarchy: {HIERARCHY}")
 print(f"experiments: {len(experiments)}")
 print(f"unique fixes: {len(UNIQUE_FIXES)}")
 print(f"bnet files: {len(bnet_paths)}")
-print(f"LDOI variants: {[LDOI_LABEL[k] for k in LDOI_KEYS]}")
+print(f"ground truth: {REF_LABEL}")
+print(f"compared methods: {[COMPARE_LABEL[k] for k in COMPARE_KEYS]}")
 print(
-    f"cubewalkers: asynchronous_set  W={CW_N_WALKERS}  "
+    f"cubewalkers GT: asynchronous_set  W={CW_N_WALKERS}  "
     f"T={CW_N_TIME_STEPS}  T_window={CW_T_WINDOW}  "
     f"set_update_prob={CW_SET_UPDATE_PROB}"
 )
@@ -252,9 +255,13 @@ class ModelScoreRow:
     def ok(self) -> bool:
         return (
             self.error is None
-            and self.score_min is not None
+            and CW_KEY in self.scores
             and all(k in self.scores for k in COMPARE_KEYS)
         )
+
+    @property
+    def score_ref(self) -> float | None:
+        return self.scores.get(CW_KEY)
 
 
 def _bnet_mtime_ns(path: Path) -> int:
@@ -534,9 +541,9 @@ class VariantMetrics:
 # %% [markdown]
 # ## Score all models
 #
-# `min_traps` and cubewalkers results (score + wall time) are read from /
-# written to JSON caches when enabled. LDOI variants always run fresh.
+# Order: `min_traps` (cached) → LDOI (fresh) → cubewalkers GT (cached).
 # Cubewalkers runs only after min_traps + all LDOI variants succeed.
+# Warm caches → LDOI + figures only (no GPU / trap-space recompute).
 
 # %%
 min_traps_cache = (
@@ -586,6 +593,8 @@ for idx, bnet in enumerate(bnet_paths, start=1):
         row.score_min = float(cached["score_min"])
         row.max_score = float(cached["max_score"])
         row.t_min = float(cached["t_min"])
+        row.scores[MIN_TRAPS_KEY] = row.score_min
+        row.times[MIN_TRAPS_KEY] = float(row.t_min)
         print(
             f"  CACHE min_traps={row.score_min:.2f}/{row.max_score} "
             f"({row.t_min:.2f}s cached)"
@@ -599,6 +608,8 @@ for idx, bnet in enumerate(bnet_paths, start=1):
             row.t_min = t_min
             row.score_min = score_min
             row.max_score = max_min
+            row.scores[MIN_TRAPS_KEY] = float(score_min)
+            row.times[MIN_TRAPS_KEY] = float(t_min)
             if USE_MIN_TRAPS_CACHE:
                 min_traps_cache["models"][rel] = {
                     "score_min": float(score_min),
@@ -647,7 +658,7 @@ for idx, bnet in enumerate(bnet_paths, start=1):
         rows.append(row)
         continue
 
-    # Cubewalkers only after min_traps + all LDOI variants succeed.
+    # Cubewalkers GT only after min_traps + all LDOI variants succeed.
     cw_cached = None
     if USE_CW_CACHE and not FORCE_RECOMPUTE_CW:
         cw_cached = lookup_cw_cache(cw_cache, rel, bnet)
@@ -714,12 +725,13 @@ for idx, bnet in enumerate(bnet_paths, start=1):
             rows.append(row)
             continue
 
+    score_ref = row.scores[CW_KEY]
     parts = [
         f"{COMPARE_LABEL[k]}={row.scores[k]:.2f} "
-        f"(Δ{row.scores[k] - row.score_min:+.2f})"
+        f"(Δ{row.scores[k] - score_ref:+.2f})"
         for k in COMPARE_KEYS
     ]
-    print(f"  DONE  " + "  ".join(parts))
+    print(f"  DONE  {CW_LABEL}={score_ref:.2f}  " + "  ".join(parts))
     rows.append(row)
 
 if USE_MIN_TRAPS_CACHE and cache_dirty:
@@ -755,14 +767,14 @@ for r in failed:
 print()
 
 # %% [markdown]
-# ## Comparison (min_traps + all LDOI + cubewalkers succeeded)
+# ## Comparison (cubewalkers GT + min_traps + all LDOI succeeded)
 
 # %%
 ok_rows = [r for r in rows if r.ok]
 n = len(ok_rows)
 
-scores_min = np.array([], dtype=float)
-ranks_min = np.array([], dtype=float)
+scores_ref = np.array([], dtype=float)
+ranks_ref = np.array([], dtype=float)
 variant_metrics: dict[str, VariantMetrics] = {}
 
 print(f"succeeded (all methods): {n} / {len(rows)}")
@@ -771,19 +783,19 @@ print()
 if n == 0:
     print("No successful models to compare.")
 else:
-    scores_min = np.array([r.score_min for r in ok_rows], dtype=float)
-    ranks_min = average_ranks(scores_min)
-    order = np.argsort(-scores_min, kind="mergesort")
+    scores_ref = np.array([r.scores[CW_KEY] for r in ok_rows], dtype=float)
+    ranks_ref = average_ranks(scores_ref)
+    order = np.argsort(-scores_ref, kind="mergesort")
 
-    # Wide score table
-    hdr = f"{'model':<45} {'min_traps':>10}"
+    # Wide score table (GT first)
+    hdr = f"{'model':<45} {REF_LABEL:>12}"
     for k in COMPARE_KEYS:
         hdr += f" {COMPARE_LABEL[k]:>16}"
     print(hdr)
     print("-" * len(hdr))
     for i in order:
         r = ok_rows[i]
-        line = f"{r.rel:<45} {scores_min[i]:10.2f}"
+        line = f"{r.rel:<45} {scores_ref[i]:12.2f}"
         for k in COMPARE_KEYS:
             line += f" {r.scores[k]:16.2f}"
         print(line)
@@ -794,15 +806,15 @@ else:
         label = COMPARE_LABEL[key]
         scores_v = np.array([r.scores[key] for r in ok_rows], dtype=float)
         ranks_v = average_ranks(scores_v)
-        diffs = scores_v - scores_min
-        r_p = pearson(scores_min, scores_v)
-        r_s = spearman(scores_min, scores_v)
-        o_agree, n_agree, n_pairs = pairwise_order_agreement(scores_min, scores_v)
-        mean_abs = float(np.mean(np.abs(ranks_min - ranks_v)))
+        diffs = scores_v - scores_ref
+        r_p = pearson(scores_ref, scores_v)
+        r_s = spearman(scores_ref, scores_v)
+        o_agree, n_agree, n_pairs = pairwise_order_agreement(scores_ref, scores_v)
+        mean_abs = float(np.mean(np.abs(ranks_ref - ranks_v)))
         top_ks: dict[int, float] = {}
         for kk in (1, 3, 5):
             if n >= kk:
-                top_ks[kk] = top_k_overlap(ranks_min, ranks_v, kk)
+                top_ks[kk] = top_k_overlap(ranks_ref, ranks_v, kk)
         variant_metrics[key] = VariantMetrics(
             key=key,
             label=label,
@@ -818,7 +830,7 @@ else:
             top_k_overlaps=top_ks,
         )
 
-        print(f"Agreement vs min_traps — {label}")
+        print(f"Agreement vs {REF_LABEL} — {label}")
         print(f"  Pearson r:              {r_p:.4f}")
         print(f"  Spearman rho:           {r_s:.4f}")
         print(
@@ -827,7 +839,7 @@ else:
         )
         print(f"  Mean |Δrank|:           {mean_abs:.3f}")
         print(
-            f"  Score diff (method − min): "
+            f"  Score diff (method − {REF_LABEL}): "
             f"mean={diffs.mean():+.3f}  "
             f"std={diffs.std(ddof=1) if n > 1 else 0.0:.3f}  "
             f"min={diffs.min():+.3f}  max={diffs.max():+.3f}"
@@ -863,12 +875,8 @@ def _timing_stats(vals: np.ndarray) -> dict[str, float]:
     }
 
 
-timing_by_method: dict[str, dict[str, float]] = {
-    "min_traps": _timing_stats(
-        np.array([r.t_min for r in rows if r.t_min is not None], dtype=float)
-    ),
-}
-for key in COMPARE_KEYS:
+timing_by_method: dict[str, dict[str, float]] = {}
+for key in ALL_METHOD_KEYS:
     timing_by_method[key] = _timing_stats(
         np.array(
             [r.times[key] for r in rows if key in r.times],
@@ -920,13 +928,13 @@ print(f"saved: {TIMINGS_CSV}")
 
 per_model_csv = LOG_DIR / "method_timings_per_model.csv"
 if n > 0:
-    fieldnames = ["model", "t_min_traps_s"] + [f"t_{k}_s" for k in COMPARE_KEYS]
+    fieldnames = ["model"] + [f"t_{k}_s" for k in ALL_METHOD_KEYS]
     with per_model_csv.open("w", encoding="utf-8", newline="") as fh:
         writer = csv.DictWriter(fh, fieldnames=fieldnames)
         writer.writeheader()
         for r in ok_rows:
-            row_out = {"model": r.rel, "t_min_traps_s": r.t_min}
-            for k in COMPARE_KEYS:
+            row_out = {"model": r.rel}
+            for k in ALL_METHOD_KEYS:
                 row_out[f"t_{k}_s"] = r.times[k]
             writer.writerow(row_out)
     print(f"saved: {per_model_csv}")
@@ -935,7 +943,7 @@ print()
 # %% [markdown]
 # ## Plots
 #
-# Side-by-side panels per compared method (LDOI + cubewalkers) for
+# Side-by-side panels per approximate method vs cubewalkers GT for
 # score/rank/diff; method timings show all methods together.
 
 # %%
@@ -960,29 +968,29 @@ else:
     for ax, key in zip(axes, COMPARE_KEYS):
         vm = variant_metrics[key]
         ax.scatter(
-            scores_min,
+            scores_ref,
             vm.scores,
             s=36,
             zorder=3,
             color=METHOD_COLORS[key],
             alpha=0.9,
         )
-        lo = float(min(scores_min.min(), vm.scores.min()))
-        hi = float(max(scores_min.max(), vm.scores.max()))
+        lo = float(min(scores_ref.min(), vm.scores.min()))
+        hi = float(max(scores_ref.max(), vm.scores.max()))
         pad = 0.05 * (hi - lo) if hi > lo else 1.0
         lim = (lo - pad, hi + pad)
         ax.plot(lim, lim, color="0.5", linestyle="--", linewidth=1)
         ax.set_xlim(lim)
         ax.set_ylim(lim)
         ax.set_aspect("equal", adjustable="box")
-        ax.set_xlabel("score (min_traps)")
+        ax.set_xlabel(f"score ({REF_LABEL})")
         ax.set_ylabel(f"score ({vm.label})")
         ax.set_title(
             f"{vm.label}\nr={vm.pearson:.3f}, ρ={vm.spearman:.3f}",
             fontsize=10,
         )
         ax.grid(True, alpha=0.3)
-    fig.suptitle(f"ABA-{DATA_SET} NAV scores vs min_traps  (n={n})", y=1.02)
+    fig.suptitle(f"ABA-{DATA_SET} NAV scores vs {REF_LABEL}  (n={n})", y=1.02)
     fig.tight_layout()
     fig.savefig(PLOT_SCORE, dpi=150, bbox_inches="tight")
     plt.close(fig)
@@ -995,7 +1003,7 @@ else:
     for ax, key in zip(axes, COMPARE_KEYS):
         vm = variant_metrics[key]
         ax.scatter(
-            ranks_min,
+            ranks_ref,
             vm.ranks,
             s=36,
             zorder=3,
@@ -1008,7 +1016,7 @@ else:
         ax.invert_xaxis()
         ax.invert_yaxis()
         ax.set_aspect("equal", adjustable="box")
-        ax.set_xlabel("rank (min_traps)")
+        ax.set_xlabel(f"rank ({REF_LABEL})")
         ax.set_ylabel(f"rank ({vm.label})")
         ax.set_title(
             f"{vm.label}\norder={vm.order_agree:.3f}, "
@@ -1016,7 +1024,7 @@ else:
             fontsize=10,
         )
         ax.grid(True, alpha=0.3)
-    fig.suptitle(f"ABA-{DATA_SET} NAV ranks vs min_traps  (n={n})", y=1.02)
+    fig.suptitle(f"ABA-{DATA_SET} NAV ranks vs {REF_LABEL}  (n={n})", y=1.02)
     fig.tight_layout()
     fig.savefig(PLOT_RANK, dpi=150, bbox_inches="tight")
     plt.close(fig)
@@ -1044,12 +1052,14 @@ else:
             alpha=0.85,
         )
         ax.axvline(0.0, color="0.4", linewidth=1)
-        ax.set_xlabel(f"{vm.label} − min_traps")
+        ax.set_xlabel(f"{vm.label} − {REF_LABEL}")
         ax.set_title(vm.label, fontsize=10)
         ax.grid(True, axis="x", alpha=0.3)
     axes[0].set_yticks(y)
     axes[0].set_yticklabels([short_labels[i] for i in order_diff], fontsize=7)
-    fig.suptitle(f"ABA-{DATA_SET}: per-model score difference", y=1.01)
+    fig.suptitle(
+        f"ABA-{DATA_SET}: per-model score difference vs {REF_LABEL}", y=1.01
+    )
     fig.tight_layout()
     fig.savefig(PLOT_DIFF, dpi=150, bbox_inches="tight")
     plt.close(fig)
@@ -1162,13 +1172,13 @@ def _fmt(x: float, digits: int = 4) -> str:
 
 
 readme_lines = [
-    f"# ABA-{DATA_SET} scores: `min_traps` vs LDOI family vs cubewalkers",
+    f"# ABA-{DATA_SET} scores: cubewalkers (GT) vs `min_traps` + LDOI",
     "",
     "Comparison of NAV total scores on every `.bnet` under `case_study/ABA`,",
     f"using experiments from `{CONFIG_REL}` "
     f"(`{data_path.name}`, `default_sources`).",
     "",
-    "Reference method: `min_traps`. Compared methods:",
+    f"Ground truth: `{REF_LABEL}`. Compared approximate methods:",
     "",
 ]
 for key in COMPARE_KEYS:
@@ -1183,7 +1193,7 @@ readme_lines.extend(
         f"- **Hierarchy:** {HIERARCHY}",
         f"- **Experiments:** {len(experiments)}",
         f"- **Unique fixes:** {len(UNIQUE_FIXES)}",
-        f"- **Cubewalkers:** `asynchronous_set`, "
+        f"- **Cubewalkers (GT):** `asynchronous_set`, "
         f"W={CW_N_WALKERS}, T={CW_N_TIME_STEPS}, "
         f"T_window={CW_T_WINDOW}, set_update_prob={CW_SET_UPDATE_PROB}",
         f"- **Bnets scanned:** {len(rows)}",
@@ -1198,7 +1208,7 @@ readme_lines.extend(
         f"`force_recompute={FORCE_RECOMPUTE_CW}`, "
         f"hits={cw_cache_hits}, misses={cw_cache_misses}",
         "",
-        "## Score agreement vs min_traps",
+        f"## Score agreement vs {REF_LABEL}",
         "",
     ]
 )
@@ -1234,8 +1244,8 @@ readme_lines.append(
     "Wall time for prediction + NAV scoring + model score "
     "(models where that method completed). "
     "`min_traps` and `cubewalkers` times reuse the originally measured "
-    "values when loaded from cache. Cubewalkers is skipped when earlier "
-    "methods fail."
+    "values when loaded from cache. LDOI always runs fresh. Cubewalkers "
+    "is skipped when earlier methods fail."
 )
 readme_lines.append("")
 readme_lines.append(
