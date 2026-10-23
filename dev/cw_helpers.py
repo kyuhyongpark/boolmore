@@ -16,12 +16,20 @@ or, if the kernel cwd is not ``dev/``::
 
 from __future__ import annotations
 
-from collections.abc import Callable, Iterable, Sequence
+import re
+from collections.abc import Callable, Iterable, Mapping, Sequence
 from pathlib import Path
 from time import perf_counter
 from typing import Any
 
 import numpy as np
+
+# Cubewalkers substitutes node names with ``\bname\b`` before compiling CUDA.
+# Hyphens / leading digits (e.g. ``8-nitro-cGMP``, ``V-ATPase``) break that
+# and yield invalid C. Rename such nodes to C identifiers before simulation.
+_C_IDENT_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+# Tokenize Boolean rule RHS: operators / whitespace vs node-name atoms.
+_BNET_EXPR_TOKEN_RE = re.compile(r"\s+|[&|!()]+|[^\s&|()!]+")
 
 _CUDA_HELP = """
 Cubewalkers requires CUDA + CuPy inside WSL2.
@@ -102,6 +110,118 @@ def bnet_rules_for_cubewalkers(path: Path) -> str:
             continue
         lines.append(line)
     return "\n".join(lines) + "\n"
+
+
+def _bnet_rule_lines(rules: str) -> list[str]:
+    """Non-empty, non-comment BoolNet rule lines (no ``targets,factors``)."""
+    out: list[str] = []
+    for line in rules.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        if stripped.lower().replace("\t", " ").replace(" ", "") in {
+            "targets,factors",
+            "targets,factors,",
+        }:
+            continue
+        left = stripped.split(",", 1)[0].strip().lower()
+        if left == "targets":
+            continue
+        out.append(stripped)
+    return out
+
+
+def node_names_from_bnet_rules(rules: str) -> list[str]:
+    """LHS node names in rule order from a BoolNet rules string."""
+    names: list[str] = []
+    for line in _bnet_rule_lines(rules):
+        names.append(line.split(",", 1)[0].strip())
+    return names
+
+
+def c_safe_name_map(names: Sequence[str]) -> dict[str, str]:
+    """Map original node names → unique C identifiers for cubewalkers.
+
+    Names that are already valid C identifiers and do not collide are kept.
+    Others become ``n0``, ``n1``, … (skipping any taken identifiers).
+    """
+    used: set[str] = set()
+    mapping: dict[str, str] = {}
+    auto_i = 0
+
+    def _next_auto() -> str:
+        nonlocal auto_i
+        while True:
+            cand = f"n{auto_i}"
+            auto_i += 1
+            if cand not in used:
+                return cand
+
+    for name in names:
+        if name in mapping:
+            continue
+        if _C_IDENT_RE.match(name) and name not in used:
+            mapping[name] = name
+            used.add(name)
+        else:
+            safe = _next_auto()
+            mapping[name] = safe
+            used.add(safe)
+    return mapping
+
+
+def _rewrite_bnet_expr(expr: str, name_map: Mapping[str, str]) -> str:
+    parts: list[str] = []
+    for match in _BNET_EXPR_TOKEN_RE.finditer(expr):
+        tok = match.group(0)
+        parts.append(name_map.get(tok, tok))
+    return "".join(parts)
+
+
+def rewrite_bnet_rules_for_cubewalkers(
+    rules: str, name_map: Mapping[str, str] | None = None
+) -> tuple[str, dict[str, str]]:
+    """Rewrite BoolNet rules so every node name is a C identifier.
+
+    Returns ``(rewritten_rules, original_to_safe)``. Comment / header lines
+    are dropped. If ``name_map`` is omitted, one is built from the rule LHSs.
+    """
+    rule_lines = _bnet_rule_lines(rules)
+    names = [line.split(",", 1)[0].strip() for line in rule_lines]
+    if name_map is None:
+        name_map = c_safe_name_map(names)
+    else:
+        name_map = dict(name_map)
+
+    out_lines: list[str] = []
+    for line in rule_lines:
+        left, _, right = line.partition(",")
+        orig = left.strip()
+        if orig not in name_map:
+            raise KeyError(f"node {orig!r} missing from name_map")
+        out_lines.append(f"{name_map[orig]},{_rewrite_bnet_expr(right, name_map)}")
+    return "\n".join(out_lines) + "\n", name_map
+
+
+def remap_clamps(
+    clamps: Sequence[tuple[str, int]] | Iterable[tuple[str, int]] | None,
+    name_map: Mapping[str, str],
+) -> list[tuple[str, int]] | None:
+    """Rename clamp nodes with ``name_map``. Unknown nodes are left unchanged."""
+    if not clamps:
+        return None
+    return [(name_map.get(node, node), int(value)) for node, value in clamps]
+
+
+def remap_nav_names(
+    nav: Mapping[str, float], name_map: Mapping[str, str]
+) -> dict[str, float]:
+    """Map a NAV dict keyed by safe names back to original names."""
+    reverse = {safe: orig for orig, safe in name_map.items()}
+    out: dict[str, float] = {}
+    for key, val in nav.items():
+        out[reverse.get(key, key)] = float(val)
+    return out
 
 
 def make_model_namer() -> Callable[[str], str]:

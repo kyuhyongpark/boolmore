@@ -63,7 +63,10 @@ if str(_DEV) not in sys.path:
 from cw_helpers import (
     bnet_rules_for_cubewalkers,
     make_model_namer,
+    remap_clamps,
+    remap_nav_names,
     require_cubewalkers,
+    rewrite_bnet_rules_for_cubewalkers,
     simulate_mean_nav,
 )
 from nav_helpers import to_nav_predictions
@@ -280,6 +283,8 @@ def _cw_cache_fingerprint() -> dict:
         "cw_n_time_steps": CW_N_TIME_STEPS,
         "cw_t_window": CW_T_WINDOW,
         "cw_set_update_prob": CW_SET_UPDATE_PROB,
+        # Bump when CW name sanitization / scoring path changes.
+        "cw_name_sanitize": 1,
     }
 
 
@@ -477,15 +482,21 @@ def _ensure_cubewalkers() -> None:
 
 
 def _score_with_cubewalkers(bnet: Path) -> tuple[float, float, float]:
-    """Simulate mean NAV per unique fix with CW; return (max_score, score, wall_s)."""
+    """Simulate mean NAV per unique fix with CW; return (max_score, score, wall_s).
+
+    ABA node names like ``8-nitro-cGMP`` / ``V-ATPase`` are not valid C
+    identifiers; cubewalkers' CUDA codegen breaks on them. Rename to safe
+    names for simulation, then map NAV keys back before scoring.
+    """
     _ensure_cubewalkers()
-    rules = bnet_rules_for_cubewalkers(bnet)
+    raw_rules = bnet_rules_for_cubewalkers(bnet)
+    rules, name_map = rewrite_bnet_rules_for_cubewalkers(raw_rules)
     t0 = perf_counter()
     preds: dict = {}
     for fixes in UNIQUE_FIXES:
-        nav, _timings = simulate_mean_nav(
+        nav_safe, _timings = simulate_mean_nav(
             rules,
-            clamps=fixes,
+            clamps=remap_clamps(fixes, name_map),
             n_time_steps=CW_N_TIME_STEPS,
             t_window=CW_T_WINDOW,
             n_walkers=CW_N_WALKERS,
@@ -493,7 +504,7 @@ def _score_with_cubewalkers(bnet: Path) -> tuple[float, float, float]:
             set_update_prob=CW_SET_UPDATE_PROB,
             model_name=_next_cw_model_name("aba_cw"),
         )
-        preds[fixes] = nav
+        preds[fixes] = remap_nav_names(nav_safe, name_map)
     items = get_NAV_scores(
         experiments,
         to_nav_predictions(preds),
