@@ -1,7 +1,7 @@
 DATA_SET: A
 log dir:  /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A
 log file: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_scores.log
-started (UTC): 2026-10-23T20:04:11.187349+00:00
+started (UTC): 2026-10-23T21:03:34.562772+00:00
 
 config: case_study/ABA/data/ABA_A.json
 data:   case_study/ABA/data/data_A.csv
@@ -10,8 +10,9 @@ hierarchy: True
 experiments: 505
 unique fixes: 260
 bnet files: 29
-LDOI variants: ['ldoi', 'enhanced(c=1)', 'enhanced(c=2)', 'enhanced+j(c=2)']
-cubewalkers: asynchronous_set  W=2048  T=600  T_window=120  set_update_prob=0.5
+ground truth: cubewalkers
+compared methods: ['min_traps', 'ldoi', 'enhanced(c=1)', 'enhanced(c=2)', 'enhanced+j(c=2)']
+cubewalkers GT: asynchronous_set  W=2048  T=600  T_window=120  set_update_prob=0.5
 min_traps cache: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/min_traps_cache.json
   use_cache=True  force_recompute=False
 cw cache: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/cw_cache.json
@@ -46,205 +47,200 @@ cw cache: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/cw_cach
   generated_models/repetitions/rep_20230924_8037_gen129.bnet
   generated_models/repetitions/rep_20230925_7821_gen113.bnet
 
-cw cache fingerprint mismatch; starting fresh
-  cached:   {'config_rel': 'case_study/ABA/data/ABA_A.json', 'cw_n_time_steps': 600, 'cw_n_walkers': 2048, 'cw_set_update_prob': 0.5, 'cw_t_window': 120, 'cw_update_scheme': 'asynchronous_set', 'data': 'case_study/ABA/data/data_A.csv', 'data_set': 'A', 'default_sources': {'ABA': 0}, 'hierarchy': True, 'n_experiments': 505, 'n_unique_fixes': 260}
-  expected: {'data_set': 'A', 'config_rel': 'case_study/ABA/data/ABA_A.json', 'data': 'case_study/ABA/data/data_A.csv', 'hierarchy': True, 'default_sources': {'ABA': 0}, 'n_experiments': 505, 'n_unique_fixes': 260, 'cw_update_scheme': 'asynchronous_set', 'cw_n_walkers': 2048, 'cw_n_time_steps': 600, 'cw_t_window': 120, 'cw_set_update_prob': 0.5, 'cw_name_sanitize': 1}
 [1/29] baseline_models/ABA_2006_Li.bnet
-  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model
+  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model  [min_traps cache]
 [2/29] baseline_models/ABA_2017_Albert.bnet
-  OK    min_traps=310.48/505.0 (2.48s)
+  CACHE min_traps=310.48/505.0 (2.48s cached)
   OK    ldoi=138.68/505.0 (0.10s)
-  OK    enhanced(c=1)=137.14/505.0 (0.34s)
-  OK    enhanced(c=2)=143.89/505.0 (0.56s)
+  OK    enhanced(c=1)=137.14/505.0 (0.37s)
+  OK    enhanced(c=2)=143.89/505.0 (0.61s)
   OK    enhanced+j(c=2)=143.92/505.0 (0.78s)
-cubewalkers ready: /home/troonmel/Boolmore/.venv314/lib/python3.14/site-packages/cubewalkers/__init__.py
-  scheme=asynchronous_set  W=2048  T=600  T_window=120
-  OK    cubewalkers=275.50/505.0 (71.50s)
-  DONE  ldoi=138.68 (Δ-171.80)  enhanced(c=1)=137.14 (Δ-173.34)  enhanced(c=2)=143.89 (Δ-166.59)  enhanced+j(c=2)=143.92 (Δ-166.56)  cubewalkers=275.50 (Δ-34.98)
+  CACHE cubewalkers=275.50/505.0 (71.50s cached)
+  DONE  cubewalkers=275.50  min_traps=310.48 (Δ+34.98)  ldoi=138.68 (Δ-136.82)  enhanced(c=1)=137.14 (Δ-138.36)  enhanced(c=2)=143.89 (Δ-131.61)  enhanced+j(c=2)=143.92 (Δ-131.58)
 [3/29] baseline_models/ABA_2017_VA-KEV_del.bnet
-  OK    min_traps=291.73/505.0 (2.41s)
+  CACHE min_traps=291.73/505.0 (2.41s cached)
   OK    ldoi=138.78/505.0 (0.10s)
-  OK    enhanced(c=1)=137.45/505.0 (0.34s)
-  OK    enhanced(c=2)=144.13/505.0 (0.55s)
-  OK    enhanced+j(c=2)=144.13/505.0 (0.78s)
-  OK    cubewalkers=269.61/505.0 (71.94s)
-  DONE  ldoi=138.78 (Δ-152.95)  enhanced(c=1)=137.45 (Δ-154.28)  enhanced(c=2)=144.13 (Δ-147.59)  enhanced+j(c=2)=144.13 (Δ-147.59)  cubewalkers=269.61 (Δ-22.11)
+  OK    enhanced(c=1)=137.45/505.0 (0.32s)
+  OK    enhanced(c=2)=144.13/505.0 (0.57s)
+  OK    enhanced+j(c=2)=144.13/505.0 (0.82s)
+  CACHE cubewalkers=269.61/505.0 (71.94s cached)
+  DONE  cubewalkers=269.61  min_traps=291.73 (Δ+22.11)  ldoi=138.78 (Δ-130.84)  enhanced(c=1)=137.45 (Δ-132.17)  enhanced(c=2)=144.13 (Δ-125.48)  enhanced+j(c=2)=144.13 (Δ-125.48)
 [4/29] baseline_models/ABA_2018_Waidyarathne.bnet
-  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model
+  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model  [min_traps cache]
 [5/29] baseline_models/ABA_2019_Maheshwari.bnet
-  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model
+  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model  [min_traps cache]
 [6/29] baseline_models/ABA_GA_base_A.bnet
-  OK    min_traps=311.71/505.0 (2.44s)
+  CACHE min_traps=311.71/505.0 (2.44s cached)
   OK    ldoi=137.81/505.0 (0.10s)
-  OK    enhanced(c=1)=137.61/505.0 (0.40s)
-  OK    enhanced(c=2)=144.32/505.0 (0.62s)
-  OK    enhanced+j(c=2)=144.32/505.0 (0.86s)
-  OK    cubewalkers=280.67/505.0 (73.54s)
-  DONE  ldoi=137.81 (Δ-173.91)  enhanced(c=1)=137.61 (Δ-174.11)  enhanced(c=2)=144.32 (Δ-167.39)  enhanced+j(c=2)=144.32 (Δ-167.39)  cubewalkers=280.67 (Δ-31.04)
+  OK    enhanced(c=1)=137.61/505.0 (0.39s)
+  OK    enhanced(c=2)=144.32/505.0 (0.64s)
+  OK    enhanced+j(c=2)=144.32/505.0 (0.88s)
+  CACHE cubewalkers=280.67/505.0 (73.54s cached)
+  DONE  cubewalkers=280.67  min_traps=311.71 (Δ+31.04)  ldoi=137.81 (Δ-142.86)  enhanced(c=1)=137.61 (Δ-143.06)  enhanced(c=2)=144.32 (Δ-136.35)  enhanced+j(c=2)=144.32 (Δ-136.35)
 [7/29] baseline_models/ABA_GA_base_B.bnet
-  FAIL  min_traps: ValueError: Ca2c is not in the model
+  FAIL  min_traps: ValueError: Ca2c is not in the model  [min_traps cache]
 [8/29] generated_models/GA0_A.bnet
-  OK    min_traps=390.81/505.0 (1.97s)
+  CACHE min_traps=390.81/505.0 (1.97s cached)
   OK    ldoi=141.30/505.0 (0.09s)
-  OK    enhanced(c=1)=139.91/505.0 (0.25s)
-  OK    enhanced(c=2)=347.21/505.0 (0.62s)
-  OK    enhanced+j(c=2)=347.21/505.0 (0.72s)
-  OK    cubewalkers=360.43/505.0 (68.99s)
-  DONE  ldoi=141.30 (Δ-249.51)  enhanced(c=1)=139.91 (Δ-250.90)  enhanced(c=2)=347.21 (Δ-43.60)  enhanced+j(c=2)=347.21 (Δ-43.60)  cubewalkers=360.43 (Δ-30.37)
+  OK    enhanced(c=1)=139.91/505.0 (0.27s)
+  OK    enhanced(c=2)=347.21/505.0 (0.63s)
+  OK    enhanced+j(c=2)=347.21/505.0 (0.67s)
+  CACHE cubewalkers=360.43/505.0 (68.99s cached)
+  DONE  cubewalkers=360.43  min_traps=390.81 (Δ+30.37)  ldoi=141.30 (Δ-219.14)  enhanced(c=1)=139.91 (Δ-220.53)  enhanced(c=2)=347.21 (Δ-13.23)  enhanced+j(c=2)=347.21 (Δ-13.23)
 [9/29] generated_models/GA0_B.bnet
-  FAIL  min_traps: ValueError: Ca2c is not in the model
+  FAIL  min_traps: ValueError: Ca2c is not in the model  [min_traps cache]
 [10/29] generated_models/GA1_A.bnet
-  OK    min_traps=426.94/505.0 (2.04s)
+  CACHE min_traps=426.94/505.0 (2.04s cached)
   OK    ldoi=132.31/505.0 (0.10s)
-  OK    enhanced(c=1)=134.78/505.0 (0.23s)
-  OK    enhanced(c=2)=343.62/505.0 (0.81s)
-  OK    enhanced+j(c=2)=343.62/505.0 (0.80s)
-  OK    cubewalkers=366.25/505.0 (79.00s)
-  DONE  ldoi=132.31 (Δ-294.63)  enhanced(c=1)=134.78 (Δ-292.17)  enhanced(c=2)=343.62 (Δ-83.32)  enhanced+j(c=2)=343.62 (Δ-83.32)  cubewalkers=366.25 (Δ-60.69)
+  OK    enhanced(c=1)=134.78/505.0 (0.22s)
+  OK    enhanced(c=2)=343.62/505.0 (0.76s)
+  OK    enhanced+j(c=2)=343.62/505.0 (0.78s)
+  CACHE cubewalkers=366.25/505.0 (79.00s cached)
+  DONE  cubewalkers=366.25  min_traps=426.94 (Δ+60.69)  ldoi=132.31 (Δ-233.94)  enhanced(c=1)=134.78 (Δ-231.48)  enhanced(c=2)=343.62 (Δ-22.63)  enhanced+j(c=2)=343.62 (Δ-22.63)
 [11/29] generated_models/GA1_B.bnet
-  FAIL  min_traps: ValueError: Ca2c is not in the model
+  FAIL  min_traps: ValueError: Ca2c is not in the model  [min_traps cache]
 [12/29] generated_models/GA2_A.bnet
-  OK    min_traps=431.19/505.0 (2.07s)
+  CACHE min_traps=431.19/505.0 (2.07s cached)
   OK    ldoi=133.31/505.0 (0.10s)
   OK    enhanced(c=1)=135.07/505.0 (0.29s)
-  OK    enhanced(c=2)=339.75/505.0 (0.84s)
-  OK    enhanced+j(c=2)=339.75/505.0 (0.88s)
-  OK    cubewalkers=319.52/505.0 (74.28s)
-  DONE  ldoi=133.31 (Δ-297.88)  enhanced(c=1)=135.07 (Δ-296.13)  enhanced(c=2)=339.75 (Δ-91.44)  enhanced+j(c=2)=339.75 (Δ-91.44)  cubewalkers=319.52 (Δ-111.67)
+  OK    enhanced(c=2)=339.75/505.0 (0.82s)
+  OK    enhanced+j(c=2)=339.75/505.0 (0.87s)
+  CACHE cubewalkers=319.52/505.0 (74.28s cached)
+  DONE  cubewalkers=319.52  min_traps=431.19 (Δ+111.67)  ldoi=133.31 (Δ-186.21)  enhanced(c=1)=135.07 (Δ-184.46)  enhanced(c=2)=339.75 (Δ+20.23)  enhanced+j(c=2)=339.75 (Δ+20.23)
 [13/29] generated_models/GA2_B.bnet
-  FAIL  min_traps: ValueError: Ca2c is not in the model
+  FAIL  min_traps: ValueError: Ca2c is not in the model  [min_traps cache]
 [14/29] generated_models/GA_VA-KEV_del.bnet
-  OK    min_traps=385.31/505.0 (2.06s)
+  CACHE min_traps=385.31/505.0 (2.06s cached)
   OK    ldoi=136.75/505.0 (0.10s)
   OK    enhanced(c=1)=137.47/505.0 (0.27s)
-  OK    enhanced(c=2)=354.34/505.0 (0.87s)
-  OK    enhanced+j(c=2)=354.34/505.0 (0.89s)
-  OK    cubewalkers=355.45/505.0 (74.32s)
-  DONE  ldoi=136.75 (Δ-248.56)  enhanced(c=1)=137.47 (Δ-247.84)  enhanced(c=2)=354.34 (Δ-30.98)  enhanced+j(c=2)=354.34 (Δ-30.98)  cubewalkers=355.45 (Δ-29.86)
+  OK    enhanced(c=2)=354.34/505.0 (0.82s)
+  OK    enhanced+j(c=2)=354.34/505.0 (0.87s)
+  CACHE cubewalkers=355.45/505.0 (74.32s cached)
+  DONE  cubewalkers=355.45  min_traps=385.31 (Δ+29.86)  ldoi=136.75 (Δ-218.70)  enhanced(c=1)=137.47 (Δ-217.98)  enhanced(c=2)=354.34 (Δ-1.12)  enhanced+j(c=2)=354.34 (Δ-1.12)
 [15/29] generated_models/repetitions/20241007143135_9306_gen124.bnet
-  OK    min_traps=420.76/505.0 (2.09s)
+  CACHE min_traps=420.76/505.0 (2.09s cached)
   OK    ldoi=127.70/505.0 (0.10s)
   OK    enhanced(c=1)=127.74/505.0 (0.22s)
-  OK    enhanced(c=2)=333.80/505.0 (0.77s)
-  OK    enhanced+j(c=2)=333.80/505.0 (0.80s)
-  OK    cubewalkers=307.08/505.0 (79.68s)
-  DONE  ldoi=127.70 (Δ-293.05)  enhanced(c=1)=127.74 (Δ-293.01)  enhanced(c=2)=333.80 (Δ-86.96)  enhanced+j(c=2)=333.80 (Δ-86.96)  cubewalkers=307.08 (Δ-113.67)
+  OK    enhanced(c=2)=333.80/505.0 (0.79s)
+  OK    enhanced+j(c=2)=333.80/505.0 (0.78s)
+  CACHE cubewalkers=307.08/505.0 (79.68s cached)
+  DONE  cubewalkers=307.08  min_traps=420.76 (Δ+113.67)  ldoi=127.70 (Δ-179.38)  enhanced(c=1)=127.74 (Δ-179.34)  enhanced(c=2)=333.80 (Δ+26.71)  enhanced+j(c=2)=333.80 (Δ+26.71)
 [16/29] generated_models/repetitions/20241009072111_9984_gen68.bnet
-  OK    min_traps=426.26/505.0 (2.61s)
-  OK    ldoi=141.76/505.0 (0.10s)
+  CACHE min_traps=426.26/505.0 (2.61s cached)
+  OK    ldoi=141.76/505.0 (0.11s)
   OK    enhanced(c=1)=143.75/505.0 (0.36s)
   OK    enhanced(c=2)=341.69/505.0 (0.96s)
-  OK    enhanced+j(c=2)=341.64/505.0 (1.11s)
-  OK    cubewalkers=385.76/505.0 (97.64s)
-  DONE  ldoi=141.76 (Δ-284.50)  enhanced(c=1)=143.75 (Δ-282.51)  enhanced(c=2)=341.69 (Δ-84.57)  enhanced+j(c=2)=341.64 (Δ-84.62)  cubewalkers=385.76 (Δ-40.50)
+  OK    enhanced+j(c=2)=341.64/505.0 (1.03s)
+  CACHE cubewalkers=385.76/505.0 (97.64s cached)
+  DONE  cubewalkers=385.76  min_traps=426.26 (Δ+40.50)  ldoi=141.76 (Δ-244.00)  enhanced(c=1)=143.75 (Δ-242.01)  enhanced(c=2)=341.69 (Δ-44.08)  enhanced+j(c=2)=341.64 (Δ-44.12)
 [17/29] generated_models/repetitions/20241009211257_9880_gen154.bnet
-  OK    min_traps=416.83/505.0 (2.10s)
+  CACHE min_traps=416.83/505.0 (2.10s cached)
   OK    ldoi=168.97/505.0 (0.10s)
   OK    enhanced(c=1)=169.84/505.0 (0.26s)
-  OK    enhanced(c=2)=334.69/505.0 (0.71s)
-  OK    enhanced+j(c=2)=334.69/505.0 (0.71s)
-  OK    cubewalkers=368.16/505.0 (84.30s)
-  DONE  ldoi=168.97 (Δ-247.86)  enhanced(c=1)=169.84 (Δ-247.00)  enhanced(c=2)=334.69 (Δ-82.14)  enhanced+j(c=2)=334.69 (Δ-82.14)  cubewalkers=368.16 (Δ-48.67)
+  OK    enhanced(c=2)=334.69/505.0 (0.70s)
+  OK    enhanced+j(c=2)=334.69/505.0 (0.73s)
+  CACHE cubewalkers=368.16/505.0 (84.30s cached)
+  DONE  cubewalkers=368.16  min_traps=416.83 (Δ+48.67)  ldoi=168.97 (Δ-199.19)  enhanced(c=1)=169.84 (Δ-198.33)  enhanced(c=2)=334.69 (Δ-33.47)  enhanced+j(c=2)=334.69 (Δ-33.47)
 [18/29] generated_models/repetitions/20241010082016_9453_gen140.bnet
-  OK    min_traps=413.00/505.0 (2.15s)
-  OK    ldoi=144.76/505.0 (0.09s)
-  OK    enhanced(c=1)=146.47/505.0 (0.31s)
-  OK    enhanced(c=2)=350.38/505.0 (0.68s)
-  OK    enhanced+j(c=2)=350.15/505.0 (0.86s)
-  OK    cubewalkers=372.66/505.0 (77.95s)
-  DONE  ldoi=144.76 (Δ-268.24)  enhanced(c=1)=146.47 (Δ-266.53)  enhanced(c=2)=350.38 (Δ-62.62)  enhanced+j(c=2)=350.15 (Δ-62.85)  cubewalkers=372.66 (Δ-40.34)
+  CACHE min_traps=413.00/505.0 (2.15s cached)
+  OK    ldoi=144.76/505.0 (0.10s)
+  OK    enhanced(c=1)=146.47/505.0 (0.32s)
+  OK    enhanced(c=2)=350.38/505.0 (0.73s)
+  OK    enhanced+j(c=2)=350.15/505.0 (0.88s)
+  CACHE cubewalkers=372.66/505.0 (77.95s cached)
+  DONE  cubewalkers=372.66  min_traps=413.00 (Δ+40.34)  ldoi=144.76 (Δ-227.90)  enhanced(c=1)=146.47 (Δ-226.18)  enhanced(c=2)=350.38 (Δ-22.27)  enhanced+j(c=2)=350.15 (Δ-22.51)
 [19/29] generated_models/repetitions/20241011222037_9848_gen50.bnet
-  OK    min_traps=396.91/505.0 (2.33s)
-  OK    ldoi=131.03/505.0 (0.11s)
+  CACHE min_traps=396.91/505.0 (2.33s cached)
+  OK    ldoi=131.03/505.0 (0.12s)
   OK    enhanced(c=1)=134.25/505.0 (0.36s)
-  OK    enhanced(c=2)=145.92/505.0 (0.79s)
-  OK    enhanced+j(c=2)=145.91/505.0 (0.90s)
-  OK    cubewalkers=300.25/505.0 (86.58s)
-  DONE  ldoi=131.03 (Δ-265.88)  enhanced(c=1)=134.25 (Δ-262.66)  enhanced(c=2)=145.92 (Δ-250.99)  enhanced+j(c=2)=145.91 (Δ-250.99)  cubewalkers=300.25 (Δ-96.66)
+  OK    enhanced(c=2)=145.92/505.0 (0.81s)
+  OK    enhanced+j(c=2)=145.91/505.0 (0.88s)
+  CACHE cubewalkers=300.25/505.0 (86.58s cached)
+  DONE  cubewalkers=300.25  min_traps=396.91 (Δ+96.66)  ldoi=131.03 (Δ-169.22)  enhanced(c=1)=134.25 (Δ-166.00)  enhanced(c=2)=145.92 (Δ-154.33)  enhanced+j(c=2)=145.91 (Δ-154.33)
 [20/29] generated_models/repetitions/20241014130450_9902_gen56.bnet
-  OK    min_traps=393.67/505.0 (2.69s)
-  OK    ldoi=130.92/505.0 (0.11s)
-  OK    enhanced(c=1)=137.94/505.0 (0.52s)
-  OK    enhanced(c=2)=342.73/505.0 (1.01s)
-  OK    enhanced+j(c=2)=343.42/505.0 (1.15s)
-  OK    cubewalkers=156.22/505.0 (88.12s)
-  DONE  ldoi=130.92 (Δ-262.74)  enhanced(c=1)=137.94 (Δ-255.73)  enhanced(c=2)=342.73 (Δ-50.93)  enhanced+j(c=2)=343.42 (Δ-50.24)  cubewalkers=156.22 (Δ-237.44)
+  CACHE min_traps=393.67/505.0 (2.69s cached)
+  OK    ldoi=130.92/505.0 (0.10s)
+  OK    enhanced(c=1)=137.94/505.0 (0.43s)
+  OK    enhanced(c=2)=342.73/505.0 (0.89s)
+  OK    enhanced+j(c=2)=343.42/505.0 (1.11s)
+  CACHE cubewalkers=156.22/505.0 (88.12s cached)
+  DONE  cubewalkers=156.22  min_traps=393.67 (Δ+237.44)  ldoi=130.92 (Δ-25.30)  enhanced(c=1)=137.94 (Δ-18.29)  enhanced(c=2)=342.73 (Δ+186.51)  enhanced+j(c=2)=343.42 (Δ+187.20)
 [21/29] generated_models/repetitions/rep_20230917_7545_gen112.bnet
-  OK    min_traps=408.14/505.0 (1.98s)
+  CACHE min_traps=408.14/505.0 (1.98s cached)
   OK    ldoi=136.79/505.0 (0.10s)
   OK    enhanced(c=1)=136.67/505.0 (0.21s)
   OK    enhanced(c=2)=338.19/505.0 (0.58s)
-  OK    enhanced+j(c=2)=338.19/505.0 (0.61s)
-  OK    cubewalkers=372.22/505.0 (79.66s)
-  DONE  ldoi=136.79 (Δ-271.36)  enhanced(c=1)=136.67 (Δ-271.48)  enhanced(c=2)=338.19 (Δ-69.96)  enhanced+j(c=2)=338.19 (Δ-69.96)  cubewalkers=372.22 (Δ-35.93)
+  OK    enhanced+j(c=2)=338.19/505.0 (0.59s)
+  CACHE cubewalkers=372.22/505.0 (79.66s cached)
+  DONE  cubewalkers=372.22  min_traps=408.14 (Δ+35.93)  ldoi=136.79 (Δ-235.43)  enhanced(c=1)=136.67 (Δ-235.55)  enhanced(c=2)=338.19 (Δ-34.03)  enhanced+j(c=2)=338.19 (Δ-34.03)
 [22/29] generated_models/repetitions/rep_20230918_7560_gen105.bnet
-  OK    min_traps=405.09/505.0 (2.24s)
+  CACHE min_traps=405.09/505.0 (2.24s cached)
   OK    ldoi=132.07/505.0 (0.10s)
-  OK    enhanced(c=1)=133.84/505.0 (0.34s)
-  OK    enhanced(c=2)=161.95/505.0 (0.88s)
-  OK    enhanced+j(c=2)=161.95/505.0 (0.96s)
-  OK    cubewalkers=370.97/505.0 (85.53s)
-  DONE  ldoi=132.07 (Δ-273.02)  enhanced(c=1)=133.84 (Δ-271.25)  enhanced(c=2)=161.95 (Δ-243.14)  enhanced+j(c=2)=161.95 (Δ-243.14)  cubewalkers=370.97 (Δ-34.12)
+  OK    enhanced(c=1)=133.84/505.0 (0.36s)
+  OK    enhanced(c=2)=161.95/505.0 (0.90s)
+  OK    enhanced+j(c=2)=161.95/505.0 (0.95s)
+  CACHE cubewalkers=370.97/505.0 (85.53s cached)
+  DONE  cubewalkers=370.97  min_traps=405.09 (Δ+34.12)  ldoi=132.07 (Δ-238.91)  enhanced(c=1)=133.84 (Δ-237.13)  enhanced(c=2)=161.95 (Δ-209.03)  enhanced+j(c=2)=161.95 (Δ-209.03)
 [23/29] generated_models/repetitions/rep_20230919_8030_gen113.bnet
-  OK    min_traps=405.50/505.0 (2.15s)
+  CACHE min_traps=405.50/505.0 (2.15s cached)
   OK    ldoi=163.67/505.0 (0.11s)
   OK    enhanced(c=1)=165.00/505.0 (0.21s)
-  OK    enhanced(c=2)=370.94/505.0 (0.53s)
-  OK    enhanced+j(c=2)=370.94/505.0 (0.51s)
-  OK    cubewalkers=378.11/505.0 (80.94s)
-  DONE  ldoi=163.67 (Δ-241.83)  enhanced(c=1)=165.00 (Δ-240.50)  enhanced(c=2)=370.94 (Δ-34.56)  enhanced+j(c=2)=370.94 (Δ-34.56)  cubewalkers=378.11 (Δ-27.39)
+  OK    enhanced(c=2)=370.94/505.0 (0.52s)
+  OK    enhanced+j(c=2)=370.94/505.0 (0.52s)
+  CACHE cubewalkers=378.11/505.0 (80.94s cached)
+  DONE  cubewalkers=378.11  min_traps=405.50 (Δ+27.39)  ldoi=163.67 (Δ-214.44)  enhanced(c=1)=165.00 (Δ-213.11)  enhanced(c=2)=370.94 (Δ-7.17)  enhanced+j(c=2)=370.94 (Δ-7.17)
 [24/29] generated_models/repetitions/rep_20230920_7788_gen121.bnet
-  OK    min_traps=413.24/505.0 (2.12s)
-  OK    ldoi=131.56/505.0 (0.09s)
-  OK    enhanced(c=1)=132.81/505.0 (0.30s)
+  CACHE min_traps=413.24/505.0 (2.12s cached)
+  OK    ldoi=131.56/505.0 (0.10s)
+  OK    enhanced(c=1)=132.81/505.0 (0.28s)
   OK    enhanced(c=2)=147.09/505.0 (0.59s)
-  OK    enhanced+j(c=2)=147.09/505.0 (0.66s)
-  OK    cubewalkers=391.45/505.0 (82.30s)
-  DONE  ldoi=131.56 (Δ-281.68)  enhanced(c=1)=132.81 (Δ-280.44)  enhanced(c=2)=147.09 (Δ-266.16)  enhanced+j(c=2)=147.09 (Δ-266.16)  cubewalkers=391.45 (Δ-21.80)
+  OK    enhanced+j(c=2)=147.09/505.0 (0.64s)
+  CACHE cubewalkers=391.45/505.0 (82.30s cached)
+  DONE  cubewalkers=391.45  min_traps=413.24 (Δ+21.80)  ldoi=131.56 (Δ-259.88)  enhanced(c=1)=132.81 (Δ-258.64)  enhanced(c=2)=147.09 (Δ-244.36)  enhanced+j(c=2)=147.09 (Δ-244.36)
 [25/29] generated_models/repetitions/rep_20230921_7687_gen104.bnet
-  OK    min_traps=400.37/505.0 (2.08s)
-  OK    ldoi=126.19/505.0 (0.10s)
-  OK    enhanced(c=1)=127.53/505.0 (0.34s)
+  CACHE min_traps=400.37/505.0 (2.08s cached)
+  OK    ldoi=126.19/505.0 (0.11s)
+  OK    enhanced(c=1)=127.53/505.0 (0.35s)
   OK    enhanced(c=2)=335.73/505.0 (0.74s)
   OK    enhanced+j(c=2)=335.73/505.0 (0.82s)
-  OK    cubewalkers=370.56/505.0 (80.01s)
-  DONE  ldoi=126.19 (Δ-274.18)  enhanced(c=1)=127.53 (Δ-272.85)  enhanced(c=2)=335.73 (Δ-64.64)  enhanced+j(c=2)=335.73 (Δ-64.64)  cubewalkers=370.56 (Δ-29.82)
+  CACHE cubewalkers=370.56/505.0 (80.01s cached)
+  DONE  cubewalkers=370.56  min_traps=400.37 (Δ+29.82)  ldoi=126.19 (Δ-244.36)  enhanced(c=1)=127.53 (Δ-243.03)  enhanced(c=2)=335.73 (Δ-34.82)  enhanced+j(c=2)=335.73 (Δ-34.82)
 [26/29] generated_models/repetitions/rep_20230922_8036_gen125.bnet
-  OK    min_traps=420.06/505.0 (2.58s)
-  OK    ldoi=186.51/505.0 (0.10s)
+  CACHE min_traps=420.06/505.0 (2.58s cached)
+  OK    ldoi=186.51/505.0 (0.11s)
   OK    enhanced(c=1)=191.43/505.0 (0.26s)
-  OK    enhanced(c=2)=346.88/505.0 (0.69s)
+  OK    enhanced(c=2)=346.88/505.0 (0.72s)
   OK    enhanced+j(c=2)=346.88/505.0 (0.76s)
-  OK    cubewalkers=368.98/505.0 (95.93s)
-  DONE  ldoi=186.51 (Δ-233.55)  enhanced(c=1)=191.43 (Δ-228.63)  enhanced(c=2)=346.88 (Δ-73.19)  enhanced+j(c=2)=346.88 (Δ-73.19)  cubewalkers=368.98 (Δ-51.08)
+  CACHE cubewalkers=368.98/505.0 (95.93s cached)
+  DONE  cubewalkers=368.98  min_traps=420.06 (Δ+51.08)  ldoi=186.51 (Δ-182.47)  enhanced(c=1)=191.43 (Δ-177.55)  enhanced(c=2)=346.88 (Δ-22.10)  enhanced+j(c=2)=346.88 (Δ-22.10)
 [27/29] generated_models/repetitions/rep_20230923_8025_gen141.bnet
-  OK    min_traps=418.52/505.0 (2.05s)
+  CACHE min_traps=418.52/505.0 (2.05s cached)
   OK    ldoi=135.55/505.0 (0.10s)
-  OK    enhanced(c=1)=138.04/505.0 (0.27s)
-  OK    enhanced(c=2)=341.88/505.0 (0.69s)
-  OK    enhanced+j(c=2)=341.88/505.0 (0.74s)
-  OK    cubewalkers=285.04/505.0 (80.40s)
-  DONE  ldoi=135.55 (Δ-282.98)  enhanced(c=1)=138.04 (Δ-280.48)  enhanced(c=2)=341.88 (Δ-76.65)  enhanced+j(c=2)=341.88 (Δ-76.65)  cubewalkers=285.04 (Δ-133.49)
+  OK    enhanced(c=1)=138.04/505.0 (0.29s)
+  OK    enhanced(c=2)=341.88/505.0 (0.71s)
+  OK    enhanced+j(c=2)=341.88/505.0 (0.80s)
+  CACHE cubewalkers=285.04/505.0 (80.40s cached)
+  DONE  cubewalkers=285.04  min_traps=418.52 (Δ+133.49)  ldoi=135.55 (Δ-149.49)  enhanced(c=1)=138.04 (Δ-146.99)  enhanced(c=2)=341.88 (Δ+56.84)  enhanced+j(c=2)=341.88 (Δ+56.84)
 [28/29] generated_models/repetitions/rep_20230924_8037_gen129.bnet
-  OK    min_traps=419.28/505.0 (2.35s)
-  OK    ldoi=185.56/505.0 (0.10s)
-  OK    enhanced(c=1)=188.94/505.0 (0.21s)
-  OK    enhanced(c=2)=347.95/505.0 (0.65s)
-  OK    enhanced+j(c=2)=347.95/505.0 (0.63s)
-  OK    cubewalkers=371.52/505.0 (83.94s)
-  DONE  ldoi=185.56 (Δ-233.72)  enhanced(c=1)=188.94 (Δ-230.34)  enhanced(c=2)=347.95 (Δ-71.32)  enhanced+j(c=2)=347.95 (Δ-71.32)  cubewalkers=371.52 (Δ-47.76)
+  CACHE min_traps=419.28/505.0 (2.35s cached)
+  OK    ldoi=185.56/505.0 (0.11s)
+  OK    enhanced(c=1)=188.94/505.0 (0.23s)
+  OK    enhanced(c=2)=347.95/505.0 (0.73s)
+  OK    enhanced+j(c=2)=347.95/505.0 (0.66s)
+  CACHE cubewalkers=371.52/505.0 (83.94s cached)
+  DONE  cubewalkers=371.52  min_traps=419.28 (Δ+47.76)  ldoi=185.56 (Δ-185.96)  enhanced(c=1)=188.94 (Δ-182.58)  enhanced(c=2)=347.95 (Δ-23.57)  enhanced+j(c=2)=347.95 (Δ-23.57)
 [29/29] generated_models/repetitions/rep_20230925_7821_gen113.bnet
-  OK    min_traps=398.33/505.0 (2.19s)
+  CACHE min_traps=398.33/505.0 (2.19s cached)
   OK    ldoi=127.32/505.0 (0.10s)
   OK    enhanced(c=1)=129.02/505.0 (0.28s)
-  OK    enhanced(c=2)=146.84/505.0 (0.90s)
-  OK    enhanced+j(c=2)=146.84/505.0 (0.85s)
-  OK    cubewalkers=330.42/505.0 (83.21s)
-  DONE  ldoi=127.32 (Δ-271.02)  enhanced(c=1)=129.02 (Δ-269.31)  enhanced(c=2)=146.84 (Δ-251.49)  enhanced+j(c=2)=146.84 (Δ-251.49)  cubewalkers=330.42 (Δ-67.91)
-min_traps cache written: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/min_traps_cache.json
+  OK    enhanced(c=2)=146.84/505.0 (0.85s)
+  OK    enhanced+j(c=2)=146.84/505.0 (0.87s)
+  CACHE cubewalkers=330.42/505.0 (83.21s cached)
+  DONE  cubewalkers=330.42  min_traps=398.33 (Δ+67.91)  ldoi=127.32 (Δ-203.10)  enhanced(c=1)=129.02 (Δ-201.40)  enhanced(c=2)=146.84 (Δ-183.58)  enhanced+j(c=2)=146.84 (Δ-183.58)
+min_traps cache unchanged: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/min_traps_cache.json
 cw cache unchanged: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/cw_cache.json
-min_traps cache: hits=0  misses/recomputes=29  (n_models=29)
-cw cache: hits=0  misses/recomputes=22  (n_models=29)
+min_traps cache: hits=29  misses/recomputes=0  (n_models=29)
+cw cache: hits=22  misses/recomputes=0  (n_models=29)
 
 failed: 7 / 29
   baseline_models/ABA_2006_Li.bnet: min_traps: ValueError: 8-nitro-cGMP is not in the model
@@ -257,89 +253,89 @@ failed: 7 / 29
 
 succeeded (all methods): 22 / 29
 
-model                                          min_traps             ldoi    enhanced(c=1)    enhanced(c=2)  enhanced+j(c=2)      cubewalkers
----------------------------------------------------------------------------------------------------------------------------------------------
-generated_models/GA2_A.bnet                       431.19           133.31           135.07           339.75           339.75           319.52
-generated_models/GA1_A.bnet                       426.94           132.31           134.78           343.62           343.62           366.25
-generated_models/repetitions/20241009072111_9984_gen68.bnet     426.26           141.76           143.75           341.69           341.64           385.76
-generated_models/repetitions/20241007143135_9306_gen124.bnet     420.76           127.70           127.74           333.80           333.80           307.08
-generated_models/repetitions/rep_20230922_8036_gen125.bnet     420.06           186.51           191.43           346.88           346.88           368.98
-generated_models/repetitions/rep_20230924_8037_gen129.bnet     419.28           185.56           188.94           347.95           347.95           371.52
-generated_models/repetitions/rep_20230923_8025_gen141.bnet     418.52           135.55           138.04           341.88           341.88           285.04
-generated_models/repetitions/20241009211257_9880_gen154.bnet     416.83           168.97           169.84           334.69           334.69           368.16
-generated_models/repetitions/rep_20230920_7788_gen121.bnet     413.24           131.56           132.81           147.09           147.09           391.45
-generated_models/repetitions/20241010082016_9453_gen140.bnet     413.00           144.76           146.47           350.38           350.15           372.66
-generated_models/repetitions/rep_20230917_7545_gen112.bnet     408.14           136.79           136.67           338.19           338.19           372.22
-generated_models/repetitions/rep_20230919_8030_gen113.bnet     405.50           163.67           165.00           370.94           370.94           378.11
-generated_models/repetitions/rep_20230918_7560_gen105.bnet     405.09           132.07           133.84           161.95           161.95           370.97
-generated_models/repetitions/rep_20230921_7687_gen104.bnet     400.37           126.19           127.53           335.73           335.73           370.56
-generated_models/repetitions/rep_20230925_7821_gen113.bnet     398.33           127.32           129.02           146.84           146.84           330.42
-generated_models/repetitions/20241011222037_9848_gen50.bnet     396.91           131.03           134.25           145.92           145.91           300.25
-generated_models/repetitions/20241014130450_9902_gen56.bnet     393.67           130.92           137.94           342.73           343.42           156.22
-generated_models/GA0_A.bnet                       390.81           141.30           139.91           347.21           347.21           360.43
-generated_models/GA_VA-KEV_del.bnet               385.31           136.75           137.47           354.34           354.34           355.45
-baseline_models/ABA_GA_base_A.bnet                311.71           137.81           137.61           144.32           144.32           280.67
-baseline_models/ABA_2017_Albert.bnet              310.48           138.68           137.14           143.89           143.92           275.50
-baseline_models/ABA_2017_VA-KEV_del.bnet          291.73           138.78           137.45           144.13           144.13           269.61
----------------------------------------------------------------------------------------------------------------------------------------------
+model                                          cubewalkers        min_traps             ldoi    enhanced(c=1)    enhanced(c=2)  enhanced+j(c=2)
+-----------------------------------------------------------------------------------------------------------------------------------------------
+generated_models/repetitions/rep_20230920_7788_gen121.bnet       391.45           413.24           131.56           132.81           147.09           147.09
+generated_models/repetitions/20241009072111_9984_gen68.bnet       385.76           426.26           141.76           143.75           341.69           341.64
+generated_models/repetitions/rep_20230919_8030_gen113.bnet       378.11           405.50           163.67           165.00           370.94           370.94
+generated_models/repetitions/20241010082016_9453_gen140.bnet       372.66           413.00           144.76           146.47           350.38           350.15
+generated_models/repetitions/rep_20230917_7545_gen112.bnet       372.22           408.14           136.79           136.67           338.19           338.19
+generated_models/repetitions/rep_20230924_8037_gen129.bnet       371.52           419.28           185.56           188.94           347.95           347.95
+generated_models/repetitions/rep_20230918_7560_gen105.bnet       370.97           405.09           132.07           133.84           161.95           161.95
+generated_models/repetitions/rep_20230921_7687_gen104.bnet       370.56           400.37           126.19           127.53           335.73           335.73
+generated_models/repetitions/rep_20230922_8036_gen125.bnet       368.98           420.06           186.51           191.43           346.88           346.88
+generated_models/repetitions/20241009211257_9880_gen154.bnet       368.16           416.83           168.97           169.84           334.69           334.69
+generated_models/GA1_A.bnet                         366.25           426.94           132.31           134.78           343.62           343.62
+generated_models/GA0_A.bnet                         360.43           390.81           141.30           139.91           347.21           347.21
+generated_models/GA_VA-KEV_del.bnet                 355.45           385.31           136.75           137.47           354.34           354.34
+generated_models/repetitions/rep_20230925_7821_gen113.bnet       330.42           398.33           127.32           129.02           146.84           146.84
+generated_models/GA2_A.bnet                         319.52           431.19           133.31           135.07           339.75           339.75
+generated_models/repetitions/20241007143135_9306_gen124.bnet       307.08           420.76           127.70           127.74           333.80           333.80
+generated_models/repetitions/20241011222037_9848_gen50.bnet       300.25           396.91           131.03           134.25           145.92           145.91
+generated_models/repetitions/rep_20230923_8025_gen141.bnet       285.04           418.52           135.55           138.04           341.88           341.88
+baseline_models/ABA_GA_base_A.bnet                  280.67           311.71           137.81           137.61           144.32           144.32
+baseline_models/ABA_2017_Albert.bnet                275.50           310.48           138.68           137.14           143.89           143.92
+baseline_models/ABA_2017_VA-KEV_del.bnet            269.61           291.73           138.78           137.45           144.13           144.13
+generated_models/repetitions/20241014130450_9902_gen56.bnet       156.22           393.67           130.92           137.94           342.73           343.42
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
-Agreement vs min_traps — ldoi
-  Pearson r:              0.1660
-  Spearman rho:           0.1101
-  Pairwise order agree:   0.5368 (124/231 pairs)
-  Mean |Δrank|:           7.273
-  Score diff (method − min): mean=-253.403  std=40.154  min=-297.882  max=-152.951
-  Top-1 set overlap:     0.000
-  Top-3 set overlap:     0.000
-  Top-5 set overlap:     0.200
-
-Agreement vs min_traps — enhanced(c=1)
-  Pearson r:              0.2171
-  Spearman rho:           0.1112
-  Pairwise order agree:   0.5498 (127/231 pairs)
-  Mean |Δrank|:           7.364
-  Score diff (method − min): mean=-251.885  std=39.407  min=-296.128  max=-154.277
-  Top-1 set overlap:     0.000
-  Top-3 set overlap:     0.000
-  Top-5 set overlap:     0.200
-
-Agreement vs min_traps — enhanced(c=2)
-  Pearson r:              0.6221
-  Spearman rho:           0.3540
-  Pairwise order agree:   0.6277 (145/231 pairs)
-  Mean |Δrank|:           5.545
-  Score diff (method − min): mean=-113.647  std=76.326  min=-266.158  max=-30.977
-  Top-1 set overlap:     0.000
-  Top-3 set overlap:     0.000
-  Top-5 set overlap:     0.000
-
-Agreement vs min_traps — enhanced+j(c=2)
-  Pearson r:              0.6219
-  Spearman rho:           0.3540
-  Pairwise order agree:   0.6277 (145/231 pairs)
-  Mean |Δrank|:           5.545
-  Score diff (method − min): mean=-113.627  std=76.344  min=-266.158  max=-30.977
-  Top-1 set overlap:     0.000
-  Top-3 set overlap:     0.000
-  Top-5 set overlap:     0.000
-
-Agreement vs min_traps — cubewalkers
+Agreement vs cubewalkers — min_traps
   Pearson r:              0.4765
   Spearman rho:           0.4613
   Pairwise order agree:   0.6710 (155/231 pairs)
   Mean |Δrank|:           5.273
-  Score diff (method − min): mean=-61.241  std=50.852  min=-237.443  max=-21.797
+  Score diff (method − cubewalkers): mean=+61.241  std=50.852  min=+21.797  max=+237.443
   Top-1 set overlap:     0.000
   Top-3 set overlap:     0.333
   Top-5 set overlap:     0.200
 
+Agreement vs cubewalkers — ldoi
+  Pearson r:              0.3287
+  Spearman rho:           0.3055
+  Pairwise order agree:   0.5801 (134/231 pairs)
+  Mean |Δrank|:           6.091
+  Score diff (method − cubewalkers): mean=-192.162  std=52.983  min=-259.884  max=-25.299
+  Top-1 set overlap:     0.000
+  Top-3 set overlap:     0.000
+  Top-5 set overlap:     0.400
+
+Agreement vs cubewalkers — enhanced(c=1)
+  Pearson r:              0.2929
+  Spearman rho:           0.1733
+  Pairwise order agree:   0.5498 (127/231 pairs)
+  Mean |Δrank|:           6.727
+  Score diff (method − cubewalkers): mean=-190.644  std=53.663  min=-258.640  max=-18.285
+  Top-1 set overlap:     0.000
+  Top-3 set overlap:     0.000
+  Top-5 set overlap:     0.400
+
+Agreement vs cubewalkers — enhanced(c=2)
+  Pearson r:              0.2414
+  Spearman rho:           0.4274
+  Pairwise order agree:   0.6623 (153/231 pairs)
+  Mean |Δrank|:           5.273
+  Score diff (method − cubewalkers): mean=-52.406  std=97.349  min=-244.361  max=+186.511
+  Top-1 set overlap:     0.000
+  Top-3 set overlap:     0.333
+  Top-5 set overlap:     0.400
+
+Agreement vs cubewalkers — enhanced+j(c=2)
+  Pearson r:              0.2402
+  Spearman rho:           0.4274
+  Pairwise order agree:   0.6623 (153/231 pairs)
+  Mean |Δrank|:           5.273
+  Score diff (method − cubewalkers): mean=-52.386  std=97.425  min=-244.361  max=+187.199
+  Top-1 set overlap:     0.000
+  Top-3 set overlap:     0.333
+  Top-5 set overlap:     0.400
+
 Method timings (prediction + NAV score + model score)
-  min_traps: n=22  total=49.19s  mean=2.24s  median=2.15s  min=1.97s  max=2.69s
-  ldoi: n=22  total=2.20s  mean=0.10s  median=0.10s  min=0.09s  max=0.11s
-  enhanced(c=1): n=22  total=6.58s  mean=0.30s  median=0.28s  min=0.21s  max=0.52s
-  enhanced(c=2): n=22  total=16.04s  mean=0.73s  median=0.70s  min=0.53s  max=1.01s
-  enhanced+j(c=2): n=22  total=17.79s  mean=0.81s  median=0.80s  min=0.51s  max=1.15s
   cubewalkers: n=22  total=1779.76s  mean=80.90s  median=80.21s  min=68.99s  max=97.64s
+  min_traps: n=22  total=49.19s  mean=2.24s  median=2.15s  min=1.97s  max=2.69s
+  ldoi: n=22  total=2.28s  mean=0.10s  median=0.10s  min=0.09s  max=0.12s
+  enhanced(c=1): n=22  total=6.56s  mean=0.30s  median=0.28s  min=0.21s  max=0.43s
+  enhanced(c=2): n=22  total=16.08s  mean=0.73s  median=0.73s  min=0.52s  max=0.96s
+  enhanced+j(c=2): n=22  total=17.67s  mean=0.80s  median=0.81s  min=0.52s  max=1.11s
 
 saved: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/method_timings.csv
 saved: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/method_timings_per_model.csv
@@ -354,24 +350,24 @@ Summary
   bnets scanned:     29
   all methods OK:    22
   failed:            7
-  min_traps cache:   hits=0  misses=29  used_on_rows=0
-  cw cache:          hits=0  misses=22  used_on_rows=0
-  ldoi               r=0.1660  ρ=0.1101  order=0.5368
-  enhanced(c=1)      r=0.2171  ρ=0.1112  order=0.5498
-  enhanced(c=2)      r=0.6221  ρ=0.3540  order=0.6277
-  enhanced+j(c=2)    r=0.6219  ρ=0.3540  order=0.6277
-  cubewalkers        r=0.4765  ρ=0.4613  order=0.6710
-  min_traps time: total=49.19s  mean=2.24s
-  ldoi time: total=2.20s  mean=0.10s
-  enhanced(c=1) time: total=6.58s  mean=0.30s
-  enhanced(c=2) time: total=16.04s  mean=0.73s
-  enhanced+j(c=2) time: total=17.79s  mean=0.81s
-  cubewalkers time: total=1779.76s  mean=80.90s
-  wall clock:        1908.5s
+  min_traps cache:   hits=29  misses=0  used_on_rows=29
+  cw cache:          hits=22  misses=0  used_on_rows=22
+  min_traps          r=0.4765  ρ=0.4613  order=0.6710
+  ldoi               r=0.3287  ρ=0.3055  order=0.5801
+  enhanced(c=1)      r=0.2929  ρ=0.1733  order=0.5498
+  enhanced(c=2)      r=0.2414  ρ=0.4274  order=0.6623
+  enhanced+j(c=2)    r=0.2402  ρ=0.4274  order=0.6623
+  cubewalkers time: total=1779.76s  mean=80.90s  (22 from cache)
+  min_traps time: total=49.19s  mean=2.24s  (29 from cache)
+  ldoi time: total=2.28s  mean=0.10s
+  enhanced(c=1) time: total=6.56s  mean=0.30s
+  enhanced(c=2) time: total=16.08s  mean=0.73s
+  enhanced+j(c=2) time: total=17.67s  mean=0.80s
+  wall clock:        77.9s
   Log written to:    /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_scores.log
   Plot written to:   /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_scores_scatter.png
   Plot written to:   /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_ranks_scatter.png
   Plot written to:   /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_score_diff.png
   Plot written to:   /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_method_timings.png
-finished (UTC): 2026-10-23T20:35:59.697580+00:00
+finished (UTC): 2026-10-23T21:04:52.486080+00:00
 saved: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/A/README.md

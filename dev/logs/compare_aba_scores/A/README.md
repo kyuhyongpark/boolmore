@@ -1,57 +1,57 @@
-# ABA-A scores: `min_traps` vs LDOI family vs cubewalkers
+# ABA-A scores: cubewalkers (GT) vs `min_traps` + LDOI
 
 Comparison of NAV total scores on every `.bnet` under `case_study/ABA`,
 using experiments from `case_study/ABA/data/ABA_A.json` (`data_A.csv`, `default_sources`).
 
-Reference method: `min_traps`. Compared methods:
+Ground truth: `cubewalkers`. Compared approximate methods:
 
+- `min_traps`
 - `ldoi`
 - `enhanced(c=1)`
 - `enhanced(c=2)`
 - `enhanced+j(c=2)`
-- `cubewalkers`
 
 - **Data set:** `A`
-- **Started (UTC):** 2026-10-23T20:04:11.187349+00:00
-- **Finished (UTC):** 2026-10-23T20:35:59.697580+00:00
-- **Wall clock:** 1908.5s
+- **Started (UTC):** 2026-10-23T21:03:34.562772+00:00
+- **Finished (UTC):** 2026-10-23T21:04:52.486080+00:00
+- **Wall clock:** 77.9s
 - **Hierarchy:** True
 - **Experiments:** 505
 - **Unique fixes:** 260
-- **Cubewalkers:** `asynchronous_set`, W=2048, T=600, T_window=120, set_update_prob=0.5
+- **Cubewalkers (GT):** `asynchronous_set`, W=2048, T=600, T_window=120, set_update_prob=0.5
 - **Bnets scanned:** 29
 - **All methods OK:** 22
 - **Failed:** 7
-- **min_traps cache:** `use=True`, `force_recompute=False`, hits=0, misses=29
-- **cw cache:** `use=True`, `force_recompute=False`, hits=0, misses=22
+- **min_traps cache:** `use=True`, `force_recompute=False`, hits=29, misses=0
+- **cw cache:** `use=True`, `force_recompute=False`, hits=22, misses=0
 
-## Score agreement vs min_traps
+## Score agreement vs cubewalkers
 
 | method | Pearson r | Spearman ρ | pairwise order | mean |Δrank| | mean Δscore |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `ldoi` | `0.1660` | `0.1101` | `0.5368` (124/231) | `7.273` | `-253.403` |
-| `enhanced(c=1)` | `0.2171` | `0.1112` | `0.5498` (127/231) | `7.364` | `-251.885` |
-| `enhanced(c=2)` | `0.6221` | `0.3540` | `0.6277` (145/231) | `5.545` | `-113.647` |
-| `enhanced+j(c=2)` | `0.6219` | `0.3540` | `0.6277` (145/231) | `5.545` | `-113.627` |
-| `cubewalkers` | `0.4765` | `0.4613` | `0.6710` (155/231) | `5.273` | `-61.241` |
-- `ldoi` overlaps: top-1=0.000, top-3=0.000, top-5=0.200
-- `enhanced(c=1)` overlaps: top-1=0.000, top-3=0.000, top-5=0.200
-- `enhanced(c=2)` overlaps: top-1=0.000, top-3=0.000, top-5=0.000
-- `enhanced+j(c=2)` overlaps: top-1=0.000, top-3=0.000, top-5=0.000
-- `cubewalkers` overlaps: top-1=0.000, top-3=0.333, top-5=0.200
+| `min_traps` | `0.4765` | `0.4613` | `0.6710` (155/231) | `5.273` | `61.241` |
+| `ldoi` | `0.3287` | `0.3055` | `0.5801` (134/231) | `6.091` | `-192.162` |
+| `enhanced(c=1)` | `0.2929` | `0.1733` | `0.5498` (127/231) | `6.727` | `-190.644` |
+| `enhanced(c=2)` | `0.2414` | `0.4274` | `0.6623` (153/231) | `5.273` | `-52.406` |
+| `enhanced+j(c=2)` | `0.2402` | `0.4274` | `0.6623` (153/231) | `5.273` | `-52.386` |
+- `min_traps` overlaps: top-1=0.000, top-3=0.333, top-5=0.200
+- `ldoi` overlaps: top-1=0.000, top-3=0.000, top-5=0.400
+- `enhanced(c=1)` overlaps: top-1=0.000, top-3=0.000, top-5=0.400
+- `enhanced(c=2)` overlaps: top-1=0.000, top-3=0.333, top-5=0.400
+- `enhanced+j(c=2)` overlaps: top-1=0.000, top-3=0.333, top-5=0.400
 
 ## Method timings
 
-Wall time for prediction + NAV scoring + model score (models where that method completed). `min_traps` and `cubewalkers` times reuse the originally measured values when loaded from cache. Cubewalkers is skipped when earlier methods fail.
+Wall time for prediction + NAV scoring + model score (models where that method completed). `min_traps` and `cubewalkers` times reuse the originally measured values when loaded from cache. LDOI always runs fresh. Cubewalkers is skipped when earlier methods fail.
 
 | method | n | total (s) | mean (s) | median (s) | min (s) | max (s) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `min_traps` | 22 | 49.19 | 2.24 | 2.15 | 1.97 | 2.69 |
-| `ldoi` | 22 | 2.20 | 0.10 | 0.10 | 0.09 | 0.11 |
-| `enhanced(c=1)` | 22 | 6.58 | 0.30 | 0.28 | 0.21 | 0.52 |
-| `enhanced(c=2)` | 22 | 16.04 | 0.73 | 0.70 | 0.53 | 1.01 |
-| `enhanced+j(c=2)` | 22 | 17.79 | 0.81 | 0.80 | 0.51 | 1.15 |
 | `cubewalkers` | 22 | 1779.76 | 80.90 | 80.21 | 68.99 | 97.64 |
+| `min_traps` | 22 | 49.19 | 2.24 | 2.15 | 1.97 | 2.69 |
+| `ldoi` | 22 | 2.28 | 0.10 | 0.10 | 0.09 | 0.12 |
+| `enhanced(c=1)` | 22 | 6.56 | 0.30 | 0.28 | 0.21 | 0.43 |
+| `enhanced(c=2)` | 22 | 16.08 | 0.73 | 0.73 | 0.52 | 0.96 |
+| `enhanced+j(c=2)` | 22 | 17.67 | 0.80 | 0.81 | 0.52 | 1.11 |
 
 ## Failures
 

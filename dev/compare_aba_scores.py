@@ -79,8 +79,8 @@ from nav_helpers import to_nav_predictions
 
 # %%
 # --- session knobs ---
-DATA_SET = "B"  # "A" or "B"
-# DATA_SET = "A"
+# DATA_SET = "B"  # "A" or "B"
+DATA_SET = "A"
 # Or: ABA_DATA_SET=A python ...
 USE_MIN_TRAPS_CACHE = True
 FORCE_RECOMPUTE_MIN_TRAPS = False  # True → ignore cache and rewrite it
