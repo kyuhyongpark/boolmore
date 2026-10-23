@@ -1,0 +1,77 @@
+Compare update schemes: NAV + bootstrap SE + timing
+out dir:  /home/troonmel/Boolmore/boolmore/dev/logs/cw_compare_update_schemes
+log file: /home/troonmel/Boolmore/boolmore/dev/logs/cw_compare_update_schemes/cw_compare_update_schemes.log
+started (UTC): 2026-10-23T19:40:57.573885+00:00
+SMOKE=False
+W=2048  N_BOOT=1000  SET_UPDATE_PROB=0.5
+  synchronous: T=800  T_window=160
+  asynchronous_set: T=1200  T_window=240
+  asynchronous: T=16000  T_window=3200
+
+CUDA devices: 1
+cubewalkers: /home/troonmel/Boolmore/.venv314/lib/python3.14/site-packages/cubewalkers/__init__.py
+bnet: /home/troonmel/Boolmore/boolmore/case_study/breast_cancer/20261016_173102/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.bnet
+nodes: 191
+Warm-up (discarded)...
+  warm-up done: setup=0.149s  simulate=0.008s  reduce=0.001s  total=0.158s  nodes=191
+
+=== synchronous  W=2048  T=800  window=160 ===
+  setup=0.137s  simulate=1.549s  reduce=0.008s  total=1.695s
+  bootstrap: t_boot=1.202s  N_BOOT=1000
+  NAV: mean of means=0.3725  median SE=0.00000  max SE=0.01143
+
+=== asynchronous_set  W=2048  T=1200  window=240 ===
+  setup=0.136s  simulate=1.618s  reduce=0.008s  total=1.762s
+  bootstrap: t_boot=1.150s  N_BOOT=1000
+  NAV: mean of means=0.3745  median SE=0.00000  max SE=0.01148
+
+=== asynchronous  W=2048  T=16000  window=3200 ===
+  setup=0.136s  simulate=5.045s  reduce=0.053s  total=5.234s
+  bootstrap: t_boot=1.174s  N_BOOT=1000
+  NAV: mean of means=0.3727  median SE=0.00000  max SE=0.01184
+
+=== Pairwise NAV differences (B − A) ===
+  asynch_set − synch: med|Δ|=0.00000  mean|Δ|=0.00923  max|Δ|=0.05518  RMSE=0.01739  corr=0.9989  medSE(Δ)=0.00000
+  asynch − synch: med|Δ|=0.00000  mean|Δ|=0.00841  max|Δ|=0.09961  RMSE=0.01583  corr=0.9991  medSE(Δ)=0.00000
+  asynch − asynch_set: med|Δ|=0.00000  mean|Δ|=0.00667  max|Δ|=0.05127  RMSE=0.01215  corr=0.9995  medSE(Δ)=0.00000
+
+Timing / SE summary:
+          scheme      short  n_walkers  n_time_steps  t_window  t_setup  t_simulate  t_reduce  t_total   t_boot  median_se   max_se  mean_of_means
+     synchronous      synch       2048           800       160 0.137426    1.549052  0.008183 1.694661 1.202353        0.0 0.011433       0.372474
+asynchronous_set asynch_set       2048          1200       240 0.136147    1.617942  0.008408 1.762497 1.150308        0.0 0.011480       0.374530
+    asynchronous     asynch       2048         16000      3200 0.135969    5.044702  0.052912 5.233583 1.174100        0.0 0.011844       0.372689
+Wrote /home/troonmel/Boolmore/boolmore/dev/logs/cw_compare_update_schemes/scheme_timings.csv
+
+Timing relative to synchronous t_total:
+  synch: t_total=1.695s  ratio=1.00x  Δ=+0.000s
+  asynch_set: t_total=1.762s  ratio=1.04x  Δ=+0.068s
+  asynch: t_total=5.234s  ratio=3.09x  Δ=+3.539s
+
+Wrote /home/troonmel/Boolmore/boolmore/dev/logs/cw_compare_update_schemes/scheme_nav.csv
+Top 10 nodes by synchronous NAV:
+     node  synch_mean  asynch_set_mean  asynch_mean
+      AKT         1.0              1.0          1.0
+ CyclinB1         1.0              1.0          1.0
+    CDK46         1.0              1.0          1.0
+ CYCLINDc         1.0              1.0          1.0
+     EIF4         1.0              1.0          1.0
+CyclinD_2         1.0              1.0          1.0
+  CyclinD         1.0              1.0          1.0
+      ERK         1.0              1.0          1.0
+    ERK_2         1.0              1.0          1.0
+mTORC2_pm         1.0              1.0          1.0
+Wrote /home/troonmel/Boolmore/boolmore/dev/logs/cw_compare_update_schemes/cw_compare_schemes_nav_overlay.png
+Wrote /home/troonmel/Boolmore/boolmore/dev/logs/cw_compare_update_schemes/cw_compare_schemes_nav_diff.png
+Wrote /home/troonmel/Boolmore/boolmore/dev/logs/cw_compare_update_schemes/cw_compare_schemes_summary.png
+Wrote /home/troonmel/Boolmore/boolmore/dev/logs/cw_compare_update_schemes/cw_compare_schemes_nav_scatter.png
+
+=== Takeaway ===
+synch: setup=0.137s  simulate=1.549s  reduce=0.008s  total=1.695s  medSE=0.00000  meanNAV=0.3725
+asynch_set: setup=0.136s  simulate=1.618s  reduce=0.008s  total=1.762s  medSE=0.00000  meanNAV=0.3745
+asynch: setup=0.136s  simulate=5.045s  reduce=0.053s  total=5.234s  medSE=0.00000  meanNAV=0.3727
+asynch_set − synch: med|Δ|=0.00000  max|Δ|=0.05518  RMSE=0.01739  corr=0.9989
+asynch − synch: med|Δ|=0.00000  max|Δ|=0.09961  RMSE=0.01583  corr=0.9991
+asynch − asynch_set: med|Δ|=0.00000  max|Δ|=0.05127  RMSE=0.01215  corr=0.9995
+Wall clock: 19.6s
+Outputs under: /home/troonmel/Boolmore/boolmore/dev/logs/cw_compare_update_schemes
+saved: /home/troonmel/Boolmore/boolmore/dev/logs/cw_compare_update_schemes/README.md
