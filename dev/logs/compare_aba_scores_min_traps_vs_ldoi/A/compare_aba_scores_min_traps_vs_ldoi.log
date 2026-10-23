@@ -1,7 +1,7 @@
 DATA_SET: A
 log dir:  /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A
 log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_scores_min_traps_vs_ldoi.log
-started (UTC): 2026-10-23T18:48:11.248016+00:00
+started (UTC): 2026-10-23T18:58:39.862737+00:00
 
 config: case_study/ABA/data/ABA_A.json
 data:   case_study/ABA/data/data_A.csv
@@ -9,6 +9,7 @@ default_sources: {'ABA': 0}
 hierarchy: True
 experiments: 505
 bnet files: 29
+LDOI variants: ['ldoi', 'enhanced(c=1)', 'enhanced(c=2)', 'enhanced+j(c=2)']
 min_traps cache: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/min_traps_cache.json
   use_cache=True  force_recompute=False
   baseline_models/ABA_2006_Li.bnet
@@ -45,82 +46,170 @@ min_traps cache: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_score
   FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model  [min_traps cache]
 [2/29] baseline_models/ABA_2017_Albert.bnet
   CACHE min_traps=310.48/505.0 (3.40s cached)
-  OK    min_traps=310.48/505.0 (cached)  ldoi=138.68/505.0 (0.15s)  diff=-171.80
+  OK    ldoi=138.68/505.0 (0.13s)
+  OK    enhanced(c=1)=137.14/505.0 (0.55s)
+  OK    enhanced(c=2)=143.89/505.0 (1.30s)
+  OK    enhanced+j(c=2)=143.92/505.0 (1.10s)
+  DONE  ldoi=138.68 (Δ-171.80)  enhanced(c=1)=137.14 (Δ-173.34)  enhanced(c=2)=143.89 (Δ-166.59)  enhanced+j(c=2)=143.92 (Δ-166.56)
 [3/29] baseline_models/ABA_2017_VA-KEV_del.bnet
   CACHE min_traps=291.73/505.0 (3.08s cached)
-  OK    min_traps=291.73/505.0 (cached)  ldoi=138.78/505.0 (0.14s)  diff=-152.95
+  OK    ldoi=138.78/505.0 (0.12s)
+  OK    enhanced(c=1)=137.45/505.0 (0.45s)
+  OK    enhanced(c=2)=144.13/505.0 (0.64s)
+  OK    enhanced+j(c=2)=144.13/505.0 (0.93s)
+  DONE  ldoi=138.78 (Δ-152.95)  enhanced(c=1)=137.45 (Δ-154.28)  enhanced(c=2)=144.13 (Δ-147.59)  enhanced+j(c=2)=144.13 (Δ-147.59)
 [4/29] baseline_models/ABA_2018_Waidyarathne.bnet
   FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model  [min_traps cache]
 [5/29] baseline_models/ABA_2019_Maheshwari.bnet
   FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model  [min_traps cache]
 [6/29] baseline_models/ABA_GA_base_A.bnet
   CACHE min_traps=311.71/505.0 (3.12s cached)
-  OK    min_traps=311.71/505.0 (cached)  ldoi=137.81/505.0 (0.13s)  diff=-173.91
+  OK    ldoi=137.81/505.0 (0.25s)
+  OK    enhanced(c=1)=137.61/505.0 (0.47s)
+  OK    enhanced(c=2)=144.32/505.0 (0.78s)
+  OK    enhanced+j(c=2)=144.32/505.0 (0.98s)
+  DONE  ldoi=137.81 (Δ-173.91)  enhanced(c=1)=137.61 (Δ-174.11)  enhanced(c=2)=144.32 (Δ-167.39)  enhanced+j(c=2)=144.32 (Δ-167.39)
 [7/29] baseline_models/ABA_GA_base_B.bnet
   FAIL  min_traps: ValueError: Ca2c is not in the model  [min_traps cache]
 [8/29] generated_models/GA0_A.bnet
   CACHE min_traps=390.81/505.0 (2.32s cached)
-  OK    min_traps=390.81/505.0 (cached)  ldoi=141.30/505.0 (0.19s)  diff=-249.51
+  OK    ldoi=141.30/505.0 (0.14s)
+  OK    enhanced(c=1)=139.91/505.0 (0.35s)
+  OK    enhanced(c=2)=347.21/505.0 (0.84s)
+  OK    enhanced+j(c=2)=347.21/505.0 (0.80s)
+  DONE  ldoi=141.30 (Δ-249.51)  enhanced(c=1)=139.91 (Δ-250.90)  enhanced(c=2)=347.21 (Δ-43.60)  enhanced+j(c=2)=347.21 (Δ-43.60)
 [9/29] generated_models/GA0_B.bnet
   FAIL  min_traps: ValueError: Ca2c is not in the model  [min_traps cache]
 [10/29] generated_models/GA1_A.bnet
   CACHE min_traps=426.94/505.0 (2.48s cached)
-  OK    min_traps=426.94/505.0 (cached)  ldoi=132.31/505.0 (0.13s)  diff=-294.63
+  OK    ldoi=132.31/505.0 (0.14s)
+  OK    enhanced(c=1)=134.78/505.0 (0.27s)
+  OK    enhanced(c=2)=343.62/505.0 (0.98s)
+  OK    enhanced+j(c=2)=343.62/505.0 (0.98s)
+  DONE  ldoi=132.31 (Δ-294.63)  enhanced(c=1)=134.78 (Δ-292.17)  enhanced(c=2)=343.62 (Δ-83.32)  enhanced+j(c=2)=343.62 (Δ-83.32)
 [11/29] generated_models/GA1_B.bnet
   FAIL  min_traps: ValueError: Ca2c is not in the model  [min_traps cache]
 [12/29] generated_models/GA2_A.bnet
   CACHE min_traps=431.19/505.0 (2.46s cached)
-  OK    min_traps=431.19/505.0 (cached)  ldoi=133.31/505.0 (0.12s)  diff=-297.88
+  OK    ldoi=133.31/505.0 (0.12s)
+  OK    enhanced(c=1)=135.07/505.0 (0.38s)
+  OK    enhanced(c=2)=339.75/505.0 (0.95s)
+  OK    enhanced+j(c=2)=339.75/505.0 (1.01s)
+  DONE  ldoi=133.31 (Δ-297.88)  enhanced(c=1)=135.07 (Δ-296.13)  enhanced(c=2)=339.75 (Δ-91.44)  enhanced+j(c=2)=339.75 (Δ-91.44)
 [13/29] generated_models/GA2_B.bnet
   FAIL  min_traps: ValueError: Ca2c is not in the model  [min_traps cache]
 [14/29] generated_models/GA_VA-KEV_del.bnet
   CACHE min_traps=385.31/505.0 (2.48s cached)
-  OK    min_traps=385.31/505.0 (cached)  ldoi=136.75/505.0 (0.11s)  diff=-248.56
+  OK    ldoi=136.75/505.0 (0.12s)
+  OK    enhanced(c=1)=137.47/505.0 (0.35s)
+  OK    enhanced(c=2)=354.34/505.0 (0.98s)
+  OK    enhanced+j(c=2)=354.34/505.0 (1.02s)
+  DONE  ldoi=136.75 (Δ-248.56)  enhanced(c=1)=137.47 (Δ-247.84)  enhanced(c=2)=354.34 (Δ-30.98)  enhanced+j(c=2)=354.34 (Δ-30.98)
 [15/29] generated_models/repetitions/20241007143135_9306_gen124.bnet
   CACHE min_traps=420.76/505.0 (2.58s cached)
-  OK    min_traps=420.76/505.0 (cached)  ldoi=127.70/505.0 (0.13s)  diff=-293.05
+  OK    ldoi=127.70/505.0 (0.12s)
+  OK    enhanced(c=1)=127.74/505.0 (0.25s)
+  OK    enhanced(c=2)=333.80/505.0 (0.88s)
+  OK    enhanced+j(c=2)=333.80/505.0 (0.94s)
+  DONE  ldoi=127.70 (Δ-293.05)  enhanced(c=1)=127.74 (Δ-293.01)  enhanced(c=2)=333.80 (Δ-86.96)  enhanced+j(c=2)=333.80 (Δ-86.96)
 [16/29] generated_models/repetitions/20241009072111_9984_gen68.bnet
   CACHE min_traps=426.26/505.0 (3.26s cached)
-  OK    min_traps=426.26/505.0 (cached)  ldoi=141.76/505.0 (0.13s)  diff=-284.50
+  OK    ldoi=141.76/505.0 (0.13s)
+  OK    enhanced(c=1)=143.75/505.0 (0.44s)
+  OK    enhanced(c=2)=341.69/505.0 (1.12s)
+  OK    enhanced+j(c=2)=341.64/505.0 (1.16s)
+  DONE  ldoi=141.76 (Δ-284.50)  enhanced(c=1)=143.75 (Δ-282.51)  enhanced(c=2)=341.69 (Δ-84.57)  enhanced+j(c=2)=341.64 (Δ-84.62)
 [17/29] generated_models/repetitions/20241009211257_9880_gen154.bnet
   CACHE min_traps=416.83/505.0 (2.51s cached)
-  OK    min_traps=416.83/505.0 (cached)  ldoi=168.97/505.0 (0.16s)  diff=-247.86
+  OK    ldoi=168.97/505.0 (0.11s)
+  OK    enhanced(c=1)=169.84/505.0 (0.30s)
+  OK    enhanced(c=2)=334.69/505.0 (0.82s)
+  OK    enhanced+j(c=2)=334.69/505.0 (0.85s)
+  DONE  ldoi=168.97 (Δ-247.86)  enhanced(c=1)=169.84 (Δ-247.00)  enhanced(c=2)=334.69 (Δ-82.14)  enhanced+j(c=2)=334.69 (Δ-82.14)
 [18/29] generated_models/repetitions/20241010082016_9453_gen140.bnet
   CACHE min_traps=413.00/505.0 (2.96s cached)
-  OK    min_traps=413.00/505.0 (cached)  ldoi=144.76/505.0 (0.14s)  diff=-268.24
+  OK    ldoi=144.76/505.0 (0.12s)
+  OK    enhanced(c=1)=146.47/505.0 (0.37s)
+  OK    enhanced(c=2)=350.38/505.0 (0.85s)
+  OK    enhanced+j(c=2)=350.15/505.0 (0.97s)
+  DONE  ldoi=144.76 (Δ-268.24)  enhanced(c=1)=146.47 (Δ-266.53)  enhanced(c=2)=350.38 (Δ-62.62)  enhanced+j(c=2)=350.15 (Δ-62.85)
 [19/29] generated_models/repetitions/20241011222037_9848_gen50.bnet
   CACHE min_traps=396.91/505.0 (3.05s cached)
-  OK    min_traps=396.91/505.0 (cached)  ldoi=131.03/505.0 (0.15s)  diff=-265.88
+  OK    ldoi=131.03/505.0 (0.13s)
+  OK    enhanced(c=1)=134.25/505.0 (0.40s)
+  OK    enhanced(c=2)=145.92/505.0 (0.87s)
+  OK    enhanced+j(c=2)=145.91/505.0 (1.02s)
+  DONE  ldoi=131.03 (Δ-265.88)  enhanced(c=1)=134.25 (Δ-262.66)  enhanced(c=2)=145.92 (Δ-250.99)  enhanced+j(c=2)=145.91 (Δ-250.99)
 [20/29] generated_models/repetitions/20241014130450_9902_gen56.bnet
   CACHE min_traps=393.67/505.0 (2.90s cached)
-  OK    min_traps=393.67/505.0 (cached)  ldoi=130.92/505.0 (0.14s)  diff=-262.74
+  OK    ldoi=130.92/505.0 (0.12s)
+  OK    enhanced(c=1)=137.94/505.0 (0.56s)
+  OK    enhanced(c=2)=342.73/505.0 (1.06s)
+  OK    enhanced+j(c=2)=343.42/505.0 (1.29s)
+  DONE  ldoi=130.92 (Δ-262.74)  enhanced(c=1)=137.94 (Δ-255.73)  enhanced(c=2)=342.73 (Δ-50.93)  enhanced+j(c=2)=343.42 (Δ-50.24)
 [21/29] generated_models/repetitions/rep_20230917_7545_gen112.bnet
   CACHE min_traps=408.14/505.0 (2.47s cached)
-  OK    min_traps=408.14/505.0 (cached)  ldoi=136.79/505.0 (0.12s)  diff=-271.36
+  OK    ldoi=136.79/505.0 (0.11s)
+  OK    enhanced(c=1)=136.67/505.0 (0.27s)
+  OK    enhanced(c=2)=338.19/505.0 (0.66s)
+  OK    enhanced+j(c=2)=338.19/505.0 (0.68s)
+  DONE  ldoi=136.79 (Δ-271.36)  enhanced(c=1)=136.67 (Δ-271.48)  enhanced(c=2)=338.19 (Δ-69.96)  enhanced+j(c=2)=338.19 (Δ-69.96)
 [22/29] generated_models/repetitions/rep_20230918_7560_gen105.bnet
   CACHE min_traps=405.09/505.0 (2.75s cached)
-  OK    min_traps=405.09/505.0 (cached)  ldoi=132.07/505.0 (0.14s)  diff=-273.02
+  OK    ldoi=132.07/505.0 (0.14s)
+  OK    enhanced(c=1)=133.84/505.0 (0.41s)
+  OK    enhanced(c=2)=161.95/505.0 (1.02s)
+  OK    enhanced+j(c=2)=161.95/505.0 (1.30s)
+  DONE  ldoi=132.07 (Δ-273.02)  enhanced(c=1)=133.84 (Δ-271.25)  enhanced(c=2)=161.95 (Δ-243.14)  enhanced+j(c=2)=161.95 (Δ-243.14)
 [23/29] generated_models/repetitions/rep_20230919_8030_gen113.bnet
   CACHE min_traps=405.50/505.0 (2.73s cached)
-  OK    min_traps=405.50/505.0 (cached)  ldoi=163.67/505.0 (0.25s)  diff=-241.83
+  OK    ldoi=163.67/505.0 (0.12s)
+  OK    enhanced(c=1)=165.00/505.0 (0.24s)
+  OK    enhanced(c=2)=370.94/505.0 (0.68s)
+  OK    enhanced+j(c=2)=370.94/505.0 (0.57s)
+  DONE  ldoi=163.67 (Δ-241.83)  enhanced(c=1)=165.00 (Δ-240.50)  enhanced(c=2)=370.94 (Δ-34.56)  enhanced+j(c=2)=370.94 (Δ-34.56)
 [24/29] generated_models/repetitions/rep_20230920_7788_gen121.bnet
   CACHE min_traps=413.24/505.0 (2.64s cached)
-  OK    min_traps=413.24/505.0 (cached)  ldoi=131.56/505.0 (0.13s)  diff=-281.68
+  OK    ldoi=131.56/505.0 (0.13s)
+  OK    enhanced(c=1)=132.81/505.0 (0.34s)
+  OK    enhanced(c=2)=147.09/505.0 (0.71s)
+  OK    enhanced+j(c=2)=147.09/505.0 (0.78s)
+  DONE  ldoi=131.56 (Δ-281.68)  enhanced(c=1)=132.81 (Δ-280.44)  enhanced(c=2)=147.09 (Δ-266.16)  enhanced+j(c=2)=147.09 (Δ-266.16)
 [25/29] generated_models/repetitions/rep_20230921_7687_gen104.bnet
   CACHE min_traps=400.37/505.0 (2.59s cached)
-  OK    min_traps=400.37/505.0 (cached)  ldoi=126.19/505.0 (0.14s)  diff=-274.18
+  OK    ldoi=126.19/505.0 (0.15s)
+  OK    enhanced(c=1)=127.53/505.0 (0.48s)
+  OK    enhanced(c=2)=335.73/505.0 (0.85s)
+  OK    enhanced+j(c=2)=335.73/505.0 (0.91s)
+  DONE  ldoi=126.19 (Δ-274.18)  enhanced(c=1)=127.53 (Δ-272.85)  enhanced(c=2)=335.73 (Δ-64.64)  enhanced+j(c=2)=335.73 (Δ-64.64)
 [26/29] generated_models/repetitions/rep_20230922_8036_gen125.bnet
   CACHE min_traps=420.06/505.0 (3.12s cached)
-  OK    min_traps=420.06/505.0 (cached)  ldoi=186.51/505.0 (0.13s)  diff=-233.55
+  OK    ldoi=186.51/505.0 (0.11s)
+  OK    enhanced(c=1)=191.43/505.0 (0.32s)
+  OK    enhanced(c=2)=346.88/505.0 (0.78s)
+  OK    enhanced+j(c=2)=346.88/505.0 (0.87s)
+  DONE  ldoi=186.51 (Δ-233.55)  enhanced(c=1)=191.43 (Δ-228.63)  enhanced(c=2)=346.88 (Δ-73.19)  enhanced+j(c=2)=346.88 (Δ-73.19)
 [27/29] generated_models/repetitions/rep_20230923_8025_gen141.bnet
   CACHE min_traps=418.52/505.0 (2.50s cached)
-  OK    min_traps=418.52/505.0 (cached)  ldoi=135.55/505.0 (0.13s)  diff=-282.98
+  OK    ldoi=135.55/505.0 (0.13s)
+  OK    enhanced(c=1)=138.04/505.0 (0.36s)
+  OK    enhanced(c=2)=341.88/505.0 (0.85s)
+  OK    enhanced+j(c=2)=341.88/505.0 (0.98s)
+  DONE  ldoi=135.55 (Δ-282.98)  enhanced(c=1)=138.04 (Δ-280.48)  enhanced(c=2)=341.88 (Δ-76.65)  enhanced+j(c=2)=341.88 (Δ-76.65)
 [28/29] generated_models/repetitions/rep_20230924_8037_gen129.bnet
   CACHE min_traps=419.28/505.0 (2.89s cached)
-  OK    min_traps=419.28/505.0 (cached)  ldoi=185.56/505.0 (0.14s)  diff=-233.72
+  OK    ldoi=185.56/505.0 (0.12s)
+  OK    enhanced(c=1)=188.94/505.0 (0.26s)
+  OK    enhanced(c=2)=347.95/505.0 (0.76s)
+  OK    enhanced+j(c=2)=347.95/505.0 (0.77s)
+  DONE  ldoi=185.56 (Δ-233.72)  enhanced(c=1)=188.94 (Δ-230.34)  enhanced(c=2)=347.95 (Δ-71.32)  enhanced+j(c=2)=347.95 (Δ-71.32)
 [29/29] generated_models/repetitions/rep_20230925_7821_gen113.bnet
   CACHE min_traps=398.33/505.0 (2.85s cached)
-  OK    min_traps=398.33/505.0 (cached)  ldoi=127.32/505.0 (0.14s)  diff=-271.02
+  OK    ldoi=127.32/505.0 (0.12s)
+  OK    enhanced(c=1)=129.02/505.0 (0.34s)
+  OK    enhanced(c=2)=146.84/505.0 (0.98s)
+  OK    enhanced+j(c=2)=146.84/505.0 (0.97s)
+  DONE  ldoi=127.32 (Δ-271.02)  enhanced(c=1)=129.02 (Δ-269.31)  enhanced(c=2)=146.84 (Δ-251.49)  enhanced+j(c=2)=146.84 (Δ-251.49)
 min_traps cache unchanged: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/min_traps_cache.json
 min_traps cache: hits=29  misses/recomputes=0  (n_models=29)
 
@@ -133,71 +222,80 @@ failed: 7 / 29
   generated_models/GA1_B.bnet: min_traps: ValueError: Ca2c is not in the model
   generated_models/GA2_B.bnet: min_traps: ValueError: Ca2c is not in the model
 
-succeeded (both methods): 22 / 29
+succeeded (all methods): 22 / 29
 
-model                                                    min_traps       ldoi     diff  rank_m  rank_l    t_min   t_ldoi
-----------------------------------------------------------------------------------------------------------------------
-generated_models/GA2_A.bnet                                 431.19     133.31  -297.88     1.0    14.0     2.46     0.12
-generated_models/GA1_A.bnet                                 426.94     132.31  -294.63     2.0    15.0     2.48     0.13
-generated_models/repetitions/20241009072111_9984_gen68.bnet     426.26     141.76  -284.50     3.0     6.0     3.26     0.13
-generated_models/repetitions/20241007143135_9306_gen124.bnet     420.76     127.70  -293.05     4.0    20.0     2.58     0.13
-generated_models/repetitions/rep_20230922_8036_gen125.bnet     420.06     186.51  -233.55     5.0     1.0     3.12     0.13
-generated_models/repetitions/rep_20230924_8037_gen129.bnet     419.28     185.56  -233.72     6.0     2.0     2.89     0.14
-generated_models/repetitions/rep_20230923_8025_gen141.bnet     418.52     135.55  -282.98     7.0    13.0     2.50     0.13
-generated_models/repetitions/20241009211257_9880_gen154.bnet     416.83     168.97  -247.86     8.0     3.0     2.51     0.16
-generated_models/repetitions/rep_20230920_7788_gen121.bnet     413.24     131.56  -281.68     9.0    17.0     2.64     0.13
-generated_models/repetitions/20241010082016_9453_gen140.bnet     413.00     144.76  -268.24    10.0     5.0     2.96     0.14
-generated_models/repetitions/rep_20230917_7545_gen112.bnet     408.14     136.79  -271.36    11.0    11.0     2.47     0.12
-generated_models/repetitions/rep_20230919_8030_gen113.bnet     405.50     163.67  -241.83    12.0     4.0     2.73     0.25
-generated_models/repetitions/rep_20230918_7560_gen105.bnet     405.09     132.07  -273.02    13.0    16.0     2.75     0.14
-generated_models/repetitions/rep_20230921_7687_gen104.bnet     400.37     126.19  -274.18    14.0    22.0     2.59     0.14
-generated_models/repetitions/rep_20230925_7821_gen113.bnet     398.33     127.32  -271.02    15.0    21.0     2.85     0.14
-generated_models/repetitions/20241011222037_9848_gen50.bnet     396.91     131.03  -265.88    16.0    18.0     3.05     0.15
-generated_models/repetitions/20241014130450_9902_gen56.bnet     393.67     130.92  -262.74    17.0    19.0     2.90     0.14
-generated_models/GA0_A.bnet                                 390.81     141.30  -249.51    18.0     7.0     2.32     0.19
-generated_models/GA_VA-KEV_del.bnet                         385.31     136.75  -248.56    19.0    12.0     2.48     0.11
-baseline_models/ABA_GA_base_A.bnet                          311.71     137.81  -173.91    20.0    10.0     3.12     0.13
-baseline_models/ABA_2017_Albert.bnet                        310.48     138.68  -171.80    21.0     9.0     3.40     0.15
-baseline_models/ABA_2017_VA-KEV_del.bnet                    291.73     138.78  -152.95    22.0     8.0     3.08     0.14
-----------------------------------------------------------------------------------------------------------------------
+model                                          min_traps             ldoi    enhanced(c=1)    enhanced(c=2)  enhanced+j(c=2)
+----------------------------------------------------------------------------------------------------------------------------
+generated_models/GA2_A.bnet                       431.19           133.31           135.07           339.75           339.75
+generated_models/GA1_A.bnet                       426.94           132.31           134.78           343.62           343.62
+generated_models/repetitions/20241009072111_9984_gen68.bnet     426.26           141.76           143.75           341.69           341.64
+generated_models/repetitions/20241007143135_9306_gen124.bnet     420.76           127.70           127.74           333.80           333.80
+generated_models/repetitions/rep_20230922_8036_gen125.bnet     420.06           186.51           191.43           346.88           346.88
+generated_models/repetitions/rep_20230924_8037_gen129.bnet     419.28           185.56           188.94           347.95           347.95
+generated_models/repetitions/rep_20230923_8025_gen141.bnet     418.52           135.55           138.04           341.88           341.88
+generated_models/repetitions/20241009211257_9880_gen154.bnet     416.83           168.97           169.84           334.69           334.69
+generated_models/repetitions/rep_20230920_7788_gen121.bnet     413.24           131.56           132.81           147.09           147.09
+generated_models/repetitions/20241010082016_9453_gen140.bnet     413.00           144.76           146.47           350.38           350.15
+generated_models/repetitions/rep_20230917_7545_gen112.bnet     408.14           136.79           136.67           338.19           338.19
+generated_models/repetitions/rep_20230919_8030_gen113.bnet     405.50           163.67           165.00           370.94           370.94
+generated_models/repetitions/rep_20230918_7560_gen105.bnet     405.09           132.07           133.84           161.95           161.95
+generated_models/repetitions/rep_20230921_7687_gen104.bnet     400.37           126.19           127.53           335.73           335.73
+generated_models/repetitions/rep_20230925_7821_gen113.bnet     398.33           127.32           129.02           146.84           146.84
+generated_models/repetitions/20241011222037_9848_gen50.bnet     396.91           131.03           134.25           145.92           145.91
+generated_models/repetitions/20241014130450_9902_gen56.bnet     393.67           130.92           137.94           342.73           343.42
+generated_models/GA0_A.bnet                       390.81           141.30           139.91           347.21           347.21
+generated_models/GA_VA-KEV_del.bnet               385.31           136.75           137.47           354.34           354.34
+baseline_models/ABA_GA_base_A.bnet                311.71           137.81           137.61           144.32           144.32
+baseline_models/ABA_2017_Albert.bnet              310.48           138.68           137.14           143.89           143.92
+baseline_models/ABA_2017_VA-KEV_del.bnet          291.73           138.78           137.45           144.13           144.13
+----------------------------------------------------------------------------------------------------------------------------
 
-Correlation / rank agreement
+Agreement vs min_traps — ldoi
   Pearson r:              0.1660
   Spearman rho:           0.1101
   Pairwise order agree:   0.5368 (124/231 pairs)
-  Mean |rank_min - rank_ldoi|: 7.273
-  Score diff (ldoi - min): mean=-253.403  std=40.154  min=-297.882  max=-152.951
+  Mean |Δrank|:           7.273
+  Score diff (method − min): mean=-253.403  std=40.154  min=-297.882  max=-152.951
   Top-1 set overlap:     0.000
   Top-3 set overlap:     0.000
   Top-5 set overlap:     0.200
 
-Scatter pairs (min_traps, ldoi)
-  (431.19, 133.31)  generated_models/GA2_A.bnet
-  (426.94, 132.31)  generated_models/GA1_A.bnet
-  (426.26, 141.76)  generated_models/repetitions/20241009072111_9984_gen68.bnet
-  (420.76, 127.70)  generated_models/repetitions/20241007143135_9306_gen124.bnet
-  (420.06, 186.51)  generated_models/repetitions/rep_20230922_8036_gen125.bnet
-  (419.28, 185.56)  generated_models/repetitions/rep_20230924_8037_gen129.bnet
-  (418.52, 135.55)  generated_models/repetitions/rep_20230923_8025_gen141.bnet
-  (416.83, 168.97)  generated_models/repetitions/20241009211257_9880_gen154.bnet
-  (413.24, 131.56)  generated_models/repetitions/rep_20230920_7788_gen121.bnet
-  (413.00, 144.76)  generated_models/repetitions/20241010082016_9453_gen140.bnet
-  (408.14, 136.79)  generated_models/repetitions/rep_20230917_7545_gen112.bnet
-  (405.50, 163.67)  generated_models/repetitions/rep_20230919_8030_gen113.bnet
-  (405.09, 132.07)  generated_models/repetitions/rep_20230918_7560_gen105.bnet
-  (400.37, 126.19)  generated_models/repetitions/rep_20230921_7687_gen104.bnet
-  (398.33, 127.32)  generated_models/repetitions/rep_20230925_7821_gen113.bnet
-  (396.91, 131.03)  generated_models/repetitions/20241011222037_9848_gen50.bnet
-  (393.67, 130.92)  generated_models/repetitions/20241014130450_9902_gen56.bnet
-  (390.81, 141.30)  generated_models/GA0_A.bnet
-  (385.31, 136.75)  generated_models/GA_VA-KEV_del.bnet
-  (311.71, 137.81)  baseline_models/ABA_GA_base_A.bnet
-  (310.48, 138.68)  baseline_models/ABA_2017_Albert.bnet
-  (291.73, 138.78)  baseline_models/ABA_2017_VA-KEV_del.bnet
+Agreement vs min_traps — enhanced(c=1)
+  Pearson r:              0.2171
+  Spearman rho:           0.1112
+  Pairwise order agree:   0.5498 (127/231 pairs)
+  Mean |Δrank|:           7.364
+  Score diff (method − min): mean=-251.885  std=39.407  min=-296.128  max=-154.277
+  Top-1 set overlap:     0.000
+  Top-3 set overlap:     0.000
+  Top-5 set overlap:     0.200
+
+Agreement vs min_traps — enhanced(c=2)
+  Pearson r:              0.6221
+  Spearman rho:           0.3540
+  Pairwise order agree:   0.6277 (145/231 pairs)
+  Mean |Δrank|:           5.545
+  Score diff (method − min): mean=-113.647  std=76.326  min=-266.158  max=-30.977
+  Top-1 set overlap:     0.000
+  Top-3 set overlap:     0.000
+  Top-5 set overlap:     0.000
+
+Agreement vs min_traps — enhanced+j(c=2)
+  Pearson r:              0.6219
+  Spearman rho:           0.3540
+  Pairwise order agree:   0.6277 (145/231 pairs)
+  Mean |Δrank|:           5.545
+  Score diff (method − min): mean=-113.627  std=76.344  min=-266.158  max=-30.977
+  Top-1 set overlap:     0.000
+  Top-3 set overlap:     0.000
+  Top-5 set overlap:     0.000
 
 Method timings (prediction + NAV score + model score)
   min_traps: n=22  total=61.14s  mean=2.78s  median=2.74s  min=2.32s  max=3.40s
-  ldoi: n=22  total=3.14s  mean=0.14s  median=0.14s  min=0.11s  max=0.25s
+  ldoi: n=22  total=2.89s  mean=0.13s  median=0.12s  min=0.11s  max=0.25s
+  enhanced(c=1): n=22  total=8.16s  mean=0.37s  median=0.36s  min=0.24s  max=0.56s
+  enhanced(c=2): n=22  total=19.38s  mean=0.88s  median=0.85s  min=0.64s  max=1.30s
+  enhanced+j(c=2): n=22  total=20.89s  mean=0.95s  median=0.97s  min=0.57s  max=1.30s
 
 saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/method_timings.csv
 saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/method_timings_per_model.csv
@@ -210,20 +308,23 @@ saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_trap
 Summary
   DATA_SET:          A
   bnets scanned:     29
-  both methods OK:   22
+  all methods OK:    22
   failed:            7
   min_traps cache:   hits=29  misses=0  used_on_rows=29
-  Pearson r:         0.1660
-  Spearman rho:      0.1101
-  pairwise order:    0.5368
-  mean |Δrank|:      7.273
-  min_traps time:     total=61.14s  mean=2.78s  (29 from cache)
-  ldoi time:     total=3.14s  mean=0.14s
-  wall clock:        41.9s
+  ldoi               r=0.1660  ρ=0.1101  order=0.5368
+  enhanced(c=1)      r=0.2171  ρ=0.1112  order=0.5498
+  enhanced(c=2)      r=0.6221  ρ=0.3540  order=0.6277
+  enhanced+j(c=2)    r=0.6219  ρ=0.3540  order=0.6277
+  min_traps time: total=61.14s  mean=2.78s  (29 from cache)
+  ldoi time: total=2.89s  mean=0.13s
+  enhanced(c=1) time: total=8.16s  mean=0.37s
+  enhanced(c=2) time: total=19.38s  mean=0.88s
+  enhanced+j(c=2) time: total=20.89s  mean=0.95s
+  wall clock:        91.5s
   Log written to:    /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_scores_min_traps_vs_ldoi.log
   Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_scores_scatter.png
   Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_ranks_scatter.png
   Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_score_diff.png
   Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_method_timings.png
-finished (UTC): 2026-10-23T18:48:53.111473+00:00
+finished (UTC): 2026-10-23T19:00:11.319816+00:00
 saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/README.md

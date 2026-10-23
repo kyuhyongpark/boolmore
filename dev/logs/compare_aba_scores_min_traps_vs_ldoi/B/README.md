@@ -1,28 +1,38 @@
-# ABA-B scores: `min_traps` vs `ldoi`
+# ABA-B scores: `min_traps` vs LDOI family
 
 Comparison of NAV total scores on every `.bnet` under `case_study/ABA`,
 using experiments from `case_study/ABA/data/ABA_B.json` (`data_B.csv`, `default_sources`).
 
+Reference method: `min_traps`. Compared LDOI variants:
+
+- `ldoi`
+- `enhanced(c=1)`
+- `enhanced(c=2)`
+- `enhanced+j(c=2)`
+
 - **Data set:** `B`
-- **Started (UTC):** 2026-10-23T18:51:12.159770+00:00
-- **Finished (UTC):** 2026-10-23T18:51:49.689100+00:00
-- **Wall clock:** 37.5s
+- **Started (UTC):** 2026-10-23T18:57:10.782662+00:00
+- **Finished (UTC):** 2026-10-23T18:57:51.560865+00:00
+- **Wall clock:** 40.8s
 - **Hierarchy:** True
 - **Experiments:** 505
 - **Bnets scanned:** 29
-- **Both methods OK:** 4
+- **All methods OK:** 4
 - **Failed:** 25
 - **min_traps cache:** `use=True`, `force_recompute=False`, hits=29, misses=0
 
-## Score agreement
+## Score agreement vs min_traps
 
-- Pearson *r*: `0.9654`
-- Spearman *ρ*: `1.0000`
-- Pairwise order agreement: `1.0000` (6/6 pairs)
-- Mean |rank_min − rank_ldoi|: `0.000`
-- Score diff (ldoi − min): mean=`-25.119`, std=`32.641`, min=`-68.719`, max=`0.000`
-- Top-1 set overlap: `1.000`
-- Top-3 set overlap: `1.000`
+| method | Pearson r | Spearman ρ | pairwise order | mean |Δrank| | mean Δscore |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `ldoi` | `0.9654` | `1.0000` | `1.0000` (6/6) | `0.000` | `-25.119` |
+| `enhanced(c=1)` | `0.9654` | `1.0000` | `1.0000` (6/6) | `0.000` | `-25.119` |
+| `enhanced(c=2)` | `0.9663` | `1.0000` | `1.0000` (6/6) | `0.000` | `-25.811` |
+| `enhanced+j(c=2)` | `0.9663` | `1.0000` | `1.0000` (6/6) | `0.000` | `-25.811` |
+- `ldoi` overlaps: top-1=1.000, top-3=1.000
+- `enhanced(c=1)` overlaps: top-1=1.000, top-3=1.000
+- `enhanced(c=2)` overlaps: top-1=1.000, top-3=1.000
+- `enhanced+j(c=2)` overlaps: top-1=1.000, top-3=1.000
 
 ## Method timings
 
@@ -31,7 +41,10 @@ Wall time for prediction + NAV scoring + model score (models where that method c
 | method | n | total (s) | mean (s) | median (s) | min (s) | max (s) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | `min_traps` | 4 | 10.48 | 2.62 | 2.61 | 2.51 | 2.74 |
-| `ldoi` | 4 | 0.64 | 0.16 | 0.16 | 0.12 | 0.21 |
+| `ldoi` | 4 | 0.53 | 0.13 | 0.13 | 0.12 | 0.15 |
+| `enhanced(c=1)` | 4 | 0.54 | 0.13 | 0.13 | 0.12 | 0.16 |
+| `enhanced(c=2)` | 4 | 0.71 | 0.18 | 0.19 | 0.12 | 0.22 |
+| `enhanced+j(c=2)` | 4 | 0.81 | 0.20 | 0.20 | 0.18 | 0.23 |
 
 ## Failures
 
