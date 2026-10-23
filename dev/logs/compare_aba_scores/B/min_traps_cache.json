@@ -11,133 +11,133 @@
   },
   "models": {
     "baseline_models/ABA_2006_Li.bnet": {
-      "bnet_mtime_ns": 1780279278586546583,
+      "bnet_mtime_ns": 1781300075468896907,
       "error": "min_traps: ValueError: 8-nitro-cGMP is not in the model"
     },
     "baseline_models/ABA_2017_Albert.bnet": {
-      "bnet_mtime_ns": 1780279278586546583,
+      "bnet_mtime_ns": 1781300075469153023,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "baseline_models/ABA_2017_VA-KEV_del.bnet": {
-      "bnet_mtime_ns": 1780279278586546583,
+      "bnet_mtime_ns": 1781300075469281631,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "baseline_models/ABA_2018_Waidyarathne.bnet": {
-      "bnet_mtime_ns": 1780279278586546583,
+      "bnet_mtime_ns": 1781300075469341856,
       "error": "min_traps: ValueError: 8-nitro-cGMP is not in the model"
     },
     "baseline_models/ABA_2019_Maheshwari.bnet": {
-      "bnet_mtime_ns": 1780279278586546583,
+      "bnet_mtime_ns": 1781300075469341856,
       "error": "min_traps: ValueError: 8-nitro-cGMP is not in the model"
     },
     "baseline_models/ABA_GA_base_A.bnet": {
-      "bnet_mtime_ns": 1780279278586546583,
+      "bnet_mtime_ns": 1781300075469341856,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "baseline_models/ABA_GA_base_B.bnet": {
-      "bnet_mtime_ns": 1780279278586546583,
+      "bnet_mtime_ns": 1781300075469586973,
       "error": null,
       "max_score": 505.0,
       "score_min": 184.19875019051975,
-      "t_min": 2.7441374290001477
+      "t_min": 2.1669720970094204
     },
     "generated_models/GA0_A.bnet": {
-      "bnet_mtime_ns": 1780279278586546583,
+      "bnet_mtime_ns": 1781300075470576789,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/GA0_B.bnet": {
-      "bnet_mtime_ns": 1780279278586546583,
+      "bnet_mtime_ns": 1781300075471142098,
       "error": null,
       "max_score": 505.0,
       "score_min": 384.625,
-      "t_min": 2.5054217420001805
+      "t_min": 2.044771553002647
     },
     "generated_models/GA1_A.bnet": {
-      "bnet_mtime_ns": 1780279278590545185,
+      "bnet_mtime_ns": 1781300075471379331,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/GA1_B.bnet": {
-      "bnet_mtime_ns": 1780279278590545185,
+      "bnet_mtime_ns": 1781300075471379331,
       "error": null,
       "max_score": 505.0,
       "score_min": 407.9166666666667,
-      "t_min": 2.6503780179991736
+      "t_min": 2.130609831001493
     },
     "generated_models/GA2_A.bnet": {
-      "bnet_mtime_ns": 1780279278590545185,
+      "bnet_mtime_ns": 1781300075471379331,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/GA2_B.bnet": {
-      "bnet_mtime_ns": 1780279278590545185,
+      "bnet_mtime_ns": 1781300075471675414,
       "error": null,
       "max_score": 505.0,
       "score_min": 412.75,
-      "t_min": 2.5770390799998495
+      "t_min": 2.1152515889989445
     },
     "generated_models/GA_VA-KEV_del.bnet": {
-      "bnet_mtime_ns": 1780279278590545185,
+      "bnet_mtime_ns": 1781300075471675414,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/20241007143135_9306_gen124.bnet": {
-      "bnet_mtime_ns": 1780279278590545185,
+      "bnet_mtime_ns": 1781300075471675414,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/20241009072111_9984_gen68.bnet": {
-      "bnet_mtime_ns": 1780279278590545185,
+      "bnet_mtime_ns": 1781300075472342655,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/20241009211257_9880_gen154.bnet": {
-      "bnet_mtime_ns": 1780279278590545185,
+      "bnet_mtime_ns": 1781300075472953247,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/20241010082016_9453_gen140.bnet": {
-      "bnet_mtime_ns": 1780279278590545185,
+      "bnet_mtime_ns": 1781300075473412313,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/20241011222037_9848_gen50.bnet": {
-      "bnet_mtime_ns": 1780279278590545185,
+      "bnet_mtime_ns": 1781300075473715088,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/20241014130450_9902_gen56.bnet": {
-      "bnet_mtime_ns": 1780279278590545185,
+      "bnet_mtime_ns": 1781300075473822338,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/rep_20230917_7545_gen112.bnet": {
-      "bnet_mtime_ns": 1780279278590545185,
+      "bnet_mtime_ns": 1781300075473987338,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/rep_20230918_7560_gen105.bnet": {
-      "bnet_mtime_ns": 1780279278594543788,
+      "bnet_mtime_ns": 1781300075474226130,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/rep_20230919_8030_gen113.bnet": {
-      "bnet_mtime_ns": 1780279278594543788,
+      "bnet_mtime_ns": 1781300075474336863,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/rep_20230920_7788_gen121.bnet": {
-      "bnet_mtime_ns": 1780279278594543788,
+      "bnet_mtime_ns": 1781300075474388838,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/rep_20230921_7687_gen104.bnet": {
-      "bnet_mtime_ns": 1780279278594543788,
+      "bnet_mtime_ns": 1781300075474501680,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/rep_20230922_8036_gen125.bnet": {
-      "bnet_mtime_ns": 1780279278594543788,
+      "bnet_mtime_ns": 1781300075474676763,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/rep_20230923_8025_gen141.bnet": {
-      "bnet_mtime_ns": 1780279278594543788,
+      "bnet_mtime_ns": 1781300075474799871,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/rep_20230924_8037_gen129.bnet": {
-      "bnet_mtime_ns": 1780279278594543788,
+      "bnet_mtime_ns": 1781300075475004104,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     },
     "generated_models/repetitions/rep_20230925_7821_gen113.bnet": {
-      "bnet_mtime_ns": 1780279278594543788,
+      "bnet_mtime_ns": 1781300075475052504,
       "error": "min_traps: ValueError: Ca2osc is not in the model"
     }
   },
-  "updated_utc": "2026-10-23T18:50:02.208186+00:00"
+  "updated_utc": "2026-10-23T20:47:01.767460+00:00"
 }

@@ -1,0 +1,176 @@
+{
+  "fingerprint": {
+    "config_rel": "case_study/ABA/data/ABA_A.json",
+    "cw_n_time_steps": 600,
+    "cw_n_walkers": 2048,
+    "cw_name_sanitize": 1,
+    "cw_set_update_prob": 0.5,
+    "cw_t_window": 120,
+    "cw_update_scheme": "asynchronous_set",
+    "data": "case_study/ABA/data/data_A.csv",
+    "data_set": "A",
+    "default_sources": {
+      "ABA": 0
+    },
+    "hierarchy": true,
+    "n_experiments": 505,
+    "n_unique_fixes": 260
+  },
+  "models": {
+    "baseline_models/ABA_2017_Albert.bnet": {
+      "bnet_mtime_ns": 1781300075469153023,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 275.5015332288356,
+      "t_cw": 71.4970436339936
+    },
+    "baseline_models/ABA_2017_VA-KEV_del.bnet": {
+      "bnet_mtime_ns": 1781300075469281631,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 269.61426758587055,
+      "t_cw": 71.93850723700598
+    },
+    "baseline_models/ABA_GA_base_A.bnet": {
+      "bnet_mtime_ns": 1781300075469341856,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 280.669192358837,
+      "t_cw": 73.53850304300431
+    },
+    "generated_models/GA0_A.bnet": {
+      "bnet_mtime_ns": 1781300075470576789,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 360.4340920108898,
+      "t_cw": 68.99408888800826
+    },
+    "generated_models/GA1_A.bnet": {
+      "bnet_mtime_ns": 1781300075471379331,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 366.2539765833727,
+      "t_cw": 78.99942712100164
+    },
+    "generated_models/GA2_A.bnet": {
+      "bnet_mtime_ns": 1781300075471379331,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 319.52390102315474,
+      "t_cw": 74.28431488499336
+    },
+    "generated_models/GA_VA-KEV_del.bnet": {
+      "bnet_mtime_ns": 1781300075471675414,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 355.45300091659976,
+      "t_cw": 74.32318166000186
+    },
+    "generated_models/repetitions/20241007143135_9306_gen124.bnet": {
+      "bnet_mtime_ns": 1781300075471675414,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 307.084481406188,
+      "t_cw": 79.68456436198903
+    },
+    "generated_models/repetitions/20241009072111_9984_gen68.bnet": {
+      "bnet_mtime_ns": 1781300075472342655,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 385.7625885132346,
+      "t_cw": 97.63811238000926
+    },
+    "generated_models/repetitions/20241009211257_9880_gen154.bnet": {
+      "bnet_mtime_ns": 1781300075472953247,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 368.1625466235674,
+      "t_cw": 84.29860996500065
+    },
+    "generated_models/repetitions/20241010082016_9453_gen140.bnet": {
+      "bnet_mtime_ns": 1781300075473412313,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 372.6569092193124,
+      "t_cw": 77.95438016499975
+    },
+    "generated_models/repetitions/20241011222037_9848_gen50.bnet": {
+      "bnet_mtime_ns": 1781300075473715088,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 300.2463800188673,
+      "t_cw": 86.57893597299699
+    },
+    "generated_models/repetitions/20241014130450_9902_gen56.bnet": {
+      "bnet_mtime_ns": 1781300075473822338,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 156.22327946782707,
+      "t_cw": 88.11563261700212
+    },
+    "generated_models/repetitions/rep_20230917_7545_gen112.bnet": {
+      "bnet_mtime_ns": 1781300075473987338,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 372.2162751753204,
+      "t_cw": 79.65510426100809
+    },
+    "generated_models/repetitions/rep_20230918_7560_gen105.bnet": {
+      "bnet_mtime_ns": 1781300075474226130,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 370.97498546029874,
+      "t_cw": 85.53162047200021
+    },
+    "generated_models/repetitions/rep_20230919_8030_gen113.bnet": {
+      "bnet_mtime_ns": 1781300075474336863,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 378.11032173464224,
+      "t_cw": 80.93632308300585
+    },
+    "generated_models/repetitions/rep_20230920_7788_gen121.bnet": {
+      "bnet_mtime_ns": 1781300075474388838,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 391.4465093260887,
+      "t_cw": 82.30111198899976
+    },
+    "generated_models/repetitions/rep_20230921_7687_gen104.bnet": {
+      "bnet_mtime_ns": 1781300075474501680,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 370.55594649276753,
+      "t_cw": 80.01216518798901
+    },
+    "generated_models/repetitions/rep_20230922_8036_gen125.bnet": {
+      "bnet_mtime_ns": 1781300075474676763,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 368.9794437394897,
+      "t_cw": 95.9322967529879
+    },
+    "generated_models/repetitions/rep_20230923_8025_gen141.bnet": {
+      "bnet_mtime_ns": 1781300075474799871,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 285.03707910861533,
+      "t_cw": 80.4007179360051
+    },
+    "generated_models/repetitions/rep_20230924_8037_gen129.bnet": {
+      "bnet_mtime_ns": 1781300075475004104,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 371.5195932967228,
+      "t_cw": 83.93568944498838
+    },
+    "generated_models/repetitions/rep_20230925_7821_gen113.bnet": {
+      "bnet_mtime_ns": 1781300075475052504,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 330.41973661105703,
+      "t_cw": 83.21014720799576
+    }
+  },
+  "updated_utc": "2026-10-23T20:35:56.628711+00:00"
+}

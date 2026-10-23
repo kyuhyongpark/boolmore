@@ -1,0 +1,50 @@
+{
+  "fingerprint": {
+    "config_rel": "case_study/ABA/data/ABA_B.json",
+    "cw_n_time_steps": 600,
+    "cw_n_walkers": 2048,
+    "cw_name_sanitize": 1,
+    "cw_set_update_prob": 0.5,
+    "cw_t_window": 120,
+    "cw_update_scheme": "asynchronous_set",
+    "data": "case_study/ABA/data/data_B.csv",
+    "data_set": "B",
+    "default_sources": {
+      "ABA": 0
+    },
+    "hierarchy": true,
+    "n_experiments": 505,
+    "n_unique_fixes": 261
+  },
+  "models": {
+    "baseline_models/ABA_GA_base_B.bnet": {
+      "bnet_mtime_ns": 1781300075469586973,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 205.20598607358139,
+      "t_cw": 70.4141327420075
+    },
+    "generated_models/GA0_B.bnet": {
+      "bnet_mtime_ns": 1781300075471142098,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 360.35034986581735,
+      "t_cw": 72.21207076500286
+    },
+    "generated_models/GA1_B.bnet": {
+      "bnet_mtime_ns": 1781300075471379331,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 396.6200195201236,
+      "t_cw": 77.54940284798795
+    },
+    "generated_models/GA2_B.bnet": {
+      "bnet_mtime_ns": 1781300075471675414,
+      "error": null,
+      "max_score": 505.0,
+      "score_cw": 401.87242484759827,
+      "t_cw": 74.01923193500261
+    }
+  },
+  "updated_utc": "2026-10-23T20:46:40.560314+00:00"
+}

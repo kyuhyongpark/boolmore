@@ -1,16 +1,20 @@
 DATA_SET: B
-log dir:  /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B
-log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_scores.log
-started (UTC): 2026-10-23T18:57:10.782662+00:00
+log dir:  /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B
+log file: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_scores.log
+started (UTC): 2026-10-23T20:41:22.953025+00:00
 
 config: case_study/ABA/data/ABA_B.json
 data:   case_study/ABA/data/data_B.csv
 default_sources: {'ABA': 0}
 hierarchy: True
 experiments: 505
+unique fixes: 261
 bnet files: 29
 LDOI variants: ['ldoi', 'enhanced(c=1)', 'enhanced(c=2)', 'enhanced+j(c=2)']
-min_traps cache: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/min_traps_cache.json
+cubewalkers: asynchronous_set  W=2048  T=600  T_window=120  set_update_prob=0.5
+min_traps cache: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/min_traps_cache.json
+  use_cache=True  force_recompute=False
+cw cache: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/cw_cache.json
   use_cache=True  force_recompute=False
   baseline_models/ABA_2006_Li.bnet
   baseline_models/ABA_2017_Albert.bnet
@@ -43,85 +47,93 @@ min_traps cache: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_score
   generated_models/repetitions/rep_20230925_7821_gen113.bnet
 
 [1/29] baseline_models/ABA_2006_Li.bnet
-  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model
 [2/29] baseline_models/ABA_2017_Albert.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [3/29] baseline_models/ABA_2017_VA-KEV_del.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [4/29] baseline_models/ABA_2018_Waidyarathne.bnet
-  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model
 [5/29] baseline_models/ABA_2019_Maheshwari.bnet
-  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model
 [6/29] baseline_models/ABA_GA_base_A.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [7/29] baseline_models/ABA_GA_base_B.bnet
-  CACHE min_traps=184.20/505.0 (2.74s cached)
-  OK    ldoi=152.61/505.0 (0.15s)
-  OK    enhanced(c=1)=152.61/505.0 (0.16s)
-  OK    enhanced(c=2)=153.42/505.0 (0.22s)
-  OK    enhanced+j(c=2)=153.42/505.0 (0.23s)
-  DONE  ldoi=152.61 (Δ-31.59)  enhanced(c=1)=152.61 (Δ-31.59)  enhanced(c=2)=153.42 (Δ-30.78)  enhanced+j(c=2)=153.42 (Δ-30.78)
+  OK    min_traps=184.20/505.0 (2.17s)
+  OK    ldoi=152.61/505.0 (0.11s)
+  OK    enhanced(c=1)=152.61/505.0 (0.11s)
+  OK    enhanced(c=2)=153.42/505.0 (0.16s)
+  OK    enhanced+j(c=2)=153.42/505.0 (0.16s)
+cubewalkers ready: /home/troonmel/Boolmore/.venv314/lib/python3.14/site-packages/cubewalkers/__init__.py
+  scheme=asynchronous_set  W=2048  T=600  T_window=120
+  OK    cubewalkers=205.21/505.0 (70.41s)
+  DONE  ldoi=152.61 (Δ-31.59)  enhanced(c=1)=152.61 (Δ-31.59)  enhanced(c=2)=153.42 (Δ-30.78)  enhanced+j(c=2)=153.42 (Δ-30.78)  cubewalkers=205.21 (Δ+21.01)
 [8/29] generated_models/GA0_A.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [9/29] generated_models/GA0_B.bnet
-  CACHE min_traps=384.62/505.0 (2.51s cached)
-  OK    ldoi=315.91/505.0 (0.12s)
-  OK    enhanced(c=1)=315.91/505.0 (0.12s)
-  OK    enhanced(c=2)=315.91/505.0 (0.12s)
-  OK    enhanced+j(c=2)=315.91/505.0 (0.21s)
-  DONE  ldoi=315.91 (Δ-68.72)  enhanced(c=1)=315.91 (Δ-68.72)  enhanced(c=2)=315.91 (Δ-68.72)  enhanced+j(c=2)=315.91 (Δ-68.72)
+  OK    min_traps=384.62/505.0 (2.04s)
+  OK    ldoi=315.91/505.0 (0.11s)
+  OK    enhanced(c=1)=315.91/505.0 (0.10s)
+  OK    enhanced(c=2)=315.91/505.0 (0.11s)
+  OK    enhanced+j(c=2)=315.91/505.0 (0.11s)
+  OK    cubewalkers=360.35/505.0 (72.21s)
+  DONE  ldoi=315.91 (Δ-68.72)  enhanced(c=1)=315.91 (Δ-68.72)  enhanced(c=2)=315.91 (Δ-68.72)  enhanced+j(c=2)=315.91 (Δ-68.72)  cubewalkers=360.35 (Δ-24.27)
 [10/29] generated_models/GA1_A.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [11/29] generated_models/GA1_B.bnet
-  CACHE min_traps=407.92/505.0 (2.65s cached)
-  OK    ldoi=407.75/505.0 (0.13s)
-  OK    enhanced(c=1)=407.75/505.0 (0.13s)
-  OK    enhanced(c=2)=404.90/505.0 (0.19s)
-  OK    enhanced+j(c=2)=404.90/505.0 (0.20s)
-  DONE  ldoi=407.75 (Δ-0.17)  enhanced(c=1)=407.75 (Δ-0.17)  enhanced(c=2)=404.90 (Δ-3.02)  enhanced+j(c=2)=404.90 (Δ-3.02)
+  OK    min_traps=407.92/505.0 (2.13s)
+  OK    ldoi=407.75/505.0 (0.12s)
+  OK    enhanced(c=1)=407.75/505.0 (0.12s)
+  OK    enhanced(c=2)=404.90/505.0 (0.18s)
+  OK    enhanced+j(c=2)=404.90/505.0 (0.17s)
+  OK    cubewalkers=396.62/505.0 (77.55s)
+  DONE  ldoi=407.75 (Δ-0.17)  enhanced(c=1)=407.75 (Δ-0.17)  enhanced(c=2)=404.90 (Δ-3.02)  enhanced+j(c=2)=404.90 (Δ-3.02)  cubewalkers=396.62 (Δ-11.30)
 [12/29] generated_models/GA2_A.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [13/29] generated_models/GA2_B.bnet
-  CACHE min_traps=412.75/505.0 (2.58s cached)
-  OK    ldoi=412.75/505.0 (0.14s)
-  OK    enhanced(c=1)=412.75/505.0 (0.13s)
-  OK    enhanced(c=2)=412.02/505.0 (0.19s)
-  OK    enhanced+j(c=2)=412.02/505.0 (0.18s)
-  DONE  ldoi=412.75 (Δ+0.00)  enhanced(c=1)=412.75 (Δ+0.00)  enhanced(c=2)=412.02 (Δ-0.73)  enhanced+j(c=2)=412.02 (Δ-0.73)
+  OK    min_traps=412.75/505.0 (2.12s)
+  OK    ldoi=412.75/505.0 (0.12s)
+  OK    enhanced(c=1)=412.75/505.0 (0.12s)
+  OK    enhanced(c=2)=412.02/505.0 (0.15s)
+  OK    enhanced+j(c=2)=412.02/505.0 (0.14s)
+  OK    cubewalkers=401.87/505.0 (74.02s)
+  DONE  ldoi=412.75 (Δ+0.00)  enhanced(c=1)=412.75 (Δ+0.00)  enhanced(c=2)=412.02 (Δ-0.73)  enhanced+j(c=2)=412.02 (Δ-0.73)  cubewalkers=401.87 (Δ-10.88)
 [14/29] generated_models/GA_VA-KEV_del.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [15/29] generated_models/repetitions/20241007143135_9306_gen124.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [16/29] generated_models/repetitions/20241009072111_9984_gen68.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [17/29] generated_models/repetitions/20241009211257_9880_gen154.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [18/29] generated_models/repetitions/20241010082016_9453_gen140.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [19/29] generated_models/repetitions/20241011222037_9848_gen50.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [20/29] generated_models/repetitions/20241014130450_9902_gen56.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [21/29] generated_models/repetitions/rep_20230917_7545_gen112.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [22/29] generated_models/repetitions/rep_20230918_7560_gen105.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [23/29] generated_models/repetitions/rep_20230919_8030_gen113.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [24/29] generated_models/repetitions/rep_20230920_7788_gen121.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [25/29] generated_models/repetitions/rep_20230921_7687_gen104.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [26/29] generated_models/repetitions/rep_20230922_8036_gen125.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [27/29] generated_models/repetitions/rep_20230923_8025_gen141.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [28/29] generated_models/repetitions/rep_20230924_8037_gen129.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
 [29/29] generated_models/repetitions/rep_20230925_7821_gen113.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
-min_traps cache unchanged: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/min_traps_cache.json
-min_traps cache: hits=29  misses/recomputes=0  (n_models=29)
+  FAIL  min_traps: ValueError: Ca2osc is not in the model
+min_traps cache written: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/min_traps_cache.json
+cw cache unchanged: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/cw_cache.json
+min_traps cache: hits=0  misses/recomputes=29  (n_models=29)
+cw cache: hits=0  misses/recomputes=4  (n_models=29)
 
 failed: 25 / 29
   baseline_models/ABA_2006_Li.bnet: min_traps: ValueError: 8-nitro-cGMP is not in the model
@@ -152,13 +164,13 @@ failed: 25 / 29
 
 succeeded (all methods): 4 / 29
 
-model                                          min_traps             ldoi    enhanced(c=1)    enhanced(c=2)  enhanced+j(c=2)
-----------------------------------------------------------------------------------------------------------------------------
-generated_models/GA2_B.bnet                       412.75           412.75           412.75           412.02           412.02
-generated_models/GA1_B.bnet                       407.92           407.75           407.75           404.90           404.90
-generated_models/GA0_B.bnet                       384.62           315.91           315.91           315.91           315.91
-baseline_models/ABA_GA_base_B.bnet                184.20           152.61           152.61           153.42           153.42
-----------------------------------------------------------------------------------------------------------------------------
+model                                          min_traps             ldoi    enhanced(c=1)    enhanced(c=2)  enhanced+j(c=2)      cubewalkers
+---------------------------------------------------------------------------------------------------------------------------------------------
+generated_models/GA2_B.bnet                       412.75           412.75           412.75           412.02           412.02           401.87
+generated_models/GA1_B.bnet                       407.92           407.75           407.75           404.90           404.90           396.62
+generated_models/GA0_B.bnet                       384.62           315.91           315.91           315.91           315.91           360.35
+baseline_models/ABA_GA_base_B.bnet                184.20           152.61           152.61           153.42           153.42           205.21
+---------------------------------------------------------------------------------------------------------------------------------------------
 
 Agreement vs min_traps — ldoi
   Pearson r:              0.9654
@@ -196,41 +208,54 @@ Agreement vs min_traps — enhanced+j(c=2)
   Top-1 set overlap:     1.000
   Top-3 set overlap:     1.000
 
+Agreement vs min_traps — cubewalkers
+  Pearson r:              0.9960
+  Spearman rho:           1.0000
+  Pairwise order agree:   1.0000 (6/6 pairs)
+  Mean |Δrank|:           0.000
+  Score diff (method − min): mean=-6.360  std=19.276  min=-24.275  max=+21.007
+  Top-1 set overlap:     1.000
+  Top-3 set overlap:     1.000
+
 Method timings (prediction + NAV score + model score)
-  min_traps: n=4  total=10.48s  mean=2.62s  median=2.61s  min=2.51s  max=2.74s
-  ldoi: n=4  total=0.53s  mean=0.13s  median=0.13s  min=0.12s  max=0.15s
-  enhanced(c=1): n=4  total=0.54s  mean=0.13s  median=0.13s  min=0.12s  max=0.16s
-  enhanced(c=2): n=4  total=0.71s  mean=0.18s  median=0.19s  min=0.12s  max=0.22s
-  enhanced+j(c=2): n=4  total=0.81s  mean=0.20s  median=0.20s  min=0.18s  max=0.23s
+  min_traps: n=4  total=8.46s  mean=2.11s  median=2.12s  min=2.04s  max=2.17s
+  ldoi: n=4  total=0.46s  mean=0.11s  median=0.11s  min=0.11s  max=0.12s
+  enhanced(c=1): n=4  total=0.45s  mean=0.11s  median=0.11s  min=0.10s  max=0.12s
+  enhanced(c=2): n=4  total=0.59s  mean=0.15s  median=0.15s  min=0.11s  max=0.18s
+  enhanced+j(c=2): n=4  total=0.58s  mean=0.14s  median=0.15s  min=0.11s  max=0.17s
+  cubewalkers: n=4  total=294.19s  mean=73.55s  median=73.12s  min=70.41s  max=77.55s
 
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/method_timings.csv
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/method_timings_per_model.csv
+saved: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/method_timings.csv
+saved: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/method_timings_per_model.csv
 
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_scores_scatter.png
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_ranks_scatter.png
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_score_diff.png
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_method_timings.png
+saved: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_scores_scatter.png
+saved: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_ranks_scatter.png
+saved: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_score_diff.png
+saved: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_method_timings.png
 
 Summary
   DATA_SET:          B
   bnets scanned:     29
   all methods OK:    4
   failed:            25
-  min_traps cache:   hits=29  misses=0  used_on_rows=29
+  min_traps cache:   hits=0  misses=29  used_on_rows=0
+  cw cache:          hits=0  misses=4  used_on_rows=0
   ldoi               r=0.9654  ρ=1.0000  order=1.0000
   enhanced(c=1)      r=0.9654  ρ=1.0000  order=1.0000
   enhanced(c=2)      r=0.9663  ρ=1.0000  order=1.0000
   enhanced+j(c=2)    r=0.9663  ρ=1.0000  order=1.0000
-  min_traps time: total=10.48s  mean=2.62s  (29 from cache)
-  ldoi time: total=0.53s  mean=0.13s
-  enhanced(c=1) time: total=0.54s  mean=0.13s
-  enhanced(c=2) time: total=0.71s  mean=0.18s
-  enhanced+j(c=2) time: total=0.81s  mean=0.20s
-  wall clock:        40.8s
-  Log written to:    /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_scores.log
-  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_scores_scatter.png
-  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_ranks_scatter.png
-  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_score_diff.png
-  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_method_timings.png
-finished (UTC): 2026-10-23T18:57:51.560865+00:00
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/B/README.md
+  cubewalkers        r=0.9960  ρ=1.0000  order=1.0000
+  min_traps time: total=8.46s  mean=2.11s
+  ldoi time: total=0.46s  mean=0.11s
+  enhanced(c=1) time: total=0.45s  mean=0.11s
+  enhanced(c=2) time: total=0.59s  mean=0.15s
+  enhanced+j(c=2) time: total=0.58s  mean=0.14s
+  cubewalkers time: total=294.19s  mean=73.55s
+  wall clock:        341.4s
+  Log written to:    /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_scores.log
+  Plot written to:   /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_scores_scatter.png
+  Plot written to:   /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_ranks_scatter.png
+  Plot written to:   /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_score_diff.png
+  Plot written to:   /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/compare_aba_method_timings.png
+finished (UTC): 2026-10-23T20:47:04.348973+00:00
+saved: /home/troonmel/Boolmore/boolmore/dev/logs/compare_aba_scores/B/README.md
