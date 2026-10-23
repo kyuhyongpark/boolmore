@@ -78,7 +78,7 @@ Wall time for prediction + NAV scoring + model score (models where that method c
 
 Stable filenames (overwritten on each run):
 
-- [`compare_aba_scores_min_traps_vs_ldoi.log`](compare_aba_scores_min_traps_vs_ldoi.log) — full run log
+- [`compare_aba_scores.log`](compare_aba_scores.log) — full run log
 - [`min_traps_cache.json`](min_traps_cache.json) — `min_traps` score + timing cache
 - [`method_timings.csv`](method_timings.csv) — timing summary CSV
 - [`method_timings_per_model.csv`](method_timings_per_model.csv) — per-model wall times

@@ -1,6 +1,6 @@
 DATA_SET: A
-log dir:  /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A
-log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_scores_min_traps_vs_ldoi.log
+log dir:  /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_scores.log
 started (UTC): 2026-10-23T18:58:39.862737+00:00
 
 config: case_study/ABA/data/ABA_A.json
@@ -10,7 +10,7 @@ hierarchy: True
 experiments: 505
 bnet files: 29
 LDOI variants: ['ldoi', 'enhanced(c=1)', 'enhanced(c=2)', 'enhanced+j(c=2)']
-min_traps cache: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/min_traps_cache.json
+min_traps cache: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/min_traps_cache.json
   use_cache=True  force_recompute=False
   baseline_models/ABA_2006_Li.bnet
   baseline_models/ABA_2017_Albert.bnet
@@ -210,7 +210,7 @@ min_traps cache: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_score
   OK    enhanced(c=2)=146.84/505.0 (0.98s)
   OK    enhanced+j(c=2)=146.84/505.0 (0.97s)
   DONE  ldoi=127.32 (Δ-271.02)  enhanced(c=1)=129.02 (Δ-269.31)  enhanced(c=2)=146.84 (Δ-251.49)  enhanced+j(c=2)=146.84 (Δ-251.49)
-min_traps cache unchanged: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/min_traps_cache.json
+min_traps cache unchanged: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/min_traps_cache.json
 min_traps cache: hits=29  misses/recomputes=0  (n_models=29)
 
 failed: 7 / 29
@@ -297,13 +297,13 @@ Method timings (prediction + NAV score + model score)
   enhanced(c=2): n=22  total=19.38s  mean=0.88s  median=0.85s  min=0.64s  max=1.30s
   enhanced+j(c=2): n=22  total=20.89s  mean=0.95s  median=0.97s  min=0.57s  max=1.30s
 
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/method_timings.csv
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/method_timings_per_model.csv
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/method_timings.csv
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/method_timings_per_model.csv
 
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_scores_scatter.png
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_ranks_scatter.png
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_score_diff.png
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_method_timings.png
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_scores_scatter.png
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_ranks_scatter.png
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_score_diff.png
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_method_timings.png
 
 Summary
   DATA_SET:          A
@@ -321,10 +321,10 @@ Summary
   enhanced(c=2) time: total=19.38s  mean=0.88s
   enhanced+j(c=2) time: total=20.89s  mean=0.95s
   wall clock:        91.5s
-  Log written to:    /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_scores_min_traps_vs_ldoi.log
-  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_scores_scatter.png
-  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_ranks_scatter.png
-  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_score_diff.png
-  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/compare_aba_method_timings.png
+  Log written to:    /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_scores.log
+  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_scores_scatter.png
+  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_ranks_scatter.png
+  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_score_diff.png
+  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/compare_aba_method_timings.png
 finished (UTC): 2026-10-23T19:00:11.319816+00:00
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/A/README.md
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores/A/README.md

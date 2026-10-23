@@ -1,27 +1,30 @@
 # %% [markdown]
-# ABA scores: `min_traps` vs LDOI family
+# ABA scores: `min_traps` vs LDOI family vs cubewalkers
 #
 # Score every `.bnet` under `case_study/ABA` against the experiments from
 # `ABA_{A|B}.json` (`data_{A|B}`, `default_sources`) using NAV prediction
-# methods from `boolmore.inference.prediction`:
+# methods from `boolmore.inference.prediction`, plus cubewalkers simulation:
 #
 # - **min_traps**: minimal trap spaces → average node values (reference)
 # - **ldoi**: plain logical domain of influence
 # - **ldoi_enhanced** with `cutoff=1`
 # - **ldoi_enhanced** with `cutoff=2`
 # - **ldoi_enhanced** with `cutoff=2` and `joint_self_loops=True`
+# - **cubewalkers**: `asynchronous_set` ensemble → mean NAV → score
+#   (W=2048, T=600, T_window=120); only run if min_traps + all LDOI succeed
 #
 # Switch dataset with `DATA_SET` below (`"A"` or `"B"`). Models that fail
 # (missing nodes, ASP errors, etc.) are logged and skipped. For successes,
-# compare each LDOI variant to `min_traps`: Pearson/Spearman, pairwise order
-# preservation, and rank agreement. Also records per-method wall times.
+# compare each LDOI / cubewalkers method to `min_traps`: Pearson/Spearman,
+# pairwise order preservation, and rank agreement. Also records per-method
+# wall times.
 #
-# `min_traps` scores + wall times are cached under the log dir (JSON) so
-# re-runs can skip the expensive trap-space step; set
-# `FORCE_RECOMPUTE_MIN_TRAPS=True` to refresh.
+# `min_traps` and cubewalkers scores + wall times are cached under the log
+# dir (JSON) so re-runs can skip those expensive steps; set
+# `FORCE_RECOMPUTE_MIN_TRAPS` / `FORCE_RECOMPUTE_CW` to refresh.
 #
 # Outputs are overwritten under
-# `dev/logs/compare_aba_scores_min_traps_vs_ldoi/{A|B}/` (stable names, no
+# `dev/logs/compare_aba_scores/{A|B}/` (stable names, no
 # timestamps): log, score/rank/diff/timing plots, method_timings.csv, README.md.
 # No interactive display.
 
@@ -52,6 +55,19 @@ from boolmore.io.load import load_json_config, load_primes
 from boolmore.io.nav import import_NAV_exps
 from boolmore.io.paths import project_root
 
+# Sibling helpers are not on the editable install; keep ``dev/`` importable.
+_DEV = Path(__file__).resolve().parent
+if str(_DEV) not in sys.path:
+    sys.path.insert(0, str(_DEV))
+
+from cw_helpers import (
+    bnet_rules_for_cubewalkers,
+    make_model_namer,
+    require_cubewalkers,
+    simulate_mean_nav,
+)
+from nav_helpers import to_nav_predictions
+
 # %% [markdown]
 # ## Config
 #
@@ -65,6 +81,13 @@ DATA_SET = "A"
 # Or: ABA_DATA_SET=A python ...
 USE_MIN_TRAPS_CACHE = True
 FORCE_RECOMPUTE_MIN_TRAPS = False  # True → ignore cache and rewrite it
+USE_CW_CACHE = True
+FORCE_RECOMPUTE_CW = False  # True → ignore CW cache and rewrite it
+# Cubewalkers (asynchronous_set)
+CW_N_WALKERS = 2048
+CW_N_TIME_STEPS = 600
+CW_T_WINDOW = 120
+CW_SET_UPDATE_PROB = 0.5
 # ---------------------
 
 _env_set = os.environ.get("ABA_DATA_SET", "").strip().upper()
@@ -80,7 +103,7 @@ CONFIG_REL = f"case_study/ABA/data/ABA_{DATA_SET}.json"
 LOG_DIR = (
     Path(__file__).resolve().parent
     / "logs"
-    / "compare_aba_scores_min_traps_vs_ldoi"
+    / "compare_aba_scores"
     / DATA_SET
 )
 HIERARCHY = True
@@ -107,17 +130,23 @@ LDOI_VARIANTS: list[tuple[str, str, dict]] = [
 ]
 LDOI_KEYS = [k for k, _, _ in LDOI_VARIANTS]
 LDOI_LABEL = {k: lab for k, lab, _ in LDOI_VARIANTS}
+CW_KEY = "cw"
+CW_LABEL = "cubewalkers"
+# Methods compared against min_traps (LDOI family + cubewalkers).
+COMPARE_KEYS = [*LDOI_KEYS, CW_KEY]
+COMPARE_LABEL = {**LDOI_LABEL, CW_KEY: CW_LABEL}
 METHOD_COLORS = {
     "min_traps": "#7f7f7f",
     "ldoi": "#2c3e50",
     "enh_c1": "#1f77b4",
     "enh_c2": "#2ca02c",
     "enh_c2_j": "#bcbd22",
+    CW_KEY: "#d62728",
 }
-ALL_METHOD_KEYS = ["min_traps", *LDOI_KEYS]
+ALL_METHOD_KEYS = ["min_traps", *COMPARE_KEYS]
 ALL_METHOD_LABELS = {
     "min_traps": "min_traps",
-    **LDOI_LABEL,
+    **COMPARE_LABEL,
 }
 
 # %% [markdown]
@@ -143,7 +172,7 @@ class Tee:
 
 
 LOG_DIR.mkdir(parents=True, exist_ok=True)
-LOG_PATH = LOG_DIR / "compare_aba_scores_min_traps_vs_ldoi.log"
+LOG_PATH = LOG_DIR / "compare_aba_scores.log"
 PLOT_SCORE = LOG_DIR / "compare_aba_scores_scatter.png"
 PLOT_RANK = LOG_DIR / "compare_aba_ranks_scatter.png"
 PLOT_DIFF = LOG_DIR / "compare_aba_score_diff.png"
@@ -151,6 +180,7 @@ PLOT_TIMING = LOG_DIR / "compare_aba_method_timings.png"
 TIMINGS_CSV = LOG_DIR / "method_timings.csv"
 README_PATH = LOG_DIR / "README.md"
 MIN_TRAPS_CACHE_PATH = LOG_DIR / "min_traps_cache.json"
+CW_CACHE_PATH = LOG_DIR / "cw_cache.json"
 _log_file = LOG_PATH.open("w", encoding="utf-8")
 _stdout = sys.stdout
 sys.stdout = Tee(_stdout, _log_file)
@@ -170,16 +200,28 @@ default_sources = {str(k): int(v) for k, v in config["default_sources"].items()}
 
 experiments = import_NAV_exps(data_path)
 bnet_paths = sorted(ABA.rglob("*.bnet"))
+UNIQUE_FIXES = sorted(
+    {exp.fixes for exp in experiments},
+    key=lambda f: (len(f), f),
+)
 
 print(f"config: {CONFIG_REL}")
 print(f"data:   {data_path.relative_to(REPO)}")
 print(f"default_sources: {default_sources}")
 print(f"hierarchy: {HIERARCHY}")
 print(f"experiments: {len(experiments)}")
+print(f"unique fixes: {len(UNIQUE_FIXES)}")
 print(f"bnet files: {len(bnet_paths)}")
 print(f"LDOI variants: {[LDOI_LABEL[k] for k in LDOI_KEYS]}")
+print(
+    f"cubewalkers: asynchronous_set  W={CW_N_WALKERS}  "
+    f"T={CW_N_TIME_STEPS}  T_window={CW_T_WINDOW}  "
+    f"set_update_prob={CW_SET_UPDATE_PROB}"
+)
 print(f"min_traps cache: {MIN_TRAPS_CACHE_PATH}")
 print(f"  use_cache={USE_MIN_TRAPS_CACHE}  force_recompute={FORCE_RECOMPUTE_MIN_TRAPS}")
+print(f"cw cache: {CW_CACHE_PATH}")
+print(f"  use_cache={USE_CW_CACHE}  force_recompute={FORCE_RECOMPUTE_CW}")
 for p in bnet_paths:
     print(f"  {p.relative_to(ABA)}")
 print()
@@ -201,13 +243,14 @@ class ModelScoreRow:
     times: dict[str, float] = field(default_factory=dict)
     error: str | None = None
     min_from_cache: bool = False
+    cw_from_cache: bool = False
 
     @property
     def ok(self) -> bool:
         return (
             self.error is None
             and self.score_min is not None
-            and all(k in self.scores for k in LDOI_KEYS)
+            and all(k in self.scores for k in COMPARE_KEYS)
         )
 
 
@@ -216,7 +259,7 @@ def _bnet_mtime_ns(path: Path) -> int:
 
 
 def _cache_fingerprint() -> dict:
-    """Inputs that must match for a cache entry to be reused."""
+    """Inputs that must match for a min_traps cache entry to be reused."""
     return {
         "data_set": DATA_SET,
         "config_rel": CONFIG_REL,
@@ -227,49 +270,88 @@ def _cache_fingerprint() -> dict:
     }
 
 
-def load_min_traps_cache(path: Path) -> dict:
-    """Load cache JSON; returns empty shell if missing/incompatible."""
-    empty = {"fingerprint": _cache_fingerprint(), "models": {}}
+def _cw_cache_fingerprint() -> dict:
+    """Inputs that must match for a cubewalkers cache entry to be reused."""
+    return {
+        **_cache_fingerprint(),
+        "n_unique_fixes": len(UNIQUE_FIXES),
+        "cw_update_scheme": "asynchronous_set",
+        "cw_n_walkers": CW_N_WALKERS,
+        "cw_n_time_steps": CW_N_TIME_STEPS,
+        "cw_t_window": CW_T_WINDOW,
+        "cw_set_update_prob": CW_SET_UPDATE_PROB,
+    }
+
+
+def _load_score_cache(
+    path: Path, *, fingerprint: dict, label: str
+) -> dict:
+    """Load a score cache JSON; returns empty shell if missing/incompatible."""
+    empty = {"fingerprint": fingerprint, "models": {}}
     if not path.is_file():
         return empty
     try:
         with path.open("r", encoding="utf-8") as fh:
             raw = json.load(fh)
     except (OSError, json.JSONDecodeError) as exc:
-        print(f"min_traps cache unreadable ({exc}); starting fresh")
+        print(f"{label} cache unreadable ({exc}); starting fresh")
         return empty
     if not isinstance(raw, dict) or "models" not in raw:
-        print("min_traps cache malformed; starting fresh")
+        print(f"{label} cache malformed; starting fresh")
         return empty
     fp = raw.get("fingerprint")
-    expected = _cache_fingerprint()
-    if fp != expected:
-        print("min_traps cache fingerprint mismatch; starting fresh")
+    if fp != fingerprint:
+        print(f"{label} cache fingerprint mismatch; starting fresh")
         print(f"  cached:   {fp}")
-        print(f"  expected: {expected}")
+        print(f"  expected: {fingerprint}")
         return empty
     models = raw.get("models") or {}
     if not isinstance(models, dict):
-        print("min_traps cache models malformed; starting fresh")
+        print(f"{label} cache models malformed; starting fresh")
         return empty
-    return {"fingerprint": expected, "models": dict(models)}
+    return {"fingerprint": fingerprint, "models": dict(models)}
 
 
-def save_min_traps_cache(path: Path, cache: dict) -> None:
-    cache = {
-        "fingerprint": _cache_fingerprint(),
+def load_min_traps_cache(path: Path) -> dict:
+    return _load_score_cache(
+        path, fingerprint=_cache_fingerprint(), label="min_traps"
+    )
+
+
+def load_cw_cache(path: Path) -> dict:
+    return _load_score_cache(
+        path, fingerprint=_cw_cache_fingerprint(), label="cw"
+    )
+
+
+def _save_score_cache(path: Path, cache: dict, *, fingerprint: dict) -> None:
+    payload = {
+        "fingerprint": fingerprint,
         "updated_utc": datetime.now(timezone.utc).isoformat(),
         "models": cache.get("models", {}),
     }
     tmp = path.with_suffix(path.suffix + ".tmp")
     with tmp.open("w", encoding="utf-8") as fh:
-        json.dump(cache, fh, indent=2, sort_keys=True)
+        json.dump(payload, fh, indent=2, sort_keys=True)
         fh.write("\n")
     tmp.replace(path)
 
 
-def lookup_min_traps_cache(
-    cache: dict, rel: str, bnet: Path
+def save_min_traps_cache(path: Path, cache: dict) -> None:
+    _save_score_cache(path, cache, fingerprint=_cache_fingerprint())
+
+
+def save_cw_cache(path: Path, cache: dict) -> None:
+    _save_score_cache(path, cache, fingerprint=_cw_cache_fingerprint())
+
+
+def _lookup_score_cache(
+    cache: dict,
+    rel: str,
+    bnet: Path,
+    *,
+    score_key: str,
+    time_key: str,
 ) -> dict | None:
     """Return cached entry if present and bnet mtime matches."""
     entry = cache["models"].get(rel)
@@ -281,11 +363,29 @@ def lookup_min_traps_cache(
         return None
     if entry.get("bnet_mtime_ns") != mtime:
         return None
-    if entry.get("error") is None and "score_min" in entry and "t_min" in entry:
+    if (
+        entry.get("error") is None
+        and score_key in entry
+        and time_key in entry
+    ):
         return entry
     if entry.get("error"):
         return entry
     return None
+
+
+def lookup_min_traps_cache(
+    cache: dict, rel: str, bnet: Path
+) -> dict | None:
+    return _lookup_score_cache(
+        cache, rel, bnet, score_key="score_min", time_key="t_min"
+    )
+
+
+def lookup_cw_cache(cache: dict, rel: str, bnet: Path) -> dict | None:
+    return _lookup_score_cache(
+        cache, rel, bnet, score_key="score_cw", time_key="t_cw"
+    )
 
 
 def average_ranks(values: np.ndarray) -> np.ndarray:
@@ -357,6 +457,53 @@ def _score_with_method(primes, method_kwargs: dict) -> tuple[float, float, float
     return max_s, score, perf_counter() - t0
 
 
+# Lazy cubewalkers init (only when a cache miss needs GPU).
+_cw_mask = None
+_next_cw_model_name = make_model_namer()
+
+
+def _ensure_cubewalkers() -> None:
+    """Import cubewalkers / CUDA once; raise SystemExit if unavailable."""
+    global _cw_mask
+    if _cw_mask is not None:
+        return
+    cw, _cp = require_cubewalkers()
+    _cw_mask = cw.update_schemes.asynchronous_set
+    print(f"cubewalkers ready: {getattr(cw, '__file__', cw)}")
+    print(
+        f"  scheme=asynchronous_set  W={CW_N_WALKERS}  "
+        f"T={CW_N_TIME_STEPS}  T_window={CW_T_WINDOW}"
+    )
+
+
+def _score_with_cubewalkers(bnet: Path) -> tuple[float, float, float]:
+    """Simulate mean NAV per unique fix with CW; return (max_score, score, wall_s)."""
+    _ensure_cubewalkers()
+    rules = bnet_rules_for_cubewalkers(bnet)
+    t0 = perf_counter()
+    preds: dict = {}
+    for fixes in UNIQUE_FIXES:
+        nav, _timings = simulate_mean_nav(
+            rules,
+            clamps=fixes,
+            n_time_steps=CW_N_TIME_STEPS,
+            t_window=CW_T_WINDOW,
+            n_walkers=CW_N_WALKERS,
+            maskfunction=_cw_mask,
+            set_update_prob=CW_SET_UPDATE_PROB,
+            model_name=_next_cw_model_name("aba_cw"),
+        )
+        preds[fixes] = nav
+    items = get_NAV_scores(
+        experiments,
+        to_nav_predictions(preds),
+        default_sources=default_sources,
+        hierarchy=HIERARCHY,
+    )
+    max_s, score = get_model_score(items)
+    return max_s, score, perf_counter() - t0
+
+
 @dataclass
 class VariantMetrics:
     key: str
@@ -376,8 +523,9 @@ class VariantMetrics:
 # %% [markdown]
 # ## Score all models
 #
-# `min_traps` results (score + wall time) are read from / written to
-# `min_traps_cache.json` when caching is enabled. LDOI variants always run fresh.
+# `min_traps` and cubewalkers results (score + wall time) are read from /
+# written to JSON caches when enabled. LDOI variants always run fresh.
+# Cubewalkers runs only after min_traps + all LDOI variants succeed.
 
 # %%
 min_traps_cache = (
@@ -385,9 +533,17 @@ min_traps_cache = (
     if USE_MIN_TRAPS_CACHE
     else {"fingerprint": _cache_fingerprint(), "models": {}}
 )
+cw_cache = (
+    load_cw_cache(CW_CACHE_PATH)
+    if USE_CW_CACHE
+    else {"fingerprint": _cw_cache_fingerprint(), "models": {}}
+)
 cache_hits = 0
 cache_misses = 0
 cache_dirty = False
+cw_cache_hits = 0
+cw_cache_misses = 0
+cw_cache_dirty = False
 
 rows: list[ModelScoreRow] = []
 
@@ -480,10 +636,77 @@ for idx, bnet in enumerate(bnet_paths, start=1):
         rows.append(row)
         continue
 
+    # Cubewalkers only after min_traps + all LDOI variants succeed.
+    cw_cached = None
+    if USE_CW_CACHE and not FORCE_RECOMPUTE_CW:
+        cw_cached = lookup_cw_cache(cw_cache, rel, bnet)
+
+    if cw_cached is not None:
+        cw_cache_hits += 1
+        row.cw_from_cache = True
+        if cw_cached.get("error"):
+            row.error = str(cw_cached["error"])
+            print(f"  FAIL  {row.error}  [cw cache]")
+            rows.append(row)
+            continue
+        row.scores[CW_KEY] = float(cw_cached["score_cw"])
+        row.times[CW_KEY] = float(cw_cached["t_cw"])
+        if row.max_score is not None and "max_score" in cw_cached:
+            if row.max_score != float(cw_cached["max_score"]):
+                print(
+                    f"  WARN  max_score mismatch "
+                    f"min_traps={row.max_score} "
+                    f"{CW_LABEL}={cw_cached['max_score']}"
+                )
+        print(
+            f"  CACHE {CW_LABEL}={row.scores[CW_KEY]:.2f}/"
+            f"{cw_cached.get('max_score', row.max_score)} "
+            f"({row.times[CW_KEY]:.2f}s cached)"
+        )
+    else:
+        cw_cache_misses += 1
+        try:
+            max_cw, score_cw, t_cw = _score_with_cubewalkers(bnet)
+            row.scores[CW_KEY] = float(score_cw)
+            row.times[CW_KEY] = float(t_cw)
+            if row.max_score is not None and row.max_score != max_cw:
+                print(
+                    f"  WARN  max_score mismatch "
+                    f"min_traps={row.max_score} {CW_LABEL}={max_cw}"
+                )
+            if USE_CW_CACHE:
+                cw_cache["models"][rel] = {
+                    "score_cw": float(score_cw),
+                    "max_score": float(max_cw),
+                    "t_cw": float(t_cw),
+                    "bnet_mtime_ns": _bnet_mtime_ns(bnet),
+                    "error": None,
+                }
+                # Persist after each model — CW runs are long.
+                save_cw_cache(CW_CACHE_PATH, cw_cache)
+                cw_cache_dirty = False
+            print(f"  OK    {CW_LABEL}={score_cw:.2f}/{max_cw} ({t_cw:.2f}s)")
+        except Exception as exc:
+            row.error = f"{CW_KEY}: {type(exc).__name__}: {exc}"
+            print(f"  FAIL  {row.error}")
+            if USE_CW_CACHE:
+                try:
+                    mtime = _bnet_mtime_ns(bnet)
+                except OSError:
+                    mtime = None
+                cw_cache["models"][rel] = {
+                    "error": row.error,
+                    "bnet_mtime_ns": mtime,
+                }
+                save_cw_cache(CW_CACHE_PATH, cw_cache)
+                cw_cache_dirty = False
+            rows.append(row)
+            continue
+
     parts = [
-        f"{LDOI_LABEL[k]}={row.scores[k]:.2f} "
+        f"{COMPARE_LABEL[k]}={row.scores[k]:.2f} "
         f"(Δ{row.scores[k] - row.score_min:+.2f})"
-        for k in LDOI_KEYS
+        for k in COMPARE_KEYS
     ]
     print(f"  DONE  " + "  ".join(parts))
     rows.append(row)
@@ -494,8 +717,18 @@ if USE_MIN_TRAPS_CACHE and cache_dirty:
 elif USE_MIN_TRAPS_CACHE:
     print(f"min_traps cache unchanged: {MIN_TRAPS_CACHE_PATH}")
 
+if USE_CW_CACHE and cw_cache_dirty:
+    save_cw_cache(CW_CACHE_PATH, cw_cache)
+    print(f"cw cache written: {CW_CACHE_PATH}")
+elif USE_CW_CACHE:
+    print(f"cw cache unchanged: {CW_CACHE_PATH}")
+
 print(
     f"min_traps cache: hits={cache_hits}  misses/recomputes={cache_misses}  "
+    f"(n_models={len(bnet_paths)})"
+)
+print(
+    f"cw cache: hits={cw_cache_hits}  misses/recomputes={cw_cache_misses}  "
     f"(n_models={len(bnet_paths)})"
 )
 print()
@@ -511,7 +744,7 @@ for r in failed:
 print()
 
 # %% [markdown]
-# ## Comparison (min_traps + all LDOI variants succeeded)
+# ## Comparison (min_traps + all LDOI + cubewalkers succeeded)
 
 # %%
 ok_rows = [r for r in rows if r.ok]
@@ -533,20 +766,21 @@ else:
 
     # Wide score table
     hdr = f"{'model':<45} {'min_traps':>10}"
-    for k in LDOI_KEYS:
-        hdr += f" {LDOI_LABEL[k]:>16}"
+    for k in COMPARE_KEYS:
+        hdr += f" {COMPARE_LABEL[k]:>16}"
     print(hdr)
     print("-" * len(hdr))
     for i in order:
         r = ok_rows[i]
         line = f"{r.rel:<45} {scores_min[i]:10.2f}"
-        for k in LDOI_KEYS:
+        for k in COMPARE_KEYS:
             line += f" {r.scores[k]:16.2f}"
         print(line)
     print("-" * len(hdr))
     print()
 
-    for key, label, _ in LDOI_VARIANTS:
+    for key in COMPARE_KEYS:
+        label = COMPARE_LABEL[key]
         scores_v = np.array([r.scores[key] for r in ok_rows], dtype=float)
         ranks_v = average_ranks(scores_v)
         diffs = scores_v - scores_min
@@ -623,7 +857,7 @@ timing_by_method: dict[str, dict[str, float]] = {
         np.array([r.t_min for r in rows if r.t_min is not None], dtype=float)
     ),
 }
-for key in LDOI_KEYS:
+for key in COMPARE_KEYS:
     timing_by_method[key] = _timing_stats(
         np.array(
             [r.times[key] for r in rows if key in r.times],
@@ -675,13 +909,13 @@ print(f"saved: {TIMINGS_CSV}")
 
 per_model_csv = LOG_DIR / "method_timings_per_model.csv"
 if n > 0:
-    fieldnames = ["model", "t_min_traps_s"] + [f"t_{k}_s" for k in LDOI_KEYS]
+    fieldnames = ["model", "t_min_traps_s"] + [f"t_{k}_s" for k in COMPARE_KEYS]
     with per_model_csv.open("w", encoding="utf-8", newline="") as fh:
         writer = csv.DictWriter(fh, fieldnames=fieldnames)
         writer.writeheader()
         for r in ok_rows:
             row_out = {"model": r.rel, "t_min_traps_s": r.t_min}
-            for k in LDOI_KEYS:
+            for k in COMPARE_KEYS:
                 row_out[f"t_{k}_s"] = r.times[k]
             writer.writerow(row_out)
     print(f"saved: {per_model_csv}")
@@ -690,12 +924,12 @@ print()
 # %% [markdown]
 # ## Plots
 #
-# Side-by-side panels per LDOI variant for score/rank/diff; method timings
-# show all methods together.
+# Side-by-side panels per compared method (LDOI + cubewalkers) for
+# score/rank/diff; method timings show all methods together.
 
 # %%
 saved_plots: list[Path] = []
-n_panels = len(LDOI_KEYS)
+n_panels = len(COMPARE_KEYS)
 
 
 def _panel_grid(n_cols: int) -> tuple[plt.Figure, np.ndarray]:
@@ -712,7 +946,7 @@ else:
 
     # --- score scatter (side by side) ---
     fig, axes = _panel_grid(n_panels)
-    for ax, key in zip(axes, LDOI_KEYS):
+    for ax, key in zip(axes, COMPARE_KEYS):
         vm = variant_metrics[key]
         ax.scatter(
             scores_min,
@@ -747,7 +981,7 @@ else:
     # --- rank scatter (side by side) ---
     fig, axes = _panel_grid(n_panels)
     rlim = (0.5, n + 0.5)
-    for ax, key in zip(axes, LDOI_KEYS):
+    for ax, key in zip(axes, COMPARE_KEYS):
         vm = variant_metrics[key]
         ax.scatter(
             ranks_min,
@@ -781,7 +1015,7 @@ else:
     # --- score difference by model (side by side; shared model order) ---
     # Order models by mean absolute diff across variants for readability.
     mean_abs_diff = np.mean(
-        np.vstack([np.abs(variant_metrics[k].diffs) for k in LDOI_KEYS]),
+        np.vstack([np.abs(variant_metrics[k].diffs) for k in COMPARE_KEYS]),
         axis=0,
     )
     order_diff = np.argsort(mean_abs_diff)
@@ -790,7 +1024,7 @@ else:
     if n_panels == 1:
         axes = np.array([axes])
     y = np.arange(n)
-    for ax, key in zip(axes, LDOI_KEYS):
+    for ax, key in zip(axes, COMPARE_KEYS):
         vm = variant_metrics[key]
         ax.barh(
             y,
@@ -864,6 +1098,7 @@ finished_utc = datetime.now(timezone.utc)
 wall_s = (finished_utc - STARTED_UTC).total_seconds()
 
 n_min_cached = sum(1 for r in rows if r.min_from_cache)
+n_cw_cached = sum(1 for r in rows if r.cw_from_cache)
 
 print("Summary")
 print(f"  DATA_SET:          {DATA_SET}")
@@ -874,7 +1109,11 @@ print(
     f"  min_traps cache:   hits={cache_hits}  "
     f"misses={cache_misses}  used_on_rows={n_min_cached}"
 )
-for key in LDOI_KEYS:
+print(
+    f"  cw cache:          hits={cw_cache_hits}  "
+    f"misses={cw_cache_misses}  used_on_rows={n_cw_cached}"
+)
+for key in COMPARE_KEYS:
     if key not in variant_metrics:
         continue
     vm = variant_metrics[key]
@@ -891,6 +1130,8 @@ for key in ALL_METHOD_KEYS:
         note = ""
         if key == "min_traps" and n_min_cached:
             note = f"  ({n_min_cached} from cache)"
+        elif key == CW_KEY and n_cw_cached:
+            note = f"  ({n_cw_cached} from cache)"
         print(
             f"  {label} time: "
             f"total={stats['total_s']:.2f}s  mean={stats['mean_s']:.2f}s"
@@ -910,17 +1151,17 @@ def _fmt(x: float, digits: int = 4) -> str:
 
 
 readme_lines = [
-    f"# ABA-{DATA_SET} scores: `min_traps` vs LDOI family",
+    f"# ABA-{DATA_SET} scores: `min_traps` vs LDOI family vs cubewalkers",
     "",
     "Comparison of NAV total scores on every `.bnet` under `case_study/ABA`,",
     f"using experiments from `{CONFIG_REL}` "
     f"(`{data_path.name}`, `default_sources`).",
     "",
-    "Reference method: `min_traps`. Compared LDOI variants:",
+    "Reference method: `min_traps`. Compared methods:",
     "",
 ]
-for key in LDOI_KEYS:
-    readme_lines.append(f"- `{LDOI_LABEL[key]}`")
+for key in COMPARE_KEYS:
+    readme_lines.append(f"- `{COMPARE_LABEL[key]}`")
 readme_lines.extend(
     [
         "",
@@ -930,6 +1171,10 @@ readme_lines.extend(
         f"- **Wall clock:** {wall_s:.1f}s",
         f"- **Hierarchy:** {HIERARCHY}",
         f"- **Experiments:** {len(experiments)}",
+        f"- **Unique fixes:** {len(UNIQUE_FIXES)}",
+        f"- **Cubewalkers:** `asynchronous_set`, "
+        f"W={CW_N_WALKERS}, T={CW_N_TIME_STEPS}, "
+        f"T_window={CW_T_WINDOW}, set_update_prob={CW_SET_UPDATE_PROB}",
         f"- **Bnets scanned:** {len(rows)}",
         f"- **All methods OK:** {len(ok_rows)}",
         f"- **Failed:** {len(failed)}",
@@ -937,6 +1182,10 @@ readme_lines.extend(
         f"`use={USE_MIN_TRAPS_CACHE}`, "
         f"`force_recompute={FORCE_RECOMPUTE_MIN_TRAPS}`, "
         f"hits={cache_hits}, misses={cache_misses}",
+        f"- **cw cache:** "
+        f"`use={USE_CW_CACHE}`, "
+        f"`force_recompute={FORCE_RECOMPUTE_CW}`, "
+        f"hits={cw_cache_hits}, misses={cw_cache_misses}",
         "",
         "## Score agreement vs min_traps",
         "",
@@ -950,7 +1199,7 @@ if ok_rows:
     readme_lines.append(
         "| --- | ---: | ---: | ---: | ---: | ---: |"
     )
-    for key in LDOI_KEYS:
+    for key in COMPARE_KEYS:
         vm = variant_metrics[key]
         readme_lines.append(
             f"| `{vm.label}` | `{_fmt(vm.pearson)}` | `{_fmt(vm.spearman)}` | "
@@ -958,7 +1207,7 @@ if ok_rows:
             f"`{_fmt(vm.mean_abs_rank_diff, 3)}` | "
             f"`{_fmt(float(vm.diffs.mean()), 3)}` |"
         )
-    for key in LDOI_KEYS:
+    for key in COMPARE_KEYS:
         vm = variant_metrics[key]
         if not vm.top_k_overlaps:
             continue
@@ -973,8 +1222,9 @@ readme_lines.extend(["", "## Method timings", ""])
 readme_lines.append(
     "Wall time for prediction + NAV scoring + model score "
     "(models where that method completed). "
-    "`min_traps` times reuse the originally measured values when loaded "
-    "from cache."
+    "`min_traps` and `cubewalkers` times reuse the originally measured "
+    "values when loaded from cache. Cubewalkers is skipped when earlier "
+    "methods fail."
 )
 readme_lines.append("")
 readme_lines.append(
@@ -1009,6 +1259,8 @@ readme_lines.extend(
         f"- [`{LOG_PATH.name}`]({LOG_PATH.name}) — full run log",
         f"- [`{MIN_TRAPS_CACHE_PATH.name}`]({MIN_TRAPS_CACHE_PATH.name}) — "
         "`min_traps` score + timing cache",
+        f"- [`{CW_CACHE_PATH.name}`]({CW_CACHE_PATH.name}) — "
+        "`cubewalkers` score + timing cache",
         f"- [`{TIMINGS_CSV.name}`]({TIMINGS_CSV.name}) — timing summary CSV",
     ]
 )
