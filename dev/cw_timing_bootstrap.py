@@ -106,7 +106,7 @@ BNET = (
 #   asynchronous      — one random node per walker
 #   asynchronous_set  — each node updates with prob SET_UPDATE_PROB
 #   synchronous       — all nodes every step
-UPDATE_SCHEME = "asynchronous"  # or "asynchronous_set" | "synchronous"
+UPDATE_SCHEME = "asynchronous_set"  # or "asynchronous_set" | "synchronous"
 SET_UPDATE_PROB = 0.5  # used only when UPDATE_SCHEME == "asynchronous_set"
 
 _ALLOWED_SCHEMES = ("asynchronous", "asynchronous_set", "synchronous")
@@ -131,17 +131,17 @@ saved_plots: list[Path] = []
 # Practical baseline / sweep base (paper-scale is optional — see RUN_PAPER_BASELINE).
 # Full traj is (T_window, N, W) bools; paper defaults can be ~1–2 GB on device.
 N_WALKERS = 2048
-N_TIME_STEPS = 8000
-T_WINDOW = 2000
+N_TIME_STEPS = 800
+T_WINDOW = 200
 
 # Sweep base (held fixed while varying one axis).
 SWEEP_WALKERS = 2048
-SWEEP_T = 8000
-SWEEP_WINDOW = 2000
+SWEEP_T = 800
+SWEEP_WINDOW = 200
 
 WALKERS_GRID = [64, 128, 256, 512, 1024, 2048, 4096]
-T_GRID = [2000, 4000, 6000, 8000, 10000]
-WINDOW_GRID = [50, 100, 250, 500, 1000, 2000, 4000]
+T_GRID = [200, 400, 600, 800, 1000]
+WINDOW_GRID = [5, 10, 25, 50, 100, 200, 400]
 
 THREADS_PER_BLOCK: tuple[int, int] = (16, 16)
 SEED = 0

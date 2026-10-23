@@ -1,0 +1,92 @@
+UPDATE_SCHEME=asynchronous_set
+SET_UPDATE_PROB=0.5
+out dir:  /home/troonmel/Boolmore/boolmore/dev/logs/cw_timing_bootstrap/asynchronous_set
+log file: /home/troonmel/Boolmore/boolmore/dev/logs/cw_timing_bootstrap/asynchronous_set/cw_timing_bootstrap.log
+started (UTC): 2026-10-23T19:18:14.600692+00:00
+SMOKE=False  RUN_PAPER_BASELINE=False
+
+CUDA devices: 1
+cubewalkers: /home/troonmel/Boolmore/.venv314/lib/python3.14/site-packages/cubewalkers/__init__.py
+bnet: /home/troonmel/Boolmore/boolmore/case_study/breast_cancer/20261016_173102/BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.bnet
+nodes: 191
+baseline config: walkers=2048  T=800  T_WINDOW=200  N_BOOT=1000
+paper formula: T=16505  T_WINDOW=4126  walkers=2000
+sweep base: walkers=2048  T=800  T_WINDOW=200
+Warm-up (discarded)...
+  warm-up done: setup=0.164s  simulate=0.300s  reduce=0.002s  total=0.466s  nodes=191
+Baseline simulation...
+  setup=0.146s  simulate=0.293s  reduce=0.010s  total=0.450s
+  bootstrap: t_boot=1.543s  N_BOOT=1000
+  NAV: mean of means=0.3751  median SE=0.00000  max SE=0.01151
+     node  mean  se
+      AKT   1.0 0.0
+ CyclinB1   1.0 0.0
+    CDK46   1.0 0.0
+ CYCLINDc   1.0 0.0
+     EIF4   1.0 0.0
+CyclinD_2   1.0 0.0
+  CyclinD   1.0 0.0
+      ERK   1.0 0.0
+    ERK_2   1.0 0.0
+mTORC2_pm   1.0 0.0
+Wrote /home/troonmel/Boolmore/boolmore/dev/logs/cw_timing_bootstrap/asynchronous_set/cw_timing_bootstrap_baseline_nav.png
+Sweep: n_walkers...
+  [W64] W=64 T=800 win=200  setup=0.147s  simulate=0.138s  reduce=0.001s  total=0.285s  medSE=0.00000 maxSE=0.06505
+  [W128] W=128 T=800 win=200  setup=0.202s  simulate=0.119s  reduce=0.001s  total=0.322s  medSE=0.00000 maxSE=0.04583  vs W64: med|Δ|=0.00000 max|Δ|=0.15625 medSE(Δ)=0.00000
+  [W256] W=256 T=800 win=200  setup=0.133s  simulate=0.129s  reduce=0.001s  total=0.263s  medSE=0.00000 maxSE=0.03217  vs W128: med|Δ|=0.00000 max|Δ|=0.09375 medSE(Δ)=0.00000
+  [W512] W=512 T=800 win=200  setup=0.146s  simulate=0.133s  reduce=0.002s  total=0.282s  medSE=0.00000 maxSE=0.02325  vs W256: med|Δ|=0.00000 max|Δ|=0.09570 medSE(Δ)=0.00000
+  [W1024] W=1024 T=800 win=200  setup=0.131s  simulate=0.127s  reduce=0.005s  total=0.263s  medSE=0.00000 maxSE=0.01618  vs W512: med|Δ|=0.00000 max|Δ|=0.05762 medSE(Δ)=0.00000
+  [W2048] W=2048 T=800 win=200  setup=0.131s  simulate=0.308s  reduce=0.008s  total=0.446s  medSE=0.00000 maxSE=0.01129  vs W1024: med|Δ|=0.00000 max|Δ|=0.04004 medSE(Δ)=0.00000
+  [W4096] W=4096 T=800 win=200  setup=0.143s  simulate=0.490s  reduce=0.013s  total=0.646s  medSE=0.00000 maxSE=0.00822  vs W2048: med|Δ|=0.00000 max|Δ|=0.03125 medSE(Δ)=0.00000
+Sweep: N_TIME_STEPS...
+  [T200] W=2048 T=200 win=200  setup=0.136s  simulate=0.339s  reduce=0.008s  total=0.483s  medSE=0.00046 maxSE=0.01139
+  [T400] W=2048 T=400 win=200  setup=0.131s  simulate=0.136s  reduce=0.008s  total=0.275s  medSE=0.00000 maxSE=0.01136  vs T200: med|Δ|=0.00940 max|Δ|=0.06559 medSE(Δ)=0.00046
+  [T600] W=2048 T=600 win=200  setup=0.132s  simulate=0.289s  reduce=0.009s  total=0.430s  medSE=0.00000 maxSE=0.01156  vs T400: med|Δ|=0.00000 max|Δ|=0.02441 medSE(Δ)=0.00000
+  [T800] W=2048 T=800 win=200  setup=0.133s  simulate=0.246s  reduce=0.008s  total=0.386s  medSE=0.00000 maxSE=0.01162  vs T600: med|Δ|=0.00000 max|Δ|=0.02441 medSE(Δ)=0.00000
+  [T1000] W=2048 T=1000 win=200  setup=0.131s  simulate=0.304s  reduce=0.008s  total=0.443s  medSE=0.00000 maxSE=0.01127  vs T800: med|Δ|=0.00000 max|Δ|=0.02930 medSE(Δ)=0.00000
+Sweep: T_WINDOW...
+  [win5] W=2048 T=800 win=5  setup=0.131s  simulate=0.240s  reduce=0.006s  total=0.377s  medSE=0.00000 maxSE=0.01142
+  [win10] W=2048 T=800 win=10  setup=0.146s  simulate=0.247s  reduce=0.005s  total=0.398s  medSE=0.00000 maxSE=0.01127  vs win5: med|Δ|=0.00000 max|Δ|=0.03076 medSE(Δ)=0.00000
+  [win25] W=2048 T=800 win=25  setup=0.148s  simulate=0.244s  reduce=0.005s  total=0.396s  medSE=0.00000 maxSE=0.01146  vs win10: med|Δ|=0.00000 max|Δ|=0.02344 medSE(Δ)=0.00000
+  [win50] W=2048 T=800 win=50  setup=0.130s  simulate=0.246s  reduce=0.007s  total=0.382s  medSE=0.00000 maxSE=0.01178  vs win25: med|Δ|=0.00000 max|Δ|=0.03027 medSE(Δ)=0.00000
+  [win100] W=2048 T=800 win=100  setup=0.131s  simulate=0.246s  reduce=0.006s  total=0.382s  medSE=0.00000 maxSE=0.01167  vs win50: med|Δ|=0.00000 max|Δ|=0.03076 medSE(Δ)=0.00000
+  [win200] W=2048 T=800 win=200  setup=0.134s  simulate=0.255s  reduce=0.007s  total=0.396s  medSE=0.00000 maxSE=0.01146  vs win100: med|Δ|=0.00000 max|Δ|=0.03516 medSE(Δ)=0.00000
+  [win400] W=2048 T=800 win=400  setup=0.131s  simulate=0.253s  reduce=0.011s  total=0.394s  medSE=0.00000 maxSE=0.01142  vs win200: med|Δ|=0.00000 max|Δ|=0.03223 medSE(Δ)=0.00000
+
+Sweep table:
+ label  n_walkers  n_time_steps  t_window  t_setup  t_simulate  t_reduce  t_total  median_se   max_se vs_prev  vs_prev_median_abs  vs_prev_max_abs  vs_prev_median_se
+   W64         64           800       200 0.146733    0.137742  0.000959 0.285434   0.000000 0.065053     NaN                 NaN              NaN                NaN
+  W128        128           800       200 0.201829    0.118712  0.000965 0.321506   0.000000 0.045827     W64            0.000000         0.156250           0.000000
+  W256        256           800       200 0.133027    0.128852  0.001198 0.263077   0.000000 0.032169    W128            0.000000         0.093750           0.000000
+  W512        512           800       200 0.146379    0.133116  0.002128 0.281624   0.000000 0.023246    W256            0.000000         0.095703           0.000000
+ W1024       1024           800       200 0.131500    0.126769  0.004611 0.262879   0.000000 0.016181    W512            0.000000         0.057617           0.000000
+ W2048       2048           800       200 0.130691    0.307778  0.007726 0.446195   0.000000 0.011286   W1024            0.000000         0.040039           0.000000
+ W4096       4096           800       200 0.143210    0.490207  0.012887 0.646305   0.000000 0.008216   W2048            0.000000         0.031250           0.000000
+  T200       2048           200       200 0.136229    0.338766  0.007515 0.482511   0.000456 0.011395     NaN                 NaN              NaN                NaN
+  T400       2048           400       200 0.131341    0.136060  0.008048 0.275450   0.000000 0.011364    T200            0.009402         0.065588           0.000456
+  T600       2048           600       200 0.131656    0.289243  0.008904 0.429804   0.000000 0.011565    T400            0.000000         0.024414           0.000000
+  T800       2048           800       200 0.132757    0.245519  0.008150 0.386426   0.000000 0.011619    T600            0.000000         0.024414           0.000000
+ T1000       2048          1000       200 0.131162    0.304395  0.007754 0.443311   0.000000 0.011275    T800            0.000000         0.029297           0.000000
+  win5       2048           800         5 0.131375    0.240070  0.005639 0.377084   0.000000 0.011417     NaN                 NaN              NaN                NaN
+ win10       2048           800        10 0.145756    0.246743  0.005059 0.397558   0.000000 0.011271    win5            0.000000         0.030762           0.000000
+ win25       2048           800        25 0.147925    0.243728  0.004580 0.396232   0.000000 0.011463   win10            0.000000         0.023438           0.000000
+ win50       2048           800        50 0.130174    0.245601  0.006595 0.382370   0.000000 0.011777   win25            0.000000         0.030273           0.000000
+win100       2048           800       100 0.130765    0.245538  0.005761 0.382064   0.000000 0.011668   win50            0.000000         0.030762           0.000000
+win200       2048           800       200 0.134057    0.254937  0.007288 0.396281   0.000000 0.011459  win100            0.000000         0.035156           0.000000
+win400       2048           800       400 0.130574    0.253031  0.010601 0.394206   0.000000 0.011422  win200            0.000000         0.032227           0.000000
+Wrote /home/troonmel/Boolmore/boolmore/dev/logs/cw_timing_bootstrap/asynchronous_set/cw_timing_bootstrap_sweep_walkers.png
+Wrote /home/troonmel/Boolmore/boolmore/dev/logs/cw_timing_bootstrap/asynchronous_set/cw_timing_bootstrap_sweep_T.png
+Wrote /home/troonmel/Boolmore/boolmore/dev/logs/cw_timing_bootstrap/asynchronous_set/cw_timing_bootstrap_sweep_window.png
+Wrote /home/troonmel/Boolmore/boolmore/dev/logs/cw_timing_bootstrap/asynchronous_set/cw_timing_bootstrap_sweep_walkers_nav.png
+Wrote /home/troonmel/Boolmore/boolmore/dev/logs/cw_timing_bootstrap/asynchronous_set/cw_timing_bootstrap_sweep_T_nav.png
+Wrote /home/troonmel/Boolmore/boolmore/dev/logs/cw_timing_bootstrap/asynchronous_set/cw_timing_bootstrap_sweep_window_nav.png
+=== Takeaway ===
+UPDATE_SCHEME=asynchronous_set
+Baseline: setup=0.146s  simulate=0.293s  reduce=0.010s  total=0.450s  medSE=0.00000 maxSE=0.01151
+n_walkers: simulate scales ~3.6x over grid; median SE shrinks ~0.0x; mean setup share of total=41%; last step vs W2048: med|Δ|=0.00000 max|Δ|=0.03125
+n_time_steps: simulate scales ~0.9x over grid; median SE shrinks ~455637671.7x; mean setup share of total=33%; last step vs T800: med|Δ|=0.00000 max|Δ|=0.02930
+t_window: simulate scales ~1.1x over grid; median SE shrinks ~0.0x; mean setup share of total=35%; last step vs win200: med|Δ|=0.00000 max|Δ|=0.03223
+Note: first launch after Model build may include NVRTC compile in t_simulate; warm-up reduces but does not eliminate per-Model name rebuild cost.
+Wall clock: 37.8s
+Outputs under: /home/troonmel/Boolmore/boolmore/dev/logs/cw_timing_bootstrap/asynchronous_set
+saved: /home/troonmel/Boolmore/boolmore/dev/logs/cw_timing_bootstrap/asynchronous_set/README.md
