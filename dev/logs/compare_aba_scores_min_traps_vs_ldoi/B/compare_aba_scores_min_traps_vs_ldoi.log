@@ -1,12 +1,16 @@
-log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi_20261013T164223Z.log
-started (UTC): 2026-10-13T16:42:23.218723+00:00
+DATA_SET: B
+log dir:  /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/compare_aba_scores_min_traps_vs_ldoi.log
+started (UTC): 2026-10-23T18:51:12.159770+00:00
 
 config: case_study/ABA/data/ABA_B.json
-data:   case_study/ABA/data/data_B.tsv
+data:   case_study/ABA/data/data_B.csv
 default_sources: {'ABA': 0}
 hierarchy: True
 experiments: 505
 bnet files: 29
+min_traps cache: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/min_traps_cache.json
+  use_cache=True  force_recompute=False
   baseline_models/ABA_2006_Li.bnet
   baseline_models/ABA_2017_Albert.bnet
   baseline_models/ABA_2017_VA-KEV_del.bnet
@@ -38,63 +42,69 @@ bnet files: 29
   generated_models/repetitions/rep_20230925_7821_gen113.bnet
 
 [1/29] baseline_models/ABA_2006_Li.bnet
-  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model
+  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model  [min_traps cache]
 [2/29] baseline_models/ABA_2017_Albert.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [3/29] baseline_models/ABA_2017_VA-KEV_del.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [4/29] baseline_models/ABA_2018_Waidyarathne.bnet
-  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model
+  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model  [min_traps cache]
 [5/29] baseline_models/ABA_2019_Maheshwari.bnet
-  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model
+  FAIL  min_traps: ValueError: 8-nitro-cGMP is not in the model  [min_traps cache]
 [6/29] baseline_models/ABA_GA_base_A.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [7/29] baseline_models/ABA_GA_base_B.bnet
-  OK    min_traps=184.20/505.0 (2.99s)  ldoi=152.61/505.0 (0.19s)  diff=-31.59
+  CACHE min_traps=184.20/505.0 (2.74s cached)
+  OK    min_traps=184.20/505.0 (cached)  ldoi=152.61/505.0 (0.21s)  diff=-31.59
 [8/29] generated_models/GA0_A.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [9/29] generated_models/GA0_B.bnet
-  OK    min_traps=384.62/505.0 (2.47s)  ldoi=315.91/505.0 (0.15s)  diff=-68.72
+  CACHE min_traps=384.62/505.0 (2.51s cached)
+  OK    min_traps=384.62/505.0 (cached)  ldoi=315.91/505.0 (0.12s)  diff=-68.72
 [10/29] generated_models/GA1_A.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [11/29] generated_models/GA1_B.bnet
-  OK    min_traps=407.92/505.0 (2.69s)  ldoi=407.75/505.0 (0.16s)  diff=-0.17
+  CACHE min_traps=407.92/505.0 (2.65s cached)
+  OK    min_traps=407.92/505.0 (cached)  ldoi=407.75/505.0 (0.18s)  diff=-0.17
 [12/29] generated_models/GA2_A.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [13/29] generated_models/GA2_B.bnet
-  OK    min_traps=412.75/505.0 (2.65s)  ldoi=412.75/505.0 (0.17s)  diff=+0.00
+  CACHE min_traps=412.75/505.0 (2.58s cached)
+  OK    min_traps=412.75/505.0 (cached)  ldoi=412.75/505.0 (0.14s)  diff=+0.00
 [14/29] generated_models/GA_VA-KEV_del.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [15/29] generated_models/repetitions/20241007143135_9306_gen124.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [16/29] generated_models/repetitions/20241009072111_9984_gen68.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [17/29] generated_models/repetitions/20241009211257_9880_gen154.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [18/29] generated_models/repetitions/20241010082016_9453_gen140.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [19/29] generated_models/repetitions/20241011222037_9848_gen50.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [20/29] generated_models/repetitions/20241014130450_9902_gen56.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [21/29] generated_models/repetitions/rep_20230917_7545_gen112.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [22/29] generated_models/repetitions/rep_20230918_7560_gen105.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [23/29] generated_models/repetitions/rep_20230919_8030_gen113.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [24/29] generated_models/repetitions/rep_20230920_7788_gen121.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [25/29] generated_models/repetitions/rep_20230921_7687_gen104.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [26/29] generated_models/repetitions/rep_20230922_8036_gen125.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [27/29] generated_models/repetitions/rep_20230923_8025_gen141.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [28/29] generated_models/repetitions/rep_20230924_8037_gen129.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
 [29/29] generated_models/repetitions/rep_20230925_7821_gen113.bnet
-  FAIL  min_traps: ValueError: Ca2osc is not in the model
+  FAIL  min_traps: ValueError: Ca2osc is not in the model  [min_traps cache]
+min_traps cache unchanged: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/min_traps_cache.json
+min_traps cache: hits=29  misses/recomputes=0  (n_models=29)
 
 failed: 25 / 29
   baseline_models/ABA_2006_Li.bnet: min_traps: ValueError: 8-nitro-cGMP is not in the model
@@ -125,13 +135,13 @@ failed: 25 / 29
 
 succeeded (both methods): 4 / 29
 
-model                                                    min_traps       ldoi     diff  rank_m  rank_l
-----------------------------------------------------------------------------------------------------
-generated_models/GA2_B.bnet                                 412.75     412.75    +0.00     1.0     1.0
-generated_models/GA1_B.bnet                                 407.92     407.75    -0.17     2.0     2.0
-generated_models/GA0_B.bnet                                 384.62     315.91   -68.72     3.0     3.0
-baseline_models/ABA_GA_base_B.bnet                          184.20     152.61   -31.59     4.0     4.0
-----------------------------------------------------------------------------------------------------
+model                                                    min_traps       ldoi     diff  rank_m  rank_l    t_min   t_ldoi
+----------------------------------------------------------------------------------------------------------------------
+generated_models/GA2_B.bnet                                 412.75     412.75    +0.00     1.0     1.0     2.58     0.14
+generated_models/GA1_B.bnet                                 407.92     407.75    -0.17     2.0     2.0     2.65     0.18
+generated_models/GA0_B.bnet                                 384.62     315.91   -68.72     3.0     3.0     2.51     0.12
+baseline_models/ABA_GA_base_B.bnet                          184.20     152.61   -31.59     4.0     4.0     2.74     0.21
+----------------------------------------------------------------------------------------------------------------------
 
 Correlation / rank agreement
   Pearson r:              0.9654
@@ -148,20 +158,35 @@ Scatter pairs (min_traps, ldoi)
   (384.62, 315.91)  generated_models/GA0_B.bnet
   (184.20, 152.61)  baseline_models/ABA_GA_base_B.bnet
 
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_scatter_20261013T164223Z.png
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_ranks_scatter_20261013T164223Z.png
-saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_score_diff_20261013T164223Z.png
+Method timings (prediction + NAV score + model score)
+  min_traps: n=4  total=10.48s  mean=2.62s  median=2.61s  min=2.51s  max=2.74s
+  ldoi: n=4  total=0.64s  mean=0.16s  median=0.16s  min=0.12s  max=0.21s
+
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/method_timings.csv
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/method_timings_per_model.csv
+
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/compare_aba_scores_scatter.png
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/compare_aba_ranks_scatter.png
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/compare_aba_score_diff.png
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/compare_aba_method_timings.png
 
 Summary
+  DATA_SET:          B
   bnets scanned:     29
   both methods OK:   4
   failed:            25
+  min_traps cache:   hits=29  misses=0  used_on_rows=29
   Pearson r:         0.9654
   Spearman rho:      1.0000
   pairwise order:    1.0000
   mean |Δrank|:      0.000
-  Log written to:    /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi_20261013T164223Z.log
-  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_scatter_20261013T164223Z.png
-  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_ranks_scatter_20261013T164223Z.png
-  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_score_diff_20261013T164223Z.png
-finished (UTC): 2026-10-13T16:43:14.515860+00:00
+  min_traps time:     total=10.48s  mean=2.62s  (29 from cache)
+  ldoi time:     total=0.64s  mean=0.16s
+  wall clock:        37.5s
+  Log written to:    /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/compare_aba_scores_min_traps_vs_ldoi.log
+  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/compare_aba_scores_scatter.png
+  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/compare_aba_ranks_scatter.png
+  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/compare_aba_score_diff.png
+  Plot written to:   /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/compare_aba_method_timings.png
+finished (UTC): 2026-10-23T18:51:49.689100+00:00
+saved: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/compare_aba_scores_min_traps_vs_ldoi/B/README.md

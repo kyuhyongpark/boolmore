@@ -1,0 +1,197 @@
+{
+  "fingerprint": {
+    "config_rel": "case_study/ABA/data/ABA_A.json",
+    "data": "case_study/ABA/data/data_A.csv",
+    "data_set": "A",
+    "default_sources": {
+      "ABA": 0
+    },
+    "hierarchy": true,
+    "n_experiments": 505
+  },
+  "models": {
+    "baseline_models/ABA_2006_Li.bnet": {
+      "bnet_mtime_ns": 1780279278586546583,
+      "error": "min_traps: ValueError: 8-nitro-cGMP is not in the model"
+    },
+    "baseline_models/ABA_2017_Albert.bnet": {
+      "bnet_mtime_ns": 1780279278586546583,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 310.4791899974079,
+      "t_min": 3.403714508000121
+    },
+    "baseline_models/ABA_2017_VA-KEV_del.bnet": {
+      "bnet_mtime_ns": 1780279278586546583,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 291.7263791171305,
+      "t_min": 3.082528010000715
+    },
+    "baseline_models/ABA_2018_Waidyarathne.bnet": {
+      "bnet_mtime_ns": 1780279278586546583,
+      "error": "min_traps: ValueError: 8-nitro-cGMP is not in the model"
+    },
+    "baseline_models/ABA_2019_Maheshwari.bnet": {
+      "bnet_mtime_ns": 1780279278586546583,
+      "error": "min_traps: ValueError: 8-nitro-cGMP is not in the model"
+    },
+    "baseline_models/ABA_GA_base_A.bnet": {
+      "bnet_mtime_ns": 1780279278586546583,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 311.71313474579466,
+      "t_min": 3.116821799000718
+    },
+    "baseline_models/ABA_GA_base_B.bnet": {
+      "bnet_mtime_ns": 1780279278586546583,
+      "error": "min_traps: ValueError: Ca2c is not in the model"
+    },
+    "generated_models/GA0_A.bnet": {
+      "bnet_mtime_ns": 1780279278586546583,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 390.80569444444444,
+      "t_min": 2.3219179310008258
+    },
+    "generated_models/GA0_B.bnet": {
+      "bnet_mtime_ns": 1780279278586546583,
+      "error": "min_traps: ValueError: Ca2c is not in the model"
+    },
+    "generated_models/GA1_A.bnet": {
+      "bnet_mtime_ns": 1780279278590545185,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 426.94444444444446,
+      "t_min": 2.4782375120003053
+    },
+    "generated_models/GA1_B.bnet": {
+      "bnet_mtime_ns": 1780279278590545185,
+      "error": "min_traps: ValueError: Ca2c is not in the model"
+    },
+    "generated_models/GA2_A.bnet": {
+      "bnet_mtime_ns": 1780279278590545185,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 431.19444444444446,
+      "t_min": 2.462775400999817
+    },
+    "generated_models/GA2_B.bnet": {
+      "bnet_mtime_ns": 1780279278590545185,
+      "error": "min_traps: ValueError: Ca2c is not in the model"
+    },
+    "generated_models/GA_VA-KEV_del.bnet": {
+      "bnet_mtime_ns": 1780279278590545185,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 385.3125,
+      "t_min": 2.4841804920006325
+    },
+    "generated_models/repetitions/20241007143135_9306_gen124.bnet": {
+      "bnet_mtime_ns": 1780279278590545185,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 420.75694444444446,
+      "t_min": 2.5815691199995854
+    },
+    "generated_models/repetitions/20241009072111_9984_gen68.bnet": {
+      "bnet_mtime_ns": 1780279278590545185,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 426.25850340136054,
+      "t_min": 3.264062732999264
+    },
+    "generated_models/repetitions/20241009211257_9880_gen154.bnet": {
+      "bnet_mtime_ns": 1780279278590545185,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 416.83260912698415,
+      "t_min": 2.5075086639999427
+    },
+    "generated_models/repetitions/20241010082016_9453_gen140.bnet": {
+      "bnet_mtime_ns": 1780279278590545185,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 413.0015589569161,
+      "t_min": 2.9585275019999244
+    },
+    "generated_models/repetitions/20241011222037_9848_gen50.bnet": {
+      "bnet_mtime_ns": 1780279278590545185,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 396.90746031746033,
+      "t_min": 3.0453263839999636
+    },
+    "generated_models/repetitions/20241014130450_9902_gen56.bnet": {
+      "bnet_mtime_ns": 1780279278590545185,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 393.6666666666667,
+      "t_min": 2.898074670999449
+    },
+    "generated_models/repetitions/rep_20230917_7545_gen112.bnet": {
+      "bnet_mtime_ns": 1780279278590545185,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 408.14444444444445,
+      "t_min": 2.4655494270000418
+    },
+    "generated_models/repetitions/rep_20230918_7560_gen105.bnet": {
+      "bnet_mtime_ns": 1780279278594543788,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 405.09,
+      "t_min": 2.7537988200001564
+    },
+    "generated_models/repetitions/rep_20230919_8030_gen113.bnet": {
+      "bnet_mtime_ns": 1780279278594543788,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 405.5,
+      "t_min": 2.7282776780002678
+    },
+    "generated_models/repetitions/rep_20230920_7788_gen121.bnet": {
+      "bnet_mtime_ns": 1780279278594543788,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 413.2436507936508,
+      "t_min": 2.6360794500005795
+    },
+    "generated_models/repetitions/rep_20230921_7687_gen104.bnet": {
+      "bnet_mtime_ns": 1780279278594543788,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 400.3725396825397,
+      "t_min": 2.588067955999577
+    },
+    "generated_models/repetitions/rep_20230922_8036_gen125.bnet": {
+      "bnet_mtime_ns": 1780279278594543788,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 420.0625,
+      "t_min": 3.1195543659996474
+    },
+    "generated_models/repetitions/rep_20230923_8025_gen141.bnet": {
+      "bnet_mtime_ns": 1780279278594543788,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 418.5233333333333,
+      "t_min": 2.499137688000701
+    },
+    "generated_models/repetitions/rep_20230924_8037_gen129.bnet": {
+      "bnet_mtime_ns": 1780279278594543788,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 419.27777777777777,
+      "t_min": 2.8896537709997574
+    },
+    "generated_models/repetitions/rep_20230925_7821_gen113.bnet": {
+      "bnet_mtime_ns": 1780279278594543788,
+      "error": null,
+      "max_score": 505.0,
+      "score_min": 398.3333333333333,
+      "t_min": 2.8549977929997112
+    }
+  },
+  "updated_utc": "2026-10-23T18:46:34.871251+00:00"
+}

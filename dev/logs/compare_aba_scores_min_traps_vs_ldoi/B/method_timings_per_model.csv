@@ -1,0 +1,5 @@
+model,t_min_traps_s,t_ldoi_s
+baseline_models/ABA_GA_base_B.bnet,2.7441374290001477,0.2112201019999702
+generated_models/GA0_B.bnet,2.5054217420001805,0.1188444650006204
+generated_models/GA1_B.bnet,2.6503780179991736,0.1760033040000053
+generated_models/GA2_B.bnet,2.5770390799998495,0.13701731200035283
