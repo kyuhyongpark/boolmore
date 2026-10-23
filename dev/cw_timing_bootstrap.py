@@ -6,6 +6,10 @@
 # per-node bootstrap SE of the time-window NAV, then sweeps
 # `n_walkers`, `N_TIME_STEPS`, and `T_WINDOW`.
 #
+# Update scheme is selected by `UPDATE_SCHEME` near the top
+# (`asynchronous` | `asynchronous_set` | `synchronous`). Outputs (log,
+# README, plots) overwrite under `dev/logs/cw_timing_bootstrap/<scheme>/`.
+#
 # Each sweep reports consecutive setting ΔNAV (B−A) by reusing per-setting
 # bootstrap mean replicates (no second walker resample), a third panel of
 # those summaries, and an overlay NAV±SE figure (one color per setting;
@@ -41,6 +45,7 @@ from __future__ import annotations
 
 import os
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import matplotlib
@@ -68,6 +73,23 @@ from cw_helpers import (
     simulate_walker_nav,
 )
 
+
+class Tee:
+    """Write to stdout and a log file."""
+
+    def __init__(self, *streams):
+        self.streams = streams
+
+    def write(self, data: str) -> int:
+        for stream in self.streams:
+            stream.write(data)
+            stream.flush()
+        return len(data)
+
+    def flush(self) -> None:
+        for stream in self.streams:
+            stream.flush()
+
 # %% [markdown]
 # ## Config
 
@@ -79,8 +101,32 @@ BNET = (
     / "20261016_173102"
     / "BreastCancer_primes_parsimonious_20261016_173102_9916_gen108.bnet"
 )
-PLOT_DIR = Path(__file__).resolve().parent / "logs"
-PLOT_DIR.mkdir(parents=True, exist_ok=True)
+
+# Cubewalkers update scheme: which nodes update each timestep.
+#   asynchronous      — one random node per walker
+#   asynchronous_set  — each node updates with prob SET_UPDATE_PROB
+#   synchronous       — all nodes every step
+UPDATE_SCHEME = "asynchronous"  # or "asynchronous_set" | "synchronous"
+SET_UPDATE_PROB = 0.5  # used only when UPDATE_SCHEME == "asynchronous_set"
+
+_ALLOWED_SCHEMES = ("asynchronous", "asynchronous_set", "synchronous")
+if UPDATE_SCHEME not in _ALLOWED_SCHEMES:
+    raise SystemExit(
+        f"UPDATE_SCHEME={UPDATE_SCHEME!r} not in {_ALLOWED_SCHEMES}"
+    )
+
+OUT_DIR = (
+    Path(__file__).resolve().parent
+    / "logs"
+    / "cw_timing_bootstrap"
+    / UPDATE_SCHEME
+)
+OUT_DIR.mkdir(parents=True, exist_ok=True)
+PLOT_DIR = OUT_DIR  # plots share the scheme output dir
+LOG_PATH = OUT_DIR / "cw_timing_bootstrap.log"
+README_PATH = OUT_DIR / "README.md"
+STARTED_UTC = datetime.now(timezone.utc)
+saved_plots: list[Path] = []
 
 # Practical baseline / sweep base (paper-scale is optional — see RUN_PAPER_BASELINE).
 # Full traj is (T_window, N, W) bools; paper defaults can be ~1–2 GB on device.
@@ -119,13 +165,34 @@ if SMOKE:
     RUN_PAPER_BASELINE = False
 
 # %% [markdown]
+# ## Logging
+
+# %%
+_log_file = LOG_PATH.open("w", encoding="utf-8")
+_stdout = sys.stdout
+sys.stdout = Tee(_stdout, _log_file)
+
+print(f"UPDATE_SCHEME={UPDATE_SCHEME}")
+if UPDATE_SCHEME == "asynchronous_set":
+    print(f"SET_UPDATE_PROB={SET_UPDATE_PROB}")
+print(f"out dir:  {OUT_DIR}")
+print(f"log file: {LOG_PATH}")
+print(f"started (UTC): {STARTED_UTC.isoformat()}")
+print(f"SMOKE={SMOKE}  RUN_PAPER_BASELINE={RUN_PAPER_BASELINE}")
+print()
+
+# %% [markdown]
 # ## CUDA / cubewalkers gate (fail-fast)
 
 # %%
 cw, cp = require_cubewalkers()
+MASKFUNCTION = {
+    "asynchronous": cw.update_schemes.asynchronous,
+    "asynchronous_set": cw.update_schemes.asynchronous_set,
+    "synchronous": cw.update_schemes.synchronous,
+}[UPDATE_SCHEME]
 print(f"CUDA devices: {cp.cuda.runtime.getDeviceCount()}")
 print(f"cubewalkers: {getattr(cw, '__file__', cw)}")
-print(f"SMOKE={SMOKE}  RUN_PAPER_BASELINE={RUN_PAPER_BASELINE}")
 
 # %% [markdown]
 # ## Load bnet (no experiment data)
@@ -193,6 +260,8 @@ _wu_nav, _wu_names, _wu_t = simulate_walker_nav(
     n_walkers=min(32, N_WALKERS),
     threads_per_block=THREADS_PER_BLOCK,
     model_name=_next_model_name("cw_warmup"),
+    maskfunction=MASKFUNCTION,
+    set_update_prob=SET_UPDATE_PROB,
 )
 print(f"  warm-up done: {format_timings(_wu_t)}  nodes={len(_wu_names)}")
 del _wu_nav
@@ -211,6 +280,8 @@ walker_nav, varnames, timings = simulate_walker_nav(
     n_walkers=N_WALKERS,
     threads_per_block=THREADS_PER_BLOCK,
     model_name=_next_model_name("cw_baseline"),
+    maskfunction=MASKFUNCTION,
+    set_update_prob=SET_UPDATE_PROB,
 )
 means, se, boot_means, t_boot = bootstrap_se(
     walker_nav, n_boot=N_BOOT, chunk=BOOT_CHUNK, rng=rng
@@ -239,6 +310,8 @@ if RUN_PAPER_BASELINE:
         n_walkers=2000,
         threads_per_block=THREADS_PER_BLOCK,
         model_name=_next_model_name("cw_paper"),
+        maskfunction=MASKFUNCTION,
+        set_update_prob=SET_UPDATE_PROB,
     )
     paper_means, paper_se, paper_boot_means, paper_boot = bootstrap_se(
         paper_nav, n_boot=N_BOOT, chunk=BOOT_CHUNK, rng=rng
@@ -273,7 +346,7 @@ ax.set_yticks(y)
 ax.set_yticklabels(plot_df["node"], fontsize=6)
 ax.set_xlabel("Node average value (NAV)")
 ax.set_title(
-    f"Baseline NAV ± bootstrap SE\n"
+    f"Baseline NAV ± bootstrap SE  [{UPDATE_SCHEME}]\n"
     f"W={N_WALKERS}, T={N_TIME_STEPS}, window={T_WINDOW}, B={N_BOOT}"
 )
 ax.set_xlim(-0.05, 1.05)
@@ -281,6 +354,7 @@ fig.tight_layout()
 plot_baseline = PLOT_DIR / "cw_timing_bootstrap_baseline_nav.png"
 fig.savefig(plot_baseline, dpi=120)
 plt.close(fig)
+saved_plots.append(plot_baseline)
 print(f"Wrote {plot_baseline}")
 
 # %% [markdown]
@@ -307,6 +381,8 @@ def run_sweep_point(
         n_walkers=n_walkers,
         threads_per_block=THREADS_PER_BLOCK,
         model_name=_next_model_name(f"cw_sweep_{label}"),
+        maskfunction=MASKFUNCTION,
+        set_update_prob=SET_UPDATE_PROB,
     )
     means, se, boot_means, t_boot = bootstrap_se(
         walker_nav, n_boot=N_BOOT, chunk=BOOT_CHUNK, rng=rng
@@ -537,6 +613,7 @@ def _plot_factor(
     fig.tight_layout()
     fig.savefig(path, dpi=120)
     plt.close(fig)
+    saved_plots.append(path)
     print(f"Wrote {path}")
 
 
@@ -591,6 +668,7 @@ def _plot_sweep_nav_overlay(
     fig.tight_layout()
     fig.savefig(path, dpi=120)
     plt.close(fig)
+    saved_plots.append(path)
     print(f"Wrote {path}")
 
 
@@ -605,19 +683,19 @@ win_df = sweep_df[sweep_df["label"].str.startswith("win")].sort_values("t_window
 _plot_factor(
     walkers_df,
     "n_walkers",
-    f"Vary n_walkers (T={SWEEP_T}, window={SWEEP_WINDOW})",
+    f"Vary n_walkers [{UPDATE_SCHEME}] (T={SWEEP_T}, window={SWEEP_WINDOW})",
     PLOT_DIR / "cw_timing_bootstrap_sweep_walkers.png",
 )
 _plot_factor(
     t_df,
     "n_time_steps",
-    f"Vary N_TIME_STEPS (W={SWEEP_WALKERS}, window≤{SWEEP_WINDOW})",
+    f"Vary N_TIME_STEPS [{UPDATE_SCHEME}] (W={SWEEP_WALKERS}, window≤{SWEEP_WINDOW})",
     PLOT_DIR / "cw_timing_bootstrap_sweep_T.png",
 )
 _plot_factor(
     win_df,
     "t_window",
-    f"Vary T_WINDOW (W={SWEEP_WALKERS}, T={t_for_window})",
+    f"Vary T_WINDOW [{UPDATE_SCHEME}] (W={SWEEP_WALKERS}, T={t_for_window})",
     PLOT_DIR / "cw_timing_bootstrap_sweep_window.png",
 )
 
@@ -628,7 +706,7 @@ win_pts = sorted(_rows_for_prefix("win"), key=lambda r: r["t_window"])
 _plot_sweep_nav_overlay(
     walkers_pts,
     title=(
-        f"Sweep n_walkers — NAV ± bootstrap SE\n"
+        f"Sweep n_walkers — NAV ± bootstrap SE  [{UPDATE_SCHEME}]\n"
         f"T={SWEEP_T}, window={SWEEP_WINDOW}, B={N_BOOT}"
     ),
     path=PLOT_DIR / "cw_timing_bootstrap_sweep_walkers_nav.png",
@@ -636,7 +714,7 @@ _plot_sweep_nav_overlay(
 _plot_sweep_nav_overlay(
     t_pts,
     title=(
-        f"Sweep N_TIME_STEPS — NAV ± bootstrap SE\n"
+        f"Sweep N_TIME_STEPS — NAV ± bootstrap SE  [{UPDATE_SCHEME}]\n"
         f"W={SWEEP_WALKERS}, window≤{SWEEP_WINDOW}, B={N_BOOT}"
     ),
     path=PLOT_DIR / "cw_timing_bootstrap_sweep_T_nav.png",
@@ -644,14 +722,14 @@ _plot_sweep_nav_overlay(
 _plot_sweep_nav_overlay(
     win_pts,
     title=(
-        f"Sweep T_WINDOW — NAV ± bootstrap SE\n"
+        f"Sweep T_WINDOW — NAV ± bootstrap SE  [{UPDATE_SCHEME}]\n"
         f"W={SWEEP_WALKERS}, T={t_for_window}, B={N_BOOT}"
     ),
     path=PLOT_DIR / "cw_timing_bootstrap_sweep_window_nav.png",
 )
 
 # %% [markdown]
-# ## Takeaway
+# ## Takeaway + README
 
 # %%
 def _dominant(df: pd.DataFrame, x_col: str) -> str:
@@ -675,16 +753,93 @@ def _dominant(df: pd.DataFrame, x_col: str) -> str:
     return msg
 
 
+finished_utc = datetime.now(timezone.utc)
+wall_s = (finished_utc - STARTED_UTC).total_seconds()
+
+takeaway_walkers = _dominant(walkers_df, "n_walkers")
+takeaway_t = _dominant(t_df, "n_time_steps")
+takeaway_win = _dominant(win_df, "t_window")
+baseline_med_se = float(np.median(se))
+baseline_max_se = float(se.max())
+
 print("=== Takeaway ===")
+print(f"UPDATE_SCHEME={UPDATE_SCHEME}")
 print(
     f"Baseline: {format_timings(timings)}  "
-    f"medSE={np.median(se):.5f} maxSE={se.max():.5f}"
+    f"medSE={baseline_med_se:.5f} maxSE={baseline_max_se:.5f}"
 )
-print(_dominant(walkers_df, "n_walkers"))
-print(_dominant(t_df, "n_time_steps"))
-print(_dominant(win_df, "t_window"))
+print(takeaway_walkers)
+print(takeaway_t)
+print(takeaway_win)
 print(
     "Note: first launch after Model build may include NVRTC compile in "
     "t_simulate; warm-up reduces but does not eliminate per-Model name rebuild cost."
 )
-print(f"Plots under: {PLOT_DIR}")
+print(f"Wall clock: {wall_s:.1f}s")
+print(f"Outputs under: {OUT_DIR}")
+
+readme_lines = [
+    f"# Cubewalkers timing + bootstrap SE (`{UPDATE_SCHEME}`)",
+    "",
+    "Single no-intervention ensemble on the breast-cancer gen108 `.bnet`.",
+    "Split wall time (`t_setup` / `t_simulate` / `t_reduce`) and per-node",
+    "bootstrap SE of the time-window NAV; sweeps `n_walkers`, `N_TIME_STEPS`,",
+    "and `T_WINDOW`.",
+    "",
+    f"- **Update scheme:** `{UPDATE_SCHEME}`",
+]
+if UPDATE_SCHEME == "asynchronous_set":
+    readme_lines.append(f"- **set_update_prob:** `{SET_UPDATE_PROB}`")
+readme_lines.extend(
+    [
+        f"- **Started (UTC):** {STARTED_UTC.isoformat()}",
+        f"- **Finished (UTC):** {finished_utc.isoformat()}",
+        f"- **Wall clock:** {wall_s:.1f}s",
+        f"- **SMOKE:** `{SMOKE}`",
+        f"- **bnet:** `{BNET.name}`",
+        f"- **nodes:** {_n_nodes}",
+        f"- **Baseline:** W={N_WALKERS}, T={N_TIME_STEPS}, "
+        f"window={T_WINDOW}, N_BOOT={N_BOOT}, seed={SEED}",
+        f"- **Sweep base:** W={SWEEP_WALKERS}, T={SWEEP_T}, "
+        f"window={SWEEP_WINDOW}",
+        f"- **Grids:** walkers={WALKERS_GRID}, T={T_GRID}, "
+        f"window={WINDOW_GRID}",
+        "",
+        "## Baseline",
+        "",
+        f"- Timings: `{format_timings(timings)}`",
+        f"- median SE: `{baseline_med_se:.5f}`",
+        f"- max SE: `{baseline_max_se:.5f}`",
+        f"- mean of node means: `{float(means.mean()):.4f}`",
+        "",
+        "## Sweep takeaways",
+        "",
+        f"- {takeaway_walkers}",
+        f"- {takeaway_t}",
+        f"- {takeaway_win}",
+        "",
+        "Note: first launch after Model build may include NVRTC compile in",
+        "`t_simulate`; warm-up reduces but does not eliminate per-Model name",
+        "rebuild cost.",
+        "",
+        "## Artifacts",
+        "",
+        "Stable filenames (overwritten on each run):",
+        "",
+        f"- [`{LOG_PATH.name}`]({LOG_PATH.name}) — full run log",
+        f"- [`{README_PATH.name}`]({README_PATH.name}) — this summary",
+    ]
+)
+for p in saved_plots:
+    readme_lines.append(f"- [`{p.name}`]({p.name})")
+readme_lines.append("")
+
+README_PATH.write_text("\n".join(readme_lines), encoding="utf-8")
+print(f"saved: {README_PATH}")
+
+sys.stdout = _stdout
+_log_file.close()
+print(f"log saved: {LOG_PATH}")
+print(f"readme: {README_PATH}")
+for p in saved_plots:
+    print(f"plot saved: {p}")

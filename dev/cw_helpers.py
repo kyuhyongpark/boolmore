@@ -161,6 +161,8 @@ def simulate_walker_nav(
     clamps: Sequence[tuple[str, int]] | Iterable[tuple[str, int]] | None = None,
     threads_per_block: tuple[int, int] = DEFAULT_THREADS_PER_BLOCK,
     model_name: str | None = None,
+    maskfunction: Callable[..., Any] | None = None,
+    set_update_prob: float = 0.5,
 ) -> tuple[np.ndarray, list[str], dict[str, float]]:
     """Run an ensemble; return per-walker NAV and split timings.
 
@@ -169,6 +171,12 @@ def simulate_walker_nav(
     clamps
         Optional permanent interventions ``(node, value)``. ``None`` / empty
         → unclamped ensemble.
+    maskfunction
+        Cubewalkers update scheme (e.g. ``cw.update_schemes.asynchronous``).
+        Defaults to asynchronous.
+    set_update_prob
+        Per-node update probability for ``asynchronous_set*`` schemes;
+        ignored otherwise.
 
     Returns
     -------
@@ -189,6 +197,9 @@ def simulate_walker_nav(
     if t_window > n_time_steps or t_window < 1:
         raise ValueError(f"T_WINDOW={t_window} must be in [1, T={n_time_steps}]")
 
+    if maskfunction is None:
+        maskfunction = cw.update_schemes.asynchronous
+
     experiment = clamps_to_experiment(clamps)
 
     t0 = perf_counter()
@@ -206,8 +217,9 @@ def simulate_walker_nav(
     model.simulate_ensemble(
         T_window=t_window,
         averages_only=False,
-        maskfunction=cw.update_schemes.asynchronous,
+        maskfunction=maskfunction,
         threads_per_block=threads_per_block,
+        set_update_prob=set_update_prob,
     )
     cp.cuda.Device().synchronize()
     t_simulate = perf_counter() - t0
@@ -240,6 +252,8 @@ def simulate_mean_nav(
     clamps: Sequence[tuple[str, int]] | Iterable[tuple[str, int]] | None = None,
     threads_per_block: tuple[int, int] = DEFAULT_THREADS_PER_BLOCK,
     model_name: str | None = None,
+    maskfunction: Callable[..., Any] | None = None,
+    set_update_prob: float = 0.5,
 ) -> tuple[dict[str, float], dict[str, float]]:
     """Run an ensemble with ``averages_only``; return mean NAV dict + timings.
 
@@ -259,6 +273,9 @@ def simulate_mean_nav(
     if t_window > n_time_steps or t_window < 1:
         raise ValueError(f"T_WINDOW={t_window} must be in [1, T={n_time_steps}]")
 
+    if maskfunction is None:
+        maskfunction = cw.update_schemes.asynchronous
+
     experiment = clamps_to_experiment(clamps)
 
     t0 = perf_counter()
@@ -276,8 +293,9 @@ def simulate_mean_nav(
     model.simulate_ensemble(
         T_window=t_window,
         averages_only=True,
-        maskfunction=cw.update_schemes.asynchronous,
+        maskfunction=maskfunction,
         threads_per_block=threads_per_block,
+        set_update_prob=set_update_prob,
     )
     cp.cuda.Device().synchronize()
     t_simulate = perf_counter() - t0
