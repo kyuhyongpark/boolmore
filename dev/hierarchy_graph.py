@@ -15,13 +15,15 @@
 # ``default_sources`` as the shared context (matching scoring). **Depth** is
 # the longest path from a root in the pruned DAG (not the raw intervention
 # count). **Printed interventions** on a non-root omit assignments already
-# shared by all immediate predecessors.
+# shared by all immediate predecessors. Plots are written under
+# ``dev/logs/hierarchy_graph/`` (not shown interactively).
 
 # %%
 from __future__ import annotations
 
 from collections import Counter, defaultdict
 from itertools import combinations
+from pathlib import Path
 
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -40,6 +42,10 @@ from boolmore.types import Assignment
 # %%
 CONFIG = project_root() / "case_study" / "breast_cancer" / "config.json"
 # CONFIG = project_root() / "case_study" / "ABA" / "data" / "ABA_A.json"
+
+LOG_DIR = Path(__file__).resolve().parent / "logs" / "hierarchy_graph"
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+OUT_TAG = CONFIG.stem
 
 # %% [markdown]
 # ## Load config and experiments
@@ -213,7 +219,10 @@ ax.set_ylabel("number of experiments")
 ax.set_title("Ancestor-id count per experiment")
 ax.set_xticks(xs)
 fig.tight_layout()
-plt.show()
+hist_path = LOG_DIR / f"ancestor_id_hist_{OUT_TAG}.png"
+fig.savefig(hist_path, dpi=120)
+plt.close(fig)
+print(f"saved: {hist_path}")
 
 # %% [markdown]
 # ## Summaries
@@ -393,7 +402,13 @@ def draw_focus_cone(H: nx.DiGraph, focus: Entity, *, max_edge_label: int = EDGE_
         fontsize=11,
     )
     fig.tight_layout()
-    plt.show()
+    focus_path = LOG_DIR / (
+        f"focus_cone_{OUT_TAG}_{data['observed']}_"
+        f"ids{'-'.join(str(i) for i in data['ids'])}.png"
+    )
+    fig.savefig(focus_path, dpi=120)
+    plt.close(fig)
+    print(f"saved: {focus_path}")
 
 
 focus = max(
