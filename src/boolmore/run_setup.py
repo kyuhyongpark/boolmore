@@ -94,14 +94,16 @@ def _nav_column_kwargs(
     observed_col: str | Sequence[str] | None = None,
     outcome_col: str | Sequence[str] | None = None,
     fixes_cols: Sequence[str] | None = None,
+    context_cols: Sequence[str] | None = None,
+    intervention_cols: Sequence[str] | None = None,
     fixes_allow_override: bool | None = None,
 ) -> dict:
     """Resolve NAV CSV column kwargs from config ``nav_columns`` and overrides.
 
     Explicit keyword arguments take precedence over ``config["nav_columns"]``.
     Keys in ``nav_columns`` are ``id``, ``weight``, ``observed``, ``outcome``,
-    ``fixes``, and ``fixes_allow_override``. Omitted keys fall through to
-    ``import_NAV_exps`` defaults.
+    ``fixes``, ``context``, ``intervention``, and ``fixes_allow_override``.
+    Omitted keys fall through to ``import_NAV_exps`` defaults.
     """
     nav_cols = config.get("nav_columns") or {}
     if not isinstance(nav_cols, dict):
@@ -117,6 +119,14 @@ def _nav_column_kwargs(
             outcome_col if outcome_col is not None else nav_cols.get("outcome")
         ),
         "fixes_cols": fixes_cols if fixes_cols is not None else nav_cols.get("fixes"),
+        "context_cols": (
+            context_cols if context_cols is not None else nav_cols.get("context")
+        ),
+        "intervention_cols": (
+            intervention_cols
+            if intervention_cols is not None
+            else nav_cols.get("intervention")
+        ),
         "fixes_allow_override": (
             fixes_allow_override
             if fixes_allow_override is not None
@@ -135,15 +145,16 @@ def build_evaluator(
     observed_col: str | Sequence[str] | None = None,
     outcome_col: str | Sequence[str] | None = None,
     fixes_cols: Sequence[str] | None = None,
+    context_cols: Sequence[str] | None = None,
+    intervention_cols: Sequence[str] | None = None,
     fixes_allow_override: bool | None = None,
 ) -> Evaluator:
     """Build a ready ``Evaluator`` from a config dict or JSON path.
 
-    Optional ``id_col`` / ``weight_col`` / ``observed_col`` / ``outcome_col`` /
-    ``fixes_cols`` / ``fixes_allow_override`` override ``config["nav_columns"]``
-    when set. Otherwise ``nav_columns`` (keys ``id``, ``weight``, ``observed``,
-    ``outcome``, ``fixes``, ``fixes_allow_override``) is used. If neither is
-    set, ``import_NAV_exps`` defaults apply.
+    Optional column kwargs override ``config["nav_columns"]`` when set.
+    ``nav_columns`` keys are ``id``, ``weight``, ``observed``, ``outcome``,
+    ``fixes``, ``context``, ``intervention``, and ``fixes_allow_override``.
+    If neither is set, ``import_NAV_exps`` defaults apply.
     """
     if not isinstance(config, dict):
         path = Path(config)
@@ -187,6 +198,8 @@ def build_evaluator(
             observed_col=observed_col,
             outcome_col=outcome_col,
             fixes_cols=fixes_cols,
+            context_cols=context_cols,
+            intervention_cols=intervention_cols,
             fixes_allow_override=fixes_allow_override,
         )
 

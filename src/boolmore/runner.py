@@ -407,6 +407,8 @@ def run_ga(
         observed_col: str | Sequence[str] | None = None,
         outcome_col: str | Sequence[str] | None = None,
         fixes_cols: Sequence[str] | None = None,
+        context_cols: Sequence[str] | None = None,
+        intervention_cols: Sequence[str] | None = None,
         fixes_allow_override: bool | None = None,
         )-> tuple[Candidate, Candidate, list[GAState]]:
     """
@@ -460,7 +462,7 @@ def run_ga(
     core : int
         if larger than 1, model evaluation is done in parallel
     id_col, weight_col, observed_col, outcome_col, fixes_cols,
-    fixes_allow_override
+    context_cols, intervention_cols, fixes_allow_override
         Optional NAV CSV column / merge options that override ``nav_columns``
         in the JSON config. Leave as ``None`` to use the config block, or
         ``import_NAV_exps`` defaults when the block is absent.
@@ -538,6 +540,8 @@ def run_ga(
             observed_col=observed_col,
             outcome_col=outcome_col,
             fixes_cols=fixes_cols,
+            context_cols=context_cols,
+            intervention_cols=intervention_cols,
             fixes_allow_override=fixes_allow_override,
         )
 

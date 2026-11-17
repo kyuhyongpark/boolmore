@@ -108,12 +108,12 @@ ID_COL = "id"
 WEIGHT_COL = "Weight"
 OBSERVED_COL = "Observed node"
 OUTCOME_COL = "Value"
-FIXES_COLS = (
+CONTEXT_COLS = (
     "Signals",
-    "Drug treatment/intervention",
     "Cell line characteristic profile",
     "Additional features of the cell population",
 )
+INTERVENTION_COLS = ("Drug treatment/intervention",)
 
 N_SCRAMBLES = 30
 MUT_PROB = 0.5
@@ -193,7 +193,8 @@ experiments = import_NAV_exps(
     weight_col=WEIGHT_COL,
     observed_col=OBSERVED_COL,
     outcome_col=OUTCOME_COL,
-    fixes_cols=FIXES_COLS,
+    context_cols=CONTEXT_COLS,
+    intervention_cols=INTERVENTION_COLS,
 )
 
 source_nodes = source_nodes_from_primes(primes_base)

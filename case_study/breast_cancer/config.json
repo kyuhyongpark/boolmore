@@ -12,14 +12,13 @@
         "weight": "Weight",
         "observed": "Observed node",
         "outcome": "Value",
-        "fixes": [
+        "context": [
             "Culture Signals",
             "Cell-induced signals",
             "Cell line characteristic profile",
-            "Additional features of the cell population",
-            "Drug treatment/intervention"
+            "Additional features of the cell population"
         ],
-        "fixes_allow_override": true
+        "intervention": ["Drug treatment/intervention"]
     },
     "constraints": {
         "fixed": [],

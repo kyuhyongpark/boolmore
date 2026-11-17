@@ -7,9 +7,16 @@ Assignment = tuple[tuple[str, int], ...]
 FixesType = Assignment  # historical alias for Assignment
 ExpType = tuple[int, float, Assignment, str, OutcomeType]
 PredictType = dict[Assignment, dict[str, float]]
+# observed -> context -> intervention -> entries
 AgreeType = dict[
     str,
-    dict[Assignment, list[tuple[int, float, OutcomeType, float | None, float]]],
+    dict[
+        Assignment,
+        dict[
+            Assignment,
+            list[tuple[int, float, OutcomeType, float | None, float]],
+        ],
+    ],
 ]
 
 __all__ = [

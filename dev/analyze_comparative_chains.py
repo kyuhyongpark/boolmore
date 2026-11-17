@@ -20,12 +20,12 @@ from boolmore.outcome import ComparativeOutcome
 
 # %%
 DATA = project_root() / "case_study" / "breast_cancer" / "breast_cancer_data_trial.csv"
-FIXES_COLS = (
+CONTEXT_COLS = (
     "Signals",
-    "Drug treatment/intervention",
     "Cell line characteristic profile",
     "Additional features of the cell population",
 )
+INTERVENTION_COLS = ("Drug treatment/intervention",)
 
 exps = import_NAV_exps(
     DATA,
@@ -33,7 +33,8 @@ exps = import_NAV_exps(
     weight_col="Weight",
     observed_col="Observed node",
     outcome_col="Value",
-    fixes_cols=FIXES_COLS,
+    context_cols=CONTEXT_COLS,
+    intervention_cols=INTERVENTION_COLS,
 )
 by_id = {e.id: e for e in exps}
 

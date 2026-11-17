@@ -144,13 +144,14 @@ def check_co_located_outcomes(
     exp_id: int,
     outcome_value: OutcomeType,
     observed_node: str,
-    fixes: Assignment,
+    context: Assignment,
+    intervention: Assignment,
 ) -> None:
     """Reject redundant absolute or same-``other_id`` comparative entries.
 
-    Multiple experiments may share ``(observed_node, fixes)`` when at most
-    one outcome is non-comparative and every comparative outcome targets a
-    distinct ``other_id``.
+    Multiple experiments may share ``(observed_node, context, intervention)``
+    when at most one outcome is non-comparative and every comparative outcome
+    targets a distinct ``other_id``.
 
     Raises
     ------
@@ -163,8 +164,8 @@ def check_co_located_outcomes(
         if not new_is_comparative and not other_is_comparative:
             raise ValueError(
                 f"Duplicate experimental entry: {other_id} and {exp_id} "
-                f"share observed={observed_node!r} fixes={fixes!r} "
-                f"with non-comparative outcomes"
+                f"share observed={observed_node!r} context={context!r} "
+                f"intervention={intervention!r} with non-comparative outcomes"
             )
         if (
             new_is_comparative
@@ -173,7 +174,8 @@ def check_co_located_outcomes(
         ):
             raise ValueError(
                 f"Duplicate experimental entry: {other_id} and {exp_id} "
-                f"share observed={observed_node!r} fixes={fixes!r} "
+                f"share observed={observed_node!r} context={context!r} "
+                f"intervention={intervention!r} "
                 f"and comparative other_id={outcome_value.other_id}"
             )
 
@@ -184,39 +186,38 @@ def get_agreements(
 ) -> AgreeType:
     """Return attractor agreements for experimental outcomes vs model predictions.
 
-    Agreements are keyed by observed node so interventions for that node
-    are easy to find.
+    Agreements are keyed by observed node, then context, then intervention.
 
     Parameters
     ----------
     experiments : list of NAVExperiment
     predictions : dict of Assignment to NAVPrediction
-        Predictions keyed by intervention assignment. Average node values
-        are read from ``NAVPrediction.average_values``. Each observed name
-        is treated as a base and scored as the mean of related sibling
+        Predictions keyed by effective ``fixes`` assignment. Average node
+        values are read from ``NAVPrediction.average_values``. Each observed
+        name is treated as a base and scored as the mean of related sibling
         nodes (``base`` or ``base_<int>``), or ``None`` if any sibling is
         unknown.
 
     Returns
     -------
     AgreeType
-        Nested mapping ``observed_node -> fixes -> list of (id, max_score,
-        outcome_value, predict_value, agreement)``. Multiple experiments may
-        share the same ``(observed, fixes)`` when at most one outcome is
-        non-comparative and comparative outcomes use distinct ``other_id``
-        values. ``predict_value`` may be ``None`` (``?``) for LDOI
-        upper-bound scoring; then ``agreement`` is ``1.0``. For comparative
-        outcomes, ``predict_value`` is the oriented or absolute difference
-        of the two experiments' absolute averages.
+        Nested mapping ``observed_node -> context -> intervention -> list of
+        (id, max_score, outcome_value, predict_value, agreement)``. Multiple
+        experiments may share the same ``(observed, context, intervention)``
+        when at most one outcome is non-comparative and comparative outcomes
+        use distinct ``other_id`` values. ``predict_value`` may be ``None``
+        (``?``) for LDOI upper-bound scoring; then ``agreement`` is ``1.0``.
+        For comparative outcomes, ``predict_value`` is the oriented or
+        absolute difference of the two experiments' absolute averages.
 
     Raises
     ------
     ValueError
         If an outcome label or range is invalid, a comparative reference id
         is missing, an observed base has no related siblings, or if two
-        experiments share the same observed node and intervention
-        assignment with conflicting outcomes (two non-comparative outcomes,
-        or two comparatives with the same ``other_id``).
+        experiments share the same observed node, context, and intervention
+        with conflicting outcomes (two non-comparative outcomes, or two
+        comparatives with the same ``other_id``).
     """
     experiments_by_id = {exp.id: exp for exp in experiments}
     agreements: AgreeType = {}
@@ -224,6 +225,8 @@ def get_agreements(
         exp_id = exp.id
         max_score = exp.weight
         fixes = exp.fixes
+        context = exp.context
+        intervention = exp.intervention
         observed_node = exp.observed
         outcome_value = exp.outcome
 
@@ -251,14 +254,16 @@ def get_agreements(
 
         agreement = _agreement_score(outcome_value, predict_value)
 
-        by_fixes = agreements.setdefault(observed_node, {})
-        entries = by_fixes.setdefault(fixes, [])
+        by_context = agreements.setdefault(observed_node, {})
+        by_intervention = by_context.setdefault(context, {})
+        entries = by_intervention.setdefault(intervention, [])
         check_co_located_outcomes(
             ((other_id, other_outcome) for other_id, _, other_outcome, _, _ in entries),
             exp_id,
             outcome_value,
             observed_node,
-            fixes,
+            context,
+            intervention,
         )
         entries.append(
             (

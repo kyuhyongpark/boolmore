@@ -15,6 +15,7 @@ from boolmore.outcome import (
     parse_outcome,
     resolve_outcome_range,
 )
+from boolmore.types import Assignment
 
 _DEFAULT_ID_COL: tuple[str, ...] = ("ID",)
 _DEFAULT_WEIGHT_COL: tuple[str, ...] = ("Score", "Weight")
@@ -220,6 +221,24 @@ def _apply_observed_to_fixes(
     return tuple((node, value) for node, value in fixes if node != observed)
 
 
+def _apply_observed_to_context_intervention(
+    context: Assignment,
+    intervention: Assignment,
+    observed: str,
+    *,
+    row_id: str | None = None,
+) -> tuple[Assignment, Assignment]:
+    """Drop observed from context; forbid observed in intervention."""
+    where = f" (row id={row_id})" if row_id is not None else ""
+    if any(node == observed for node, _ in intervention):
+        raise ValueError(
+            f"Node '{observed}' appears in both intervention and observed{where}"
+        )
+    if any(node == observed for node, _ in context):
+        context = tuple((node, value) for node, value in context if node != observed)
+    return context, intervention
+
+
 def _reformat_fixes_cell(cell: str) -> str:
     """Rewrite a fixes cell to standard ``name=value`` tokens.
 
@@ -276,8 +295,10 @@ def import_NAV_exps(
     weight_col: str | Sequence[str] = _DEFAULT_WEIGHT_COL,
     observed_col: str | Sequence[str] = _DEFAULT_OBSERVED_COL,
     outcome_col: str | Sequence[str] = _DEFAULT_OUTCOME_COL,
-    fixes_cols: Sequence[str] = _DEFAULT_FIXES_COLS,
-    fixes_allow_override: bool = False,
+    fixes_cols: Sequence[str] | None = None,
+    context_cols: Sequence[str] | None = None,
+    intervention_cols: Sequence[str] | None = None,
+    fixes_allow_override: bool | None = None,
 ) -> list[NAVExperiment]:
     """Import NAV experiments from a ``.tsv`` or ``.csv`` file.
 
@@ -292,16 +313,21 @@ def import_NAV_exps(
         Alias or aliases for each required single-column role. Exactly one
         header must match.
     fixes_cols :
-        Columns whose cells are concatenated into ``NAVExperiment.fixes``.
-        Absent names are skipped. Tokens may be ``Node=0|1`` or legacy
-        ``Node KO|CA``. A cell that is only ``-`` is treated as empty.
-        When ``fixes_allow_override`` is true, put the intervention column last.
+        Legacy mode: columns concatenated into a single intervention with
+        empty context. Defaults to Source / Perturbation / Intervention when
+        neither ``context_cols`` nor ``intervention_cols`` is given.
+    context_cols, intervention_cols :
+        Explicit split: context columns form ``NAVExperiment.context``;
+        intervention columns form ``NAVExperiment.intervention``. Effective
+        ``fixes`` are context overridden by intervention. Cannot be combined
+        with ``fixes_cols``.
     fixes_allow_override :
-        When ``False`` (default), duplicate or inconsistent fixed nodes raise,
-        and an observed node that also appears in fixes raises. When ``True``,
-        later ``fixes_cols`` entries override earlier ones for the same node;
-        if the observed node appears only in earlier columns it is dropped from
-        fixes; if it appears in the last resolved fixes column, import raises.
+        Legacy ``fixes_cols`` mode only. When ``False`` (default), duplicate
+        or inconsistent fixed nodes raise, and an observed node that also
+        appears in fixes raises. When ``True``, later columns override
+        earlier ones; observed may be stripped from earlier columns. In
+        context/intervention mode, override is always on (intervention wins;
+        observed is stripped from context and forbidden in intervention).
 
     Notes
     -----
@@ -311,7 +337,7 @@ def import_NAV_exps(
     node, or lacks the expected reciprocal comparative
     outcome on the referenced experiment, or when the observed node also
     appears in that row's fixes (strict mode) / last fixes column (override
-    mode).
+    mode) / intervention columns (context mode).
 
     When an ``Outcome range`` column is present, each row is checked against
     the range resolved from the outcome column; matching ranges are treated as
@@ -323,6 +349,28 @@ def import_NAV_exps(
     """
     path = Path(location)
     delimiter = _delimiter_for_path(path)
+
+    split_mode = context_cols is not None or intervention_cols is not None
+    if split_mode and fixes_cols is not None:
+        raise ValueError(
+            "Provide either fixes_cols= or context_cols=/intervention_cols=, "
+            "not both"
+        )
+    if split_mode:
+        if context_cols is None:
+            context_cols = ()
+        if intervention_cols is None:
+            intervention_cols = ()
+        if fixes_allow_override is False:
+            raise ValueError(
+                "fixes_allow_override=False is not supported with "
+                "context_cols/intervention_cols"
+            )
+        allow_override = True
+    else:
+        if fixes_cols is None:
+            fixes_cols = _DEFAULT_FIXES_COLS
+        allow_override = False if fixes_allow_override is None else fixes_allow_override
 
     with path.open("r", newline="") as file:
         reader = csv.reader(_valid_lines(file), delimiter=delimiter)
@@ -336,7 +384,15 @@ def import_NAV_exps(
         weight_header = _resolve_single_column(headers, weight_col, "weight")
         observed_header = _resolve_single_column(headers, observed_col, "observed")
         outcome_header = _resolve_single_column(headers, outcome_col, "outcome")
-        fixes_headers = _resolve_fixes_columns(headers, fixes_cols)
+
+        if split_mode:
+            context_headers = _resolve_fixes_columns(headers, context_cols)
+            intervention_headers = _resolve_fixes_columns(headers, intervention_cols)
+            rewrite_headers = context_headers + intervention_headers
+        else:
+            context_headers = []
+            intervention_headers = []
+            rewrite_headers = _resolve_fixes_columns(headers, fixes_cols)
 
         header_index = {name: i for i, name in enumerate(headers)}
         existing_range_idx = _outcome_range_header_index(headers)
@@ -362,28 +418,63 @@ def import_NAV_exps(
                 raise ValueError(f"Duplicate id {exp_id}")
             seen_ids.add(exp_id)
 
-            fixes_cells = [cell(h) for h in fixes_headers]
-            for header in fixes_headers:
+            for header in rewrite_headers:
                 if _fixes_cell_needs_rewrite(row[header_index[header]]):
                     needs_fixes_rewrite = True
                     break
 
-            fixes = _merge_fixes(
-                fixes_cells,
-                row_id=row_id_str or None,
-                allow_override=fixes_allow_override,
-            )
             observed = cell(observed_header)
-            fixes = _apply_observed_to_fixes(
-                fixes,
-                observed,
-                fixes_cells,
-                row_id=row_id_str or None,
-                allow_override=fixes_allow_override,
-            )
-
             raw_outcome = cell(outcome_header)
             outcome = parse_outcome(raw_outcome)
+            weight = float(cell(weight_header))
+
+            if split_mode:
+                context = _merge_fixes(
+                    [cell(h) for h in context_headers],
+                    row_id=row_id_str or None,
+                    allow_override=True,
+                )
+                intervention = _merge_fixes(
+                    [cell(h) for h in intervention_headers],
+                    row_id=row_id_str or None,
+                    allow_override=True,
+                )
+                context, intervention = _apply_observed_to_context_intervention(
+                    context,
+                    intervention,
+                    observed,
+                    row_id=row_id_str or None,
+                )
+                exp = NAVExperiment(
+                    id=exp_id,
+                    observed=observed,
+                    outcome=outcome,
+                    context=context,
+                    intervention=intervention,
+                    weight=weight,
+                )
+            else:
+                fixes_cells = [cell(h) for h in rewrite_headers]
+                fixes = _merge_fixes(
+                    fixes_cells,
+                    row_id=row_id_str or None,
+                    allow_override=allow_override,
+                )
+                fixes = _apply_observed_to_fixes(
+                    fixes,
+                    observed,
+                    fixes_cells,
+                    row_id=row_id_str or None,
+                    allow_override=allow_override,
+                )
+                exp = NAVExperiment(
+                    id=exp_id,
+                    fixes=fixes,
+                    observed=observed,
+                    outcome=outcome,
+                    weight=weight,
+                )
+
             lo, hi = resolve_outcome_range(outcome)
             range_str = format_outcome_range(lo, hi)
             outcome_range_strings.append(range_str)
@@ -411,21 +502,22 @@ def import_NAV_exps(
             elif raw_outcome != range_str:
                 needs_outcome_ranges = True
 
-            exp = NAVExperiment(
-                id=exp_id,
-                fixes=fixes,
-                observed=observed,
-                outcome=outcome,
-                weight=float(cell(weight_header)),
-            )
-
             co_located = [
                 (other_exp.id, other_exp.outcome)
                 for other_exp in exps
-                if other_exp.fixes == fixes and other_exp.observed == observed
+                if (
+                    other_exp.context == exp.context
+                    and other_exp.intervention == exp.intervention
+                    and other_exp.observed == observed
+                )
             ]
             check_co_located_outcomes(
-                co_located, exp_id, outcome, observed, fixes
+                co_located,
+                exp_id,
+                outcome,
+                observed,
+                exp.context,
+                exp.intervention,
             )
 
             exps.append(exp)
@@ -469,7 +561,7 @@ def import_NAV_exps(
         if existing_range_idx is None:
             out_headers.append(_OUTCOME_RANGE_HEADER)
 
-        fixes_indices = {header_index[h] for h in fixes_headers}
+        fixes_indices = {header_index[h] for h in rewrite_headers}
         rewritten_rows: list[list[str]] = []
         for row, range_str in zip(raw_rows, outcome_range_strings, strict=True):
             new_row = list(row[: len(headers)])

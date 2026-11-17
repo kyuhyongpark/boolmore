@@ -4,10 +4,9 @@
 # Probe whether a NAV-style CSV/TSV can be loaded with
 # `boolmore.io.nav.import_NAV_exps`.
 #
-# Edit the config cell below to point at another dataset. Set `FIXES_COLS`
-# when the file uses non-default fixes headers (e.g. breast cancer). Put the
-# intervention column last and set `FIXES_ALLOW_OVERRIDE` when later columns
-# may override earlier fixes (and observed may be stripped from earlier cols).
+# Edit the config cell below to point at another dataset. Prefer
+# `CONTEXT_COLS` / `INTERVENTION_COLS` for breast-cancer-style data. Legacy
+# `FIXES_COLS` (+ `FIXES_ALLOW_OVERRIDE`) remains available for ABA-style CSVs.
 
 # %%
 from __future__ import annotations
@@ -39,22 +38,23 @@ from boolmore.outcome import ComparativeOutcome, OutcomeType, parse_outcome
 # %% [markdown]
 # ## Config
 #
-# Change `DATA` / `FIXES_COLS` for another dataset. Leave `FIXES_COLS` as
-# ``None`` to use ``import_NAV_exps`` defaults.
+# Change `DATA` / column lists for another dataset. Leave both context and
+# intervention as ``None`` (and ``FIXES_COLS`` as ``None``) for import defaults.
 
 # %%
 REPO = Path(__file__).resolve().parents[1]
 DATA = REPO / "case_study" / "breast_cancer" / "data.csv"
 
-# Intervention last so ``FIXES_ALLOW_OVERRIDE`` can treat it as the override col.
-FIXES_COLS: Sequence[str] | None = (
+CONTEXT_COLS: Sequence[str] | None = (
     "Culture Signals",
     "Cell-induced signals",
     "Cell line characteristic profile",
     "Additional features of the cell population",
-    "Drug treatment/intervention",
 )
-FIXES_ALLOW_OVERRIDE = True
+INTERVENTION_COLS: Sequence[str] | None = ("Drug treatment/intervention",)
+# Legacy single-blob mode (mutually exclusive with context/intervention above).
+FIXES_COLS: Sequence[str] | None = None
+FIXES_ALLOW_OVERRIDE = False
 
 # Metadata columns for report-only uniqueness checks (breast-cancer style).
 CULTURE_COL = "Culture"
@@ -305,8 +305,19 @@ ID_COL = _resolve_single_column(headers, _DEFAULT_ID_COL, "id")
 WEIGHT_COL = _resolve_single_column(headers, _DEFAULT_WEIGHT_COL, "weight")
 OBSERVED_COL = _resolve_single_column(headers, _DEFAULT_OBSERVED_COL, "observed")
 OUTCOME_COL = _resolve_single_column(headers, _DEFAULT_OUTCOME_COL, "outcome")
-active_fixes = list(FIXES_COLS) if FIXES_COLS is not None else list(_DEFAULT_FIXES_COLS)
-resolved_fixes = _resolve_fixes_columns(headers, active_fixes)
+split_mode = CONTEXT_COLS is not None or INTERVENTION_COLS is not None
+if split_mode:
+    active_context = list(CONTEXT_COLS or ())
+    active_intervention = list(INTERVENTION_COLS or ())
+    resolved_context = _resolve_fixes_columns(headers, active_context)
+    resolved_intervention = _resolve_fixes_columns(headers, active_intervention)
+    active_fixes = active_context + active_intervention
+    resolved_fixes = resolved_context + resolved_intervention
+else:
+    active_fixes = list(FIXES_COLS) if FIXES_COLS is not None else list(_DEFAULT_FIXES_COLS)
+    resolved_fixes = _resolve_fixes_columns(headers, active_fixes)
+    resolved_context = []
+    resolved_intervention = []
 
 print(f"file: {DATA}")
 print(f"rows: {len(rows)}")
@@ -331,18 +342,30 @@ print(f"  id={ID_COL!r}")
 print(f"  weight={WEIGHT_COL!r}")
 print(f"  observed={OBSERVED_COL!r}")
 print(f"  outcome={OUTCOME_COL!r}")
-print(f"  fixes={active_fixes!r}")
-print(f"  resolved_fixes={resolved_fixes!r}")
-print(f"  fixes_allow_override={FIXES_ALLOW_OVERRIDE}")
+if split_mode:
+    print(f"  context={active_context!r}")
+    print(f"  resolved_context={resolved_context!r}")
+    print(f"  intervention={active_intervention!r}")
+    print(f"  resolved_intervention={resolved_intervention!r}")
+else:
+    print(f"  fixes={active_fixes!r}")
+    print(f"  resolved_fixes={resolved_fixes!r}")
+    print(f"  fixes_allow_override={FIXES_ALLOW_OVERRIDE}")
 
 # %% [markdown]
-# ## 2. Import with configured fixes columns
+# ## 2. Import with configured columns
 
 # %%
 nav_kwargs: dict = {}
-if FIXES_COLS is not None:
-    nav_kwargs["fixes_cols"] = FIXES_COLS
-nav_kwargs["fixes_allow_override"] = FIXES_ALLOW_OVERRIDE
+if split_mode:
+    if CONTEXT_COLS is not None:
+        nav_kwargs["context_cols"] = CONTEXT_COLS
+    if INTERVENTION_COLS is not None:
+        nav_kwargs["intervention_cols"] = INTERVENTION_COLS
+else:
+    if FIXES_COLS is not None:
+        nav_kwargs["fixes_cols"] = FIXES_COLS
+    nav_kwargs["fixes_allow_override"] = FIXES_ALLOW_OVERRIDE
 
 try:
     exps = import_NAV_exps(DATA, **nav_kwargs)
@@ -385,6 +408,8 @@ duplicate_id_errors: list[tuple[str, str]] = []
 parsed_rows: list[ParsedRow] = []
 seen_exp_ids: set[int] = set()
 
+manual_allow_override = True if split_mode else FIXES_ALLOW_OVERRIDE
+
 for r in rows:
     rid = (r.get(ID_COL) or "").strip()
     # Match import: only resolved headers, keep blanks so last-col override
@@ -395,7 +420,7 @@ for r in rows:
         if not cell:
             continue
         try:
-            _merge_fixes([cell], row_id=rid, allow_override=FIXES_ALLOW_OVERRIDE)
+            _merge_fixes([cell], row_id=rid, allow_override=manual_allow_override)
         except Exception as exc:
             parse_errors.append((rid, col, cell[:100], str(exc)))
             row_parse_ok = False
@@ -407,7 +432,7 @@ for r in rows:
         fixes = _merge_fixes(
             cells,
             row_id=rid or None,
-            allow_override=FIXES_ALLOW_OVERRIDE,
+            allow_override=manual_allow_override,
         )
     except Exception as exc:
         merge_errors.append((rid, str(exc)))
@@ -420,7 +445,7 @@ for r in rows:
             observed,
             cells,
             row_id=rid or None,
-            allow_override=FIXES_ALLOW_OVERRIDE,
+            allow_override=manual_allow_override,
         )
     except Exception as exc:
         observed_in_fixes.append((rid, str(exc)))

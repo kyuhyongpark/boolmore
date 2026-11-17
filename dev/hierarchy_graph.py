@@ -4,13 +4,17 @@
 # Loads a NAV `config.json`, resolves `default_sources` / `generate_defaults`
 # the same way scoring does, and builds a digraph of intervention entities.
 #
-# Entity = `(fixes, observed)`. An edge **A → B** means A is a hierarchical
-# subset of B (more general → more specific): when scoring B, agreements at A
-# multiply in via an *incoming* ancestor edge. After building the full subset
-# closure, transitive reduction keeps only consecutive-depth covering edges.
+# Entity = `(context, intervention, observed)`. An edge **A → B** means A is a
+# hierarchical subset of B within the same effective context (more general →
+# more specific): when scoring B, agreements at A multiply in via an *incoming*
+# ancestor edge. After building the full subset closure, transitive reduction
+# keeps only consecutive-depth covering edges.
 #
-# **Depth** is the longest path from a root in the pruned DAG (not the raw
-# intervention count). **Printed fixes** on a non-root omit assignments already
+# Comparative outcomes are omitted — they are scored flat and never multiply
+# into hierarchy products. Legacy empty-context experiments use
+# ``default_sources`` as the shared context (matching scoring). **Depth** is
+# the longest path from a root in the pruned DAG (not the raw intervention
+# count). **Printed interventions** on a non-root omit assignments already
 # shared by all immediate predecessors.
 
 # %%
@@ -23,15 +27,19 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import pandas as pd
 
-from boolmore.evaluation.nav_score import _is_intervention_subset
+from boolmore.evaluation.nav_score import (
+    _effective_hierarchy_parts,
+    _is_intervention_subset,
+)
 from boolmore.io.load import load_json_config
 from boolmore.io.paths import project_root
+from boolmore.outcome import ComparativeOutcome
 from boolmore.run_setup import build_evaluator
 from boolmore.types import Assignment
 
 # %%
-# CONFIG = project_root() / "case_study" / "breast_cancer" / "BreastCancer_config.json"
-CONFIG = project_root() / "case_study" / "ABA" / "data" / "ABA_A.json"
+CONFIG = project_root() / "case_study" / "breast_cancer" / "config.json"
+# CONFIG = project_root() / "case_study" / "ABA" / "data" / "ABA_A.json"
 
 # %% [markdown]
 # ## Load config and experiments
@@ -58,8 +66,11 @@ if not evaluator.hierarchy:
 # %% [markdown]
 # ## Build full subset digraph
 #
-# Nodes are co-located experiment groups sharing `(fixes, observed)`.
-# Edges only within the same observed node.
+# Nodes are co-located experiment groups sharing
+# `(context, intervention, observed)`. Only **definitive** (non-comparative)
+# experiments are included — matching hierarchy scoring, which never
+# multiplies comparative agreements. Edges only within the same observed
+# node and the same effective context.
 
 
 # %%
@@ -74,58 +85,74 @@ def assignment_delta(child: Assignment, shared: dict[str, int]) -> Assignment:
     return tuple((n, v) for n, v in child if shared.get(n) != v)
 
 
+# Entity = (eff_context, eff_intervention, observed)
+Entity = tuple[Assignment, Assignment, str]
+
+
 def predecessor_intersection(H: nx.DiGraph, entity: Entity) -> dict[str, int]:
     preds = list(H.predecessors(entity))
     if not preds:
         return {}
-    shared = dict(preds[0][0])
+    shared = dict(preds[0][1])
     for pred in preds[1:]:
-        other = dict(pred[0])
+        other = dict(pred[1])
         shared = {n: v for n, v in shared.items() if other.get(n) == v}
     return shared
 
 
-Entity = tuple[Assignment, str]
-
-
 def display_fixes(H: nx.DiGraph, entity: Entity) -> str:
-    """Full fixes for roots; otherwise only settings beyond all immediate preds."""
+    """Full intervention for roots; otherwise only settings beyond preds."""
     if H.in_degree(entity) == 0:
-        return format_fixes(entity[0])
-    return format_fixes(assignment_delta(entity[0], predecessor_intersection(H, entity)))
+        return format_fixes(entity[1])
+    return format_fixes(assignment_delta(entity[1], predecessor_intersection(H, entity)))
 
+
+n_comparative = sum(
+    1 for exp in exps if isinstance(exp.outcome, ComparativeOutcome)
+)
 entity_to_ids: dict[Entity, list[int]] = defaultdict(list)
 for exp in exps:
-    entity_to_ids[(exp.fixes, exp.observed)].append(exp.id)
+    if isinstance(exp.outcome, ComparativeOutcome):
+        continue
+    eff_context, eff_intervention, _ = _effective_hierarchy_parts(
+        exp.context, exp.intervention, default_sources
+    )
+    entity_to_ids[(eff_context, eff_intervention, exp.observed)].append(exp.id)
 
 for ids in entity_to_ids.values():
     ids.sort()
 
 G = nx.DiGraph()
 for entity, ids in entity_to_ids.items():
-    fixes, observed = entity
+    context, intervention, observed = entity
     G.add_node(
         entity,
         ids=ids,
-        fixes_str=format_fixes(fixes),
+        fixes_str=format_fixes(intervention),
+        context_str=format_fixes(context),
         observed=observed,
     )
 
-by_observed: dict[str, list[Entity]] = defaultdict(list)
+by_pool: dict[tuple[str, Assignment], list[Entity]] = defaultdict(list)
 for entity in G.nodes:
-    by_observed[entity[1]].append(entity)
+    context, _intervention, observed = entity
+    by_pool[(observed, context)].append(entity)
 
-for observed, entities in by_observed.items():
+for (_observed, _context), entities in by_pool.items():
     for a, b in combinations(entities, 2):
-        a_fixes = dict(a[0])
-        b_fixes = dict(b[0])
-        if _is_intervention_subset(a_fixes, b_fixes, default_sources):
+        a_interv = dict(a[1])
+        b_interv = dict(b[1])
+        if _is_intervention_subset(a_interv, b_interv):
             G.add_edge(a, b)
-        if _is_intervention_subset(b_fixes, a_fixes, default_sources):
+        if _is_intervention_subset(b_interv, a_interv):
             G.add_edge(b, a)
 
+print(
+    f"definitive experiments: {len(exps) - n_comparative}  |  "
+    f"comparative skipped: {n_comparative}"
+)
 print(f"nodes: {G.number_of_nodes()}  |  full subset edges: {G.number_of_edges()}")
-print(f"observed nodes: {len(by_observed)}")
+print(f"hierarchy pools (observed, context): {len(by_pool)}")
 print(f"co-located entities (≥2 ids): {sum(1 for ids in entity_to_ids.values() if len(ids) > 1)}")
 
 # %% [markdown]
@@ -281,7 +308,7 @@ def ids_str(H: nx.DiGraph, entity: Entity) -> str:
 
 
 def edge_delta(pred: Entity, succ: Entity) -> str:
-    return format_fixes(assignment_delta(succ[0], dict(pred[0])))
+    return format_fixes(assignment_delta(succ[1], dict(pred[1])))
 
 
 def draw_focus_cone(H: nx.DiGraph, focus: Entity, *, max_edge_label: int = EDGE_LABEL_LEN) -> None:

@@ -165,6 +165,8 @@ def test_export_nav_report(tmp_path):
 
     assert len(rows) == 1
     assert rows[0]["id"] == "1"
+    assert rows[0]["context"] == ""
+    assert rows[0]["intervention"] == ""
     assert rows[0]["fixes"] == "S=1"
     assert rows[0]["observed"] == "A"
     assert rows[0]["outcome"] == "ON"
@@ -175,6 +177,8 @@ def test_export_nav_report(tmp_path):
         "id",
         "weight",
         "hierarchy",
+        "context",
+        "intervention",
         "fixes",
         "observed",
         "outcome",

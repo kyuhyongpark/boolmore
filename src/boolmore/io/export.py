@@ -42,11 +42,18 @@ def export_nav_report(result: EvaluationResult, path: str | Path) -> Path:
         if item.outcome is None:
             raise ValueError("export_nav_report requires NAV item scores with outcome")
         lo, hi = resolve_outcome_range(item.outcome)
+        def _fmt(assignment) -> str:
+            if not assignment:
+                return ""
+            return ",".join(f"{n}={v}" for n, v in assignment)
+
         rows.append({
             "id": item.id,
             "weight": item.weight,
             "hierarchy": item.hierarchy,
-            "fixes": ",".join(f"{n}={v}" for n, v in item.fixes),
+            "context": _fmt(item.context or ()),
+            "intervention": _fmt(item.intervention or ()),
+            "fixes": _fmt(item.fixes),
             "observed": item.observed,
             "outcome": format_outcome(item.outcome),
             "outcome_range": format_outcome_range(lo, hi),

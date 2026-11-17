@@ -33,9 +33,13 @@ class EvaluationItemScore:
     kind : ``"NAV"`` or ``"Phenotype"`` or None
         Evaluation modality for this item.
     hierarchy : int or None
-        Number of non-default interventions (NAV only).
+        Number of interventions away from context (NAV only).
     fixes : Assignment or None
-        Intervention assignment (NAV only).
+        Effective assignment ``context`` overridden by ``intervention`` (NAV only).
+    context : Assignment or None
+        Background assignment used for hierarchy grouping (NAV only).
+    intervention : Assignment or None
+        Deviation from context (NAV only).
     observed : str or None
         Observed node name (NAV only).
     outcome : OutcomeType or None
@@ -65,6 +69,8 @@ class EvaluationItemScore:
     kind: ItemKind | None = None
     hierarchy: int | None = None
     fixes: Assignment | None = None
+    context: Assignment | None = None
+    intervention: Assignment | None = None
     observed: str | None = None
     outcome: OutcomeType | None = None
     predict_value: float | None = None

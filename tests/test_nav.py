@@ -328,6 +328,55 @@ def test_override_same_cell_duplicate_still_raises(tmp_path: Path):
         )
 
 
+def test_context_intervention_split_and_override(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Culture,Drug,Observed node,Categorization\n"
+        '1,1.0,"A=0,B=1","A=1,C=1",X,ON\n',
+    )
+
+    exps = import_NAV_exps(
+        csv_path,
+        context_cols=("Culture",),
+        intervention_cols=("Drug",),
+    )
+    assert exps[0].context == (("A", 0), ("B", 1))
+    assert exps[0].intervention == (("A", 1), ("C", 1))
+    assert exps[0].fixes == (("A", 1), ("B", 1), ("C", 1))
+
+
+def test_context_strips_observed_node(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Culture,Drug,Observed node,Categorization\n"
+        '1,1.0,"A=1,B=0",C=1,A,ON\n',
+    )
+
+    exps = import_NAV_exps(
+        csv_path,
+        context_cols=("Culture",),
+        intervention_cols=("Drug",),
+    )
+    assert exps[0].context == (("B", 0),)
+    assert exps[0].intervention == (("C", 1),)
+    assert exps[0].fixes == (("B", 0), ("C", 1))
+
+
+def test_observed_in_intervention_raises(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Culture,Drug,Observed node,Categorization\n"
+        "1,1.0,B=0,A=1,A,ON\n",
+    )
+
+    with pytest.raises(ValueError, match="intervention and observed"):
+        import_NAV_exps(
+            csv_path,
+            context_cols=("Culture",),
+            intervention_cols=("Drug",),
+        )
+
+
 def test_ambiguous_single_column_raises(tmp_path: Path):
     csv_path = _write(
         tmp_path / "data.csv",
