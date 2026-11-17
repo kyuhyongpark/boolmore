@@ -6,6 +6,7 @@ from boolmore.experiment import NAVExperiment
 from boolmore.evaluation.agreement import get_agreements
 from boolmore.evaluation.score import EvaluationItemScore
 from boolmore.inference.prediction import NAVPrediction
+from boolmore.outcome import ComparativeOutcome
 from boolmore.types import AgreeType, Assignment
 
 
@@ -111,11 +112,13 @@ def get_hierarchy_scores(
 ) -> list[EvaluationItemScore]:
     """Compute per-experiment scores with intervention hierarchy.
 
-    For each experiment, the score is the experiment weight multiplied by
-    every agreement at every hierarchical subset intervention (including
-    itself). When several experiments share a subset intervention, all of
-    their agreements multiply in. Models must agree with more general
-    (fewer) interventions before receiving credit for more specific ones.
+    For each non-comparative experiment, the score is the experiment weight
+    multiplied by every non-comparative agreement at every hierarchical
+    subset intervention (including itself). Comparative outcomes are scored
+    flat (``weight * agreement``) and never multiply into another
+    experiment's hierarchy product. Models must agree with more general
+    (fewer) definitive interventions before receiving credit for more
+    specific ones.
 
     Parameters
     ----------
@@ -142,10 +145,21 @@ def get_hierarchy_scores(
             ]
 
             for exp_id, weight, outcome, predict_value, agreement in entries:
-                score = weight
-                for other in subset_fixes:
-                    for *_, other_agreement in by_fixes[other]:
-                        score *= other_agreement
+                if isinstance(outcome, ComparativeOutcome):
+                    score = weight * agreement
+                else:
+                    score = weight
+                    for other in subset_fixes:
+                        for (
+                            _,
+                            _,
+                            other_outcome,
+                            _,
+                            other_agreement,
+                        ) in by_fixes[other]:
+                            if isinstance(other_outcome, ComparativeOutcome):
+                                continue
+                            score *= other_agreement
 
                 results.append(
                     EvaluationItemScore(

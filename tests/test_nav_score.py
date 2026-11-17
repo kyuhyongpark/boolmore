@@ -7,6 +7,7 @@ from boolmore.evaluation.nav_score import (
 )
 from boolmore.experiment import NAVExperiment
 from boolmore.inference.prediction import NAVPrediction
+from boolmore.outcome import ComparativeOutcome
 
 
 # --- intervention_hierarchy ---
@@ -211,6 +212,49 @@ def test_get_hierarchy_scores_independent_observed_nodes():
     assert by_id[2].score == 3.0
     assert by_id[1].observed == "A"
     assert by_id[2].observed == "B"
+
+
+def test_get_hierarchy_scores_skips_comparative_multipliers():
+    """Comparative agreements do not multiply into definitive hierarchy scores."""
+    default_sources = {"S": 0}
+    general = (("S", 0),)
+    specific = (("S", 0), ("X", 1))
+    comparative = ComparativeOutcome(relation="higher", other_id=99)
+    agreements = {
+        "A": {
+            general: [
+                (1, 1.0, "ON", 1.0, 1.0),
+                (3, 1.0, comparative, 0.1, 0.0),
+            ],
+            specific: [(2, 2.0, "ON", 1.0, 1.0)],
+        }
+    }
+
+    scores = {item.id: item for item in get_hierarchy_scores(agreements, default_sources)}
+
+    # weight * absolute general * specific; comparative 0.0 is ignored
+    assert scores[2].score == 2.0
+    # comparative itself is flat: weight * agreement
+    assert scores[3].score == 0.0
+
+
+def test_get_hierarchy_scores_comparative_flat_despite_subset_disagreement():
+    """Comparative rows stay flat even when a subset definitive disagrees."""
+    default_sources = {"S": 0}
+    general = (("S", 0),)
+    specific = (("S", 0), ("X", 1))
+    comparative = ComparativeOutcome(relation="same", other_id=1)
+    agreements = {
+        "A": {
+            general: [(1, 1.0, "ON", 0.0, 0.0)],
+            specific: [(2, 2.0, comparative, 0.0, 1.0)],
+        }
+    }
+
+    scores = {item.id: item for item in get_hierarchy_scores(agreements, default_sources)}
+
+    assert scores[1].score == 0.0
+    assert scores[2].score == 2.0
 
 
 # --- get_NAV_scores ---
