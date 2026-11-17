@@ -442,48 +442,48 @@ def test_get_agreements_tuple_outcome():
     assert agreement == pytest.approx(1.0)
 
 
-def test_get_agreements_avg_observed_means_siblings():
+def test_get_agreements_observed_means_siblings():
     experiments = [
-        NAVExperiment(id=1, fixes=(), observed="A_avg", outcome="Some", weight=1.0),
+        NAVExperiment(id=1, fixes=(), observed="A", outcome="Some", weight=1.0),
     ]
     predictions = _prediction((), {"A": 0.0, "A_2": 1.0})
 
     agreements = get_agreements(experiments, predictions)
-    exp_id, weight, outcome, predict, agreement = agreements["A_avg"][()][0]
+    exp_id, weight, outcome, predict, agreement = agreements["A"][()][0]
     assert (exp_id, weight, outcome, predict) == (1, 1.0, "Some", 0.5)
     assert agreement == pytest.approx(1.0)
 
 
-def test_related_node_names_includes_alphabet_siblings_excludes_unrelated():
+def test_related_node_names_includes_int_siblings_excludes_unrelated():
     values = {
         "A": 0.0,
-        "A_X": 1.0,
-        "A_Y": 0.5,
-        "A_Z": 0.0,
+        "A_2": 1.0,
+        "A_3": 0.5,
+        "A_X": 0.0,  # letter suffix is not a sibling
         "A_T": 0.9,  # distinct entity (transcript), not a sibling
         "A_iT": 0.25,
         "A_2b": 0.75,
         "AB": 1.0,
     }
-    assert sorted(_related_node_names("A", values)) == ["A", "A_X", "A_Y", "A_Z"]
-    assert _average_related_values(values, "A_avg") == pytest.approx(0.375)
+    assert sorted(_related_node_names("A", values)) == ["A", "A_2", "A_3"]
+    assert _average_related_values(values, "A") == pytest.approx(0.5)
 
 
-def test_get_agreements_avg_none_when_any_sibling_none():
+def test_get_agreements_observed_none_when_any_sibling_none():
     experiments = [
-        NAVExperiment(id=1, fixes=(), observed="A_avg", outcome="Some", weight=1.0),
+        NAVExperiment(id=1, fixes=(), observed="A", outcome="Some", weight=1.0),
     ]
     predictions = _prediction((), {"A": None, "A_2": None})
 
     agreements = get_agreements(experiments, predictions)
-    _, _, _, predict, agreement = agreements["A_avg"][()][0]
+    _, _, _, predict, agreement = agreements["A"][()][0]
     assert predict is None
     assert agreement == pytest.approx(1.0)
 
 
-def test_get_agreements_avg_no_siblings_raises():
+def test_get_agreements_observed_no_siblings_raises():
     experiments = [
-        NAVExperiment(id=1, fixes=(), observed="A_avg", outcome="Some", weight=1.0),
+        NAVExperiment(id=1, fixes=(), observed="A", outcome="Some", weight=1.0),
     ]
     predictions = _prediction((), {"B": 0.5})
 

@@ -27,7 +27,6 @@ import numpy as np
 
 from boolmore.boolean_functions import assignment_to_dict
 from boolmore.evaluation.agreement import (
-    _AVG_SUFFIX,
     _average_related_values,
     _related_node_names,
 )
@@ -307,17 +306,15 @@ def discover_entity_bases(
     node_names: Sequence[str],
     experiments: Iterable[Any],
 ) -> list[str]:
-    """Bases with ≥2 siblings, plus bases behind observed ``*_avg`` names."""
+    """Bases with ≥2 siblings, plus multi-sibling bases used as observed names."""
     names = list(node_names)
     bases: set[str] = set()
     for exp in experiments:
         obs = exp.observed
-        if obs.endswith(_AVG_SUFFIX):
-            base = obs[: -len(_AVG_SUFFIX)]
-            if base and _related_node_names(base, names):
-                bases.add(base)
+        if obs and len(_related_node_names(obs, names)) >= 2:
+            bases.add(obs)
 
-    suffix_re = re.compile(r"^(.+?)_(?:\d+|[X-Z])$")
+    suffix_re = re.compile(r"^(.+?)_\d+$")
     candidates: set[str] = set(names)
     for name in names:
         m = suffix_re.match(name)
@@ -338,8 +335,7 @@ def entity_average_nav(
     """Map each entity base → mean of sibling node NAVs."""
     out: dict[str, float] = {}
     for base in bases:
-        avg_name = f"{base}{_AVG_SUFFIX}"
-        val = _average_related_values(nav, avg_name)
+        val = _average_related_values(nav, base)
         if val is None:
             raise ValueError(f"entity average for {base!r} hit a None sibling NAV")
         out[base] = float(val)
@@ -379,7 +375,7 @@ def entity_nav_dict(
     out: dict[str, float] = {}
     for key in entity_keys:
         if key in merged:
-            val = _average_related_values(nav, f"{key}{_AVG_SUFFIX}")
+            val = _average_related_values(nav, key)
             if val is None:
                 raise ValueError(f"entity average for {key!r} hit a None sibling NAV")
             out[key] = float(val)

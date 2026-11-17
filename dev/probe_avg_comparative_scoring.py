@@ -1,13 +1,13 @@
 # %% [markdown]
-# Probe: `A_avg` + comparative NAV scoring
+# Probe: observed base `A` (sibling mean) + comparative NAV scoring
 #
 # Builds a tiny cascade model and one NAV `data.csv` with absolute `Some`
 # plus reciprocal higher/lower and same-as pairs (including co-located
 # absolute + comparative rows on the same fixes). Evaluates like
 # `scripts/evaluate_model.py` and checks expected agreements:
 #
-# | id | fixes | outcome | expect A_avg / Δ | agreement |
-# |----|-------|---------|------------------|-----------|
+# | id | fixes | outcome | expect A mean / Δ | agreement |
+# |----|-------|---------|-------------------|-----------|
 # | 1 | none | Some | 0.5 | 1.0 |
 # | 2 | Inhib1=1 | lower than 3 | Δ = 1/6 | 1/6 |
 # | 3 | Inhib2=1 | higher than 2 | Δ = 1/6 | 1/6 |
@@ -57,11 +57,11 @@ DATA.write_text(
     "\n".join(
         [
             "ID,Score,Source,Perturbation,Observed node,Categorization",
-            "1,1.0,,,A_avg,Some",
-            "2,1.0,,Inhib1=1,A_avg,lower than 3",
-            "3,1.0,,Inhib2=1,A_avg,higher than 2",
-            "4,1.0,,,A_avg,same as 5",
-            "5,1.0,,Inhib2=1,A_avg,same as 4",
+            "1,1.0,,,A,Some",
+            "2,1.0,,Inhib1=1,A,lower than 3",
+            "3,1.0,,Inhib2=1,A,higher than 2",
+            "4,1.0,,,A,same as 5",
+            "5,1.0,,Inhib2=1,A,same as 4",
             "",
         ]
     ),

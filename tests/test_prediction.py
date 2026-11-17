@@ -278,15 +278,14 @@ class TestGetNAVPrediction(unittest.TestCase):
             {"S": 1.0, "A": 0.0, "B": 0.0, "C": 0.0},
         )
 
-    def test_avg_observed_does_not_inject_synthetic_keys(self):
+    def test_observed_base_does_not_inject_synthetic_keys(self):
         primes = bnet_text2primes("A, A\nA_2, A_2\nA_3, A_3\n")
         experiments = [
-            NAVExperiment(id=1, fixes=(), observed="A_avg", outcome="Some", weight=1.0),
+            NAVExperiment(id=1, fixes=(), observed="A", outcome="Some", weight=1.0),
         ]
         preds = get_NAV_prediction(primes, experiments, method="ldoi")
         values = preds[()].average_values
         self.assertEqual(values, {"A": 0.5, "A_2": 0.5, "A_3": 0.5})
-        self.assertNotIn("A_avg", values)
 
 
 class TestLdoiEnhanced(unittest.TestCase):

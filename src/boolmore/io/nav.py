@@ -308,7 +308,7 @@ def import_NAV_exps(
     Raises ``ValueError`` on duplicate experiment ids, invalid outcomes, an
     inconsistent or empty ``Outcome range`` column, a comparative outcome
     that references a missing experiment id, compares a different observed
-    node (or ``*_avg`` name), or lacks the expected reciprocal comparative
+    node, or lacks the expected reciprocal comparative
     outcome on the referenced experiment, or when the observed node also
     appears in that row's fixes (strict mode) / last fixes column (override
     mode).

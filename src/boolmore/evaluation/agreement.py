@@ -10,8 +10,6 @@ from boolmore.inference.prediction import NAVPrediction
 from boolmore.outcome import ComparativeOutcome, resolve_outcome_range
 from boolmore.types import AgreeType, Assignment, OutcomeType
 
-_AVG_SUFFIX = "_avg"
-
 
 def line(x: float, start: tuple[float, float], end: tuple[float, float]) -> float:
     """Linearly interpolate ``y`` for ``x`` on the segment from ``start`` to ``end``.
@@ -94,34 +92,34 @@ def _comparative_predict_value(
 
 
 def _related_node_names(base: str, node_names: Iterable[str]) -> list[str]:
-    """Return names matching ``base``, ``base_<int>``, or ``base_<X-Z>``."""
-    pattern = re.compile(rf"^(?:{re.escape(base)}|{re.escape(base)}_(?:\d+|[X-Z]))$")
+    """Return names matching ``base`` or ``base_<int>``."""
+    pattern = re.compile(rf"^(?:{re.escape(base)}|{re.escape(base)}_\d+)$")
     return [name for name in node_names if pattern.fullmatch(name)]
 
 
 def _average_related_values(
     average_values: dict[str, float | None],
-    observed_avg: str,
+    base: str,
 ) -> float | None:
-    """Mean of sibling node values for an ``*_avg`` observed name.
+    """Mean of sibling node values for an observed base name.
+
+    Related nodes are ``base`` and ``base_<int>``. Returns ``None`` if any
+    sibling value is unknown.
 
     Raises
     ------
     ValueError
-        If ``observed_avg`` does not end with ``_avg``, the base is empty,
-        or no related sibling nodes are present in ``average_values``.
+        If ``base`` is empty or no related nodes are present in
+        ``average_values``.
     """
-    if not observed_avg.endswith(_AVG_SUFFIX):
-        raise ValueError(f"Expected observed name ending with {_AVG_SUFFIX!r}: {observed_avg!r}")
-    base = observed_avg[: -len(_AVG_SUFFIX)]
     if not base:
-        raise ValueError(f"Empty base for average observed node {observed_avg!r}")
+        raise ValueError("Empty base for observed node average")
 
     related = _related_node_names(base, average_values)
     if not related:
         raise ValueError(
-            f"No related nodes found for {observed_avg!r} "
-            f"(looked for {base!r}, {base}_<int>, or {base}_<X-Z>)"
+            f"No related nodes found for observed {base!r} "
+            f"(looked for {base!r} or {base}_<int>)"
         )
 
     floats: list[float] = []
@@ -137,10 +135,8 @@ def _predict_value_for_observed(
     average_values: dict[str, float | None],
     observed: str,
 ) -> float | None:
-    """Look up a predicted value, resolving ``*_avg`` as the sibling mean."""
-    if observed.endswith(_AVG_SUFFIX):
-        return _average_related_values(average_values, observed)
-    return average_values[observed]
+    """Predicted value for ``observed`` as the mean of ``base`` / ``base_<int>``."""
+    return _average_related_values(average_values, observed)
 
 
 def check_co_located_outcomes(
@@ -196,10 +192,10 @@ def get_agreements(
     experiments : list of NAVExperiment
     predictions : dict of Assignment to NAVPrediction
         Predictions keyed by intervention assignment. Average node values
-        are read from ``NAVPrediction.average_values``. Observed names
-        ending in ``*_avg`` are scored as the mean of related sibling
-        nodes (``base``, ``base_<int>``, or ``base_<X-Z>``), or ``None``
-        if any sibling is unknown.
+        are read from ``NAVPrediction.average_values``. Each observed name
+        is treated as a base and scored as the mean of related sibling
+        nodes (``base`` or ``base_<int>``), or ``None`` if any sibling is
+        unknown.
 
     Returns
     -------
@@ -217,8 +213,8 @@ def get_agreements(
     ------
     ValueError
         If an outcome label or range is invalid, a comparative reference id
-        is missing, an ``*_avg`` observed name has no related siblings, or
-        if two experiments share the same observed node and intervention
+        is missing, an observed base has no related siblings, or if two
+        experiments share the same observed node and intervention
         assignment with conflicting outcomes (two non-comparative outcomes,
         or two comparatives with the same ``other_id``).
     """

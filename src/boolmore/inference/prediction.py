@@ -62,8 +62,9 @@ class NAVPrediction:
     average_values : dict of str to float or None
         Average attractor value of each model node in ``[0, 1]``.
         ``None`` means unknown / free (``?``), used only by the LDOI
-        upper-bound path. Synthetic ``*_avg`` observed names are resolved
-        later by :func:`~boolmore.evaluation.agreement.get_agreements`.
+        upper-bound path. Observed base names are resolved to sibling
+        means later by
+        :func:`~boolmore.evaluation.agreement.get_agreements`.
     """
 
     fixes: Assignment
@@ -985,7 +986,7 @@ def get_NAV_prediction(
     dict of Assignment to NAVPrediction
         One prediction per unique intervention, keyed by ``fixes``.
         ``average_values`` maps each model node to a value in ``[0, 1]``.
-        Observed names ending in ``*_avg`` are resolved later by
+        Observed base names are resolved to sibling means later by
         :func:`~boolmore.evaluation.agreement.get_agreements`.
 
     Raises
