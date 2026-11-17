@@ -159,15 +159,27 @@ def _merge_fixes(
     cells: Sequence[str],
     *,
     row_id: str | None = None,
+    allow_override: bool = False,
 ) -> tuple[tuple[str, int], ...]:
-    """Merge fixes cells; raise if any node name appears more than once."""
-    merged: list[tuple[str, int]] = []
+    """Merge fixes cells into a unique ``(node, value)`` mapping.
+
+    Parameters
+    ----------
+    allow_override :
+        When ``False`` (default), any node that appears more than once raises.
+        When ``True``, a later cell's assignment for the same node replaces an
+        earlier one. Duplicate nodes within a single cell always raise.
+    """
     seen: dict[str, int] = {}
     for cell in cells:
+        cell_nodes: set[str] = set()
         for node, value in _parse_fixes_cell(cell):
-            if node in seen:
+            where = f" (row id={row_id})" if row_id is not None else ""
+            if node in cell_nodes:
+                raise ValueError(f"Duplicate node '{node}' in fixes{where}")
+            cell_nodes.add(node)
+            if node in seen and not allow_override:
                 prev = seen[node]
-                where = f" (row id={row_id})" if row_id is not None else ""
                 if prev != value:
                     raise ValueError(
                         f"Inconsistent fixes for node '{node}'{where}: "
@@ -175,8 +187,37 @@ def _merge_fixes(
                     )
                 raise ValueError(f"Duplicate node '{node}' in fixes{where}")
             seen[node] = value
-            merged.append((node, value))
-    return tuple(sorted(merged, key=lambda x: x[0]))
+    return tuple(sorted(seen.items(), key=lambda x: x[0]))
+
+
+def _apply_observed_to_fixes(
+    fixes: tuple[tuple[str, int], ...],
+    observed: str,
+    fixes_cells: Sequence[str],
+    *,
+    row_id: str | None = None,
+    allow_override: bool = False,
+) -> tuple[tuple[str, int], ...]:
+    """Enforce observed-vs-fixes rules; optionally drop observed from fixes."""
+    where = f" (row id={row_id})" if row_id is not None else ""
+    fixed_nodes = {node for node, _ in fixes}
+    if not allow_override:
+        if observed in fixed_nodes:
+            raise ValueError(
+                f"Node '{observed}' appears in both fixes and observed{where}"
+            )
+        return fixes
+
+    if fixes_cells:
+        last_nodes = {node for node, _ in _parse_fixes_cell(fixes_cells[-1])}
+        if observed in last_nodes:
+            raise ValueError(
+                f"Node '{observed}' appears in both the last fixes column "
+                f"and observed{where}"
+            )
+    if observed not in fixed_nodes:
+        return fixes
+    return tuple((node, value) for node, value in fixes if node != observed)
 
 
 def _reformat_fixes_cell(cell: str) -> str:
@@ -236,6 +277,7 @@ def import_NAV_exps(
     observed_col: str | Sequence[str] = _DEFAULT_OBSERVED_COL,
     outcome_col: str | Sequence[str] = _DEFAULT_OUTCOME_COL,
     fixes_cols: Sequence[str] = _DEFAULT_FIXES_COLS,
+    fixes_allow_override: bool = False,
 ) -> list[NAVExperiment]:
     """Import NAV experiments from a ``.tsv`` or ``.csv`` file.
 
@@ -253,6 +295,13 @@ def import_NAV_exps(
         Columns whose cells are concatenated into ``NAVExperiment.fixes``.
         Absent names are skipped. Tokens may be ``Node=0|1`` or legacy
         ``Node KO|CA``. A cell that is only ``-`` is treated as empty.
+        When ``fixes_allow_override`` is true, put the intervention column last.
+    fixes_allow_override :
+        When ``False`` (default), duplicate or inconsistent fixed nodes raise,
+        and an observed node that also appears in fixes raises. When ``True``,
+        later ``fixes_cols`` entries override earlier ones for the same node;
+        if the observed node appears only in earlier columns it is dropped from
+        fixes; if it appears in the last resolved fixes column, import raises.
 
     Notes
     -----
@@ -261,7 +310,8 @@ def import_NAV_exps(
     that references a missing experiment id, compares a different observed
     node (or ``*_avg`` name), or lacks the expected reciprocal comparative
     outcome on the referenced experiment, or when the observed node also
-    appears in that row's fixes.
+    appears in that row's fixes (strict mode) / last fixes column (override
+    mode).
 
     When an ``Outcome range`` column is present, each row is checked against
     the range resolved from the outcome column; matching ranges are treated as
@@ -321,14 +371,16 @@ def import_NAV_exps(
             fixes = _merge_fixes(
                 fixes_cells,
                 row_id=row_id_str or None,
+                allow_override=fixes_allow_override,
             )
             observed = cell(observed_header)
-            fixed_nodes = {node for node, _ in fixes}
-            if observed in fixed_nodes:
-                raise ValueError(
-                    f"Node '{observed}' appears in both fixes and observed "
-                    f"(row id={exp_id})"
-                )
+            fixes = _apply_observed_to_fixes(
+                fixes,
+                observed,
+                fixes_cells,
+                row_id=row_id_str or None,
+                allow_override=fixes_allow_override,
+            )
 
             raw_outcome = cell(outcome_header)
             outcome = parse_outcome(raw_outcome)

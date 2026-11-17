@@ -1,37 +1,58 @@
 {
     "run_type": "NAV",
-    "data": "case_study/breast_cancer/breast_cancer_data_trial.csv",
-    "base": "case_study/breast_cancer/BreastCancer_primes_parsimonious.pkl",
-    "start": "case_study/breast_cancer/BreastCancer_primes_parsimonious.pkl",
+    "data": "case_study/breast_cancer/data.csv",
+    "base": "case_study/breast_cancer/parsimonious.pkl",
+    "start": "case_study/breast_cancer/parsimonious.pkl",
     "hierarchy": true,
     "nav_method": "ldoi",
     "default_sources": {},
     "generate_defaults": false,
+    "nav_columns": {
+        "id": "id",
+        "weight": "Weight",
+        "observed": "Observed node",
+        "outcome": "Value",
+        "fixes": [
+            "Culture Signals",
+            "Cell-induced signals",
+            "Cell line characteristic profile",
+            "Additional features of the cell population",
+            "Drug treatment/intervention"
+        ],
+        "fixes_allow_override": true
+    },
     "constraints": {
         "fixed": [],
         "regulate": {
             "ABL1": [
-                "RB",
                 "SRC"
             ],
             "AKT": [
                 "Ipatasertib",
-                "PDK1_pm",
-                "PIP3",
-                "mTORC2_pm"
+                "PDK1pm",
+                "PIP3_1",
+                "mTORC2pm"
             ],
             "APC": [
                 "AXIN1"
             ],
+            "ATF1": [
+                "ERK_1"
+            ],
             "AXIN1": [
-                "DVL1",
+                "DVL",
                 "GSK3B"
             ],
+            "Apoptosis": [
+                "CASP3",
+                "CASP7"
+            ],
             "BAD": [
-                "ERK",
+                "ERK_1",
                 "PAK1"
             ],
             "BAK1": [
+                "BCLXL",
                 "BID",
                 "BIM",
                 "MCL1",
@@ -39,6 +60,8 @@
             ],
             "BAX": [
                 "BAX",
+                "BCL2",
+                "BCLXL",
                 "BID",
                 "BIM",
                 "p53"
@@ -47,8 +70,8 @@
                 "BAD",
                 "BIM",
                 "CREB1",
-                "ERK",
-                "ER_transcription_2"
+                "ERK_1",
+                "ERtranscription_2"
             ],
             "BCLXL": [
                 "BAD",
@@ -61,7 +84,7 @@
             "BIM": [
                 "BCL2",
                 "BCLXL",
-                "BIM_T",
+                "BIMt",
                 "ERK_2",
                 "FOXO1",
                 "FOXO3"
@@ -70,8 +93,12 @@
                 "CASP8",
                 "CASP9"
             ],
+            "CASP7": [
+                "CASP8",
+                "CASP9"
+            ],
             "CASP8": [
-                "ERK",
+                "ERK_1",
                 "FADD",
                 "SRC"
             ],
@@ -86,52 +113,53 @@
             ],
             "CREB1": [
                 "AKT",
-                "PTEN",
+                "PTEN_1",
                 "SGK1"
             ],
             "CTNNB1": [
                 "SRC"
             ],
-            "CYCS": [
-                "BAK1",
-                "BAX"
-            ],
-            "CyclinB1": [
-                "p53"
-            ],
-            "CyclinD": [
+            "CycD1_1": [
+                "ERtranscription_1",
                 "GSK3B",
                 "JUN"
             ],
-            "DVL1": [
+            "DVL": [
                 "FZD"
             ],
+            "E2F_1": [
+                "RB_3"
+            ],
+            "E2F_2": [
+                "RB_2"
+            ],
             "E2F_3": [
-                "E2F_3"
+                "RB_1"
             ],
             "EGFR": [
                 "JUN",
                 "NFKB"
             ],
             "EGFRHER3c": [
-                "NRG1",
-                "erlotinib"
+                "Erlotinib",
+                "NRG1"
             ],
             "EGFRc": [
-                "Neratinib",
-                "erlotinib"
+                "Erlotinib",
+                "Neratinib"
             ],
             "EIF4": [
                 "EIF4EBP1"
             ],
-            "ER_transcription_2": [
+            "ERtranscription_2": [
                 "FOXA1",
                 "KMT2D",
                 "PBX1"
             ],
-            "ESR1": [
+            "ESR1_1": [
                 "AKT",
                 "ER",
+                "ERK_1",
                 "ES",
                 "FOXO3",
                 "Fulvestrant"
@@ -143,20 +171,20 @@
             "FAS": [
                 "p53"
             ],
-            "FASLG": [
-                "FOXO3"
-            ],
             "FOXO3": [
                 "PIM"
             ],
-            "FOXO3_Ub": [
+            "FOXO3ub": [
                 "ERK_2"
+            ],
+            "FZD": [
+                "WNT1"
             ],
             "GRB2": [
                 "EGFRHER3c",
                 "EGFRc",
                 "HER2HER2c",
-                "HER2HER3c",
+                "HER2HER3c_1",
                 "HER2HER3c_2",
                 "IRS1",
                 "SRC"
@@ -166,26 +194,26 @@
             ],
             "GSK3B": [
                 "AKT",
-                "ERK",
+                "ERK_1",
                 "GSK3B",
                 "p53"
             ],
             "HER2HER2c": [
-                "Neratinib",
-                "erlotinib"
+                "Erlotinib",
+                "Neratinib"
             ],
-            "HER2HER3c": [
+            "HER2HER3c_1": [
+                "Erlotinib",
                 "Neratinib",
-                "erlotinib",
-                "trastuzumab"
+                "Trastuzumab"
             ],
             "HER2HER3c_2": [
                 "NRG1",
-                "pertuzumab"
+                "Pertuzumab"
             ],
-            "HER3": [
+            "HER3_1": [
                 "FOXO3",
-                "HER3_iT"
+                "HER3it"
             ],
             "HER3_2": [
                 "FOXO3"
@@ -197,12 +225,11 @@
                 "NICD"
             ],
             "HRAS": [
-                "SOS1"
+                "SOS"
             ],
-            "IGF1R": [
+            "IGF1R_1": [
                 "IGF1",
-                "IGF1R_iT",
-                "INS",
+                "IGF1Rit_1",
                 "SRC"
             ],
             "IL1B": [
@@ -218,46 +245,55 @@
                 "INS"
             ],
             "IRS1": [
-                "IGF1R",
+                "IGF1R_1",
                 "INSR",
                 "S6K"
+            ],
+            "JAK1": [
+                "IL6R"
             ],
             "JAK2": [
                 "ABL1",
                 "IL6R"
             ],
             "JUN": [
+                "ATF1",
                 "GSK3B",
                 "JUN",
                 "MAPK8"
             ],
-            "LATS1": [
+            "LATS": [
                 "NF2"
             ],
             "MCL1": [
-                "ERK",
+                "ERK_1",
                 "GSK3B",
-                "MCL1_T",
+                "MCL1t",
                 "Translation"
             ],
             "MDM2": [
                 "AKT",
                 "p53"
             ],
-            "MEK": [
-                "PDK1_pm",
+            "MEK_1": [
+                "PDK1pm",
                 "Trametinib"
             ],
-            "MYC": [
+            "MOMP": [
+                "BAK1",
+                "BAX"
+            ],
+            "MYC_1": [
+                "ATF1",
                 "CTNNB1",
-                "ERK",
-                "ER_transcription",
+                "ERK_1",
+                "ERtranscription_1",
                 "GSK3B",
                 "PIM",
                 "STAT3"
             ],
-            "MYC_targets": [
-                "MYC",
+            "MYCtargets_1": [
+                "MYC_1",
                 "Translation"
             ],
             "MYOD1": [
@@ -285,29 +321,27 @@
                 "MDM2"
             ],
             "PAK1": [
-                "PDK1_ic",
+                "PDK1ic",
                 "RAC1"
             ],
             "PAK2": [
                 "RAC1"
             ],
-            "PGR": [
-                "PG"
-            ],
-            "PI3K": [
+            "PI3K_1": [
                 "Alpelisib",
                 "EGFRHER3c",
-                "ESR1",
-                "HER2HER3c",
+                "ESR1_1",
+                "GRB2",
+                "HER2HER3c_1",
                 "IRS1",
-                "RAS"
+                "RAS_1"
             ],
             "PIM": [
                 "STAT5"
             ],
-            "PIP3": [
-                "PI3K",
-                "PTEN"
+            "PIP3_1": [
+                "PI3K_1",
+                "PTEN_1"
             ],
             "PKCa": [
                 "PLCg"
@@ -327,30 +361,27 @@
             "PRKAA2": [
                 "STK11"
             ],
-            "PTEN": [
+            "PTEN_1": [
                 "GSK3B"
             ],
             "RAC1": [
                 "AKT",
-                "DVL1"
+                "DVL"
             ],
-            "RAF1": [
+            "RAF1_1": [
                 "HRAS",
-                "RAS"
+                "RAS_1"
             ],
-            "RAS": [
-                "SOS1"
-            ],
-            "RB": [
-                "pRB"
+            "RAS_1": [
+                "SOS"
             ],
             "RPS6": [
                 "S6K"
             ],
             "S6K": [
-                "ERK"
+                "ERK_1"
             ],
-            "SOS1": [
+            "SOS": [
                 "GRB2"
             ],
             "STAT1": [
@@ -359,6 +390,7 @@
                 "SRC"
             ],
             "STAT3": [
+                "JAK1",
                 "JAK2",
                 "SRC"
             ],
@@ -368,13 +400,13 @@
                 "SRC"
             ],
             "STK11": [
-                "ERK",
+                "ERK_1",
                 "FOXO3"
             ],
             "TCF7L2": [
                 "JUN"
             ],
-            "TEAD1": [
+            "TEAD": [
                 "YAP1"
             ],
             "TRADD": [
@@ -386,7 +418,7 @@
             ],
             "TWIST1": [
                 "AKT",
-                "ERK"
+                "ERK_1"
             ],
             "Translation": [
                 "EIF4"
@@ -396,44 +428,45 @@
                 "PRAS40",
                 "RHEB"
             ],
-            "p21": [
-                "p21_iT"
-            ],
-            "p21_p27": [
-                "p21_p27_T"
-            ],
-            "p21_p27_T": [
+            "p21t": [
                 "FOXO3",
-                "p21_iT",
-                "p27_iT"
-            ],
-            "p53": [
-                "PTEN",
-                "p38",
+                "MYC_1",
+                "p21it_1",
+                "p21it_2",
                 "p53"
             ],
-            "pRB": [
-                "CYCLINDc",
-                "RB",
-                "cycE_CDK2"
+            "p27": [
+                "PIM"
+            ],
+            "p27t": [
+                "FOXO3",
+                "p27it"
+            ],
+            "p53": [
+                "PTEN_1",
+                "p38",
+                "p53"
             ]
         },
         "necessary": {
+            "Apoptosis": [
+                "MOMP"
+            ],
             "BAD": [
                 "AKT",
                 "PIM"
             ],
             "BCL2": [
-                "BCL2_T",
+                "BCL2t",
                 "Navitoclax"
             ],
             "BCLXL": [
-                "BCLXL_T",
+                "BCLXLt",
                 "Navitoclax"
             ],
             "CASP9": [
                 "AKT",
-                "ERK"
+                "ERK_1"
             ],
             "CDK46": [
                 "Palbociclib"
@@ -441,26 +474,34 @@
             "CTNNB1": [
                 "DC"
             ],
-            "CYCLINDc": [
+            "CYCS": [
+                "MOMP"
+            ],
+            "CycD1CDK46c_1": [
                 "CDK46",
                 "CDKN2A",
-                "CyclinD"
+                "CycD1_1"
             ],
-            "CYCLINDc_2": [
-                "CYCLINDc"
+            "CycD1CDK46c_2": [
+                "CycD1CDK46c_1"
             ],
-            "CyclinD_2": [
-                "CyclinD"
+            "CycD1_2": [
+                "CycD1_1"
+            ],
+            "CycECDK2c": [
+                "CycECDK2t",
+                "p21",
+                "p27"
+            ],
+            "CycECDK2t": [
+                "E2F_1"
             ],
             "DC": [
                 "APC",
                 "GSK3B"
             ],
-            "E2F": [
-                "RB"
-            ],
             "E2F_2": [
-                "E2F"
+                "E2F_1"
             ],
             "E2F_3": [
                 "E2F_2"
@@ -468,7 +509,7 @@
             "EGFRHER3c": [
                 "EGF",
                 "EGFR",
-                "HER3"
+                "HER3_1"
             ],
             "EGFRc": [
                 "EGF",
@@ -477,24 +518,21 @@
             "EIF4EBP1": [
                 "mTORC1"
             ],
-            "ERK": [
-                "MEK"
+            "ERK_1": [
+                "MEK_1"
             ],
             "ERK_2": [
-                "ERK"
+                "ERK_1"
             ],
-            "ER_transcription": [
-                "ESR1"
+            "ERtranscription_1": [
+                "ESR1_1"
             ],
-            "ER_transcription_2": [
-                "ER_transcription"
-            ],
-            "ER_transcription_feedback_2": [
-                "ER_transcription_feedback"
+            "ERtranscription_2": [
+                "ERtranscription_1"
             ],
             "ESR1_2": [
                 "ER",
-                "ESR1",
+                "ESR1_1",
                 "Fulvestrant"
             ],
             "FAS": [
@@ -506,30 +544,30 @@
             ],
             "FOXO3": [
                 "AKT",
-                "FOXO3_Ub",
+                "FOXO3ub",
                 "SGK1"
             ],
             "HER2HER2c": [
                 "HER2"
             ],
-            "HER2HER3c": [
+            "HER2HER3c_1": [
                 "HER2",
-                "HER3"
+                "HER3_1"
             ],
             "HER2HER3c_2": [
-                "HER2HER3c"
+                "HER2HER3c_1"
             ],
             "HER3_2": [
-                "HER3"
+                "HER3_1"
             ],
             "HRAS": [
                 "NF1"
             ],
             "IGF1R_2": [
-                "IGF1R"
+                "IGF1R_1"
             ],
-            "IGF1R_iT_2": [
-                "IGF1R_iT"
+            "IGF1Rit_2": [
+                "IGF1Rit_1"
             ],
             "IL6R": [
                 "IL6"
@@ -537,23 +575,20 @@
             "KMT2D": [
                 "AKT"
             ],
-            "MAPK_2": [
-                "MAPK"
-            ],
             "MCL1": [
                 "S63845"
             ],
-            "MEK": [
-                "RAF1"
+            "MEK_1": [
+                "RAF1_1"
             ],
             "MEK_2": [
-                "MEK"
+                "MEK_1"
             ],
             "MYC_2": [
-                "MYC"
+                "MYC_1"
             ],
-            "MYC_targets_2": [
-                "MYC_targets"
+            "MYCtargets_2": [
+                "MYCtargets_1"
             ],
             "NICD": [
                 "NOTCH1"
@@ -561,33 +596,54 @@
             "NOTCH1": [
                 "DLL"
             ],
-            "PDK1_pm": [
-                "PIP3"
+            "PDK1pm": [
+                "PIP3_1"
             ],
             "PI3K_2": [
                 "Alpelisib",
-                "PI3K"
+                "PI3K_1"
             ],
             "PIP3_2": [
-                "PIP3"
+                "PIP3_1"
             ],
-            "PTEN": [
-                "PTEN_T"
+            "PTEN_1": [
+                "PTENt_1"
             ],
             "PTEN_2": [
-                "PTEN"
+                "PTEN_1"
             ],
-            "PTEN_T_2": [
-                "PTEN_T"
+            "PTENt_2": [
+                "PTENt_1"
+            ],
+            "Proliferation_1": [
+                "Apoptosis"
+            ],
+            "Proliferation_2": [
+                "Proliferation_1"
+            ],
+            "Proliferation_3": [
+                "Proliferation_2"
             ],
             "RAF1_2": [
-                "RAF1"
+                "RAF1_1"
             ],
             "RAS_2": [
-                "RAS"
+                "RAS_1"
             ],
             "RAS_3": [
                 "RAS_2"
+            ],
+            "RB_1": [
+                "RBt",
+                "pRB_3"
+            ],
+            "RB_2": [
+                "RB_1",
+                "pRB_2"
+            ],
+            "RB_3": [
+                "RB_2",
+                "pRB_1"
             ],
             "RELA": [
                 "NFKB"
@@ -599,45 +655,43 @@
                 "mTORC1"
             ],
             "SGK1": [
-                "PDK1_ic",
-                "SGK1_T",
-                "mTORC2_ic"
+                "PDK1ic",
+                "SGK1t",
+                "mTORC2ic"
             ],
             "TCF7L2": [
                 "CTNNB1"
             ],
             "TSC2": [
                 "AKT",
-                "ERK",
+                "ERK_1",
                 "SGK1"
             ],
             "YAP1": [
-                "LATS1"
+                "LATS"
             ],
-            "cycE_CDK2": [
-                "cycE_CDK2_T",
-                "p21_p27"
-            ],
-            "cycE_CDK2_T": [
-                "E2F"
-            ],
-            "mTORC2_pm": [
-                "PIP3"
+            "mTORC2pm": [
+                "PIP3_1"
             ],
             "p21": [
-                "AKT"
+                "AKT",
+                "p21t"
             ],
-            "p21_iT_2": [
-                "p21_iT"
+            "p21it_2": [
+                "p21it_1"
             ],
-            "p21_p27": [
-                "AKT"
+            "p27": [
+                "AKT",
+                "p27t"
             ],
             "p53": [
                 "MDM2"
             ],
+            "pRB_1": [
+                "RBt"
+            ],
             "pRB_2": [
-                "pRB"
+                "pRB_1"
             ],
             "pRB_3": [
                 "pRB_2"
@@ -647,18 +701,6 @@
         "possible_constant": []
     },
     "edge_pool": [],
-    "nav_columns": {
-        "id": "id",
-        "weight": "Weight",
-        "observed": "Observed node",
-        "outcome": "Value",
-        "fixes": [
-            "Signals",
-            "Drug treatment/intervention",
-            "Cell line characteristic profile",
-            "Additional features of the cell population"
-        ]
-    },
     "parameters": {
         "stop_if_max": true,
         "starting_gen": 0,
@@ -666,12 +708,10 @@
         "per_iter": 100,
         "keep": 20,
         "mix": 20,
-        "prob": {"1": 0.5, "11": 0.01},
+        "prob": 0.01,
         "edge_prob": 0.0,
         "order_by": [
             "n_extra_edges",
-            "n_eff_self_edges",
-            "n_eff_edges",
             "n_prime_implicants"
         ]
     }

@@ -5,14 +5,16 @@
 # `boolmore.io.nav.import_NAV_exps`.
 #
 # Edit the config cell below to point at another dataset. Set `FIXES_COLS`
-# when the file uses non-default fixes headers (e.g. breast cancer).
+# when the file uses non-default fixes headers (e.g. breast cancer). Put the
+# intervention column last and set `FIXES_ALLOW_OVERRIDE` when later columns
+# may override earlier fixes (and observed may be stripped from earlier cols).
 
 # %%
 from __future__ import annotations
 
 import csv
 import re
-from collections import Counter
+from collections import Counter, defaultdict
 from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
@@ -25,8 +27,10 @@ from boolmore.io.nav import (
     _DEFAULT_OBSERVED_COL,
     _DEFAULT_OUTCOME_COL,
     _DEFAULT_WEIGHT_COL,
+    _apply_observed_to_fixes,
     _merge_fixes,
     _normalize_header,
+    _resolve_fixes_columns,
     _resolve_single_column,
     import_NAV_exps,
 )
@@ -40,11 +44,25 @@ from boolmore.outcome import ComparativeOutcome, OutcomeType, parse_outcome
 
 # %%
 REPO = Path(__file__).resolve().parents[1]
-DATA = REPO / "case_study" / "breast_cancer" / "breast_cancer_data.csv"
+DATA = REPO / "case_study" / "breast_cancer" / "data.csv"
 
+# Intervention last so ``FIXES_ALLOW_OVERRIDE`` can treat it as the override col.
 FIXES_COLS: Sequence[str] | None = (
-    "Signals",
+    "Culture Signals",
+    "Cell-induced signals",
+    "Cell line characteristic profile",
+    "Additional features of the cell population",
     "Drug treatment/intervention",
+)
+FIXES_ALLOW_OVERRIDE = True
+
+# Metadata columns for report-only uniqueness checks (breast-cancer style).
+CULTURE_COL = "Culture"
+CULTURE_NOTES_COL = "Culture notes"
+CULTURE_SIGNALS_COL = "Culture Signals"
+CELL_LINE_COL = "Cell line"
+CELL_LINE_UNIQUE_COLS: tuple[str, ...] = (
+    "Cell-induced signals",
     "Cell line characteristic profile",
     "Additional features of the cell population",
 )
@@ -204,6 +222,76 @@ def _report_grouped(
         print(f"        ids: {', '.join(ids)}")
 
 
+def _collect_uniqueness_violations(
+    rows: Sequence[dict[str, str]],
+    *,
+    id_col: str,
+) -> list[tuple[str, str]]:
+    """Report-only Culture / Cell-line uniqueness violations."""
+    violations: list[tuple[str, str]] = []
+
+    by_culture: dict[tuple[str, str], dict[str, list[str]]] = defaultdict(
+        lambda: defaultdict(list)
+    )
+    for r in rows:
+        culture = (r.get(CULTURE_COL) or "").strip()
+        notes = (r.get(CULTURE_NOTES_COL) or "").strip()
+        if not culture and not notes:
+            continue
+        signals = (r.get(CULTURE_SIGNALS_COL) or "").strip()
+        rid = (r.get(id_col) or "").strip()
+        by_culture[(culture, notes)][signals].append(rid)
+
+    for (culture, notes), signal_groups in by_culture.items():
+        if len(signal_groups) <= 1:
+            continue
+        variants = sorted(signal_groups.items(), key=lambda kv: (-len(kv[1]), kv[0]))
+        summary = "; ".join(
+            f"{sig!r} ({len(ids)} rows)" for sig, ids in variants
+        )
+        for _sig, ids in variants:
+            for rid in ids:
+                violations.append(
+                    (
+                        rid,
+                        f"Culture+notes {(culture, notes)!r} has "
+                        f"disagreeing {CULTURE_SIGNALS_COL}: {summary}",
+                    )
+                )
+
+    for col in CELL_LINE_UNIQUE_COLS:
+        by_line: dict[str, dict[str, list[str]]] = defaultdict(
+            lambda: defaultdict(list)
+        )
+        for r in rows:
+            cell_line = (r.get(CELL_LINE_COL) or "").strip()
+            if not cell_line:
+                continue
+            value = (r.get(col) or "").strip()
+            rid = (r.get(id_col) or "").strip()
+            by_line[cell_line][value].append(rid)
+
+        for cell_line, value_groups in by_line.items():
+            if len(value_groups) <= 1:
+                continue
+            variants = sorted(
+                value_groups.items(), key=lambda kv: (-len(kv[1]), kv[0])
+            )
+            summary = "; ".join(
+                f"{val!r} ({len(ids)} rows)" for val, ids in variants
+            )
+            for _val, ids in variants:
+                for rid in ids:
+                    violations.append(
+                        (
+                            rid,
+                            f"Cell line {cell_line!r} has disagreeing "
+                            f"{col}: {summary}",
+                        )
+                    )
+    return violations
+
+
 # %% [markdown]
 # ## 1. Inspect headers vs `import_NAV_exps` defaults
 
@@ -218,6 +306,7 @@ WEIGHT_COL = _resolve_single_column(headers, _DEFAULT_WEIGHT_COL, "weight")
 OBSERVED_COL = _resolve_single_column(headers, _DEFAULT_OBSERVED_COL, "observed")
 OUTCOME_COL = _resolve_single_column(headers, _DEFAULT_OUTCOME_COL, "outcome")
 active_fixes = list(FIXES_COLS) if FIXES_COLS is not None else list(_DEFAULT_FIXES_COLS)
+resolved_fixes = _resolve_fixes_columns(headers, active_fixes)
 
 print(f"file: {DATA}")
 print(f"rows: {len(rows)}")
@@ -243,24 +332,17 @@ print(f"  weight={WEIGHT_COL!r}")
 print(f"  observed={OBSERVED_COL!r}")
 print(f"  outcome={OUTCOME_COL!r}")
 print(f"  fixes={active_fixes!r}")
+print(f"  resolved_fixes={resolved_fixes!r}")
+print(f"  fixes_allow_override={FIXES_ALLOW_OVERRIDE}")
 
 # %% [markdown]
-# ## 2. Default import (expected to fail on mismatched fixes columns)
-
-# %%
-try:
-    exps = import_NAV_exps(DATA)
-    print(f"default import OK: {len(exps)} experiments")
-except Exception as exc:
-    print(f"default import FAILED: {type(exc).__name__}: {exc}")
-
-# %% [markdown]
-# ## 3. Import with custom fixes columns (if configured)
+# ## 2. Import with configured fixes columns
 
 # %%
 nav_kwargs: dict = {}
 if FIXES_COLS is not None:
     nav_kwargs["fixes_cols"] = FIXES_COLS
+nav_kwargs["fixes_allow_override"] = FIXES_ALLOW_OVERRIDE
 
 try:
     exps = import_NAV_exps(DATA, **nav_kwargs)
@@ -270,9 +352,22 @@ except Exception as exc:
     print(f"import FAILED: {type(exc).__name__}: {exc}")
 
 # %% [markdown]
+# ## 3. Report-only uniqueness assertions
+#
+# Culture+notes → unique Culture Signals; Cell line → unique cell-line
+# feature columns. Violations are reported but do not drop trial rows.
+
+# %%
+uniqueness_violations = _collect_uniqueness_violations(rows, id_col=ID_COL)
+_report_grouped(
+    "uniqueness violations (report-only; not dropped)",
+    uniqueness_violations,
+)
+
+# %% [markdown]
 # ## 4. Row-level + comparative diagnostics
 #
-# Mirrors ``import_NAV_exps`` checks: fixes parse/merge, observed-in-fixes,
+# Mirrors ``import_NAV_exps`` checks: fixes parse/merge, observed vs fixes,
 # weights, outcome parse, co-located outcomes, and comparative pairs
 # (missing other id, different observed, missing/wrong reciprocal).
 
@@ -292,15 +387,15 @@ seen_exp_ids: set[int] = set()
 
 for r in rows:
     rid = (r.get(ID_COL) or "").strip()
-    cells: list[str] = []
+    # Match import: only resolved headers, keep blanks so last-col override
+    # / observed rules see the same column positions.
+    cells = [(r.get(col) or "").strip() for col in resolved_fixes]
     row_parse_ok = True
-    for col in active_fixes:
-        cell = (r.get(col) or "").strip()
+    for col, cell in zip(resolved_fixes, cells, strict=True):
         if not cell:
             continue
         try:
-            _merge_fixes([cell], row_id=rid)
-            cells.append(cell)
+            _merge_fixes([cell], row_id=rid, allow_override=FIXES_ALLOW_OVERRIDE)
         except Exception as exc:
             parse_errors.append((rid, col, cell[:100], str(exc)))
             row_parse_ok = False
@@ -309,14 +404,26 @@ for r in rows:
         continue
 
     try:
-        fixes = _merge_fixes(cells, row_id=rid or None)
+        fixes = _merge_fixes(
+            cells,
+            row_id=rid or None,
+            allow_override=FIXES_ALLOW_OVERRIDE,
+        )
     except Exception as exc:
         merge_errors.append((rid, str(exc)))
         continue
 
     observed = (r.get(OBSERVED_COL) or "").strip()
-    if observed in {node for node, _ in fixes}:
-        observed_in_fixes.append((rid, observed))
+    try:
+        fixes = _apply_observed_to_fixes(
+            fixes,
+            observed,
+            cells,
+            row_id=rid or None,
+            allow_override=FIXES_ALLOW_OVERRIDE,
+        )
+    except Exception as exc:
+        observed_in_fixes.append((rid, str(exc)))
         continue
 
     w = (r.get(WEIGHT_COL) or "").strip()
@@ -377,8 +484,8 @@ _report_grouped(
 )
 
 _report_grouped(
-    "observed node also in fixes",
-    [(rid, f"observed={observed!r}") for rid, observed in observed_in_fixes],
+    "observed node vs fixes conflicts",
+    observed_in_fixes,
 )
 
 _report_grouped(
@@ -423,7 +530,7 @@ for rid, msg in merge_errors:
     r = next(x for x in rows if (x.get(ID_COL) or "").strip() == rid)
     print(f"  ids={', '.join(ids)}")
     print(f"    example id={rid}: {msg}")
-    for col in active_fixes:
+    for col in resolved_fixes:
         print(f"      {col}: {(r.get(col) or '')[:120]!r}")
 
 print("\ncomparative failures (one example row per message):")
@@ -464,7 +571,7 @@ per_row_drop_msgs: dict[str, str] = {}
 for rid, msg in (
     [(r, msg) for r, _c, _cell, msg in parse_errors]
     + merge_errors
-    + [(r, f"Node '{obs}' appears in both fixes and observed") for r, obs in observed_in_fixes]
+    + observed_in_fixes
     + [(r, f"non-numeric {WEIGHT_COL}={w!r}") for r, w in weight_errors]
     + id_errors
     + duplicate_id_errors
@@ -485,14 +592,19 @@ print(f"kept after diagnostics: {len(kept)} / {len(rows)}")
 _report_grouped("dropped", dropped)
 
 trial_path = DATA.with_name(f"{DATA.stem}_trial{DATA.suffix or '.csv'}")
-with trial_path.open("w", newline="", encoding="utf-8") as f:
-    writer = csv.DictWriter(f, fieldnames=headers, extrasaction="ignore")
-    writer.writeheader()
-    writer.writerows(kept)
-print(f"\nwrote trial CSV: {trial_path}  ({len(kept)} rows)")
+if len(kept) == len(rows):
+    import_path = DATA
+    print(f"\nkept set identical to input; skipping trial CSV ({DATA.name})")
+else:
+    with trial_path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=headers, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(kept)
+    import_path = trial_path
+    print(f"\nwrote trial CSV: {trial_path}  ({len(kept)} rows)")
 
 try:
-    exps = import_NAV_exps(trial_path, **nav_kwargs)
+    exps = import_NAV_exps(import_path, **nav_kwargs)
     print(f"\ntrial import OK: {len(exps)} experiments")
     print("first:", exps[0])
     print(f"n fixes (first): {len(exps[0].fixes)}")

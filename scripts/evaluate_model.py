@@ -17,8 +17,8 @@ from boolmore.io.paths import project_root
 from boolmore.run_setup import build_evaluator
 
 # --- edit these to evaluate a different model ---
-CONFIG = "case_study/breast_cancer/BreastCancer_config.json"
-MODEL = "case_study/breast_cancer/20261015_164622/BreastCancer_primes_parsimonious_20261015_164622_2404_gen57.pkl"
+CONFIG = "case_study/breast_cancer/config.json"
+MODEL = "case_study/breast_cancer/parsimonious.pkl"
 REPORT = True  # set True to write a per-experiment NAV score CSV
 # ------------------------------------------------
 

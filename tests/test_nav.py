@@ -249,6 +249,85 @@ def test_inconsistent_node_in_fixes_raises(tmp_path: Path):
         import_NAV_exps(csv_path, fixes_cols=("Source", "Signals"))
 
 
+def test_override_later_column_wins(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Base,Intervention,Observed node,Categorization\n"
+        "1,1.0,A=1,A=0,B,ON\n",
+    )
+
+    exps = import_NAV_exps(
+        csv_path,
+        fixes_cols=("Base", "Intervention"),
+        fixes_allow_override=True,
+    )
+    assert exps[0].fixes == (("A", 0),)
+
+
+def test_override_agreeing_duplicate_kept_once(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Base,Extra,Observed node,Categorization\n"
+        "1,1.0,A=1,A=1,B,ON\n",
+    )
+
+    exps = import_NAV_exps(
+        csv_path,
+        fixes_cols=("Base", "Extra"),
+        fixes_allow_override=True,
+    )
+    assert exps[0].fixes == (("A", 1),)
+
+
+def test_override_strips_observed_from_earlier_column(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Base,Intervention,Observed node,Categorization\n"
+        '1,1.0,"A=1,B=0",C=1,A,ON\n',
+    )
+
+    exps = import_NAV_exps(
+        csv_path,
+        fixes_cols=("Base", "Intervention"),
+        fixes_allow_override=True,
+    )
+    assert exps[0].fixes == (("B", 0), ("C", 1))
+    assert exps[0].observed == "A"
+
+
+def test_override_observed_in_last_column_raises(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Base,Intervention,Observed node,Categorization\n"
+        "1,1.0,B=0,A=1,A,ON\n",
+    )
+
+    with pytest.raises(
+        ValueError,
+        match="last fixes column",
+    ):
+        import_NAV_exps(
+            csv_path,
+            fixes_cols=("Base", "Intervention"),
+            fixes_allow_override=True,
+        )
+
+
+def test_override_same_cell_duplicate_still_raises(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Base,Intervention,Observed node,Categorization\n"
+        '1,1.0,"A=1,A=0",,B,ON\n',
+    )
+
+    with pytest.raises(ValueError, match="Duplicate node 'A'"):
+        import_NAV_exps(
+            csv_path,
+            fixes_cols=("Base", "Intervention"),
+            fixes_allow_override=True,
+        )
+
+
 def test_ambiguous_single_column_raises(tmp_path: Path):
     csv_path = _write(
         tmp_path / "data.csv",

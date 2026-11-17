@@ -94,12 +94,14 @@ def _nav_column_kwargs(
     observed_col: str | Sequence[str] | None = None,
     outcome_col: str | Sequence[str] | None = None,
     fixes_cols: Sequence[str] | None = None,
+    fixes_allow_override: bool | None = None,
 ) -> dict:
     """Resolve NAV CSV column kwargs from config ``nav_columns`` and overrides.
 
     Explicit keyword arguments take precedence over ``config["nav_columns"]``.
     Keys in ``nav_columns`` are ``id``, ``weight``, ``observed``, ``outcome``,
-    and ``fixes``. Omitted keys fall through to ``import_NAV_exps`` defaults.
+    ``fixes``, and ``fixes_allow_override``. Omitted keys fall through to
+    ``import_NAV_exps`` defaults.
     """
     nav_cols = config.get("nav_columns") or {}
     if not isinstance(nav_cols, dict):
@@ -115,6 +117,11 @@ def _nav_column_kwargs(
             outcome_col if outcome_col is not None else nav_cols.get("outcome")
         ),
         "fixes_cols": fixes_cols if fixes_cols is not None else nav_cols.get("fixes"),
+        "fixes_allow_override": (
+            fixes_allow_override
+            if fixes_allow_override is not None
+            else nav_cols.get("fixes_allow_override")
+        ),
     }
     return {key: value for key, value in resolved.items() if value is not None}
 
@@ -128,13 +135,15 @@ def build_evaluator(
     observed_col: str | Sequence[str] | None = None,
     outcome_col: str | Sequence[str] | None = None,
     fixes_cols: Sequence[str] | None = None,
+    fixes_allow_override: bool | None = None,
 ) -> Evaluator:
     """Build a ready ``Evaluator`` from a config dict or JSON path.
 
     Optional ``id_col`` / ``weight_col`` / ``observed_col`` / ``outcome_col`` /
-    ``fixes_cols`` override ``config["nav_columns"]`` when set. Otherwise
-    ``nav_columns`` (keys ``id``, ``weight``, ``observed``, ``outcome``,
-    ``fixes``) is used. If neither is set, ``import_NAV_exps`` defaults apply.
+    ``fixes_cols`` / ``fixes_allow_override`` override ``config["nav_columns"]``
+    when set. Otherwise ``nav_columns`` (keys ``id``, ``weight``, ``observed``,
+    ``outcome``, ``fixes``, ``fixes_allow_override``) is used. If neither is
+    set, ``import_NAV_exps`` defaults apply.
     """
     if not isinstance(config, dict):
         path = Path(config)
@@ -178,6 +187,7 @@ def build_evaluator(
             observed_col=observed_col,
             outcome_col=outcome_col,
             fixes_cols=fixes_cols,
+            fixes_allow_override=fixes_allow_override,
         )
 
         exps = import_NAV_exps(str(data_path), **nav_kwargs)
