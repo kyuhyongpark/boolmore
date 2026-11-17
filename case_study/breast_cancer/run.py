@@ -12,7 +12,7 @@ from __future__ import annotations
 from boolmore.runner import run_batch
 
 # --- session knobs ---
-CONFIG = "case_study/breast_cancer/BreastCancer_config.json"
+CONFIG = "case_study/breast_cancer/config.json"
 RUN_NAME = None  # None → UTC timestamp folder under RUNS_ROOT
 RUNS_ROOT = "case_study/breast_cancer/runs"
 SEEDS = [0]

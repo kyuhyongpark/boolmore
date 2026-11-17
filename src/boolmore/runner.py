@@ -190,7 +190,11 @@ def _path_for_config(path: Path) -> str:
 
 
 def _write_model_snapshot(src: Path, stem: Path) -> Path:
-    """Write ``{stem}.bnet`` and ``{stem}.pkl`` from ``src``; return the ``.bnet`` path."""
+    """Write ``{stem}.bnet`` and ``{stem}.pkl`` from ``src``; return the ``.pkl`` path.
+
+    The pickle is what subsequent loads use (faster for large models). The
+    ``.bnet`` remains as a human-readable companion in the batch folder.
+    """
     primes = load_primes(src)
     model = Model.from_primes(primes)
     bnet_path = stem.with_suffix(".bnet")
@@ -202,7 +206,7 @@ def _write_model_snapshot(src: Path, stem: Path) -> Path:
             fp.write("\n")
     with open(pkl_path, "wb") as fp:
         pickle.dump(primes, fp)
-    return bnet_path
+    return pkl_path
 
 
 def _write_data_csv(src: Path, dest: Path) -> None:
@@ -224,8 +228,8 @@ def _snapshot_batch_assets(batch_dir: Path, config_dict: dict) -> dict[str, Path
 
     NAV data is materialized in preprocessed CSV form (via ``import_NAV_exps``).
     Phenotype data is copied/converted to ``data.csv``. Models are written as
-    both ``.bnet`` and ``.pkl``; the returned paths point at the ``.bnet`` files
-    for ``config.json``.
+    both ``.bnet`` and ``.pkl``; the returned paths point at the ``.pkl`` files
+    for ``config.json`` (faster loads for large models).
     """
     data_src = (project_root() / config_dict["data"]).resolve()
     base_src = (project_root() / config_dict["base"]).resolve()
@@ -268,9 +272,10 @@ def run_batch(
     """Run GA for one or more seeds under ``{runs_root}/{batch_name}/``.
 
     Creates a batch folder with ``config.json``, ``batch.log``, fixed-name
-    snapshots (``data.csv``, ``base.bnet``/``.pkl``, ``start.bnet``/``.pkl``),
-    and per-seed subdirectories ``seed_NNN/``. Named ``run_name`` folders are
-    overwritten; ``run_name=None`` uses a UTC stamp folder.
+    snapshots (``data.csv``, ``base.bnet``/``.pkl``, ``start.bnet``/``.pkl``;
+    config points at the ``.pkl`` paths), and per-seed subdirectories
+    ``seed_NNN/``. Named ``run_name`` folders are overwritten;
+    ``run_name=None`` uses a UTC stamp folder.
 
     Parameters
     ----------
