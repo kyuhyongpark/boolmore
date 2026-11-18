@@ -16,6 +16,7 @@ from boolmore.inference.prediction import (
 )
 from boolmore.io.load import import_NAV_exps, import_phenotypes, load_json_config, load_model
 from boolmore.io.paths import project_root
+from boolmore.outcome import ComparativeOutcome
 
 
 def build_run_config(
@@ -227,9 +228,15 @@ def build_evaluator(
         if run_type == "NAV":
             print(f"distinct interventions: {len({exp.fixes for exp in exps})}")
             outcomes: dict[str, int] = {}
+            n_comparative = 0
             for exp in exps:
-                outcomes[exp.outcome] = outcomes.get(exp.outcome, 0) + 1
+                if isinstance(exp.outcome, ComparativeOutcome):
+                    n_comparative += 1
+                else:
+                    key = str(exp.outcome)
+                    outcomes[key] = outcomes.get(key, 0) + 1
             print(f"outcomes: {outcomes}")
+            print(f"comparative outcomes: {n_comparative}")
         print()
 
     return Evaluator(
