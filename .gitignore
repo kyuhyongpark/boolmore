@@ -10,6 +10,11 @@ __pycache__/
 # editable install
 boolmore.egg-info/
 
+# Cython build artifacts
+*.c
+*.so
+*.html
+
 # Obsolete files
 .obsolete/
 

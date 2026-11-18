@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools", "wheel", "Cython"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -24,3 +24,9 @@ notebook = [
 
 [project.urls]
 Homepage = "https://github.com/kyuhyongpark/boolmore"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+boolmore = ["*.pyx"]

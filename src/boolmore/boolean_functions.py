@@ -217,6 +217,48 @@ def prime2bnet(node:str, prime:PrimeType) -> str:
     
     return s
 
+# Smallest regulator count ``k`` where the Cython kernel is used when available.
+# Measured locally (py vs cy on dens 0.05/0.3, max/min); Cython wins from k=1
+# with >=1.2x margin on this machine (see plan bake-off).
+_UNI_RR_CYTHON_MIN_K = 1
+
+try:
+    from boolmore._get_uni_rr import get_uni_rr as _get_uni_rr_cy
+
+    _UNI_RR_CYTHON = True
+except ImportError:  # pragma: no cover - depends on local extension build
+    _get_uni_rr_cy = None  # type: ignore[assignment]
+    _UNI_RR_CYTHON = False
+
+
+def _get_uni_rr_py(rr: str, max: bool = True) -> str:
+    """Pure-Python canonical maximal / minimal rr (mask-order)."""
+    n = len(rr)
+
+    if n <= 1:
+        return rr
+
+    uni_rr = list(rr)
+
+    modified = set()
+    fill_value = "1" if max else "0"
+
+    for i in range(n):
+        if uni_rr[i] != "1":
+            continue
+
+        if i in modified:
+            continue
+
+        for position in range(i + 1, n):
+            if (position & i) == i:
+                modified.add(position)
+
+                uni_rr[position] = fill_value
+
+    return "".join(uni_rr)
+
+
 def get_uni_rr(rr: str, max: bool = True) -> str:
     """
     Returns the unique canonical representation (maximal truth table or 
@@ -236,29 +278,13 @@ def get_uni_rr(rr: str, max: bool = True) -> str:
     uni_rr - unique representation of the rule  : length 2^k binary str
     """
     n = len(rr)
-    
-    if n <= 1:
-        return rr
-
-    uni_rr = list(rr)
-    
-    modified = set()
-    fill_value = '1' if max else '0'
-
-    for i in range(n):
-        if uni_rr[i] != '1':
-            continue
-            
-        if i in modified:
-            continue
-
-        for position in range(i+1, n):               
-            if (position & i) == i:
-                modified.add(position)
-                
-                uni_rr[position] = fill_value
-
-    return ''.join(uni_rr)
+    if (
+        _UNI_RR_CYTHON
+        and _get_uni_rr_cy is not None
+        and n >= (1 << _UNI_RR_CYTHON_MIN_K)
+    ):
+        return _get_uni_rr_cy(rr, max)
+    return _get_uni_rr_py(rr, max)
 
 
 def get_max_irr(rr:str) -> str:
