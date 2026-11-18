@@ -28,6 +28,10 @@ from typing import Literal
 # leftover literals (query \\ P) are this small or smaller; else scan probes.
 _DELTA_ENUM_MAX = 20
 
+# TODO: Cython/native ``_ldoi_closure_fast`` (flat arrays / CSR watchers).
+# TODO: batch ``ldoi_many(primes, seeds)`` API for multi-intervention NAV.
+# TODO: restrict NAV dicts to observed/related nodes in scoring.
+
 LdoiClosureEngine = Literal["fast", "scan"]
 _CLOSURE_ENGINE: LdoiClosureEngine = "fast"
 
@@ -441,11 +445,19 @@ def _ldoi_closure_fast(
     return result
 
 
-def _ldoi_closure(primes: dict, fixed: dict[str, int]) -> dict[str, int]:
+def _ldoi_closure(
+    primes: dict,
+    fixed: dict[str, int],
+    *,
+    compiled: CompiledPrimes | None = None,
+) -> dict[str, int]:
     """Dispatch to the active closure engine."""
     if _CLOSURE_ENGINE == "scan":
         return _ldoi_closure_scan(primes, fixed)
-    return _ldoi_closure_fast(_get_compiled(primes), fixed)
+    return _ldoi_closure_fast(
+        compiled if compiled is not None else _get_compiled(primes),
+        fixed,
+    )
 
 
 def logical_domain_of_influence(
@@ -455,6 +467,7 @@ def logical_domain_of_influence(
     cache: LdoiCache | None = None,
     base: dict[str, int] | None = None,
     implied: dict[str, int] | None = None,
+    compiled: CompiledPrimes | None = None,
 ) -> dict[str, int]:
     """Return seed ∪ LDOI by iterative prime-implicant implication.
 
@@ -487,6 +500,11 @@ def logical_domain_of_influence(
     implied : dict of str to int, optional
         Already-forced nodes included in the starting fixed set and result,
         but excluded from the cache key (typically ``LDOI(base)``).
+    compiled : CompiledPrimes, optional
+        Precompiled watcher tables for the fast engine. When omitted, primes
+        are compiled (and fingerprint-validated) on each call. Pass one
+        compilation across many seeds on the same primes object to avoid
+        repeated fingerprint work. Ignored when the scan engine is active.
 
     Returns
     -------
@@ -527,7 +545,7 @@ def logical_domain_of_influence(
         fixed.update(cache.compatible_merge(full_seed))
     fixed.update(full_seed)
 
-    result = _ldoi_closure(primes, fixed)
+    result = _ldoi_closure(primes, fixed, compiled=compiled)
 
     if cache is not None:
         cache.store(seed, result, base=base)

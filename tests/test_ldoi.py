@@ -313,6 +313,17 @@ class TestLdoiClosureEquivalence(unittest.TestCase):
         self.assertIsNot(compiled_a, compiled_b)
         _assert_fast_equals_scan(self, primes, {})
 
+    def test_compiled_reuse_matches_auto_compile(self):
+        primes = bnet_text2primes("A, A\nB, A\nX, A & B\n")
+        seed = {"A": 1}
+        compiled = _get_compiled(primes)
+        with ldoi_closure_engine("scan"):
+            scan = logical_domain_of_influence(primes, seed)
+        auto = logical_domain_of_influence(primes, seed)
+        reused = logical_domain_of_influence(primes, seed, compiled=compiled)
+        self.assertEqual(auto, scan)
+        self.assertEqual(reused, scan)
+
 
 if __name__ == "__main__":
     unittest.main()

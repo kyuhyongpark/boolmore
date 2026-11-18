@@ -11,7 +11,9 @@ from boolmore.experiment import PhenotypeExperiment, NAVExperiment
 from boolmore.boolean_functions import assignment_to_dict
 from boolmore.inference.asp_backend import ensure_asp_backend
 from boolmore.inference.ldoi import (
+    CompiledPrimes,
     LdoiCache,
+    _get_compiled,
     _implicant_implied_by,
     logical_domain_of_influence,
 )
@@ -343,6 +345,7 @@ def _nav_from_ldoi(
     perturbation: dict[str, int],
     *,
     cache: LdoiCache | None = None,
+    compiled: CompiledPrimes | None = None,
 ) -> dict[str, float]:
     """Approximate NAV from LDOI (forced 0/1, else 0.5).
 
@@ -351,7 +354,7 @@ def _nav_from_ldoi(
     cyclic attractors are not resolved.
     """
     constants = logical_domain_of_influence(
-        primes, perturbation, cache=cache
+        primes, perturbation, cache=cache, compiled=compiled
     )
     return {
         node: float(constants[node]) if node in constants else 0.5
@@ -662,6 +665,7 @@ def _nav_from_ldoi_enhanced(
     joint_self_loops: bool = False,
     joint_stats: dict | None = None,
     cache: LdoiCache | None = None,
+    compiled: CompiledPrimes | None = None,
 ) -> dict[str, float]:
     """LDOI NAV refined by self-sustaining / self-negating SC-subset probes.
 
@@ -702,6 +706,8 @@ def _nav_from_ldoi_enhanced(
     cache : LdoiCache, optional
         Shared nested ``P → SC`` LDOI cache. Created for this call when
         omitted; pass one cache across interventions to reuse closures.
+    compiled : CompiledPrimes, optional
+        Precompiled watcher tables reused across probes for this model.
     """
     if not 1 <= cutoff <= LDOI_ENHANCED_CUTOFF_MAX:
         raise ValueError(
@@ -710,7 +716,7 @@ def _nav_from_ldoi_enhanced(
 
     ldoi_cache = cache if cache is not None else LdoiCache()
     fixed = logical_domain_of_influence(
-        primes, perturbation, cache=ldoi_cache
+        primes, perturbation, cache=ldoi_cache, compiled=compiled
     )
     nav = {
         node: float(fixed[node]) if node in fixed else 0.5
@@ -759,6 +765,7 @@ def _nav_from_ldoi_enhanced(
             cache=ldoi_cache,
             base=perturbation,
             implied=fixed,
+            compiled=compiled,
         )
         members = list(zip(component, state, strict=True))
         sustains = [
@@ -896,6 +903,7 @@ def _nav_from_ldoi_partial(
     perturbation: dict[str, int],
     *,
     cache: LdoiCache | None = None,
+    compiled: CompiledPrimes | None = None,
 ) -> dict[str, float | None]:
     """LDOI prediction with free nodes left as ``None`` (``?``).
 
@@ -904,7 +912,7 @@ def _nav_from_ldoi_partial(
     perfect match.
     """
     constants = logical_domain_of_influence(
-        primes, perturbation, cache=cache
+        primes, perturbation, cache=cache, compiled=compiled
     )
     return {
         node: float(constants[node]) if node in constants else None
@@ -922,7 +930,7 @@ def get_NAV_upper_bound_prediction(
     (non-LDOI) nodes are ``None`` instead of ``0.5``.
     """
     interventions = sorted({exp.fixes for exp in experiments})
-    ldoi_cache = LdoiCache()
+    compiled = _get_compiled(primes)
 
     predictions: dict[Assignment, NAVPrediction] = {}
     for fixes in interventions:
@@ -930,7 +938,7 @@ def get_NAV_upper_bound_prediction(
         predictions[fixes] = NAVPrediction(
             fixes=fixes,
             average_values=_nav_from_ldoi_partial(
-                primes, perturbation, cache=ldoi_cache
+                primes, perturbation, compiled=compiled
             ),
         )
 
@@ -1024,6 +1032,7 @@ def get_NAV_prediction(
     elif method == "ldoi_enhanced":
         sc_subsets = _sc_subsets_by_size(primes, cutoff)
         ldoi_cache = LdoiCache()
+        compiled = _get_compiled(primes)
         for fixes in interventions:
             perturbation = assignment_to_dict(fixes)
             predictions[fixes] = NAVPrediction(
@@ -1035,16 +1044,18 @@ def get_NAV_prediction(
                     sc_subsets=sc_subsets,
                     joint_self_loops=joint_self_loops,
                     cache=ldoi_cache,
+                    compiled=compiled,
                 ),
             )
     else:
-        ldoi_cache = LdoiCache()
+        # Plain LDOI: no nested-probe reuse, so skip LdoiCache (net slowdown).
+        compiled = _get_compiled(primes)
         for fixes in interventions:
             perturbation = assignment_to_dict(fixes)
             predictions[fixes] = NAVPrediction(
                 fixes=fixes,
                 average_values=_nav_from_ldoi(
-                    primes, perturbation, cache=ldoi_cache
+                    primes, perturbation, compiled=compiled
                 ),
             )
 
