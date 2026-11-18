@@ -1,8 +1,61 @@
+import random
 import unittest
+from pathlib import Path
 
 from pyboolnet.external.bnet2primes import bnet_text2primes
 
-from boolmore.inference.ldoi import LdoiCache, logical_domain_of_influence
+from boolmore.inference.ldoi import (
+    LdoiCache,
+    _ldoi_closure_fast,
+    _ldoi_closure_scan,
+    _get_compiled,
+    get_ldoi_closure_engine,
+    ldoi_closure_engine,
+    logical_domain_of_influence,
+    set_ldoi_closure_engine,
+)
+from boolmore.io.load import load_primes
+from boolmore.io.nav import import_NAV_exps
+from boolmore.types import Assignment
+
+
+def _fixes_to_dict(fixes: Assignment) -> dict[str, int]:
+    return {node: int(value) for node, value in fixes}
+
+
+def _assert_fast_equals_scan(
+    test: unittest.TestCase,
+    primes: dict,
+    seed: dict[str, int],
+    *,
+    base: dict[str, int] | None = None,
+    implied: dict[str, int] | None = None,
+) -> None:
+    """Compare public API under both engines and raw closure helpers."""
+    with ldoi_closure_engine("scan"):
+        scan = logical_domain_of_influence(
+            primes, seed, base=base, implied=implied
+        )
+    with ldoi_closure_engine("fast"):
+        fast = logical_domain_of_influence(
+            primes, seed, base=base, implied=implied
+        )
+    test.assertEqual(fast, scan)
+
+    if base is not None:
+        full = dict(base)
+        full.update(seed)
+    else:
+        full = dict(seed)
+    if implied:
+        fixed = dict(implied)
+        fixed.update(full)
+    else:
+        fixed = full
+    test.assertEqual(
+        _ldoi_closure_fast(_get_compiled(primes), fixed),
+        _ldoi_closure_scan(primes, fixed),
+    )
 
 
 class TestLogicalDomainOfInfluence(unittest.TestCase):
@@ -164,6 +217,101 @@ class TestLdoiCache(unittest.TestCase):
         alone = logical_domain_of_influence(primes, {"A": 1}, cache=cache)
         self.assertIsNone(alone.get("X"))
         self.assertNotEqual(alone, probe)
+
+
+class TestLdoiClosureEquivalence(unittest.TestCase):
+
+    def tearDown(self) -> None:
+        set_ldoi_closure_engine("fast")
+
+    def test_engine_switch_roundtrip(self):
+        self.assertEqual(get_ldoi_closure_engine(), "fast")
+        set_ldoi_closure_engine("scan")
+        self.assertEqual(get_ldoi_closure_engine(), "scan")
+        with ldoi_closure_engine("fast"):
+            self.assertEqual(get_ldoi_closure_engine(), "fast")
+        self.assertEqual(get_ldoi_closure_engine(), "scan")
+        set_ldoi_closure_engine("fast")
+
+    def test_hand_cases_fast_equals_scan(self):
+        cases = [
+            ("A, A & B\nB, B\n", {"A": 1}),
+            ("C, 1\nA, C\nB, A\n", {}),
+            ("A, 0\nB, A\n", {"A": 1}),
+            ("A, A\nB, B\nX, A\nY, B\nZ, A & B\n", {"A": 1, "B": 1}),
+            ("A, A\nB, !A\nC, B\n", {"A": 1, "B": 1}),
+            ("A, !A\nB, A\n", {"A": 0}),
+            ("A, A\nB, A | B\n", {"A": 1}),
+            ("P, P\nA, A\nX, A\nY, P & A\n", {"P": 1, "A": 1}),
+        ]
+        for bnet, seed in cases:
+            with self.subTest(bnet=bnet, seed=seed):
+                primes = bnet_text2primes(bnet)
+                _assert_fast_equals_scan(self, primes, seed)
+
+    def test_implied_and_base_fast_equals_scan(self):
+        primes = bnet_text2primes("P, P\nA, A\nX, A\nY, P & A\n")
+        base = {"P": 1}
+        with ldoi_closure_engine("scan"):
+            implied = logical_domain_of_influence(primes, base)
+        _assert_fast_equals_scan(
+            self, primes, {"A": 1}, base=base, implied=implied
+        )
+
+    def test_random_networks_fast_equals_scan(self):
+        rng = random.Random(0)
+        formulas = [
+            "0",
+            "1",
+            "{x}",
+            "!{x}",
+            "{x} & {y}",
+            "{x} | {y}",
+            "{x} & !{y}",
+            "!{x} | {y}",
+        ]
+        for trial in range(40):
+            n = rng.randint(3, 7)
+            names = [f"N{i}" for i in range(n)]
+            lines: list[str] = []
+            for target in names:
+                template = rng.choice(formulas)
+                regs = rng.sample(names, k=min(2, n))
+                fmt = {"x": regs[0], "y": regs[-1]}
+                lines.append(f"{target}, {template.format(**fmt)}")
+            primes = bnet_text2primes("\n".join(lines) + "\n")
+            for _ in range(8):
+                k = rng.randint(0, min(3, n))
+                seed_nodes = rng.sample(names, k=k)
+                seed = {node: rng.randint(0, 1) for node in seed_nodes}
+                with self.subTest(trial=trial, seed=seed):
+                    _assert_fast_equals_scan(self, primes, seed)
+
+    def test_cad_interventions_fast_equals_scan(self):
+        repo = Path(__file__).resolve().parents[1]
+        bnet = repo / "demo" / "CAD.bnet"
+        data = repo / "demo" / "CAD_data.csv"
+        if not bnet.is_file() or not data.is_file():
+            self.skipTest("CAD demo files not present")
+        primes = load_primes(bnet)
+        exps = import_NAV_exps(data)
+        seen: set[frozenset[tuple[str, int]]] = set()
+        for exp in exps:
+            key = frozenset(_fixes_to_dict(exp.fixes).items())
+            if key in seen:
+                continue
+            seen.add(key)
+            seed = dict(key)
+            with self.subTest(seed=seed):
+                _assert_fast_equals_scan(self, primes, seed)
+
+    def test_compile_cache_invalidates_on_node_replace(self):
+        primes = bnet_text2primes("A, A\nB, A\n")
+        compiled_a = _get_compiled(primes)
+        primes["B"] = [[{}], []]  # B becomes constant 0
+        compiled_b = _get_compiled(primes)
+        self.assertIsNot(compiled_a, compiled_b)
+        _assert_fast_equals_scan(self, primes, {})
 
 
 if __name__ == "__main__":

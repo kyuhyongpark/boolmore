@@ -5,6 +5,10 @@ Rozum et al.), which implements the LDOI of Yang et al. 2018. This module
 returns only ``seed ∪ LDOI`` as a single ``dict[str, int]`` and does not
 compute a contradiction boundary.
 
+The default closure is a compiled event-driven propagator. The original
+whole-network scan remains available as an equivalence oracle via
+``set_ldoi_closure_engine("scan")``.
+
 References
 ----------
 Yang, G., Gómez Tejeda Zañudo, J., and Albert, R. (2018). Target control in
@@ -14,11 +18,49 @@ Physiology* 9:454. https://doi.org/10.3389/fphys.2018.00454
 
 from __future__ import annotations
 
+from collections import OrderedDict
+from collections.abc import Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass, field
+from typing import Literal
 
 # Under a matching base P, enumerate ``2^|delta|`` probe keys when the
 # leftover literals (query \\ P) are this small or smaller; else scan probes.
 _DELTA_ENUM_MAX = 20
+
+LdoiClosureEngine = Literal["fast", "scan"]
+_CLOSURE_ENGINE: LdoiClosureEngine = "fast"
+
+# Unset sentinel for integer state arrays (-1 is not a valid Boolean value).
+_UNSET = -1
+
+
+def set_ldoi_closure_engine(engine: LdoiClosureEngine) -> None:
+    """Select the LDOI closure implementation (``"fast"`` or ``"scan"``).
+
+    Intended for tests and A/B benches only. Production callers should leave
+    the default ``"fast"``.
+    """
+    global _CLOSURE_ENGINE
+    if engine not in ("fast", "scan"):
+        raise ValueError(f"unknown LDOI closure engine: {engine!r}")
+    _CLOSURE_ENGINE = engine
+
+
+def get_ldoi_closure_engine() -> LdoiClosureEngine:
+    """Return the active LDOI closure engine."""
+    return _CLOSURE_ENGINE
+
+
+@contextmanager
+def ldoi_closure_engine(engine: LdoiClosureEngine) -> Iterator[None]:
+    """Temporarily select a closure engine; restore the previous on exit."""
+    previous = _CLOSURE_ENGINE
+    set_ldoi_closure_engine(engine)
+    try:
+        yield
+    finally:
+        set_ldoi_closure_engine(previous)
 
 
 def _implicant_implied_by(fixed: dict[str, int], implicant: dict[str, int]) -> bool:
@@ -184,8 +226,124 @@ class LdoiCache:
         return merged
 
 
-def _ldoi_closure(primes: dict, fixed: dict[str, int]) -> dict[str, int]:
-    """Grow ``fixed`` by iterative prime-implicant implication.
+@dataclass(frozen=True, slots=True)
+class CompiledPrimes:
+    """Integer-indexed prime implicants for event-driven LDOI closure."""
+
+    names: tuple[str, ...]
+    name_to_id: dict[str, int]
+    # Per-implicant: (target_id, value, number of literals)
+    targets: tuple[int, ...]
+    values: tuple[int, ...]
+    lit_counts: tuple[int, ...]
+    # watchers[node_id][value] -> implicant indices containing that literal
+    watchers: tuple[tuple[tuple[int, ...], tuple[int, ...]], ...]
+    # Empty implicants in scan order: node order, then value 0 then 1.
+    empty_implicants: tuple[int, ...]
+    # Object identities of primes[node] at compile time (invalidation).
+    fingerprint: tuple[tuple[str, int], ...]
+
+
+# Plain dicts are not weak-referenceable; cache by id(primes) with a
+# node-entry identity fingerprint and a bounded LRU to avoid leaks.
+_COMPILED_CACHE_MAX = 128
+_compiled_cache: OrderedDict[
+    int, tuple[tuple[tuple[str, int], ...], CompiledPrimes]
+] = OrderedDict()
+
+
+def _primes_fingerprint(primes: dict) -> tuple[tuple[str, int], ...]:
+    """Fingerprint node → primes[node] object identity for cache validity."""
+    return tuple((node, id(primes[node])) for node in primes)
+
+
+def _compile_primes(primes: dict) -> CompiledPrimes:
+    """Compile PyBoolNet primes into integer-indexed watcher tables."""
+    names = tuple(primes)
+    name_to_id = {name: i for i, name in enumerate(names)}
+    n = len(names)
+
+    targets: list[int] = []
+    values: list[int] = []
+    lit_counts: list[int] = []
+    empty_implicants: list[int] = []
+    # Temporary mutable watchers: [node][value] -> list[implicant_idx]
+    watchers_mut: list[list[list[int]]] = [[[], []] for _ in range(n)]
+
+    for target_id, name in enumerate(names):
+        node_primes = primes[name]
+        if not isinstance(node_primes, (list, tuple)) or len(node_primes) != 2:
+            raise ValueError(
+                f"malformed primes for {name!r}: expected [neg, pos] lists"
+            )
+        # Match scan: try value 0 then 1; empty implicants fire in that order.
+        for value in (0, 1):
+            implicants = node_primes[value]
+            if not isinstance(implicants, (list, tuple)):
+                raise ValueError(
+                    f"malformed primes for {name!r} value {value}: "
+                    "expected a list of implicants"
+                )
+            for implicant in implicants:
+                if not isinstance(implicant, dict):
+                    raise ValueError(
+                        f"malformed implicant for {name!r}={value}: "
+                        f"expected dict, got {type(implicant).__name__}"
+                    )
+                imp_idx = len(targets)
+                targets.append(target_id)
+                values.append(value)
+                lit_counts.append(len(implicant))
+                if not implicant:
+                    empty_implicants.append(imp_idx)
+                    continue
+                for lit_node, lit_value in implicant.items():
+                    lit_id = name_to_id.get(lit_node)
+                    if lit_id is None:
+                        raise ValueError(
+                            f"implicant for {name!r} references unknown "
+                            f"node {lit_node!r}"
+                        )
+                    if lit_value not in (0, 1):
+                        raise ValueError(
+                            f"implicant for {name!r} has non-Boolean "
+                            f"literal {lit_node!r}={lit_value!r}"
+                        )
+                    watchers_mut[lit_id][lit_value].append(imp_idx)
+
+    watchers = tuple(
+        (tuple(w[0]), tuple(w[1])) for w in watchers_mut
+    )
+    return CompiledPrimes(
+        names=names,
+        name_to_id=name_to_id,
+        targets=tuple(targets),
+        values=tuple(values),
+        lit_counts=tuple(lit_counts),
+        watchers=watchers,
+        empty_implicants=tuple(empty_implicants),
+        fingerprint=_primes_fingerprint(primes),
+    )
+
+
+def _get_compiled(primes: dict) -> CompiledPrimes:
+    """Return a cached compilation of ``primes``, rebuilding if mutated."""
+    key = id(primes)
+    fingerprint = _primes_fingerprint(primes)
+    cached = _compiled_cache.get(key)
+    if cached is not None and cached[0] == fingerprint:
+        _compiled_cache.move_to_end(key)
+        return cached[1]
+    compiled = _compile_primes(primes)
+    _compiled_cache[key] = (fingerprint, compiled)
+    _compiled_cache.move_to_end(key)
+    while len(_compiled_cache) > _COMPILED_CACHE_MAX:
+        _compiled_cache.popitem(last=False)
+    return compiled
+
+
+def _ldoi_closure_scan(primes: dict, fixed: dict[str, int]) -> dict[str, int]:
+    """Grow ``fixed`` by iterative prime-implicant implication (scan oracle).
 
     Returns a new dict starting from ``fixed``. Nodes already in ``fixed``
     are not re-checked (no contradiction boundary).
@@ -215,6 +373,79 @@ def _ldoi_closure(primes: dict, fixed: dict[str, int]) -> dict[str, int]:
         remaining.difference_update(newly_forced)
 
     return fixed
+
+
+def _ldoi_closure_fast(
+    compiled: CompiledPrimes,
+    fixed: dict[str, int],
+) -> dict[str, int]:
+    """Grow ``fixed`` via event-driven prime-implicant propagation.
+
+    Semantically equivalent to ``_ldoi_closure_scan``: seeds are never
+    overwritten; empty implicants fire in node/value-0-then-1 order; already
+    fixed targets are skipped.
+    """
+    n = len(compiled.names)
+    state = [_UNSET] * n
+    for name, value in fixed.items():
+        node_id = compiled.name_to_id.get(name)
+        if node_id is None:
+            raise ValueError(f"{name} is not in the model")
+        state[node_id] = value
+
+    residuals = list(compiled.lit_counts)
+    queue: list[int] = []
+
+    def _force(node_id: int, value: int) -> None:
+        if state[node_id] != _UNSET:
+            return
+        state[node_id] = value
+        queue.append(node_id)
+
+    # Constants / empty implicants first (same order as scan: nodes then 0,1).
+    for imp_idx in compiled.empty_implicants:
+        _force(compiled.targets[imp_idx], compiled.values[imp_idx])
+
+    # Seed / warm-start nodes already fixed (may overlap constants).
+    for node_id, value in enumerate(state):
+        if value != _UNSET:
+            queue.append(node_id)
+
+    # Deduplicate initial queue while preserving first-occurrence order so
+    # constant-forced nodes are processed before later seed echoes when both
+    # appear; processing order of already-fixed nodes only affects watcher
+    # decrement timing, not the final fixed point for consistent primes.
+    seen_init = [False] * n
+    deduped: list[int] = []
+    for node_id in queue:
+        if not seen_init[node_id]:
+            seen_init[node_id] = True
+            deduped.append(node_id)
+    queue = deduped
+
+    head = 0
+    while head < len(queue):
+        node_id = queue[head]
+        head += 1
+        value = state[node_id]
+        for imp_idx in compiled.watchers[node_id][value]:
+            residuals[imp_idx] -= 1
+            if residuals[imp_idx] == 0:
+                _force(compiled.targets[imp_idx], compiled.values[imp_idx])
+
+    result: dict[str, int] = {}
+    names = compiled.names
+    for node_id, value in enumerate(state):
+        if value != _UNSET:
+            result[names[node_id]] = value
+    return result
+
+
+def _ldoi_closure(primes: dict, fixed: dict[str, int]) -> dict[str, int]:
+    """Dispatch to the active closure engine."""
+    if _CLOSURE_ENGINE == "scan":
+        return _ldoi_closure_scan(primes, fixed)
+    return _ldoi_closure_fast(_get_compiled(primes), fixed)
 
 
 def logical_domain_of_influence(

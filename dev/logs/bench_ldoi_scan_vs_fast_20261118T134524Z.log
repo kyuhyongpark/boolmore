@@ -1,0 +1,19 @@
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/bench_ldoi_scan_vs_fast_20261118T134524Z.log
+started (UTC): 2026-11-18T13:45:24.542775+00:00
+
+dataset: breast_cancer
+model nodes: 200
+experiments: 771
+unique interventions used: 194 (cap=200)
+warmup=1, repeats=5
+
+mismatches: 0 / 194
+all interventions match
+
+Full-pass timing (all selected interventions per repeat)
+  scan: mean=0.156322s  stdev=0.031063s  min=0.138320s  max=0.211486s  (n=5)
+  fast: mean=0.052269s  stdev=0.004574s  min=0.047353s  max=0.058273s  (n=5)
+  fast speedup: 2.99x
+
+Log written to: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/bench_ldoi_scan_vs_fast_20261118T134524Z.log
+finished (UTC): 2026-11-18T13:45:26.579800+00:00
