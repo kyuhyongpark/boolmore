@@ -117,7 +117,9 @@ def mutate_rr_constraint(regulators:tuple[str, ...], rr:str, base_rr:str, constr
         else:
             return base_rr, True
 
+    max_original = bf.get_uni_rr(rr)
     mutated_rr = ''
+    max_rr = max_original
     redo = True
     trial = 0
     while redo == True:
@@ -140,25 +142,31 @@ def mutate_rr_constraint(regulators:tuple[str, ...], rr:str, base_rr:str, constr
                 mutated_rr = ce.impose_necessary(regulators, mutated_rr, necc)
         ### end of mutation ###
 
+        min_rr = bf.get_uni_rr(mutated_rr, max=False)
+        max_rr = bf.get_uni_rr(mutated_rr, max=True)
+
         redo = False
         # check constraint - regulate
         if node in constraints['regulate']:
             for reg in constraints['regulate'][node]:
-                redo = redo or not cons.check_regulate(regulators, mutated_rr, reg)
+                redo = redo or not cons.check_regulate(
+                    regulators, min_rr, reg, is_min=True
+                )
                 if redo == True:
                     # print('redo to ensure', reg, 'regulates', node)
                     break
         
         # node with a self loop should not become a source node
         if node in regulators:
-            redo = redo or cons.check_source(regulators, mutated_rr, node)
+            redo = redo or cons.check_source(
+                regulators, mutated_rr, node, min_rr=min_rr
+            )
             # if redo == True:
                 # print('redo to ensure', node, 'is not a source')
         
         # only nodes that were originally a constant node
         # or nodes in possible_constant can become constants
-        if cons.check_constant(mutated_rr):
-            max_rr = bf.get_uni_rr(mutated_rr, max = True)
+        if cons.check_constant(mutated_rr, max_rr=max_rr):
             if node not in constraints['possible_constant'] and len(base_rr) != 1:
                 redo = True
                 # print('redo because', node, 'became a constant')
@@ -173,12 +181,7 @@ def mutate_rr_constraint(regulators:tuple[str, ...], rr:str, base_rr:str, constr
         if redo == True:
             trial += 1
 
-    max_original = bf.get_uni_rr(rr)
-    max_mutated = bf.get_uni_rr(mutated_rr)
-    if max_original == max_mutated:
-        modified = False
-    else:
-        modified = True
+    modified = max_original != max_rr
 
     return mutated_rr, modified
 

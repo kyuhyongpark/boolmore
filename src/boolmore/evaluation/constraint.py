@@ -5,20 +5,22 @@ import boolmore.boolean_functions as bf
 from boolmore.model import Model
 
 
-def check_constant(rr:str) -> bool:
+def check_constant(rr: str, max_rr: str | None = None) -> bool:
     """
     Checks if the rule is fixed to a constant.
 
     Parameters
     ----------
     rr - representation of the rule     :length 2^k binary str
+    max_rr - optional precomputed maximal form of ``rr``
 
     Returns
     -------
     check - True if the rule is constant    :bool
 
     """
-    max_rr = bf.get_uni_rr(rr, max=True)
+    if max_rr is None:
+        max_rr = bf.get_uni_rr(rr, max=True)
     return not ('0' in max_rr and '1' in max_rr)
 
 
@@ -26,6 +28,7 @@ def check_source(
     regulators: tuple[str, ...],
     rr: str,
     node: str,
+    min_rr: str | None = None,
 ) -> bool:
     """
     Check if the node became a source node.
@@ -34,7 +37,8 @@ def check_source(
     ----------
     regulators - the regulating nodes           :length k tuple[str]
     rr         - representation of the rule     :length 2^k binary str
-    reg        - the target node to check       :str
+    node       - the target node to check       :str
+    min_rr     - optional precomputed minimal form of ``rr``
 
     Returns
     -------
@@ -47,7 +51,8 @@ def check_source(
     k = len(regulators)
     n = regulators.index(node)
 
-    min_rr = bf.get_uni_rr(rr, max=False)
+    if min_rr is None:
+        min_rr = bf.get_uni_rr(rr, max=False)
 
     add = 0
     for i in range(2**k):
@@ -96,6 +101,7 @@ def check_necessary(
     regulators: tuple[str, ...],
     rr: str,
     nec: str,
+    min_rr: str | None = None,
 ) -> bool:
     """
     Checks if the node is necessary for the rule.
@@ -105,6 +111,7 @@ def check_necessary(
     regulators - the regulating nodes                   :length k tuple[str]
     rr         - representation of the rule             :length 2^k binary str
     nec        - the node to check whether necessary    :str
+    min_rr     - optional precomputed minimal form of ``rr``
 
     Returns
     -------
@@ -114,7 +121,11 @@ def check_necessary(
     if nec not in regulators:
         return False
 
-    if not check_regulate(regulators, rr, nec):
+    if min_rr is not None:
+        regulates = check_regulate(regulators, min_rr, nec, is_min=True)
+    else:
+        regulates = check_regulate(regulators, rr, nec)
+    if not regulates:
         return False
 
     k = len(regulators)
@@ -180,6 +191,13 @@ def check_node(
             errors.append(f"{node} with fixed function was mutated")
 
     else:
+        need_min = (
+            node in constraints["necessary"]
+            or node in constraints["regulate"]
+            or node in regulators
+        )
+        min_rr = bf.get_uni_rr(rr, max=False) if need_min else None
+
         # necessary constraints
         if node in constraints["necessary"]:
             for necc in constraints["necessary"][node]:
@@ -187,7 +205,7 @@ def check_node(
                     errors.append(
                         f"{node}: necessary regulator {necc} is completely absent"
                     )
-                elif not check_necessary(regulators, rr, necc):
+                elif not check_necessary(regulators, rr, necc, min_rr=min_rr):
                     errors.append(
                         f"{necc} should be necessary for {node}"
                     )
@@ -199,20 +217,19 @@ def check_node(
                     errors.append(
                         f"{node}: regulator {reg} is completely absent"
                     )
-                elif not check_regulate(regulators, rr, reg):
+                elif not check_regulate(regulators, min_rr, reg, is_min=True):
                     errors.append(
                         f"{reg} should regulate {node}"
                     )
 
         # node with a self loop should not become a source node
         if node in regulators:
-            if check_source(regulators, rr, node):
+            if check_source(regulators, rr, node, min_rr=min_rr):
                 errors.append(f"{node} should not be a source")
 
         # constant checks
-        if check_constant(rr):
-            max_rr = bf.get_uni_rr(rr, max=True)
-
+        max_rr = bf.get_uni_rr(rr, max=True)
+        if check_constant(rr, max_rr=max_rr):
             if (
                 node not in constraints["possible_constant"]
                 and len(base_rr) != 1
