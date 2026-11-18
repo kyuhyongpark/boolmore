@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Literal
 
 from boolmore.model import Model
@@ -120,12 +120,14 @@ class EvaluationResult:
     satisfies_constraints : bool
         Whether the model satisfies all configured constraints.
     item_scores : list of EvaluationItemScore
-        Per-experiment score details.
+        Per-experiment score details. May be empty when evaluation was run
+        with ``detail=False`` (scalars and ``kind`` are still valid).
     is_upper_bound : bool
         True when ``score`` is an LDOI optimistic upper bound and full
         ``min_traps`` evaluation was skipped.
-    kind : ``"NAV"``, ``"Phenotype"``, or ``"Mixed"``
-        Aggregate modality derived from ``item_scores`` kinds.
+    kind : ``"NAV"``, ``"Phenotype"``, or ``"Mixed"``, or None
+        Aggregate modality. When ``None`` at init, derived from
+        ``item_scores``; pass explicitly when discarding ``item_scores``.
     """
 
     model_id: int
@@ -138,10 +140,11 @@ class EvaluationResult:
     satisfies_constraints: bool
     item_scores: list[EvaluationItemScore]
     is_upper_bound: bool = False
-    kind: ResultKind = field(init=False)
+    kind: ResultKind | None = None
 
     def __post_init__(self) -> None:
-        self.kind = get_result_kind(self.item_scores)
+        if self.kind is None:
+            self.kind = get_result_kind(self.item_scores)
 
 
 def get_model_score(
@@ -229,6 +232,8 @@ class Evaluator:
         model: Model,
         model_id: int = -1,
         score_threshold: float | None = None,
+        *,
+        detail: bool = True,
     ) -> EvaluationResult:
         """Score ``model`` and return an aggregated :class:`EvaluationResult`.
 
@@ -243,6 +248,10 @@ class Evaluator:
             ``ldoi_prune`` is True, compute an LDOI optimistic upper
             bound first. If that bound is strictly below the threshold,
             skip full ``min_traps`` evaluation and return the bound.
+        detail : bool, default True
+            When False, discard per-experiment ``item_scores`` after
+            aggregation (``kind`` and scalar fields are preserved). Use
+            during GA selection to avoid retaining large result payloads.
 
         Returns
         -------
@@ -266,6 +275,7 @@ class Evaluator:
             max_score, upper_bound = get_model_score(ub_item_scores)
 
             if upper_bound < score_threshold:
+                kind = get_result_kind(ub_item_scores)
                 return EvaluationResult(
                     model_id=model_id,
                     max_score=max_score,
@@ -275,13 +285,15 @@ class Evaluator:
                     n_prime_implicants=complexity["n_prime_implicants"],
                     n_extra_edges=complexity["n_extra_edges"],
                     satisfies_constraints=satisfies_constraints,
-                    item_scores=ub_item_scores,
+                    item_scores=ub_item_scores if detail else [],
                     is_upper_bound=True,
+                    kind=kind,
                 )
 
         predictions = self.prediction_fn(model.primes, self.experiments)
         item_scores = self.score_fn(self.experiments, predictions)
         max_score, score = get_model_score(item_scores)
+        kind = get_result_kind(item_scores)
 
         return EvaluationResult(
             model_id=model_id,
@@ -292,8 +304,9 @@ class Evaluator:
             n_prime_implicants=complexity["n_prime_implicants"],
             n_extra_edges=complexity["n_extra_edges"],
             satisfies_constraints=satisfies_constraints,
-            item_scores=item_scores,
+            item_scores=item_scores if detail else [],
             is_upper_bound=False,
+            kind=kind,
         )
 
 

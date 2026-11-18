@@ -1,16 +1,29 @@
 import csv
+from functools import partial
 from pathlib import Path
 
 import pytest
+from pyboolnet.external.bnet2primes import bnet_text2primes
 
 from boolmore.genetic.population import Candidate
-from boolmore.evaluation.score import EvaluationItemScore, EvaluationResult
+from boolmore.evaluation.nav_score import get_NAV_scores
+from boolmore.evaluation.score import EvaluationItemScore, EvaluationResult, Evaluator
+from boolmore.experiment import NAVExperiment
+from boolmore.inference.prediction import NAVPrediction
 from boolmore.io.export import (
     export_candidate,
     export_nav_report,
     export_phenotype_report,
 )
 from boolmore.model import Model
+
+_EMPTY_CONSTRAINTS = {
+    "fixed": [],
+    "regulate": {},
+    "necessary": {},
+    "group": {},
+    "possible_constant": [],
+}
 
 
 def _tiny_model() -> Model:
@@ -278,3 +291,71 @@ def test_export_candidate_requires_eval_result(tmp_path):
 
     with pytest.raises(ValueError, match="eval_result"):
         export_candidate(candidate, str(tmp_path / "missing"))
+
+
+def test_export_candidate_requires_evaluator_when_item_scores_empty(tmp_path):
+    result = EvaluationResult(
+        model_id=3,
+        max_score=1.0,
+        score=1.0,
+        n_eff_edges=1,
+        n_eff_self_edges=1,
+        n_prime_implicants=1,
+        n_extra_edges=0,
+        satisfies_constraints=True,
+        item_scores=[],
+        kind="NAV",
+    )
+    candidate = Candidate(
+        model=_tiny_model(), id=3, generation=0, eval_result=result
+    )
+
+    with pytest.raises(ValueError, match="requires evaluator"):
+        export_candidate(candidate, str(tmp_path / "empty"))
+
+
+def test_export_candidate_reevaluates_when_item_scores_empty(tmp_path):
+    model = Model.from_primes(bnet_text2primes("A, !A\nB, A\n"))
+    experiments = [
+        NAVExperiment(
+            id=1,
+            fixes=(),
+            observed="A",
+            outcome="ON",
+            weight=1.0,
+        ),
+    ]
+
+    def fake_full(primes_arg, experiments_arg):
+        return {
+            (): NAVPrediction(fixes=(), average_values={"A": 1.0, "B": 1.0}),
+        }
+
+    evaluator = Evaluator(
+        base=model,
+        experiments=experiments,
+        prediction_fn=fake_full,
+        score_fn=partial(get_NAV_scores, default_sources={}, hierarchy=False),
+        constraints=_EMPTY_CONSTRAINTS,
+        run_type="NAV",
+        hierarchy=False,
+        nav_method="min_traps",
+        ldoi_prune=False,
+    )
+
+    compact = evaluator.evaluate(model, model_id=9, detail=False)
+    assert compact.item_scores == []
+    candidate = Candidate(model=model, id=9, generation=1, eval_result=compact)
+
+    stem = export_candidate(candidate, str(tmp_path / "reeval"), evaluator=evaluator)
+    score_path = Path(f"{stem}_score.csv")
+    assert score_path.exists()
+
+    with open(score_path, newline="") as f:
+        rows = list(csv.DictReader(f))
+
+    assert len(rows) == 1
+    assert rows[0]["id"] == "1"
+    assert rows[0]["observed"] == "A"
+    assert candidate.eval_result is not None
+    assert len(candidate.eval_result.item_scores) == 1

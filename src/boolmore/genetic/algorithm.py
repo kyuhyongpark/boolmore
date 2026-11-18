@@ -90,6 +90,50 @@ class GAState:
     pruned_ids: list[int] = field(default_factory=list)
     n_evaluated: int = 0
 
+
+@dataclass(frozen=True)
+class GenerationSummary:
+    """Cheap per-iteration snapshot (scalars only; no models or item_scores)."""
+
+    iteration: int
+    generated: int
+    n_evaluated: int
+    n_pruned: int
+    score_threshold: float | None
+    best_id: int
+    best_generation: int
+    best_score: float
+    best_max_score: float
+    order_by_values: dict[str, float | int]
+
+
+@dataclass
+class GAOutcome:
+    """Final GA population plus compact iteration history."""
+
+    final: GAState
+    history: list[GenerationSummary]
+
+
+def _generation_summary(state: GAState, order_by: list[str]) -> GenerationSummary:
+    best = state.population[0]
+    result = best.eval_result
+    if result is None:
+        raise ValueError("best candidate has no evaluation result")
+    return GenerationSummary(
+        iteration=state.iteration,
+        generated=state.generated,
+        n_evaluated=state.n_evaluated,
+        n_pruned=len(state.pruned_ids),
+        score_threshold=state.score_threshold,
+        best_id=best.id,
+        best_generation=best.generation,
+        best_score=result.score,
+        best_max_score=result.max_score,
+        order_by_values={attr: getattr(result, attr) for attr in order_by},
+    )
+
+
 class GeneticAlgorithm:
     def __init__(
             self,
@@ -119,7 +163,10 @@ class GeneticAlgorithm:
         if self.config.core > 1:
             results = Parallel(n_jobs=self.config.core)(
                 delayed(evaluator.evaluate)(
-                    candidate.model, candidate.id, score_threshold
+                    candidate.model,
+                    candidate.id,
+                    score_threshold,
+                    detail=False,
                 )
                 for candidate in offsprings
             )
@@ -135,7 +182,10 @@ class GeneticAlgorithm:
             new_candidates = []
             for candidate in offsprings:
                 result = evaluator.evaluate(
-                    candidate.model, candidate.id, score_threshold
+                    candidate.model,
+                    candidate.id,
+                    score_threshold,
+                    detail=False,
                 )
                 candidate.eval_result = result
                 new_candidates.append(candidate)
@@ -215,7 +265,7 @@ def ga_main(
         reproducer:Reproducer,
         config:GAConfig,
         on_generation: Callable[[GAState], None] | None = None,
-        ) -> list[GAState]:
+        ) -> GAOutcome:
     """
     Main part of the genetic algorithm.
 
@@ -236,7 +286,9 @@ def ga_main(
 
     Returns
     -------
-    list[GAState]
+    GAOutcome
+        Final population plus compact per-iteration history. Past
+        populations are not retained in memory.
     """
     if config.seed is not None:
         random.seed(config.seed)
@@ -249,15 +301,15 @@ def ga_main(
         reproducer,
         )
 
-    initial_state = GAState(
+    state = GAState(
         iteration=0,
         population=ga.initialize_population([], start)
         )
-    states = [initial_state]
-    
+    history: list[GenerationSummary] = []
+
     for _ in range(config.total_iter):
-        state = ga.next_state(states[-1])
-        states.append(state)
+        state = ga.next_state(state)
+        history.append(_generation_summary(state, config.order_by))
 
         print(
             format_iteration_summary(
@@ -279,7 +331,7 @@ def ga_main(
             print("max score reached")
             break
 
-    return states
+    return GAOutcome(final=state, history=history)
 
 
 def format_iteration_summary(
@@ -337,6 +389,8 @@ def format_iteration_summary(
 __all__ = [
     "GAConfig",
     "GAState",
+    "GAOutcome",
+    "GenerationSummary",
     "GeneticAlgorithm",
     "ga_main",
 ]

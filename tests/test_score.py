@@ -1,14 +1,28 @@
-import pytest
+from functools import partial
 
+import pytest
+from pyboolnet.external.bnet2primes import bnet_text2primes
+
+from boolmore.evaluation.nav_score import get_NAV_scores
 from boolmore.evaluation.score import (
     EvaluationItemScore,
     EvaluationResult,
+    Evaluator,
     get_model_score,
     get_result_kind,
 )
 from boolmore.evaluation.phenotype_score import get_phenotype_scores
-from boolmore.experiment import PhenotypeExperiment
-from boolmore.inference.prediction import PhenotypePrediction
+from boolmore.experiment import NAVExperiment, PhenotypeExperiment
+from boolmore.inference.prediction import NAVPrediction, PhenotypePrediction
+from boolmore.model import Model
+
+_EMPTY_CONSTRAINTS = {
+    "fixed": [],
+    "regulate": {},
+    "necessary": {},
+    "group": {},
+    "possible_constant": [],
+}
 
 
 def test_get_phenotype_score_match():
@@ -124,3 +138,54 @@ def test_get_result_kind():
         item_scores=[nav],
     )
     assert result.kind == "NAV"
+
+    stripped = EvaluationResult(
+        model_id=0,
+        max_score=1.0,
+        score=1.0,
+        n_eff_edges=0,
+        n_eff_self_edges=0,
+        n_prime_implicants=0,
+        n_extra_edges=0,
+        satisfies_constraints=True,
+        item_scores=[],
+        kind="NAV",
+    )
+    assert stripped.kind == "NAV"
+    assert stripped.item_scores == []
+
+
+def test_evaluate_detail_false_keeps_scalars_drops_items():
+    model = Model.from_primes(bnet_text2primes("A, !A\nB, A\n"))
+    experiments = [
+        NAVExperiment(id=1, fixes=(), observed="A", outcome="ON", weight=1.0),
+    ]
+
+    def fake_full(primes_arg, experiments_arg):
+        return {
+            (): NAVPrediction(fixes=(), average_values={"A": 1.0, "B": 1.0}),
+        }
+
+    evaluator = Evaluator(
+        base=model,
+        experiments=experiments,
+        prediction_fn=fake_full,
+        score_fn=partial(get_NAV_scores, default_sources={}, hierarchy=False),
+        constraints=_EMPTY_CONSTRAINTS,
+        run_type="NAV",
+        hierarchy=False,
+        nav_method="min_traps",
+        ldoi_prune=False,
+    )
+
+    detailed = evaluator.evaluate(model, model_id=1, detail=True)
+    assert detailed.kind == "NAV"
+    assert len(detailed.item_scores) == 1
+    assert detailed.score == 1.0
+
+    compact = evaluator.evaluate(model, model_id=1, detail=False)
+    assert compact.kind == "NAV"
+    assert compact.item_scores == []
+    assert compact.score == detailed.score
+    assert compact.max_score == detailed.max_score
+    assert compact.n_prime_implicants == detailed.n_prime_implicants

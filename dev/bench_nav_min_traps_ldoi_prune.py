@@ -205,18 +205,18 @@ def run_ga_bench(ldoi_prune: bool) -> RunResult:
         reproducer = Reproducer(selector=selector, constraints=evaluator.constraints)
 
         t0 = perf_counter()
-        states = ga_main(start, evaluator, selector, reproducer, ga)
+        outcome = ga_main(start, evaluator, selector, reproducer, ga)
         wall = perf_counter() - t0
 
-        final = states[-1].population[0]
+        final = outcome.final.population[0]
         assert start.eval_result is not None
         assert final.eval_result is not None
 
         result = RunResult(
             ldoi_prune=ldoi_prune,
             wall_seconds=wall,
-            n_iterations=len(states) - 1,
-            n_generated=states[-1].generated,
+            n_iterations=len(outcome.history),
+            n_generated=outcome.final.generated,
             start_score=start.eval_result.score,
             start_max=start.eval_result.max_score,
             final_score=final.eval_result.score,

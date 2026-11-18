@@ -9,7 +9,7 @@ from pathlib import Path
 import pandas as pd
 
 from boolmore.boolean_functions import assignment_to_dict
-from boolmore.evaluation.score import EvaluationResult
+from boolmore.evaluation.score import EvaluationResult, Evaluator
 from boolmore.genetic.population import Candidate
 from boolmore.model import Model
 from boolmore.outcome import format_outcome, format_outcome_range, resolve_outcome_range
@@ -163,7 +163,11 @@ def export_model(
     return Path(bnet_file_name).resolve()
 
 
-def export_candidate(candidate: Candidate, export_name: str) -> Path:
+def export_candidate(
+    candidate: Candidate,
+    export_name: str,
+    evaluator: Evaluator | None = None,
+) -> Path:
     """Export a GA candidate model and its evaluation score report.
 
     Writes:
@@ -179,6 +183,10 @@ def export_candidate(candidate: Candidate, export_name: str) -> Path:
         Candidate with a non-``None`` ``eval_result``.
     export_name : str
         Prefix for output file names.
+    evaluator : Evaluator or None
+        Required when ``eval_result.item_scores`` is empty (GA ran with
+        ``detail=False``). Re-evaluates once with ``detail=True`` before
+        writing the score CSV and stores the full result on the candidate.
 
     Returns
     -------
@@ -188,16 +196,27 @@ def export_candidate(candidate: Candidate, export_name: str) -> Path:
     Raises
     ------
     ValueError
-        If ``candidate.eval_result`` is ``None``, or ``kind`` is not
-        ``"NAV"`` or ``"Phenotype"``.
+        If ``candidate.eval_result`` is ``None``, ``item_scores`` are empty
+        and ``evaluator`` is missing, or ``kind`` is not ``"NAV"`` or
+        ``"Phenotype"``.
     """
     if candidate.eval_result is None:
         raise ValueError("export_candidate requires candidate.eval_result")
 
+    result = candidate.eval_result
+    if not result.item_scores:
+        if evaluator is None:
+            raise ValueError(
+                "export_candidate requires evaluator when item_scores are empty"
+            )
+        result = evaluator.evaluate(
+            candidate.model, candidate.id, detail=True
+        )
+        candidate.eval_result = result
+
     stem = f"{export_name}_{candidate.id}_gen{candidate.generation}"
     export_model(candidate.model, stem, header=candidate.info())
 
-    result = candidate.eval_result
     score_path = f"{stem}_score.csv"
     if result.kind == "NAV":
         export_nav_report(result, score_path)

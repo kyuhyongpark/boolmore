@@ -18,7 +18,8 @@ from boolmore.boolean_functions import prime2bnet
 from boolmore.evaluation.metrics import compare_model_functions
 from boolmore.io.export import export_candidate
 from boolmore.io.paths import project_root
-from boolmore.genetic.algorithm import GAState, ga_main
+from boolmore.evaluation.score import Evaluator
+from boolmore.genetic.algorithm import GAOutcome, GAState, ga_main
 from boolmore.genetic.population import Candidate
 from boolmore.genetic.operators.reproduction import Reproducer
 from boolmore.genetic.selection import Selector
@@ -129,30 +130,44 @@ def append_generation_evals(path: str, state: GAState) -> None:
         csv.DictWriter(fp, fieldnames=_EVAL_CSV_FIELDS).writerows(rows)
 
 
+def export_generation_top(
+    state: GAState,
+    run_name: str,
+    evaluator: Evaluator,
+    export_top: int,
+    export_thresh: float = 0.0,
+) -> None:
+    """Export top-N models from the current generation when above threshold."""
+    if not export_top:
+        return
+    for candidate in state.population[:export_top]:
+        result = candidate.eval_result
+        if result is not None and result.score > export_thresh:
+            export_candidate(candidate, run_name, evaluator=evaluator)
+
+
 def export_models(
-        states: list[GAState],
+        final_state: GAState,
         run_name: str,
-        export_top: int = 0,
-        export_thresh: float = 0.0,
+        evaluator: Evaluator,
         export_same: bool = False,
         ):
-    final = states[-1].population[0]
+    """Export the final best model (and optional score ties) from ``final_state``."""
+    final = final_state.population[0]
 
     # Always export the final best model
-    export_candidate(final, run_name)
-
-    # Export top models from each generation
-    if export_top:
-        for state in states[1:]:
-            for candidate in state.population[:export_top]:
-                if candidate.eval_result.score > export_thresh:
-                    export_candidate(candidate, run_name)
+    export_candidate(final, run_name, evaluator=evaluator)
 
     # Export all models tied with the best model in the final generation
     if export_same:
-        for candidate in states[-1].population:
-            if candidate.eval_result.score == final.eval_result.score:
-                export_candidate(candidate, run_name)
+        for candidate in final_state.population:
+            if (
+                candidate is not final
+                and candidate.eval_result is not None
+                and final.eval_result is not None
+                and candidate.eval_result.score == final.eval_result.score
+            ):
+                export_candidate(candidate, run_name, evaluator=evaluator)
 
 
 def _utc_now() -> datetime.datetime:
@@ -415,7 +430,7 @@ def run_ga(
         context_cols: Sequence[str] | None = None,
         intervention_cols: Sequence[str] | None = None,
         fixes_allow_override: bool | None = None,
-        )-> tuple[Candidate, Candidate, list[GAState]]:
+        )-> tuple[Candidate, Candidate, GAOutcome]:
     """
     Imports parameters, experiments, base model in the json file.
     Runs genetic algorithm and exports refined models.
@@ -478,8 +493,8 @@ def run_ga(
         the base model and its evaluation
     start : Candidate
         the starting model and its evaluation
-    states : list[GAState]
-        the states of the genetic algorithm
+    outcome : GAOutcome
+        final population plus compact per-iteration history
 
     """
     # ---------- Load run configuration ----------
@@ -552,7 +567,7 @@ def run_ga(
 
         # ---------- Evaluate and print base (same detail as START/FINAL) ----------
         start_single = datetime.datetime.now()
-        base_result = evaluator.evaluate(evaluator.base)
+        base_result = evaluator.evaluate(evaluator.base, detail=False)
         base = Candidate(model=evaluator.base, eval_result=base_result)
         end_single = datetime.datetime.now()
         log_candidate(base, "BASE", str(base_path))
@@ -571,7 +586,7 @@ def run_ga(
             start_model = load_model(start_path, base=evaluator.base)
             print("Starting model loaded.")
 
-        start_result = evaluator.evaluate(start_model, model_id=0)
+        start_result = evaluator.evaluate(start_model, model_id=0, detail=False)
         start = Candidate(start_model, 0, ga.starting_gen, start_result)
         log_candidate(start, "START", str(start_path))
         print()
@@ -582,10 +597,17 @@ def run_ga(
 
         def on_generation(state: GAState) -> None:
             append_generation_evals(EVAL_CSV, state)
+            export_generation_top(
+                state,
+                run_name,
+                evaluator,
+                export_top=export_top,
+                export_thresh=export_thresh,
+            )
 
         selector = Selector(keep=ga.keep, order_by=ga.order_by)
         reproducer = Reproducer(selector=selector, constraints=evaluator.constraints)
-        states = ga_main(
+        outcome = ga_main(
             start, evaluator, selector, reproducer, ga, on_generation=on_generation
         )
         print(f"Eval summaries: {os.path.abspath(EVAL_CSV)}")
@@ -593,9 +615,11 @@ def run_ga(
         end_time = datetime.datetime.now()
 
         print()
-        export_models(states, run_name, export_top, export_thresh, export_same)
+        export_models(
+            outcome.final, run_name, evaluator, export_same=export_same
+        )
 
-        final = states[-1].population[0]
+        final = outcome.final.population[0]
         log_candidate(
             final,
             "FINAL",
@@ -606,7 +630,8 @@ def run_ga(
         start_vs_final = compare_model_functions(start.model, final.model)
 
         print(
-            f"Ran {len(states)-1} iterations, generated {states[-1].generated} models, "
+            f"Ran {len(outcome.history)} iterations, "
+            f"generated {outcome.final.generated} models, "
             f"mutated {len(start_vs_final)} functions. "
             f"Elapsed: {end_time-start_time}"
         )
@@ -646,6 +671,6 @@ def run_ga(
                 f"functions differ among base, start, and final"
             )
 
-        return base, start, states
+        return base, start, outcome
     finally:
         logger.close()
