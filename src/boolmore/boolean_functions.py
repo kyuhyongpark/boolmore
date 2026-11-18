@@ -1,25 +1,19 @@
 from boolmore.types import Assignment, PrimeType
 
-# RR bit-string conventions
-# -------------------------
-# External (public API / stored models), regulators (A, B):
-#   A&B | A | B | 1
-#   string index e = 2**k - 1 - mask
+# RR bit-string convention (public / stored)
+# ------------------------------------------
+# ``rr`` is a length-``2**k`` binary string with ``index == mask``.
+# For regulators ``(A, B)``:
 #
-# Internal (index == mask), used inside index-sensitive ops after invert:
-#   1 | B | A | A&B
+#   index:  0   1   2   3
+#   term:   1 | B | A | A&B
 #
-# TODO: drop boundary inversions and store the internal order externally.
-
-
-def _to_internal(rr: str) -> str:
-    """Map external A&B|A|B|1 order to internal 1|B|A|A&B (index == mask)."""
-    return rr[::-1]
-
-
-def _to_external(rr: str) -> str:
-    """Map internal 1|B|A|A&B order back to external A&B|A|B|1."""
-    return rr[::-1]
+# Regulator at position ``n`` uses bit ``1 << (k - n - 1)`` (first = MSB).
+# Newly appended regulators become the LSB.
+#
+# Note: ``get_max_irr`` still ends with ``[::-1]``. That reverse is semantic
+# (input complement after flipping outputs), not an order adapter:
+# ``max_irr[mask] = 1 - max_rr[(2**k - 1) ^ mask]``.
 
 
 def prime2rr(prime:PrimeType,
@@ -38,7 +32,7 @@ def prime2rr(prime:PrimeType,
     Returns
     -------
     regulators - the regulating nodes                   :length k tuple[str]
-    rr         - representation of the rule             :length 2^k binary str
+    rr         - rule in mask order (index == mask)     :length 2^k binary str
     signs      - represents the signs of regulators     :length k binary str
                  0 means negative regulation
     
@@ -61,7 +55,7 @@ def prime2rr(prime:PrimeType,
             rr = '0'
         return regulators, rr, signs # type: ignore
 
-    # Build in internal mask order (index == mask), then convert to external.
+    # Build rr with index == mask.
     rr = ['0'] * (2**len(regulators)) # type: ignore
     if signs == None:
         signs_list = ['*'] * len(regulators) # type: ignore
@@ -90,12 +84,9 @@ def prime2rr(prime:PrimeType,
             else:
                 # if it does not exist, put 0
                 bi += '0'
-        # put 1 on that position of the internal rr (index == mask)
         rr[int(bi, 2)] = '1'
 
-    rr = _to_external(''.join(rr))
-
-    return regulators, rr, signs # type: ignore
+    return regulators, ''.join(rr), signs # type: ignore
 
 
 def rr2prime(regulators:tuple[str], rr:str, signs:str, inverted:bool=False) -> PrimeType:
@@ -106,7 +97,7 @@ def rr2prime(regulators:tuple[str], rr:str, signs:str, inverted:bool=False) -> P
     Parameters
     ----------
     regulators - the regulating nodes                       :length k tuple[str]
-    rr         - representation of the rule                 :length 2^k binary str
+    rr         - rule in mask order (index == mask)         :length 2^k binary str
     signs      - represents the signs of regulators         :length k binary str
                  0 means negative regulation
     inverted   - if true, input rr is taken as inverted     :bool
@@ -123,14 +114,12 @@ def rr2prime(regulators:tuple[str], rr:str, signs:str, inverted:bool=False) -> P
     assert k == len(signs), "signs should be a list with the numbe of nodes as length"
 
     inv = int(inverted)
-    # Canonicalize in external order, then decode with internal mask indices.
-    min_rr = _to_internal(get_uni_rr(rr, max = False))
+    min_rr = get_uni_rr(rr, max = False)
     max_irr = get_max_irr(rr)
-    min_irr = _to_internal(get_uni_rr(max_irr, max = False))
+    min_irr = get_uni_rr(max_irr, max = False)
 
     prime = [[],[]]
-    # Walk high mask → low so implicant order matches the legacy external scan.
-    for i in range(len(min_rr) - 1, -1, -1):
+    for i in range(len(min_rr)):
         if min_rr[i] != '1':
             continue
         bi = format(i, '0' + str(k) + 'b')
@@ -140,7 +129,7 @@ def rr2prime(regulators:tuple[str], rr:str, signs:str, inverted:bool=False) -> P
                 implicant[regulators[j]] = (int(signs[j]) - inv)%2
         prime[1-inv].append(implicant)
 
-    for i in range(len(min_irr) - 1, -1, -1):
+    for i in range(len(min_irr)):
         if min_irr[i] != '1':
             continue
         bi = format(i, '0' + str(k) + 'b')
@@ -158,10 +147,13 @@ def rr2bnet(regulators:tuple[str], rr:str, signs:str) -> str:
     Returns a bnet string
     when given regulators, signs and a binary representation of a rule.
 
+    Terms are emitted in ascending mask order (``1 | B | A | A&B`` for two
+    regulators). See the module header for the ``rr`` convention.
+
     Parameters
     ----------
     regulators - the regulating nodes                       :length k tuple[str]
-    rr         - representation of the rule                 :length 2^k binary str
+    rr         - rule in mask order (index == mask)         :length 2^k binary str
     signs      - represents the signs of regulators         :length k binary str
                  0 means negative regulation
 
@@ -180,11 +172,9 @@ def rr2bnet(regulators:tuple[str], rr:str, signs:str) -> str:
         if num == '0':
             nodes[i] = '!' + nodes[i]
 
-    rr_int = _to_internal(rr)
-    # Walk high mask → low to preserve legacy external term order in the string.
     bnet = '('
-    for i in range(len(rr_int) - 1, -1, -1):
-        bnet += rr_int[i]
+    for i, num in enumerate(rr):
+        bnet += str(num)
         bi = format(i, '0' + str(k) + 'b')
         for j, node in enumerate(nodes):
             if bi[j] == '1':
@@ -232,13 +222,12 @@ def get_uni_rr(rr: str, max: bool = True) -> str:
     Returns the unique canonical representation (maximal truth table or 
     minimal Blake canonical form) of a Boolean rule.
     
-    This function processes a binary string of length 2^k (where k is the 
-    number of regulators) by identifying and filling out sub-cubes of a 
-    hypercube using fast bitwise integer logic.
+    Operates on mask-order ``rr`` (``index == mask``). Fills supersets of each
+    active implicant mask via bitwise subset checks.
 
     Parameters
     ----------
-    rr  - representation of the rule            : length 2^k binary str
+    rr  - rule in mask order (index == mask)    : length 2^k binary str
     max - if True, get maximal representation   : bool
           if False, get minimal representation
 
@@ -246,11 +235,10 @@ def get_uni_rr(rr: str, max: bool = True) -> str:
     -------
     uni_rr - unique representation of the rule  : length 2^k binary str
     """
-    rr = _to_internal(rr)
     n = len(rr)
     
     if n <= 1:
-        return _to_external(rr)
+        return rr
 
     uni_rr = list(rr)
     
@@ -270,7 +258,7 @@ def get_uni_rr(rr: str, max: bool = True) -> str:
                 
                 uni_rr[position] = fill_value
 
-    return _to_external(''.join(uni_rr))
+    return ''.join(uni_rr)
 
 
 def get_max_irr(rr:str) -> str:
@@ -278,9 +266,14 @@ def get_max_irr(rr:str) -> str:
     Returns the inverted maximal representation of the rule of a node
     when given any representation of the rule.
 
+    After taking the maximal form and complementing each output bit, the
+    string is reversed. That reverse complements the regulator assignment
+    mask (``max_irr[mask] = 1 - max_rr[(2**k - 1) ^ mask]``); it is not an
+    rr order-adapter.
+
     Parameters
     ----------
-    rr - represents the rule    :length 2^k binary str
+    rr - rule in mask order (index == mask)    :length 2^k binary str
 
     Returns
     -------

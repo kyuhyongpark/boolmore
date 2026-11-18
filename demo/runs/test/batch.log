@@ -8,20 +8,20 @@ parameter_overrides={}
 seeds=[0, 1, 2]
 core=4
 
-[2026-11-18T13:55:15.610032+00:00] start seed=0 dir=/home/kyuhyongpark/Boolmore/boolmore/demo/runs/test/seed_000
-[2026-11-18T13:55:20.273772+00:00] done  seed=0 elapsed=0:00:04.663740
-  iter 10/10 | generated 100 | pruned  7/10 (thresh 48.17) | best id  52 | gen  9 | score 48.2/50 (96.3%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 12
-[2026-11-18T13:55:20.274817+00:00] start seed=1 dir=/home/kyuhyongpark/Boolmore/boolmore/demo/runs/test/seed_001
-[2026-11-18T13:55:23.395542+00:00] done  seed=1 elapsed=0:00:03.120725
-  iter 10/10 | generated 100 | pruned  6/10 (thresh 47.00) | best id  99 | gen  9 | score 47.5/50 (95.0%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 11
-[2026-11-18T13:55:23.396635+00:00] start seed=2 dir=/home/kyuhyongpark/Boolmore/boolmore/demo/runs/test/seed_002
-[2026-11-18T13:55:26.657192+00:00] done  seed=2 elapsed=0:00:03.260557
-  iter 10/10 | generated 100 | pruned  6/10 (thresh 47.00) | best id  92 | gen  9 | score 48.5/50 (97.0%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 10 | n_prime_implicants 10
+[2026-11-18T15:21:43.380303+00:00] start seed=0 dir=/home/kyuhyongpark/Boolmore/boolmore/demo/runs/test/seed_000
+[2026-11-18T15:21:47.865361+00:00] done  seed=0 elapsed=0:00:04.485058
+  iter 10/10 | generated 100 | pruned  4/10 (thresh 45.33) | best id  97 | gen  7 | score 46.8/50 (93.6%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 13 | n_prime_implicants 16
+[2026-11-18T15:21:47.866542+00:00] start seed=1 dir=/home/kyuhyongpark/Boolmore/boolmore/demo/runs/test/seed_001
+[2026-11-18T15:21:51.100531+00:00] done  seed=1 elapsed=0:00:03.233989
+  iter 10/10 | generated 100 | pruned  7/10 (thresh 49.50) | best id  63 | gen  6 | score 49.5/50 (99.0%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 11
+[2026-11-18T15:21:51.101659+00:00] start seed=2 dir=/home/kyuhyongpark/Boolmore/boolmore/demo/runs/test/seed_002
+[2026-11-18T15:21:54.358765+00:00] done  seed=2 elapsed=0:00:03.257106
+  iter 10/10 | generated 100 | pruned  3/10 (thresh 49.00) | best id  71 | gen 12 | score 49.0/50 (98.0%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 10 | n_prime_implicants 10
 
 --- summary ---
-seed=0  elapsed=0:00:04.663740
-  iter 10/10 | generated 100 | pruned  7/10 (thresh 48.17) | best id  52 | gen  9 | score 48.2/50 (96.3%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 12
-seed=1  elapsed=0:00:03.120725
-  iter 10/10 | generated 100 | pruned  6/10 (thresh 47.00) | best id  99 | gen  9 | score 47.5/50 (95.0%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 11
-seed=2  elapsed=0:00:03.260557
-  iter 10/10 | generated 100 | pruned  6/10 (thresh 47.00) | best id  92 | gen  9 | score 48.5/50 (97.0%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 10 | n_prime_implicants 10
+seed=0  elapsed=0:00:04.485058
+  iter 10/10 | generated 100 | pruned  4/10 (thresh 45.33) | best id  97 | gen  7 | score 46.8/50 (93.6%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 13 | n_prime_implicants 16
+seed=1  elapsed=0:00:03.233989
+  iter 10/10 | generated 100 | pruned  7/10 (thresh 49.50) | best id  63 | gen  6 | score 49.5/50 (99.0%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 11 | n_prime_implicants 11
+seed=2  elapsed=0:00:03.257106
+  iter 10/10 | generated 100 | pruned  3/10 (thresh 49.00) | best id  71 | gen 12 | score 49.0/50 (98.0%) | n_extra_edges 0 | n_eff_self_edges 1 | n_eff_edges 10 | n_prime_implicants 10

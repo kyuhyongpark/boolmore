@@ -11,7 +11,7 @@ def check_constant(rr: str, max_rr: str | None = None) -> bool:
 
     Parameters
     ----------
-    rr - representation of the rule     :length 2^k binary str
+    rr - rule in mask order (index == mask)     :length 2^k binary str
     max_rr - optional precomputed maximal form of ``rr``
 
     Returns
@@ -33,10 +33,13 @@ def check_source(
     """
     Check if the node became a source node.
 
+    ``rr`` / ``min_rr`` use mask order (``index == mask``); see
+    ``boolmore.boolean_functions``.
+
     Parameters
     ----------
     regulators - the regulating nodes           :length k tuple[str]
-    rr         - representation of the rule     :length 2^k binary str
+    rr         - rule in mask order             :length 2^k binary str
     node       - the target node to check       :str
     min_rr     - optional precomputed minimal form of ``rr``
 
@@ -54,14 +57,12 @@ def check_source(
     if min_rr is None:
         min_rr = bf.get_uni_rr(rr, max=False)
 
-    min_rr = bf._to_internal(min_rr)
-
     add = 0
     for i in range(2**k):
         add += int(min_rr[i])
 
-    # Internal index of the singleton implicant for regulator n.
-    return add == 1 and min_rr[2**(k - n - 1)] == '1'
+    # Singleton implicant for regulator n (its bit alone).
+    return add == 1 and min_rr[1 << (k - n - 1)] == '1'
 
 
 def check_regulate(
@@ -73,10 +74,12 @@ def check_regulate(
     """
     Checks if a regulator appears in the rule in a non-redundant manner.
 
+    ``rr`` uses mask order (``index == mask``); see ``boolmore.boolean_functions``.
+
     Parameters
     ----------
     regulators - the regulating nodes               :length k tuple[str]
-    rr         - representation of the rule         :length 2^k binary str
+    rr         - rule in mask order                 :length 2^k binary str
     reg        - the regulating node to check       :str
     is_min     - True if minimal representation     :bool
 
@@ -91,12 +94,11 @@ def check_regulate(
     n = regulators.index(reg)
 
     bi = rr if is_min else bf.get_uni_rr(rr, max=False)
-    bi = bf._to_internal(bi)
+    bit = 1 << (k - n - 1)
 
     add = 0
     for i in range(2**k):
-        # Masks where regulator n's bit is set (internal index == mask).
-        if i % 2**(k - n) > 2**(k - 1 - n) - 1:
+        if i & bit:
             add += int(bi[i])
 
     return add != 0
@@ -111,10 +113,13 @@ def check_necessary(
     """
     Checks if the node is necessary for the rule.
 
+    ``rr`` / ``min_rr`` use mask order (``index == mask``); see
+    ``boolmore.boolean_functions``.
+
     Parameters
     ----------
     regulators - the regulating nodes                   :length k tuple[str]
-    rr         - representation of the rule             :length 2^k binary str
+    rr         - rule in mask order                     :length 2^k binary str
     nec        - the node to check whether necessary    :str
     min_rr     - optional precomputed minimal form of ``rr``
 
@@ -135,14 +140,12 @@ def check_necessary(
 
     k = len(regulators)
     n = regulators.index(nec)
-
-    rr_int = bf._to_internal(rr)
+    bit = 1 << (k - n - 1)
 
     add = 0
     for i in range(2**k):
-        # Masks where regulator n's bit is unset must be zero.
-        if i % 2**(k - n) <= 2**(k - 1 - n) - 1:
-            add += int(rr_int[i])
+        if not (i & bit):
+            add += int(rr[i])
 
     return add == 0
 
@@ -169,8 +172,8 @@ def check_node(
     ----------
     regulators  - the regulating nodes                      :length (k+a) tuple[str]
                   Note that there can be added regulators
-    rr          - representation of the rule                :length 2^(k+a) binary str
-    base_rr     - representation of the the baseline rule   :length 2^k binary str
+    rr          - rule in mask order                        :length 2^(k+a) binary str
+    base_rr     - baseline rule in mask order               :length 2^k binary str
     constraints - represents 5 types of constraints         :dict[str, list or dict]
                   (fixed, regulate, necessary, group, possible_constant)
     node        - the target node                           :str
@@ -277,6 +280,3 @@ def check_model_constraints(model:Model, constraints:dict={}) -> bool:
             constraints,
             node) and check
     return check
-
-
-

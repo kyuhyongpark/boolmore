@@ -15,9 +15,9 @@ id,weight,hierarchy,context,intervention,fixes,observed,outcome,outcome_range,pr
 2,1.0,0,,,,Emx2,Some,"0.25,0.75",0.5,1.0,1.0
 6,1.0,1,,Coup_fti=0,Coup_fti=0,Emx2,OFF,"0.0,0.0",0.0,1.0,1.0
 14,1.0,1,,Sp8=1,Sp8=1,Emx2,OFF,"0.0,0.0",0.0,1.0,1.0
-18,1.0,1,,Pax6=1,Pax6=1,Emx2,OFF,"0.0,0.0",0.5,0.5,0.5
+18,1.0,1,,Pax6=1,Pax6=1,Emx2,OFF,"0.0,0.0",0.0,1.0,1.0
 21,1.0,1,,Coup_fti=1,Coup_fti=1,Emx2,Some,"0.25,0.75",0.5,1.0,1.0
-27,1.0,2,,"Coup_fti=0,Pax6=1","Coup_fti=0,Pax6=1",Emx2,OFF,"0.0,0.0",0.0,1.0,0.5
+27,1.0,2,,"Coup_fti=0,Pax6=1","Coup_fti=0,Pax6=1",Emx2,OFF,"0.0,0.0",0.0,1.0,1.0
 43,1.0,2,,"Fgf8=1,Sp8=0","Fgf8=1,Sp8=0",Emx2,OFF,"0.0,0.0",0.0,1.0,1.0
 49,1.0,2,,"Coup_fti=0,Sp8=0","Coup_fti=0,Sp8=0",Emx2,OFF,"0.0,0.0",0.0,1.0,1.0
 3,1.0,0,,,,Fgf8,Some,"0.25,0.75",0.5,1.0,1.0

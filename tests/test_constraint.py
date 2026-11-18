@@ -32,7 +32,7 @@ def test_base_constant_flipped_without_regulators_fails():
 
 def test_base_constant_with_edge_pool_regulator_nonconstant_passes():
     # Seed-11 case: constant 0 gains ABI1 and becomes identity-like.
-    assert check_node(("ABI1",), "10", "0", EMPTY_CONSTRAINTS, "GEF1_4_10") is True
+    assert check_node(("ABI1",), "01", "0", EMPTY_CONSTRAINTS, "GEF1_4_10") is True
 
 
 def test_base_constant_with_regulator_same_constant_passes():
@@ -44,16 +44,16 @@ def test_base_constant_with_regulator_opposite_constant_fails():
 
 
 def test_pure_source_unchanged_passes():
-    assert check_node(("A",), "10", "10", EMPTY_CONSTRAINTS, "A") is True
+    assert check_node(("A",), "01", "01", EMPTY_CONSTRAINTS, "A") is True
 
 
 def test_pure_source_mutated_fails():
-    assert check_node(("A",), "01", "10", EMPTY_CONSTRAINTS, "A") is False
+    assert check_node(("A",), "10", "01", EMPTY_CONSTRAINTS, "A") is False
 
 
 def test_source_with_added_regulator_passes():
     # Former source that gained an edge-pool regulator is no longer frozen.
-    assert check_node(("A", "B"), "1000", "10", EMPTY_CONSTRAINTS, "A") is True
+    assert check_node(("A", "B"), "0001", "01", EMPTY_CONSTRAINTS, "A") is True
 
 
 @pytest.mark.parametrize("k", range(1, 5))
@@ -90,13 +90,13 @@ def test_check_node_fixed_rejects_mutation():
         **EMPTY_CONSTRAINTS,
         "fixed": ["N"],
     }
-    assert check_node(("A", "B"), "0001", "0001", constraints, "N") is True
-    assert check_node(("A", "B"), "0011", "0001", constraints, "N") is False
+    assert check_node(("A", "B"), "1000", "1000", constraints, "N") is True
+    assert check_node(("A", "B"), "1100", "1000", constraints, "N") is False
 
 
 def test_check_node_regulate_present_and_absent():
     regulators = ("A", "B")
-    rr_ok = "0100"  # A regulates; non-constant
+    rr_ok = "0010"  # A regulates; non-constant
     rr_bad = "0000"  # A does not regulate
     constraints = {
         **EMPTY_CONSTRAINTS,
@@ -121,11 +121,11 @@ def test_check_node_necessary_present_and_absent():
         "necessary": {"N": ["A"]},
         "possible_constant": ["N"],
     }
-    rr_ok = "0100"
+    rr_ok = "0010"
     assert check_necessary(regulators, rr_ok, "A")
     assert check_node(regulators, rr_ok, "0", constraints, "N") is True
 
-    rr_bad = "0010"
+    rr_bad = "0100"
     assert not check_necessary(regulators, rr_bad, "A")
     assert check_node(regulators, rr_bad, "0", constraints, "N") is False
 
@@ -136,9 +136,9 @@ def test_check_node_possible_constant_allows_constant():
         **EMPTY_CONSTRAINTS,
         "possible_constant": ["N"],
     }
-    assert check_node(regulators, "0000", "0001", constraints, "N") is True
+    assert check_node(regulators, "0000", "1000", constraints, "N") is True
     # Without possible_constant, same constant fails for non-base-constant.
-    assert check_node(regulators, "0000", "0001", EMPTY_CONSTRAINTS, "N") is False
+    assert check_node(regulators, "0000", "1000", EMPTY_CONSTRAINTS, "N") is False
 
 
 def test_check_node_self_loop_source_rejected():
@@ -146,12 +146,10 @@ def test_check_node_self_loop_source_rejected():
     regulators = ("N", "A")
     # Construct a source-on-N rule if possible; otherwise assert helper agreement.
     constraints = EMPTY_CONSTRAINTS
-    # Identity-like on N alone would be length-2; with two regs use min form with
-    # single ON at the N-source position.
     # If check_source is True, check_node must fail.
     for rr in ("".join(bits) for bits in itertools.product("01", repeat=4)):
         if check_source(regulators, rr, "N"):
-            assert check_node(regulators, rr, "0001", constraints, "N") is False
+            assert check_node(regulators, rr, "1000", constraints, "N") is False
             break
     else:
         pytest.skip("no length-4 source-on-N example found")

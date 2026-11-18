@@ -191,10 +191,13 @@ def add_regulator(regulators:tuple[str, ...], rr:str, signs:str, new_regulator:s
     """
     Returns a new representation of a rule with an extra regulator.
 
+    ``rr`` / ``added_rr`` use mask order (``index == mask``). The new regulator
+    is appended and becomes the least-significant mask bit.
+
     Parameters
     ----------
     regulators    - the regulating nodes                    :length k tuple[str]
-    rr            - representation of the rule              :length 2^k binary str
+    rr            - rule in mask order                      :length 2^k binary str
     signs         - represents the signs of regulators      :length k binary str
                     0 means negative regulation
     new_regulator - the added regulating node               :str
@@ -203,7 +206,7 @@ def add_regulator(regulators:tuple[str, ...], rr:str, signs:str, new_regulator:s
     Returns
     -------
     added_regulators - the regulating nodes             :length k+1 tuple[str]
-    added_rr         - representation of the rule       :length 2^(k+1) binary str
+    added_rr         - rule in mask order               :length 2^(k+1) binary str
     added_signs      - represents signs of regulators   :length k+1 binary str
 
     """
@@ -217,16 +220,13 @@ def add_regulator(regulators:tuple[str, ...], rr:str, signs:str, new_regulator:s
     if rnd < bias:
         rr = bf.get_max_irr(rr)
 
-    # Expand in internal mask order: old value at new-bit=0, random at new-bit=1.
-    # Walk high→low old masks so random.randint order matches the legacy external scan.
-    rr_int = bf._to_internal(rr)
-    n = len(rr_int)
+    # Old value at new-bit=0, random at new-bit=1; ascending old-mask order.
+    n = len(rr)
     added = ['0'] * (2 * n)
-    for old_mask in range(n - 1, -1, -1):
-        rand_val = str(random.randint(0, 1))
-        added[(old_mask << 1)] = rr_int[old_mask]
-        added[(old_mask << 1) | 1] = rand_val
-    added_rr = bf._to_external(''.join(added))
+    for old_mask in range(n):
+        added[old_mask << 1] = rr[old_mask]
+        added[(old_mask << 1) | 1] = str(random.randint(0, 1))
+    added_rr = ''.join(added)
 
     if rnd < bias:
         added_rr = bf.get_max_irr(added_rr)
@@ -239,10 +239,12 @@ def delete_regulator(regulators:tuple[str, ...], rr:str, signs:str, target_regul
     """
     Returns a new representation of a rule with the target regulator deleted.
 
+    ``rr`` / ``deleted_rr`` use mask order (``index == mask``).
+
     Parameters
     ----------
     regulators       - the regulating nodes                 :length k tuple[str]
-    rr               - representation of the rule           :length 2^k binary str
+    rr               - rule in mask order                   :length 2^k binary str
     signs            - represents the signs of regulators   :length k binary str
                        0 means negative regulation
     target_regulator - the regulator to be deleted          :str
@@ -250,7 +252,7 @@ def delete_regulator(regulators:tuple[str, ...], rr:str, signs:str, target_regul
     Returns
     -------
     deleted_regulators - the regulating nodes                   :length k-1 tuple[str]
-    deleted_rr         - representation of the rules            :length 2^(k-1) binary str
+    deleted_rr         - rule in mask order                     :length 2^(k-1) binary str
     deleted_signs      - represents the signs of regulators     :length k-1 binary str
 
     """
@@ -269,12 +271,12 @@ def delete_regulator(regulators:tuple[str, ...], rr:str, signs:str, target_regul
     if rnd < bias:
         rr = bf.get_max_irr(rr)
 
-    bi = list(bf._to_internal(rr))
+    bit = 1 << (k - n - 1)
+    bi = list(rr)
     for i in range(2**k):
         # Keep masks where the deleted regulator's bit is unset.
-        if i % 2**(k-n) <= 2**(k-1-n)-1:
+        if not (i & bit):
             deleted_rr += bi[i]
-    deleted_rr = bf._to_external(deleted_rr)
 
     if rnd < bias:
         deleted_rr = bf.get_max_irr(deleted_rr)

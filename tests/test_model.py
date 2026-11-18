@@ -20,7 +20,7 @@ def test_from_primes_creates_base_model(base_primes):
     assert model.primes == base_primes
     assert model.regulators_dict == {"A": ("A",), "B": ("A","B")}
     assert model.signs_dict == {"A": "1", "B": "01"}
-    assert model.rr_dict == {"A": "10", "B": "1000"}
+    assert model.rr_dict == {"A": "01", "B": "0001"}
     assert model.edges == [
         {
             "regulator": "A",
@@ -62,7 +62,7 @@ def test_from_primes_uses_base_model(base_primes):
     assert model.primes == primes
     assert model.regulators_dict == {"A": ("A","B"), "B": ("A","B")}
     assert model.signs_dict == {"A": "11", "B": "01"}
-    assert model.rr_dict == {"A": "1000", "B": "1000"}
+    assert model.rr_dict == {"A": "0001", "B": "0001"}
     assert len(model.get_edges(source="edge_pool")) == len(edge_pool)
 
 

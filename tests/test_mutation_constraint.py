@@ -133,8 +133,7 @@ def test_mutate_rr_constraint_matches_reference(probability, bias, k):
     regulators = tuple(f"R{i}" for i in range(k))
     # Include a self-loop case for source checks.
     node = regulators[0]
-    base_rr = "0" * (2**k)
-    base_rr = base_rr[:-1] + "1"  # single ON bit at the end
+    base_rr = "1" + "0" * (2**k - 1)  # single ON bit at mask 0 (constant 1)
     rr = base_rr
 
     for constraints in _constraint_combos(node, regulators):
@@ -166,23 +165,23 @@ def test_mutate_rr_constraint_early_returns_match_reference():
         "0",
         True,
     )
-    # Single regulator (non-base-constant)
-    assert mutate_rr_constraint(("A",), "10", "10", constraints, "B", 0.5) == (
-        "10",
+    # Single regulator (non-base-constant); identity is "01" in mask order
+    assert mutate_rr_constraint(("A",), "01", "01", constraints, "B", 0.5) == (
+        "01",
         False,
     )
-    assert mutate_rr_constraint(("A",), "01", "10", constraints, "B", 0.5) == (
-        "10",
+    assert mutate_rr_constraint(("A",), "10", "01", constraints, "B", 0.5) == (
+        "01",
         True,
     )
     # Fixed
     fixed = _empty_constraints()
     fixed["fixed"] = ["N"]
-    assert mutate_rr_constraint(("A", "B"), "0001", "0001", fixed, "N", 0.5) == (
-        "0001",
+    assert mutate_rr_constraint(("A", "B"), "1000", "1000", fixed, "N", 0.5) == (
+        "1000",
         False,
     )
-    assert mutate_rr_constraint(("A", "B"), "0011", "0001", fixed, "N", 0.5) == (
-        "0001",
+    assert mutate_rr_constraint(("A", "B"), "1100", "1000", fixed, "N", 0.5) == (
+        "1000",
         True,
     )

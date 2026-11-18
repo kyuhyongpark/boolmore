@@ -1,8 +1,8 @@
 """
-Lock the external rr convention A&B | A | B | 1.
+Lock the public rr convention: index == mask (1 | B | A | A&B).
 
-Legacy oracles copy the pre-refactor index formulas so production helpers
-must keep identical external I/O while migrating to internal mask order.
+Reference oracles use direct mask indexing so production helpers must keep
+identical I/O under this convention.
 """
 
 from __future__ import annotations
@@ -36,11 +36,11 @@ from boolmore.genetic.operators.mutation import add_regulator, delete_regulator
 
 
 # ---------------------------------------------------------------------------
-# Legacy conversion oracles (external A&B|A|B|1 index formulas)
+# New-convention reference oracles (index == mask)
 # ---------------------------------------------------------------------------
 
 
-def legacy_prime2rr(prime, regulators=None, signs=None):
+def ref_prime2rr(prime, regulators=None, signs=None):
     if regulators is None:
         nodes = set()
         for dct in prime[1]:
@@ -64,21 +64,18 @@ def legacy_prime2rr(prime, regulators=None, signs=None):
                         signs_list[i] = "0"
                     elif implicant[node] == 1 and signs_list[i] == "*":
                         signs_list[i] = "1"
-                    else:
-                        if implicant[node] != int(signs_list[i]):
-                            pass
         signs = "".join(signs_list)
 
     for implicant in prime[1]:
         bi = ""
         for node in regulators:
             bi += "1" if node in implicant else "0"
-        rr[-int(bi, 2) - 1] = "1"
+        rr[int(bi, 2)] = "1"
 
     return regulators, "".join(rr), signs
 
 
-def legacy_rr2prime(regulators, rr, signs, inverted=False):
+def ref_rr2prime(regulators, rr, signs, inverted=False):
     k = len(regulators)
     inv = int(inverted)
     min_rr = get_uni_rr(rr, max=False)
@@ -89,7 +86,7 @@ def legacy_rr2prime(regulators, rr, signs, inverted=False):
     for i in range(len(rr)):
         if min_rr[i] != "1":
             continue
-        bi = format(2**k - i - 1, "0" + str(k) + "b")
+        bi = format(i, "0" + str(k) + "b")
         implicant = {}
         for j, num in enumerate(bi):
             if num == "1":
@@ -99,7 +96,7 @@ def legacy_rr2prime(regulators, rr, signs, inverted=False):
     for i in range(len(rr)):
         if min_irr[i] != "1":
             continue
-        bi = format(2**k - i - 1, "0" + str(k) + "b")
+        bi = format(i, "0" + str(k) + "b")
         implicant = {}
         for j, num in enumerate(bi):
             if num == "1":
@@ -109,7 +106,7 @@ def legacy_rr2prime(regulators, rr, signs, inverted=False):
     return prime
 
 
-def legacy_rr2bnet(regulators, rr, signs):
+def ref_rr2bnet(regulators, rr, signs):
     nodes = list(regulators)
     k = len(nodes)
     for i, num in enumerate(signs):
@@ -119,7 +116,7 @@ def legacy_rr2bnet(regulators, rr, signs):
     bnet = "("
     for i, num in enumerate(rr):
         bnet += str(num)
-        bi = format(2**k - i - 1, "0" + str(k) + "b")
+        bi = format(i, "0" + str(k) + "b")
         for j, node in enumerate(nodes):
             if bi[j] == "1":
                 bnet += " & " + node
@@ -127,7 +124,7 @@ def legacy_rr2bnet(regulators, rr, signs):
     return bnet.removesuffix(" | (")
 
 
-def legacy_get_max_irr(rr: str) -> str:
+def ref_get_max_irr(rr: str) -> str:
     max_rr = get_uni_rr(rr, max=True)
     max_rr = max_rr.replace("0", "X")
     max_rr = max_rr.replace("1", "0")
@@ -135,7 +132,7 @@ def legacy_get_max_irr(rr: str) -> str:
     return max_rr[::-1]
 
 
-def legacy_check_source(regulators, rr, node, min_rr=None):
+def ref_check_source(regulators, rr, node, min_rr=None):
     if node not in regulators:
         return False
     k = len(regulators)
@@ -143,51 +140,54 @@ def legacy_check_source(regulators, rr, node, min_rr=None):
     if min_rr is None:
         min_rr = get_uni_rr(rr, max=False)
     add = sum(int(min_rr[i]) for i in range(2**k))
-    return add == 1 and min_rr[2**k - 2 ** (k - n - 1) - 1] == "1"
+    return add == 1 and min_rr[1 << (k - n - 1)] == "1"
 
 
-def legacy_check_regulate(regulators, rr, reg, is_min=False):
+def ref_check_regulate(regulators, rr, reg, is_min=False):
     if reg not in regulators:
         return False
     k = len(regulators)
     n = regulators.index(reg)
     bi = rr if is_min else get_uni_rr(rr, max=False)
+    bit = 1 << (k - n - 1)
     add = 0
     for i in range(2**k):
-        if i % 2 ** (k - n) <= 2 ** (k - 1 - n) - 1:
+        if i & bit:
             add += int(bi[i])
     return add != 0
 
 
-def legacy_check_necessary(regulators, rr, nec, min_rr=None):
+def ref_check_necessary(regulators, rr, nec, min_rr=None):
     if nec not in regulators:
         return False
     if min_rr is not None:
-        regulates = legacy_check_regulate(regulators, min_rr, nec, is_min=True)
+        regulates = ref_check_regulate(regulators, min_rr, nec, is_min=True)
     else:
-        regulates = legacy_check_regulate(regulators, rr, nec)
+        regulates = ref_check_regulate(regulators, rr, nec)
     if not regulates:
         return False
     k = len(regulators)
     n = regulators.index(nec)
+    bit = 1 << (k - n - 1)
     add = 0
     for i in range(2**k):
-        if i % 2 ** (k - n) > 2 ** (k - 1 - n) - 1:
+        if not (i & bit):
             add += int(rr[i])
     return add == 0
 
 
-def legacy_impose_necessary(regulators, rr, nec):
+def ref_impose_necessary(regulators, rr, nec):
     k = len(regulators)
     n = regulators.index(nec)
+    bit = 1 << (k - n - 1)
     bi = list(rr)
     for i in range(2**k):
-        if i % 2 ** (k - n) > 2 ** (k - 1 - n) - 1:
+        if not (i & bit):
             bi[i] = "0"
     return "".join(bi)
 
 
-def legacy_rr2group_rr(regulators, rr, groups):
+def ref_rr2group_rr(regulators, rr, groups):
     group_regulators = []
     individual_regulators = set(regulators)
     for group in groups:
@@ -199,26 +199,26 @@ def legacy_rr2group_rr(regulators, rr, groups):
     m = len(group_regulators)
     group_rr = ["0"] * (2**m)
     for i in range(2**m):
-        group_bi = format(2**m - 1 - i, "0" + str(m) + "b")
+        group_bi = format(i, "0" + str(m) + "b")
         bi = group_bi2bi(group_bi, group_regulators)
-        if rr[-int(bi, 2) - 1] == "1":
+        if rr[int(bi, 2)] == "1":
             group_rr[i] = "1"
     return "".join(group_rr), group_regulators
 
 
-def legacy_group_rr2rr(regulators, group_rr, group_regulators):
+def ref_group_rr2rr(regulators, group_rr, group_regulators):
     m = len(group_regulators)
     k = len(regulators)
     rr = ["0"] * (2**k)
     for i in range(2**m):
-        group_bi = format(2**m - 1 - i, "0" + str(m) + "b")
+        group_bi = format(i, "0" + str(m) + "b")
         bi = group_bi2bi(group_bi, group_regulators)
         if group_rr[i] == "1":
-            rr[-int(bi, 2) - 1] = "1"
+            rr[int(bi, 2)] = "1"
     return "".join(rr)
 
 
-def legacy_add_regulator(regulators, rr, signs, new_regulator, new_sign, bias=0.5):
+def ref_add_regulator(regulators, rr, signs, new_regulator, new_sign, bias=0.5):
     nodes = list(regulators)
     nodes.append(new_regulator)
     added_regulators = tuple(nodes)
@@ -228,10 +228,12 @@ def legacy_add_regulator(regulators, rr, signs, new_regulator, new_sign, bias=0.
     if rnd < bias:
         rr = bf.get_max_irr(rr)
 
-    added_rr = ""
-    for bi in rr:
-        added_rr += str(random.randint(0, 1))
-        added_rr += bi
+    n = len(rr)
+    added = ["0"] * (2 * n)
+    for old_mask in range(n):
+        added[old_mask << 1] = rr[old_mask]
+        added[(old_mask << 1) | 1] = str(random.randint(0, 1))
+    added_rr = "".join(added)
 
     if rnd < bias:
         added_rr = bf.get_max_irr(added_rr)
@@ -239,7 +241,7 @@ def legacy_add_regulator(regulators, rr, signs, new_regulator, new_sign, bias=0.
     return added_regulators, added_rr, added_signs
 
 
-def legacy_delete_regulator(regulators, rr, signs, target_regulator, bias=0.5):
+def ref_delete_regulator(regulators, rr, signs, target_regulator, bias=0.5):
     k = len(regulators)
     n = regulators.index(target_regulator)
 
@@ -253,9 +255,10 @@ def legacy_delete_regulator(regulators, rr, signs, target_regulator, bias=0.5):
     if rnd < bias:
         rr = bf.get_max_irr(rr)
 
+    bit = 1 << (k - n - 1)
     bi = list(rr)
     for i in range(2**k):
-        if i % 2 ** (k - n) > 2 ** (k - 1 - n) - 1:
+        if not (i & bit):
             deleted_rr += bi[i]
 
     if rnd < bias:
@@ -265,7 +268,7 @@ def legacy_delete_regulator(regulators, rr, signs, target_regulator, bias=0.5):
 
 
 # ---------------------------------------------------------------------------
-# Hardcoded external convention: regulators (A, B) → A&B | A | B | 1
+# Hardcoded mask order: regulators (A, B) → 1 | B | A | A&B
 # ---------------------------------------------------------------------------
 
 
@@ -275,30 +278,30 @@ def legacy_delete_regulator(regulators, rr, signs, target_regulator, bias=0.5):
         (
             "A&B",
             [[], [{"A": 1, "B": 1}]],
-            "1000",
-            "(1 & A & B) | (0 & A) | (0 & B) | (0)",
+            "0001",
+            "(0) | (0 & B) | (0 & A) | (1 & A & B)",
         ),
         (
             "A",
             [[], [{"A": 1}]],
-            "0100",
-            "(0 & A & B) | (1 & A) | (0 & B) | (0)",
+            "0010",
+            "(0) | (0 & B) | (1 & A) | (0 & A & B)",
         ),
         (
             "B",
             [[], [{"B": 1}]],
-            "0010",
-            "(0 & A & B) | (0 & A) | (1 & B) | (0)",
+            "0100",
+            "(0) | (1 & B) | (0 & A) | (0 & A & B)",
         ),
         (
             "1",
             [[], [{}]],
-            "0001",
-            "(0 & A & B) | (0 & A) | (0 & B) | (1)",
+            "1000",
+            "(1) | (0 & B) | (0 & A) | (0 & A & B)",
         ),
     ],
 )
-def test_external_order_prime_rr_bnet(name, prime, expected_rr, expected_bnet):
+def test_mask_order_prime_rr_bnet(name, prime, expected_rr, expected_bnet):
     regulators = ("A", "B")
     signs = "11"
     _, rr, out_signs = prime2rr(prime, regulators=regulators, signs=signs)
@@ -310,10 +313,10 @@ def test_external_order_prime_rr_bnet(name, prime, expected_rr, expected_bnet):
 @pytest.mark.parametrize(
     "rr,expected_activation",
     [
-        ("1000", [{"A": 1, "B": 1}]),
-        ("0100", [{"A": 1}]),
-        ("0010", [{"B": 1}]),
-        ("0001", [{}]),
+        ("0001", [{"A": 1, "B": 1}]),
+        ("0010", [{"A": 1}]),
+        ("0100", [{"B": 1}]),
+        ("1000", [{}]),
     ],
 )
 def test_rr2prime_activation_terms(rr, expected_activation):
@@ -324,10 +327,10 @@ def test_rr2prime_activation_terms(rr, expected_activation):
 @pytest.mark.parametrize(
     "rr,expected_max_irr",
     [
-        ("1000", "1110"),
-        ("0100", "1100"),
-        ("0010", "1010"),
-        ("0001", "0000"),
+        ("0001", "0111"),
+        ("0010", "0011"),
+        ("0100", "0101"),
+        ("1000", "0000"),
     ],
 )
 def test_get_max_irr_hardcoded(rr, expected_max_irr):
@@ -335,29 +338,28 @@ def test_get_max_irr_hardcoded(rr, expected_max_irr):
 
 
 @pytest.mark.parametrize("k", range(0, 4))
-def test_conversions_match_legacy(k):
+def test_conversions_match_reference(k):
     regulators = tuple(f"R{i}" for i in range(k))
     signs = "1" * k
     n = 2**k
     for bits in itertools.product("01", repeat=n):
         rr = "".join(bits)
-        assert rr2bnet(regulators, rr, signs) == legacy_rr2bnet(regulators, rr, signs)
-        assert get_max_irr(rr) == legacy_get_max_irr(rr)
-        assert rr2prime(regulators, rr, signs) == legacy_rr2prime(regulators, rr, signs)
+        assert rr2bnet(regulators, rr, signs) == ref_rr2bnet(regulators, rr, signs)
+        assert get_max_irr(rr) == ref_get_max_irr(rr)
+        assert rr2prime(regulators, rr, signs) == ref_rr2prime(regulators, rr, signs)
 
 
 @pytest.mark.parametrize("k", range(0, 4))
-def test_prime2rr_matches_legacy_single_implicants(k):
+def test_prime2rr_matches_reference_single_implicants(k):
     regulators = tuple(f"R{i}" for i in range(k))
     signs = "1" * k
-    # empty activation and each singleton/full mask via presence bits
     for mask in range(2**k):
         implicant = {}
         for i, node in enumerate(regulators):
             if mask & (1 << (k - i - 1)):
                 implicant[node] = 1
         prime = [[], [implicant]]
-        assert prime2rr(prime, regulators=regulators, signs=signs) == legacy_prime2rr(
+        assert prime2rr(prime, regulators=regulators, signs=signs) == ref_prime2rr(
             prime, regulators=regulators, signs=signs
         )
 
@@ -370,14 +372,14 @@ def test_prime2rr_matches_legacy_single_implicants(k):
 @pytest.mark.parametrize(
     "regulators,rr,node,expected",
     [
-        (("N",), "10", "N", True),
-        (("N",), "01", "N", False),
-        (("N", "A"), "0100", "N", True),
-        (("N", "A"), "1000", "N", False),
-        (("A", "N"), "0010", "N", True),
-        (("A", "N"), "0100", "N", False),
-        (("A", "N", "B"), "00000100", "N", True),
-        (("A", "N", "B"), "01000000", "N", False),
+        (("N",), "01", "N", True),
+        (("N",), "10", "N", False),
+        (("N", "A"), "0010", "N", True),
+        (("N", "A"), "0001", "N", False),
+        (("A", "N"), "0100", "N", True),
+        (("A", "N"), "0010", "N", False),
+        (("A", "N", "B"), "00100000", "N", True),
+        (("A", "N", "B"), "00000010", "N", False),
     ],
 )
 def test_check_source_hardcoded(regulators, rr, node, expected):
@@ -387,14 +389,14 @@ def test_check_source_hardcoded(regulators, rr, node, expected):
 @pytest.mark.parametrize(
     "regulators,rr,reg,expected",
     [
-        (("A", "B"), "0100", "A", True),
-        (("A", "B"), "0010", "A", False),
-        (("A", "B"), "0010", "B", True),
-        (("A", "B"), "0100", "B", False),
-        (("A", "B", "C"), "00010000", "A", True),
-        (("A", "B", "C"), "00000100", "B", True),
-        (("A", "B", "C"), "00000010", "C", True),
-        (("A", "B", "C"), "00000001", "A", False),
+        (("A", "B"), "0010", "A", True),
+        (("A", "B"), "0100", "A", False),
+        (("A", "B"), "0100", "B", True),
+        (("A", "B"), "0010", "B", False),
+        (("A", "B", "C"), "00001000", "A", True),
+        (("A", "B", "C"), "00100000", "B", True),
+        (("A", "B", "C"), "01000000", "C", True),
+        (("A", "B", "C"), "10000000", "A", False),
     ],
 )
 def test_check_regulate_hardcoded(regulators, rr, reg, expected):
@@ -404,16 +406,16 @@ def test_check_regulate_hardcoded(regulators, rr, reg, expected):
 @pytest.mark.parametrize(
     "regulators,rr,nec,expected",
     [
-        (("A", "B"), "0100", "A", True),
-        (("A", "B"), "1100", "A", True),
-        (("A", "B"), "0110", "A", False),  # B alone also on
-        (("A", "B"), "0010", "A", False),
-        (("A", "B"), "0010", "B", True),
-        (("A", "B"), "1010", "B", True),
+        (("A", "B"), "0010", "A", True),
+        (("A", "B"), "0011", "A", True),
+        (("A", "B"), "0110", "A", False),
+        (("A", "B"), "0100", "A", False),
+        (("A", "B"), "0100", "B", True),
+        (("A", "B"), "0101", "B", True),
         (("A", "B"), "0110", "B", False),
-        (("A", "N", "B"), "00010000", "N", False),  # A alone; N absent
-        (("A", "N", "B"), "01000000", "N", True),  # A&N only
-        (("A", "N", "B"), "01010000", "N", False),  # A without N is on
+        (("A", "N", "B"), "00001000", "N", False),  # A alone
+        (("A", "N", "B"), "00100000", "N", True),  # N alone
+        (("A", "N", "B"), "00001010", "N", False),  # A and A&N
     ],
 )
 def test_check_necessary_hardcoded(regulators, rr, nec, expected):
@@ -421,19 +423,19 @@ def test_check_necessary_hardcoded(regulators, rr, nec, expected):
 
 
 @pytest.mark.parametrize("k", range(1, 4))
-def test_constraint_predicates_match_legacy(k):
+def test_constraint_predicates_match_reference(k):
     regulators = tuple(f"R{i}" for i in range(k))
     n = 2**k
     for bits in itertools.product("01", repeat=n):
         rr = "".join(bits)
         for reg in regulators:
-            assert check_source(regulators, rr, reg) == legacy_check_source(
+            assert check_source(regulators, rr, reg) == ref_check_source(
                 regulators, rr, reg
             )
-            assert check_regulate(regulators, rr, reg) == legacy_check_regulate(
+            assert check_regulate(regulators, rr, reg) == ref_check_regulate(
                 regulators, rr, reg
             )
-            assert check_necessary(regulators, rr, reg) == legacy_check_necessary(
+            assert check_necessary(regulators, rr, reg) == ref_check_necessary(
                 regulators, rr, reg
             )
 
@@ -446,11 +448,11 @@ def test_constraint_predicates_match_legacy(k):
 @pytest.mark.parametrize(
     "regulators,rr,nec,expected",
     [
-        (("A", "B"), "1111", "A", "1100"),
-        (("A", "B"), "1111", "B", "1010"),
-        (("A", "N", "B"), "11111111", "N", "11001100"),
-        (("A", "B"), "0100", "A", "0100"),
-        (("A", "B"), "0110", "A", "0100"),
+        (("A", "B"), "1111", "A", "0011"),
+        (("A", "B"), "1111", "B", "0101"),
+        (("A", "N", "B"), "11111111", "N", "00110011"),
+        (("A", "B"), "0010", "A", "0010"),
+        (("A", "B"), "0110", "A", "0010"),
     ],
 )
 def test_impose_necessary_hardcoded(regulators, rr, nec, expected):
@@ -458,34 +460,34 @@ def test_impose_necessary_hardcoded(regulators, rr, nec, expected):
 
 
 @pytest.mark.parametrize("k", range(1, 4))
-def test_impose_necessary_matches_legacy(k):
+def test_impose_necessary_matches_reference(k):
     regulators = tuple(f"R{i}" for i in range(k))
     n = 2**k
     for bits in itertools.product("01", repeat=n):
         rr = "".join(bits)
         for nec in regulators:
-            assert impose_necessary(regulators, rr, nec) == legacy_impose_necessary(
+            assert impose_necessary(regulators, rr, nec) == ref_impose_necessary(
                 regulators, rr, nec
             )
 
 
 def test_group_rr_hardcoded_and_roundtrip_shape():
     regulators = ("A", "B", "C")
-    rr = "10101010"
+    rr = "01010101"
     group_rr, group_regulators = rr2group_rr(regulators, rr, [["B", "C"]])
     assert group_regulators == (("B", "C"), "A")
-    assert group_rr == "1100"
-    assert group_rr2rr(regulators, group_rr, group_regulators) == "10001000"
+    assert group_rr == "0011"
+    assert group_rr2rr(regulators, group_rr, group_regulators) == "00010001"
 
-    legacy_g, legacy_regs = legacy_rr2group_rr(regulators, rr, [["B", "C"]])
-    assert (group_rr, group_regulators) == (legacy_g, legacy_regs)
-    assert group_rr2rr(regulators, group_rr, group_regulators) == legacy_group_rr2rr(
+    ref_g, ref_regs = ref_rr2group_rr(regulators, rr, [["B", "C"]])
+    assert (group_rr, group_regulators) == (ref_g, ref_regs)
+    assert group_rr2rr(regulators, group_rr, group_regulators) == ref_group_rr2rr(
         regulators, group_rr, group_regulators
     )
 
 
 @pytest.mark.parametrize("k", [2, 3])
-def test_group_rr_matches_legacy_exhaustive(k):
+def test_group_rr_matches_reference_exhaustive(k):
     regulators = tuple(chr(ord("A") + i) for i in range(k))
     groups = [[regulators[0], regulators[1]]] if k >= 2 else []
     n = 2**k
@@ -497,9 +499,9 @@ def test_group_rr_matches_legacy_exhaustive(k):
     for bits in samples:
         rr = "".join(bits) if isinstance(bits, tuple) else bits
         g1, r1 = rr2group_rr(regulators, rr, groups)
-        g2, r2 = legacy_rr2group_rr(regulators, rr, groups)
+        g2, r2 = ref_rr2group_rr(regulators, rr, groups)
         assert (g1, r1) == (g2, r2)
-        assert group_rr2rr(regulators, g1, r1) == legacy_group_rr2rr(regulators, g1, r1)
+        assert group_rr2rr(regulators, g1, r1) == ref_group_rr2rr(regulators, g1, r1)
 
 
 def test_add_regulator_bias0_deterministic():
@@ -516,10 +518,10 @@ def test_add_regulator_bias0_deterministic():
     with patch("boolmore.genetic.operators.mutation.random") as m:
         m.random.return_value = 0.9
         m.randint.side_effect = Seq([0, 1, 0, 1]).randint
-        regs, rr, signs = add_regulator(("A", "B"), "1000", "11", "C", "1", bias=0.0)
+        regs, rr, signs = add_regulator(("A", "B"), "0001", "11", "C", "1", bias=0.0)
     assert regs == ("A", "B", "C")
     assert signs == "111"
-    assert rr == "01100010"
+    assert rr == "00010011"
 
 
 def test_add_regulator_bias1_deterministic():
@@ -536,17 +538,17 @@ def test_add_regulator_bias1_deterministic():
     with patch("boolmore.genetic.operators.mutation.random") as m:
         m.random.return_value = 0.0
         m.randint.side_effect = Seq([0, 0, 0, 0]).randint
-        regs, rr, signs = add_regulator(("A", "B"), "1000", "11", "C", "1", bias=1.0)
+        regs, rr, signs = add_regulator(("A", "B"), "0001", "11", "C", "1", bias=1.0)
     assert regs == ("A", "B", "C")
     assert signs == "111"
-    assert rr == "11000000"
+    assert rr == "00000011"
 
 
 @pytest.mark.parametrize(
     "target,rr,expected",
     [
-        ("B", "1110", "10"),
-        ("A", "1110", "10"),
+        ("B", "0111", "01"),
+        ("A", "0111", "01"),
     ],
 )
 def test_delete_regulator_bias0(target, rr, expected):
@@ -556,18 +558,16 @@ def test_delete_regulator_bias0(target, rr, expected):
     assert len(signs) == 1
 
 
-def test_add_delete_match_legacy_seeded():
+def test_add_delete_match_reference_seeded():
     for seed in range(20):
-        rng_state = random.getstate()
         random.seed(seed)
-        prod = add_regulator(("A", "B"), "1010", "11", "C", "0", bias=0.5)
-        random.setstate(rng_state)
+        prod = add_regulator(("A", "B"), "0101", "11", "C", "0", bias=0.5)
         random.seed(seed)
-        legacy = legacy_add_regulator(("A", "B"), "1010", "11", "C", "0", bias=0.5)
-        assert prod == legacy
+        ref = ref_add_regulator(("A", "B"), "0101", "11", "C", "0", bias=0.5)
+        assert prod == ref
 
         random.seed(seed + 100)
-        prod = delete_regulator(("A", "B", "C"), "10101010", "111", "B", bias=0.5)
+        prod = delete_regulator(("A", "B", "C"), "01010101", "111", "B", bias=0.5)
         random.seed(seed + 100)
-        legacy = legacy_delete_regulator(("A", "B", "C"), "10101010", "111", "B", bias=0.5)
-        assert prod == legacy
+        ref = ref_delete_regulator(("A", "B", "C"), "01010101", "111", "B", bias=0.5)
+        assert prod == ref

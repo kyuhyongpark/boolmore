@@ -28,6 +28,8 @@ class Model():
 
         rr_dict : dict[str, str]
             Dictionary mapping each node to its binary rule representation.
+            Each value is a length-``2**k`` string in mask order
+            (``index == mask``; see ``boolmore.boolean_functions``).
 
         edges : list[dict[str, str | bool]]
             List of edges currently present in the model. Each edge contains

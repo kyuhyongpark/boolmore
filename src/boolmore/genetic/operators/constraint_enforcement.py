@@ -1,14 +1,13 @@
-import boolmore.boolean_functions as bf
-
-
 def impose_necessary(regulators:tuple[str, ...], rr:str, nec:str) -> str:
     """
     Impose the necessary condition for the rule.
 
+    ``rr`` uses mask order (``index == mask``); see ``boolmore.boolean_functions``.
+
     Parameters
     ----------
     regulators - the regulating nodes           :length k tuple[str]
-    rr         - representation of the rule     :length 2^k binary str
+    rr         - rule in mask order             :length 2^k binary str
     nec        - the necessary node             :str
 
     Returns
@@ -23,14 +22,15 @@ def impose_necessary(regulators:tuple[str, ...], rr:str, nec:str) -> str:
     k = len(regulators)
     # n = nth regulator
     n = regulators.index(nec)
+    bit = 1 << (k - n - 1)
 
-    bi = list(bf._to_internal(rr))
+    bi = list(rr)
     for i in range(2**k):
-        # Zero masks where regulator n's bit is unset (internal index == mask).
-        if i % 2**(k-n) <= 2**(k-1-n)-1:
+        # Zero masks where regulator n's bit is unset.
+        if not (i & bit):
             bi[i] = '0'
 
-    return bf._to_external(''.join(bi))
+    return ''.join(bi)
 
 
 def group_bi2bi(group_bi:str, group_regulators:tuple[str, tuple[str, ...]]) -> str:
@@ -38,6 +38,9 @@ def group_bi2bi(group_bi:str, group_regulators:tuple[str, tuple[str, ...]]) -> s
     Returns the binary position of the old representation
     when given a binary position of the group representation
     and the group regulators.
+
+    The returned ``bi`` is a mask string interpreted directly as an ``rr``
+    index (``int(bi, 2)``) under the public mask-order convention.
 
     Parameters
     ----------
@@ -84,16 +87,18 @@ def rr2group_rr(regulators:tuple[str, ...], rr:str, groups:list[list[str]]) -> t
     Convert the representation of a rule into a representation in which
     certain nodes are grouped together.
 
+    Input and output ``rr`` strings use mask order (``index == mask``).
+
     Parameters
     ----------
     regulators - the regulating nodes           :length k tuple[str]
-    rr         - representation of the rule     :length 2^k binary str
+    rr         - rule in mask order             :length 2^k binary str
     groups     - groups of nodes                :list[list[str]]
                  [[node A, node B], [node A, node C], ...]
     
     Returns
     -------
-    group_rr         - modified so that nec is necessary            :length 2^m binary str
+    group_rr         - grouped rule in mask order                   :length 2^m binary str
     group_regulators - the regulating nodes where some are grouped  :length m tuple[str, tuple[str]]
                        (node A, node B, (node C, node D), ...)
 
@@ -112,16 +117,15 @@ def rr2group_rr(regulators:tuple[str, ...], rr:str, groups:list[list[str]]) -> t
     group_regulators = tuple(group_regulators)
 
     m = len(group_regulators)
-    rr_int = bf._to_internal(rr)
     group_rr = ['0']*(2**m)
 
     for i in range(2**m):
         group_bi = format(i, '0' + str(m) + 'b')
         bi = group_bi2bi(group_bi, group_regulators) # type: ignore
-        if rr_int[int(bi, 2)] == '1':
+        if rr[int(bi, 2)] == '1':
             group_rr[i] = '1'
 
-    return bf._to_external(''.join(group_rr)), group_regulators # type: ignore
+    return ''.join(group_rr), group_regulators # type: ignore
 
 
 def group_rr2rr(regulators:tuple[str, ...], group_rr:str, group_regulators:tuple[str, tuple[str, ...]]) -> str:
@@ -129,28 +133,29 @@ def group_rr2rr(regulators:tuple[str, ...], group_rr:str, group_regulators:tuple
     Convert the representation of a rule with grouped regulators
     into a representation with original regulators.
 
+    Input and output ``rr`` strings use mask order (``index == mask``).
+
     Parameters
     ----------
     regulators       - the regulating nodes                         :length k tuple[str]
-    group_rr         - modified so that nec is necessary            :length 2^m binary str
+    group_rr         - grouped rule in mask order                   :length 2^m binary str
     group_regulators - the regulating nodes where some are grouped  :length m tuple[str, tuple[str]]
                        (node A, node B, (node C, node D), ...)
 
     Returns
     -------
-    rr - representation of the rule     :length 2^k binary str
+    rr - rule in mask order     :length 2^k binary str
 
     """
 
     m = len(group_regulators)
     k = len(regulators)
-    group_rr_int = bf._to_internal(group_rr)
     rr = ['0']*(2**k)
 
     for i in range(2**m):
         group_bi = format(i, '0' + str(m) + 'b')
         bi = group_bi2bi(group_bi, group_regulators)
-        if group_rr_int[i] == '1':
+        if group_rr[i] == '1':
             rr[int(bi, 2)] = '1'
 
-    return bf._to_external(''.join(rr))
+    return ''.join(rr)
