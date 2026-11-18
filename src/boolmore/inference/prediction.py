@@ -15,6 +15,7 @@ from boolmore.inference.ldoi import (
     LdoiCache,
     _get_compiled,
     _implicant_implied_by,
+    ldoi_many,
     logical_domain_of_influence,
 )
 from boolmore.types import Assignment
@@ -930,16 +931,17 @@ def get_NAV_upper_bound_prediction(
     (non-LDOI) nodes are ``None`` instead of ``0.5``.
     """
     interventions = sorted({exp.fixes for exp in experiments})
-    compiled = _get_compiled(primes)
+    perturbations = [assignment_to_dict(fixes) for fixes in interventions]
+    closures = ldoi_many(primes, perturbations)
 
     predictions: dict[Assignment, NAVPrediction] = {}
-    for fixes in interventions:
-        perturbation = assignment_to_dict(fixes)
+    for fixes, constants in zip(interventions, closures, strict=True):
         predictions[fixes] = NAVPrediction(
             fixes=fixes,
-            average_values=_nav_from_ldoi_partial(
-                primes, perturbation, compiled=compiled
-            ),
+            average_values={
+                node: float(constants[node]) if node in constants else None
+                for node in primes
+            },
         )
 
     return predictions
@@ -1048,15 +1050,16 @@ def get_NAV_prediction(
                 ),
             )
     else:
-        # Plain LDOI: no nested-probe reuse, so skip LdoiCache (net slowdown).
-        compiled = _get_compiled(primes)
-        for fixes in interventions:
-            perturbation = assignment_to_dict(fixes)
+        # Plain LDOI: batch closure (Cython when available); no LdoiCache.
+        perturbations = [assignment_to_dict(fixes) for fixes in interventions]
+        closures = ldoi_many(primes, perturbations)
+        for fixes, constants in zip(interventions, closures, strict=True):
             predictions[fixes] = NAVPrediction(
                 fixes=fixes,
-                average_values=_nav_from_ldoi(
-                    primes, perturbation, compiled=compiled
-                ),
+                average_values={
+                    node: float(constants[node]) if node in constants else 0.5
+                    for node in primes
+                },
             )
 
     return predictions

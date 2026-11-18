@@ -11,6 +11,7 @@ from boolmore.inference.ldoi import (
     _get_compiled,
     get_ldoi_closure_engine,
     ldoi_closure_engine,
+    ldoi_many,
     logical_domain_of_influence,
     set_ldoi_closure_engine,
 )
@@ -323,6 +324,51 @@ class TestLdoiClosureEquivalence(unittest.TestCase):
         reused = logical_domain_of_influence(primes, seed, compiled=compiled)
         self.assertEqual(auto, scan)
         self.assertEqual(reused, scan)
+
+
+class TestLdoiMany(unittest.TestCase):
+
+    def tearDown(self) -> None:
+        set_ldoi_closure_engine("fast")
+
+    def test_ldoi_many_matches_scan_hand_cases(self):
+        cases = [
+            ("A, A & B\nB, B\n", [{"A": 1}, {"B": 1}, {}]),
+            ("C, 1\nA, C\nB, A\n", [{}, {"A": 0}]),
+            ("A, 0\nB, A\n", [{"A": 1}, {}]),
+        ]
+        for bnet, seeds in cases:
+            with self.subTest(bnet=bnet):
+                primes = bnet_text2primes(bnet)
+                with ldoi_closure_engine("scan"):
+                    expected = [
+                        logical_domain_of_influence(primes, seed)
+                        for seed in seeds
+                    ]
+                with ldoi_closure_engine("fast"):
+                    got = ldoi_many(primes, seeds)
+                self.assertEqual(got, expected)
+
+    def test_ldoi_many_seed_overrides_constant(self):
+        primes = bnet_text2primes("A, 0\nB, A\n")
+        with ldoi_closure_engine("scan"):
+            expected = logical_domain_of_influence(primes, {"A": 1})
+        self.assertEqual(ldoi_many(primes, [{"A": 1}])[0], expected)
+
+    def test_ldoi_many_compiled_reuse(self):
+        primes = bnet_text2primes("A, A\nB, A\nX, A & B\n")
+        seeds = [{"A": 1}, {"A": 1, "B": 1}, {}]
+        compiled = _get_compiled(primes)
+        with ldoi_closure_engine("scan"):
+            expected = [
+                logical_domain_of_influence(primes, seed) for seed in seeds
+            ]
+        self.assertEqual(ldoi_many(primes, seeds, compiled=compiled), expected)
+
+    def test_ldoi_many_missing_seed_node_raises(self):
+        primes = bnet_text2primes("A, A\n")
+        with self.assertRaises(ValueError):
+            ldoi_many(primes, [{"Z": 1}])
 
 
 if __name__ == "__main__":

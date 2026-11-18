@@ -93,6 +93,7 @@ def collect_environment() -> dict[str, Any]:
     """Runtime environment that can affect wall time."""
     import boolmore.boolean_functions as bf
     from boolmore.genetic.operators import mutation as mut
+    from boolmore.inference import ldoi as ldoi_mod
     from boolmore.inference.ldoi import get_ldoi_closure_engine
 
     return {
@@ -103,6 +104,7 @@ def collect_environment() -> dict[str, Any]:
         "cwd": str(Path.cwd()),
         "uni_rr_cython": bool(bf._UNI_RR_CYTHON and bf._get_uni_rr_cy is not None),
         "uni_rr_cython_min_k": bf._UNI_RR_CYTHON_MIN_K,
+        "ldoi_cython": bool(ldoi_mod._LDOI_CYTHON and ldoi_mod._batch_closure_cy is not None),
         "ldoi_closure_engine": get_ldoi_closure_engine(),
         "regulate_repair_mode": mut.REGULATE_REPAIR_MODE,
         "OMP_NUM_THREADS": os.environ.get("OMP_NUM_THREADS"),

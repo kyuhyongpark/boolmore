@@ -182,6 +182,7 @@ def main(argv: list[str] | None = None) -> int:
         # Algorithmic toggles belong in the task fingerprint so a Cython-off
         # run is not treated as identical work to a Cython-on run.
         task["ldoi_closure_engine"] = env["ldoi_closure_engine"]
+        task["ldoi_cython"] = env["ldoi_cython"]
         task["regulate_repair_mode"] = env["regulate_repair_mode"]
         task["uni_rr_cython"] = env["uni_rr_cython"]
         task["uni_rr_cython_min_k"] = env["uni_rr_cython_min_k"]
@@ -198,6 +199,7 @@ def main(argv: list[str] | None = None) -> int:
             "seed",
             "core",
             "ldoi_closure_engine",
+            "ldoi_cython",
             "regulate_repair_mode",
             "uni_rr_cython",
         ):

@@ -18,8 +18,9 @@ Physiology* 9:454. https://doi.org/10.3389/fphys.2018.00454
 
 from __future__ import annotations
 
+from array import array
 from collections import OrderedDict
-from collections.abc import Iterator
+from collections.abc import Iterator, Sequence
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from typing import Literal
@@ -28,15 +29,22 @@ from typing import Literal
 # leftover literals (query \\ P) are this small or smaller; else scan probes.
 _DELTA_ENUM_MAX = 20
 
-# TODO: Cython/native ``_ldoi_closure_fast`` (flat arrays / CSR watchers).
-# TODO: batch ``ldoi_many(primes, seeds)`` API for multi-intervention NAV.
 # TODO: restrict NAV dicts to observed/related nodes in scoring.
+# TODO: incremental (state, residuals) snapshots for ldoi_enhanced probes.
 
 LdoiClosureEngine = Literal["fast", "scan"]
 _CLOSURE_ENGINE: LdoiClosureEngine = "fast"
 
 # Unset sentinel for integer state arrays (-1 is not a valid Boolean value).
 _UNSET = -1
+
+try:
+    from boolmore._ldoi_closure import batch_closure as _batch_closure_cy
+
+    _LDOI_CYTHON = True
+except ImportError:  # pragma: no cover - depends on local extension build
+    _batch_closure_cy = None  # type: ignore[assignment]
+    _LDOI_CYTHON = False
 
 
 def set_ldoi_closure_engine(engine: LdoiClosureEngine) -> None:
@@ -246,6 +254,13 @@ class CompiledPrimes:
     empty_implicants: tuple[int, ...]
     # Object identities of primes[node] at compile time (invalidation).
     fingerprint: tuple[tuple[str, int], ...]
+    # Contiguous CSR tables for the Cython batch kernel (same content).
+    csr_targets: array
+    csr_values: array
+    csr_lit_counts: array
+    csr_empty: array
+    watch_ptr: array
+    watch_idx: array
 
 
 # Plain dicts are not weak-referenceable; cache by id(primes) with a
@@ -318,6 +333,13 @@ def _compile_primes(primes: dict) -> CompiledPrimes:
     watchers = tuple(
         (tuple(w[0]), tuple(w[1])) for w in watchers_mut
     )
+    watch_ptr = array("i", [0])
+    watch_idx = array("i")
+    for node_id in range(n):
+        for value in (0, 1):
+            watch_idx.extend(watchers_mut[node_id][value])
+            watch_ptr.append(len(watch_idx))
+
     return CompiledPrimes(
         names=names,
         name_to_id=name_to_id,
@@ -327,6 +349,12 @@ def _compile_primes(primes: dict) -> CompiledPrimes:
         watchers=watchers,
         empty_implicants=tuple(empty_implicants),
         fingerprint=_primes_fingerprint(primes),
+        csr_targets=array("i", targets),
+        csr_values=array("b", values),
+        csr_lit_counts=array("i", lit_counts),
+        csr_empty=array("i", empty_implicants),
+        watch_ptr=watch_ptr,
+        watch_idx=watch_idx,
     )
 
 
@@ -383,7 +411,7 @@ def _ldoi_closure_fast(
     compiled: CompiledPrimes,
     fixed: dict[str, int],
 ) -> dict[str, int]:
-    """Grow ``fixed`` via event-driven prime-implicant propagation.
+    """Grow ``fixed`` via event-driven prime-implicant propagation (Python).
 
     Semantically equivalent to ``_ldoi_closure_scan``: seeds are never
     overwritten; empty implicants fire in node/value-0-then-1 order; already
@@ -445,6 +473,121 @@ def _ldoi_closure_fast(
     return result
 
 
+def _pack_seeds(
+    compiled: CompiledPrimes,
+    seeds: Sequence[dict[str, int]],
+) -> tuple[array, array, array]:
+    """Pack seed dicts into CSR ``(seed_ptr, seed_node, seed_value)``."""
+    seed_ptr = array("i", [0])
+    seed_node = array("i")
+    seed_value = array("b")
+    name_to_id = compiled.name_to_id
+    for seed in seeds:
+        for name, value in seed.items():
+            node_id = name_to_id.get(name)
+            if node_id is None:
+                raise ValueError(f"{name} is not in the model")
+            if value not in (0, 1):
+                raise ValueError(
+                    f"non-Boolean seed value for {name!r}: {value!r}"
+                )
+            seed_node.append(node_id)
+            seed_value.append(value)
+        seed_ptr.append(len(seed_node))
+    return seed_ptr, seed_node, seed_value
+
+
+def _states_to_dicts(
+    compiled: CompiledPrimes,
+    out_state: array | bytearray | memoryview,
+    n_seeds: int,
+) -> list[dict[str, int]]:
+    """Convert packed ``n_seeds * n`` int8 states into LDOI dicts."""
+    names = compiled.names
+    n = len(names)
+    results: list[dict[str, int]] = []
+    for s in range(n_seeds):
+        base = s * n
+        result: dict[str, int] = {}
+        for node_id in range(n):
+            value = out_state[base + node_id]
+            if value != _UNSET:
+                result[names[node_id]] = int(value)
+        results.append(result)
+    return results
+
+
+def _ldoi_many_cython(
+    compiled: CompiledPrimes,
+    seeds: Sequence[dict[str, int]],
+) -> list[dict[str, int]]:
+    """Batch LDOI via the Cython CSR kernel."""
+    if _batch_closure_cy is None:  # pragma: no cover
+        raise RuntimeError("Cython LDOI extension is not available")
+    n = len(compiled.names)
+    n_imp = len(compiled.csr_targets)
+    n_seeds = len(seeds)
+    seed_ptr, seed_node, seed_value = _pack_seeds(compiled, seeds)
+    out_state = array("b", [_UNSET]) * (n_seeds * n) if n_seeds and n else array("b")
+    _batch_closure_cy(
+        n,
+        n_imp,
+        compiled.csr_targets,
+        compiled.csr_values,
+        compiled.csr_lit_counts,
+        compiled.watch_ptr,
+        compiled.watch_idx,
+        compiled.csr_empty,
+        seed_ptr,
+        seed_node,
+        seed_value,
+        out_state,
+    )
+    return _states_to_dicts(compiled, out_state, n_seeds)
+
+
+def _ldoi_one_cython(
+    compiled: CompiledPrimes,
+    fixed: dict[str, int],
+) -> dict[str, int]:
+    """Single-seed LDOI via the Cython batch kernel."""
+    return _ldoi_many_cython(compiled, [fixed])[0]
+
+
+def _ldoi_many_python(
+    compiled: CompiledPrimes,
+    seeds: Sequence[dict[str, int]],
+) -> list[dict[str, int]]:
+    """Batch LDOI via the pure-Python event-driven closure."""
+    return [_ldoi_closure_fast(compiled, seed) for seed in seeds]
+
+
+def ldoi_many(
+    primes: dict,
+    seeds: Sequence[dict[str, int]],
+    *,
+    compiled: CompiledPrimes | None = None,
+) -> list[dict[str, int]]:
+    """Return ``seed ∪ LDOI`` for each seed (one compile, batch when possible).
+
+    Uses the Cython CSR kernel when the extension is built and the active
+    engine is ``"fast"``. Falls back to pure-Python ``_ldoi_closure_fast``
+    per seed. With engine ``"scan"``, loops the scan oracle.
+    """
+    for seed in seeds:
+        for node in seed:
+            if node not in primes:
+                raise ValueError(f"{node} is not in the model")
+
+    if _CLOSURE_ENGINE == "scan":
+        return [logical_domain_of_influence(primes, seed) for seed in seeds]
+
+    compiled = compiled if compiled is not None else _get_compiled(primes)
+    if _LDOI_CYTHON and _batch_closure_cy is not None:
+        return _ldoi_many_cython(compiled, seeds)
+    return _ldoi_many_python(compiled, seeds)
+
+
 def _ldoi_closure(
     primes: dict,
     fixed: dict[str, int],
@@ -454,10 +597,10 @@ def _ldoi_closure(
     """Dispatch to the active closure engine."""
     if _CLOSURE_ENGINE == "scan":
         return _ldoi_closure_scan(primes, fixed)
-    return _ldoi_closure_fast(
-        compiled if compiled is not None else _get_compiled(primes),
-        fixed,
-    )
+    compiled = compiled if compiled is not None else _get_compiled(primes)
+    if _LDOI_CYTHON and _batch_closure_cy is not None:
+        return _ldoi_one_cython(compiled, fixed)
+    return _ldoi_closure_fast(compiled, fixed)
 
 
 def logical_domain_of_influence(

@@ -14,7 +14,11 @@ else:
             Extension(
                 "boolmore._get_uni_rr",
                 sources=["src/boolmore/_get_uni_rr.pyx"],
-            )
+            ),
+            Extension(
+                "boolmore._ldoi_closure",
+                sources=["src/boolmore/_ldoi_closure.pyx"],
+            ),
         ],
         language_level=3,
     )
