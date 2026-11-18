@@ -1,5 +1,26 @@
 from boolmore.types import Assignment, PrimeType
 
+# RR bit-string conventions
+# -------------------------
+# External (public API / stored models), regulators (A, B):
+#   A&B | A | B | 1
+#   string index e = 2**k - 1 - mask
+#
+# Internal (index == mask), used inside index-sensitive ops after invert:
+#   1 | B | A | A&B
+#
+# TODO: drop boundary inversions and store the internal order externally.
+
+
+def _to_internal(rr: str) -> str:
+    """Map external A&B|A|B|1 order to internal 1|B|A|A&B (index == mask)."""
+    return rr[::-1]
+
+
+def _to_external(rr: str) -> str:
+    """Map internal 1|B|A|A&B order back to external A&B|A|B|1."""
+    return rr[::-1]
+
 
 def prime2rr(prime:PrimeType,
              regulators:tuple[str]|None=None, signs:str|None=None) -> tuple[tuple[str],str,str]:
@@ -40,7 +61,7 @@ def prime2rr(prime:PrimeType,
             rr = '0'
         return regulators, rr, signs # type: ignore
 
-    # Get the rr and signs of the regulators
+    # Build in internal mask order (index == mask), then convert to external.
     rr = ['0'] * (2**len(regulators)) # type: ignore
     if signs == None:
         signs_list = ['*'] * len(regulators) # type: ignore
@@ -69,10 +90,10 @@ def prime2rr(prime:PrimeType,
             else:
                 # if it does not exist, put 0
                 bi += '0'
-        # put 1 on that position of the rr
-        rr[-int(bi, 2)-1] = '1'
+        # put 1 on that position of the internal rr (index == mask)
+        rr[int(bi, 2)] = '1'
 
-    rr = ''.join(rr)
+    rr = _to_external(''.join(rr))
 
     return regulators, rr, signs # type: ignore
 
@@ -102,35 +123,31 @@ def rr2prime(regulators:tuple[str], rr:str, signs:str, inverted:bool=False) -> P
     assert k == len(signs), "signs should be a list with the numbe of nodes as length"
 
     inv = int(inverted)
-    min_rr = get_uni_rr(rr, max = False)
+    # Canonicalize in external order, then decode with internal mask indices.
+    min_rr = _to_internal(get_uni_rr(rr, max = False))
     max_irr = get_max_irr(rr)
-    min_irr = get_uni_rr(max_irr, max = False)
+    min_irr = _to_internal(get_uni_rr(max_irr, max = False))
 
     prime = [[],[]]
-    for i in range(len(rr)):
-        # get the regulator values if there is '1'
-        if min_rr[i] == '1':
-            # bi represents the regulator values in binary string
-            bi = format(2**k - i - 1, '0' + str(k) + 'b')
-        else:
+    # Walk high mask → low so implicant order matches the legacy external scan.
+    for i in range(len(min_rr) - 1, -1, -1):
+        if min_rr[i] != '1':
             continue
+        bi = format(i, '0' + str(k) + 'b')
         implicant = {}
-        for i, num in enumerate(bi):
+        for j, num in enumerate(bi):
             if num == '1':
-                implicant[regulators[i]] = (int(signs[i]) - inv)%2
+                implicant[regulators[j]] = (int(signs[j]) - inv)%2
         prime[1-inv].append(implicant)
 
-    for i in range(len(rr)):
-        # get the regulator values if there is '1'
-        if min_irr[i] == '1':
-            # bi represents the regulator values in binary string
-            bi = format(2**k - i - 1, '0' + str(k) + 'b')
-        else:
+    for i in range(len(min_irr) - 1, -1, -1):
+        if min_irr[i] != '1':
             continue
+        bi = format(i, '0' + str(k) + 'b')
         implicant = {}
-        for i, num in enumerate(bi):
+        for j, num in enumerate(bi):
             if num == '1':
-                implicant[regulators[i]] = (1-int(signs[i]) - inv)%2
+                implicant[regulators[j]] = (1-int(signs[j]) - inv)%2
         prime[0-inv].append(implicant)
 
     return prime
@@ -163,12 +180,12 @@ def rr2bnet(regulators:tuple[str], rr:str, signs:str) -> str:
         if num == '0':
             nodes[i] = '!' + nodes[i]
 
-    # start constructing bnet = (0 and A and B and C) or (1 and A and B) or ...
+    rr_int = _to_internal(rr)
+    # Walk high mask → low to preserve legacy external term order in the string.
     bnet = '('
-    for i, num in enumerate(rr):
-        bnet += str(num)
-        # bin = 111, 110, 101, ...
-        bi = format(2**k-i-1, '0' + str(k) + 'b')
+    for i in range(len(rr_int) - 1, -1, -1):
+        bnet += rr_int[i]
+        bi = format(i, '0' + str(k) + 'b')
         for j, node in enumerate(nodes):
             if bi[j] == '1':
                 bnet += ' & ' + node
@@ -229,11 +246,11 @@ def get_uni_rr(rr: str, max: bool = True) -> str:
     -------
     uni_rr - unique representation of the rule  : length 2^k binary str
     """
-    rr = rr[::-1]
+    rr = _to_internal(rr)
     n = len(rr)
     
     if n <= 1:
-        return rr
+        return _to_external(rr)
 
     uni_rr = list(rr)
     
@@ -253,7 +270,7 @@ def get_uni_rr(rr: str, max: bool = True) -> str:
                 
                 uni_rr[position] = fill_value
 
-    return ''.join(uni_rr)[::-1]
+    return _to_external(''.join(uni_rr))
 
 
 def get_max_irr(rr:str) -> str:

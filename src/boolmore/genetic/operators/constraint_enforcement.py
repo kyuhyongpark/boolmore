@@ -1,3 +1,6 @@
+import boolmore.boolean_functions as bf
+
+
 def impose_necessary(regulators:tuple[str, ...], rr:str, nec:str) -> str:
     """
     Impose the necessary condition for the rule.
@@ -21,14 +24,13 @@ def impose_necessary(regulators:tuple[str, ...], rr:str, nec:str) -> str:
     # n = nth regulator
     n = regulators.index(nec)
 
-    bi = list(rr)
+    bi = list(bf._to_internal(rr))
     for i in range(2**k):
-        if i % 2**(k-n) > 2**(k-1-n)-1:
+        # Zero masks where regulator n's bit is unset (internal index == mask).
+        if i % 2**(k-n) <= 2**(k-1-n)-1:
             bi[i] = '0'
 
-    necessary_rr = ''.join(bi)
-
-    return necessary_rr
+    return bf._to_external(''.join(bi))
 
 
 def group_bi2bi(group_bi:str, group_regulators:tuple[str, tuple[str, ...]]) -> str:
@@ -110,16 +112,16 @@ def rr2group_rr(regulators:tuple[str, ...], rr:str, groups:list[list[str]]) -> t
     group_regulators = tuple(group_regulators)
 
     m = len(group_regulators)
+    rr_int = bf._to_internal(rr)
     group_rr = ['0']*(2**m)
 
     for i in range(2**m):
-        group_bi = format(2**m - 1 - i, '0' + str(m) + 'b')
+        group_bi = format(i, '0' + str(m) + 'b')
         bi = group_bi2bi(group_bi, group_regulators) # type: ignore
-        if rr[-int(bi, 2)-1] == '1':
+        if rr_int[int(bi, 2)] == '1':
             group_rr[i] = '1'
 
-    group_rr = ''.join(group_rr)
-    return group_rr, group_regulators # type: ignore
+    return bf._to_external(''.join(group_rr)), group_regulators # type: ignore
 
 
 def group_rr2rr(regulators:tuple[str, ...], group_rr:str, group_regulators:tuple[str, tuple[str, ...]]) -> str:
@@ -142,15 +144,13 @@ def group_rr2rr(regulators:tuple[str, ...], group_rr:str, group_regulators:tuple
 
     m = len(group_regulators)
     k = len(regulators)
+    group_rr_int = bf._to_internal(group_rr)
     rr = ['0']*(2**k)
 
     for i in range(2**m):
-        group_bi = format(2**m - 1 - i, '0' + str(m) + 'b')
+        group_bi = format(i, '0' + str(m) + 'b')
         bi = group_bi2bi(group_bi, group_regulators)
-        # print('bi:',bi)
-        if group_rr[i] == '1':
-            rr[-int(bi, 2)-1] = '1'
+        if group_rr_int[i] == '1':
+            rr[int(bi, 2)] = '1'
 
-    rr = ''.join(rr)
-
-    return rr
+    return bf._to_external(''.join(rr))

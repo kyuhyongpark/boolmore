@@ -217,10 +217,16 @@ def add_regulator(regulators:tuple[str, ...], rr:str, signs:str, new_regulator:s
     if rnd < bias:
         rr = bf.get_max_irr(rr)
 
-    added_rr = ''
-    for bi in rr:
-        added_rr += str(random.randint(0,1))
-        added_rr += bi
+    # Expand in internal mask order: old value at new-bit=0, random at new-bit=1.
+    # Walk high→low old masks so random.randint order matches the legacy external scan.
+    rr_int = bf._to_internal(rr)
+    n = len(rr_int)
+    added = ['0'] * (2 * n)
+    for old_mask in range(n - 1, -1, -1):
+        rand_val = str(random.randint(0, 1))
+        added[(old_mask << 1)] = rr_int[old_mask]
+        added[(old_mask << 1) | 1] = rand_val
+    added_rr = bf._to_external(''.join(added))
 
     if rnd < bias:
         added_rr = bf.get_max_irr(added_rr)
@@ -263,10 +269,12 @@ def delete_regulator(regulators:tuple[str, ...], rr:str, signs:str, target_regul
     if rnd < bias:
         rr = bf.get_max_irr(rr)
 
-    bi = list(rr)
+    bi = list(bf._to_internal(rr))
     for i in range(2**k):
-        if i % 2**(k-n) > 2**(k-1-n)-1:
+        # Keep masks where the deleted regulator's bit is unset.
+        if i % 2**(k-n) <= 2**(k-1-n)-1:
             deleted_rr += bi[i]
+    deleted_rr = bf._to_external(deleted_rr)
 
     if rnd < bias:
         deleted_rr = bf.get_max_irr(deleted_rr)

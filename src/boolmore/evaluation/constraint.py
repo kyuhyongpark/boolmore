@@ -54,11 +54,14 @@ def check_source(
     if min_rr is None:
         min_rr = bf.get_uni_rr(rr, max=False)
 
+    min_rr = bf._to_internal(min_rr)
+
     add = 0
     for i in range(2**k):
         add += int(min_rr[i])
 
-    return add == 1 and min_rr[2**k - 2**(k - n - 1) - 1] == '1'
+    # Internal index of the singleton implicant for regulator n.
+    return add == 1 and min_rr[2**(k - n - 1)] == '1'
 
 
 def check_regulate(
@@ -88,10 +91,12 @@ def check_regulate(
     n = regulators.index(reg)
 
     bi = rr if is_min else bf.get_uni_rr(rr, max=False)
+    bi = bf._to_internal(bi)
 
     add = 0
     for i in range(2**k):
-        if i % 2**(k - n) <= 2**(k - 1 - n) - 1:
+        # Masks where regulator n's bit is set (internal index == mask).
+        if i % 2**(k - n) > 2**(k - 1 - n) - 1:
             add += int(bi[i])
 
     return add != 0
@@ -131,10 +136,13 @@ def check_necessary(
     k = len(regulators)
     n = regulators.index(nec)
 
+    rr_int = bf._to_internal(rr)
+
     add = 0
     for i in range(2**k):
-        if i % 2**(k - n) > 2**(k - 1 - n) - 1:
-            add += int(rr[i])
+        # Masks where regulator n's bit is unset must be zero.
+        if i % 2**(k - n) <= 2**(k - 1 - n) - 1:
+            add += int(rr_int[i])
 
     return add == 0
 
