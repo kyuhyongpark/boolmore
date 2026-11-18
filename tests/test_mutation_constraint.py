@@ -9,7 +9,11 @@ import pytest
 import boolmore.boolean_functions as bf
 from boolmore.evaluation import constraint as cons
 from boolmore.genetic.operators import constraint_enforcement as ce
-from boolmore.genetic.operators.mutation import mutate_rr_bias, mutate_rr_constraint
+from boolmore.genetic.operators.mutation import (
+    mutate_rr_bias,
+    mutate_rr_constraint,
+    regulate_repair_enabled,
+)
 
 
 def _empty_constraints() -> dict:
@@ -126,39 +130,74 @@ def _constraint_combos(node: str, regulators: tuple[str, ...]) -> list[dict]:
     return combos
 
 
+def _has_regulate(constraints: dict) -> bool:
+    return bool(constraints.get("regulate"))
+
+
 @pytest.mark.parametrize("probability", [0.05, 0.3])
 @pytest.mark.parametrize("bias", [0.0, 0.5, 1.0])
 @pytest.mark.parametrize("k", [2, 3, 4])
 def test_mutate_rr_constraint_matches_reference(probability, bias, k):
+    """RNG-exact vs pre-reuse reference with regulate repair disabled."""
     regulators = tuple(f"R{i}" for i in range(k))
     # Include a self-loop case for source checks.
     node = regulators[0]
     base_rr = "1" + "0" * (2**k - 1)  # single ON bit at mask 0 (constant 1)
     rr = base_rr
 
-    for constraints in _constraint_combos(node, regulators):
-        for seed in range(40):
-            random.seed(seed)
-            ref_out = _ref_mutate_rr_constraint(
-                regulators, rr, base_rr, constraints, node, probability, bias
-            )
-            ref_state = random.getstate()
+    with regulate_repair_enabled(False):
+        for constraints in _constraint_combos(node, regulators):
+            for seed in range(40):
+                random.seed(seed)
+                ref_out = _ref_mutate_rr_constraint(
+                    regulators, rr, base_rr, constraints, node, probability, bias
+                )
+                ref_state = random.getstate()
 
-            random.seed(seed)
-            new_out = mutate_rr_constraint(
-                regulators, rr, base_rr, constraints, node, probability, bias
-            )
-            new_state = random.getstate()
+                random.seed(seed)
+                new_out = mutate_rr_constraint(
+                    regulators, rr, base_rr, constraints, node, probability, bias
+                )
+                new_state = random.getstate()
 
-            mutated_rr, modified, min_rr, max_rr = new_out
-            assert (mutated_rr, modified) == ref_out
-            assert new_state == ref_state
-            if min_rr is None:
-                # Early-return paths (fixed / constant / single-reg) skip forms.
-                assert max_rr is None
-            else:
+                mutated_rr, modified, min_rr, max_rr = new_out
+                assert (mutated_rr, modified) == ref_out
+                assert new_state == ref_state
+                if min_rr is None:
+                    # Early-return paths (fixed / constant / single-reg) skip forms.
+                    assert max_rr is None
+                else:
+                    assert min_rr == bf.get_uni_rr(mutated_rr, max=False)
+                    assert max_rr == bf.get_uni_rr(mutated_rr, max=True)
+
+
+@pytest.mark.parametrize("probability", [0.05, 0.3])
+@pytest.mark.parametrize("bias", [0.0, 0.5, 1.0])
+@pytest.mark.parametrize("k", [2, 3, 4])
+def test_mutate_rr_constraint_regulate_postconditions(probability, bias, k):
+    """With repair on, accepted mutants still satisfy regulate constraints."""
+    regulators = tuple(f"R{i}" for i in range(k))
+    node = regulators[0]
+    base_rr = "1" + "0" * (2**k - 1)
+    rr = base_rr
+
+    regulate_combos = [
+        c for c in _constraint_combos(node, regulators) if _has_regulate(c)
+    ]
+    with regulate_repair_enabled(True):
+        for constraints in regulate_combos:
+            for seed in range(40):
+                random.seed(seed)
+                mutated_rr, _modified, min_rr, max_rr = mutate_rr_constraint(
+                    regulators, rr, base_rr, constraints, node, probability, bias
+                )
+                assert min_rr is not None and max_rr is not None
                 assert min_rr == bf.get_uni_rr(mutated_rr, max=False)
                 assert max_rr == bf.get_uni_rr(mutated_rr, max=True)
+                for reg in constraints["regulate"][node]:
+                    assert cons.check_regulate(
+                        regulators, min_rr, reg, is_min=True
+                    )
 
 
 def test_mutate_rr_constraint_early_returns_match_reference():

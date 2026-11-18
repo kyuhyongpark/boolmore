@@ -1,3 +1,116 @@
+import boolmore.boolean_functions as bf
+
+
+def try_add_regulator(
+    regulators: tuple[str, ...],
+    rr: str,
+    reg: str,
+    max_rr: str | None = None,
+    max_irr: str | None = None,
+    necessary: tuple[str, ...] | list[str] | None = None,
+) -> tuple[str, str | None, str | None, str]:
+    """
+    Heuristic attempt to make ``reg`` appear by flipping one related bit.
+
+    Always tries maximal (forward) space first: flip the **rightmost**
+    (largest-index) mask that includes ``reg`` (and all ``necessary``
+    regulators when given) and is currently ``'0'``. If no such mask
+    exists, fall back to max-irr with only the ``reg`` bit required,
+    again flipping the rightmost zero.
+    This does **not** guarantee that ``reg`` appears in the minimal form;
+    callers must re-check with ``check_regulate``.
+
+    Because ``max_rr`` / ``max_irr`` are upward-closed, a zero at the
+    exact required mask is necessary and sufficient for any candidate
+    to exist; search then walks supersets largest-first.
+
+    ``max_rr`` / ``max_irr`` are optional caches for the repair base. When
+    provided they are reused; newly computed forms are returned so the
+    caller can keep caching across retries on the same base.
+
+    Parameters
+    ----------
+    regulators - the regulating nodes           :length k tuple[str]
+    rr         - rule in mask order             :length 2^k binary str
+                 Used only when ``max_rr`` is not supplied.
+    reg        - regulator to try to introduce  :str
+    max_rr     - optional cached maximal form of the repair base
+    max_irr    - optional cached max-inverted form of the repair base
+    necessary  - regulators that must appear in forward flipped masks
+
+    Returns
+    -------
+    repaired_rr - possibly modified rule in mask order  :str
+                  Unchanged ``rr`` when neither space has a candidate bit.
+    max_rr      - maximal form used/computed for this base (cacheable)
+    max_irr     - max-inverted form if computed, else the input cache
+    path        - ``"forward"``, ``"irr"``, or ``"noop"``
+    """
+    assert reg in regulators, "The node should be one of the regulators"
+
+    k = len(regulators)
+    n = regulators.index(reg)
+    bit = 1 << (k - n - 1)
+
+    need_mask = 0
+    if necessary:
+        for nec in necessary:
+            assert nec in regulators, "Necessary node should be one of the regulators"
+            need_mask |= 1 << (k - regulators.index(nec) - 1)
+
+    def _rightmost_zero(base: str, require: int) -> int | None:
+        # Upward-closed: if require itself is 1, every superset is 1.
+        if base[require] == "1":
+            return None
+        # Walk supersets of require from largest to smallest.
+        free = ((1 << k) - 1) ^ require
+        s = free
+        while True:
+            idx = s | require
+            if base[idx] == "0":
+                return idx
+            if s == 0:
+                return None
+            s = (s - 1) & free
+
+    def _flip(base: str, idx: int) -> str:
+        return base[:idx] + "1" + base[idx + 1 :]
+
+    # Reuse caller caches when present; build only as needed.
+    def _max() -> str:
+        nonlocal max_rr
+        if max_rr is None:
+            max_rr = bf.get_uni_rr(rr, max=True)
+        return max_rr
+
+    def _irr() -> str:
+        nonlocal max_irr
+        if max_irr is None:
+            max_irr = bf.get_max_irr(rr, max_rr=_max())
+        return max_irr
+
+    def _try(base: str, require: int, inverted: bool) -> str | None:
+        idx = _rightmost_zero(base, require)
+        if idx is None:
+            return None
+        flipped = _flip(base, idx)
+        if inverted:
+            return bf.get_max_irr(flipped)
+        return flipped
+
+    # Always forward first; irr only if forward has no target.
+    forward_require = bit | need_mask
+    repaired = _try(_max(), forward_require, inverted=False)
+    if repaired is not None:
+        return repaired, max_rr, max_irr, "forward"
+
+    repaired = _try(_irr(), bit, inverted=True)
+    if repaired is not None:
+        return repaired, max_rr, max_irr, "irr"
+
+    return rr, max_rr, max_irr, "noop"
+
+
 def impose_necessary(regulators:tuple[str, ...], rr:str, nec:str) -> str:
     """
     Impose the necessary condition for the rule.

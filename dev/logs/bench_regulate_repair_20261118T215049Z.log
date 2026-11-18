@@ -1,0 +1,82 @@
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/bench_regulate_repair_20261118T215049Z.log
+started (UTC): 2026-11-18T21:50:49.587682+00:00
+
+config: case_study/breast_cancer/config.json
+base:   /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/parsimonious.pkl
+start:  /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/parsimonious.pkl
+config prob={'1': 0.5, '11': 0.01}, edge_prob=0.0 (bench uses PROB=0.5, EDGE_PROB=0.0)
+N_MUTATIONS=300, seed=0
+
+Loading base model from /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/parsimonious.pkl
+Base model loaded.
+
+========================================================================
+Run: baseline (REGULATE_REPAIR=False)
+========================================================================
+  wall:              7.3114s
+  get_uni_rr calls:  416114
+  trials:            116921
+  retries:           78821
+  repair_attempts:   0
+  repair_noop:       0
+  repair_forward:    0
+  repair_irr_fallback: 0
+  irr_fallback_fixed_regulate: 0
+  regulate_fixed (after flip):    0
+  regulate_still_false (after flip): 0
+  undone_by_necessary: 0
+  accepted_after_repair: 0
+  regulate_fixed_but_other_fail: 0
+
+========================================================================
+Run: repair (REGULATE_REPAIR=True)
+========================================================================
+  wall:              5.4559s
+  get_uni_rr calls:  267184
+  trials:            48282
+  retries:           10182
+  repair_attempts:   17516
+  repair_noop:       0
+  repair_forward:    10943
+  repair_irr_fallback: 6573
+  irr_fallback_fixed_regulate: 6573
+  regulate_fixed (after flip):    17516
+  regulate_still_false (after flip): 0
+  undone_by_necessary: 0
+  accepted_after_repair: 17516
+  regulate_fixed_but_other_fail: 0
+
+Summary: breast-cancer mutate_model, regulate repair A/B
+------------------------------------------------------------------------
+metric                                     baseline         repair
+------------------------------------------------------------------------
+wall time (s)                                7.3114         5.4559
+get_uni_rr calls                             416114         267184
+trials                                       116921          48282
+retries                                       78821          10182
+repair_attempts                                   0          17516
+repair_noop                                       0              0
+repair_forward                                    0          10943
+repair_irr_fallback                               0           6573
+irr_fallback_fixed_regulate                       0           6573
+regulate_fixed (after flip)                       0          17516
+regulate_still_false (after flip)                 0              0
+undone_by_necessary                               0              0
+accepted_after_repair                             0          17516
+regulate_fixed_but_other_fail                     0              0
+------------------------------------------------------------------------
+get_uni_rr calls: repair fewer by 148930 (35.79% below baseline)
+wall: repair faster by 1.34x (saved 1.8555s)
+
+Counts: regulate_fixed / still_false are checked right after try_add_regulator; undone_by_necessary is flip-fixed then lost after impose_necessary.
+forward path / attempts: 10943/17516
+irr fallback (forward had no target) / attempts: 6573/17516
+irr fallback fixed regulate: 6573 (of 6573 irr fallbacks)
+YES: there are cases where forward finds no target and irr still repairs regulate.
+flip hit rate (regulate_fixed / attempts): 17516/17516 = 100.0%
+undone by necessary / flip-fixed: 0/17516 = 0.0%
+repair accept rate (accepted / attempts): 17516/17516 = 100.0%
+
+Note: mutate-only stress (no scoring). Scores need not match between arms; RNG trajectories diverge once repair consumes random draws.
+Log written to: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/bench_regulate_repair_20261118T215049Z.log
+finished (UTC): 2026-11-18T21:51:02.397015+00:00
