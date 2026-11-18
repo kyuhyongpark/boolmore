@@ -15,7 +15,7 @@ from boolmore.runner import run_batch
 CONFIG = "case_study/breast_cancer/config.json"
 RUN_NAME = None  # None → UTC timestamp folder under RUNS_ROOT
 RUNS_ROOT = "case_study/breast_cancer/runs"
-SEEDS = [0]
+SEEDS = list(range(30))
 CORE = 4
 
 CONFIG_OVERRIDES: dict = {}

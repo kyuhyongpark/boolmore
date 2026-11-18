@@ -711,6 +711,8 @@
         "edge_prob": 0.0,
         "order_by": [
             "n_extra_edges",
+            "n_eff_self_edges",
+            "n_eff_edges",
             "n_prime_implicants"
         ]
     }
