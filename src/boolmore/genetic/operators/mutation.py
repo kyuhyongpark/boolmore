@@ -6,7 +6,7 @@ from boolmore.genetic.operators import constraint_enforcement as ce
 from boolmore.model import Model
 
 
-def mutate_rr(rr:str, probability:float) -> str:
+def mutate_rr(rr: str, probability: float) -> str:
     """
     Returns the mutated representation of that rule
     when given any representation of a rule.
@@ -25,18 +25,12 @@ def mutate_rr(rr:str, probability:float) -> str:
     mutated_rr - representation of the mutated rule     :length 2^k binary str
     
     """
-    lst = []
-    for num in rr:
-        lst.append(int(num))
-    for i in range(len(lst)):
-        rnd = random.random()
-        if rnd < probability:
-            lst[i] += 1
-    mutated_rr = ''
-    for num in lst:
-        mutated_rr += str(num % 2)
-    
-    return mutated_rr
+    out = bytearray(rr, "ascii")
+    zero = 48  # '0'
+    for i in range(len(out)):
+        if random.random() < probability:
+            out[i] = zero + ((out[i] - zero + 1) & 1)
+    return out.decode("ascii")
 
 
 def mutate_rr_bias(rr:str, probability:float, bias:float=0.5) -> str:

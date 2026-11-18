@@ -1,0 +1,100 @@
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/bench_uni_rr_py_vs_cython_20261118T191841Z.log
+started (UTC): 2026-11-18T19:18:41.478048+00:00
+
+Cython extension loaded; dispatch min k=1 (n >= 2)
+
+config: case_study/breast_cancer/config.json
+data:   case_study/breast_cancer/data.csv
+base:   case_study/breast_cancer/parsimonious.pkl
+start:  case_study/breast_cancer/parsimonious.pkl
+run_type: NAV
+nav_method: ldoi
+hierarchy: True
+GA params: total_iter=3, per_iter=100, keep=20, mix=20, prob={'1': 0.5, '11': 0.01}
+seed: 0, core: 1
+related_nodes: cached via build_evaluator (both arms)
+
+========================================================================
+Run: uni_rr=python, nav_method=ldoi, core=1
+========================================================================
+Loading base model from /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/parsimonious.pkl
+Base model loaded.
+Loading experimental data from /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/data.csv
+Experimental data loaded.
+experiments: 771
+total weight: 518.0
+distinct interventions: 194
+outcomes: {'1.0': 154, '0.0': 91, '0.1': 1, '0.25': 4, '0.5': 2, '0.75': 1, '0.8': 2, '0.05': 2, '0.2': 1, '0.6': 1, '0.02': 3, '0.06': 1, '0.28': 1, '0.04': 1}
+comparative outcomes: 506
+
+# number of nodes: 200
+# number of edges: 577
+# number of effective base edges: 577
+# number of ineffective base edges: 0
+# extra edges: []
+# number of extra edges: 0
+# number of effective extra edges: 0
+# number of ineffective extra edges: 0
+# number of unadded edges: 0
+score: 69.38 / 518.0 (13.4%)
+
+iter 1/3 | generated 100 | best id  11 | gen 1 | score 203.9/518 (39.4%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 500 | n_prime_implicants 768
+iter 2/3 | generated 200 | best id 101 | gen 2 | score 227.8/518 (44.0%) | n_extra_edges 0 | n_eff_self_edges 34 | n_eff_edges 528 | n_prime_implicants 895
+iter 3/3 | generated 300 | best id 203 | gen 3 | score 246.8/518 (47.6%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 496 | n_prime_implicants 701
+
+  GA wall time: 39.1360s
+  iterations=3, generated=300
+  start score: 69.38 / 518.0
+  final score: 246.78 / 518.0
+
+========================================================================
+Run: uni_rr=cython, nav_method=ldoi, core=1
+========================================================================
+Loading base model from /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/parsimonious.pkl
+Base model loaded.
+Loading experimental data from /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/data.csv
+Experimental data loaded.
+experiments: 771
+total weight: 518.0
+distinct interventions: 194
+outcomes: {'1.0': 154, '0.0': 91, '0.1': 1, '0.25': 4, '0.5': 2, '0.75': 1, '0.8': 2, '0.05': 2, '0.2': 1, '0.6': 1, '0.02': 3, '0.06': 1, '0.28': 1, '0.04': 1}
+comparative outcomes: 506
+
+# number of nodes: 200
+# number of edges: 577
+# number of effective base edges: 577
+# number of ineffective base edges: 0
+# extra edges: []
+# number of extra edges: 0
+# number of effective extra edges: 0
+# number of ineffective extra edges: 0
+# number of unadded edges: 0
+score: 69.38 / 518.0 (13.4%)
+
+iter 1/3 | generated 100 | best id  11 | gen 1 | score 203.9/518 (39.4%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 500 | n_prime_implicants 768
+iter 2/3 | generated 200 | best id 101 | gen 2 | score 227.8/518 (44.0%) | n_extra_edges 0 | n_eff_self_edges 34 | n_eff_edges 528 | n_prime_implicants 895
+iter 3/3 | generated 300 | best id 203 | gen 3 | score 246.8/518 (47.6%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 496 | n_prime_implicants 701
+
+  GA wall time: 30.8306s
+  iterations=3, generated=300
+  start score: 69.38 / 518.0
+  final score: 246.78 / 518.0
+
+Summary: breast-cancer NAV GA, get_uni_rr python vs cython
+------------------------------------------------------------------------
+metric                               python         cython
+------------------------------------------------------------------------
+GA wall time (s)                    39.1360        30.8306
+iterations                                3              3
+models generated                        300            300
+start score                     69.38/518      69.38/518  
+final score                    246.78/518     246.78/518  
+final %                               47.6%          47.6%
+------------------------------------------------------------------------
+cython faster by 1.27x (saved 8.3054s)
+
+PASS: start/final scores, iterations, and generated counts match (CORE=1, identical seed).
+
+Note: CORE=1 keeps RNG trajectories aligned so equivalent get_uni_rr must yield identical scores.
+Log written to: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/bench_uni_rr_py_vs_cython_20261118T191841Z.log
+finished (UTC): 2026-11-18T19:19:54.040625+00:00
