@@ -6,6 +6,7 @@ from boolmore.evaluation.agreement import (
     _agreement_score,
     _average_related_values,
     _related_node_names,
+    build_related_nodes,
     get_agreements,
     line,
 )
@@ -469,6 +470,32 @@ def test_related_node_names_includes_int_siblings_excludes_unrelated():
     }
     assert sorted(_related_node_names("A", values)) == ["A", "A_2", "A_3"]
     assert _average_related_values(values, "A") == pytest.approx(0.5)
+
+
+def test_build_related_nodes_matches_scan():
+    node_names = ["A", "A_2", "A_3", "B", "A_X"]
+    experiments = [
+        NAVExperiment(id=1, fixes=(), observed="A", outcome="Some", weight=1.0),
+        NAVExperiment(id=2, fixes=(), observed="B", outcome="OFF", weight=1.0),
+    ]
+    related = build_related_nodes(node_names, experiments)
+    assert sorted(related["A"]) == sorted(_related_node_names("A", node_names))
+    assert sorted(related["B"]) == sorted(_related_node_names("B", node_names))
+
+
+def test_get_agreements_with_related_nodes_matches_uncached():
+    experiments = [
+        NAVExperiment(id=1, fixes=(), observed="A", outcome="Some", weight=1.0),
+    ]
+    predictions = _prediction((), {"A": 0.0, "A_2": 1.0})
+    related = build_related_nodes(["A", "A_2"], experiments)
+
+    uncached = get_agreements(experiments, predictions)
+    cached = get_agreements(experiments, predictions, related_nodes=related)
+    assert cached == uncached
+    assert _average_related_values(
+        predictions[()].average_values, "A", related_nodes=related
+    ) == pytest.approx(0.5)
 
 
 def test_get_agreements_observed_none_when_any_sibling_none():

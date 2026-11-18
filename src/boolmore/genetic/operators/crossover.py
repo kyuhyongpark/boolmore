@@ -2,18 +2,26 @@ import random
 
 from boolmore.model import Model
 
-def mix_models(model1:Model, model2:Model) -> Model:
+def mix_models(
+    model1: Model,
+    model2: Model,
+    seed: int | None = None,
+) -> Model:
     """
     For each node, take the rule from one of the parent model randomly.
 
     Parameters
     ----------
     model1, model2 - parent models                              :Model class
-    
+    seed - optional RNG seed for parallel workers               :int|None
+
     Returns
     -------
     mixed_model - model that takes functions from the parents   :Model class
     """
+    if seed is not None:
+        random.seed(seed)
+
     mixed_model = Model()
 
     mixed_model.base = model1.base

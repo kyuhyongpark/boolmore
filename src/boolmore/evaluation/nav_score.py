@@ -260,6 +260,7 @@ def get_NAV_scores(
     predictions: dict[Assignment, NAVPrediction],
     default_sources: dict[str, int] | None = None,
     hierarchy: bool = True,
+    related_nodes: dict[str, list[str]] | None = None,
 ) -> list[EvaluationItemScore]:
     """Score NAV experiments given model predictions.
 
@@ -273,6 +274,9 @@ def get_NAV_scores(
         ``context`` is empty.
     hierarchy : bool, default True
         If True, apply hierarchy-adjusted scoring; otherwise use flat scores.
+    related_nodes : dict of str to list of str, optional
+        Precomputed observed-base → sibling node names shared across
+        candidates (see :func:`~boolmore.evaluation.agreement.build_related_nodes`).
 
     Returns
     -------
@@ -281,7 +285,9 @@ def get_NAV_scores(
     if default_sources is None:
         default_sources = {}
 
-    agreements = get_agreements(experiments, predictions)
+    agreements = get_agreements(
+        experiments, predictions, related_nodes=related_nodes
+    )
 
     if hierarchy:
         return get_hierarchy_scores(agreements, default_sources)

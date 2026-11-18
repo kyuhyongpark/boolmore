@@ -97,14 +97,39 @@ def _related_node_names(base: str, node_names: Iterable[str]) -> list[str]:
     return [name for name in node_names if pattern.fullmatch(name)]
 
 
+def build_related_nodes(
+    node_names: Iterable[str],
+    experiments: list[NAVExperiment],
+) -> dict[str, list[str]]:
+    """Precompute related sibling names for every observed base in ``experiments``.
+
+    Related nodes are ``base`` and ``base_<int>`` among ``node_names``. The map
+    is stable across GA candidates that share the same node set.
+    """
+    names = list(node_names)
+    bases = {exp.observed for exp in experiments}
+    return {base: _related_node_names(base, names) for base in bases}
+
+
 def _average_related_values(
     average_values: dict[str, float | None],
     base: str,
+    related_nodes: dict[str, list[str]] | None = None,
 ) -> float | None:
     """Mean of sibling node values for an observed base name.
 
     Related nodes are ``base`` and ``base_<int>``. Returns ``None`` if any
     sibling value is unknown.
+
+    Parameters
+    ----------
+    average_values :
+        Predicted averages keyed by node name.
+    base :
+        Observed base name.
+    related_nodes :
+        Optional precomputed map from base → sibling names. When provided
+        and ``base`` is present, skips scanning ``average_values`` keys.
 
     Raises
     ------
@@ -115,7 +140,10 @@ def _average_related_values(
     if not base:
         raise ValueError("Empty base for observed node average")
 
-    related = _related_node_names(base, average_values)
+    if related_nodes is not None and base in related_nodes:
+        related = related_nodes[base]
+    else:
+        related = _related_node_names(base, average_values)
     if not related:
         raise ValueError(
             f"No related nodes found for observed {base!r} "
@@ -134,9 +162,12 @@ def _average_related_values(
 def _predict_value_for_observed(
     average_values: dict[str, float | None],
     observed: str,
+    related_nodes: dict[str, list[str]] | None = None,
 ) -> float | None:
     """Predicted value for ``observed`` as the mean of ``base`` / ``base_<int>``."""
-    return _average_related_values(average_values, observed)
+    return _average_related_values(
+        average_values, observed, related_nodes=related_nodes
+    )
 
 
 def check_co_located_outcomes(
@@ -183,6 +214,7 @@ def check_co_located_outcomes(
 def get_agreements(
     experiments: list[NAVExperiment],
     predictions: dict[Assignment, NAVPrediction],
+    related_nodes: dict[str, list[str]] | None = None,
 ) -> AgreeType:
     """Return attractor agreements for experimental outcomes vs model predictions.
 
@@ -197,6 +229,9 @@ def get_agreements(
         name is treated as a base and scored as the mean of related sibling
         nodes (``base`` or ``base_<int>``), or ``None`` if any sibling is
         unknown.
+    related_nodes : dict of str to list of str, optional
+        Precomputed base → sibling names (see :func:`build_related_nodes`).
+        When omitted, siblings are scanned from each prediction's keys.
 
     Returns
     -------
@@ -239,17 +274,23 @@ def get_agreements(
                     f"missing id {outcome_value.other_id}"
                 ) from exc
             this_value = _predict_value_for_observed(
-                predictions[fixes].average_values, observed_node
+                predictions[fixes].average_values,
+                observed_node,
+                related_nodes=related_nodes,
             )
             other_value = _predict_value_for_observed(
-                predictions[other.fixes].average_values, other.observed
+                predictions[other.fixes].average_values,
+                other.observed,
+                related_nodes=related_nodes,
             )
             predict_value = _comparative_predict_value(
                 outcome_value, this_value, other_value
             )
         else:
             predict_value = _predict_value_for_observed(
-                predictions[fixes].average_values, observed_node
+                predictions[fixes].average_values,
+                observed_node,
+                related_nodes=related_nodes,
             )
 
         agreement = _agreement_score(outcome_value, predict_value)

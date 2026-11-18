@@ -1,14 +1,18 @@
 import random
 from collections.abc import Callable
 from dataclasses import dataclass, field
+from typing import Literal
 
 from joblib import Parallel, delayed
 import numpy as np
 
 from boolmore.evaluation.score import Evaluator
 from boolmore.genetic.population import Candidate, sort_population
+from boolmore.genetic.operators.crossover import mix_models
+from boolmore.genetic.operators.mutation import mutate_model
 from boolmore.genetic.operators.reproduction import Reproducer
 from boolmore.genetic.selection import Selector
+from boolmore.model import Model
 
 
 @dataclass
@@ -115,6 +119,20 @@ class GAOutcome:
     history: list[GenerationSummary]
 
 
+@dataclass(frozen=True)
+class _ReproduceJob:
+    """One reproduce+evaluate unit of work (built on the main process)."""
+
+    kind: Literal["sexual", "asexual"]
+    model_id: int
+    generation: int
+    parent1: Model
+    parent2: Model | None = None
+    prob: float | None = None
+    edge_prob: float | None = None
+    seed: int | None = None
+
+
 def _generation_summary(state: GAState, order_by: list[str]) -> GenerationSummary:
     best = state.population[0]
     result = best.eval_result
@@ -132,6 +150,46 @@ def _generation_summary(state: GAState, order_by: list[str]) -> GenerationSummar
         best_max_score=result.max_score,
         order_by_values={attr: getattr(result, attr) for attr in order_by},
     )
+
+
+def _job_seed(core: int) -> int | None:
+    """Per-job seed for parallel workers; ``None`` keeps serial global RNG."""
+    if core > 1:
+        return random.randint(0, 2**31 - 1)
+    return None
+
+
+def _reproduce_and_evaluate(
+    job: _ReproduceJob,
+    constraints: dict,
+    evaluator: Evaluator,
+    score_threshold: float | None,
+) -> Candidate:
+    """Reproduce one offspring then evaluate it (pickle-friendly worker)."""
+    if job.kind == "sexual":
+        if job.parent2 is None:
+            raise ValueError("sexual job requires parent2")
+        model = mix_models(job.parent1, job.parent2, seed=job.seed)
+    elif job.kind == "asexual":
+        if job.prob is None or job.edge_prob is None:
+            raise ValueError("asexual job requires prob and edge_prob")
+        model = mutate_model(
+            job.parent1,
+            job.prob,
+            job.edge_prob,
+            constraints,
+            seed=job.seed,
+        )
+    else:
+        raise ValueError(f"unknown reproduce kind: {job.kind!r}")
+
+    result = evaluator.evaluate(
+        model,
+        job.model_id,
+        score_threshold,
+        detail=False,
+    )
+    return Candidate(model, job.model_id, job.generation, result)
 
 
 class GeneticAlgorithm:
@@ -160,6 +218,7 @@ class GeneticAlgorithm:
         evaluator: Evaluator,
         score_threshold: float | None = None,
     ) -> list[Candidate]:
+        """Evaluate already-built offsprings (legacy two-phase path / benches)."""
         if self.config.core > 1:
             results = Parallel(n_jobs=self.config.core)(
                 delayed(evaluator.evaluate)(
@@ -191,6 +250,67 @@ class GeneticAlgorithm:
                 new_candidates.append(candidate)
             return new_candidates
 
+    def _run_jobs(
+        self,
+        jobs: list[_ReproduceJob],
+        score_threshold: float | None,
+    ) -> list[Candidate]:
+        """Run reproduce+evaluate jobs serially or with ``batch_size=1`` Parallel."""
+        if not jobs:
+            return []
+        constraints = self.reproducer.constraints
+        evaluator = self.evaluator
+        if self.config.core > 1:
+            return Parallel(n_jobs=self.config.core, batch_size=1)(
+                delayed(_reproduce_and_evaluate)(
+                    job, constraints, evaluator, score_threshold
+                )
+                for job in jobs
+            )
+        return [
+            _reproduce_and_evaluate(job, constraints, evaluator, score_threshold)
+            for job in jobs
+        ]
+
+    def _sexual_jobs(self, population: list[Candidate], n: int) -> list[_ReproduceJob]:
+        jobs: list[_ReproduceJob] = []
+        for _ in range(n):
+            parents = self.selector.select_parents(population)
+            jobs.append(
+                _ReproduceJob(
+                    kind="sexual",
+                    model_id=self.reproducer._next_id(),
+                    generation=max(parents[0].generation, parents[1].generation) + 1,
+                    parent1=parents[0].model,
+                    parent2=parents[1].model,
+                    seed=_job_seed(self.config.core),
+                )
+            )
+        return jobs
+
+    def _asexual_jobs(
+        self,
+        population: list[Candidate],
+        n: int,
+        prob: float,
+        edge_prob: float,
+    ) -> list[_ReproduceJob]:
+        jobs: list[_ReproduceJob] = []
+        for _ in range(n):
+            parent = self.selector.select_single_parent(population)
+            jobs.append(
+                _ReproduceJob(
+                    kind="asexual",
+                    model_id=self.reproducer._next_id(),
+                    generation=parent.generation + 1,
+                    parent1=parent.model,
+                    prob=prob,
+                    edge_prob=edge_prob,
+                    seed=_job_seed(self.config.core),
+                )
+            )
+        return jobs
+
     def next_state(self, state: GAState) -> GAState:
         iteration = state.iteration + 1
         population = self.selector.select_survivors(state.population)
@@ -213,10 +333,10 @@ class GeneticAlgorithm:
                 score_threshold = min(survivor_scores)
 
         if iteration > 1:
-            # mix the good ones
-            mixed_offsprings = self.reproducer.sexual(population, self.config.mix)
-            candidates = self.new_candidates(
-                mixed_offsprings, self.evaluator, score_threshold
+            # mix the good ones (select on main; reproduce+evaluate in parallel)
+            candidates = self._run_jobs(
+                self._sexual_jobs(population, self.config.mix),
+                score_threshold,
             )
             population.extend(candidates)
             generated += len(candidates)
@@ -228,13 +348,15 @@ class GeneticAlgorithm:
             )
 
         # total population should be keep + per_iter
-        offsprings = self.reproducer.asexual(
-            population=population,
-            prob=self.config.prob_list[iteration-1],
-            edge_prob=self.config.edge_prob,
-            n = self.config.keep + self.config.per_iter - len(population))
-        candidates = self.new_candidates(
-            offsprings, self.evaluator, score_threshold
+        n_asexual = self.config.keep + self.config.per_iter - len(population)
+        candidates = self._run_jobs(
+            self._asexual_jobs(
+                population,
+                n_asexual,
+                self.config.prob_list[iteration - 1],
+                self.config.edge_prob,
+            ),
+            score_threshold,
         )
         population.extend(candidates)
         generated += len(candidates)

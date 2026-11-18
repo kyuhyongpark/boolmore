@@ -4,6 +4,7 @@ from collections.abc import Sequence
 from functools import partial
 from pathlib import Path
 
+from boolmore.evaluation.agreement import build_related_nodes
 from boolmore.evaluation.score import Evaluator
 from boolmore.evaluation.nav_score import get_NAV_scores
 from boolmore.evaluation.phenotype_score import get_phenotype_scores
@@ -205,10 +206,12 @@ def build_evaluator(
 
         exps = import_NAV_exps(str(data_path), **nav_kwargs)
         prediction_fn = partial(get_NAV_prediction, method=nav_method)
+        related_nodes = build_related_nodes(base_model.primes, exps)
         score_fn = partial(
             get_NAV_scores,
             default_sources=default_sources,
             hierarchy=hierarchy,
+            related_nodes=related_nodes,
         )
     elif run_type == "Phenotype":
         exps = import_phenotypes(str(data_path))
