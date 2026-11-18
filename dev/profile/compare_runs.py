@@ -36,6 +36,7 @@ if str(_PROFILE_DIR) not in sys.path:
 from common import (  # noqa: E402
     RUNS_DIR,
     env_warning_report,
+    git_commit_order,
     iter_manifests,
     load_manifest,
     task_mismatch_report,
@@ -121,15 +122,27 @@ def _run_label(m: dict) -> str:
     return f"{short}{dirty}"
 
 
+def _sort_runs_by_history(runs: list[dict]) -> list[dict]:
+    """Oldest commit first; clean before dirty; then started_utc."""
+    commits = [(m.get("git") or {}).get("commit") or "" for m in runs]
+    order = git_commit_order(commits)
+    unknown = max(order.values(), default=-1) + 1
+
+    def key(m: dict) -> tuple:
+        git = m.get("git") or {}
+        sha = git.get("commit") or ""
+        return (
+            order.get(sha, unknown),
+            1 if git.get("dirty") else 0,
+            m.get("started_utc") or "",
+        )
+
+    return sorted(runs, key=key)
+
+
 def print_group_table(runs: list[dict]) -> None:
     """Print one comparison table for runs that share a fingerprint."""
-    runs = sorted(
-        runs,
-        key=lambda m: (
-            (m.get("git") or {}).get("commit") or "",
-            m.get("started_utc") or "",
-        ),
-    )
+    runs = _sort_runs_by_history(runs)
     fp = runs[0].get("task_fingerprint", "?")
     task = runs[0].get("task") or {}
     print("=" * 88)

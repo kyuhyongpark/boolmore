@@ -89,6 +89,33 @@ def collect_git_info(repo_root: Path) -> dict[str, Any]:
     }
 
 
+def git_commit_order(
+    commits: list[str],
+    *,
+    repo_root: Path | None = None,
+) -> dict[str, int]:
+    """Map full commit SHAs to oldest-first history rank.
+
+    Uses ``git rev-list --date-order --reverse`` over the union of the given
+    commits, then keeps only those commits in that order. Unknown / missing
+    commits are omitted (caller should fall back).
+    """
+    uniq = [c for c in dict.fromkeys(commits) if c]
+    if not uniq:
+        return {}
+    root = repo_root or PROFILE_DIR.parents[1]
+    out = _git("rev-list", "--date-order", "--reverse", *uniq, cwd=root)
+    if not out:
+        return {}
+    wanted = set(uniq)
+    order: dict[str, int] = {}
+    for line in out.splitlines():
+        sha = line.strip()
+        if sha in wanted and sha not in order:
+            order[sha] = len(order)
+    return order
+
+
 def collect_environment() -> dict[str, Any]:
     """Runtime environment that can affect wall time."""
     import boolmore.boolean_functions as bf
