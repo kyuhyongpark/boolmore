@@ -120,6 +120,7 @@ def get_flat_scores(
         default_sources = {}
 
     results: list[EvaluationItemScore] = []
+    fixes_cache: dict[tuple[Assignment, Assignment], Assignment] = {}
 
     for observed_node, by_context in agreements.items():
         for context, by_intervention in by_context.items():
@@ -128,7 +129,11 @@ def get_flat_scores(
                     context, intervention, default_sources
                 )
                 hierarchy = len(eff_intervention)
-                fixes = merge_assignments(context, intervention)
+                fixes_key = (context, intervention)
+                fixes = fixes_cache.get(fixes_key)
+                if fixes is None:
+                    fixes = merge_assignments(context, intervention)
+                    fixes_cache[fixes_key] = fixes
                 for exp_id, weight, outcome, predict_value, agreement in entries:
                     results.append(
                         EvaluationItemScore(
@@ -179,6 +184,7 @@ def get_hierarchy_scores(
     list of EvaluationItemScore
     """
     results: list[EvaluationItemScore] = []
+    fixes_cache: dict[tuple[Assignment, Assignment], Assignment] = {}
 
     # Re-group by (observed, effective_context) so legacy empty contexts that
     # share default_sources land in one hierarchy pool.
@@ -202,38 +208,39 @@ def get_hierarchy_scores(
                 )
 
     for (observed_node, _eff_context), by_eff_intervention in grouped.items():
-        for eff_intervention, bundles in by_eff_intervention.items():
-            subset_interventions = [
-                other
-                for other in by_eff_intervention
-                if _is_intervention_subset(dict(other), dict(eff_intervention))
+        as_dicts = {eff: dict(eff) for eff in by_eff_intervention}
+        abs_agreements: dict[Assignment, list[float]] = {
+            eff: [
+                other_agreement
+                for _oc, _oi, other_entries, _oul in bundles
+                for _id, _w, other_outcome, _pv, other_agreement in other_entries
+                if not isinstance(other_outcome, ComparativeOutcome)
             ]
+            for eff, bundles in by_eff_intervention.items()
+        }
+        products: dict[Assignment, float] = {}
+        for eff, ref_dict in as_dicts.items():
+            product = 1.0
+            for other, other_dict in as_dicts.items():
+                if _is_intervention_subset(other_dict, ref_dict):
+                    for other_agreement in abs_agreements[other]:
+                        product *= other_agreement
+            products[eff] = product
 
+        for eff_intervention, bundles in by_eff_intervention.items():
+            hierarchy = len(eff_intervention)
+            product = products[eff_intervention]
             for context, intervention, entries, _use_legacy in bundles:
-                hierarchy = len(eff_intervention)
-                fixes = merge_assignments(context, intervention)
+                fixes_key = (context, intervention)
+                fixes = fixes_cache.get(fixes_key)
+                if fixes is None:
+                    fixes = merge_assignments(context, intervention)
+                    fixes_cache[fixes_key] = fixes
                 for exp_id, weight, outcome, predict_value, agreement in entries:
                     if isinstance(outcome, ComparativeOutcome):
                         score = weight * agreement
                     else:
-                        score = weight
-                        for other in subset_interventions:
-                            for (
-                                _oc,
-                                _oi,
-                                other_entries,
-                                _oul,
-                            ) in by_eff_intervention[other]:
-                                for (
-                                    _,
-                                    _,
-                                    other_outcome,
-                                    _,
-                                    other_agreement,
-                                ) in other_entries:
-                                    if isinstance(other_outcome, ComparativeOutcome):
-                                        continue
-                                    score *= other_agreement
+                        score = weight * product
 
                     results.append(
                         EvaluationItemScore(
@@ -261,6 +268,8 @@ def get_NAV_scores(
     default_sources: dict[str, int] | None = None,
     hierarchy: bool = True,
     related_nodes: dict[str, list[str]] | None = None,
+    *,
+    validate_co_located: bool = True,
 ) -> list[EvaluationItemScore]:
     """Score NAV experiments given model predictions.
 
@@ -277,6 +286,9 @@ def get_NAV_scores(
     related_nodes : dict of str to list of str, optional
         Precomputed observed-base → sibling node names shared across
         candidates (see :func:`~boolmore.evaluation.agreement.build_related_nodes`).
+    validate_co_located : bool, default True
+        Forwarded to :func:`~boolmore.evaluation.agreement.get_agreements`.
+        GA evaluators set this False after import-time validation.
 
     Returns
     -------
@@ -286,7 +298,10 @@ def get_NAV_scores(
         default_sources = {}
 
     agreements = get_agreements(
-        experiments, predictions, related_nodes=related_nodes
+        experiments,
+        predictions,
+        related_nodes=related_nodes,
+        validate_co_located=validate_co_located,
     )
 
     if hierarchy:

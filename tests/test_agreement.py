@@ -334,6 +334,22 @@ def test_get_agreements_duplicate_absolute_raises():
         get_agreements(experiments, predictions)
 
 
+def test_get_agreements_validate_co_located_false_allows_duplicate_absolute():
+    fixes = (("X", 1),)
+    experiments = [
+        NAVExperiment(id=1, fixes=fixes, observed="A", outcome="ON", weight=1.0),
+        NAVExperiment(id=2, fixes=fixes, observed="A", outcome="OFF", weight=1.0),
+    ]
+    predictions = _prediction(fixes, {"A": 0.5})
+
+    agreements = get_agreements(
+        experiments, predictions, validate_co_located=False
+    )
+    entries = agreements["A"][()][fixes]
+    assert len(entries) == 2
+    assert {entry[0] for entry in entries} == {1, 2}
+
+
 def test_get_agreements_duplicate_comparative_other_id_raises():
     fixes = (("X", 1),)
     outcome = ComparativeOutcome(relation="higher", other_id=3)

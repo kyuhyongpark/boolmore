@@ -215,6 +215,8 @@ def get_agreements(
     experiments: list[NAVExperiment],
     predictions: dict[Assignment, NAVPrediction],
     related_nodes: dict[str, list[str]] | None = None,
+    *,
+    validate_co_located: bool = True,
 ) -> AgreeType:
     """Return attractor agreements for experimental outcomes vs model predictions.
 
@@ -232,6 +234,9 @@ def get_agreements(
     related_nodes : dict of str to list of str, optional
         Precomputed base → sibling names (see :func:`build_related_nodes`).
         When omitted, siblings are scanned from each prediction's keys.
+    validate_co_located : bool, default True
+        When True, reject conflicting co-located outcomes. Set False on the
+        GA hot path after import-time validation.
 
     Returns
     -------
@@ -252,9 +257,11 @@ def get_agreements(
         is missing, an observed base has no related siblings, or if two
         experiments share the same observed node, context, and intervention
         with conflicting outcomes (two non-comparative outcomes, or two
-        comparatives with the same ``other_id``).
+        comparatives with the same ``other_id``) when
+        ``validate_co_located`` is True.
     """
     experiments_by_id = {exp.id: exp for exp in experiments}
+    predict_cache: dict[tuple[Assignment, str], float | None] = {}
     agreements: AgreeType = {}
     for exp in experiments:
         exp_id = exp.id
@@ -265,6 +272,15 @@ def get_agreements(
         observed_node = exp.observed
         outcome_value = exp.outcome
 
+        cache_key = (fixes, observed_node)
+        if cache_key not in predict_cache:
+            predict_cache[cache_key] = _predict_value_for_observed(
+                predictions[fixes].average_values,
+                observed_node,
+                related_nodes=related_nodes,
+            )
+        this_value = predict_cache[cache_key]
+
         if isinstance(outcome_value, ComparativeOutcome):
             try:
                 other = experiments_by_id[outcome_value.other_id]
@@ -273,39 +289,36 @@ def get_agreements(
                     f"Comparative outcome for experiment {exp_id} references "
                     f"missing id {outcome_value.other_id}"
                 ) from exc
-            this_value = _predict_value_for_observed(
-                predictions[fixes].average_values,
-                observed_node,
-                related_nodes=related_nodes,
-            )
-            other_value = _predict_value_for_observed(
-                predictions[other.fixes].average_values,
-                other.observed,
-                related_nodes=related_nodes,
-            )
+            other_key = (other.fixes, other.observed)
+            if other_key not in predict_cache:
+                predict_cache[other_key] = _predict_value_for_observed(
+                    predictions[other.fixes].average_values,
+                    other.observed,
+                    related_nodes=related_nodes,
+                )
             predict_value = _comparative_predict_value(
-                outcome_value, this_value, other_value
+                outcome_value, this_value, predict_cache[other_key]
             )
         else:
-            predict_value = _predict_value_for_observed(
-                predictions[fixes].average_values,
-                observed_node,
-                related_nodes=related_nodes,
-            )
+            predict_value = this_value
 
         agreement = _agreement_score(outcome_value, predict_value)
 
         by_context = agreements.setdefault(observed_node, {})
         by_intervention = by_context.setdefault(context, {})
         entries = by_intervention.setdefault(intervention, [])
-        check_co_located_outcomes(
-            ((other_id, other_outcome) for other_id, _, other_outcome, _, _ in entries),
-            exp_id,
-            outcome_value,
-            observed_node,
-            context,
-            intervention,
-        )
+        if validate_co_located:
+            check_co_located_outcomes(
+                (
+                    (other_id, other_outcome)
+                    for other_id, _, other_outcome, _, _ in entries
+                ),
+                exp_id,
+                outcome_value,
+                observed_node,
+                context,
+                intervention,
+            )
         entries.append(
             (
                 exp_id,

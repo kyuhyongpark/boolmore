@@ -213,6 +213,7 @@ def build_evaluator(
             default_sources=default_sources,
             hierarchy=hierarchy,
             related_nodes=related_nodes,
+            validate_co_located=False,
         )
     elif run_type == "Phenotype":
         exps = import_phenotypes(str(data_path))

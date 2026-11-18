@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from boolmore.experiment import NAVExperiment
+from boolmore.experiment import NAVExperiment, merge_assignments
 from boolmore.io.nav import import_NAV_exps
 from boolmore.outcome import ComparativeOutcome
 
@@ -15,6 +15,32 @@ from boolmore.outcome import ComparativeOutcome
 def _write(path: Path, text: str) -> Path:
     path.write_text(text, encoding="utf-8")
     return path
+
+
+def test_nav_experiment_fixes_cached_from_context_intervention():
+    context = (("A", 0), ("B", 1))
+    intervention = (("B", 0), ("C", 1))
+    exp = NAVExperiment(
+        id=1,
+        observed="X",
+        outcome="ON",
+        context=context,
+        intervention=intervention,
+        weight=1.0,
+    )
+    expected = merge_assignments(context, intervention)
+    assert exp.fixes == expected
+    assert exp.fixes is exp._fixes
+    assert exp.fixes == expected
+
+
+def test_nav_experiment_fixes_alias_cached():
+    fixes = (("A", 1), ("B", 0))
+    exp = NAVExperiment(id=1, observed="X", outcome="ON", weight=1.0, fixes=fixes)
+    assert exp.context == ()
+    assert exp.intervention == fixes
+    assert exp.fixes == merge_assignments((), fixes)
+    assert exp.fixes is exp._fixes
 
 
 def test_import_tsv_default_mapping(tmp_path: Path):

@@ -58,6 +58,7 @@ class NAVExperiment:
     context: Assignment = ()
     intervention: Assignment = ()
     weight: float = 1.0
+    _fixes: Assignment = field(init=False, repr=False, compare=False)
 
     def __init__(
         self,
@@ -77,14 +78,19 @@ class NAVExperiment:
                 )
             context = ()
             intervention = tuple(fixes)
+        context_t = tuple(context)
+        intervention_t = tuple(intervention)
         object.__setattr__(self, "id", id)
         object.__setattr__(self, "observed", observed)
         object.__setattr__(self, "outcome", outcome)
-        object.__setattr__(self, "context", tuple(context))
-        object.__setattr__(self, "intervention", tuple(intervention))
+        object.__setattr__(self, "context", context_t)
+        object.__setattr__(self, "intervention", intervention_t)
         object.__setattr__(self, "weight", weight)
+        object.__setattr__(
+            self, "_fixes", merge_assignments(context_t, intervention_t)
+        )
 
     @property
     def fixes(self) -> Assignment:
         """Effective fixes: context overridden by intervention."""
-        return merge_assignments(self.context, self.intervention)
+        return self._fixes
