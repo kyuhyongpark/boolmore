@@ -89,7 +89,15 @@ def prime2rr(prime:PrimeType,
     return regulators, ''.join(rr), signs # type: ignore
 
 
-def rr2prime(regulators:tuple[str], rr:str, signs:str, inverted:bool=False) -> PrimeType:
+def rr2prime(
+    regulators: tuple[str],
+    rr: str,
+    signs: str,
+    inverted: bool = False,
+    *,
+    min_rr: str | None = None,
+    max_rr: str | None = None,
+) -> PrimeType:
     """
     Returns prime implicants of a rule
     when given regulators, signs and a binary representation of a rule.
@@ -102,6 +110,8 @@ def rr2prime(regulators:tuple[str], rr:str, signs:str, inverted:bool=False) -> P
                  0 means negative regulation
     inverted   - if true, input rr is taken as inverted     :bool
                  default is False
+    min_rr     - optional precomputed minimal form of ``rr``
+    max_rr     - optional precomputed maximal form of ``rr``
 
     Returns
     -------
@@ -114,9 +124,10 @@ def rr2prime(regulators:tuple[str], rr:str, signs:str, inverted:bool=False) -> P
     assert k == len(signs), "signs should be a list with the numbe of nodes as length"
 
     inv = int(inverted)
-    min_rr = get_uni_rr(rr, max = False)
-    max_irr = get_max_irr(rr)
-    min_irr = get_uni_rr(max_irr, max = False)
+    if min_rr is None:
+        min_rr = get_uni_rr(rr, max=False)
+    max_irr = get_max_irr(rr, max_rr=max_rr)
+    min_irr = get_uni_rr(max_irr, max=False)
 
     prime = [[],[]]
     for i in range(len(min_rr)):
@@ -287,7 +298,13 @@ def get_uni_rr(rr: str, max: bool = True) -> str:
     return _get_uni_rr_py(rr, max)
 
 
-def get_max_irr(rr:str) -> str:
+def _max_rr_to_irr(max_rr: str) -> str:
+    """Complement bits of a maximal rr, then reverse (input-mask complement)."""
+    flipped = max_rr.replace("0", "X").replace("1", "0").replace("X", "1")
+    return flipped[::-1]
+
+
+def get_max_irr(rr: str, max_rr: str | None = None) -> str:
     """
     Returns the inverted maximal representation of the rule of a node
     when given any representation of the rule.
@@ -300,19 +317,16 @@ def get_max_irr(rr:str) -> str:
     Parameters
     ----------
     rr - rule in mask order (index == mask)    :length 2^k binary str
+    max_rr - optional precomputed maximal form of ``rr``
 
     Returns
     -------
     max_irr - inverted maximal representation of the rule   :length 2^k binary str
         
     """
-    max_rr = get_uni_rr(rr, max = True)
-    max_rr = max_rr.replace('0', 'X')
-    max_rr = max_rr.replace('1', '0')
-    max_rr = max_rr.replace('X', '1')
-    max_irr = max_rr[::-1]
-
-    return(max_irr)
+    if max_rr is None:
+        max_rr = get_uni_rr(rr, max=True)
+    return _max_rr_to_irr(max_rr)
 
 def merge_primes(primes_list:list[PrimeType]) -> tuple[tuple[str],str,str]:
     """

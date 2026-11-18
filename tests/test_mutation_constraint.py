@@ -150,8 +150,15 @@ def test_mutate_rr_constraint_matches_reference(probability, bias, k):
             )
             new_state = random.getstate()
 
-            assert new_out == ref_out
+            mutated_rr, modified, min_rr, max_rr = new_out
+            assert (mutated_rr, modified) == ref_out
             assert new_state == ref_state
+            if min_rr is None:
+                # Early-return paths (fixed / constant / single-reg) skip forms.
+                assert max_rr is None
+            else:
+                assert min_rr == bf.get_uni_rr(mutated_rr, max=False)
+                assert max_rr == bf.get_uni_rr(mutated_rr, max=True)
 
 
 def test_mutate_rr_constraint_early_returns_match_reference():
@@ -160,19 +167,27 @@ def test_mutate_rr_constraint_early_returns_match_reference():
     assert mutate_rr_constraint((), "0", "0", constraints, "X", 0.5) == (
         "0",
         False,
+        None,
+        None,
     )
     assert mutate_rr_constraint((), "1", "0", constraints, "X", 0.5) == (
         "0",
         True,
+        None,
+        None,
     )
     # Single regulator (non-base-constant); identity is "01" in mask order
     assert mutate_rr_constraint(("A",), "01", "01", constraints, "B", 0.5) == (
         "01",
         False,
+        None,
+        None,
     )
     assert mutate_rr_constraint(("A",), "10", "01", constraints, "B", 0.5) == (
         "01",
         True,
+        None,
+        None,
     )
     # Fixed
     fixed = _empty_constraints()
@@ -180,8 +195,12 @@ def test_mutate_rr_constraint_early_returns_match_reference():
     assert mutate_rr_constraint(("A", "B"), "1000", "1000", fixed, "N", 0.5) == (
         "1000",
         False,
+        None,
+        None,
     )
     assert mutate_rr_constraint(("A", "B"), "1100", "1000", fixed, "N", 0.5) == (
         "1000",
         True,
+        None,
+        None,
     )

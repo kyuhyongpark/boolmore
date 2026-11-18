@@ -324,6 +324,22 @@ def test_rr2prime_activation_terms(rr, expected_activation):
     assert primes[1] == expected_activation
 
 
+@pytest.mark.parametrize("k", range(0, 5))
+def test_rr2prime_precomputed_min_max_matches(k):
+    """Optional min_rr/max_rr kwargs must match computing them inside rr2prime."""
+    regulators = tuple(f"R{i}" for i in range(k))
+    signs = "1" * k
+    n = 2**k
+    for bits in itertools.product("01", repeat=n):
+        rr = "".join(bits)
+        min_rr = get_uni_rr(rr, max=False)
+        max_rr = get_uni_rr(rr, max=True)
+        assert rr2prime(regulators, rr, signs) == rr2prime(
+            regulators, rr, signs, min_rr=min_rr, max_rr=max_rr
+        )
+        assert get_max_irr(rr) == get_max_irr(rr, max_rr=max_rr)
+
+
 @pytest.mark.parametrize(
     "rr,expected_max_irr",
     [

@@ -69,7 +69,8 @@ def mutate_rr_bias(rr:str, probability:float, bias:float=0.5) -> str:
 
 
 def mutate_rr_constraint(regulators:tuple[str, ...], rr:str, base_rr:str, constraints:dict,
-                         node:str, probability:float, bias:float=0.5) -> tuple[str, bool]:
+                         node:str, probability:float, bias:float=0.5,
+                         ) -> tuple[str, bool, str | None, str | None]:
     """
     When given any representation of a rule,
     returns the mutated representation of that rule
@@ -91,14 +92,16 @@ def mutate_rr_constraint(regulators:tuple[str, ...], rr:str, base_rr:str, constr
     -------
     mutated_rr  - representation of the mutated rule        :length 2^(k+a) binary str
     modified    - True if modified                          :bool
+    min_rr      - minimal form of accepted ``mutated_rr``, or None on early return
+    max_rr      - maximal form of accepted ``mutated_rr``, or None on early return
 
     """
     # constant nodes have no degree of freedom and should not be mutated
     if len(regulators) == 0:
         if rr == base_rr:
-            return rr, False
+            return rr, False, None, None
         else:
-            return base_rr, True
+            return base_rr, True, None, None
 
     # nodes with single regulators (including source nodes)
     # have no degree of freedom, and hence should not be mutated
@@ -106,19 +109,20 @@ def mutate_rr_constraint(regulators:tuple[str, ...], rr:str, base_rr:str, constr
     # in which case it can become a constant node
     if len(regulators) == 1 and len(base_rr) != 1:
         if rr == base_rr:
-            return rr, False
+            return rr, False, None, None
         else:
-            return base_rr, True
+            return base_rr, True, None, None
 
     # impose constraints - fixed
     if node in constraints['fixed']:
         if rr == base_rr:
-            return rr, False
+            return rr, False, None, None
         else:
-            return base_rr, True
+            return base_rr, True, None, None
 
     max_original = bf.get_uni_rr(rr)
     mutated_rr = ''
+    min_rr = ''
     max_rr = max_original
     redo = True
     trial = 0
@@ -183,7 +187,7 @@ def mutate_rr_constraint(regulators:tuple[str, ...], rr:str, base_rr:str, constr
 
     modified = max_original != max_rr
 
-    return mutated_rr, modified
+    return mutated_rr, modified, min_rr, max_rr
 
 
 def add_regulator(regulators:tuple[str, ...], rr:str, signs:str, new_regulator:str, new_sign:str,
@@ -346,7 +350,7 @@ def mutate_model(
 
     for node in mutated_model.rr_dict:
         # get mutated_rr from rr
-        mutated_rr, modified = mutate_rr_constraint(
+        mutated_rr, modified, min_rr, max_rr = mutate_rr_constraint(
             mutated_model.regulators_dict[node],
             mutated_model.rr_dict[node],
             mutated_model.base.rr_dict[node],
@@ -359,7 +363,14 @@ def mutate_model(
         # get primes from the mutated_rr
         # if the representations are equivalent, take the old prime
         if modified:
-            prime1 = bf.rr2prime(mutated_model.regulators_dict[node], mutated_rr, mutated_model.signs_dict[node], inverted = False)
+            prime1 = bf.rr2prime(
+                mutated_model.regulators_dict[node],
+                mutated_rr,
+                mutated_model.signs_dict[node],
+                inverted=False,
+                min_rr=min_rr,
+                max_rr=max_rr,
+            )
             mutated_model.primes[node] = prime1
             # irr = get_max_irr(mutated_model.rr_dict[node])
             # prime2 = rr2prime(mutated_model.regulators_dict[node], irr, mutated_model.signs_dict[node], inverted = True)
