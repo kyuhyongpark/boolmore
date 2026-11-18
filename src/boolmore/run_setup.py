@@ -4,7 +4,10 @@ from collections.abc import Sequence
 from functools import partial
 from pathlib import Path
 
-from boolmore.evaluation.agreement import build_related_nodes
+from boolmore.evaluation.agreement import (
+    build_related_nodes,
+    flatten_related_nodes,
+)
 from boolmore.evaluation.score import Evaluator
 from boolmore.evaluation.nav_score import get_NAV_scores
 from boolmore.evaluation.phenotype_score import get_phenotype_scores
@@ -206,8 +209,11 @@ def build_evaluator(
         )
 
         exps = import_NAV_exps(str(data_path), **nav_kwargs)
-        prediction_fn = partial(get_NAV_prediction, method=nav_method)
         related_nodes = build_related_nodes(base_model.primes, exps)
+        nav_nodes = flatten_related_nodes(related_nodes)
+        prediction_fn = partial(
+            get_NAV_prediction, method=nav_method, nodes=nav_nodes
+        )
         score_fn = partial(
             get_NAV_scores,
             default_sources=default_sources,
@@ -219,6 +225,7 @@ def build_evaluator(
         exps = import_phenotypes(str(data_path))
         prediction_fn = get_phenotype_prediction
         score_fn = get_phenotype_scores
+        nav_nodes = None
     else:
         raise ValueError(f"Unsupported run type: {run_type}")
 
@@ -252,6 +259,7 @@ def build_evaluator(
         ldoi_prune=ldoi_prune,
         default_sources=default_sources,
         generate_defaults=generate_defaults,
+        nav_nodes=nav_nodes,
     )
 
 

@@ -29,7 +29,6 @@ from typing import Literal
 # leftover literals (query \\ P) are this small or smaller; else scan probes.
 _DELTA_ENUM_MAX = 20
 
-# TODO: restrict NAV dicts to observed/related nodes in scoring.
 # TODO: incremental (state, residuals) snapshots for ldoi_enhanced probes.
 
 LdoiClosureEngine = Literal["fast", "scan"]
@@ -497,29 +496,68 @@ def _pack_seeds(
     return seed_ptr, seed_node, seed_value
 
 
+def _resolve_node_ids(
+    compiled: CompiledPrimes,
+    nodes: Sequence[str] | None,
+) -> tuple[int, ...] | None:
+    """Map ``nodes`` to compiled ids, or ``None`` for the full network."""
+    if nodes is None:
+        return None
+    name_to_id = compiled.name_to_id
+    ids: list[int] = []
+    for name in nodes:
+        node_id = name_to_id.get(name)
+        if node_id is None:
+            raise ValueError(f"{name} is not in the model")
+        ids.append(node_id)
+    return tuple(ids)
+
+
 def _states_to_dicts(
     compiled: CompiledPrimes,
     out_state: array | bytearray | memoryview,
     n_seeds: int,
+    *,
+    node_ids: tuple[int, ...] | None = None,
 ) -> list[dict[str, int]]:
-    """Convert packed ``n_seeds * n`` int8 states into LDOI dicts."""
+    """Convert packed ``n_seeds * n`` int8 states into LDOI dicts.
+
+    When ``node_ids`` is set, only those nodes are written (if forced).
+    """
     names = compiled.names
     n = len(names)
     results: list[dict[str, int]] = []
     for s in range(n_seeds):
         base = s * n
         result: dict[str, int] = {}
-        for node_id in range(n):
-            value = out_state[base + node_id]
-            if value != _UNSET:
-                result[names[node_id]] = int(value)
+        if node_ids is None:
+            for node_id in range(n):
+                value = out_state[base + node_id]
+                if value != _UNSET:
+                    result[names[node_id]] = int(value)
+        else:
+            for node_id in node_ids:
+                value = out_state[base + node_id]
+                if value != _UNSET:
+                    result[names[node_id]] = int(value)
         results.append(result)
     return results
+
+
+def _filter_closure_nodes(
+    closures: list[dict[str, int]],
+    nodes: Sequence[str],
+) -> list[dict[str, int]]:
+    """Keep only ``nodes`` keys from each closure dict."""
+    wanted = set(nodes)
+    return [{k: v for k, v in closure.items() if k in wanted} for closure in closures]
 
 
 def _ldoi_many_cython(
     compiled: CompiledPrimes,
     seeds: Sequence[dict[str, int]],
+    *,
+    node_ids: tuple[int, ...] | None = None,
 ) -> list[dict[str, int]]:
     """Batch LDOI via the Cython CSR kernel."""
     if _batch_closure_cy is None:  # pragma: no cover
@@ -543,7 +581,7 @@ def _ldoi_many_cython(
         seed_value,
         out_state,
     )
-    return _states_to_dicts(compiled, out_state, n_seeds)
+    return _states_to_dicts(compiled, out_state, n_seeds, node_ids=node_ids)
 
 
 def _ldoi_one_cython(
@@ -557,9 +595,14 @@ def _ldoi_one_cython(
 def _ldoi_many_python(
     compiled: CompiledPrimes,
     seeds: Sequence[dict[str, int]],
+    *,
+    nodes: Sequence[str] | None = None,
 ) -> list[dict[str, int]]:
     """Batch LDOI via the pure-Python event-driven closure."""
-    return [_ldoi_closure_fast(compiled, seed) for seed in seeds]
+    closures = [_ldoi_closure_fast(compiled, seed) for seed in seeds]
+    if nodes is None:
+        return closures
+    return _filter_closure_nodes(closures, nodes)
 
 
 def ldoi_many(
@@ -567,25 +610,39 @@ def ldoi_many(
     seeds: Sequence[dict[str, int]],
     *,
     compiled: CompiledPrimes | None = None,
+    nodes: Sequence[str] | None = None,
 ) -> list[dict[str, int]]:
     """Return ``seed ∪ LDOI`` for each seed (one compile, batch when possible).
 
     Uses the Cython CSR kernel when the extension is built and the active
     engine is ``"fast"``. Falls back to pure-Python ``_ldoi_closure_fast``
     per seed. With engine ``"scan"``, loops the scan oracle.
+
+    When ``nodes`` is set, each result dict only includes those names (if
+    forced). Omit ``nodes`` to return the full closure for every seed.
     """
     for seed in seeds:
         for node in seed:
             if node not in primes:
                 raise ValueError(f"{node} is not in the model")
+    if nodes is not None:
+        for node in nodes:
+            if node not in primes:
+                raise ValueError(f"{node} is not in the model")
 
     if _CLOSURE_ENGINE == "scan":
-        return [logical_domain_of_influence(primes, seed) for seed in seeds]
+        closures = [
+            logical_domain_of_influence(primes, seed) for seed in seeds
+        ]
+        if nodes is None:
+            return closures
+        return _filter_closure_nodes(closures, nodes)
 
     compiled = compiled if compiled is not None else _get_compiled(primes)
+    node_ids = _resolve_node_ids(compiled, nodes)
     if _LDOI_CYTHON and _batch_closure_cy is not None:
-        return _ldoi_many_cython(compiled, seeds)
-    return _ldoi_many_python(compiled, seeds)
+        return _ldoi_many_cython(compiled, seeds, node_ids=node_ids)
+    return _ldoi_many_python(compiled, seeds, nodes=nodes)
 
 
 def _ldoi_closure(

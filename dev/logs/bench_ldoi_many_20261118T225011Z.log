@@ -1,0 +1,19 @@
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/bench_ldoi_many_20261118T225011Z.log
+started (UTC): 2026-11-18T22:50:11.854512+00:00
+ldoi_cython available: True
+
+dataset: breast_cancer
+model nodes: 200
+unique interventions: 194 (cap=200)
+
+correctness: scan == python fast == cython
+
+Full-pass timing
+  scan:        mean=0.099228s  stdev=0.006302s  min=0.092975s  max=0.109410s  (n=5)
+  python fast: mean=0.047393s  stdev=0.020889s  min=0.030753s  max=0.079766s  (n=5)
+  cython batch:mean=0.015806s  stdev=0.004636s  min=0.011144s  max=0.021135s  (n=5)
+  cython vs scan: 6.28x
+  cython vs python fast: 3.00x
+
+Log written to: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/bench_ldoi_many_20261118T225011Z.log
+finished (UTC): 2026-11-18T22:50:13.170065+00:00

@@ -370,6 +370,18 @@ class TestLdoiMany(unittest.TestCase):
         with self.assertRaises(ValueError):
             ldoi_many(primes, [{"Z": 1}])
 
+    def test_ldoi_many_nodes_filter_matches_full(self):
+        primes = bnet_text2primes("A, A\nB, A\nX, A & B\n")
+        seeds = [{"A": 1}, {}]
+        full = ldoi_many(primes, seeds)
+        restricted = ldoi_many(primes, seeds, nodes=["B", "X"])
+        for full_d, rest_d in zip(full, restricted, strict=True):
+            self.assertEqual(set(rest_d), set(rest_d) & {"B", "X"})
+            self.assertEqual(
+                rest_d,
+                {k: v for k, v in full_d.items() if k in ("B", "X")},
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -111,6 +111,13 @@ def build_related_nodes(
     return {base: _related_node_names(base, names) for base in bases}
 
 
+def flatten_related_nodes(
+    related_nodes: dict[str, list[str]],
+) -> list[str]:
+    """Sorted unique sibling names needed for NAV scoring."""
+    return sorted({name for sibs in related_nodes.values() for name in sibs})
+
+
 def _average_related_values(
     average_values: dict[str, float | None],
     base: str,

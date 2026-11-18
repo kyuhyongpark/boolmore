@@ -198,6 +198,10 @@ class Evaluator:
         Default source-node settings defining the top of the hierarchy.
     generate_defaults : bool, default False
         Whether default sources were (or should be) inferred from the base model.
+    nav_nodes : list of str, optional
+        Node names needed for NAV scoring (related siblings). When set, the
+        LDOI upper-bound prune path requests only these nodes. ``None`` keeps
+        full-network upper-bound predictions.
     """
 
     def __init__(
@@ -214,6 +218,7 @@ class Evaluator:
         ldoi_prune: bool = True,
         default_sources: dict[str, int] | None = None,
         generate_defaults: bool = False,
+        nav_nodes: list[str] | None = None,
     ):
         self.base = base
         self.experiments = experiments
@@ -226,6 +231,7 @@ class Evaluator:
         self.ldoi_prune = ldoi_prune
         self.default_sources = dict(default_sources) if default_sources is not None else {}
         self.generate_defaults = generate_defaults
+        self.nav_nodes = list(nav_nodes) if nav_nodes is not None else None
 
     def evaluate(
         self,
@@ -269,7 +275,7 @@ class Evaluator:
             and score_threshold is not None
         ):
             ub_predictions = get_NAV_upper_bound_prediction(
-                model.primes, self.experiments
+                model.primes, self.experiments, nodes=self.nav_nodes
             )
             ub_item_scores = self.score_fn(self.experiments, ub_predictions)
             max_score, upper_bound = get_model_score(ub_item_scores)

@@ -4,6 +4,12 @@ from pathlib import Path
 
 from pyboolnet.external.bnet2primes import bnet_text2primes
 
+from boolmore.evaluation.agreement import (
+    build_related_nodes,
+    flatten_related_nodes,
+)
+from boolmore.evaluation.nav_score import get_NAV_scores
+from boolmore.evaluation.score import get_model_score
 from boolmore.experiment import NAVExperiment, PhenotypeExperiment
 from boolmore.inference.prediction import (
     _enhanced_nav_from_forcers,
@@ -236,6 +242,51 @@ class TestGetNAVPrediction(unittest.TestCase):
             preds[(("A", 0),)].average_values,
             {"A": 0.0, "B": 0.0},
         )
+
+    def test_ldoi_nodes_filter_subset(self):
+        experiments = [
+            NAVExperiment(id=1, fixes=(), observed="A", outcome="Some", weight=1.0),
+            NAVExperiment(id=2, fixes=(("A", 1),), observed="B", outcome="ON", weight=1.0),
+        ]
+        full = get_NAV_prediction(self.primes, experiments, method="ldoi")
+        restricted = get_NAV_prediction(
+            self.primes, experiments, method="ldoi", nodes=["B"]
+        )
+        for fixes in full:
+            self.assertEqual(set(restricted[fixes].average_values), {"B"})
+            self.assertEqual(
+                restricted[fixes].average_values["B"],
+                full[fixes].average_values["B"],
+            )
+
+    def test_ldoi_restricted_nodes_score_matches_full(self):
+        primes = bnet_text2primes("A, A\nB, A\nX, A & B\n")
+        experiments = [
+            NAVExperiment(id=1, fixes=(), observed="B", outcome=0.5, weight=1.0),
+            NAVExperiment(
+                id=2, fixes=(("A", 1),), observed="B", outcome=1.0, weight=2.0
+            ),
+            NAVExperiment(
+                id=3, fixes=(("A", 0),), observed="X", outcome=0.0, weight=1.0
+            ),
+        ]
+        related = build_related_nodes(primes, experiments)
+        nav_nodes = flatten_related_nodes(related)
+        full = get_NAV_prediction(primes, experiments, method="ldoi")
+        sparse = get_NAV_prediction(
+            primes, experiments, method="ldoi", nodes=nav_nodes
+        )
+        full_score = get_model_score(
+            get_NAV_scores(experiments, full, related_nodes=related)
+        )
+        sparse_score = get_model_score(
+            get_NAV_scores(experiments, sparse, related_nodes=related)
+        )
+        self.assertEqual(sparse_score, full_score)
+        for fixes in sparse:
+            self.assertEqual(
+                set(sparse[fixes].average_values), set(nav_nodes)
+            )
 
     def test_ldoi_matches_min_traps_when_traps_agree(self):
         experiments = [

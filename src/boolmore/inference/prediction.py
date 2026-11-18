@@ -1,5 +1,6 @@
 import logging
 from collections import defaultdict
+from collections.abc import Sequence
 from itertools import combinations, product
 from time import perf_counter
 from dataclasses import dataclass
@@ -19,6 +20,24 @@ from boolmore.inference.ldoi import (
     logical_domain_of_influence,
 )
 from boolmore.types import Assignment
+
+
+def _nav_node_list(primes, nodes: Sequence[str] | None) -> list[str]:
+    """Return the node names to emit in ``average_values``."""
+    if nodes is None:
+        return list(primes)
+    for node in nodes:
+        if node not in primes:
+            raise ValueError(f"{node} is not in the model")
+    return list(nodes)
+
+
+def _filter_average_values(
+    average_values: dict[str, float | None],
+    nodes: Sequence[str],
+) -> dict[str, float | None]:
+    """Keep only ``nodes`` keys from a full average-values map."""
+    return {node: average_values[node] for node in nodes}
 
 NAV_METHODS = ("min_traps", "ldoi", "ldoi_enhanced")
 LDOI_ENHANCED_CUTOFF_MAX = 3
@@ -924,15 +943,24 @@ def _nav_from_ldoi_partial(
 def get_NAV_upper_bound_prediction(
     primes,
     experiments: list[NAVExperiment],
+    *,
+    nodes: Sequence[str] | None = None,
 ) -> dict[Assignment, NAVPrediction]:
     """LDOI-based partial predictions for optimistic upper-bound scoring.
 
     Same unique-intervention loop as :func:`get_NAV_prediction`, but free
     (non-LDOI) nodes are ``None`` instead of ``0.5``.
+
+    Parameters
+    ----------
+    nodes : sequence of str, optional
+        Restrict ``average_values`` to these names. Default: every prime.
     """
+    node_list = _nav_node_list(primes, nodes)
+    ldoi_nodes = None if nodes is None else node_list
     interventions = sorted({exp.fixes for exp in experiments})
     perturbations = [assignment_to_dict(fixes) for fixes in interventions]
-    closures = ldoi_many(primes, perturbations)
+    closures = ldoi_many(primes, perturbations, nodes=ldoi_nodes)
 
     predictions: dict[Assignment, NAVPrediction] = {}
     for fixes, constants in zip(interventions, closures, strict=True):
@@ -940,7 +968,7 @@ def get_NAV_upper_bound_prediction(
             fixes=fixes,
             average_values={
                 node: float(constants[node]) if node in constants else None
-                for node in primes
+                for node in node_list
             },
         )
 
@@ -954,6 +982,7 @@ def get_NAV_prediction(
     method: str = "min_traps",
     cutoff: int = 1,
     joint_self_loops: bool = False,
+    nodes: Sequence[str] | None = None,
 ) -> dict[Assignment, NAVPrediction]:
     """Predict average attractor values for each unique NAV intervention.
 
@@ -990,21 +1019,26 @@ def get_NAV_prediction(
     joint_self_loops : bool, default False
         Passed to :func:`_nav_from_ldoi_enhanced` when
         ``method="ldoi_enhanced"``; ignored otherwise.
+    nodes : sequence of str, optional
+        Restrict ``average_values`` to these names (e.g. observed/related
+        siblings used by scoring). Default: every prime. Analysis callers
+        that need the full network should omit ``nodes``.
 
     Returns
     -------
     dict of Assignment to NAVPrediction
         One prediction per unique intervention, keyed by ``fixes``.
-        ``average_values`` maps each model node to a value in ``[0, 1]``.
+        ``average_values`` maps each requested node to a value in ``[0, 1]``.
         Observed base names are resolved to sibling means later by
         :func:`~boolmore.evaluation.agreement.get_agreements`.
 
     Raises
     ------
     ValueError
-        If a fixed node is not present in the model, ``method`` is not
-        recognized, or (for ``ldoi_enhanced``) a probed SC-subset member
-        both self-sustains and self-negates under the same LDOI closure.
+        If a fixed or requested node is not present in the model, ``method``
+        is not recognized, or (for ``ldoi_enhanced``) a probed SC-subset
+        member both self-sustains and self-negates under the same LDOI
+        closure.
     RuntimeError
         If ``method="min_traps"`` and PyBoolNet's ASP backend
         (gringo/clasp) fails the probe check.
@@ -1021,15 +1055,19 @@ def get_NAV_prediction(
             f"expected one of {NAV_METHODS}"
         )
 
+    node_list = _nav_node_list(primes, nodes)
     interventions = sorted({exp.fixes for exp in experiments})
 
     predictions: dict[Assignment, NAVPrediction] = {}
     if method == "min_traps":
         for fixes in interventions:
             perturbation = assignment_to_dict(fixes)
+            values = _nav_from_min_traps(primes, perturbation)
+            if nodes is not None:
+                values = _filter_average_values(values, node_list)
             predictions[fixes] = NAVPrediction(
                 fixes=fixes,
-                average_values=_nav_from_min_traps(primes, perturbation),
+                average_values=values,
             )
     elif method == "ldoi_enhanced":
         sc_subsets = _sc_subsets_by_size(primes, cutoff)
@@ -1037,28 +1075,32 @@ def get_NAV_prediction(
         compiled = _get_compiled(primes)
         for fixes in interventions:
             perturbation = assignment_to_dict(fixes)
+            values = _nav_from_ldoi_enhanced(
+                primes,
+                perturbation,
+                cutoff=cutoff,
+                sc_subsets=sc_subsets,
+                joint_self_loops=joint_self_loops,
+                cache=ldoi_cache,
+                compiled=compiled,
+            )
+            if nodes is not None:
+                values = _filter_average_values(values, node_list)
             predictions[fixes] = NAVPrediction(
                 fixes=fixes,
-                average_values=_nav_from_ldoi_enhanced(
-                    primes,
-                    perturbation,
-                    cutoff=cutoff,
-                    sc_subsets=sc_subsets,
-                    joint_self_loops=joint_self_loops,
-                    cache=ldoi_cache,
-                    compiled=compiled,
-                ),
+                average_values=values,
             )
     else:
         # Plain LDOI: batch closure (Cython when available); no LdoiCache.
         perturbations = [assignment_to_dict(fixes) for fixes in interventions]
-        closures = ldoi_many(primes, perturbations)
+        ldoi_nodes = None if nodes is None else node_list
+        closures = ldoi_many(primes, perturbations, nodes=ldoi_nodes)
         for fixes, constants in zip(interventions, closures, strict=True):
             predictions[fixes] = NAVPrediction(
                 fixes=fixes,
                 average_values={
                     node: float(constants[node]) if node in constants else 0.5
-                    for node in primes
+                    for node in node_list
                 },
             )
 
