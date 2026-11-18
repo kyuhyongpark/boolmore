@@ -1,0 +1,17 @@
+batch_dir=/home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/runs/bottleneck_probe_3iter_v2
+source_config=/home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/config.json
+data=/home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/runs/bottleneck_probe_3iter_v2/data.csv
+base=/home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/runs/bottleneck_probe_3iter_v2/base.pkl
+start=/home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/runs/bottleneck_probe_3iter_v2/start.pkl
+config_overrides={}
+parameter_overrides={'total_iter': 3, 'stop_if_max': False}
+seeds=[0]
+core=4
+
+[2026-11-18T13:58:20.514043+00:00] start seed=0 dir=/home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/runs/bottleneck_probe_3iter_v2/seed_000
+[2026-11-18T13:58:55.982549+00:00] done  seed=0 elapsed=0:00:35.468506
+  iter 3/3 | generated 300 | best id 208 | gen 3 | score 221.1/518 (42.7%) | n_extra_edges 0 | n_eff_self_edges 33 | n_eff_edges 480 | n_prime_implicants 664
+
+--- summary ---
+seed=0  elapsed=0:00:35.468506
+  iter 3/3 | generated 300 | best id 208 | gen 3 | score 221.1/518 (42.7%) | n_extra_edges 0 | n_eff_self_edges 33 | n_eff_edges 480 | n_prime_implicants 664

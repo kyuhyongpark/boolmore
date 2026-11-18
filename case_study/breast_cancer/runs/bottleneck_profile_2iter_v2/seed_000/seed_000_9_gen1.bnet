@@ -1,0 +1,218 @@
+# id: 9
+# generation: 1
+# score: 167.29 / 518.0 (32.3%)
+# satisfies_constraints: True
+# n_eff_edges: 539
+# n_eff_self_edges: 32
+# n_prime_implicants: 812
+# n_extra_edges: 0
+# number of nodes: 200
+# number of edges: 577
+# number of effective base edges: 539
+# number of ineffective base edges: 38
+# extra edges: []
+# number of extra edges: 0
+# number of effective extra edges: 0
+# number of ineffective extra edges: 0
+# number of unadded edges: 0
+targets,	factors
+ABL1,	!RB_1 & !RB_2 & !RB_3 & SRC
+ABL2,	ABL2
+AKT,	AKT & CycB1 & !Ipatasertib & PDK1pm & PIP3_2 & mTORC2pm | CycB1 & !Ipatasertib & PDK1pm & PIP3_1 & mTORC2pm
+APC,	AXIN1
+ATF1,	ERK_1
+AXIN1,	!DVL & GSK3B
+Alpelisib,	0
+Apoptosis,	CASP3 & MOMP | CASP7 & MOMP
+BAD,	!AKT & !ERK_1 & !PIM | !AKT & !PAK1 & !PIM
+BAK1,	!BCLXL | BID & !MCL1 | BIM | !MCL1 & p53
+BAX,	BAX & BIM | !BCL2 | !BCLXL | BID | BIM & p53 | !MCL1
+BCL2,	!BAD & BCL2t & ERK_2 & !Navitoclax | BCL2t & !BIM & !Navitoclax | BCL2t & CREB1 & !Navitoclax | BCL2t & ERK_1 & ERK_2 & !Navitoclax | BCL2t & ERtranscription_2 & !Navitoclax
+BCL2t,	BCL2t
+BCLXL,	!BAD & BCLXLt & CREB1 & !Navitoclax | BCLXLt & !BIM & !Navitoclax
+BCLXLt,	BCLXLt
+BID,	CASP8
+BIM,	!BCL2 | !BCLXL | BIMt | !ERK_2 | FOXO1 & FOXO3
+BIMt,	BIMt
+CASP3,	CASP8 | CASP9
+CASP7,	CASP8 | CASP9
+CASP8,	!ERK_1 & !SRC | FADD
+CASP9,	!AKT & CASP3 & CYCS & !ERK_1 & !ERK_2 & !PRKACA
+CDK46,	!Palbociclib
+CDKN2A,	!MYC_1
+CEBPB,	ABL2 | CREB1
+CREB1,	AKT & !PTEN_1 & SGK1 | !PTEN_1 & !PTEN_2 | !PTEN_2 & SGK1
+CTNNB1,	!DC & SRC
+CYCS,	MOMP
+CycB1,	EGFR | HER3_1 & !p53 | HER3_2
+CycD1CDK46c_1,	CDK46 & !CDKN2A & CycD1_1 & CycD1_2 & EIF4 | CDK46 & !CDKN2A & CycD1_1 & CycD1_2 & MYC_1 | CDK46 & !CDKN2A & CycD1_1 & EIF4 & MYC_1 | CDK46 & !CDKN2A & CycD1_1 & MYC_2 | CDK46 & !CDKN2A & CycD1_1 & TCF7L2 | CDK46 & !CDKN2A & CycD1_1 & TEAD
+CycD1CDK46c_2,	CDK46 & !CDKN2A & CycD1CDK46c_1 & CycD1_2 & MYC_2 & TCF7L2 & TEAD | CDK46 & CycD1CDK46c_1 & CycD1_2 & MYC_1 & MYC_2 & TCF7L2 & TEAD
+CycD1_1,	ERtranscription_1 & S6K | ERtranscription_2 | !GSK3B | JUN | RPS6
+CycD1_2,	CycD1_1 & ERtranscription_1 & ERtranscription_2 & !GSK3B & JUN & S6K | CycD1_1 & ERtranscription_2 & RPS6 & S6K
+CycECDK2c,	CycECDK2t & !p21 & !p27
+CycECDK2t,	E2F_1 & E2F_3
+DC,	APC & GSK3B
+DLL,	DLL
+DVL,	FZD
+E2F_1,	!RB_3
+E2F_2,	E2F_1 & !RB_2
+E2F_3,	E2F_2 & !RB_1
+EGF,	EGF
+EGFR,	JUN & NFKB
+EGFRHER3c,	EGF & EGFR & !Erlotinib & HER3_1 & HER3_2 & NRG1
+EGFRc,	EGF & EGFR & !Erlotinib | EGF & EGFR & !Neratinib
+EIF4,	!EIF4EBP1
+EIF4EBP1,	!mTORC1
+ER,	ER
+ERK_1,	MEK_1
+ERK_2,	ERK_1
+ERtranscription_1,	ESR1_1
+ERtranscription_2,	ERtranscription_1 & ESR1_2 & KMT2D & PBX1 | ERtranscription_1 & FOXA1 & KMT2D & PBX1
+ES,	ES
+ESR1_1,	AKT & ER & ERK_1 & ERK_2 & ES & FOXO3 | AKT & ER & ERK_1 & ERK_2 & ES & !Fulvestrant
+ESR1_2,	AKT & ER & ESR1_1 & !Fulvestrant | ER & ERK_1 & ERK_2 & ESR1_1 & !Fulvestrant | ER & ERK_1 & ES & ESR1_1 & !Fulvestrant | ER & ERK_2 & ES & ESR1_1 & !Fulvestrant | ER & ESR1_1 & FOXO3 & !Fulvestrant
+Erlotinib,	0
+Everolimus,	0
+FADD,	FAS & TRADD
+FAS,	FASLG & p53
+FASLG,	FASLG
+FOXA1,	FOXO3
+FOXO1,	!AKT & !SGK1
+FOXO3,	!AKT & !FOXO3ub & !PIM & !SGK1
+FOXO3ub,	ERK_2
+FZD,	WNT1
+Fulvestrant,	0
+GATA3,	!STAT1
+GRB2,	EGFRHER3c & EGFRc & HER2HER3c_1 & HER2HER3c_2 & IRS1 | EGFRHER3c & HER2HER2c & HER2HER3c_1 & HER2HER3c_2 & IRS1 & SRC
+GRB7,	INSR
+GSK3B,	!AKT & !ERK_1 & p53 | !AKT & GSK3B & p53 | !ERK_1 & !ERK_2 | !ERK_1 & GSK3B & p53
+HER2,	FOXO3
+HER2HER2c,	!Erlotinib & HER2 | HER2 & !Neratinib
+HER2HER3c_1,	!Erlotinib & HER2 & HER3_1 | HER2 & HER3_1 & HER3_2 & !Trastuzumab | HER2 & HER3_1 & !Neratinib
+HER2HER3c_2,	!Erlotinib & HER2 & HER2HER3c_1 & HER3_1 & HER3_2 & !MEK_2 & NRG1 & !Pertuzumab | !Erlotinib & HER2 & HER2HER3c_1 & HER3_1 & !MEK_2 & NRG1 & !Neratinib & !Pertuzumab
+HER3_1,	FOXO3 & HER3it & !PTEN_2 | HER3it & !PTEN_1 | !PTEN_1 & !PTEN_2
+HER3_2,	FOXO3 & HER3_1 & !PTEN_1
+HER3it,	HER3it
+HES1,	NICD
+HEY1,	NICD
+HRAS,	!NF1 & PI3K_1 & PI3K_2 & PIP3_2 & SOS | !NF1 & PIP3_1 & SOS
+HSP90AA1,	ESR1_1
+IGF1,	IGF1
+IGF1R_1,	ESR1_1 & ESR1_2 & FOXO3 & IGF1 & INS & SRC | ESR1_1 & ESR1_2 & IGF1 & IGF1Rit_1 & INS
+IGF1R_2,	ESR1_1 & IGF1R_1 | ESR1_2 & IGF1R_1 | FOXO3 & IGF1R_1 | IGF1 & IGF1R_1 & INS | IGF1R_1 & IGF1Rit_1 | IGF1R_1 & IGF1Rit_2 & INS | IGF1R_1 & SRC
+IGF1Rit_1,	IGF1Rit_1
+IGF1Rit_2,	IGF1Rit_1
+IL1B,	NFKB
+IL6,	IL1B & IL6
+IL6R,	IL6 & STAT3
+IL8,	STAT5
+INS,	INS
+INSR,	FOXO3 & INS
+IRS1,	IGF1R_1 & IGF1R_2 & INSR | IGF1R_1 & !S6K | IGF1R_2 & !S6K
+Ipatasertib,	0
+JAK1,	IL6R
+JAK2,	ABL1 | IL6R
+JUN,	ATF1 & !GSK3B | ATF1 & JUN & MAPK8 | !GSK3B & MAPK8
+KMT2D,	!AKT
+KRT14,	EGFR | PAK2
+LATS,	NF2
+LCK,	LCK
+MAPK8,	RAC1
+MCL1,	ERK_1 & !S63845 | !GSK3B & !S63845 | MCL1t & !S63845 | !S63845 & Translation
+MCL1t,	MCL1t
+MDM2,	AKT & p53
+MEK_1,	PDK1pm & RAF1_1 | RAF1_1 & !Trametinib
+MEK_2,	MEK_1 & RAF1_2 | MEK_1 & !Trametinib
+MOMP,	BAK1 | BAX
+MYC_1,	ATF1 & CTNNB1 & EIF4 & ERK_2 & ERtranscription_1 & !GSK3B & STAT3 | ATF1 & CTNNB1 & EIF4 & ERK_2 & ERtranscription_1 & PIM & STAT3 | ATF1 & EIF4 & ERK_1 & ERK_2 & ERtranscription_1 & PIM & STAT3 | ATF1 & ERK_1 & ERK_2 & ERtranscription_1 & !GSK3B & STAT3
+MYC_2,	ATF1 & CTNNB1 & EIF4 & ERK_1 & ERK_2 & ERtranscription_2 & !GSK3B & MYC_1 & PIM & STAT3 | ATF1 & CTNNB1 & EIF4 & ERK_1 & ERK_2 & MYC_1 & MYCt & PIM & STAT3
+MYCt,	MYCt
+MYCtargets_1,	MYC_1 | Translation
+MYCtargets_2,	MYC_1 & MYC_2 & MYCtargets_1 | MYCtargets_1 & Translation
+MYOD1,	!ABL1 | !HES1
+MYOG,	!HEY1 | MYOD1
+NEDD4L,	!PRKACA | !SGK1
+NF1,	p53
+NF2,	NEDD4L
+NFKB,	HER3_2 & NOTCH1 | PIM
+NICD,	NOTCH1
+NOS3,	AKT & HSP90AA1
+NOTCH1,	CTNNB1 & DLL | DLL & LCK | DLL & MDM2
+NRG1,	NRG1
+Navitoclax,	0
+Neratinib,	0
+PAK1,	PDK1ic & RAC1 | PDK1ic & TCF7L2
+PAK2,	RAC1 & SRC
+PAX7,	!MYOG & NOTCH1
+PBX1,	PBX1
+PDK1ic,	PDK1ic
+PDK1pm,	PIP3_1
+PI3K_1,	!Alpelisib & EGFRHER3c & ESR1_1 & ESR1_2 & GRB2 & HER2HER3c_2 & IRS1 & RAS_1 & RAS_2 | !Alpelisib & EGFRHER3c & ESR1_1 & ESR1_2 & HER2HER3c_2 & RAS_1 & RAS_2 & RAS_3 | !Alpelisib & EGFRHER3c & ESR1_2 & GRB2 & HER2HER3c_1 & HER2HER3c_2 & RAS_1 & RAS_2 & RAS_3 | !Alpelisib & ESR1_1 & ESR1_2 & GRB2 & HER2HER3c_1 & HER2HER3c_2 & IRS1 & RAS_1 & RAS_2 | !Alpelisib & ESR1_1 & ESR1_2 & HER2HER3c_1 & HER2HER3c_2 & RAS_1 & RAS_2 & RAS_3 | EGFRHER3c & ESR1_1 & ESR1_2 & GRB2 & HER2HER3c_2 & IRS1 & RAS_1 & RAS_2 & RAS_3 | EGFRHER3c & ESR1_2 & GRB2 & HER2HER3c_1 & HER2HER3c_2 & IRS1 & RAS_1 & RAS_2 & RAS_3
+PI3K_2,	!Alpelisib & EGFRHER3c & ESR1_1 & GRB2 & HER2HER3c_2 & PI3K_1
+PIM,	STAT5
+PIP3_1,	PI3K_1 & !PTEN_1 | PI3K_2 & !PTEN_1 | !PTEN_2
+PIP3_2,	PI3K_2 & PIP3_1 & !PTEN_2 | PIP3_1 & !PTEN_1
+PKCa,	PLCg
+PLCg,	EGFRc & HER2HER2c
+PPARG,	CEBPB | !GATA3
+PRAS40,	!AKT | !PIM | PRAS40
+PRKAA2,	!PRKACA | STK11
+PRKACA,	AKT
+PTEN_1,	!GSK3B & PTENt_1 & !SRC
+PTEN_2,	PTEN_1 & PTENt_2 & !SRC
+PTENt_1,	PTENt_1
+PTENt_2,	PTENt_1
+Palbociclib,	0
+Pertuzumab,	0
+Proliferation_1,	!Apoptosis & E2F_1 | !Apoptosis & E2F_2 & E2F_3 | !Apoptosis & E2F_3 & MYCtargets_1
+Proliferation_2,	Proliferation_1
+Proliferation_3,	E2F_1 & E2F_2 & E2F_3 & MYCtargets_2 & Proliferation_2
+Proliferation_4,	MYCtargets_1
+RAC1,	!AKT & PI3K_2 | DVL | PI3K_1
+RAF1_1,	!ERK_1 | !ERK_2 & RAS_1 | HRAS | PIP3_1 | PIP3_2 | RAS_1 & RAS_3 | RAS_1 & RPS6 | RAS_2 | RAS_3 & RPS6
+RAF1_2,	!ERK_1 & RAF1_1 | HRAS & RAF1_1 | PIP3_1 & RAF1_1 & RPS6 | PIP3_2 & RAF1_1 | RAF1_1 & RAS_1 | RAF1_1 & RAS_2 | RAF1_1 & RAS_3
+RAS_1,	PI3K_1 | PI3K_2 & PIP3_1 | PI3K_2 & SOS | PIP3_1 & SOS | PIP3_2
+RAS_2,	PI3K_1 & PIP3_1 & RAS_1 | PI3K_2 & PIP3_1 & RAS_1 | PI3K_2 & RAS_1 & SOS | PIP3_1 & RAS_1 & SOS | PIP3_2 & RAS_1
+RAS_3,	PI3K_1 & PI3K_2 & PIP3_1 & PIP3_2 & RAS_2 | PI3K_1 & PIP3_1 & PIP3_2 & RAS_2 & SOS
+RB_1,	RBt & !pRB_3
+RB_2,	RB_1 & !pRB_2
+RB_3,	RB_2 & !pRB_1
+RBt,	RBt
+RELA,	NFKB
+RHEB,	!TSC2
+RPS6,	S6K
+S63845,	0
+S6K,	ERK_1 & mTORC1
+SGK1,	PDK1ic & SGK1t & mTORC2ic
+SGK1t,	SGK1t
+SOS,	GRB2
+SRC,	ABL1
+STAT1,	EGFRc & SRC | JAK2 & SRC
+STAT3,	IL1B & SRC | JAK1 & SRC | JAK2 & SRC
+STAT5,	EGFRc | JAK2 | SRC
+STK11,	!ERK_1 | !ERK_2 | FOXO3
+TCF7L2,	CTNNB1 & JUN
+TEAD,	YAP1
+TRADD,	!KRT14
+TSC2,	!AKT & !ERK_1 & !ERK_2 & GSK3B & HER2 & PRKAA2 & !SGK1 & pRB_2 & pRB_3 | !AKT & !ERK_1 & !ERK_2 & HER2 & PRKAA2 & !SGK1 & pRB_1 & pRB_3 | !AKT & !ERK_1 & !ERK_2 & HER2 & !SGK1 & pRB_1 & pRB_2 & pRB_3
+TWIST1,	AKT & ERK_2 | ERK_1
+Trametinib,	0
+Translation,	EIF4 | S6K
+Trastuzumab,	0
+WNT1,	WNT1
+YAP1,	!LATS
+mTORC1,	!Everolimus & RHEB | !PRAS40 & RHEB
+mTORC2ic,	!Everolimus
+mTORC2pm,	!Everolimus & PIP3_1 | PIP3_1 & PIP3_2
+p21,	!AKT & p21t
+p21it_1,	p21it_1
+p21it_2,	p21it_1
+p21t,	FOXO3 | !MYC_1 & p53 | !MYC_2 & p53 | p21it_1 | p21it_2
+p27,	!AKT & !PIM & p27t
+p27it,	p27it
+p27t,	FOXO3 | p27it
+p38,	AKT
+p53,	!MDM2 & PTEN_1 & PTEN_2 & p38 | !MDM2 & PTEN_1 & RB_2 | !MDM2 & PTEN_1 & p53 | !MDM2 & PTEN_2 & RB_2 | !MDM2 & PTEN_2 & p53 | !MDM2 & RB_1 | !MDM2 & RB_2 & p53 | !MDM2 & RB_3
+pRB_1,	CycD1CDK46c_1 & RBt | CycECDK2c & RBt
+pRB_2,	CycD1CDK46c_1 & pRB_1 | CycD1CDK46c_2 & pRB_1 | CycECDK2c & pRB_1
+pRB_3,	pRB_2

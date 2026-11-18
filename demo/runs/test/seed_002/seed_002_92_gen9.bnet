@@ -1,6 +1,6 @@
-# id: 80
-# generation: 11
-# score: 49.0 / 50.0 (98.0%)
+# id: 92
+# generation: 9
+# score: 48.5 / 50.0 (97.0%)
 # satisfies_constraints: True
 # n_eff_edges: 10
 # n_eff_self_edges: 1
@@ -18,6 +18,6 @@
 targets,	factors
 Coup_fti,	!Sp8
 Emx2,	Coup_fti & !Fgf8 & !Sp8
-Fgf8,	!Emx2 & Fgf8 & Sp8
+Fgf8,	Fgf8 & Sp8
 Pax6,	!Coup_fti & Sp8
-Sp8,	Fgf8
+Sp8,	!Emx2 & Fgf8
