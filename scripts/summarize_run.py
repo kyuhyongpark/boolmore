@@ -31,7 +31,8 @@ from boolmore.batch_summary import (
 from boolmore.io.paths import project_root
 
 # --- edit these to summarize a different batch ---
-RUN_DIR = "case_study/breast_cancer/runs/20261118T231453Z"
+# RUN_DIR = "case_study/breast_cancer/runs/20261118T231453Z"
+RUN_DIR = "case_study/breast_cancer/runs/20261119T130225Z"
 TOP = 0  # 0 = print all seeds; N = top-N by score
 # -------------------------------------------------
 
