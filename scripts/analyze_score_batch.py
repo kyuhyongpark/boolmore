@@ -54,8 +54,8 @@ from matplotlib.colors import TwoSlopeNorm
 from boolmore.io.paths import project_root
 
 # --- edit these to analyze a different batch ---
-RUN_DIR = "case_study/breast_cancer/runs/20261118T231453Z"
-# RUN_DIR = "case_study/breast_cancer/runs/20261119T130225Z"
+# RUN_DIR = "case_study/breast_cancer/runs/20261118T231453Z"
+RUN_DIR = "case_study/breast_cancer/runs/20261119T130225Z"
 DATA = None  # None → batch data.csv / analyze_score default
 MIN_N = 10
 TOP = 0  # 0 = all groups (pass min_n); N = cap tables / strip / heatmap columns
@@ -515,12 +515,12 @@ def _marker_sizes(ns: Sequence[int], *, lo: float = 18.0, hi: float = 90.0) -> l
     return out
 
 
-def _order_seeds_by_signature(rows: Sequence[Sequence[float]]) -> list[int]:
-    """Leaf order that groups similar seed signatures (shared across panels).
+def _cluster_leaf_order(rows: Sequence[Sequence[float]]) -> list[int]:
+    """Leaf order that groups similar vectors.
 
     Uses average-linkage hierarchical clustering on Euclidean distance when
     SciPy is available; otherwise sorts by the first principal component.
-    ``rows[i]`` is the concatenated, n-weighted Δ vector for seed i.
+    ``rows[i]`` is the feature vector for item i (NaNs treated as 0).
     """
     n = len(rows)
     if n <= 1:
@@ -566,12 +566,13 @@ def _build_clustered_heatmaps(
     top: int,
     facets: Sequence[tuple[str, str]],
 ) -> tuple[list[str], list[tuple[str, list[str], list[list[float]]] | None]]:
-    """Cluster seeds on the joint signature; return shared labels + panels.
+    """Cluster seeds jointly; cluster groups per facet; return labels + panels.
 
     Each panel is ``(title, groups, matrix)`` with rows in the shared seed
-    order, or ``None`` if that facet has no groups.
+    order and columns in that facet's group-cluster leaf order, or ``None``
+    if that facet has no groups.
     """
-    # Features: (facet, group, n) in consensus order within each facet.
+    # Features: (facet, group, n) — membership for joint seed clustering.
     features: list[tuple[str, str, int]] = []
     for facet, _title in facets:
         for r in _take_groups(by_facet[facet], top):
@@ -600,7 +601,7 @@ def _build_clustered_heatmaps(
     if not keep:
         return [], [None] * len(facets)
 
-    order_local = _order_seeds_by_signature(weighted_rows)
+    order_local = _cluster_leaf_order(weighted_rows)
     ordered_idx = [keep[j] for j in order_local]
     seed_labels = [seed_labels_all[i] for i in ordered_idx]
     ordered_seeds = [seed_ids[i] for i in ordered_idx]
@@ -611,6 +612,13 @@ def _build_clustered_heatmaps(
         if not groups:
             panels.append(None)
             continue
+        # Cluster groups on their across-seed Δ vectors (per facet).
+        group_vectors = [
+            [lookup.get((facet, sid, g), float("nan")) for sid in ordered_seeds]
+            for g in groups
+        ]
+        group_order = _cluster_leaf_order(group_vectors)
+        groups = [groups[j] for j in group_order]
         matrix = [
             [lookup.get((facet, sid, g), float("nan")) for g in groups]
             for sid in ordered_seeds
@@ -665,7 +673,7 @@ def write_overview_heatmap(
         ax.set_yticks(range(len(seed_labels)))
         ax.set_title(title)
 
-    # Seed labels only on the leftmost drawn panel.
+    # Seed labels only on the leftmost drawn panel (shared row order).
     labeled = False
     for ax, payload in zip(axes, panels):
         if payload is None:
@@ -686,7 +694,7 @@ def write_overview_heatmap(
         "Batch signature heatmap: seed × group Δ\n"
         "red = below overall (worse), blue = above (better); "
         "rows = seeds clustered on joint n-weighted Δ signature (shared); "
-        "columns ordered by |median Δ|·log10(n+1)",
+        "columns = groups clustered within each facet",
         fontsize=11,
     )
     path.parent.mkdir(parents=True, exist_ok=True)
