@@ -31,6 +31,14 @@ from boolmore.run_setup import (
     build_ga_config,
     build_run_config,
 )
+from boolmore.batch_summary import write_batch_summary_csv
+from boolmore.runtime_info import (
+    SCHEMA_VERSION as RUN_META_SCHEMA_VERSION,
+    collect_environment,
+    collect_git_info,
+    format_meta_oneline,
+    write_json,
+)
 
 _EVAL_CSV_FIELDS = (
     "iteration",
@@ -286,11 +294,12 @@ def run_batch(
 ) -> Path:
     """Run GA for one or more seeds under ``{runs_root}/{batch_name}/``.
 
-    Creates a batch folder with ``config.json``, ``batch.log``, fixed-name
-    snapshots (``data.csv``, ``base.bnet``/``.pkl``, ``start.bnet``/``.pkl``;
-    config points at the ``.pkl`` paths), and per-seed subdirectories
-    ``seed_NNN/``. Named ``run_name`` folders are overwritten;
-    ``run_name=None`` uses a UTC stamp folder.
+    Creates a batch folder with ``config.json``, ``run_meta.json`` (git +
+    environment provenance), ``summary.csv`` (per-seed bests), ``batch.log``,
+    fixed-name snapshots (``data.csv``, ``base.bnet``/``.pkl``,
+    ``start.bnet``/``.pkl``; config points at the ``.pkl`` paths), and
+    per-seed subdirectories ``seed_NNN/``. Named ``run_name`` folders are
+    overwritten; ``run_name=None`` uses a UTC stamp folder.
 
     Parameters
     ----------
@@ -349,60 +358,88 @@ def run_batch(
         json.dump(config_dict, fp, indent=2)
         fp.write("\n")
 
+    root = project_root()
+    started_batch = _utc_now()
+    git = collect_git_info(root)
+    environment = collect_environment()
+    meta_path = batch_dir / "run_meta.json"
+    run_meta: dict = {
+        "schema_version": RUN_META_SCHEMA_VERSION,
+        "started_utc": started_batch.isoformat(),
+        "finished_utc": None,
+        "source_config": str(source_config),
+        "config_overrides": overrides,
+        "parameter_overrides": param_overrides,
+        "seeds": list(seeds),
+        "core": core,
+        "git": git,
+        "environment": environment,
+    }
+    write_json(meta_path, run_meta)
+
     batch_log = batch_dir / "batch.log"
     summaries: list[tuple[int, str, str]] = []
 
-    with open(batch_log, "w", encoding="utf-8") as log:
-        log.write(f"batch_dir={batch_dir}\n")
-        log.write(f"source_config={source_config}\n")
-        log.write(f"data={snapshots['data']}\n")
-        log.write(f"base={snapshots['base']}\n")
-        log.write(f"start={snapshots['start']}\n")
-        log.write(f"config_overrides={overrides}\n")
-        log.write(f"parameter_overrides={param_overrides}\n")
-        log.write(f"seeds={list(seeds)}\n")
-        log.write(f"core={core}\n\n")
-        log.flush()
-
-        for seed in seeds:
-            seed_dir = batch_dir / f"seed_{seed:03d}"
-            seed_dir.mkdir()
-            run_prefix = seed_dir / f"seed_{seed:03d}"
-            seed_log_path = f"{run_prefix}_log.txt"
-
-            started = _utc_now()
-            log.write(f"[{started.isoformat()}] start seed={seed} dir={seed_dir}\n")
-            log.flush()
-            print(f"\n=== seed={seed} → {seed_dir} ===\n")
-
-            run_ga(
-                json_file=str(config_path),
-                run_name=str(run_prefix),
-                seed=seed,
-                core=core,
-                export_top=export_top,
-                export_thresh=export_thresh,
-                export_same=export_same,
-            )
-
-            finished = _utc_now()
-            elapsed = finished - started
-            iter_line = _last_iter_line(seed_log_path) or "(no iter line found)"
-            summaries.append((seed, str(elapsed), iter_line))
-
-            log.write(
-                f"[{finished.isoformat()}] done  seed={seed} "
-                f"elapsed={elapsed}\n"
-            )
-            log.write(f"  {iter_line}\n")
+    try:
+        with open(batch_log, "w", encoding="utf-8") as log:
+            log.write(f"batch_dir={batch_dir}\n")
+            log.write(f"source_config={source_config}\n")
+            log.write(f"data={snapshots['data']}\n")
+            log.write(f"base={snapshots['base']}\n")
+            log.write(f"start={snapshots['start']}\n")
+            log.write(f"config_overrides={overrides}\n")
+            log.write(f"parameter_overrides={param_overrides}\n")
+            log.write(f"seeds={list(seeds)}\n")
+            log.write(f"core={core}\n")
+            log.write(f"{format_meta_oneline(git=git, environment=environment)}\n\n")
             log.flush()
 
-        log.write("\n--- summary ---\n")
-        for seed, elapsed, iter_line in summaries:
-            log.write(f"seed={seed}  elapsed={elapsed}\n")
-            log.write(f"  {iter_line}\n")
-        log.flush()
+            for seed in seeds:
+                seed_dir = batch_dir / f"seed_{seed:03d}"
+                seed_dir.mkdir()
+                run_prefix = seed_dir / f"seed_{seed:03d}"
+                seed_log_path = f"{run_prefix}_log.txt"
 
+                started = _utc_now()
+                log.write(f"[{started.isoformat()}] start seed={seed} dir={seed_dir}\n")
+                log.flush()
+                print(f"\n=== seed={seed} → {seed_dir} ===\n")
+
+                run_ga(
+                    json_file=str(config_path),
+                    run_name=str(run_prefix),
+                    seed=seed,
+                    core=core,
+                    export_top=export_top,
+                    export_thresh=export_thresh,
+                    export_same=export_same,
+                    write_run_meta=False,
+                )
+
+                finished = _utc_now()
+                elapsed = finished - started
+                iter_line = _last_iter_line(seed_log_path) or "(no iter line found)"
+                summaries.append((seed, str(elapsed), iter_line))
+
+                log.write(
+                    f"[{finished.isoformat()}] done  seed={seed} "
+                    f"elapsed={elapsed}\n"
+                )
+                log.write(f"  {iter_line}\n")
+                log.flush()
+
+            log.write("\n--- summary ---\n")
+            for seed, elapsed, iter_line in summaries:
+                log.write(f"seed={seed}  elapsed={elapsed}\n")
+                log.write(f"  {iter_line}\n")
+            log.flush()
+    finally:
+        run_meta["finished_utc"] = _utc_now().isoformat()
+        write_json(meta_path, run_meta)
+
+    summary_csv = write_batch_summary_csv(batch_dir)
+    if summary_csv is not None:
+        print(f"Wrote {summary_csv}")
     print(f"\nAll runs finished. Outputs in {batch_dir}")
     return batch_dir
 
@@ -430,6 +467,7 @@ def run_ga(
         context_cols: Sequence[str] | None = None,
         intervention_cols: Sequence[str] | None = None,
         fixes_allow_override: bool | None = None,
+        write_run_meta: bool = True,
         )-> tuple[Candidate, Candidate, GAOutcome]:
     """
     Imports parameters, experiments, base model in the json file.
@@ -486,6 +524,10 @@ def run_ga(
         Optional NAV CSV column / merge options that override ``nav_columns``
         in the JSON config. Leave as ``None`` to use the config block, or
         ``import_NAV_exps`` defaults when the block is absent.
+    write_run_meta : bool
+        If True (default), write ``{run_name}_meta.json`` with git +
+        environment provenance. ``run_batch`` sets this False and writes a
+        single batch-level ``run_meta.json`` instead.
 
     Returns
     -------
@@ -509,9 +551,10 @@ def run_ga(
         nav_method=nav_method,
     )
 
-    data_path = (project_root() / config_dict["data"]).resolve()
-    base_path = (project_root() / config_dict["base"]).resolve()
-    start_path = (project_root() / config_dict["start"]).resolve()
+    root = project_root()
+    data_path = (root / config_dict["data"]).resolve()
+    base_path = (root / config_dict["base"]).resolve()
+    start_path = (root / config_dict["start"]).resolve()
 
     if run_name is None:
         stamp = datetime.datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -519,6 +562,25 @@ def run_ga(
 
     LOG = run_name + "_log.txt"
     EVAL_CSV = run_name + "_evals.csv"
+    META_JSON = run_name + "_meta.json"
+
+    started_utc = _utc_now()
+    git = collect_git_info(root) if write_run_meta else {}
+    environment = collect_environment() if write_run_meta else {}
+    run_meta: dict | None = None
+    if write_run_meta:
+        run_meta = {
+            "schema_version": RUN_META_SCHEMA_VERSION,
+            "started_utc": started_utc.isoformat(),
+            "finished_utc": None,
+            "wall_seconds": None,
+            "seed": seed,
+            "core": core,
+            "run_name": run_name,
+            "git": git,
+            "environment": environment,
+        }
+        write_json(META_JSON, run_meta)
 
     logger = RunLogger(LOG)
     try:
@@ -549,6 +611,8 @@ def run_ga(
         print(f"edge prob: {ga.edge_prob}")
         print(f"order by: {ga.order_by}")
         print(f"{core=}")
+        if write_run_meta:
+            print(format_meta_oneline(git=git, environment=environment))
         print()
 
         # Loads base then experimental data (prints load messages + data stats)
@@ -613,6 +677,12 @@ def run_ga(
         print(f"Eval summaries: {os.path.abspath(EVAL_CSV)}")
 
         end_time = datetime.datetime.now()
+        finished_utc = _utc_now()
+        wall_seconds = (finished_utc - started_utc).total_seconds()
+        if run_meta is not None:
+            run_meta["finished_utc"] = finished_utc.isoformat()
+            run_meta["wall_seconds"] = wall_seconds
+            write_json(META_JSON, run_meta)
 
         print()
         export_models(

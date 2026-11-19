@@ -8,14 +8,15 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
-import platform
-import socket
 import subprocess
-import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+from boolmore.runtime_info import (  # noqa: F401 — re-export for profile scripts
+    collect_environment,
+    collect_git_info,
+)
 
 PROFILE_DIR = Path(__file__).resolve().parent
 RUNS_DIR = PROFILE_DIR / "runs"
@@ -72,23 +73,6 @@ def _git(*args: str, cwd: Path) -> str | None:
     return out.strip()
 
 
-def collect_git_info(repo_root: Path) -> dict[str, Any]:
-    """Snapshot of the git tree the profile was executed against."""
-    commit = _git("rev-parse", "HEAD", cwd=repo_root)
-    short = _git("rev-parse", "--short", "HEAD", cwd=repo_root)
-    branch = _git("rev-parse", "--abbrev-ref", "HEAD", cwd=repo_root)
-    dirty_out = _git("status", "--porcelain", cwd=repo_root)
-    describe = _git("describe", "--always", "--dirty", "--tags", cwd=repo_root)
-    return {
-        "commit": commit,
-        "commit_short": short,
-        "branch": branch,
-        "dirty": bool(dirty_out),
-        "dirty_paths": dirty_out.splitlines() if dirty_out else [],
-        "describe": describe,
-    }
-
-
 def git_commit_order(
     commits: list[str],
     *,
@@ -114,31 +98,6 @@ def git_commit_order(
         if sha in wanted and sha not in order:
             order[sha] = len(order)
     return order
-
-
-def collect_environment() -> dict[str, Any]:
-    """Runtime environment that can affect wall time."""
-    import boolmore.boolean_functions as bf
-    from boolmore.genetic.operators import mutation as mut
-    from boolmore.inference import ldoi as ldoi_mod
-    from boolmore.inference.ldoi import get_ldoi_closure_engine
-
-    return {
-        "hostname": socket.gethostname(),
-        "platform": platform.platform(),
-        "python": sys.version.replace("\n", " "),
-        "python_executable": sys.executable,
-        "cwd": str(Path.cwd()),
-        "uni_rr_cython": bool(bf._UNI_RR_CYTHON and bf._get_uni_rr_cy is not None),
-        "uni_rr_cython_min_k": bf._UNI_RR_CYTHON_MIN_K,
-        "ldoi_cython": bool(ldoi_mod._LDOI_CYTHON and ldoi_mod._batch_closure_cy is not None),
-        "ldoi_closure_engine": get_ldoi_closure_engine(),
-        "regulate_repair_mode": mut.REGULATE_REPAIR_MODE,
-        "OMP_NUM_THREADS": os.environ.get("OMP_NUM_THREADS"),
-        "MKL_NUM_THREADS": os.environ.get("MKL_NUM_THREADS"),
-        "OPENBLAS_NUM_THREADS": os.environ.get("OPENBLAS_NUM_THREADS"),
-        "NUMEXPR_NUM_THREADS": os.environ.get("NUMEXPR_NUM_THREADS"),
-    }
 
 
 def canonical_json(obj: Any) -> str:

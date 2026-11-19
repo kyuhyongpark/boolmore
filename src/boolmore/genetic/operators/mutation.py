@@ -10,9 +10,9 @@ from boolmore.model import Model
 # Regulate-failure handling after a mutation trial:
 #   "remutate" — no try_add; full remutation only
 #   "oneshot"  — at most one try_add_regulator, then remutate if still invalid
-REGULATE_REPAIR_MODE = "oneshot"
+REGULATE_REPAIR_MODE = "remutate"
 # Backward-compatible gate used by older benches (False => remutate).
-REGULATE_REPAIR = True
+REGULATE_REPAIR = False
 
 _REPAIR_STAT_KEYS = (
     "trials",
