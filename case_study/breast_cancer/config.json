@@ -24,12 +24,15 @@
         "fixed": [],
         "regulate": {
             "ABL1": [
+                "Dasatinib",
                 "SRC"
             ],
+            "ABL2": [
+                "Dasatinib"
+            ],
             "AKT": [
+                "AKTinh",
                 "Ipatasertib",
-                "PDK1pm",
-                "PIP3_1",
                 "mTORC2pm"
             ],
             "APC": [
@@ -140,6 +143,7 @@
                 "NFKB"
             ],
             "EGFRHER3c": [
+                "EGF",
                 "Erlotinib",
                 "NRG1"
             ],
@@ -264,6 +268,9 @@
             "LATS": [
                 "NF2"
             ],
+            "LCK": [
+                "Dasatinib"
+            ],
             "MCL1": [
                 "ERK_1",
                 "GSK3B",
@@ -339,7 +346,6 @@
                 "STAT5"
             ],
             "PIP3_1": [
-                "PI3K_1",
                 "PTEN_1"
             ],
             "PKCa": [
@@ -382,6 +388,9 @@
             ],
             "SOS": [
                 "GRB2"
+            ],
+            "SRC": [
+                "Dasatinib"
             ],
             "STAT1": [
                 "EGFRc",
@@ -448,6 +457,10 @@
             ]
         },
         "necessary": {
+            "AKT": [
+                "PDK1pm",
+                "PIP3_1"
+            ],
             "Apoptosis": [
                 "MOMP"
             ],
@@ -506,7 +519,6 @@
                 "E2F_2"
             ],
             "EGFRHER3c": [
-                "EGF",
                 "EGFR",
                 "HER3_1"
             ],
@@ -602,6 +614,9 @@
                 "Alpelisib",
                 "PI3K_1"
             ],
+            "PIP3_1": [
+                "PI3K_1"
+            ],
             "PIP3_2": [
                 "PIP3_1"
             ],
@@ -622,6 +637,9 @@
             ],
             "Proliferation_3": [
                 "Proliferation_2"
+            ],
+            "Proliferation_4": [
+                "Proliferation_3"
             ],
             "RAF1_2": [
                 "RAF1_1"
@@ -677,7 +695,8 @@
                 "p21t"
             ],
             "p21it_2": [
-                "p21it_1"
+                "p21it_1",
+                "p21it_2"
             ],
             "p27": [
                 "AKT",

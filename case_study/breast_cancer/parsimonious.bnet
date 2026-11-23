@@ -1,6 +1,7 @@
-ABL1,	!RB_1 & !RB_2 & !RB_3 & SRC
-ABL2,	ABL2
-AKT,	AKT & CycB1 & !Ipatasertib & PDK1pm & PIP3_1 & PIP3_2 & mTORC2pm
+ABL1,	!Dasatinib & !RB_1 & !RB_2 & !RB_3 & SRC
+ABL2,	!Dasatinib
+AKT,	AKT & !AKTinh & CycB1 & !Ipatasertib & PDK1pm & PIP3_1 & PIP3_2 & mTORC2pm
+AKTinh,	0
 APC,	AXIN1
 ATF1,	ERK_1 & ERK_2
 AXIN1,	!DVL & GSK3B
@@ -36,6 +37,7 @@ CycECDK2t,	E2F_1 & E2F_2 & E2F_3
 DC,	APC & GSK3B
 DLL,	DLL
 DVL,	FZD
+Dasatinib,	0
 E2F_1,	!RB_3
 E2F_2,	E2F_1 & !RB_2
 E2F_3,	E2F_2 & E2F_3 & !RB_1
@@ -98,7 +100,7 @@ JUN,	ATF1 & !GSK3B & JUN & MAPK8
 KMT2D,	!AKT
 KRT14,	EGFR & PAK2
 LATS,	NF2
-LCK,	LCK
+LCK,	!Dasatinib
 MAPK8,	RAC1
 MCL1,	ERK_1 & ERK_2 & !GSK3B & MCL1t & !S63845 & Translation
 MCL1t,	MCL1t
@@ -149,7 +151,7 @@ Pertuzumab,	0
 Proliferation_1,	!Apoptosis & E2F_1 & E2F_2 & E2F_3 & MYCtargets_1
 Proliferation_2,	E2F_2 & E2F_3 & Proliferation_1
 Proliferation_3,	E2F_1 & E2F_2 & E2F_3 & MYCtargets_2 & Proliferation_2
-Proliferation_4,	MYCtargets_1 & MYCtargets_2
+Proliferation_4,	E2F_3 & MYCtargets_1 & MYCtargets_2 & Proliferation_3
 RAC1,	!AKT & DVL & PI3K_1 & PI3K_2
 RAF1_1,	!ERK_1 & !ERK_2 & HRAS & PIP3_1 & PIP3_2 & RAS_1 & RAS_2 & RAS_3 & RPS6
 RAF1_2,	!ERK_1 & !ERK_2 & HRAS & PIP3_1 & PIP3_2 & RAF1_1 & RAS_1 & RAS_2 & RAS_3 & RPS6
@@ -168,7 +170,7 @@ S6K,	ERK_1 & ERK_2 & mTORC1
 SGK1,	PDK1ic & SGK1t & mTORC2ic
 SGK1t,	SGK1t
 SOS,	GRB2
-SRC,	ABL1 & PRKACA
+SRC,	ABL1 & !Dasatinib & PRKACA
 STAT1,	EGFRc & JAK2 & SRC
 STAT3,	IL1B & JAK1 & JAK2 & SRC
 STAT5,	EGFRc & JAK2 & SRC
@@ -188,7 +190,7 @@ mTORC2ic,	!Everolimus
 mTORC2pm,	!Everolimus & PIP3_1 & PIP3_2
 p21,	!AKT & p21t
 p21it_1,	p21it_1
-p21it_2,	p21it_1
+p21it_2,	p21it_1 & p21it_2
 p21t,	FOXO3 & !MYC_1 & !MYC_2 & p21it_1 & p21it_2 & p53
 p27,	!AKT & !PIM & p27t
 p27it,	p27it
