@@ -208,7 +208,11 @@ def build_evaluator(
             fixes_allow_override=fixes_allow_override,
         )
 
-        exps = import_NAV_exps(str(data_path), **nav_kwargs)
+        exps = import_NAV_exps(
+            str(data_path),
+            node_names=list(base_model.primes),
+            **nav_kwargs,
+        )
         related_nodes = build_related_nodes(base_model.primes, exps)
         nav_nodes = flatten_related_nodes(related_nodes)
         prediction_fn = partial(
