@@ -51,15 +51,20 @@ def _score_range(x: float, lo: float, hi: float) -> float:
     return max(parts)
 
 
-def _agreement_score(outcome: OutcomeType, predict_value: float | None) -> float:
+def _agreement_score(
+    outcome: OutcomeType,
+    predict_value: float | None,
+    *,
+    max_level: int | None = None,
+) -> float:
     """Score agreement of a predicted average value against an observed outcome.
 
     Outcomes are float ranges ``(lo, hi)``, scalar floats (expanded to a
     ±0.1 band, or point ranges at ``0.0`` / ``1.0``), string labels that
-    map to those ranges, or comparative outcomes (resolved to ``(0.5, 1)``
-    for higher/lower or ``(0, 0)`` for same). Agreement is ``1.0`` inside
-    the range and drops linearly to ``0`` outside (shoulders from ``0``
-    and/or to ``1``).
+    map to those ranges, or comparative outcomes (resolved to
+    ``(1/(2k), 1)`` for higher/lower with entity max level ``k``, or
+    ``(0, 0)`` for same). Agreement is ``1.0`` inside the range and drops
+    linearly to ``0`` outside (shoulders from ``0`` and/or to ``1``).
 
     Unknown predictions (``None`` / ``?``) score ``1.0`` for optimistic
     upper-bound scoring. Forced floats are clamped to ``[0, 1]`` (so tiny
@@ -69,7 +74,7 @@ def _agreement_score(outcome: OutcomeType, predict_value: float | None) -> float
         return 1.0
 
     x = min(1.0, max(0.0, predict_value))
-    lo, hi = resolve_outcome_range(outcome)
+    lo, hi = resolve_outcome_range(outcome, max_level=max_level)
     return _score_range(x, lo, hi)
 
 
@@ -95,6 +100,23 @@ def _related_node_names(base: str, node_names: Iterable[str]) -> list[str]:
     """Return names matching ``base`` or ``base_<int>``."""
     pattern = re.compile(rf"^(?:{re.escape(base)}|{re.escape(base)}_\d+)$")
     return [name for name in node_names if pattern.fullmatch(name)]
+
+
+def entity_max_level(base: str, related_names: Iterable[str]) -> int:
+    """Return max suffix ``k`` among ``base_k`` siblings, or ``1`` if Boolean.
+
+    Multi-valued entities are encoded as ``base_1`` … ``base_k`` (plus an
+    implicit OFF). A lone ``base`` node is treated as Boolean (``k=1``).
+    """
+    prefix = f"{base}_"
+    max_k = 0
+    for name in related_names:
+        if not name.startswith(prefix):
+            continue
+        suffix = name[len(prefix) :]
+        if suffix.isdigit():
+            max_k = max(max_k, int(suffix))
+    return max_k if max_k > 0 else 1
 
 
 def build_related_nodes(
@@ -256,6 +278,8 @@ def get_agreements(
         (``?``) for LDOI upper-bound scoring; then ``agreement`` is ``1.0``.
         For comparative outcomes, ``predict_value`` is the oriented or
         absolute difference of the two experiments' absolute averages.
+        Higher/lower agreement uses plateau ``[1/(2k), 1]`` where ``k`` is
+        the observed entity's max level among related siblings.
 
     Raises
     ------
@@ -288,6 +312,7 @@ def get_agreements(
             )
         this_value = predict_cache[cache_key]
 
+        max_level: int | None = None
         if isinstance(outcome_value, ComparativeOutcome):
             try:
                 other = experiments_by_id[outcome_value.other_id]
@@ -306,10 +331,20 @@ def get_agreements(
             predict_value = _comparative_predict_value(
                 outcome_value, this_value, predict_cache[other_key]
             )
+            if outcome_value.relation != "same":
+                if related_nodes is not None and observed_node in related_nodes:
+                    related = related_nodes[observed_node]
+                else:
+                    related = _related_node_names(
+                        observed_node, predictions[fixes].average_values
+                    )
+                max_level = entity_max_level(observed_node, related)
         else:
             predict_value = this_value
 
-        agreement = _agreement_score(outcome_value, predict_value)
+        agreement = _agreement_score(
+            outcome_value, predict_value, max_level=max_level
+        )
 
         by_context = agreements.setdefault(observed_node, {})
         by_intervention = by_context.setdefault(context, {})

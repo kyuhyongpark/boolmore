@@ -10,6 +10,7 @@ NAV CSV columns come from ``nav_columns`` in the config JSON when present.
 from pathlib import Path
 from time import perf_counter
 
+from boolmore.evaluation.agreement import build_related_nodes
 from boolmore.evaluation.score import format_score
 from boolmore.io.export import export_nav_report
 from boolmore.io.load import load_model
@@ -45,7 +46,12 @@ print(format_score(result))
 print(f"Evaluation took {elapsed:.3f} s")
 
 if REPORT:
+    related = None
+    if evaluator.run_type == "NAV":
+        related = build_related_nodes(model.primes, evaluator.experiments)
     report_path = export_nav_report(
-        result, Path.cwd() / f"{model_path.stem}_score.csv"
+        result,
+        Path.cwd() / f"{model_path.stem}_score.csv",
+        related_nodes=related,
     )
     print(f"Wrote detailed report to {report_path}")

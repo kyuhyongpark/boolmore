@@ -7,12 +7,17 @@ from boolmore.evaluation.agreement import (
     _average_related_values,
     _related_node_names,
     build_related_nodes,
+    entity_max_level,
     get_agreements,
     line,
 )
 from boolmore.experiment import NAVExperiment
 from boolmore.inference.prediction import NAVPrediction
-from boolmore.outcome import ComparativeOutcome
+from boolmore.outcome import (
+    ComparativeOutcome,
+    comparative_higher_lower_threshold,
+    resolve_outcome_range,
+)
 
 
 # --- line ---
@@ -688,4 +693,61 @@ def test_get_agreements_comparative_uses_each_observed():
     agreements = get_agreements(experiments, predictions)
     _id, _w, _out, predict, agreement = agreements["A"][()][fixes_a][0]
     assert predict == pytest.approx(0.5)
+    assert agreement == pytest.approx(1.0)
+
+
+@pytest.mark.parametrize(
+    "related, expected_k",
+    [
+        (["A"], 1),
+        (["A_1", "A_2"], 2),
+        (["A", "A_1", "A_2", "A_3"], 3),
+        (["Proliferation_1", "Proliferation_2", "Proliferation_3", "Proliferation_4"], 4),
+    ],
+)
+def test_entity_max_level(related, expected_k):
+    base = "Proliferation" if related[0].startswith("Proliferation") else "A"
+    assert entity_max_level(base, related) == expected_k
+
+
+@pytest.mark.parametrize(
+    "max_level, expected",
+    [(1, 0.5), (2, 0.25), (3, 1.0 / 6.0), (4, 0.125)],
+)
+def test_comparative_higher_lower_threshold(max_level, expected):
+    assert comparative_higher_lower_threshold(max_level) == pytest.approx(expected)
+    assert resolve_outcome_range(
+        ComparativeOutcome(relation="higher", other_id=2),
+        max_level=max_level,
+    ) == pytest.approx((expected, 1.0))
+
+
+def test_agreement_score_higher_uses_max_level():
+    outcome = ComparativeOutcome(relation="higher", other_id=2)
+    # diff 0.25: Boolean k=1 → half credit; k=4 → full credit
+    assert _agreement_score(outcome, 0.25, max_level=1) == pytest.approx(0.5)
+    assert _agreement_score(outcome, 0.25, max_level=4) == pytest.approx(1.0)
+    assert _agreement_score(outcome, 0.0625, max_level=4) == pytest.approx(0.5)
+
+
+def test_get_agreements_higher_than_multi_level_threshold():
+    """Five-level entity (P_1..P_4): k=4 ⇒ threshold 1/8; Δ=0.25 is full agree."""
+    fixes_a = (("S", 1),)
+    fixes_b = ()
+    higher = ComparativeOutcome(relation="higher", other_id=2)
+    lower = ComparativeOutcome(relation="lower", other_id=1)
+    experiments = [
+        NAVExperiment(id=1, fixes=fixes_a, observed="P", outcome=higher, weight=1.0),
+        NAVExperiment(id=2, fixes=fixes_b, observed="P", outcome=lower, weight=1.0),
+    ]
+    preds_a = {"P_1": 1.0, "P_2": 1.0, "P_3": 0.0, "P_4": 0.0}  # mean 0.5
+    preds_b = {"P_1": 1.0, "P_2": 0.0, "P_3": 0.0, "P_4": 0.0}  # mean 0.25
+    predictions = {
+        **_prediction(fixes_a, preds_a),
+        **_prediction(fixes_b, preds_b),
+    }
+
+    agreements = get_agreements(experiments, predictions)
+    _id, _w, _out, predict, agreement = agreements["P"][()][fixes_a][0]
+    assert predict == pytest.approx(0.25)
     assert agreement == pytest.approx(1.0)

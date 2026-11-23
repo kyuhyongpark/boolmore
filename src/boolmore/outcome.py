@@ -50,20 +50,38 @@ def format_outcome_range(lo: float, hi: float) -> str:
     return f"{lo},{hi}"
 
 
-def resolve_outcome_range(outcome: OutcomeType) -> tuple[float, float]:
+def comparative_higher_lower_threshold(max_level: int) -> float:
+    """Return the full-agreement threshold for comparative higher/lower.
+
+    For an observed entity with levels up to ``base_k`` (Boolean ⇒ ``k=1``),
+    the threshold is ``1 / (2k)``: Boolean ``0.5``, three-level ``0.25``,
+    four-level ``1/6``, five-level ``0.125``, etc.
+    """
+    if max_level < 1:
+        raise ValueError(f"max_level must be >= 1, got {max_level!r}")
+    return 1.0 / (2 * max_level)
+
+
+def resolve_outcome_range(
+    outcome: OutcomeType,
+    *,
+    max_level: int | None = None,
+) -> tuple[float, float]:
     """Resolve an outcome label, scalar float, float range, or comparative
     outcome to ``(lo, hi)`` in ``[0, 1]``.
 
     Scalar floats in ``(0, 1)`` expand to a band of half-width
     ``_DEFAULT_FLOAT_HALF_WIDTH`` clamped to ``[0, 1]``. Exact ``0.0`` and
     ``1.0`` stay point ranges. Comparative ``higher`` / ``lower`` map to
-    ``(0.5, 1.0)`` so a difference of ``0.5`` still scores full agreement;
-    ``same`` maps to ``(0.0, 0.0)``.
+    ``(1/(2k), 1.0)`` where ``k`` is ``max_level`` (default ``1``, so
+    ``0.5`` as for Boolean entities); ``same`` maps to ``(0.0, 0.0)``.
     """
     if isinstance(outcome, ComparativeOutcome):
         if outcome.relation == "same":
             return 0.0, 0.0
-        return 0.5, 1.0
+        k = 1 if max_level is None else max_level
+        lo = comparative_higher_lower_threshold(k)
+        return lo, 1.0
 
     if isinstance(outcome, tuple):
         if len(outcome) != 2:

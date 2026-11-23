@@ -9,13 +9,26 @@ from pathlib import Path
 import pandas as pd
 
 from boolmore.boolean_functions import assignment_to_dict
+from boolmore.evaluation.agreement import (
+    _related_node_names,
+    entity_max_level,
+)
 from boolmore.evaluation.score import EvaluationResult, Evaluator
 from boolmore.genetic.population import Candidate
 from boolmore.model import Model
-from boolmore.outcome import format_outcome, format_outcome_range, resolve_outcome_range
+from boolmore.outcome import (
+    ComparativeOutcome,
+    format_outcome,
+    format_outcome_range,
+    resolve_outcome_range,
+)
 
 
-def export_nav_report(result: EvaluationResult, path: str | Path) -> Path:
+def export_nav_report(
+    result: EvaluationResult,
+    path: str | Path,
+    related_nodes: dict[str, list[str]] | None = None,
+) -> Path:
     """Write a per-experiment NAV score CSV from an :class:`EvaluationResult`.
 
     Parameters
@@ -24,6 +37,10 @@ def export_nav_report(result: EvaluationResult, path: str | Path) -> Path:
         Must contain NAV ``item_scores`` (with ``fixes`` set).
     path : str or Path
         Output CSV path.
+    related_nodes : dict of str to list of str, optional
+        Observed-base → sibling names used to resolve comparative
+        higher/lower ``outcome_range`` (``1/(2k)``). When omitted, Boolean
+        ``k=1`` (``0.5``) is assumed for those outcomes.
 
     Returns
     -------
@@ -41,7 +58,18 @@ def export_nav_report(result: EvaluationResult, path: str | Path) -> Path:
             raise ValueError("export_nav_report requires NAV item scores")
         if item.outcome is None:
             raise ValueError("export_nav_report requires NAV item scores with outcome")
-        lo, hi = resolve_outcome_range(item.outcome)
+        max_level: int | None = None
+        if (
+            isinstance(item.outcome, ComparativeOutcome)
+            and item.outcome.relation != "same"
+            and item.observed is not None
+            and related_nodes is not None
+            and item.observed in related_nodes
+        ):
+            max_level = entity_max_level(
+                item.observed, related_nodes[item.observed]
+            )
+        lo, hi = resolve_outcome_range(item.outcome, max_level=max_level)
         def _fmt(assignment) -> str:
             if not assignment:
                 return ""
@@ -219,7 +247,16 @@ def export_candidate(
 
     score_path = f"{stem}_score.csv"
     if result.kind == "NAV":
-        export_nav_report(result, score_path)
+        observed = {
+            item.observed
+            for item in result.item_scores
+            if item.observed is not None
+        }
+        related_nodes = {
+            base: _related_node_names(base, candidate.model.primes)
+            for base in observed
+        }
+        export_nav_report(result, score_path, related_nodes=related_nodes)
     elif result.kind == "Phenotype":
         export_phenotype_report(result, score_path)
     else:
