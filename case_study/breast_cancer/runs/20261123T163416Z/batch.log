@@ -1,0 +1,163 @@
+batch_dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z
+source_config=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/config.json
+data=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/data.csv
+base=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/base.pkl
+start=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/start.pkl
+config_overrides={}
+parameter_overrides={}
+seeds=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+core=4
+git=v0.1.2-346-gb522a3f  ldoi_closure_engine='fast'  ldoi_cython=True  uni_rr_cython=True  regulate_repair_mode='remutate'
+
+[2026-11-23T16:34:17.141581+00:00] start seed=0 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_000
+[2026-11-23T16:38:43.898751+00:00] done  seed=0 elapsed=0:04:26.757170
+  iter 100/100 | generated 10000 | best id  9719 | gen 113 | score 307.1/473 (64.9%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 500 | n_prime_implicants 886
+[2026-11-23T16:38:43.900154+00:00] start seed=1 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_001
+[2026-11-23T16:43:04.519429+00:00] done  seed=1 elapsed=0:04:20.619275
+  iter 100/100 | generated 10000 | best id  9901 | gen  80 | score 305.0/473 (64.5%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 493 | n_prime_implicants 891
+[2026-11-23T16:43:04.520327+00:00] start seed=2 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_002
+[2026-11-23T16:47:28.138501+00:00] done  seed=2 elapsed=0:04:23.618174
+  iter 100/100 | generated 10000 | best id  9705 | gen 108 | score 299.4/473 (63.3%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 505 | n_prime_implicants 1221
+[2026-11-23T16:47:28.139381+00:00] start seed=3 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_003
+[2026-11-23T16:51:46.248245+00:00] done  seed=3 elapsed=0:04:18.108864
+  iter 100/100 | generated 10000 | best id  9909 | gen 108 | score 320.4/473 (67.7%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 498 | n_prime_implicants 949
+[2026-11-23T16:51:46.249171+00:00] start seed=4 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_004
+[2026-11-23T16:56:02.138491+00:00] done  seed=4 elapsed=0:04:15.889320
+  iter 100/100 | generated 10000 | best id  9920 | gen  85 | score 309.5/473 (65.4%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 495 | n_prime_implicants 794
+[2026-11-23T16:56:02.139391+00:00] start seed=5 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_005
+[2026-11-23T17:00:19.195417+00:00] done  seed=5 elapsed=0:04:17.056026
+  iter 100/100 | generated 10000 | best id  9970 | gen 111 | score 332.7/473 (70.3%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 509 | n_prime_implicants 1000
+[2026-11-23T17:00:19.196321+00:00] start seed=6 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_006
+[2026-11-23T17:04:37.439463+00:00] done  seed=6 elapsed=0:04:18.243142
+  iter 100/100 | generated 10000 | best id  9908 | gen  97 | score 318.2/473 (67.3%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 517 | n_prime_implicants 1207
+[2026-11-23T17:04:37.440469+00:00] start seed=7 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_007
+[2026-11-23T17:08:54.978622+00:00] done  seed=7 elapsed=0:04:17.538153
+  iter 100/100 | generated 10000 | best id  9815 | gen 122 | score 317.5/473 (67.1%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 503 | n_prime_implicants 1364
+[2026-11-23T17:08:54.979542+00:00] start seed=8 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_008
+[2026-11-23T17:13:15.860454+00:00] done  seed=8 elapsed=0:04:20.880912
+  iter 100/100 | generated 10000 | best id  9218 | gen 106 | score 321.2/473 (67.9%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 483 | n_prime_implicants 1158
+[2026-11-23T17:13:15.861507+00:00] start seed=9 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_009
+[2026-11-23T17:17:35.242974+00:00] done  seed=9 elapsed=0:04:19.381467
+  iter 100/100 | generated 10000 | best id  9918 | gen 101 | score 310.1/473 (65.6%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 498 | n_prime_implicants 886
+[2026-11-23T17:17:35.243920+00:00] start seed=10 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_010
+[2026-11-23T17:21:54.996403+00:00] done  seed=10 elapsed=0:04:19.752483
+  iter 100/100 | generated 10000 | best id  9918 | gen 100 | score 305.3/473 (64.5%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 511 | n_prime_implicants 1038
+[2026-11-23T17:21:54.997448+00:00] start seed=11 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_011
+[2026-11-23T17:26:16.886378+00:00] done  seed=11 elapsed=0:04:21.888930
+  iter 100/100 | generated 10000 | best id  9962 | gen 114 | score 319.4/473 (67.5%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 511 | n_prime_implicants 1280
+[2026-11-23T17:26:16.887355+00:00] start seed=12 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_012
+[2026-11-23T17:30:35.909152+00:00] done  seed=12 elapsed=0:04:19.021797
+  iter 100/100 | generated 10000 | best id  8018 | gen  93 | score 318.4/473 (67.3%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 513 | n_prime_implicants 1034
+[2026-11-23T17:30:35.910083+00:00] start seed=13 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_013
+[2026-11-23T17:34:57.874428+00:00] done  seed=13 elapsed=0:04:21.964345
+  iter 100/100 | generated 10000 | best id  8713 | gen 102 | score 305.6/473 (64.6%) | n_extra_edges 0 | n_eff_self_edges 28 | n_eff_edges 490 | n_prime_implicants 1012
+[2026-11-23T17:34:57.875304+00:00] start seed=14 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_014
+[2026-11-23T17:39:18.340006+00:00] done  seed=14 elapsed=0:04:20.464702
+  iter 100/100 | generated 10000 | best id  9911 | gen  94 | score 309.3/473 (65.4%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 504 | n_prime_implicants 1026
+[2026-11-23T17:39:18.341140+00:00] start seed=15 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_015
+[2026-11-23T17:43:39.426068+00:00] done  seed=15 elapsed=0:04:21.084928
+  iter 100/100 | generated 10000 | best id  9950 | gen 111 | score 323.0/473 (68.3%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 492 | n_prime_implicants 1034
+[2026-11-23T17:43:39.427099+00:00] start seed=16 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_016
+[2026-11-23T17:47:59.180414+00:00] done  seed=16 elapsed=0:04:19.753315
+  iter 100/100 | generated 10000 | best id  9515 | gen 102 | score 313.4/473 (66.3%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 499 | n_prime_implicants 938
+[2026-11-23T17:47:59.181340+00:00] start seed=17 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_017
+[2026-11-23T17:52:19.080102+00:00] done  seed=17 elapsed=0:04:19.898762
+  iter 100/100 | generated 10000 | best id  9120 | gen 114 | score 320.6/473 (67.8%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 471 | n_prime_implicants 819
+[2026-11-23T17:52:19.081287+00:00] start seed=18 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_018
+[2026-11-23T17:56:39.576944+00:00] done  seed=18 elapsed=0:04:20.495657
+  iter 100/100 | generated 10000 | best id  8901 | gen 106 | score 313.3/473 (66.2%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 500 | n_prime_implicants 1146
+[2026-11-23T17:56:39.577888+00:00] start seed=19 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_019
+[2026-11-23T18:01:00.951751+00:00] done  seed=19 elapsed=0:04:21.373863
+  iter 100/100 | generated 10000 | best id  9972 | gen 107 | score 306.5/473 (64.8%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 521 | n_prime_implicants 1082
+[2026-11-23T18:01:00.953196+00:00] start seed=20 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_020
+[2026-11-23T18:05:20.567148+00:00] done  seed=20 elapsed=0:04:19.613952
+  iter 100/100 | generated 10000 | best id  9905 | gen 100 | score 320.2/473 (67.7%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 493 | n_prime_implicants 785
+[2026-11-23T18:05:20.568036+00:00] start seed=21 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_021
+[2026-11-23T18:09:43.410873+00:00] done  seed=21 elapsed=0:04:22.842837
+  iter 100/100 | generated 10000 | best id  9615 | gen 101 | score 321.3/473 (67.9%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 510 | n_prime_implicants 970
+[2026-11-23T18:09:43.411799+00:00] start seed=22 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_022
+[2026-11-23T18:14:05.673101+00:00] done  seed=22 elapsed=0:04:22.261302
+  iter 100/100 | generated 10000 | best id  9935 | gen 112 | score 319.1/473 (67.5%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 512 | n_prime_implicants 1097
+[2026-11-23T18:14:05.673981+00:00] start seed=23 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_023
+[2026-11-23T18:18:26.655646+00:00] done  seed=23 elapsed=0:04:20.981665
+  iter 100/100 | generated 10000 | best id  9922 | gen  70 | score 297.7/473 (62.9%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 503 | n_prime_implicants 762
+[2026-11-23T18:18:26.656667+00:00] start seed=24 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_024
+[2026-11-23T18:22:47.569959+00:00] done  seed=24 elapsed=0:04:20.913292
+  iter 100/100 | generated 10000 | best id  9913 | gen 113 | score 312.8/473 (66.1%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 476 | n_prime_implicants 790
+[2026-11-23T18:22:47.570943+00:00] start seed=25 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_025
+[2026-11-23T18:27:10.631249+00:00] done  seed=25 elapsed=0:04:23.060306
+  iter 100/100 | generated 10000 | best id  9948 | gen 110 | score 322.5/473 (68.2%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 524 | n_prime_implicants 1276
+[2026-11-23T18:27:10.632123+00:00] start seed=26 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_026
+[2026-11-23T18:31:31.737583+00:00] done  seed=26 elapsed=0:04:21.105460
+  iter 100/100 | generated 10000 | best id  9904 | gen 107 | score 309.0/473 (65.3%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 496 | n_prime_implicants 1007
+[2026-11-23T18:31:31.738831+00:00] start seed=27 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_027
+[2026-11-23T18:35:52.569809+00:00] done  seed=27 elapsed=0:04:20.830978
+  iter 100/100 | generated 10000 | best id  9831 | gen 107 | score 302.1/473 (63.9%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 498 | n_prime_implicants 1003
+[2026-11-23T18:35:52.571321+00:00] start seed=28 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_028
+[2026-11-23T18:40:16.857738+00:00] done  seed=28 elapsed=0:04:24.286417
+  iter 100/100 | generated 10000 | best id  8201 | gen  73 | score 314.3/473 (66.4%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 511 | n_prime_implicants 1272
+[2026-11-23T18:40:16.858931+00:00] start seed=29 dir=/home/troonmel/Boolmore/boolmore/case_study/breast_cancer/runs/20261123T163416Z/seed_029
+[2026-11-23T18:44:38.901632+00:00] done  seed=29 elapsed=0:04:22.042701
+  iter 100/100 | generated 10000 | best id  9972 | gen 114 | score 306.1/473 (64.7%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 496 | n_prime_implicants 983
+
+--- summary ---
+seed=0  elapsed=0:04:26.757170
+  iter 100/100 | generated 10000 | best id  9719 | gen 113 | score 307.1/473 (64.9%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 500 | n_prime_implicants 886
+seed=1  elapsed=0:04:20.619275
+  iter 100/100 | generated 10000 | best id  9901 | gen  80 | score 305.0/473 (64.5%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 493 | n_prime_implicants 891
+seed=2  elapsed=0:04:23.618174
+  iter 100/100 | generated 10000 | best id  9705 | gen 108 | score 299.4/473 (63.3%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 505 | n_prime_implicants 1221
+seed=3  elapsed=0:04:18.108864
+  iter 100/100 | generated 10000 | best id  9909 | gen 108 | score 320.4/473 (67.7%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 498 | n_prime_implicants 949
+seed=4  elapsed=0:04:15.889320
+  iter 100/100 | generated 10000 | best id  9920 | gen  85 | score 309.5/473 (65.4%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 495 | n_prime_implicants 794
+seed=5  elapsed=0:04:17.056026
+  iter 100/100 | generated 10000 | best id  9970 | gen 111 | score 332.7/473 (70.3%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 509 | n_prime_implicants 1000
+seed=6  elapsed=0:04:18.243142
+  iter 100/100 | generated 10000 | best id  9908 | gen  97 | score 318.2/473 (67.3%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 517 | n_prime_implicants 1207
+seed=7  elapsed=0:04:17.538153
+  iter 100/100 | generated 10000 | best id  9815 | gen 122 | score 317.5/473 (67.1%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 503 | n_prime_implicants 1364
+seed=8  elapsed=0:04:20.880912
+  iter 100/100 | generated 10000 | best id  9218 | gen 106 | score 321.2/473 (67.9%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 483 | n_prime_implicants 1158
+seed=9  elapsed=0:04:19.381467
+  iter 100/100 | generated 10000 | best id  9918 | gen 101 | score 310.1/473 (65.6%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 498 | n_prime_implicants 886
+seed=10  elapsed=0:04:19.752483
+  iter 100/100 | generated 10000 | best id  9918 | gen 100 | score 305.3/473 (64.5%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 511 | n_prime_implicants 1038
+seed=11  elapsed=0:04:21.888930
+  iter 100/100 | generated 10000 | best id  9962 | gen 114 | score 319.4/473 (67.5%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 511 | n_prime_implicants 1280
+seed=12  elapsed=0:04:19.021797
+  iter 100/100 | generated 10000 | best id  8018 | gen  93 | score 318.4/473 (67.3%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 513 | n_prime_implicants 1034
+seed=13  elapsed=0:04:21.964345
+  iter 100/100 | generated 10000 | best id  8713 | gen 102 | score 305.6/473 (64.6%) | n_extra_edges 0 | n_eff_self_edges 28 | n_eff_edges 490 | n_prime_implicants 1012
+seed=14  elapsed=0:04:20.464702
+  iter 100/100 | generated 10000 | best id  9911 | gen  94 | score 309.3/473 (65.4%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 504 | n_prime_implicants 1026
+seed=15  elapsed=0:04:21.084928
+  iter 100/100 | generated 10000 | best id  9950 | gen 111 | score 323.0/473 (68.3%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 492 | n_prime_implicants 1034
+seed=16  elapsed=0:04:19.753315
+  iter 100/100 | generated 10000 | best id  9515 | gen 102 | score 313.4/473 (66.3%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 499 | n_prime_implicants 938
+seed=17  elapsed=0:04:19.898762
+  iter 100/100 | generated 10000 | best id  9120 | gen 114 | score 320.6/473 (67.8%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 471 | n_prime_implicants 819
+seed=18  elapsed=0:04:20.495657
+  iter 100/100 | generated 10000 | best id  8901 | gen 106 | score 313.3/473 (66.2%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 500 | n_prime_implicants 1146
+seed=19  elapsed=0:04:21.373863
+  iter 100/100 | generated 10000 | best id  9972 | gen 107 | score 306.5/473 (64.8%) | n_extra_edges 0 | n_eff_self_edges 31 | n_eff_edges 521 | n_prime_implicants 1082
+seed=20  elapsed=0:04:19.613952
+  iter 100/100 | generated 10000 | best id  9905 | gen 100 | score 320.2/473 (67.7%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 493 | n_prime_implicants 785
+seed=21  elapsed=0:04:22.842837
+  iter 100/100 | generated 10000 | best id  9615 | gen 101 | score 321.3/473 (67.9%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 510 | n_prime_implicants 970
+seed=22  elapsed=0:04:22.261302
+  iter 100/100 | generated 10000 | best id  9935 | gen 112 | score 319.1/473 (67.5%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 512 | n_prime_implicants 1097
+seed=23  elapsed=0:04:20.981665
+  iter 100/100 | generated 10000 | best id  9922 | gen  70 | score 297.7/473 (62.9%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 503 | n_prime_implicants 762
+seed=24  elapsed=0:04:20.913292
+  iter 100/100 | generated 10000 | best id  9913 | gen 113 | score 312.8/473 (66.1%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 476 | n_prime_implicants 790
+seed=25  elapsed=0:04:23.060306
+  iter 100/100 | generated 10000 | best id  9948 | gen 110 | score 322.5/473 (68.2%) | n_extra_edges 0 | n_eff_self_edges 32 | n_eff_edges 524 | n_prime_implicants 1276
+seed=26  elapsed=0:04:21.105460
+  iter 100/100 | generated 10000 | best id  9904 | gen 107 | score 309.0/473 (65.3%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 496 | n_prime_implicants 1007
+seed=27  elapsed=0:04:20.830978
+  iter 100/100 | generated 10000 | best id  9831 | gen 107 | score 302.1/473 (63.9%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 498 | n_prime_implicants 1003
+seed=28  elapsed=0:04:24.286417
+  iter 100/100 | generated 10000 | best id  8201 | gen  73 | score 314.3/473 (66.4%) | n_extra_edges 0 | n_eff_self_edges 30 | n_eff_edges 511 | n_prime_implicants 1272
+seed=29  elapsed=0:04:22.042701
+  iter 100/100 | generated 10000 | best id  9972 | gen 114 | score 306.1/473 (64.7%) | n_extra_edges 0 | n_eff_self_edges 29 | n_eff_edges 496 | n_prime_implicants 983
