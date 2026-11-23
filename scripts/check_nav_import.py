@@ -26,6 +26,7 @@ from boolmore.io.nav import (
     _DEFAULT_OBSERVED_COL,
     _DEFAULT_OUTCOME_COL,
     _DEFAULT_WEIGHT_COL,
+    _apply_observed_to_context_intervention,
     _apply_observed_to_fixes,
     _merge_fixes,
     _normalize_header,
@@ -34,6 +35,7 @@ from boolmore.io.nav import (
     import_NAV_exps,
 )
 from boolmore.outcome import ComparativeOutcome, OutcomeType, parse_outcome
+from boolmore.types import Assignment
 
 # %% [markdown]
 # ## Config
@@ -74,7 +76,8 @@ class ParsedRow:
 
     exp_id: int
     row_id: str
-    fixes: tuple[tuple[str, int], ...]
+    context: Assignment
+    intervention: Assignment
     observed: str
     outcome: OutcomeType
 
@@ -145,7 +148,11 @@ def _filter_co_located_and_comparative(
         co_located = [
             (other.exp_id, other.outcome)
             for other in accepted
-            if other.fixes == row.fixes and other.observed == row.observed
+            if (
+                other.context == row.context
+                and other.intervention == row.intervention
+                and other.observed == row.observed
+            )
         ]
         try:
             check_co_located_outcomes(
@@ -153,7 +160,8 @@ def _filter_co_located_and_comparative(
                 row.exp_id,
                 row.outcome,
                 row.observed,
-                row.fixes,
+                row.context,
+                row.intervention,
             )
         except ValueError as exc:
             co_located_errors.append(
@@ -177,7 +185,8 @@ def _format_co_located_error(msg: str) -> str:
     """Rewrite co-located errors to lead with the duplicate ids."""
     match = re.fullmatch(
         r"Duplicate experimental entry: (\d+) and (\d+) share "
-        r"observed=(?P<obs>.*?) fixes=.*? with (?P<reason>.*)",
+        r"observed=(?P<obs>.*?) context=.*? intervention=.*? "
+        r"(?:with|and) (?P<reason>.*)",
         msg,
     )
     if match is None:
@@ -428,27 +437,47 @@ for r in rows:
     if not row_parse_ok:
         continue
 
-    try:
-        fixes = _merge_fixes(
-            cells,
-            row_id=rid or None,
-            allow_override=manual_allow_override,
-        )
-    except Exception as exc:
-        merge_errors.append((rid, str(exc)))
-        continue
-
     observed = (r.get(OBSERVED_COL) or "").strip()
     try:
-        fixes = _apply_observed_to_fixes(
-            fixes,
-            observed,
-            cells,
-            row_id=rid or None,
-            allow_override=manual_allow_override,
-        )
+        if split_mode:
+            context = _merge_fixes(
+                [(r.get(col) or "").strip() for col in resolved_context],
+                row_id=rid or None,
+                allow_override=True,
+            )
+            intervention = _merge_fixes(
+                [(r.get(col) or "").strip() for col in resolved_intervention],
+                row_id=rid or None,
+                allow_override=True,
+            )
+            context, intervention = _apply_observed_to_context_intervention(
+                context,
+                intervention,
+                observed,
+                row_id=rid or None,
+            )
+        else:
+            fixes = _merge_fixes(
+                cells,
+                row_id=rid or None,
+                allow_override=manual_allow_override,
+            )
+            fixes = _apply_observed_to_fixes(
+                fixes,
+                observed,
+                cells,
+                row_id=rid or None,
+                allow_override=manual_allow_override,
+            )
+            # Legacy import: empty context, fixes become intervention.
+            context = ()
+            intervention = fixes
     except Exception as exc:
-        observed_in_fixes.append((rid, str(exc)))
+        msg = str(exc)
+        if "observed" in msg.lower():
+            observed_in_fixes.append((rid, msg))
+        else:
+            merge_errors.append((rid, msg))
         continue
 
     w = (r.get(WEIGHT_COL) or "").strip()
@@ -479,7 +508,8 @@ for r in rows:
         ParsedRow(
             exp_id=exp_id,
             row_id=rid,
-            fixes=fixes,
+            context=context,
+            intervention=intervention,
             observed=observed,
             outcome=outcome,
         )
@@ -509,7 +539,7 @@ _report_grouped(
 )
 
 _report_grouped(
-    "observed node vs fixes conflicts",
+    "observed node vs context/intervention conflicts",
     observed_in_fixes,
 )
 

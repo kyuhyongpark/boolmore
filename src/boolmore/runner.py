@@ -265,7 +265,13 @@ def _snapshot_batch_assets(batch_dir: Path, config_dict: dict) -> dict[str, Path
     if config_dict["run_type"] == "NAV":
         staging = batch_dir / f"_data_src{data_src.suffix}"
         shutil.copy2(data_src, staging)
-        import_NAV_exps(str(staging), **_nav_column_kwargs(config_dict))
+        # Pass base primes so comparative Outcome range uses 1/(2k).
+        node_names = list(load_primes(base_src))
+        import_NAV_exps(
+            str(staging),
+            node_names=node_names,
+            **_nav_column_kwargs(config_dict),
+        )
         preprocessed = staging.with_name(f"{staging.stem}_preprocessed.csv")
         if preprocessed.exists():
             preprocessed.replace(data_dest)

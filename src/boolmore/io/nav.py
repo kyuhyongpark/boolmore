@@ -7,7 +7,11 @@ import re
 from collections.abc import Sequence
 from pathlib import Path
 
-from boolmore.evaluation.agreement import check_co_located_outcomes
+from boolmore.evaluation.agreement import (
+    _related_node_names,
+    check_co_located_outcomes,
+    entity_max_level,
+)
 from boolmore.experiment import NAVExperiment
 from boolmore.outcome import (
     ComparativeOutcome,
@@ -299,6 +303,7 @@ def import_NAV_exps(
     context_cols: Sequence[str] | None = None,
     intervention_cols: Sequence[str] | None = None,
     fixes_allow_override: bool | None = None,
+    node_names: Sequence[str] | None = None,
 ) -> list[NAVExperiment]:
     """Import NAV experiments from a ``.tsv`` or ``.csv`` file.
 
@@ -328,6 +333,12 @@ def import_NAV_exps(
         earlier ones; observed may be stripped from earlier columns. In
         context/intervention mode, override is always on (intervention wins;
         observed is stripped from context and forbidden in intervention).
+    node_names :
+        Optional network node names (e.g. model primes keys). When given,
+        comparative higher/lower ``Outcome range`` uses the level-dependent
+        threshold ``1/(2k)`` from :func:`~boolmore.evaluation.agreement.entity_max_level`
+        among ``observed`` / ``observed_<int>`` siblings. When omitted,
+        Boolean ``k=1`` (``0.5``) is assumed.
 
     Notes
     -----
@@ -349,6 +360,7 @@ def import_NAV_exps(
     """
     path = Path(location)
     delimiter = _delimiter_for_path(path)
+    node_name_list = list(node_names) if node_names is not None else None
 
     split_mode = context_cols is not None or intervention_cols is not None
     if split_mode and fixes_cols is not None:
@@ -475,7 +487,16 @@ def import_NAV_exps(
                     weight=weight,
                 )
 
-            lo, hi = resolve_outcome_range(outcome)
+            max_level: int | None = None
+            if (
+                node_name_list is not None
+                and isinstance(outcome, ComparativeOutcome)
+                and outcome.relation != "same"
+            ):
+                max_level = entity_max_level(
+                    observed, _related_node_names(observed, node_name_list)
+                )
+            lo, hi = resolve_outcome_range(outcome, max_level=max_level)
             range_str = format_outcome_range(lo, hi)
             outcome_range_strings.append(range_str)
 

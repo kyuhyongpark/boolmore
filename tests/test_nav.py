@@ -508,6 +508,39 @@ def test_import_comparative_outcomes(tmp_path: Path):
     assert rows[4][6] == "0.0,0.0"
 
 
+def test_import_comparative_outcome_range_uses_entity_max_level(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization\n"
+        "1,1.0,A=1,,Proliferation,higher than 2\n"
+        "2,1.0,,,Proliferation,lower than 1\n"
+        "3,1.0,A=0,,B,higher than 4\n"
+        "4,1.0,,,B,lower than 3\n",
+    )
+
+    import_NAV_exps(
+        csv_path,
+        node_names=[
+            "A",
+            "B",
+            "Proliferation_1",
+            "Proliferation_2",
+            "Proliferation_3",
+            "Proliferation_4",
+        ],
+    )
+
+    preprocessed = tmp_path / "data_preprocessed.csv"
+    assert preprocessed.exists()
+    with preprocessed.open(newline="") as f:
+        rows = list(csv.reader(f))
+    # Proliferation k=4 → 1/(2*4)=0.125; Boolean B → 0.5
+    assert rows[1][6] == "0.125,1.0"
+    assert rows[2][6] == "0.125,1.0"
+    assert rows[3][6] == "0.5,1.0"
+    assert rows[4][6] == "0.5,1.0"
+
+
 def test_comparative_consistent_outcome_range(tmp_path: Path):
     csv_path = _write(
         tmp_path / "data.csv",
@@ -521,6 +554,27 @@ def test_comparative_consistent_outcome_range(tmp_path: Path):
     exps = import_NAV_exps(csv_path)
     assert exps[0].outcome == ComparativeOutcome(relation="higher", other_id=2)
     assert exps[2].outcome == ComparativeOutcome(relation="same", other_id=4)
+    assert not (tmp_path / "data_preprocessed.csv").exists()
+
+
+def test_comparative_consistent_outcome_range_with_max_level(tmp_path: Path):
+    csv_path = _write(
+        tmp_path / "data.csv",
+        "ID,Score,Source,Perturbation,Observed node,Categorization,Outcome range\n"
+        '1,1.0,A=1,,Proliferation,higher than 2,"0.125,1.0"\n'
+        '2,1.0,,,Proliferation,lower than 1,"0.125,1.0"\n',
+    )
+
+    exps = import_NAV_exps(
+        csv_path,
+        node_names=[
+            "Proliferation_1",
+            "Proliferation_2",
+            "Proliferation_3",
+            "Proliferation_4",
+        ],
+    )
+    assert exps[0].outcome == ComparativeOutcome(relation="higher", other_id=2)
     assert not (tmp_path / "data_preprocessed.csv").exists()
 
 
