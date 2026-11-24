@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """Batch consensus view of per-group agreement Δ across seeds.
 
-For each seed's best ``*_score.csv`` in a batch run folder, computes the same
-group Δs as ``analyze_score.py`` (observed node, cell line, intervened node):
+For each seed's best ``*_score.csv`` in a batch run folder, computes group Δs
+(observed node, cell line, intervened node) against a shared batch baseline:
 
-    Δ = mean(group agreement) − overall mean agreement
+    Δ = mean(group agreement) − batch mean agreement
+
+where batch mean agreement is the average of each seed's overall mean
+agreement (equal weight per seed). Unlike ``analyze_score.py``, deltas are
+not centered on each model's own mean.
 
 Stacks those vectors into a models × features signature, prints consensus
 tables (median Δ, spread, sign agreement), and writes:
@@ -55,7 +59,8 @@ from boolmore.io.paths import project_root
 
 # --- edit these to analyze a different batch ---
 # RUN_DIR = "case_study/breast_cancer/runs/20261118T231453Z"
-RUN_DIR = "case_study/breast_cancer/runs/20261119T130225Z"
+# RUN_DIR = "case_study/breast_cancer/runs/20261119T130225Z"
+RUN_DIR = "case_study/breast_cancer/runs/20261123T163416Z"
 DATA = None  # None → batch data.csv / analyze_score default
 MIN_N = 10
 TOP = 0  # 0 = all groups (pass min_n); N = cap tables / strip / heatmap columns
@@ -65,8 +70,8 @@ PLOT = True
 _SEED_DIR_RE = re.compile(r"^seed_(\d+)$")
 _EPS = 1e-12
 
-# Shared diverging Δ palette (ColorBrewer RdBu): red = below overall / worse,
-# blue = above overall / better. Strips and heatmaps both use this cmap.
+# Shared diverging Δ palette (ColorBrewer RdBu): red = below batch mean / worse,
+# blue = above batch mean / better. Strips and heatmaps both use this cmap.
 DELTA_CMAP = "RdBu"
 
 
@@ -127,8 +132,8 @@ class FacetEntry:
     group: str
     n: int
     mean_agreement: float
-    delta_agreement: float
-    overall_mean: float
+    delta_agreement: float  # mean_agreement − batch mean agreement
+    overall_mean: float  # batch mean agreement (shared across seeds)
 
 
 @dataclass
@@ -281,9 +286,13 @@ def collect_entries(
     seeds: Sequence[SeedRef],
     data_by_id: dict,
     min_n: int,
-) -> tuple[list[FacetEntry], dict[int, float]]:
-    """Load every seed score; return long entries + per-seed overall mean."""
-    entries: list[FacetEntry] = []
+) -> tuple[list[FacetEntry], dict[int, float], float]:
+    """Load every seed score; return long entries, per-seed means, batch mean.
+
+    Deltas use the batch mean agreement (average of per-seed overall means),
+    not each seed's own overall mean.
+    """
+    loaded: list[tuple[SeedRef, Sequence, float]] = []
     overall_by_seed: dict[int, float] = {}
     for ref in seeds:
         rows = ascore.load_score_rows(ref.score_path, data_by_id)
@@ -292,7 +301,25 @@ def collect_entries(
             continue
         mean_a, mean_h = _overall_means(rows)
         overall_by_seed[ref.seed] = mean_a
-        for facet, stats in _facet_stats(rows, mean_a, mean_h, min_n).items():
+        loaded.append((ref, rows, mean_h))
+        print(
+            f"  {ref.label}: overall agree={ascore._fmt(mean_a)}  "
+            f"rows={len(rows)}  file={ref.score_path.name}"
+        )
+
+    if not overall_by_seed:
+        return [], {}, float("nan")
+
+    batch_mean = statistics.fmean(overall_by_seed.values())
+    print(
+        f"  batch mean agreement (Δ baseline): {ascore._fmt(batch_mean)}  "
+        f"(mean of {len(overall_by_seed)} seed overalls)"
+    )
+
+    entries: list[FacetEntry] = []
+    for ref, rows, mean_h in loaded:
+        # Agreement Δ vs batch mean; hierarchy baseline stays per-seed (unused).
+        for facet, stats in _facet_stats(rows, batch_mean, mean_h, min_n).items():
             for s in stats:
                 entries.append(
                     FacetEntry(
@@ -303,14 +330,10 @@ def collect_entries(
                         n=s.n,
                         mean_agreement=s.mean_agreement,
                         delta_agreement=s.delta_agreement,
-                        overall_mean=mean_a,
+                        overall_mean=batch_mean,
                     )
                 )
-        print(
-            f"  {ref.label}: overall agree={ascore._fmt(mean_a)}  "
-            f"rows={len(rows)}  file={ref.score_path.name}"
-        )
-    return entries, overall_by_seed
+    return entries, overall_by_seed, batch_mean
 
 
 def _sign_fracs(deltas: Sequence[float]) -> tuple[float, float, float]:
@@ -692,7 +715,7 @@ def write_overview_heatmap(
 
     fig.suptitle(
         "Batch signature heatmap: seed × group Δ\n"
-        "red = below overall (worse), blue = above (better); "
+        "red = below batch mean (worse), blue = above (better); "
         "rows = seeds clustered on joint n-weighted Δ signature (shared); "
         "columns = groups clustered within each facet",
         fontsize=11,
@@ -784,7 +807,7 @@ def write_overview_strip(
 
     fig.suptitle(
         "Batch signature: Δ across seeds\n"
-        "red = below overall (worse), blue = above (better); "
+        "red = below batch mean (worse), blue = above (better); "
         "black tick = median; size ∝ log(n); "
         "y-label shows group n; ordered by |median Δ|·log10(n+1)",
         fontsize=11,
@@ -814,17 +837,20 @@ def main(argv: list[str] | None = None) -> None:
 
     data_by_id = ascore.load_data_by_id(data_path)
     print("loading per-seed group Δs …")
-    entries, overall_by_seed = collect_entries(seeds, data_by_id, min_n)
+    entries, overall_by_seed, batch_mean = collect_entries(
+        seeds, data_by_id, min_n
+    )
     if not entries:
         raise SystemExit("no group entries collected")
 
     overalls = list(overall_by_seed.values())
     print(
-        f"\noverall mean agreement across seeds: "
+        f"\nper-seed overall agreement: "
         f"median={ascore._fmt(statistics.median(overalls))}  "
-        f"mean={ascore._fmt(statistics.fmean(overalls))}  "
+        f"mean={ascore._fmt(batch_mean)}  "
         f"σ={ascore._fmt(statistics.stdev(overalls) if len(overalls) >= 2 else float('nan'))}"
     )
+    print(f"Δ baseline = batch mean agreement: {ascore._fmt(batch_mean)}")
 
     facets = ("observed", "cell_line", "intervened")
     titles = {
