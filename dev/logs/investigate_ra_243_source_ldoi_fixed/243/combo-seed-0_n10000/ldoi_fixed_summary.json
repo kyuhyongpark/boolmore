@@ -1,0 +1,32 @@
+{
+  "model_pkl": "/home/kyuhyongpark/Boolmore/boolmore/case_study/RA/243.pkl",
+  "n_nodes": 1076,
+  "n_sources": 223,
+  "n_combos": 10000,
+  "combo_rng_seed": 0,
+  "smoke": false,
+  "n_fixed": {
+    "mean": 1021.7872,
+    "median": 1031.0,
+    "std": 48.8629728542994,
+    "min": 735,
+    "max": 1076,
+    "p05": 928.0,
+    "p95": 1076.0
+  },
+  "n_free": {
+    "mean": 54.2128,
+    "median": 45.0,
+    "std": 48.86297285429939,
+    "min": 0,
+    "max": 341,
+    "p05": 0.0,
+    "p95": 148.0
+  },
+  "n_fully_fixed_combos": 1578,
+  "ldoi_s": {
+    "total": 6.064880217914833,
+    "mean": 0.0006064880217914833
+  },
+  "wall_s_pass": 1.9249997890001396
+}
