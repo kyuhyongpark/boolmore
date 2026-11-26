@@ -12,7 +12,8 @@ license = { file = "LICENSE" }
 requires-python = ">=3.11"
 dependencies = ["pyboolnet @ git+https://github.com/hklarner/pyboolnet",
                 "joblib",
-                "pandas",]
+                "pandas",
+                "python-sat",]
 
 [project.optional-dependencies]
 test = [

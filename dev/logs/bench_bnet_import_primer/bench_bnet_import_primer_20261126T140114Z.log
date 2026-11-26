@@ -1,0 +1,56 @@
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/bench_bnet_import_primer_20261126T140114Z.log
+started (UTC): 2026-11-26T14:01:14.555919+00:00
+warmup=1  repeats=3
+
+========================================================================
+network: CAD
+  path: /home/kyuhyongpark/Boolmore/boolmore/demo/CAD.bnet
+  pyboolnet timeout: 60.0s
+-- pyboolnet (BNetToPrime) --
+  pyboolnet repeat 1: 0.403105s
+  pyboolnet repeat 2: 0.440837s
+  pyboolnet repeat 3: 0.330841s
+  mean=0.391594s  stdev=0.055894s  min=0.330841s  max=0.440837s  (n=3)
+-- primer (Primer-B) --
+  primer repeat 1: 0.025680s
+  primer repeat 2: 0.029123s
+  primer repeat 3: 0.038362s
+  mean=0.031055s  stdev=0.006558s  min=0.025680s  max=0.038362s  (n=3)
+  speedup (pyboolnet/primer mean): 12.61x
+-- equality (canonized) --
+  OK  nodes=5
+
+========================================================================
+network: breast_cancer
+  path: /home/kyuhyongpark/Boolmore/boolmore/case_study/breast_cancer/parsimonious.bnet
+  pyboolnet timeout: 60.0s
+-- pyboolnet (BNetToPrime) --
+  pyboolnet repeat 1: 27.102099s
+  pyboolnet repeat 2: 28.909324s
+  pyboolnet repeat 3: 29.120524s
+  mean=28.377316s  stdev=1.109407s  min=27.102099s  max=29.120524s  (n=3)
+-- primer (Primer-B) --
+  primer repeat 1: 0.391397s
+  primer repeat 2: 0.426101s
+  primer repeat 3: 0.370415s
+  mean=0.395971s  stdev=0.028124s  min=0.370415s  max=0.426101s  (n=3)
+  speedup (pyboolnet/primer mean): 71.67x
+-- equality (canonized) --
+  OK  nodes=202
+
+========================================================================
+network: RA_243
+  path: /home/kyuhyongpark/Boolmore/boolmore/case_study/RA/243.bnet
+  pyboolnet timeout: 30.0s
+-- pyboolnet (BNetToPrime) --
+  pyboolnet TIMEOUT after 30.0s (attempt 1/4)
+  no successful timed repeats (cutoff/error)
+-- primer (Primer-B) --
+  primer repeat 1: 1.510749s
+  primer repeat 2: 1.582738s
+  primer repeat 3: 1.522171s
+  mean=1.538552s  stdev=0.038689s  min=1.510749s  max=1.582738s  (n=3)
+-- equality --
+  skipped (PyBoolNet arm did not complete under cutoff)
+
+finished (UTC): 2026-11-26T14:03:48.670165+00:00

@@ -4,8 +4,7 @@ import json
 import pickle
 from pathlib import Path
 
-from pyboolnet.external.bnet2primes import bnet_file2primes
-
+from boolmore.io.bnet_primes import bnet_file_to_primes
 from boolmore.io.nav import import_NAV_exps
 from boolmore.io.phenotype import (
     CSVParseException,
@@ -32,7 +31,7 @@ def load_primes(path: str | Path) -> dict[str, PrimeType]:
     """Load PyBoolNet primes from a ``.bnet`` or ``.pkl`` file."""
     path = Path(path)
     if path.suffix == ".bnet":
-        return bnet_file2primes(str(path))
+        return bnet_file_to_primes(path)
     if path.suffix == ".pkl":
         with open(path, "rb") as f:
             return pickle.load(f)
