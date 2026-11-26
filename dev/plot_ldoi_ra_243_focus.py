@@ -13,8 +13,7 @@
 # 2. ``nodes_pooled_ecdf_summary.png`` (ECDF | box over node×combo)
 # 3. ``nodes_ldoi_unfixed_ecdf_summary.png`` (ECDF | box over node×combo)
 # 4. ``combos_pooled_ecdf_summary.png`` (ECDF | box of per-combo mean |Δ|)
-# 5. ``combos_ldoi_unfixed_ecdf_summary.png`` (same, unfixed means;
-#    equal weight per combo — avoids overweighting large free sets)
+# 5. ``combos_ldoi_unfixed_ecdf_summary.png`` (same, unfixed means)
 
 # %%
 from __future__ import annotations
@@ -293,14 +292,14 @@ unfixed = node_cmp[node_cmp["ldoi_unfixed"].astype(bool)]
 p_unfixed = plot_ecdf_box(
     _series_from_node_cmp(unfixed),
     path=OUT_DIR / "nodes_ldoi_unfixed_ecdf_summary.png",
-    title="Unfixed nodes only (excl. sources; set varies by combo)",
+    title="Unfixed nodes only (set varies by combo)",
 )
 print(f"wrote {p_unfixed}")
 
 p_combo_pooled = plot_ecdf_box(
     _series_from_per_combo(per_combo, PER_COMBO_MEAN_COL),
     path=OUT_DIR / "combos_pooled_ecdf_summary.png",
-    title="Per-combo mean |Δ| (all nodes; equal weight per combo)",
+    title="Per-combo mean |Δ| (all nodes)",
     value_label="mean |Δ| per combo (all nodes)",
     ecdf_item="combos",
 )
@@ -309,10 +308,7 @@ print(f"wrote {p_combo_pooled}")
 p_combo_unfixed = plot_ecdf_box(
     _series_from_per_combo(per_combo, PER_COMBO_MEAN_UNFIXED_COL),
     path=OUT_DIR / "combos_ldoi_unfixed_ecdf_summary.png",
-    title=(
-        "Per-combo mean |Δ| on unfixed nodes only "
-        "(excl. sources; equal weight per combo)"
-    ),
+    title="Per-combo mean |Δ| on unfixed nodes only",
     value_label="mean |Δ| per combo (unfixed nodes only)",
     ecdf_item="combos",
 )
