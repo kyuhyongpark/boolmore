@@ -314,17 +314,27 @@ def _plot_hist(series: np.ndarray, *, xlabel: str, title: str, path: Path) -> Pa
     return path
 
 
-def _plot_ecdf(series: np.ndarray, *, ylabel: str, title: str, path: Path) -> Path:
+def _plot_ecdf(
+    series: np.ndarray,
+    *,
+    xlabel: str,
+    title: str,
+    path: Path,
+    xlim: tuple[float, float] | None = None,
+) -> Path:
     vals = np.sort(series.astype(np.float64))
     frac = np.arange(1, len(vals) + 1) / len(vals)
     fig, ax = plt.subplots(figsize=(8.0, 4.2))
-    ax.step(frac, vals, where="post", color="#1f77b4", linewidth=2.0)
-    ax.set_xlabel("ECDF  (fraction of combos ≤ y)")
-    ax.set_ylabel(ylabel)
+    ax.step(vals, frac, where="post", color="#1f77b4", linewidth=2.0)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel("ECDF  (fraction of combos ≤ x)")
     ax.set_title(title)
-    ax.set_xlim(0.0, 1.02)
-    ymax = float(vals[-1]) if len(vals) else 0.0
-    ax.set_ylim(0.0, ymax * 1.02 if ymax > 0 else 1.0)
+    if xlim is not None:
+        ax.set_xlim(*xlim)
+    else:
+        xmax = float(vals[-1]) if len(vals) else 0.0
+        ax.set_xlim(0.0, xmax * 1.02 if xmax > 0 else 1.0)
+    ax.set_ylim(0.0, 1.02)
     ax.grid(alpha=0.3)
     fig.tight_layout()
     fig.savefig(path, dpi=140)
@@ -414,15 +424,29 @@ plot_paths = [
     ),
     _plot_ecdf(
         df["n_fixed"].to_numpy(),
-        ylabel="n_fixed (logical percolation)",
+        xlabel="n_fixed (logical percolation)",
         title="RA 243: ECDF of logical percolation fixed-node count",
         path=RUN_DIR / "n_fixed_ecdf.png",
     ),
     _plot_ecdf(
         df["frac_fixed"].to_numpy(),
-        ylabel="fraction of nodes fixed",
+        xlabel="fraction of nodes fixed",
         title="RA 243: ECDF of logical percolation fixed fraction",
         path=RUN_DIR / "frac_fixed_ecdf.png",
+        xlim=(0.0, 1.0),
+    ),
+    _plot_ecdf(
+        df["n_free"].to_numpy(),
+        xlabel="n_free (N − n_fixed)",
+        title="RA 243: ECDF of free-node count after logical percolation",
+        path=RUN_DIR / "n_free_ecdf.png",
+    ),
+    _plot_ecdf(
+        df["frac_free"].to_numpy(),
+        xlabel="fraction of nodes free",
+        title="RA 243: ECDF of free-node fraction after logical percolation",
+        path=RUN_DIR / "frac_free_ecdf.png",
+        xlim=(0.0, 1.0),
     ),
     _plot_scatter_sources_vs_fixed(RUN_DIR / "n_sources_on_vs_n_fixed.png"),
     _plot_box_summary(RUN_DIR / "n_fixed_n_free_box.png"),

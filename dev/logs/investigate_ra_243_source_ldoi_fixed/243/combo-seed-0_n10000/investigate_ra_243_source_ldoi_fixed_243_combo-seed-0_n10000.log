@@ -1,6 +1,6 @@
 run dir: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ra_243_source_ldoi_fixed/243/combo-seed-0_n10000
 log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ra_243_source_ldoi_fixed/243/combo-seed-0_n10000/investigate_ra_243_source_ldoi_fixed_243_combo-seed-0_n10000.log
-started (UTC): 2026-11-26T16:10:25.387736+00:00
+started (UTC): 2026-11-26T18:28:20.983989+00:00
 model bnet: /home/kyuhyongpark/Boolmore/boolmore/case_study/RA/243.bnet
 model pkl:  /home/kyuhyongpark/Boolmore/boolmore/case_study/RA/243.pkl
 COMBO_RNG_SEED=0  N_COMBOS=10000
@@ -116,7 +116,7 @@ loaded fixed-count cache (10000 rows) from ldoi_fixed_counts.pkl
 [9800/10000] cache hit  index=4472909769902621755779898811953044496480606238709850354323258423548
 [9900/10000] cache hit  index=465908674045525536736185375140816403630993895933616268512129775005
 [10000/10000] cache hit  index=214612969349413724809384681816431610372337381546705017603047759526
-LDOI pass done in 1.925s  cache → /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ra_243_source_ldoi_fixed/243/combo-seed-0_n10000/ldoi_fixed_counts.pkl
+LDOI pass done in 2.251s  cache → /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ra_243_source_ldoi_fixed/243/combo-seed-0_n10000/ldoi_fixed_counts.pkl
 
 Fixed / free summary across combos:
          n_fixed     n_free  frac_fixed  frac_free     ldoi_s
@@ -140,9 +140,11 @@ Writing plots…
   wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ra_243_source_ldoi_fixed/243/combo-seed-0_n10000/n_free_hist.png
   wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ra_243_source_ldoi_fixed/243/combo-seed-0_n10000/n_fixed_ecdf.png
   wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ra_243_source_ldoi_fixed/243/combo-seed-0_n10000/frac_fixed_ecdf.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ra_243_source_ldoi_fixed/243/combo-seed-0_n10000/n_free_ecdf.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ra_243_source_ldoi_fixed/243/combo-seed-0_n10000/frac_free_ecdf.png
   wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ra_243_source_ldoi_fixed/243/combo-seed-0_n10000/n_sources_on_vs_n_fixed.png
   wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ra_243_source_ldoi_fixed/243/combo-seed-0_n10000/n_fixed_n_free_box.png
   wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ra_243_source_ldoi_fixed/243/combo-seed-0_n10000/ldoi_fixed_counts.csv
   wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ra_243_source_ldoi_fixed/243/combo-seed-0_n10000/ldoi_fixed_summary.json
 
-finished (UTC): 2026-11-26T16:10:34.021923+00:00
+finished (UTC): 2026-11-26T18:28:29.772903+00:00

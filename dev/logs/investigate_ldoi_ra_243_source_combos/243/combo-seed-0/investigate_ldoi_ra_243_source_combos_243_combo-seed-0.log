@@ -1,15 +1,15 @@
-run dir: /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0
-log file: /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/investigate_ldoi_ra_243_source_combos_243_combo-seed-0.log
-started (UTC): 2026-11-26T17:02:08.317598+00:00
-model bnet: /home/troonmel/Boolmore/boolmore/case_study/RA/243.bnet
-model pkl:  /home/troonmel/Boolmore/boolmore/case_study/RA/243.pkl
+run dir: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0
+log file: /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/investigate_ldoi_ra_243_source_combos_243_combo-seed-0.log
+started (UTC): 2026-11-26T18:28:07.364748+00:00
+model bnet: /home/kyuhyongpark/Boolmore/boolmore/case_study/RA/243.bnet
+model pkl:  /home/kyuhyongpark/Boolmore/boolmore/case_study/RA/243.pkl
 COMBO_RNG_SEED=0  N_COMBOS=30
 ENHANCED_CUTOFFS=(1, 2, 3)
 USE_JOINT_SELF_LOOPS=True
 FORCE_RECOMPUTE=False  SMOKE=False
 UPDATE_SCHEME=synchronous
 
-loading primes from /home/troonmel/Boolmore/boolmore/case_study/RA/243.pkl
+loading primes from /home/kyuhyongpark/Boolmore/boolmore/case_study/RA/243.pkl
 Model nodes : 1076
 Source nodes: 223
   first sources: v_ACVR2A_ACVR2B_complex, v_AGT, v_APAF1, v_ARI_ARII_bmp6_complex, v_ASC_M1_macrophage___Cytoplasm, v_ASC_M2_macrophage__cytoplasm, v_BAD_M1_macrophage__Mitochondria_membrane, v_BAD_M2_macrophage_mitochondrion_membrane…
@@ -25,73 +25,41 @@ building SC subsets (max cutoff=3)…
   SC subsets size 1: 224
   SC subsets size 2: 1
   SC subsets size 3: 0
-  SC-subset prep: 0.109s
+  SC-subset prep: 0.154s
 
 loaded LDOI cache (30 combos) from ldoi_nav_cache.pkl
-CUDA devices: 1  (needed for ldoi+primer+cw)
-cubewalkers: /home/troonmel/Boolmore/.venv314/lib/python3.14/site-packages/cubewalkers/__init__.py
 
-[1/30] Filling ldoi+primer+cw  index=8851751101911509752322234120777354777993129476635285052769309553446…
-  ldoi+primer+cw     0.306s  fixed=1035  free=41  T=205  ran_cw=True
-[2/30] Filling ldoi+primer+cw  index=11664354796213614833620236494551875160832854618380880939994440210364…
-  ldoi+primer+cw     0.448s  fixed=979  free=97  T=485  ran_cw=True
-[3/30] Filling ldoi+primer+cw  index=11733929019668620868427860750278375332240094826439786726351882106666…
-  ldoi+primer+cw     0.271s  fixed=1023  free=53  T=265  ran_cw=True
-[4/30] Filling ldoi+primer+cw  index=1755422068264791796644245603328450781476530868584716391541076331315…
-  ldoi+primer+cw     0.313s  fixed=1003  free=73  T=365  ran_cw=True
-[5/30] Filling ldoi+primer+cw  index=13429529091767007613686650473653800457356442852037713227949745300594…
-  ldoi+primer+cw     0.204s  fixed=1041  free=35  T=175  ran_cw=True
-[6/30] Filling ldoi+primer+cw  index=6595572763820743298514929628168195515929623811917088351354177701022…
-  ldoi+primer+cw     0.005s  fixed=1076  free=0  T=0  ran_cw=False
-[7/30] Filling ldoi+primer+cw  index=7379488885164942013156693687241900657297970996520120452828120168209…
-  ldoi+primer+cw     0.125s  fixed=1062  free=14  T=70  ran_cw=True
-[8/30] Filling ldoi+primer+cw  index=11451048194317458886795408613135894785620073944995567971393562571761…
-  ldoi+primer+cw     0.072s  fixed=1073  free=3  T=15  ran_cw=True
-[9/30] Filling ldoi+primer+cw  index=6364471228841098243389128348905741394416864860457029031797745664251…
-  ldoi+primer+cw     0.367s  fixed=991  free=85  T=425  ran_cw=True
-[10/30] Filling ldoi+primer+cw  index=1084407439922358193237811923171068977032300312374952771536825661394…
-  ldoi+primer+cw     0.210s  fixed=1027  free=49  T=245  ran_cw=True
-[11/30] Filling ldoi+primer+cw  index=11391623174115695037844130913738703511620246981026259626152389728902…
-  ldoi+primer+cw     0.357s  fixed=983  free=93  T=465  ran_cw=True
-[12/30] Filling ldoi+primer+cw  index=12347581196055377963061398631985184872191305053769867321618520829594…
-  ldoi+primer+cw     0.085s  fixed=1061  free=15  T=75  ran_cw=True
-[13/30] Filling ldoi+primer+cw  index=12107349724154639267207691216365830020962127691216312393518749582827…
-  ldoi+primer+cw     0.180s  fixed=1027  free=49  T=245  ran_cw=True
-[14/30] Filling ldoi+primer+cw  index=4371890241958966972885186636394447873821200286660403171888789060301…
-  ldoi+primer+cw     0.240s  fixed=1002  free=74  T=370  ran_cw=True
-[15/30] Filling ldoi+primer+cw  index=2478545522270877967371184746525569289321654583189132568635629729825…
-  ldoi+primer+cw     0.288s  fixed=976  free=100  T=500  ran_cw=True
-[16/30] Filling ldoi+primer+cw  index=3490190874456433092437659023624935149994854659758590273779346966477…
-  ldoi+primer+cw     0.139s  fixed=1037  free=39  T=195  ran_cw=True
-[17/30] Filling ldoi+primer+cw  index=12241337516461229185068933025438896562695208005005473763731433711369…
-  ldoi+primer+cw     0.187s  fixed=1019  free=57  T=285  ran_cw=True
-[18/30] Filling ldoi+primer+cw  index=10776256109062024973816486983210082933015603045663157695825744700218…
-  ldoi+primer+cw     0.054s  fixed=1070  free=6  T=30  ran_cw=True
-[19/30] Filling ldoi+primer+cw  index=8037930951399877316481838640184645662614898256138106239048523341714…
-  ldoi+primer+cw     0.162s  fixed=1033  free=43  T=215  ran_cw=True
-[20/30] Filling ldoi+primer+cw  index=11294400993551332718363987003946701049308915729993704618395794067880…
-  ldoi+primer+cw     0.319s  fixed=976  free=100  T=500  ran_cw=True
-[21/30] Filling ldoi+primer+cw  index=9507871589407626890121785711817054559983906173598869856377877867278…
-  ldoi+primer+cw     0.140s  fixed=1037  free=39  T=195  ran_cw=True
-[22/30] Filling ldoi+primer+cw  index=13247922004903657361071888850640704390422862171297473797292859158076…
-  ldoi+primer+cw     0.341s  fixed=959  free=117  T=585  ran_cw=True
-[23/30] Filling ldoi+primer+cw  index=1278316118064029397007923108080992114411235385029902628182395968729…
-  ldoi+primer+cw     0.236s  fixed=995  free=81  T=405  ran_cw=True
-[24/30] Filling ldoi+primer+cw  index=11186394986570440505581571875394335458852209987028213620653563622650…
-  ldoi+primer+cw     0.138s  fixed=1034  free=42  T=210  ran_cw=True
-[25/30] Filling ldoi+primer+cw  index=10829069849537277777747480624996590483597341266591668681878051732684…
-  ldoi+primer+cw     0.096s  fixed=1052  free=24  T=120  ran_cw=True
-[26/30] Filling ldoi+primer+cw  index=11118888259567474609480366934546431181204251228443568671829515582632…
-  ldoi+primer+cw     0.092s  fixed=1055  free=21  T=105  ran_cw=True
-[27/30] Filling ldoi+primer+cw  index=1331327218649808600279826201380780326197673327855988653655637502753…
-  ldoi+primer+cw     0.318s  fixed=976  free=100  T=500  ran_cw=True
-[28/30] Filling ldoi+primer+cw  index=5653814062174839705859489660065499067643904272337927987067901931140…
-  ldoi+primer+cw     0.238s  fixed=999  free=77  T=385  ran_cw=True
-[29/30] Filling ldoi+primer+cw  index=11162270908961579981215984711607681064701535202777271123196356649936…
-  ldoi+primer+cw     0.255s  fixed=1000  free=76  T=380  ran_cw=True
-[30/30] Filling ldoi+primer+cw  index=8632890381279089777090384231928714361086776175995876814273035367198…
-  ldoi+primer+cw     0.003s  fixed=1076  free=0  T=0  ran_cw=False
-LDOI cache → /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/ldoi_nav_cache.pkl
+[1/30] LDOI cache hit  index=8851751101911509752322234120777354777993129476635285052769309553446
+[2/30] LDOI cache hit  index=11664354796213614833620236494551875160832854618380880939994440210364
+[3/30] LDOI cache hit  index=11733929019668620868427860750278375332240094826439786726351882106666
+[4/30] LDOI cache hit  index=1755422068264791796644245603328450781476530868584716391541076331315
+[5/30] LDOI cache hit  index=13429529091767007613686650473653800457356442852037713227949745300594
+[6/30] LDOI cache hit  index=6595572763820743298514929628168195515929623811917088351354177701022
+[7/30] LDOI cache hit  index=7379488885164942013156693687241900657297970996520120452828120168209
+[8/30] LDOI cache hit  index=11451048194317458886795408613135894785620073944995567971393562571761
+[9/30] LDOI cache hit  index=6364471228841098243389128348905741394416864860457029031797745664251
+[10/30] LDOI cache hit  index=1084407439922358193237811923171068977032300312374952771536825661394
+[11/30] LDOI cache hit  index=11391623174115695037844130913738703511620246981026259626152389728902
+[12/30] LDOI cache hit  index=12347581196055377963061398631985184872191305053769867321618520829594
+[13/30] LDOI cache hit  index=12107349724154639267207691216365830020962127691216312393518749582827
+[14/30] LDOI cache hit  index=4371890241958966972885186636394447873821200286660403171888789060301
+[15/30] LDOI cache hit  index=2478545522270877967371184746525569289321654583189132568635629729825
+[16/30] LDOI cache hit  index=3490190874456433092437659023624935149994854659758590273779346966477
+[17/30] LDOI cache hit  index=12241337516461229185068933025438896562695208005005473763731433711369
+[18/30] LDOI cache hit  index=10776256109062024973816486983210082933015603045663157695825744700218
+[19/30] LDOI cache hit  index=8037930951399877316481838640184645662614898256138106239048523341714
+[20/30] LDOI cache hit  index=11294400993551332718363987003946701049308915729993704618395794067880
+[21/30] LDOI cache hit  index=9507871589407626890121785711817054559983906173598869856377877867278
+[22/30] LDOI cache hit  index=13247922004903657361071888850640704390422862171297473797292859158076
+[23/30] LDOI cache hit  index=1278316118064029397007923108080992114411235385029902628182395968729
+[24/30] LDOI cache hit  index=11186394986570440505581571875394335458852209987028213620653563622650
+[25/30] LDOI cache hit  index=10829069849537277777747480624996590483597341266591668681878051732684
+[26/30] LDOI cache hit  index=11118888259567474609480366934546431181204251228443568671829515582632
+[27/30] LDOI cache hit  index=1331327218649808600279826201380780326197673327855988653655637502753
+[28/30] LDOI cache hit  index=5653814062174839705859489660065499067643904272337927987067901931140
+[29/30] LDOI cache hit  index=11162270908961579981215984711607681064701535202777271123196356649936
+[30/30] LDOI cache hit  index=8632890381279089777090384231928714361086776175995876814273035367198
+LDOI cache → /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/ldoi_nav_cache.pkl
 
 loaded CW sync cache (30 combos) from cw_sync_nav_cache_w2048_T5380_tw1345.pkl
 all CW combos cached — skipping cubewalkers gate (cw_sync_nav_cache_w2048_T5380_tw1345.pkl)
@@ -126,38 +94,38 @@ all CW combos cached — skipping cubewalkers gate (cw_sync_nav_cache_w2048_T538
 [28/30] CW cache hit  index=5653814062174839705859489660065499067643904272337927987067901931140
 [29/30] CW cache hit  index=11162270908961579981215984711607681064701535202777271123196356649936
 [30/30] CW cache hit  index=8632890381279089777090384231928714361086776175995876814273035367198
-CW sync cache → /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/cw_sync_nav_cache_w2048_T5380_tw1345.pkl
+CW sync cache → /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/cw_sync_nav_cache_w2048_T5380_tw1345.pkl
 
-combo 0 index=8851751101911509752322234120777354777993129476635285052769309553446: mean|Δ|ldoi=0.0058  ldoi_pcw=0.0054  enh_c3=0.0058  changed=0
-combo 1 index=11664354796213614833620236494551875160832854618380880939994440210364: mean|Δ|ldoi=0.0178  ldoi_pcw=0.0204  enh_c3=0.0213  changed=15
-combo 2 index=11733929019668620868427860750278375332240094826439786726351882106666: mean|Δ|ldoi=0.0246  ldoi_pcw=0.0000  enh_c3=0.0246  changed=0
-combo 3 index=1755422068264791796644245603328450781476530868584716391541076331315: mean|Δ|ldoi=0.0108  ldoi_pcw=0.0104  enh_c3=0.0108  changed=0
-combo 4 index=13429529091767007613686650473653800457356442852037713227949745300594: mean|Δ|ldoi=0.0085  ldoi_pcw=0.0071  enh_c3=0.0085  changed=0
-combo 5 index=6595572763820743298514929628168195515929623811917088351354177701022: mean|Δ|ldoi=0.0000  ldoi_pcw=0.0000  enh_c3=0.0000  changed=0
-combo 6 index=7379488885164942013156693687241900657297970996520120452828120168209: mean|Δ|ldoi=0.0004  ldoi_pcw=0.0004  enh_c3=0.0004  changed=0
-combo 7 index=11451048194317458886795408613135894785620073944995567971393562571761: mean|Δ|ldoi=0.0003  ldoi_pcw=0.0004  enh_c3=0.0003  changed=0
-combo 8 index=6364471228841098243389128348905741394416864860457029031797745664251: mean|Δ|ldoi=0.0325  ldoi_pcw=0.0321  enh_c3=0.0325  changed=0
-combo 9 index=1084407439922358193237811923171068977032300312374952771536825661394: mean|Δ|ldoi=0.0188  ldoi_pcw=0.0183  enh_c3=0.0188  changed=0
-combo 10 index=11391623174115695037844130913738703511620246981026259626152389728902: mean|Δ|ldoi=0.0417  ldoi_pcw=0.0021  enh_c3=0.0417  changed=0
-combo 11 index=12347581196055377963061398631985184872191305053769867321618520829594: mean|Δ|ldoi=0.0008  ldoi_pcw=0.0011  enh_c3=0.0008  changed=0
-combo 12 index=12107349724154639267207691216365830020962127691216312393518749582827: mean|Δ|ldoi=0.0188  ldoi_pcw=0.0186  enh_c3=0.0188  changed=0
-combo 13 index=4371890241958966972885186636394447873821200286660403171888789060301: mean|Δ|ldoi=0.0278  ldoi_pcw=0.0286  enh_c3=0.0278  changed=0
-combo 14 index=2478545522270877967371184746525569289321654583189132568635629729825: mean|Δ|ldoi=0.0255  ldoi_pcw=0.0098  enh_c3=0.0162  changed=42
-combo 15 index=3490190874456433092437659023624935149994854659758590273779346966477: mean|Δ|ldoi=0.0049  ldoi_pcw=0.0053  enh_c3=0.0049  changed=0
-combo 16 index=12241337516461229185068933025438896562695208005005473763731433711369: mean|Δ|ldoi=0.0008  ldoi_pcw=0.0003  enh_c3=0.0008  changed=0
-combo 17 index=10776256109062024973816486983210082933015603045663157695825744700218: mean|Δ|ldoi=0.0003  ldoi_pcw=0.0006  enh_c3=0.0003  changed=0
-combo 18 index=8037930951399877316481838640184645662614898256138106239048523341714: mean|Δ|ldoi=0.0007  ldoi_pcw=0.0006  enh_c3=0.0007  changed=0
-combo 19 index=11294400993551332718363987003946701049308915729993704618395794067880: mean|Δ|ldoi=0.0308  ldoi_pcw=0.0005  enh_c3=0.0308  changed=0
-combo 20 index=9507871589407626890121785711817054559983906173598869856377877867278: mean|Δ|ldoi=0.0171  ldoi_pcw=0.0033  enh_c3=0.0171  changed=0
-combo 21 index=13247922004903657361071888850640704390422862171297473797292859158076: mean|Δ|ldoi=0.0369  ldoi_pcw=0.0070  enh_c3=0.0423  changed=23
-combo 22 index=1278316118064029397007923108080992114411235385029902628182395968729: mean|Δ|ldoi=0.0070  ldoi_pcw=0.0067  enh_c3=0.0065  changed=2
-combo 23 index=11186394986570440505581571875394335458852209987028213620653563622650: mean|Δ|ldoi=0.0058  ldoi_pcw=0.0056  enh_c3=0.0058  changed=0
-combo 24 index=10829069849537277777747480624996590483597341266591668681878051732684: mean|Δ|ldoi=0.0088  ldoi_pcw=0.0087  enh_c3=0.0088  changed=0
-combo 25 index=11118888259567474609480366934546431181204251228443568671829515582632: mean|Δ|ldoi=0.0082  ldoi_pcw=0.0082  enh_c3=0.0082  changed=0
-combo 26 index=1331327218649808600279826201380780326197673327855988653655637502753: mean|Δ|ldoi=0.0220  ldoi_pcw=0.0213  enh_c3=0.0220  changed=0
-combo 27 index=5653814062174839705859489660065499067643904272337927987067901931140: mean|Δ|ldoi=0.0216  ldoi_pcw=0.0181  enh_c3=0.0193  changed=18
-combo 28 index=11162270908961579981215984711607681064701535202777271123196356649936: mean|Δ|ldoi=0.0179  ldoi_pcw=0.0116  enh_c3=0.0179  changed=0
-combo 29 index=8632890381279089777090384231928714361086776175995876814273035367198: mean|Δ|ldoi=0.0000  ldoi_pcw=0.0000  enh_c3=0.0000  changed=0
+combo 0 index=8851751101911509752322234120777354777993129476635285052769309553446: mean|Δ|ldoi=0.0058  unfixed=0.1509  ldoi_pcw=0.0054  pcw_unf=0.1409  n_unfixed=41  changed=0
+combo 1 index=11664354796213614833620236494551875160832854618380880939994440210364: mean|Δ|ldoi=0.0178  unfixed=0.1977  ldoi_pcw=0.0204  pcw_unf=0.2261  n_unfixed=97  changed=15
+combo 2 index=11733929019668620868427860750278375332240094826439786726351882106666: mean|Δ|ldoi=0.0246  unfixed=0.5000  ldoi_pcw=0.0000  pcw_unf=0.0000  n_unfixed=53  changed=0
+combo 3 index=1755422068264791796644245603328450781476530868584716391541076331315: mean|Δ|ldoi=0.0108  unfixed=0.1587  ldoi_pcw=0.0104  pcw_unf=0.1536  n_unfixed=73  changed=0
+combo 4 index=13429529091767007613686650473653800457356442852037713227949745300594: mean|Δ|ldoi=0.0085  unfixed=0.2623  ldoi_pcw=0.0071  pcw_unf=0.2180  n_unfixed=35  changed=0
+combo 5 index=6595572763820743298514929628168195515929623811917088351354177701022: mean|Δ|ldoi=0.0000  unfixed=nan  ldoi_pcw=0.0000  pcw_unf=nan  n_unfixed=0  changed=0
+combo 6 index=7379488885164942013156693687241900657297970996520120452828120168209: mean|Δ|ldoi=0.0004  unfixed=0.0304  ldoi_pcw=0.0004  pcw_unf=0.0323  n_unfixed=14  changed=0
+combo 7 index=11451048194317458886795408613135894785620073944995567971393562571761: mean|Δ|ldoi=0.0003  unfixed=0.1240  ldoi_pcw=0.0004  pcw_unf=0.1367  n_unfixed=3  changed=0
+combo 8 index=6364471228841098243389128348905741394416864860457029031797745664251: mean|Δ|ldoi=0.0325  unfixed=0.4117  ldoi_pcw=0.0321  pcw_unf=0.4061  n_unfixed=85  changed=0
+combo 9 index=1084407439922358193237811923171068977032300312374952771536825661394: mean|Δ|ldoi=0.0188  unfixed=0.4135  ldoi_pcw=0.0183  pcw_unf=0.4013  n_unfixed=49  changed=0
+combo 10 index=11391623174115695037844130913738703511620246981026259626152389728902: mean|Δ|ldoi=0.0417  unfixed=0.4828  ldoi_pcw=0.0021  pcw_unf=0.0243  n_unfixed=93  changed=0
+combo 11 index=12347581196055377963061398631985184872191305053769867321618520829594: mean|Δ|ldoi=0.0008  unfixed=0.0607  ldoi_pcw=0.0011  pcw_unf=0.0812  n_unfixed=15  changed=0
+combo 12 index=12107349724154639267207691216365830020962127691216312393518749582827: mean|Δ|ldoi=0.0188  unfixed=0.4124  ldoi_pcw=0.0186  pcw_unf=0.4077  n_unfixed=49  changed=0
+combo 13 index=4371890241958966972885186636394447873821200286660403171888789060301: mean|Δ|ldoi=0.0278  unfixed=0.4040  ldoi_pcw=0.0286  pcw_unf=0.4154  n_unfixed=74  changed=0
+combo 14 index=2478545522270877967371184746525569289321654583189132568635629729825: mean|Δ|ldoi=0.0255  unfixed=0.2746  ldoi_pcw=0.0098  pcw_unf=0.1052  n_unfixed=100  changed=42
+combo 15 index=3490190874456433092437659023624935149994854659758590273779346966477: mean|Δ|ldoi=0.0049  unfixed=0.1348  ldoi_pcw=0.0053  pcw_unf=0.1466  n_unfixed=39  changed=0
+combo 16 index=12241337516461229185068933025438896562695208005005473763731433711369: mean|Δ|ldoi=0.0008  unfixed=0.0142  ldoi_pcw=0.0003  pcw_unf=0.0060  n_unfixed=57  changed=0
+combo 17 index=10776256109062024973816486983210082933015603045663157695825744700218: mean|Δ|ldoi=0.0003  unfixed=0.0616  ldoi_pcw=0.0006  pcw_unf=0.1088  n_unfixed=6  changed=0
+combo 18 index=8037930951399877316481838640184645662614898256138106239048523341714: mean|Δ|ldoi=0.0007  unfixed=0.0178  ldoi_pcw=0.0006  pcw_unf=0.0140  n_unfixed=43  changed=0
+combo 19 index=11294400993551332718363987003946701049308915729993704618395794067880: mean|Δ|ldoi=0.0308  unfixed=0.3313  ldoi_pcw=0.0005  pcw_unf=0.0049  n_unfixed=100  changed=0
+combo 20 index=9507871589407626890121785711817054559983906173598869856377877867278: mean|Δ|ldoi=0.0171  unfixed=0.4714  ldoi_pcw=0.0033  pcw_unf=0.0900  n_unfixed=39  changed=0
+combo 21 index=13247922004903657361071888850640704390422862171297473797292859158076: mean|Δ|ldoi=0.0369  unfixed=0.3396  ldoi_pcw=0.0070  pcw_unf=0.0643  n_unfixed=117  changed=23
+combo 22 index=1278316118064029397007923108080992114411235385029902628182395968729: mean|Δ|ldoi=0.0070  unfixed=0.0924  ldoi_pcw=0.0067  pcw_unf=0.0889  n_unfixed=81  changed=2
+combo 23 index=11186394986570440505581571875394335458852209987028213620653563622650: mean|Δ|ldoi=0.0058  unfixed=0.1482  ldoi_pcw=0.0056  pcw_unf=0.1441  n_unfixed=42  changed=0
+combo 24 index=10829069849537277777747480624996590483597341266591668681878051732684: mean|Δ|ldoi=0.0088  unfixed=0.3927  ldoi_pcw=0.0087  pcw_unf=0.3881  n_unfixed=24  changed=0
+combo 25 index=11118888259567474609480366934546431181204251228443568671829515582632: mean|Δ|ldoi=0.0082  unfixed=0.4218  ldoi_pcw=0.0082  pcw_unf=0.4178  n_unfixed=21  changed=0
+combo 26 index=1331327218649808600279826201380780326197673327855988653655637502753: mean|Δ|ldoi=0.0220  unfixed=0.2371  ldoi_pcw=0.0213  pcw_unf=0.2291  n_unfixed=100  changed=0
+combo 27 index=5653814062174839705859489660065499067643904272337927987067901931140: mean|Δ|ldoi=0.0216  unfixed=0.3021  ldoi_pcw=0.0181  pcw_unf=0.2535  n_unfixed=77  changed=18
+combo 28 index=11162270908961579981215984711607681064701535202777271123196356649936: mean|Δ|ldoi=0.0179  unfixed=0.2530  ldoi_pcw=0.0116  pcw_unf=0.1636  n_unfixed=76  changed=0
+combo 29 index=8632890381279089777090384231928714361086776175995876814273035367198: mean|Δ|ldoi=0.0000  unfixed=nan  ldoi_pcw=0.0000  pcw_unf=nan  n_unfixed=0  changed=0
 
 Pooled over all combos × nodes — |Δ| summary by method:
          method   mean  median    p75    p90    max     n
@@ -170,6 +138,17 @@ enhanced+j(c=2) 0.0138  0.0000 0.0000 0.0000 0.5000 32280
 enhanced+j(c=3) 0.0138  0.0000 0.0000 0.0000 0.5000 32280
  ldoi+primer+cw 0.0084  0.0000 0.0000 0.0000 0.5733 32280
 
+Pooled over LDOI-unfixed nodes only (excl. sources; set varies by combo) — |Δ| summary by method:
+         method   mean  median    p75    p90    max    n
+           ldoi 0.2799  0.3289 0.4580 0.5000 0.5000 1603
+  enhanced(c=1) 0.2800  0.3289 0.4580 0.5000 0.5000 1603
+  enhanced(c=2) 0.2777  0.2897 0.4432 0.5000 0.5000 1603
+  enhanced(c=3) 0.2777  0.2897 0.4432 0.5000 0.5000 1603
+enhanced+j(c=1) 0.2800  0.3289 0.4580 0.5000 0.5000 1603
+enhanced+j(c=2) 0.2777  0.2897 0.4432 0.5000 0.5000 1603
+enhanced+j(c=3) 0.2776  0.2897 0.4432 0.5000 0.5000 1603
+ ldoi+primer+cw 0.1693  0.1412 0.3208 0.4114 0.5733 1603
+
 Per-combo mean |Δ| (mean across combos):
   ldoi                mean=0.0139  std=0.0121
   enhanced(c=1)       mean=0.0139  std=0.0121
@@ -179,6 +158,18 @@ Per-combo mean |Δ| (mean across combos):
   enhanced+j(c=2)     mean=0.0138  std=0.0123
   enhanced+j(c=3)     mean=0.0138  std=0.0123
   ldoi+primer+cw      mean=0.0084  std=0.0088
+
+Per-combo mean |Δ| on LDOI-unfixed nodes (excl. sources; mean across combos with ≥1 unfixed):
+  ldoi                mean=0.2536  std=0.1525  n_combos=28
+  enhanced(c=1)       mean=0.2537  std=0.1525  n_combos=28
+  enhanced(c=2)       mean=0.2518  std=0.1541  n_combos=28
+  enhanced(c=3)       mean=0.2518  std=0.1541  n_combos=28
+  enhanced+j(c=1)     mean=0.2537  std=0.1525  n_combos=28
+  enhanced+j(c=2)     mean=0.2518  std=0.1541  n_combos=28
+  enhanced+j(c=3)     mean=0.2518  std=0.1541  n_combos=28
+  ldoi+primer+cw      mean=0.1739  std=0.1391  n_combos=28
+
+  n_ldoi_unfixed across combos: mean=53.4  min=0  max=117
 
 Method wall times across combos:
   ldoi                total=0.046s  mean=0.002s  std=0.002s
@@ -203,18 +194,34 @@ enhanced+j(c=3)     0 31018  31018
  ldoi+primer+cw  1242 30678  31920
   (n=32280 node×combo rows)
 
-Writing |Δ| distribution plots…
-  wrote /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/nodes_pooled_abs_delta_box.png
-  wrote /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/nodes_pooled_abs_delta_hist.png
-  wrote /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/nodes_pooled_abs_delta_ecdf.png
-  wrote /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/nodes_pooled_abs_delta_summary.png
+Writing |Δ| distribution plots (all nodes)…
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/nodes_pooled_abs_delta_box.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/nodes_pooled_abs_delta_hist.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/nodes_pooled_abs_delta_ecdf.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/nodes_pooled_abs_delta_summary.png
+Writing |Δ| distribution plots (LDOI-unfixed excl. sources)…
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/nodes_ldoi_unfixed_abs_delta_box.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/nodes_ldoi_unfixed_abs_delta_hist.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/nodes_ldoi_unfixed_abs_delta_ecdf.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/nodes_ldoi_unfixed_abs_delta_summary.png
+Writing combo-mean |Δ| plots (one value per source combo)…
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/combos_pooled_abs_delta_box.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/combos_pooled_abs_delta_hist.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/combos_pooled_abs_delta_ecdf.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/combos_pooled_abs_delta_summary.png
+Writing combo-mean |Δ| plots (unfixed nodes only; equal weight per combo)…
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/combos_ldoi_unfixed_abs_delta_box.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/combos_ldoi_unfixed_abs_delta_hist.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/combos_ldoi_unfixed_abs_delta_ecdf.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/combos_ldoi_unfixed_abs_delta_summary.png
 Writing method compute-time plot…
-  wrote /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/method_compute_times.png
-  wrote /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/node_cmp.csv
-  wrote /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/per_combo_summary.csv
-  wrote /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/method_timings.csv
-  wrote /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/pooled_abs_delta_summary.csv
-  wrote /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/best_method_counts.csv
-  wrote /home/troonmel/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/method_timings_summary.csv
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/method_compute_times.png
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/node_cmp.csv
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/per_combo_summary.csv
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/method_timings.csv
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/pooled_abs_delta_summary.csv
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/pooled_abs_delta_summary_ldoi_unfixed.csv
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/best_method_counts.csv
+  wrote /home/kyuhyongpark/Boolmore/boolmore/dev/logs/investigate_ldoi_ra_243_source_combos/243/combo-seed-0/method_timings_summary.csv
 
-finished (UTC): 2026-11-26T17:02:19.739371+00:00
+finished (UTC): 2026-11-26T18:28:16.311167+00:00

@@ -11,6 +11,10 @@
 #    reduce / drop constants → sync CW on the free subnet → merge fixed values
 # 6. For each combo: CubeWalkers synchronous NAV on the full network (``T = 5*N``)
 # 7. Cache LDOI / CW results; compare prediction quality and wall times
+# 8. Also report |Δ| over LDOI-unfixed nodes only (NAV 0.5 under plain LDOI,
+#    excluding sources); the node set is per combo and shared across methods
+# 9. Combo-equal plots: mean |Δ| per source combo (avoids overweighting combos
+#    with more unfixed nodes in the node-pooled unfixed ECDFs / boxes)
 #
 # Cubewalkers requires CUDA + CuPy in WSL2 (see ``cw_helpers.require_cubewalkers``).
 # ``SMOKE=1`` uses a tiny horizon / fewer combos for an end-to-end check.
@@ -153,6 +157,27 @@ TIMING_METHOD_ORDER = METHOD_ORDER + [METHOD_CW]
 
 def _assignment_key(assignment: dict[str, int]) -> str:
     return json.dumps(sorted(assignment.items()), separators=(",", ":"))
+
+
+def _ldoi_unfixed_nodes(
+    nav_ldoi: dict[str, float],
+    *,
+    node_names: list[str],
+    source_set: set[str],
+    eps: float = 1e-12,
+) -> list[str]:
+    """Nodes left at 0.5 by plain LDOI, excluding syntactic sources.
+
+    Sources are always fixed by the seed assignment; the interesting free set
+    for |Δ| is everything else LDOI does not pin to 0/1. The same node list is
+    used when scoring every method on that combo (other methods may assign
+    values other than 0.5 on these nodes).
+    """
+    return [
+        n
+        for n in node_names
+        if n not in source_set and abs(float(nav_ldoi[n]) - 0.5) < eps
+    ]
 
 
 def _parse_bnet_rules(text: str) -> dict[str, str]:
@@ -738,7 +763,43 @@ def _build_cmp_df(
 per_combo_rows: list[dict] = []
 timing_rows: list[dict] = []
 pooled_abs: dict[str, list[float]] = {m: [] for m in METHOD_ORDER}
+pooled_abs_unfixed: dict[str, list[float]] = {m: [] for m in METHOD_ORDER}
 all_node_cmp: list[pd.DataFrame] = []
+_source_set = set(sources)
+
+
+def _pooled_abs_summary(
+    pooled: dict[str, list[float]],
+) -> pd.DataFrame:
+    rows = []
+    for m in METHOD_ORDER:
+        vals = np.asarray(pooled[m], dtype=np.float64)
+        if vals.size == 0:
+            rows.append(
+                {
+                    "method": m,
+                    "mean": float("nan"),
+                    "median": float("nan"),
+                    "p75": float("nan"),
+                    "p90": float("nan"),
+                    "max": float("nan"),
+                    "n": 0,
+                }
+            )
+            continue
+        rows.append(
+            {
+                "method": m,
+                "mean": float(vals.mean()),
+                "median": float(np.median(vals)),
+                "p75": float(np.quantile(vals, 0.75)),
+                "p90": float(np.quantile(vals, 0.90)),
+                "max": float(vals.max()),
+                "n": int(vals.size),
+            }
+        )
+    return pd.DataFrame(rows)
+
 
 for i, (idx, assignment) in enumerate(zip(combo_indices, assignments)):
     key = _assignment_key(assignment)
@@ -747,15 +808,26 @@ for i, (idx, assignment) in enumerate(zip(combo_indices, assignments)):
     nav_by_method = {m: ldoi_entry["nav"][m] for m in METHOD_ORDER}
     nav_cw = cw_entry["nav"]
 
+    unfixed_nodes = _ldoi_unfixed_nodes(
+        nav_by_method[METHOD_LDOI],
+        node_names=node_names,
+        source_set=_source_set,
+    )
+    unfixed_set = set(unfixed_nodes)
+
     cmp_df = _build_cmp_df(node_names, "node", nav_by_method, nav_cw)
     cmp_df.insert(0, "combo_i", i)
     cmp_df.insert(1, "combo_index", int(idx))
+    cmp_df["ldoi_unfixed"] = cmp_df["node"].isin(unfixed_set)
     all_node_cmp.append(cmp_df)
+
+    cmp_unfixed = cmp_df[cmp_df["ldoi_unfixed"]]
 
     row: dict = {
         "combo_i": i,
         "combo_index": int(idx),
         "n_sources_on": int(sum(assignment.values())),
+        "n_ldoi_unfixed": int(len(unfixed_nodes)),
     }
     for m in METHOD_ORDER:
         col = ABS_COL_SHORT[m]
@@ -764,6 +836,17 @@ for i, (idx, assignment) in enumerate(zip(combo_indices, assignments)):
         row[f"p90_{col}"] = float(cmp_df[col].quantile(0.90))
         row[f"max_{col}"] = float(cmp_df[col].max())
         pooled_abs[m].extend(cmp_df[col].tolist())
+        if len(cmp_unfixed):
+            row[f"mean_{col}_unfixed"] = float(cmp_unfixed[col].mean())
+            row[f"median_{col}_unfixed"] = float(cmp_unfixed[col].median())
+            row[f"p90_{col}_unfixed"] = float(cmp_unfixed[col].quantile(0.90))
+            row[f"max_{col}_unfixed"] = float(cmp_unfixed[col].max())
+            pooled_abs_unfixed[m].extend(cmp_unfixed[col].tolist())
+        else:
+            row[f"mean_{col}_unfixed"] = float("nan")
+            row[f"median_{col}_unfixed"] = float("nan")
+            row[f"p90_{col}_unfixed"] = float("nan")
+            row[f"max_{col}_unfixed"] = float("nan")
     row["n_changed"] = int(cmp_df["changed"].sum())
     per_combo_rows.append(row)
 
@@ -788,8 +871,10 @@ for i, (idx, assignment) in enumerate(zip(combo_indices, assignments)):
     print(
         f"combo {i} index={idx}: "
         f"mean|Δ|ldoi={row['mean_abs_delta_ldoi']:.4f}  "
+        f"unfixed={row['mean_abs_delta_ldoi_unfixed']:.4f}  "
         f"ldoi_pcw={row['mean_abs_delta_ldoi_pcw']:.4f}  "
-        f"enh_c3={row.get('mean_abs_delta_enh_c3', float('nan')):.4f}  "
+        f"pcw_unf={row['mean_abs_delta_ldoi_pcw_unfixed']:.4f}  "
+        f"n_unfixed={row['n_ldoi_unfixed']}  "
         f"changed={row['n_changed']}"
     )
 
@@ -799,22 +884,20 @@ timings_df = pd.DataFrame(timing_rows)
 
 print()
 print("Pooled over all combos × nodes — |Δ| summary by method:")
-_summary_rows = []
-for m in METHOD_ORDER:
-    vals = np.asarray(pooled_abs[m], dtype=np.float64)
-    _summary_rows.append(
-        {
-            "method": m,
-            "mean": float(vals.mean()),
-            "median": float(np.median(vals)),
-            "p75": float(np.quantile(vals, 0.75)),
-            "p90": float(np.quantile(vals, 0.90)),
-            "max": float(vals.max()),
-            "n": int(vals.size),
-        }
-    )
-pooled_summary_df = pd.DataFrame(_summary_rows)
+pooled_summary_df = _pooled_abs_summary(pooled_abs)
 print(pooled_summary_df.to_string(index=False, float_format=lambda x: f"{x:.4f}"))
+print()
+
+print(
+    "Pooled over LDOI-unfixed nodes only (excl. sources; set varies by combo) "
+    "— |Δ| summary by method:"
+)
+pooled_unfixed_summary_df = _pooled_abs_summary(pooled_abs_unfixed)
+print(
+    pooled_unfixed_summary_df.to_string(
+        index=False, float_format=lambda x: f"{x:.4f}"
+    )
+)
 print()
 
 print("Per-combo mean |Δ| (mean across combos):")
@@ -825,6 +908,31 @@ for m in METHOD_ORDER:
         f"mean={per_combo_df[col].mean():.4f}  "
         f"std={per_combo_df[col].std(ddof=0):.4f}"
     )
+print()
+
+print(
+    "Per-combo mean |Δ| on LDOI-unfixed nodes "
+    "(excl. sources; mean across combos with ≥1 unfixed):"
+)
+for m in METHOD_ORDER:
+    col = f"mean_{ABS_COL_SHORT[m]}_unfixed"
+    sub = per_combo_df[col].dropna()
+    if sub.empty:
+        print(f"  {m:18s}  (no unfixed nodes in any combo)")
+        continue
+    print(
+        f"  {m:18s}  "
+        f"mean={sub.mean():.4f}  "
+        f"std={sub.std(ddof=0):.4f}  "
+        f"n_combos={len(sub)}"
+    )
+print()
+print(
+    f"  n_ldoi_unfixed across combos: "
+    f"mean={per_combo_df['n_ldoi_unfixed'].mean():.1f}  "
+    f"min={int(per_combo_df['n_ldoi_unfixed'].min())}  "
+    f"max={int(per_combo_df['n_ldoi_unfixed'].max())}"
+)
 print()
 
 print("Method wall times across combos:")
@@ -928,21 +1036,48 @@ def _plot_method_timings(out_dir: Path) -> Path | None:
     return path
 
 
-def _abs_series_by_method_pooled() -> dict[str, np.ndarray]:
-    return {
-        m: np.asarray(pooled_abs[m], dtype=np.float64) for m in METHOD_ORDER
-    }
+def _abs_series_from_pooled(
+    pooled: dict[str, list[float]],
+) -> dict[str, np.ndarray]:
+    return {m: np.asarray(pooled[m], dtype=np.float64) for m in METHOD_ORDER}
 
 
-def _plot_abs_delta_distributions(out_dir: Path) -> list[Path]:
-    series = _abs_series_by_method_pooled()
+def _abs_series_from_per_combo(
+    df: pd.DataFrame,
+    *,
+    unfixed: bool,
+) -> dict[str, np.ndarray]:
+    """One value per combo: mean |Δ| over nodes (all or LDOI-unfixed)."""
+    suffix = "_unfixed" if unfixed else ""
+    out: dict[str, np.ndarray] = {}
+    for m in METHOD_ORDER:
+        col = f"mean_{ABS_COL_SHORT[m]}{suffix}"
+        vals = df[col].to_numpy(dtype=np.float64)
+        out[m] = vals[np.isfinite(vals)]
+    return out
+
+
+def _plot_abs_delta_distributions(
+    out_dir: Path,
+    series: dict[str, np.ndarray],
+    *,
+    scope: str,
+    title_note: str = "",
+    value_label: str = "|Δ| NAV vs CubeWalkers (sync)",
+    ecdf_item: str = "items",
+) -> list[Path]:
     written: list[Path] = []
-    all_vals = np.concatenate(list(series.values()))
-    xmax = float(np.nanmax(all_vals)) if len(all_vals) else 1.0
+    nonempty = [v for v in series.values() if len(v)]
+    if not nonempty:
+        print(f"  (skipped {scope} plots — no values)")
+        return written
+    all_vals = np.concatenate(nonempty)
+    xmax = float(np.nanmax(all_vals)) if len(all_vals) else 0.5
     if not np.isfinite(xmax) or xmax <= 0:
-        xmax = 1.0
+        xmax = 0.5
+    xmax = max(xmax, 0.5)
     bins = np.linspace(0.0, xmax, 31)
-    scope = "nodes_pooled"
+    note = f"\n{title_note}" if title_note else ""
 
     fig, ax = plt.subplots(figsize=(8.5, 4.2))
     data = [series[m] for m in METHOD_ORDER]
@@ -959,6 +1094,8 @@ def _plot_abs_delta_distributions(out_dir: Path) -> list[Path]:
         patch.set_alpha(0.45)
         patch.set_edgecolor(METHOD_COLORS[m])
     for m, vals, xpos in zip(METHOD_ORDER, data, range(1, len(METHOD_ORDER) + 1)):
+        if len(vals) == 0:
+            continue
         ax.scatter(
             xpos,
             np.mean(vals),
@@ -970,8 +1107,9 @@ def _plot_abs_delta_distributions(out_dir: Path) -> list[Path]:
             linewidths=0.6,
             label="mean" if xpos == 1 else None,
         )
-    ax.set_ylabel("|Δ| NAV vs CubeWalkers (sync)")
-    ax.set_title(f"{scope}: |Δ| distribution by method")
+    ax.set_ylabel(value_label)
+    ax.set_title(f"{scope}: |Δ| distribution by method{note}")
+    ax.set_ylim(0.0, xmax * 1.02)
     ax.tick_params(axis="x", rotation=15)
     ax.grid(axis="y", alpha=0.3)
     handles, labels = ax.get_legend_handles_labels()
@@ -985,6 +1123,8 @@ def _plot_abs_delta_distributions(out_dir: Path) -> list[Path]:
 
     fig, ax = plt.subplots(figsize=(8.5, 4.5))
     for m in METHOD_ORDER:
+        if len(series[m]) == 0:
+            continue
         ax.hist(
             series[m],
             bins=bins,
@@ -1003,9 +1143,9 @@ def _plot_abs_delta_distributions(out_dir: Path) -> list[Path]:
             color=METHOD_COLORS[m],
             alpha=0.12,
         )
-    ax.set_xlabel("|Δ| NAV vs CubeWalkers (sync)")
+    ax.set_xlabel(value_label)
     ax.set_ylabel("Density")
-    ax.set_title(f"{scope}: |Δ| histogram by method")
+    ax.set_title(f"{scope}: |Δ| histogram by method{note}")
     ax.legend(frameon=False, loc="upper right")
     ax.set_xlim(0.0, xmax * 1.02)
     ax.grid(axis="y", alpha=0.3)
@@ -1029,9 +1169,9 @@ def _plot_abs_delta_distributions(out_dir: Path) -> list[Path]:
             linewidth=2.0,
             label=m,
         )
-    ax.set_xlabel("|Δ| NAV vs CubeWalkers (sync)")
-    ax.set_ylabel("ECDF  (fraction of items ≤ x)")
-    ax.set_title(f"{scope}: |Δ| empirical CDF by method")
+    ax.set_xlabel(value_label)
+    ax.set_ylabel(f"ECDF  (fraction of {ecdf_item} ≤ x)")
+    ax.set_title(f"{scope}: |Δ| empirical CDF by method{note}")
     ax.legend(frameon=False, loc="lower right")
     ax.set_xlim(0.0, xmax * 1.02)
     ax.set_ylim(0.0, 1.02)
@@ -1044,8 +1184,14 @@ def _plot_abs_delta_distributions(out_dir: Path) -> list[Path]:
 
     fig, ax = plt.subplots(figsize=(8.0, 4.0))
     x = np.arange(len(METHOD_ORDER))
-    means = [float(np.mean(series[m])) for m in METHOD_ORDER]
-    medians = [float(np.median(series[m])) for m in METHOD_ORDER]
+    means = [
+        float(np.mean(series[m])) if len(series[m]) else float("nan")
+        for m in METHOD_ORDER
+    ]
+    medians = [
+        float(np.median(series[m])) if len(series[m]) else float("nan")
+        for m in METHOD_ORDER
+    ]
     w = 0.36
     bars_mean = ax.bar(
         x - w / 2,
@@ -1070,11 +1216,14 @@ def _plot_abs_delta_distributions(out_dir: Path) -> list[Path]:
     )
     ax.set_xticks(x)
     ax.set_xticklabels(METHOD_ORDER, rotation=15)
-    ax.set_ylabel("|Δ| NAV vs CubeWalkers (sync)")
-    ax.set_title(f"{scope}: mean / median |Δ| by method")
+    ax.set_ylabel(value_label)
+    ax.set_title(f"{scope}: mean / median |Δ| by method{note}")
+    ax.set_ylim(0.0, xmax * 1.02)
     ax.legend(frameon=False, loc="upper right")
     ax.grid(axis="y", alpha=0.3)
     for bar, val in zip(bars_mean, means):
+        if not np.isfinite(val):
+            continue
         ax.text(
             bar.get_x() + bar.get_width() / 2,
             bar.get_height(),
@@ -1092,8 +1241,49 @@ def _plot_abs_delta_distributions(out_dir: Path) -> list[Path]:
     return written
 
 
-print("Writing |Δ| distribution plots…")
-for p in _plot_abs_delta_distributions(RUN_DIR):
+print("Writing |Δ| distribution plots (all nodes)…")
+for p in _plot_abs_delta_distributions(
+    RUN_DIR,
+    _abs_series_from_pooled(pooled_abs),
+    scope="nodes_pooled",
+):
+    print(f"  wrote {p}")
+
+print("Writing |Δ| distribution plots (LDOI-unfixed excl. sources)…")
+for p in _plot_abs_delta_distributions(
+    RUN_DIR,
+    _abs_series_from_pooled(pooled_abs_unfixed),
+    scope="nodes_ldoi_unfixed",
+    title_note="(unfixed nodes only; excl. sources; set varies by combo)",
+):
+    print(f"  wrote {p}")
+
+print("Writing combo-mean |Δ| plots (one value per source combo)…")
+for p in _plot_abs_delta_distributions(
+    RUN_DIR,
+    _abs_series_from_per_combo(per_combo_df, unfixed=False),
+    scope="combos_pooled",
+    title_note="(mean |Δ| over all nodes; one point per combo)",
+    value_label="mean |Δ| per combo (all nodes)",
+    ecdf_item="combos",
+):
+    print(f"  wrote {p}")
+
+print(
+    "Writing combo-mean |Δ| plots "
+    "(unfixed nodes only; equal weight per combo)…"
+)
+for p in _plot_abs_delta_distributions(
+    RUN_DIR,
+    _abs_series_from_per_combo(per_combo_df, unfixed=True),
+    scope="combos_ldoi_unfixed",
+    title_note=(
+        "(mean |Δ| over unfixed nodes only; "
+        "one point per combo with ≥1 unfixed)"
+    ),
+    value_label="mean |Δ| per combo (unfixed nodes only)",
+    ecdf_item="combos",
+):
     print(f"  wrote {p}")
 
 print("Writing method compute-time plot…")
@@ -1107,6 +1297,7 @@ node_csv = RUN_DIR / "node_cmp.csv"
 per_combo_csv = RUN_DIR / "per_combo_summary.csv"
 timings_csv = RUN_DIR / "method_timings.csv"
 pooled_csv = RUN_DIR / "pooled_abs_delta_summary.csv"
+pooled_unfixed_csv = RUN_DIR / "pooled_abs_delta_summary_ldoi_unfixed.csv"
 best_csv = RUN_DIR / "best_method_counts.csv"
 timing_summary_csv = RUN_DIR / "method_timings_summary.csv"
 
@@ -1114,6 +1305,7 @@ node_cmp_all.to_csv(node_csv, index=False)
 per_combo_df.to_csv(per_combo_csv, index=False)
 timings_df.to_csv(timings_csv, index=False)
 pooled_summary_df.to_csv(pooled_csv, index=False)
+pooled_unfixed_summary_df.to_csv(pooled_unfixed_csv, index=False)
 best_counts_df.to_csv(best_csv, index=False)
 timing_summary_df.to_csv(timing_summary_csv, index=False)
 
@@ -1121,6 +1313,7 @@ print(f"  wrote {node_csv}")
 print(f"  wrote {per_combo_csv}")
 print(f"  wrote {timings_csv}")
 print(f"  wrote {pooled_csv}")
+print(f"  wrote {pooled_unfixed_csv}")
 print(f"  wrote {best_csv}")
 print(f"  wrote {timing_summary_csv}")
 
