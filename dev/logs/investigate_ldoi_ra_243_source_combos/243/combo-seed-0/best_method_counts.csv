@@ -1,0 +1,8 @@
+method,sole,tied,total
+ldoi,1,32222,32223
+enhanced(c=1),0,32222,32222
+enhanced(c=2),0,32237,32237
+enhanced(c=3),0,32237,32237
+enhanced+j(c=1),0,32222,32222
+enhanced+j(c=2),0,32237,32237
+enhanced+j(c=3),0,32237,32237
