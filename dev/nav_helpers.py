@@ -127,10 +127,37 @@ def sample_source_indices(x: int, n_samples: int, rng: random.Random) -> list[in
     Always shuffled (including full enumeration). Sequential ``0 .. 2**x-1``
     order would keep high-order source bits constant on nested prefixes, so
     Δprev would hit 0.5 artifactually on every power-of-two doubling.
+
+    For large ``x`` (``2**x`` beyond C ``ssize_t``), ``random.sample(range(...))``
+    fails; sample unique ``getrandbits(x)`` indices instead.
     """
-    total = 2**x
-    n = min(n_samples, total)
-    return rng.sample(range(total), n)
+    if x < 0:
+        raise ValueError(f"x must be >= 0, got {x}")
+    if n_samples < 0:
+        raise ValueError(f"n_samples must be >= 0, got {n_samples}")
+    if x == 0:
+        return [0] if n_samples else []
+
+    # range(2**x) / len() fails once 2**x exceeds C ssize_t (~2**63).
+    if x < 63:
+        total = 2**x
+        n = min(n_samples, total)
+        return rng.sample(range(total), n)
+
+    n = n_samples
+    if n == 0:
+        return []
+    # Collision probability among n << 2**x samples is negligible; still
+    # enforce uniqueness for a clean without-replacement draw.
+    seen: set[int] = set()
+    out: list[int] = []
+    while len(out) < n:
+        idx = rng.getrandbits(x)
+        if idx not in seen:
+            seen.add(idx)
+            out.append(idx)
+    rng.shuffle(out)
+    return out
 
 
 def sample_size_grid(requested: Sequence[int], x: int) -> list[int]:
