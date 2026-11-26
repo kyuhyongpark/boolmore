@@ -7,8 +7,10 @@
 # 2. Count syntactic source nodes (dangling regulators become sources on load)
 # 3. Sample 30 full 0/1 source assignments (seeded) and persist them
 # 4. For each combo: LDOI + LDOI-enhanced (cutoffs 1–3, optional joint) NAV
-# 5. For each combo: CubeWalkers synchronous NAV (``T = 5*N``)
-# 6. Cache LDOI / CW results; compare prediction quality and wall times
+# 5. For each combo: ``ldoi+primer+cw`` — LDOI → plug into bnet → Primer-B
+#    reduce / drop constants → sync CW on the free subnet → merge fixed values
+# 6. For each combo: CubeWalkers synchronous NAV on the full network (``T = 5*N``)
+# 7. Cache LDOI / CW results; compare prediction quality and wall times
 #
 # Cubewalkers requires CUDA + CuPy in WSL2 (see ``cw_helpers.require_cubewalkers``).
 # ``SMOKE=1`` uses a tiny horizon / fewer combos for an end-to-end check.
@@ -22,6 +24,7 @@ import json
 import os
 import pickle
 import random
+import re
 import sys
 import time
 from datetime import datetime, timezone
@@ -34,12 +37,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from pyboolnet.file_exchange import primes2bnet
+from pyboolnet.prime_implicants import find_constants, percolate
 
+from boolmore.inference.ldoi import logical_domain_of_influence
 from boolmore.inference.prediction import (
     _nav_from_ldoi,
     _nav_from_ldoi_enhanced,
     _sc_subsets_by_size,
 )
+from boolmore.io.bnet_primes import bnet_text_to_primes
 from boolmore.io.load import load_primes
 from boolmore.io.paths import project_root
 
@@ -59,6 +65,9 @@ from nav_helpers import (
     sample_source_indices,
     source_nodes_from_primes,
 )
+
+_IDENT_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
+_BOOL_CONST_NAMES = frozenset({"true", "false"})
 
 # %% [markdown]
 # ## Config
@@ -98,9 +107,11 @@ if SMOKE:
 METHOD_LDOI = "ldoi"
 METHOD_ENH = {c: f"enhanced(c={c})" for c in ENHANCED_CUTOFFS}
 METHOD_ENHJ = {c: f"enhanced+j(c={c})" for c in ENHANCED_CUTOFFS}
+METHOD_LDOI_PCW = "ldoi+primer+cw"
 METHOD_ORDER = [METHOD_LDOI] + [METHOD_ENH[c] for c in ENHANCED_CUTOFFS]
 if USE_JOINT_SELF_LOOPS:
     METHOD_ORDER = METHOD_ORDER + [METHOD_ENHJ[c] for c in ENHANCED_CUTOFFS]
+METHOD_ORDER = METHOD_ORDER + [METHOD_LDOI_PCW]
 ABS_COL_SHORT = {
     METHOD_LDOI: "abs_delta_ldoi",
     **{METHOD_ENH[c]: f"abs_delta_enh_c{c}" for c in ENHANCED_CUTOFFS},
@@ -109,6 +120,16 @@ if USE_JOINT_SELF_LOOPS:
     ABS_COL_SHORT.update(
         {METHOD_ENHJ[c]: f"abs_delta_enhj_c{c}" for c in ENHANCED_CUTOFFS}
     )
+ABS_COL_SHORT[METHOD_LDOI_PCW] = "abs_delta_ldoi_pcw"
+VAL_COL_SHORT = {
+    METHOD_LDOI: "ldoi",
+    **{METHOD_ENH[c]: f"enh_c{c}" for c in ENHANCED_CUTOFFS},
+    METHOD_LDOI_PCW: "ldoi_pcw",
+}
+if USE_JOINT_SELF_LOOPS:
+    VAL_COL_SHORT.update(
+        {METHOD_ENHJ[c]: f"enhj_c{c}" for c in ENHANCED_CUTOFFS}
+    )
 
 METHOD_CW = "cubewalkers"
 METHOD_COLORS = {
@@ -116,6 +137,7 @@ METHOD_COLORS = {
     METHOD_ENH[1]: "#1f77b4",
     METHOD_ENH[2]: "#2ca02c",
     METHOD_ENH[3]: "#d62728",
+    METHOD_LDOI_PCW: "#ff7f0e",
     METHOD_CW: "#7f7f7f",
 }
 if USE_JOINT_SELF_LOOPS:
@@ -131,6 +153,163 @@ TIMING_METHOD_ORDER = METHOD_ORDER + [METHOD_CW]
 
 def _assignment_key(assignment: dict[str, int]) -> str:
     return json.dumps(sorted(assignment.items()), separators=(",", ":"))
+
+
+def _parse_bnet_rules(text: str) -> dict[str, str]:
+    """Parse BoolNet text into ``{node: expression}`` (header / comments dropped)."""
+    rules: dict[str, str] = {}
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        lower = "".join(line.lower().split())
+        if lower == "targets,factors" or lower.startswith("targets,factors"):
+            continue
+        if "," not in line:
+            raise ValueError(f"invalid bnet line (no comma): {raw!r}")
+        name, expr = line.split(",", 1)
+        name = name.strip()
+        expr = expr.strip()
+        if not name:
+            raise ValueError(f"invalid bnet line (empty target): {raw!r}")
+        rules[name] = expr
+    return rules
+
+
+def _substitute_fixed_in_expr(expr: str, fixed: dict[str, int]) -> str:
+    """Replace fixed node identifiers in a BoolNet expression with ``0`` / ``1``."""
+
+    def _repl(match: re.Match[str]) -> str:
+        tok = match.group(0)
+        if tok.lower() in _BOOL_CONST_NAMES:
+            return tok
+        if tok in fixed:
+            return str(int(fixed[tok]))
+        return tok
+
+    return _IDENT_RE.sub(_repl, expr)
+
+
+def _bnet_text_from_rules(rules: dict[str, str]) -> str:
+    lines = ["targets, factors"]
+    for name in sorted(rules):
+        lines.append(f"{name}, {rules[name]}")
+    return "\n".join(lines) + "\n"
+
+
+def _rules_text_for_cubewalkers(bnet_text: str) -> str:
+    """Drop ``targets, factors`` header from an in-memory BoolNet string."""
+    lines: list[str] = []
+    for line in bnet_text.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if stripped.lower().replace("\t", " ").replace(" ", "") in {
+            "targets,factors",
+            "targets,factors,",
+        }:
+            continue
+        left = stripped.split(",", 1)[0].strip().lower()
+        if left == "targets":
+            continue
+        lines.append(line)
+    return "\n".join(lines) + "\n"
+
+
+def _horizon_for_n(n_nodes: int) -> tuple[int, int]:
+    """Return ``(T, T_WINDOW)`` for a free subnet of size ``n_nodes``."""
+    if n_nodes < 1:
+        raise ValueError("n_nodes must be >= 1")
+    if SMOKE:
+        return 80, 16
+    t = 5 * n_nodes
+    tw = max(n_nodes, t // 4)
+    return t, tw
+
+
+def _nav_from_ldoi_primer_cw(
+    primes: dict,
+    assignment: dict[str, int],
+    complete_bnet_text: str,
+    *,
+    n_walkers: int,
+    threads_per_block: tuple[int, int],
+    maskfunction,
+    model_name: str,
+) -> tuple[dict[str, float], dict]:
+    """LDOI → plug into bnet → Primer-B reduce → optional CW on free nodes.
+
+    1. LDOI of the source assignment (includes the seed).
+    2. Plug those fixed values into the complete ``.bnet`` and drop fixed lines.
+    3. Re-import with Primer-B; percolate out any remaining constants.
+    4. If free nodes remain, run synchronous CubeWalkers with ``T = 5*N_free``.
+    5. Merge CW averages with the fixed 0/1 values for a full-network NAV.
+    """
+    fixed = dict(logical_domain_of_influence(primes, assignment))
+    rules = _parse_bnet_rules(complete_bnet_text)
+    free_rules: dict[str, str] = {}
+    for name, expr in rules.items():
+        if name in fixed:
+            continue
+        free_rules[name] = _substitute_fixed_in_expr(expr, fixed)
+
+    meta: dict = {
+        "n_ldoi_fixed": len(fixed),
+        "n_free_rules_after_plug": len(free_rules),
+        "n_free_after_reduce": 0,
+        "n_time_steps": 0,
+        "t_window": 0,
+        "ran_cw": False,
+        "cw_timings_s": {},
+    }
+
+    if not free_rules:
+        nav = {n: float(fixed[n]) if n in fixed else 0.5 for n in primes}
+        return nav, meta
+
+    plugged_text = _bnet_text_from_rules(free_rules)
+    plugged_primes = bnet_text_to_primes(plugged_text)
+    extra_const = find_constants(plugged_primes)
+    for node, value in extra_const.items():
+        fixed[node] = int(value)
+    reduced_primes = percolate(plugged_primes, remove_constants=True, copy=True)
+    meta["n_free_after_reduce"] = len(reduced_primes)
+
+    nav: dict[str, float] = {
+        n: float(fixed[n]) if n in fixed else 0.5 for n in primes
+    }
+    if not reduced_primes:
+        return nav, meta
+
+    reduced_bnet = primes2bnet(
+        reduced_primes, fname_bnet=None, minimize=False, header=True
+    )
+    rules_cw = _rules_text_for_cubewalkers(reduced_bnet)
+    n_free = len(reduced_primes)
+    t_steps, t_window = _horizon_for_n(n_free)
+    meta["n_time_steps"] = int(t_steps)
+    meta["t_window"] = int(t_window)
+    meta["ran_cw"] = True
+
+    nav_free, cw_timings = simulate_mean_nav(
+        rules_cw,
+        n_time_steps=t_steps,
+        t_window=t_window,
+        n_walkers=n_walkers,
+        clamps=None,
+        threads_per_block=threads_per_block,
+        model_name=model_name,
+        maskfunction=maskfunction,
+    )
+    meta["cw_timings_s"] = dict(cw_timings)
+    missing = [n for n in reduced_primes if n not in nav_free]
+    if missing:
+        raise ValueError(
+            f"reduced CW NAV missing {len(missing)} nodes e.g. {missing[:5]}"
+        )
+    for name in reduced_primes:
+        nav[name] = float(nav_free[name])
+    return nav, meta
 
 
 # %% [markdown]
@@ -276,57 +455,119 @@ if LDOI_CACHE_PATH.is_file() and not FORCE_RECOMPUTE:
           f"from {LDOI_CACHE_PATH.name}")
 
 ldoi_combos: dict[str, dict] = dict(ldoi_cache.get("combos", {}))
+COMPLETE_BNET_TEXT = COMPLETE_BNET.read_text(encoding="utf-8")
+
+_need_ldoi_pcw = any(
+    FORCE_RECOMPUTE
+    or METHOD_LDOI_PCW
+    not in ldoi_combos.get(_assignment_key(a), {}).get("nav", {})
+    for a in assignments
+)
+sync_mask_ldoi = None
+cw_mod = None
+if _need_ldoi_pcw:
+    cw_mod, cp = require_cubewalkers()
+    sync_mask_ldoi = cw_mod.update_schemes.synchronous
+    print(
+        f"CUDA devices: {cp.cuda.runtime.getDeviceCount()}  "
+        f"(needed for {METHOD_LDOI_PCW})"
+    )
+    print(f"cubewalkers: {getattr(cw_mod, '__file__', cw_mod)}")
+print()
+
 for i, (idx, assignment) in enumerate(zip(combo_indices, assignments)):
     key = _assignment_key(assignment)
     cached = ldoi_combos.get(key)
-    if cached is not None and not FORCE_RECOMPUTE:
+    have_plain = (
+        cached is not None
+        and METHOD_LDOI in cached.get("nav", {})
+        and not FORCE_RECOMPUTE
+    )
+    have_pcw = (
+        cached is not None
+        and METHOD_LDOI_PCW in cached.get("nav", {})
+        and not FORCE_RECOMPUTE
+    )
+    if have_plain and have_pcw:
         print(f"[{i + 1}/{len(assignments)}] LDOI cache hit  index={idx}")
         continue
 
-    print(f"[{i + 1}/{len(assignments)}] Computing LDOI methods  index={idx}…")
-    entry: dict = {
-        "combo_index": int(idx),
-        "assignment": dict(assignment),
-        "timings_s": {},
-        "nav": {},
-        "joint_stats": {},
-    }
-
-    _t0 = time.perf_counter()
-    nav_ldoi = _nav_from_ldoi(primes, assignment)
-    entry["timings_s"][METHOD_LDOI] = time.perf_counter() - _t0
-    entry["nav"][METHOD_LDOI] = nav_ldoi
-    print(f"  ldoi              {entry['timings_s'][METHOD_LDOI]:.3f}s")
-
-    for c in ENHANCED_CUTOFFS:
-        m = METHOD_ENH[c]
-        _t0 = time.perf_counter()
-        entry["nav"][m] = _nav_from_ldoi_enhanced(
-            primes, assignment, cutoff=c, sc_subsets=sc_subsets
+    if have_plain:
+        print(
+            f"[{i + 1}/{len(assignments)}] Filling {METHOD_LDOI_PCW}  "
+            f"index={idx}…"
         )
-        entry["timings_s"][m] = time.perf_counter() - _t0
-        print(f"  {m:18s} {entry['timings_s'][m]:.3f}s")
+        entry = cached
+        entry.setdefault("ldoi_pcw_meta", {})
+    else:
+        print(f"[{i + 1}/{len(assignments)}] Computing LDOI methods  index={idx}…")
+        entry = {
+            "combo_index": int(idx),
+            "assignment": dict(assignment),
+            "timings_s": {},
+            "nav": {},
+            "joint_stats": {},
+            "ldoi_pcw_meta": {},
+        }
 
-    if USE_JOINT_SELF_LOOPS:
+        _t0 = time.perf_counter()
+        nav_ldoi = _nav_from_ldoi(primes, assignment)
+        entry["timings_s"][METHOD_LDOI] = time.perf_counter() - _t0
+        entry["nav"][METHOD_LDOI] = nav_ldoi
+        print(f"  ldoi              {entry['timings_s'][METHOD_LDOI]:.3f}s")
+
         for c in ENHANCED_CUTOFFS:
-            m = METHOD_ENHJ[c]
-            _stats: dict = {}
+            m = METHOD_ENH[c]
             _t0 = time.perf_counter()
             entry["nav"][m] = _nav_from_ldoi_enhanced(
-                primes,
-                assignment,
-                cutoff=c,
-                sc_subsets=sc_subsets,
-                joint_self_loops=True,
-                joint_stats=_stats,
+                primes, assignment, cutoff=c, sc_subsets=sc_subsets
             )
             entry["timings_s"][m] = time.perf_counter() - _t0
-            entry["joint_stats"][m] = dict(_stats)
-            print(
-                f"  {m:18s} {entry['timings_s'][m]:.3f}s  "
-                f"joint_probed={_stats.get('n_joint_probed', 0)}  "
-                f"joint_kept={_stats.get('n_joint_kept', 0)}"
-            )
+            print(f"  {m:18s} {entry['timings_s'][m]:.3f}s")
+
+        if USE_JOINT_SELF_LOOPS:
+            for c in ENHANCED_CUTOFFS:
+                m = METHOD_ENHJ[c]
+                _stats: dict = {}
+                _t0 = time.perf_counter()
+                entry["nav"][m] = _nav_from_ldoi_enhanced(
+                    primes,
+                    assignment,
+                    cutoff=c,
+                    sc_subsets=sc_subsets,
+                    joint_self_loops=True,
+                    joint_stats=_stats,
+                )
+                entry["timings_s"][m] = time.perf_counter() - _t0
+                entry["joint_stats"][m] = dict(_stats)
+                print(
+                    f"  {m:18s} {entry['timings_s'][m]:.3f}s  "
+                    f"joint_probed={_stats.get('n_joint_probed', 0)}  "
+                    f"joint_kept={_stats.get('n_joint_kept', 0)}"
+                )
+
+    if not have_pcw:
+        assert sync_mask_ldoi is not None
+        _t0 = time.perf_counter()
+        nav_pcw, pcw_meta = _nav_from_ldoi_primer_cw(
+            primes,
+            assignment,
+            COMPLETE_BNET_TEXT,
+            n_walkers=N_WALKERS,
+            threads_per_block=THREADS_PER_BLOCK,
+            maskfunction=sync_mask_ldoi,
+            model_name=f"{SCRIPT_NAME}_pcw_{i}",
+        )
+        entry["timings_s"][METHOD_LDOI_PCW] = time.perf_counter() - _t0
+        entry["nav"][METHOD_LDOI_PCW] = nav_pcw
+        entry["ldoi_pcw_meta"] = dict(pcw_meta)
+        print(
+            f"  {METHOD_LDOI_PCW:18s} {entry['timings_s'][METHOD_LDOI_PCW]:.3f}s  "
+            f"fixed={pcw_meta['n_ldoi_fixed']}  "
+            f"free={pcw_meta['n_free_after_reduce']}  "
+            f"T={pcw_meta['n_time_steps']}  "
+            f"ran_cw={pcw_meta['ran_cw']}"
+        )
 
     ldoi_combos[key] = entry
     # Incremental save so long runs survive interruption.
@@ -374,9 +615,13 @@ _need_cw = any(
     _assignment_key(a) not in cw_combos or FORCE_RECOMPUTE for a in assignments
 )
 if _need_cw:
-    cw, cp = require_cubewalkers()
-    print(f"CUDA devices: {cp.cuda.runtime.getDeviceCount()}")
-    print(f"cubewalkers: {getattr(cw, '__file__', cw)}")
+    if cw_mod is None:
+        cw_mod, cp = require_cubewalkers()
+        print(f"CUDA devices: {cp.cuda.runtime.getDeviceCount()}")
+        print(f"cubewalkers: {getattr(cw_mod, '__file__', cw_mod)}")
+    else:
+        print(f"reusing cubewalkers already loaded for {METHOD_LDOI_PCW}")
+    cw = cw_mod
     sync_mask = cw.update_schemes.synchronous
 else:
     cw = None
@@ -454,36 +699,28 @@ print()
 def _build_cmp_df(
     keys: list[str],
     key_col: str,
-    nav_ldoi: dict[str, float],
-    nav_enh: dict[int, dict[str, float]],
+    nav_by_method: dict[str, dict[str, float]],
     nav_cw: dict[str, float],
-    nav_enhj: dict[int, dict[str, float]] | None = None,
 ) -> pd.DataFrame:
     rows = []
     for k in keys:
         row: dict = {
             key_col: k,
-            "ldoi": nav_ldoi[k],
             "cw": nav_cw[k],
-            ABS_COL_SHORT[METHOD_LDOI]: abs(nav_cw[k] - nav_ldoi[k]),
         }
-        for c in ENHANCED_CUTOFFS:
-            row[f"enh_c{c}"] = nav_enh[c][k]
-            row[ABS_COL_SHORT[METHOD_ENH[c]]] = abs(nav_cw[k] - nav_enh[c][k])
-        if nav_enhj is not None:
-            for c in ENHANCED_CUTOFFS:
-                row[f"enhj_c{c}"] = nav_enhj[c][k]
-                row[ABS_COL_SHORT[METHOD_ENHJ[c]]] = abs(
-                    nav_cw[k] - nav_enhj[c][k]
-                )
+        for m in METHOD_ORDER:
+            row[VAL_COL_SHORT[m]] = nav_by_method[m][k]
+            row[ABS_COL_SHORT[m]] = abs(nav_cw[k] - nav_by_method[m][k])
         rows.append(row)
     df = pd.DataFrame(rows)
-    enh_cols = [f"enh_c{c}" for c in ENHANCED_CUTOFFS]
-    if nav_enhj is not None:
-        enh_cols = enh_cols + [f"enhj_c{c}" for c in ENHANCED_CUTOFFS]
-    df["changed"] = (df[enh_cols].sub(df["ldoi"], axis=0).abs() > 1e-12).any(
-        axis=1
-    )
+    enh_cols = [VAL_COL_SHORT[METHOD_ENH[c]] for c in ENHANCED_CUTOFFS]
+    if USE_JOINT_SELF_LOOPS:
+        enh_cols = enh_cols + [
+            VAL_COL_SHORT[METHOD_ENHJ[c]] for c in ENHANCED_CUTOFFS
+        ]
+    df["changed"] = (
+        df[enh_cols].sub(df[VAL_COL_SHORT[METHOD_LDOI]], axis=0).abs() > 1e-12
+    ).any(axis=1)
     abs_cols = [ABS_COL_SHORT[m] for m in METHOD_ORDER]
     short_to_method = {ABS_COL_SHORT[m]: m for m in METHOD_ORDER}
     best_vals = df[abs_cols].min(axis=1)
@@ -507,18 +744,10 @@ for i, (idx, assignment) in enumerate(zip(combo_indices, assignments)):
     key = _assignment_key(assignment)
     ldoi_entry = ldoi_combos[key]
     cw_entry = cw_combos[key]
-    nav_ldoi = ldoi_entry["nav"][METHOD_LDOI]
-    nav_enh = {c: ldoi_entry["nav"][METHOD_ENH[c]] for c in ENHANCED_CUTOFFS}
-    nav_enhj = (
-        {c: ldoi_entry["nav"][METHOD_ENHJ[c]] for c in ENHANCED_CUTOFFS}
-        if USE_JOINT_SELF_LOOPS
-        else None
-    )
+    nav_by_method = {m: ldoi_entry["nav"][m] for m in METHOD_ORDER}
     nav_cw = cw_entry["nav"]
 
-    cmp_df = _build_cmp_df(
-        node_names, "node", nav_ldoi, nav_enh, nav_cw, nav_enhj
-    )
+    cmp_df = _build_cmp_df(node_names, "node", nav_by_method, nav_cw)
     cmp_df.insert(0, "combo_i", i)
     cmp_df.insert(1, "combo_index", int(idx))
     all_node_cmp.append(cmp_df)
@@ -559,6 +788,7 @@ for i, (idx, assignment) in enumerate(zip(combo_indices, assignments)):
     print(
         f"combo {i} index={idx}: "
         f"mean|Δ|ldoi={row['mean_abs_delta_ldoi']:.4f}  "
+        f"ldoi_pcw={row['mean_abs_delta_ldoi_pcw']:.4f}  "
         f"enh_c3={row.get('mean_abs_delta_enh_c3', float('nan')):.4f}  "
         f"changed={row['n_changed']}"
     )
@@ -684,7 +914,8 @@ def _plot_method_timings(out_dir: Path) -> Path | None:
     ax.text(
         0.01,
         0.98,
-        "LDOI / enhanced exclude SC-subset prep; CW = t_total",
+        "LDOI / enhanced exclude SC-subset prep; "
+        "ldoi+primer+cw includes reduced CW; full CW = t_total",
         transform=ax.transAxes,
         fontsize=7,
         color="#555555",
